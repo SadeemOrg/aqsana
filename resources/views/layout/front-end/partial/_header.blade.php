@@ -1,0 +1,15 @@
+<div dir="rtl" class="flex flex-row justify-between items-center my-4 h-14  w-full pr-20 pl-24">
+    <div class="flex basis-2/5 flex-row justify-between items-center text-base text-[#101426] cursor-pointer" >
+        <a href="#">من نحن</a>
+        <a href="#">مشاريعنا</a>
+        <a href="#">اخبارنا</a>
+        <a href="#">القدس والمسجد الاقصى</a>
+    </div>
+    <img class="flex basis-2/5 max-w-[200px] max-h-[60px]" src="{{ asset('assets/image/image 1.svg') }}" />
+    <div class="flex flex-row  basis-2/5 justify-between items-center text-base text-[#101426] cursor-pointer">
+        <a href="#">الاوقاف والمقدسات</a>
+        <a href="#">حصاد الجمعية</a>
+        <a href="#"> التبرع للمشاريع</a>
+        <a href="#">اتصل بنا</a>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    @font-face {
+        font-family:"alfont_com_JF-Flat-Bold" ;
+        font-weight: 700px;
+        src: url('/assets/front-end/fonts/alfont_com_JF-Flat-Bold.ttf')
+    }
+    @font-face {
+        font-family:"alfont_com_JF-Flat-regular" ;
+        font-weight: 400px;
+        src: url('/assets/front-end/fonts/alfont_com_JF-Flat-regular.ttf')
+    }
+}
+body{
+    font-family:'alfont_com_JF-Flat-Bold';
+}
