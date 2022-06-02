@@ -519,6 +519,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-\[125px\]{
   max-height: 125px;
 }
+.max-h-\[500px\]{
+  max-height: 500px;
+}
 .min-h-\[350px\]{
   min-height: 350px;
 }
