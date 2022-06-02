@@ -33,6 +33,7 @@
     @include('layout.front-end.partial._top_banner')
 
     @yield('content')
+    @include('layout.front-end.partial.contact-us')
     @include('layout.front-end.partial._footer')
 
 </body>
