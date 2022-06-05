@@ -31,8 +31,11 @@
 <body>
     @include('layout.front-end.partial._header')
     @include('layout.front-end.partial._top_banner')
-
+    @include('Components.Association_news')
     @yield('content')
+    @include('Components.AlaqsaBaneer')
+    @include('Components.ProjectNews')
+    @include('Components.Our_business_sectors')
     @include('layout.front-end.partial.contact-us')
     @include('layout.front-end.partial._footer')
 
