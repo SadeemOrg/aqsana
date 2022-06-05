@@ -3,28 +3,26 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\BelongsTo;
-class User extends Resource
+use Laravel\Nova\Http\Requests\NovaRequest;
+
+class buses extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\User::class;
+    public static $model = \App\Models\buses::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -32,7 +30,7 @@ class User extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'email',
+        'id',
     ];
 
     /**
@@ -44,38 +42,10 @@ class User extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
-
-            Gravatar::make()->maxWidth(50),
-
-            Text::make('Name')
-                ->sortable()
-                ->rules('required', 'max:255'),
-
-            Text::make('Email')
-                ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
-
-            Password::make('Password')
-                ->onlyOnForms()
-                ->creationRules('required', 'string', 'min:8')
-                ->updateRules('nullable', 'string', 'min:8'),
-
-            Number::make('Phone','phone')
-                ->textAlign('left'),
-
-            Select::make('user roll','user_roll')->options([
-                'admin' => 'Admin',
-                'financial_user' => 'Financial User',
-                'responsible_area'=>'Responsible Area',
-                'regular_area'=>'Regular Area',
-                'Volunteer'=>'Volunteer',
-                'regular_uses'=>'Regular Uses'
-
-            ]),
-            BelongsTo::make('City'),
+            ID::make(__('ID'), 'id')->sortable(),
+            Text::make("Bus Number","bus_number"),
+            Text::make("Name Driver","name_driver"),
+            Number::make("Number person on bus","number_person_on_bus")->step(1.0),
         ];
     }
 
