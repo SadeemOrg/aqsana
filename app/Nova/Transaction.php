@@ -9,6 +9,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\Number;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Epartment\NovaDependencyContainer\HasDependencies;
@@ -63,37 +64,28 @@ class Transaction extends Resource
 
 
                 NovaDependencyContainer::make([
-                // Select::make('alhasala','ref_id')
-                // ->options( function() {
-                // $users =  \App\Models\Alhisalat::all();
-                // $user_type_admin_array =  array();
-                // foreach($users as $user) {
-                // $user_type_admin_array += [$user['id'] => ($user['name'] )];
-                // }
-                // return $user_type_admin_array;
-                // }),
-                // BelongsTo::make('Alhisalat ', 'Alhisalat', \App\Nova\Alhisalat::class)->onlyOnIndex()  ,
-
-                Select::make('admin','ref_id',)
+                Select::make('alhasala','ref_id')
                 ->options( function() {
-                    $users =  \App\Models\User::where('user_roll', '=', 'admin')->get();
+                $users =  \App\Models\Alhisalat::all();
+                $user_type_admin_array =  array();
+                foreach($users as $user) {
+                $user_type_admin_array += [$user['id'] => ($user['name'] )];
+                }
+                return $user_type_admin_array;
+                }),
 
-                    $user_type_admin_array =  array();
 
-                    foreach($users as $user) {
-                        $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_roll'] .")")];
-                    }
+                Hidden::make('User', 'user_id')->default(function ($request) {
+                    return $request->user()->id;
+                }),
 
-                    return $user_type_admin_array;
-                   })->hideFromIndex()->hideFromDetail(),
-
-                   BelongsTo::make('Alhisalat ', 'Alhisalat', \App\Nova\Alhisalat::class)->hideWhenCreating()->
-                     hideWhenUpdating(),
 
 
 
                 ])->dependsOn('type', 'alhasala'),
 
+                BelongsTo::make('Alhisalat ', 'Alhisalat', \App\Nova\Alhisalat::class)->hideWhenCreating()->
+                hideWhenUpdating(),
 
 
 
@@ -109,8 +101,7 @@ class Transaction extends Resource
                     })->hideFromIndex()->hideFromDetail(),
 
 
-                   BelongsTo::make('Trip ', 'Trip', \App\Nova\Trip::class)->hideWhenCreating()->
-                   hideWhenUpdating(),
+                   BelongsTo::make('Trip ', 'Trip', \App\Nova\Trip::class)->exceptOnForms(),
 
                                     ])->dependsOn('type', "trip"),
 
