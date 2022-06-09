@@ -20,7 +20,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/ ', function () {
     return view('home');
 });
-Route::get('/body', function () {
-    return view('body');
+
+Route::get('/aboutus', function (){
+    return view('about-us');
+});
+
+Route::get('our-project', function (){
+    return view('our-projects');
 });
 

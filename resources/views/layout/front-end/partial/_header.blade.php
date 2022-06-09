@@ -1,7 +1,7 @@
 <div dir="rtl" class="flex flex-row justify-between items-center my-4 h-14  w-full pr-20 pl-24">
     <div class="flex basis-2/5 flex-row justify-between items-center text-base text-[#101426] cursor-pointer" >
-        <a class="hover:text-[#349A37]" href="#">من نحن</a>
-        <a class="hover:text-[#349A37]" href="#">مشاريعنا</a>
+        <a class="hover:text-[#349A37]"  href="/aboutus">من نحن</a>
+        <a class="hover:text-[#349A37]" href="/our-project">مشاريعنا</a>
         <a class="hover:text-[#349A37]" href="#">اخبارنا</a>
         <a class="hover:text-[#349A37]" href="#">القدس والمسجد الاقصى</a>
     </div>

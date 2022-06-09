@@ -1,5 +1,5 @@
 <div dir="rtl" class="flex flex-col lg:flex-row justify-center py-4 lg:justify-between  items-center gap-x-10">
-    <div class="bg-[#E4FFE585] h-[432px] basis-1/2  flex flex-col pr-24 pl-4">
+    <div class="bg-[#E4FFE585] h-[432px] basis-1/2  flex flex-col pr-14 2xl:pr-24 pl-4">
         <p class="text-3xl text-[#101426] pt-10">تواصل معنا</p>
         <p class="text-[#8F9BB3] text-[16px] font-Flatnormal pt-8">هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء
             لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص
