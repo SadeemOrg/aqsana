@@ -4,8 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f63828b90ea5a5a5facaa34cdeeec210",
+    "content-hash": "b65e7eb66eadfd5a8c3922f9f6aaf4a6",
     "packages": [
+        {
+            "name": "acme/multiselect-field",
+            "version": "dev-Zeyad_B1_Backend",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/MultiselectField",
+                "reference": "ef5ff1ad0e12733116ba801e9cd294deb6154c83"
+            },
+            "require": {
+                "optimistdigital/nova-translations-loader": "^3.1",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Acme\\MultiselectField\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Acme\\MultiselectField\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tarvo Reinpalu",
+                    "email": "tarvoreinpalu@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Optimist Digital",
+                    "email": "info@optimistdigital.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A multiple select field for Laravel Nova.",
+            "keywords": [
+                "laravel",
+                "multiselect",
+                "nova",
+                "select"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.1.1",
@@ -951,6 +1002,51 @@
                 }
             ],
             "time": "2020-12-29T14:50:06+00:00"
+        },
+        {
+            "name": "epartment/nova-dependency-container",
+            "version": "1.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/epartment/nova-dependency-container.git",
+                "reference": "da1490d015754d2aa7fd0815ad91d54b279472d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/epartment/nova-dependency-container/zipball/da1490d015754d2aa7fd0815ad91d54b279472d7",
+                "reference": "da1490d015754d2aa7fd0815ad91d54b279472d7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Epartment\\NovaDependencyContainer\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Epartment\\NovaDependencyContainer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova field container allowing to depend on other fields values",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/epartment/nova-dependency-container/issues",
+                "source": "https://github.com/epartment/nova-dependency-container/tree/1.3.3"
+            },
+            "time": "2021-05-13T16:30:53+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -2791,6 +2887,54 @@
                 "source": "https://github.com/opis/closure/tree/3.6.3"
             },
             "time": "2022-01-27T09:35:39+00:00"
+        },
+        {
+            "name": "optimistdigital/nova-translations-loader",
+            "version": "3.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/optimistdigital/nova-translations-loader.git",
+                "reference": "d70d311b3c5b5722ebd27e1223f39e6a75b744b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/optimistdigital/nova-translations-loader/zipball/d70d311b3c5b5722ebd27e1223f39e6a75b744b2",
+                "reference": "d70d311b3c5b5722ebd27e1223f39e6a75b744b2",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^7.21 || ^8.0 || ^9.0",
+                "laravel/nova": "^3.0",
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OptimistDigital\\NovaTranslationsLoader\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This Laravel Nova package helps developers load translations into their packages.",
+            "keywords": [
+                "laravel",
+                "nova",
+                "optimistdigital",
+                "translations"
+            ],
+            "support": {
+                "issues": "https://github.com/optimistdigital/nova-translations-loader/issues",
+                "source": "https://github.com/optimistdigital/nova-translations-loader/tree/3.1.4"
+            },
+            "time": "2022-04-08T12:27:58+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -6497,6 +6641,51 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "whitecube/nova-google-maps",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whitecube/nova-google-maps.git",
+                "reference": "1761cb462b528d0c94bc15c9ef5747ce8ae2d114"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whitecube/nova-google-maps/zipball/1761cb462b528d0c94bc15c9ef5747ce8ae2d114",
+                "reference": "1761cb462b528d0c94bc15c9ef5747ce8ae2d114",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Whitecube\\NovaGoogleMaps\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Whitecube\\NovaGoogleMaps\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova field.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/whitecube/nova-google-maps/issues",
+                "source": "https://github.com/whitecube/nova-google-maps/tree/v0.0.1"
+            },
+            "time": "2020-05-04T14:32:00+00:00"
         }
     ],
     "packages-dev": [

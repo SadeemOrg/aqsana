@@ -4,25 +4,23 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class buses extends Resource
+class Currency extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\buses::class;
+    public static $model = \App\Models\Currency::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -43,9 +41,6 @@ class buses extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Bus Number","bus_number"),
-            Text::make("Name Driver","name_driver"),
-            Number::make("Number person on bus","number_person_on_bus")->step(1.0),
         ];
     }
 

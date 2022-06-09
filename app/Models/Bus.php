@@ -5,29 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Area extends Model
+class Bus extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'id','name','admin_id'
+        'id','bus_number','name_driver','number_person_on_bus','status'
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
-
     ];
 
 
-    public function City()
-    {
-        return $this->hasMany(City::class);
-    }
 
-    public function User()
-    {
-        return $this->belongsTo('App\Models\User','admin_id');
-    }
+
+
 
 }

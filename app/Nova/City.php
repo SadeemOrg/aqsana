@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class City extends Resource
@@ -30,7 +31,7 @@ class City extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'name',
     ];
 
     /**
@@ -45,6 +46,8 @@ class City extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make('Name','name'),
             BelongsTo::make('Area','Area'),
+            hasMany::make('Alhisalat','Alhisalat'),
+            hasMany::make('User','User'),
         ];
     }
 

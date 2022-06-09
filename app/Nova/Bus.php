@@ -4,29 +4,27 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Select;
-
-
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Area extends Resource
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
+
+class Bus extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Area::class;
+    public static $model = \App\Models\Bus::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -47,25 +45,13 @@ class Area extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Name','name'),
-
-            Select::make('admin','admin_id',)
-            ->options( function() {
-                $users =  \App\Models\User::where('user_roll', '=', 'admin')->get();
-
-                $user_type_admin_array =  array();
-
-                foreach($users as $user) {
-                    $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_roll'] .")")];
-                }
-
-                return $user_type_admin_array;
-               })->hideFromIndex()->hideFromDetail(),
-               BelongsTo::make('admin city', 'User', \App\Nova\User::class)->hideWhenCreating()->
-                  hideWhenUpdating(),
-
-
-               HasMany::make("City","City")
+            Text::make("Bus Number","bus_number"),
+            Text::make("Name Driver","name_driver"),
+            Number::make("Number person on bus","number_person_on_bus")->step(1.0),
+            Select::make('status','status')->options([
+                "0" => 'avilabel',
+                "1" => 'un avalabel',
+                ])->displayUsingLabels(),
         ];
     }
 

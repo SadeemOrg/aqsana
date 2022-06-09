@@ -10,6 +10,10 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsTo;
+use Whitecube\NovaGoogleMaps\GoogleMaps;
+
 use Acme\MultiselectField\Multiselect;
 use App\Models\User;
 use App\Models\Bus;
@@ -29,7 +33,7 @@ class Trip extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -53,43 +57,28 @@ class Trip extends Resource
                 Text::make("Name","name"),
                 Textarea::make("Description","description"),
                 Text::make("Trip goal","trip_goal"),
-                Select::make('Admin','admin_id')
-                    ->options( function() {
+
+
+                Select::make('admin','admin_id',)
+                ->options( function() {
                     $users =  \App\Models\User::where('user_roll', '=', 'admin')->get();
 
                     $user_type_admin_array =  array();
 
                     foreach($users as $user) {
-                    $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_roll'] .")")];
+                        $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_roll'] .")")];
                     }
 
                     return $user_type_admin_array;
-                    }),
+                   })->hideFromIndex()->hideFromDetail(),
 
-                Select::make('from','from_city_id')
-                    ->options( function() {
-                    $users =  \App\Models\User::where('user_roll', '=', 'admin')->get();
+                   BelongsTo::make('admin ', 'User', \App\Nova\User::class)->hideWhenCreating()->
+                     hideWhenUpdating(),
 
-                    $user_type_admin_array =  array();
 
-                    foreach($users as $user) {
-                    $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_roll'] .")")];
-                    }
+                         BelongsTo::make('from city', 'from', \App\Nova\City::class),
+                        BelongsTo::make('to city', 'tocity', \App\Nova\City::class),
 
-                    return $user_type_admin_array;
-                    }),
-                Select::make('to','to_city_id')
-                    ->options( function() {
-                    $users =  \App\Models\User::where('user_roll', '=', 'admin')->get();
-
-                    $user_type_admin_array =  array();
-
-                    foreach($users as $user) {
-                    $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_roll'] .")")];
-                    }
-
-                    return $user_type_admin_array;
-                    }),
 
 
                 Number::make("buses number","buses_number"),
@@ -97,7 +86,7 @@ class Trip extends Resource
 
                 Multiselect::make('Buses','bus_id')
                     ->options( function() {
-                    $buses_db = Bus::where("status","1")->get();
+                    $buses_db = Bus::all();
                     $buses =  array();
 
                     foreach($buses_db as $bus) {
@@ -116,7 +105,7 @@ class Trip extends Resource
                     'in tipe' => 'in tipe',
                     ' tipe' => ' tipe',
 
-                    ]),
+                    ])->displayUsingLabels(),
                 Number::make("Cost","cost"),
 
 
@@ -126,6 +115,10 @@ class Trip extends Resource
                     '3' => 'weekly',
                     '4' => 'Monthly',
                     ])->singleSelect(),
+           // GoogleMaps::make('Map')
+                // ->zoom(8) // Optionally set the zoom level
+                // ->defaultCoordinates(1200, 1233), // Optionally set the map's default center point
+                    // HasMany::make("Buses","bus")
 
 
 

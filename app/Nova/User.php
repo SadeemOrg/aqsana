@@ -10,6 +10,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
+
 class User extends Resource
 {
     /**
@@ -74,8 +76,11 @@ class User extends Resource
                 'Volunteer'=>'Volunteer',
                 'regular_uses'=>'Regular Uses'
 
-            ]),
+            ])->displayUsingLabels(),
             BelongsTo::make('City'),
+            BelongsTo::make('admin', 'Area', \App\Nova\Area::class)->exceptOnForms(),
+            HasMany::make('Alhisalat'),
+
         ];
     }
 
