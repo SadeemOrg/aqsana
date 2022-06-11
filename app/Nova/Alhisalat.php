@@ -20,6 +20,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 class Alhisalat extends Resource
 {
     /**
@@ -74,6 +75,9 @@ class Alhisalat extends Resource
     public function fields(Request $request)
     {
         return [
+
+
+
             ID::make(__('ID'), 'id')->sortable(),
             Text::make("Name","name"),
             BelongsTo::make('City','City'),
