@@ -20,6 +20,8 @@ class Currency extends Resource
      *
      * @var string
      */
+
+    public static $group = 'Admin';
     public static $title = 'name';
 
     /**

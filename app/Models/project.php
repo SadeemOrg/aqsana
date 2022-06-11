@@ -9,7 +9,7 @@ class project extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','project_name', 'project_number','project_goal','projec_type', 'projec_start','projec_end','area_id'
+        'id','project_name', 'project_number','project_goal','Project_Status','projec_type', 'projec_start','projec_end','area_id','approval','reason_of_reject'
     ];
 
     protected $hidden = [

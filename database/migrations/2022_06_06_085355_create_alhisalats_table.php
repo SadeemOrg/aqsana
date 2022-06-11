@@ -27,6 +27,8 @@ class CreateAlhisalatsTable extends Migration
             $table->dateTime('end_time')->nullable();
             $table->bigInteger('recipient')->nullable();
             $table->bigInteger('giver')->nullable();
+            $table->string('approval')->nullable();
+            $table->string("reason_of_reject")->nullable();
             $table->timestamps();
         });
     }

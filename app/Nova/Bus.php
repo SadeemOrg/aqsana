@@ -17,6 +17,7 @@ class Bus extends Resource
      *
      * @var string
      */
+    public static $group = 'Admin';
     public static $model = \App\Models\Bus::class;
 
     /**

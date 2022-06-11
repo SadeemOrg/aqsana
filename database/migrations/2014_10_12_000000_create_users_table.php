@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('user_roll');
             $table->string('phone')->nullable();
+            $table->string('photo')->nullable();
+            $table->string('birthday')->nullable();
             $table->bigInteger('city_id')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -21,6 +21,8 @@ class CreateTransactionsTable extends Migration
             $table->integer('transactions_status');
             $table->string('Currency');
             $table->string('equivalent_amount');
+            $table->string('approval')->nullable();
+            $table->string("reason_of_reject")->nullable();
             $table->time('date');
 
             $table->timestamps();
