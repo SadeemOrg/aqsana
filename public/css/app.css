@@ -377,6 +377,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .static{
   position: static;
 }
+.fixed{
+  position: fixed;
+}
 .absolute{
   position: absolute;
 }
@@ -404,8 +407,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-0{
   right: 0px;
 }
+.right-\[-250px\]{
+  right: -250px;
+}
+.right-\[100\%\]{
+  right: 100%;
+}
+.top-\[88px\]{
+  top: 88px;
+}
 .z-30{
   z-index: 30;
+}
+.z-10{
+  z-index: 10;
 }
 .mx-auto{
   margin-left: auto;
@@ -478,6 +493,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mr-3{
   margin-right: 0.75rem;
 }
+.mb-3{
+  margin-bottom: 0.75rem;
+}
 .block{
   display: block;
 }
@@ -538,9 +556,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-\[125px\]{
   max-height: 125px;
 }
-.max-h-\[60px\]{
-  max-height: 60px;
-}
 .max-h-\[500px\]{
   max-height: 500px;
 }
@@ -583,6 +598,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-8{
   width: 2rem;
 }
+.w-\[200px\]{
+  width: 200px;
+}
+.w-\[280px\]{
+  width: 280px;
+}
+.w-\[250px\]{
+  width: 250px;
+}
 .max-w-7xl{
   max-width: 80rem;
 }
@@ -612,9 +636,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-w-\[480px\]{
   max-width: 480px;
-}
-.max-w-\[200px\]{
-  max-width: 200px;
 }
 .max-w-\[90\%\]{
   max-width: 90%;
@@ -844,6 +865,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 0.25rem;
   padding-right: 0.25rem;
 }
+.py-5{
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
 .pb-4{
   padding-bottom: 1rem;
 }
@@ -888,12 +913,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pt-3{
   padding-top: 0.75rem;
-}
-.pr-20{
-  padding-right: 5rem;
-}
-.pl-24{
-  padding-left: 6rem;
 }
 .text-center{
   text-align: center;
@@ -1002,6 +1021,19 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mix-blend-multiply{
   mix-blend-mode: multiply;
+}
+.transition{
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.delay-\[500ms\]{
+  transition-delay: 500ms;
+}
+.delay-500{
+  transition-delay: 500ms;
 }
 .duration-700{
   transition-duration: 700ms;
@@ -1177,11 +1209,20 @@ body{
   .lg\:mr-0{
     margin-right: 0px;
   }
+  .lg\:hidden{
+    display: none;
+  }
+  .lg\:h-auto{
+    height: auto;
+  }
   .lg\:max-h-52{
     max-height: 13rem;
   }
   .lg\:w-\[550px\]{
     width: 550px;
+  }
+  .lg\:w-\[150px\]{
+    width: 150px;
   }
   .lg\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1216,8 +1257,14 @@ body{
   .lg\:text-\[24px\]{
     font-size: 24px;
   }
+  .lg\:text-\[15px\]{
+    font-size: 15px;
+  }
 }
 @media (min-width: 1280px){
+  .xl\:static{
+    position: static;
+  }
   .xl\:mt-24{
     margin-top: 6rem;
   }
@@ -1227,8 +1274,17 @@ body{
   .xl\:mt-16{
     margin-top: 4rem;
   }
+  .xl\:mb-0{
+    margin-bottom: 0px;
+  }
   .xl\:block{
     display: block;
+  }
+  .xl\:inline-block{
+    display: inline-block;
+  }
+  .xl\:flex{
+    display: flex;
   }
   .xl\:hidden{
     display: none;
@@ -1236,8 +1292,17 @@ body{
   .xl\:h-80{
     height: 20rem;
   }
+  .xl\:h-\[60px\]{
+    height: 60px;
+  }
   .xl\:max-h-\[450px\]{
     max-height: 450px;
+  }
+  .xl\:w-\[200px\]{
+    width: 200px;
+  }
+  .xl\:w-auto{
+    width: auto;
   }
   .xl\:max-w-\[390px\]{
     max-width: 390px;
@@ -1247,6 +1312,9 @@ body{
   }
   .xl\:basis-3\/5{
     flex-basis: 60%;
+  }
+  .xl\:flex-row{
+    flex-direction: row;
   }
   .xl\:flex-nowrap{
     flex-wrap: nowrap;
@@ -1263,15 +1331,37 @@ body{
   .xl\:gap-y-0{
     row-gap: 0px;
   }
+  .xl\:bg-transparent{
+    background-color: transparent;
+  }
   .xl\:px-4{
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+  .xl\:py-0{
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .xl\:px-0{
+    padding-left: 0px;
+    padding-right: 0px;
   }
   .xl\:text-right{
     text-align: right;
   }
   .xl\:text-\[30px\]{
     font-size: 30px;
+  }
+  .xl\:text-\[16px\]{
+    font-size: 16px;
+  }
+  .xl\:text-\[\#000\]{
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+  }
+  .xl\:hover\:text-\[\#349A37\]:hover{
+    --tw-text-opacity: 1;
+    color: rgb(52 154 55 / var(--tw-text-opacity));
   }
 }
 @media (min-width: 1536px){
