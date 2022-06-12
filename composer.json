@@ -19,7 +19,9 @@
         "laravel/nova": "*",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "whitecube/nova-google-maps": "^0.0.1"
+        "whitecube/nova-google-maps": "^0.0.1",
+        "optimistdigital/nova-settings": "^3.5",
+        "eminiarts/nova-tabs": "^1.4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

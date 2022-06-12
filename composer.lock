@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7cf926a9ef538101dd3544dc278a5d15",
+    "content-hash": "deb1eddff29e32421cbbd77be673b16b",
     "packages": [
         {
             "name": "acme/multiselect-field",
@@ -1074,6 +1074,66 @@
                 }
             ],
             "time": "2020-12-29T14:50:06+00:00"
+        },
+        {
+            "name": "eminiarts/nova-tabs",
+            "version": "1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eminiarts/nova-tabs.git",
+                "reference": "cd19cf4954c54ba18ecdff7c1f7fdfb83cc23252"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eminiarts/nova-tabs/zipball/cd19cf4954c54ba18ecdff7c1f7fdfb83cc23252",
+                "reference": "cd19cf4954c54ba18ecdff7c1f7fdfb83cc23252",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/nova": "^2.9||^3.0",
+                "php": "^7.1.3||^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.17",
+                "orchestra/testbench": "^6.7",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Eminiarts\\Tabs\\TabsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Eminiarts\\Tabs\\": "src/",
+                    "Eminiarts\\Tabs\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emini Arts GmbH",
+                    "email": "support@eminiarts.ch",
+                    "homepage": "https://eminiarts.ch"
+                }
+            ],
+            "description": "Laravel Nova - Tabs.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/eminiarts/nova-tabs/issues",
+                "source": "https://github.com/eminiarts/nova-tabs/tree/1.5.1"
+            },
+            "time": "2022-02-23T21:12:29+00:00"
         },
         {
             "name": "epartment/nova-dependency-container",
@@ -2959,6 +3019,68 @@
                 "source": "https://github.com/opis/closure/tree/3.6.3"
             },
             "time": "2022-01-27T09:35:39+00:00"
+        },
+        {
+            "name": "optimistdigital/nova-settings",
+            "version": "3.5.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/outl1ne/nova-settings.git",
+                "reference": "d6a4db71451f60f63a9c24285a9fba2768360731"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/outl1ne/nova-settings/zipball/d6a4db71451f60f63a9c24285a9fba2768360731",
+                "reference": "d6a4db71451f60f63a9c24285a9fba2768360731",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^3.0",
+                "optimistdigital/nova-translations-loader": "^3.0",
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "laravel/nova-dusk-suite": "7.x-dev|8.x-dev",
+                "orchestra/testbench": "^5.0|^6.0",
+                "orchestra/testbench-dusk": "^5.0|^6.0",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "OptimistDigital\\NovaSettings\\NovaSettingsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "./src/helpers.php"
+                ],
+                "psr-4": {
+                    "OptimistDigital\\NovaSettings\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova tool for editing custom settings using native Nova fields.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/outl1ne/nova-settings/issues",
+                "source": "https://github.com/outl1ne/nova-settings/tree/3.5.6"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/optimistdigital",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-05-13T13:46:23+00:00"
         },
         {
             "name": "optimistdigital/nova-translations-loader",
