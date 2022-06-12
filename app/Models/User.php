@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_roll',
+        'phone',
+        'city_id'
+
     ];
 
     /**
@@ -41,4 +45,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function City()
+    {
+        return $this->belongsTo('App\Models\City');
+    }
+
+    public function Area()
+    {
+        return $this->belongsTo('App\Models\Area','admin_id');
+    }
+    public function Alhisalat()
+    {
+        return $this->hasMany('App\Models\Alhisalat','giver');
+    }
+
+
+
+
+
+    public function type ()
+    {
+        return $this->user_roll;
+    }
 }
