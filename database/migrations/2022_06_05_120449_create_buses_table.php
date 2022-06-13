@@ -18,7 +18,7 @@ class CreateBusesTable extends Migration
             $table->string('bus_number');
             $table->string('name_driver');
             $table->integer('number_person_on_bus');
-            $table->integer('status')->default(0);
+            $table->char('status',1)->default('0');
             $table->timestamps();
         });
     }

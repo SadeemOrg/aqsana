@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -24,8 +25,8 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
             'user_roll'=>'admin',
             'phone'=>'0569465465',
-            'city_id'=>'1'
+            'city_id'=>'1']);
 
-                ]);
-    }
+        
+        }
 }

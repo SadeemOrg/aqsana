@@ -5,6 +5,8 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 
 class Notification extends Resource
 {
@@ -41,6 +43,8 @@ class Notification extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Text::make("Title","title"),
+            Textarea::make("Message","message")->showOnIndex()
         ];
     }
 
