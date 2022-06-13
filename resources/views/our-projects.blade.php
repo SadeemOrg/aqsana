@@ -1,8 +1,8 @@
 @extends('layout.app')
 @section('content')
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10 px-2">
-    <div class="flex flex-row-reverse">
-        <ul class="list-reset breadcrumbs flex flex-row-reverse font-FlatBold ">
+    <div class="flex flex-row">
+        <ul class="list-reset breadcrumbs flex flex-row font-FlatBold ">
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] text-[#101426]">
                 <a href="/">الرئيسية</a>
             </li>
