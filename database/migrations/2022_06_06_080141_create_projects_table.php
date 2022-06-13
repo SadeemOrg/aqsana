@@ -21,7 +21,7 @@ class CreateProjectsTable extends Migration
             $table->integer('project_number');
             $table->string('project_goal');
             $table->string('projec_type');
-            $table->string('Project_Status')->default("Initial");
+            $table->char('Project_Status',1)->default("1");
             $table->time('projec_start');
             $table->time('projec_end');
             $table->json('city_id');

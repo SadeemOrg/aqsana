@@ -69,16 +69,18 @@ class User extends Resource
             Number::make('Phone','phone')
                 ->textAlign('left'),
 
-            Select::make('user roll','user_roll')->options([
-                'admin' => 'Admin',
-                'financial_user' => 'Financial User',
-                'normal_financial_user'=>'normal financial user',
-                'responsible_area'=>'Responsible Area',
-                'regular_area'=>'Regular Area',
-                'Volunteer'=>'Volunteer',
-                'regular_uses'=>'Regular Uses'
+            // Select::make('user roll','user_roll')->options([
+            //     'admin' => 'Admin',
+            //     'financial_user' => 'Financial User',
+            //     'normal_financial_user'=>'normal financial user',
+            //     'responsible_area'=>'Responsible Area',
+            //     'regular_area'=>'Regular Area',
+            //     'Volunteer'=>'Volunteer',
+            //     'regular_uses'=>'Regular Uses'
 
-            ])->displayUsingLabels(),
+            // ])->displayUsingLabels(),
+
+            BelongsTo::make('Role'),    
             BelongsTo::make('City'),
             BelongsTo::make('admin', 'Area', \App\Nova\Area::class)->exceptOnForms(),
             HasMany::make('Alhisalat'),

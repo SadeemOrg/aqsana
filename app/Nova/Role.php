@@ -4,16 +4,17 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-
-class ProjectTask extends Resource
+use Laravel\Nova\Fields\Boolean;
+class Role extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\ProjectTask::class;
+    public static $model = \App\Models\Role::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -21,7 +22,7 @@ class ProjectTask extends Resource
      * @var string
      */
     public static $group = 'Admin';
-    public static $title = 'id';
+    public static $title = 'role';
 
     /**
      * The columns that should be searched.
@@ -42,6 +43,8 @@ class ProjectTask extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Text::make('Role'),
+            Boolean::make("Status","status"),
         ];
     }
 
