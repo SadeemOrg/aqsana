@@ -18,6 +18,9 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 class Alhisalat extends Resource
 {
     /**
@@ -25,6 +28,9 @@ class Alhisalat extends Resource
      *
      * @var string
      */
+    public static $group = 'Admin';
+
+
     public static $model = \App\Models\Alhisalat::class;
 
     /**
@@ -49,12 +55,32 @@ class Alhisalat extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        $id = Auth::id();
+        $areas = DB::table('areas')->where('admin_id', $id)
+        ->join('cities', 'cities.area_id', '=', 'areas.id')
+        ->join('alhisalats', 'alhisalats.city_id', '=', 'cities.id')
+        ->select('alhisalats.name')->get();
+        $stack = array();
+      foreach ( $areas as $key => $value) {
+          array_push($stack, $value->name);
+          // echo $value->name;
+      }
+        return $query->whereIn('name', $stack);
+    }
+
+
+
     public function fields(Request $request)
     {
         return [
+
+
+
             ID::make(__('ID'), 'id')->sortable(),
             Text::make("Name","name"),
-            BelongsTo::make('Cities','Cities'),
+            BelongsTo::make('City','City'),
             Textarea::make("Description","description"),
             Number::make("The amount required","amount_total"),
             Multiselect::make("Status","status")->options([
@@ -63,7 +89,10 @@ class Alhisalat extends Resource
                 '3' => 'Amount completed',
                 '4' => 'sent done',
               ])->singleSelect(),
-
+              Text::make("approval","approval")->hideWhenCreating()->
+              hideWhenUpdating(),
+              Text::make("reason_of_reject","reason_of_reject")->hideWhenCreating()->
+              hideWhenUpdating(),
             Number::make("Lat","lat"),
             Number::make("Lon","lon"),
 
@@ -114,7 +143,7 @@ class Alhisalat extends Resource
                })->singleSelect(),
 
 
-
+                HasMany::make('Transaction','giver'),
         ];
     }
 
@@ -159,6 +188,12 @@ class Alhisalat extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+
+            (new Actions\ApprovalRejectProjec)->canSee(function ($request) {
+                $user = Auth::user();
+              return  $user->type() == 'admin';
+            }),
+        ];
     }
 }

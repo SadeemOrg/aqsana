@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Nova;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -16,7 +16,9 @@ class City extends Resource
      *
      * @var string
      */
+    public static $group = 'Admin';
     public static $model = \App\Models\City::class;
+    public static $with = ['user'];
 
     /**
      * The single value that should be used to represent the resource when being displayed.

@@ -27,6 +27,7 @@ class User extends Resource
      * @var string
      */
     public static $title = 'name';
+    public static $group = 'Admin';
 
     /**
      * The columns that should be searched.
@@ -71,6 +72,7 @@ class User extends Resource
             Select::make('user roll','user_roll')->options([
                 'admin' => 'Admin',
                 'financial_user' => 'Financial User',
+                'normal_financial_user'=>'normal financial user',
                 'responsible_area'=>'Responsible Area',
                 'regular_area'=>'Regular Area',
                 'Volunteer'=>'Volunteer',
