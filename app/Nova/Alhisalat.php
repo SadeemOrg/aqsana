@@ -20,6 +20,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Fields\Select;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 class Alhisalat extends Resource
 {
@@ -74,7 +75,7 @@ class Alhisalat extends Resource
         }
         return $query->whereIn('name', $stack);
         }
-        }
+     }
 
 
 
@@ -95,8 +96,15 @@ class Alhisalat extends Resource
                 '3' => 'Amount completed',
                 '4' => 'sent done',
               ])->singleSelect(),
-              Text::make("approval","approval")->hideWhenCreating()->
+              Select::make("approval","approval")
+              ->options([
+                '1' => 'aproved',
+                '2' => 'reject',
+
+              ])->displayUsingLabels()
+              ->hideWhenCreating()->
               hideWhenUpdating(),
+
               Text::make("reason_of_reject","reason_of_reject")->hideWhenCreating()->
               hideWhenUpdating(),
 
@@ -187,7 +195,7 @@ class Alhisalat extends Resource
 
             (new Actions\ApprovalRejectProjec)->canSee(function ($request) {
                 $user = Auth::user();
-              return  $user->type() == 'admin';
+              return  ($user->type() == 'admin' || $user->type() == 'regular_area');
             }),
         ];
     }

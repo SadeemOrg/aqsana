@@ -18,7 +18,7 @@ class AlhisalatPolicy
      */
     public function viewAny(User $user)
     {
-       return $user->type() == 'admin';
+        return  ($user->type() == 'admin' || $user->type() == 'regular_area') ;
     }
 
     /**
@@ -30,7 +30,7 @@ class AlhisalatPolicy
      */
     public function view(User $user, Alhisalat $alhisalat)
     {
-        return $user->type() == 'admin';
+          return  ($user->type() == 'admin' || $user->type() == 'regular_area') ;
     }
 
     /**
@@ -41,7 +41,7 @@ class AlhisalatPolicy
      */
     public function create(User $user)
     {
-        return $user->type() == 'admin';
+          return  ($user->type() == 'admin' || $user->type() == 'regular_area') ;
     }
 
     /**
@@ -53,7 +53,7 @@ class AlhisalatPolicy
      */
     public function update(User $user, Alhisalat $alhisalat)
     {
-        return $user->type() == 'admin';
+          return  ($user->type() == 'admin' || $user->type() == 'regular_area') ;
     }
 
     /**
@@ -65,7 +65,7 @@ class AlhisalatPolicy
      */
     public function delete(User $user, Alhisalat $alhisalat)
     {
-        return $user->type() == 'admin';
+          return  ($user->type() == 'admin' ) ;
     }
 
     /**
@@ -77,7 +77,7 @@ class AlhisalatPolicy
      */
     public function restore(User $user, Alhisalat $alhisalat)
     {
-        return $user->type() == 'admin';
+          return  ($user->type() == 'admin' || $user->type() == 'regular_area') ;
     }
 
     /**
@@ -89,7 +89,7 @@ class AlhisalatPolicy
      */
     public function forceDelete(User $user, Alhisalat $alhisalat)
     {
-        return $user->type() == 'admin';
+          return  ($user->type() == 'admin' || $user->type() == 'regular_area') ;
 
     }
 }
