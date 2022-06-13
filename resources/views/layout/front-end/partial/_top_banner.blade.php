@@ -1,4 +1,6 @@
+<div class="owl-carousel" id="main-home-slider">
 <img class="w-screen max-h-[500px]" src="{{ asset('assets/image/27.png') }}" alt="topBanner">
+</div>
 <div dir="rtl" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-row flex-wrap xl:flex-nowrap  items-center justify-center xl:justify-start  gap-x-7">
         <div class="h-[380px] max-w-[600px] bg-[#E4FFE585] mt-16 rounded-[5px] pt-7 px-4">

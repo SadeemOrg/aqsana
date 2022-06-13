@@ -13,5 +13,6 @@
         </ul>
     </div>
 </div>
-@include('Components.Projects.OurProjects')
+@include('Components.Projects.our-projects')
+@include('Components.Projects.Pagination')
 @endsection
