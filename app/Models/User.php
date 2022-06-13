@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use App\Models\Role;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -52,14 +52,21 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\City');
     }
+
+    public function Role()
+    {
+        return $this->belongsTo('App\Models\Role','user_roll','code_role');
+    }
+
+    public function Area()
+    {
+        return $this->belongsTo('App\Models\Area','admin_id');
+    }
     public function Alhisalat()
     {
         return $this->hasMany('App\Models\Alhisalat','giver');
     }
-    public function Area()
-    {
-        return $this->belongsTo(Area::class,'names');
-    }
+
 
 
 

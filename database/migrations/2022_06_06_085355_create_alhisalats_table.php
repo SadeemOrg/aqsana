@@ -19,7 +19,7 @@ class CreateAlhisalatsTable extends Migration
             $table->bigInteger('city_id');
             $table->string('description');
             $table->double('amount_total')->default(0.0);
-            $table->integer('status');
+            $table->char('status',1);
             $table->json('adrees')->nullable();
             $table->string('information_location');
             $table->dateTime('start_time')->nullable();

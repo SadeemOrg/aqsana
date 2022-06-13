@@ -14,7 +14,11 @@
         <img src="{{ asset('assets/image/harkehesalmey.svg') }}" alt="harkehesalmey">
     </div>
     <div class="flex flex-col items-start justify-start">
-        <p class="text-2xl text-[#101426] font-FlatBold">قطاعات عملنا المركزية</p>
+        <div class="relative mt-4 xl:mt-8">
+            <p class="text-2xl text-[#101426] font-FlatBold">قطاعات عملنا المركزية</p>
+            <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-9 hidden xl:block"></div>
+        </div>
+
         <p class="pt-7 text-lg text-[#101426] font-noto_Regular max-w-3xl">هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى
             المقروء لصفحة ما سيلهي القارئ
             عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. </p>
@@ -90,5 +94,3 @@
         </div>
     </div>
 </div>
-
-

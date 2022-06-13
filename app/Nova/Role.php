@@ -4,27 +4,17 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\Trix;
-use Laravel\Nova\Fields\Image;
-use Laravel\Nova\Fields\File;
-use App\Models\User;
-use App\Models\Bus;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\DateTime;
-use Laravel\Nova\Fields\Select;
-class ProjectTask extends Resource
+class Role extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\ProjectTask::class;
+    public static $model = \App\Models\Role::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -32,7 +22,7 @@ class ProjectTask extends Resource
      * @var string
      */
     public static $group = 'Admin';
-    public static $title = 'id';
+    public static $title = 'role';
 
     /**
      * The columns that should be searched.
@@ -53,22 +43,8 @@ class ProjectTask extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Name","name"),
-            Textarea::make("Description","description"),
-            BelongsTo::make('Projects','Projects'),
-            DateTime::make('Start time','start_time'),
-            DateTime::make('End time','end_time'),
+            Text::make('Role'),
             Boolean::make("Status","status"),
-            Select::make('Admin',"admin_id")->options(function(){
-                $users = \App\Models\User::all();
-                $users->map(function($value){
-
-                    return [$value->id=>$value->name];
-                });
-               
-            })
-
-        
         ];
     }
 

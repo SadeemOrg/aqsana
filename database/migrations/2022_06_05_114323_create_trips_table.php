@@ -26,7 +26,7 @@ class CreateTripsTable extends Migration
             $table->json('bus_id');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
-            $table->integer('status');
+            $table->char('status',1);
             $table->double('cost')->default(0);
             $table->integer('repetition')->default(0);
 
