@@ -19,6 +19,7 @@ class Area extends Resource
      *
      * @var string
      */
+    public static $group = 'Admin';
     public static $model = \App\Models\Area::class;
 
     /**
@@ -27,6 +28,10 @@ class Area extends Resource
      * @var string
      */
     public static $title = 'name';
+
+
+    public static $priority = 2;
+
 
     /**
      * The columns that should be searched.

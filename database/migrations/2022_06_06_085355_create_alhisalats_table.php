@@ -20,13 +20,14 @@ class CreateAlhisalatsTable extends Migration
             $table->string('description');
             $table->double('amount_total')->default(0.0);
             $table->integer('status');
-            $table->double('lat')->nullable();
-            $table->double('lon')->nullable();
+            $table->json('adrees')->nullable();
             $table->string('information_location');
             $table->dateTime('start_time')->nullable();
             $table->dateTime('end_time')->nullable();
             $table->bigInteger('recipient')->nullable();
             $table->bigInteger('giver')->nullable();
+            $table->integer('approval')->nullable();
+            $table->string("reason_of_reject")->nullable();
             $table->timestamps();
         });
     }

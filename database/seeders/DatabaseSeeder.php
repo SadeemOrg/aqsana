@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'TopStarAdmin',
-            'email' => 'zeyad.h@averotech.com',
-            'password' => bcrypt('111'),
+            'name' => 'alaqsaAdmin',
+            'email' => 'alaqsa@averotech.com',
+            'password' => bcrypt('10203040'),
             'remember_token' => Str::random(10),
             'user_roll'=>'admin',
             'phone'=>'0569465465',

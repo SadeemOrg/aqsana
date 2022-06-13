@@ -11,7 +11,7 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id','type', 'description','ref_id','transactions_type', 'transactions_status','Currency','equivalent_amount','date'
+        'id','type', 'description','ref_id','transactions_type', 'transactions_status','Currency','equivalent_amount','date','reason_of_reject','approval'
     ];
 
     protected $hidden = [

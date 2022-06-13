@@ -21,7 +21,11 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('user_roll');
             $table->string('phone')->nullable();
-            $table->bigInteger('city_id')->nullable();
+            $table->string('photo')->nullable();
+            $table->date('birthday')->nullable();
+            $table->unsignedBigInteger('city_id')->nullable();
+            // $table->foreign('city_id')->references('id')->on('cities')
+            // ->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

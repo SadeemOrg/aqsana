@@ -1,7 +1,24 @@
 jQuery(document).ready(function(){
-	// $('#hamburger').click(function(){
-	// 	$(this).toggleClass('open');
-	// });
+    // Start links
+    $('.stop-link').click(function(e) {
+      e.preventDefault();
+    });
+    
+    // show and hide submenu
+    $('body').on('mouseenter mouseleave click','.nav-item',function(e){
+      if ($(window).width() < 750) {
+        $( this ).addClass('show');
+      }
+    });
+    $( ".nav-item" ).hover(
+      function() {
+        $( this ).addClass('show');
+      }, function() {
+        $( this ).removeClass('show');
+      }
+    );
+
+    
 });
 
 // Auto animate for demo

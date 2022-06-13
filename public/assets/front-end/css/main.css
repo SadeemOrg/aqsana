@@ -1,22 +1,121 @@
+
+/******** Start dropdown style ***********/
+
+.nav-item {
+  position: relative;
+  transition: all 200ms linear;
+}
+
+/* #Primary style
+================================================== */
+
+.bg-light {
+  background-color: #fff !important;
+  transition: all 200ms linear;
+}
+
+.section {
+  position: relative;
+  width: 100%;
+  display: block;
+}
+
+.nav-item .dropdown-menu {
+  transform: translate3d(0, 10px, 0);
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0;
+  display: block;
+  padding: 0;
+  margin: 0;
+  transition: all 200ms linear;
+}
+
+[lang="en"] .nav-item .dropdown-menu {
+  left: 0
+}
+
+.nav-item.show .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  max-height: 999px;
+  transform: translate3d(0, 0px, 0);
+}
+
+.dropdown-menu {
+  padding: 10px !important;
+  margin: 0;
+  font-size: 13px;
+  color: #212121;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 5px 10px 0 rgba(138, 155, 165, 0.15);
+  transition: all 200ms linear;
+  position: static;
+  float: none;
+  width: 200px;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-item {
+  padding: 3px 15px;
+  color: #212121;
+  border-radius: 2px;
+  transition: all 200ms linear;
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  /* border: 0; */
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: #fff;
+  background-color: var(--dark-clr)
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+}
+
+.nav-item .dropdown-menu {
+  position: absolute;
+  z-index: 99;
+}
+
+
+
+
+
 /* Start nav links in mobile */
-.nav-links nav a{
+.nav-links nav .nav-item > a{
   right: 0;
   transition: all 0.3s ease-out;
 }
-.nav-links.open nav a{
+.nav-links.open nav .nav-item > a{
   right: 100%;
  
 }
 
-.nav-links .rt-links nav a:nth-of-type(2) {transition-delay: 0.1s;}
-.nav-links .rt-links nav a:nth-of-type(3) {transition-delay: 0.2s;}
-.nav-links .rt-links nav a:nth-of-type(4) {transition-delay: 0.3s;}
-.nav-links .rt-links nav a:nth-of-type(5) {transition-delay: 0.4s;}
+.nav-links .rt-links nav .nav-item:nth-of-type(2) > a {transition-delay: 0.1s;}
+.nav-links .rt-links nav .nav-item:nth-of-type(3) > a {transition-delay: 0.2s;}
+.nav-links .rt-links nav .nav-item:nth-of-type(4) > a {transition-delay: 0.3s;}
+.nav-links .rt-links nav .nav-item:nth-of-type(5) > a {transition-delay: 0.4s;}
 
-.nav-links .lt-links nav a:nth-of-type(1) {transition-delay: 0.5s;}
-.nav-links .lt-links nav a:nth-of-type(2) {transition-delay: 0.6s;}
-.nav-links .lt-links nav a:nth-of-type(3) {transition-delay: 0.7s;}
-.nav-links .lt-links nav a:nth-of-type(4) {transition-delay: 0.8s;}
+.nav-links .lt-links nav .nav-item:nth-of-type(1) > a {transition-delay: 0.5s;}
+.nav-links .lt-links nav .nav-item:nth-of-type(2) > a {transition-delay: 0.6s;}
+.nav-links .lt-links nav .nav-item:nth-of-type(3) > a {transition-delay: 0.7s;}
+.nav-links .lt-links nav .nav-item:nth-of-type(4) > a {transition-delay: 0.8s;}
 /* End nav links in mobile*/
 
 

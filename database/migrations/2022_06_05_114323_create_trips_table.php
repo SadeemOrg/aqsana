@@ -18,25 +18,19 @@ class CreateTripsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('trip_goal');
-            $table->bigInteger('admin_id')->nullable();
-            $table->bigInteger('from_city_id')->nullable();
-            $table->bigInteger('to_city_id')->nullable();
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->json('from_city_id')->nullable();
+            $table->json('to_city_id')->nullable();
             $table->integer('buses_number');
             $table->integer('participants_number');
             $table->json('bus_id');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
-            $table->string('status');
+            $table->integer('status');
             $table->double('cost')->default(0);
             $table->integer('repetition')->default(0);
-            // $table->foreign('from_city_id')->references('id')->on('cities')
-            // ->onDelete('cascade');
-            // $table->foreign('to_city_id')->references('id')->on('cities')
-            // ->onDelete('cascade');
-            // $table->foreign('admin_id')->references('id')->on('users')
-            // ->onDelete('cascade');
-            // $table->foreign('bus_id')->references('id')->on('areas')
-            // ->onDelete('cascade');
+
+
 
 
             $table->timestamps();
