@@ -20,10 +20,9 @@ class CreateTransactionsTable extends Migration
             $table->integer('transactions_type');
             $table->string('Currency');
             $table->string('equivalent_amount');
-            $table->string('approval')->nullable();
+            $table->integer('approval')->nullable();
             $table->string("reason_of_reject")->nullable();
             $table->time('date');
-
             $table->timestamps();
         });
     }
