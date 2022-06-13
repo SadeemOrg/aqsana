@@ -54,7 +54,7 @@ dd($end);
 
 @endphp
 
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -86,7 +86,7 @@ dd($end);
     <link rel="stylesheet" href="{{ asset('assets/front-end/css/main.css') }}">    
 </head>
 
-<body>
+<body dir="rtl">
 
 
     @include('layout.front-end.partial._header')
