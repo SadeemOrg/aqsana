@@ -52,16 +52,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\City');
     }
-
-    public function Area()
-    {
-        return $this->belongsTo('App\Models\Area','admin_id');
-    }
     public function Alhisalat()
     {
         return $this->hasMany('App\Models\Alhisalat','giver');
     }
-
+    public function Area()
+    {
+        return $this->belongsTo(Area::class,'names');
+    }
 
 
 

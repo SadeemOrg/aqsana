@@ -11,6 +11,9 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
+use Illuminate\Support\Facades\DB;
+use App\Models\Area;
+
 
 class User extends Resource
 {
@@ -80,7 +83,18 @@ class User extends Resource
 
             ])->displayUsingLabels(),
             BelongsTo::make('City'),
-            BelongsTo::make('admin', 'Area', \App\Nova\Area::class)->exceptOnForms(),
+
+            // BelongsTo::make('admin', 'Area', \App\Nova\Area::class)->exceptOnForms(),
+
+            // Text::make('admin', function () {
+            //     $user= Area::where('admin_id', 'id')
+            //     ->select('name')
+            //     ->first();
+            //     return $user['name'];
+
+
+            // }),
+
             HasMany::make('Alhisalat'),
 
         ];

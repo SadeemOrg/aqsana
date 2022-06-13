@@ -46,8 +46,8 @@ class ApprovalRejectProjec extends Action
         return [
             // Text::make('approval ', 'approval'),
             Select::make('approval ', 'approval')->options([
-                "approval" => 'approval',
-                "reject"=> 'reject',
+                1 => 'approval',
+                2=> 'reject',
             ])->displayUsingLabels(),
 
             NovaDependencyContainer::make([

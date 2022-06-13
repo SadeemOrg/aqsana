@@ -20,7 +20,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Whitecube\NovaGoogleMaps\GoogleMaps;
 class Alhisalat extends Resource
 {
     /**
@@ -57,18 +57,24 @@ class Alhisalat extends Resource
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
+        $user = Auth::user();
         $id = Auth::id();
+        if($user->type() == 'admin')
+        {
+            return $query;
+        }
+        else{
         $areas = DB::table('areas')->where('admin_id', $id)
         ->join('cities', 'cities.area_id', '=', 'areas.id')
         ->join('alhisalats', 'alhisalats.city_id', '=', 'cities.id')
         ->select('alhisalats.name')->get();
         $stack = array();
-      foreach ( $areas as $key => $value) {
-          array_push($stack, $value->name);
-          // echo $value->name;
-      }
+        foreach ( $areas as $key => $value) {
+            array_push($stack, $value->name);
+        }
         return $query->whereIn('name', $stack);
-    }
+        }
+        }
 
 
 
@@ -80,8 +86,8 @@ class Alhisalat extends Resource
 
             ID::make(__('ID'), 'id')->sortable(),
             Text::make("Name","name"),
-            BelongsTo::make('City','City'),
             Textarea::make("Description","description"),
+            BelongsTo::make('City','City'),
             Number::make("The amount required","amount_total"),
             Multiselect::make("Status","status")->options([
                 '1' => 'placed on the site',
@@ -93,28 +99,17 @@ class Alhisalat extends Resource
               hideWhenUpdating(),
               Text::make("reason_of_reject","reason_of_reject")->hideWhenCreating()->
               hideWhenUpdating(),
-            Number::make("Lat","lat"),
-            Number::make("Lon","lon"),
+
+              GoogleMaps::make('adrees','adrees')
+              ->zoom(8), // Optionally set the zoom level
+
+
 
             Text::make("Information location","information_location"),
             DateTime::make('Start time','start_time'),
             DateTime::make('End time','end_time'),
 
 
-
-
-        //     Multiselect::make('Administrator','giver')
-        //     ->options( function() {
-        //     $users = User::join('user_roles','user_roles.user_id','users.id')
-        //     ->join('roles','user_roles.role_id','roles.id')->select('users.name','users.id','roles.role_name')->get();
-        //     $user_type_admin_array =  array();
-
-        //     foreach($users as $user) {
-        //         $user_type_admin_array += [$user['id'] => ( $user['id'] . $user['name'] . " (". $user['role_name'] .")")];
-        //     }
-
-        //     return $user_type_admin_array;
-        //    }),
 
 
 
@@ -143,7 +138,7 @@ class Alhisalat extends Resource
                })->singleSelect(),
 
 
-                HasMany::make('Transaction','giver'),
+
         ];
     }
 

@@ -15,7 +15,7 @@ use App\Nova\Actions\ProjectStatu;
 use Illuminate\Support\Facades\Auth;
 use App\Nova\Filters\ProjectStatus;
 use App\Nova\Filters\Projectapproval;
-use App\Models\User;
+use App\Models\City;
 use Illuminate\Support\Facades\DB;
 
 class project extends Resource
@@ -69,6 +69,18 @@ class project extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make("project_name","project_name"),
             Number::make("project_number","project_number"),
+            Select::make('admin','admin_id',)
+            ->options( function() {
+                $users =  \App\Models\User::where('user_roll', '=', 'admin')->get();
+
+                $user_type_admin_array =  array();
+
+                foreach($users as $user) {
+                    $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_roll'] .")")];
+                }
+
+                return $user_type_admin_array;
+               }),
             Text::make("project_goal","project_goal"),
             Text::make("projec_type","projec_type"),
             Select::make('Project Status ', 'Project_Status')->options([
@@ -87,9 +99,9 @@ class project extends Resource
              hideWhenUpdating(),
             DateTime::make('End time','projec_start'),
             DateTime::make('projec_end','projec_end'),
-            Multiselect::make('area','area_id')
+            Multiselect::make('city','city_id')
             ->options( function() {
-            $buses_db = Area::all();
+            $buses_db = City::all();
             $buses =  array();
 
             foreach($buses_db as $bus) {

@@ -487,6 +487,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .inline-flex{
   display: inline-flex;
 }
+.table{
+  display: table;
+}
 .flow-root{
   display: flow-root;
 }
