@@ -18,8 +18,7 @@ class AlhisalatPolicy
      */
     public function viewAny(User $user)
     {
-        return ($user->type() == 'admin' || $user->type() == 'financial_user');
-
+       return $user->type() == 'admin';
     }
 
     /**
@@ -90,6 +89,7 @@ class AlhisalatPolicy
      */
     public function forceDelete(User $user, Alhisalat $alhisalat)
     {
-        return     ($user->type() == 'admin' || $user->type() == 'admin')    ;
+        return $user->type() == 'admin';
+
     }
 }

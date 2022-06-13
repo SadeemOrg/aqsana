@@ -15,6 +15,7 @@ use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Epartment\NovaDependencyContainer\ActionHasDependencies;
 use Laravel\Nova\Fields\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class Transaction extends Resource
 {
@@ -31,6 +32,7 @@ class Transaction extends Resource
      * @var string
      */
     public static $title = 'id';
+    public static $group = 'Admin';
 
     /**
      * The columns that should be searched.
@@ -135,7 +137,10 @@ class Transaction extends Resource
                     }
                     return $user_type_admin_array;
                     }),
-
+                    Text::make("approval","approval")->hideWhenCreating()->
+                    hideWhenUpdating(),
+                    Text::make("reason_of_reject","reason_of_reject")->hideWhenCreating()->
+                    hideWhenUpdating(),
 
 
             Select::make("transactions_type","transactions_type")->options([
@@ -194,6 +199,11 @@ class Transaction extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new Actions\ApprovalRejectProjec)->canSee(function ($request) {
+                $user = Auth::user();
+              return  ($user->type() == 'admin'|| $user->type() == 'financial_user');
+            }),
+        ];
     }
 }

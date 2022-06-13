@@ -18,7 +18,8 @@ class TransactionPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->type() == 'admin';
+        return  ($user->type() == 'admin' || $user->type() == 'normal_financial_user'|| $user->type() == 'financial_user') ;
+
     }
 
     /**
@@ -30,7 +31,8 @@ class TransactionPolicy
      */
     public function view(User $user, Transaction $transaction)
     {
-        return $user->type() == 'admin';
+        return  ($user->type() == 'admin' || $user->type() == 'normal_financial_user'|| $user->type() == 'financial_user') ;
+
     }
 
     /**
@@ -41,7 +43,7 @@ class TransactionPolicy
      */
     public function create(User $user)
     {
-        return $user->type() == 'admin';
+        return  ($user->type() == 'admin' || $user->type() == 'normal_financial_user'|| $user->type() == 'financial_user') ;
     }
 
     /**
@@ -53,7 +55,7 @@ class TransactionPolicy
      */
     public function update(User $user, Transaction $transaction)
     {
-        return $user->type() == 'admin';
+        return  ($user->type() == 'admin' || $user->type() == 'normal_financial_user'|| $user->type() == 'financial_user') ;
     }
 
     /**

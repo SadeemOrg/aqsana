@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use App\Nova\User;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -16,7 +17,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function boot()
     {
+        Nova::sortResourcesBy(function ($resource) {
+            return $resource::$priority ?? 9999;
+        });
         parent::boot();
+        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
+            ]);
     }
 
     /**
@@ -75,9 +81,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function tools()
     {
-        return [];
-    }
+        return [
 
+            new \OptimistDigital\NovaSettings\NovaSettings
+        ];
+    }
     /**
      * Register any application services.
      *
@@ -87,4 +95,5 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         //
     }
+
 }

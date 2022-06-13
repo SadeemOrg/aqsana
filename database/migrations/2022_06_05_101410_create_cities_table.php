@@ -16,9 +16,9 @@ class CreateCitiesTable extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('area_id')->nullable();
-            // $table->foreign('area_id')->references('id')->on('areas')
-            // ->onDelete('cascade');
+            $table->unsignedBigInteger('area_id')->nullable();
+            $table->foreign('area_id')->references('id')->on('areas')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }
