@@ -18,7 +18,6 @@ class CreateTransactionsTable extends Migration
             $table->string('type');
             $table->bigInteger('ref_id')->nullable();
             $table->integer('transactions_type');
-            $table->integer('transactions_status');
             $table->string('Currency');
             $table->string('equivalent_amount');
             $table->string('approval')->nullable();

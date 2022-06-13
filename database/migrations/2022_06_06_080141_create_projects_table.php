@@ -24,7 +24,8 @@ class CreateProjectsTable extends Migration
             $table->string('Project_Status')->default("Initial");
             $table->time('projec_start');
             $table->time('projec_end');
-            $table->json('area_id');
+            $table->json('city_id');
+            $table->integer('admin_id');
             $table->string('approval')->nullable();
             $table->string("reason_of_reject")->nullable();
             $table->timestamps();
