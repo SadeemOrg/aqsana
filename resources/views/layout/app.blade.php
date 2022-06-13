@@ -1,4 +1,4 @@
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
 
 <head>
     <meta charset="utf-8">
@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{{ asset('assets/front-end/css/main.css') }}">    
 </head>
 
-<body>
+<body dir="rtl">
 
     @include('layout.front-end.partial._header')
     @yield('content')

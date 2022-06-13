@@ -28,4 +28,8 @@ Route::get('/aboutus', function (){
 Route::get('our-project', function (){
     return view('our-projects');
 });
+Route::get('/yearly-news', function (){
+    return view('yearlyNews');
+});
+
 
