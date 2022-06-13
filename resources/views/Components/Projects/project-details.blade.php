@@ -15,7 +15,7 @@
         margin: 0 -32px;
     }
 </style>
-<div dir="rtl" class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
     <div class="relative mt-4 xl:mt-28">
         <p class="font-FlatBold text-xl sm:text-3xl text-center mt-8 lg:mt-0 xl:text-right">
             مشروع إفطار الصائم في المسجد الاقصى

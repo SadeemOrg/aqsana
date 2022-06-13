@@ -36,3 +36,8 @@ Route::get('/yearly-news', function (){
 Route::get('our-project/1', function (){
     return view('project-details-page');
 });
+
+Route::get('/our-news', function (){
+    return view('our-news');
+});
+
