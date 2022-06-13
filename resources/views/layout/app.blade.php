@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
     <style>
         @layer base {
             @font-face {
@@ -121,7 +120,7 @@ var owl = $("#main-home-slider");
 
 
 var owl2 = $("#association-news-slider-1");
-        owl1.owlCarousel({
+        owl2.owlCarousel({
             rtl:true,
 
     loop:true,

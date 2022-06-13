@@ -14,16 +14,17 @@
         /* display:inline-block; */
         margin: 0 -32px;
     }
-
 </style>
 <div dir="rtl" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-1 mt-24 ">
     <div class="flex flex-row items-center justify-between">
         <div class="relative mt-4 xl:mt-8">
+
             <h4 class="md:text-[18px] lg:text-[24px] xl:text-[30px]  font-FlatBold text-[#101426]">
                 أخبار الجمعية
             </h4>
-            <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
+            <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-9 hidden xl:block"></div>
         </div>
+
         <div class="flex flex-row gap-x-2">
             <a href="#" class="text-[#349A37] text-[16px] font-noto_Regular ">
                 عرض المزيد
