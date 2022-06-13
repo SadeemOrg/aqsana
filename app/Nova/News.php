@@ -5,6 +5,11 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Trix;
+use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Text;
+use Halimtuhu\ArrayImages\ArrayImages;
+use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
 
 class News extends Resource
 {
@@ -41,6 +46,14 @@ class News extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Text::make("Title",'title'),
+            Trix::make("Description",'description'),
+            ImageUploadPreview::make('Image','image')->disk('public')->path('image_news'),
+            // Image::make('Image','image')->disk('public')->prunable(),
+            ArrayImages::make('Pictures', 'pictures')
+            ->disk('public')
+            ->path('pictures_news'),
+            
         ];
     }
 

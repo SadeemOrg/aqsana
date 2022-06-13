@@ -22,14 +22,17 @@ Route::get('/ ', function () {
 });
 
 Route::get('/aboutus', function (){
-    return view('about-us');
+    return view('about-us-page');
 });
 
 Route::get('our-project', function (){
-    return view('our-projects');
+    return view('projects-page');
 });
 Route::get('/yearly-news', function (){
     return view('yearlyNews');
 });
 
 
+Route::get('our-project/1', function (){
+    return view('project-details-page');
+});

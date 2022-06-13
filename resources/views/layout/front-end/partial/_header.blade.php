@@ -1,6 +1,6 @@
-<header> 
+<header>
     <div dir="rtl" class=" my-4 h-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-        
+
         <!-- Start for mobile -->
         <div class="xl:hidden flex justify-between items-center">
             <a href="#">
