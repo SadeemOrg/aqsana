@@ -15,6 +15,15 @@ class CreateProjectTasksTable extends Migration
     {
         Schema::create('project_tasks', function (Blueprint $table) {
             $table->id();
+            $table->json('user_role_id')->nullable();
+            $table->bigInteger('project_id');
+            $table->string('name');
+            $table->string('description');
+            $table->integer('status')->default(0);
+            $table->dateTime('start_time')->nullable();
+            $table->dateTime('end_time')->nullable();
+            $table->bigInteger('recipient')->nullable();
+            $table->bigInteger('giver')->nullable();
             $table->timestamps();
         });
     }
