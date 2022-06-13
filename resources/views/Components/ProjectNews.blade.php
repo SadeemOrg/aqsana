@@ -6,7 +6,12 @@
     }
 </style>
 <div dir="rtl" class="max-w-7xl mx-auto px-4 pt-12 sm:pt-28 sm:px-6 lg:px-8">
-    <p class="font-FlatBold text-3xl text-center xl:text-right">أخبار المشاريع</p>
+
+    <div class="relative mt-4 xl:mt-8">
+        <p class="font-FlatBold text-3xl text-center xl:text-right">أخبار المشاريع</p>
+        <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-9 hidden xl:block"></div>
+    </div>
+
     <div class="flex flex-row flex-wrap items-center justify-start sm:justify-center xl:items-start xl:justify-between gap-y-6 xl:gap-y-0">
         <div class="flex flex-col items-center basis-full sm:basis-3/5 xl:basis-2/5 gap-y-5">
             <div
