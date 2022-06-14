@@ -22,8 +22,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             return $resource::$priority ?? 9999;
         });
         parent::boot();
-        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            ]);
+        // \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
+        //     ]);
     }
 
     /**
