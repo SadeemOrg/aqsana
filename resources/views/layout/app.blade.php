@@ -69,10 +69,9 @@ var owl = $("#main-home-slider");
         }
     }
         });
-        var owl1 = $("#association-news-slider");
-        owl1.owlCarousel({
-            rtl:true,
-
+var owl1 = $("#association-news-slider");
+owl1.owlCarousel({
+    rtl:true,
     loop:true,
     margin:20,
     nav:true,
@@ -167,6 +166,57 @@ var owl2 = $("#association-news-slider-1");
                 }
             }
 })
+
+
+var owl3 = $("#association-news-slider-2");
+owl3.owlCarousel({
+    rtl:true,
+    loop:true,
+    margin:20,
+    nav:true,
+    dots:true,
+    dotsClass:'dotsCurosal',
+    responsive: {
+                //X-Small
+                0: {
+                    items: 1
+                },
+                360: {
+                    items: 1
+                },
+                375: {
+                    items: 1
+                },
+                540: {
+                    items: 1
+                },
+                //Small
+                576: {
+                    items: 1
+                },
+                //Medium
+                768: {
+                    items: 1
+                },
+                850: {
+                    items: 2
+                },
+                //Large
+                1120: {
+                    items: 2
+                },
+                //Extra large
+                1200: {
+                    items: 3
+                },
+                //Extra extra large
+                1400: {
+                    items: 3
+                }
+            }
+})
+
+
 </script>
 
 </html>
