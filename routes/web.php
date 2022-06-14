@@ -28,16 +28,21 @@ Route::get('/aboutus', function (){
 Route::get('our-project', function (){
     return view('projects-page');
 });
+Route::get('our-project/1', function (){
+    return view('project-details-page');
+});
+
+Route::get('project-donations', function (){
+    return view('project-donations');
+});
+
 Route::get('/yearly-news', function (){
     return view('yearlyNews');
 });
 
 
-Route::get('our-project/1', function (){
-    return view('project-details-page');
-});
 
-Route::get('/our-news', function (){
+Route::get('our-project/2', function (){
     return view('our-news');
 });
 

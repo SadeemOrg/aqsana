@@ -8,17 +8,16 @@
     .leftline {
         /* content:"\A"; */
         width: 13px;
-        height: 98%;
+        height: 97.5%;
         background: #349A37;
         right: 10;
         /* display:inline-block; */
         margin: 0 -32px;
     }
 </style>
-<div dir="rtl" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-1 mt-24 ">
-    <div class="flex flex-row items-center justify-between">
-        <div class="relative mt-4 xl:mt-8">
-
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 ">
+    <div class="flex flex-row items-center justify-between mb-4">
+        <div class="relative">
             <h4 class="md:text-[18px] lg:text-[24px] xl:text-[30px]  font-FlatBold text-[#101426]">
                 أخبار الجمعية
             </h4>

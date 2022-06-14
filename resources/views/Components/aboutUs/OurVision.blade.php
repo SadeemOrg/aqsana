@@ -4,7 +4,7 @@
         box-shadow: 0px 20px 25px -5px #0000001A;
     }
 </style>
-<div dir="rtl" class="max-w-7xl mx-auto px-4 mt-8 md:mt-24 sm:px-6 lg:px-8">
+<div  class="max-w-7xl mx-auto px-4 mt-8 md:mt-24 sm:px-6 lg:px-8">
     <div
         class="flex flex-row flex-wrap xl:flex-nowrap items-center justify-start sm:justify-center xl:items-start xl:justify-between gap-y-6 xl:gap-y-0 gap-x-7">
         <img src="{{ asset('assets/image/AlAqsaView.png') }}" alt="AlAqsaView"

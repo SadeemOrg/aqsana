@@ -1,4 +1,32 @@
 
+/** Start home page **/
+#association-news-slider-1 .owl-stage, #association-news-slider .owl-stage {
+  padding: 2.5rem 0;
+  padding-top: 1.5rem;
+}
+.common-shadow {
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+  background-color: #fff;
+}
+
+      /*** Start tabs system ***/
+      .tabs-container .tab:not(:first-child){
+        display: none;
+      }
+      /*** End tabs system ***/
+/** End home page **/
+
+
+
+
+
+
+
+
+
+
+
+
 /******** Start dropdown style ***********/
 
 .nav-item {
@@ -195,3 +223,17 @@
   bottom: -15px;
 }
 /** End nav button style **/
+
+/*** Start my css framework ***/
+.dots-style .owl-dots {text-align: center; margin-top: 25px;}
+.dots-style .owl-dots .owl-dot{
+  width: 16px;
+  height: 16px;
+  background-color: #CFE9FF;
+  border-radius: 50%;
+  margin: 0 2px;
+}
+.dots-style .owl-dots .owl-dot.active{
+  background-color: #349A37;
+}
+/*** End my css framework ***/

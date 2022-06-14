@@ -8,7 +8,7 @@
     .leftline {
         /* content:"\A"; */
         width: 13px;
-        height: 98%;
+        height: 97.5%;
         background: #349A37;
         right: 10;
         /* display:inline-block; */
@@ -97,4 +97,5 @@
             </div>
         </div>
     </div>
+    @include('Components.Projects.ProjectDetailsSlider')
 </div>
