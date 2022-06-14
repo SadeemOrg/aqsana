@@ -52,7 +52,7 @@ class Transaction extends Resource
     public function fields(Request $request)
     {
         return [
-
+            ID::make(__('ID'), 'id')->sortable(),
             Select::make('Transactions Type ', 'transactions_type')->options([
                 0 => 'Payment voucher',
                 1 => 'receipt voucher',
@@ -77,9 +77,7 @@ class Transaction extends Resource
                 }),
 
 
-                Hidden::make('User', 'user_id')->default(function ($request) {
-                    return $request->user()->id;
-                }),
+
 
 
 
@@ -108,12 +106,12 @@ class Transaction extends Resource
                                     ])->dependsOn('type', "trip"),
 
 
-                Select::make("transactions status","transactions_status")->options([
-                    '0' => 'not',
-                    '1' => 'ok',
+                // Select::make("transactions status","transactions_status")->options([
+                //     '0' => 'not',
+                //     '1' => 'ok',
 
-                    ])->default(0)
-                    ->hideFromIndex() ,
+                //     ])->default(0)
+                //     ->hideFromIndex() ,
 
                     // Text::make('Description')->rules('max:255')->displayUsing(function ($text) {
 
@@ -124,7 +122,7 @@ class Transaction extends Resource
                     // }),
 
 
-                    Text::make('equivalent_amount'),
+                    Text::make('equivalent amount','equivalent_amount'),
 
 
                     // Select::make('Currency','Currency')->options(\App\Models\Currency::pluck('name')),
@@ -137,18 +135,21 @@ class Transaction extends Resource
                     }
                     return $user_type_admin_array;
                     }),
-                    Text::make("approval","approval")->hideWhenCreating()->
+                    Select::make('approval ', 'approval')->options([
+                        1 => 'approval',
+                        2=> 'reject',
+                    ])->displayUsingLabels()->hideWhenCreating()->
                     hideWhenUpdating(),
                     Text::make("reason_of_reject","reason_of_reject")->hideWhenCreating()->
                     hideWhenUpdating(),
 
 
-            Select::make("transactions_type","transactions_type")->options([
-                '0' => 'not',
-                '1' => 'ok',
+            // Select::make("transactions_type","transactions_type")->options([
+            //     '0' => 'not',
+            //     '1' => 'ok',
 
-                ])->default(0)
-                ->hideFromIndex() ,
+            //     ])->default(0)
+            //     ->hideFromIndex() ,
 
             Date::make('date','date'),
 

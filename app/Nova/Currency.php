@@ -5,7 +5,8 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
-
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Text;
 class Currency extends Resource
 {
     /**
@@ -43,6 +44,8 @@ class Currency extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Text::make('Name','name'),
+            Number::make('values','values')->step(0.01),
         ];
     }
 
