@@ -21,8 +21,8 @@
                         <li class="nav-item relative">
                             <a class=" w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"  href="/aboutus">من نحن</a>
                         </li>
-                        <li class="nav-item relative">
-                            <p onclick="location.href='our-project'"  class="stop-link w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static" >مشاريعنا</p>
+                        <li class="nav-item relative" onclick="location.href='our-project'">
+                            <a   class="stop-link w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static" >مشاريعنا</a>
                             <div class="dropdown-menu drop-shadow-lg bg-white rounded-[5px] right-[110%] xl:right-[0] top-[100%]">
                                 <ul>
                                     <li>
