@@ -171,7 +171,6 @@
                     alt="people_on_Mousq" />
             </div>
         </div> --}}
-
     </div>
 
 

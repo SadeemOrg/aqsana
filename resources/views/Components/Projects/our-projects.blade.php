@@ -98,7 +98,7 @@
             </div>
         </div>
         <!--second card -->
-        <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full">
+        <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full" onclick="location.href='our-project/2'">
             <div class="absolute leftline"></div>
             <div class="max-w-[600px] bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
                 <img src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq"
