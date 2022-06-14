@@ -10,7 +10,8 @@
 
     <div class="owl-carousel owl-theme owl-loaded" id="association-news-slider-1">
         <div class="p-3 item bg-white Card_shadow mt-4 lg:mt-16 relative rounded-[5px]  lg:max-h-[390px]"
-            onclick="location.href='our-project/1'">
+            onclick="location.href='our-project/1'"
+            >
             <div class="absolute leftline"></div>
             <div
                 class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-3 px-2 lg:max-h-[340px]">
@@ -92,7 +93,6 @@
                     alt="people_on_Mousq" />
             </div>
         </div> --}}
-
     </div>
 
 

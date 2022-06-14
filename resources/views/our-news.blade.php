@@ -40,7 +40,7 @@
     <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
         <div class="relative ">
             <p class="font-FlatBold text-xl sm:text-3xl text-center mt-8 lg:mt-0 xl:text-right">
-                أكثر من 10 آلاف مشارك بمعسكر “القدس أولًا 13” الذي نظمته الحركة الإسلامية وجمعية الأقصى  
+                أكثر من 10 آلاف مشارك بمعسكر “القدس أولًا 13” الذي نظمته الحركة الإسلامية وجمعية الأقصى
             </p>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
@@ -139,10 +139,9 @@
                     </div>
                 </div>
 
-
-
             </div>
         </div>
+        @include('Components.Projects.ProjectDetailsSlider')
     </div>
 </div>
 

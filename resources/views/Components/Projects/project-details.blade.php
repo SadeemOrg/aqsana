@@ -97,4 +97,5 @@
             </div>
         </div>
     </div>
+    @include('Components.Projects.ProjectDetailsSlider')
 </div>
