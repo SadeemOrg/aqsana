@@ -419,6 +419,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[100\%\]{
   top: 100%;
 }
+.top-\[50\%\]{
+  top: 50%;
+}
+.left-\[-50px\]{
+  left: -50px;
+}
+.bottom-0{
+  bottom: 0px;
+}
 .z-30{
   z-index: 30;
 }
@@ -638,6 +647,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .min-h-\[350px\]{
   min-height: 350px;
 }
+.min-h-\[294px\]{
+  min-height: 294px;
+}
 .w-full{
   width: 100%;
 }
@@ -742,6 +754,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .-translate-y-1\/2{
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.translate-y-\[-50\%\]{
   --tw-translate-y: -50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
@@ -859,6 +875,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .overflow-hidden{
   overflow: hidden;
 }
+.overflow-x-hidden{
+  overflow-x: hidden;
+}
 .rounded-lg{
   border-radius: 0.5rem;
 }
@@ -873,6 +892,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .rounded-\[30px\]{
   border-radius: 30px;
+}
+.rounded-\[16px\]{
+  border-radius: 16px;
 }
 .border-0{
   border-width: 0px;
@@ -1077,6 +1099,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pb-5{
   padding-bottom: 1.25rem;
+}
+.pt-20{
+  padding-top: 5rem;
+}
+.pb-\[72px\]{
+  padding-bottom: 72px;
 }
 .text-center{
   text-align: center;
@@ -1401,6 +1429,9 @@ body{
   .md\:block{
     display: block;
   }
+  .md\:flex{
+    display: flex;
+  }
   .md\:grid{
     display: grid;
   }
@@ -1473,6 +1504,15 @@ body{
   }
   .lg\:mr-0{
     margin-right: 0px;
+  }
+  .lg\:ml-10{
+    margin-left: 2.5rem;
+  }
+  .lg\:ml-20{
+    margin-left: 5rem;
+  }
+  .lg\:ml-24{
+    margin-left: 6rem;
   }
   .lg\:block{
     display: block;
@@ -1574,6 +1614,9 @@ body{
   }
   .xl\:right-\[0\]{
     right: 0;
+  }
+  .xl\:left-0{
+    left: 0px;
   }
   .xl\:mt-8{
     margin-top: 2rem;

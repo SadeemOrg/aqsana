@@ -225,7 +225,7 @@
 /** End nav button style **/
 
 /*** Start my css framework ***/
-.dots-style .owl-dots {text-align: center; margin-top: 50px;}
+.dots-style .owl-dots {text-align: center; margin-top: 25px;}
 .dots-style .owl-dots .owl-dot{
   width: 16px;
   height: 16px;
