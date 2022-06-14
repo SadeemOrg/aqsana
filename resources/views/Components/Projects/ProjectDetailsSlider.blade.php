@@ -8,7 +8,7 @@
 <!--Starting Slider -->
 
 <!--Slider Content -->
-<div class="owl-carousel owl-theme owl-loaded" id="association-news-slider-2">
+<div class="owl-carousel owl-theme owl-loaded dots-style" id="association-news-slider-2">
     <div class="p-3 item bg-white Card_shadow mt-4 lg:mt-16 relative rounded-[5px]  lg:max-h-[390px]"
         {{-- onclick="location.href='our-project/1'" --}}
         >
@@ -33,7 +33,7 @@
                 </p>
 
             </div>
-            <img class=" lg:block lg:max-w-[200px] h-[300px] object-cover rounded-[5px] my-4"
+            <img class=" lg:block lg:max-w-[180px] h-[300px] object-cover rounded-[5px] my-4"
                 src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq" />
         </div>
     </div>

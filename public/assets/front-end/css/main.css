@@ -1,4 +1,21 @@
 
+/** Start home page **/
+ #association-news-slider-1 .owl-stage {
+  padding: 2.5rem 0;
+ }
+/** End home page **/
+
+
+
+
+
+
+
+
+
+
+
+
 /******** Start dropdown style ***********/
 
 .nav-item {
@@ -195,3 +212,17 @@
   bottom: -15px;
 }
 /** End nav button style **/
+
+/*** Start my css framework ***/
+.dots-style .owl-dots {text-align: center; margin-top: 50px;}
+.dots-style .owl-dots .owl-dot{
+  width: 16px;
+  height: 16px;
+  background-color: #CFE9FF;
+  border-radius: 50%;
+  margin: 0 2px;
+}
+.dots-style .owl-dots .owl-dot.active{
+  background-color: #349A37;
+}
+/*** End my css framework ***/
