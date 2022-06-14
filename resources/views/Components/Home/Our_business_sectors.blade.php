@@ -5,16 +5,16 @@
     }
 </style>
 
-<div dir="rtl" class="max-w-7xl mx-auto px-4 sm:py-24 sm:px-6 lg:px-1 mt-8 xl:mt-24">
-    <div class="flex flex-row flex-wrap gap-y-8 md:gap-y-0 justify-center items-center gap-x-6 pb-20">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-1 mt-8 xl:mt-24">
+    <div class="flex flex-row flex-wrap gap-y-8 md:gap-y-0 justify-center items-center gap-x-6">
         <img src="{{ asset('assets/image/emar_deen.svg') }}" alt="emar_deen">
         <img src="{{ asset('assets/image/somood.svg') }}" alt="somood">
         <img src="{{ asset('assets/image/jsoor.svg') }}" alt="jsoor">
         <img src="{{ asset('assets/image/oloom&sharea.svg') }}" alt="oloom&sharea">
         <img src="{{ asset('assets/image/harkehesalmey.svg') }}" alt="harkehesalmey">
     </div>
-    <div class="flex flex-col items-start justify-start">
-        <div class="relative mt-4 xl:mt-8">
+    <div class="flex flex-col items-start justify-start mt-24">
+        <div class="relative ">
             <p class="text-2xl text-[#101426] font-FlatBold">قطاعات عملنا المركزية</p>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-9 hidden xl:block"></div>
         </div>
@@ -26,7 +26,7 @@
     <div class="mt-12">
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <!-- first card -->
-            <div class="pt-6 shaddow">
+            <div class="pt-6 shaddow relative pb-[72px] overflow-hidden rounded-[16px]">
                 <div class="flow-root rounded-lg bg-[#FFFFFF] px-6 pb-8 ">
                     <div class="-mt-6">
                         <img src="{{ asset('assets/image/Brand_icon.svg') }}" alt="Brand_icon" class="w-16 h-16">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-[72px] flex flex-row justify-between items-center w-full px-6 cursor-pointer bg-[#F9FAFB]">
+                    class="h-[72px] absolute bottom-0 right-0 left-0 w-full flex flex-row justify-between items-center w-full px-6 cursor-pointer bg-[#F9FAFB]">
                     <a class="font-FlatBold text-[#349A37] text-base " href="#">عرض المزيد</a>
                     <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <!-- second card -->
-            <div class="pt-6 shaddow">
+            <div class="pt-6 shaddow relative pb-[72px] overflow-hidden rounded-[16px]">
                 <div class="flow-root rounded-lg bg-[#FFFFFF] px-6 pb-8 ">
                     <div class="-mt-6">
                         <img src="{{ asset('assets/image/finance_Brand.svg') }}" alt="finance_Brand" class="w-16 h-16">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-[72px] flex flex-row justify-between items-center w-full px-6 cursor-pointer bg-[#F9FAFB]">
+                    class="h-[72px] absolute bottom-0 right-0 left-0 w-full flex flex-row justify-between items-center w-full px-6 cursor-pointer bg-[#F9FAFB]">
                     <a class="font-FlatBold text-[#349A37] text-base " href="#">عرض المزيد</a>
                     <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <!-- third card -->
-            <div class="pt-6 shaddow">
+            <div class="pt-6 shaddow relative pb-[72px] overflow-hidden rounded-[16px]">
                 <div class="flow-root rounded-lg bg-[#FFFFFF] px-6 pb-8 ">
                     <div class="-mt-6">
                         <img src="{{ asset('assets/image/Brand_icon.svg') }}" alt="Brand_icon" class="w-16 h-16">
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-[72px] flex flex-row justify-between items-center w-full px-6 cursor-pointer bg-[#F9FAFB]">
+                    class="h-[72px] absolute bottom-0 right-0 left-0 w-full flex flex-row justify-between items-center w-full px-6 cursor-pointer bg-[#F9FAFB]">
                     <a class="font-FlatBold text-[#349A37] text-base " href="#">عرض المزيد</a>
                     <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path

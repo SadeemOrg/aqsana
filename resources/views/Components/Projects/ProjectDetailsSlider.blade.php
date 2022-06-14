@@ -1,4 +1,4 @@
-<div class="relative mt-28 xl:mt-28">
+<div class="relative mt-28 xl:mt-24">
     <p class="font-FlatBold text-xl sm:text-[27px] text-center mt-8 lg:mt-0 xl:text-right">
         مقالات ذات صلة
     </p>

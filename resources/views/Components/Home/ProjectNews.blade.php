@@ -4,7 +4,7 @@
         border-radius: 5px;
     }
 </style>
-<div class="max-w-7xl mx-auto px-4 pt-12 sm:pt-28 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto px-4 mt-24 sm:px-6 lg:px-8">
 
     <div class="relative mt-4 xl:mt-8 mb-7">
         <p class="font-FlatBold text-3xl text-center xl:text-right">أخبار المشاريع</p>
