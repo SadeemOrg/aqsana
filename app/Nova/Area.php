@@ -56,7 +56,7 @@ class Area extends Resource
 
             Select::make('admin','admin_id',)
             ->options( function() {
-                $users =  \App\Models\User::where('user_roll', '=', 'admin')->get();
+                $users =  \App\Models\User::where('user_roll', '=', 'regular_area')->get();
 
                 $user_type_admin_array =  array();
 

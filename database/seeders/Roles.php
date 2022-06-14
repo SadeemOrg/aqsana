@@ -13,7 +13,7 @@ class Roles extends Seeder
      */
     public function run()
     {
-       
+
         Role::create([
             'status' => '1',
             'code_role' => 'admin',
@@ -32,11 +32,7 @@ class Roles extends Seeder
             'role' => 'normal financial user',
         ]);
 
-        Role::create([
-            'status' => '1',
-            'code_role' => 'responsible_area',
-            'role' => 'Responsible Area',
-        ]);
+
 
         Role::create([
             'status' => '1',

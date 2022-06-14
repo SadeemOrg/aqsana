@@ -77,10 +77,13 @@ class Trip extends Resource
                      hideWhenUpdating(),
 
 
-                         BelongsTo::make('from city', 'from', \App\Nova\City::class),
-                        BelongsTo::make('to city', 'tocity', \App\Nova\City::class),
+                        //  BelongsTo::make('from city', 'from', \App\Nova\City::class),
+                        // BelongsTo::make('to city', 'tocity', \App\Nova\City::class),
 
-
+                        GoogleMaps::make('from city', 'from_city_id')
+                        ->zoom(8),
+                        GoogleMaps::make('to city', 'to_city_id')
+                        ->zoom(8) ,
 
                 Number::make("buses number","buses_number"),
                 Number::make("participants number","participants_number"),
@@ -102,9 +105,9 @@ class Trip extends Resource
                 DateTime::make('End time','end_time'),
 
                 Select::make('Status','status')->options([
-                    'wate tipe' => 'wate tipe',
-                    'in tipe' => 'in tipe',
-                    ' tipe' => ' tipe',
+                    '1' => 'wate tipe',
+                    '2' => 'in tipe',
+                    '3' => ' tipe',
 
                     ])->displayUsingLabels(),
                 Number::make("Cost","cost"),
@@ -116,10 +119,8 @@ class Trip extends Resource
                     '3' => 'weekly',
                     '4' => 'Monthly',
                     ])->singleSelect(),
-           // GoogleMaps::make('Map')
-                // ->zoom(8) // Optionally set the zoom level
-                // ->defaultCoordinates(1200, 1233), // Optionally set the map's default center point
-                    // HasMany::make("Buses","bus")
+  // Optionally set the map's default center point
+
 
 
 

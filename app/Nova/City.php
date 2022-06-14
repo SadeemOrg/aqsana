@@ -8,6 +8,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class City extends Resource
 {
@@ -42,6 +44,27 @@ class City extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        $user = Auth::user();
+        $id = Auth::id();
+        if($user->type() == 'admin')
+        {
+            return $query;
+        }
+        else{
+        $areas = DB::table('areas')->where('admin_id', $id)
+        ->join('cities', 'cities.area_id', '=', 'areas.id')
+
+        ->select('cities.name')->get();
+        $stack = array();
+        foreach ( $areas as $key => $value) {
+            array_push($stack, $value->name);
+        }
+        return $query->whereIn('name', $stack);
+        }
+     }
     public function fields(Request $request)
     {
         return [

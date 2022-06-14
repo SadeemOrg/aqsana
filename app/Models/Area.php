@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Area extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'admin_id';
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'id','name','admin_id'
+    'name','admin_id'
     ];
 
     protected $hidden = [
@@ -25,9 +25,9 @@ class Area extends Model
         return $this->hasMany(City::class);
     }
 
+
     public function User()
     {
         return $this->belongsTo('App\Models\User','admin_id');
     }
-
 }
