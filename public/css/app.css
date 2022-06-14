@@ -536,6 +536,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-5{
   margin-top: 1.25rem;
 }
+.mt-28{
+  margin-top: 7rem;
+}
 .block{
   display: block;
 }
@@ -849,6 +852,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .gap-x-5{
   -moz-column-gap: 1.25rem;
        column-gap: 1.25rem;
+}
+.gap-y-4{
+  row-gap: 1rem;
 }
 .overflow-hidden{
   overflow: hidden;
@@ -1322,6 +1328,9 @@ body{
   }
 }
 @media (min-width: 640px){
+  .sm\:mt-20{
+    margin-top: 5rem;
+  }
   .sm\:block{
     display: block;
   }
@@ -1360,6 +1369,9 @@ body{
   .sm\:pt-28{
     padding-top: 7rem;
   }
+  .sm\:pt-16{
+    padding-top: 4rem;
+  }
   .sm\:text-right{
     text-align: right;
   }
@@ -1377,6 +1389,9 @@ body{
   .sm\:text-sm{
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+  .sm\:text-\[27px\]{
+    font-size: 27px;
   }
 }
 @media (min-width: 768px){
@@ -1398,8 +1413,14 @@ body{
   .md\:w-\[200px\]{
     width: 200px;
   }
+  .md\:w-\[50\%\]{
+    width: 50%;
+  }
   .md\:grid-cols-1{
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .md\:flex-row{
+    flex-direction: row;
   }
   .md\:justify-between{
     justify-content: space-between;
@@ -1501,6 +1522,9 @@ body{
   .lg\:max-w-\[250px\]{
     max-width: 250px;
   }
+  .lg\:max-w-\[180px\]{
+    max-width: 180px;
+  }
   .lg\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -1565,6 +1589,9 @@ body{
   }
   .xl\:mt-16{
     margin-top: 4rem;
+  }
+  .xl\:mt-20{
+    margin-top: 5rem;
   }
   .xl\:block{
     display: block;

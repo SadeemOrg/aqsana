@@ -5,19 +5,19 @@
     }
 </style>
 
-<div class="relative mt-44 md:max-h-72">
+<div class="relative mt-24 md:max-h-72">
     <div class="absolute inset-0">
-        <img class="w-full h-full object-cover" src="{{ asset('assets/image/Alaqsa_Button_Banner1.png') }}"
+        <img class="w-full h-full object-cover" src="{{ asset('assets/image/AlAqsaBanner.png') }}"
             alt="AlAqsaBanner">
 
-        {{-- <div class="absolute inset-0  linearGradiants mix-blend-multiply" aria-hidden="true"></div> --}}
+        <div class="absolute inset-0  linearGradiants mix-blend-multiply" aria-hidden="true"></div>
     </div>
     <div class="relative max-w-7xl mx-auto sm-py-12 py-11 px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col items-center justify-center gap-y-2 md:justify-between ">
             <div class="text-right font-FlatBold text-white">
                 <p class="text-[24px] md:text-[36px] pb-4 text-center max-w-[560px]">جمعية الاقصى لرعاية الاوقاف
                     والمقدسات الاسلامية</p>
-                <div class="flex flex-row flex-wrap-reverse items-center justify-center">
+                <div class="flex flex-row-reverse flex-wrap-reverse items-center justify-center">
                     <svg width="216" height="111" viewBox="0 0 216 111" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g filter="url(#filter0_ddd_21_1194)">
                             <rect x="24" y="8" width="168" height="63" rx="5" fill="white" />
