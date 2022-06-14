@@ -5,7 +5,7 @@
         box-shadow: 0px 16px 24px 0px #0000000F;
     }
 </style>
-<div dir="rtl" class="max-w-7xl mx-auto px-4 mt-12 md:mt-24 sm:px-6 lg:px-8">
+<div  class="max-w-7xl mx-auto px-4 mt-12 md:mt-24 sm:px-6 lg:px-8">
     <div class="relative mt-0 xl:mt-8">
         <p class="font-FlatBold text-3xl text-center xl:text-right"> اهدافنا </p>
         <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-7 hidden xl:block">
