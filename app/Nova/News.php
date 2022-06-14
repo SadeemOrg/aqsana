@@ -26,7 +26,7 @@ class News extends Resource
      * @var string
      */
     public static $title = 'id';
-
+    public static $group = 'Admin';
     /**
      * The columns that should be searched.
      *
@@ -53,7 +53,7 @@ class News extends Resource
             ArrayImages::make('Pictures', 'pictures')
             ->disk('public')
             ->path('pictures_news'),
-            
+
         ];
     }
 
