@@ -28,7 +28,7 @@
         </div>
     </div>
     <!--second Slider -->
-    <div class="p-3 item bg-white Card_shadow mt-4 lg:mt-16 relative rounded-[5px]  max-h-[390px]"
+    {{-- <div class="p-3 item bg-white Card_shadow mt-4 lg:mt-16 relative rounded-[5px]  max-h-[390px]"
         onclick="location.href='our-project/1'">
         <div class="absolute leftline"></div>
         <div
@@ -54,9 +54,9 @@
             <img class="max-w-[190px] h-72 mt-4 rounded-[5px]" src="{{ asset('assets/image/AlaqsaSun.png') }}"
                 alt="people_on_Mousq" />
         </div>
-    </div>
+    </div> --}}
     <!--third Slider -->
-    <div class="p-3 item bg-white Card_shadow mt-4 lg:mt-16 relative rounded-[5px]  max-h-[390px]"
+    {{-- <div class="p-3 item bg-white Card_shadow mt-4 lg:mt-16 relative rounded-[5px]  max-h-[390px]"
         onclick="location.href='our-project/1'">
         <div class="absolute leftline"></div>
         <div
@@ -82,6 +82,6 @@
             <img class="max-w-[190px] h-72 rounded-[5px] mt-4" src="{{ asset('assets/image/Alquds_First.png') }}"
                 alt="people_on_Mousq" />
         </div>
-    </div>
+    </div> --}}
 
 </div>
