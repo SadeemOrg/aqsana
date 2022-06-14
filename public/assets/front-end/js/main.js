@@ -18,6 +18,23 @@ jQuery(document).ready(function(){
       }
     );
 
+    //Start text accodrion text + Start tabs system 
+    $('.news-title').click(function() {
+        $(this).parent('.newsShaddow').toggleClass('open').siblings('.newsShaddow').removeClass('open');
+        $('.news-text').not($(this).siblings('.news-text')).slideUp();
+        $(this).siblings('.news-text').slideToggle();
+        // Arrow rotate
+        $('.arrow-icon').not($(this).find('.arrow-icon')).removeClass('rotate-90');
+        $(this).find('.arrow-icon').toggleClass('rotate-90')
+    });
+    
+    $('.tabs-btn .tab-btn').click(function() {
+      $(this).addClass('active').siblings().removeClass('active');
+      $('.tabs-container .tab').hide()
+      $( '.' + $(this).data('tab')).fadeIn()
+    })
+    //End text accodrion text + Start tabs system 
+
     
 });
 

@@ -1,12 +1,11 @@
 <!--Slider Content -->
-<div class="owl-carousel owl-theme owl-loaded" id="association-news-slider">
-    <div class="p-3 item bg-white Card_shadow mt-4 lg:mt-16 relative rounded-[5px]  lg:max-h-[390px]"
-        onclick="location.href='our-project/1'">
+<div class="owl-carousel owl-theme owl-loaded dots-style" id="association-news-slider">
+    <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[430px]" onclick="location.href='our-project/1'">
         <div class="absolute leftline"></div>
         <div
-            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-3 px-2 lg:max-h-[340px]">
+            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-5 px-2 lg:max-h-[100%]">
             <div class="flex flex-col lg:max-w-[170px] ">
-                <p class="text-[#349A37] text-[16px] pt-4 text-right ">
+                <p class="text-[#349A37] text-[16px] pt-4 text-right leading-[1.3]">
                     اكثر من 10 الاف مشارك بمعسكر "القدس اولا 13" الذي نظمته الحركة الاسلامية وجمعية الاقصى
                 </p>
                 <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 ">أبريل 20, 2022</p>
@@ -23,7 +22,85 @@
                 </p>
 
             </div>
-            <img class=" lg:block lg:max-w-[200px] h-[300px] object-cover rounded-[5px] my-4"
+            <img class=" lg:block lg:max-w-[200px] h-[250px] sm:h-[350px] md:h-[300px] object-cover rounded-[5px] my-4"
+                src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq" />
+        </div>
+    </div>
+    <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[430px]" onclick="location.href='our-project/1'">
+        <div class="absolute leftline"></div>
+        <div
+            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-5 px-2 lg:max-h-[100%]">
+            <div class="flex flex-col lg:max-w-[170px] ">
+                <p class="text-[#349A37] text-[16px] pt-4 text-right leading-[1.3]">
+                    اكثر من 10 الاف مشارك بمعسكر "القدس اولا 13" الذي نظمته الحركة الاسلامية وجمعية الاقصى
+                </p>
+                <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 ">أبريل 20, 2022</p>
+                <p class="text-xs text-[#101426] font-noto_Regular pt-2">
+                    نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف
+                    والمقدسات،
+                    للسنة
+                    الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
+                    لاستقبال
+                    المصلين في شهر رمضان المبارك، ولدعم...
+                    <a href="#">
+                        <span class="text-[#349A37] text-[12px]">عرض المزيد</span>
+                    </a>
+                </p>
+
+            </div>
+            <img class=" lg:block lg:max-w-[200px] h-[250px] sm:h-[350px] md:h-[300px] object-cover rounded-[5px] my-4"
+                src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq" />
+        </div>
+    </div>
+    <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[430px]" onclick="location.href='our-project/1'">
+        <div class="absolute leftline"></div>
+        <div
+            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-5 px-2 lg:max-h-[100%]">
+            <div class="flex flex-col lg:max-w-[170px] ">
+                <p class="text-[#349A37] text-[16px] pt-4 text-right leading-[1.3]">
+                    اكثر من 10 الاف مشارك بمعسكر "القدس اولا 13" الذي نظمته الحركة الاسلامية وجمعية الاقصى
+                </p>
+                <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 ">أبريل 20, 2022</p>
+                <p class="text-xs text-[#101426] font-noto_Regular pt-2">
+                    نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف
+                    والمقدسات،
+                    للسنة
+                    الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
+                    لاستقبال
+                    المصلين في شهر رمضان المبارك، ولدعم...
+                    <a href="#">
+                        <span class="text-[#349A37] text-[12px]">عرض المزيد</span>
+                    </a>
+                </p>
+
+            </div>
+            <img class=" lg:block lg:max-w-[200px] h-[250px] sm:h-[350px] md:h-[300px] object-cover rounded-[5px] my-4"
+                src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq" />
+        </div>
+    </div>
+    <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[430px]" onclick="location.href='our-project/1'">
+        <div class="absolute leftline"></div>
+        <div
+            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-5 px-2 lg:max-h-[100%]">
+            <div class="flex flex-col lg:max-w-[170px] ">
+                <p class="text-[#349A37] text-[16px] pt-4 text-right leading-[1.3]">
+                    اكثر من 10 الاف مشارك بمعسكر "القدس اولا 13" الذي نظمته الحركة الاسلامية وجمعية الاقصى
+                </p>
+                <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 ">أبريل 20, 2022</p>
+                <p class="text-xs text-[#101426] font-noto_Regular pt-2">
+                    نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف
+                    والمقدسات،
+                    للسنة
+                    الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
+                    لاستقبال
+                    المصلين في شهر رمضان المبارك، ولدعم...
+                    <a href="#">
+                        <span class="text-[#349A37] text-[12px]">عرض المزيد</span>
+                    </a>
+                </p>
+
+            </div>
+            <img class=" lg:block lg:max-w-[200px] h-[250px] sm:h-[350px] md:h-[300px] object-cover rounded-[5px] my-4"
                 src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq" />
         </div>
     </div>
