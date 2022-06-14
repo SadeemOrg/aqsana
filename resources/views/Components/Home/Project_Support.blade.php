@@ -1,4 +1,4 @@
-<div dir="rtl" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-1 mt-24 ">
+<div dir="rtl" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 ">
     <div class="relative mt-4 xl:mt-8">
         <p class="font-FlatBold text-3xl text-center xl:text-right"> قم بدعم مشاريع الجمعية</p>
         <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-9 hidden xl:block"></div>
@@ -9,7 +9,7 @@
 
 
     <div class="owl-carousel owl-theme owl-loaded mt-4 dots-style" id="association-news-slider-1">
-        <div class="p-3 item bg-white Card_shadow lg:mt-16 relative rounded-[5px]  lg:max-h-[422px]" onclick="location.href='our-project/1'">
+        <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[430px]" onclick="location.href='our-project/1'">
             <div class="absolute leftline"></div>
             <div
                 class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-5 px-2 lg:max-h-[100%]">
@@ -35,7 +35,7 @@
                     src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq" />
             </div>
         </div>
-        <div class="p-3 item bg-white Card_shadow lg:mt-16 relative rounded-[5px]  lg:max-h-[422px]" onclick="location.href='our-project/1'">
+        <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[430px]" onclick="location.href='our-project/1'">
             <div class="absolute leftline"></div>
             <div
                 class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-5 px-2 lg:max-h-[100%]">
@@ -61,7 +61,7 @@
                     src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq" />
             </div>
         </div>
-        <div class="p-3 item bg-white Card_shadow lg:mt-16 relative rounded-[5px]  lg:max-h-[422px]" onclick="location.href='our-project/1'">
+        <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[430px]" onclick="location.href='our-project/1'">
             <div class="absolute leftline"></div>
             <div
                 class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-5 px-2 lg:max-h-[100%]">
@@ -87,7 +87,7 @@
                     src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq" />
             </div>
         </div>
-        <div class="p-3 item bg-white Card_shadow lg:mt-16 relative rounded-[5px]  lg:max-h-[422px]" onclick="location.href='our-project/1'">
+        <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[430px]" onclick="location.href='our-project/1'">
             <div class="absolute leftline"></div>
             <div
                 class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-5 px-2 lg:max-h-[100%]">
