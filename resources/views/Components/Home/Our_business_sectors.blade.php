@@ -5,7 +5,7 @@
     }
 </style>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-1 mt-8 xl:mt-24">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 xl:mt-24">
     <div class="flex flex-row flex-wrap gap-y-8 md:gap-y-0 justify-center items-center gap-x-6">
         <img src="{{ asset('assets/image/emar_deen.svg') }}" alt="emar_deen">
         <img src="{{ asset('assets/image/somood.svg') }}" alt="somood">
