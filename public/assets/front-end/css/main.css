@@ -22,6 +22,18 @@ header.sticky-h {box-shadow: 0 6px 12px -10px #349a37}
   background-color: #fff;
 }
 
+                    /* Contact section */
+.right-color::after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 5000px;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  background-color: #E4FFE585;
+}
       /*** Start tabs system ***/
       .tabs-container .tab:not(:first-child){
         display: none;
