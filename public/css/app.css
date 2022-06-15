@@ -548,6 +548,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-28{
   margin-top: 7rem;
 }
+.mb-8{
+  margin-bottom: 2rem;
+}
+.mb-14{
+  margin-bottom: 3.5rem;
+}
 .block{
   display: block;
 }
@@ -1123,6 +1129,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pb-\[72px\]{
   padding-bottom: 72px;
 }
+.pt-14{
+  padding-top: 3.5rem;
+}
 .text-center{
   text-align: center;
 }
@@ -1442,6 +1451,9 @@ body{
 @media (min-width: 768px){
   .md\:mt-24{
     margin-top: 6rem;
+  }
+  .md\:mb-0{
+    margin-bottom: 0px;
   }
   .md\:block{
     display: block;
