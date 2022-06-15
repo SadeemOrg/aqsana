@@ -9,7 +9,7 @@
     </p>
     <!-- first card -->
     <div class="flex flex-col pt-16 gap-y-28 mb-32">
-        <div class=" shaddow px-6">
+        <div class=" shaddow px-6 rounded-[16px]">
             <div class="flow-root rounded-lg bg-[#FFFFFF]  pb-8 ">
                 <div class="-mt-6">
                     <img src="{{ asset('assets/image/Brand_icon.svg') }}" alt="finance_Brand" class="w-16 h-16 mr-6">
@@ -27,7 +27,7 @@
             </div>
         </div>
         <!-- second card -->
-        <div class=" shaddow">
+        <div class=" shaddow  rounded-[16px]">
             <div class="flow-root rounded-lg bg-[#FFFFFF] px-6 pb-8 ">
                 <div class="-mt-6">
                     <img src="{{ asset('assets/image/finance_Brand.svg') }}" alt="finance_Brand"
@@ -41,7 +41,7 @@
             </div>
         </div>
         <!-- third card -->
-        <div class=" shaddow px-6">
+        <div class=" shaddow px-6  rounded-[16px]">
             <div class="flow-root rounded-lg bg-[#FFFFFF]  pb-8 ">
                 <div class="-mt-6">
                     <img src="{{ asset('assets/image/flafelAlaqsa.svg') }}" alt="flafelAlaqsa" class="w-16 h-16 mr-6">
@@ -59,7 +59,7 @@
             </div>
         </div>
         <!-- 4th card -->
-        <div class=" shaddow px-6">
+        <div class=" shaddow px-6  rounded-[16px]">
             <div class="flow-root rounded-lg bg-[#FFFFFF]  pb-8 ">
                 <div class="-mt-6">
                     <img src="{{ asset('assets/image/Brand_icon.svg') }}" alt="Brand_icon" class="w-16 h-16 mr-6">

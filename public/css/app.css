@@ -713,6 +713,21 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-\[190px\]{
   max-width: 190px;
 }
+.max-w-\[90\%\]{
+  max-width: 90%;
+}
+.max-w-\[560px\]{
+  max-width: 560px;
+}
+.max-w-\[95\%\]{
+  max-width: 95%;
+}
+.max-w-\[91\%\]{
+  max-width: 91%;
+}
+.basis-full{
+  flex-basis: 100%;
+}
 .basis-1\/2{
   flex-basis: 50%;
 }
