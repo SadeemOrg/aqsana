@@ -121,7 +121,6 @@ owl1.owlCarousel({
 var owl2 = $("#association-news-slider-1");
         owl2.owlCarousel({
             rtl:true,
-
             loop:true,
             margin:30,
             stagePadding: 20,

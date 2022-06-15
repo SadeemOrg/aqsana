@@ -1,13 +1,13 @@
 <style>
     .linearGradiants {
-        background: linear-gradient(269.95deg, rgba(16, 20, 38, 0.8) 0.03%, rgba(16, 20, 38, 0.54) 84.34%, rgba(16, 20, 38, 0) 99.95%);
+        background: radial-gradient(50% 50% at 32.01% 50%, rgba(16, 20, 38, 0.5) 0%, rgba(29, 67, 44, 0.323393) 49.36%, rgba(52, 154, 55, 0) 100%);
 
     }
 </style>
 
 <div class="relative mt-24 md:max-h-72">
     <div class="absolute inset-0">
-        <img class="w-full h-full object-cover" src="{{ asset('assets/image/AlAqsaBanner.png') }}"
+        <img class="w-full h-full object-cover" src="{{ asset('assets/image/Alaqsa_Button_Banner1.png') }}"
             alt="AlAqsaBanner">
 
         <div class="absolute inset-0  linearGradiants mix-blend-multiply" aria-hidden="true"></div>
