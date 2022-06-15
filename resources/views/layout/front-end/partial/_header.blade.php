@@ -1,5 +1,5 @@
-<header>
-    <div dir="rtl" class=" my-4  lg:h-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+<header class="py-3 fixed w-full top-0 right-0 left-0 z-10 bg-white sticky-h">
+    <div dir="rtl" class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
 
         <!-- Start for mobile -->
         <div class="xl:hidden flex justify-between items-center">
@@ -13,7 +13,7 @@
             </div>
         </div>
         <!-- End for mobile -->
-        <div class="nav xl:flex xl:flex-row justify-between items-center fixed xl:static right-[-250px] top-[88px] z-10 nav-links">
+        <div class="nav xl:flex xl:flex-row justify-between items-center fixed xl:static right-[-250px] top-[84px] z-10 nav-links">
             <!-- Start RT links -->
             <div class="rt-links basis-2/5  text-base text-[#101426] cursor-pointer text-[15px] xl:text-[16px]" >
                 <nav class="">
