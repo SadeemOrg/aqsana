@@ -1,4 +1,4 @@
-<div class="relative mt-28 xl:mt-24">
+<div class="relative mt-20 xl:mt-20 mb-10 lg:mb-0">
     <p class="font-FlatBold text-xl sm:text-[27px] text-center mt-8 lg:mt-0 xl:text-right">
         مقالات ذات صلة
     </p>
@@ -9,7 +9,7 @@
 
 <!--Slider Content -->
 <div class="owl-carousel owl-theme owl-loaded dots-style" id="association-news-slider-2">
-    <div class="p-3 item bg-white Card_shadow mt-4 lg:mt-16 relative rounded-[5px]  lg:max-h-[390px]"
+    <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[390px]"
         {{-- onclick="location.href='our-project/1'" --}}
         >
         <div class="absolute leftline"></div>
@@ -38,7 +38,7 @@
         </div>
     </div>
     <!--second Slider -->
-    {{-- <div class="p-3 item bg-white Card_shadow mt-4 lg:mt-16 relative rounded-[5px]  max-h-[390px]"
+    {{-- <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  max-h-[390px]"
         onclick="location.href='our-project/1'">
         <div class="absolute leftline"></div>
         <div
