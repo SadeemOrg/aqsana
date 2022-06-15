@@ -9,7 +9,11 @@
         "prod": "npm run production",
         "production": "mix --production",
         "build-stripe-inspector": "cd nova-components/StripeInspector && npm run dev",
-        "build-stripe-inspector-prod": "cd nova-components/StripeInspector && npm run prod"
+        "build-stripe-inspector-prod": "cd nova-components/StripeInspector && npm run prod",
+        "build-projecs": "cd nova-components/Projecs && npm run dev",
+        "build-projecs-prod": "cd nova-components/Projecs && npm run prod",
+        "build-price-tracker": "cd nova-components/PriceTracker && npm run dev",
+        "build-price-tracker-prod": "cd nova-components/PriceTracker && npm run prod"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.7",
