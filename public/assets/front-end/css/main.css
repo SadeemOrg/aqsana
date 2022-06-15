@@ -1,4 +1,12 @@
 
+body{padding-top: 82px;}
+/* Start header **/
+header.sticky-h {box-shadow: 0 6px 12px -10px #349a37}
+
+/* header {
+  
+} */
+
 /** Start home page **/
 #association-news-slider-1 .owl-stage, #association-news-slider .owl-stage, #association-news-slider-2 .owl-stage {
   padding: 2.5rem 0;

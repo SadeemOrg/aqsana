@@ -389,6 +389,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .relative{
   position: relative;
 }
+.sticky{
+  position: -webkit-sticky;
+  position: sticky;
+}
 .inset-0{
   top: 0px;
   right: 0px;
@@ -434,6 +438,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .top-\[100\%\]{
   top: 100%;
+}
+.top-\[86px\]{
+  top: 86px;
+}
+.top-\[82px\]{
+  top: 82px;
+}
+.top-\[83px\]{
+  top: 83px;
+}
+.top-\[84px\]{
+  top: 84px;
 }
 .z-30{
   z-index: 30;
