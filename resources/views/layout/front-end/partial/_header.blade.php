@@ -1,12 +1,12 @@
 <header>
-    <div dir="rtl" class=" my-4 h-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+    <div dir="rtl" class=" my-4  lg:h-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
 
         <!-- Start for mobile -->
         <div class="xl:hidden flex justify-between items-center">
             <a href="#">
-                <img class="w-[150px] md:w-[200px] xl:w-[200px] lg:h-auto xl:h-[60px]" src="{{ asset('assets/image/image 1.svg') }}" />
+                <img class="w-[170px] md:w-[200px] xl:w-[200px] lg:h-auto xl:h-[60px]" src="{{ asset('assets/image/image 1.svg') }}" />
             </a>
-            <div class="relative">
+            <div class="relative mt-2">
                 <a class="hamburger" href="#" role="button" title="Open menu" aria-label="Open menu">
                     <span class="hamburger__bar"></span>
                 </a>
