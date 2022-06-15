@@ -12,7 +12,7 @@
     <div class="pt-6 md:pt-16 grid grid-cols-1 lg:grid-cols-2 gap-y-3 md:gap-y-6 gap-x-6">
         <!--First section -->
         <div class="newsShaddow goal py-6  w-full text-[15px] sm:text-lg font-FlatBold text-right text-[#101426]   bg-white px-4">
-            <div class="flex flex-row justify-between items-center goal-title">
+            <div class="flex flex-row justify-between items-center goal-title cursor-pointer">
                 <p class="max-w-[91%] ">
                     مسح وأرشفة المواقع والأراضي والممتلكات الوقفية في فلسطين 1948 وبيان إحداثياتها....
                 </p>
@@ -32,7 +32,7 @@
 
         <!--second section -->
         <div class="newsShaddow goal py-6 w-full text-[15px] sm:text-lg font-FlatBold text-right text-[#101426]   bg-white px-4">            
-            <div class="flex flex-row justify-between items-center goal-title">
+            <div class="flex flex-row justify-between items-center goal-title cursor-pointer">
                 <p class="max-w-[90%] ">
                     بناء تصور وخطة تدخل للدفاع عن هذه الممتلكات والمقدسات قضائياً ومن خلال ....
                 </p>
@@ -52,7 +52,7 @@
 
         <!--third section -->
         <div class="newsShaddow goal py-6 w-full text-[15px] sm:text-lg font-FlatBold text-right text-[#101426] bg-white px-4">            
-            <div class="flex flex-row justify-between items-center goal-title">
+            <div class="flex flex-row justify-between items-center goal-title cursor-pointer">
                 <p class="max-w-[90%] ">
                     رصد ومتابعة قضايا المقدسات الإسلامية في الداخل الفلسطيني ومدينة القدس ....
                 </p>
@@ -74,7 +74,7 @@
         <!--fourth section -->
         <div class="newsShaddow goal py-6 w-full text-[15px] sm:text-lg font-FlatBold text-right text-[#101426]   bg-white px-4">
             
-            <div class="flex flex-row justify-between items-center goal-title">
+            <div class="flex flex-row justify-between items-center goal-title cursor-pointer">
                 <p class="max-w-[90%] ">
                     نشر الوعي وتصليط الضوء على واقع الانتهاكات المستمرة ومحاولات السيطرة ....
                 </p>
@@ -94,7 +94,7 @@
         <!--5th section -->
         <div class="newsShaddow goal py-6 w-full text-[15px] sm:text-lg font-FlatBold text-right text-[#101426]   bg-white px-4">
             
-            <div class="flex flex-row justify-between items-center goal-title">
+            <div class="flex flex-row justify-between items-center goal-title cursor-pointer">
                 <p class="max-w-[90%] ">
                     إثبات مرجعية الأوقاف للمسلمين وتشكيل أداة إضافية لدحض الوهم والادعاء المزعوم ....
                 </p>
@@ -115,7 +115,7 @@
         </div>
         <!--6th section -->
         <div class="newsShaddow goal py-6 w-full text-[15px] sm:text-lg font-FlatBold text-right text-[#101426]   bg-white px-4">
-            <div class="flex flex-row justify-between items-center goal-title">
+            <div class="flex flex-row justify-between items-center goal-title cursor-pointer">
                 <p class="max-w-[90%] ">
                     إعمار المسجد الأقصى وشد الرحال إليه وتسيير قوافل المصلين(قوافل الأقصى) .....
                 </p>
@@ -135,7 +135,7 @@
         <!--7th section -->
         <div class="newsShaddow goal py-6 w-full text-[15px] sm:text-lg font-FlatBold text-right text-[#101426]   bg-white px-4">
             
-            <div class="flex flex-row justify-between items-center goal-title">
+            <div class="flex flex-row justify-between items-center goal-title cursor-pointer">
                 <p class="max-w-[90%] ">
                     رفع مستوى الوعي وتعزيز الانتماء لدى أبناء وبنات الداخل الفلسطيني ومدينة القدس ....
                 </p>
@@ -155,7 +155,7 @@
         <!--8th section -->
         <div class="newsShaddow goal py-6 w-full text-[15px] sm:text-lg font-FlatBold text-right text-[#101426]   bg-white px-4">
             
-            <div class="flex flex-row justify-between items-center goal-title">
+            <div class="flex flex-row justify-between items-center goal-title cursor-pointer">
                 <p class="max-w-[90%] ">
                     تقديم الدعم النفسي والمعنوي والمادي والاقتصادي والحقوقي القضائي للمقدسيين ....s
                 </p>
@@ -176,7 +176,7 @@
         <!--9th section -->
         <div class="newsShaddow goal py-6 w-full text-[15px] sm:text-lg font-FlatBold text-right text-[#101426]   bg-white px-4">
             
-            <div class="flex flex-row justify-between items-center goal-title">
+            <div class="flex flex-row justify-between items-center goal-title cursor-pointer">
                 <p class="max-w-[90%] ">
                     إبقاء قضية القدس والمسجد الأقصى حية في الوعي العام العربي والإسلامي ....
                 </p>
@@ -195,7 +195,7 @@
         </div>
         <!--10th section -->
         <div class="newsShaddow goal py-6 w-full text-[15px] sm:text-lg font-FlatBold text-right text-[#101426]   bg-white px-4">
-            <div class="flex flex-row justify-between items-center goal-title">
+            <div class="flex flex-row justify-between items-center goal-title cursor-pointer">
                 <p class="max-w-[90%] ">
                     . تجهيز دراسات ونشرات وأبحاث ومؤتمرات ومنتديات ومحاضرات وورش عمل للأجيال.....
                 </p>
@@ -214,7 +214,7 @@
         </div>
         <!--11th section -->
         <div class="newsShaddow goal py-6 w-full text-[15px] sm:text-lg font-FlatBold text-right text-[#101426]   bg-white px-4">
-            <div class="flex flex-row justify-between items-center goal-title">
+            <div class="flex flex-row justify-between items-center goal-title cursor-pointer">
                 <p class="max-w-[90%] ">
                     . تجهيز دراسات ونشرات وأبحاث ومؤتمرات ومنتديات ومحاضرات وورش عمل للأجيال والشرائح المختلفة.
                 </p>
@@ -233,7 +233,7 @@
         </div>
         <!--12th section -->
         <div class="newsShaddow goal py-6 w-full text-[15px] sm:text-lg font-FlatBold text-right text-[#101426]   bg-white px-4">
-            <div class="flex flex-row justify-between items-center goal-title">        
+            <div class="flex flex-row justify-between items-center goal-title cursor-pointer">        
                 <p class="max-w-[90%] ">
                     إدخال الممتلكات الوقفية المصادرة كمركب في المطالبة الفلسطينية لإرجاعها إلى حضن .....
                 </p>
