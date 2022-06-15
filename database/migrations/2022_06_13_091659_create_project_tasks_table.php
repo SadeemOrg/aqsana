@@ -22,8 +22,6 @@ class CreateProjectTasksTable extends Migration
             $table->integer('status')->default(0);
             $table->dateTime('start_time')->nullable();
             $table->dateTime('end_time')->nullable();
-            $table->bigInteger('recipient')->nullable();
-            $table->bigInteger('giver')->nullable();
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use App\Nova\User;
+// use Acme\Projecs\Projecs;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -21,8 +22,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             return $resource::$priority ?? 9999;
         });
         parent::boot();
-        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            ]);
+        // \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
+        //     ]);
     }
 
     /**
@@ -83,7 +84,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
 
-            new \OptimistDigital\NovaSettings\NovaSettings
+            // new \OptimistDigital\NovaSettings\NovaSettings,
+            // new projecs
+
         ];
     }
     /**
