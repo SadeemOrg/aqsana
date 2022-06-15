@@ -32,6 +32,8 @@
     </style>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{rand(0, 99)}}">
     <link rel="stylesheet" href="{{ asset('assets/front-end/css/main.css') }}?v={{rand(0, 99)}}">
 </head>
@@ -208,6 +210,7 @@
 
 
     </script>
+    <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
     <script src="{{ asset('assets/front-end/js/main.js') }}"></script>
 </body>
 <!-- <script src="{{ mix('/js/app.js') }}"></script> -->
