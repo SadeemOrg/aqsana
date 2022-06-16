@@ -22,6 +22,7 @@ use Laravel\Nova\Fields\HasMany;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use Yassi\NestedForm\NestedForm;
 use Laravel\Nova\Fields\BelongsToMany;
+use AwesomeNova\Cards\FilterCard;
 
 class project extends Resource
 {
@@ -140,7 +141,11 @@ class project extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+
+            new FilterCard(new ProjectStatus()),
+            new FilterCard(new Projectapproval()),
+        ];
     }
 
     /**
