@@ -18,13 +18,13 @@ class CreateProjectsTable extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('project_name');
-            $table->integer('project_number');
-            $table->string('project_goal');
-            $table->string('projec_type');
+            $table->string('project_describe');
+            $table->json('city_id');
             $table->char('Project_Status',1)->default("1");
+            $table->date('projec_day');
             $table->time('projec_start');
             $table->time('projec_end');
-            $table->json('city_id');
+            $table->json('map');
             $table->integer('admin_id');
             $table->integer('approval')->nullable();
             $table->string("reason_of_reject")->nullable();
