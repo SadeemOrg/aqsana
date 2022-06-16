@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\HasMany;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use Yassi\NestedForm\NestedForm;
-use Laravel\Nova\Fields\belongsToMany;
+use Laravel\Nova\Fields\BelongsToMany;
 
 class project extends Resource
 {
@@ -126,8 +126,8 @@ class project extends Resource
             TimeField::make('projec end','projec_end'),
 
             NestedForm::make('buses', 'buses', 'App\Nova\bus'),
-            HasMany::make('buses'),
-            // NestedForm::make('buses'),
+            belongsToMany::make('buses'),
+
 
         ];
     }
