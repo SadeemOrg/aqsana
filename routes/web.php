@@ -51,3 +51,10 @@ Route::get('/contact', function (){
     return view('contact-page');
 });
 
+Route::get('/projects-for-donations', function (){
+    return view('projects-for-donations');
+});
+Route::get('/donation-details/1', function (){
+    return view('project-donation-details');
+});
+
