@@ -29,7 +29,7 @@
                 <img src="{{ asset('assets/image/Logo_footer.svg') }}" alt="Logo_footer" class="w-40 h-40 " />
                 <ul class=" flex flex-start items-center gap-x-1 justify-center ">
                     <li>
-                        <a href="#">
+                        <a class="facebook" href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 22 22" fill="none">
                                 <circle cx="10.9328" cy="10.9328" r="10.4328" stroke="white"></circle>
                                 <g clip-path="url(#clip0_21_1207)">
@@ -44,7 +44,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a class="instagram" href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 23 22" fill="none">
                                 <circle cx="11.8117" cy="10.9328" r="10.4328" stroke="white"></circle>
                                 <g clip-path="url(#clip0_21_1218)">
@@ -61,7 +61,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a class="twitter" href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 23 22" fill="none">
                                 <circle cx="11.6908" cy="10.9328" r="10.4328" stroke="white"></circle>
                                 <g clip-path="url(#clip0_21_1212)">
@@ -76,7 +76,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a class="youtube" href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 23 22" fill="none">
                                 <circle cx="11.5697" cy="10.9328" r="10.4328" stroke="white"></circle>
                                 <g clip-path="url(#clip0_21_1202)">
