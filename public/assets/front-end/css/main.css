@@ -1,14 +1,39 @@
 
+body{padding-top: 82px;}
+/* Start header **/
+header.sticky-h {box-shadow: 0 6px 12px -10px #349a37}
+
+/* header {
+  
+} */
+
 /** Start home page **/
-#association-news-slider-1 .owl-stage, #association-news-slider .owl-stage {
+#association-news-slider-1 .owl-stage, #association-news-slider .owl-stage, #association-news-slider-2 .owl-stage {
   padding: 2.5rem 0;
   padding-top: 1.5rem;
 }
+/* #association-news-slider-2 .owl-stage {
+  padding-top: 20px;
+  padding-bottom: 2.5rem;
+  padding-top: 1.5rem;
+} */
 .common-shadow {
   box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
   background-color: #fff;
 }
 
+                    /* Contact section */
+.right-color::after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 5000px;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  background-color: #E4FFE585;
+}
       /*** Start tabs system ***/
       .tabs-container .tab:not(:first-child){
         display: none;

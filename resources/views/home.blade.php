@@ -11,5 +11,5 @@
 @include('Components.Projects.ProjectDetailsSlider')
 </div>
 @include('Components.Home.Our_business_sectors')
-{{-- @include('layout.front-end.partial.contact-us') --}}
+@include('layout.front-end.partial.contact-us')
 @endsection

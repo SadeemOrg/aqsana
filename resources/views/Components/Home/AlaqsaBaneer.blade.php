@@ -12,7 +12,7 @@
 
         <div class="absolute inset-0  linearGradiants mix-blend-multiply" aria-hidden="true"></div>
     </div>
-    <div class="relative max-w-7xl mx-auto sm-py-12 py-8 px-4 sm:px-6 lg:px-8 pt-16">
+    <div class="relative max-w-7xl mx-auto sm-py-12 py-8 px-4 sm:px-6 lg:px-8 md:pt-16">
         <div class="flex flex-row flex-wrap items-center justify-center gap-y-2 md:justify-between ">
             <div class="text-right font-FlatBold text-white">
                 <p class="text-[18px] md:text-[22px] pb-4  ">قم بالتبر ع للعديد من المشاريع التابعة للجمعية</p>
