@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\HasMany;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use Yassi\NestedForm\NestedForm;
+use Laravel\Nova\Fields\belongsToMany;
 
 class project extends Resource
 {

@@ -4,7 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
-// use Laravel\Nova\Fields\belongsToMany;
+use Laravel\Nova\Fields\belongsToMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 use Laravel\Nova\Fields\Text;
@@ -56,7 +56,7 @@ class Bus extends Resource
                 "0" => 'avilabel',
                 "1" => 'un avalabel',
                 ])->displayUsingLabels(),
-                // belongsToMany::make('projects', 'projects', 'App\Nova\project'),
+                belongsToMany::make('projects', 'projects', 'App\Nova\project'),
         ];
     }
 
