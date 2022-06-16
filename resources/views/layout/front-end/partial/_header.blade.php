@@ -44,7 +44,7 @@
                             </div>
                         </li>
                         <li class="nav-item relative">
-                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static" href="#">اخبارنا</a>
+                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static" href="/our-news">اخبارنا</a>
                         </li>
                         <li class="nav-item relative">
                             <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static" href="#">القدس والمسجد الاقصى</a>
@@ -69,13 +69,13 @@
                             <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="#">الاوقاف والمقدسات</a>
                         </li>
                         <li class="nav-item relative">
-                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="#">حصاد الجمعية</a>
+                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="/yearly-news">حصاد الجمعية</a>
                         </li>
                         <li class="nav-item relative">
                             <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="project-donations"> التبرع للمشاريع</a>
                         </li>
                         <li class="nav-item relative">
-                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="#">اتصل بنا</a>
+                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="/contact">اتصل بنا</a>
                         </li>
                     </ul>
                 </nav>

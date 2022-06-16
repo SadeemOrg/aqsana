@@ -51,7 +51,7 @@
             <img src="assets/image/visa-images.png" alt="cards images">
         </div>
         <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
-            <button class="rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700]">تبرع الان</button>
+            <button class="rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">تبرع الان</button>
         </div>      
     </div>
 </div>
