@@ -125,7 +125,7 @@ class project extends Resource
             TimeField::make('projec end','projec_end'),
 
             NestedForm::make('buses', 'buses', 'App\Nova\bus'),
-            HasMany::make('buses')
+            HasMany::make('buses'),
             // NestedForm::make('buses'),
 
         ];
