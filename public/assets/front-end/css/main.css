@@ -56,9 +56,24 @@ svg path, svg circle {transition: .2s;}
 .linkedin  svg:hover path {fill: #0A66C2;}
 .linkedin  svg:hover circle {stroke: #0A66C2;}
 
-
-
       /**End social media ***/
+
+      /* our strpes work section  */
+.link-wrap::after {
+  content: '';
+  width: 0;
+  height: 100%;
+  background-color: #101426;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transition: .4s;
+}
+.link-wrap:hover::after {
+  width: 100%;
+}
 /** End home page **/
 
 
@@ -284,5 +299,9 @@ svg path, svg circle {transition: .2s;}
 }
 .dots-style .owl-dots .owl-dot.active{
   background-color: #349A37;
+}
+
+.inter-font {
+  font-family: 'Inter', sans-serif;
 }
 /*** End my css framework ***/
