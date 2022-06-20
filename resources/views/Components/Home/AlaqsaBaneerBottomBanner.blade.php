@@ -1,13 +1,13 @@
 <style>
     .linearGradiants {
-        background: linear-gradient(269.95deg, rgba(16, 20, 38, 0.8) 0.03%, rgba(16, 20, 38, 0.54) 84.34%, rgba(16, 20, 38, 0) 99.95%);
+        background: radial-gradient(50% 50% at 32.01% 50%, rgba(16, 20, 38, 0.5) 0%, rgba(29, 67, 44, 0.323393) 49.36%, rgba(52, 154, 55, 0) 100%);
 
     }
 </style>
 
 <div class="relative mt-24 md:max-h-72">
     <div class="absolute inset-0">
-        <img class="w-full h-full object-cover" src="{{ asset('assets/image/aqsa-niehgt.png') }}"
+        <img class="w-full h-full object-cover" src="{{ asset('assets/image/Alaqsa_Button_Banner1.png') }}"
             alt="AlAqsaBanner">
 
         <!-- <div class="absolute inset-0  linearGradiants mix-blend-multiply" aria-hidden="true"></div> -->
@@ -17,16 +17,16 @@
             <div class="text-right font-FlatBold text-white">
                 <p class="text-[24px] md:text-[36px] pb-4 text-center max-w-[560px]">جمعية الاقصى لرعاية الاوقاف
                     والمقدسات الاسلامية</p>
-                <div class="flex flex-row flex-wrap items-center justify-center">                    
-                
-                    <button class="flex justify-center items-center bg-white text-[#101426] w-[150px] h-[60px] sm:w-[168px] sm:h-[63px] rounded-[5px] ml-3 hover:text-[#fff] hover:bg-[#101426] duration-200">                        
+                <div class="flex flex-row flex-wrap items-center justify-center">
+
+                    <button class="flex justify-center items-center bg-white text-[#101426] w-[150px] h-[60px] sm:w-[168px] sm:h-[63px] rounded-[5px] ml-3 hover:text-[#fff] hover:bg-[#101426] duration-200">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
                             <path d="M18.0001 23.5453C21.061 23.5453 23.5424 21.064 23.5424 18.0031C23.5424 14.9422 21.061 12.4608 18.0001 12.4608C14.9392 12.4608 12.4578 14.9422 12.4578 18.0031C12.4578 21.064 14.9392 23.5453 18.0001 23.5453Z" fill="#349A37"/>
                             <path d="M35.4478 16.4679C31.1876 11.3199 24.7389 6.36438 18.0001 6.36438C11.26 6.36438 4.80972 11.3233 0.552356 16.4679C-0.184073 17.3575 -0.184073 18.6488 0.552356 19.5383C1.62271 20.8318 3.86663 23.3286 6.86361 25.5101C14.4114 31.0047 21.5722 31.0169 29.1366 25.5101C32.1336 23.3286 34.3775 20.8318 35.4478 19.5383C36.1821 18.6505 36.1859 17.3604 35.4478 16.4679ZM18.0001 10.244C22.2787 10.244 25.7593 13.7245 25.7593 18.0031C25.7593 22.2818 22.2787 25.7623 18.0001 25.7623C13.7215 25.7623 10.2409 22.2818 10.2409 18.0031C10.2409 13.7245 13.7215 10.244 18.0001 10.244Z" fill="#349A37"/>
                         </svg>
                         <span class="text-[20px] sm:text-[24px] font-[500] mr-2">52.8K</span>
                     </button>
-                    <button class="flex justify-center items-center bg-white text-[#101426] w-[150px] h-[60px] sm:w-[168px] sm:h-[63px] rounded-[5px] hover:text-[#fff] hover:bg-[#101426] duration-200">                        
+                    <button class="flex justify-center items-center bg-white text-[#101426] w-[150px] h-[60px] sm:w-[168px] sm:h-[63px] rounded-[5px] hover:text-[#fff] hover:bg-[#101426] duration-200">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="28" viewBox="0 0 36 28" fill="none">
                             <path d="M35.7352 6.79489L35.7336 6.77841C35.7031 6.48865 35.3996 3.91098 34.1466 2.60031C32.6983 1.05838 31.0564 0.871063 30.2668 0.78125C30.2014 0.77356 30.1415 0.766968 30.088 0.759827L30.0251 0.753235C25.2658 0.407166 18.0783 0.359924 18.0063 0.359375H17.9937C17.9217 0.359924 10.7342 0.407166 5.93207 0.753235L5.86862 0.759827C5.81754 0.766693 5.76123 0.77301 5.69998 0.780151C4.9194 0.870239 3.29507 1.05783 1.84268 2.65524C0.649292 3.95245 0.304321 6.47464 0.26889 6.75809L0.264771 6.79489C0.254059 6.91547 0 9.78592 0 12.6676V15.3615C0 18.2432 0.254059 21.1136 0.264771 21.2342L0.266693 21.2526C0.29718 21.5374 0.600403 24.0676 1.84763 25.3791C3.20938 26.8697 4.93121 27.0666 5.85736 27.1726C6.00375 27.1894 6.1301 27.2039 6.21579 27.219L6.29901 27.2303C9.04697 27.492 17.6627 27.6208 18.028 27.6261L18.039 27.6263L18.0497 27.6261C18.1219 27.6258 25.3092 27.5786 30.0685 27.2322L30.1314 27.2259C30.1913 27.2179 30.2588 27.2108 30.333 27.2031C31.1094 27.1207 32.7247 26.9496 34.1573 25.3739C35.3507 24.0767 35.6957 21.5545 35.7311 21.271L35.7352 21.2342C35.7459 21.1136 36 18.2432 36 15.3615V12.6676C36 9.78592 35.7459 6.91574 35.7352 6.79489ZM23.5319 14.9506L15.5786 19.2273C15.3603 19.3448 15.123 19.4034 14.8862 19.4034C14.6277 19.4034 14.3698 19.3336 14.1372 19.1949C13.6917 18.9285 13.4258 18.4596 13.4258 17.9408V9.31213C13.4258 8.79083 13.6934 8.32117 14.1416 8.0553C14.5898 7.7897 15.1306 7.78009 15.588 8.0303L23.5412 12.3823C24.0117 12.6396 24.3029 13.1329 24.3009 13.6693C24.299 14.2054 24.0043 14.6965 23.5319 14.9506Z" fill="#349A37"/>
                         </svg>
@@ -43,7 +43,7 @@
                         البخاري
                         ومسلم.
                     </p> --}}
-            </div>            
+            </div>
             <ul class="absolute left-0 bottom-[20px] md:flex flex-start items-center gap-x-2 hidden ">
                 <li>
                     <a class="facebook" href="#">
@@ -107,9 +107,9 @@
                             </defs>
                         </svg>
                     </a>
-                </li>            
+                </li>
             </ul>
         </div>
-        
+
     </div>
 </div>
