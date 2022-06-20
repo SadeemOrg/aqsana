@@ -5,20 +5,19 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\Trix;
-use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
-use Halimtuhu\ArrayImages\ArrayImages;
-use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
+use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Select;
 
-class News extends Resource
+class ProjectsNews extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\News::class;
+    public static $model = \App\Models\Banner::class;
+    public static $group = 'website';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -26,7 +25,7 @@ class News extends Resource
      * @var string
      */
     public static $title = 'id';
-    public static $group = 'website';
+
     /**
      * The columns that should be searched.
      *
@@ -46,14 +45,18 @@ class News extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Title",'title'),
-            Trix::make("Description",'description'),
-            ImageUploadPreview::make('Image','image')->disk('public')->path('image_news'),
-            // Image::make('Image','image')->disk('public')->prunable(),
-            ArrayImages::make('Pictures', 'pictures')
-            ->disk('public')
-            ->path('pictures_news'),
 
+            // Select::make('type ', 'type')
+            // ->options([
+            //     '1' => 'Mercedes',
+            //     'audi' => 'Audi',
+            //     'bmw' => 'BMW',
+            // ])
+            // ->withMeta(['value' => '1']),
+            Text::make('type ', 'type')->withMeta(['value' => '1']),
+            Text::make('text ', 'text'),
+            Text::make('sub_text ', 'sub_text'),
+            Image::make('Image','image'),
         ];
     }
 

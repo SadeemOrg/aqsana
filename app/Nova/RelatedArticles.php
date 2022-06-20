@@ -10,15 +10,15 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
-
-class News extends Resource
+class RelatedArticles extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\News::class;
+    public static $model = \App\Models\Banner::class;
+    public static $group = 'website';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -26,7 +26,7 @@ class News extends Resource
      * @var string
      */
     public static $title = 'id';
-    public static $group = 'website';
+
     /**
      * The columns that should be searched.
      *
@@ -46,13 +46,12 @@ class News extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Title",'title'),
-            Trix::make("Description",'description'),
-            ImageUploadPreview::make('Image','image')->disk('public')->path('image_news'),
+            Text::make("type",'type'),
+            Text::make("text",'text'),
+            Trix::make("Description",'sub_text'),
+            ImageUploadPreview::make('image','image')->disk('public')->path('image_news'),
+            Text::make("link",'link'),
             // Image::make('Image','image')->disk('public')->prunable(),
-            ArrayImages::make('Pictures', 'pictures')
-            ->disk('public')
-            ->path('pictures_news'),
 
         ];
     }
