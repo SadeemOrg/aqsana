@@ -48,4 +48,5 @@ class ProjectTask extends Model
     {
         return $this->belongsTo('App\Models\project','project_id');
     }
+
 }

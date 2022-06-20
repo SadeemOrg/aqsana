@@ -1,19 +1,79 @@
 
+body{padding-top: 82px;}
+/* Start header **/
+header.sticky-h {box-shadow: 0 6px 12px -10px #349a37}
+
+/* header {
+  
+} */
+
 /** Start home page **/
-#association-news-slider-1 .owl-stage, #association-news-slider .owl-stage {
+#association-news-slider-1 .owl-stage, #association-news-slider .owl-stage, #association-news-slider-2 .owl-stage {
   padding: 2.5rem 0;
   padding-top: 1.5rem;
 }
+/* #association-news-slider-2 .owl-stage {
+  padding-top: 20px;
+  padding-bottom: 2.5rem;
+  padding-top: 1.5rem;
+} */
 .common-shadow {
   box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
   background-color: #fff;
 }
 
+                    /* Contact section */
+.right-color::after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 5000px;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  background-color: #E4FFE585;
+}
       /*** Start tabs system ***/
       .tabs-container .tab:not(:first-child){
         display: none;
       }
       /*** End tabs system ***/
+      /**Start social media ***/
+svg path, svg circle {transition: .2s;}
+.facebook svg:hover path {fill: #4267B2;}
+.facebook svg:hover circle {stroke: #4267B2;  }
+.instagram svg:hover path {fill: #ffcb52;}
+.instagram svg:hover circle {stroke: #ffcb52;}
+.twitter svg:hover path {fill: #1DA1F2;}
+.twitter svg:hover circle {stroke: #1DA1F2;}
+.youtube svg:hover path {fill: #FF0000;}
+.youtube svg:hover circle {stroke: #FF0000;}
+
+
+.pinterest  svg:hover path {fill: #b7081b;}
+.pinterest  svg:hover circle {stroke: #b7081b;}
+.linkedin  svg:hover path {fill: #0A66C2;}
+.linkedin  svg:hover circle {stroke: #0A66C2;}
+
+      /**End social media ***/
+
+      /* our strpes work section  */
+.link-wrap::after {
+  content: '';
+  width: 0;
+  height: 100%;
+  background-color: #101426;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transition: .4s;
+}
+.link-wrap:hover::after {
+  width: 100%;
+}
 /** End home page **/
 
 
@@ -135,15 +195,19 @@
  
 }
 
-.nav-links .rt-links nav .nav-item:nth-of-type(2) > a {transition-delay: 0.1s;}
-.nav-links .rt-links nav .nav-item:nth-of-type(3) > a {transition-delay: 0.2s;}
-.nav-links .rt-links nav .nav-item:nth-of-type(4) > a {transition-delay: 0.3s;}
-.nav-links .rt-links nav .nav-item:nth-of-type(5) > a {transition-delay: 0.4s;}
+@media (max-width: 1280px) {
 
-.nav-links .lt-links nav .nav-item:nth-of-type(1) > a {transition-delay: 0.5s;}
-.nav-links .lt-links nav .nav-item:nth-of-type(2) > a {transition-delay: 0.6s;}
-.nav-links .lt-links nav .nav-item:nth-of-type(3) > a {transition-delay: 0.7s;}
-.nav-links .lt-links nav .nav-item:nth-of-type(4) > a {transition-delay: 0.8s;}
+  .nav-links .rt-links nav .nav-item:nth-of-type(2) > a {transition-delay: 0.1s;}
+  .nav-links .rt-links nav .nav-item:nth-of-type(3) > a {transition-delay: 0.2s;}
+  .nav-links .rt-links nav .nav-item:nth-of-type(4) > a {transition-delay: 0.3s;}
+  .nav-links .rt-links nav .nav-item:nth-of-type(5) > a {transition-delay: 0.4s;}
+
+  .nav-links .lt-links nav .nav-item:nth-of-type(1) > a {transition-delay: 0.5s;}
+  .nav-links .lt-links nav .nav-item:nth-of-type(2) > a {transition-delay: 0.6s;}
+  .nav-links .lt-links nav .nav-item:nth-of-type(3) > a {transition-delay: 0.7s;}
+  .nav-links .lt-links nav .nav-item:nth-of-type(4) > a {transition-delay: 0.8s;}
+
+}
 /* End nav links in mobile*/
 
 
@@ -235,5 +299,9 @@
 }
 .dots-style .owl-dots .owl-dot.active{
   background-color: #349A37;
+}
+
+.inter-font {
+  font-family: 'Inter', sans-serif;
 }
 /*** End my css framework ***/

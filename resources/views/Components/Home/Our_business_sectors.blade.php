@@ -5,7 +5,7 @@
     }
 </style>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-1 mt-8 xl:mt-24">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 xl:mt-24">
     <div class="flex flex-row flex-wrap gap-y-8 md:gap-y-0 justify-center items-center gap-x-6">
         <img src="{{ asset('assets/image/emar_deen.svg') }}" alt="emar_deen">
         <img src="{{ asset('assets/image/somood.svg') }}" alt="somood">
@@ -38,13 +38,15 @@
                     </div>
                 </div>
                 <div
-                    class="h-[72px] absolute bottom-0 right-0 left-0 w-full flex flex-row justify-between items-center w-full px-6 cursor-pointer bg-[#F9FAFB]">
-                    <a class="font-FlatBold text-[#349A37] text-base " href="#">عرض المزيد</a>
-                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M0.654768 8.49995C0.654769 8.19528 0.7711 7.89064 1.00327 7.65835L8.31296 0.34874C8.77795 -0.116247 9.53185 -0.116247 9.99665 0.34874C10.4614 0.813539 10.4614 1.56729 9.99665 2.03231L3.52863 8.49995L9.99642 14.9676C10.4612 15.4326 10.4612 16.1863 9.99642 16.651C9.53162 17.1163 8.77772 17.1163 8.31274 16.651L1.00305 9.34155C0.770836 9.10915 0.654768 8.80451 0.654768 8.49995Z"
-                            fill="#349A37" />
-                    </svg>
+                    class="h-[72px] absolute bottom-0 right-0 left-0 w-full flex flex-row justify-between items-center px-6 cursor-pointer bg-[#F9FAFB]">
+                    <a class="reltive link-wrap font-FlatBold text-[#349A37] text-base h-full w-full flex flex-row justify-between items-center" href="#">
+                        <span class="relative z-10">عرض المزيد</span>
+                        <svg class="relative z-10" width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M0.654768 8.49995C0.654769 8.19528 0.7711 7.89064 1.00327 7.65835L8.31296 0.34874C8.77795 -0.116247 9.53185 -0.116247 9.99665 0.34874C10.4614 0.813539 10.4614 1.56729 9.99665 2.03231L3.52863 8.49995L9.99642 14.9676C10.4612 15.4326 10.4612 16.1863 9.99642 16.651C9.53162 17.1163 8.77772 17.1163 8.31274 16.651L1.00305 9.34155C0.770836 9.10915 0.654768 8.80451 0.654768 8.49995Z"
+                                fill="#349A37" />
+                        </svg>
+                    </a>
                 </div>
             </div>
             <!-- second card -->
@@ -60,12 +62,14 @@
                 </div>
                 <div
                     class="h-[72px] absolute bottom-0 right-0 left-0 w-full flex flex-row justify-between items-center w-full px-6 cursor-pointer bg-[#F9FAFB]">
-                    <a class="font-FlatBold text-[#349A37] text-base " href="#">عرض المزيد</a>
-                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M0.654768 8.49995C0.654769 8.19528 0.7711 7.89064 1.00327 7.65835L8.31296 0.34874C8.77795 -0.116247 9.53185 -0.116247 9.99665 0.34874C10.4614 0.813539 10.4614 1.56729 9.99665 2.03231L3.52863 8.49995L9.99642 14.9676C10.4612 15.4326 10.4612 16.1863 9.99642 16.651C9.53162 17.1163 8.77772 17.1163 8.31274 16.651L1.00305 9.34155C0.770836 9.10915 0.654768 8.80451 0.654768 8.49995Z"
-                            fill="#349A37" />
-                    </svg>
+                    <a class="reltive link-wrap font-FlatBold text-[#349A37] text-base h-full w-full flex flex-row justify-between items-center" href="#">
+                        <span class="relative z-10">عرض المزيد</span>
+                        <svg class="relative z-10" width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M0.654768 8.49995C0.654769 8.19528 0.7711 7.89064 1.00327 7.65835L8.31296 0.34874C8.77795 -0.116247 9.53185 -0.116247 9.99665 0.34874C10.4614 0.813539 10.4614 1.56729 9.99665 2.03231L3.52863 8.49995L9.99642 14.9676C10.4612 15.4326 10.4612 16.1863 9.99642 16.651C9.53162 17.1163 8.77772 17.1163 8.31274 16.651L1.00305 9.34155C0.770836 9.10915 0.654768 8.80451 0.654768 8.49995Z"
+                                fill="#349A37" />
+                        </svg>
+                    </a>
                 </div>
             </div>
             <!-- third card -->
@@ -83,12 +87,14 @@
                 </div>
                 <div
                     class="h-[72px] absolute bottom-0 right-0 left-0 w-full flex flex-row justify-between items-center w-full px-6 cursor-pointer bg-[#F9FAFB]">
-                    <a class="font-FlatBold text-[#349A37] text-base " href="#">عرض المزيد</a>
-                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M0.654768 8.49995C0.654769 8.19528 0.7711 7.89064 1.00327 7.65835L8.31296 0.34874C8.77795 -0.116247 9.53185 -0.116247 9.99665 0.34874C10.4614 0.813539 10.4614 1.56729 9.99665 2.03231L3.52863 8.49995L9.99642 14.9676C10.4612 15.4326 10.4612 16.1863 9.99642 16.651C9.53162 17.1163 8.77772 17.1163 8.31274 16.651L1.00305 9.34155C0.770836 9.10915 0.654768 8.80451 0.654768 8.49995Z"
-                            fill="#349A37" />
-                    </svg>
+                    <a class="reltive link-wrap font-FlatBold text-[#349A37] text-base h-full w-full flex flex-row justify-between items-center" href="#">
+                        <span class="relative z-10">عرض المزيد</span>
+                        <svg class="relative z-10" width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M0.654768 8.49995C0.654769 8.19528 0.7711 7.89064 1.00327 7.65835L8.31296 0.34874C8.77795 -0.116247 9.53185 -0.116247 9.99665 0.34874C10.4614 0.813539 10.4614 1.56729 9.99665 2.03231L3.52863 8.49995L9.99642 14.9676C10.4612 15.4326 10.4612 16.1863 9.99642 16.651C9.53162 17.1163 8.77772 17.1163 8.31274 16.651L1.00305 9.34155C0.770836 9.10915 0.654768 8.80451 0.654768 8.49995Z"
+                                fill="#349A37" />
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>

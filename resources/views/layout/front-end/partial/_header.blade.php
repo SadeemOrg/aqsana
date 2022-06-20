@@ -1,5 +1,5 @@
-<header>
-    <div dir="rtl" class=" my-4  lg:h-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+<header class="py-3 fixed w-full top-0 right-0 left-0 z-10 bg-white sticky-h">
+    <div dir="rtl" class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
 
         <!-- Start for mobile -->
         <div class="xl:hidden flex justify-between items-center">
@@ -13,7 +13,7 @@
             </div>
         </div>
         <!-- End for mobile -->
-        <div class="nav xl:flex xl:flex-row justify-between items-center fixed xl:static right-[-250px] top-[88px] z-10 nav-links">
+        <div class="nav xl:flex xl:flex-row justify-between items-center fixed xl:static right-[-250px] top-[84px] z-10 nav-links">
             <!-- Start RT links -->
             <div class="rt-links basis-2/5  text-base text-[#101426] cursor-pointer text-[15px] xl:text-[16px]" >
                 <nav class="">
@@ -44,7 +44,7 @@
                             </div>
                         </li>
                         <li class="nav-item relative">
-                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static" href="#">اخبارنا</a>
+                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static" href="/our-news">اخبارنا</a>
                         </li>
                         <li class="nav-item relative">
                             <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static" href="#">القدس والمسجد الاقصى</a>
@@ -69,13 +69,13 @@
                             <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="#">الاوقاف والمقدسات</a>
                         </li>
                         <li class="nav-item relative">
-                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="#">حصاد الجمعية</a>
+                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="/yearly-news">حصاد الجمعية</a>
                         </li>
                         <li class="nav-item relative">
-                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="project-donations"> التبرع للمشاريع</a>
+                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="/projects-for-donations"> التبرع للمشاريع</a>
                         </li>
                         <li class="nav-item relative">
-                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="#">اتصل بنا</a>
+                            <a class="w-[250px] xl:w-auto mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0 xl:inline-block relative xl:static" href="/contact">اتصل بنا</a>
                         </li>
                     </ul>
                 </nav>

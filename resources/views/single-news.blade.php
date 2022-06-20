@@ -1,3 +1,5 @@
+@extends('layout.app')
+@section('content')
 <style>
     .Card_shadow {
         box-shadow: 0px 0px 1px 0px #0000000A;
@@ -15,21 +17,41 @@
         margin: 0 -32px;
     }
 </style>
-<div class=" bg-[#F2FFF285] py-16 pt-14 mt-8">
+
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10 px-2">
+    <div class="flex flex-row">
+        <ul class="list-reset breadcrumbs flex flex-row font-FlatBold ">
+            <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#101426]">
+                <a href="/">الرئيسية</a>
+            </li>
+            <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
+            <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#101426]">
+                <a href="/our-project">أخبارنا</a>
+            </li>
+            <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
+            <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px]  text-[#349A37]">
+                أكثر من 10 آلاف مشارك بمعسكر “القدس أولًا 13” الذي نظمته الحركة الإسلامية وجمعية الأقصى
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="bg-[#F2FFF285] py-16 pb-20 mt-10">
     <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
-        <div class="relative xl:mt-8 mb-8 lg:mb-0">
-            <p class="font-FlatBold text-xl sm:text-3xl text-center lg:mt-0 xl:text-right">
-                مشروع إفطار الصائم في المسجد الاقصى
+        <div class="relative ">
+            <p class="font-FlatBold text-xl sm:text-3xl text-center mt-8 lg:mt-0 xl:text-right">
+                أكثر من 10 آلاف مشارك بمعسكر “القدس أولًا 13” الذي نظمته الحركة الإسلامية وجمعية الأقصى
             </p>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
-        <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full rounded-[5px]" >
+        <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full" >
             <div class="absolute leftline"></div>
             <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
                 <img src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq"
                     class="w-full max-h-[510px]">
-                <p class="text-[#349A37] text-[22px] pt-4 text-right max-w-[480px] px-4">
-                    مشروع إفطار الصائم في المسجد الاقصى
+                <p class="text-[#349A37] text-[22px] pt-4 text-right px-4">
+                    أكثر من 10 آلاف مشارك بمعسكر “القدس أولًا 13” الذي نظمته الحركة الإسلامية وجمعية الأقصى
+
                 </p>
                 <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">أبريل 20, 2022</p>
                 <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">
@@ -108,12 +130,36 @@
                         </li>                            
                     </ul>
                 </div>
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="col-span-1">
+                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
+                    </div>
+                    <div class="col-span-1">
+                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
+                    </div>
+                    <div class="col-span-1">
+                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
+                    </div>
+                    <div class="col-span-1">
+                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
+                    </div>
+                    <div class="col-span-1">
+                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
+                    </div>
+                    <div class="col-span-1">
+                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
+                    </div>
+                </div>
+
             </div>
         </div>
-        
+        @include('Components.Projects.ProjectDetailsSlider')
     </div>
 </div>
-<div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
-@include('Components.Projects.ProjectDetailsSlider')
-</div>
 
+
+
+
+
+
+@endsection

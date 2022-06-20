@@ -27,13 +27,22 @@ jQuery(document).ready(function(){
         $('.arrow-icon').not($(this).find('.arrow-icon')).removeClass('rotate-90');
         $(this).find('.arrow-icon').toggleClass('rotate-90')
     });
-
     $('.tabs-btn .tab-btn').click(function() {
       $(this).addClass('active').siblings().removeClass('active');
       $('.tabs-container .tab').hide()
       $( '.' + $(this).data('tab')).fadeIn()
     })
     //End text accodrion text + Start tabs system
+
+
+    // Start goals in about us page
+    $('.goal-title').click(function() {
+        $('.goal-text').not($(this).siblings('.goal-text')).slideUp();
+        $(this).siblings('.goal-text').slideToggle();
+        // Arrow rotate
+        $('.arrow-icon').not($(this).find('.arrow-icon')).removeClass('rotate-90');
+        $(this).find('.arrow-icon').toggleClass('rotate-90')
+    });
 
 
 });

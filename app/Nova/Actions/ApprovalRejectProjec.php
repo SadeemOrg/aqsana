@@ -56,7 +56,7 @@ class ApprovalRejectProjec extends Action
             Text::make('reason_of_reject','reason_of_reject'),
 
 
-                ])->dependsOn('approval', 'reject'),
+                ])->dependsOn('approval', '2'),
 
 
 

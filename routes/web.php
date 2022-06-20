@@ -28,6 +28,7 @@ Route::get('/aboutus', function (){
 Route::get('our-project', function (){
     return view('projects-page');
 });
+
 Route::get('our-project/1', function (){
     return view('project-details-page');
 });
@@ -37,12 +38,23 @@ Route::get('project-donations', function (){
 });
 
 Route::get('/yearly-news', function (){
-    return view('yearlyNews');
+    return view('yearly-news');
 });
 
-
-
-Route::get('our-project/2', function (){
+Route::get('/our-news', function (){
     return view('our-news');
+});
+Route::get('news/1', function (){
+    return view('single-news');
+});
+Route::get('/contact', function (){
+    return view('contact-page');
+});
+
+Route::get('/projects-for-donations', function (){
+    return view('projects-for-donations');
+});
+Route::get('/donation-details/1', function (){
+    return view('project-donation-details');
 });
 

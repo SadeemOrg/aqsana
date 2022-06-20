@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Select;
+use Laraning\NovaTimeField\TimeField;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Acme\MultiselectField\Multiselect;
 use App\Nova\Actions\ApprovalRejectProjec;
@@ -17,6 +18,11 @@ use App\Nova\Filters\ProjectStatus;
 use App\Nova\Filters\Projectapproval;
 use App\Models\City;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Fields\HasMany;
+use Whitecube\NovaGoogleMaps\GoogleMaps;
+use Yassi\NestedForm\NestedForm;
+use Laravel\Nova\Fields\BelongsToMany;
+use AwesomeNova\Cards\FilterCard;
 
 class project extends Resource
 {
@@ -66,9 +72,10 @@ class project extends Resource
     public function fields(Request $request)
     {
         return [
+
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("project_name","project_name"),
-            Number::make("project_number","project_number"),
+            Text::make("project name","project_name"),
+            Text::make("project describe","project_describe"),
             Select::make('admin','admin_id',)
             ->options( function() {
                 $users =  \App\Models\User::where('user_roll', '=', 'admin')->get();
@@ -81,8 +88,25 @@ class project extends Resource
 
                 return $user_type_admin_array;
                }),
-            Text::make("project_goal","project_goal"),
-            Text::make("projec_type","projec_type"),
+
+               Multiselect::make('city','city_id')
+               ->options( function() {
+               $buses_db = City::all();
+               $buses =  array();
+
+               foreach($buses_db as $bus) {
+               $buses += [$bus['name'] => ($bus['name'])];
+               }
+
+               return $buses;
+               })
+               ->saveAsJSON(),
+
+               GoogleMaps::make('from city', 'map')
+               ->zoom(8),
+
+
+
             Select::make('Project Status ', 'Project_Status')->options([
                 'Initial' => 'Initial',
                 'Acceptable' => 'Acceptable',
@@ -97,20 +121,14 @@ class project extends Resource
              hideWhenUpdating(),
              Text::make("reason_of_reject","reason_of_reject")->hideWhenCreating()->
              hideWhenUpdating(),
-            DateTime::make('End time','projec_start'),
-            DateTime::make('projec_end','projec_end'),
-            Multiselect::make('city','city_id')
-            ->options( function() {
-            $buses_db = City::all();
-            $buses =  array();
 
-            foreach($buses_db as $bus) {
-            $buses += [$bus['name'] => ($bus['name'])];
-            }
+             Date::make('projec day','projec_day'),
+            TimeField::make('projec start','projec_start'),
+            TimeField::make('projec end','projec_end'),
 
-            return $buses;
-            })
-            ->saveAsJSON(),
+            NestedForm::make('buses', 'buses', 'App\Nova\bus'),
+            belongsToMany::make('buses'),
+
 
         ];
     }
@@ -123,7 +141,11 @@ class project extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+
+            new FilterCard(new ProjectStatus()),
+            new FilterCard(new Projectapproval()),
+        ];
     }
 
     /**
