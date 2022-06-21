@@ -38,7 +38,7 @@ class project extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'project_name';
     public static $group = 'Admin';
 
     /**
