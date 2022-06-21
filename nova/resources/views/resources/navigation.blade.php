@@ -8,9 +8,13 @@
     </h3>
 
     @foreach($navigation as $group => $resources)
+    <details>
+
         @if (count($groups) > 1)
-            <h4 class="ml-8 mb-4 text-xs text-white-50% uppercase tracking-wide">{{ $group }}</h4>
-        @endif
+
+            <summary class="ml-8 mb-4 text-sm text-white uppercase tracking-wide">{{ $group }}</summary>
+
+    @endif
 
         <ul class="list-reset mb-8">
             @foreach($resources as $resource)
@@ -26,5 +30,30 @@
                 </li>
             @endforeach
         </ul>
+    </details>
     @endforeach
+
 @endif
+
+<style>
+    details {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: .5em .5em 0;
+}
+
+summary {
+    font-weight: bold;
+    margin: -.5em -.5em 0;
+    padding: .5em;
+}
+
+details[open] {
+    padding: .5em;
+}
+
+details[open] summary {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .5em;
+}
+</style>

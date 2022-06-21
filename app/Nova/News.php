@@ -25,8 +25,9 @@ class News extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'title';
     public static $group = 'website';
+    public static $priority = 4;
     /**
      * The columns that should be searched.
      *

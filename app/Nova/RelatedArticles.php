@@ -17,7 +17,7 @@ class RelatedArticles extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\Banner::class;
+    public static $model = \App\Models\RelatedArticles::class;
     public static $group = 'website';
 
     /**
@@ -26,6 +26,8 @@ class RelatedArticles extends Resource
      * @var string
      */
     public static $title = 'id';
+    public static $priority = 6;
+
 
     /**
      * The columns that should be searched.
@@ -46,12 +48,13 @@ class RelatedArticles extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("type",'type'),
-            Text::make("text",'text'),
-            Trix::make("Description",'sub_text'),
-            ImageUploadPreview::make('image','image')->disk('public')->path('image_news'),
-            Text::make("link",'link'),
+            Text::make("Title",'title'),
+            Trix::make("Description",'description'),
+            ImageUploadPreview::make('Image','image')->disk('public')->path('image_news'),
             // Image::make('Image','image')->disk('public')->prunable(),
+            ArrayImages::make('Pictures', 'pictures')
+            ->disk('public')
+            ->path('pictures_news'),
 
         ];
     }

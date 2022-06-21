@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
-use Laravel\Nova\Cards\Help;
+
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use App\Nova\User;
 use App\Nova\Area;
+use App\Nova\project;
+use App\Nova\News;
 use Acme\Projecs\Projecs;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use App\Models\Bus;
@@ -18,6 +20,10 @@ use Laravel\Nova\Fields\Text;
 use Eminiarts\Tabs\Tabs;
 use Eminiarts\Tabs\Tab;
 use Laravel\Nova\Fields\Image;
+use \OptimistDigital\NovaSettings\NovaSettings;
+use Whitecube\NovaFlexibleContent\Flexible;
+use Illuminate\Support\Facades\Auth;
+use Comodolab\Nova\Fields\Help\Help;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -36,17 +42,18 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
         parent::boot();
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            Tabs::make('website', [
+            Tabs::make('Home', [
                 Tab::make(
                     'navbar ',
                     [
 
 
-                        Tree::make('Items (EN)', 'Itemsg')->fields([
+
+                        Tree::make('Items', 'Items')->fields([
                             Text::make('Name'),
                             Link::make('Link')->resources([
-                                User::class,
-                                Area::class,
+                                News::class,
+                                project::class,
 
                             ])
                         ])->title('name'),
@@ -58,6 +65,43 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                     ]
                 ),
+                Tab::make(
+
+                    'Heroo ',
+                    [
+                        Flexible::make('heroo', 'heroo')
+                            ->addLayout('Simple content section', 'heroo', [
+                                Image::make('img'),
+
+                            ])
+
+
+
+
+
+
+                    ]
+                ),
+                // Tab::make(
+                //     'Sup Heroo ',
+                //     [
+                //         Flexible::make('supheroo')
+                //             ->addLayout('Simple content section', 'wysiwyg', [
+                //                 Text::make('Text'),
+                //                 Text::make('SupText'),
+                //                 Image::make('img'),
+
+
+                //             ])
+
+
+
+
+
+
+                //     ]
+                // ),
+
                 Tab::make(
                     'Banner 1',
                     [
@@ -76,6 +120,19 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     ]
                 ),
                 Tab::make(
+                    'Projects News',
+                    [
+                        Flexible::make('Projects News','ProjectsNews')
+                            ->addLayout('Simple content section','ProjectsNews', [
+                                Text::make('main text', 'text_main'),
+                                Text::make('sup text ', 'sup_text'),
+                                Image::make('img'),
+
+                            ])
+                  ]
+                ),
+
+                Tab::make(
                     'Banner 2',
                     [
                         Image::make('main img', 'main_img_Banner_2'),
@@ -87,6 +144,24 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                         Text::make('bottom seen text ', 'text_seen_bottom_Banner_1'),
                         Text::make('bottom seen link ', 'link_seen_bottom_Banner_1'),
+
+
+
+
+
+                    ]
+                ),
+                Tab::make(
+
+                    'partner',
+                    [
+                        Flexible::make('partner','partner')
+                            ->addLayout('Simple content section', 'partner', [
+                                Image::make('img'),
+                                text::make('link'),
+
+                            ])
+
 
 
 
@@ -172,28 +247,46 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             new Tabs('who are we', [
-                'website SEO'    => [
-                    Text::make('Site name', 'Site_name')->help('enter the site name'),
-                    Text::make('Site description', 'Site_description'),
-                    Text::make('Site keywords', 'Site_keywords'),
-                    Text::make('Open Graph site name', 'og_site_name'),
-                    Text::make('Open Graph description', 'og_description'),
-                    Image::make('Open Graph image', 'og_image'),
+                'main section'    => [
+                    Text::make('text', 'main_section_text'),
+                    Image::make('image', 'main_section_image'),
+                ],
+                ' our vision' => [
+
+                    Text::make('text', 'vision_section_text'),
+                    Image::make('image', 'vision_section_image'),
+
+                ], ' Goals' => [
+                    Flexible::make('Goals')
+                    ->addLayout('Simple content section', 'wysiwyg', [
+                        Text::make('text', 'Goals_section_text'),
+                        Text::make('sup text', 'Goals_section_sup_text'),
+
+                    ])
 
 
 
                 ],
-                'website Soshal Midia ' => [
-                    Text::make('Facebook', 'Facebook'),
-                    Text::make('Instagram', 'Instagram'),
-                    Text::make('whatsapp', 'whatsapp'),
-                    Text::make('youtube', 'youtube'),
+                ' achievements' => [
+                    Image::make('image', 'main_section_image'),
+                    Flexible::make('achievements')
+                    ->addLayout('Simple content section', 'wysiwyg', [
+                        Text::make('text', 'achievements_section_text'),
+
+                    ])
 
 
-                ], 'website settings' => [
-                    Text::make('phone', 'phone'),
-                    Text::make('email', 'email'),
-                    Text::make('address', 'address'),
+
+                ],
+                ' workplace' => [
+                    Text::make('text', 'main_section_image'),
+                    Flexible::make('achievements')
+                    ->addLayout('Simple content section', 'wysiwyg', [
+                        Image::make('main img', 'main_img_workplace'),
+                        Text::make('main text', 'text_main_workplace'),
+                        Text::make('sup text', 'sup_text_workplace'),
+
+                    ])
 
 
 
@@ -291,7 +384,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
 
-            new \OptimistDigital\NovaSettings\NovaSettings,
+            new NovaSettings,
+            // ( new NovaSettings)->canSee(function ($request) {
+            //     $user = Auth::user();
+            //     return  ($user->type() == 'website_admin' ) ;
+            // }),
             // new projecs
 
         ];
