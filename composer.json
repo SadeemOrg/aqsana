@@ -28,6 +28,7 @@
         "laravel/nova": "*",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "manogi/nova-tiptap": "^3.0",
         "optimistdigital/nova-settings": "^3.5",
         "optimistdigital/nova-tailwind": "^1.1",
         "whitecube/nova-flexible-content": "^0.2.8",

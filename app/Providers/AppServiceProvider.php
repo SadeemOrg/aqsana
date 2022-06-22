@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Support\Facades\View;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +23,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
+        View::composer(['layout.front-end.partial._header'],
+         function ($view) {
+            $Navjson=nova_get_setting('Items', 'default_value');
+            $nav = json_decode($Navjson);
+
+            $view->with([
+                'nav' =>  $nav
+            ]);
+        });
     }
 }

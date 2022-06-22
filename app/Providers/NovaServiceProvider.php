@@ -139,11 +139,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         Text::make('main text', 'text_main_Banner_2'),
                         Text::make('sup text ', 'sup_text_Banner_2'),
 
-                        Text::make('bottom view  text ', 'text_view_bottom_Banner_1'),
-                        Text::make('bottom view link ', 'link_view_bottom_Banner_1'),
+                        Text::make('bottom view  text ', 'text_view_bottom_Banner_2'),
+                        Text::make('bottom view link ', 'link_view_bottom_Banner_2'),
 
-                        Text::make('bottom seen text ', 'text_seen_bottom_Banner_1'),
-                        Text::make('bottom seen link ', 'link_seen_bottom_Banner_1'),
+                        Text::make('bottom seen text ', 'text_seen_bottom_Banner_2'),
+                        Text::make('bottom seen link ', 'link_seen_bottom_Banner_2'),
 
 
 
@@ -175,25 +175,38 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         Text::make('main text', 'text_main_workplace'),
                         Text::make('sup text ', 'sup_text_workplace'),
 
-                        Image::make('main img 1', 'main_img_workplace_1'),
-                        Text::make('main text 1', 'text_main_workplace_1'),
-                        Text::make('sup text 1', 'sup_text_workplace_1'),
-                        Text::make('bottom  text 1', 'text_bottom_workplace_1'),
-                        Text::make('bottom  link 1', 'link_bottom_workplace_1'),
+
+                        Flexible::make('heroo', 'workplace')
+                        ->addLayout('Simple content section', 'workplace', [
+                            Image::make('main img ', 'main_img_workplace_'),
+                            Text::make('main text ', 'text_main_workplace_'),
+                            Text::make('sup text ', 'sup_text_workplace'),
+                            Text::make('bottom  text ', 'text_bottom_workplace_'),
+                            Text::make('bottom  link ', 'link_bottom_workplace_'),
+
+                        ]),
 
 
-                        Image::make('main img 2', 'main_img_workplace_2'),
-                        Text::make('main text 2', 'text_main_workplace_2'),
-                        Text::make('sup text 2', 'sup_text_workplace_2'),
-                        Text::make('bottom  text 2', 'text_bottom_workplace_2'),
-                        Text::make('bottom  link 2', 'link_bottom_workplace_2'),
+
+                        // Image::make('main img 1', 'main_img_workplace_1'),
+                        // Text::make('main text 1', 'text_main_workplace_1'),
+                        // Text::make('sup text 1', 'sup_text_workplace_1'),
+                        // Text::make('bottom  text 1', 'text_bottom_workplace_1'),
+                        // Text::make('bottom  link 1', 'link_bottom_workplace_1'),
 
 
-                        Image::make('main img 3', 'main_img_workplace_3'),
-                        Text::make('main text 3', 'text_main_workplace_3'),
-                        Text::make('sup text 3', 'sup_text_workplace_3'),
-                        Text::make('bottom  text 3', 'text_bottom_workplace_3'),
-                        Text::make('bottom  link 3', 'link_bottom_workplace_3'),
+                        // Image::make('main img 2', 'main_img_workplace_2'),
+                        // Text::make('main text 2', 'text_main_workplace_2'),
+                        // Text::make('sup text 2', 'sup_text_workplace_2'),
+                        // Text::make('bottom  text 2', 'text_bottom_workplace_2'),
+                        // Text::make('bottom  link 2', 'link_bottom_workplace_2'),
+
+
+                        // Image::make('main img 3', 'main_img_workplace_3'),
+                        // Text::make('main text 3', 'text_main_workplace_3'),
+                        // Text::make('sup text 3', 'sup_text_workplace_3'),
+                        // Text::make('bottom  text 3', 'text_bottom_workplace_3'),
+                        // Text::make('bottom  link 3', 'link_bottom_workplace_3'),
 
 
 
@@ -202,13 +215,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 Tab::make(
                     'Connect with us',
                     [
-                        Text::make('heder text', 'text_main_Connect'),
+                        Text::make('heder text', 'heder_text_main_Connect'),
                         Text::make('main text', 'text_main_Connect'),
                         Text::make('sup text text', 'sup_text_main_Connect'),
                         Text::make('phone', 'phone_Connect'),
                         Text::make('Email', 'email_Connect'),
-                        Text::make('Text bottome', 'text-bottom_Connect'),
-                        Text::make('linl bottom', 'email_Connect'),
+                        Text::make('Text bottome', 'text_bottom_Connect'),
+                        Text::make('linl bottom', 'linl_bottom'),
 
                         Text::make('filed 1 ', 'filed1_Connect'),
                         Text::make('filed 2 ', 'filed2_Connect'),
