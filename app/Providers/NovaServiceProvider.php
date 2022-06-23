@@ -62,7 +62,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Text::make('Name'),
                             Link::make('Link')->resources([
                                 News::class,
-                                project::class,
+
 
                             ])
                         ])->title('name'),
@@ -345,7 +345,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             // ...
         ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            new Tabs('who are we', [
+            new Tabs('about us', [
                 'main section'    => [
                     Text::make('text', 'main_section_text'),
                     Image::make('image', 'main_section_image'),
@@ -379,13 +379,106 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ],
                 ' workplace' => [
                     Text::make('text', 'main_section_image'),
-                    Flexible::make('achievements')
-                        ->addLayout('Simple content section', 'wysiwyg', [
-                            Image::make('main img', 'main_img_workplace'),
-                            Text::make('main text', 'text_main_workplace'),
-                            Text::make('sup text', 'sup_text_workplace'),
+                    FlexibleContent::make('workplace', 'workplaceabout')
+                            ->addLayout(
+                                [
+                                    'label' => 'workplace',
+                                    'name' => 'workplace',
+                                    'fields' => [
+                                        [
+                                            'type' => 'image',
+                                            'name' => 'image',
+                                            'label' => 'Image',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                       [
+                                            'type' => 'text',
+                                            'name' => 'title',
+                                            'label' => 'title',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'sup_title',
+                                            'label' => 'sup_title',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
 
-                        ])
+
+                                    ]
+                                ]
+                            ),
+
+
+
+                ],
+
+            ]),
+        ], [
+            'workplaceabout' => 'array',
+
+            // ...
+        ]);
+        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
+            new Tabs('Connect with us', [
+                'Connect with us'    => [
+
+
+                    Text::make('heder text', 'heder_text_main_Connectus'),
+                    Text::make('main text', 'text_main_Connectus'),
+                    Text::make('sup text text', 'sup_text_main_Connectus'),
+                    Text::make('phone', 'phone_Connectus'),
+                    Text::make('Email', 'email_Connectus'),
+                    Text::make('Text bottome', 'text_bottom_Connectus'),
+                    Text::make('linl bottom', 'linl_bottom_ Connectus'),
+
+
+
+                ],
+                'FORM'    => [
+
+
+                    Text::make('filed 1 ', 'filed1_Connectus'),
+                    Text::make('filed 2 ', 'filed2_Connectus'),
+                    Text::make('filed 3 ', 'filed3_Connectus'),
+                    Text::make('text form bottom', 'text_form_Connectus'),
+
+
+                ],
+
+            ]),
+        ]);
+
+        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
+            new Tabs('website Settings', [
+                'website SEO'    => [
+
+
+                    Text::make('Site name', 'Site_name')->help('enter the site name'),
+                    Text::make('Site description', 'Site_description'),
+                    Text::make('Site keywords', 'Site_keywords'),
+                    Text::make('Open Graph site name', 'og_site_name'),
+                    Text::make('Open Graph description', 'og_description'),
+                    Image::make('Open Graph image', 'og_image'),
+                    Image::make('First Name', 'first_name'),
+
+
+
+                ],
+                'website Soshal Midia ' => [
+                    Text::make('Facebook', 'Facebook'),
+                    Text::make('Instagram', 'Instagram'),
+                    Text::make('whatsapp', 'whatsapp'),
+                    Text::make('youtube', 'youtube'),
+
+
+                ], 'website settings' => [
+                    Text::make('phone', 'phone'),
+                    Text::make('email', 'email'),
+                    Text::make('address', 'address'),
 
 
 
@@ -393,6 +486,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             ]),
         ]);
+
 
     }
 
