@@ -17,13 +17,23 @@ use Acme\MultiselectField\Multiselect;
 use Averotech\Link\Link;
 use Averotech\Tree\Tree;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\file;
+
 use Eminiarts\Tabs\Tabs;
 use Eminiarts\Tabs\Tab;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Image;
 use \OptimistDigital\NovaSettings\NovaSettings;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Illuminate\Support\Facades\Auth;
 use Comodolab\Nova\Fields\Help\Help;
+use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
+use Chaseconey\ExternalImage\ExternalImage;
+use Epartment\NovaDependencyContainer\NovaDependencyContainer;
+use Epartment\NovaDependencyContainer\HasDependencies;
+use Epartment\NovaDependencyContainer\ActionHasDependencies;
+use Laravel\Nova\Fields\Boolean;
+use Gwd\FlexibleContent\FlexibleContent;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -33,6 +43,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      *
      * @return void
      */
+
     public function boot()
     {
 
@@ -41,14 +52,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         });
 
         parent::boot();
+
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             Tabs::make('Home', [
                 Tab::make(
                     'navbar ',
                     [
-
-
-
                         Tree::make('Items', 'Items')->fields([
                             Text::make('Name'),
                             Link::make('Link')->resources([
@@ -66,33 +75,40 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     ]
                 ),
                 Tab::make(
-
                     'Heroo ',
                     [
-                        Flexible::make('heroo', 'heroo')
-                            ->addLayout('Simple content section', 'heroo', [
-                                Image::make('img'),
 
-                            ])
-
-
-
+                        FlexibleContent::make('Heroo', 'Heroo')
+                            ->addLayout(
+                                [
+                                    'label' => 'Heroo',
+                                    'name' => 'Heroo',
+                                    'fields' => [
+                                        [
+                                            'type' => 'image',
+                                            'name' => 'image',
+                                            'label' => 'Image',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ]
+                                    ]
+                                ]
+                            ),
 
 
 
                     ]
                 ),
-                // Tab::make(
-                //     'Sup Heroo ',
-                //     [
-                //         Flexible::make('supheroo')
-                //             ->addLayout('Simple content section', 'wysiwyg', [
-                //                 Text::make('Text'),
-                //                 Text::make('SupText'),
-                //                 Image::make('img'),
 
 
-                //             ])
+
+
+
+
+
+
+
+
 
 
 
@@ -122,14 +138,38 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 Tab::make(
                     'Projects News',
                     [
-                        Flexible::make('Projects News','ProjectsNews')
-                            ->addLayout('Simple content section','ProjectsNews', [
-                                Text::make('main text', 'text_main'),
-                                Text::make('sup text ', 'sup_text'),
-                                Image::make('img'),
+                        FlexibleContent::make('Projects_News', 'Projects_News')
+                            ->addLayout(
+                                [
+                                    'label' => 'Heroo',
+                                    'name' => 'Heroo',
+                                    'fields' => [
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'title',
+                                            'label' => 'title',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'sup_title',
+                                            'label' => 'sup_title',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                        [
+                                            'type' => 'image',
+                                            'name' => 'image',
+                                            'label' => 'Image',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
 
-                            ])
-                  ]
+                                    ]
+                                ]
+                            ),
+                    ]
                 ),
 
                 Tab::make(
@@ -155,12 +195,31 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                     'partner',
                     [
-                        Flexible::make('partner','partner')
-                            ->addLayout('Simple content section', 'partner', [
-                                Image::make('img'),
-                                text::make('link'),
+                        FlexibleContent::make('partner', 'partner')
+                            ->addLayout(
+                                [
+                                    'label' => 'partner',
+                                    'name' => 'partner',
+                                    'fields' => [
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'title',
+                                            'label' => 'title',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
 
-                            ])
+                                        [
+                                            'type' => 'image',
+                                            'name' => 'image',
+                                            'label' => 'Image',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+
+                                    ]
+                                ]
+                            ),
 
 
 
@@ -176,37 +235,58 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         Text::make('sup text ', 'sup_text_workplace'),
 
 
-                        Flexible::make('heroo', 'workplace')
-                        ->addLayout('Simple content section', 'workplace', [
-                            Image::make('main img ', 'main_img_workplace_'),
-                            Text::make('main text ', 'text_main_workplace_'),
-                            Text::make('sup text ', 'sup_text_workplace'),
-                            Text::make('bottom  text ', 'text_bottom_workplace_'),
-                            Text::make('bottom  link ', 'link_bottom_workplace_'),
 
-                        ]),
+                        FlexibleContent::make('workplace', 'workplace')
+                            ->addLayout(
+                                [
+                                    'label' => 'workplace',
+                                    'name' => 'workplace',
+                                    'fields' => [
+                                        [
+                                            'type' => 'image',
+                                            'name' => 'main_img_workplace',
+                                            'label' => 'Image',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'text_main_workplace',
+                                            'label' => 'title',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'sup_text_workplace',
+                                            'label' => 'sup title',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'text_bottom_workplace_',
+                                            'label' => 'text bottom_',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],  [
+                                            'type' => 'text',
+                                            'name' => 'link_bottom_workplace_',
+                                            'label' => 'link bottom',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
 
 
 
-                        // Image::make('main img 1', 'main_img_workplace_1'),
-                        // Text::make('main text 1', 'text_main_workplace_1'),
-                        // Text::make('sup text 1', 'sup_text_workplace_1'),
-                        // Text::make('bottom  text 1', 'text_bottom_workplace_1'),
-                        // Text::make('bottom  link 1', 'link_bottom_workplace_1'),
+
+                                    ]
+                                ]
+                            ),
 
 
-                        // Image::make('main img 2', 'main_img_workplace_2'),
-                        // Text::make('main text 2', 'text_main_workplace_2'),
-                        // Text::make('sup text 2', 'sup_text_workplace_2'),
-                        // Text::make('bottom  text 2', 'text_bottom_workplace_2'),
-                        // Text::make('bottom  link 2', 'link_bottom_workplace_2'),
 
 
-                        // Image::make('main img 3', 'main_img_workplace_3'),
-                        // Text::make('main text 3', 'text_main_workplace_3'),
-                        // Text::make('sup text 3', 'sup_text_workplace_3'),
-                        // Text::make('bottom  text 3', 'text_bottom_workplace_3'),
-                        // Text::make('bottom  link 3', 'link_bottom_workplace_3'),
 
 
 
@@ -256,8 +336,14 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
 
             ]),
+        ], [
+            'heroo' => 'array',
+            'flexible' => 'array',
+            'Projects_News' => 'array',
+            'partner' => 'array',
+            'workplace' => 'array',
+            // ...
         ]);
-
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             new Tabs('who are we', [
                 'main section'    => [
@@ -271,11 +357,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                 ], ' Goals' => [
                     Flexible::make('Goals')
-                    ->addLayout('Simple content section', 'wysiwyg', [
-                        Text::make('text', 'Goals_section_text'),
-                        Text::make('sup text', 'Goals_section_sup_text'),
+                        ->addLayout('Simple content section', 'wysiwyg', [
+                            Text::make('text', 'Goals_section_text'),
+                            Text::make('sup text', 'Goals_section_sup_text'),
 
-                    ])
+                        ])
 
 
 
@@ -283,10 +369,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ' achievements' => [
                     Image::make('image', 'main_section_image'),
                     Flexible::make('achievements')
-                    ->addLayout('Simple content section', 'wysiwyg', [
-                        Text::make('text', 'achievements_section_text'),
+                        ->addLayout('Simple content section', 'wysiwyg', [
+                            Text::make('text', 'achievements_section_text'),
 
-                    ])
+                        ])
 
 
 
@@ -294,44 +380,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ' workplace' => [
                     Text::make('text', 'main_section_image'),
                     Flexible::make('achievements')
-                    ->addLayout('Simple content section', 'wysiwyg', [
-                        Image::make('main img', 'main_img_workplace'),
-                        Text::make('main text', 'text_main_workplace'),
-                        Text::make('sup text', 'sup_text_workplace'),
+                        ->addLayout('Simple content section', 'wysiwyg', [
+                            Image::make('main img', 'main_img_workplace'),
+                            Text::make('main text', 'text_main_workplace'),
+                            Text::make('sup text', 'sup_text_workplace'),
 
-                    ])
-
-
-
-                ],
-
-            ]),
-        ]);
-
-        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            new Tabs('website Settings', [
-                'website SEO'    => [
-                    Text::make('Site name', 'Site_name')->help('enter the site name'),
-                    Text::make('Site description', 'Site_description'),
-                    Text::make('Site keywords', 'Site_keywords'),
-                    Text::make('Open Graph site name', 'og_site_name'),
-                    Text::make('Open Graph description', 'og_description'),
-                    Image::make('Open Graph image', 'og_image'),
-
-
-
-                ],
-                'website Soshal Midia ' => [
-                    Text::make('Facebook', 'Facebook'),
-                    Text::make('Instagram', 'Instagram'),
-                    Text::make('whatsapp', 'whatsapp'),
-                    Text::make('youtube', 'youtube'),
-
-
-                ], 'website settings' => [
-                    Text::make('phone', 'phone'),
-                    Text::make('email', 'email'),
-                    Text::make('address', 'address'),
+                        ])
 
 
 
@@ -339,7 +393,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             ]),
         ]);
+
     }
+
 
     /**
      * Register the Nova routes.
