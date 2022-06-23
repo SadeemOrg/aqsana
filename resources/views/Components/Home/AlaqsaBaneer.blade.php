@@ -6,9 +6,13 @@
     }
 </style>
 
+@php
+    $img = 'storage/' .nova_get_setting('main_img_Banner_1', 'default_value');
+    // dd($img)
+@endphp
 <div class="relative mt-24 md:max-h-72 min-h-[294px] overflow-hidden">
     <div class="absolute inset-0">
-        <img class="w-full h-full object-cover" src="{{ asset('assets/image/AlAqsaBanner.png') }}" alt="AlAqsaBanner">
+        <img class="w-full h-full object-cover" src="{{URL::asset($img)}}" alt="AlAqsaBanner">
 
         <div class="absolute inset-0  linearGradiants mix-blend-multiply" aria-hidden="true"></div>
     </div>
@@ -90,7 +94,7 @@
                                 </defs>
                             </svg>
                         </a>
-                    </li>            
+                    </li>
                 </ul>
             </div>
         </div>
