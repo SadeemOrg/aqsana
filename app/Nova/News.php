@@ -82,8 +82,8 @@ class News extends Resource
                 '|',
                 'editHtml',
             ]),
-            ImageUploadPreview::make('Image','image')->disk('public')->path('image_news'),
-            // Image::make('Image','image')->disk('public')->prunable(),
+            // ImageUploadPreview::make('Image','image')->disk('public')->path('image_news'),
+            Image::make('Image','image')->disk('public')->prunable(),
             ArrayImages::make('Pictures', 'pictures')
             ->disk('public')
             ->path('pictures_news'),
