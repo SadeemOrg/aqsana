@@ -22,7 +22,7 @@ Route::get('/', [HomeController::class, 'index'])->name('Home');
 
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::post('/conctus', [HomeController::class, 'conctus'])->name('conctus');
-Route::post('/our-news', [HomeController::class, 'news'])->name('news');
+Route::get('/our-news', [HomeController::class, 'news'])->name('news');
 
 
 // Route::get('/ ', function () {
