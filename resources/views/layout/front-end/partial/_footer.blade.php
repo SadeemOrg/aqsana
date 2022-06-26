@@ -1,15 +1,19 @@
+@php
+
+// dd($navfooter->data->name);
+@endphp
 <footer class="bg-[#101426] text-white mt-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-start">
-        <img src="{{ asset('assets/image/Logo_footer.svg') }}" class="w-[165px] pt-10 max-h-[125px]" />
+        @php
+        $img = 'storage/'. nova_get_setting('footer_logo', 'default_value');
+    @endphp
+        <img src="{{ $img }}" class="w-[165px] pt-10 max-h-[125px]" />
         <div class="hidden sm:flex flex-row flex-wrap justify-around items-center gap-7 pt-9">
-            <a class="text-[16px] hover:text-[#349A37] duration-200" href="#">من نحن</a>
-            <a class="text-[16px] hover:text-[#349A37] duration-200" href="#">مشاريعنا</a>
-            <a class="text-[16px] hover:text-[#349A37] duration-200" href="#">اخبارنا</a>
-            <a class="text-[16px] hover:text-[#349A37] duration-200" href="#">القدس والمسجد الاقصى</a>
-            <a class="text-[16px] hover:text-[#349A37] duration-200" href="#">الاوقاف والمقدسات</a>
-            <a class="text-[16px] hover:text-[#349A37] duration-200" href="#">حصاد الحمعية</a>
-            <a class="text-[16px] hover:text-[#349A37] duration-200" href="#">التبرع للمشاريع</a>
-            <a class="text-[16px] hover:text-[#349A37] duration-200" href="#">اتصل بنا</a>
+          @foreach ($navfooters as $navfooter)
+
+          <a class="text-[16px] hover:text-[#349A37] duration-200" href="#">{{ $navfooter->data->name }}</a>
+
+          @endforeach
         </div>
         <div class="flex flex-row justify-between gap-x-6 sm:hidden mt-6 text-right w-full">
             <div class="flex flex-col items-start justify-start text-right gap-y-2 text-[10px] ">
@@ -25,7 +29,7 @@
                 <a class="text-[14px] hover:text-[#349A37] duration-200" href="#">اتصل بنا</a>
             </div>
         </div>
-        <div class="flex flex-col sm:flex-row justify-between items-center mt-10 py-5 w-full border-t border-t-[#727272]">    
+        <div class="flex flex-col sm:flex-row justify-between items-center mt-10 py-5 w-full border-t border-t-[#727272]">
             <ul class=" flex flex-start items-center gap-x-2 mb-4 sm:mb-0">
                 <li>
                     <a class="facebook" href="#">
@@ -89,9 +93,9 @@
                             </defs>
                         </svg>
                     </a>
-                </li>            
+                </li>
             </ul>
-            
+
             <p class="text-16px">
                 Copyright <?php echo date("Y"); ?> Name By Averotech
             </p>

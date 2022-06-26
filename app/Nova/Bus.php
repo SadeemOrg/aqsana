@@ -11,7 +11,8 @@ use Yassi\NestedForm\NestedForm;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
-
+use Laravel\Nova\Fields\BelongsTo;
+use Whitecube\NovaGoogleMaps\GoogleMaps;
 class Bus extends Resource
 {
     /**
@@ -21,7 +22,7 @@ class Bus extends Resource
      */
     public static $group = 'Admin';
     public static $model = \App\Models\Bus::class;
-    public static $displayInNavigation = false;
+
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
@@ -46,19 +47,36 @@ class Bus extends Resource
      */
     public function fields(Request $request)
     {
+
+        // 'Created_By','Update_By'
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Text::make("Name","name"),
+            BelongsTo::make('company', 'company', \App\Nova\buses_company::class),
             Text::make("Bus Number","bus_number"),
-            Text::make("Bus Compane","bus_Compane"),
-
-            Text::make("Name Driver","name_driver"),
             Number::make("Number person on bus","number_person_on_bus")->step(1.0),
-            Select::make('status','status')->options([
-                "0" => 'avilabel',
-                "1" => 'un avalabel',
-                ])->displayUsingLabels(),
+            GoogleMaps::make('travel from', 'travel_from')
+            ->zoom(8),
+            GoogleMaps::make('travel to', 'travel_to')
+            ->zoom(8) ,
+            GoogleMaps::make('current_location', 'current_location')
+            ->zoom(8) ,
+            Text::make("Name Driver","driver"),
+            Text::make("phone_number","phone_number"),
+
+
+
+            Select::make("status","status")
+            ->options([
+                '1' => 'available',
+                '2' => 'un available',
+
+
+                ])->displayUsingLabels()
+            ->hideWhenCreating()->
+            hideWhenUpdating(),
                 // belongsToMany::make('projects', 'projects', 'App\Nova\project'),
-                belongsToMany::make('projects', 'projects', 'App\Nova\project'),
+                // belongsToMany::make('projects', 'projects', 'App\Nova\project'),
 
             ];
     }
