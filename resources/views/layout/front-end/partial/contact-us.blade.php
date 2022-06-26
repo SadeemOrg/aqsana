@@ -26,9 +26,9 @@
             <p class="text-[#8F9BB3] text-[16px] font-FlatBold pt-6 pb-4">هل تريد المشاركة بالتبرع؟ <a href="#"
                     class="text-[#349A37]">{{ $text_Button }}</a></p>
         </div>
-        <form method="POST" action="{{ route('conctus') }}">
-            @csrf
-        <div class=" h-[432px] basis-1/2 w-full lg:mr-0">
+        {{-- <form method="POST" action="{{ route('conctus') }}"> --}}
+            <form method="POST" action="{{ route('conctus') }}" class=" h-[432px] basis-1/2 w-full lg:mr-0">
+                @csrf
                 <div class=" ltr pt-10 px-6 lg:px-0">
                     <input type="text" name="name" placeholder=" الاسم الكامل"
                         class="rtl block w-full  border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
@@ -47,7 +47,7 @@
                     ارسال
                 </button>
             </div>
-        </div>
+        {{-- </form> --}}
     </form>
     </div>
 </div>
