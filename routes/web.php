@@ -20,7 +20,7 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('Home');
 
-
+Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
 
 
 
@@ -28,9 +28,9 @@ Route::get('/', [HomeController::class, 'index'])->name('Home');
 //     return view('home');
 // });
 
-Route::get('/aboutus', function (){
-    return view('about-us-page');
-});
+// Route::get('/aboutus', function (){
+//     return view('about-us-page');
+// });
 
 Route::get('our-project', function (){
     return view('projects-page');

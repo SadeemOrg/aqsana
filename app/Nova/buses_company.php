@@ -22,7 +22,7 @@ class buses_company extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
     public static $group = 'Admin';
     public static function label()
     {
