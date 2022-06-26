@@ -33,5 +33,18 @@ class AppServiceProvider extends ServiceProvider
                 'nav' =>  $nav
             ]);
         });
+
+        View::composer(['layout.front-end.partial._footer'],
+        function ($view) {
+
+
+        $footers = nova_get_setting('Itemsfooter', 'default_value');
+
+              $navfooters = json_decode($footers);
+
+           $view->with([
+               'navfooters' =>  $navfooters
+           ]);
+       });
     }
 }

@@ -21,7 +21,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index'])->name('Home');
 
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
-
+Route::post('/conctus', [HomeController::class, 'conctus'])->name('conctus');
 
 
 // Route::get('/ ', function () {

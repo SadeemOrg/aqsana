@@ -34,11 +34,9 @@ class HomeController extends Controller
         $sectors = nova_get_setting('workplace', 'default_value');
         // $sectors= json_decode($sectorsjson);
 
-        $footers = nova_get_setting('Itemsfooter', 'default_value');
-        // $footers = json_decode($footerjson);
 
 
-        return view('home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'Articles', 'partners','footers','sectors'));
+        return view('home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'Articles', 'partners','sectors'));
     }
 
     public function aboutus()
@@ -53,8 +51,13 @@ class HomeController extends Controller
         $achievements = json_decode($achievementsjson);
 
 
-        $workplace = nova_get_setting('workplace', 'default_value');
-
+        $workplace = nova_get_setting('workplaceabout', 'default_value');
         return view('about-us-page', compact('goals','achievements','workplace'));
+    }
+
+    public function conctus()
+    {
+
+dd('hi');
     }
 }
