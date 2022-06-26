@@ -10,14 +10,21 @@ class Bus extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id','bus_number','bus_Compane','name_driver','number_person_on_bus','status'
+        'id','name','company_id','bus_number','number_person_on_bus',
+        'travel_from','travel_to','current_location','driver','phone_number','status',
+        'Created_By','Update_By'
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
     ];
+    protected $casts = [
+        'travel_from' => 'array',
+        'travel_to' => 'array',
+        'current_location' => 'array',
 
+    ];
 
 
 
@@ -26,6 +33,10 @@ class Bus extends Model
         return $this->belongsToMany(project::class);
     }
 
+    public function company()
+    {
+        return $this->belongsTo(buses_company::class,'company_id');
+    }
 
 
 }
