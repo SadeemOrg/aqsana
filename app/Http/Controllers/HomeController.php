@@ -36,7 +36,7 @@ class HomeController extends Controller
 
 
 
-        return view('home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'Articles', 'partners','sectors'));
+        return view('Pages.home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'Articles', 'partners','sectors'));
     }
 
     public function news()
@@ -44,7 +44,7 @@ class HomeController extends Controller
 
 
         $news = DB::table('news')->orderBy('created_at', 'desc')->get();
-        return view('our-news', compact('news'));
+        return view('Pages.our-news', compact('news'));
 
 
     }
@@ -61,7 +61,7 @@ class HomeController extends Controller
 
 
         $workplace = nova_get_setting('workplaceabout', 'default_value');
-        return view('about-us-page', compact('goals','achievements','workplace'));
+        return view('Pages.about-us-page', compact('goals','achievements','workplace'));
     }
 
     public function conctus()

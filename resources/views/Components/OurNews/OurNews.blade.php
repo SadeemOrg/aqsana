@@ -1,6 +1,3 @@
-@extends('layout.app')
-@section('content')
-
 <style>
     .Card_shadow {
         box-shadow: 0px 0px 1px 0px #0000000A;
@@ -17,8 +14,8 @@
         /* display:inline-block; */
         margin: 0 -32px;
     }
-</style>
 
+</style>
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10 px-2">
     <div class="flex flex-row">
         <ul class="list-reset breadcrumbs flex flex-row font-FlatBold ">
@@ -33,7 +30,7 @@
     </div>
 </div>
 
-<div class="bg-[#F2FFF285] py-16 mt-8">
+<div class="bg-[#F2FFF285] py-8 mt-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative xl:mt-8 mb-7 lg:mb-0">
             <p class="font-FlatBold text-3xl text-center xl:text-right"> أخبارانا </p>
@@ -41,25 +38,37 @@
         </div>
         <div class="lg:grid lg:grid-cols-2 gap-x-8 gap-y-6 text-center lg:text-right">
             <!--first card -->
+            @if(!empty($news))
+            @foreach ($news as $new )
+            @php
+            $img = 'storage/'.$new->image;
+            @endphp
             <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]" onclick="location.href='our-project/1'">
                 <div class="absolute leftline"></div>
                 <div class="max-w-[600px] bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
-                    <img src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq"
+                    <img src="{{ asset($img) }}"  alt="people_on_Mousq"
                         class="w-full lg:w-[550px] lg:max-h-52">
                     <p class="text-[#349A37] text-[16px] pt-4 text-right max-w-[480px] px-4">
-                        اكثر من 10 الاف مشارك بمعسكر "القدس اولا" الذي نظمته الحركة الاسلامية وجمعية الاقصى
+                        {{Illuminate\Support\Str::limit($new->title,113)  }}
+                        {{-- اكثر من 10 الاف مشارك بمعسكر "القدس اولا" الذي نظمته الحركة الاسلامية وجمعية الاقصى --}}
                     </p>
                     <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">أبريل 20, 2022</p>
                     <p class="text-[11px] text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">
                         أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية الأقصى,
                         مشاريعنا
                     </p>
-                    <p class="text-xs text-[#101426] font-noto_Regular px-4 pt-2 text-right">
-                        نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف والمقدسات،
+                    <p class="text-xs text-[#101426] font-noto_Regular px-4 pt-2 text-right slider-paragraph">
+                        {!! Illuminate\Support\Str::limit(strip_tags( $new->description),240)!!}
+                        @if(strip_tags(Str::length($new->description)) > 240)
+                        <a href="#">
+                            <span class="text-[#349A37] text-[12px]">عرض المزيد</span>
+                        </a>
+                        @endif
+                        {{-- نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف والمقدسات،
                         للسنة
                         الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
                         لاستقبال
-                        المصلين في شهر رمضان المبارك، ولدعم...
+                        المصلين في شهر رمضان المبارك، ولدعم... --}}
                     </p>
                     <div class="flex flex-row items-center justify-start px-4 pt-2 font-noto_Regular gap-x-2">
                         <p class="text-[#101426] text-sm">شارك عبر</p>
@@ -100,15 +109,15 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li class="px-1">  
-                                <a class="pinterest" href="#">                                 
+                            <li class="px-1">
+                                <a class="pinterest" href="#">
                                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                         <path
                                             d="M12.7948 6C9.16884 6 7.24048 8.32362 7.24048 10.8573C7.24048 12.0323 7.89705 13.4976 8.94805 13.9623C9.10765 14.0343 9.19447 14.0037 9.23003 13.8557C9.26145 13.7432 9.39955 13.2016 9.46653 12.9461C9.4872 12.8642 9.47645 12.7931 9.4103 12.7162C9.06134 12.3126 8.78432 11.5775 8.78432 10.8879C8.78432 9.12077 10.1892 7.40492 12.5799 7.40492C14.6471 7.40492 16.0934 8.74783 16.0934 10.6687C16.0934 12.8394 14.9448 14.3411 13.4522 14.3411C12.6262 14.3411 12.0109 13.6928 12.2061 12.8907C12.4418 11.9356 12.904 10.9086 12.904 10.2197C12.904 9.60203 12.555 9.091 11.8422 9.091C11.0013 9.091 10.3191 9.9237 10.3191 11.0417C10.3191 11.752 10.5705 12.2316 10.5705 12.2316C10.5705 12.2316 9.73858 15.5922 9.58395 16.2198C9.32264 17.2824 9.6195 19.0032 9.64514 19.1512C9.66085 19.2331 9.75264 19.2587 9.80391 19.1917C9.88577 19.0842 10.8913 17.6495 11.1733 16.6126C11.2758 16.2347 11.6967 14.7024 11.6967 14.7024C11.9737 15.2027 12.7733 15.6219 13.6251 15.6219C16.1587 15.6219 17.9895 13.3951 17.9895 10.6315C17.9804 7.98211 15.713 6 12.7948 6Z"
                                             fill="#101426" />
                                     </svg>
-                                </a> 
+                                </a>
                             </li>
                             <li class="px-1">
                                 <a class="linkedin" href="#">
@@ -123,13 +132,15 @@
                                             fill="#101426" />
                                     </svg>
                                 </a>
-                            </li>                            
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
+            @endforeach
+            @endif
             <!--second card -->
-            <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]" onclick="location.href='our-project/2'">
+            {{-- <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]" onclick="location.href='our-project/2'">
                 <div class="absolute leftline"></div>
                 <div class="max-w-[600px] bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
                     <img src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq"
@@ -188,15 +199,15 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li class="px-1">  
-                                <a class="pinterest" href="#">                                 
+                            <li class="px-1">
+                                <a class="pinterest" href="#">
                                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                         <path
                                             d="M12.7948 6C9.16884 6 7.24048 8.32362 7.24048 10.8573C7.24048 12.0323 7.89705 13.4976 8.94805 13.9623C9.10765 14.0343 9.19447 14.0037 9.23003 13.8557C9.26145 13.7432 9.39955 13.2016 9.46653 12.9461C9.4872 12.8642 9.47645 12.7931 9.4103 12.7162C9.06134 12.3126 8.78432 11.5775 8.78432 10.8879C8.78432 9.12077 10.1892 7.40492 12.5799 7.40492C14.6471 7.40492 16.0934 8.74783 16.0934 10.6687C16.0934 12.8394 14.9448 14.3411 13.4522 14.3411C12.6262 14.3411 12.0109 13.6928 12.2061 12.8907C12.4418 11.9356 12.904 10.9086 12.904 10.2197C12.904 9.60203 12.555 9.091 11.8422 9.091C11.0013 9.091 10.3191 9.9237 10.3191 11.0417C10.3191 11.752 10.5705 12.2316 10.5705 12.2316C10.5705 12.2316 9.73858 15.5922 9.58395 16.2198C9.32264 17.2824 9.6195 19.0032 9.64514 19.1512C9.66085 19.2331 9.75264 19.2587 9.80391 19.1917C9.88577 19.0842 10.8913 17.6495 11.1733 16.6126C11.2758 16.2347 11.6967 14.7024 11.6967 14.7024C11.9737 15.2027 12.7733 15.6219 13.6251 15.6219C16.1587 15.6219 17.9895 13.3951 17.9895 10.6315C17.9804 7.98211 15.713 6 12.7948 6Z"
                                             fill="#101426" />
                                     </svg>
-                                </a> 
+                                </a>
                             </li>
                             <li class="px-1">
                                 <a class="linkedin" href="#">
@@ -211,13 +222,13 @@
                                             fill="#101426" />
                                     </svg>
                                 </a>
-                            </li>                            
+                            </li>
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--third card -->
-            <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]">
+            {{-- <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]">
                 <div class="absolute leftline"></div>
                 <div class=" max-w-[600px] bg-[#E4FFE585]  rounded-[5px] py-3 px-4">
                     <img src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq"
@@ -276,15 +287,15 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li class="px-1">  
-                                <a class="pinterest" href="#">                                 
+                            <li class="px-1">
+                                <a class="pinterest" href="#">
                                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                         <path
                                             d="M12.7948 6C9.16884 6 7.24048 8.32362 7.24048 10.8573C7.24048 12.0323 7.89705 13.4976 8.94805 13.9623C9.10765 14.0343 9.19447 14.0037 9.23003 13.8557C9.26145 13.7432 9.39955 13.2016 9.46653 12.9461C9.4872 12.8642 9.47645 12.7931 9.4103 12.7162C9.06134 12.3126 8.78432 11.5775 8.78432 10.8879C8.78432 9.12077 10.1892 7.40492 12.5799 7.40492C14.6471 7.40492 16.0934 8.74783 16.0934 10.6687C16.0934 12.8394 14.9448 14.3411 13.4522 14.3411C12.6262 14.3411 12.0109 13.6928 12.2061 12.8907C12.4418 11.9356 12.904 10.9086 12.904 10.2197C12.904 9.60203 12.555 9.091 11.8422 9.091C11.0013 9.091 10.3191 9.9237 10.3191 11.0417C10.3191 11.752 10.5705 12.2316 10.5705 12.2316C10.5705 12.2316 9.73858 15.5922 9.58395 16.2198C9.32264 17.2824 9.6195 19.0032 9.64514 19.1512C9.66085 19.2331 9.75264 19.2587 9.80391 19.1917C9.88577 19.0842 10.8913 17.6495 11.1733 16.6126C11.2758 16.2347 11.6967 14.7024 11.6967 14.7024C11.9737 15.2027 12.7733 15.6219 13.6251 15.6219C16.1587 15.6219 17.9895 13.3951 17.9895 10.6315C17.9804 7.98211 15.713 6 12.7948 6Z"
                                             fill="#101426" />
                                     </svg>
-                                </a> 
+                                </a>
                             </li>
                             <li class="px-1">
                                 <a class="linkedin" href="#">
@@ -299,13 +310,13 @@
                                             fill="#101426" />
                                     </svg>
                                 </a>
-                            </li>                            
+                            </li>
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--4th card -->
-            <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]">
+            {{-- <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]">
                 <div class="absolute leftline"></div>
                 <div class="max-w-[600px] bg-[#E4FFE585] rounded-[5px] py-3 px-4">
                     <img src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq"
@@ -364,15 +375,15 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li class="px-1">  
-                                <a class="pinterest" href="#">                                 
+                            <li class="px-1">
+                                <a class="pinterest" href="#">
                                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                         <path
                                             d="M12.7948 6C9.16884 6 7.24048 8.32362 7.24048 10.8573C7.24048 12.0323 7.89705 13.4976 8.94805 13.9623C9.10765 14.0343 9.19447 14.0037 9.23003 13.8557C9.26145 13.7432 9.39955 13.2016 9.46653 12.9461C9.4872 12.8642 9.47645 12.7931 9.4103 12.7162C9.06134 12.3126 8.78432 11.5775 8.78432 10.8879C8.78432 9.12077 10.1892 7.40492 12.5799 7.40492C14.6471 7.40492 16.0934 8.74783 16.0934 10.6687C16.0934 12.8394 14.9448 14.3411 13.4522 14.3411C12.6262 14.3411 12.0109 13.6928 12.2061 12.8907C12.4418 11.9356 12.904 10.9086 12.904 10.2197C12.904 9.60203 12.555 9.091 11.8422 9.091C11.0013 9.091 10.3191 9.9237 10.3191 11.0417C10.3191 11.752 10.5705 12.2316 10.5705 12.2316C10.5705 12.2316 9.73858 15.5922 9.58395 16.2198C9.32264 17.2824 9.6195 19.0032 9.64514 19.1512C9.66085 19.2331 9.75264 19.2587 9.80391 19.1917C9.88577 19.0842 10.8913 17.6495 11.1733 16.6126C11.2758 16.2347 11.6967 14.7024 11.6967 14.7024C11.9737 15.2027 12.7733 15.6219 13.6251 15.6219C16.1587 15.6219 17.9895 13.3951 17.9895 10.6315C17.9804 7.98211 15.713 6 12.7948 6Z"
                                             fill="#101426" />
                                     </svg>
-                                </a> 
+                                </a>
                             </li>
                             <li class="px-1">
                                 <a class="linkedin" href="#">
@@ -387,13 +398,13 @@
                                             fill="#101426" />
                                     </svg>
                                 </a>
-                            </li>                            
+                            </li>
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--5th card -->
-            <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]">
+            {{-- <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]">
                 <div class="absolute leftline"></div>
                 <div class=" max-w-[600px] bg-[#E4FFE585]  rounded-[5px] py-3 px-4">
                     <img src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq"
@@ -452,15 +463,15 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li class="px-1">  
-                                <a class="pinterest" href="#">                                 
+                            <li class="px-1">
+                                <a class="pinterest" href="#">
                                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                         <path
                                             d="M12.7948 6C9.16884 6 7.24048 8.32362 7.24048 10.8573C7.24048 12.0323 7.89705 13.4976 8.94805 13.9623C9.10765 14.0343 9.19447 14.0037 9.23003 13.8557C9.26145 13.7432 9.39955 13.2016 9.46653 12.9461C9.4872 12.8642 9.47645 12.7931 9.4103 12.7162C9.06134 12.3126 8.78432 11.5775 8.78432 10.8879C8.78432 9.12077 10.1892 7.40492 12.5799 7.40492C14.6471 7.40492 16.0934 8.74783 16.0934 10.6687C16.0934 12.8394 14.9448 14.3411 13.4522 14.3411C12.6262 14.3411 12.0109 13.6928 12.2061 12.8907C12.4418 11.9356 12.904 10.9086 12.904 10.2197C12.904 9.60203 12.555 9.091 11.8422 9.091C11.0013 9.091 10.3191 9.9237 10.3191 11.0417C10.3191 11.752 10.5705 12.2316 10.5705 12.2316C10.5705 12.2316 9.73858 15.5922 9.58395 16.2198C9.32264 17.2824 9.6195 19.0032 9.64514 19.1512C9.66085 19.2331 9.75264 19.2587 9.80391 19.1917C9.88577 19.0842 10.8913 17.6495 11.1733 16.6126C11.2758 16.2347 11.6967 14.7024 11.6967 14.7024C11.9737 15.2027 12.7733 15.6219 13.6251 15.6219C16.1587 15.6219 17.9895 13.3951 17.9895 10.6315C17.9804 7.98211 15.713 6 12.7948 6Z"
                                             fill="#101426" />
                                     </svg>
-                                </a> 
+                                </a>
                             </li>
                             <li class="px-1">
                                 <a class="linkedin" href="#">
@@ -475,13 +486,13 @@
                                             fill="#101426" />
                                     </svg>
                                 </a>
-                            </li>                            
+                            </li>
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--6th card -->
-            <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]">
+            {{-- <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]">
                 <div class="absolute leftline"></div>
                 <div class="max-w-[600px] bg-[#E4FFE585] rounded-[5px] py-3 px-4">
                     <img src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq"
@@ -540,15 +551,15 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li class="px-1">  
-                                <a class="pinterest" href="#">                                 
+                            <li class="px-1">
+                                <a class="pinterest" href="#">
                                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                         <path
                                             d="M12.7948 6C9.16884 6 7.24048 8.32362 7.24048 10.8573C7.24048 12.0323 7.89705 13.4976 8.94805 13.9623C9.10765 14.0343 9.19447 14.0037 9.23003 13.8557C9.26145 13.7432 9.39955 13.2016 9.46653 12.9461C9.4872 12.8642 9.47645 12.7931 9.4103 12.7162C9.06134 12.3126 8.78432 11.5775 8.78432 10.8879C8.78432 9.12077 10.1892 7.40492 12.5799 7.40492C14.6471 7.40492 16.0934 8.74783 16.0934 10.6687C16.0934 12.8394 14.9448 14.3411 13.4522 14.3411C12.6262 14.3411 12.0109 13.6928 12.2061 12.8907C12.4418 11.9356 12.904 10.9086 12.904 10.2197C12.904 9.60203 12.555 9.091 11.8422 9.091C11.0013 9.091 10.3191 9.9237 10.3191 11.0417C10.3191 11.752 10.5705 12.2316 10.5705 12.2316C10.5705 12.2316 9.73858 15.5922 9.58395 16.2198C9.32264 17.2824 9.6195 19.0032 9.64514 19.1512C9.66085 19.2331 9.75264 19.2587 9.80391 19.1917C9.88577 19.0842 10.8913 17.6495 11.1733 16.6126C11.2758 16.2347 11.6967 14.7024 11.6967 14.7024C11.9737 15.2027 12.7733 15.6219 13.6251 15.6219C16.1587 15.6219 17.9895 13.3951 17.9895 10.6315C17.9804 7.98211 15.713 6 12.7948 6Z"
                                             fill="#101426" />
                                     </svg>
-                                </a> 
+                                </a>
                             </li>
                             <li class="px-1">
                                 <a class="linkedin" href="#">
@@ -563,15 +574,13 @@
                                             fill="#101426" />
                                     </svg>
                                 </a>
-                            </li>                            
+                            </li>
                         </ul>
                     </div>
                 </div>
-            </div>            
+            </div> --}}
         </div>
     </div>
 </div>
 
 @include('Components.Projects.Pagination')
-
-@endsection
