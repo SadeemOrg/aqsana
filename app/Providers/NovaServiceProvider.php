@@ -374,7 +374,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                 ],
                 ' achievements' => [
-                    Image::make('image', 'main_section_image'),
+                    Image::make('image', 'main_section_image_achievements'),
                     Flexible::make('achievements')
                         ->addLayout('Simple content section', 'wysiwyg', [
                             Text::make('text', 'achievements_section_text'),
@@ -385,7 +385,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                 ],
                 ' workplace' => [
-                    Text::make('text', 'main_section_image'),
+                    Text::make('text', 'main_section_text'),
                     FlexibleContent::make('workplace', 'workplaceabout')
                         ->addLayout(
                             [
