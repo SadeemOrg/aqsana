@@ -9,8 +9,9 @@ class Area extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
+
     protected $fillable = [
-    'name','admin_id'
+        'name','admin_id','describtion','created_by'
     ];
 
     protected $hidden = [
@@ -26,8 +27,15 @@ class Area extends Model
     }
 
 
-    public function User()
+    public function admin()
     {
         return $this->belongsTo('App\Models\User','admin_id');
     }
+
+    public function create()
+    {
+        return $this->belongsTo('App\Models\User','created_by');
+    }
+
+
 }

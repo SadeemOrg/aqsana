@@ -24,7 +24,7 @@ class Currency extends Resource
 
     public static $group = 'Admin';
     public static $title = 'name';
-
+    public static $displayInNavigation = false;
     /**
      * The columns that should be searched.
      *

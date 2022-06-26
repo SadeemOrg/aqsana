@@ -21,7 +21,6 @@ class City extends Resource
     public static $group = 'Admin';
     public static $model = \App\Models\City::class;
     public static $with = ['user'];
-
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
@@ -71,9 +70,19 @@ class City extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make('Name','name'),
             BelongsTo::make('Area','Area'),
+            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
+            hideWhenUpdating(),
             hasMany::make('Alhisalat','Alhisalat'),
             hasMany::make('User','User'),
         ];
+    }
+    public static function afterCreate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->update([
+            'created_by'=>$id,
+
+        ]);
     }
 
     /**
