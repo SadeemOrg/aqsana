@@ -22,6 +22,7 @@ Route::get('/', [HomeController::class, 'index'])->name('Home');
 
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::post('/conctus', [HomeController::class, 'conctus'])->name('conctus');
+Route::post('/our-news', [HomeController::class, 'news'])->name('news');
 
 
 // Route::get('/ ', function () {
@@ -48,9 +49,9 @@ Route::get('/yearly-news', function (){
     return view('yearly-news');
 });
 
-Route::get('/our-news', function (){
-    return view('our-news');
-});
+// Route::get('/our-news', function (){
+//     return view('our-news');
+// });
 Route::get('news/1', function (){
     return view('single-news');
 });
