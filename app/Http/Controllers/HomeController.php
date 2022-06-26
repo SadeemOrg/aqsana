@@ -40,4 +40,21 @@ class HomeController extends Controller
 
         return view('home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'Articles', 'partners','footers','sectors'));
     }
+
+    public function aboutus()
+    {
+
+
+        $goalsjson = nova_get_setting('goals', 'default_value');
+        $goals = json_decode($goalsjson);
+
+
+        $achievementsjson = nova_get_setting('achievements', 'default_value');
+        $achievements = json_decode($achievementsjson);
+
+
+        $workplace = nova_get_setting('workplace', 'default_value');
+
+        return view('about-us-page', compact('goals','achievements','workplace'));
+    }
 }
