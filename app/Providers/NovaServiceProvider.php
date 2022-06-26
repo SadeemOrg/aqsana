@@ -297,7 +297,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'Connect with us',
                         [
                             Text::make('heder text', 'heder_text_main_Connect'),
-                            Tiptap::make('FieldName') ->buttons([]),
                             Text::make('main text', 'text_main_Connect'),
                             Text::make('sup text text', 'sup_text_main_Connect'),
                             Text::make('phone', 'phone_Connect'),
@@ -350,11 +349,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new Tabs('about us', [
                 'main section'    => [
                     Text::make('text', 'main_section_text'),
+
+
+                    Trix::make('sup text','sup_text_main_aboutus'),
                     Image::make('image', 'main_section_image'),
                 ],
                 ' our vision' => [
 
                     Text::make('text', 'vision_section_text'),
+                    Trix::make('sup text','sup_text_vision_aboutus'),
+
                     Image::make('image', 'vision_section_image'),
 
                 ], ' Goals' => [
