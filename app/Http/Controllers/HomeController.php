@@ -39,6 +39,15 @@ class HomeController extends Controller
         return view('home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'Articles', 'partners','sectors'));
     }
 
+    public function news()
+    {
+
+
+        $news = DB::table('news')->orderBy('created_at', 'desc')->get();
+        return view('our-news', compact('news'));
+
+
+    }
     public function aboutus()
     {
 
