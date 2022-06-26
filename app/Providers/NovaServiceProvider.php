@@ -16,6 +16,7 @@ use App\Models\Bus;
 use Acme\MultiselectField\Multiselect;
 use Averotech\Link\Link;
 use Averotech\Tree\Tree;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\file;
 use Laravel\Nova\Fields\Trix;
@@ -351,13 +352,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('text', 'main_section_text'),
 
 
-                    Trix::make('sup text','sup_text_main_aboutus'),
+                    Textarea::make('sup text','sup_text_main_aboutus'),
                     Image::make('image', 'main_section_image'),
                 ],
                 ' our vision' => [
 
                     Text::make('text', 'vision_section_text'),
-                    Trix::make('sup text','sup_text_vision_aboutus'),
+                    Textarea::make('sup text','sup_text_vision_aboutus'),
 
                     Image::make('image', 'vision_section_image'),
 
