@@ -4,9 +4,10 @@ namespace App\Nova;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource as NovaResource;
-
+use Ganyicz\NovaCallbacks\HasCallbacks;
 abstract class Resource extends NovaResource
 {
+    use HasCallbacks;
     /**
      * Build an "index" query for the given resource.
      *

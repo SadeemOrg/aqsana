@@ -31,6 +31,7 @@ class Transaction extends Resource
      *
      * @var string
      */
+    public static $displayInNavigation = false;
     public static $title = 'id';
     public static $group = 'Admin';
 

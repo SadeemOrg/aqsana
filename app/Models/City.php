@@ -9,7 +9,7 @@ class City extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','area_id','name'
+        'id','area_id','name','created_by'
     ];
 
     protected $hidden = [
@@ -34,4 +34,11 @@ class City extends Model
     {
         return $this->belongsTo('App\Models\Area','area_id');
     }
+
+    public function create()
+    {
+        return $this->belongsTo('App\Models\User','created_by');
+    }
 }
+
+

@@ -23,9 +23,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'user_roll',
+        'user_role',
         'phone',
-        'city_id'
+        'city_id',
+        'birth_date'
 
     ];
 
@@ -55,7 +56,7 @@ class User extends Authenticatable
 
     public function Role()
     {
-        return $this->belongsTo('App\Models\Role','user_roll','code_role');
+        return $this->belongsTo('App\Models\Role','user_role','code_role');
     }
 
     public function Area()
@@ -73,6 +74,6 @@ class User extends Authenticatable
 
     public function type ()
     {
-        return $this->user_roll;
+        return $this->user_role;
     }
 }

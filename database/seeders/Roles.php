@@ -51,5 +51,10 @@ class Roles extends Seeder
             'code_role' => 'regular_uses',
             'role' => 'Regular Uses',
         ]);
+        Role::create([
+            'status' => '1',
+            'code_role' => 'website_admin',
+            'role' => 'Website Admin',
+        ]);
     }
 }

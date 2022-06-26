@@ -24,6 +24,7 @@ class Notification extends Resource
      */
     public static $title = 'id';
     public static $group = 'Admin';
+    public static $displayInNavigation = false;
     /**
      * The columns that should be searched.
      *

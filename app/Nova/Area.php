@@ -8,7 +8,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Select;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -53,20 +54,23 @@ class Area extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make('Name','name'),
+            Text::make('Describtion','describtion'),
 
             Select::make('admin','admin_id',)
             ->options( function() {
-                $users =  \App\Models\User::where('user_roll', '=', 'regular_area')->get();
+                $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
 
                 $user_type_admin_array =  array();
 
                 foreach($users as $user) {
-                    $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_roll'] .")")];
+                    $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
                 }
 
                 return $user_type_admin_array;
                })->hideFromIndex()->hideFromDetail(),
-               BelongsTo::make('admin city', 'User', \App\Nova\User::class)->hideWhenCreating()->
+               BelongsTo::make('admin city', 'admin', \App\Nova\User::class)->hideWhenCreating()->
+                  hideWhenUpdating(),
+                  BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
                   hideWhenUpdating(),
 
 
@@ -74,6 +78,14 @@ class Area extends Resource
         ];
     }
 
+    public static function afterCreate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->update([
+            'created_by'=>$id,
+
+        ]);
+    }
     /**
      * Get the cards available for the request.
      *
