@@ -35,7 +35,7 @@ class Trip extends Resource
      */
     public static $title = 'name';
     public static $group = 'Admin';
-
+    public static $displayInNavigation = false;
     /**
      * The columns that should be searched.
      *
@@ -62,12 +62,12 @@ class Trip extends Resource
 
                 Select::make('admin','admin_id',)
                 ->options( function() {
-                    $users =  \App\Models\User::where('user_roll', '=', 'admin')->get();
+                    $users =  \App\Models\User::where('user_role', '=', 'admin')->get();
 
                     $user_type_admin_array =  array();
 
                     foreach($users as $user) {
-                        $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_roll'] .")")];
+                        $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
                     }
 
                     return $user_type_admin_array;

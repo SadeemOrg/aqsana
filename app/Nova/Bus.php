@@ -21,7 +21,7 @@ class Bus extends Resource
      */
     public static $group = 'Admin';
     public static $model = \App\Models\Bus::class;
-
+    public static $displayInNavigation = false;
     /**
      * The single value that should be used to represent the resource when being displayed.
      *

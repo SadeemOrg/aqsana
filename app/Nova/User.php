@@ -13,6 +13,8 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Illuminate\Support\Facades\DB;
 use App\Models\Area;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\Image;
 
 
 class User extends Resource
@@ -29,6 +31,7 @@ class User extends Resource
      *
      * @var string
      */
+
     public static $title = 'name';
     public static $group = 'Admin';
 
@@ -69,33 +72,16 @@ class User extends Resource
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
 
-            Number::make('Phone','phone')
+
+
+            Number::make('Phone', 'phone')
                 ->textAlign('left'),
-
-            // Select::make('user roll','user_roll')->options([
-            //     'admin' => 'Admin',
-            //     'financial_user' => 'Financial User',
-            //     'normal_financial_user'=>'normal financial user',
-            //     'responsible_area'=>'Responsible Area',
-            //     'regular_area'=>'Regular Area',
-            //     'Volunteer'=>'Volunteer',
-            //     'regular_uses'=>'Regular Uses'
-
-            // ])->displayUsingLabels(),
-
-            BelongsTo::make('Role'),    
+            Date::make('Birth Date', 'birth_date'),
+            Image::make('photo', 'photo')->disk('public'),
+            BelongsTo::make('Role'),
             BelongsTo::make('City'),
 
-            // BelongsTo::make('admin', 'Area', \App\Nova\Area::class)->exceptOnForms(),
 
-            // Text::make('admin', function () {
-            //     $user= Area::where('admin_id', 'id')
-            //     ->select('name')
-            //     ->first();
-            //     return $user['name'];
-
-
-            // }),
 
             HasMany::make('Alhisalat'),
 

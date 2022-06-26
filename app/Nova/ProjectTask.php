@@ -33,7 +33,7 @@ class ProjectTask extends Resource
      */
     public static $group = 'Admin';
     public static $title = 'id';
-
+    public static $displayInNavigation = false;
     /**
      * The columns that should be searched.
      *
@@ -65,10 +65,10 @@ class ProjectTask extends Resource
 
                     return [$value->id=>$value->name];
                 });
-               
+
             })
 
-        
+
         ];
     }
 

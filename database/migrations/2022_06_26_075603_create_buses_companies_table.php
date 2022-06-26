@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBusesTable extends Migration
+class CreateBusesCompaniesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,26 +13,21 @@ class CreateBusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('buses', function (Blueprint $table) {
+        Schema::create('buses_companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('company_id ');
-            $table->string('bus_number');
-            $table->integer('number_person_on_bus');
-            $table->json('travel_from')->nullable();
-            $table->json('travel_to')->nullable();
-            $table->json('current_location')->nullable();
-            $table->string('driver');
+            $table->string('description');
+            $table->double("cost");
+            $table->integer('number_of_buses');
+            $table->string('contact_person');
             $table->string('phone_number');
-            $table->char('status', 1);
+            $table->char('status', 1)->default('1');
             $table->unsignedBigInteger('Created_By')->nullable();
             $table->unsignedBigInteger('Update_By')->nullable();
 
             $table->foreign('Created_By')->references('id')->on('users')
                 ->onDelete('cascade');
             $table->foreign('Update_By')->references('id')->on('users')
-                ->onDelete('cascade');
-            $table->foreign('company_id')->references('id')->on('buses_company')
                 ->onDelete('cascade');
             $table->timestamps();
         });
@@ -45,6 +40,6 @@ class CreateBusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buses');
+        Schema::dropIfExists('buses_companies');
     }
 }
