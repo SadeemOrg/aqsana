@@ -21,10 +21,9 @@ class Currency extends Resource
      *
      * @var string
      */
-
     public static $group = 'Admin';
     public static $title = 'name';
-    public static $displayInNavigation = false;
+
     /**
      * The columns that should be searched.
      *
@@ -41,11 +40,14 @@ class Currency extends Resource
      * @return array
      */
     public function fields(Request $request)
-    {
+    {    // 'Update_By'
+
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make('Name','name'),
-            Number::make('values','values')->step(0.01),
+            Text::make('code','code'),
+
+            Number::make('rate','rate')->step(0.01),
         ];
     }
 
