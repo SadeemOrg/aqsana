@@ -26,27 +26,29 @@
             <p class="text-[#8F9BB3] text-[16px] font-FlatBold pt-6 pb-4">هل تريد المشاركة بالتبرع؟ <a href="#"
                     class="text-[#349A37]">{{ $text_Button }}</a></p>
         </div>
+        <form method="POST" action="{{ route('conctus') }}">
+            @csrf
         <div class=" h-[432px] basis-1/2 w-full lg:mr-0">
                 <div class=" ltr pt-10 px-6 lg:px-0">
-                    <input type="text" name="" placeholder=" الاسم الكامل"
+                    <input type="text" name="name" placeholder=" الاسم الكامل"
                         class="rtl block w-full  border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
                 </div>
                 <div class=" ltr pt-6 px-6 lg:px-0">
-                    <input type="text" name="" placeholder="رقم الهاتف"
+                    <input type="text" name="phone" placeholder="رقم الهاتف"
                         class="rtl block w-full border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
                 </div>
                 <div class="  pt-6 px-6 lg:px-0">
-                    <textarea rows="4" name="order_note" id="order_note" placeholder="رسالتك" required=""
+                    <textarea rows="4" name="message" id="order_note" placeholder="رسالتك" required=""
                         class="w-full inline-flex items-center text-right  justify-center border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4"></textarea>
                 </div>
             <div class=" my-4 mr-6 lg:mr-0">
-                <button type="button" {{-- onclick="location.href='{{route('product',$bestSell->slug)}} '" --}}
+                <button type="submit" {{-- onclick="location.href='{{route('product',$bestSell->slug)}} '" --}}
                     class="duration-200 flex justify-center items-center px-5 lg:px-7 py-3 mt-2 text-[13px] font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
                     ارسال
                 </button>
             </div>
         </div>
-
+    </form>
     </div>
 </div>
 
