@@ -72,6 +72,6 @@ class HomeController extends Controller
     public function getnewDetail($id)
     {
         $news = DB::table('news')->where('id',$id)->get();
-        return view('about-us-page', compact('news'));
+        return view('single-news', compact('news'));
     }
 }
