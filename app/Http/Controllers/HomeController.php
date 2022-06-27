@@ -43,8 +43,8 @@ class HomeController extends Controller
     {
 
 
-        $news = DB::table('news')->orderBy('created_at', 'desc')->get();
-        return view('Pages.our-news', compact('news'));
+        $news = DB::table('news')->orderBy('created_at', 'desc')->paginate( 3 );
+        return view('our-news', compact('news'));
 
 
     }
