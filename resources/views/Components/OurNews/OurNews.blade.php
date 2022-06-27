@@ -43,7 +43,7 @@
             @php
             $img = 'storage/'.$new->image;
             @endphp
-            <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]" onclick="location.href='our-project/1'">
+            <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]" onclick="location.href='{{ route('getnewDetail', ['id' => $new->id]) }}'">
                 <div class="absolute leftline"></div>
                 <div class="max-w-[600px] bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
                     <img src="{{ asset($img) }}"  alt="people_on_Mousq"
@@ -60,7 +60,9 @@
                     <p class="text-xs text-[#101426] font-noto_Regular px-4 pt-2 text-right slider-paragraph">
                         {!! Illuminate\Support\Str::limit(strip_tags( $new->description),240)!!}
                         @if(strip_tags(Str::length($new->description)) > 240)
-                        <a href="#">
+                        <a
+                        href="{{ route('getnewDetail', ['id' => $new->id]) }}"
+                        >
                             <span class="text-[#349A37] text-[12px]">عرض المزيد</span>
                         </a>
                         @endif

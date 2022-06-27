@@ -14,7 +14,6 @@
         </ul>
     </div>
 </div>
-
 @include('Components.aboutUs.AboutUsComp')
 @include('Components.aboutUs.OurVision')
 @include('Components.aboutUs.OurGoals')
