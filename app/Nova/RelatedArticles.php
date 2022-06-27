@@ -11,7 +11,7 @@ use Laravel\Nova\Fields\Text;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
 use Manogi\Tiptap\Tiptap;
-
+use Waynestate\Nova\CKEditor;
 class RelatedArticles extends Resource
 {
     /**
@@ -51,39 +51,8 @@ class RelatedArticles extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make("Title",'title'),
-            Tiptap::make("Description",'description')  ->buttons([
-                'heading',
-                '|',
-                'italic',
-                'bold',
-                '|',
-                'link',
-                'code',
-                'strike',
-                'underline',
-                'highlight',
-                '|',
-                'bulletList',
-                'orderedList',
-                'br',
-                'codeBlock',
-                'blockquote',
-                '|',
-                'horizontalRule',
-                'hardBreak',
-                '|',
-                'table',
-                '|',
-                'image',
-                '|',
-                'textAlign',
-                '|',
-                'rtl',
-                '|',
-                'history',
-                '|',
-                'editHtml',
-            ]),
+
+            CKEditor::make('description', 'description'),
             // ImageUploadPreview::make('Image','image')->disk('public')->path('image_news'),
             Image::make('Image','image')->disk('public')->prunable(),
             ArrayImages::make('Pictures', 'pictures')

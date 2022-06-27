@@ -15,7 +15,7 @@ class Role extends Resource
      * @var string
      */
     public static $model = \App\Models\Role::class;
-    public static $displayInNavigation = false;
+
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
@@ -44,8 +44,9 @@ class Role extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Role'),
-            Boolean::make("Status","status"),
+            Text::make('code_role'),
+            Text::make('role'),
+            Boolean::make("status","status"),
         ];
     }
 
