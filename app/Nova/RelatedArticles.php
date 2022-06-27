@@ -21,7 +21,7 @@ class RelatedArticles extends Resource
      */
     public static $model = \App\Models\RelatedArticles::class;
     public static $group = 'website';
-
+    public static $displayInNavigation = false;
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
