@@ -20,5 +20,5 @@
 @include('Components.aboutUs.OurGoals')
 @include('Components.aboutUs.best_Achievements')
 @include('Components.aboutUs.business_sectors')
-{{-- @include('layout.front-end.partial.contact-us') --}}
+@include('layout.front-end.partial.contact-us')
 @endsection
