@@ -71,7 +71,15 @@ class HomeController extends Controller
 
     public function getnewDetail($id)
     {
-        $news = DB::table('news')->where('id',$id)->get();
-        return view('single-news', compact('news'));
+        $news = DB::table('news')->where('id',$id)->first();
+        // dd($news->pictures);
+        $goalsjson=$news->pictures;
+        // dd($goalsjson);
+        // $goals = json_decode($goalsjson,true);
+        // dd(gettype($goals));
+        $pictures = json_decode( json_decode($goalsjson,true),true);
+
+            // dd(gettype($pictures));
+        return view('single-news', compact('news','pictures'));
     }
 }
