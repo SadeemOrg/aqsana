@@ -4,25 +4,26 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
-class Currency extends Resource
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Http\Requests\NovaRequest;
+
+class ProjectType extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Currency::class;
+    public static $model = \App\Models\ProjectType::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $group = 'Admin';
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -40,13 +41,23 @@ class Currency extends Resource
      * @return array
      */
     public function fields(Request $request)
-    {    // 'Update_By'
-
+    {
         return [
+
+
+// Type
+
+
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Name','name'),
-            Text::make('code','code'),
-            Number::make('rate','rate')->step(0.01),
+            Text::make("Name","name"),
+            Textarea::make("Description","describtion"),
+            Select::make("Type","Type")
+            ->options([
+                '1' => 'available',
+                '2' => 'un available',
+
+
+                ])->displayUsingLabels(),
         ];
     }
 
