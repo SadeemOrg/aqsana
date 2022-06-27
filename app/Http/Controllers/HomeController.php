@@ -66,7 +66,12 @@ class HomeController extends Controller
 
     public function conctus()
     {
+            return"okk";
+    }
 
-dd('hi');
+    public function getnewDetail($id)
+    {
+        $news = DB::table('news')->where('id',$id)->get();
+        return view('single-news', compact('news'));
     }
 }
