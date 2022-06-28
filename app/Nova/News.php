@@ -51,7 +51,7 @@ class News extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-        return $query->where('is_blog', '0');
+        return $query->where('main_type', '0');
 
      }
     public function fields(Request $request)
@@ -69,6 +69,14 @@ class News extends Resource
             ->disk('public'),
 
         ];
+    }
+    public static function afterCreate(Request $request, $model)
+    {
+        // $user = Auth::user();
+
+        $model->update([
+            'main_type'=>'1',
+        ]);
     }
 
     /**

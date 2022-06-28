@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class City extends Model
 {
     use HasFactory;
@@ -38,6 +39,13 @@ class City extends Model
     public function create()
     {
         return $this->belongsTo('App\Models\User','created_by');
+    }
+
+    public function Areaadmin()
+    {
+        $id = Auth::id();
+        $user = DB::table('areas')->where('admin_id', $id)->select('id')->first();
+        return $user->id;
     }
 }
 

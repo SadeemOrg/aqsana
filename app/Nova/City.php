@@ -69,18 +69,23 @@ class City extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make('Name','name'),
-            BelongsTo::make('Area','Area'),
+            BelongsTo::make('Area','Area')->hideWhenCreating()->
+            hideWhenUpdating(),
             BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
             hideWhenUpdating(),
-            hasMany::make('Alhisalat','Alhisalat'),
-            hasMany::make('User','User'),
+            // hasMany::make('Alhisalat','Alhisalat'),
+            // hasMany::make('User','User'),
         ];
     }
     public static function afterCreate(Request $request, $model)
-    {
-        $id = Auth::id();
+    {   $id = Auth::id();
+        $user = DB::table('areas')->where('admin_id', $id)->select('id')->first();
+
+        // $user = Auth::user();
+
         $model->update([
             'created_by'=>$id,
+            'area_id'=>$user->id,
 
         ]);
     }

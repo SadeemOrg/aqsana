@@ -63,7 +63,11 @@ class Area extends Resource
                 $user_type_admin_array =  array();
 
                 foreach($users as $user) {
+                    if ($user->Area == null) {
+
+
                     $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
+                }
                 }
 
                 return $user_type_admin_array;
