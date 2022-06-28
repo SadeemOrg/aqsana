@@ -43,7 +43,7 @@ class HomeController extends Controller
     {
 
 
-        $news = DB::table('news')->orderBy('created_at', 'desc')->paginate( 3 );
+        $news = DB::table('news')->orderBy('created_at', 'desc')->paginate( 8 );
         return view('Pages.our-news', compact('news'));
 
 
@@ -85,33 +85,30 @@ class HomeController extends Controller
             // dd(gettype($pictures));
         return view('single-news', compact('news','pictures','Articles'));
     }
-
-
-
     public function Alquds_news()
     {
         $news = DB::table('news')->where([
             ['type', '=', '1'],
             ['main_type', '=', '0'],
-                    ])->get();
+                    ])->paginate( 8 );
                     // dd($news);
-                    $Articles = DB::table('news')
+                    // $Articles = DB::table('news')
 
-                    ->where([
-                        ['type', '=', $news[0]->type],
-                        ['main_type', '=', '0'],
-                                ])
-                    ->orderBy('created_at', 'desc')->take(6)->get();
+                    // ->where([
+                    //     ['type', '=', $news[0]->type],
+                    //     ['main_type', '=', '0'],
+                    //             ])
+                    // ->orderBy('created_at', 'desc')->take(6)->get();
                     // dd($Articles);
                     // dd($newser);
                     // dd($news->pictures);
-                    $goalsjson=$news->pictures;
+                    // $goalsjson=$news->pictures;
                     // dd($goalsjson);
                     // $goals = json_decode($goalsjson,true);
                     // dd(gettype($goals));
-                    $pictures = json_decode( json_decode($goalsjson,true),true);
+                    // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-                    return view('single-news', compact('news','pictures','Articles'));
+                    return view('Pages.quds-news', compact('news'));
 
     }
     public function Alquds_blog()
@@ -119,50 +116,70 @@ class HomeController extends Controller
         $news = DB::table('news')->where([
             ['type', '=', '1'],
             ['main_type', '=', '1'],
-                    ])->get();
+                    ])->paginate( 8 );
                     // dd($news);
-                    $Articles = DB::table('news')
+                    // $Articles = DB::table('news')
 
-                    ->where([
-                        ['type', '=', $news[0]->type],
-                        ['main_type', '=', '1'],
-                                ])
-                    ->orderBy('created_at', 'desc')->take(6)->get();
-                    // dd($Articles);
-                    // dd($newser);
-                    // dd($news->pictures);
-                    $goalsjson=$news->pictures;
-                    // dd($goalsjson);
-                    // $goals = json_decode($goalsjson,true);
-                    // dd(gettype($goals));
-                    $pictures = json_decode( json_decode($goalsjson,true),true);
+                    // ->where([
+                    //     ['type', '=', $news[0]->type],
+                    //     ['main_type', '=', '1'],
+                    //             ])
+                    // ->orderBy('created_at', 'desc')->take(6)->get();
+                    // // dd($Articles);
+                    // // dd($newser);
+                    // // dd($news->pictures);
+                    // $goalsjson=$news->pictures;
+                    // // dd($goalsjson);
+                    // // $goals = json_decode($goalsjson,true);
+                    // // dd(gettype($goals));
+                    // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-                    return view('single-news', compact('news','pictures','Articles'));
+                    return view('Pages.quds-blogs', compact('news'));
 
     } public function Alquds_report()
     {
         $news = DB::table('news')->where([
             ['type', '=', '1'],
             ['main_type', '=', '2'],
-                    ])->get();
+                    ])->paginate( 8 );
                     // dd($news);
-                    $Articles = DB::table('news')
+                    // $Articles = DB::table('news')
 
-                    ->where([
-                        ['type', '=', $news[0]->type],
-                        ['main_type', '=', '2'],
-                                ])
-                    ->orderBy('created_at', 'desc')->take(6)->get();
-                    // dd($Articles);
-                    // dd($newser);
-                    // dd($news->pictures);
-                    $goalsjson=$news->pictures;
-                    // dd($goalsjson);
-                    // $goals = json_decode($goalsjson,true);
-                    // dd(gettype($goals));
-                    $pictures = json_decode( json_decode($goalsjson,true),true);
+                    // ->where([
+                    //     ['type', '=', $news[0]->type],
+                    //     ['main_type', '=', '2'],
+                    //             ])
+                    // ->orderBy('created_at', 'desc')->take(6)->get();
+                    // // dd($Articles);
+                    // // dd($newser);
+                    // // dd($news->pictures);
+                    // $goalsjson=$news->pictures;
+                    // // dd($goalsjson);
+                    // // $goals = json_decode($goalsjson,true);
+                    // // dd(gettype($goals));
+                    // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-                    return view('single-news', compact('news','pictures','Articles'));
+                    return view('Pages.quds-report', compact('news'));
 
+    }
+
+    public function getalaqsaDetail($id)
+    {
+        $news = DB::table('news')->where('id',$id)->first();
+
+        $Articles = DB::table('news') ->where([
+                ['type', '=', $news->type],
+                ['main_type', '=', '0'],
+                        ])->orderBy('created_at', 'desc')->take(6)->get();
+        // dd($newser);
+        // dd($news->pictures);
+        $goalsjson=$news->pictures;
+        // dd($goalsjson);
+        // $goals = json_decode($goalsjson,true);
+        // dd(gettype($goals));
+        $pictures = json_decode( json_decode($goalsjson,true),true);
+
+            // dd(gettype($pictures));
+        return view('Pages.alaqsa-single-news', compact('news','pictures','Articles'));
     }
 }
