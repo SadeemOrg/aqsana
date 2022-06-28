@@ -17,8 +17,11 @@
         <div class="absolute leftline"></div>
         <div
             class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px]  py-2 px-2 ">
+            <div class="relative">
             <img class=" lg:block max-w-[380px] lg:h-[280px]  max-h-[280px] object-cover rounded-[5px] my-1"
                 src="{{ asset($img) }}" alt="people_on_Mousq" />
+                <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[48%] left-[46%]" />
+            </div>
         </div>
     </div>
     @endforeach
