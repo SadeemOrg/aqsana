@@ -3,7 +3,6 @@
 @php
     $news_detail = $news;
     $image = 'storage/'.$news_detail->image;
-    // dd($news_detail->description)
 @endphp
 <style>
     .Card_shadow {
@@ -148,30 +147,15 @@
                         </li>
                     </ul>
                 </div>
-                @if(!empty($news_detail->pictures))
-                    {{-- @foreach ($Pictures as $picture ) --}}
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
+                    @if(!empty($pictures))
+                    @foreach ($pictures as $picture )
                     <div class="col-span-1">
-                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
+                        <img class="mx-auto object-cover lg:h-[265px]" src="{{ asset($picture['url']) }}" alt="related image">
                     </div>
-                    {{-- <div class="col-span-1">
-                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
-                    </div> --}}
-                    {{-- <div class="col-span-1">
-                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
-                    </div>
-                    <div class="col-span-1">
-                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
-                    </div>
-                    <div class="col-span-1">
-                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
-                    </div>
-                    <div class="col-span-1">
-                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
-                    </div> --}}
+                        @endforeach
+                        @endif
                 </div>
-                {{-- @endforeach --}}
-                @endif
 
             </div>
         </div>
