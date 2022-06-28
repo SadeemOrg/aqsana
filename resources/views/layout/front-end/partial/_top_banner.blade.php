@@ -1,13 +1,3 @@
-<style>
-    .paragraph-text {
-        display :inline-flex;
-    }
-    .paragraph-text + p{
-        display :inline;
-        font-size: 19px;
-        font-family:"alfont_com_JF-Flat-Bold" ;
-    }
-</style>
 <div class="owl-carousel" id="main-home-slider">
     @if(!empty($Heros))
     @foreach ( $Heros as $Hero )
@@ -26,8 +16,8 @@
             <div class="z md:h-[380px] md:max-w-[590px] lg:min-w-[570px] bg-[#E4FFE585] rounded-[5px] py-5 px-4">
                 <img src="{{ asset($img) }}" alt="people_on_Mousq" class="w-full h-[254px] object-cover rounded-[5px]">
                 <div class="pr-6">
-                <p class="text-[#349A37] text-[21px] pt-4 text-right max-w-[90%]  pl-2 paragraph-text">{{Illuminate\Support\Str::limit($lastnew->title,35)  }}
-               <span class="text-black font-FlatBold"> {!! Illuminate\Support\Str::limit($lastnew->description,69)!!}</span>
+                <p class="text-[#349A37]  pt-4 text-right  font-bold text-lg  pl-2 ">{{Illuminate\Support\Str::limit($lastnew->title,35)  }}
+               <span class="text-black"> {{  Illuminate\Support\Str::limit($lastnew->description,78)  }}</span>
                 </p>
             </div>
         </div>

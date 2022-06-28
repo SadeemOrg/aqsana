@@ -58,7 +58,7 @@
                         مشاريعنا
                     </p>
                     <p class="text-xs text-[#101426] font-noto_Regular px-4 pt-2 text-right slider-paragraph">
-                        {!! Illuminate\Support\Str::limit(strip_tags( $new->description),240)!!}
+                        {{ Illuminate\Support\Str::limit(strip_tags( $new->description),240) }}
                         @if(strip_tags(Str::length($new->description)) > 240)
                         <a
                         href="{{ route('getnewDetail', ['id' => $new->id]) }}"

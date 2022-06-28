@@ -12,7 +12,7 @@
     </div>
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <div class="tabs-btn flex flex-col items-center justify-center gap-y-3">
-            <div class="tab-btn w-full newsShaddow px-4 py-3" data-tab="tab-1">            
+            <div class="tab-btn w-full newsShaddow px-4 py-3" data-tab="tab-1">
                 <div class="news-title cursor-pointer flex flex-row justify-between items-center text-lg font-FlatBold text-right text-[#101426]  bg-white ">
                     <p class="max-w-[90%]">
                         أكثر من 10 آلاف مشارك بمعسكر “القدس أولًا 13”
@@ -29,7 +29,7 @@
                     </p>
                 </div>
             </div>
-            <div class="tab-btn w-full newsShaddow px-4 py-3 " data-tab="tab-2">            
+            <div class="tab-btn w-full newsShaddow px-4 py-3 " data-tab="tab-2">
                 <div class="news-title cursor-pointer flex flex-row justify-between items-center text-lg font-FlatBold text-right text-[#101426]  bg-white ">
                     <p class="max-w-[90%]">
                         جمعية الأقصى- الحركة الإسلامية تطلق 70 حافلة للأقصى وتنظم العديد من الفعاليات إحياءً لذكرى
@@ -48,10 +48,10 @@
                     </p>
                 </div>
             </div>
-            <div class="tab-btn w-full newsShaddow px-4 py-3" data-tab="tab-3">            
+            <div class="tab-btn w-full newsShaddow px-4 py-3" data-tab="tab-3">
                 <div class="news-title cursor-pointer flex flex-row justify-between items-center text-lg font-FlatBold text-right text-[#101426]  bg-white ">
                     <p class="max-w-[90%]">
-                        تحت عنوان أثر طاعة المسلم لربه.. جمعية الأقصى تنظم لقائها الشهري في المسجد الأقصى المبارك 
+                        تحت عنوان أثر طاعة المسلم لربه.. جمعية الأقصى تنظم لقائها الشهري في المسجد الأقصى المبارك
                     </p>
                     <svg class="md:block duration-200 arrow-icon" width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -61,14 +61,14 @@
                 </div>
                 <div class="news-text hidden mt-3">
                     <p>
-                        تحت عنوان أثر طاعة المسلم لربه.. جمعية الأقصى تنظم لقائها الشهري في المسجد الأقصى المبارك 
+                        تحت عنوان أثر طاعة المسلم لربه.. جمعية الأقصى تنظم لقائها الشهري في المسجد الأقصى المبارك
                     </p>
                 </div>
             </div>
-            <div class="tab-btn w-full newsShaddow px-4 py-3 " data-tab="tab-4">            
+            <div class="tab-btn w-full newsShaddow px-4 py-3 " data-tab="tab-4">
                 <div class="news-title cursor-pointer flex flex-row justify-between items-center text-lg font-FlatBold text-right text-[#101426]  bg-white ">
                     <p class="max-w-[90%]">
-                        تحت عنوان أثر طاعة المسلم لربه.. جمعية الأقصى تنظم <br />لقائها الشهري في المسجد الأقصى المبارك 
+                        تحت عنوان أثر طاعة المسلم لربه.. جمعية الأقصى تنظم <br />لقائها الشهري في المسجد الأقصى المبارك
                     </p>
                     <svg class="md:block duration-200 arrow-icon" width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -78,10 +78,10 @@
                 </div>
                 <div class="news-text hidden mt-3">
                     <p>
-                        تحت عنوان أثر طاعة المسلم لربه.. جمعية الأقصى تنظم <br />لقائها الشهري في المسجد الأقصى المبارك 
+                        تحت عنوان أثر طاعة المسلم لربه.. جمعية الأقصى تنظم <br />لقائها الشهري في المسجد الأقصى المبارك
                     </p>
                 </div>
-            </div>            
+            </div>
         </div>
         <div class="tabs-container mt-5 lg:mt-0">
             <div class="tab tab-1">
@@ -97,6 +97,6 @@
                 <img src="{{ asset('assets/image/Rock_Mousq.png') }}" alt="Rock_Mousq" class=" lg:max-h-[450px] max-h-[400px] m-auto">
             </div>
         </div>
-        
+
     </div>
 </div>
