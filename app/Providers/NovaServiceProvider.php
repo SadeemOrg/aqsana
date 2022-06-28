@@ -295,6 +295,48 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         ]
                     ),
                     Tab::make(
+                        'vadio',
+                        [
+
+
+
+                            FlexibleContent::make('vadio', 'vadiohome')
+                                ->addLayout(
+                                    [
+                                        'label' => 'vadio',
+                                        'name' => 'vadiohome',
+                                        'fields' => [
+                                            [
+                                                'type' => 'text',
+                                                'name' => 'link',
+                                                'label' => 'link',
+                                                'multiple' => false,
+                                                'required' => true
+                                            ],
+                                            [
+                                                'type' => 'image',
+                                                'name' => 'cover',
+                                                'label' => 'cover',
+                                                'multiple' => false,
+                                                'required' => true
+                                            ],
+
+
+
+
+                                        ]
+                                    ]
+                                ),
+
+
+
+
+
+
+
+                        ]
+                    ),
+                    Tab::make(
                         'Connect with us',
                         [
                             Text::make('heder text', 'heder_text_main_Connect'),
@@ -344,6 +386,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 'Projects_News' => 'array',
                 'partner' => 'array',
                 'workplace' => 'array',
+                'vadiohome' => 'array',
                 // ...
             ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([

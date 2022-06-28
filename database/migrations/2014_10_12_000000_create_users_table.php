@@ -11,6 +11,7 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
@@ -24,8 +25,9 @@ class CreateUsersTable extends Migration
             $table->string('photo')->nullable();
             $table->date('birth_date')->nullable();
             $table->unsignedBigInteger('city_id')->nullable();
-            $table->foreign('city_id')->references('id')->on('cities')
-            ->onDelete('cascade');
+
+            // $table->foreign('city_id')->references('id')->on('cities')
+            // ->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

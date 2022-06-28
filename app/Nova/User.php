@@ -76,7 +76,7 @@ class User extends Resource
 
             Number::make('Phone', 'phone')
                 ->textAlign('left'),
-            Date::make('Birth Date', 'birth_date'),
+            // Date::make('Birth Date', 'birth_date'),
             Image::make('photo', 'photo')->disk('public'),
             BelongsTo::make('Role'),
             BelongsTo::make('City'),

@@ -40,7 +40,7 @@ class project extends Resource
      */
     public static $title = 'project_name';
     public static $group = 'Admin';
-    public static $displayInNavigation = false;
+
     /**
      * The columns that should be searched.
      *
@@ -49,7 +49,7 @@ class project extends Resource
     public static $search = [
         'id',
     ];
-
+    public static $displayInNavigation = false;
     /**
      * Get the fields displayed by the resource.
      *

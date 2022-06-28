@@ -28,12 +28,12 @@ class CreateBusesTable extends Migration
             $table->unsignedBigInteger('Created_By')->nullable();
             $table->unsignedBigInteger('Update_By')->nullable();
 
-            $table->foreign('Created_By')->references('id')->on('users')
-                ->onDelete('cascade');
-            $table->foreign('Update_By')->references('id')->on('users')
-                ->onDelete('cascade');
-            $table->foreign('company_id')->references('id')->on('buses_company')
-                ->onDelete('cascade');
+            // $table->foreign('Created_By')->references('id')->on('users')
+            //     ->onDelete('cascade');
+            // $table->foreign('Update_By')->references('id')->on('users')
+            //     ->onDelete('cascade');
+            // $table->foreign('company_id')->references('id')->on('buses_company')
+            //     ->onDelete('cascade');
             $table->timestamps();
         });
     }

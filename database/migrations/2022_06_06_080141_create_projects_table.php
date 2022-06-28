@@ -26,8 +26,16 @@ class CreateProjectsTable extends Migration
             $table->time('projec_end');
             $table->json('map');
             $table->integer('admin_id');
+            $table->json('pictures')->nullable();
             $table->integer('approval')->nullable();
             $table->string("reason_of_reject")->nullable();
+            $table->unsignedBigInteger('Created_By')->nullable();
+            $table->unsignedBigInteger('Update_By')->nullable();
+
+            $table->foreign('Created_By')->references('id')->on('users')
+                ->onDelete('cascade');
+            $table->foreign('Update_By')->references('id')->on('users')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
