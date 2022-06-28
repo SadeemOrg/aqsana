@@ -85,4 +85,84 @@ class HomeController extends Controller
             // dd(gettype($pictures));
         return view('single-news', compact('news','pictures','Articles'));
     }
+
+
+
+    public function Alquds_news()
+    {
+        $news = DB::table('news')->where([
+            ['type', '=', '1'],
+            ['main_type', '=', '0'],
+                    ])->get();
+                    // dd($news);
+                    $Articles = DB::table('news')
+
+                    ->where([
+                        ['type', '=', $news[0]->type],
+                        ['main_type', '=', '0'],
+                                ])
+                    ->orderBy('created_at', 'desc')->take(6)->get();
+                    // dd($Articles);
+                    // dd($newser);
+                    // dd($news->pictures);
+                    $goalsjson=$news->pictures;
+                    // dd($goalsjson);
+                    // $goals = json_decode($goalsjson,true);
+                    // dd(gettype($goals));
+                    $pictures = json_decode( json_decode($goalsjson,true),true);
+
+                    return view('single-news', compact('news','pictures','Articles'));
+
+    }
+    public function Alquds_blog()
+    {
+        $news = DB::table('news')->where([
+            ['type', '=', '1'],
+            ['main_type', '=', '1'],
+                    ])->get();
+                    // dd($news);
+                    $Articles = DB::table('news')
+
+                    ->where([
+                        ['type', '=', $news[0]->type],
+                        ['main_type', '=', '1'],
+                                ])
+                    ->orderBy('created_at', 'desc')->take(6)->get();
+                    // dd($Articles);
+                    // dd($newser);
+                    // dd($news->pictures);
+                    $goalsjson=$news->pictures;
+                    // dd($goalsjson);
+                    // $goals = json_decode($goalsjson,true);
+                    // dd(gettype($goals));
+                    $pictures = json_decode( json_decode($goalsjson,true),true);
+
+                    return view('single-news', compact('news','pictures','Articles'));
+
+    } public function Alquds_report()
+    {
+        $news = DB::table('news')->where([
+            ['type', '=', '1'],
+            ['main_type', '=', '2'],
+                    ])->get();
+                    // dd($news);
+                    $Articles = DB::table('news')
+
+                    ->where([
+                        ['type', '=', $news[0]->type],
+                        ['main_type', '=', '2'],
+                                ])
+                    ->orderBy('created_at', 'desc')->take(6)->get();
+                    // dd($Articles);
+                    // dd($newser);
+                    // dd($news->pictures);
+                    $goalsjson=$news->pictures;
+                    // dd($goalsjson);
+                    // $goals = json_decode($goalsjson,true);
+                    // dd(gettype($goals));
+                    $pictures = json_decode( json_decode($goalsjson,true),true);
+
+                    return view('single-news', compact('news','pictures','Articles'));
+
+    }
 }

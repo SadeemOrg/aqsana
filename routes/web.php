@@ -25,6 +25,11 @@ Route::get('/conctus', [HomeController::class, 'conctus'])->name('conctus');
 Route::get('/our-news', [HomeController::class, 'news'])->name('news');
 Route::get('/our-news/{id}/', [HomeController::class, 'getnewDetail'])->name('getnewDetail');
 
+Route::get('/alquds/news', [HomeController::class, 'Alquds_news'])->name('Alquds_news');
+Route::get('/alquds/blog', [HomeController::class, 'Alquds_blog'])->name('Alquds_blog');
+Route::get('/alquds/report', [HomeController::class, 'Alquds_report'])->name('Alquds_report');
+
+
 
 // Route::get('/ ', function () {
 //     return view('home');
