@@ -12,7 +12,7 @@ use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
 use Manogi\Tiptap\Tiptap;
 use Waynestate\Nova\CKEditor;
-class RelatedArticles extends Resource
+class blog extends Resource
 {
     /**
      * The model the resource corresponds to.
@@ -46,6 +46,13 @@ class RelatedArticles extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+
+        return $query->where('is_blog', '1');
+
+     }
     public function fields(Request $request)
     {
         return [
