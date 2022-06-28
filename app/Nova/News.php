@@ -48,6 +48,12 @@ class News extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+
+        return $query->where('is_blog', '0');
+
+     }
     public function fields(Request $request)
     {
         return [
