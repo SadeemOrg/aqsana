@@ -7,7 +7,7 @@
 {{-- @include('Components.Home.Project_Support') --}}
 @include('Components.Home.AlaqsaBaneerBottomBanner')
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8  px-2">
-{{-- @include('Components.Projects.ProjectDetailsSlider') --}}
+@include('Components.Projects.ProjectDetailsSlider')
 </div>
 @include('Components.Home.Our_business_sectors')
 <div class=" mt-24 overflow-hidden">
