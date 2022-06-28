@@ -61,7 +61,7 @@ class HomeController extends Controller
 
 
         $workplace = nova_get_setting('workplaceabout', 'default_value');
-        return view('Pages.about-us-page', compact('goals','achievements','workplace'));
+        return view('Pages.our-news', compact('goals','achievements','workplace'));
     }
 
     public function conctus()
@@ -108,7 +108,7 @@ class HomeController extends Controller
                     // dd(gettype($goals));
                     // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-                    return view('Pages.quds-news', compact('news'));
+                    return view('Pages.our-news', compact('news'));
 
     }
     public function Alquds_blog()
@@ -134,7 +134,7 @@ class HomeController extends Controller
                     // // dd(gettype($goals));
                     // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-                    return view('Pages.quds-blogs', compact('news'));
+                    return view('Pages.our-news', compact('news'));
 
     } public function Alquds_report()
     {
@@ -159,7 +159,7 @@ class HomeController extends Controller
                     // // dd(gettype($goals));
                     // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-                    return view('Pages.quds-report', compact('news'));
+                    return view('Pages.our-news', compact('news'));
 
     }
 
@@ -180,6 +180,6 @@ class HomeController extends Controller
         $pictures = json_decode( json_decode($goalsjson,true),true);
 
             // dd(gettype($pictures));
-        return view('Pages.alaqsa-single-news', compact('news','pictures','Articles'));
+        return view('single-news', compact('news','pictures','Articles'));
     }
 }
