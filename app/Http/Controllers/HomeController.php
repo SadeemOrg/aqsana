@@ -72,6 +72,9 @@ class HomeController extends Controller
     public function getnewDetail($id)
     {
         $news = DB::table('news')->where('id',$id)->first();
+
+        $Articles = DB::table('news')->where('type',$news->type)->orderBy('created_at', 'desc')->take(6)->get();
+        // dd($newser);
         // dd($news->pictures);
         $goalsjson=$news->pictures;
         // dd($goalsjson);
@@ -80,6 +83,6 @@ class HomeController extends Controller
         $pictures = json_decode( json_decode($goalsjson,true),true);
 
             // dd(gettype($pictures));
-        return view('single-news', compact('news','pictures'));
+        return view('single-news', compact('news','pictures','Articles'));
     }
 }

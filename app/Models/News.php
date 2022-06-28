@@ -11,7 +11,7 @@ class News extends Model
 
 
     protected $fillable = [
-        'id','title','description','image'
+        'id','title','description','image','type','pictures'
     ];
 
     protected $casts = [
@@ -24,4 +24,9 @@ class News extends Model
         'updated_at',
 
     ];
+
+    public function newsTypes()
+    {
+        return $this->belongsTo('App\Models\newsType','type');
+    }
 }

@@ -8,7 +8,7 @@
         @endphp
 
             <a href="#">
-                <img class="w-[170px] md:w-[200px] xl:w-[200px] lg:h-auto xl:h-[60px]" src="{{ $img }}" />
+                <img class="w-[170px] md:w-[200px] xl:w-[200px] lg:h-auto xl:h-[60px]" src="/{{ $img }}" />
             </a>
             <div class="relative mt-2">
                 <a class="hamburger" href="#" role="button" title="Open menu" aria-label="Open menu">
@@ -33,7 +33,7 @@
                             @endphp
                                 <a href="/">
 
-                                    <img class=" lg:w-[150px] xl:w-[200px] lg:h-auto xl:h-[60px]" src="{{ $img }}" />
+                                    <img class=" lg:w-[150px] xl:w-[200px] lg:h-auto xl:h-[60px]" src="/{{ $img }}" />
                                 </a>
                             </li>
                             @endif
