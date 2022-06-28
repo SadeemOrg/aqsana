@@ -12,6 +12,8 @@ use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
 use Manogi\Tiptap\Tiptap;
 use Waynestate\Nova\CKEditor;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\BelongsTo;
 class blog extends Resource
 {
     /**
@@ -58,11 +60,14 @@ class blog extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make("Title",'title'),
-            CKEditor::make('description', 'description'),
+          BelongsTo::make("newsType",'newsTypes'),
+            Textarea::make('description', 'description'),
+            CKEditor::make('Contents', 'contents')->hidefromindex(),
+
+
             Image::make('Image','image')->disk('public')->prunable(),
             ArrayImages::make('Pictures', 'pictures')
-            ->disk('public')
-            ->path('pictures_news'),
+            ->disk('public'),
 
         ];
     }
