@@ -38,16 +38,16 @@ Route::get('our-project', function (){
     return view('projects-page');
 });
 Route::get('our-project/1', function (){
-    return view('project-details-page');
+    return view('Pages.project-details-page');
 });
 
 
 Route::get('project-donations', function (){
-    return view('project-donations');
+    return view('Pages.project-donations');
 });
 
-Route::get('/yearly-news', function (){
-    return view('yearly-news');
+Route::get('/annual-news', function (){
+    return view('Pages.annual-news');
 });
 
 // Route::get('/our-news', function (){

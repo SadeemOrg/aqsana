@@ -7,7 +7,7 @@
         @php
         $img = 'storage/'. nova_get_setting('footer_logo', 'default_value');
     @endphp
-        <img src="/{{ $img }}" class="w-[165px] pt-10 max-h-[125px]" />
+        <img src="/{{ $img }}" class="w-[165px] pt-10 " />
         <div class="hidden sm:flex flex-row flex-wrap justify-around items-center gap-7 pt-9">
           @foreach ($navfooters as $navfooter)
 

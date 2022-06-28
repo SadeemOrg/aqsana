@@ -49,7 +49,8 @@
     @yield('content')
     @include('layout.front-end.partial._footer')
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- <script src="{{ asset('js/app.js') }}"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}?v={{rand(0, 99)}}"></script>
@@ -77,8 +78,8 @@
             owl1.owlCarousel({
                 rtl:true,
                 loop:true,
-                margin:30, 
-                stagePadding: 20,                        
+                margin:30,
+                stagePadding: 20,
                 responsive: {
                             //X-Small
                             0: {
@@ -124,8 +125,8 @@
             owl2.owlCarousel({
                 rtl:true,
                 loop:true,
-                margin:30, 
-                stagePadding: 20,                        
+                margin:30,
+                stagePadding: 20,
                 responsive: {
                             //X-Small
                             0: {
@@ -214,6 +215,10 @@
                         }
             })
 
+            function openWindow(url) {
+    window.open(url,'sharer','toolbar=0,status=0,width=580,height=400');
+    return false;
+};
 
     </script>
     <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
