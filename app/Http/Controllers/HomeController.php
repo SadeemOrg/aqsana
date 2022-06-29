@@ -170,10 +170,10 @@ class HomeController extends Controller
 
 
 
-//collection
+//holy
 
 
-    public function collection_news()
+    public function holy_news()
     {
         $news = DB::table('news')->where([
             ['type', '=', '2'],
@@ -199,7 +199,7 @@ class HomeController extends Controller
                     return view('Pages.our-news', compact('news'));
 
     }
-    public function collection_blog()
+    public function holy_blog()
     {
         $news = DB::table('news')->where([
             ['type', '=', '2'],
@@ -224,7 +224,7 @@ class HomeController extends Controller
 
                     return view('Pages.our-news', compact('news'));
 
-    } public function collection_report()
+    } public function holy_report()
     {
         $news = DB::table('news')->where([
             ['type', '=', '2'],

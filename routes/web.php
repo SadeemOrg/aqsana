@@ -30,9 +30,9 @@ Route::get('/alquds/blog', [HomeController::class, 'Alquds_blog'])->name('Alquds
 Route::get('/alquds/report', [HomeController::class, 'Alquds_report'])->name('Alquds_report');
 
 
-Route::get('/collection/news', [HomeController::class, 'collection_news'])->name('collection_news');
-Route::get('/collection/blog', [HomeController::class, 'collection_blog'])->name('collection_blog');
-Route::get('/collection/report', [HomeController::class, 'collection_report'])->name('collection_report');
+Route::get('/holy/news', [HomeController::class, 'holy_news'])->name('holy_news');
+Route::get('/holy/blog', [HomeController::class, 'holy_blog'])->name('holy_blog');
+Route::get('/holy/report', [HomeController::class, 'holy_report'])->name('holy_report');
 
 
 // Route::get('/ ', function () {
