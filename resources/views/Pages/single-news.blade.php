@@ -3,7 +3,6 @@
 @php
     $news_detail = $new;
     $image = 'storage/'.$news_detail->image;
-    // dd($Articles)
 @endphp
 <style>
     .Card_shadow {
@@ -160,7 +159,7 @@
 
             </div>
         </div>
-        @include('Components.Projects.ProjectDetailsSlider')
+        @include('layout.front-end.partial.ProjectDetailsSlider')
     </div>
 </div>
 

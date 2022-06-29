@@ -1,3 +1,7 @@
+@php
+       $videohome = nova_get_setting('videohome', 'default_value');
+
+@endphp
 <div class="relative mt-20 xl:mt-20 mb-10 lg:mb-0">
     <p class="font-FlatBold text-xl sm:text-[27px] text-center mt-8 lg:mt-0 xl:text-right">
         شاهد معنا
@@ -8,10 +12,11 @@
 
 <!--Slider Content -->
 <div class="owl-carousel owl-theme owl-loaded dots-style" id="association-news-slider-2">
-    @if(!empty($Articles))
-    @foreach ($Articles as $article)
+
+    @if(!empty($videohome))
+    @foreach ($videohome as $video)
    @php
-    $img = 'storage/'.$article->image;
+    $img = $video['data']['cover'];
     @endphp
     <div class="p-3 item bg-white Card_shadow relative rounded-[5px] ">
         <div class="absolute leftline"></div>
@@ -27,7 +32,4 @@
     @endforeach
     @endif
 </div>
-
-
-
 
