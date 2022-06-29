@@ -105,6 +105,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Tab::make(
                         'Projects News',
                         [
+                            Text::make('main text Projects News', 'text_main_projects_news'),
                             FlexibleContent::make('Projects_News', 'Projects_News')
                                 ->addLayout(
                                     [
