@@ -35,6 +35,8 @@ Route::get('/holy/blog', [HomeController::class, 'holy_blog'])->name('holy_blog'
 Route::get('/holy/report', [HomeController::class, 'holy_report'])->name('holy_report');
 
 
+Route::get('/annualnews/{id}/', [HomeController::class, 'annualnews'])->name('annualnews');
+
 // Route::get('/ ', function () {
 //     return view('home');
 // });
