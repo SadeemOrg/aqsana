@@ -158,7 +158,7 @@
 
             </div>
         </div>
-        @include('Components.Projects.ProjectDetailsSlider')
+        @include('layout.front-end.partial.ProjectDetailsSlider')
     </div>
 </div>
 

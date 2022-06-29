@@ -41,6 +41,7 @@
             @if(!empty($news))
             @foreach ($news as $new )
             @php
+            // dd($news);
             $img = 'storage/'.$new->image;
             @endphp
             <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]" onclick="location.href='{{ route('getnewDetail', ['id' => $new->id]) }}'">
