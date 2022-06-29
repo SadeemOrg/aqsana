@@ -8,14 +8,14 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
-class buses_company extends Resource
+class busescompany extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\buses_company::class;
+    public static $model = \App\Models\busescompany::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.

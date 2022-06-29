@@ -52,7 +52,7 @@ class blog extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-        return $query->where('is_blog', '1');
+        return $query->where('main_type', '1');
 
      }
     public function fields(Request $request)
@@ -77,7 +77,7 @@ class blog extends Resource
         // $user = Auth::user();
 
         $model->update([
-            'is_blog'=>'1',
+            'main_type'=>'1',
         ]);
     }
 

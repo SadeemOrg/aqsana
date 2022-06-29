@@ -61,7 +61,7 @@ class HomeController extends Controller
 
 
         $workplace = nova_get_setting('workplaceabout', 'default_value');
-        return view('Pages.our-news', compact('goals','achievements','workplace'));
+        return view('Pages.about-us-page', compact('goals','achievements','workplace'));
     }
 
     public function conctus()
@@ -73,7 +73,10 @@ class HomeController extends Controller
     {
         $news = DB::table('news')->where('id',$id)->first();
 
-        $Articles = DB::table('news')->where('type',$news->type)->orderBy('created_at', 'desc')->take(6)->get();
+        $Articles = DB::table('news') ->where([
+                ['type', '=', $news->type],
+                ['main_type', '=',$news->main_type ],
+                        ])->orderBy('created_at', 'desc')->take(6)->get();
         // dd($newser);
         // dd($news->pictures);
         $goalsjson=$news->pictures;
@@ -85,6 +88,8 @@ class HomeController extends Controller
             // dd(gettype($pictures));
         return view('single-news', compact('news','pictures','Articles'));
     }
+
+   // Alquds
     public function Alquds_news()
     {
         $news = DB::table('news')->where([
@@ -163,23 +168,87 @@ class HomeController extends Controller
 
     }
 
-    public function getalaqsaDetail($id)
+
+
+//collection
+
+
+    public function collection_news()
     {
-        $news = DB::table('news')->where('id',$id)->first();
+        $news = DB::table('news')->where([
+            ['type', '=', '2'],
+            ['main_type', '=', '0'],
+                    ])->paginate( 8 );
+                    // dd($news);
+                    // $Articles = DB::table('news')
 
-        $Articles = DB::table('news') ->where([
-                ['type', '=', $news->type],
-                ['main_type', '=', '0'],
-                        ])->orderBy('created_at', 'desc')->take(6)->get();
-        // dd($newser);
-        // dd($news->pictures);
-        $goalsjson=$news->pictures;
-        // dd($goalsjson);
-        // $goals = json_decode($goalsjson,true);
-        // dd(gettype($goals));
-        $pictures = json_decode( json_decode($goalsjson,true),true);
+                    // ->where([
+                    //     ['type', '=', $news[0]->type],
+                    //     ['main_type', '=', '0'],
+                    //             ])
+                    // ->orderBy('created_at', 'desc')->take(6)->get();
+                    // dd($Articles);
+                    // dd($newser);
+                    // dd($news->pictures);
+                    // $goalsjson=$news->pictures;
+                    // dd($goalsjson);
+                    // $goals = json_decode($goalsjson,true);
+                    // dd(gettype($goals));
+                    // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-            // dd(gettype($pictures));
-        return view('single-news', compact('news','pictures','Articles'));
+                    return view('Pages.our-news', compact('news'));
+
     }
+    public function collection_blog()
+    {
+        $news = DB::table('news')->where([
+            ['type', '=', '2'],
+            ['main_type', '=', '1'],
+                    ])->paginate( 8 );
+                    // dd($news);
+                    // $Articles = DB::table('news')
+
+                    // ->where([
+                    //     ['type', '=', $news[0]->type],
+                    //     ['main_type', '=', '1'],
+                    //             ])
+                    // ->orderBy('created_at', 'desc')->take(6)->get();
+                    // // dd($Articles);
+                    // // dd($newser);
+                    // // dd($news->pictures);
+                    // $goalsjson=$news->pictures;
+                    // // dd($goalsjson);
+                    // // $goals = json_decode($goalsjson,true);
+                    // // dd(gettype($goals));
+                    // $pictures = json_decode( json_decode($goalsjson,true),true);
+
+                    return view('Pages.our-news', compact('news'));
+
+    } public function collection_report()
+    {
+        $news = DB::table('news')->where([
+            ['type', '=', '2'],
+            ['main_type', '=', '2'],
+                    ])->paginate( 8 );
+                    // dd($news);
+                    // $Articles = DB::table('news')
+
+                    // ->where([
+                    //     ['type', '=', $news[0]->type],
+                    //     ['main_type', '=', '2'],
+                    //             ])
+                    // ->orderBy('created_at', 'desc')->take(6)->get();
+                    // // dd($Articles);
+                    // // dd($newser);
+                    // // dd($news->pictures);
+                    // $goalsjson=$news->pictures;
+                    // // dd($goalsjson);
+                    // // $goals = json_decode($goalsjson,true);
+                    // // dd(gettype($goals));
+                    // $pictures = json_decode( json_decode($goalsjson,true),true);
+
+                    return view('Pages.our-news', compact('news'));
+
+    }
+
 }

@@ -26,7 +26,10 @@ class Area extends Model
         return $this->hasMany(City::class);
     }
 
-
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User','admin_id');
+    }
     public function admin()
     {
         return $this->belongsTo('App\Models\User','admin_id');

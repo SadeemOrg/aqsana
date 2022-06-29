@@ -11,7 +11,6 @@ class CreateBusesCompaniesTable extends Migration
      *
      * @return void
      */
-
     public function up()
     {
         Schema::create('buses_companies', function (Blueprint $table) {
