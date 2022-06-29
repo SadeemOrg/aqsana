@@ -71,22 +71,22 @@ class HomeController extends Controller
 
     public function getnewDetail($id)
     {
-        $news = DB::table('news')->where('id',$id)->first();
-
+        $new = DB::table('news')->where('id',$id)->first();
+// dd($news);
         $Articles = DB::table('news') ->where([
-                ['type', '=', $news->type],
-                ['main_type', '=',$news->main_type ],
+                ['type', '=', $new->type],
+                ['main_type', '=',$new->main_type ],
                         ])->orderBy('created_at', 'desc')->take(6)->get();
         // dd($newser);
         // dd($news->pictures);
-        $goalsjson=$news->pictures;
+        $goalsjson=$new->pictures;
         // dd($goalsjson);
         // $goals = json_decode($goalsjson,true);
         // dd(gettype($goals));
         $pictures = json_decode( json_decode($goalsjson,true),true);
 
             // dd(gettype($pictures));
-        return view('single-news', compact('news','pictures','Articles'));
+        return view('single-news', compact('new','pictures','Articles'));
     }
 
    // Alquds
