@@ -8,9 +8,9 @@
 
 <!--Slider Content -->
 <div class="owl-carousel owl-theme owl-loaded dots-style" id="association-news-slider-2">
-    @if(!empty($news))
-    @foreach ($news as $article)
-    @php
+    @if(!empty($Articles))
+    @foreach ($Articles as $article)
+   @php
     $img = 'storage/'.$article->image;
     @endphp
     <div class="p-3 item bg-white Card_shadow relative rounded-[5px] ">

@@ -1,8 +1,9 @@
 @extends('layout.app')
 @section('content')
 @php
-    $news_detail = $news;
+    $news_detail = $new;
     $image = 'storage/'.$news_detail->image;
+    // dd($Articles)
 @endphp
 <style>
     .Card_shadow {
