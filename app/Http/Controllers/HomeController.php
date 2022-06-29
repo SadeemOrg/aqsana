@@ -36,17 +36,15 @@ class HomeController extends Controller
 
 
 
-        return view('Pages.home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'Articles', 'partners','sectors'));
+        return view('Pages.home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'Articles', 'partners', 'sectors'));
     }
 
     public function news()
     {
 
 
-        $news = DB::table('news')->orderBy('created_at', 'desc')->paginate( 8 );
+        $news = DB::table('news')->orderBy('created_at', 'desc')->paginate(8);
         return view('Pages.our-news', compact('news'));
-
-
     }
     public function aboutus()
     {
@@ -61,116 +59,114 @@ class HomeController extends Controller
 
 
         $workplace = nova_get_setting('workplaceabout', 'default_value');
-        return view('Pages.about-us-page', compact('goals','achievements','workplace'));
+        return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace'));
     }
 
     public function conctus()
     {
-            return"okk";
+        return "okk";
     }
 
     public function getnewDetail($id)
     {
-        $new = DB::table('news')->where('id',$id)->first();
-// dd($news);
-        $Articles = DB::table('news') ->where([
-                ['type', '=', $new->type],
-                ['main_type', '=',$new->main_type ],
-                        ])->orderBy('created_at', 'desc')->take(6)->get();
+        $new = DB::table('news')->where('id', $id)->first();
+        // dd($news);
+        $Articles = DB::table('news')->where([
+            ['type', '=', $new->type],
+            ['main_type', '=', $new->main_type],
+        ])->orderBy('created_at', 'desc')->take(6)->get();
         // dd($newser);
         // dd($news->pictures);
-        $goalsjson=$new->pictures;
+        $goalsjson = $new->pictures;
         // dd($goalsjson);
         // $goals = json_decode($goalsjson,true);
         // dd(gettype($goals));
-        $pictures = json_decode( json_decode($goalsjson,true),true);
+        $pictures = json_decode(json_decode($goalsjson, true), true);
 
-            // dd(gettype($pictures));
-        return view('pages.single-news', compact('new','pictures','Articles'));
+        // dd(gettype($pictures));
+        return view('pages.single-news', compact('new', 'pictures', 'Articles'));
     }
 
-   // Alquds
+    // Alquds
     public function Alquds_news()
     {
         $news = DB::table('news')->where([
             ['type', '=', '1'],
             ['main_type', '=', '0'],
-                    ])->paginate( 8 );
-                    // dd($news);
-                    // $Articles = DB::table('news')
+        ])->paginate(8);
+        // dd($news);
+        // $Articles = DB::table('news')
 
-                    // ->where([
-                    //     ['type', '=', $news[0]->type],
-                    //     ['main_type', '=', '0'],
-                    //             ])
-                    // ->orderBy('created_at', 'desc')->take(6)->get();
-                    // dd($Articles);
-                    // dd($newser);
-                    // dd($news->pictures);
-                    // $goalsjson=$news->pictures;
-                    // dd($goalsjson);
-                    // $goals = json_decode($goalsjson,true);
-                    // dd(gettype($goals));
-                    // $pictures = json_decode( json_decode($goalsjson,true),true);
+        // ->where([
+        //     ['type', '=', $news[0]->type],
+        //     ['main_type', '=', '0'],
+        //             ])
+        // ->orderBy('created_at', 'desc')->take(6)->get();
+        // dd($Articles);
+        // dd($newser);
+        // dd($news->pictures);
+        // $goalsjson=$news->pictures;
+        // dd($goalsjson);
+        // $goals = json_decode($goalsjson,true);
+        // dd(gettype($goals));
+        // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-                    return view('Pages.our-news', compact('news'));
-
+        return view('Pages.our-news', compact('news'));
     }
     public function Alquds_blog()
     {
         $news = DB::table('news')->where([
             ['type', '=', '1'],
             ['main_type', '=', '1'],
-                    ])->paginate( 8 );
-                    // dd($news);
-                    // $Articles = DB::table('news')
+        ])->paginate(8);
+        // dd($news);
+        // $Articles = DB::table('news')
 
-                    // ->where([
-                    //     ['type', '=', $news[0]->type],
-                    //     ['main_type', '=', '1'],
-                    //             ])
-                    // ->orderBy('created_at', 'desc')->take(6)->get();
-                    // // dd($Articles);
-                    // // dd($newser);
-                    // // dd($news->pictures);
-                    // $goalsjson=$news->pictures;
-                    // // dd($goalsjson);
-                    // // $goals = json_decode($goalsjson,true);
-                    // // dd(gettype($goals));
-                    // $pictures = json_decode( json_decode($goalsjson,true),true);
+        // ->where([
+        //     ['type', '=', $news[0]->type],
+        //     ['main_type', '=', '1'],
+        //             ])
+        // ->orderBy('created_at', 'desc')->take(6)->get();
+        // // dd($Articles);
+        // // dd($newser);
+        // // dd($news->pictures);
+        // $goalsjson=$news->pictures;
+        // // dd($goalsjson);
+        // // $goals = json_decode($goalsjson,true);
+        // // dd(gettype($goals));
+        // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-                    return view('Pages.our-news', compact('news'));
-
-    } public function Alquds_report()
+        return view('Pages.our-news', compact('news'));
+    }
+    public function Alquds_report()
     {
         $news = DB::table('news')->where([
             ['type', '=', '1'],
             ['main_type', '=', '2'],
-                    ])->paginate( 8 );
-                    // dd($news);
-                    // $Articles = DB::table('news')
+        ])->paginate(8);
+        // dd($news);
+        // $Articles = DB::table('news')
 
-                    // ->where([
-                    //     ['type', '=', $news[0]->type],
-                    //     ['main_type', '=', '2'],
-                    //             ])
-                    // ->orderBy('created_at', 'desc')->take(6)->get();
-                    // // dd($Articles);
-                    // // dd($newser);
-                    // // dd($news->pictures);
-                    // $goalsjson=$news->pictures;
-                    // // dd($goalsjson);
-                    // // $goals = json_decode($goalsjson,true);
-                    // // dd(gettype($goals));
-                    // $pictures = json_decode( json_decode($goalsjson,true),true);
+        // ->where([
+        //     ['type', '=', $news[0]->type],
+        //     ['main_type', '=', '2'],
+        //             ])
+        // ->orderBy('created_at', 'desc')->take(6)->get();
+        // // dd($Articles);
+        // // dd($newser);
+        // // dd($news->pictures);
+        // $goalsjson=$news->pictures;
+        // // dd($goalsjson);
+        // // $goals = json_decode($goalsjson,true);
+        // // dd(gettype($goals));
+        // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-                    return view('Pages.our-news', compact('news'));
-
+        return view('Pages.our-news', compact('news'));
     }
 
 
 
-//holy
+    //holy
 
 
     public function holy_news()
@@ -178,77 +174,94 @@ class HomeController extends Controller
         $news = DB::table('news')->where([
             ['type', '=', '2'],
             ['main_type', '=', '0'],
-                    ])->paginate( 8 );
-                    // dd($news);
-                    // $Articles = DB::table('news')
+        ])->paginate(8);
+        // dd($news);
+        // $Articles = DB::table('news')
 
-                    // ->where([
-                    //     ['type', '=', $news[0]->type],
-                    //     ['main_type', '=', '0'],
-                    //             ])
-                    // ->orderBy('created_at', 'desc')->take(6)->get();
-                    // dd($Articles);
-                    // dd($newser);
-                    // dd($news->pictures);
-                    // $goalsjson=$news->pictures;
-                    // dd($goalsjson);
-                    // $goals = json_decode($goalsjson,true);
-                    // dd(gettype($goals));
-                    // $pictures = json_decode( json_decode($goalsjson,true),true);
+        // ->where([
+        //     ['type', '=', $news[0]->type],
+        //     ['main_type', '=', '0'],
+        //             ])
+        // ->orderBy('created_at', 'desc')->take(6)->get();
+        // dd($Articles);
+        // dd($newser);
+        // dd($news->pictures);
+        // $goalsjson=$news->pictures;
+        // dd($goalsjson);
+        // $goals = json_decode($goalsjson,true);
+        // dd(gettype($goals));
+        // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-                    return view('Pages.our-news', compact('news'));
-
+        return view('Pages.our-news', compact('news'));
     }
     public function holy_blog()
     {
         $news = DB::table('news')->where([
             ['type', '=', '2'],
             ['main_type', '=', '1'],
-                    ])->paginate( 8 );
-                    // dd($news);
-                    // $Articles = DB::table('news')
+        ])->paginate(8);
+        // dd($news);
+        // $Articles = DB::table('news')
 
-                    // ->where([
-                    //     ['type', '=', $news[0]->type],
-                    //     ['main_type', '=', '1'],
-                    //             ])
-                    // ->orderBy('created_at', 'desc')->take(6)->get();
-                    // // dd($Articles);
-                    // // dd($newser);
-                    // // dd($news->pictures);
-                    // $goalsjson=$news->pictures;
-                    // // dd($goalsjson);
-                    // // $goals = json_decode($goalsjson,true);
-                    // // dd(gettype($goals));
-                    // $pictures = json_decode( json_decode($goalsjson,true),true);
+        // ->where([
+        //     ['type', '=', $news[0]->type],
+        //     ['main_type', '=', '1'],
+        //             ])
+        // ->orderBy('created_at', 'desc')->take(6)->get();
+        // // dd($Articles);
+        // // dd($newser);
+        // // dd($news->pictures);
+        // $goalsjson=$news->pictures;
+        // // dd($goalsjson);
+        // // $goals = json_decode($goalsjson,true);
+        // // dd(gettype($goals));
+        // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-                    return view('Pages.our-news', compact('news'));
-
-    } public function holy_report()
+        return view('Pages.our-news', compact('news'));
+    }
+    public function holy_report()
     {
         $news = DB::table('news')->where([
             ['type', '=', '2'],
             ['main_type', '=', '2'],
-                    ])->paginate( 8 );
-                    // dd($news);
-                    // $Articles = DB::table('news')
+        ])->paginate(8);
+        // dd($news);
+        // $Articles = DB::table('news')
 
-                    // ->where([
-                    //     ['type', '=', $news[0]->type],
-                    //     ['main_type', '=', '2'],
-                    //             ])
-                    // ->orderBy('created_at', 'desc')->take(6)->get();
-                    // // dd($Articles);
-                    // // dd($newser);
-                    // // dd($news->pictures);
-                    // $goalsjson=$news->pictures;
-                    // // dd($goalsjson);
-                    // // $goals = json_decode($goalsjson,true);
-                    // // dd(gettype($goals));
-                    // $pictures = json_decode( json_decode($goalsjson,true),true);
+        // ->where([
+        //     ['type', '=', $news[0]->type],
+        //     ['main_type', '=', '2'],
+        //             ])
+        // ->orderBy('created_at', 'desc')->take(6)->get();
+        // // dd($Articles);
+        // // dd($newser);
+        // // dd($news->pictures);
+        // $goalsjson=$news->pictures;
+        // // dd($goalsjson);
+        // // $goals = json_decode($goalsjson,true);
+        // // dd(gettype($goals));
+        // $pictures = json_decode( json_decode($goalsjson,true),true);
 
-                    return view('Pages.our-news', compact('news'));
-
+        return view('Pages.our-news', compact('news'));
     }
 
+    public function annualnews($id)
+    {
+        $new = DB::table('news')->where('id', $id)->first();
+        // dd($news);
+        $Articles = DB::table('news')->where([
+            ['type', '=', $new->type],
+            ['main_type', '=', $new->main_type],
+        ])->orderBy('created_at', 'desc')->take(6)->get();
+        // dd($newser);
+        // dd($news->pictures);
+        $goalsjson = $new->pictures;
+        // dd($goalsjson);
+        // $goals = json_decode($goalsjson,true);
+        // dd(gettype($goals));
+        $pictures = json_decode(json_decode($goalsjson, true), true);
+
+        // dd(gettype($pictures));
+        return view('pages.single-news', compact('new', 'pictures', 'Articles'));
+    }
 }
