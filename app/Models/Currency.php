@@ -9,7 +9,7 @@ class Currency extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','name', 'code','rate','Update_By'
+        'id','name', 'code','rate','created_by','update_by'
     ];
 
     protected $hidden = [
@@ -17,6 +17,13 @@ class Currency extends Model
         'updated_at',
     ];
 
-
+    public function create()
+    {
+        return $this->belongsTo('App\Models\User','created_by');
+    }
+    public function Updateby()
+    {
+        return $this->belongsTo('App\Models\User','update_by');
+    }
 
 }

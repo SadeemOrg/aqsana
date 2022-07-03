@@ -11,7 +11,7 @@ class Area extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'name','admin_id','describtion','created_by'
+        'name','admin_id','describtion','created_by','update_by'
     ];
 
     protected $hidden = [
@@ -38,6 +38,10 @@ class Area extends Model
     public function create()
     {
         return $this->belongsTo('App\Models\User','created_by');
+    }
+    public function Updateby()
+    {
+        return $this->belongsTo('App\Models\User','update_by');
     }
 
 

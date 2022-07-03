@@ -26,7 +26,7 @@ class CreateTransactionsTable extends Migration
             $table->string('Rate')->nullable();
 
 
-            $table->time('transaction_date');
+
             $table->integer('approval')->nullable();
             $table->string("reason_of_reject")->nullable();
             $table->time('transaction_date');

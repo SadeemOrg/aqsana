@@ -19,7 +19,11 @@ class CreateNewsTypesTable extends Migration
             $table->string('describtion');
 
             $table->unsignedBigInteger('created_by')->nullable();
-               // $table->foreign('Created_By')->references('id')->on('users')
+            $table->unsignedBigInteger('update_by')->nullable();
+
+            // $table->foreign('created_by')->references('id')->on('users')
+            //     ->onDelete('cascade');
+            // $table->foreign('update_by')->references('id')->on('users')
             //     ->onDelete('cascade');
             $table->timestamps();
         });
