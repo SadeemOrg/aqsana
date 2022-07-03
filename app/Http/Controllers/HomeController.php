@@ -65,8 +65,10 @@ class HomeController extends Controller
             ['type', '=', $type],
             ['main_type', '=', $maintype],
         ])->paginate(8);
+        $mainTypy="news";
+        $type="hh";
 
-  return view('Pages.our-news', compact('news'));
+  return view('Pages.our-news', compact('news','mainTypy','type'));
         // $news = DB::table('news')->orderBy('created_at', 'desc')->paginate(8);
         // return view('Pages.our-news', compact('news'));
     }
