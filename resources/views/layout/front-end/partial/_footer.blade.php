@@ -1,7 +1,4 @@
-@php
 
-// dd($navfooter->data->name);
-@endphp
 <footer class="bg-[#101426] text-white mt-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-start">
         @php
@@ -11,7 +8,7 @@
         <div class="hidden sm:flex flex-row flex-wrap justify-around items-center gap-7 pt-9">
           @foreach ($navfooters as $navfooter)
 
-          <a class="text-[16px] hover:text-[#349A37] duration-200" href="#">{{ $navfooter->data->name }}</a>
+          <a class="text-[16px] hover:text-[#349A37] duration-200" href={{ $navfooter->data->link->id }}>{{ $navfooter->data->name }}</a>
 
           @endforeach
         </div>
