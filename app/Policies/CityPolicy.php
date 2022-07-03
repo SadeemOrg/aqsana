@@ -41,7 +41,7 @@ class CityPolicy
      */
     public function create(User $user)
     {
-        return ($user->type() == 'admin' ) ;
+        return ($user->type() == 'admin' || $user->type() == 'regular_area') ;
     }
 
     /**
@@ -53,7 +53,7 @@ class CityPolicy
      */
     public function update(User $user, City $city)
     {
-        return ($user->type() == 'admin' ) ;
+        return ($user->type() == 'admin'|| $user->type() == 'regular_area' ) ;
     }
 
     /**

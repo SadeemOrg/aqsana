@@ -32,6 +32,7 @@ class Report extends Resource
     public static $title = 'title';
     public static $group = 'website';
     public static $priority = 5;
+    public static $displayInNavigation = false;
 
     /**
      * The columns that should be searched.

@@ -22,20 +22,24 @@ Route::get('/', [HomeController::class, 'index'])->name('Home');
 
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/conctus', [HomeController::class, 'conctus'])->name('conctus');
-Route::get('/our-news', [HomeController::class, 'news'])->name('news');
+Route::get('/our-news/{type}/{maintype}', [HomeController::class, 'news'])->name('news');
 Route::get('/our-news/{id}/', [HomeController::class, 'getnewDetail'])->name('getnewDetail');
 
-Route::get('/alquds/news', [HomeController::class, 'Alquds_news'])->name('Alquds_news');
-Route::get('/alquds/blog', [HomeController::class, 'Alquds_blog'])->name('Alquds_blog');
-Route::get('/alquds/report', [HomeController::class, 'Alquds_report'])->name('Alquds_report');
 
 
-Route::get('/holy/news', [HomeController::class, 'holy_news'])->name('holy_news');
-Route::get('/holy/blog', [HomeController::class, 'holy_blog'])->name('holy_blog');
-Route::get('/holy/report', [HomeController::class, 'holy_report'])->name('holy_report');
+// // Route::get('/our-news', [HomeController::class, 'news'])->name('news');
+
+// Route::get('/alquds/news', [HomeController::class, 'Alquds_news'])->name('Alquds_news');
+// Route::get('/alquds/blog', [HomeController::class, 'Alquds_blog'])->name('Alquds_blog');
+// Route::get('/alquds/report', [HomeController::class, 'Alquds_report'])->name('Alquds_report');
 
 
-Route::get('/annualnews/{id}/', [HomeController::class, 'annualnews'])->name('annualnews');
+// Route::get('/holy/news', [HomeController::class, 'holy_news'])->name('holy_news');
+// Route::get('/holy/blog', [HomeController::class, 'holy_blog'])->name('holy_blog');
+// Route::get('/holy/report', [HomeController::class, 'holy_report'])->name('holy_report');
+
+
+// Route::get('/annualnews/{id}/', [HomeController::class, 'annualnews'])->name('annualnews');
 
 // Route::get('/ ', function () {
 //     return view('home');

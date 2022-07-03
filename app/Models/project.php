@@ -9,7 +9,13 @@ class project extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','project_name', 'project_describe','Project_Status','map', 'projec_day','projec_start','projec_end','city_id','approval','reason_of_reject','admin_id'
+        'id', 'project_name', 'project_describe', 'purpose',
+        'is_reported','report_title','report_description','report_text','report_image','pictures',
+         'type', 'Project_Status', 'start_date', 'end_date',
+        'Budjet', 'admin_id', 'approval', 'reason_of_reject'
+        ,'created_by','update_by'
+
+
     ];
 
     protected $hidden = [
@@ -18,17 +24,34 @@ class project extends Model
     ];
 
     protected $casts = [
-        'projec_day' => 'date',
-
-        'city_id' => 'array',
-        'map' => 'array',
+        'start_date' => 'date',
+        'end_date' => 'date',
+        'pictures' => 'array',
 
     ];
 
 
     public function buses()
     {
-        return $this->belongsToMany(Bus::class);
+        return $this->hasOne(Bus::class);
+    }
+    public function ProjectType()
+    {
+        return $this->belongsTo(ProjectType::class,'type','code');
     }
 
+    public function newsTypes()
+    {
+        return $this->belongsTo(newsType::class,'');
+    }
+
+
+    public function create()
+    {
+        return $this->belongsTo('App\Models\User','created_by');
+    }
+    public function Updateby()
+    {
+        return $this->belongsTo('App\Models\User','update_by');
+    }
 }

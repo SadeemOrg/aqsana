@@ -18,15 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'alaqsaAdmin',
-            'email' => 'alaqsa@averotech.com',
-            'password' => bcrypt('10203040'),
-            'remember_token' => Str::random(10),
-            'user_role'=>'admin',
-            'phone'=>'0569465465',
-            'city_id'=>'1']);
 
+        $this->call([
+            UserSeeder::class,
+            RolesSeeder::class,
+            ProjectTypeSeeder::class,
 
-        }
+        ]);
+    }
 }

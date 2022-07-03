@@ -76,13 +76,35 @@ class Bus extends Resource
 
 
                 ])->displayUsingLabels(),
-                // belongsToMany::make('projects', 'projects', 'App\Nova\project'),
+                BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
+                hideWhenUpdating(),
+                BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
+                hideWhenUpdating(),
+                belongsTo::make('projects', 'projects')->hideWhenCreating()->
+                hideWhenUpdating(),
                 // belongsToMany::make('projects', 'projects', 'App\Nova\project'),
 
             ];
 
 
     }
+
+
+    // public static function afterCreate(Request $request, $model)
+    // {   $id = Auth::id();
+    //     $model->update([
+    //         'created_by'=>$id,
+    //         ]);
+    // }
+
+    // public static function beforeUpdate(Request $request, $model)
+    // {
+    //     $id = Auth::id();
+    //     $model->update([
+    //         'update_by'=>$id,
+
+    //     ]);
+    // }
 
     /**
      * Get the cards available for the request.

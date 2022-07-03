@@ -71,21 +71,33 @@ class City extends Resource
             Text::make('Name','name'),
             BelongsTo::make('Area','Area')->hideWhenCreating()->
             hideWhenUpdating(),
-            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
-            hideWhenUpdating(),
-            // hasMany::make('Alhisalat','Alhisalat'),
+
+
+          BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
+          hideWhenUpdating(),
+          BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
+          hideWhenUpdating(),
             // hasMany::make('User','User'),
         ];
     }
     public static function afterCreate(Request $request, $model)
     {   $id = Auth::id();
-        $user = DB::table('areas')->where('admin_id', $id)->select('id')->first();
+        // $user = DB::table('areas')->where('admin_id', $id)->select('id')->first();
 
-        // $user = Auth::user();
+
 
         $model->update([
             'created_by'=>$id,
-            'area_id'=>$user->id,
+            // 'area_id'=>$user->id,
+
+        ]);
+    }
+
+    public static function beforeUpdate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->update([
+            'update_by'=>$id,
 
         ]);
     }
