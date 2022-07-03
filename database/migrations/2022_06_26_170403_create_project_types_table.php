@@ -16,13 +16,17 @@ class CreateProjectTypesTable extends Migration
         Schema::create('project_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('describtion');
+            $table->string('describtion')->nullable();
+            $table->char('code', 2);
             $table->char('type', 1);
 
             $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('update_by')->nullable();
 
-            // $table->foreign('Created_By')->references('id')->on('users')
-            //     ->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('users')
+                ->onDelete('cascade');
+            $table->foreign('update_by')->references('id')->on('users')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

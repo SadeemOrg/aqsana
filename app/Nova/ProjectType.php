@@ -23,7 +23,7 @@ class ProjectType extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -51,10 +51,10 @@ class ProjectType extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make("Name","name"),
             Textarea::make("Description","describtion"),
-            Select::make("Type","Type")
+            Select::make("Type","type")
             ->options([
-                '1' => 'available',
-                '2' => 'un available',
+                '1' => 'income',
+                '2' => 'Payments',
 
 
                 ])->displayUsingLabels(),

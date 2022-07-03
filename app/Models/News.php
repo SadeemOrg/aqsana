@@ -11,7 +11,7 @@ class News extends Model
 
 
     protected $fillable = [
-        'id','title','description','image','type','pictures'
+        'id','title','description','image','type','pictures','created_by','update_by'
     ];
 
     protected $casts = [

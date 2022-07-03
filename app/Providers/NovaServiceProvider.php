@@ -64,6 +64,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                 Text::make('Name'),
                                 Link::make('Link')->resources([
                                     News::class,
+                                    project::class  ,
+
+
                                 ])
                             ])->title('name'),
                             Image::make('Logo', 'logo')->disk('public'),
@@ -105,6 +108,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Tab::make(
                         'Projects News',
                         [
+                            Text::make('main text Projects News', 'text_main_projects_news'),
                             FlexibleContent::make('Projects_News', 'Projects_News')
                                 ->addLayout(
                                     [

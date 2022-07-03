@@ -10,7 +10,7 @@ class City extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','area_id','name','created_by'
+        'id','area_id','name','created_by','update_by'
     ];
 
     protected $hidden = [
@@ -25,10 +25,10 @@ class City extends Model
         return $this->hasMany('App\Models\User', 'city_id' );
     }
 
-    public function Alhisalat()
-    {
-        return $this->hasMany('App\Models\Alhisalat', 'city_id' );
-    }
+    // public function Alhisalat()
+    // {
+    //     return $this->hasMany('App\Models\Alhisalat', 'city_id' );
+    // }
 
 
     public function Area()
@@ -40,13 +40,13 @@ class City extends Model
     {
         return $this->belongsTo('App\Models\User','created_by');
     }
-
-    public function Areaadmin()
+    public function Updateby()
     {
-        $id = Auth::id();
-        $user = DB::table('areas')->where('admin_id', $id)->select('id')->first();
-        return $user->id;
+        return $this->belongsTo('App\Models\User','update_by');
     }
+
+
+
 }
 
 

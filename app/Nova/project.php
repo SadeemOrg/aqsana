@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Nova;
+
 use App\Models\Area;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
@@ -16,16 +17,33 @@ use App\Nova\Actions\ProjectStatu;
 use Illuminate\Support\Facades\Auth;
 use App\Nova\Filters\ProjectStatus;
 use App\Nova\Filters\Projectapproval;
-use App\Models\City;
+use App\Models\ProjectType;
 use Illuminate\Support\Facades\DB;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\hasOne;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use Yassi\NestedForm\NestedForm;
 use Laravel\Nova\Fields\BelongsToMany;
 use AwesomeNova\Cards\FilterCard;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Image;
+use Halimtuhu\ArrayImages\ArrayImages;
+use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
+use Laravel\Nova\Fields\BelongsTo;
+use Manogi\Tiptap\Tiptap;
+use Waynestate\Nova\CKEditor;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
+use Epartment\NovaDependencyContainer\NovaDependencyContainer;
+use Eminiarts\Tabs\Traits\HasTabs;
+use Eminiarts\Tabs\Tabs;
+use Eminiarts\Tabs\Tab;
+use Eminiarts\Tabs\TabsOnEdit;
+use Laravel\Nova\Fields\HasOne as FieldsHasOne;
 
 class project extends Resource
 {
+    use TabsOnEdit;
+
     /**
      * The model the resource corresponds to.
      *
@@ -39,8 +57,8 @@ class project extends Resource
      * @var string
      */
     public static $title = 'project_name';
-    public static $group = 'Admin';
-
+    public static $group = 'project_name';
+    public static $displayInNavigation = false;
     /**
      * The columns that should be searched.
      *
@@ -49,7 +67,8 @@ class project extends Resource
     public static $search = [
         'id',
     ];
-    public static $displayInNavigation = false;
+
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -71,67 +90,201 @@ class project extends Resource
     // }
     public function fields(Request $request)
     {
+
+
+        // 'is_reported','report_title','report_description','report_text','report_image','pictures',
+
+
+
+
         return [
 
+
+            // new Tabs('Some Title', [
+            //     'project detales'    => [
+
+            //         ID::make(__('ID'), 'id')->sortable(),
+            //         Text::make("project name", "project_name"),
+            //         Text::make("project describe", "project_describe"),
+            //         Text::make("project purpose", "purpose"),
+            //         Select::make('Project type', 'type')
+            //             ->options(function () {
+            //                 $users =  \App\Models\ProjectType::all();
+
+            //                 $user_type_admin_array =  array();
+
+            //                 foreach ($users as $user) {
+            //                     if ($user->Area == null) {
+
+
+            //                         $user_type_admin_array += [$user['code'] => ($user['name'])];
+            //                     }
+            //                 }
+            //                 return $user_type_admin_array;
+            //             })->hideFromIndex()->hideFromDetail(),
+            //         BelongsTo::make('Project Type', 'ProjectType', \App\Nova\ProjectType::class)->hideWhenCreating()->hideWhenUpdating(),
+            //         Number::make("Budjet", 'Budjet'),
+            //         Select::make('admin', 'admin_id',)
+            //             ->options(function () {
+            //                 $users =  \App\Models\User::where('user_role', '=', 'admin')->get();
+
+            //                 $user_type_admin_array =  array();
+
+            //                 foreach ($users as $user) {
+            //                     $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
+            //                 }
+
+            //                 return $user_type_admin_array;
+            //             }),
+            //         Select::make('Project Status ', 'Project_Status')->options([
+            //             '0' => 'Initial',
+            //             '1' => 'Acceptable',
+            //             '2  in progress' => 'project  in progress',
+            //             '3' => 'locked',
+            //             '4' => 'Collection the project',
+            //         ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            //         DateTime::make('projec start', 'start_date'),
+            //         DateTime::make('projec end', 'end_date'),
+            //         Text::make("approval", "approval")->hideWhenCreating()->hideWhenUpdating(),
+            //         Text::make("reason_of_reject", "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
+            //         // NestedForm::make('buses', 'buses', 'App\Nova\bus'),
+
+
+            //         Select::make('is_reported Status ', 'is_reported')->options([
+            //             '1' => 'yes',
+            //             '0' => 'no',
+            //         ])->displayUsingLabels(),
+
+
+            //         NovaDependencyContainer::make([
+
+            //             Text::make("project name", "report_title"),
+            //             Textarea::make('description', 'report_description'),
+            //             CKEditor::make('Contents', 'report_text')->hidefromindex(),
+            //             Image::make('Image', 'report_image')->disk('public')->prunable(),
+            //             ArrayImages::make('Pictures', 'pictures')
+            //                 ->disk('public'),
+
+
+            //         ])->dependsOn('is_reported', '1'),
+
+            //         BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            //         BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            //         HasOne::make('buses')->hideWhenCreating()->hideWhenUpdating(),
+            //         NestedForm::make('buses', 'buses', 'App\Nova\bus'),
+            //     ],
+            //     // HasOne::make('buses')->hideWhenCreating()->hideWhenUpdating(),
+            //     // NestedForm::make('buses', 'buses', 'App\Nova\bus')->displayIf(function ($nestedForm, $request) {
+            //     //     return [
+            //     //         ['attribute' => 'type', 'is' => '8']
+            //     //     ];
+            //     // })
+
+            // ]),
+
+
+
+
+            // NestedForm::make('buses', 'buses', 'App\Nova\bus'),
+
+
+
+
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("project name","project_name"),
-            Text::make("project describe","project_describe"),
-            Select::make('admin','admin_id',)
-            ->options( function() {
-                $users =  \App\Models\User::where('user_role', '=', 'admin')->get();
+            Text::make("project name", "project_name"),
+            Text::make("project describe", "project_describe"),
+            Text::make("project purpose", "purpose"),
+            Select::make('Project type', 'type')
+                ->options(function () {
+                    $users =  \App\Models\ProjectType::all();
 
-                $user_type_admin_array =  array();
+                    $user_type_admin_array =  array();
 
-                foreach($users as $user) {
-                    $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
-                }
-
-                return $user_type_admin_array;
-               }),
-
-               Multiselect::make('city','city_id')
-               ->options( function() {
-               $buses_db = City::all();
-               $buses =  array();
-
-               foreach($buses_db as $bus) {
-               $buses += [$bus['name'] => ($bus['name'])];
-               }
-
-               return $buses;
-               })
-               ->saveAsJSON(),
-
-               GoogleMaps::make('from city', 'map')
-               ->zoom(8),
+                    foreach ($users as $user) {
+                        if ($user->Area == null) {
 
 
+                            $user_type_admin_array += [$user['code'] => ($user['name'])];
+                        }
+                    }
+                    return $user_type_admin_array;
+                })->hideFromIndex()->hideFromDetail(),
+            BelongsTo::make('Project Type', 'ProjectType', \App\Nova\ProjectType::class)->hideWhenCreating()->hideWhenUpdating(),
+            Number::make("Budjet", 'Budjet'),
+            Select::make('admin', 'admin_id',)
+                ->options(function () {
+                    $users =  \App\Models\User::where('user_role', '=', 'admin')->get();
 
+                    $user_type_admin_array =  array();
+
+                    foreach ($users as $user) {
+                        $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
+                    }
+
+                    return $user_type_admin_array;
+                }),
             Select::make('Project Status ', 'Project_Status')->options([
-                'Initial' => 'Initial',
-                'Acceptable' => 'Acceptable',
-                'project  in progress'=> 'project  in progress',
-                'locked' => 'locked',
-                'Collection the project' => 'Collection the project',
+                '0' => 'Initial',
+                '1' => 'Acceptable',
+                '2  in progress' => 'project  in progress',
+                '3' => 'locked',
+                '4' => 'Collection the project',
+            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            DateTime::make('projec start', 'start_date'),
+            DateTime::make('projec end', 'end_date'),
+            Text::make("approval", "approval")->hideWhenCreating()->hideWhenUpdating(),
+            Text::make("reason_of_reject", "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
+            // NestedForm::make('buses', 'buses', 'App\Nova\bus'),
 
-             ])->displayUsingLabels()->hideWhenCreating()->
-             hideWhenUpdating(),
 
-             Text::make("approval","approval")->hideWhenCreating()->
-             hideWhenUpdating(),
-             Text::make("reason_of_reject","reason_of_reject")->hideWhenCreating()->
-             hideWhenUpdating(),
+            Select::make('is_reported Status ', 'is_reported')->options([
+                '1' => 'yes',
+                '0' => 'no',
+            ])->displayUsingLabels(),
 
-             Date::make('projec day','projec_day'),
-            TimeField::make('projec start','projec_start'),
-            TimeField::make('projec end','projec_end'),
 
+            NovaDependencyContainer::make([
+
+                Text::make("project name", "report_title"),
+                Textarea::make('description', 'report_description'),
+                CKEditor::make('Contents', 'report_text')->hidefromindex(),
+                Image::make('Image', 'report_image')->disk('public')->prunable(),
+                ArrayImages::make('Pictures', 'pictures')
+                    ->disk('public'),
+
+
+            ])->dependsOn('is_reported', '1'),
+
+            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            HasOne::make('buses')->hideWhenCreating()->hideWhenUpdating(),
             NestedForm::make('buses', 'buses', 'App\Nova\bus'),
-            belongsToMany::make('buses'),
+
+
+
+
+
 
 
         ];
     }
+
+    // public static function afterCreate(Request $request, $model)
+    // {
+    //     $id = Auth::id();
+    //     $model->update([
+    //         'created_by'=>$id,
+    //         ]);
+    // }
+
+    // public static function beforeUpdate(Request $request, $model)
+    // {
+    //     $id = Auth::id();
+    //     $model->update([
+    //         'update_by'=>$id,
+
+    //     ]);
+    // }
 
     /**
      * Get the cards available for the request.
@@ -183,11 +336,11 @@ class project extends Resource
     {
         return [
 
-             (new ApprovalRejectProjec)->canSee(function ($request) {
+            (new ApprovalRejectProjec)->canSee(function ($request) {
                 $user = Auth::user();
-              return  $user->type() == 'admin';
+                return  $user->type() == 'admin';
             }),
-             new ProjectStatu,
+            new ProjectStatu,
 
         ];
     }

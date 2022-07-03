@@ -25,13 +25,13 @@ class CreateNewsTable extends Migration
             $table->string('image');
             $table->json('pictures')->nullable();
 
-            $table->unsignedBigInteger('Created_By')->nullable();
-            $table->unsignedBigInteger('Update_By')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('update_by')->nullable();
 
-            // $table->foreign('Created_By')->references('id')->on('users')
+            // $table->foreign('created_by')->references('id')->on('users')
             //     ->onDelete('cascade');
-            // $table->foreign('Update_By')->references('id')->on('users')
-            //     ->onDelete('cascade');
+            // $table->foreign('update_by')->references('id')->on('users')
+                // ->onDelete('cascade');
 
             $table->timestamps();
         });

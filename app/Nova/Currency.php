@@ -7,6 +7,9 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\BelongsTo;
+use Illuminate\Support\Facades\Auth;
+
 class Currency extends Resource
 {
     /**
@@ -47,7 +50,28 @@ class Currency extends Resource
             Text::make('Name','name'),
             Text::make('code','code'),
             Number::make('rate','rate')->step(0.01),
+
+            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
+            hideWhenUpdating(),
+            BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
+            hideWhenUpdating(),
         ];
+    }
+
+    public static function afterCreate(Request $request, $model)
+    {   $id = Auth::id();
+        $model->update([
+            'created_by'=>$id,
+            ]);
+    }
+
+    public static function beforeUpdate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->update([
+            'update_by'=>$id,
+
+        ]);
     }
 
     /**
