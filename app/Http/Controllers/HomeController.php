@@ -20,35 +20,20 @@ class HomeController extends Controller
         $ProjectsNews = nova_get_setting('Projects_News', 'default_value');
         // $ProjectsNews = json_decode($ProjectsNewsjson);
 
-
-
-
-
-
-
         $partners = nova_get_setting('partner', 'default_value');
         // $partners = json_decode($partnerjson);
 
         $sectors = nova_get_setting('workplace', 'default_value');
         // $sectors= json_decode($sectorsjson);
 
-
-
         return view('Pages.home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'partners', 'sectors'));
     }
-
     public function aboutus()
     {
-
-
         $goalsjson = nova_get_setting('goals', 'default_value');
         $goals = json_decode($goalsjson);
-
-
         $achievementsjson = nova_get_setting('achievements', 'default_value');
         $achievements = json_decode($achievementsjson);
-
-
         $workplace = nova_get_setting('workplaceabout', 'default_value');
         return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace'));
     }

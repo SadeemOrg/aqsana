@@ -1,4 +1,4 @@
-<header class="py-3 fixed w-full top-0 right-0 left-0 z-10 bg-white sticky-h z-20">
+<header class="py-3 fixed w-full top-0 right-0 left-0  bg-white sticky-h z-20">
     <div dir="rtl" class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
 
         <!-- Start for mobile -->
@@ -7,7 +7,7 @@
             $img = 'storage/'. nova_get_setting('logo', 'default_value');
         @endphp
 
-            <a href="#">
+            <a href="/">
                 <img class="w-[170px] md:w-[200px] xl:w-[200px] lg:h-auto xl:h-[60px]" src="/{{ $img }}" />
             </a>
             <div class="relative mt-2">
