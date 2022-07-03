@@ -1,7 +1,7 @@
 <div class="owl-carousel" id="main-home-slider">
     @if(!empty($Heros))
     @foreach ( $Heros as $Hero )
-    <img class="h-[220px] md:h-[500px]" src="{{ URL::asset($Hero['data']['image'])}}" alt="topBanner">
+    <img class="h-[150px] sm:h-[220px]  lg:h-[500px]" src="{{ URL::asset($Hero['data']['image'])}}" alt="topBanner">
     @endforeach
     @endif
 </div>
