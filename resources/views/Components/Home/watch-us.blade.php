@@ -1,6 +1,141 @@
+<style>
+    .mediabox-wrap {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    background-color: rgba(0,0,0,0.8);
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 999;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: mediabox;
+    animation-name: mediabox;
+}
+
+@-webkit-keyframes mediabox {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes mediabox {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.mediabox-content {
+    max-width: 680px;
+    display: block;
+    margin: 0 auto;
+    height: 100%;
+    position: relative;
+}
+
+.mediabox-content iframe {
+    max-width: 100% !important;
+    width: 100% !important;
+    display: block !important;
+    height: 480px !important;
+    border: none !important;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+
+.mediabox-hide {
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: mediaboxhide;
+    animation-name: mediaboxhide;
+}
+
+@-webkit-keyframes mediaboxhide {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes mediaboxhide {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.mediabox-close {
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    bottom: 528px;
+    right: 0px;
+    margin: auto 0;
+    width: 24px;
+    height: 24px;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAMvSURBVHja7Js9aBRBFMd/d1lPY6FiJVjY+Fkoxl7wA1Q0prQRS6tgoZV2MWIRRVHUUq3U+JnESrS2sBXBzipREWMlATXwt8gFznC5nd15M7Nn8uC45nZnfr/dY96+N1uTxFKOOks8lgUU/H2t4tJqIQUcAiaBGeBymcECRgO4B/wBPgJ9zkdKcvkclfRL/8ZtSTXH40N+GpLGF8zth6Q9Lse7DHCsDXxVJLSDLyQhb4B+Sb/VOVJJ6ATfKqGvrIDjDvCpJLjAz8d0JwmLDTBQAD62hIakiYJzm5a021VAfwn4WBLKwLdK2JUnIJP0XX4RSoIP/Hy8W3jeepv1dL3nmjwI3DLOExrAU2DA8zwb8xKhGeCuwYQtJTSAZwbwAHdcEqFM0mPZhO/foSHppdFcrraby2IDV0FCcPi8PCClhCjwLplgCgkrDeGv5I3pcjViSogK7yogloTo8EUEhJaQBL6oAGsJ9yVtkrRD0qsU8JKolagKZ8AD4ETFymFXgPOAQpXE5mMWOAk86XZ4n6pwlSSUhvcti1dBghe8RV8gpYQRX3irxkgKCSPABV94y85QTAlm8NatsRgSTOGBUnmAS57w3KiA0Ro3gHOW8KEEAOwE3hvfXWubFauu6A6vCND07OmW9viq5vpsGT3AtRAN2XoA+BfAwQBiTweoNpMZw48BRwKuAoPN7zNVWwZjwAfpO9S7DN5cQmYAPw4cTvAsYPJ3qHcpvNmdUO9ieBMJZQT0AhMVgfeWUC8BP87cjjHfuA6sATY0c4c0EgpUUHslvTaq3l5aUL1N1oarAnxSCVWBTyYhJvyw41XJJI3GkpAH/yYyfHQJi01gdUL4qBKqCh9NQrtBx4wGvGi0XS6T9MhoTkN5AtZVDN5awlTePsGfwDfPjGwYGDKu3s4Cp4BRz/N8cskED0iaqciVt7wTvkra5roKlJEQGt5HwhdJ24vmAUUkDEV+VyCT9NBxbp/bXXnXTNBFQmz4IhI6wrs+C+zvICEVvIuEKUlbrZ4G97WRkBq+k4RJSVusd4ntlfSheVudrQh8q4SbmntH6K2kzSF3if1Xsfzq7LKAJR5/BwCdAQBJn4egPgAAAABJRU5ErkJggg==') no-repeat;
+    background-size: 24px 24px;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+}
+
+.mediabox-close:hover {
+    opacity: 0.5;
+}
+
+@media all and (max-width: 768px) and (min-width: 10px) {
+    .mediabox-content {
+        max-width: 90%;
+    }
+}
+
+@media all and (max-width: 600px) and (min-width: 10px) {
+    .mediabox-content iframe {
+        height: 320px !important;
+    }
+
+    .mediabox-close {
+        bottom: 362px;
+    }
+}
+
+@media all and (max-width: 480px) and (min-width: 10px) {
+    .mediabox-content iframe {
+        height: 220px !important;
+    }
+
+    .mediabox-close {
+        bottom: 262px;
+    }
+}
+</style>
+
+
 @php
        $videohome = nova_get_setting('videohome', 'default_value');
-
 @endphp
 <div class="relative mt-20 xl:mt-20 mb-10 lg:mb-0">
     <p class="font-FlatBold text-xl sm:text-[27px] text-center mt-8 lg:mt-0 xl:text-right">
@@ -15,6 +150,7 @@
 
     @if(!empty($videohome))
     @foreach ($videohome as $video)
+
    @php
     $img = $video['data']['cover'];
     @endphp
@@ -23,9 +159,9 @@
         <div
             class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px]  py-2 px-2 ">
             <div class="relative">
-            <img class=" lg:block max-w-[380px] lg:h-[280px]  max-h-[280px] object-cover rounded-[5px] my-1"
+            <a href={{ $video['data']['link'] }} class="mediabox"><img class=" lg:block max-w-[380px] lg:h-[280px]  max-h-[280px] object-cover rounded-[5px] my-1"
                 src="{{ asset($img) }}" alt="people_on_Mousq" />
-                <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[48%] left-[46%]" />
+                <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[48%] left-[46%]" /></a>
             </div>
         </div>
     </div>
@@ -33,3 +169,106 @@
     @endif
 </div>
 
+<script type="text/javascript">
+	(function (root, factory) {
+    "use strict";
+    if (typeof define === 'function' && define.amd) {
+        define([], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory();
+    } else {
+        root.MediaBox = factory();
+    }
+}(this, function () {
+    "use strict";
+
+    var MediaBox = function (element) {
+        if (!this || !(this instanceof MediaBox)) {
+            return new MediaBox(element);
+        }
+
+        this.selector = document.querySelectorAll(element);
+        this.root     = document.querySelector('body');
+        this.run();
+    };
+
+    MediaBox.prototype = {
+        run: function () {
+            Array.prototype.forEach.call(this.selector, function (el) {
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    var link = this.parseUrl(el.getAttribute('href'));
+                    this.render(link);
+                    this.close();
+                }.bind(this), false);
+            }.bind(this));
+        },
+        template: function (s, d) {
+            var p;
+
+            for (p in d) {
+                if (d.hasOwnProperty(p)) {
+                    s = s.replace(new RegExp('{' + p + '}', 'g'), d[p]);
+                }
+            }
+            return s;
+        },
+        parseUrl: function (url) {
+            var service = {},
+                matches;
+
+            if (matches = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/)) {
+                service.provider = "youtube";
+                service.id       = matches[2];
+            } else if (matches = url.match(/https?:\/\/(?:www\.)?vimeo.com\/(?:channels\/|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/)) {
+                service.provider = "vimeo";
+                service.id       = matches[3];
+            } else {
+                service.provider = "Unknown";
+                service.id       = '';
+            }
+
+            return service;
+        },
+        render: function (service) {
+            var embedLink,
+                lightbox;
+
+            if (service.provider === 'youtube') {
+                embedLink = 'https://www.youtube.com/embed/' + service.id;
+            } else if (service.provider === 'vimeo') {
+                embedLink = 'https://player.vimeo.com/video/' + service.id;
+            } else {
+                throw new Error("Invalid video URL");
+            }
+
+            lightbox = this.template(
+                '<div class="mediabox-wrap"><div class="mediabox-content"><span class="mediabox-close"></span><iframe src="{embed}?autoplay=1" frameborder="0" allowfullscreen></iframe></div></div>', {
+                    embed: embedLink
+                });
+
+            this.root.insertAdjacentHTML('beforeend', lightbox);
+        },
+        close: function () {
+            var wrapper = document.querySelector('.mediabox-wrap');
+
+            wrapper.addEventListener('click', function (e) {
+                if (e.target && e.target.nodeName === 'SPAN' && e.target.className === 'mediabox-close') {
+                    wrapper.classList.add('mediabox-hide');
+                    setTimeout(function() {
+                        this.root.removeChild(wrapper);
+                    }.bind(this), 500);
+                }
+            }.bind(this), false);
+        }
+    };
+
+    return MediaBox;
+}));
+
+
+//Initialize the MediaBox.
+
+MediaBox('.mediabox');
+</script>
