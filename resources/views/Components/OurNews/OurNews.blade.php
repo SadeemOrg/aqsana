@@ -14,7 +14,6 @@
         /* display:inline-block; */
         margin: 0 -32px;
     }
-
 </style>
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10 px-2">
     <div class="flex flex-row">
@@ -23,13 +22,16 @@
                 <a href="/">الرئيسية</a>
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
+            <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] text-[#101426]">
+                <a href="/">أخبارنا</a>
+            </li>
+            <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] text-[#349A37]">
             أخبارنا
             </li>
         </ul>
     </div>
 </div>
-
 <div class="bg-[#F2FFF285] py-8 mt-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative xl:mt-8 mb-7 lg:mb-0">
