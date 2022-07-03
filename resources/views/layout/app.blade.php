@@ -171,7 +171,7 @@
         var owl3 = $("#association-news-slider-2");
         owl3.owlCarousel({
             rtl:true,
-            loop:true,
+            loop:false,
                 margin:30,
                 stagePadding: 20,
                 dots:true,

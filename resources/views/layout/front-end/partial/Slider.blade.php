@@ -1,5 +1,5 @@
 <!--Slider Content -->
-<div class="owl-carousel owl-theme owl-loaded dots-style" id="association-news-slider">
+<div class="owl-carousel owl-theme owl-loaded dots-style mt-6" id="association-news-slider">
     @if(!empty($news))
     @foreach ($news as $new )
     @php
