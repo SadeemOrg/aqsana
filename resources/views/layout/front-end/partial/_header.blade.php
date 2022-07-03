@@ -1,4 +1,4 @@
-<header class="py-3 fixed w-full top-0 right-0 left-0 z-10 bg-white sticky-h">
+<header class="py-3 fixed w-full top-0 right-0 left-0 z-10 bg-white sticky-h z-20">
     <div dir="rtl" class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
 
         <!-- Start for mobile -->
