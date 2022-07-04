@@ -5,16 +5,16 @@
         @endphp
         <img src="/{{ $img }}" class="w-[165px] pt-10 " />
         <div class="hidden sm:flex flex-row flex-wrap justify-around items-center gap-7 pt-9">
+            @if(count($navfooters) > 0)
             @foreach ($navfooters as $navfooter)
-
             <a class="text-[16px] hover:text-[#349A37] duration-200" href={{ $navfooter->data->link->id }}>{{
                 $navfooter->data->name }}</a>
-
             @endforeach
+            @endif
         </div>
         <div class="flex flex-row justify-between gap-x-6 sm:hidden mt-6 text-right w-full">
             <div class="flex flex-col items-start justify-start text-right gap-y-2 text-[10px] ">
-                @if(count($navfooters)%2==0)
+                @if(count($navfooters)%2==0 && count($navfooters)>0)
                 @foreach ($navfooters as $key => $navfooter)
                 @if($key < count($navfooters)/2) <a class="text-[14px] text-right hover:text-[#349A37] duration-200"
                     href={{ $navfooter->data->link->id }}>{{ $navfooter->data->name }}</a>
