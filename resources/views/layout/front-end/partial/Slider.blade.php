@@ -6,7 +6,7 @@
     // dd($news);
     $img = 'storage/'.$new->image;
     @endphp
-    <div class="p-3 item bg-white Card_shadow relative rounded-[5px] " onclick="location.href='our-project/1'">
+    <div class="p-3 item bg-white Card_shadow relative rounded-[5px] " onclick="location.href='{{ route('getnewDetail', ['id' => $new->id]) }}'">
         <div
             class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px]  py-2 px-2 max-h-[390px]">
             <div class="flex flex-col justify-center lg:max-w-[160px] max-h-[380px] ">
