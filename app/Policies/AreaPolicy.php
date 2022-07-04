@@ -18,7 +18,7 @@ class AreaPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->type() == 'admin';
+        return ($user->type() == 'admin' || $user->type() == 'regular_area') ;
     }
 
     /**
@@ -30,7 +30,7 @@ class AreaPolicy
      */
     public function view(User $user, Area $area)
     {
-        return $user->type() == 'admin';
+        return ($user->type() == 'admin' || $user->type() == 'regular_area') ;
     }
 
     /**

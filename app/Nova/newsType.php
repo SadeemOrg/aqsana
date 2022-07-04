@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
 class newsType extends Resource
 {
     /**
@@ -21,7 +20,7 @@ class newsType extends Resource
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -43,7 +42,6 @@ class newsType extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make("Name","name"),
-            Textarea::make("Description","describtion"),
         ];
     }
 
