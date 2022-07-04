@@ -10,6 +10,7 @@ use App\Nova\User;
 use App\Nova\Area;
 use App\Nova\project;
 use App\Nova\News;
+use App\Nova\hisadAljameia;
 use Acme\Projecs\Projecs;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use App\Models\Bus;
@@ -63,8 +64,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Tree::make('Items', 'Items')->fields([
                                 Text::make('Name'),
                                 Link::make('Link')->resources([
-                                    News::class,
-                                    project::class  ,
+                                    project::class,
+                                    hisadAljameia::class ,
 
 
                                 ])
