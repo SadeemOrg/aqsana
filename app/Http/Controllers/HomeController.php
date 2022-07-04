@@ -4,9 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Mail;
+use App\Mail\TestMail;
+
+
 
 class HomeController extends Controller
 {
+
+
+
+
+
+    public function getProduct(int $id, string $slug)
+    {
+     dd("nbddj");
+    }
+
+
+
+
+
+
+
+
     public function index()
     {
 
@@ -37,23 +59,49 @@ class HomeController extends Controller
         $workplace = nova_get_setting('workplaceabout', 'default_value');
         return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace'));
     }
-
-    public function conctus()
+    public function conctusee(Request $request)
     {
-        return "okk";
+        return "asa";
+    }
+    public function conctus(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required|string',
+            'phone' => 'required|string',
+            'message' => 'required|string',
+
+        ]);
+
+        $mail = 'your_email_id@gmail.com';
+        Mail::to($mail)->send(new TestMail);
+
+        // return redirect()->back();
+        // $input = $request->all();
+        // $validator = Validator::make($input,[
+        //     'name'=> 'required|string',
+        //     'phone'=> 'required|string',
+        //     'message'=>'required|string|email',
+
+        // ]);
+        // if ($validator->fails()) {
+        //     return redirect()->back()->with('error', 'Something went wrong.');
+        // }
+        // return redirect()->back();
+
     }
 
 
-    public function news($type,$maintype)
+    public function news($type, $maintype)
     {
         $news = DB::table('news')->where([
             ['type', '=', $type],
             ['main_type', '=', $maintype],
         ])->paginate(8);
-        $mainType="news";
-        $type="hh";
+        $mainType = "news";
+        $type = "hh";
 
-  return view('Pages.our-news', compact('news','mainType','type'));
+        return view('Pages.our-news', compact('news', 'mainType', 'type'));
         // $news = DB::table('news')->orderBy('created_at', 'desc')->paginate(8);
         // return view('Pages.our-news', compact('news'));
     }
