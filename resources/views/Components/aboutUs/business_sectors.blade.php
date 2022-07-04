@@ -18,7 +18,7 @@
     @if(!empty($workplace))
         @foreach ($workplace as $oneworkplace)
         {{-- @php(dd($oneworkplace['data']['image'])) --}}
-    <div class="flex flex-col pt-16 gap-y-28 mb-32">
+    <div class="flex flex-col pt-16 lg:gap-y-28 gap-y-12 mb-12 lg:mb-32">
         <div class=" shaddow px-6 rounded-[16px]">
             <div class="flow-root rounded-lg bg-[#FFFFFF]  pb-8 ">
                 <div class="-mt-6">
