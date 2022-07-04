@@ -37,7 +37,7 @@
             class="flex flex-col sm:flex-row justify-between items-center mt-10 py-5 w-full border-t border-t-[#727272]">
             <ul class=" flex flex-start items-center gap-x-2 mb-4 sm:mb-0">
                 <li>
-                    <a class="facebook" href="#">
+                    <a class="facebook" href="https://www.facebook.com/aqsaassociation/" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 22 22" fill="none">
                             <circle cx="10.9328" cy="10.9328" r="10.4328" stroke="white"></circle>
                             <g clip-path="url(#clip0_21_1207)">
@@ -55,7 +55,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="instagram" href="#">
+                    <a class="instagram" href="https://www.instagram.com/aqsaquds" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 23 22" fill="none">
                             <circle cx="11.8117" cy="10.9328" r="10.4328" stroke="white"></circle>
                             <g clip-path="url(#clip0_21_1218)">
@@ -79,7 +79,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="twitter" href="#">
+                    <a class="twitter" href="https://twitter.com/AqsaAss" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 23 22" fill="none">
                             <circle cx="11.6908" cy="10.9328" r="10.4328" stroke="white"></circle>
                             <g clip-path="url(#clip0_21_1212)">
@@ -97,7 +97,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="youtube" href="#">
+                    <a class="youtube" href="https://www.youtube.com/channel/UCuumAw7vPSQJeC6FTOkH37g" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 23 22" fill="none">
                             <circle cx="11.5697" cy="10.9328" r="10.4328" stroke="white"></circle>
                             <g clip-path="url(#clip0_21_1202)">
