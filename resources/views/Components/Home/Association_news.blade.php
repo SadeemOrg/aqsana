@@ -15,15 +15,14 @@
         margin: 0 -32px;
     }
 </style>
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 ">
-    <div class="flex flex-row items-center justify-between mb-4">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:mt-24 mt-12 ">
+    <div class="flex flex-row items-center justify-between mb-8 lg:mb-4 mx-4 lg:mx-none">
         <div class="relative">
-            <h4 class="md:text-[18px] lg:text-[24px] xl:text-[30px]  font-FlatBold text-[#101426]">
+            <h4 class="md:text-[18px] lg:text-[24px] xl:text-[30px] font-FlatBold text-[#101426]">
                 أخبار الجمعية
             </h4>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-9 hidden xl:block"></div>
         </div>
-
         <div class="flex flex-row gap-x-2">
             <a href="#" class="text-[#349A37] text-[16px] font-noto_Regular ">
                 عرض المزيد

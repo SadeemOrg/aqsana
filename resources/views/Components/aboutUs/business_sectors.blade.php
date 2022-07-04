@@ -1,6 +1,13 @@
+@php
+  $business_sectors_main = nova_get_setting('main_section_text', 'default_value');
+  @endphp
+
 <div class="max-w-7xl mx-auto px-4 mt-16 lg:mt-32 sm:px-6 lg:px-8">
     <div class="relative mt-4 xl:mt-8">
-        <p class="font-FlatBold text-3xl text-center xl:text-right"> قطاعات عملنا المركزية</p>
+        <p class="font-FlatBold text-3xl text-center xl:text-right">
+            {{ $business_sectors_main }}
+            {{-- قطاعات عملنا المركزية --}}
+        </p>
         <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-9 hidden xl:block"></div>
     </div>
     <p class="text-[#101426] font-noto_Regular text-base md:text-lg text-justify lg:text-right pt-9 max-w-3xl">
@@ -8,26 +15,33 @@
         شكل توضع الفقرات في الصفحة التي يقرأها.
     </p>
     <!-- first card -->
-    <div class="flex flex-col pt-16 gap-y-28 mb-32">
+    @if(!empty($workplace))
+        @foreach ($workplace as $oneworkplace)
+        {{-- @php(dd($oneworkplace['data']['image'])) --}}
+    <div class="flex flex-col pt-16 lg:gap-y-28 gap-y-12 mb-12 lg:mb-32">
         <div class=" shaddow px-6 rounded-[16px]">
             <div class="flow-root rounded-lg bg-[#FFFFFF]  pb-8 ">
                 <div class="-mt-6">
-                    <img src="{{ asset('assets/image/Brand_icon.svg') }}" alt="finance_Brand" class="w-16 h-16 mr-6">
-                    <h3 class="mt-8 text-lg font-FlatBold text-[#101426]"> قطاع التنمية والدعم الاقتصادي</h3>
+                    <img src="{{ asset($oneworkplace['data']['image']) }}" alt="finance_Brand" class="w-16 h-16 mr-6">
+                    <h3 class="mt-8 text-lg font-FlatBold text-[#101426]">
+                        {{ $oneworkplace['data']['title'] }}
+                        {{-- قطاع التنمية والدعم الاقتصادي --}}
+                        </h3>
                     <p class="mt-4 text-sm text-justify md:text-right md:text-[16px] font-noto_Regular text-[#6B7280] max-w-6xl">
-                        تقوم الجمعية على تقديم الدعم الغذائي والصحي لكافة الشرائح المحتاجة من الداخل والقدس من خلال
+                        {{ $oneworkplace['data']['sup_title']}}
+                        {{-- تقوم الجمعية على تقديم الدعم الغذائي والصحي لكافة الشرائح المحتاجة من الداخل والقدس من خلال
                         مجموعة
                         كبيرة من المشاريع الموسمية مثل: افطار الصائمين ومشروع الأضاحي ومشروع الطرود الغذائية في الأقصى
                         ومدينة القدس ومدن الضفة الغربية والداخل الفلسطيني في الشهر الفضيل وعلى مدار العام، بالإضافة إلى
                         مشروع فرحة يتيم وكسوة عيد لأتيام مدينة القدس، إلى جانب تقديم الدعم الصحي والمواد الطبية
                         لمستشفيات
-                        المقاصد والمطلع وباقي المستشفيات في مدينة القدس حسب الحاجة ومرتين على الأقل في العام.
+                        المقاصد والمطلع وباقي المستشفيات في مدينة القدس حسب الحاجة ومرتين على الأقل في العام. --}}
                     </p>
                 </div>
             </div>
         </div>
         <!-- second card -->
-        <div class=" shaddow  rounded-[16px]">
+        {{-- <div class=" shaddow  rounded-[16px]">
             <div class="flow-root rounded-lg bg-[#FFFFFF] px-6 pb-8 ">
                 <div class="-mt-6">
                     <img src="{{ asset('assets/image/finance_Brand.svg') }}" alt="finance_Brand"
@@ -39,9 +53,9 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- third card -->
-        <div class=" shaddow px-6  rounded-[16px]">
+        {{-- <div class=" shaddow px-6  rounded-[16px]">
             <div class="flow-root rounded-lg bg-[#FFFFFF]  pb-8 ">
                 <div class="-mt-6">
                     <img src="{{ asset('assets/image/flafelAlaqsa.svg') }}" alt="flafelAlaqsa" class="w-16 h-16 mr-6">
@@ -57,9 +71,9 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- 4th card -->
-        <div class=" shaddow px-6  rounded-[16px]">
+        {{-- <div class=" shaddow px-6  rounded-[16px]">
             <div class="flow-root rounded-lg bg-[#FFFFFF]  pb-8 ">
                 <div class="-mt-6">
                     <img src="{{ asset('assets/image/Brand_icon.svg') }}" alt="Brand_icon" class="w-16 h-16 mr-6">
@@ -73,6 +87,8 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
+    @endforeach
+    @endif
 </div>

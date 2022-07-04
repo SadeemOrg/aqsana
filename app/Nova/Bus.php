@@ -13,6 +13,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\BelongsTo;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
+use Illuminate\Support\Facades\Auth;
 class Bus extends Resource
 {
     /**
@@ -22,7 +23,7 @@ class Bus extends Resource
      */
     public static $group = 'Admin';
     public static $model = \App\Models\Bus::class;
-
+    public static $displayInNavigation = false;
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
@@ -48,11 +49,13 @@ class Bus extends Resource
     public function fields(Request $request)
     {
 
+
+
         // 'Created_By','Update_By'
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make("Name","name"),
-            BelongsTo::make('company', 'company', \App\Nova\buses_company::class),
+            BelongsTo::make('company', 'company', \App\Nova\busescompany::class),
             Text::make("Bus Number","bus_number"),
             Number::make("Number person on bus","number_person_on_bus")->step(1.0),
             GoogleMaps::make('travel from', 'travel_from')
@@ -72,14 +75,36 @@ class Bus extends Resource
                 '2' => 'un available',
 
 
-                ])->displayUsingLabels()
-            ->hideWhenCreating()->
-            hideWhenUpdating(),
-                // belongsToMany::make('projects', 'projects', 'App\Nova\project'),
+                ])->displayUsingLabels(),
+                BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
+                hideWhenUpdating(),
+                BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
+                hideWhenUpdating(),
+                belongsTo::make('projects', 'projects')->hideWhenCreating()->
+                hideWhenUpdating(),
                 // belongsToMany::make('projects', 'projects', 'App\Nova\project'),
 
             ];
+
+
     }
+
+
+    // public static function afterCreate(Request $request, $model)
+    // {   $id = Auth::id();
+    //     $model->update([
+    //         'created_by'=>$id,
+    //         ]);
+    // }
+
+    // public static function beforeUpdate(Request $request, $model)
+    // {
+    //     $id = Auth::id();
+    //     $model->update([
+    //         'update_by'=>$id,
+
+    //     ]);
+    // }
 
     /**
      * Get the cards available for the request.

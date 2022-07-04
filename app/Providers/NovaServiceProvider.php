@@ -64,22 +64,17 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                 Text::make('Name'),
                                 Link::make('Link')->resources([
                                     News::class,
+                                    project::class  ,
 
 
                                 ])
                             ])->title('name'),
-
                             Image::make('Logo', 'logo')->disk('public'),
-
-
-
-
                         ]
                     ),
                     Tab::make(
                         'Heroo ',
                         [
-
                             FlexibleContent::make('Heroo', 'Heroo')
                                 ->addLayout(
                                     [
@@ -96,30 +91,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                         ]
                                     ]
                                 ),
-
-
-
                         ]
                     ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    //     ]
-                    // ),
-
                     Tab::make(
                         'Banner 1',
                         [
@@ -130,16 +103,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Text::make('text logo', 'text_loga_Banner_1'),
                             Text::make('bottom  text ', 'text_bottom_Banner_1'),
                             Text::make('bottom  link ', 'link_bottom_Banner_1'),
-
-
-
-
-
                         ]
                     ),
                     Tab::make(
                         'Projects News',
                         [
+                            Text::make('main text Projects News', 'text_main_projects_news'),
                             FlexibleContent::make('Projects_News', 'Projects_News')
                                 ->addLayout(
                                     [
@@ -167,34 +136,24 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                                 'multiple' => false,
                                                 'required' => true
                                             ],
-
                                         ]
                                     ]
                                 ),
                         ]
                     ),
-
                     Tab::make(
                         'Banner 2',
                         [
                             Image::make('main img', 'main_img_Banner_2'),
                             Text::make('main text', 'text_main_Banner_2'),
                             Text::make('sup text ', 'sup_text_Banner_2'),
-
                             Text::make('bottom view  text ', 'text_view_bottom_Banner_2'),
                             Text::make('bottom view link ', 'link_view_bottom_Banner_2'),
-
                             Text::make('bottom seen text ', 'text_seen_bottom_Banner_2'),
                             Text::make('bottom seen link ', 'link_seen_bottom_Banner_2'),
-
-
-
-
-
                         ]
                     ),
                     Tab::make(
-
                         'partner',
                         [
                             FlexibleContent::make('partner', 'partner')
@@ -210,7 +169,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                                 'multiple' => false,
                                                 'required' => true
                                             ],
-
                                             [
                                                 'type' => 'image',
                                                 'name' => 'image',
@@ -218,16 +176,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                                 'multiple' => false,
                                                 'required' => true
                                             ],
-
                                         ]
                                     ]
                                 ),
-
-
-
-
-
-
                         ]
                     ),
                     Tab::make(
@@ -235,9 +186,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         [
                             Text::make('main text', 'text_main_workplace'),
                             Text::make('sup text ', 'sup_text_workplace'),
-
-
-
                             FlexibleContent::make('workplace', 'workplace')
                                 ->addLayout(
                                     [
@@ -278,33 +226,19 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                                 'multiple' => false,
                                                 'required' => true
                                             ],
-
-
-
-
                                         ]
                                     ]
                                 ),
-
-
-
-
-
-
-
                         ]
                     ),
                     Tab::make(
-                        'vadio',
+                        'video',
                         [
-
-
-
-                            FlexibleContent::make('vadio', 'vadiohome')
+                            FlexibleContent::make('video', 'videohome')
                                 ->addLayout(
                                     [
-                                        'label' => 'vadio',
-                                        'name' => 'vadiohome',
+                                        'label' => 'video',
+                                        'name' => 'videohome',
                                         'fields' => [
                                             [
                                                 'type' => 'text',
@@ -320,20 +254,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                                 'multiple' => false,
                                                 'required' => true
                                             ],
-
-
-
-
                                         ]
                                     ]
                                 ),
-
-
-
-
-
-
-
                         ]
                     ),
                     Tab::make(
@@ -346,39 +269,23 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Text::make('Email', 'email_Connect'),
                             Text::make('Text bottome', 'text_bottom_Connect'),
                             Text::make('linl bottom', 'linl_bottom'),
-
                             Text::make('filed 1 ', 'filed1_Connect'),
                             Text::make('filed 2 ', 'filed2_Connect'),
                             Text::make('filed 3 ', 'filed3_Connect'),
                             Text::make('text form bottom', 'text_form_Connect'),
-
-
-
-
-
-
-
-
                         ]
                     ),
-
                     Tab::make('footer', [
-
                         Image::make('Logo', 'footer_logo')->disk('public'),
-
                         Tree::make('Items (EN)', 'Itemsfooter')->fields([
                             Text::make('Name'),
                             Link::make('Link')->resources([
                                 User::class,
                                 Area::class,
-
                             ])
                         ])->title('name'),
-
                     ]),
                     Tab::make('footer', []),
-
-
                 ]),
             ], [
                 'heroo' => 'array',
@@ -386,46 +293,33 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 'Projects_News' => 'array',
                 'partner' => 'array',
                 'workplace' => 'array',
-                'vadiohome' => 'array',
+                'videohome' => 'array',
                 // ...
             ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             new Tabs('about us', [
                 'main section'    => [
                     Text::make('text', 'main_section_text'),
-
-
                     Textarea::make('sup text','sup_text_main_aboutus'),
                     Image::make('image', 'main_section_image'),
                 ],
                 ' our vision' => [
-
                     Text::make('text', 'vision_section_text'),
                     Textarea::make('sup text','sup_text_vision_aboutus'),
-
                     Image::make('image', 'vision_section_image'),
-
                 ], ' Goals' => [
                     Flexible::make('Goals')
                         ->addLayout('Simple content section', 'wysiwyg', [
                             Text::make('text', 'Goals_section_text'),
                             Text::make('sup text', 'Goals_section_sup_text'),
-
                         ])
-
-
-
                 ],
                 ' achievements' => [
                     Image::make('image', 'main_section_image_achievements'),
                     Flexible::make('achievements')
                         ->addLayout('Simple content section', 'wysiwyg', [
                             Text::make('text', 'achievements_section_text'),
-
                         ])
-
-
-
                 ],
                 ' workplace' => [
                     Text::make('text', 'main_section_text'),
@@ -456,27 +350,17 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                         'multiple' => false,
                                         'required' => true
                                     ],
-
-
                                 ]
                             ]
                         ),
-
-
-
                 ],
-
             ]),
         ], [
             'workplaceabout' => 'array',
-
-            // ...
         ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             new Tabs('Connect with us', [
                 'Connect with us'    => [
-
-
                     Text::make('heder text', 'heder_text_main_Connectus'),
                     Text::make('main text', 'text_main_Connectus'),
                     Text::make('sup text text', 'sup_text_main_Connectus'),
@@ -484,19 +368,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('Email', 'email_Connectus'),
                     Text::make('Text bottome', 'text_bottom_Connectus'),
                     Text::make('linl bottom', 'linl_bottom_ Connectus'),
-
-
-
                 ],
                 'FORM'    => [
-
-
                     Text::make('filed 1 ', 'filed1_Connectus'),
                     Text::make('filed 2 ', 'filed2_Connectus'),
                     Text::make('filed 3 ', 'filed3_Connectus'),
                     Text::make('text form bottom', 'text_form_Connectus'),
-
-
                 ],
 
             ]),
@@ -505,8 +382,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             new Tabs('website Settings', [
                 'website SEO'    => [
-
-
                     Text::make('Site name', 'Site_name')->help('enter the site name'),
                     Text::make('Site description', 'Site_description'),
                     Text::make('Site keywords', 'Site_keywords'),
@@ -514,30 +389,20 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('Open Graph description', 'og_description'),
                     Image::make('Open Graph image', 'og_image'),
                     Image::make('First Name', 'first_name'),
-
-
-
                 ],
                 'website Soshal Midia ' => [
                     Text::make('Facebook', 'Facebook'),
                     Text::make('Instagram', 'Instagram'),
                     Text::make('whatsapp', 'whatsapp'),
                     Text::make('youtube', 'youtube'),
-
-
                 ], 'website settings' => [
                     Text::make('phone', 'phone'),
                     Text::make('email', 'email'),
                     Text::make('address', 'address'),
-
-
-
                 ],
-
             ]),
         ]);
     }
-
 
     /**
      * Register the Nova routes.
@@ -565,7 +430,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             return true;
         });
     }
-
     /**
      * Get the cards that should be displayed on the default Nova dashboard.
      *
@@ -575,7 +439,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [];
     }
-
     /**
      * Get the extra dashboards that should be displayed on the Nova dashboard.
      *
@@ -585,7 +448,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [];
     }
-
     /**
      * Get the tools that should be listed in the Nova sidebar.
      *
@@ -594,14 +456,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-
             new NovaSettings,
             // ( new NovaSettings)->canSee(function ($request) {
             //     $user = Auth::user();
             //     return  ($user->type() == 'website_admin' ) ;
             // }),
             // new projecs
-
         ];
     }
     /**

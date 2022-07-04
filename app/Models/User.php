@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -61,15 +63,13 @@ class User extends Authenticatable
 
     public function Area()
     {
-        return $this->belongsTo('App\Models\Area','admin_id');
+        return $this->hasOne('App\Models\Area','admin_id');
     }
+
     public function Alhisalat()
     {
         return $this->hasMany('App\Models\Alhisalat','giver');
     }
-
-
-
 
 
     public function type ()

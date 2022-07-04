@@ -11,7 +11,6 @@ class CreateBusesCompaniesTable extends Migration
      *
      * @return void
      */
-
     public function up()
     {
         Schema::create('buses_companies', function (Blueprint $table) {
@@ -23,12 +22,12 @@ class CreateBusesCompaniesTable extends Migration
             $table->string('contact_person');
             $table->string('phone_number');
             $table->char('status', 1)->default('1');
-            $table->unsignedBigInteger('Created_By')->nullable();
-            $table->unsignedBigInteger('Update_By')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('update_by')->nullable();
 
-            $table->foreign('Created_By')->references('id')->on('users')
+            $table->foreign('created_by')->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->foreign('Update_By')->references('id')->on('users')
+            $table->foreign('update_by')->references('id')->on('users')
                 ->onDelete('cascade');
             $table->timestamps();
         });

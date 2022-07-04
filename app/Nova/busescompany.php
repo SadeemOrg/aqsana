@@ -6,16 +6,19 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
-class buses_company extends Resource
+use Illuminate\Support\Facades\Auth;
+
+class busescompany extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\buses_company::class;
+    public static $model = \App\Models\busescompany::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -24,6 +27,7 @@ class buses_company extends Resource
      */
     public static $title = 'name';
     public static $group = 'Admin';
+    public static $priority = 3;
     public static function label()
     {
         return __('Buses Company');
@@ -67,11 +71,31 @@ class buses_company extends Resource
             ->hideWhenCreating()->
             hideWhenUpdating(),
 
+            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
+            hideWhenUpdating(),
+            BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
+            hideWhenUpdating(),
+
 
 
         ];
     }
 
+    public static function afterCreate(Request $request, $model)
+    {   $id = Auth::id();
+        $model->update([
+            'created_by'=>$id,
+            ]);
+    }
+
+    public static function beforeUpdate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->update([
+            'update_by'=>$id,
+
+        ]);
+    }
     /**
      * Get the cards available for the request.
      *

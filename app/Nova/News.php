@@ -15,6 +15,7 @@ use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
 use Laravel\Nova\Fields\BelongsTo;
 use Manogi\Tiptap\Tiptap;
 use Waynestate\Nova\CKEditor;
+use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 
 class News extends Resource
 {
@@ -48,21 +49,75 @@ class News extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Title",'title'),
-          BelongsTo::make("newsType",'newsTypes'),
+            Text::make("Title", 'title'),
+            //   BelongsTo::make("newsType",'newsTypes'),
             Textarea::make('description', 'description'),
+
+            Select::make("main Type", "main_type")
+                ->options([
+                    '1' => 'News',
+                    '2' => 'alqudus walmasjid alaqsaa',
+                    '3' => 'alqudus walmasjid alaqsaa',
+                    '4' => 'hisad aljameia',
+
+                ])->displayUsingLabels(),
+
+
+            NovaDependencyContainer::make([
+                Select::make(" type", "type")
+                    ->options([
+                        '1' => 'News',
+                        '2' => 'Blogs',
+                        '3' => 'Report',
+                    ])->displayUsingLabels(),
+            ])->dependsOn('main_type', '1'),
+
+
+            NovaDependencyContainer::make([
+                Select::make(" type", "type")
+                    ->options([
+                        '1' => 'News',
+                        '2' => 'Blogs',
+                        '3' => 'Report',
+                    ])->displayUsingLabels(),
+            ])->dependsOn('main_type', '2'),
+
+
+            NovaDependencyContainer::make([
+                Select::make(" type", "type")
+                    ->options([
+                        '1' => 'News',
+                        '2' => 'almas alsamel',
+                    ])->displayUsingLabels(),
+            ])->dependsOn('main_type', '3'),
+
+
+
             CKEditor::make('Contents', 'contents')->hidefromindex(),
 
 
-            Image::make('Image','image')->disk('public')->prunable(),
+            Image::make('Image', 'image')->disk('public')->prunable(),
             ArrayImages::make('Pictures', 'pictures')
-            ->disk('public'),
+                ->disk('public'),
+
+
+
+            NovaDependencyContainer::make([])->dependsOn('is_reported', '1'),
 
         ];
+    }
+    public static function afterCreate(Request $request, $model)
+    {
+        // $user = Auth::user();
+
+        // $model->update([
+        //     'main_type'=>'1',
+        // ]);
     }
 
     /**

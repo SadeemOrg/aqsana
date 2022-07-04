@@ -31,7 +31,7 @@ class Area extends Resource
     public static $title = 'name';
 
 
-    public static $priority = 2;
+    public static $priority = 1;
 
 
     /**
@@ -49,6 +49,23 @@ class Area extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        $user = Auth::user();
+        $id = Auth::id();
+        if ($user->type() == 'admin') {
+            return $query;
+        } else {
+            $areas = DB::table('areas')->where('admin_id', $id)
+                ->select('areas.name')->get();
+            $stack = array();
+            foreach ($areas as $key => $value) {
+                array_push($stack, $value->name);
+            }
+            return $query->whereIn('name', $stack);
+        }
+    }
     public function fields(Request $request)
     {
         return [
@@ -56,21 +73,27 @@ class Area extends Resource
             Text::make('Name','name'),
             Text::make('Describtion','describtion'),
 
-            Select::make('admin','admin_id',)
+            Select::make('admin','admin_id')
             ->options( function() {
                 $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
 
                 $user_type_admin_array =  array();
 
                 foreach($users as $user) {
+                    if ($user->Area == null  ) {
+
+
                     $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
+                }
                 }
 
                 return $user_type_admin_array;
                })->hideFromIndex()->hideFromDetail(),
-               BelongsTo::make('admin city', 'admin', \App\Nova\User::class)->hideWhenCreating()->
-                  hideWhenUpdating(),
+                BelongsTo::make('admin city', 'admin', \App\Nova\User::class)->hideWhenCreating()->
+                    hideWhenUpdating(),
                   BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
+                  hideWhenUpdating(),
+                  BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
                   hideWhenUpdating(),
 
 
@@ -86,6 +109,17 @@ class Area extends Resource
 
         ]);
     }
+
+    public static function beforeUpdate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->update([
+            'update_by'=>$id,
+
+        ]);
+    }
+
+
     /**
      * Get the cards available for the request.
      *

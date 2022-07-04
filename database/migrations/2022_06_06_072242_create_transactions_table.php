@@ -11,6 +11,7 @@ class CreateTransactionsTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
@@ -25,7 +26,7 @@ class CreateTransactionsTable extends Migration
             $table->string('Rate')->nullable();
 
 
-            $table->time('projec_start');
+
             $table->integer('approval')->nullable();
             $table->string("reason_of_reject")->nullable();
             $table->time('transaction_date');

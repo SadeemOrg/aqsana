@@ -1,164 +1,32 @@
 <!--Slider Content -->
-<div class="owl-carousel owl-theme owl-loaded dots-style" id="association-news-slider">
-    <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[430px]" onclick="location.href='our-project/1'">
-        <div class="absolute leftline"></div>
+<div class="owl-carousel owl-theme owl-loaded dots-style mt-6" id="association-news-slider">
+    @if(!empty($news))
+    @foreach ($news as $new )
+    @php
+    // dd($news);
+    $img = 'storage/'.$new->image;
+    @endphp
+    <div class="p-3 item bg-white Card_shadow relative rounded-[5px] " onclick="location.href='{{ route('getnewDetail', ['id' => $new->id]) }}'">
         <div
-            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-5 px-2 lg:max-h-[100%]">
-            <div class="flex flex-col lg:max-w-[170px] ">
-                <p class="text-[#349A37] text-[16px] pt-4 text-right leading-[1.3]">
-                    اكثر من 10 الاف مشارك بمعسكر "القدس اولا 13" الذي نظمته الحركة الاسلامية وجمعية الاقصى
+            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px]  py-2 px-2 max-h-[390px]">
+            <div class="flex flex-col justify-center lg:max-w-[160px] max-h-[380px] ">
+                <p class="text-[#349A37] text-[14px] pt-4 text-right lg:min-h-[90px]">
+                    {{Illuminate\Support\Str::limit($new->title,100)  }}
                 </p>
                 <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 ">أبريل 20, 2022</p>
-                <p class="text-xs text-[#101426] font-noto_Regular pt-2">
-                    نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف
-                    والمقدسات،
-                    للسنة
-                    الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
-                    لاستقبال
-                    المصلين في شهر رمضان المبارك، ولدعم...
+                <p class="text-[#101426]  pt-2 text-xs font-noto_Regular ">
+                    {{ Illuminate\Support\Str::limit($new->description,240) }}
+                    @if(strip_tags(Str::length($new->description)) > 240)
                     <a href="#">
                         <span class="text-[#349A37] text-[12px]">عرض المزيد</span>
                     </a>
+                    @endif
                 </p>
-
             </div>
-            <img class=" lg:block lg:max-w-[200px] h-[250px] sm:h-[350px] md:h-[300px] object-cover rounded-[5px] my-4"
-                src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq" />
+            <img class=" lg:block lg:max-w-[185px] h-[250px] sm:h-[350px] md:h-[320px] object-cover rounded-[5px] my-6"
+            src="{{ asset($img) }}" alt="people_on_Mousq" />
         </div>
     </div>
-    <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[430px]" onclick="location.href='our-project/1'">
-        <div class="absolute leftline"></div>
-        <div
-            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-5 px-2 lg:max-h-[100%]">
-            <div class="flex flex-col lg:max-w-[170px] ">
-                <p class="text-[#349A37] text-[16px] pt-4 text-right leading-[1.3]">
-                    اكثر من 10 الاف مشارك بمعسكر "القدس اولا 13" الذي نظمته الحركة الاسلامية وجمعية الاقصى
-                </p>
-                <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 ">أبريل 20, 2022</p>
-                <p class="text-xs text-[#101426] font-noto_Regular pt-2">
-                    نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف
-                    والمقدسات،
-                    للسنة
-                    الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
-                    لاستقبال
-                    المصلين في شهر رمضان المبارك، ولدعم...
-                    <a href="#">
-                        <span class="text-[#349A37] text-[12px]">عرض المزيد</span>
-                    </a>
-                </p>
-
-            </div>
-            <img class=" lg:block lg:max-w-[200px] h-[250px] sm:h-[350px] md:h-[300px] object-cover rounded-[5px] my-4"
-                src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq" />
-        </div>
-    </div>
-    <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[430px]" onclick="location.href='our-project/1'">
-        <div class="absolute leftline"></div>
-        <div
-            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-5 px-2 lg:max-h-[100%]">
-            <div class="flex flex-col lg:max-w-[170px] ">
-                <p class="text-[#349A37] text-[16px] pt-4 text-right leading-[1.3]">
-                    اكثر من 10 الاف مشارك بمعسكر "القدس اولا 13" الذي نظمته الحركة الاسلامية وجمعية الاقصى
-                </p>
-                <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 ">أبريل 20, 2022</p>
-                <p class="text-xs text-[#101426] font-noto_Regular pt-2">
-                    نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف
-                    والمقدسات،
-                    للسنة
-                    الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
-                    لاستقبال
-                    المصلين في شهر رمضان المبارك، ولدعم...
-                    <a href="#">
-                        <span class="text-[#349A37] text-[12px]">عرض المزيد</span>
-                    </a>
-                </p>
-
-            </div>
-            <img class=" lg:block lg:max-w-[200px] h-[250px] sm:h-[350px] md:h-[300px] object-cover rounded-[5px] my-4"
-                src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq" />
-        </div>
-    </div>
-    <div class="p-3 item bg-white Card_shadow relative rounded-[5px]  lg:max-h-[430px]" onclick="location.href='our-project/1'">
-        <div class="absolute leftline"></div>
-        <div
-            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-5 px-2 lg:max-h-[100%]">
-            <div class="flex flex-col lg:max-w-[170px] ">
-                <p class="text-[#349A37] text-[16px] pt-4 text-right leading-[1.3]">
-                    اكثر من 10 الاف مشارك بمعسكر "القدس اولا 13" الذي نظمته الحركة الاسلامية وجمعية الاقصى
-                </p>
-                <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 ">أبريل 20, 2022</p>
-                <p class="text-xs text-[#101426] font-noto_Regular pt-2">
-                    نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف
-                    والمقدسات،
-                    للسنة
-                    الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
-                    لاستقبال
-                    المصلين في شهر رمضان المبارك، ولدعم...
-                    <a href="#">
-                        <span class="text-[#349A37] text-[12px]">عرض المزيد</span>
-                    </a>
-                </p>
-
-            </div>
-            <img class=" lg:block lg:max-w-[200px] h-[250px] sm:h-[350px] md:h-[300px] object-cover rounded-[5px] my-4"
-                src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq" />
-        </div>
-    </div>
-    <!--second Slider -->
-    {{-- <div class="p-3 item bg-white Card_shadow mt-4 lg:mt-16 relative rounded-[5px]  max-h-[390px]"
-        onclick="location.href='our-project/1'">
-        <div class="absolute leftline"></div>
-        <div
-            class="flex flex-row items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-3 px-2 max-h-[340px]">
-            <div class="flex flex-col max-w-[170px] ">
-                <p class="text-[#349A37] text-[16px] pt-4 text-right ">
-                    اكثر من 10 الاف مشارك بمعسكر "القدس اولا 13" الذي نظمته الحركة الاسلامية وجمعية الاقصى
-                </p>
-                <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 ">أبريل 20, 2022</p>
-                <p class="text-xs text-[#101426] font-noto_Regular pt-2">
-                    نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف
-                    والمقدسات،
-                    للسنة
-                    الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
-                    لاستقبال
-                    المصلين في شهر رمضان المبارك، ولدعم...
-                    <a href="#">
-                        <span class="text-[#349A37] text-[12px]">عرض المزيد</span>
-                    </a>
-                </p>
-
-            </div>
-            <img class="max-w-[190px] h-72 mt-4 rounded-[5px]" src="{{ asset('assets/image/AlaqsaSun.png') }}"
-                alt="people_on_Mousq" />
-        </div>
-    </div> --}}
-    <!--third Slider -->
-    {{-- <div class="p-3 item bg-white Card_shadow mt-4 lg:mt-16 relative rounded-[5px]  max-h-[390px]"
-        onclick="location.href='our-project/1'">
-        <div class="absolute leftline"></div>
-        <div
-            class="flex flex-row items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px] pt-1 pb-3 px-2 max-h-[340px]">
-            <div class="flex flex-col max-w-[170px] ">
-                <p class="text-[#349A37] text-[16px] pt-4 text-right ">
-                    اكثر من 10 الاف مشارك بمعسكر "القدس اولا 13" الذي نظمته الحركة الاسلامية وجمعية الاقصى
-                </p>
-                <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 ">أبريل 20, 2022</p>
-                <p class="text-xs text-[#101426] font-noto_Regular pt-2">
-                    نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف
-                    والمقدسات،
-                    للسنة
-                    الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
-                    لاستقبال
-                    المصلين في شهر رمضان المبارك، ولدعم...
-                    <a href="#">
-                        <span class="text-[#349A37] text-[12px]">عرض المزيد</span>
-                    </a>
-                </p>
-
-            </div>
-            <img class="max-w-[190px] h-72 rounded-[5px] mt-4" src="{{ asset('assets/image/Alquds_First.png') }}"
-                alt="people_on_Mousq" />
-        </div>
-    </div> --}}
-
+@endforeach
+@endif
 </div>

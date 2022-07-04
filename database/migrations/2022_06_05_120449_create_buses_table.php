@@ -17,6 +17,7 @@ class CreateBusesTable extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('project_id');
             $table->string('bus_number');
             $table->integer('number_person_on_bus');
             $table->json('travel_from')->nullable();
@@ -25,12 +26,12 @@ class CreateBusesTable extends Migration
             $table->string('driver');
             $table->string('phone_number');
             $table->char('status', 1);
-            $table->unsignedBigInteger('Created_By')->nullable();
-            $table->unsignedBigInteger('Update_By')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('update_by')->nullable();
 
-            // $table->foreign('Created_By')->references('id')->on('users')
+            // $table->foreign('created_by')->references('id')->on('users')
             //     ->onDelete('cascade');
-            // $table->foreign('Update_By')->references('id')->on('users')
+            // $table->foreign('update_by')->references('id')->on('users')
             //     ->onDelete('cascade');
             // $table->foreign('company_id')->references('id')->on('buses_company')
             //     ->onDelete('cascade');

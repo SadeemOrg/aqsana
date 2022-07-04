@@ -1,4 +1,4 @@
-<div class="flex justify-center mt-16">
+{{-- <div class="flex justify-center mt-16">
     <nav aria-label="Page navigation example">
         <ul class="flex list-style-none gap-x-1">
             <li class="page-item">
@@ -19,4 +19,9 @@
             </li>
         </ul>
     </nav>
-</div>
+</div> --}}
+
+
+     <!-- Pagination-->
+
+  {{ $news->links() }}

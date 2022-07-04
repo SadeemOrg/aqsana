@@ -19,8 +19,12 @@ class CreateAreasTable extends Migration
             $table->string('describtion');
             $table->unsignedBigInteger('admin_id');
             $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('update_by')->nullable();
+
             $table->foreign('created_by')->references('id')->on('users')
-            ->onDelete('cascade');
+                ->onDelete('cascade');
+            $table->foreign('update_by')->references('id')->on('users')
+                ->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('users')
             ->onDelete('cascade');
             $table->timestamps();

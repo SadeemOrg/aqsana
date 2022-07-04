@@ -1,35 +1,38 @@
 <?php
-
 namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\Trix;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Select;
+
 use Laravel\Nova\Fields\Text;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
+use Laravel\Nova\Fields\BelongsTo;
 use Manogi\Tiptap\Tiptap;
 use Waynestate\Nova\CKEditor;
-class RelatedArticles extends Resource
+
+class Report extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\RelatedArticles::class;
-    public static $group = 'website';
-    public static $displayInNavigation = false;
+    public static $model = \App\Models\News::class;
+
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'id';
-    public static $priority = 6;
-
+    public static $title = 'title';
+    public static $group = 'website';
+    public static $priority = 5;
+    public static $displayInNavigation = false;
 
     /**
      * The columns that should be searched.
@@ -46,22 +49,36 @@ class RelatedArticles extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+
+        return $query->where('main_type', '2');
+
+     }
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make("Title",'title'),
+          BelongsTo::make("newsType",'newsTypes'),
+            Textarea::make('description', 'description'),
+            CKEditor::make('Contents', 'contents')->hidefromindex(),
 
-            CKEditor::make('description', 'description'),
-            // ImageUploadPreview::make('Image','image')->disk('public')->path('image_news'),
+
             Image::make('Image','image')->disk('public')->prunable(),
             ArrayImages::make('Pictures', 'pictures')
-            ->disk('public')
-            ->path('pictures_news'),
+            ->disk('public'),
 
         ];
     }
+    public static function afterCreate(Request $request, $model)
+    {
+        // $user = Auth::user();
 
+        $model->update([
+            'main_type'=>'2',
+        ]);
+    }
     /**
      * Get the cards available for the request.
      *
