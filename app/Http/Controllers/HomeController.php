@@ -92,14 +92,22 @@ class HomeController extends Controller
     }
 
 
-    public function news($type, $maintype)
+    public function news($maintype,$type )
     {
         $news = DB::table('news')->where([
-            ['type', '=', $type],
             ['main_type', '=', $maintype],
+            ['type', '=', $type],
         ])->paginate(8);
-        $mainType = "news";
-        $type = "hh";
+        $mainType = DB::table('news_types')->where([
+            ['main_type', '=', $maintype],
+            ['type', '=', '0'],
+        ])->first();
+
+
+        $type = DB::table('news_types')->where([
+            ['main_type', '=', $maintype],
+            ['type', '=', $type ],
+        ])->first();
 
         return view('Pages.our-news', compact('news', 'mainType', 'type'));
         // $news = DB::table('news')->orderBy('created_at', 'desc')->paginate(8);

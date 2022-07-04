@@ -22,7 +22,7 @@ class City extends Resource
      */
     public static $group = 'Admin';
     public static $model = \App\Models\City::class;
-
+    public static $priority = 2;
     /**
      * The single value that should be used to represent the resource when being displayed.
      *

@@ -31,7 +31,7 @@ class Area extends Resource
     public static $title = 'name';
 
 
-    public static $priority = 2;
+    public static $priority = 1;
 
 
     /**
