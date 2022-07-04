@@ -23,11 +23,11 @@
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] text-[#101426]">
-                <a href="/">أخبارنا</a>
+                <a href="/">{{ $mainType->name }}</a>
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] text-[#349A37]">
-                أخبارنا
+                {{ $type->name }}
             </li>
         </ul>
     </div>
@@ -35,7 +35,7 @@
 <div class="bg-[#F2FFF285] py-8 mt-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative xl:mt-8 mb-7 lg:mb-0">
-            <p class="font-FlatBold text-3xl text-center xl:text-right"> أخبارانا </p>
+            <p class="font-FlatBold text-3xl text-center xl:text-right"> {{ $type->name }} </p>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
         <div class="lg:grid lg:grid-cols-2 gap-x-8 gap-y-6 text-center lg:text-right">
@@ -52,7 +52,7 @@
                 <div class="max-w-[600px] bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
                     <div onclick="location.href='{{ route('getnewDetail', ['id' => $new->id]) }}'">
                         <img src="{{ asset($img) }}" alt="people_on_Mousq" class="w-full lg:w-[550px] lg:max-h-52">
-                        <p class="text-[#349A37] text-[16px] pt-4 text-right max-w-[480px] px-4">
+                        <p class="text-[#349A37] text-[16px] pt-4 text-right max-w-none px-4">
                             {{Illuminate\Support\Str::limit($new->title,113) }}
                             {{-- اكثر من 10 الاف مشارك بمعسكر "القدس اولا" الذي نظمته الحركة الاسلامية وجمعية الاقصى
                             --}}
