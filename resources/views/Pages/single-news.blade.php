@@ -20,9 +20,6 @@
         /* display:inline-block; */
         margin: 0 -32px;
     }
-    .paragraph_content~ p{
-        margin-right: 16px;
-    }
 </style>
 
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10 px-2">
@@ -74,7 +71,7 @@
                     أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية الأقصى,
                     مشاريعنا
                 </p>
-                <p class="text-base text-[#101426] font-noto_Regular px-4 pt-2 paragraph_content">
+                <p class="text-base text-[#101426] font-noto_Regular px-4 pt-2 ">
                     {!!  $news_detail->description !!}
                     {{-- نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف والمقدسات،
                     للسنة

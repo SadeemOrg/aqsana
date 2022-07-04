@@ -13,12 +13,12 @@
         $img = 'storage/'.$lastnew->image;
         $id = $lastnew->id
         @endphp
-        <div class="p-3 rounded-[5px] common-shadow mb-6 xl:mb-0" onclick="location.href='{{ route('getnewDetail', ['id' => $lastnew->id]) }}'">
+        <div class="p-3 rounded-[5px] common-shadow mb-6 xl:mb-0 hover:cursor-pointer" onclick="location.href='{{ route('getnewDetail', ['id' => $lastnew->id]) }}'">
             <div class=" md:h-[390px] sm:max-w-[700px] bg-[#E4FFE585] rounded-[5px] py-5 px-4">
-                <img src="{{ asset($img) }}" alt="people_on_Mousq" class="w-full h-[254px] object-cover rounded-[5px]">
+                <img src="{{ asset($img) }}" alt="people_on_Mousq" class="w-full h-[254px] object-fill rounded-[5px]">
                 <div class="pr-6">
-                <p class="text-[#349A37]  pt-4 text-right  font-bold text-lg pl-2 ">{{Illuminate\Support\Str::limit($lastnew->title,35)  }}
-               <span class="text-black"> {{  Illuminate\Support\Str::limit($lastnew->description,78)  }}</span>
+                <p class="text-[#349A37]  pt-4 text-right  font-bold text-lg pl-2 ">{{Illuminate\Support\Str::limit($lastnew->title,55)  }}
+               <span class="text-black"> {{  Illuminate\Support\Str::limit($lastnew->description,60)  }}</span>
                 </p>
             </div>
         </div>
