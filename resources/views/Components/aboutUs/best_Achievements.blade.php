@@ -5,7 +5,9 @@
     height:5px;
     background: #349A37;
     vertical-align: middle;
-    display:inline-block;
+    position: absolute;
+    top: 50px;
+    right: -10px;
     margin:0 4px;
 }
 
@@ -27,20 +29,13 @@
                 class="block xl:hidden mt-12 object-cover" />
            @if(!empty($achievements))
            @foreach ($achievements as $achievement)
-           <p class="dashedBefore max-w-2xl pt-9 font-noto_Regular text-base sm:text-lg text-justify sm:text-right text-[#101426]">
-            {{ $achievement->attributes->achievements_section_text }}
-            </p>
+           <div class="relative  w-full">
+           <div class="dashedBefore max-w-2xl pt-9 font-noto_Regular text-base sm:text-lg text-justify sm:text-right text-[#101426]">
+            <p class="mr-4">{{ $achievement->attributes->achievements_section_text }}</p>
+            </div>
+        </div>
             @endforeach
             @endif
-            {{-- <p class="dashedBefore max-w-2xl pt-9 font-noto_Regular text-base sm:text-lg text-justify sm:text-right text-[#101426]">
-                ترميم وتأهيل المسجد الأقصى القديم وإعادة فتحه للصلاة في ايلول عام عام 1999 م.
-            </p> --}}
-            {{-- <p class="dashedBefore max-w-2xl pt-9 font-noto_Regular text-base sm:text-lg text-justify sm:text-right text-[#101426] ">
-                اتمام مشروع المسح الشامل لكافة المقدسات والأوقاف الإسلامية في أراضي الداخل الفلسطيني 1948.
-            </p> --}}
-            {{-- <p class="dashedBefore max-w-2xl pt-9 font-noto_Regular text-base sm:text-lg text-justify sm:text-right text-[#101426] w-full ">
-                إقامة مصلى في شارع عابر البلاد رقم 6.
-            </p> --}}
         </div>
         <img src="{{ asset($aboutUs_main) }}" alt="AlaqsaSun"
             class="xl:basis-2/5 max-w-[550px] max-h-[460px] xl:block hidden" />
