@@ -26,28 +26,43 @@
             <p class="text-[#8F9BB3] text-[16px] font-FlatBold pt-6 pb-4">هل تريد المشاركة بالتبرع؟ <a href="#"
                     class="text-[#349A37]">{{ $text_Button }}</a></p>
         </div>
-        {{-- <form method="POST" action="{{ route('conctus') }}"> --}}
-            <form method="POST" action="{{ route('conctus') }}" class=" h-[432px] basis-1/2 w-full lg:mr-0">
+
+            <form method="get" action="{{ route('conctus') }}" class=" h-[432px] basis-1/2 w-full lg:mr-0">
                 @csrf
                 <div class=" ltr pt-10 px-6 lg:px-0">
                     <input type="text" name="name" placeholder=" الاسم الكامل"
                         class="rtl block w-full  border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
                 </div>
+                @error('name')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
                 <div class=" ltr pt-6 px-6 lg:px-0">
                     <input type="text" name="phone" placeholder="رقم الهاتف"
                         class="rtl block w-full border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
                 </div>
+                @error('phone')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
                 <div class="  pt-6 px-6 lg:px-0">
                     <textarea rows="4" name="message" id="order_note" placeholder="رسالتك" required=""
                         class="w-full inline-flex items-center text-right  justify-center border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4"></textarea>
                 </div>
+                @error('message')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
             <div class=" my-4 mr-6 lg:mr-0">
                 <button type="submit" {{-- onclick="location.href='{{route('product',$bestSell->slug)}} '" --}}
                     class="duration-200 flex justify-center items-center px-5 lg:px-7 py-3 mt-2 text-[13px] font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
                     ارسال
                 </button>
             </div>
-        {{-- </form> --}}
+
     </form>
     </div>
 </div>

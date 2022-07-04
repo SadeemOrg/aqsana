@@ -10,7 +10,7 @@ class City extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','area_id','name','created_by','update_by'
+        'id','area_id','name','created_by','update_by','admin_id'
     ];
 
     protected $hidden = [
@@ -29,7 +29,10 @@ class City extends Model
     // {
     //     return $this->hasMany('App\Models\Alhisalat', 'city_id' );
     // }
-
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\User','admin_id');
+    }
 
     public function Area()
     {

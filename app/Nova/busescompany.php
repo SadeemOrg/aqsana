@@ -27,6 +27,7 @@ class busescompany extends Resource
      */
     public static $title = 'name';
     public static $group = 'Admin';
+    public static $priority = 3;
     public static function label()
     {
         return __('Buses Company');

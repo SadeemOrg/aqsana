@@ -31,7 +31,7 @@ class Area extends Resource
     public static $title = 'name';
 
 
-    public static $priority = 2;
+    public static $priority = 1;
 
 
     /**
@@ -49,6 +49,23 @@ class Area extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        $user = Auth::user();
+        $id = Auth::id();
+        if ($user->type() == 'admin') {
+            return $query;
+        } else {
+            $areas = DB::table('areas')->where('admin_id', $id)
+                ->select('areas.name')->get();
+            $stack = array();
+            foreach ($areas as $key => $value) {
+                array_push($stack, $value->name);
+            }
+            return $query->whereIn('name', $stack);
+        }
+    }
     public function fields(Request $request)
     {
         return [

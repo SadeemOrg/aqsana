@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\newsType;
 use Illuminate\Database\Seeder;
 
@@ -13,44 +14,83 @@ class newsTypeSeeder extends Seeder
      */
     public function run()
     {
-        $Roles = [
+        $newsTypes = [
             [
-                'code_role' => 'admin',
-                'role' => 'Admin',
+                'name' => 'أخبار',
+                'main_type' => '1',
+                'type' => '0',
             ],
             [
-                'code_role' => 'financial_user',
-                'role' => 'Financial User',
+                'name' => 'أخبار',
+                'main_type' => '1',
+                'type' => '1',
             ],
             [
-                'code_role' => 'normal_financial_user',
-                'role' => 'normal financial user',
+                'name' => 'مقالات',
+                'main_type' => '1',
+                'type' => '2',
             ],
             [
-                'code_role' => 'regular_area',
-                'role' => 'Regular Area',
+                'name' => 'إحصاءات',
+                'main_type' => '1',
+                'type' => '3',
             ],
-            [
-                'code_role' => 'Volunteer',
-                'role' => 'Volunteer',
-            ],
-            [
-                'code_role' => 'regular_uses',
-                'role' => 'Regular Uses',
-            ],
-            [
-                'code_role' => 'website_admin',
-                'role' => 'Website Admin',
-            ]
 
+            [
+                'name' => 'القدس والمسجد الأقصى',
+                'main_type' => '2',
+                'type' => '0',
+            ],
+            [
+                'name' => 'أخبار',
+                'main_type' => '2',
+                'type' => '1',
+            ],
+            [
+                'name' => 'مقالات',
+                'main_type' => '2',
+                'type' => '2',
+            ],
+            [
+                'name' => 'إحصاءات',
+                'main_type' => '2',
+                'type' => '3',
+            ],
+
+            [
+                'name' => 'الأوقاف والمقدسات',
+                'main_type' => '3',
+                'type' => '0',
+            ],
+            [
+                'name' => 'أخبار',
+                'main_type' => '3',
+                'type' => '1',
+            ],
+            [
+                'name' => ' مشروع المسح الشامل',
+                'main_type' => '3',
+                'type' => '2',
+            ],
+
+            [
+                'name' => '  حصاد الجمعية',
+                'main_type' => '4',
+                'type' => '0',
+            ],
+            [
+                'name' => 'حصاد',
+                'main_type' => '4',
+                'type' => '1',
+            ],
 
         ];
 
-        collect($Roles)->each(function($Roles) {
+        collect($newsTypes)->each(function ($newsTypes) {
             newsType::create([
-                'status' => '1',
-                'code_role' => 'admin',
-                'role' => 'Admin',
+                'name' => $newsTypes['name'],
+                'main_type' => $newsTypes['main_type'],
+                'type' => $newsTypes['type'],
             ]);
         });
     }

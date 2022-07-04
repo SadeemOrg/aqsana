@@ -33,7 +33,11 @@ class RolesSeeder extends Seeder
                 'role' => 'Regular Area',
             ],
             [
-                'code_role' => 'Volunteer',
+                'code_role' => 'regular_city',
+                'role' => 'Regular city',
+            ],
+            [
+                'code_role' => 'volunteer',
                 'role' => 'Volunteer',
             ],
             [
