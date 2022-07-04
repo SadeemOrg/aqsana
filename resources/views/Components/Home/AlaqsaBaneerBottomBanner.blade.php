@@ -43,19 +43,10 @@ $seen_button = nova_get_setting('text_seen_bottom_Banner_2', 'default_value');
                     </button>
 
                 </div>
-                    {{-- <p class="text-[12px] md:text-[14px] max-w-lg ">قال رسول الله صلى الله عليه وسلم: ((كل سُلَامَى من
-                        الناس
-                        عليه صدقةٌ،
-                        كل يومٍ تطلع فيه الشمس: تعدل بين اثنين صدقةٌ، وتعين الرجل في دابته فتحمله عليها أو ترفع له متاعه
-                        صدقةٌ،
-                        والكلمة الطيبة صدقةٌ، وبكل خطوةٍ تمشيها إلى الصلاة صدقةٌ، وتميط الأذى عن الطريق صدقةٌ))؛ رواه
-                        البخاري
-                        ومسلم.
-                    </p> --}}
             </div>
             <ul class="absolute left-0 bottom-[20px] md:flex flex-start items-center gap-x-2 hidden ">
                 <li>
-                    <a class="facebook" href="#">
+                    <a class="facebook" href="https://www.facebook.com/aqsaassociation/" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 22 22" fill="none">
                             <circle cx="10.9328" cy="10.9328" r="10.4328" stroke="white"/>
                             <g clip-path="url(#clip0_21_1207)">
@@ -70,7 +61,7 @@ $seen_button = nova_get_setting('text_seen_bottom_Banner_2', 'default_value');
                     </a>
                 </li>
                 <li>
-                    <a class="instagram" href="#">
+                    <a class="instagram" href="https://www.instagram.com/aqsaquds" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 23 22" fill="none">
                             <circle cx="11.8117" cy="10.9328" r="10.4328" stroke="white"/>
                             <g clip-path="url(#clip0_21_1218)">
@@ -87,7 +78,7 @@ $seen_button = nova_get_setting('text_seen_bottom_Banner_2', 'default_value');
                     </a>
                 </li>
                 <li>
-                    <a class="twitter" href="#">
+                    <a class="twitter" href="https://twitter.com/AqsaAss" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 23 22" fill="none">
                             <circle cx="11.6908" cy="10.9328" r="10.4328" stroke="white"/>
                             <g clip-path="url(#clip0_21_1212)">
@@ -102,7 +93,7 @@ $seen_button = nova_get_setting('text_seen_bottom_Banner_2', 'default_value');
                     </a>
                 </li>
                 <li>
-                    <a class="youtube" href="#">
+                    <a class="youtube" href="https://www.youtube.com/channel/UCuumAw7vPSQJeC6FTOkH37g" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 23 22" fill="none">
                             <circle cx="11.5697" cy="10.9328" r="10.4328" stroke="white"/>
                             <g clip-path="url(#clip0_21_1202)">

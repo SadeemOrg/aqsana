@@ -23,7 +23,7 @@
                     @endif
                 </p>
             </div>
-            <img class=" lg:block lg:max-w-[185px] h-[250px] sm:h-[350px] md:max-h-[320px] object-cover rounded-[5px] my-6"
+            <img class=" lg:block lg:max-w-[185px] h-[250px] sm:h-[350px] md:h-[320px] object-cover rounded-[5px] my-6"
             src="{{ asset($img) }}" alt="people_on_Mousq" />
         </div>
     </div>
