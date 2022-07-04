@@ -46,7 +46,7 @@
 <div class="bg-[#F2FFF285] py-16 pb-20 mt-10">
     <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
         <div class="relative ">
-            <p class="font-FlatBold text-xl sm:text-3xl max-w-4xl text-center mt-8 lg:mt-0 xl:text-right">
+            <p class="font-FlatBold text-xl sm:text-3xl max-w-6xl text-center mt-8 lg:mt-0 xl:text-right">
                 @if($news_detail)
                 {{ $news_detail->title }}
                 @endif
@@ -72,7 +72,7 @@
                     مشاريعنا
                 </p>
                 <p class="text-base text-[#101426] font-noto_Regular px-4 pt-2 ">
-                    {!!  $news_detail->description !!}
+                    {{   $news_detail->description  }}
                     {{-- نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف والمقدسات،
                     للسنة
                     الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
@@ -148,7 +148,7 @@
                     @if(!empty($pictures))
                     @foreach ($pictures as $picture )
                     <div class="col-span-1">
-                        <img class="mx-auto object-cover lg:h-[265px]" src="{{ asset($picture['url']) }}" alt="related image">
+                        <img class="mx-auto w-full object-cover lg:h-[265px]" src="{{ asset($picture['url']) }}" alt="related image">
                     </div>
                         @endforeach
                         @endif

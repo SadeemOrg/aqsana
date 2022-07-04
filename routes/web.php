@@ -72,7 +72,7 @@ Route::get('/annual-news', function (){
 //     return view('single-news');
 // });
 Route::get('/contact', function (){
-    return view('contact-page');
+    return view('Pages.contact-page');
 });
 
 Route::get('/projects-for-donations', function (){
