@@ -49,11 +49,7 @@ class News extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public static function indexQuery(NovaRequest $request, $query)
-    {
 
-        return $query->where('main_type', '0');
-    }
     public function fields(Request $request)
     {
         return [
