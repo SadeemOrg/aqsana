@@ -111,6 +111,6 @@ $logo_Banner_Img = 'storage/'.nova_get_setting('logo_Banner_1', 'default_value')
             </div>
         </div>
     </div>
-    <img src="{{ asset('assets/image/mask-shape.png') }}" alt="left image"
+    <img src="{{ asset('assets/image/mask-shape.webp') }}" alt="left image"
         class=" absolute xl:left-0 left-[-50px] top-[50%] translate-y-[-50%] hidden lg:block" />
 </div>
