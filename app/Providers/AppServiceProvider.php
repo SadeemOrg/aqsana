@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use App\Models\News;
+use App\Observers\NewsObserver;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        News::observe(NewsObserver::class);
 
         View::composer(['layout.front-end.partial._header'],
          function ($view) {
