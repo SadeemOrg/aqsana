@@ -21,8 +21,8 @@
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] text-[#101426]">
                 <a href="/">الرئيسية</a>
             </li>
-            <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
-            <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] text-[#101426]">
+            <li class="ltr:mr-2 rtl:ml-2 ml-2">/</li>
+            <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] min-w-fit text-[#101426]">
                 <a href="/">{{ $mainType->name }}</a>
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
