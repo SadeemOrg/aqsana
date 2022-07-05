@@ -13,7 +13,7 @@
             <!-- display image medium screen div -->
             <div class="block sm:hidden px-3 pt-4 w-full ">
                 <img src="{{ asset($img) }}" alt="people_on_Mousq"
-                    class=" rounded-[5px] object-cover h-[280px]" />
+                    class=" rounded-[5px] object-cover h-[247px]" />
             </div>
             <!-- start right div -->
             <div class="flex flex-col items-start sm:max-w-[250px] md:max-w-[170px] pr-3">
