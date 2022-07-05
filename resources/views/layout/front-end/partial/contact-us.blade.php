@@ -16,11 +16,11 @@
             <p class="text-[#8F9BB3] text-[16px] pt-3"> {{ $Contact_sub_text  }}</p>
             <p class="text-[#8F9BB3] text-[16px] ">of the printing and</p>
             <div class="flex flex-row items-center justify-start gap-x-2 mt-7">
-                <img src="{{ asset('assets/image/telephone.svg') }}" alt="telephone">
+                <img src="{{ asset('assets/image/telephone.svg') }}" alt="telephone" class="max-w-[17px] max-h-[17px]">
                 <p dir="ltr" class="text-[#8F9BB3] text-[16px] inter-font">{{ $phone_contact }}</p>
             </div>
             <div class="flex flex-row items-center justify-start gap-x-2 pt-2">
-                <img src="{{ asset('assets/image/message.svg') }}" alt="message">
+                <img src="{{ asset('assets/image/message.svg') }}" alt="message" class="max-w-[17px] max-h-[17px]">
                 <p dir="ltr" class="text-[#8F9BB3] text-[16px] inter-font">{{ $email_contact }}</p>
             </div>
             <p class="text-[#8F9BB3] text-[16px] font-FlatBold pt-6 pb-4">هل تريد المشاركة بالتبرع؟ <a href="#"
