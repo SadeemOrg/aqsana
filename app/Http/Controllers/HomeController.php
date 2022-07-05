@@ -130,7 +130,7 @@ class HomeController extends Controller
         $pictures = json_decode(json_decode($goalsjson, true), true);
 
         // dd(gettype($pictures));
-        return view('pages.single-news', compact('new', 'pictures', 'Articles'));
+        return view('Pages.single-news', compact('new', 'pictures', 'Articles'));
     }
 
     // // Alquds
