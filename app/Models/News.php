@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Observers\NewsObserver;
 class News extends Model
 {
     use HasFactory;
 
-
+    protected $observers = [
+        News::class => [NewsObserver::class],
+    ];
     protected $fillable = [
         'id','title','description','image','type','pictures','created_by','update_by'
     ];
