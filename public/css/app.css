@@ -639,8 +639,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-\[450px\]{
   height: 450px;
 }
-.h-\[280px\]{
-  height: 280px;
+.h-\[247px\]{
+  height: 247px;
 }
 .h-\[150px\]{
   height: 150px;
@@ -653,18 +653,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .h-5{
   height: 1.25rem;
-}
-.h-\[270px\]{
-  height: 270px;
-}
-.h-\[260px\]{
-  height: 260px;
-}
-.h-\[240px\]{
-  height: 240px;
-}
-.h-\[247px\]{
-  height: 247px;
 }
 .max-h-\[510px\]{
   max-height: 510px;
@@ -1151,6 +1139,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pb-5{
   padding-bottom: 1.25rem;
+}
+.pl-4{
+  padding-left: 1rem;
 }
 .pt-14{
   padding-top: 3.5rem;
