@@ -68,7 +68,7 @@
                     أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية الأقصى,
                     مشاريعنا
                 </p>
-                <p class="text-base text-[#101426] font-noto_Regular px-4 pt-2 text-justify">
+                <p class="text-base text-[#101426] font-noto_Regular px-4 pt-2 text-right">
                     {{   $news_detail->description  }}
                     {{-- نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف والمقدسات،
                     للسنة

@@ -100,7 +100,7 @@
                             },
                             //Medium
                             768: {
-                                items: 1
+                                items: 2
                             },
                             850: {
                                 items: 2
