@@ -110,6 +110,7 @@ class HomeController extends Controller
         ])->first();
 
         return view('Pages.our-news', compact('news', 'mainType', 'type'));
+
         // $news = DB::table('news')->orderBy('created_at', 'desc')->paginate(8);
         // return view('Pages.our-news', compact('news'));
     }
@@ -129,8 +130,15 @@ class HomeController extends Controller
         // dd(gettype($goals));
         $pictures = json_decode(json_decode($goalsjson, true), true);
 
+        $mainType = DB::table('news_types')->where([
+            ['main_type', '=', $new->main_type],
+            ['type', '=', '0'],
+        ])->first();
+
+
+
         // dd(gettype($pictures));
-        return view('Pages.single-news', compact('new', 'pictures', 'Articles'));
+        return view('Pages.single-news', compact('new', 'pictures', 'Articles','mainType'));
     }
 
     // // Alquds
