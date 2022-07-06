@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Models\FormMassage;
 use Mail;
 use App\Mail\TestMail;
 
@@ -73,8 +74,14 @@ class HomeController extends Controller
 
         ]);
 
-        $mail = 'your_email_id@gmail.com';
-        Mail::to($mail)->send(new TestMail);
+
+        FormMassage::create([
+            'name' => $request['name'],
+            'phone' => $request['phone'],
+            'message' =>$request['message'],
+
+            ]);
+            return redirect()->back();
 
         // return redirect()->back();
         // $input = $request->all();
@@ -110,8 +117,7 @@ class HomeController extends Controller
         ])->first();
 
         return view('Pages.our-news', compact('news', 'mainType', 'type'));
-        // $news = DB::table('news')->orderBy('created_at', 'desc')->paginate(8);
-        // return view('Pages.our-news', compact('news'));
+
     }
     public function getnewDetail($id)
     {
