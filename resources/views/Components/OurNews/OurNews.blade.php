@@ -21,8 +21,8 @@
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] text-[#101426]">
                 <a href="/">الرئيسية</a>
             </li>
-            <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
-            <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] text-[#101426]">
+            <li class="ltr:mr-2 rtl:ml-2 ml-2">/</li>
+            <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] min-w-fit text-[#101426]">
                 <a href="/">{{ $mainType->name }}</a>
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
@@ -52,18 +52,18 @@
                 <div class="max-w-[600px] bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
                     <div onclick="location.href='{{ route('getnewDetail', ['id' => $new->id]) }}'">
                         <img src="{{ asset($img) }}" alt="people_on_Mousq" class="w-full lg:w-[550px] lg:max-h-52">
-                        <p class="text-[#349A37] text-[16px] pt-4 text-right max-w-none px-4">
+                        <p class="text-[#349A37] text-[16px] pt-4 text-right max-w-none pl-4">
                             {{Illuminate\Support\Str::limit($new->title,113) }}
                             {{-- اكثر من 10 الاف مشارك بمعسكر "القدس اولا" الذي نظمته الحركة الاسلامية وجمعية الاقصى
                             --}}
                         </p>
-                        <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">أبريل 20, 2022</p>
-                        <p class="text-[11px] text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">
+                        <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 pl-4">أبريل 20, 2022</p>
+                        <p class="text-[11px] text-[#8F9BB3] font-noto_Regular text-right pt-2 pl-4">
                             أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية
                             الأقصى,
                             مشاريعنا
                         </p>
-                        <p class="text-xs text-[#101426] font-noto_Regular px-4 pt-2 text-right slider-paragraph">
+                        <p class="text-xs text-[#101426] font-noto_Regular pl-4 pt-2 text-right slider-paragraph">
                             {{ Illuminate\Support\Str::limit(strip_tags( $new->description),240) }}
                             @if(strip_tags(Str::length($new->description)) > 240)
                             <a href="{{ route('getnewDetail', ['id' => $new->id]) }}">
@@ -72,7 +72,7 @@
                             @endif
                         </p>
                     </div>
-                    <div class="flex flex-row items-center justify-start px-4 pt-2 font-noto_Regular gap-x-2">
+                    <div class="flex flex-row items-center justify-start pl-4 pt-2 font-noto_Regular gap-x-2">
                         <p class="text-[#101426] text-sm">شارك عبر</p>
                         <ul class="share-us flex flex-row items-center justify-start">
                             <li class="px-1">

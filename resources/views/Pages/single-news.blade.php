@@ -23,27 +23,24 @@
 </style>
 
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10 px-2">
-    <div class="flex flex-row">
-        <ul class="list-reset breadcrumbs flex flex-row font-FlatBold ">
+        <ul class="breadcrumbs flex flex-row flex-wrap font-FlatBold ">
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#101426]">
                 <a href="/">الرئيسية</a>
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
-            <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#101426]">
-                <a href="/our">أخبا رنا</a>
+            <li class="navBarContainer ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#101426]">
+                <a href="/"> {{ $mainType->name }} </a>
             </li>
+
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
-            <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px]  text-[#349A37]">
+            <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#349A37]">
               @if($news_detail)
               {{ $news_detail->title }}
               @endif
-                {{-- أكثر من 10 آلاف مشارك بمعسكر “القدس أولًا 13” الذي نظمته الحركة الإسلامية وجمعية الأقصى --}}
-            </li>
+             </li>
         </ul>
-    </div>
 </div>
-
-<div class="bg-[#F2FFF285] py-16 pb-20 mt-10">
+<div class="bg-[#F2FFF285] py-16 pb-20 lg:mt-10">
     <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
         <div class="relative ">
             <p class="font-FlatBold text-xl sm:text-3xl max-w-6xl text-center mt-8 lg:mt-0 xl:text-right">
@@ -61,7 +58,7 @@
                  {{-- src="{{ asset('assets/image/Alquds_First.png') }}" --}}
                  alt="people_on_Mousq"
                     class="w-full max-h-[510px]">
-                <p class="text-[#349A37] text-[22px] pt-4 text-right px-4">
+                <p class="text-[#349A37] text-[18px] md:text-[22px] pt-4 text-right pr-4">
                 {{ $news_detail->title }}
                     {{-- أكثر من 10 آلاف مشارك بمعسكر “القدس أولًا 13” الذي نظمته الحركة الإسلامية وجمعية الأقصى --}}
 
@@ -71,7 +68,7 @@
                     أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية الأقصى,
                     مشاريعنا
                 </p>
-                <p class="text-base text-[#101426] font-noto_Regular px-4 pt-2 ">
+                <p class="text-base text-[#101426] font-noto_Regular px-4 pt-2 text-right">
                     {{   $news_detail->description  }}
                     {{-- نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف والمقدسات،
                     للسنة

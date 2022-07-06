@@ -109,7 +109,7 @@
             @endphp
             <div class="tab {{ $tab }}">
                 <img src="{{ asset($ProjectsNew['data']['image']) }}" alt="Rock_Mousq"
-                    class="lg:max-h-[450px] max-h-[400px] m-auto ">
+                    class="lg:h-[450px] max-h-[400px] m-auto w-full">
             </div>
             @endforeach
 
