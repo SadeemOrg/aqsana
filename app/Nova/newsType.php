@@ -20,7 +20,9 @@ class newsType extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $group = 'Admin';
+    public static $title = 'name';
+    public static $priority = 7;
 
     /**
      * The columns that should be searched.
