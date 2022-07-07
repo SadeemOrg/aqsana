@@ -1,4 +1,4 @@
-<div class="owl-carousel" id="main-home-slider">
+<div class="owl-carousel dots-style1" id="main-home-slider">
     @if(!empty($Heros))
     @foreach ( $Heros as $Hero )
     <img class="h-[150px] sm:h-[220px]  lg:h-[500px]" src="{{ URL::asset($Hero['data']['image'])}}" alt="topBanner">
@@ -14,11 +14,11 @@
         $id = $lastnew->id
         @endphp
         <div class="p-3 rounded-[5px] common-shadow mb-6 xl:mb-0 hover:cursor-pointer" onclick="location.href='{{ route('getnewDetail', ['id' => $lastnew->id]) }}'">
-            <div class=" md:h-[390px] sm:max-w-[700px] bg-[#E4FFE585] rounded-[5px] py-5 px-4">
+            <div class=" md:max-h-[390px] sm:max-w-[700px] bg-[#E4FFE585] rounded-[5px] py-5 px-4">
                 <img src="{{ asset($img) }}" alt="people_on_Mousq" class="w-full h-[254px] object-fill rounded-[5px]">
                 <div class="pr-6">
-                <p class="text-[#349A37]  pt-4 text-right  font-bold text-lg pl-2 ">{{Illuminate\Support\Str::limit($lastnew->title,55)  }}
-               <span class="text-black"> {{  Illuminate\Support\Str::limit($lastnew->description,60)  }}</span>
+                <p class="text-[#349A37] pt-4 text-right font-bold text-lg pl-2 ">{{Illuminate\Support\Str::limit($lastnew->title,55)  }}
+               <span class="text-black"> {{  Illuminate\Support\Str::limit($lastnew->description,55)  }}</span>
                 </p>
             </div>
         </div>

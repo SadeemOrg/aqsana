@@ -57,7 +57,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script>
         var owl = $("#main-home-slider");
-        // console.log('owl',owl[0])
             owl.owlCarousel({
                 rtl: true,
                 autoplay: true,
