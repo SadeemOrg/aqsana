@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBusProjectTable extends Migration
+class CreateFormMassagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateBusProjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('bus_project', function (Blueprint $table) {
+        Schema::create('form_massages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('bus_id');
-            $table->unsignedBigInteger('project_id');
+            $table->string('name');
+            $table->string('phone');
+            $table->string('message');
+            $table->char('is_read', 1)->default('0');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateBusProjectTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bus_project');
+        Schema::dropIfExists('form_massages');
     }
 }

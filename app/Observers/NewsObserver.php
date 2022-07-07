@@ -28,6 +28,9 @@ class NewsObserver
         } elseif ($filetype == 1) {
             $image = imagecreatefromgif($path);
         }
+        elseif ($filetype == 18) {
+            $image = imagecreatefromwebp($path);
+        }
         imagejpeg($image, $path, 20);
         // photos
 
@@ -44,6 +47,9 @@ class NewsObserver
                     $image = imagecreatefrompng($path);
                 } elseif ($filetype == 1) {
                     $image = imagecreatefromgif($path);
+                }
+                elseif ($filetype == 18) {
+                    $image = imagecreatefromwebp($path);
                 }
                 imagejpeg($image, $path, 20);
             }
