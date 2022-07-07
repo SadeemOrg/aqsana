@@ -269,7 +269,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Text::make('phone', 'phone_Connect'),
                             Text::make('Email', 'email_Connect'),
                             Text::make('Text bottome', 'text_bottom_Connect'),
-                            Text::make('linl bottom', 'linl_bottom'),
+                            Text::make('linlk bottom', 'linlk_bottom'),
                             Text::make('filed 1 ', 'filed1_Connect'),
                             Text::make('filed 2 ', 'filed2_Connect'),
                             Text::make('filed 3 ', 'filed3_Connect'),
@@ -362,13 +362,14 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             new Tabs('Connect with us', [
                 'Connect with us'    => [
+
                     Text::make('heder text', 'heder_text_main_Connectus'),
                     Text::make('main text', 'text_main_Connectus'),
                     Text::make('sup text text', 'sup_text_main_Connectus'),
                     Text::make('phone', 'phone_Connectus'),
                     Text::make('Email', 'email_Connectus'),
                     Text::make('Text bottome', 'text_bottom_Connectus'),
-                    Text::make('linl bottom', 'linl_bottom_ Connectus'),
+                    Text::make('linlk bottom', 'linlk_bottom_Connectus'),
                 ],
                 'FORM'    => [
                     Text::make('filed 1 ', 'filed1_Connectus'),
@@ -395,6 +396,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('Facebook', 'Facebook'),
                     Text::make('Instagram', 'Instagram'),
                     Text::make('whatsapp', 'whatsapp'),
+                    Text::make('Twitter', 'twitter'),
                     Text::make('youtube', 'youtube'),
                 ], 'website settings' => [
                     Text::make('phone', 'phone'),
