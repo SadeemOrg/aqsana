@@ -18,8 +18,8 @@ class NotificationTest extends Controller
         $from = "AAAAA_Hl3RU:APA91bG0Fqxoqxi703Ov637hTwDZx99ezBvlcpETyJOyXod65v2Wp9KVM-Bk_uGAYGyBmTpjbcp_RO9B8Y9P_AhM9K1DuB10zEHriHAFRcmrGrSMIQdKg-Scf05TWgN5ugdwnipdY3mv";
         $msg = array
               (
-                'body'  => "Testing Testing",
-                'title' => "Hi, From Raj",
+                'body'  => "Testing Notfication",
+                'title' => "Al Aqsa Association",
                 'receiver' => 'erw',
                 'icon'  => "http://url-to-an-icon/icon.png",/*Default Icon*/
                 'sound' => 'mySound'/*Default sound*/
