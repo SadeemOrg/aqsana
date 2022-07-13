@@ -1,5 +1,6 @@
 @php
-if (request()->path()== '/'){
+// dd(request()->path());
+if (request()->path()== '/' || request()->path() == 'about-us' ){
     $contact_main = nova_get_setting('heder_text_main_Connect', 'default_value');
     $contact_Text_Main = nova_get_setting('text_main_Connect', 'default_value');
     $Contact_sub_text = nova_get_setting('sup_text_main_Connect', 'default_value');
@@ -12,7 +13,7 @@ if (request()->path()== '/'){
     $text_Button = nova_get_setting('text_bottom_Connect', 'default_value');
     // dd($name_placeholder);
 }
-elseif (request()->path() == 'contact'){
+elseif (request()->path() == 'contact-us'){
 $contact_main = nova_get_setting('heder_text_main_Connectus', 'default_value');
 $contact_Text_Main = nova_get_setting('text_main_Connectus', 'default_value');
 $Contact_sub_text = nova_get_setting('sup_text_main_Connectus', 'default_value');
@@ -23,7 +24,7 @@ $phone_placeholder = nova_get_setting('filed2_Connectus', 'default_value');
 $textArea_placeholder = nova_get_setting('filed3_Connectus', 'default_value');
 $text_Button = nova_get_setting('text_bottom_Connectus', 'default_value');
 }
-// dd($contact_main)
+
 @endphp
 <div itemscope itemtype="http://schema.org/LocalBusiness" class="max-w-7xl mx-auto px-0 lg:px-8 mt-8">
     <div class="lg:flex flex-col lg:flex-row justify-center py-4 lg:justify-between  items-center lg:gap-x-10">
