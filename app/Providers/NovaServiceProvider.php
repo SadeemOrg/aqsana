@@ -63,12 +63,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         [
                             Tree::make('Items', 'Items')->fields([
                                 Text::make('Name'),
-                                Link::make('Link')->resources([
-                                    project::class,
-                                    hisadAljameia::class ,
-
-
-                                ])
                             ])->title('name'),
                             Image::make('Logo', 'logo')->disk('public'),
                         ]
@@ -303,11 +297,14 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('text', 'main_section_text'),
                     Textarea::make('sup text','sup_text_main_aboutus'),
                     Image::make('image', 'main_section_image'),
+                    Text::make('image description', 'image_alt_main_section_about_us'),
                 ],
-                ' our vision' => [
+                'our vision' => [
                     Text::make('text', 'vision_section_text'),
                     Textarea::make('sup text','sup_text_vision_aboutus'),
                     Image::make('image', 'vision_section_image'),
+                    Text::make('image description', 'image_alt_our_vision_about_us'),
+
                 ], ' Goals' => [
                     Flexible::make('Goals')
                         ->addLayout('Simple content section', 'wysiwyg', [
@@ -317,6 +314,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ],
                 ' achievements' => [
                     Image::make('image', 'main_section_image_achievements'),
+                    Text::make('image description', 'image_alt_achievements_about_us'),
+
                     Flexible::make('achievements')
                         ->addLayout('Simple content section', 'wysiwyg', [
                             Text::make('text', 'achievements_section_text'),
@@ -334,6 +333,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                         'type' => 'image',
                                         'name' => 'image',
                                         'label' => 'Image',
+                                        'multiple' => false,
+                                        'required' => true
+                                    ],
+                                    [
+                                        'type' => 'text',
+                                        'name' => 'image_alt_workplace_about_us',
+                                        'label' => 'image description',
                                         'multiple' => false,
                                         'required' => true
                                     ],
