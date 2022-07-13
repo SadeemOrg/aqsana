@@ -14,20 +14,20 @@ use App\Guidelines;
 class NotificationTest extends Controller
 {
     function sendNotfiy(){
-        $token = "edL4ukAZ4vY:APA91bFgz4DFVeP29MqVayuEUvs-7Qix8buB1vI10mthr2sBahe8t7tFxfJ5ogA6FgNw3Wfyo_HyORDzlpKURPpc4m942LdscyOWloX_2Kn2CR1nwEpMxPLI5kViRIT16t_K1sbPbdZQ";  
+        $token = "eU1k7vgH1FASnTlH5gZPAr:APA91bHBhNH8P71N6fCKakQFZxH2XaUQkIwl8J6HX0wEb4XGtH84rtU_LQ0ovz0y0uGLqoayq2ax420psis3HkwOMPvF_6rmF9-oMi8q3F2XLw_YdhREL0k0fmWB_qbGHUJiypMJtGeA";  
         $from = "AAAAA_Hl3RU:APA91bG0Fqxoqxi703Ov637hTwDZx99ezBvlcpETyJOyXod65v2Wp9KVM-Bk_uGAYGyBmTpjbcp_RO9B8Y9P_AhM9K1DuB10zEHriHAFRcmrGrSMIQdKg-Scf05TWgN5ugdwnipdY3mv";
         $msg = array
               (
                 'body'  => "Testing Testing",
                 'title' => "Hi, From Raj",
                 'receiver' => 'erw',
-                'icon'  => "https://image.flaticon.com/icons/png/512/270/270014.png",/*Default Icon*/
+                'icon'  => "http://url-to-an-icon/icon.png",/*Default Icon*/
                 'sound' => 'mySound'/*Default sound*/
               );
 
         $fields = array
                 (
-                    'to'        => '/topics/ALL',
+                    'to' => $token,
                     'notification'  => $msg
                 );
 
