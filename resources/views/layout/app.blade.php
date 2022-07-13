@@ -1,10 +1,31 @@
+@php
+  $vision_section_image ='storage/'.nova_get_setting('main_logo', 'default_value');
+
+@endphp
 <!DOCTYPE html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#349A37" />
-    <title>Laravel</title>
+
+
+
+    <title>{{ nova_get_setting('Site_name', config('app.name', 'Laravel')) }}</title>
+
+    <link rel="icon" type="image/x-icon" href=" storage/{{ nova_get_setting('main_logo', 'default_value')}}">
+
+    <meta charset="utf-8">
+    <meta name="description" content="{{ nova_get_setting('Site_description', '') }}" />
+    <meta name="keywords" content="{{ nova_get_setting('Site_keywords', '') }}" />
+    <meta property="og:site_name" content="{{ nova_get_setting('og_site_name', '') }}" />
+    <meta property="og:url" content="{{ Request::url() }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="{{ nova_get_setting('og_description', '') }}" />
+    <meta property="og:image" content="{{ nova_get_setting('og_image', '') }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css" />
