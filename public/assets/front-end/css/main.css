@@ -4,7 +4,7 @@ body{padding-top: 82px;}
 header.sticky-h {box-shadow: 0 6px 12px -10px #349a37}
 
 /* header {
-  
+
 } */
 
 /** Start home page **/
@@ -192,7 +192,7 @@ svg path, svg circle {transition: .2s;}
 }
 .nav-links.open nav .nav-item > a{
   right: 100%;
- 
+
 }
 
 @media (max-width: 1280px) {
@@ -248,7 +248,7 @@ svg path, svg circle {transition: .2s;}
 .hamburger {
   width: 37px;
   height: auto;
-  display: block; 
+  display: block;
 }
 .hamburger.is-active .hamburger__bar {
   background: transparent;
@@ -298,6 +298,18 @@ svg path, svg circle {transition: .2s;}
   margin: 0 2px;
 }
 .dots-style .owl-dots .owl-dot.active{
+  background-color: #349A37;
+}
+
+.dots-style1 .owl-dots {text-align: center; margin-top: 25px;}
+.dots-style1 .owl-dots .owl-dot{
+  width: 16px;
+  height: 16px;
+  background-color: #CFE9FF;
+  border-radius: 50%;
+  margin: 12px 2px;
+}
+.dots-style1 .owl-dots .owl-dot.active{
   background-color: #349A37;
 }
 
