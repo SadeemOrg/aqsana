@@ -7,9 +7,9 @@ if (request()->path()== '/' || request()->path() == 'about-us' ){
     $phone_contact = nova_get_setting('phone_Connect', 'default_value');
     $email_contact = nova_get_setting('email_Connect', 'default_value');
     $text_Button = nova_get_setting('text_bottom_Connect', 'default_value');
-    $name_placeholder = nova_get_setting('filed1_Connect', 'default_value');
-    $phone_placeholder = nova_get_setting('filed2_Connect', 'default_value');
-    $textArea_placeholder = nova_get_setting('filed3_Connect', 'default_value');
+    $name_placeholder = nova_get_setting('filed1_Connect', 'الاسم كامل');
+    $phone_placeholder = nova_get_setting('filed2_Connect', 'رقم الهاتف');
+    $textArea_placeholder = nova_get_setting('filed3_Connect', 'رسالتك');
     $text_Button = nova_get_setting('text_bottom_Connect', 'default_value');
     // dd($name_placeholder);
 }
@@ -19,9 +19,9 @@ $contact_Text_Main = nova_get_setting('text_main_Connectus', 'default_value');
 $Contact_sub_text = nova_get_setting('sup_text_main_Connectus', 'default_value');
 $phone_contact = nova_get_setting('phone_Connectus', 'default_value');
 $email_contact = nova_get_setting('email_Connectus', 'default_value');
-$name_placeholder = nova_get_setting('filed1_Connectus', 'default_value');
-$phone_placeholder = nova_get_setting('filed2_Connectus', 'default_value');
-$textArea_placeholder = nova_get_setting('filed3_Connectus', 'default_value');
+$name_placeholder = nova_get_setting('filed1_Connectus', 'الاسم كامل');
+$phone_placeholder = nova_get_setting('filed2_Connectus', 'رقم الهاتف');
+$textArea_placeholder = nova_get_setting('filed3_Connectus', 'رسالتك');
 $text_Button = nova_get_setting('text_bottom_Connectus', 'default_value');
 }
 
@@ -49,7 +49,8 @@ $text_Button = nova_get_setting('text_bottom_Connectus', 'default_value');
         <form method="get" action="{{ route('conctus') }}" class=" h-[432px] basis-1/2 w-full lg:mr-0">
             @csrf
             <div class=" ltr pt-10 px-6 lg:px-0">
-                <input type="text" name="name" placeholder="{{ $name_placeholder }}"
+                <input type="text" name="name"
+                placeholder="{{ $name_placeholder}}"
                     class="rtl block w-full  border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
             </div>
             @error('name')
