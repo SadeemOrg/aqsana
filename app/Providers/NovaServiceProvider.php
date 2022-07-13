@@ -396,7 +396,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('Open Graph site name', 'og_site_name'),
                     Text::make('Open Graph description', 'og_description'),
                     Image::make('Open Graph image', 'og_image'),
-                    Image::make('First Name', 'first_name'),
+                    Image::make('logo', 'main_logo'),
                 ],
                 'website Soshal Midia ' => [
                     Text::make('Facebook', 'Facebook'),

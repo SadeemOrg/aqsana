@@ -58,9 +58,11 @@ class FormMassage extends Resource
                 ])->displayUsingLabels(),
 
                 ActionButton::make('ReadMessage')
-                ->action(ReadMessage::class, $this->id) ->readonly(function () {
+                ->action((new ReadMessage) ->confirmText('Are you sure you want to read  this Massage?')
+                ->confirmButtonText('Read')
+                ->cancelButtonText("Don't Read"), $this->id) ->readonly(function () {
                     return $this->is_read === '1';
-                })->text('read')->showLoadingAnimation()
+                })->text('Read')->showLoadingAnimation()
                 ->loadingColor('#fff') ->svg('VueComponentName')
 
         ];
@@ -109,7 +111,10 @@ class FormMassage extends Resource
     {
         return [
 
-            new ReadMessage,
+            (new ReadMessage)
+            ->confirmText('Are you sure you want to read  this Massage?')
+            ->confirmButtonText('Read')
+            ->cancelButtonText("Don't Read"),
         ];
     }
 }
