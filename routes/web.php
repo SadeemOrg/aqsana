@@ -20,7 +20,7 @@ use App\Http\Controllers\NotificationTest;
 //     return view('welcome');
 // });
 
-Route::get('/', [HomeController::class, 'aboutus'])->name('aboutus');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/about-us', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/conctus', [HomeController::class, 'conctus'])->name('conctus');
