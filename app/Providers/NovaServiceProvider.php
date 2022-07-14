@@ -82,6 +82,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                                 'label' => 'Image',
                                                 'multiple' => false,
                                                 'required' => true
+                                            ],
+                                            [
+                                                'type' => 'text',
+                                                'name' => 'image_alt_Heroo',
+                                                'label' => 'image description',
+                                                'multiple' => false,
+                                                'required' => true
                                             ]
                                         ]
                                     ]
