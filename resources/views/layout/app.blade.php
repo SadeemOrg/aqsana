@@ -1,30 +1,44 @@
-@php
-  $vision_section_image ='storage/'.nova_get_setting('main_logo', 'default_value');
-
-@endphp
 <!DOCTYPE html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#349A37" />
-
-
-
     <title>{{ nova_get_setting('Site_name', config('app.name', 'Laravel')) }}</title>
 
     <link rel="icon" type="image/x-icon" href=" storage/{{ nova_get_setting('main_logo', 'default_value')}}">
-
-    <meta charset="utf-8">
     <meta name="description" content="{{ nova_get_setting('Site_description', '') }}" />
     <meta name="keywords" content="{{ nova_get_setting('Site_keywords', '') }}" />
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="{{ nova_get_setting('Site_link', '') }}">
+    <link rel="amphtml" href="{{ nova_get_setting('Site_link', '') }}">
+    <base href="{{ nova_get_setting('Site_link', '') }}" target="_blank">
+
+
+    <link rel="canonical" href="https://aqsana.org/"/>
+    <meta rel="sitemap" type="application/xml" content="https://www.google.com/maps/place/Salah+ad-Din%2FEntry/@32.1287772,34.9666098,15z/data=!4m13!1m7!3m6!1s0x151d30a07d1c8d37:0xe4ff2734981fb335!2sKafr+Bara,+Israel!3b1!8m2!3d32.130911!4d34.970108!3m4!1s0x151d30a7771ae475:0x3a3ffa51d8ced657!8m2!3d32.13195!4d34.965225"/>
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="{{ nova_get_setting('og_site_name', '') }}"/>
+    <meta itemprop="description" content="{{ nova_get_setting('og_description', '') }}"/>
+    <meta itemprop="image" content=" storage/{{ nova_get_setting('main_logo', 'default_value')}}"/>
+
+
+
     <meta property="og:site_name" content="{{ nova_get_setting('og_site_name', '') }}" />
     <meta property="og:url" content="{{ Request::url() }}" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="https://schema.org/WebSite" />
     <meta property="og:description" content="{{ nova_get_setting('og_description', '') }}" />
     <meta property="og:image" content="{{ nova_get_setting('og_image', '') }}" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta property="og:title" content="Al-Aqsa Association"/>
+    <meta property="og:locale" content="ar"/>
+    <meta property="fb:admins" content="{{ nova_get_setting('phone', '') }}"/>
+    <meta name="theme-color" content="#349A37" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
+
+
+
 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
@@ -287,7 +301,7 @@ firebase.initializeApp(firebaseConfig);
 //     appId: "1:16943275285:web:c95070543cf570cb265d1c",
 //     measurementId: "G-FHN8R2KH3M"
 //     });
- 
+
 
   const messaging = firebase.messaging();
 
@@ -301,18 +315,18 @@ navigator.serviceWorker.register("../firebase-messaging-sw.js")
 }
 	messaging.requestPermission()
 .then(function () {
-//MsgElem.innerHTML = "Notification permission granted." 
+//MsgElem.innerHTML = "Notification permission granted."
 	console.log("Notification permission granted.");
 
      // get the token in the form of promise
 	return messaging.getToken()
 })
 .then(function(token) {
- // print the token on the HTML page     
+ // print the token on the HTML page
   console.log(token);
-  
-  
-  
+
+
+
 })
 .catch(function (err) {
 	console.log("Unable to get permission to notify.", err);
