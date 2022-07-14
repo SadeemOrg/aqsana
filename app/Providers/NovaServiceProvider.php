@@ -82,6 +82,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                                 'label' => 'Image',
                                                 'multiple' => false,
                                                 'required' => true
+                                            ],
+                                            [
+                                                'type' => 'text',
+                                                'name' => 'image_alt_Heroo',
+                                                'label' => 'image description',
+                                                'multiple' => false,
+                                                'required' => true
                                             ]
                                         ]
                                     ]
@@ -92,6 +99,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'Banner 1',
                         [
                             Image::make('main img', 'main_img_Banner_1'),
+                            Text::make('image description ', 'image_alt_Banner_1'),
                             Text::make('main text', 'text_main_Banner_1'),
                             Text::make('sup text ', 'sup_text_Banner_1'),
                             Image::make('Logo', 'logo_Banner_1')->disk('public'),
@@ -394,7 +402,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('Site description', 'Site_description'),
                     Text::make('Site keywords', 'Site_keywords'),
                     Text::make('Open Graph site name', 'og_site_name'),
-                    Text::make('Open Graph description', 'og_description'),
+                    Text::make('Open Graph description', 'description'),
+                    Text::make('Site link', 'Site_link'),
                     Image::make('Open Graph image', 'og_image'),
                     Image::make('logo', 'main_logo'),
                 ],
