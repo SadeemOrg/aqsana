@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotificationTest;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,7 @@ use App\Http\Controllers\HomeController;
 //     return view('welcome');
 // });
 
-Route::get('/', [HomeController::class, 'index'])->name('Home');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/about-us', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/conctus', [HomeController::class, 'conctus'])->name('conctus');
@@ -76,6 +78,13 @@ Route::get('/annual-news', function (){
 Route::get('/contact', function (){
     return view('Pages.contact-page');
 });
+
+
+Route::get('/testNotfiy', function (){
+    return view('Pages.testNotfiy');
+});
+
+Route::get('/SendNotificationTest',[NotificationTest::class,'sendNotfiy'])->name('sendNotfiy');
 
 Route::get('/projects-for-donations', function (){
     return view('projects-for-donations');
