@@ -24,7 +24,7 @@ class Notification extends Resource
      */
     public static $title = 'id';
     public static $group = 'Admin';
-    public static $displayInNavigation = false;
+    public static $displayInNavigation = true;
     /**
      * The columns that should be searched.
      *
@@ -47,6 +47,11 @@ class Notification extends Resource
             Text::make("Title","title"),
             Textarea::make("Message","message")->showOnIndex()
         ];
+    }
+
+    public static function afterCreate(Request $request, $model)
+    {   
+        
     }
 
     /**
