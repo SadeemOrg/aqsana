@@ -770,9 +770,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-\[91\%\]{
   max-width: 91%;
 }
-.max-w-\[90\%\]{
-  max-width: 90%;
-}
 .max-w-lg{
   max-width: 32rem;
 }
@@ -781,6 +778,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-w-\[140px\]{
   max-width: 140px;
+}
+.max-w-\[90\%\]{
+  max-width: 90%;
 }
 .max-w-\[380px\]{
   max-width: 380px;
@@ -1295,10 +1295,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-\[\#8F9BB3\]{
   --tw-text-opacity: 1;
   color: rgb(143 155 179 / var(--tw-text-opacity));
-}
-.text-yellow-400{
-  --tw-text-opacity: 1;
-  color: rgb(250 204 21 / var(--tw-text-opacity));
 }
 .text-\[\#6B7280\]{
   --tw-text-opacity: 1;
