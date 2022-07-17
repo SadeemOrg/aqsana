@@ -68,14 +68,12 @@ jQuery(document).ready(function(){
 
       // Toggle hamburger and text depending on state
       if(burger.hasClass(activeClass)) {
-
         burger.removeClass(activeClass)
               .attr("title", closedText);
-
         srText.text(closedText);
+        $('.nav-item').removeClass('show');
       }
       else {
-
         burger.addClass(activeClass)
               .attr("title", openText);
 
