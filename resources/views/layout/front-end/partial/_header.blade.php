@@ -31,7 +31,7 @@
                                 @php
                                 $img = 'storage/' . nova_get_setting('logo', 'default_value');
                             @endphp
-                                <a href="/">
+                                <a href="/" target="_self">
 
                                     <img class=" lg:w-[150px] xl:w-[200px] lg:h-auto xl:h-[60px]" src="/{{ $img }}" />
                                 </a>
