@@ -7,6 +7,7 @@ jQuery(document).ready(function(){
     // show and hide submenu
     $('body').on('mouseenter mouseleave click','.nav-item',function(e){
       if ($(window).width() < 750) {
+          $( this ).siblings().removeClass('show');
         $( this ).addClass('show');
       }
     });
