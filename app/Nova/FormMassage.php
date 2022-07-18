@@ -1,38 +1,31 @@
 <?php
+
 namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\Image;
-use Laravel\Nova\Fields\Select;
-
 use Laravel\Nova\Fields\Text;
-use Halimtuhu\ArrayImages\ArrayImages;
-use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
-use Laravel\Nova\Fields\BelongsTo;
-use Manogi\Tiptap\Tiptap;
-use Waynestate\Nova\CKEditor;
+use Laravel\Nova\Fields\Select;
+use App\Nova\Actions\ReadMessage;
 
-class Report extends Resource
+use Pdmfc\NovaFields\ActionButton;
+
+class FormMassage extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\News::class;
+    public static $model = \App\Models\FormMassage::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'title';
-    public static $group = 'website';
-    public static $priority = 5;
-    public static $displayInNavigation = false;
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -49,36 +42,32 @@ class Report extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public static function indexQuery(NovaRequest $request, $query)
-    {
-
-        return $query->where('main_type', '2');
-
-     }
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Title",'title'),
-          BelongsTo::make("newsType",'newsTypes'),
-            Textarea::make('description', 'description'),
-            CKEditor::make('Contents', 'contents')->hidefromindex(),
+            Text::make('name','name'),
+            Text::make('phone','phone'),
+            Text::make('message','message'),
+            Select::make("is read","is_read")
+            ->options([
+                '0' => 'not read',
+                '1' => 'read',
 
 
-            Image::make('Image','image')->disk('public')->prunable(),
-            ArrayImages::make('Pictures', 'pictures')
-            ->disk('public'),
+                ])->displayUsingLabels(),
+
+                ActionButton::make('ReadMessage')
+                ->action((new ReadMessage) ->confirmText('Are you sure you want to read  this Massage?')
+                ->confirmButtonText('Read')
+                ->cancelButtonText("Don't Read"), $this->id) ->readonly(function () {
+                    return $this->is_read === '1';
+                })->text('Read')->showLoadingAnimation()
+                ->loadingColor('#fff') ->svg('VueComponentName')
 
         ];
     }
-    public static function afterCreate(Request $request, $model)
-    {
-        // $user = Auth::user();
 
-        $model->update([
-            'main_type'=>'2',
-        ]);
-    }
     /**
      * Get the cards available for the request.
      *
@@ -120,6 +109,12 @@ class Report extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+
+            (new ReadMessage)
+            ->confirmText('Are you sure you want to read  this Massage?')
+            ->confirmButtonText('Read')
+            ->cancelButtonText("Don't Read"),
+        ];
     }
 }

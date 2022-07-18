@@ -663,17 +663,26 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-\[460px\]{
   max-height: 460px;
 }
+.max-h-\[135px\]{
+  max-height: 135px;
+}
 .max-h-\[400px\]{
   max-height: 400px;
 }
 .max-h-\[280px\]{
   max-height: 280px;
 }
+.max-h-\[17px\]{
+  max-height: 17px;
+}
 .max-h-\[390px\]{
   max-height: 390px;
 }
 .max-h-\[380px\]{
   max-height: 380px;
+}
+.max-h-\[200px\]{
+  max-height: 200px;
 }
 .min-h-\[294px\]{
   min-height: 294px;
@@ -761,14 +770,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-\[91\%\]{
   max-width: 91%;
 }
-.max-w-\[90\%\]{
-  max-width: 90%;
-}
 .max-w-lg{
   max-width: 32rem;
 }
 .max-w-\[560px\]{
   max-width: 560px;
+}
+.max-w-\[140px\]{
+  max-width: 140px;
+}
+.max-w-\[90\%\]{
+  max-width: 90%;
 }
 .max-w-\[380px\]{
   max-width: 380px;
@@ -778,6 +790,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-w-none{
   max-width: none;
+}
+.max-w-\[17px\]{
+  max-width: 17px;
 }
 .flex-1{
   flex: 1 1 0%;
@@ -1281,10 +1296,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(143 155 179 / var(--tw-text-opacity));
 }
-.text-yellow-400{
-  --tw-text-opacity: 1;
-  color: rgb(250 204 21 / var(--tw-text-opacity));
-}
 .text-\[\#6B7280\]{
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -1599,14 +1610,14 @@ body{
   .md\:h-\[320px\]{
     height: 320px;
   }
-  .md\:h-\[390px\]{
-    height: 390px;
-  }
   .md\:max-h-72{
     max-height: 18rem;
   }
   .md\:max-h-\[320px\]{
     max-height: 320px;
+  }
+  .md\:max-h-\[390px\]{
+    max-height: 390px;
   }
   .md\:w-\[50\%\]{
     width: 50%;
@@ -1700,6 +1711,9 @@ body{
   }
   .lg\:h-\[265px\]{
     height: 265px;
+  }
+  .lg\:h-\[450px\]{
+    height: 450px;
   }
   .lg\:h-\[280px\]{
     height: 280px;

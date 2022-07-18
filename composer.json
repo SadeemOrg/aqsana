@@ -35,6 +35,7 @@
         "manogi/nova-tiptap": "^2.8",
         "optimistdigital/nova-settings": "^3.5",
         "optimistdigital/nova-tailwind": "^1.1",
+        "pdmfc/nova-action-button": "^0.7.4",
         "waynestate/nova-ckeditor4-field": "^0.7.0",
         "whitecube/nova-flexible-content": "^0.2.8",
         "whitecube/nova-google-maps": "^0.0.1",
