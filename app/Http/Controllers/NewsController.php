@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController as BaseController;
 
-class NewsController extends Controller
+
+class NewsController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,20 +16,22 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news=  News::all();
-        return view('cart.show', compact('news'));
+
+        $Influencer =   News::orderBy('created_at', 'desc')->paginate(15);
+        return response($Influencer, 200);
 
     }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -35,20 +39,25 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
 
-    /**
-     * Display the specified resource.
+      /**
+     * show  News by id
      *
-     * @param  \App\Models\News  $news
-     * @return \Illuminate\Http\Response
+     *@urlParam id int required
      */
-    public function show(News $news)
+    public function show($id)
     {
-        //
+
+        $New = News::find($id);
+              if (is_null($New)) {
+            return $this->sendError('Post not found!' );
+        }
+        return $this->sendResponse($New, 'Post retireved Successfully!' );
+
     }
 
     /**
