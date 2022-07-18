@@ -291,23 +291,17 @@
     appId: "1:16943275285:web:c95070543cf570cb265d1c",
     measurementId: "G-FHN8R2KH3M"
   };
-firebase.initializeApp(firebaseConfig);
-//   firebase.initializeApp({
-//     apiKey: "AIzaSyCUFf82RK4_UHpnJ2EAD1eXgz2tIIBoFaE",
-//     authDomain: "alaqsa-association.firebaseapp.com",
-//     projectId: "alaqsa-association",
-//     storageBucket: "alaqsa-association.appspot.com",
-//     messagingSenderId: "16943275285",
-//     appId: "1:16943275285:web:c95070543cf570cb265d1c",
-//     measurementId: "G-FHN8R2KH3M"
-//     });
+
+  firebase.initializeApp(firebaseConfig); 
+
 
 
   const messaging = firebase.messaging();
 
   if ('serviceWorker' in navigator) {
-navigator.serviceWorker.register("../firebase-messaging-sw.js")
+  navigator.serviceWorker.register("../firebase-messaging-sw.js")
   .then(function(registration) {
+   
     console.log('Registration successful, scope is:', registration.scope);
   }).catch(function(err) {
     console.log('Service worker registration failed, error:', err);
@@ -315,7 +309,7 @@ navigator.serviceWorker.register("../firebase-messaging-sw.js")
 }
 	messaging.requestPermission()
 .then(function () {
-//MsgElem.innerHTML = "Notification permission granted."
+
 	console.log("Notification permission granted.");
 
      // get the token in the form of promise
@@ -325,7 +319,24 @@ navigator.serviceWorker.register("../firebase-messaging-sw.js")
  // print the token on the HTML page
   console.log(token);
 
-
+//   $.post({
+//         url: '{{url('/')}}/update_fcm_token',
+//         data: {
+//             id: "{{auth('user')->id()}}",
+//             token_fcm: token,
+//         },
+//         dataType: 'json',
+//         beforeSend: function () {
+            
+//         },
+//         success: function (response) {
+            
+//         },
+//         complete: function () {
+            
+//         },
+//     });
+  
 
 })
 .catch(function (err) {
