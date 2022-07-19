@@ -18,10 +18,10 @@ class CreateTransactionsTable extends Migration
             $table->id();
 
             $table->char('type', 1);
-            $table->char('status', 1);
+            $table->char('status', 1)->default(0);
             $table->bigInteger('project_id')->nullable();
             $table->integer('transact_amount');
-            $table->string('equivelant_amount');
+            $table->string('equivelant_amount')->nullable();
             $table->unsignedBigInteger('Currency')->nullable();
             $table->string('Rate')->nullable();
             $table->string('voucher')->nullable();

@@ -20,7 +20,7 @@ class Transaction extends Model
     ];
 
     protected $casts = [
-        'date' => 'date',
+        'transaction_date' => 'date',
 
     ];
 
@@ -30,11 +30,18 @@ class Transaction extends Model
     }
 
 
-    public function Alhisalat()
+    public function project()
     {
-        return $this->belongsTo('App\Models\Alhisalat','ref_id');
+        return $this->belongsTo('App\Models\project','project_id');
     }
 
+    public function Currenc()
+    {
+        return $this->belongsTo('App\Models\Currency','Currency');
+    }
 
+    // public function getCountryName() {
+    //     return Currency::where('id', $this->id)->first()->name;
+    // }
 
 }
