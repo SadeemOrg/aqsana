@@ -1,11 +1,11 @@
 <template>
     <default-field :field="field" :errors="errors">
         <template slot="field">
-            <sl-vue-tree ref="tree" 
-                v-model="nodes" 
-                v-show="nodes.length" 
+            <sl-vue-tree ref="tree"
+                v-model="nodes"
+                v-show="nodes.length"
                 @input="updateValue"
-                v-on-clickaway="clearSelected" 
+                v-on-clickaway="clearSelected"
                 class="mb-3">
                 <template slot="title" slot-scope="{ node }">
                     {{ getTitle(node) }}
@@ -16,13 +16,13 @@
                         <icon type="edit" class="w-4"></icon>
                     </span>
 
-                    <span class="inline-flex items-center h-full px-1" @click="deleteNode(node)">
+                    <span class="inline-flex items-center h-full px-1 hidden" @click="deleteNode(node)">
                         <icon type="delete" class="w-4"></icon>
                     </span>
                 </template>
             </sl-vue-tree>
 
-            <button class="btn btn-default btn-white mr-3" @click.prevent="addNode()">
+            <button class="btn btn-default btn-white mr-3 hidden" @click.prevent="addNode()">
                 {{ __('New') }}
             </button>
 
@@ -56,7 +56,7 @@
                         </button>
                     </div>
                 </div>
-            </modal>  
+            </modal>
         </template>
     </default-field>
 </template>
@@ -106,7 +106,7 @@ export default {
                 this.fields.forEach(field => {
                     // this.$refs[field.attribute][0].setValue(node.data[field.attribute]);
                     this.$refs[field.attribute][0].value = node.data[field.attribute];
-                });    
+                });
             })
         },
 
@@ -154,7 +154,7 @@ export default {
         },
 
         clearSelected() {
-            this.clearNodeSelected(this.nodes); 
+            this.clearNodeSelected(this.nodes);
         },
 
         clearNodeSelected(nodes) {
@@ -163,7 +163,7 @@ export default {
                 if (node.children && node.children.length) {
                     this.clearNodeSelected(node.children);
                 }
-            });         
+            });
         },
 
         clone(object) {
@@ -257,5 +257,5 @@ export default {
 .rtl .sl-vue-tree-sidebar {
     margin-left: 0;
     margin-right: auto;
-} 
+}
 </style>

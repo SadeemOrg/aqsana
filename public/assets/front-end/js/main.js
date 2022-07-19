@@ -7,6 +7,7 @@ jQuery(document).ready(function(){
     // show and hide submenu
     $('body').on('mouseenter mouseleave click','.nav-item',function(e){
       if ($(window).width() < 750) {
+          $( this ).siblings().removeClass('show');
         $( this ).addClass('show');
       }
     });
@@ -67,14 +68,12 @@ jQuery(document).ready(function(){
 
       // Toggle hamburger and text depending on state
       if(burger.hasClass(activeClass)) {
-
         burger.removeClass(activeClass)
               .attr("title", closedText);
-
         srText.text(closedText);
+        $('.nav-item').removeClass('show');
       }
       else {
-
         burger.addClass(activeClass)
               .attr("title", openText);
 
