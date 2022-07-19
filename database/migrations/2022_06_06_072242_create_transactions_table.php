@@ -24,7 +24,7 @@ class CreateTransactionsTable extends Migration
             $table->string('equivelant_amount');
             $table->unsignedBigInteger('Currency')->nullable();
             $table->string('Rate')->nullable();
-
+            $table->string('voucher')->nullable();
 
 
             $table->integer('approval')->nullable();
