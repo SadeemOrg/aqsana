@@ -98,6 +98,8 @@ messaging.onMessage(function(payload) {
     console.log(payload.notification);
 });
 
+
+  
     //firebase.initializeApp(config);
 // var database = firebase.database().ref().child("/users/");
    

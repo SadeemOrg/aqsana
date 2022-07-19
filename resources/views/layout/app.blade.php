@@ -319,23 +319,7 @@
  // print the token on the HTML page
   console.log(token);
 
-//   $.post({
-//         url: '{{url('/')}}/update_fcm_token',
-//         data: {
-//             id: "{{auth('user')->id()}}",
-//             token_fcm: token,
-//         },
-//         dataType: 'json',
-//         beforeSend: function () {
-            
-//         },
-//         success: function (response) {
-            
-//         },
-//         complete: function () {
-            
-//         },
-//     });
+
   
 
 })
