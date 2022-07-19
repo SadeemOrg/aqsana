@@ -5,11 +5,13 @@
     }
 </style>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 xl:mt-24">
-    {{-- <div class="flex flex-row flex-wrap gap-y-8 md:gap-y-0 justify-center items-center gap-x-6">
+    <div class="flex flex-row flex-wrap gap-y-8 md:gap-y-0 justify-center items-center gap-x-6">
+        @if(is_array($partners)==true && !empty($partners))
         @foreach ($partners as $partner)
         <img src="{{ asset($partner['data']['image']) }}" alt="emar_deen" class="max-w-[140px] max-h-[135px]" />
         @endforeach
-    </div> --}}
+        @endif
+    </div>
     <div class="flex flex-col items-start justify-start mt-24">
         <div class="relative ">
             @php
