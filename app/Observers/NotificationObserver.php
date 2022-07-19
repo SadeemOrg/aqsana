@@ -5,7 +5,7 @@ namespace App\Observers;
 use App\CPU\Helpers;
 use App\Models\Notification;
 use Illuminate\Mail\Message;
-use Illuminate\Support\Facades\App;
+
 
 class NotificationObserver
 {
