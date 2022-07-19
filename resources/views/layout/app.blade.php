@@ -306,28 +306,60 @@
   }).catch(function(err) {
     console.log('Service worker registration failed, error:', err);
   });
-}
+    }
 	messaging.requestPermission()
-.then(function () {
+    .then(function () {
 
 	console.log("Notification permission granted.");
 
      // get the token in the form of promise
 	return messaging.getToken()
-})
-.then(function(token) {
- // print the token on the HTML page
+    })
+    .then(function(token) {
+    // print the token on the HTML page
   console.log(token);
 
+  <?php
+   if(\Illuminate\Support\Facades\Auth::user() != null) {
 
+   
+  ?>
+ 
+  $.post({
+        url: '{{url('/')}}api/update_fcm_token',
+        data: {
+            id: "{{Auth::user()->id}}",
+            fcm_token: token,
+        },
+        dataType: 'json',
+        beforeSend: function () {
+            
+        },
+        success: function (response) {
+            
+        },
+        complete: function () {
+            
+        },
+    });
+    <?php
+        } else {
+
+        
+  ?>
+  console.log("not Auth")
+
+    <?php
+        }
+  ?>
   
 
-})
-.catch(function (err) {
+    })
+    .catch(function (err) {
 	console.log("Unable to get permission to notify.", err);
-});
+    });
 
-messaging.onMessage(function(payload) {
+    messaging.onMessage(function(payload) {
     console.log(payload);
     var notify;
     notify = new Notification(payload.notification.title,{

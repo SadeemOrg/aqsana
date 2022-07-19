@@ -21,11 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
 
+Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
 Route::resource('News', NewsController::class);
 
-
-
-
+// Route::group(['middleware' => ['auth:sanctum']], function () {
+//     Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
+// });
 
