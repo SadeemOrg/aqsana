@@ -18,7 +18,7 @@ class FormMassagePolicy
      */
     public function viewAny(User $user)
     {
-        return ($user->type() == 'admin' || $user->type() == 'website_admin') ;
+        return ($user->type() == 'admin' ) ;
     }
 
     /**
@@ -30,7 +30,7 @@ class FormMassagePolicy
      */
     public function view(User $user, FormMassage $formMassage)
     {
-        return ($user->type() == 'admin' || $user->type() == 'website_admin') ;
+        return ($user->type() == 'admin' ) ;
     }
 
     /**
@@ -41,7 +41,7 @@ class FormMassagePolicy
      */
     public function create(User $user)
     {
-        return ($user->type() == 'admin' || $user->type() == 'website_admin') ;
+        return ($user->type() == 'admin' ) ;
     }
 
     /**
@@ -53,7 +53,7 @@ class FormMassagePolicy
      */
     public function update(User $user, FormMassage $formMassage)
     {
-        return ($user->type() == 'admin' || $user->type() == 'website_admin') ;
+        return ($user->type() == 'admin' ) ;
     }
 
     /**
@@ -65,7 +65,7 @@ class FormMassagePolicy
      */
     public function delete(User $user, FormMassage $formMassage)
     {
-        return ($user->type() == 'admin' || $user->type() == 'website_admin') ;
+        return ($user->type() == 'admin' ) ;
     }
 
     /**
@@ -77,7 +77,7 @@ class FormMassagePolicy
      */
     public function restore(User $user, FormMassage $formMassage)
     {
-        return ($user->type() == 'admin' || $user->type() == 'website_admin') ;
+        return ($user->type() == 'admin' ) ;
     }
 
     /**
@@ -89,6 +89,6 @@ class FormMassagePolicy
      */
     public function forceDelete(User $user, FormMassage $formMassage)
     {
-        return ($user->type() == 'admin' || $user->type() == 'website_admin') ;
+        return ($user->type() == 'admin' ) ;
     }
 }

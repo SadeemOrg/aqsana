@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Role;
 use App\Models\User;
+use App\Models\newsType;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class RolePolicy
+class newsTypePolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class RolePolicy
      */
     public function viewAny(User $user)
     {
-              return ($user->type() == 'admin' ) ;
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\newsType  $newsType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Role $role)
+    public function view(User $user, newsType $newsType)
     {
-              return ($user->type() == 'admin' ) ;
+        //
     }
 
     /**
@@ -41,29 +41,29 @@ class RolePolicy
      */
     public function create(User $user)
     {
-        return false;
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\newsType  $newsType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Role $role)
+    public function update(User $user, newsType $newsType)
     {
-              return ($user->type() == 'admin' ) ;
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\newsType  $newsType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Role $role)
+    public function delete(User $user, newsType $newsType)
     {
         //
     }
@@ -72,10 +72,10 @@ class RolePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\newsType  $newsType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Role $role)
+    public function restore(User $user, newsType $newsType)
     {
         //
     }
@@ -84,10 +84,10 @@ class RolePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\newsType  $newsType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Role $role)
+    public function forceDelete(User $user, newsType $newsType)
     {
         //
     }
