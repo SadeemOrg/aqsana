@@ -45,22 +45,22 @@ class AuthController extends Controller
             'email' => 'required|string|unique:users|email',
             'phone' => 'numeric|digits_between:9,15',
             'password' => 'required|string|confirmed',
-            'user_role' => 'required|string'  ,
-                  'birth_date' => 'date_format:Y-m-d',
+            'user_role' => 'required|string',
+            'birth_date' => 'date_format:Y-m-d',
 
 
         ]);
         $city_id = "";
         $photo = "";
         $birth_datep = "";
-        $phone ="";
+        $phone = "";
 
 
         if ($request->has('city_id')) {
             $city_id = $request['city_id'];
         }
         if ($request->has('photo')) {
-        $photo = $request['photo'];
+            $photo = $request['photo'];
         }
         if ($request->has('birth_date')) {
             $birth_datep = $request['birth_date'];
@@ -262,9 +262,13 @@ class AuthController extends Controller
     /**
      * Update in the user by update profile .
      * @authenticated
+  * @bodyParam   name    string  required    The name of the  user.      Example: zeyad
      * @bodyParam   email    string  required    The email of the  user.      Example:zeyad.hawash@averotec.sa
-     * @bodyParam   name    string  required    The name of the  user.      Example: zeyad
-     * @bodyParam   phone    string  required    The password of the  user.   Example: secret
+     * @bodyParam   user_role    string  required    The role of the  user.      Example: admin
+     * @bodyParam   city_id    string      The  birth_date of the  user.   Example:1
+     * @bodyParam photo file  The image.
+     * @bodyParam birth_date date_format  The .
+     * @bodyParam   phone    string      The name of the  user.      Example: 123456789
      * @response {
      *  "user": "{ email:testuser@example.com,name :testuser,passwor:secret }",
      * }
@@ -275,7 +279,9 @@ class AuthController extends Controller
     {
         $fields = $request->validate([
             'email' => 'string|email',
+            'name' => 'required|string',
             'phone' => 'numeric|digits_between:9,15',
+            'user_role' => 'required|string',
 
 
         ]);
@@ -294,7 +300,13 @@ class AuthController extends Controller
             $user->email = $request->get("email");
         }
 
+        if ($request->has('user_role')) {
+            $user->name = $request->get("user_role");
+        }
 
+        if ($request->has('birth_date')) {
+            $user->name = $request->get("birth_date");
+        }
         $is_save = $user->save();
 
 

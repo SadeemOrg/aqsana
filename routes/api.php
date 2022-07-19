@@ -18,14 +18,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/register_login_social_media', [AuthController::class, 'register_login_social_media']);
+Route::post('/login_social_media', [AuthController::class, 'login_social_media']);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::post('/user/update', [AuthController::class, 'update']);
+});
+
 Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
 
 Route::resource('News', NewsController::class);
-
-
-
-
-
