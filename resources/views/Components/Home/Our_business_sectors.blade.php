@@ -5,11 +5,11 @@
     }
 </style>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 xl:mt-24">
-    <div class="flex flex-row flex-wrap gap-y-8 md:gap-y-0 justify-center items-center gap-x-6">
+    {{-- <div class="flex flex-row flex-wrap gap-y-8 md:gap-y-0 justify-center items-center gap-x-6">
         @foreach ($partners as $partner)
         <img src="{{ asset($partner['data']['image']) }}" alt="emar_deen" class="max-w-[140px] max-h-[135px]" />
         @endforeach
-    </div>
+    </div> --}}
     <div class="flex flex-col items-start justify-start mt-24">
         <div class="relative ">
             @php
@@ -27,28 +27,27 @@
     <div class="mt-12">
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <!-- first card -->
-            @if(!empty($news))
+            @if(!empty($news) && is_array($sectors)==true)
             @foreach ($sectors as $sector)
             @php
             $img = $sector['data']['main_img_workplace'];
-                // dd($sector['data']['text_bottom_workplace_']);
+            // dd($sector['data']['text_bottom_workplace_']);
             @endphp
             <div class="pt-6 shaddow relative pb-[72px] overflow-hidden rounded-[16px]">
                 <div class="flow-root rounded-lg bg-[#FFFFFF] px-6 pb-8 ">
                     <div class="-mt-6">
                         <img src="{{ asset($img) }}" alt="Brand_icon" class="w-16 h-16">
-                        <h3 class="mt-8 text-lg font-FlatBold text-[#101426]">{{ $sector['data']['text_main_workplace'] }}</h3>
+                        <h3 class="mt-8 text-lg font-FlatBold text-[#101426]">{{ $sector['data']['text_main_workplace']
+                            }}</h3>
                         <p class="mt-4 text-[16px] font-noto_Regular text-[#6B7280]">
-                        {{ $sector['data']['sup_text_workplace'] }}
+                            {{ $sector['data']['sup_text_workplace'] }}
                         </p>
                     </div>
                 </div>
-
                 <div
                     class="h-[72px] absolute bottom-0 right-0 left-0 w-full flex flex-row justify-between items-center px-6 cursor-pointer bg-[#F9FAFB]">
                     <a class="reltive link-wrap font-FlatBold text-[#349A37] text-base h-full w-full flex flex-row justify-between items-center"
-                        href={{ $sector['data']['link_bottom_workplace_']}}
-                        >
+                        href={{ $sector['data']['link_bottom_workplace_']}}>
                         <span class="relative z-10">{{ $sector['data']['text_bottom_workplace_'] }}</span>
                         <svg class="relative z-10" width="11" height="17" viewBox="0 0 11 17" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
