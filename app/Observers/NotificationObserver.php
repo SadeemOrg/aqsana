@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Observers;
+
 use App\CPU\Helpers;
 use App\Models\Notification;
 use Illuminate\Mail\Message;
