@@ -45,6 +45,10 @@ class project extends Model
         return $this->belongsTo(newsType::class,'');
     }
 
+    public function Transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 
     public function create()
     {

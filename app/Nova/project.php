@@ -58,7 +58,6 @@ class project extends Resource
      */
     public static $title = 'project_name';
     public static $group = 'project_name';
-    public static $displayInNavigation = false;
     /**
      * The columns that should be searched.
      *
