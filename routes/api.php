@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
+use App\Http\Controllers\SettingController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +26,13 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
 Route::resource('News', NewsController::class);
+
+
+// setting api
+Route::get('/about_us', [SettingController::class, 'about_us']);
+Route::get('/contact_us', [SettingController::class, 'contact_us']);
+Route::post('/report_problem', [SettingController::class, 'report_problem']);
+
 
 // Route::group(['middleware' => ['auth:sanctum']], function () {
 //     Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
