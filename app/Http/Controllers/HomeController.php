@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\FormMassage;
 use Mail;
 use App\Mail\TestMail;
-
+use App\Models\News;
+use App\Models\newsType;
 
 
 class HomeController extends Controller
@@ -20,7 +21,7 @@ class HomeController extends Controller
 
     public function getProduct(int $id, string $slug)
     {
-     dd("nbddj");
+        dd("nbddj");
     }
 
 
@@ -78,63 +79,46 @@ class HomeController extends Controller
         FormMassage::create([
             'name' => $request['name'],
             'phone' => $request['phone'],
-            'message' =>$request['message'],
+            'message' => $request['message'],
 
-            ]);
-            return redirect()->back();
-
-        // return redirect()->back();
-        // $input = $request->all();
-        // $validator = Validator::make($input,[
-        //     'name'=> 'required|string',
-        //     'phone'=> 'required|string',
-        //     'message'=>'required|string|email',
-
-        // ]);
-        // if ($validator->fails()) {
-        //     return redirect()->back()->with('error', 'Something went wrong.');
-        // }
-        // return redirect()->back();
-
+        ]);
+        return redirect()->back();
     }
 
 
-    public function news($maintype,$type )
+    public function news($maintype, $type)
     {
+        $main_type = newsType::where('name', $maintype)
+            ->where('type', '0')
+            ->select('main_type')->first();
+
+        $Type = newsType::where('name', $type)
+            ->where('main_type', $main_type->main_type)
+            ->select('type')->first();
+
+
         $news = DB::table('news')->where([
-            ['main_type', '=', $maintype],
-            ['type', '=', $type],
+            ['main_type', '=', $main_type->main_type],
+            ['type', '=', $Type->type],
         ])->paginate(8);
-        $mainType = DB::table('news_types')->where([
-            ['main_type', '=', $maintype],
-            ['type', '=', '0'],
-        ])->first();
 
 
-        $type = DB::table('news_types')->where([
-            ['main_type', '=', $maintype],
-            ['type', '=', $type ],
-        ])->first();
-
+        $mainType = str_replace("-", " ", $maintype);
+        $type = str_replace("-", " ", $type);
         return view('Pages.our-news', compact('news', 'mainType', 'type'));
-
-        // $news = DB::table('news')->orderBy('created_at', 'desc')->paginate(8);
-        // return view('Pages.our-news', compact('news'));
     }
+
     public function getnewDetail($id)
     {
         $new = DB::table('news')->where('id', $id)->first();
-        // dd($news);
+
         $Articles = DB::table('news')->where([
             ['type', '=', $new->type],
             ['main_type', '=', $new->main_type],
         ])->orderBy('created_at', 'desc')->take(6)->get();
-        // dd($newser);
-        // dd($news->pictures);
+
         $goalsjson = $new->pictures;
-        // dd($goalsjson);
-        // $goals = json_decode($goalsjson,true);
-        // dd(gettype($goals));
+
         $pictures = json_decode(json_decode($goalsjson, true), true);
 
         $mainType = DB::table('news_types')->where([
@@ -144,188 +128,35 @@ class HomeController extends Controller
 
 
 
-        // dd(gettype($pictures));
-        return view('Pages.single-news', compact('new', 'pictures', 'Articles','mainType'));
+
+        return view('Pages.single-news', compact('new', 'pictures', 'Articles', 'mainType'));
     }
 
-    // // Alquds
 
 
 
-    // public function Alquds_news()
-    // {
-    //     $news = DB::table('news')->where([
-    //         ['type', '=', '1'],
-    //         ['main_type', '=', '0'],
-    //     ])->paginate(8);
-    //     // dd($news);
-    //     // $Articles = DB::table('news')
 
-    //     // ->where([
-    //     //     ['type', '=', $news[0]->type],
-    //     //     ['main_type', '=', '0'],
-    //     //             ])
-    //     // ->orderBy('created_at', 'desc')->take(6)->get();
-    //     // dd($Articles);
-    //     // dd($newser);
-    //     // dd($news->pictures);
-    //     // $goalsjson=$news->pictures;
-    //     // dd($goalsjson);
-    //     // $goals = json_decode($goalsjson,true);
-    //     // dd(gettype($goals));
-    //     // $pictures = json_decode( json_decode($goalsjson,true),true);
-
-    //     return view('Pages.our-news', compact('news'));
-    // }
-    // public function Alquds_blog()
-    // {
-    //     $news = DB::table('news')->where([
-    //         ['type', '=', '1'],
-    //         ['main_type', '=', '1'],
-    //     ])->paginate(8);
-    //     // dd($news);
-    //     // $Articles = DB::table('news')
-
-    //     // ->where([
-    //     //     ['type', '=', $news[0]->type],
-    //     //     ['main_type', '=', '1'],
-    //     //             ])
-    //     // ->orderBy('created_at', 'desc')->take(6)->get();
-    //     // // dd($Articles);
-    //     // // dd($newser);
-    //     // // dd($news->pictures);
-    //     // $goalsjson=$news->pictures;
-    //     // // dd($goalsjson);
-    //     // // $goals = json_decode($goalsjson,true);
-    //     // // dd(gettype($goals));
-    //     // $pictures = json_decode( json_decode($goalsjson,true),true);
-
-    //     return view('Pages.our-news', compact('news'));
-    // }
-    // public function Alquds_report()
-    // {
-    //     $news = DB::table('news')->where([
-    //         ['type', '=', '1'],
-    //         ['main_type', '=', '2'],
-    //     ])->paginate(8);
-    //     // dd($news);
-    //     // $Articles = DB::table('news')
-
-    //     // ->where([
-    //     //     ['type', '=', $news[0]->type],
-    //     //     ['main_type', '=', '2'],
-    //     //             ])
-    //     // ->orderBy('created_at', 'desc')->take(6)->get();
-    //     // // dd($Articles);
-    //     // // dd($newser);
-    //     // // dd($news->pictures);
-    //     // $goalsjson=$news->pictures;
-    //     // // dd($goalsjson);
-    //     // // $goals = json_decode($goalsjson,true);
-    //     // // dd(gettype($goals));
-    //     // $pictures = json_decode( json_decode($goalsjson,true),true);
-
-    //     return view('Pages.our-news', compact('news'));
-    // }
+    public function search($search)
+    {
+        $main_type = newsType::where('name', 'like',  '%' . $search . '%')
+            ->select('main_type')->get();
 
 
 
-    // //holy
+        $stack_main_type = array();
+        foreach ($main_type as $key => $value) {
+            array_push($stack_main_type, $value->main_type);
+        }
 
-
-    // public function holy_news()
-    // {
-    //     $news = DB::table('news')->where([
-    //         ['type', '=', '2'],
-    //         ['main_type', '=', '0'],
-    //     ])->paginate(8);
-    //     // dd($news);
-    //     // $Articles = DB::table('news')
-
-    //     // ->where([
-    //     //     ['type', '=', $news[0]->type],
-    //     //     ['main_type', '=', '0'],
-    //     //             ])
-    //     // ->orderBy('created_at', 'desc')->take(6)->get();
-    //     // dd($Articles);
-    //     // dd($newser);
-    //     // dd($news->pictures);
-    //     // $goalsjson=$news->pictures;
-    //     // dd($goalsjson);
-    //     // $goals = json_decode($goalsjson,true);
-    //     // dd(gettype($goals));
-    //     // $pictures = json_decode( json_decode($goalsjson,true),true);
-
-    //     return view('Pages.our-news', compact('news'));
-    // }
-    // public function holy_blog()
-    // {
-    //     $news = DB::table('news')->where([
-    //         ['type', '=', '2'],
-    //         ['main_type', '=', '1'],
-    //     ])->paginate(8);
-    //     // dd($news);
-    //     // $Articles = DB::table('news')
-
-    //     // ->where([
-    //     //     ['type', '=', $news[0]->type],
-    //     //     ['main_type', '=', '1'],
-    //     //             ])
-    //     // ->orderBy('created_at', 'desc')->take(6)->get();
-    //     // // dd($Articles);
-    //     // // dd($newser);
-    //     // // dd($news->pictures);
-    //     // $goalsjson=$news->pictures;
-    //     // // dd($goalsjson);
-    //     // // $goals = json_decode($goalsjson,true);
-    //     // // dd(gettype($goals));
-    //     // $pictures = json_decode( json_decode($goalsjson,true),true);
-
-    //     return view('Pages.our-news', compact('news'));
-    // }
-    // public function holy_report()
-    // {
-    //     $news = DB::table('news')->where([
-    //         ['type', '=', '2'],
-    //         ['main_type', '=', '2'],
-    //     ])->paginate(8);
-    //     // dd($news);
-    //     // $Articles = DB::table('news')
-
-    //     // ->where([
-    //     //     ['type', '=', $news[0]->type],
-    //     //     ['main_type', '=', '2'],
-    //     //             ])
-    //     // ->orderBy('created_at', 'desc')->take(6)->get();
-    //     // // dd($Articles);
-    //     // // dd($newser);
-    //     // // dd($news->pictures);
-    //     // $goalsjson=$news->pictures;
-    //     // // dd($goalsjson);
-    //     // // $goals = json_decode($goalsjson,true);
-    //     // // dd(gettype($goals));
-    //     // $pictures = json_decode( json_decode($goalsjson,true),true);
-
-    //     return view('Pages.our-news', compact('news'));
-    // }
-
-    // public function annualnews($id)
-    // {
-    //     $new = DB::table('news')->where('id', $id)->first();
-    //     // dd($news);
-    //     $Articles = DB::table('news')->where([
-    //         ['type', '=', $new->type],
-    //         ['main_type', '=', $new->main_type],
-    //     ])->orderBy('created_at', 'desc')->take(6)->get();
-    //     // dd($newser);
-    //     // dd($news->pictures);
-    //     $goalsjson = $new->pictures;
-    //     // dd($goalsjson);
-    //     // $goals = json_decode($goalsjson,true);
-    //     // dd(gettype($goals));
-    //     $pictures = json_decode(json_decode($goalsjson, true), true);
-
-    //     // dd(gettype($pictures));
-    //     return view('pages.annual-news', compact('new', 'pictures', 'Articles'));
-    // }
+        $News = News::whereIn('main_type', $stack_main_type)
+            ->orWhere('title', 'like',  $search)
+            ->orWhere('sector', 'like',  $search)
+            ->get();
+        // foreach ($News as $key => $value) {
+        //     echo  $value->title;
+        //     echo '<br>';
+        // }
+return $news
+        // return dd($News);
+    }
 }

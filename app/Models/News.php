@@ -13,11 +13,12 @@ class News extends Model
         News::class => [NewsObserver::class],
     ];
     protected $fillable = [
-        'id','title','description','image','type','pictures','created_by','update_by'
+        'id','title','description','image','type','pictures','created_by','update_by','video_link'
     ];
 
     protected $casts = [
     	'pictures' => 'array',
+        'new_date' => 'date',
     ];
 
 
