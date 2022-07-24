@@ -29,6 +29,28 @@
     @foreach(\Laravel\Nova\Nova::themeStyles() as $publicPath)
         <link rel="stylesheet" href="{{ $publicPath }}">
     @endforeach
+
+       <!-- firebase integration started -->
+
+<!-- Firebase App is always required and must be first -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+<!-- Add additional services that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-functions.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ asset('js/app.js') }}?v={{rand(0, 99)}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<!-- firebase integration end -->
 </head>
 <body class="min-w-site bg-40 text-90 font-medium min-h-full">
     <div id="nova">
@@ -98,5 +120,98 @@
     <script>
         Nova.liftOff()
     </script>
+
+<script>
+
+console.log("owais");
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCUFf82RK4_UHpnJ2EAD1eXgz2tIIBoFaE",
+  authDomain: "alaqsa-association.firebaseapp.com",
+  projectId: "alaqsa-association",
+  storageBucket: "alaqsa-association.appspot.com",
+  messagingSenderId: "16943275285",
+  appId: "1:16943275285:web:c95070543cf570cb265d1c",
+  measurementId: "G-FHN8R2KH3M"
+};
+
+firebase.initializeApp(firebaseConfig); 
+
+
+
+const messaging = firebase.messaging();
+
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register("../../public/firebase-messaging-sw.js")
+.then(function(registration) {
+ 
+  console.log('Registration successful, scope is:', registration.scope);
+}).catch(function(err) {
+  console.log('Service worker registration failed, error:', err);
+});
+  }
+  messaging.requestPermission()
+  .then(function () {
+
+  console.log("Notification permission granted.");
+
+   // get the token in the form of promise
+  return messaging.getToken()
+  })
+  .then(function(token) {
+  // print the token on the HTML page
+console.log(token);
+
+<?php
+ if(\Illuminate\Support\Facades\Auth::user() != null) {
+
+    
+?>
+
+$.post({
+      url: '{{url('/')}}/api/update_fcm_token',
+      data: {
+          id: "{{Auth::user()->id}}",
+          fcm_token: token,
+      },
+      dataType: 'json',
+      beforeSend: function () {
+      },
+      success: function (response) {
+       
+      },
+      complete: function () {
+       
+      },
+  });
+  <?php
+      } else {
+
+      
+?>
+
+
+  <?php
+      }
+?>
+
+
+  })
+  .catch(function (err) {
+  console.log("Unable to get permission to notify.", err);
+  });
+
+  messaging.onMessage(function(payload) {
+  console.log(payload);
+  var notify;
+  notify = new Notification(payload.notification.title,{
+      body: payload.notification.body,
+      icon: payload.notification.icon,
+      tag: "Dummy"
+  });
+  console.log(payload.notification);
+});
+</script>
 </body>
 </html>
