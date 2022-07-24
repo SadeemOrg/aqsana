@@ -23,11 +23,11 @@
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2">/</li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] min-w-fit text-[#101426]">
-                <a href="/">{{ $mainType->name }}</a>
+                <a href="/">{{ $mainType }}</a>
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] text-[#349A37]">
-                {{ $type->name }}
+                {{ $type }}
             </li>
         </ul>
     </div>
@@ -35,7 +35,7 @@
 <div class="bg-[#F2FFF285] py-8 mt-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative xl:mt-8 mb-7 lg:mb-0">
-            <p class="font-FlatBold text-3xl text-center xl:text-right"> {{ $type->name }} </p>
+            <p class="font-FlatBold text-3xl text-center xl:text-right"> {{ $type }} </p>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
         <div class="lg:grid lg:grid-cols-2 gap-x-8 gap-y-6 text-center lg:text-right">

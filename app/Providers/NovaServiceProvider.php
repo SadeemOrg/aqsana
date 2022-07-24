@@ -63,6 +63,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         [
                             Tree::make('Items', 'Items')->fields([
                                 Text::make('Name'),
+                                Link::make('Link')->resources([
+
+                                ])
                             ])->title('name'),
                             Image::make('Logo', 'logo')->disk('public'),
                         ]
