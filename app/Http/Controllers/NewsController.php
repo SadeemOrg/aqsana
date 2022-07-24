@@ -24,8 +24,8 @@ class NewsController extends BaseController
     public function index()
     {
 
-        $Influencer =   News::orderBy('created_at', 'desc')->paginate(15);
-        return response($Influencer, 200);
+        $News =   News::orderBy('created_at', 'desc')->paginate(15);
+        return response($News, 200);
     }
 
 
@@ -43,5 +43,7 @@ class NewsController extends BaseController
         }
         return $this->sendResponse($New, 'Post retireved Successfully!');
     }
+
+
 
 }
