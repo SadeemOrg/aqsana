@@ -13,12 +13,13 @@
     <base href="{{ nova_get_setting('Site_link', '') }}" target="_blank">
 
 
-    <link rel="canonical" href="https://aqsana.org/"/>
-    <meta rel="sitemap" type="application/xml" content="https://www.google.com/maps/place/Salah+ad-Din%2FEntry/@32.1287772,34.9666098,15z/data=!4m13!1m7!3m6!1s0x151d30a07d1c8d37:0xe4ff2734981fb335!2sKafr+Bara,+Israel!3b1!8m2!3d32.130911!4d34.970108!3m4!1s0x151d30a7771ae475:0x3a3ffa51d8ced657!8m2!3d32.13195!4d34.965225"/>
+    <link rel="canonical" href="https://aqsana.org/" />
+    <meta rel="sitemap" type="application/xml"
+        content="https://www.google.com/maps/place/Salah+ad-Din%2FEntry/@32.1287772,34.9666098,15z/data=!4m13!1m7!3m6!1s0x151d30a07d1c8d37:0xe4ff2734981fb335!2sKafr+Bara,+Israel!3b1!8m2!3d32.130911!4d34.970108!3m4!1s0x151d30a7771ae475:0x3a3ffa51d8ced657!8m2!3d32.13195!4d34.965225" />
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="{{ nova_get_setting('og_site_name', '') }}"/>
-    <meta itemprop="description" content="{{ nova_get_setting('og_description', '') }}"/>
-    <meta itemprop="image" content=" storage/{{ nova_get_setting('main_logo', 'default_value')}}"/>
+    <meta itemprop="name" content="{{ nova_get_setting('og_site_name', '') }}" />
+    <meta itemprop="description" content="{{ nova_get_setting('og_description', '') }}" />
+    <meta itemprop="image" content=" storage/{{ nova_get_setting('main_logo', 'default_value')}}" />
 
 
 
@@ -27,9 +28,9 @@
     <meta property="og:type" content="https://schema.org/WebSite" />
     <meta property="og:description" content="{{ nova_get_setting('og_description', '') }}" />
     <meta property="og:image" content="{{ nova_get_setting('og_image', '') }}" />
-    <meta property="og:title" content="Al-Aqsa Association"/>
-    <meta property="og:locale" content="ar"/>
-    <meta property="fb:admins" content="{{ nova_get_setting('phone', '') }}"/>
+    <meta property="og:title" content="Al-Aqsa Association" />
+    <meta property="og:locale" content="ar" />
+    <meta property="fb:admins" content="{{ nova_get_setting('phone', '') }}" />
     <meta name="theme-color" content="#349A37" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -51,24 +52,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        <!-- firebase integration started -->
+    <!-- firebase integration started -->
 
-<!-- Firebase App is always required and must be first -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 
-<!-- Add additional services that you want to use -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-functions.js"></script>
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-functions.js"></script>
 
-<!-- firebase integration end -->
+    <!-- firebase integration end -->
 
-<!-- Comment out (or don't include) services that you don't want to use -->
+    <!-- Comment out (or don't include) services that you don't want to use -->
 
 
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
     <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
     <style>
         @layer base {
@@ -278,8 +279,7 @@
 </body>
 <!-- <script src="{{ mix('/js/app.js') }}"></script> -->
 <script>
-
-  console.log("owais");
+    console.log("owais");
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
@@ -292,7 +292,7 @@
     measurementId: "G-FHN8R2KH3M"
   };
 
-  firebase.initializeApp(firebaseConfig); 
+  firebase.initializeApp(firebaseConfig);
 
 
 
@@ -301,7 +301,7 @@
   if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register("../firebase-messaging-sw.js")
   .then(function(registration) {
-   
+
     console.log('Registration successful, scope is:', registration.scope);
   }).catch(function(err) {
     console.log('Service worker registration failed, error:', err);
@@ -322,9 +322,9 @@
   <?php
    if(\Illuminate\Support\Facades\Auth::user() != null) {
 
-   
+
   ?>
- 
+
   $.post({
         url: '{{url('/')}}api/update_fcm_token',
         data: {
@@ -333,26 +333,26 @@
         },
         dataType: 'json',
         beforeSend: function () {
-            
+
         },
         success: function (response) {
-            
+
         },
         complete: function () {
-            
+
         },
     });
     <?php
         } else {
 
-        
+
   ?>
   console.log("not Auth")
 
     <?php
         }
   ?>
-  
+
 
     })
     .catch(function (err) {
@@ -369,5 +369,36 @@
     });
     console.log(payload.notification);
 });
+
+$('#search').on('keyup', function(){
+    var val = $('#search').val();
+    if(val.length>1){
+        $('.search-bar').siblings().css('display','flex');
+    $.get({
+        url: '{{url('/')}}/search/'+val,
+        data: {
+            val: val,
+        },
+        dataType: 'json',
+        beforeSend: function () {
+        },
+        success: function (response) {
+            console.log("🚀 ~ file: app.blade.php ~ line 350 ~ $ ~ response", response)
+            $('.search-result-box').empty().append(
+                response.map(item=>{
+                console.log("🚀 ~ file: app.blade.php ~ line 389 ~ $ ~ item", item)
+                    var trimmedString =item.title.substring(0, 50);
+                   return trimmedString
+                })
+            )
+
+        },
+        complete: function () {
+
+        },
+    });
+}
+});
 </script>
+
 </html>
