@@ -67,7 +67,11 @@ class VolunteerController extends BaseController
             return $this->sendError('Validate Error', $validator->errors());
         }
 
-        $volunteering_user = Volunteer::where("user_id",$request->get("user_id"))->with('Project')->get();
+        if($request->status == "0") {
+            $volunteering_user = Volunteer::where("user_id",$request->get("user_id"))->where("status","0")->with('Project')->paginate(15);
+
+        }
+        $volunteering_user = Volunteer::where("user_id",$request->get("user_id"))->where("status","1")->with('Project')->paginate(15);
 
         return $this->sendResponse($volunteering_user, 'Success get Volunteer user');
 
