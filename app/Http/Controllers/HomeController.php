@@ -148,15 +148,18 @@ class HomeController extends Controller
             array_push($stack_main_type, $value->main_type);
         }
 
-        $News = News::whereIn('main_type', $stack_main_type)
-            ->orWhere('title', 'like',  $search)
-            ->orWhere('sector', 'like',  $search)
-            ->get();
+        $News = News::query()->
+        where('main_type', $stack_main_type)
+       ->orWhere('title', 'like',  "%{$search}%")
+       ->orWhere('sector', 'like',  "%{$search}%")
+       ->select('title')
+
+       ->get();
         // foreach ($News as $key => $value) {
         //     echo  $value->title;
         //     echo '<br>';
         // }
-return $news
+return $News;
         // return dd($News);
     }
 }
