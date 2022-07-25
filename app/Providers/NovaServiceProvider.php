@@ -57,272 +57,278 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         parent::boot();
 
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-                Tabs::make('Home', [
-                    Tab::make(
-                        'navbar ',
-                        [
-                            Tree::make('Items', 'Items')->fields([
-                                Text::make('Name'),
-                                Link::make('Link')->resources([
-
-                                ])
-                            ])->title('name'),
-                            Image::make('Logo', 'logo')->disk('public'),
-                        ]
-                    ),
-                    Tab::make(
-                        'Heroo ',
-                        [
-                            FlexibleContent::make('Heroo', 'Heroo')
-                                ->addLayout(
-                                    [
-                                        'label' => 'Heroo',
-                                        'name' => 'Heroo',
-                                        'fields' => [
-                                            [
-                                                'type' => 'image',
-                                                'name' => 'image',
-                                                'label' => 'Image',
-                                                'multiple' => false,
-                                                'required' => true
-                                            ],
-
-                                            [
-                                                'type' => 'text',
-                                                'name' => 'image_alt_Heroo',
-                                                'label' => 'image description',
-                                                'multiple' => false,
-                                                'required' => true
-                                            ]
-                                        ]
-                                    ]
-                                ),
-                        ]
-                    ),
-                    Tab::make(
-                        'Banner 1',
-                        [
-                            Image::make('main img', 'main_img_Banner_1'),
-                            Text::make('image description ', 'image_alt_Banner_1'),
-                            Text::make('main text', 'text_main_Banner_1'),
-                            Text::make('sup text ', 'sup_text_Banner_1'),
-                            Image::make('Logo', 'logo_Banner_1')->disk('public'),
-                            Text::make('text logo', 'text_loga_Banner_1'),
-                            Text::make('bottom  text ', 'text_bottom_Banner_1'),
-                            Text::make('bottom  link ', 'link_bottom_Banner_1'),
-                        ]
-                    ),
-                    Tab::make(
-                        'Projects News',
-                        [
-                            Text::make('main text Projects News', 'text_main_projects_news'),
-                            FlexibleContent::make('Projects_News', 'Projects_News')
-                                ->addLayout(
-                                    [
-                                        'label' => 'Heroo',
-                                        'name' => 'Heroo',
-                                        'fields' => [
-                                            [
-                                                'type' => 'text',
-                                                'name' => 'title',
-                                                'label' => 'title',
-                                                'multiple' => false,
-                                                'required' => true
-                                            ],
-                                            [
-                                                'type' => 'text',
-                                                'name' => 'sup_title',
-                                                'label' => 'sup_title',
-                                                'multiple' => false,
-                                                'required' => true
-                                            ],
-                                            [
-                                                'type' => 'image',
-                                                'name' => 'image',
-                                                'label' => 'Image',
-                                                'multiple' => false,
-                                                'required' => true
-                                            ],
-                                        ]
-                                    ]
-                                ),
-                        ]
-                    ),
-                    Tab::make(
-                        'Banner 2',
-                        [
-                            Image::make('main img', 'main_img_Banner_2'),
-                            Text::make('main text', 'text_main_Banner_2'),
-                            Text::make('sup text ', 'sup_text_Banner_2'),
-                            Text::make('bottom view  text ', 'text_view_bottom_Banner_2'),
-                            Text::make('bottom view link ', 'link_view_bottom_Banner_2'),
-                            Text::make('bottom seen text ', 'text_seen_bottom_Banner_2'),
-                            Text::make('bottom seen link ', 'link_seen_bottom_Banner_2'),
-                        ]
-                    ),
-                    Tab::make(
-                        'partner',
-                        [
-                            FlexibleContent::make('partner', 'partner')
-                                ->addLayout(
-                                    [
-                                        'label' => 'partner',
-                                        'name' => 'partner',
-                                        'fields' => [
-                                            [
-                                                'type' => 'text',
-                                                'name' => 'title',
-                                                'label' => 'title',
-                                                'multiple' => false,
-                                                'required' => true
-                                            ],
-                                            [
-                                                'type' => 'image',
-                                                'name' => 'image',
-                                                'label' => 'Image',
-                                                'multiple' => false,
-                                                'required' => true
-                                            ],
-                                        ]
-                                    ]
-                                ),
-                        ]
-                    ),
-                    Tab::make(
-                        'Our central work place ',
-                        [
-                            Text::make('main text', 'text_main_workplace'),
-                            Text::make('sup text ', 'sup_text_workplace'),
-                            FlexibleContent::make('workplace', 'workplace')
-                                ->addLayout(
-                                    [
-                                        'label' => 'workplace',
-                                        'name' => 'workplace',
-                                        'fields' => [
-                                            [
-                                                'type' => 'image',
-                                                'name' => 'main_img_workplace',
-                                                'label' => 'Image',
-                                                'multiple' => false,
-                                                'required' => false
-                                            ],
-                                            [
-                                                'type' => 'text',
-                                                'name' => 'text_main_workplace',
-                                                'label' => 'title',
-                                                'multiple' => false,
-                                                'required' => false
-                                            ],
-                                            [
-                                                'type' => 'text',
-                                                'name' => 'sup_text_workplace',
-                                                'label' => 'sup title',
-                                                'multiple' => false,
-                                                'required' => false
-                                            ],
-                                            [
-                                                'type' => 'text',
-                                                'name' => 'text_bottom_workplace_',
-                                                'label' => 'text bottom_',
-                                                'multiple' => false,
-                                                'required' => false
-                                            ],
-                                            [
-                                                'type' => 'text',
-                                                'name' => 'valuo00',
-                                                'label' => 'Image',
-                                                'multiple' => false,
-                                                'required' => false,
-                                                'value'=>'3487'
-                                            ],
-                                            [
-                                                'type' => 'text',
-                                                'name' => 'link_bottom_workplace_',
-                                                'label' => 'link bottom',
-                                                'multiple' => false,
-                                                'required' => false
-                                            ],
-                                        ]
-                                    ]
-                                ),
-                        ]
-                    ),
-                    Tab::make(
-                        'video',
-                        [
-                            FlexibleContent::make('video', 'videohome')
-                                ->addLayout(
-                                    [
-                                        'label' => 'video',
-                                        'name' => 'videohome',
-                                        'fields' => [
-                                            [
-                                                'type' => 'text',
-                                                'name' => 'link',
-                                                'label' => 'link',
-                                                'multiple' => false,
-                                                'required' => true
-                                            ],
-                                            [
-                                                'type' => 'image',
-                                                'name' => 'cover',
-                                                'label' => 'cover',
-                                                'multiple' => false,
-                                                'required' => true
-                                            ],
-                                        ]
-                                    ]
-                                ),
-                        ]
-                    ),
-                    Tab::make(
-                        'Connect with us',
-                        [
-                            Text::make('heder text', 'heder_text_main_Connect'),
-                            Text::make('main text', 'text_main_Connect'),
-                            Text::make('sup text text', 'sup_text_main_Connect'),
-                            Text::make('phone', 'phone_Connect'),
-                            Text::make('Email', 'email_Connect'),
-                            Text::make('Text bottome', 'text_bottom_Connect'),
-                            Text::make('linlk bottom', 'linlk_bottom'),
-                            Text::make('filed 1 ', 'filed1_Connect'),
-                            Text::make('filed 2 ', 'filed2_Connect'),
-                            Text::make('filed 3 ', 'filed3_Connect'),
-                            Text::make('text form bottom', 'text_form_Connect'),
-                        ]
-                    ),
-                    Tab::make('footer', [
-                        Image::make('Logo', 'footer_logo')->disk('public'),
-                        Tree::make('Items (EN)', 'Itemsfooter')->fields([
+            Tabs::make('Home', [
+                Tab::make(
+                    'navbar ',
+                    [
+                        Tree::make('Items', 'Items')->fields([
                             Text::make('Name'),
-                            Link::make('Link')->resources([
-                                User::class,
-                                Area::class,
-                            ])
+                            Link::make('Link')->resources([])
                         ])->title('name'),
-                    ]),
-                    Tab::make('footer', []),
+                        Image::make('Logo', 'logo')->disk('public'),
+                    ]
+                ),
+                Tab::make(
+                    'Heroo ',
+                    [
+                        FlexibleContent::make('Heroo', 'Heroo')
+                            ->addLayout(
+                                [
+                                    'label' => 'Heroo',
+                                    'name' => 'Heroo',
+                                    'fields' => [
+                                        [
+                                            'type' => 'image',
+                                            'name' => 'image',
+                                            'label' => 'Image',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'image_alt_Heroo',
+                                            'label' => 'image description',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ]
+                                    ]
+                                ]
+                            ),
+                    ]
+                ),
+                Tab::make(
+                    'Banner 1',
+                    [
+                        Image::make('main img', 'main_img_Banner_1'),
+                        Text::make('image description ', 'image_alt_Banner_1'),
+                        Text::make('main text', 'text_main_Banner_1'),
+                        Text::make('sup text ', 'sup_text_Banner_1'),
+                        Image::make('Logo', 'logo_Banner_1')->disk('public'),
+                        Text::make('text logo', 'text_loga_Banner_1'),
+                        Text::make('bottom  text ', 'text_bottom_Banner_1'),
+                        Text::make('bottom  link ', 'link_bottom_Banner_1'),
+                    ]
+                ),
+                Tab::make(
+                    'Projects News',
+                    [
+                        Text::make('main text Projects News', 'text_main_projects_news'),
+                        FlexibleContent::make('Projects_News', 'Projects_News')
+                            ->addLayout(
+                                [
+                                    'label' => 'Heroo',
+                                    'name' => 'Heroo',
+                                    'fields' => [
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'title',
+                                            'label' => 'title',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'sup_title',
+                                            'label' => 'sup_title',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                        [
+                                            'type' => 'image',
+                                            'name' => 'image',
+                                            'label' => 'Image',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                    ]
+                                ]
+                            ),
+                    ]
+                ),
+                Tab::make(
+                    'Banner 2',
+                    [
+                        Image::make('main img', 'main_img_Banner_2'),
+                        Text::make('main text', 'text_main_Banner_2'),
+                        Text::make('sup text ', 'sup_text_Banner_2'),
+                        Text::make('bottom view  text ', 'text_view_bottom_Banner_2'),
+                        Text::make('bottom view link ', 'link_view_bottom_Banner_2'),
+                        Text::make('bottom seen text ', 'text_seen_bottom_Banner_2'),
+                        Text::make('bottom seen link ', 'link_seen_bottom_Banner_2'),
+                    ]
+                ),
+                Tab::make(
+                    'partner',
+                    [
+                        FlexibleContent::make('partner', 'partner')
+                            ->addLayout(
+                                [
+                                    'label' => 'partner',
+                                    'name' => 'partner',
+                                    'fields' => [
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'title',
+                                            'label' => 'title',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                        [
+                                            'type' => 'image',
+                                            'name' => 'image',
+                                            'label' => 'Image',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                    ]
+                                ]
+                            ),
+                    ]
+                ),
+                Tab::make(
+                    'Our central work place ',
+                    [
+
+                        Text::make('main text', 'text_main_workplace'),
+                        Text::make('sup text ', 'sup_text_workplace'),
+                        FlexibleContent::make('workplace', 'workplace')
+                            ->addLayout(
+                                [
+                                    'label' => 'workplace',
+                                    'name' => 'workplace',
+                                    'fields' => [
+                                        [
+                                            'type' => 'image',
+                                            'name' => 'main_img_workplace',
+                                            'label' => 'Image',
+                                            'multiple' => false,
+                                            'required' => false
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'searsh_text_workplace',
+                                            'label' => 'searsh text',
+                                            'multiple' => false,
+                                            'required' => false
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'text_main_workplace',
+                                            'label' => 'title',
+                                            'multiple' => false,
+                                            'required' => false
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'sup_text_workplace',
+                                            'label' => 'sup title',
+                                            'multiple' => false,
+                                            'required' => false
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'text_bottom_workplace_',
+                                            'label' => 'text bottom_',
+                                            'multiple' => false,
+                                            'required' => false
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'valuo00',
+                                            'label' => 'Image',
+                                            'multiple' => false,
+                                            'required' => false,
+                                            'value' => '3487'
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'link_bottom_workplace_',
+                                            'label' => 'link bottom',
+                                            'multiple' => false,
+                                            'required' => false
+                                        ],
+                                    ]
+                                ]
+                            ),
+                    ]
+                ),
+                Tab::make(
+                    'video',
+                    [
+                        FlexibleContent::make('video', 'videohome')
+                            ->addLayout(
+                                [
+                                    'label' => 'video',
+                                    'name' => 'videohome',
+                                    'fields' => [
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'link',
+                                            'label' => 'link',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                        [
+                                            'type' => 'image',
+                                            'name' => 'cover',
+                                            'label' => 'cover',
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                    ]
+                                ]
+                            ),
+                    ]
+                ),
+                Tab::make(
+                    'Connect with us',
+                    [
+                        Text::make('heder text', 'heder_text_main_Connect'),
+                        Text::make('main text', 'text_main_Connect'),
+                        Text::make('sup text text', 'sup_text_main_Connect'),
+                        Text::make('phone', 'phone_Connect'),
+                        Text::make('Email', 'email_Connect'),
+                        Text::make('Text bottome', 'text_bottom_Connect'),
+                        Text::make('linlk bottom', 'linlk_bottom'),
+                        Text::make('filed 1 ', 'filed1_Connect'),
+                        Text::make('filed 2 ', 'filed2_Connect'),
+                        Text::make('filed 3 ', 'filed3_Connect'),
+                        Text::make('text form bottom', 'text_form_Connect'),
+                    ]
+                ),
+                Tab::make('footer', [
+                    Image::make('Logo', 'footer_logo')->disk('public'),
+                    Tree::make('Items (EN)', 'Itemsfooter')->fields([
+                        Text::make('Name'),
+                        Link::make('Link')->resources([
+                            User::class,
+                            Area::class,
+                        ])
+                    ])->title('name'),
                 ]),
-            ], [
-                'heroo' => 'array',
-                'flexible' => 'array',
-                'Projects_News' => 'array',
-                'partner' => 'array',
-                'workplace' => 'array',
-                'videohome' => 'array',
-                // ...
-            ]);
+                Tab::make('footer', []),
+            ]),
+        ], [
+            'heroo' => 'array',
+            'flexible' => 'array',
+            'Projects_News' => 'array',
+            'partner' => 'array',
+            'workplace' => 'array',
+            'videohome' => 'array',
+            // ...
+        ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             new Tabs('about us', [
                 'main section'    => [
                     Text::make('text', 'main_section_text'),
-                    Textarea::make('sup text','sup_text_main_aboutus'),
+                    Textarea::make('sup text', 'sup_text_main_aboutus'),
                     Image::make('image', 'main_section_image'),
                     Text::make('image description', 'image_alt_main_section_about_us'),
                 ],
                 'our vision' => [
                     Text::make('text', 'vision_section_text'),
-                    Textarea::make('sup text','sup_text_vision_aboutus'),
+                    Textarea::make('sup text', 'sup_text_vision_aboutus'),
                     Image::make('image', 'vision_section_image'),
                     Text::make('image description', 'image_alt_our_vision_about_us'),
 
