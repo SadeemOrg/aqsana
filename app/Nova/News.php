@@ -67,24 +67,7 @@ class News extends Resource
             //     '5' => 'قطاع الصحة ',
             // ])->displayUsingLabels(),
 
-            Select::make('admin','admin_id')
-            ->options( function() {
-                // $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
-                    $user = DB::table('nova_settings')
-                    ->where('key', 'address')
-                    ->first();
-                $user_type_admin_array =  array();
 
-                // foreach($users as $user) {
-                //     if ($user->Area == null  ) {
-
-
-                //     $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
-                // }
-                // }
-
-                return $user->value;
-               })->hideFromIndex()->hideFromDetail(),
             Select::make("main Type", "main_type")
                 ->options([
                     '1' => 'News',
