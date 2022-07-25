@@ -19,12 +19,14 @@ class CreateNewsTable extends Migration
             $table->char('status',1)->default('1');
             $table->char('main_type',1)->default('0');
             $table->char('type',1)->default('1');
+            $table->string('sector')->nullable();
             $table->string('title');
             $table->longText('contents');
             $table->longText('description');
             $table->string('image');
             $table->json('pictures')->nullable();
-
+            $table->string('video_link')->nullable();
+            $table->time('new_date');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('update_by')->nullable();
 

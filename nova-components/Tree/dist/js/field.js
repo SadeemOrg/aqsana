@@ -39651,8 +39651,7 @@ var render = function() {
                     _c(
                       "span",
                       {
-                        staticClass:
-                          "inline-flex items-center h-full px-1 hidden",
+                        staticClass: "inline-flex items-center h-full px-1",
                         on: {
                           click: function($event) {
                             return _vm.deleteNode(node)
@@ -39683,7 +39682,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "btn btn-default btn-white mr-3 hidden",
+              staticClass: "btn btn-default btn-white mr-3",
               on: {
                 click: function($event) {
                   $event.preventDefault()
