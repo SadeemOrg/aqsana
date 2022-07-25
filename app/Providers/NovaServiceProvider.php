@@ -86,6 +86,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                                 'multiple' => false,
                                                 'required' => true
                                             ],
+
                                             [
                                                 'type' => 'text',
                                                 'name' => 'image_alt_Heroo',
@@ -203,34 +204,43 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                                 'name' => 'main_img_workplace',
                                                 'label' => 'Image',
                                                 'multiple' => false,
-                                                'required' => true
+                                                'required' => false
                                             ],
                                             [
                                                 'type' => 'text',
                                                 'name' => 'text_main_workplace',
                                                 'label' => 'title',
                                                 'multiple' => false,
-                                                'required' => true
+                                                'required' => false
                                             ],
                                             [
                                                 'type' => 'text',
                                                 'name' => 'sup_text_workplace',
                                                 'label' => 'sup title',
                                                 'multiple' => false,
-                                                'required' => true
+                                                'required' => false
                                             ],
                                             [
                                                 'type' => 'text',
                                                 'name' => 'text_bottom_workplace_',
                                                 'label' => 'text bottom_',
                                                 'multiple' => false,
-                                                'required' => true
-                                            ],  [
+                                                'required' => false
+                                            ],
+                                            [
+                                                'type' => 'text',
+                                                'name' => 'valuo00',
+                                                'label' => 'Image',
+                                                'multiple' => false,
+                                                'required' => false,
+                                                'value'=>'3487'
+                                            ],
+                                            [
                                                 'type' => 'text',
                                                 'name' => 'link_bottom_workplace_',
                                                 'label' => 'link bottom',
                                                 'multiple' => false,
-                                                'required' => true
+                                                'required' => false
                                             ],
                                         ]
                                     ]
@@ -478,6 +488,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             new NovaSettings,
+            new \Infinety\Filemanager\FilemanagerTool(),
             // ( new NovaSettings)->canSee(function ($request) {
             //     $user = Auth::user();
             //     return  ($user->type() == 'website_admin' ) ;

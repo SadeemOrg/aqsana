@@ -16,7 +16,8 @@ use Laravel\Nova\Fields\BelongsTo;
 use Manogi\Tiptap\Tiptap;
 use Waynestate\Nova\CKEditor;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
-
+use Laravel\Nova\Fields\Date;
+use Illuminate\Support\Facades\DB;
 class News extends Resource
 {
     /**
@@ -57,7 +58,33 @@ class News extends Resource
             Text::make("Title", 'title'),
             //   BelongsTo::make("newsType",'newsTypes'),
             Textarea::make('description', 'description'),
+            // Select::make("main sector", "sector")
+            // ->options([
+            //     '1' => 'قطاع الاغاثة',
+            //     '2' => 'قطاع التنمية والدعم الاقتصادي',
+            //     '3' => 'قوافل الأقصى',
+            //     '4' => 'قطاع الأوقاف والمقدسات',
+            //     '5' => 'قطاع الصحة ',
+            // ])->displayUsingLabels(),
 
+            Select::make('admin','admin_id')
+            ->options( function() {
+                // $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
+                    $user = DB::table('nova_settings')
+                    ->where('key', 'address')
+                    ->first();
+                $user_type_admin_array =  array();
+
+                // foreach($users as $user) {
+                //     if ($user->Area == null  ) {
+
+
+                //     $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
+                // }
+                // }
+
+                return $user->value;
+               })->hideFromIndex()->hideFromDetail(),
             Select::make("main Type", "main_type")
                 ->options([
                     '1' => 'News',
@@ -104,6 +131,11 @@ class News extends Resource
             Image::make('Image', 'image')->disk('public')->prunable(),
             ArrayImages::make('Pictures', 'pictures')
                 ->disk('public'),
+
+                Text::make("video link", 'video_link'),
+
+                Date::make('date', 'new_date'),
+
 
 
 

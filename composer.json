@@ -27,6 +27,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "gwd/laravel-nova-flexible-content": "^0.0.1",
         "halimtuhu/array-images": "^1.1",
+        "infinety-es/nova-filemanager": "^2.8",
         "laraning/nova-time-field": "^1.2",
         "laravel/framework": "^8.75",
         "laravel/nova": "*",
