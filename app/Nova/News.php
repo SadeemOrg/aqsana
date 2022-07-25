@@ -18,6 +18,7 @@ use Waynestate\Nova\CKEditor;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Laravel\Nova\Fields\Date;
 use Illuminate\Support\Facades\DB;
+
 class News extends Resource
 {
     /**
@@ -66,8 +67,65 @@ class News extends Resource
             //     '4' => 'قطاع الأوقاف والمقدسات',
             //     '5' => 'قطاع الصحة ',
             // ])->displayUsingLabels(),
+            Tiptap::make('FieldName')
+            ->buttons([
+                  'heading',
+                  '|',
+                  'italic',
+                  'bold',
+                  '|',
+                  'link',
+                  'code',
+                  'strike',
+                  'underline',
+                  'highlight',
+                  '|',
+                  'bulletList',
+                  'orderedList',
+                  'br',
+                  'codeBlock',
+                  'blockquote',
+                  '|',
+                  'horizontalRule',
+                  'hardBreak',
+                  '|',
+                  'table',
+                  '|',
+                  'image',
+                  '|',
+                  'textAlign',
+                  '|',
+                  'rtl',
+                  '|',
+                  'history',
+                  '|',
+                  'editHtml',
+              ])
+              ->headingLevels([2, 3, 4]),
+            Select::make('admin', 'admin_id')
+                ->options(function () {
+                    // // $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
+                    //     $user = DB::table('nova_settings')
+                    //     ->where('key', 'address')
+                    //     ->first();
+                    $sectors = nova_get_setting('workplace', 'default_value');
+                    $user_type_admin_array =  array();
+                    foreach ($sectors as $sector) {
+                        $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace']. " (". $sector['data']['text_main_workplace'] .")")];
+                        // $user_type_admin_array += $sector['data']['text_main_workplace'];
+                    }
 
 
+                    // foreach($users as $user) {
+                    //     if ($user->Area == null  ) {
+
+
+                    //     $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
+                    // }
+                    // }
+                    return  $user_type_admin_array;
+                    // return $user->value;
+                })->hideFromIndex()->hideFromDetail(),
             Select::make("main Type", "main_type")
                 ->options([
                     '1' => 'News',
@@ -115,9 +173,9 @@ class News extends Resource
             ArrayImages::make('Pictures', 'pictures')
                 ->disk('public'),
 
-                Text::make("video link", 'video_link'),
+            Text::make("video link", 'video_link'),
 
-                Date::make('date', 'new_date'),
+            Date::make('date', 'new_date'),
 
 
 
