@@ -1,6 +1,6 @@
 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 ">
     <div
-        class="absolute z-10 mt-10 bottom-28 w-[60%] bg-white rounded-[5px] h-20 flex flex-row justify-start items-center">
+        class="absolute z-10 mt-10 -top-48 w-[75%] bg-white rounded-[5px] h-20 flex flex-row justify-start items-center">
         <!--search Bar -->
         <div dir="rtl" class=" relative shadow-sm  w-full bg-white border-0 h-full  rounded-md">
             <form action="" method="POST">
@@ -13,7 +13,7 @@
                     </svg>
                 </div>
                 <input type="search" name="search" id="search"
-                    class="px-20 shadow-sm  block w-full bg-white border-0 h-full sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]"
+                    class="search-bar px-20 shadow-sm  block w-full bg-white border-0 h-full sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]"
                     placeholder="ابحث عن مشروع , خبر , تبرع ... ">
 
                 <div class="absolute inset-y-0 left-6 flex items-center ">
@@ -22,11 +22,13 @@
                         class="inline-flex items-center px-8 py-2 text-sm font-medium rounded-3xl text-white bg-[#349A37] hover:bg-[#101426] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-transparent">بحث
                     </button>
                 </div>
+                <div
+                    class="card absolute bg-green-50 search-card z-10 h-40 overflow-auto md:w-[550px] w-[270px] top-[100%] right-0 rounded shadow hidden">
+                    <ul class="card-body cursor-pointer  p-6 text-right" style="">
+                        <li class="search-result-box"></li>
+                    </ul>
+                </div>
             </form>
         </div>
     </div>
 </div>
-
-
-
-
