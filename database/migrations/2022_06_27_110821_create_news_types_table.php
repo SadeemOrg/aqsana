@@ -16,7 +16,7 @@ class CreateNewsTypesTable extends Migration
         Schema::create('news_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('describtion')->nullable();
+
             $table->char('main_type', 1);
             $table->char('type', 1)->nullable();
 

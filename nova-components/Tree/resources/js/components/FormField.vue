@@ -16,13 +16,13 @@
                         <icon type="edit" class="w-4"></icon>
                     </span>
 
-                    <span class="inline-flex items-center h-full px-1 hidden" @click="deleteNode(node)">
+                    <span class="inline-flex items-center h-full px-1 " @click="deleteNode(node)">
                         <icon type="delete" class="w-4"></icon>
                     </span>
                 </template>
             </sl-vue-tree>
 
-            <button class="btn btn-default btn-white mr-3 hidden" @click.prevent="addNode()">
+            <button class="btn btn-default btn-white mr-3 " @click.prevent="addNode()">
                 {{ __('New') }}
             </button>
 
