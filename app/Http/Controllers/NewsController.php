@@ -24,8 +24,8 @@ class NewsController extends BaseController
     public function index()
     {
 
-        $Influencer =   News::orderBy('created_at', 'desc')->paginate(15);
-        return response($Influencer, 200);
+        $news =   News::orderBy('created_at', 'desc')->paginate(15);
+        return response($news, 200);
     }
 
 
@@ -37,11 +37,11 @@ class NewsController extends BaseController
     public function show($id)
     {
 
-        $New = News::find($id);
-        if (is_null($New)) {
-            return $this->sendError('Post not found!');
+        $new = News::find($id);
+        if (is_null($new)) {
+            return $this->sendError('News not found!');
         }
-        return $this->sendResponse($New, 'Post retireved Successfully!');
+        return $this->sendResponse($new, 'News retireved Successfully!');
     }
 
 }
