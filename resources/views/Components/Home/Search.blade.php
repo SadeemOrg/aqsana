@@ -23,10 +23,9 @@
                     </button>
                 </div>
                 <div
-                    class="card absolute bg-green-50 search-card z-10 h-40 overflow-auto md:w-[550px] w-[270px] top-[100%] right-0 rounded shadow hidden">
-                    <ul class="card-body cursor-pointer  p-6 text-right" style="">
-                        <li class="search-result-box"></li>
-                    </ul>
+                    class="card absolute bg-green-50 search-card z-10 my-2 h-40 overflow-auto w-[65%] top-[100%] right-0 rounded shadow hidden">
+                    <div class="card-body p-6 text-right search-result-box" style="">
+                    </div>
                 </div>
             </form>
         </div>
