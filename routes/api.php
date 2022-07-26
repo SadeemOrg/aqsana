@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\TripBookingController;
 use App\Http\Controllers\VolunteerController;
 
 /*
@@ -39,10 +40,23 @@ Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
 Route::get('/about_us', [SettingController::class, 'about_us']);
 Route::get('/contact_us', [SettingController::class, 'contact_us']);
 Route::post('/report_problem', [SettingController::class, 'report_problem']);
+Route::get('/social_media', [SettingController::class, 'social_media']);
 
+//volunteer api
 Route::post('/volunteer_project', [VolunteerController::class, 'store']);
 Route::post('/cancel_volunteering', [VolunteerController::class, 'cancel_volunteering']);
 Route::get('/get_volunteering_user', [VolunteerController::class, 'get_volunteering_user']);
+
+
+
+//Trip Booking api
+Route::post('/trip_booking', [TripBookingController::class, 'store']);
+Route::post('/cancel_trip_booking', [TripBookingController::class, 'cancel_trip_booking']);
+Route::get('/get_trip_booking_user', [TripBookingController::class, 'get_trip_booking_user']);
+
+
+//Search Trip
+Route::get('/search_trip', [TripBookingController::class, 'search_trip']);
 
 
 // Route::group(['middleware' => ['auth:sanctum']], function () {
