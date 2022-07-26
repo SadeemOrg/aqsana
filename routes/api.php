@@ -34,6 +34,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
+Route::post('/reset_password_request', [AuthController::class, 'reset_password_request']);
+Route::post('/verification_token', [AuthController::class, 'verification_token']);
+Route::post('/update_password', [AuthController::class, 'update_password']);
 
 
 // setting api
