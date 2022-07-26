@@ -384,13 +384,13 @@ $('#search').on('keyup', function(){
         },
         success: function (response) {
             console.log("🚀 ~ file: app.blade.php ~ line 350 ~ $ ~ response", response)
-            $('.search-result-box').empty().append(
-                response.map(item=>{
-                console.log("🚀 ~ file: app.blade.php ~ line 389 ~ $ ~ item", item)
-                    var trimmedString =item.title.substring(0, 50);
-                   return trimmedString
+            var elements = '';
+            response.map(item=>{
+            console.log("🚀 ~ file: app.blade.php ~ line 389 ~ $ ~ item", item)
+                var trimmedString =item.title.substring(0, 80);
+                elements = elements + '<div class="py-2 cursor-pointer">'+trimmedString+'</div>';
+                    $('.search-result-box').append(elements)
                 })
-            )
 
         },
         complete: function () {
