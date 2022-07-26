@@ -15,22 +15,6 @@ use App\Models\newsType;
 class HomeController extends Controller
 {
 
-
-
-
-
-    public function getProduct(int $id, string $slug)
-    {
-        dd("nbddj");
-    }
-
-
-
-
-
-
-
-
     public function index()
     {
 
@@ -148,13 +132,10 @@ class HomeController extends Controller
             array_push($stack_main_type, $value->main_type);
         }
 
-        $News = News::query()->
-        where('main_type', $stack_main_type)
-       ->orWhere('title', 'like',  "%{$search}%")
-       ->orWhere('sector', 'like',  "%{$search}%")
-       ->select('title')
-
-       ->get();
+        $News = News::whereIn('main_type', $stack_main_type)
+            ->orWhere('title', 'like',  $search)
+            ->orWhere('sector', 'like',  $search)
+            ->get();
         // foreach ($News as $key => $value) {
         //     echo  $value->title;
         //     echo '<br>';

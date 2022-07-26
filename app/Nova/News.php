@@ -33,9 +33,13 @@ class News extends Resource
      *
      * @var string
      */
+    public static function label()
+{
+    return __('News');
+}
     public static $title = 'title';
     public static $group = 'website';
-    public static $priority = 4;
+    public static $priority = 1;
     /**
      * The columns that should be searched.
      *
@@ -67,42 +71,8 @@ class News extends Resource
             //     '4' => 'قطاع الأوقاف والمقدسات',
             //     '5' => 'قطاع الصحة ',
             // ])->displayUsingLabels(),
-            Tiptap::make('FieldName')
-            ->buttons([
-                  'heading',
-                  '|',
-                  'italic',
-                  'bold',
-                  '|',
-                  'link',
-                  'code',
-                  'strike',
-                  'underline',
-                  'highlight',
-                  '|',
-                  'bulletList',
-                  'orderedList',
-                  'br',
-                  'codeBlock',
-                  'blockquote',
-                  '|',
-                  'horizontalRule',
-                  'hardBreak',
-                  '|',
-                  'table',
-                  '|',
-                  'image',
-                  '|',
-                  'textAlign',
-                  '|',
-                  'rtl',
-                  '|',
-                  'history',
-                  '|',
-                  'editHtml',
-              ])
-              ->headingLevels([2, 3, 4]),
-            Select::make('admin', 'admin_id')
+
+            Select::make('sector', 'sector')
                 ->options(function () {
                     // // $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
                     //     $user = DB::table('nova_settings')
@@ -131,7 +101,7 @@ class News extends Resource
                     '1' => 'News',
                     '2' => 'alqudus walmasjid alaqsaa',
                     '3' => 'alqudus walmasjid alaqsaa',
-                    '4' => 'hisad aljameia',
+
 
                 ])->displayUsingLabels(),
 
@@ -166,8 +136,40 @@ class News extends Resource
 
 
 
-            CKEditor::make('Contents', 'contents')->hidefromindex(),
-
+            // CKEditor::make('Contents', 'contents')->hidefromindex(),
+            Tiptap::make('Contents', 'contents')
+            ->buttons([
+                  'heading',
+                  '|',
+                  'italic',
+                  'bold',
+                  '|',
+                  'link',
+                  'code',
+                  'strike',
+                  'underline',
+                  'highlight',
+                  '|',
+                  'bulletList',
+                  'orderedList',
+                  'br',
+                  'codeBlock',
+                  'blockquote',
+                  '|',
+                  'horizontalRule',
+                  'hardBreak',
+                  '|',
+                  'table',
+                  '|',
+                  'image',
+                  '|',
+                  'textAlign',
+                  '|',
+                  'rtl',
+                  '|',
+                  'history',
+              ])
+              ->headingLevels([1, 2, 3, 4, 5, 6 ]),
 
             Image::make('Image', 'image')->disk('public')->prunable(),
             ArrayImages::make('Pictures', 'pictures')
@@ -184,7 +186,7 @@ class News extends Resource
 
         ];
     }
-    public static function afterCreate(Request $request, $model)
+    public static function beforeSave(Request $request, $model)
     {
         // $user = Auth::user();
 
