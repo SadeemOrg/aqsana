@@ -24,8 +24,10 @@ class NewsController extends BaseController
     public function index()
     {
 
+
         $news =   News::orderBy('created_at', 'desc')->paginate(15);
         return response($news, 200);
+
     }
 
 
@@ -43,5 +45,7 @@ class NewsController extends BaseController
         }
         return $this->sendResponse($new, 'News retireved Successfully!');
     }
+
+
 
 }
