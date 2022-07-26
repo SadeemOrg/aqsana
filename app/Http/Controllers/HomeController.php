@@ -92,7 +92,7 @@ class HomeController extends Controller
         return view('Pages.our-news', compact('news', 'mainType', 'type'));
     }
 
-    public function getnewDetail($id)
+    public function getnewDetail($title,$id)
     {
         $new = DB::table('news')->where('id', $id)->first();
 
@@ -132,10 +132,13 @@ class HomeController extends Controller
             array_push($stack_main_type, $value->main_type);
         }
 
-        $News = News::whereIn('main_type', $stack_main_type)
-            ->orWhere('title', 'like',  $search)
-            ->orWhere('sector', 'like',  $search)
-            ->get();
+        $News = News::query()->
+        where('main_type', $stack_main_type)
+       ->orWhere('title', 'like',  "%{$search}%")
+       ->orWhere('sector', 'like',  "%{$search}%")
+       ->select('title','id')
+
+       ->get();
         // foreach ($News as $key => $value) {
         //     echo  $value->title;
         //     echo '<br>';
