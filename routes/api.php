@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TripBookingController;
 use App\Http\Controllers\VolunteerController;
@@ -60,6 +61,10 @@ Route::get('/get_trip_booking_user', [TripBookingController::class, 'get_trip_bo
 
 //Search Trip
 Route::get('/search_trip', [TripBookingController::class, 'search_trip']);
+
+
+//P"rojects
+Route::get('/projects', [ProjectController::class, 'index']);
 
 
 // Route::group(['middleware' => ['auth:sanctum']], function () {

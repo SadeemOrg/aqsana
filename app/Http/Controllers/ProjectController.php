@@ -4,17 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class ProjectController extends Controller
+class ProjectController extends BaseController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $validator =  Validator::make($request->all(),[
+            'type' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validate Error', $validator->errors());
+        }
+
+        $projects =   project::where("type",$request->get("type"))->orderBy('created_at', 'desc')->paginate(15);
+        return $this->sendResponse($projects, 'Success get projects');
+
     }
 
     /**
