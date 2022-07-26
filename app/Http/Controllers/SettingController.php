@@ -55,4 +55,19 @@ class SettingController extends BaseController
             ]);
         return $this->sendResponse([], 'Success Send Report');
     }
+
+
+    public function social_media(){
+        $facebook = nova_get_setting('facebook', 'default_value');
+        $instagram = nova_get_setting('instagram', 'default_value');
+        $twitter = nova_get_setting('twitter', 'default_value');
+      
+        $social_media = [
+            "facebook"=>$facebook,
+            "instagram"=>$instagram,
+            "twitter"=>$twitter,
+
+        ];
+        return $this->sendResponse($social_media, 'social media information');
+    }
 }

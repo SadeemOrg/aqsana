@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TripBooking;
+use App\Models\Bus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -81,6 +82,25 @@ class TripBookingController extends BaseController
 
 
         return $this->sendResponse($trip_booking_user, 'Success get trib booking user');
+
+    }
+
+
+    public function search_trip(Request $request){
+        $validator =  Validator::make($request->all(),[
+            'travel_to' => 'required|string',
+
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validate Error', $validator->errors());
+        }
+
+    
+        $search_trips = Bus::where("travel_to",$request->get("user_id"))->where("status","like","%".$request->get("travel_to")."%")->with('Project')->get();
+
+
+        return $this->sendResponse($search_trips, 'Success get trib');
 
     }
 }
