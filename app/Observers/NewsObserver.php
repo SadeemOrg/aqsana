@@ -67,6 +67,7 @@ class NewsObserver
     public function updated(News $news)
     {
 
+        if(! $news->main_type='4'){
 // /dd($news->new_date);
         //picture
         $path = 'storage/' . $news->image;
@@ -106,6 +107,7 @@ class NewsObserver
                 imagejpeg($image, $path, 20);
             }
         }
+    }
     }
 
     /**
