@@ -120,6 +120,21 @@ class AuthController extends Controller
 
 
         // Check email
+
+        $user = User::where('social_media_id', $fields['email'])->first();
+        if ($user != null) {
+
+            $token = $user->createToken('myapptoken')->plainTextToken;
+
+            $response = [
+                'user' => $user,
+                'token' => $token
+            ];
+
+            return response($response, 201);
+        }
+
+
         $user = User::where('social_media_id', $fields['id'])->first();
 
         if ($user != null) {
@@ -134,31 +149,24 @@ class AuthController extends Controller
             return response($response, 201);
         }
         
-        $user = User::where('social_media_id', $fields['email'])->first();
-            if ($user != null) {
-
-                $token = $user->createToken('myapptoken')->plainTextToken;
-    
-                $response = [
-                    'user' => $user,
-                    'token' => $token
-                ];
-    
-                return response($response, 201);
-            }
 
             
          if($user == null && $request->has("email")) {
-            $password = Str::random(8);
-            $user = User::create([
-                'name' => $fields['name'],
-                'email' => $fields['email'],
-                'password' =>  bcrypt($password),
-                'social_media_id' => $fields['id'],
-                'role' => "user",
-                'nick_name' => $fields['name'],
-            ]);
+            if($fields['email'] != null && $fields['email'] != ""){
+                $password = Str::random(8);
+                $user = User::create([
+                    'name' => $fields['name'],
+                    'email' => $fields['email'],
+                    'password' =>  bcrypt($password),
+                    'social_media_id' => $fields['id'],
+                    'role' => "user",
+                    'nick_name' => $fields['name'],
+                ]);
+            }
+            
         } else {
+            
+            if($fields['id'] != null && $fields['id'] != ""){
                $password = Str::random(8);
                 $user = User::create([
                 'name' => $fields['name'],
@@ -168,6 +176,7 @@ class AuthController extends Controller
                 'nick_name' => $fields['name'],
                 
                 ]);
+            }
         }
 
 
