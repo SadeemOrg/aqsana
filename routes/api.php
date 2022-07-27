@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
+use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TripBookingController;
@@ -63,8 +64,15 @@ Route::get('/get_trip_booking_user', [TripBookingController::class, 'get_trip_bo
 Route::get('/search_trip', [TripBookingController::class, 'search_trip']);
 
 
-//P"rojects
+//Prrojects
 Route::get('/projects', [ProjectController::class, 'index']);
+
+
+//payment methods
+Route::get('paymnet-methods/get-payment-methods', [PaymentMethodsController::class, 'index']);
+Route::post('paymnet-methods/store', [PaymentMethodsController::class, 'store']);
+Route::post('paymnet-methods/update', [PaymentMethodsController::class, 'update']);
+Route::post('paymnet-methods/delete', [PaymentMethodsController::class, 'delete']);
 
 
 // Route::group(['middleware' => ['auth:sanctum']], function () {
