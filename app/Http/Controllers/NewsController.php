@@ -26,7 +26,8 @@ class NewsController extends BaseController
 
 
         $news =   News::orderBy('created_at', 'desc')->paginate(15);
-        return response($news, 200);
+        return $this->sendResponse($news, 'Success get projects');
+
 
     }
 

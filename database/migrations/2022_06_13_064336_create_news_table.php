@@ -26,7 +26,7 @@ class CreateNewsTable extends Migration
             $table->string('image');
             $table->json('pictures')->nullable();
             $table->string('video_link')->nullable();
-            $table->time('new_date');
+            $table->date('new_date');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('update_by')->nullable();
 

@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
+use App\Http\Controllers\PaymentMethodsController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TripBookingController;
 use App\Http\Controllers\VolunteerController;
@@ -34,6 +36,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
+Route::post('/reset_password_request', [AuthController::class, 'reset_password_request']);
+Route::post('/verification_token', [AuthController::class, 'verification_token']);
+Route::post('/update_password', [AuthController::class, 'update_password']);
 
 
 // setting api
@@ -57,6 +62,17 @@ Route::get('/get_trip_booking_user', [TripBookingController::class, 'get_trip_bo
 
 //Search Trip
 Route::get('/search_trip', [TripBookingController::class, 'search_trip']);
+
+
+//Prrojects
+Route::get('/projects', [ProjectController::class, 'index']);
+
+
+//payment methods
+Route::get('paymnet-methods/get-payment-methods', [PaymentMethodsController::class, 'index']);
+Route::post('paymnet-methods/store', [PaymentMethodsController::class, 'store']);
+Route::post('paymnet-methods/update', [PaymentMethodsController::class, 'update']);
+Route::post('paymnet-methods/delete', [PaymentMethodsController::class, 'delete']);
 
 
 // Route::group(['middleware' => ['auth:sanctum']], function () {

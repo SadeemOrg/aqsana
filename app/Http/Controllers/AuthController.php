@@ -8,7 +8,9 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 /**
  * @group  Auth management
  *
@@ -118,6 +120,21 @@ class AuthController extends Controller
 
 
         // Check email
+
+        $user = User::where('social_media_id', $fields['email'])->first();
+        if ($user != null) {
+
+            $token = $user->createToken('myapptoken')->plainTextToken;
+
+            $response = [
+                'user' => $user,
+                'token' => $token
+            ];
+
+            return response($response, 201);
+        }
+
+
         $user = User::where('social_media_id', $fields['id'])->first();
 
         if ($user != null) {
@@ -131,26 +148,35 @@ class AuthController extends Controller
 
             return response($response, 201);
         }
-        if ($request->has('email')) {
+        
 
-            $password = Str::random(8);
-            $user = User::create([
-                'name' => $fields['name'],
-                'email' => $fields['email'],
-                'password' =>  bcrypt($password),
-                'social_media_id' => $fields['id'],
-                'role' => "user",
-                'nick_name' => $fields['name'],
-            ]);
+            
+         if($user == null && $request->has("email")) {
+            if($fields['email'] != null && $fields['email'] != ""){
+                $password = Str::random(8);
+                $user = User::create([
+                    'name' => $fields['name'],
+                    'email' => $fields['email'],
+                    'password' =>  bcrypt($password),
+                    'social_media_id' => $fields['id'],
+                    'role' => "user",
+                    'nick_name' => $fields['name'],
+                ]);
+            }
+            
         } else {
-            $password = Str::random(8);
-            $user = User::create([
+            
+            if($fields['id'] != null && $fields['id'] != ""){
+               $password = Str::random(8);
+                $user = User::create([
                 'name' => $fields['name'],
                 'social_media_id' => $fields['id'],
                 'password' =>  bcrypt($password),
                 'role' => "user",
                 'nick_name' => $fields['name'],
-            ]);
+                
+                ]);
+            }
         }
 
 
@@ -359,5 +385,88 @@ class AuthController extends Controller
             ];
             return response($response, 204);
         }
+    }
+
+
+
+    public function reset_password_request(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 403);
+        }
+
+       
+        DB::table('password_resets')->where('email', 'like', "%{$request['email']}%")->delete();
+
+        $customer = User::Where(['email' => $request['email']])->first();
+            if (isset($customer)) {
+                $token = rand(1000, 9999);
+                DB::table('password_resets')->insert([
+                    'email' => $customer['email'],
+                    'token' => $token,
+                    'created_at' => now(),
+                ]);
+               
+                Mail::to($customer['email'])->send(new \App\Mail\PasswordResetMail($token));
+                return response()->json(['message' => 'Email sent successfully.'], 200);
+            }  
+        
+        return response()->json(['errors' => [
+            ['code' => 'not-found', 'message' => 'user not found!']
+        ]], 404);
+    }
+
+    public function verification_token(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|min:6',
+            'token' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 403);
+        }
+
+       $check_token_reset_password = DB::table('password_resets')->where('email', 'like', "%{$request['email']}%")->where('token',$request['token'])->first();
+
+       if($check_token_reset_password != null) {
+        DB::table('password_resets')->where('email', 'like', "%{$request['email']}%")->where('token',$request['token'])->delete();
+
+        return response()->json(['message' => 'successfully token reset password'], 200);
+       }
+       return response()->json(['errors' => [
+        ['code' => 'not-found', 'message' => 'invalid token']
+       ]], 404);
+        
+    }
+
+
+    public function  update_password(Request $request)
+    {
+        $fields = $request->validate([
+            'email' => 'string|email',
+            'password' => 'required|string',
+
+        ]);
+
+        $customer = User::Where('email' , $fields['email'])->first();
+
+        if($customer != null) {
+            $customer->password = bcrypt($fields['password']);
+            $customer->save();
+            return response()->json(['message' => 'successfully reset password'], 200);
+        } 
+
+
+       return response()->json(['errors' => [
+        ['code' => 'not-found', 'message' => 'not found email']
+       ]], 404);
+
+       
+    
     }
 }

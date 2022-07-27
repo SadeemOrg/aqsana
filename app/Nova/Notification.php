@@ -23,7 +23,14 @@ class Notification extends Resource
      * @var string
      */
     public static $title = 'id';
-    public static $group = 'Admin';
+    public static function label()
+    {
+        return __('Notification');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }
     public static $displayInNavigation = true;
     /**
      * The columns that should be searched.
@@ -50,8 +57,8 @@ class Notification extends Resource
     }
 
     public static function afterCreate(Request $request, $model)
-    {   
-        
+    {
+
     }
 
     /**

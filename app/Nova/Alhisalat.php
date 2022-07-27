@@ -29,7 +29,15 @@ class Alhisalat extends Resource
      *
      * @var string
      */
-    public static $group = 'Admin';
+    public static function label()
+    {
+        return __('Alhisalat');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }
+
 
 
     public static $model = \App\Models\Alhisalat::class;
