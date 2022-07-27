@@ -92,7 +92,7 @@ class HomeController extends Controller
         return view('Pages.our-news', compact('news', 'mainType', 'type'));
     }
 
-    public function getnewDetail($title,$id)
+    public function getnewDetail($title, $id)
     {
         $new = DB::table('news')->where('id', $id)->first();
 
@@ -118,7 +118,23 @@ class HomeController extends Controller
 
 
 
+    public function sector ($sector)
+    {
+        // dd($sector);mainType
+        $mainType= "sector";
+        $type=$sector;
+             $news = News::query()->where('sector', $sector  )
 
+            ->paginate(8);
+
+            return view('Pages.our-news', compact('news', 'mainType', 'type'));
+        // foreach ($News as $key => $value) {
+        //     echo  $value->title;
+        //     echo '<br>';
+        // }
+        // dd ($News);
+        // return dd($News);
+    }
 
     public function search($search)
     {
@@ -132,18 +148,44 @@ class HomeController extends Controller
             array_push($stack_main_type, $value->main_type);
         }
 
-        $News = News::query()->
-        where('main_type', $stack_main_type)
-       ->orWhere('title', 'like',  "%{$search}%")
-       ->orWhere('sector', 'like',  "%{$search}%")
-       ->select('title','id')
+        $News = News::query()->where('main_type', $stack_main_type)
+            ->orWhere('title', 'like',  "%{$search}%")
+            ->orWhere('sector', 'like',  "%{$search}%")
+            ->select('title', 'id')
 
-       ->get();
+            ->get();
         // foreach ($News as $key => $value) {
         //     echo  $value->title;
         //     echo '<br>';
         // }
-return $News;
+        return $News;
+        // return dd($News);
+    }
+    public function pagesearch(Request $request)
+    {
+        $search = $request->get("search");
+        $type= $request->get("search");
+        $mainType="بحث";
+        $main_type = newsType::where('name', 'like',  '%' . $search . '%')
+            ->select('main_type')->get();
+
+
+
+        $stack_main_type = array();
+        foreach ($main_type as $key => $value) {
+            array_push($stack_main_type, $value->main_type);
+        }
+
+        $news = News::query()->where('main_type', $stack_main_type)
+            ->orWhere('title', 'like',  "%{$search}%")
+            ->orWhere('sector', 'like',  "%{$search}%")
+            ->paginate(8);
+            return view('Pages.our-news', compact('news', 'mainType', 'type'));
+        // foreach ($News as $key => $value) {
+        //     echo  $value->title;
+        //     echo '<br>';
+        // }
+        // dd ($News);
         // return dd($News);
     }
 }
