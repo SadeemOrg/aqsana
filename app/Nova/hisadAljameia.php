@@ -56,6 +56,14 @@ class hisadAljameia extends Resource
         return [
 
             ID::make(__('ID'), 'id')->sortable(),
+            Text::make('اخبار','main_type')->withMeta([
+                'type' => 'hidden',
+                'value' => '4'
+            ])->hideFromIndex(),
+            Text::make('حصاد الجمعية','type')->withMeta([
+                'type' => 'hidden',
+                'value' => '8'
+            ])->hideFromIndex(),
             Text::make("Title", 'title'),
             Text::make("link", 'description'),
         ];
@@ -64,10 +72,6 @@ class hisadAljameia extends Resource
     {
         // $user = Auth::user();
 
-        $model->update([
-            'main_type'=>'4',
-            'type'=>'8'
-        ]);
     }
 
 
