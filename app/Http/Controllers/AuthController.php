@@ -120,6 +120,21 @@ class AuthController extends Controller
 
 
         // Check email
+
+        $user = User::where('social_media_id', $fields['email'])->first();
+        if ($user != null) {
+
+            $token = $user->createToken('myapptoken')->plainTextToken;
+
+            $response = [
+                'user' => $user,
+                'token' => $token
+            ];
+
+            return response($response, 201);
+        }
+
+        
         $user = User::where('social_media_id', $fields['id'])->first();
 
         if ($user != null) {
@@ -134,18 +149,6 @@ class AuthController extends Controller
             return response($response, 201);
         }
         
-        $user = User::where('social_media_id', $fields['email'])->first();
-            if ($user != null) {
-
-                $token = $user->createToken('myapptoken')->plainTextToken;
-    
-                $response = [
-                    'user' => $user,
-                    'token' => $token
-                ];
-    
-                return response($response, 201);
-            }
 
             
          if($user == null && $request->has("email")) {
