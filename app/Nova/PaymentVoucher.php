@@ -5,32 +5,35 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
-
-class hisadAljameia extends Resource
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\BelongsTo;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Fields\Image;
+class PaymentVoucher extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\News::class;
+    public static $model = \App\Models\Transaction::class;
+
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
+    public static $title = 'id';
     public static function label()
     {
-        return __('Hisad Aljameias');
+        return __('Payment Voucher');
     }
     public static function group()
-{
-    return __('website');
-}
-    public static $title = 'title';
-
-    public static $priority = 2;
+    {
+        return __('Financial management');
+    }
     /**
      * The columns that should be searched.
      *
@@ -49,25 +52,51 @@ class hisadAljameia extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-        return $query->where('main_type', '4');
+        return $query->where('type', '1');
     }
     public function fields(Request $request)
     {
         return [
-
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Title", 'title'),
-            Text::make("link", 'description'),
-        ];
-    }
-    public static function beforeSave(Request $request, $model)
-    {
-        // $user = Auth::user();
+            Text::make('type','type')->withMeta([
+                'type' => 'hidden',
+                'value' => '1'
+            ]),
+            Select::make("transactions status", "status")->options([
+                '0' => 'not',
+                '1' => 'ok',
 
-        $model->update([
-            'main_type'=>'4',
-            'type'=>'8'
-        ]);
+            ])->default(0)
+                ->hideWhenCreating()->hideWhenUpdating(),
+
+
+
+            Text::make('project', 'project_id'),
+            Text::make('transact amount', 'transact_amount'),
+            BelongsTo::make('Currency', 'Currenc'),
+
+
+            Text::make('Rate', function () {
+                return $this->Currenc->rate;
+            }),
+            Text::make('equivalent amount', function () {
+                return ($this->Currenc->rate )*$this->transact_amount;
+            }),
+
+                Image::make('voucher', 'voucher')->disk('public')->prunable(),
+
+            Select::make('approval ', 'approval')->options([
+                1 => 'approval',
+                2 => 'reject',
+            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            Text::make("reason_of_reject", "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
+
+
+
+
+            Date::make('date', 'transaction_date'),
+
+        ];
     }
 
 
