@@ -25,7 +25,7 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/about-us', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/conctus', [HomeController::class, 'conctus'])->name('conctus');
 Route::get('/category/{maintype}/{type}', [HomeController::class, 'news'])->name('news');
-Route::get('/{title}/{id}/', [HomeController::class, 'getnewDetail'])->name('getnewDetail');
+Route::get('/categor/{title}/{id}/', [HomeController::class, 'getnewDetail'])->name('getnewDetail');
 Route::get('/contact-us', function (){
     return view('Pages.contact-page');
 });
