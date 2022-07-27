@@ -26,6 +26,17 @@ Route::get('/about-us', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/conctus', [HomeController::class, 'conctus'])->name('conctus');
 Route::get('/category/{maintype}/{type}', [HomeController::class, 'news'])->name('news');
 Route::get('/categor/{title}/{id}/', [HomeController::class, 'getnewDetail'])->name('getnewDetail');
+
+Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch');
+
+
+Route::get('/sector/{sector}', [HomeController::class, 'sector'])->name('sector');
+
+
+Route::get('/contact-us', function (){
+    return view('Pages.contact-page');
+});
+
 Route::get('/contact-us', function (){
     return view('Pages.contact-page');
 });

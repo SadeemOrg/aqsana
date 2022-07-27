@@ -24,7 +24,14 @@ class ProjectType extends Resource
      * @var string
      */
 
-    public static $group = 'Admin';
+    public static function label()
+    {
+        return __('ProjectType');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }
     public static $title = 'name';
     public static $priority = 6;
     /**

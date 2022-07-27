@@ -22,8 +22,14 @@ class Role extends Resource
      * @var string
      */
 
-    public static $group = 'Admin';
-    public static $title = 'role';
+    public static function label()
+    {
+        return __('Role');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }       public static $title = 'role';
 
     /**
      * The columns that should be searched.

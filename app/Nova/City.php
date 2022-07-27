@@ -20,7 +20,15 @@ class City extends Resource
      *
      * @var string
      */
-    public static $group = 'Admin';
+    public static function label()
+    {
+        return __('City');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }
+
     public static $model = \App\Models\City::class;
     public static $priority = 2;
     /**

@@ -53,7 +53,7 @@
                 <div
                     class="h-[72px] absolute bottom-0 right-0 left-0 w-full flex flex-row justify-between items-center px-6 cursor-pointer bg-[#F9FAFB]">
                     <a class="reltive link-wrap font-FlatBold text-[#349A37] text-base h-full w-full flex flex-row justify-between items-center"
-                        href='sector/{{ $link }}'>
+                    onclick="location.href='{{ route('sector', ['sector'=>$sector['data']['searsh_text_workplace']]) }}'">
                         <span class="relative z-10">{{ $sector['data']['text_bottom_workplace_'] }}</span>
                         <svg class="relative z-10" width="11" height="17" viewBox="0 0 11 17" fill="none"
                             xmlns="http://www.w3.org/2000/svg">

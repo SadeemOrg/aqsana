@@ -9,14 +9,14 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\BelongsTo;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\Number;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Epartment\NovaDependencyContainer\ActionHasDependencies;
-use Laravel\Nova\Fields\BelongsTo;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Nova\Fields\Image;
 
 class Transaction extends Resource
 {
@@ -33,7 +33,14 @@ class Transaction extends Resource
      * @var string
      */
     public static $title = 'id';
-    public static $group = 'Admin';
+    public static function label()
+    {
+        return __('Transaction');
+    }
+    public static function group()
+    {
+        return __('Financial management');
+    }
 
     /**
      * The columns that should be searched.
@@ -55,8 +62,8 @@ class Transaction extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Select::make('Transactions Type ', 'type')->options([
-                0 => 'Payment voucher',
-                1 => 'receipt voucher',
+                1 => 'Payment voucher',
+                2 => 'receipt voucher',
             ])->displayUsingLabels(),
 
 
@@ -69,30 +76,17 @@ class Transaction extends Resource
 
 
 
-            // BelongsTo::make('projec ', 'project', \App\Nova\project::class),
             Text::make('project', 'project_id'),
             Text::make('transact amount', 'transact_amount'),
             BelongsTo::make('Currency', 'Currenc'),
-            // Select::make('Currency', 'Currency')
-            //     ->options(function () {
-            //         $users =  \App\Models\Currency::all();
-            //         $user_type_admin_array =  array();
-            //         foreach ($users as $user) {
-            //             $user_type_admin_array += [$user['name'] => ($user['name'])];
-            //         }
-            //         return $user_type_admin_array;
-            //     }),
-            // Text::make('Rate ', 'equivalent_amount'),
+
 
             Text::make('Rate', function () {
-                // $countryName= $this->getCountryName;
                 return $this->Currenc->rate;
             }),
             Text::make('equivalent amount', function () {
-                // $countryName= $this->getCountryName;
                 return ($this->Currenc->rate )*$this->transact_amount;
             }),
-            // Text::make('equivalent amount', 'equivelant_amount'),
 
                 Image::make('voucher', 'voucher')->disk('public')->prunable(),
 
@@ -111,6 +105,14 @@ class Transaction extends Resource
 
 
         ];
+    }
+    public static function beforeSave(Request $request, $model)
+    {
+        // $user = Auth::user();
+
+        $model->update([
+            'type'=>'1'
+        ]);
     }
 
     /**
