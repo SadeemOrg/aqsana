@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TripBookingController;
 use App\Http\Controllers\VolunteerController;
@@ -34,6 +35,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
+Route::post('/reset_password_request', [AuthController::class, 'reset_password_request']);
+Route::post('/verification_token', [AuthController::class, 'verification_token']);
+Route::post('/update_password', [AuthController::class, 'update_password']);
 
 
 // setting api
@@ -57,6 +61,10 @@ Route::get('/get_trip_booking_user', [TripBookingController::class, 'get_trip_bo
 
 //Search Trip
 Route::get('/search_trip', [TripBookingController::class, 'search_trip']);
+
+
+//P"rojects
+Route::get('/projects', [ProjectController::class, 'index']);
 
 
 // Route::group(['middleware' => ['auth:sanctum']], function () {
