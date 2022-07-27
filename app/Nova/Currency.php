@@ -24,7 +24,15 @@ class Currency extends Resource
      *
      * @var string
      */
-    public static $group = 'Admin';
+    public static function label()
+    {
+        return __('Currency');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }
+
     public static $title = 'name';
     public static $priority = 4;
     /**

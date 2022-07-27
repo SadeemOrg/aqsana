@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        // News::observe(NewsObserver::class);
+        News::observe(NewsObserver::class);
         Notification::observe(NotificationObserver::class);
 
         View::composer(['layout.front-end.partial._header'],

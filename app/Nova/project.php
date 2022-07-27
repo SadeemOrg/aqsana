@@ -57,7 +57,15 @@ class project extends Resource
      * @var string
      */
     public static $title = 'project_name';
-    public static $group = 'project_name';
+    public static function label()
+    {
+        return __('project');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }
+    public static $displayInNavigation = false;
     /**
      * The columns that should be searched.
      *

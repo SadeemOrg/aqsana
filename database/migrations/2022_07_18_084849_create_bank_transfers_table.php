@@ -22,7 +22,7 @@ class CreateBankTransfersTable extends Migration
             $table->string('iban');
             $table->string('swift_code');
             $table->double('amount');
-            $table->time('transaction_date');
+            $table->date('transaction_date');
             $table->unsignedBigInteger('currency_id')->nullable();
             $table->unsignedBigInteger('Created_By')->nullable();
             $table->unsignedBigInteger('Update_By')->nullable();

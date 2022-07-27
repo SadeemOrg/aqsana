@@ -20,7 +20,16 @@ class Area extends Resource
      *
      * @var string
      */
-    public static $group = 'Admin';
+    public static function label()
+    {
+        return __('Area');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }
+
+
     public static $model = \App\Models\Area::class;
 
     /**

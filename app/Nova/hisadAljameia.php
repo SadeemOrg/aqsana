@@ -20,8 +20,16 @@ class hisadAljameia extends Resource
      *
      * @var string
      */
+    public static function label()
+    {
+        return __('Hisad Aljameias');
+    }
+    public static function group()
+{
+    return __('website');
+}
     public static $title = 'title';
-    public static $group = 'website';
+
     public static $priority = 2;
     /**
      * The columns that should be searched.
@@ -57,7 +65,7 @@ class hisadAljameia extends Resource
 
         $model->update([
             'main_type'=>'4',
-                'type'=>'8'
+            'type'=>'8'
         ]);
     }
 

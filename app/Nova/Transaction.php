@@ -33,7 +33,14 @@ class Transaction extends Resource
      * @var string
      */
     public static $title = 'id';
-    public static $group = 'Admin';
+    public static function label()
+    {
+        return __('Transaction');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }
 
     /**
      * The columns that should be searched.

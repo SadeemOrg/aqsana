@@ -21,7 +21,16 @@ class Bus extends Resource
      *
      * @var string
      */
-    public static $group = 'Admin';
+    public static function label()
+    {
+        return __('Bus');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }
+
+
     public static $model = \App\Models\Bus::class;
     public static $displayInNavigation = false;
     /**

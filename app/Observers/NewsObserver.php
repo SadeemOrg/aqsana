@@ -15,45 +15,47 @@ class NewsObserver
     public function created(News $news)
     {
 
+   if(! $news->main_type='4'){
+       //picture
+       $path = 'storage/' . $news->image;
+       $mime = mime_content_type($path);
 
-        //picture
-        $path = 'storage/' . $news->image;
-        $mime = mime_content_type($path);
+       $filetype = exif_imagetype($path);
+       if ($filetype == 2) {
+           $image = imagecreatefromjpeg($path);
+       } elseif ($filetype == 3) {
+           $image = imagecreatefrompng($path);
+       } elseif ($filetype == 1) {
+           $image = imagecreatefromgif($path);
+       }
+       elseif ($filetype == 18) {
+           $image = imagecreatefromwebp($path);
+       }
+       imagejpeg($image, $path, 20);
+       // photos
 
-        $filetype = exif_imagetype($path);
-        if ($filetype == 2) {
-            $image = imagecreatefromjpeg($path);
-        } elseif ($filetype == 3) {
-            $image = imagecreatefrompng($path);
-        } elseif ($filetype == 1) {
-            $image = imagecreatefromgif($path);
-        }
-        elseif ($filetype == 18) {
-            $image = imagecreatefromwebp($path);
-        }
-        imagejpeg($image, $path, 20);
-        // photos
+       $photos = $news->pictures;
+       $json_photos = json_decode($photos, true);
+       if (!empty($json_photos)) {
+           foreach ($json_photos as $key => $json_photo) {
+               $photo = $json_photo['url'];
+               $path = substr($photo, 1);
+               $filetype = exif_imagetype($path);
+               if ($filetype == 2) {
+                   $image = imagecreatefromjpeg($path);
+               } elseif ($filetype == 3) {
+                   $image = imagecreatefrompng($path);
+               } elseif ($filetype == 1) {
+                   $image = imagecreatefromgif($path);
+               }
+               elseif ($filetype == 18) {
+                   $image = imagecreatefromwebp($path);
+               }
+               imagejpeg($image, $path, 20);
+           }
+       }
+   }
 
-        $photos = $news->pictures;
-        $json_photos = json_decode($photos, true);
-        if (!empty($json_photos)) {
-            foreach ($json_photos as $key => $json_photo) {
-                $photo = $json_photo['url'];
-                $path = substr($photo, 1);
-                $filetype = exif_imagetype($path);
-                if ($filetype == 2) {
-                    $image = imagecreatefromjpeg($path);
-                } elseif ($filetype == 3) {
-                    $image = imagecreatefrompng($path);
-                } elseif ($filetype == 1) {
-                    $image = imagecreatefromgif($path);
-                }
-                elseif ($filetype == 18) {
-                    $image = imagecreatefromwebp($path);
-                }
-                imagejpeg($image, $path, 20);
-            }
-        }
     }
 
     /**
@@ -65,7 +67,7 @@ class NewsObserver
     public function updated(News $news)
     {
 
-
+// /dd($news->new_date);
         //picture
         $path = 'storage/' . $news->image;
         $mime = mime_content_type($path);

@@ -37,8 +37,14 @@ class News extends Resource
 {
     return __('News');
 }
+public static function group()
+{
+    return __('website');
+}
+
+
     public static $title = 'title';
-    public static $group = 'website';
+    // public static $group = 'website';
     public static $priority = 1;
     /**
      * The columns that should be searched.
@@ -177,12 +183,12 @@ class News extends Resource
 
             Text::make("video link", 'video_link'),
 
-            Date::make('date', 'new_date'),
+            // Date::make('date', 'new_date'),
+            Date::make('date', 'new_date')->pickerDisplayFormat('d.m.Y'),
 
 
 
 
-            NovaDependencyContainer::make([])->dependsOn('is_reported', '1'),
 
         ];
     }
