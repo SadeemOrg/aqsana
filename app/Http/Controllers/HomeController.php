@@ -121,7 +121,7 @@ class HomeController extends Controller
     public function sector ($sector)
     {
         // dd($sector);mainType
-        $mainType= "sector";
+        $mainType= "قطاع";
         $type=$sector;
              $news = News::query()->where('sector', $sector  )
 
