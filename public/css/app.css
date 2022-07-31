@@ -197,7 +197,6 @@ Correct the cursor style of increment and decrement buttons in Safari.
   -webkit-appearance: textfield; /* 1 */
   outline-offset: -2px; /* 2 */
 }
-
 /*
 Remove the inner padding in Chrome and Safari on macOS.
 */
@@ -427,14 +426,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bottom-0{
   bottom: 0px;
 }
-.bottom-28{
-  bottom: 7rem;
+.-top-48{
+  top: -12rem;
 }
 .right-10{
   right: 2.5rem;
 }
 .left-6{
   left: 1.5rem;
+}
+.top-\[100\%\]{
+  top: 100%;
 }
 .top-\[48\%\]{
   top: 48%;
@@ -445,41 +447,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-\[110\%\]{
   right: 110%;
 }
-.top-\[100\%\]{
-  top: 100%;
-}
 .right-\[-250px\]{
   right: -250px;
 }
 .top-\[84px\]{
   top: 84px;
-}
-.top-28{
-  top: 7rem;
-}
-.top-\[80\%\]{
-  top: 80%;
-}
-.top-\[70\%\]{
-  top: 70%;
-}
-.top-\[65\%\]{
-  top: 65%;
-}
-.top-\[75\%\]{
-  top: 75%;
-}
-.-top-16{
-  top: -4rem;
-}
-.-top-56{
-  top: -14rem;
-}
-.-top-44{
-  top: -11rem;
-}
-.-top-48{
-  top: -12rem;
 }
 .z-30{
   z-index: 30;
@@ -518,6 +490,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-4{
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+.my-2{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 .my-1{
   margin-top: 0.25rem;
@@ -638,11 +614,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .inline-flex{
   display: inline-flex;
 }
+.table{
+  display: table;
+}
 .flow-root{
   display: flow-root;
 }
 .grid{
   display: grid;
+}
+.contents{
+  display: contents;
 }
 .hidden{
   display: none;
@@ -764,8 +746,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-40{
   width: 10rem;
 }
-.w-\[60\%\]{
-  width: 60%;
+.w-\[75\%\]{
+  width: 75%;
+}
+.w-\[65\%\]{
+  width: 65%;
 }
 .w-\[250px\]{
   width: 250px;
@@ -784,15 +769,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-5{
   width: 1.25rem;
-}
-.w-\[70\%\]{
-  width: 70%;
-}
-.w-\[75\%\]{
-  width: 75%;
-}
-.w-\[270px\]{
-  width: 270px;
 }
 .min-w-fit{
   min-width: -webkit-fit-content;
@@ -864,6 +840,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .basis-2\/5{
   flex-basis: 40%;
+}
+.border-collapse{
+  border-collapse: collapse;
 }
 .-translate-x-1\/2{
   --tw-translate-x: -50%;
@@ -1001,14 +980,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .rounded-3xl{
   border-radius: 1.5rem;
 }
+.rounded{
+  border-radius: 0.25rem;
+}
 .rounded-\[30px\]{
   border-radius: 30px;
 }
 .rounded-\[10px\]{
   border-radius: 10px;
-}
-.rounded{
-  border-radius: 0.25rem;
 }
 .rounded-l-md{
   border-top-left-radius: 0.375rem;
@@ -1089,17 +1068,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
-.bg-\[\#101426\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(16 20 38 / var(--tw-bg-opacity));
-}
-.bg-green-300{
-  --tw-bg-opacity: 1;
-  background-color: rgb(134 239 172 / var(--tw-bg-opacity));
-}
 .bg-green-50{
   --tw-bg-opacity: 1;
   background-color: rgb(240 253 244 / var(--tw-bg-opacity));
+}
+.bg-\[\#101426\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(16 20 38 / var(--tw-bg-opacity));
 }
 .object-cover{
   -o-object-fit: cover;
@@ -1141,6 +1116,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 0.25rem;
   padding-right: 0.25rem;
 }
+.py-2{
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
 .py-1{
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -1176,10 +1155,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-8{
   padding-left: 2rem;
   padding-right: 2rem;
-}
-.py-2{
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
 .px-3{
   padding-left: 0.75rem;
@@ -1383,6 +1358,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(143 155 179 / var(--tw-text-opacity));
 }
+.text-\[rgb\(16\2c 20\2c 38\)\]{
+  --tw-text-opacity: 1;
+  color: rgb(16 20 38 / var(--tw-text-opacity));
+}
 .text-\[\#6B7280\]{
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -1411,19 +1390,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
-.shadow-md{
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
 .shadow{
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+.shadow-md{
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .outline-none{
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+.outline{
+  outline-style: solid;
 }
 .ring-gray-300{
   --tw-ring-opacity: 1;
@@ -1735,15 +1717,6 @@ body{
   }
   .md\:w-\[200px\]{
     width: 200px;
-  }
-  .md\:w-\[350px\]{
-    width: 350px;
-  }
-  .md\:w-\[450px\]{
-    width: 450px;
-  }
-  .md\:w-\[550px\]{
-    width: 550px;
   }
   .md\:max-w-\[170px\]{
     max-width: 170px;
