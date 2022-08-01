@@ -14,7 +14,7 @@ class News extends Model
     ];
     protected $fillable = [
 
-        'id','title','description','image','type','pictures','created_by','update_by','video_link','created_at'
+        'id','title','description','image','type','pictures','created_by','update_by','created_at'
 
     ];
 
@@ -25,7 +25,6 @@ class News extends Model
 
 
     protected $hidden = [
-        'created_at',
         'updated_at',
 
     ];
