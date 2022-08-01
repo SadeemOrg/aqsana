@@ -32,6 +32,12 @@ class busescompany extends Resource
     {
         return __('Buses Company');
     }
+
+    public static function group()
+    {
+        return __('Admin');
+    }
+
     /**
      * The columns that should be searched.
      *

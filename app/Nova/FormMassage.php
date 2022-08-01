@@ -35,7 +35,14 @@ class FormMassage extends Resource
     public static $search = [
         'id',
     ];
-
+    public static function label()
+{
+    return __('Form Massage');
+}
+public static function group()
+{
+    return __('Email');
+}
     /**
      * Get the fields displayed by the resource.
      *

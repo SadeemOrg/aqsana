@@ -54,14 +54,17 @@
 </head>
 <body class="min-w-site bg-40 text-90 font-medium min-h-full">
     <div id="nova">
-        <div v-cloak class="flex min-h-screen">
+        <div v-cloak class="flex min-h-screen ">
             <!-- Sidebar -->
-            <div class="flex-none pt-header min-h-screen w-sidebar bg-grad-sidebar px-6">
+
+            <div class="flex-none pt-header min-h-screen w-sideba bg-green-700 px-6 w-1/6" >
                 <a href="{{ \Laravel\Nova\Nova::path() }}">
-                    <div class="absolute pin-t pin-l pin-r bg-logo flex items-center w-sidebar h-header px-6 text-white">
+                    <div class="absolute pin-t pin-l pin-r bg-logo flex items-center  h-header px-6 text-white  bg-white w-full p-4 border-x-2 border-black " >
                        @include('nova::partials.logo')
                     </div>
                 </a>
+
+
 
                 @foreach (\Laravel\Nova\Nova::availableTools(request()) as $tool)
                     {!! $tool->renderNavigation() !!}
@@ -69,7 +72,7 @@
             </div>
 
             <!-- Content -->
-            <div class="content">
+            <div class="content ">
                 <div class="flex items-center relative shadow h-header bg-white z-20 px-view">
                     <a v-if="@json(\Laravel\Nova\Nova::name() !== null)" href="{{ \Illuminate\Support\Facades\Config::get('nova.url') }}" class="no-underline dim font-bold text-90 mr-6">
                         AlAqsa
@@ -136,7 +139,7 @@ const firebaseConfig = {
   measurementId: "G-FHN8R2KH3M"
 };
 
-firebase.initializeApp(firebaseConfig); 
+firebase.initializeApp(firebaseConfig);
 
 
 
@@ -145,7 +148,7 @@ const messaging = firebase.messaging();
 if ('serviceWorker' in navigator) {
 navigator.serviceWorker.register("../../public/firebase-messaging-sw.js")
 .then(function(registration) {
- 
+
   console.log('Registration successful, scope is:', registration.scope);
 }).catch(function(err) {
   console.log('Service worker registration failed, error:', err);
@@ -166,7 +169,7 @@ console.log(token);
 <?php
  if(\Illuminate\Support\Facades\Auth::user() != null) {
 
-    
+
 ?>
 
 $.post({
@@ -179,16 +182,16 @@ $.post({
       beforeSend: function () {
       },
       success: function (response) {
-       
+
       },
       complete: function () {
-       
+
       },
   });
   <?php
       } else {
 
-      
+
 ?>
 
 

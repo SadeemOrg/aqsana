@@ -3,7 +3,7 @@
         class="absolute z-10 mt-10 -top-48 w-[75%] bg-white rounded-[5px] h-20 flex flex-row justify-start items-center">
         <!--search Bar -->
         <div dir="rtl" class=" relative shadow-sm  w-full bg-white border-0 h-full  rounded-md">
-            <form action="" method="POST">
+            <form action="{{ route('pagesearch') }}" method="get">
                 <div class="absolute inset-y-0 right-10 pl-3 flex items-center pointer-events-none">
                     <!-- Heroicon name: solid/mail -->
                     <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,15 +18,14 @@
 
                 <div class="absolute inset-y-0 left-6 flex items-center ">
                     <!-- Heroicon name: solid/mail -->
-                    <button type="button"
+                    <button  type="submit"
                         class="inline-flex items-center px-8 py-2 text-sm font-medium rounded-3xl text-white bg-[#349A37] hover:bg-[#101426] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-transparent">بحث
                     </button>
                 </div>
                 <div
-                    class="card absolute bg-green-50 search-card z-10 h-40 overflow-auto md:w-[550px] w-[270px] top-[100%] right-0 rounded shadow hidden">
-                    <ul class="card-body cursor-pointer  p-6 text-right" style="">
-                        <li class="search-result-box"></li>
-                    </ul>
+                    class="card absolute bg-green-50 search-card z-10 my-2 h-40 overflow-auto w-[65%] top-[100%] right-0 rounded shadow hidden">
+                    <div class="card-body p-6 text-right search-result-box" style="">
+                    </div>
                 </div>
             </form>
         </div>

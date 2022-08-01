@@ -372,6 +372,7 @@
 
 $('#search').on('keyup', function(){
     var val = $('#search').val();
+    // console.log("🚀 ~ file: app.blade.php ~ line 375 ~ $ ~ val", val)
     if(val.length>1){
         $('.search-bar').siblings().css('display','flex');
     $.get({
@@ -383,22 +384,27 @@ $('#search').on('keyup', function(){
         beforeSend: function () {
         },
         success: function (response) {
-            console.log("🚀 ~ file: app.blade.php ~ line 350 ~ $ ~ response", response)
-            $('.search-result-box').empty().append(
-                response.map(item=>{
-                console.log("🚀 ~ file: app.blade.php ~ line 389 ~ $ ~ item", item)
-                    var trimmedString =item.title.substring(0, 50);
-                   return trimmedString
+            // console.log("🚀 ~ file: app.blade.php ~ line 350 ~ $ ~ response", response)
+            var elements = '';
+            response.map(item=>{
+            // console.log("🚀 ~ file: app.blade.php ~ line 389 ~ $ ~ item", item)
+                var trimmedString =item.title.substring(0, 80);
+                elements = elements +
+                '<div onclick="RouteToLink(`trimmedString`)" class="py-2 cursor-pointer routeLink">'+trimmedString+'</div>';
+                    $('.search-result-box').append(elements)
                 })
-            )
-
         },
         complete: function () {
-
         },
     });
 }
 });
+function RouteToLink(trimmedString) {
+    console.log('string', trimmedString)
+// var x = trimmedString.getAttribute("data-id");
+//    console.log(name);
+//    console.log(user_id);
+}
 </script>
 
 </html>

@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Text;
 
 class hisadAljameia extends Resource
 {
@@ -14,14 +15,22 @@ class hisadAljameia extends Resource
      * @var string
      */
     public static $model = \App\Models\News::class;
-    public static $displayInNavigation = false;
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
+    public static function label()
+    {
+        return __('Hisad Aljameias');
+    }
+    public static function group()
+{
+    return __('website');
+}
     public static $title = 'title';
 
+    public static $priority = 2;
     /**
      * The columns that should be searched.
      *
@@ -45,9 +54,26 @@ class hisadAljameia extends Resource
     public function fields(Request $request)
     {
         return [
+
             ID::make(__('ID'), 'id')->sortable(),
+            Text::make('اخبار','main_type')->withMeta([
+                'type' => 'hidden',
+                'value' => '4'
+            ])->hideFromIndex(),
+            Text::make('حصاد الجمعية','type')->withMeta([
+                'type' => 'hidden',
+                'value' => '8'
+            ])->hideFromIndex(),
+            Text::make("Title", 'title'),
+            Text::make("link", 'description'),
         ];
     }
+    public static function beforeSave(Request $request, $model)
+    {
+        // $user = Auth::user();
+
+    }
+
 
     /**
      * Get the cards available for the request.
