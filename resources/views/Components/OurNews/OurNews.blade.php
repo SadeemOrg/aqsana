@@ -60,7 +60,13 @@
                             {{-- اكثر من 10 الاف مشارك بمعسكر "القدس اولا" الذي نظمته الحركة الاسلامية وجمعية الاقصى
                             --}}
                         </p>
-                        <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 pl-4">أبريل 20, 2022</p>
+
+                @if(!empty($new->new_date))
+
+                        <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 pl-4">
+                            {{ $new->new_date }}
+                        </p>
+                       @endif
                         <p class="text-[11px] text-[#8F9BB3] font-noto_Regular text-right pt-2 pl-4">
                             أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية
                             الأقصى,
