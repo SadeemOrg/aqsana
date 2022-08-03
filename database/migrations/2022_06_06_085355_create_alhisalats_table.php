@@ -16,7 +16,7 @@ class CreateAlhisalatsTable extends Migration
         Schema::create('alhisalats', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('city_id');
+            $table->unsignedBigInteger('project_id');
             $table->string('description');
             $table->double('amount_total')->default(0.0);
             $table->char('status',1);

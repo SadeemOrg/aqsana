@@ -21,6 +21,7 @@ class News extends Model
     protected $casts = [
     	'pictures' => 'array',
         'new_date' => 'date',
+        'main_type' => 'array',
     ];
 
 

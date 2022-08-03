@@ -1,19 +1,4 @@
 @php
-// dd(request()->path());
-if (request()->path()== '/' || request()->path() == 'about-us' ){
-$contact_main = nova_get_setting('heder_text_main_Connect', 'default_value');
-$contact_Text_Main = nova_get_setting('text_main_Connect', 'default_value');
-$Contact_sub_text = nova_get_setting('sup_text_main_Connect', 'default_value');
-$phone_contact = nova_get_setting('phone_Connect', 'default_value');
-$email_contact = nova_get_setting('email_Connect', 'default_value');
-$text_Button = nova_get_setting('text_bottom_Connect', 'default_value');
-$name_placeholder = nova_get_setting('filed1_Connect', 'الاسم كامل');
-$phone_placeholder = nova_get_setting('filed2_Connect', 'رقم الهاتف');
-$textArea_placeholder = nova_get_setting('filed3_Connect', 'رسالتك');
-$text_Button = nova_get_setting('text_bottom_Connect', 'default_value');
-// dd($name_placeholder);
-}
-elseif (request()->path() == 'contact-us'){
 $contact_main = nova_get_setting('heder_text_main_Connectus', 'default_value');
 $contact_Text_Main = nova_get_setting('text_main_Connectus', 'default_value');
 $Contact_sub_text = nova_get_setting('sup_text_main_Connectus', 'default_value');
@@ -23,7 +8,7 @@ $name_placeholder = nova_get_setting('filed1_Connectus', 'الاسم كامل');
 $phone_placeholder = nova_get_setting('filed2_Connectus', 'رقم الهاتف');
 $textArea_placeholder = nova_get_setting('filed3_Connectus', 'رسالتك');
 $text_Button = nova_get_setting('text_bottom_Connectus', 'default_value');
-}
+$linlk_bottom_Connectus = nova_get_setting('linlk_bottom_Connectus', 'default_value');
 
 @endphp
 <div itemscope itemtype="http://schema.org/LocalBusiness" class="max-w-7xl mx-auto px-0 lg:px-8 mt-8">
@@ -63,7 +48,7 @@ $text_Button = nova_get_setting('text_bottom_Connectus', 'default_value');
                 <img src="{{ asset('assets/image/message.svg') }}" alt="message" class="max-w-[17px] max-h-[17px]">
                 <p dir="ltr" itemprop="email" class="text-[#8F9BB3] text-[16px] inter-font">{{ $email_contact }}</p>
             </div>
-            <p class="text-[#8F9BB3] text-[16px] font-FlatBold pt-6 pb-4">هل تريد المشاركة بالتبرع؟ <a href="#"
+            <p class="text-[#8F9BB3] text-[16px] font-FlatBold pt-6 pb-4">هل تريد المشاركة بالتبرع؟ <a href="{{ $linlk_bottom_Connectus }}"
                     class="text-[#349A37]">{{ $text_Button }}</a></p>
         </div>
         <form method="get" action="{{ route('conctus') }}" class=" h-[432px] basis-1/2 w-full lg:mr-0">
