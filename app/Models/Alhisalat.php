@@ -9,7 +9,7 @@ class Alhisalat extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','name', 'city_id','description','amount_total', 'status','lat','lon','information_location','start_time', 'end_time','recipient','giver','approval','reason_of_reject'
+        'id','name', 'project_id','city_id','description','amount_total', 'status','lat','lon','information_location','start_time', 'end_time','recipient','giver','approval','reason_of_reject'
     ];
 
     protected $hidden = [
@@ -33,7 +33,10 @@ class Alhisalat extends Model
         return $this->belongsTo('App\Models\User','giver');
     }
 
-
+    public function projects()
+    {
+        return $this->belongsTo(project::class);
+    }
     public function Transaction()
     {
         $users = DB::table('users')

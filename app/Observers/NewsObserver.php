@@ -15,47 +15,34 @@ class NewsObserver
     public function created(News $news)
     {
 
-   if(! $news->main_type='4'){
-       //picture
-       $path = 'storage/' . $news->image;
-       $mime = mime_content_type($path);
+        $imagePath = 'storage/' . $news->image;
 
-       $filetype = exif_imagetype($path);
-       if ($filetype == 2) {
-           $image = imagecreatefromjpeg($path);
-       } elseif ($filetype == 3) {
-           $image = imagecreatefrompng($path);
-       } elseif ($filetype == 1) {
-           $image = imagecreatefromgif($path);
-       }
-       elseif ($filetype == 18) {
-           $image = imagecreatefromwebp($path);
-       }
-       imagejpeg($image, $path, 20);
-       // photos
+        $filetype = exif_imagetype($imagePath);
+        dd(   $filetype);
+        if ($filetype == 2) {
+           $im = imagecreatefromjpeg($imagePath);
+        } elseif ($filetype == 3) {
+           $im = imagecreatefrompng($imagePath);
+        } elseif ($filetype == 1) {
+           $im = imagecreatefromgif($imagePath);
+        } elseif ($filetype == 18) {
+           $im = imagecreatefromwebp($imagePath);
+        }
+        //Create an image object.
+        // $im = imagecreatefromjpeg($imagePath);
 
-       $photos = $news->pictures;
-       $json_photos = json_decode($photos, true);
-       if (!empty($json_photos)) {
-           foreach ($json_photos as $key => $json_photo) {
-               $photo = $json_photo['url'];
-               $path = substr($photo, 1);
-               $filetype = exif_imagetype($path);
-               if ($filetype == 2) {
-                   $image = imagecreatefromjpeg($path);
-               } elseif ($filetype == 3) {
-                   $image = imagecreatefrompng($path);
-               } elseif ($filetype == 1) {
-                   $image = imagecreatefromgif($path);
-               }
-               elseif ($filetype == 18) {
-                   $image = imagecreatefromwebp($path);
-               }
-               imagejpeg($image, $path, 20);
-           }
-       }
-   }
+        //The path that we want to save our webp file to.
+        $newImagePath = str_replace("jpg", "webp", $imagePath);
 
+        //Quality of the new webp image. 1-100.
+        //Reduce this to decrease the file size.
+        $quality = 1;
+
+         $save= str_replace("storage/", "", $newImagePath);
+        //  dd( $save);
+        //Create the webp image.
+        imagewebp($im, $newImagePath, $quality);
+        news::where('id', $news->id)->update(['image' => $save]);
     }
 
     /**
@@ -67,47 +54,43 @@ class NewsObserver
     public function updated(News $news)
     {
 
-        if(! $news->main_type='4'){
-// /dd($news->new_date);
-        //picture
-        $path = 'storage/' . $news->image;
-        $mime = mime_content_type($path);
+        $imagePath = 'storage/' . $news->image;
 
-        $filetype = exif_imagetype($path);
+        $filetype = exif_imagetype($imagePath);
+        // dd( $filetype);
         if ($filetype == 2) {
-            $image = imagecreatefromjpeg($path);
+           $im = imagecreatefromjpeg($imagePath);
+           $newImagePath = str_replace("jpeg", "webp", $imagePath);
+           $newImagePath = str_replace("jpg", "webp", $imagePath);
         } elseif ($filetype == 3) {
-            $image = imagecreatefrompng($path);
-        } elseif ($filetype == 1) {
-            $image = imagecreatefromgif($path);
-        }
-        elseif ($filetype == 18) {
-            $image = imagecreatefromwebp($path);
-        }
-        imagejpeg($image, $path, 20);
-        // photos
+           $im = imagecreatefrompng($imagePath);
+           $newImagePath = str_replace("png", "webp", $imagePath);
 
-        $photos = $news->pictures;
-        $json_photos = json_decode($photos, true);
-        if (!empty($json_photos)) {
-            foreach ($json_photos as $key => $json_photo) {
-                $photo = $json_photo['url'];
-                $path = substr($photo, 1);
-                $filetype = exif_imagetype($path);
-                if ($filetype == 2) {
-                    $image = imagecreatefromjpeg($path);
-                } elseif ($filetype == 3) {
-                    $image = imagecreatefrompng($path);
-                } elseif ($filetype == 1) {
-                    $image = imagecreatefromgif($path);
-                }
-                elseif ($filetype == 18) {
-                    $image = imagecreatefromwebp($path);
-                }
-                imagejpeg($image, $path, 20);
-            }
+        } elseif ($filetype == 1) {
+           $im = imagecreatefromgif($imagePath);
+           $newImagePath = str_replace("gif", "webp", $imagePath);
+
+        } elseif ($filetype == 18) {
+           $im = imagecreatefromwebp($imagePath);
+           $newImagePath = str_replace("webp", "webp", $imagePath);
+
         }
-    }
+        //Create an image object.
+        // $im = imagecreatefromjpeg($imagePath);
+
+        //The path that we want to save our webp file to.
+        // $newImagePath = str_replace("jpg", "webp", $imagePath);
+
+        //Quality of the new webp image. 1-100.
+        //Reduce this to decrease the file size.
+        $quality = 1;
+
+         $save= str_replace("storage/", "", $newImagePath);
+        //  dd( $save);
+        //Create the webp image.
+        imagewebp($im, $newImagePath, $quality);
+        news::where('id', $news->id)->update(['image' => $save]);
+
     }
 
     /**
@@ -142,4 +125,7 @@ class NewsObserver
     {
         //
     }
+
+
+
 }

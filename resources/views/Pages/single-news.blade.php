@@ -29,7 +29,7 @@
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
             <li class="navBarContainer ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#101426]">
-                <a href="/"> {{ $mainType->name }} </a>
+                <a href="/"> {{ $mainType }} </a>
             </li>
 
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>

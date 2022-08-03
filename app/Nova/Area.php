@@ -89,11 +89,9 @@ class Area extends Resource
                 $user_type_admin_array =  array();
 
                 foreach($users as $user) {
-                    if ($user->Area == null  ) {
-
-
+                    // if ($user->Area == null  ) {
                     $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
-                }
+                // }
                 }
 
                 return $user_type_admin_array;
@@ -110,23 +108,28 @@ class Area extends Resource
         ];
     }
 
-    public static function afterCreate(Request $request, $model)
+    public static function beforeSave(Request $request, $model)
     {
         $id = Auth::id();
-        $model->update([
-            'created_by'=>$id,
-
-        ]);
+        $model->created_by=$id;
     }
+    // public static function afterCreate(Request $request, $model)
+    // {
+    //     $id = Auth::id();
+    //     $model->update([
+    //         'created_by'=>$id,
 
-    public static function beforeUpdate(Request $request, $model)
-    {
-        $id = Auth::id();
-        $model->update([
-            'update_by'=>$id,
+    //     ]);
+    // }
 
-        ]);
-    }
+    // public static function beforeUpdate(Request $request, $model)
+    // {
+    //     $id = Auth::id();
+    //     $model->update([
+    //         'update_by'=>$id,
+
+    //     ]);
+    // }
 
 
     /**
