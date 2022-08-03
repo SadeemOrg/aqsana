@@ -3,8 +3,8 @@
         -webkit-appearance: none;
     }
 </style>
-<form>
-    <div class="flex flex-row items-center justify-start">
+<form class="flex flex-col w-full items-center md:items-start justify-center">
+    <div class="flex flex-row items-center ">
         <div class="mt-10 firstPage">
             <label for="price" class="block text-sm font-medium text-gray-700 pr-1">المبلغ المراد التبرع به</label>
             <div class="mt-2 relative rounded-md shadow-sm">
@@ -26,17 +26,23 @@
         </div>
     </div>
     <!-- title -->
-    <div class="mt-4 w-full firstPage">
+    {{-- <div class="mt-4 w-full firstPage flex-col items-center">
         <label for="title" class=" pr-1 block text-sm font-medium text-gray-700">عنوان المشروع</label>
-        <div class="mt-2">
+        <div class="mt-2 ">
             <input type="text" name="title" id="title"
                 value="اكثر من 10 الاف مشارك بمعسكر 'القدس اولا' الذي نظمته الحركة الاسلامية وجمعية الاقصى" disabled
                 class="w-[50%] shadow-sm block sm:text-sm  border-gray-300 rounded-md">
         </div>
+    </div> --}}
+    <div class="mt-4 firstPage">
+        <label for="title" class=" pr-1 block text-sm font-medium text-gray-700">عنوان المشروع</label>
+<p class="shadow-sm block sm:text-sm border px-4 md:px-2 p-2 mt-2 border-gray-300 rounded-md max-w-[220px] sm:max-w-[210px] md:max-w-none">
+    اكثر من 10 الاف مشارك بمعسكر 'القدس اولا' الذي نظمته الحركة الاسلامية وجمعية الاقصى
+</p>
     </div>
 
     <!-- Second Page Input -->
-    <div class="secondPage mt-10 sm:mt-20 flex flex-col gap-y-6 hidden">
+    <div class="secondPage mt-10 sm:mt-20 flex flex-col gap-y-6 hidden w-full">
         <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
             <input type="text" name="" placeholder=" الاسم الاول"
                 class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
@@ -59,8 +65,8 @@
             </div>
         </div>
         <!-- Second Page Radio Input -->
-        <div class="sm:flex sm:flex-row items-center mt-4">
-            <div class="flex flex-row pr-6 items-center mb-5 sm:mb-0">
+        <div class="sm:flex sm:flex-row items-center mt-4 mr-[9%] md:mr-0">
+            <div class="flex flex-row items-center mb-5 sm:mb-0">
                 <input id="visa" name="notification-method" type="radio" value="visa"
                     class="focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
                 <label for="visa"
@@ -69,7 +75,7 @@
                     <img src="{{asset('assets/image/visa_1.svg')}}" class="pl-3 w-[52px]" />
                 </label>
             </div>
-            <div class="flex flex-row pr-6 items-center">
+            <div class="flex flex-row md:pr-6 items-center">
                 <input id="recived" name="notification-method" checked type="radio" value="recived"
                     class="focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative">
                 <label for="recived"
@@ -88,7 +94,7 @@
     $img = 'storage/'. nova_get_setting('logo', 'default_value');
 @endphp
 <img class="w-[370px] h-24" src="/{{ $img }}" alt="logo">
-<p class="text-[30px] max-w-md mt-8">
+<p class="text-[30px] max-w-md mt-8 text-center">
     تم التبرع بنجاح لصالح مشروع اسم المشروع بمبلغ قدره
     <span class="text-[#349A37]">500 شيكل </span>
 </p>
@@ -96,7 +102,7 @@
 
 </div>
 
-<div class="flex flex-row items-center justify-start gap-x-2">
+<div class="flex flex-row items-center justify-center md:justify-start gap-x-2">
     <div class="mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5">
         <button id="firstPageDonations"
             class="Ctnbtn rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">متابعة</button>
