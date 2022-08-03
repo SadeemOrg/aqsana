@@ -63,7 +63,11 @@ class News extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
 
+        return $query->whereNotIn('type', [8]);
+    }
     public function fields(Request $request)
     {
         return [
@@ -81,9 +85,9 @@ class News extends Resource
                         $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
                     }
                     return  $user_type_admin_array;
-                })->hideFromIndex()->hideFromDetail(),
+                }),
 
-                Select::make("has mult cat", "mult", function () {
+                Select::make("have multi category", "mult", function () {
 
                     $total=  json_decode($this->main_type);
                     // dd(gettype( $total));
@@ -108,7 +112,7 @@ class News extends Resource
                     */
                     // or just return null;
                     return null;
-                }),
+                })->hideFromIndex()->hideFromDetail(),
 
 
             NovaDependencyContainer::make([

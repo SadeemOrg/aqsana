@@ -96,8 +96,24 @@ class HomeController extends Controller
 
     public function getnewDetail($title, $id)
     {
-        $new = DB::table('news')->where('id', $id)->first();
 
+        $new = DB::table('news')->where('id', $id)->first();
+        $photos = $new->pictures;
+        $json_photos = json_encode($photos, true);
+dd(($json_photos ));
+        $json_photos = json_decode($photos, true);
+        $json_photos = json_decode($json_photos, true);
+        foreach ($json_photos as $key => $json_photo) {
+        $photo = $json_photo['url'];
+        dd($json_photos);
+        $json_photos[$key]["url"]='lll';
+        }
+        dd($json_photos);
+        foreach ($json_photos as $key => $json_photo) {
+            $photo = $json_photo['url'];
+            dd($photo);
+            $json_photos[$key]='lll';
+            }
         $Articles = DB::table('news')->where([
             ['type', '=', $new->type],
             ['main_type', '=', $new->main_type],

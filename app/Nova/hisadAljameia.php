@@ -49,29 +49,30 @@ class hisadAljameia extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-        return $query->where('main_type', '4');
+        return $query->where('type', '8');
     }
     public function fields(Request $request)
     {
         return [
 
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('اخبار','main_type')->withMeta([
-                'type' => 'hidden',
-                'value' => '4'
-            ])->hideFromIndex(),
-            Text::make('حصاد الجمعية','type')->withMeta([
-                'type' => 'hidden',
-                'value' => '8'
-            ])->hideFromIndex(),
+            // Text::make('اخبار','main_type')->withMeta([
+            //     'type' => 'hidden',
+            //     'value' => '4'
+            // ])->hideFromIndex(),
+            // Text::make('حصاد الجمعية','type')->withMeta([
+            //     'type' => 'hidden',
+            //     'value' => '8'
+            // ])->hideFromIndex(),
             Text::make("Title", 'title'),
             Text::make("link", 'description'),
         ];
     }
     public static function beforeSave(Request $request, $model)
     {
-        // $user = Auth::user();
 
+        $model->main_type='4';
+        $model->type='8';
     }
 
 
