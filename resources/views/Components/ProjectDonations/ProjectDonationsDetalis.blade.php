@@ -3,6 +3,9 @@
         -webkit-appearance: none;
     }
 </style>
+@php
+$project_Id = null;
+@endphp
 <form class="flex flex-col w-full items-center md:items-start justify-center">
     <div class="flex flex-row items-center ">
         <div class="mt-10 firstPage">
@@ -18,6 +21,7 @@
         </div>
     </div>
     <!-- Sector -->
+    @if($project_Id !== null)
     <div class="mt-4 firstPage">
         <label for="sector" class=" pr-1 block text-sm font-medium text-gray-700">القطاعات</label>
         <div class="mt-2">
@@ -26,21 +30,20 @@
         </div>
     </div>
     <!-- title -->
-    {{-- <div class="mt-4 w-full firstPage flex-col items-center">
-        <label for="title" class=" pr-1 block text-sm font-medium text-gray-700">عنوان المشروع</label>
-        <div class="mt-2 ">
-            <input type="text" name="title" id="title"
-                value="اكثر من 10 الاف مشارك بمعسكر 'القدس اولا' الذي نظمته الحركة الاسلامية وجمعية الاقصى" disabled
-                class="w-[50%] shadow-sm block sm:text-sm  border-gray-300 rounded-md">
-        </div>
-    </div> --}}
     <div class="mt-4 firstPage">
         <label for="title" class=" pr-1 block text-sm font-medium text-gray-700">عنوان المشروع</label>
-<p class="shadow-sm block sm:text-sm border px-4 md:px-2 p-2 mt-2 border-gray-300 rounded-md max-w-[220px] sm:max-w-[210px] md:max-w-none">
-    اكثر من 10 الاف مشارك بمعسكر 'القدس اولا' الذي نظمته الحركة الاسلامية وجمعية الاقصى
-</p>
+        <p
+            class="shadow-sm block sm:text-sm border px-4 md:px-2 p-2 mt-2 border-gray-300 rounded-md max-w-[220px] sm:max-w-[210px] md:max-w-none">
+            اكثر من 10 الاف مشارك بمعسكر 'القدس اولا' الذي نظمته الحركة الاسلامية وجمعية الاقصى
+        </p>
     </div>
-
+    @else
+    <div class="  pt-6  lg:px-0 w-[25opx] lg:w-[80%]">
+        <label for="donationAim" class=" pr-1 block text-sm font-medium text-gray-700">سبب التبرع</label>
+        <textarea rows="4" name="donationAim" id="order_note" placeholder="سبب التبرع" required=""
+            class="w-full mt-2 inline-flex items-center text-right  justify-center  border rounded-md focus:ring-green-500 focus:border-green-500  border-gray-300 sm:text-sm p-4"></textarea>
+    </div>
+    @endif
     <!-- Second Page Input -->
     <div class="secondPage mt-10 sm:mt-20 flex flex-col gap-y-6 hidden w-full">
         <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
@@ -92,13 +95,15 @@
 <div class="thirdPage mt-24 flex flex-col items-center justify-center hidden">
     @php
     $img = 'storage/'. nova_get_setting('logo', 'default_value');
-@endphp
-<img class="w-[370px] h-24" src="/{{ $img }}" alt="logo">
-<p class="text-[30px] max-w-md mt-8 text-center">
-    تم التبرع بنجاح لصالح مشروع اسم المشروع بمبلغ قدره
-    <span class="text-[#349A37]">500 شيكل </span>
-</p>
-<a target="_self" class="bg-[#349A37] mt-5 hover:bg-[#101426] duration-200 py-3 px-4 ml-2 text-white  rounded-[50px] text-lg  " href="/">الصفحة الرئيسية</a>
+    @endphp
+    <img class="w-[370px] h-24" src="/{{ $img }}" alt="logo">
+    <p class="text-[30px] max-w-md mt-8 text-center">
+        تم التبرع بنجاح لصالح مشروع اسم المشروع بمبلغ قدره
+        <span class="text-[#349A37]">500 شيكل </span>
+    </p>
+    <a target="_self"
+        class="bg-[#349A37] mt-5 hover:bg-[#101426] duration-200 py-3 px-4 ml-2 text-white  rounded-[50px] text-lg  "
+        href="/">الصفحة الرئيسية</a>
 
 </div>
 
