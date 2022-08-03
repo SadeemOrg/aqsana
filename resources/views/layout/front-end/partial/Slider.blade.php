@@ -12,8 +12,7 @@
         <div class="bg-[#E4FFE585] w-full h-full flex flex-col sm:flex-row justify-start items-start gap-x-3">
             <!-- display image medium screen div -->
             <div class="block sm:hidden px-3 pt-4 w-full ">
-                <img src="{{ asset($img) }}" alt="people_on_Mousq"
-                    class=" rounded-[5px] object-cover h-[247px]" />
+                <img src="{{ asset($img) }}" alt="people_on_Mousq" class=" rounded-[5px] object-cover h-[247px]" />
             </div>
             <!-- start right div -->
             <div class="flex flex-col items-start sm:max-w-[250px] md:max-w-[170px] pr-3">
@@ -22,11 +21,15 @@
                     {{Illuminate\Support\Str::limit($new->title,100) }}
                 </p>
                 <p class="block sm:hidden text-[#349A37] text-[14px] pt-2 sm:pt-4 text-right cursor-pointer"
-                onclick="location.href='{{ route('getnewDetail', ['title'=>$route_title,'id' => $new->id]) }}'">
-                {{Illuminate\Support\Str::limit($new->title,75) }}
-            </p>
+                    onclick="location.href='{{ route('getnewDetail', ['title'=>$route_title,'id' => $new->id]) }}'">
+                    {{Illuminate\Support\Str::limit($new->title,75) }}
+                </p>
 
-                <p class="hidden sm:block text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 ">أبريل 20, 2022</p>
+                @if(!empty($new->new_date))
+                <p class="hidden sm:block text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 ">
+                    {{ $new->new_date }}
+                </p>
+                @endif
                 <p class="text-[#101426]  pt-2 text-xs font-noto_Regular ">
                     {{ Illuminate\Support\Str::limit($new->description,156) }}
                     @if(strip_tags(Str::length($new->description)) > 156)

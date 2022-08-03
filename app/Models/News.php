@@ -13,7 +13,9 @@ class News extends Model
         News::class => [NewsObserver::class],
     ];
     protected $fillable = [
-        'id','title','description','image','type','pictures','created_by','update_by','video_link','main_type'
+
+        'id','title','description','image','type','pictures','created_by','update_by','created_at'
+
     ];
 
     protected $casts = [
@@ -24,7 +26,6 @@ class News extends Model
 
 
     protected $hidden = [
-        'created_at',
         'updated_at',
 
     ];
