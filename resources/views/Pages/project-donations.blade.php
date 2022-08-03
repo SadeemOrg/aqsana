@@ -16,18 +16,11 @@
             </li>
         </ul>
     </div>
-    <div class="relative mt-14 xl:mt-20">
-        <div class="flex flex-col gap-y-8 sm:flex-row justify-between items-center">
-            <div>
-                <p class="font-FlatBold text-3xl text-center xl:text-right"> تبرع الان </p>
-                <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
-            </div>
-            <p class="font-FlatBold text-[20px]">المبلغ المتبرع فيه
-                <span class="text-[#349A37]">500 شيكل</span>
-            </p>
-        </div>
-    </div>
-    <div class="mt-10 sm:mt-20 flex flex-col gap-y-6">
+    @include('Components.ProjectDonations.DonationSteps')
+@include('Components.ProjectDonations.ProjectDonationsDetalis')
+
+
+    {{-- <div class="mt-10 sm:mt-20 flex flex-col gap-y-6">
         <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
             <input type="text" name="" placeholder=" الاسم الاول"
                 class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
@@ -42,17 +35,21 @@
         </div>
         <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
             <input type="text" name="" placeholder="CVV"
-                class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">            
-                <div dir="ltr" class="w-[80%] md:w-[50%]">
-                    <input datepicker type="text" class="block w-full border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4 text-right" placeholder="MM/YY">
-                </div>
-        </div>        
+                class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
+            <div dir="ltr" class="w-[80%] md:w-[50%]">
+                <input datepicker type="text"
+                    class="block w-full border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4 text-right"
+                    placeholder="MM/YY">
+            </div>
+        </div>
         <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
             <img src="assets/image/visa-images.png" alt="cards images">
         </div>
         <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
-            <button class="rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">تبرع الان</button>
-        </div>      
-    </div>
+            <button
+                class="rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">تبرع
+                الان</button>
+        </div>
+    </div> --}}
 </div>
 @endsection
