@@ -10,7 +10,10 @@ $textArea_placeholder = nova_get_setting('filed3_Connectus', 'رسالتك');
 $text_Button = nova_get_setting('text_bottom_Connectus', 'default_value');
 $linlk_bottom_Connectus = nova_get_setting('linlk_bottom_Connectus', 'default_value');
 $whatsapp_phone = nova_get_setting('whatsapp_Connectus', 'default_value');
+$Correct_whatsapp_phone = str_replace(' ', '', $whatsapp_phone);
+$Final_Correct_whatsapp_phone = str_replace('-', '', $Correct_whatsapp_phone);
 
+$whatsapp_phone_Link = "https://wa.me/".$Final_Correct_whatsapp_phone ;
 @endphp
 <div itemscope itemtype="http://schema.org/LocalBusiness" class="max-w-7xl mx-auto px-0 lg:px-8 mt-8">
     <div class="lg:flex flex-col lg:flex-row justify-center py-4 lg:justify-between  items-center lg:gap-x-10">
@@ -33,7 +36,7 @@ $whatsapp_phone = nova_get_setting('whatsapp_Connectus', 'default_value');
                 </svg>
 
                 <p itemprop="telephone" dir="ltr" class="text-[#8F9BB3] text-[16px] inter-font">
-                    <a href={{ $whatsapp_phone }}> {{ $whatsapp_phone }} </a>
+                    <a href="{{$whatsapp_phone_Link }}"  target="_blank"> {{ $whatsapp_phone }} </a>
                 </p>
             </div>
             <div class="flex flex-row items-center justify-start gap-x-2 pt-2">
