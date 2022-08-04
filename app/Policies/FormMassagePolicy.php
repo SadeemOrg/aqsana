@@ -41,7 +41,6 @@ class FormMassagePolicy
      */
     public function create(User $user)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin' ) ;
     }
 
     /**
@@ -53,8 +52,9 @@ class FormMassagePolicy
      */
     public function update(User $user, FormMassage $formMassage)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin' ) ;
+        return ($user->type() == 'admin' ||$user->type() == 'website_admin' ) ;
     }
+
 
     /**
      * Determine whether the user can delete the model.

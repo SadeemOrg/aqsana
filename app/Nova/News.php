@@ -8,7 +8,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Select;
-
+use App\Nova\Actions\ChangeRole;
+use Pdmfc\NovaFields\ActionButton;
 use Laravel\Nova\Fields\Text;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
@@ -20,7 +21,10 @@ use Laravel\Nova\Fields\Date;
 use Illuminate\Support\Facades\DB;
 use Acme\MultiselectField\Multiselect;
 use Laravel\Nova\Fields\Boolean;
-
+use App\Nova\Actions\PostNews;
+use AwesomeNova\Cards\FilterCard;
+use App\Nova\Filters\StateFilter;
+use App\Nova\Filters\PostNewsFilters;
 class News extends Resource
 {
     /**
@@ -74,7 +78,17 @@ class News extends Resource
 
 
 
+
+
             ID::make(__('ID'), 'id')->sortable(),
+            ActionButton::make(__('POST NEWS'))
+            ->action((new PostNews) ->confirmText('Are you sure you want to read  this Massage?')
+            ->confirmButtonText(__('post'))
+            ->cancelButtonText(__('Dont post')), $this->id) ->readonly(function () {
+                return $this->status === '1';
+            })->text(__('post'))->showLoadingAnimation()
+            ->loadingColor('#fff') ->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+            Boolean::make(__('is posted'),'status'),
             Text::make("Title", 'title'),
             Textarea::make('description', 'description'),
             Select::make('sector', 'sector')
@@ -266,7 +280,10 @@ class News extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new FilterCard(new PostNewsFilters()),
+
+        ];
     }
 
     /**
@@ -277,7 +294,9 @@ class News extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new PostNewsFilters()
+        ];
     }
 
     /**
@@ -299,6 +318,12 @@ class News extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+
+            (new PostNews)
+            ->confirmText('Are you sure you want to read  this Massage?')
+            ->confirmButtonText('Read')
+            ->cancelButtonText("Don't Read"),
+        ];
     }
 }
