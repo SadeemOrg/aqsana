@@ -21,7 +21,7 @@ class CreateNewsTable extends Migration
             $table->char('type',1)->default('1');
             $table->string('sector')->nullable();
             $table->string('title');
-            $table->longText('contents');
+            $table->longText('contents')->nullable();
             $table->longText('description');
             $table->string('image');
             $table->json('pictures')->nullable();

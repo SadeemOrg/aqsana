@@ -9,6 +9,7 @@ $phone_placeholder = nova_get_setting('filed2_Connectus', 'رقم الهاتف')
 $textArea_placeholder = nova_get_setting('filed3_Connectus', 'رسالتك');
 $text_Button = nova_get_setting('text_bottom_Connectus', 'default_value');
 $linlk_bottom_Connectus = nova_get_setting('linlk_bottom_Connectus', 'default_value');
+$whatsapp_phone = nova_get_setting('whatsapp_Connectus', 'default_value');
 
 @endphp
 <div itemscope itemtype="http://schema.org/LocalBusiness" class="max-w-7xl mx-auto px-0 lg:px-8 mt-8">
@@ -25,60 +26,52 @@ $linlk_bottom_Connectus = nova_get_setting('linlk_bottom_Connectus', 'default_va
                 </p>
             </div>
             <div class="flex flex-row items-center justify-start gap-x-2 mt-2">
-                <img src="{{ asset('assets/image/icons8-whatsapp.gif') }}" alt="telephone"
-                    class="max-w-[17px] max-h-[17px]">
-                {{-- <a href="https://wa.me/message/VTYBG7JAT4GAK1">
-                    <svg class="" width="24" height="24" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M48 96C74.5097 96 96 74.5097 96 48C96 21.4903 74.5097 0 48 0C21.4903 0 0 21.4903 0 48C0 74.5097 21.4903 96 48 96Z"
-                            fill="#29A71A"></path>
-                        <path
-                            d="M69.1637 26.8366C64.1697 21.7927 57.5377 18.6995 50.4639 18.1149C43.3901 17.5302 36.3402 19.4926 30.5859 23.6481C24.8316 27.8035 20.7516 33.8785 19.0819 40.7772C17.4122 47.676 18.2627 54.9443 21.48 61.2711L18.3218 76.6038C18.2891 76.7565 18.2881 76.9142 18.3191 77.0672C18.3501 77.2201 18.4123 77.3651 18.5018 77.4929C18.633 77.687 18.8203 77.8363 19.0386 77.9211C19.2569 78.0059 19.4959 78.0221 19.7237 77.9675L34.7509 74.4057C41.06 77.5415 48.277 78.3373 55.1178 76.6515C61.9585 74.9657 67.9793 70.9076 72.1089 65.1993C76.2384 59.491 78.2088 52.5027 77.6695 45.478C77.1302 38.4532 74.1162 31.8476 69.1637 26.8366ZM64.4782 64.2329C61.0229 67.6786 56.5734 69.9531 51.7569 70.7359C46.9404 71.5188 41.9996 70.7705 37.6309 68.5966L35.5364 67.5602L26.3237 69.742L26.3509 69.6275L28.26 60.3548L27.2346 58.3311C25.0023 53.9471 24.2149 48.9692 24.985 44.1103C25.7552 39.2514 28.0434 34.7609 31.5218 31.282C35.8926 26.9126 41.8198 24.458 48 24.458C54.1803 24.458 60.1075 26.9126 64.4782 31.282C64.5154 31.3247 64.5555 31.3648 64.5982 31.402C68.9148 35.7827 71.3245 41.6922 71.302 47.8422C71.2796 53.9922 68.8267 59.8839 64.4782 64.2329Z"
-                            fill="white"></path>
-                        <path
-                            d="M63.6601 57.4313C62.531 59.2095 60.7474 61.3858 58.5056 61.9258C54.5783 62.8749 48.551 61.9586 41.051 54.9658L40.9583 54.884C34.3638 48.7695 32.651 43.6804 33.0656 39.644C33.2947 37.3531 35.2038 35.2804 36.8129 33.9277C37.0672 33.7105 37.3689 33.556 37.6937 33.4763C38.0186 33.3966 38.3575 33.394 38.6835 33.4688C39.0095 33.5435 39.3135 33.6935 39.5711 33.9067C39.8288 34.1199 40.033 34.3905 40.1674 34.6968L42.5947 40.1513C42.7524 40.505 42.8109 40.8949 42.7638 41.2793C42.7167 41.6637 42.5658 42.028 42.3274 42.3331L41.1001 43.9258C40.8368 44.2547 40.6779 44.6549 40.6439 45.0748C40.6098 45.4947 40.7023 45.9152 40.9092 46.2822C41.5965 47.4877 43.2438 49.2604 45.071 50.9022C47.1219 52.7567 49.3965 54.4531 50.8365 55.0313C51.2218 55.1887 51.6454 55.2271 52.0528 55.1416C52.4601 55.056 52.8325 54.8504 53.1219 54.5513L54.5456 53.1167C54.8203 52.8459 55.1619 52.6527 55.5356 52.5569C55.9093 52.461 56.3017 52.466 56.6729 52.5713L62.4383 54.2077C62.7563 54.3052 63.0479 54.4742 63.2906 54.7017C63.5333 54.9292 63.7207 55.2092 63.8386 55.5203C63.9565 55.8313 64.0017 56.1652 63.9708 56.4965C63.9399 56.8277 63.8336 57.1474 63.6601 57.4313Z"
-                            fill="white"></path>
-                    </svg>
-                </a> --}}
+                <svg class="h-5 w-5 text-gray-500    " xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 48 48" style=" fill: currentColor;">
+                    <path
+                        d="M 24 3.9980469 C 12.972292 3.9980469 4 12.970339 4 23.998047 C 4 27.273363 4.8627078 30.334853 6.2617188 33.064453 L 4.09375 40.826172 C 3.5887973 42.629575 5.3719261 44.41261 7.1757812 43.908203 L 14.943359 41.740234 C 17.670736 43.136312 20.727751 43.998047 24 43.998047 C 35.027708 43.998047 44 35.025755 44 23.998047 C 44 12.970339 35.027708 3.9980469 24 3.9980469 z M 24 6.9980469 C 33.406292 6.9980469 41 14.591755 41 23.998047 C 41 33.404339 33.406292 40.998047 24 40.998047 C 20.998416 40.998047 18.190601 40.217527 15.742188 38.853516 A 1.50015 1.50015 0 0 0 14.609375 38.71875 L 7.2226562 40.779297 L 9.2851562 33.396484 A 1.50015 1.50015 0 0 0 9.1503906 32.261719 C 7.7836522 29.811523 7 27.002565 7 23.998047 C 7 14.591755 14.593708 6.9980469 24 6.9980469 z M 17.240234 15 C 16.921234 15 16.405797 15.119656 15.966797 15.597656 C 15.528797 16.073656 14.294922 17.228125 14.294922 19.578125 C 14.294922 21.928125 16.005141 24.197578 16.244141 24.517578 C 16.482141 24.834578 19.547344 29.812562 24.402344 31.726562 C 28.436344 33.316563 29.256812 32.999922 30.132812 32.919922 C 31.008813 32.841922 32.959422 31.766391 33.357422 30.650391 C 33.755422 29.534391 33.755672 28.579813 33.638672 28.382812 C 33.519672 28.183812 33.200656 28.063219 32.722656 27.824219 C 32.245656 27.585219 29.898937 26.430484 29.460938 26.271484 C 29.022938 26.112484 28.702766 26.031766 28.384766 26.509766 C 28.066766 26.987766 27.152047 28.062859 26.873047 28.380859 C 26.594047 28.700859 26.315891 28.740953 25.837891 28.501953 C 25.358891 28.260953 23.822094 27.757859 21.996094 26.130859 C 20.576094 24.865859 19.620797 23.302219 19.341797 22.824219 C 19.063797 22.348219 19.311781 22.086609 19.550781 21.849609 C 19.765781 21.635609 20.028578 21.292672 20.267578 21.013672 C 20.504578 20.734672 20.583188 20.53675 20.742188 20.21875 C 20.901188 19.90175 20.822125 19.621813 20.703125 19.382812 C 20.584125 19.143813 19.655469 16.780938 19.230469 15.835938 C 18.873469 15.041938 18.49725 15.024719 18.15625 15.011719 C 17.87825 15.000719 17.558234 15 17.240234 15 z" />
+                </svg>
+
                 <p itemprop="telephone" dir="ltr" class="text-[#8F9BB3] text-[16px] inter-font">
-                    <a href={{ $phone_contact }}> {{ $phone_contact }} </a>
+                    <a href={{ $whatsapp_phone }}> {{ $whatsapp_phone }} </a>
                 </p>
             </div>
             <div class="flex flex-row items-center justify-start gap-x-2 pt-2">
                 <img src="{{ asset('assets/image/message.svg') }}" alt="message" class="max-w-[17px] max-h-[17px]">
-                <p dir="ltr" itemprop="email" class="text-[#8F9BB3] text-[16px] inter-font">{{ $email_contact }}</p>
+                <p dir="ltr" itemprop="email" class="text-[#8F9BB3] text-[16px] inter-font">{{ $email_contact }}
+                </p>
             </div>
-            <p class="text-[#8F9BB3] text-[16px] font-FlatBold pt-6 pb-4">هل تريد المشاركة بالتبرع؟ <a href="{{ $linlk_bottom_Connectus }}"
-                    class="text-[#349A37]">{{ $text_Button }}</a></p>
+            <p class="text-[#8F9BB3] text-[16px] font-FlatBold pt-6 pb-4">هل تريد المشاركة بالتبرع؟ <a
+                    href="{{ $linlk_bottom_Connectus }}" class="text-[#349A37]">{{ $text_Button }}</a></p>
         </div>
         <form method="get" action="{{ route('conctus') }}" class=" h-[432px] basis-1/2 w-full lg:mr-0">
             @csrf
             <div class=" ltr pt-10 px-6 lg:px-0">
-                <input type="text" name="name" placeholder="{{ $name_placeholder}}"
+                <input type="text" name="name" placeholder="{{ $name_placeholder }}"
                     class="rtl block w-full  border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
             </div>
             @error('name')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
             @enderror
             <div class=" ltr pt-6 px-6 lg:px-0">
                 <input type="text" name="phone" placeholder="{{ $phone_placeholder }}"
                     class="rtl block w-full border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
             </div>
             @error('phone')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
             @enderror
             <div class="  pt-6 px-6 lg:px-0">
                 <textarea rows="4" name="message" id="order_note" placeholder="{{ $textArea_placeholder }}" required=""
                     class="w-full inline-flex items-center text-right  justify-center border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4"></textarea>
             </div>
             @error('message')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
             @enderror
             <div class=" my-4 mr-6 lg:mr-0">
                 <button type="submit" {{-- onclick="location.href='{{route('product',$bestSell->slug)}} '" --}}

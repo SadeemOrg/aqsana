@@ -53,7 +53,7 @@ if (!empty($json_photos)) {
 
 
         $filetype = exif_imagetype($path);
-            // dd( $filetype);
+
             if ($filetype == 2) {
                 $im = imagecreatefromjpeg($path);
                 $newImagePath = str_replace("jpeg", "webp", $path);
@@ -71,19 +71,17 @@ if (!empty($json_photos)) {
             $quality = 5;
 
                 $save = str_replace("storage", '/storage', $newImagePath);
-                // dd($save);
-                //  dd( $save);
-                // Create the webp image.
+
                 imagewebp($im, $newImagePath, $quality);
 
                 $json_photos[$key]["url"]= $save;
 
 
     }
-    // dd( $json_photos);
+
     $json_photos = json_encode($json_photos, true);
     $json_photos = json_encode($json_photos, true);
-    // dd( $json_photos);
+
     news::where('id', $news->id)->update(['pictures' => $json_photos]);
 
 }

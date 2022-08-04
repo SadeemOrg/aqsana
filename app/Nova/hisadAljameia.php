@@ -73,6 +73,8 @@ class hisadAljameia extends Resource
 
         $model->main_type='4';
         $model->type='8';
+        $model->new_date='8';
+        $model->image='0rZDE0SPjZB4ZUBbfROleA7kx6DXuggG0RQGawNX.webp';
     }
 
 
