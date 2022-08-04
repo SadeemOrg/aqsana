@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlhisalatsTable extends Migration
+class CreateProjectFeaturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateAlhisalatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('alhisalats', function (Blueprint $table) {
+        Schema::create('project_features', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->bigInteger('project_id');
             $table->bigInteger('city_id');
-            $table->bigInteger('address_id');
-            $table->string('number_alhisala');
-            $table->char('status','1');
+            $table->char('is_bus');
+            $table->char('is_vounter');
+            $table->char('is_donation');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateAlhisalatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alhisalats');
+        Schema::dropIfExists('project_features');
     }
 }
