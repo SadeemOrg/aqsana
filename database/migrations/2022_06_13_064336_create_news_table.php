@@ -17,11 +17,11 @@ class CreateNewsTable extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->char('status',1)->default('1');
-            $table->char('main_type',1)->default('0');
+            $table->json('main_type')->default('0');
             $table->char('type',1)->default('1');
             $table->string('sector')->nullable();
             $table->string('title');
-            $table->longText('contents');
+            $table->longText('contents')->nullable();
             $table->longText('description');
             $table->string('image');
             $table->json('pictures')->nullable();

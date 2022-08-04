@@ -11,10 +11,11 @@ class project extends Model
     protected $table = 'projects';
     protected $fillable = [
         'id', 'project_name', 'project_describe', 'purpose',
-        'is_reported','report_title','report_description','report_text','report_image','pictures',
-         'type', 'Project_Status', 'start_date', 'end_date',
+        'is_reported','report_status','report_title','report_description','report_contents','report_image','report_pictures','report_video_link',
+         'project_type', 'Project_Status', 'start_date', 'end_date',
         'Budjet', 'admin_id', 'approval', 'reason_of_reject'
-        ,'created_by','update_by'
+        ,'Financial_Type','is_has_volunteer','is_has_Donations','areas','cities','approval_Status',
+        'created_by','update_by'
 
 
     ];
@@ -28,6 +29,8 @@ class project extends Model
         'start_date' => 'date',
         'end_date' => 'date',
         'pictures' => 'array',
+       ' cities'=> 'array',
+        'areas'=> 'array',
 
     ];
 
@@ -36,9 +39,13 @@ class project extends Model
     {
         return $this->hasOne(Bus::class);
     }
+    public function Alhisalat()
+    {
+        return $this->hasOne(Alhisalat::class);
+    }
     public function ProjectType()
     {
-        return $this->belongsTo(ProjectType::class,'type','code');
+        return $this->belongsTo(ProjectType::class,'project_type','code');
     }
 
     public function newsTypes()

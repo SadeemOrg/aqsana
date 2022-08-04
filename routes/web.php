@@ -32,11 +32,6 @@ Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch')
 
 Route::get('/sector/{sector}', [HomeController::class, 'sector'])->name('sector');
 
-
-Route::get('/contact-us', function (){
-    return view('Pages.contact-page');
-});
-
 Route::get('/contact-us', function (){
     return view('Pages.contact-page');
 });

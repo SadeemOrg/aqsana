@@ -42,7 +42,7 @@ class HomeController extends Controller
         $goals = json_decode($goalsjson);
         $achievementsjson = nova_get_setting('achievements', 'default_value');
         $achievements = json_decode($achievementsjson);
-        $workplace = nova_get_setting('workplaceabout', 'default_value');
+        $workplace = nova_get_setting('workplace', 'default_value');
         return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace'));
     }
     public function conctusee(Request $request)
@@ -72,6 +72,7 @@ class HomeController extends Controller
 
     public function news($maintype, $type)
     {
+
         $main_type = newsType::where('name', $maintype)
             ->where('type', '0')
             ->select('main_type')->first();
@@ -79,12 +80,13 @@ class HomeController extends Controller
         $Type = newsType::where('name', $type)
             ->where('main_type', $main_type->main_type)
             ->select('type')->first();
-
+// dd($Type->type);
 
         $news = DB::table('news')->where([
-            ['main_type', '=', $main_type->main_type],
-            ['type', '=', $Type->type],
+            ['main_type', 'like' , '%' . $main_type->main_type . '%'],
+            ['type', '=', $Type->type ],
         ])->paginate(8);
+
 
 
         $mainType = str_replace("-", " ", $maintype);
@@ -94,8 +96,24 @@ class HomeController extends Controller
 
     public function getnewDetail($title, $id)
     {
-        $new = DB::table('news')->where('id', $id)->first();
 
+        $new = DB::table('news')->where('id', $id)->first();
+        $photos = $new->pictures;
+        $json_photos = json_encode($photos, true);
+// dd(($json_photos ));
+        $json_photos = json_decode($photos, true);
+        $json_photos = json_decode($json_photos, true);
+        foreach ($json_photos as $key => $json_photo) {
+        $photo = $json_photo['url'];
+        // dd($json_photos);
+        $json_photos[$key]["url"]='lll';
+        }
+        // dd($json_photos);
+        foreach ($json_photos as $key => $json_photo) {
+            $photo = $json_photo['url'];
+            // dd($photo);
+            $json_photos[$key]='lll';
+            }
         $Articles = DB::table('news')->where([
             ['type', '=', $new->type],
             ['main_type', '=', $new->main_type],
@@ -105,13 +123,29 @@ class HomeController extends Controller
 
         $pictures = json_decode(json_decode($goalsjson, true), true);
 
-        $mainType = DB::table('news_types')->where([
-            ['main_type', '=', $new->main_type],
-            ['type', '=', '0'],
-        ])->first();
+        $total=  json_decode(json_decode($new->main_type, true), true);
+
+        if( gettype( $total) == "string" )
+        {
+            $tt=  str_replace('"', "", $total);
+
+            $mainType = DB::table('news_types')->where([
+                ['main_type', 'like' ,  $tt ],
+                ['type', '=', '0'],
+                        ])->first();
+                        $mainType=  $mainType->name;
+                //  dd(   $mainType);
+        }
+        else $mainType="اخبار";
+        // $coutotal =  count( $total);
+
+//         $mainType = DB::table('news_types')->where([
+//             ['main_type', '=', $new->main_type],
+//             ['type', '=', '0'],
+//         ])->first();
 
 
-
+// dd( $new->main_type);
 
         return view('Pages.single-news', compact('new', 'pictures', 'Articles', 'mainType'));
     }
@@ -121,7 +155,7 @@ class HomeController extends Controller
     public function sector ($sector)
     {
         // dd($sector);mainType
-        $mainType= "sector";
+        $mainType= "قطاع";
         $type=$sector;
              $news = News::query()->where('sector', $sector  )
 

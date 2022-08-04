@@ -15,26 +15,20 @@ class CreateBusesTable extends Migration
     {
         Schema::create('buses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name_driver');
             $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('city_id');
             $table->string('bus_number');
-            $table->integer('number_person_on_bus');
+            $table->integer('number_of_seats');
+            $table->double('seat_price');
             $table->json('travel_from')->nullable();
             $table->json('travel_to')->nullable();
             $table->json('current_location')->nullable();
-            $table->string('driver');
-            $table->string('phone_number');
-            $table->char('status', 1);
+            $table->string('phone_number_driver');
+            $table->char('status', '1');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('update_by')->nullable();
-
-            // $table->foreign('created_by')->references('id')->on('users')
-            //     ->onDelete('cascade');
-            // $table->foreign('update_by')->references('id')->on('users')
-            //     ->onDelete('cascade');
-            // $table->foreign('company_id')->references('id')->on('buses_company')
-            //     ->onDelete('cascade');
             $table->timestamps();
         });
     }
