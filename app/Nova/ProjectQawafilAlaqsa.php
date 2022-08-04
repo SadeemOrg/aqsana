@@ -43,10 +43,9 @@ use Laravel\Nova\Fields\FormData;
 use Actengage\Wizard\HasMultipleSteps;
 use Actengage\Wizard\Step;
 
-class project extends Resource
+
+class ProjectQawafilAlaqsa extends Resource
 {
-    use TabsOnEdit;
-    // use HasMultipleSteps;
     /**
      * The model the resource corresponds to.
      *
@@ -59,25 +58,24 @@ class project extends Resource
      *
      * @var string
      */
-    public static $title = 'project_name';
-    public static function label()
-    {
-        return __('project');
-    }
-    public static function group()
-    {
-        return __('Admin');
-    }
-    // public static $displayInNavigation = false;
+    public static $title = 'id';
+
     /**
      * The columns that should be searched.
      *
      * @var array
      */
+    public static function label()
+    {
+        return __('ProjectQawafilAlaqsa');
+    }
+    public static function group()
+    {
+        return __('Project');
+    }
     public static $search = [
         'id',
     ];
-
 
     /**
      * Get the fields displayed by the resource.
@@ -85,28 +83,8 @@ class project extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    // public static function indexQuery(NovaRequest $request, $query)
-    // {
-    //     $id = Auth::id();
-    //     $areas = DB::table('areas')->where('admin_id', $id)
-    //     ->join('projects', 'projects.area_id', '=', 'areas.id')
-    //     ->select('alhisalats.name')->get();
-    //     $stack = array();
-    //   foreach ( $areas as $key => $value) {
-    //       array_push($stack, $value->name);
-    //       // echo $value->name;
-    //   }
-    //     return $query->whereIn('name', $stack);
-    // }
     public function fields(Request $request)
     {
-
-
-
-
-
-
-
         return [
 
 
@@ -116,6 +94,8 @@ class project extends Resource
             Text::make("project name", "project_name"),
             Text::make("project describe", "project_describe"),
             Text::make("project purpose", "purpose"),
+            // BelongsTo::make('Project Type', 'ProjectType', \App\Nova\ProjectType::class),
+
             Text::make('Financial_Type', function () {
                 if ($this->ProjectType) {
                     return $this->ProjectType['type'];
@@ -213,9 +193,13 @@ class project extends Resource
             BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             HasOne::make('buses')->hideWhenCreating()->hideWhenUpdating(),
             // HasOne::make('Alhisalat')->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make('Project Type', 'ProjectType', \App\Nova\ProjectType::class),
 
-            NestedForm::make('buses', 'buses', 'App\Nova\bus'),
+
+
+
+                NestedForm::make('buses', 'buses', 'App\Nova\bus'),
+
+
 
 
 
@@ -232,34 +216,10 @@ class project extends Resource
         ];
     }
 
-    public static function beforeCreate(Request $request, $model)
+    public static function beforeSave(Request $request, $model)
     {
-
-        $id = Auth::id();
-        $model->created_by=$id;
+        $model->project_type='1';
     }
-    public static function beforeUpdate(Request $request, $model)
-    {
-        $id = Auth::id();
-        $model->created_by=$id;
-    }
-
-    // public static function afterCreate(Request $request, $model)
-    // {
-    //     $id = Auth::id();
-    //     $model->update([
-    //         'created_by'=>$id,
-    //         ]);
-    // }
-
-    // public static function beforeUpdate(Request $request, $model)
-    // {
-    //     $id = Auth::id();
-    //     $model->update([
-    //         'update_by'=>$id,
-
-    //     ]);
-    // }
 
     /**
      * Get the cards available for the request.
@@ -269,11 +229,7 @@ class project extends Resource
      */
     public function cards(Request $request)
     {
-        return [
-
-            new FilterCard(new ProjectStatus()),
-            new FilterCard(new Projectapproval()),
-        ];
+        return [];
     }
 
     /**
@@ -284,10 +240,7 @@ class project extends Resource
      */
     public function filters(Request $request)
     {
-        return [
-            new ProjectStatus,
-            new  Projectapproval
-        ];
+        return [];
     }
 
     /**
@@ -309,14 +262,6 @@ class project extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-
-            (new ApprovalRejectProjec)->canSee(function ($request) {
-                $user = Auth::user();
-                return  $user->type() == 'admin';
-            }),
-            new ProjectStatu,
-
-        ];
+        return [];
     }
 }

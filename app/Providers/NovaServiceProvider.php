@@ -186,73 +186,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             ),
                     ]
                 ),
-                Tab::make(
-                    'Our central work place ',
-                    [
 
-                        Text::make('main text', 'text_main_workplace'),
-                        Text::make('sup text ', 'sup_text_workplace'),
-                        FlexibleContent::make('workplace', 'workplace')
-                            ->addLayout(
-                                [
-                                    'label' => 'workplace',
-                                    'name' => 'workplace',
-                                    'fields' => [
-                                        [
-                                            'type' => 'image',
-                                            'name' => 'main_img_workplace',
-                                            'label' => 'Image',
-                                            'multiple' => false,
-                                            'required' => false
-                                        ],
-                                        [
-                                            'type' => 'text',
-                                            'name' => 'searsh_text_workplace',
-                                            'label' => 'searsh text',
-                                            'multiple' => false,
-                                            'required' => false
-                                        ],
-                                        [
-                                            'type' => 'text',
-                                            'name' => 'text_main_workplace',
-                                            'label' => 'title',
-                                            'multiple' => false,
-                                            'required' => false
-                                        ],
-                                        [
-                                            'type' => 'text',
-                                            'name' => 'sup_text_workplace',
-                                            'label' => 'sup title',
-                                            'multiple' => false,
-                                            'required' => false
-                                        ],
-                                        [
-                                            'type' => 'text',
-                                            'name' => 'text_bottom_workplace_',
-                                            'label' => 'text bottom_',
-                                            'multiple' => false,
-                                            'required' => false
-                                        ],
-                                        [
-                                            'type' => 'text',
-                                            'name' => 'valuo00',
-                                            'label' => 'Image',
-                                            'multiple' => false,
-                                            'required' => false,
-                                            'value' => '3487'
-                                        ],
-                                        [
-                                            'type' => 'text',
-                                            'name' => 'link_bottom_workplace_',
-                                            'label' => 'link bottom',
-                                            'multiple' => false,
-                                            'required' => false
-                                        ],
-                                    ]
-                                ]
-                            ),
-                    ]
-                ),
                 Tab::make(
                     'video',
                     [
@@ -281,22 +215,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             ),
                     ]
                 ),
-                Tab::make(
-                    'Connect with us',
-                    [
-                        Text::make('heder text', 'heder_text_main_Connect'),
-                        Text::make('main text', 'text_main_Connect'),
-                        Text::make('sup text text', 'sup_text_main_Connect'),
-                        Text::make('phone', 'phone_Connect'),
-                        Text::make('Email', 'email_Connect'),
-                        Text::make('Text bottome', 'text_bottom_Connect'),
-                        Text::make('linlk bottom', 'linlk_bottom'),
-                        Text::make('filed 1 ', 'filed1_Connect'),
-                        Text::make('filed 2 ', 'filed2_Connect'),
-                        Text::make('filed 3 ', 'filed3_Connect'),
-                        Text::make('text form bottom', 'text_form_Connect'),
-                    ]
-                ),
+
                 Tab::make('footer', [
                     Image::make('Logo', 'footer_logo')->disk('public'),
                     Tree::make('Items (EN)', 'Itemsfooter')->fields([
@@ -307,7 +226,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         ])
                     ])->title('name'),
                 ]),
-                Tab::make('footer', []),
+
             ]),
         ], [
             'heroo' => 'array',
@@ -318,6 +237,75 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             'videohome' => 'array',
             // ...
         ]);
+        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
+            Tabs::make('workplace', [
+                Tab::make('workplace', [
+                        Text::make('main text', 'text_main_workplace'),
+                Text::make('sup text ', 'sup_text_workplace'),
+            FlexibleContent::make('workplace', 'workplace')
+            ->addLayout(
+                [
+                    'label' => 'workplace',
+                    'name' => 'workplace',
+                    'fields' => [
+                        [
+                            'type' => 'image',
+                            'name' => 'main_img_workplace',
+                            'label' => 'Image',
+                            'multiple' => false,
+                            'required' => false
+                        ],
+                        [
+                            'type' => 'text',
+                            'name' => 'searsh_text_workplace',
+                            'label' => 'searsh text',
+                            'multiple' => false,
+                            'required' => false
+                        ],
+                        [
+                            'type' => 'text',
+                            'name' => 'text_main_workplace',
+                            'label' => 'title',
+                            'multiple' => false,
+                            'required' => false
+                        ],
+                        [
+                            'type' => 'text',
+                            'name' => 'sup_text_workplace',
+                            'label' => 'sup title',
+                            'multiple' => false,
+                            'required' => false
+                        ],
+                        [
+                            'type' => 'text',
+                            'name' => 'text_bottom_workplace_',
+                            'label' => 'text bottom_',
+                            'multiple' => false,
+                            'required' => false
+                        ],
+                        [
+                            'type' => 'text',
+                            'name' => 'valuo00',
+                            'label' => 'Image',
+                            'multiple' => false,
+                            'required' => false,
+                            'value' => '3487'
+                        ],
+                        [
+                            'type' => 'text',
+                            'name' => 'link_bottom_workplace_',
+                            'label' => 'link bottom',
+                            'multiple' => false,
+                            'required' => false
+                        ],
+                    ]
+                ]
+            ),]),
+
+        ], [
+            'workplace' => 'array',
+        ])
+    ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             new Tabs('about us', [
                 'main section'    => [
@@ -348,46 +336,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Text::make('text', 'achievements_section_text'),
                         ])
                 ],
-                ' workplace' => [
-                    Text::make('text', 'main_section_text'),
-                    FlexibleContent::make('workplace', 'workplaceabout')
-                        ->addLayout(
-                            [
-                                'label' => 'workplace',
-                                'name' => 'workplace',
-                                'fields' => [
-                                    [
-                                        'type' => 'image',
-                                        'name' => 'image',
-                                        'label' => 'Image',
-                                        'multiple' => false,
-                                        'required' => true
-                                    ],
-                                    [
-                                        'type' => 'text',
-                                        'name' => 'image_alt_workplace_about_us',
-                                        'label' => 'image description',
-                                        'multiple' => false,
-                                        'required' => true
-                                    ],
-                                    [
-                                        'type' => 'text',
-                                        'name' => 'title',
-                                        'label' => 'title',
-                                        'multiple' => false,
-                                        'required' => true
-                                    ],
-                                    [
-                                        'type' => 'text',
-                                        'name' => 'sup_title',
-                                        'label' => 'sup_title',
-                                        'multiple' => false,
-                                        'required' => true
-                                    ],
-                                ]
-                            ]
-                        ),
-                ],
+
             ]),
         ], [
             'workplaceabout' => 'array',
@@ -400,6 +349,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('main text', 'text_main_Connectus'),
                     Text::make('sup text text', 'sup_text_main_Connectus'),
                     Text::make('phone', 'phone_Connectus'),
+                     Text::make('whatsapp', 'whatsapp_Connectus'),
                     Text::make('Email', 'email_Connectus'),
                     Text::make('Text bottome', 'text_bottom_Connectus'),
                     Text::make('linlk bottom', 'linlk_bottom_Connectus'),

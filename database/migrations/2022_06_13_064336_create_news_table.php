@@ -17,7 +17,7 @@ class CreateNewsTable extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->char('status',1)->default('1');
-            $table->char('main_type',1)->default('0');
+            $table->json('main_type')->default('0');
             $table->char('type',1)->default('1');
             $table->string('sector')->nullable();
             $table->string('title');

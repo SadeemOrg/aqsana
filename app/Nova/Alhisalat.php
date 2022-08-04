@@ -153,7 +153,8 @@ class Alhisalat extends Resource
                 return $users;
                })->singleSelect(),
 
-
+               belongsTo::make('projects', 'projects','App\Nova\ProjectAlhisalat')->hideWhenCreating()->
+               hideWhenUpdating(),
 
         ];
     }

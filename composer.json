@@ -11,6 +11,7 @@
         "php": "^7.3|^8.0",
         "acme/multiselect-field": "*",
         "acme/projecs": "*",
+        "actengage/nova-wizard": "^0.9.8",
         "ajhaupt7/image-upload-preview": "^1.0",
         "averotech/link": "*",
         "averotech/tree": "*",

@@ -22,12 +22,14 @@ class CreateProjectsTable extends Migration
 
 
             $table->boolean('is_reported')->default(0);
+            $table->char('report_status', 1)->default('1');
             $table->string('report_title')->nullable();
+            $table->longText('report_contents')->nullable();
             $table->longText('report_description')->nullable();
-            $table->longText('report_text')->nullable();
-            $table->string('report_image')->nullable();
-            $table->json('pictures')->nullable();
 
+            $table->string('report_image')->nullable();
+            $table->json('report_pictures')->nullable();
+            $table->string('report_video_link')->nullable();
 
             $table->integer('sector');
             $table->datetime('start_date');
