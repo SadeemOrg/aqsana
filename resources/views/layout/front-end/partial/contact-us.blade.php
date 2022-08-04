@@ -36,7 +36,7 @@ $text_Button = nova_get_setting('text_bottom_Connectus', 'default_value');
             <div class="flex flex-row items-center justify-start gap-x-2 mt-7">
                 <img src="{{ asset('assets/image/telephone.svg') }}" alt="telephone" class="max-w-[17px] max-h-[17px]">
                 <p itemprop="telephone" dir="ltr" class="text-[#8F9BB3] text-[16px] inter-font">
-                    <a href={{ $phone_contact }}> {{ $phone_contact }} </a>
+                    <a > {{ $phone_contact }} </a>
                 </p>
             </div>
             <div class="flex flex-row items-center justify-start gap-x-2 mt-2">
