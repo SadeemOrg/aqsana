@@ -36,7 +36,7 @@ class NewsObserver
 
             //Quality of the new webp image. 1-100.
             //Reduce this to decrease the file size.
-            $quality = 1;
+            $quality = 4;
 
             $save = str_replace("storage/", "", $newImagePath);
             //  dd( $save);
@@ -68,7 +68,7 @@ if (!empty($json_photos)) {
                 $im = imagecreatefromwebp($path);
                 $newImagePath = str_replace("webp", "webp", $path);
             }
-            $quality = 3;
+            $quality = 4;
 
                 $save = str_replace("storage", '/storage', $newImagePath);
                 // dd($save);
