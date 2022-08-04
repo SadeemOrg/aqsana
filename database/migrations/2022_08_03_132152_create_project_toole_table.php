@@ -15,6 +15,9 @@ class CreateProjectTooleTable extends Migration
     {
         Schema::create('project_toole', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('project_id');
+            $table->bigInteger('city_id');
+            $table->string('tools');
             $table->timestamps();
         });
     }
