@@ -154,8 +154,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         Text::make('sup text ', 'sup_text_Banner_2'),
                         Text::make('bottom view  text ', 'text_view_bottom_Banner_2'),
                         Text::make('bottom view link ', 'link_view_bottom_Banner_2'),
-                        Text::make('bottom seen text ', 'text_seen_bottom_Banner_2'),
-                        Text::make('bottom seen link ', 'link_seen_bottom_Banner_2'),
+                        // Text::make('bottom seen text ', 'text_seen_bottom_Banner_2'),
+                        // Text::make('bottom seen link ', 'link_seen_bottom_Banner_2'),
                     ]
                 ),
                 Tab::make(
