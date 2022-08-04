@@ -1,7 +1,7 @@
 <div itemscope class="owl-carousel dots-style1" id="main-home-slider">
     @if(is_array($Heros)==true && !empty($Heros))
     @foreach ( $Heros as $Hero )
-    <img itemprop="image" alt="Google" class="h-[150px] sm:h-[220px]  lg:h-[500px]"
+    <img itemprop="image" alt="Google" class="h-[250px] sm:h-[350px]  lg:h-[680px]"
         src="{{ URL::asset($Hero['data']['image'])}}" alt="topBanner">
     @endforeach
     @endif

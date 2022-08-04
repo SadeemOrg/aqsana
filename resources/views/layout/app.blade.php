@@ -272,6 +272,37 @@
     window.open(url,'sharer','toolbar=0,status=0,width=580,height=400');
     return false;
 };
+// first Page Donation
+
+var pageNumber = 0 ;
+var PagePrevious = 0;
+$("#firstPageDonations").click(function() {
+$(".firstPage").hide();
+pageNumber++;
+if(pageNumber==1){
+    pageNumber=1
+    $(".secondPage").css("display", "flex");
+    $(".Ctnbtn").text("تأكيد الدفع");
+}
+else if(pageNumber == 2 ){
+    $(".thirdPage").css("display","flex")
+    $(".secondPage").css("display", "none");
+    $(".Ctnbtn").css("display", "none");
+}
+});
+
+$("#PreviousPageDonations").click(function() {
+    PagePrevious ++;
+    if(PagePrevious==1){
+        pageNumber=0;
+        PagePrevious=0;
+    $(".firstPage").show();
+    $(".secondPage").css("display", "none");
+    $(".Ctnbtn").text("متابعة");
+    }
+
+
+});
 
     </script>
     <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
@@ -405,6 +436,7 @@ function RouteToLink(trimmedString) {
 //    console.log(name);
 //    console.log(user_id);
 }
+
 </script>
 
 </html>
