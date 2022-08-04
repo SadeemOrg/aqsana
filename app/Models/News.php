@@ -14,7 +14,7 @@ class News extends Model
     ];
     protected $fillable = [
 
-        'id','title','description','image','type','pictures','created_by','update_by','created_at'
+        'id','title','description','image','type','pictures','created_by','update_by','created_at','status'
 
     ];
 

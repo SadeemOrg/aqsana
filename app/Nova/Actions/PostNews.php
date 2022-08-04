@@ -9,11 +9,9 @@ use Illuminate\Support\Collection;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
 
-
-class ReadMessage extends Action
+class PostNews extends Action
 {
     use InteractsWithQueue, Queueable;
-
     /**
      * Perform the action on the given models.
      *
@@ -25,13 +23,12 @@ class ReadMessage extends Action
     {
         foreach ($models as $model) {
             $model->update([
-            'is_read'=>'1',
+            'status'=>'1',
 
         ]);
     }
 
     return action::message('the done');
-
     }
 
     /**

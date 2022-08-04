@@ -8,7 +8,9 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Select;
 use App\Nova\Actions\ReadMessage;
-
+use AwesomeNova\Cards\FilterCard;
+use App\Nova\Filters\StateFilter;
+use App\Nova\Filters\ReadMessageFilters;
 use Pdmfc\NovaFields\ActionButton;
 
 class FormMassage extends Resource
@@ -53,16 +55,16 @@ public static function group()
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('name','name'),
-            Text::make('phone','phone'),
-            Text::make('message','message'),
+            Text::make('name','name')->readonly(),
+            Text::make('phone','phone')->readonly(),
+            Text::make('message','message')->readonly(),
             Select::make("is read","is_read")
             ->options([
                 '0' => 'not read',
                 '1' => 'read',
 
 
-                ])->displayUsingLabels(),
+                ])->displayUsingLabels()->readonly(),
 
                 ActionButton::make('ReadMessage')
                 ->action((new ReadMessage) ->confirmText('Are you sure you want to read  this Massage?')
@@ -83,7 +85,10 @@ public static function group()
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new FilterCard(new ReadMessageFilters()),
+
+        ];
     }
 
     /**
@@ -94,7 +99,11 @@ public static function group()
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+
+            new ReadMessageFilters()
+
+        ];
     }
 
     /**
