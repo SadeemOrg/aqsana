@@ -38,7 +38,6 @@ class CreateProjectsTable extends Migration
             $table->datetime('start_date');
             $table->datetime('end_date');
             $table->double('Budjet')->default(0.0);
-            $table->integer('admin_id');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('update_by')->nullable();
 
