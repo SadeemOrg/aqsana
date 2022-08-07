@@ -22,6 +22,9 @@ class CreateProjectsTable extends Migration
 
 
             $table->boolean('is_reported')->default(0);
+            $table->boolean('is_bus')->default(0);
+            $table->boolean('is_volunteer')->default(0);
+            $table->boolean('is_donation')->default(0);
             $table->char('report_status', 1)->default('1');
             $table->string('report_title')->nullable();
             $table->longText('report_contents')->nullable();
