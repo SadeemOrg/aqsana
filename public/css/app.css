@@ -453,6 +453,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[84px\]{
   top: 84px;
 }
+.top-\[72\%\]{
+  top: 72%;
+}
+.right-6{
+  right: 1.5rem;
+}
 .z-30{
   z-index: 30;
 }
@@ -677,23 +683,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-\[432px\]{
   height: 432px;
 }
+.h-5{
+  height: 1.25rem;
+}
 .h-\[450px\]{
   height: 450px;
 }
 .h-\[247px\]{
   height: 247px;
 }
-.h-\[150px\]{
-  height: 150px;
-}
-.h-\[254px\]{
-  height: 254px;
-}
 .h-8{
   height: 2rem;
-}
-.h-5{
-  height: 1.25rem;
 }
 .max-h-\[510px\]{
   max-height: 510px;
@@ -776,6 +776,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-\[370px\]{
   width: 370px;
 }
+.w-5{
+  width: 1.25rem;
+}
 .w-\[250px\]{
   width: 250px;
 }
@@ -790,9 +793,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-8{
   width: 2rem;
-}
-.w-5{
-  width: 1.25rem;
 }
 .min-w-fit{
   min-width: -webkit-fit-content;
@@ -1652,6 +1652,9 @@ body{
   }
 }
 @media (min-width: 640px){
+  .sm\:top-\[70\%\]{
+    top: 70%;
+  }
   .sm\:mt-0{
     margin-top: 0px;
   }
@@ -1682,9 +1685,6 @@ body{
   .sm\:h-\[300px\]{
     height: 300px;
   }
-  .sm\:h-\[220px\]{
-    height: 220px;
-  }
   .sm\:w-\[168px\]{
     width: 168px;
   }
@@ -1694,8 +1694,8 @@ body{
   .sm\:max-w-\[250px\]{
     max-width: 250px;
   }
-  .sm\:max-w-\[700px\]{
-    max-width: 700px;
+  .sm\:max-w-\[563px\]{
+    max-width: 563px;
   }
   .sm\:flex-1{
     flex: 1 1 0%;
@@ -1774,14 +1774,14 @@ body{
   .md\:h-\[320px\]{
     height: 320px;
   }
+  .md\:h-\[375px\]{
+    height: 375px;
+  }
   .md\:max-h-72{
     max-height: 18rem;
   }
   .md\:max-h-\[320px\]{
     max-height: 320px;
-  }
-  .md\:max-h-\[390px\]{
-    max-height: 390px;
   }
   .md\:w-full{
     width: 100%;
@@ -1856,6 +1856,9 @@ body{
   }
 }
 @media (min-width: 1024px){
+  .lg\:top-\[68\%\]{
+    top: 68%;
+  }
   .lg\:mt-0{
     margin-top: 0px;
   }
@@ -2005,6 +2008,9 @@ body{
   }
   .xl\:right-\[0\]{
     right: 0;
+  }
+  .xl\:top-\[72\%\]{
+    top: 72%;
   }
   .xl\:mt-8{
     margin-top: 2rem;
