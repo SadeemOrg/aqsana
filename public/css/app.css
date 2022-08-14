@@ -734,6 +734,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-14{
   max-height: 3.5rem;
 }
+.max-h-\[329px\]{
+  max-height: 329px;
+}
 .min-h-\[294px\]{
   min-height: 294px;
 }
@@ -870,6 +873,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-w-\[17px\]{
   max-width: 17px;
+}
+.max-w-\[563px\]{
+  max-width: 563px;
+}
+.max-w-\[531px\]{
+  max-width: 531px;
 }
 .flex-1{
   flex: 1 1 0%;
@@ -1700,6 +1709,9 @@ body{
   .sm\:w-\[168px\]{
     width: 168px;
   }
+  .sm\:w-\[563px\]{
+    width: 563px;
+  }
   .sm\:max-w-\[210px\]{
     max-width: 210px;
   }
@@ -1708,6 +1720,9 @@ body{
   }
   .sm\:max-w-\[563px\]{
     max-width: 563px;
+  }
+  .sm\:max-w-\[563\]{
+    max-width: 563;
   }
   .sm\:flex-1{
     flex: 1 1 0%;
