@@ -459,6 +459,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-6{
   right: 1.5rem;
 }
+.top-\[75\%\]{
+  top: 75%;
+}
 .z-30{
   z-index: 30;
 }
@@ -724,6 +727,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-h-\[200px\]{
   max-height: 200px;
+}
+.max-h-5{
+  max-height: 1.25rem;
+}
+.max-h-14{
+  max-height: 3.5rem;
 }
 .min-h-\[294px\]{
   min-height: 294px;
@@ -1652,6 +1661,9 @@ body{
   }
 }
 @media (min-width: 640px){
+  .sm\:absolute{
+    position: absolute;
+  }
   .sm\:top-\[70\%\]{
     top: 70%;
   }
@@ -1858,6 +1870,9 @@ body{
 @media (min-width: 1024px){
   .lg\:top-\[68\%\]{
     top: 68%;
+  }
+  .lg\:top-\[72\%\]{
+    top: 72%;
   }
   .lg\:mt-0{
     margin-top: 0px;
