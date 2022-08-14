@@ -25,14 +25,13 @@
         @endphp
         <div class="p-3 rounded-[5px] common-shadow mb-6 xl:mb-0 hover:cursor-pointer relative"
             onclick="location.href='{{ route('getnewDetail', ['title'=>$route_title,'id' => $lastnew->id]) }}'">
-            <div class=" md:h-[375px] sm:max-w-[563px] bg-[#E4FFE585] rounded-[5px] py-5 px-4">
+            <div class="relative md:h-[375px] sm:max-w-[563px] bg-[#E4FFE585] rounded-[5px] py-5 px-4">
                 <img itemprop="image" alt="Google" src="{{ asset($img) }}" alt="people_on_Mousq"
                     class="Iman w-full h-full  object-fill rounded-[5px]">
-                <div class="writing sm:block absolute hidden  lg:top-[68%] xl:top-[72%] sm:top-[70%] top-[72%]   right-6 left-6 ">
-                    <p itemprop="title" class="text-white bg-[#349A37] text-right font-bold text-sm sm:text-lg pl-2 mx-4 rounded-md px-1 ">
-                        {{Illuminate\Support\Str::limit($lastnew->title,46) }}
-                        <br/>
-                        <span itemprop="description" class="text-white"> {{Illuminate\Support\Str::limit($lastnew->description,45) }}</span>
+                <div class="writing sm:block absolute hidden top-[75%]  right-6 left-6 max-h-14 overflow-hidden  ">
+                    <p itemprop="title" class="text-white bg-[#349A37] text-right font-bold text-sm sm:text-lg rounded-md">
+                        {{Illuminate\Support\Str::limit($lastnew->title,50) }}
+                        <span itemprop="description" class="text-white"> {{Illuminate\Support\Str::limit($lastnew->description,49) }}</span>
                     </p>
                 </div>
                 <!-- hidden div Bar -->
