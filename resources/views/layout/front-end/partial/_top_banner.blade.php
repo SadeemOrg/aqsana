@@ -30,7 +30,7 @@
                     class="Iman w-full h-full  object-fill rounded-[5px]">
                 <div class="writing sm:block absolute hidden top-[75%]  right-6 left-6 max-h-14 overflow-hidden  ">
                     <p itemprop="title" class="text-white bg-[#349A37] text-right font-bold text-sm sm:text-lg rounded-md">
-                        {{Illuminate\Support\Str::limit($lastnew->title,50) }}
+                        {{Illuminate\Support\Str::limit($lastnew->title,45) }}
                         <br/>
                         <span itemprop="description" class="text-white"> {{Illuminate\Support\Str::limit($lastnew->description,49) }}</span>
                     </p>
