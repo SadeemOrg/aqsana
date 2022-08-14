@@ -1,3 +1,8 @@
+<style>
+    .Iman {
+        background: linear-gradient(0.92deg, rgba(0, 0, 0, 0.3) 4.13%, rgba(0, 0, 0, 0) 96.18%);
+    }
+</style>
 <div itemscope class="owl-carousel dots-style1" id="main-home-slider">
     @if(is_array($Heros)==true && !empty($Heros))
     @foreach ( $Heros as $Hero )
@@ -18,16 +23,22 @@
         $id = $lastnew->id;
         $route_title = str_replace(" ", "-", $lastnew->title);
         @endphp
-        <div class="p-3 rounded-[5px] common-shadow mb-6 xl:mb-0 hover:cursor-pointer"
+        <div class="p-3 rounded-[5px] common-shadow mb-6 xl:mb-0 hover:cursor-pointer relative"
             onclick="location.href='{{ route('getnewDetail', ['title'=>$route_title,'id' => $lastnew->id]) }}'">
-            <div class=" md:max-h-[390px] sm:max-w-[700px] bg-[#E4FFE585] rounded-[5px] py-5 px-4">
+            <div class=" md:h-[375px] sm:max-w-[563px] bg-[#E4FFE585] rounded-[5px] py-5 px-4">
                 <img itemprop="image" alt="Google" src="{{ asset($img) }}" alt="people_on_Mousq"
-                    class="w-full h-[254px] object-fill rounded-[5px]">
-                <div class="pr-6">
-                    <p itemprop="title" class="text-[#349A37] pt-4 text-right font-bold text-lg pl-2 ">
+                    class="Iman w-full h-full  object-fill rounded-[5px]">
+                <div class="writing sm:block absolute hidden  lg:top-[68%] xl:top-[72%] sm:top-[70%] top-[72%]   right-6 left-6 ">
+                    <p itemprop="title" class="text-white bg-[#349A37] text-right font-bold text-sm sm:text-lg pl-2 mx-4 rounded-md px-1 ">
+                        {{Illuminate\Support\Str::limit($lastnew->title,50) }}
+                        <span itemprop="description" class="text-white"> {{Illuminate\Support\Str::limit($lastnew->description,49) }}</span>
+                    </p>
+                </div>
+                <!-- hidden div Bar -->
+                <div class="writing relative sm:hidden  mt-4 pr-6 ">
+                    <p itemprop="title" class="text-[#349A37] pt-4 text-right font-bold text-sm pl-2 ">
                         {{Illuminate\Support\Str::limit($lastnew->title,55) }}
-                        <span itemprop="description" class="text-black"> {{
-                            Illuminate\Support\Str::limit($lastnew->description,55) }}</span>
+                        <span itemprop="description" class="text-black"> {{Illuminate\Support\Str::limit($lastnew->description,45) }}</span>
                     </p>
                 </div>
             </div>
