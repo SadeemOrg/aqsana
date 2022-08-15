@@ -3,60 +3,43 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\Trix;
-use Laravel\Nova\Fields\Image;
-use Laravel\Nova\Fields\File;
-use Acme\MultiselectField\Multiselect;
-use App\Models\User;
-use App\Models\Income;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\DateTime;
-use Laravel\Nova\Fields\HasMany;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
-
-class Alhisalat extends Resource
+class address extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static function label()
-    {
-        return __('Alhisalat');
-    }
+    public static $model = \App\Models\address::class;
 
-    public static function group()
-    {
-        return __('project');
-    }
-
-
-
-    public static $model = \App\Models\Alhisalat::class;
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
 
+    public static function label()
+    {
+        return __('address');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }
     /**
      * The columns that should be searched.
      *
      * @var array
      */
     public static $search = [
-        'id',
+        'id',"name_address"
     ];
 
     /**
@@ -65,51 +48,24 @@ class Alhisalat extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public static function indexQuery(NovaRequest $request, $query)
-    {
-        $user = Auth::user();
-        $id = Auth::id();
-        if($user->type() == 'admin')
-        {
-            return $query;
-        }
-        // elseif($user->type() == 'regular_area'){
-        // $areas = DB::table('areas')->where('admin_id', $id)
-        // ->join('cities', 'cities.area_id', '=', 'areas.id')
-        // ->join('alhisalats', 'alhisalats.city_id', '=', 'cities.id')
-        // ->select('alhisalats.name')->get();
-        // $stack = array();
-        // foreach ( $areas as $key => $value) {
-        //     array_push($stack, $value->name);
-        // }
-        // return $query->whereIn('name', $stack);
-        // }
-     }
-
-
-
     public function fields(Request $request)
     {
         return [
-
-
-
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Name","name"),
-            BelongsTo::make('City','City'),
-            BelongsTo::make('address','address'),
-            Number::make("number alhisala","number_alhisala"),
-
-            Multiselect::make("Status","status")->options([
+            Text::make("Name","name_address"),
+            Text::make("Name","description"),
+            Text::make("Name","phone_number_address"),
+            // Text::make("Name","current_location"),
+            GoogleMaps::make('current_location', 'current_location')
+            ->zoom(8) ,
+            Select::make("Status","status")->options([
                 '1' => 'placed on the site',
                 '2' => 'received',
                 '3' => 'Amount completed',
                 '4' => 'sent done',
-              ])->singleSelect(),
+              ]),
               BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
               BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-
-
         ];
     }
 
@@ -164,12 +120,6 @@ class Alhisalat extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-
-            (new Actions\ApprovalRejectProjec)->canSee(function ($request) {
-                $user = Auth::user();
-              return  ($user->type() == 'admin' || $user->type() == 'regular_area');
-            }),
-        ];
+        return [];
     }
 }

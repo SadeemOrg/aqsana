@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class project extends Model
 {
@@ -15,7 +16,7 @@ class project extends Model
          'project_type', 'Project_Status', 'start_date', 'end_date',
         'Budjet', 'admin_id', 'approval', 'reason_of_reject'
         ,'Financial_Type','is_has_volunteer','is_has_Donations','areas','cities','approval_Status',
-        'created_by','update_by'
+        'update_by','created_by'
 
 
     ];
@@ -39,10 +40,7 @@ class project extends Model
     {
         return $this->hasOne(Bus::class);
     }
-    public function Alhisalat()
-    {
-        return $this->hasOne(Alhisalat::class);
-    }
+
     public function ProjectType()
     {
         return $this->belongsTo(ProjectType::class,'project_type','code');
@@ -56,6 +54,25 @@ class project extends Model
     public function Transaction()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function Area()
+    {
+        return $this->belongsToMany(Area::class,'project_area')->withTimestamps();
+    }
+    public function City()
+    {
+        return $this->belongsToMany(City::class,'project_city')->withTimestamps();
+    }
+    public function Bus()
+    {
+        $id = Auth::id();
+        $user = Auth::user();
+
+        $citye =   City::where('admin_id', $id)
+        ->select('id')->first();
+        if ($user->type() == 'regular_city')     return $this->belongsToMany(Bus::class,'project_bus')->where('project_bus.city_id', '=', $citye['id']);
+        return $this->belongsToMany(Bus::class,'project_bus');
     }
 
     public function create()

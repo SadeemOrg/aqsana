@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function City()
     {
-        return $this->belongsTo('App\Models\City');
+        return $this->hasOne('App\Models\City','admin_id');
     }
 
     public function Role()

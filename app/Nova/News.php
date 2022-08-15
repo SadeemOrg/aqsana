@@ -89,9 +89,9 @@ class News extends Resource
             })->text(__('post'))->showLoadingAnimation()
             ->loadingColor('#fff') ->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
             Boolean::make(__('is posted'),'status'),
-            Text::make("Title", 'title'),
-            Textarea::make('description', 'description'),
-            Select::make('sector', 'sector')
+            Text::make(__('TITLE'), 'title'),
+            Textarea::make(__('description'), 'description'),
+            Select::make(__('SECTOR'), 'sector')
                 ->options(function () {
                     $sectors = nova_get_setting('workplace', 'default_value');
                     $user_type_admin_array =  array();
@@ -101,12 +101,13 @@ class News extends Resource
                     return  $user_type_admin_array;
                 }),
 
-                Select::make("have multi category", "mult", function () {
+                Select::make(__('have multi category'), "mult", function () {
 
                     $total=  json_decode($this->main_type);
                     // dd(gettype( $total));
-                    if( gettype( $total) == "string" ) return "2";
-                    else return "1";
+                    // if( gettype( $total) == "string" ) return "2";
+                    // else return "1";
+                    return "1";
                     $coutotal =  count( $total);
                     // if( $coutotal >1) return "1";
                     // else return "2";
@@ -114,23 +115,38 @@ class News extends Resource
                     // return ($this->main_type );
                 })
                 ->options([
-                    '1' => 'yes',
-                    '2' => 'no',
+                    '1' =>__('yes'),
+                    '2' => __('no'),
 
                 ])->displayUsingLabels()
                 // ->withMeta(['ignoreOnSaving'])
                 ->fillUsing(function(NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    /*
-                        $request->input('unique_key_for_model') // Value of the field
-                        $model->unique_key_for_model // DOES NOT exists, so no errors happens
-                    */
-                    // or just return null;
+                // dd($attribute);
                     return null;
-                })->hideFromIndex()->hideFromDetail(),
+                }),
 
 
+//   Select::make(__('have dwdwmulti wdwdw'), "ccc")
+//   ->options([
+//     '1' =>__('yes'),
+//     '2' => __('no'),
+
+// ])->displayUsingLabels()
+// ->fillUsing(function(NovaRequest $request, $model, $attribute, $requestAttribute) {
+//     // DB::table('project_toole')->insert([
+//     //     'project_id' => '3',
+//     //     'city_id' => '3',
+
+//     //     'tools' =>  $request->ccc,
+
+//     // ]);
+
+//     // dd($requestAttribute);
+
+//         return null;
+//     }),
             NovaDependencyContainer::make([
-                Select::make("main Type", "main_type", function () {
+                Select::make(__('main Type'), "main_type", function () {
 
                  $tt=  str_replace('"', "", $this->main_type);
                  return $tt;
@@ -153,7 +169,7 @@ class News extends Resource
                     ])->displayUsingLabels(),
 
                 NovaDependencyContainer::make([
-                    Select::make(" type", "type")
+                    Select::make(__('type'), "type")
                         ->options([
                             '1' => 'News',
                             '2' => 'Blogs',
@@ -161,7 +177,7 @@ class News extends Resource
                         ])->displayUsingLabels(),
                 ])->dependsOn('main_type', '1'),
                 NovaDependencyContainer::make([
-                    Select::make(" type", "type")
+                    Select::make(__('type'), "type")
                         ->options([
                             '1' => 'News',
                             '2' => 'Blogs',
@@ -169,7 +185,7 @@ class News extends Resource
                         ])->displayUsingLabels(),
                 ])->dependsOn('main_type', '2'),
                 NovaDependencyContainer::make([
-                    Select::make(" type", "type")
+                    Select::make(__('type'), "type")
                         ->options([
                             '1' => 'News',
                             '2' => 'almas alsamel',
@@ -178,7 +194,7 @@ class News extends Resource
             ])->dependsOn('mult', "2"),
 
             NovaDependencyContainer::make([
-                 Multiselect::make("main Type", "main_type")
+                 Multiselect::make(__('main Type'), "main_type")
             ->options([
                 '1' => 'News',
                 '2' => 'alqudus walmasjid alaqsaa',
@@ -197,7 +213,7 @@ class News extends Resource
             // ]),
 
             // CKEditor::make('Contents', 'contents')->hidefromindex(),
-            Tiptap::make('Contents', 'contents')
+            Tiptap::make(__('Contents'), 'contents')
                 ->buttons([
                     'heading',
                     '|',
@@ -231,14 +247,14 @@ class News extends Resource
                 ])
                 ->headingLevels([1, 2, 3, 4, 5, 6]),
 
-            Image::make('Image', 'image')->disk('public')->prunable(),
-            ArrayImages::make('Pictures', 'pictures')
+            Image::make(__('IMAGE'), 'image')->disk('public')->prunable(),
+            ArrayImages::make(__('PICTURES'), 'pictures')
                 ->disk('public'),
 
-            Text::make("video link", 'video_link'),
+            Text::make(__('VIDEO LINK'), 'video_link'),
 
             // Date::make('date', 'new_date'),
-            Date::make('date', 'new_date')->pickerDisplayFormat('d.m.Y'),
+            Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y'),
 
 
 
@@ -257,6 +273,7 @@ class News extends Resource
         // }
     public static function beforeSave(Request $request, $model)
     {
+        // if($request->ccc)  dd($request->ccc);
         // $user = Auth::user();
 
         // $model->update([

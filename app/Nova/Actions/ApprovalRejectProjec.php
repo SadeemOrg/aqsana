@@ -2,6 +2,7 @@
 
 namespace App\Nova\Actions;
 
+use App\Models\City;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -12,6 +13,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Select;
 
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ApprovalRejectProjec extends Action
 {
@@ -26,14 +29,29 @@ class ApprovalRejectProjec extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        foreach ($models as $model) {
-                 $model->update([
-                 'approval'=>$fields->approval,
-                  'reason_of_reject'=>$fields->reason_of_reject
-             ]);
-            }
+        // foreach ($models as $model) {
+        //          $model->update([
+        //          'approval'=>$fields->approval,
+        //           'reason_of_reject'=>$fields->reason_of_reject
+        //      ]);
+        //     }
 
-            return action::message('the done');
+        //     return action::message('the done');
+        $id = Auth::id();
+        $citye =   City::where('admin_id', $id)
+            ->select('id')->first();
+        foreach ($models as $model) {
+        // //   dd(  $model->id);
+        //     $model->update([
+        //     'status'=>'1',
+
+        // ]);
+
+        DB::table('accept_project')->updateOrInsert(
+            [ 'project_id' => $model->id, 'city_id' =>  $citye['id']],
+            [ 'accepted' => $fields->approval,  'reject_reason' => $fields->reason_of_reject,]
+        );
+    }
     }
 
     /**
@@ -44,7 +62,9 @@ class ApprovalRejectProjec extends Action
     public function fields()
     {
         return [
-            // Text::make('approval ', 'approval'),
+
+
+
             Select::make('approval ', 'approval')->options([
                 1 => 'approval',
                 2=> 'reject',
@@ -57,6 +77,7 @@ class ApprovalRejectProjec extends Action
 
 
                 ])->dependsOn('approval', '2'),
+
 
 
 

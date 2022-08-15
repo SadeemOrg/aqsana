@@ -74,6 +74,7 @@ class ProjectAlhisalat extends Resource
     {
         return __('Project');
     }
+    public static $displayInNavigation = false;
     public static $search = [
         'id',
     ];
