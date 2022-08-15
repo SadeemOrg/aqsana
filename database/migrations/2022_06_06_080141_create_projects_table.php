@@ -35,7 +35,7 @@ class CreateProjectsTable extends Migration
             $table->date('report_date');
             $table->string('sector');
             $table->datetime('start_date');
-            $table->datetime('end_date');
+            $table->datetime('end_date')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('update_by')->nullable();
 
