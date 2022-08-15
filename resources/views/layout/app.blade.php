@@ -1,9 +1,3 @@
-@php
-
-$id = Auth::id();
- $Projects = \App\Models\Project::where('is_donation', '1')->get();
-//  dd( $Area[0]->is_donation);
-@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
