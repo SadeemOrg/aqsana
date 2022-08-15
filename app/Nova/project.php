@@ -94,7 +94,7 @@ class Project extends Resource
     {
         $user = Auth::user();
         $id = Auth::id();
-        if ($user->type() == 'admin') {
+        if ($user->type() == 'admin'||$user->type() == 'website_admin' ) {
             return $query;
         } elseif ($user->type() == 'regular_area') {
 
@@ -143,10 +143,9 @@ class Project extends Resource
                 DateTime::make('projec end', 'end_date'),
 
 
-                Boolean::make('is_has_Donations', 'is_bus'),
+                Boolean::make('is_bus', 'is_bus'),
                 Boolean::make('is_has_volunteer', 'is_volunteer'),
                 Boolean::make('is_has_Donations', 'is_donation'),
-
 
                 Select::make('is_reported Status ', 'is_reported')->options([
                     '1' => 'yes',
@@ -196,7 +195,7 @@ class Project extends Resource
                     ArrayImages::make('Pictures', 'report_pictures')
                         ->disk('public'),
                     Text::make("video link", 'report_video_link'),
-
+                    Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y'),
 
                 ])->dependsOn('is_reported', '1'),
 

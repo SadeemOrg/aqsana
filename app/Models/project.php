@@ -32,6 +32,7 @@ class project extends Model
         'pictures' => 'array',
        ' cities'=> 'array',
         'areas'=> 'array',
+        'report_date' => 'date',
 
     ];
 

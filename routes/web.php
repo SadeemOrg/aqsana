@@ -29,6 +29,7 @@ Route::get('/categor/{title}/{id}/', [HomeController::class, 'getnewDetail'])->n
 
 Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch');
 
+Route::get('/donation', [HomeController::class, 'donation'])->name('donation');
 
 Route::get('/sector/{sector}', [HomeController::class, 'sector'])->name('sector');
 
