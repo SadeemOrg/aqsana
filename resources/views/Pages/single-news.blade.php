@@ -16,7 +16,7 @@ $image = 'storage/'.$news_detail->image;
         width: 13px;
         height: 97.5%;
         background: #349A37;
-        right: 10;
+        right: 10px;
         /* display:inline-block; */
         margin: 0 -32px;
     }
