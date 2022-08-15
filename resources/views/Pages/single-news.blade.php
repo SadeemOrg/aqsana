@@ -5,15 +5,23 @@ $news_detail = $new;
 $image = 'storage/'.$news_detail->image;
 @endphp
 <style>
-    .Card_shadow {
+    /* .Card_shadow {
         box-shadow: 0px 0px 1px 0px #0000000A;
         box-shadow: 0px 2px 6px 0px #0000000A;
-        box-shadow: 0px 16px 24px 0px #0000000F;
+        box-shadow: 0px 16px 12px 0px #0000000F;
+    } */
+    .leftline1 {
+        /* content:"\A"; */
+        width: 10px;
+        height: 97.5%;
+        background: #349A37;
+        right: 30px;
+        /* display:inline-block; */
+        margin: 0 -32px;
     }
-
     .leftline {
         /* content:"\A"; */
-        width: 13px;
+        width: 10px;
         height: 97.5%;
         background: #349A37;
         right: 10px;
@@ -54,7 +62,7 @@ $image = 'storage/'.$news_detail->image;
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
         <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full">
-            <div class="absolute leftline"></div>
+            <div class="absolute leftline1"></div>
             <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
                 <img src="{{ asset($image) }}" {{-- src="{{ asset('assets/image/Alquds_First.png') }}" --}}
                     alt="people_on_Mousq" class="w-full max-h-[510px]">
