@@ -199,12 +199,7 @@ class HomeController extends Controller
             ->orWhere('sector', 'like',  "%{$search}%")
             ->paginate(8);
         return view('Pages.our-news', compact('news', 'mainType', 'type'));
-        // foreach ($News as $key => $value) {
-        //     echo  $value->title;
-        //     echo '<br>';
-        // }
-        // dd ($News);
-        // return dd($News);
+
     }
     public function donation()
     {
@@ -216,5 +211,21 @@ class HomeController extends Controller
 
             // dd($Projects);
         return view('projects-for-donations', compact('Projects' ));
+    }
+    public function getdonationDetail($id)
+    {
+
+        $projects = DB::table('projects')->where('id', $id)->first();
+
+        $goalsjson = $projects->pictures;
+
+        $pictures = json_decode(json_decode($goalsjson, true), true);
+
+
+
+
+
+
+        return view('project-donation-details', compact('projects', 'pictures'));
     }
 }
