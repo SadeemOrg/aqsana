@@ -2,7 +2,13 @@
     "not read":"غير مقروء",
     "not post":"غير منشور",
     "address":"عنوان",
+    "is_bus":"هل يحتاج باص",
+    "is_has_volunteer":"هل يحتاج متطوع",
+    "is_has_Donations":"هل يوجد تبرعات",
+    "is_reported":"نشر كخبر",
+
     "read":"مقروء",
+    "QawafilAlaqsa":"قوافل الاقصى",
     "Upload Image":"رفع صورة",
     "project":"مشاريع",
     "all":"الكل",

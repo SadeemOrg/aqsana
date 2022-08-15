@@ -95,10 +95,12 @@ class News extends Resource
                 ->options(function () {
                     $sectors = nova_get_setting('workplace', 'default_value');
                     $user_type_admin_array =  array();
+                        if($sectors != "default_value" ){
                     foreach ($sectors as $sector) {
                         $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
                     }
                     return  $user_type_admin_array;
+                }
                 }),
 
                 Select::make(__('have multi category'), "mult", function () {

@@ -105,7 +105,7 @@ class Alhisalat extends Resource
                 '2' => 'received',
                 '3' => 'Amount completed',
                 '4' => 'sent done',
-              ])->singleSelect(),
+              ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
               BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
               BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
