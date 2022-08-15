@@ -17,7 +17,6 @@ class CreateBusesTable extends Migration
             $table->id();
             $table->string('name_driver');
             $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('city_id');
             $table->string('bus_number');
             $table->integer('number_of_seats');

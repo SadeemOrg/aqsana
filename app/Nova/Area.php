@@ -70,6 +70,7 @@ class Area extends Resource
                 ->select('areas.name')->get();
             $stack = array();
             foreach ($areas as $key => $value) {
+
                 array_push($stack, $value->name);
             }
             return $query->whereIn('name', $stack);
@@ -89,9 +90,10 @@ class Area extends Resource
                 $user_type_admin_array =  array();
 
                 foreach($users as $user) {
-                    // if ($user->Area == null  ) {
+
+                    if ($user->Area == null || $this->admin_id== $user['id'] ) {
                     $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
-                // }
+                }
                 }
 
                 return $user_type_admin_array;

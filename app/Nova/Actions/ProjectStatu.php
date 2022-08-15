@@ -2,10 +2,13 @@
 
 namespace App\Nova\Actions;
 
+use App\Models\City;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Fields\Select;
@@ -23,12 +26,17 @@ class ProjectStatu extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
+        $id = Auth::id();
+        $citye =   City::where('admin_id', $id)
+            ->select('id')->first();
         foreach ($models as $model) {
-            $model->update([
-            'Project_Status'=>$fields->Project_Status,
 
-        ]);
-       }
+
+        DB::table('project_status')->updateOrInsert(
+            [ 'project_id' => $model->id, 'city_id' =>  $citye['id']],
+            [ 'status' => $fields->Project_Status  ]
+        );
+    }
 
        return action::message('the done');
     }

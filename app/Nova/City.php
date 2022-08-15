@@ -103,10 +103,10 @@ class City extends Resource
                         foreach ($users as $user) {
 
 
-
+                            if ($user->City == null || $this->admin_id== $user['id'] ){
                             $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
                         }
-
+                    }
                         return $user_type_admin_array;
                     })->hideFromIndex()->hideFromDetail(),
                 BelongsTo::make('admin city', 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),

@@ -22,13 +22,14 @@ use App\Http\Controllers\NotificationTest;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::get('/about-us', [HomeController::class, 'aboutus'])->name('aboutus');
+Route::get('/من-نحن', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/conctus', [HomeController::class, 'conctus'])->name('conctus');
 Route::get('/category/{maintype}/{type}', [HomeController::class, 'news'])->name('news');
 Route::get('/categor/{title}/{id}/', [HomeController::class, 'getnewDetail'])->name('getnewDetail');
 
 Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch');
 
+Route::get('/donation', [HomeController::class, 'donation'])->name('donation');
 
 Route::get('/sector/{sector}', [HomeController::class, 'sector'])->name('sector');
 

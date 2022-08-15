@@ -51,14 +51,14 @@ use Pdmfc\NovaFields\ActionButton;
 
 use Fourstacks\NovaRepeatableFields\Repeater;
 
-class Project extends Resource
+class QawafilAlaqsa extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\project::class;
+    public static $model = \App\Models\QawafilAlaqsa::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -72,17 +72,17 @@ class Project extends Resource
      *
      * @var array
      */
+    public static $search = [
+        'id',
+    ];
     public static function label()
     {
-        return __('project');
+        return __('QawafilAlaqsa');
     }
     public static function group()
     {
         return __('project');
     }
-    public static $search = [
-        'id',
-    ];
 
     /**
      * Get the fields displayed by the resource.
@@ -130,8 +130,8 @@ class Project extends Resource
                             $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
                         }
                         return  $user_type_admin_array;
-     }
-     }),
+                    }
+                    }),
                 BelongsToManyField::make('Area', 'Area')
                     ->options(Area::all())
                     ->optionsLabel('name')->canSee(function ($request) {
@@ -145,11 +145,11 @@ class Project extends Resource
                 DateTime::make('projec end', 'end_date'),
 
 
-                Boolean::make(__('is_bus'), 'is_bus'),
-                Boolean::make(__('is_has_volunteer'), 'is_volunteer'),
-                Boolean::make(__('is_has_Donations'), 'is_donation'),
+                Boolean::make('is_bus', 'is_bus'),
+                Boolean::make('is_has_volunteer', 'is_volunteer'),
+                Boolean::make('is_has_Donations', 'is_donation'),
 
-                Select::make(__('is_reported'), 'is_reported')->options([
+                Select::make('is_reported Status ', 'is_reported')->options([
                     '1' => 'yes',
                     '0' => 'no',
                 ])->displayUsingLabels(),
@@ -621,12 +621,6 @@ class Project extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-
-            new ApprovalRejectProjec,
-            new ProjectStatu
-
-
-        ];
+        return [];
     }
 }

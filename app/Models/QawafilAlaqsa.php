@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class project extends Model
+class QawafilAlaqsa extends Model
 {
     use HasFactory;
-    protected $table = 'projects';
     protected $fillable = [
         'id', 'project_name', 'project_describe', 'purpose',
         'is_reported','report_status','report_title','report_description','report_contents','report_image','report_pictures','report_video_link',

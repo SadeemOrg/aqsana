@@ -89,8 +89,8 @@ class Bus extends Resource
                 hideWhenUpdating(),
                 BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
                 hideWhenUpdating(),
-                belongsTo::make('projects', 'projects','App\Nova\ProjectQawafilAlaqsa')->hideWhenCreating()->
-                hideWhenUpdating(),
+                // belongsTo::make('projects', 'projects','App\Nova\ProjectQawafilAlaqsa')->hideWhenCreating()->
+                // hideWhenUpdating(),
                 // belongsToMany::make('projects', 'projects', 'App\Nova\project'),
 
             ];

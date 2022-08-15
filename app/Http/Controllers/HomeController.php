@@ -80,11 +80,11 @@ class HomeController extends Controller
         $Type = newsType::where('name', $type)
             ->where('main_type', $main_type->main_type)
             ->select('type')->first();
-// dd($Type->type);
+        // dd($Type->type);
 
         $news = DB::table('news')->where([
-            ['main_type', 'like' , '%' . $main_type->main_type . '%'],
-            ['type', '=', $Type->type ],
+            ['main_type', 'like', '%' . $main_type->main_type . '%'],
+            ['type', '=', $Type->type],
         ])->paginate(8);
 
 
@@ -109,45 +109,43 @@ class HomeController extends Controller
 
         $pictures = json_decode(json_decode($goalsjson, true), true);
 
-        $total=  json_decode(json_decode($new->main_type, true), true);
+        $total =  json_decode(json_decode($new->main_type, true), true);
 
-        if( gettype( $total) == "string" )
-        {
-            $tt=  str_replace('"', "", $total);
+        if (gettype($total) == "string") {
+            $tt =  str_replace('"', "", $total);
 
             $mainType = DB::table('news_types')->where([
-                ['main_type', 'like' ,  $tt ],
+                ['main_type', 'like',  $tt],
                 ['type', '=', '0'],
-                        ])->first();
-                        $mainType=  $mainType->name;
-                //  dd(   $mainType);
-        }
-        else $mainType="اخبار";
+            ])->first();
+            $mainType =  $mainType->name;
+            //  dd(   $mainType);
+        } else $mainType = "اخبار";
         // $coutotal =  count( $total);
 
-//         $mainType = DB::table('news_types')->where([
-//             ['main_type', '=', $new->main_type],
-//             ['type', '=', '0'],
-//         ])->first();
+        //         $mainType = DB::table('news_types')->where([
+        //             ['main_type', '=', $new->main_type],
+        //             ['type', '=', '0'],
+        //         ])->first();
 
 
-// dd( $new->main_type);
+        // dd( $new->main_type);
 
         return view('Pages.single-news', compact('new', 'pictures', 'Articles', 'mainType'));
     }
 
 
 
-    public function sector ($sector)
+    public function sector($sector)
     {
         // dd($sector);mainType
-        $mainType= "قطاع";
-        $type=$sector;
-             $news = News::query()->where('sector', $sector  )
+        $mainType = "قطاع";
+        $type = $sector;
+        $news = News::query()->where('sector', $sector)
 
             ->paginate(8);
 
-            return view('Pages.our-news', compact('news', 'mainType', 'type'));
+        return view('Pages.our-news', compact('news', 'mainType', 'type'));
         // foreach ($News as $key => $value) {
         //     echo  $value->title;
         //     echo '<br>';
@@ -184,8 +182,8 @@ class HomeController extends Controller
     public function pagesearch(Request $request)
     {
         $search = $request->get("search");
-        $type= $request->get("search");
-        $mainType="بحث";
+        $type = $request->get("search");
+        $mainType = "بحث";
         $main_type = newsType::where('name', 'like',  '%' . $search . '%')
             ->select('main_type')->get();
 
@@ -200,12 +198,23 @@ class HomeController extends Controller
             ->orWhere('title', 'like',  "%{$search}%")
             ->orWhere('sector', 'like',  "%{$search}%")
             ->paginate(8);
-            return view('Pages.our-news', compact('news', 'mainType', 'type'));
+        return view('Pages.our-news', compact('news', 'mainType', 'type'));
         // foreach ($News as $key => $value) {
         //     echo  $value->title;
         //     echo '<br>';
         // }
         // dd ($News);
         // return dd($News);
+    }
+    public function donation()
+    {
+           $Projects = DB::table('projects')->where([
+            ['is_donation', '=', '1'],
+            ['is_reported', '=', '1'],])
+                ->get();
+
+
+            // dd($Projects);
+        return view('projects-for-donations', compact('Projects' ));
     }
 }

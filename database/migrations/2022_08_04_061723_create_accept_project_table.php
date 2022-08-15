@@ -19,6 +19,7 @@ class CreateAcceptProjectTable extends Migration
             $table->bigInteger('city_id');
             $table->bigInteger('area_id');
             $table->char('accepted');
+            $table->string('reject_reason')->nullable();
             $table->timestamps();
         });
     }
