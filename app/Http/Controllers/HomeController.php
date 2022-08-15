@@ -217,7 +217,7 @@ class HomeController extends Controller
 
         $projects = DB::table('projects')->where('id', $id)->first();
 
-        $goalsjson = $projects->pictures;
+        $goalsjson = $projects->report_pictures;
 
         $pictures = json_decode(json_decode($goalsjson, true), true);
 
