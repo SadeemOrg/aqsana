@@ -39,7 +39,7 @@
                                         <span class="relative inline-flex items-center justify-center w-9 h-9 text-center  text-white bg-[#101426] rounded-full text-xl">{{ $page }}</span>
                                     </span>
                                 @else
-                                    <a href="{{ $url }}" class="relative inline-flex items-center justify-center text-[#101426] w-9 h-9 mt-2  hover:text-green-300  transition duration-150 text-2xl" aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
+                                    <a href="{{ $url }}" target="_self" class="relative inline-flex items-center justify-center text-[#101426] w-9 h-9 mt-2  hover:text-green-300  transition duration-150 text-2xl" aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
                                         {{ $page }}
                                     </a>
                                 @endif

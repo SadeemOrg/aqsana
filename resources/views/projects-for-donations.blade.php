@@ -13,7 +13,7 @@
         width: 13px;
         height: 97.5%;
         background: #349A37;
-        right: 10;
+        right: 10px;
         /* display:inline-block; */
         margin: 0 -32px;
     }
@@ -66,7 +66,7 @@
                     <div class="flex flex-wrap justify-center sm:justify-between items-center mt-5">
                         <div class="flex text-center">
                             <a target="_self" class="bg-[#349A37] hover:bg-[#101426] duration-200 py-3 ml-2 text-white  rounded-[50px] w-[134px] lg:w-[110px] xl:w-[134px] " href="/project-donations">تبرع الان</a>
-                            <a class="bg-transparent hover:text-white hover:bg-[#349A37] duration-200 py-3 text-[#349A37] rounded-[50px] w-[134px] lg:w-[110px] xl:w-[134px]  border border-[#349A37]" href="/donation-details/1">رؤية التفاصيل</a>
+                            <a class="bg-transparent hover:text-white hover:bg-[#349A37] duration-200 py-3 text-[#349A37] rounded-[50px] w-[134px] lg:w-[110px] xl:w-[134px]  border border-[#349A37]" href="/donation-details/1" target="_self">رؤية التفاصيل</a>
                         </div>
                         <div class="flex flex-row items-center justify-start mt-3 sm:mt-0 font-noto_Regular gap-x-2 mx-5 md:mx-0 ">
                             <p class="text-[#101426] text-sm">شارك عبر</p>
