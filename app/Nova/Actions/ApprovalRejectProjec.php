@@ -15,6 +15,7 @@ use Laravel\Nova\Fields\Select;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Nova;
 
 class ApprovalRejectProjec extends Action
 {
@@ -29,29 +30,19 @@ class ApprovalRejectProjec extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        // foreach ($models as $model) {
-        //          $model->update([
-        //          'approval'=>$fields->approval,
-        //           'reason_of_reject'=>$fields->reason_of_reject
-        //      ]);
-        //     }
 
-        //     return action::message('the done');
-        $id = Auth::id();
-        $citye =   City::where('admin_id', $id)
-            ->select('id')->first();
-        foreach ($models as $model) {
-        // //   dd(  $model->id);
-        //     $model->update([
-        //     'status'=>'1',
-
-        // ]);
-
-        DB::table('accept_project')->updateOrInsert(
-            [ 'project_id' => $model->id, 'city_id' =>  $citye['id']],
-            [ 'accepted' => $fields->approval,  'reject_reason' => $fields->reason_of_reject,]
-        );
-    }
+                $id = Auth::id();
+                $citye =   City::where('admin_id', $id)
+                ->first();
+                foreach ($models as $model) {
+                    DB::table('accept_project')->updateOrInsert(
+                        [ 'project_id' => $model->id, 'area_id' =>  $citye['area_id'],'city_id' =>  $citye['id']],
+                        [ 'accepted' => $fields->approval,  'reject_reason' => $fields->reason_of_reject,]
+                    );
+                }
+                if($fields->approval=="1") return Action::redirect('/Admin/resources/projects/'. $models[0]->id .'/edit');
+                // Nova::initialPath('/resources/users');
+                // return action::message('the done');
     }
 
     /**

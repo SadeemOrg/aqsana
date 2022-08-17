@@ -72,7 +72,7 @@ class HomeController extends Controller
 
     public function news($maintype, $type)
     {
-
+// dd($maintype, $type);
         $main_type = newsType::where('name', $maintype)
             ->where('type', '0')
             ->select('main_type')->first();

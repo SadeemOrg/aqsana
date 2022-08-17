@@ -24,7 +24,7 @@ class address extends Resource
      *
      * @var string
      */
-
+    public static $title = 'name_address';
     public static function label()
     {
         return __('address');
@@ -53,16 +53,14 @@ class address extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make("Name","name_address"),
-            Text::make("Name","description"),
-            Text::make("Name","phone_number_address"),
-            // Text::make("Name","current_location"),
+            Text::make("description","description"),
+            Text::make("phone number","phone_number_address"),
+
             GoogleMaps::make('current_location', 'current_location')
             ->zoom(8) ,
             Select::make("Status","status")->options([
-                '1' => 'placed on the site',
-                '2' => 'received',
-                '3' => 'Amount completed',
-                '4' => 'sent done',
+                '1' => 'active',
+                '2' => 'not active',
               ]),
               BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
               BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),

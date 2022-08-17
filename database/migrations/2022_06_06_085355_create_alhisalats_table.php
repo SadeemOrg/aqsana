@@ -16,10 +16,9 @@ class CreateAlhisalatsTable extends Migration
         Schema::create('alhisalats', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('city_id');
             $table->bigInteger('address_id');
             $table->string('number_alhisala');
-            $table->char('status','1');
+            $table->char('status','1')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('update_by')->nullable();
             $table->timestamps();

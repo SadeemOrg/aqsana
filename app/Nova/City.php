@@ -62,20 +62,18 @@ class City extends Resource
             return $query;
         } elseif ($user->type() == 'regular_area') {
 
-            $area = \App\Models\area:: with('City')->where('admin_id',$id)->first();
-            $areas= $area->toArray();
-            $cites=$areas['city'];
+            $area = \App\Models\area::with('City')->where('admin_id', $id)->first();
+            $areas = $area->toArray();
+            $cites = $areas['city'];
 
             $stack = array();
             foreach ($cites as $key => $value) {
                 array_push($stack, $value['name']);
             }
             return $query->whereIn('name', $stack);
-        }
-        else
-        {
+        } else {
 
-            $cites = \App\Models\City::where('admin_id',$id)->get();
+            $cites = \App\Models\City::where('admin_id', $id)->get();
 
 
             $stack = array();
@@ -103,17 +101,17 @@ class City extends Resource
                         foreach ($users as $user) {
 
 
-                            if ($user->City == null || $this->admin_id== $user['id'] ){
-                            $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
+                            if ($user->City == null || $this->admin_id == $user['id']) {
+                                $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
+                            }
                         }
-                    }
                         return $user_type_admin_array;
                     })->hideFromIndex()->hideFromDetail(),
                 BelongsTo::make('admin city', 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
                 BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                hasMany::make('User','User'),
+                hasMany::make('User', 'User'),
             ];
         }
         return [
@@ -129,9 +127,6 @@ class City extends Resource
                     $user_type_admin_array =  array();
 
                     foreach ($users as $user) {
-
-
-
                         $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
                     }
 
@@ -143,31 +138,27 @@ class City extends Resource
             // hasMany::make('User','User'),
         ];
     }
-    public static function afterCreate(Request $request, $model)
-    {
-        $user = Auth::user();
-        $id = Auth::id();
-        if ($user->type() == 'admin') {
-            $model->update([
-                'created_by' => $id,
-            ]);
-        } else {
-            $user = DB::table('areas')->where('admin_id', $id)->select('id')->first();
-            $model->update([
-                'created_by' => $id,
-                'area_id' => $user->id,
-            ]);
-        }
-    }
+
 
     public static function beforeUpdate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->update([
-            'update_by' => $id,
-
-        ]);
+        $model->update_by = $id;
     }
+    public static function beforeSave(Request $request, $model)
+    {
+        $user = Auth::user();
+        $id = Auth::id();
+        if ($user->type() == 'admin') {
+            $model->created_by = $id;
+        } else {
+            $user = DB::table('areas')->where('admin_id', $id)->select('id')->first();
+            $model->update_by = $id;
+            $model->area_id = $user->id;
+        }
+    }
+
+
 
     /**
      * Get the cards available for the request.

@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Fields\Image;
+
 class PaymentVoucher extends Resource
 {
     /**
@@ -97,6 +98,20 @@ class PaymentVoucher extends Resource
             Date::make('date', 'transaction_date'),
 
         ];
+    }
+    public static function beforeSave(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->created_by=$id;
+    }
+
+
+    public static function beforeUpdate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->update_by=$id;
+
+
     }
 
 

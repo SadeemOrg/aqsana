@@ -21,9 +21,9 @@ class CreateBusesTable extends Migration
             $table->string('bus_number');
             $table->integer('number_of_seats');
             $table->double('seat_price');
-            $table->json('travel_from')->nullable();
-            $table->json('travel_to')->nullable();
-            $table->json('current_location')->nullable();
+            $table->unsignedBigInteger('travel_from')->nullable();
+            $table->unsignedBigInteger('travel_to')->nullable();
+            $table->unsignedBigInteger('current_location')->nullable();
             $table->string('phone_number_driver');
             $table->char('status', '1');
             $table->unsignedBigInteger('created_by')->nullable();
