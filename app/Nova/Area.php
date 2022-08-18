@@ -20,6 +20,7 @@ class Area extends Resource
      *
      * @var string
      */
+
     public static function label()
     {
         return __('Area');
@@ -115,23 +116,15 @@ class Area extends Resource
         $id = Auth::id();
         $model->created_by=$id;
     }
-    // public static function afterCreate(Request $request, $model)
-    // {
-    //     $id = Auth::id();
-    //     $model->update([
-    //         'created_by'=>$id,
 
-    //     ]);
-    // }
 
-    // public static function beforeUpdate(Request $request, $model)
-    // {
-    //     $id = Auth::id();
-    //     $model->update([
-    //         'update_by'=>$id,
+    public static function beforeUpdate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->update_by=$id;
 
-    //     ]);
-    // }
+
+    }
 
 
     /**

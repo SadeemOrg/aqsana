@@ -17,14 +17,14 @@ class Currency extends Model
         'updated_at',
     ];
 
-    // public function create()
-    // {
-    //     return $this->belongsTo('App\Models\User','created_by');
-    // }
-    // public function Updateby()
-    // {
-    //     return $this->belongsTo('App\Models\User','update_by');
-    // }
+    public function create()
+    {
+        return $this->belongsTo('App\Models\User','created_by');
+    }
+    public function Updateby()
+    {
+        return $this->belongsTo('App\Models\User','update_by');
+    }
 
 
 }

@@ -96,7 +96,6 @@ class Alhisalat extends Resource
 
             ID::make(__('ID'), 'id')->sortable(),
             Text::make("Name","name"),
-            BelongsTo::make('City','City'),
             BelongsTo::make('address','address'),
             Number::make("number alhisala","number_alhisala"),
 

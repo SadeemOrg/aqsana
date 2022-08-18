@@ -32,7 +32,7 @@ class Bus extends Resource
 
 
     public static $model = \App\Models\Bus::class;
-    public static $displayInNavigation = false;
+    // public static $displayInNavigation = false;
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
@@ -63,17 +63,27 @@ class Bus extends Resource
         // 'Created_By','Update_By'
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Name","name"),
+            // Text::make("Name","name"),
             BelongsTo::make('company', 'company', \App\Nova\busescompany::class),
             Text::make("Bus Number","bus_number"),
             Number::make("Number person on bus","number_person_on_bus")->step(1.0),
-            GoogleMaps::make('travel from', 'travel_from')
-            ->zoom(8),
-            GoogleMaps::make('travel to', 'travel_to')
-            ->zoom(8) ,
-            GoogleMaps::make('current_location', 'current_location')
-            ->zoom(8) ,
-            Text::make("Name Driver","driver"),
+            // BelongsTo::make('address','address'),
+            // BelongsTo::make('address','address'),
+            BelongsTo::make('travel from', 'travelfrom', \App\Nova\address::class),
+            BelongsTo::make('travel to', 'travelto', \App\Nova\address::class),
+            BelongsTo::make('current location', 'currentlocation', \App\Nova\address::class),
+
+            // BelongsTo::make('address','travel_to'),
+
+            // BelongsTo::make('address','current_location'),
+
+            // GoogleMaps::make('travel from', 'travel_from')
+            // ->zoom(8),
+            // GoogleMaps::make('travel to', 'travel_to')
+            // ->zoom(8) ,
+            // GoogleMaps::make('current_location', 'current_location')
+            // ->zoom(8) ,
+            Text::make("Name Driver","name_driver"),
             Text::make("phone_number","phone_number"),
 
 
@@ -99,21 +109,20 @@ class Bus extends Resource
     }
 
 
-    // public static function afterCreate(Request $request, $model)
-    // {   $id = Auth::id();
-    //     $model->update([
-    //         'created_by'=>$id,
-    //         ]);
-    // }
+    public static function beforeSave(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->created_by=$id;
+    }
 
-    // public static function beforeUpdate(Request $request, $model)
-    // {
-    //     $id = Auth::id();
-    //     $model->update([
-    //         'update_by'=>$id,
 
-    //     ]);
-    // }
+    public static function beforeUpdate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->update_by=$id;
+
+
+    }
 
     /**
      * Get the cards available for the request.
