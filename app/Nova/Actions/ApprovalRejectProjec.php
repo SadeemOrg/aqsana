@@ -30,19 +30,52 @@ class ApprovalRejectProjec extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
+        $user = Auth::user();
+        $id = Auth::id();
+        $citye =   City::where('admin_id', $id)
+            ->first();
+        foreach ($models as $model) {
+            DB::table('accept_project')->updateOrInsert(
+                ['project_id' => $model->id, 'area_id' =>  $citye['area_id'], 'city_id' =>  $citye['id']],
+                ['accepted' => $fields->approval,  'reject_reason' => $fields->reason_of_reject,]
+            );
 
-                $id = Auth::id();
-                $citye =   City::where('admin_id', $id)
-                ->first();
-                foreach ($models as $model) {
-                    DB::table('accept_project')->updateOrInsert(
-                        [ 'project_id' => $model->id, 'area_id' =>  $citye['area_id'],'city_id' =>  $citye['id']],
-                        [ 'accepted' => $fields->approval,  'reject_reason' => $fields->reason_of_reject,]
-                    );
-                }
-                if($fields->approval=="1") return Action::redirect('/Admin/resources/projects/'. $models[0]->id .'/edit');
-                // Nova::initialPath('/resources/users');
-                // return action::message('the done');
+        if ($fields->approval == "1") {
+
+            if ($user->type() == 'admin' ) {
+                DB::table('project_status')->updateOrInsert(
+                    ['project_id' => $model->id, 'city_id' =>  $citye['id']],
+                    ['status' => 'admin']
+                );
+            }
+            elseif ($user->type() == 'regular_area') {
+                DB::table('project_status')->updateOrInsert(
+                    ['project_id' => $model->id, 'city_id' =>  $citye['id']],
+                    ['status' => 'regular_area']
+                );
+            }
+            else if ($user->user_role == "regular_city") {
+                // dd('dd');
+                DB::table('project_status')->updateOrInsert(
+                    ['project_id' => $model->id, 'city_id' =>  $citye['id'],'status' => 'regular_city'],
+
+                );
+            }
+            else if ( $user->type() == 'website_admin') {
+                DB::table('project_status')->updateOrInsert(
+                    ['project_id' => $model->id, 'city_id' =>  $citye['id']],
+                    ['status' => 'website_admin']
+                );
+            }
+        }
+    }    DB::table('project_status')->updateOrInsert(
+        [ 'project_id' => $model->id, 'city_id' =>  $citye['id']],
+        [ 'status' => $fields->Project_Status  ]
+    );
+        return Action::redirect('/Admin/resources/projects/' . $models[0]->id . '/edit');
+
+        // Nova::initialPath('/resources/users');
+        // return action::message('the done');
     }
 
     /**
@@ -58,16 +91,16 @@ class ApprovalRejectProjec extends Action
 
             Select::make('approval ', 'approval')->options([
                 1 => 'approval',
-                2=> 'reject',
+                2 => 'reject',
             ])->displayUsingLabels(),
 
             NovaDependencyContainer::make([
 
 
-            Text::make('reason_of_reject','reason_of_reject'),
+                Text::make('reason_of_reject', 'reason_of_reject'),
 
 
-                ])->dependsOn('approval', '2'),
+            ])->dependsOn('approval', '2'),
 
 
 
