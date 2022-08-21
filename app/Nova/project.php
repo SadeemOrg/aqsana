@@ -80,6 +80,11 @@ class Project extends Resource
     {
         return __('project');
     }
+    public static function availableForNavigation(Request $request)
+    {
+        return (!  $request->user()->type()== 'website_admin');
+    }
+
     public static $search = [
         'id',
     ];
@@ -120,6 +125,16 @@ class Project extends Resource
                 ID::make(__('ID'), 'id')->sortable(),
                 ActionButton::make(__('Action'))
                     ->action(ApprovalRejectProjec::class, $this->id)
+                    ->text(__('acsept'))
+                    ->showLoadingAnimation()
+                    ->loadingColor('#fff')->buttonColor('#21b970')
+                    ->canSee(function(){
+                        $user = Auth::user();
+
+                        if ($user->type() == 'admin' ) {
+                            return true;
+                        }
+                    })
                     ->hideWhenCreating()->hideWhenUpdating(),
                 Text::make(__("project name"), "project_name"),
                 Text::make(__("project describe"), "project_describe"),
@@ -150,11 +165,12 @@ class Project extends Resource
                 Boolean::make(__('is_bus'), 'is_bus'),
                 Boolean::make(__('is_has_volunteer'), 'is_volunteer'),
                 Boolean::make(__('is_has_Donations'), 'is_donation'),
+                Boolean::make(__('is_reported'), 'is_reported'),
 
-                Select::make(__('is_reported'), 'is_reported')->options([
-                    '1' => 'نعم',
-                    '0' => 'لا',
-                ])->displayUsingLabels(),
+                // Select::make(__('is_reported'), 'is_reported')->options([
+                //     '1' => 'نعم',
+                //     '0' => 'لا',
+                // ])->displayUsingLabels(),
 
 
                 NovaDependencyContainer::make([
@@ -201,7 +217,7 @@ class Project extends Resource
                     Text::make(__("video link"), 'report_video_link'),
                     Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y'),
 
-                ])->dependsOn('is_reported', '1'),
+                ])->dependsOn('is_reported', '10'),
 
                 BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
