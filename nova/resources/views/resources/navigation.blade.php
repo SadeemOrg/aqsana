@@ -10,14 +10,15 @@
     </h3>
 
     @foreach ($navigation as $group => $resources)
-        <details class="mr-2">
+        <details class="mr-2" >
 
 
             @if (count($groups) > 1)
 
-                <summary style="cursor: pointer; list-style: none;"  class="ml-8 mb-4 text-base text-white uppercase tracking-wide ">
+                <summary style="line-height: 2rem/* 40px */; font-weight: 700;"  class="ml-8 mb-4 text-base text-white uppercase tracking-wide ">
 
-                    {{ $group }}</summary>
+                    {{ $group }}
+                </summary>
             @endif
 
             <ul class="list-reset mb-8 mr-3">
