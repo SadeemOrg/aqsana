@@ -65,7 +65,7 @@ class Project extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'project_name';
 
     /**
      * The columns that should be searched.
@@ -170,7 +170,7 @@ class Project extends Resource
                 Boolean::make(__('is_bus'), 'is_bus'),
                 Boolean::make(__('is_has_volunteer'), 'is_volunteer'),
                 Boolean::make(__('is_has_Donations'), 'is_donation'),
-                Boolean::make(__('is_reported'), 'is_reported'),
+
 
                 // Select::make(__('is_reported'), 'is_reported')->options([
                 //     '1' => 'نعم',
@@ -496,6 +496,8 @@ class Project extends Resource
                 $id = Auth::id();
         $model->created_by = $id;
         $model->project_type='1';
+        $model->is_reported='0';
+
        }
 
     public static function afterCreate(Request $request, $model)

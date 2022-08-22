@@ -52,11 +52,7 @@ class ProjectNews extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public static function indexQuery(NovaRequest $request, $query)
-    {
-        return $query->where('is_reported', '=>', 1);
 
-    }
     public function fields(Request $request)
     {
         return [
@@ -65,9 +61,14 @@ class ProjectNews extends Resource
             ->action((new PostProjectNews) ->confirmText('Are you sure you want to read  this Massage?')
             ->confirmButtonText(__('post'))
             ->cancelButtonText(__('Dont post')), $this->id) ->readonly(function () {
-                return $this->report_status === '2';
+                return $this->report_status === '1';
             })->text(__('post'))->showLoadingAnimation()
             ->loadingColor('#fff') ->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+            Text::make("project type", "project_type",function(){
+                if ($this->project_type =="1")return "مشروع";
+                if ($this->project_type =="2")return "قوافل الاقصي";
+            })->readonly(true)
+            ,
             Text::make("project name", "project_name"),
 
                 Text::make("Title", 'report_title'),
@@ -118,6 +119,7 @@ class ProjectNews extends Resource
 
         ];
     }
+
 
     /**
      * Get the cards available for the request.
