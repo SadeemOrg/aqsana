@@ -320,4 +320,7 @@ svg path, svg circle {transition: .2s;}
 .inter-font {
   font-family: 'Inter', sans-serif;
 }
+.avero-name:hover {color: #CC9933; transition: .2s;}
+.scale-hover {transition: .4s;}
+.scalabel-img-box:hover .scale-hover {transform: scale(1.1);}
 /*** End my css framework ***/
