@@ -215,9 +215,9 @@ class HomeController extends Controller
     public function getdonationDetail($id)
     {
 
-        $projects = DB::table('projects')->where('id', $id)->first();
+        $project = DB::table('projects')->where('id', $id)->first();
 
-        $goalsjson = $projects->report_pictures;
+        $goalsjson = $project->report_pictures;
 
         $pictures = json_decode(json_decode($goalsjson, true), true);
 
@@ -226,6 +226,6 @@ class HomeController extends Controller
 
 
 
-        return view('project-donation-details', compact('projects', 'pictures'));
+        return view('project-donation-details', compact('project', 'pictures'));
     }
 }

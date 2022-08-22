@@ -122,7 +122,10 @@
 
             <p class="text-16px">
                 Copyright
-                <?php echo date("Y"); ?> Name By Averotech
+                <?php echo date("Y"); ?> Name By                
+                <a target="_blank" href="https://averotech.com/" class="avero-name mt-3 pb-0 text-[#CC9933] hover:text-[#CC9933]">                          
+                    Averotech
+                </a>                
             </p>
         </div>
     </div>
