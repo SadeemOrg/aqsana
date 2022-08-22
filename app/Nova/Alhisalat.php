@@ -100,10 +100,10 @@ class Alhisalat extends Resource
             Number::make("number alhisala","number_alhisala"),
 
             Multiselect::make("Status","status")->options([
-                '1' => 'placed on the site',
-                '2' => 'received',
-                '3' => 'Amount completed',
-                '4' => 'sent done',
+                '1' => 'تم انشاء الحصالة',
+                '2' => 'نم جمع الحصالة',
+                '3' => 'مكتملة',
+
               ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
               BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
               BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -116,6 +116,8 @@ class Alhisalat extends Resource
     {
         $id = Auth::id();
       $model->created_by=$id;
+      $model->status='1';
+
     }
     public static function beforeUpdate(Request $request, $model)
     {

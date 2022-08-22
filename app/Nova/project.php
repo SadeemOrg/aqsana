@@ -82,7 +82,11 @@ class Project extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        return (!  $request->user()->type()== 'website_admin');
+        if (  $request->user()->type()== 'website_admin')
+        {
+            return false;
+        }
+       else return true;
     }
 
     public static $search = [
@@ -100,7 +104,8 @@ class Project extends Resource
         $user = Auth::user();
         $id = Auth::id();
         if ($user->type() == 'admin' ) {
-            return $query;
+
+            return $query->where('project_type', '1');
         } elseif ($user->type() == 'regular_area') {
 
             $Area = \App\Models\Area::where('admin_id', $id)->first();
@@ -116,7 +121,7 @@ class Project extends Resource
         foreach ($projects as $key => $value) {
             array_push($stack, $value->project_id);
         }
-        return $query->whereIn('id', $stack);
+        return $query->whereIn('id', $stack)->where('project_type', '1');
     }
     public function fields(Request $request)
     {
@@ -490,7 +495,8 @@ class Project extends Resource
     {
                 $id = Auth::id();
         $model->created_by = $id;
-    }
+        $model->project_type='1';
+       }
 
     public static function afterCreate(Request $request, $model)
     {
