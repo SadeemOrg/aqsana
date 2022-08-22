@@ -38,7 +38,7 @@ class QawafilAlaqsa extends Model
 
     public function buses()
     {
-        return $this->hasOne(Bus::class);
+        return $this->belongsToMany(Bus::class,'qawafil_alaqsas_bus','id');
     }
 
     public function ProjectType()
