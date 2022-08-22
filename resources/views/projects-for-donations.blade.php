@@ -1,6 +1,4 @@
-{{-- @php
-dd($Projects[0]);
-@endphp --}}
+
 @extends('layout.app')
 @section('content')
 <style>
