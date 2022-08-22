@@ -1,3 +1,6 @@
+@php
+    $img = 'storage/'.$project->report_image;
+@endphp
 @extends('layout.app')
 @section('content')
 <style>
@@ -19,6 +22,7 @@
 </style>
 
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10 px-2">
+    <!--headers -->
     <div class="flex flex-row">
         <ul class="list-reset breadcrumbs flex flex-row font-FlatBold ">
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#101426]">
@@ -30,18 +34,18 @@
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px]  text-[#349A37]">
-                مشروع الاضاحي في مدينة القدس
+                {{ $project->project_name }}
             </li>
         </ul>
     </div>
 </div>
-
+<!--Reports Body -->
 <div class="bg-[#F2FFF285] py-16 pb-20 mt-10">
     <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
         <div class="flex justify-between items-center">
             <div class="relative ">
-                <p class="font-FlatBold text-xl sm:text-3xl text-center mt-8 lg:mt-0 xl:text-right">
-                    مشروع الاضاحي في مدينة القدس
+                <p class="font-FlatBold text-xl sm:text-3xl max-w-6xl text-center mt-8 lg:mt-0 xl:text-right">
+                {{ $project->project_name }}
                 </p>
                 <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
             </div>
@@ -52,30 +56,38 @@
         <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full" >
             <div class="absolute leftline"></div>
             <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
-                <img src="{{ asset('assets/image/Alquds_First.png') }}" alt="people_on_Mousq"
+                <img src="{{ asset($img) }}"
+                alt="people_on_Mousq"
                     class="w-full max-h-[510px]">
                 <p class="text-[#349A37] text-[22px] pt-4 text-right px-4">
-                    أكثر من 10 آلاف مشارك بمعسكر “القدس أولًا 13” الذي نظمته الحركة الإسلامية وجمعية الأقصى
-
+                    {{ $project->project_name }}
                 </p>
-                <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">أبريل 20, 2022</p>
+                @if(!empty($news_detail->new_date))
+                <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">
+                    {{-- أبريل 20, 2022 --}}
+                    {{ $project->report_date }}
+                </p>
+                @endif
                 <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">
                     أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية الأقصى,
                     مشاريعنا
                 </p>
                 <p class="text-base text-[#101426] font-noto_Regular px-4 pt-2">
-                    نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف والمقدسات،
+                    {{ $project->report_contents }}
+                    {{-- نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف والمقدسات،
                     للسنة
                     الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
                     لاستقبال
-                    المصلين في شهر رمضان المبارك، ولدعم...
+                    المصلين في شهر رمضان المبارك، ولدعم... --}}
                 </p>
-                <div class="flex flex-row items-center justify-start px-4 pt-4 pb-10 font-noto_Regular gap-x-2">
+                {{-- <div class="flex flex-row items-center justify-start px-4 pt-4 pb-10 font-noto_Regular gap-x-2">
                     <p class="text-[#101426] text-sm">شارك عبر</p>
                     <ul class="share-us flex flex-row items-center justify-start">
                         <li class="px-1">
-                            <a class="facebook" href="#">
-                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <a class="facebook"
+                                href="javascript:openWindow('http://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}&title=')">
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                     <g clip-path="url(#clip0_38_2337)">
                                         <path
@@ -92,8 +104,10 @@
                             </a>
                         </li>
                         <li class="px-1">
-                            <a class="twitter" href="#">
-                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <a class="twitter"
+                                href="javascript:openWindow('http://twitter.com/intent/tweet?status=+{{ Request::url() }}')">
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                     <g clip-path="url(#clip0_38_2342)">
                                         <path
@@ -110,8 +124,10 @@
                             </a>
                         </li>
                         <li class="px-1">
-                            <a class="pinterest" href="#">
-                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <a class="pinterest"
+                                href="https://pinterest.com/pin/create/button/?url={{ Request::url() }}&media={{ $img }}&description={{ $project->project_name  }}">
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                     <path
                                         d="M12.7948 6C9.16884 6 7.24048 8.32362 7.24048 10.8573C7.24048 12.0323 7.89705 13.4976 8.94805 13.9623C9.10765 14.0343 9.19447 14.0037 9.23003 13.8557C9.26145 13.7432 9.39955 13.2016 9.46653 12.9461C9.4872 12.8642 9.47645 12.7931 9.4103 12.7162C9.06134 12.3126 8.78432 11.5775 8.78432 10.8879C8.78432 9.12077 10.1892 7.40492 12.5799 7.40492C14.6471 7.40492 16.0934 8.74783 16.0934 10.6687C16.0934 12.8394 14.9448 14.3411 13.4522 14.3411C12.6262 14.3411 12.0109 13.6928 12.2061 12.8907C12.4418 11.9356 12.904 10.9086 12.904 10.2197C12.904 9.60203 12.555 9.091 11.8422 9.091C11.0013 9.091 10.3191 9.9237 10.3191 11.0417C10.3191 11.752 10.5705 12.2316 10.5705 12.2316C10.5705 12.2316 9.73858 15.5922 9.58395 16.2198C9.32264 17.2824 9.6195 19.0032 9.64514 19.1512C9.66085 19.2331 9.75264 19.2587 9.80391 19.1917C9.88577 19.0842 10.8913 17.6495 11.1733 16.6126C11.2758 16.2347 11.6967 14.7024 11.6967 14.7024C11.9737 15.2027 12.7733 15.6219 13.6251 15.6219C16.1587 15.6219 17.9895 13.3951 17.9895 10.6315C17.9804 7.98211 15.713 6 12.7948 6Z"
@@ -120,8 +136,9 @@
                             </a>
                         </li>
                         <li class="px-1">
-                            <a class="linkedin" href="#">
-                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <a class="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={url}">
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                     <path
                                         d="M17.907 17.907V14.0306C17.907 12.1255 17.4969 10.6702 15.2743 10.6702C14.2026 10.6702 13.4882 11.2523 13.1972 11.8079H13.1707V10.8422H11.0671V17.907H13.2633V14.401C13.2633 13.4749 13.4353 12.5885 14.5731 12.5885C15.6976 12.5885 15.7109 13.6337 15.7109 14.4539V17.8937H17.907V17.907Z"
@@ -134,9 +151,19 @@
                             </a>
                         </li>
                     </ul>
-                </div>
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                </div> --}}
+                <div class="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3">
+                    @if(!empty($pictures))
+                    @foreach ($pictures as $picture )
                     <div class="col-span-1">
+                        <img class="mx-auto w-full object-cover lg:h-[265px]"
+                        {{-- src="/assets/image/image11.png"  --}}
+                        src="{{ asset($picture['url']) }}"
+                        alt="related image">
+                    </div>
+                    @endforeach
+                    @endif
+                    {{-- <div class="col-span-1">
                         <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
                     </div>
                     <div class="col-span-1">
@@ -150,15 +177,12 @@
                     </div>
                     <div class="col-span-1">
                         <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
-                    </div>
-                    <div class="col-span-1">
-                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
-                    </div>
+                    </div> --}}
                 </div>
 
             </div>
         </div>
-        @include('layout.front-end.partial.ProjectDetailsSlider')
+        {{-- @include('layout.front-end.partial.ProjectDetailsSlider') --}}
     </div>
 </div>
 
