@@ -17,20 +17,8 @@ class CreateQawafilAlaqsasTable extends Migration
             $table->id();
             $table->string('project_name');
             $table->string('project_describe');
-
-            $table->boolean('is_bus')->default(0);
             $table->boolean('is_volunteer')->default(0);
             $table->boolean('is_donation')->default(0);
-
-            $table->boolean('is_reported')->default(0);
-            $table->char('report_status', 1)->default('1');
-            $table->string('report_title')->nullable();
-            $table->longText('report_contents')->nullable();
-            $table->longText('report_description')->nullable();
-            $table->string('report_image')->nullable();
-            $table->json('report_pictures')->nullable();
-            $table->string('report_video_link')->nullable();
-            $table->date('report_date');
             $table->string('sector');
             $table->datetime('start_date');
             $table->datetime('end_date')->nullable();

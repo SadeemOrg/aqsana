@@ -23,7 +23,7 @@ class HomeController extends Controller
 
         $lastnews = DB::table('news')->orderBy('created_at', 'desc')->take(2)->get();
 
-        $news = DB::table('news')->orderBy('created_at', 'desc')->get();
+        $news = DB::table('news')->orderBy('new_date', 'desc')->get();
 
         $ProjectsNews = nova_get_setting('Projects_News', 'default_value');
         // $ProjectsNews = json_decode($ProjectsNewsjson);
@@ -72,7 +72,7 @@ class HomeController extends Controller
 
     public function news($maintype, $type)
     {
-
+// dd($maintype, $type);
         $main_type = newsType::where('name', $maintype)
             ->where('type', '0')
             ->select('main_type')->first();
@@ -85,7 +85,7 @@ class HomeController extends Controller
         $news = DB::table('news')->where([
             ['main_type', 'like', '%' . $main_type->main_type . '%'],
             ['type', '=', $Type->type],
-        ])->paginate(8);
+        ])->orderBy('new_date', 'desc')->paginate(8);
 
 
 
@@ -103,7 +103,7 @@ class HomeController extends Controller
         $Articles = DB::table('news')->where([
             ['type', '=', $new->type],
             ['main_type', '=', $new->main_type],
-        ])->orderBy('created_at', 'desc')->take(6)->get();
+        ])->orderBy('new_date', 'desc')->take(6)->get();
 
         $goalsjson = $new->pictures;
 

@@ -30,7 +30,7 @@ class projectPolicy
      */
     public function view(User $user, project $project)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city'||$user->type() == 'website_admin'  ) ;
+          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city'  ||$user->type() == 'website_admin') ;
     }
 
     /**
@@ -41,7 +41,7 @@ class projectPolicy
      */
     public function create(User $user)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city' ||$user->type() == 'website_admin' ) ;
+          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city'  ) ;
     }
 
     /**
@@ -65,7 +65,7 @@ class projectPolicy
      */
     public function delete(User $user, project $project)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city' ||$user->type() == 'website_admin' ) ;
+          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city'  ) ;
     }
 
     /**
@@ -89,6 +89,6 @@ class projectPolicy
      */
     public function forceDelete(User $user, project $project)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city' ||$user->type() == 'website_admin' ) ;
+          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city'  ) ;
     }
 }

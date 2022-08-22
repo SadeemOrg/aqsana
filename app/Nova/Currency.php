@@ -66,20 +66,19 @@ class Currency extends Resource
         ];
     }
 
-    public static function afterCreate(Request $request, $model)
-    {   $id = Auth::id();
-        $model->update([
-            'created_by'=>$id,
-            ]);
+    public static function beforeSave(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->created_by=$id;
     }
+
 
     public static function beforeUpdate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->update([
-            'update_by'=>$id,
+        $model->update_by=$id;
 
-        ]);
+
     }
 
     /**

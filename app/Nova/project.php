@@ -80,6 +80,15 @@ class Project extends Resource
     {
         return __('project');
     }
+    public static function availableForNavigation(Request $request)
+    {
+        if (  $request->user()->type()== 'website_admin')
+        {
+            return false;
+        }
+       else return true;
+    }
+
     public static $search = [
         'id',
     ];
@@ -94,8 +103,9 @@ class Project extends Resource
     {
         $user = Auth::user();
         $id = Auth::id();
-        if ($user->type() == 'admin'||$user->type() == 'website_admin' ) {
-            return $query;
+        if ($user->type() == 'admin' ) {
+
+            return $query->where('project_type', '1');
         } elseif ($user->type() == 'regular_area') {
 
             $Area = \App\Models\Area::where('admin_id', $id)->first();
@@ -110,29 +120,41 @@ class Project extends Resource
         $stack = array();
         foreach ($projects as $key => $value) {
             array_push($stack, $value->project_id);
-
         }
-        return $query->whereIn('id', $stack);
+        return $query->whereIn('id', $stack)->where('project_type', '1');
     }
     public function fields(Request $request)
     {
         return [
             (new Panel(__('main'), [
                 ID::make(__('ID'), 'id')->sortable(),
-                Text::make("project name", "project_name"),
-                Text::make("project describe", "project_describe"),
+                ActionButton::make(__('Action'))
+                    ->action(ApprovalRejectProjec::class, $this->id)
+                    ->text(__('acsept'))
+                    ->showLoadingAnimation()
+                    ->loadingColor('#fff')->buttonColor('#21b970')
+                    ->canSee(function(){
+                        $user = Auth::user();
+
+                        if ($user->type() == 'admin' ) {
+                            return true;
+                        }
+                    })
+                    ->hideWhenCreating()->hideWhenUpdating(),
+                Text::make(__("project name"), "project_name"),
+                Text::make(__("project describe"), "project_describe"),
                 Select::make(__('SECTOR'), 'sector')
                     ->options(function () {
                         $sectors = nova_get_setting('workplace', 'default_value');
                         $user_type_admin_array =  array();
-                        if($sectors !="default_value" ){
-                        foreach ($sectors as $sector) {
-                            $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
+                        if ($sectors != "default_value") {
+                            foreach ($sectors as $sector) {
+                                $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
+                            }
+                            return  $user_type_admin_array;
                         }
-                        return  $user_type_admin_array;
-     }
-     }),
-                BelongsToManyField::make('Area', 'Area')
+                    }),
+                BelongsToManyField::make(__('Area'),"Area" ,'\App\Nova\Area')
                     ->options(Area::all())
                     ->optionsLabel('name')->canSee(function ($request) {
                         $user = Auth::user();
@@ -141,24 +163,25 @@ class Project extends Resource
                     }),
 
 
-                DateTime::make('projec start', 'start_date'),
-                DateTime::make('projec end', 'end_date'),
+                DateTime::make(__('projec start'), 'start_date'),
+                DateTime::make(__('projec end'), 'end_date'),
 
 
                 Boolean::make(__('is_bus'), 'is_bus'),
                 Boolean::make(__('is_has_volunteer'), 'is_volunteer'),
                 Boolean::make(__('is_has_Donations'), 'is_donation'),
+                Boolean::make(__('is_reported'), 'is_reported'),
 
-                Select::make(__('is_reported'), 'is_reported')->options([
-                    '1' => 'yes',
-                    '0' => 'no',
-                ])->displayUsingLabels(),
+                // Select::make(__('is_reported'), 'is_reported')->options([
+                //     '1' => 'نعم',
+                //     '0' => 'لا',
+                // ])->displayUsingLabels(),
 
 
                 NovaDependencyContainer::make([
-                    Text::make("Title", 'report_title'),
-                    Textarea::make('description', 'report_description'),
-                    Tiptap::make('Contents', 'report_contents')
+                    Text::make(__("Title"), 'report_title'),
+                    Textarea::make(__('description'), 'report_description'),
+                    Tiptap::make(__('Contents'), 'report_contents')
                         ->buttons([
                             'heading',
                             '|',
@@ -193,13 +216,13 @@ class Project extends Resource
                         ->headingLevels([1, 2, 3, 4, 5, 6]),
 
 
-                    Image::make('Image', 'report_image')->disk('public')->prunable(),
-                    ArrayImages::make('Pictures', 'report_pictures')
+                    Image::make(__('Image'), 'report_image')->disk('public')->prunable(),
+                    ArrayImages::make(__('Pictures'), 'report_pictures')
                         ->disk('public'),
-                    Text::make("video link", 'report_video_link'),
+                    Text::make(__("video link"), 'report_video_link'),
                     Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y'),
 
-                ])->dependsOn('is_reported', '1'),
+                ])->dependsOn('is_reported', '10'),
 
                 BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -233,9 +256,8 @@ class Project extends Resource
                         if ($user->type() == 'regular_area') return true;
                         return false;
                     }),
-                ])),
-
-            (new Panel(__('Budjet'), [
+            ])),
+            (new Panel(__('Budget'), [
 
                 Text::make("Budjet", "Budjet", function () {
 
@@ -263,7 +285,7 @@ class Project extends Resource
                     return null;
                 }),
             ])),
-            (new Panel(__('Toole'), [
+            (new Panel(__('tooles'), [
 
                 Text::make("Toole", "Toole", function () {
 
@@ -340,20 +362,21 @@ class Project extends Resource
                     }
                 })->canSee(function ($request) {
                     $user = Auth::user();
-                    if ($user->type() == 'regular_city'){
-                    $id = Auth::id();
-                    $citye =   City::where('admin_id', $id)
-                        ->select('id')->first();
+                    if ($user->type() == 'regular_city') {
+                        $id = Auth::id();
+                        $citye =   City::where('admin_id', $id)
+                            ->select('id')->first();
 
-                    $acspet = DB::table('accept_project')
-                        ->where([
-                            ['project_id', '=', $this->id],
-                            ['city_id', '=', $citye['id']],
-                        ])
-                        ->first();
-                    if ($acspet) if ($acspet->accepted == "2")   return true;
-                    return false;
-              }  })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                        $acspet = DB::table('accept_project')
+                            ->where([
+                                ['project_id', '=', $this->id],
+                                ['city_id', '=', $citye['id']],
+                            ])
+                            ->first();
+                        if ($acspet) if ($acspet->accepted == "2")   return true;
+                        return false;
+                    }
+                })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 }),
 
@@ -362,7 +385,6 @@ class Project extends Resource
 
 
             ])),
-
             (new Panel(__('status'), [
                 Text::make('approval ', 'approval', function () {
                     $id = Auth::id();
@@ -380,7 +402,6 @@ class Project extends Resource
                         // dd("1");
                         if ($acspet)  return   $acspet->status;
                         else return "__";
-
                     }
                 })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
@@ -389,7 +410,7 @@ class Project extends Resource
                     if ($user->type() == 'regular_city') return true;
                     return false;
                 })->readonly(true),
-        ])),
+            ])),
             (new Panel(__('bus'), [
 
 
@@ -407,6 +428,9 @@ class Project extends Resource
                         if ($user->type() == 'regular_city') return true;
                         return false;
                     }),
+
+
+
                 Repeater::make('newbus')
                     ->addField([
 
@@ -469,8 +493,39 @@ class Project extends Resource
     }
     public static function beforeCreate(Request $request, $model)
     {
-        $id = Auth::id();
+                $id = Auth::id();
         $model->created_by = $id;
+        $model->project_type='1';
+       }
+
+    public static function afterCreate(Request $request, $model)
+    {
+        $user = Auth::user();
+        $id = Auth::id();
+        $citye =   City::where('admin_id', $id)
+            ->first();
+        if ($user->type() == 'regular_area') {
+            $Area = \App\Models\Area::where('admin_id', $id)->first();
+            DB::table('project_area')
+                ->updateOrInsert(
+                    ['project_id' => $model->id, 'area_id' =>  $Area['id']],
+
+                );
+        }
+        if ($user->type() == 'regular_city') {
+            // dd($citye);
+            DB::table('project_area')
+            ->updateOrInsert(
+                ['project_id' => $model->id, 'area_id' =>  $citye['area_id']],
+
+            );
+            DB::table('project_city')
+                ->updateOrInsert(
+                    ['project_id' => $model->id, 'city_id' =>  $citye['id']],
+
+                );
+        }
+
     }
     public static function beforeUpdate(Request $request, $model)
     {
@@ -507,17 +562,18 @@ class Project extends Resource
             }
             // dd($stack);
             $busss = DB::table('project_bus')->where(
-                ['project_id' => $model->id, 'city_id' => $citye['id']])->get();
-                $busstack = array();
-                foreach ($busss as $key => $value) {
-                    array_push($busstack, $value->bus_id);
-                }
-                $result = array_intersect($stack, $busstack);
-        //    dd($busstack);
-                // dd( $result);
-        $deleted = DB::table('project_bus')->where(['project_id' => $model->id, 'city_id' => $citye['id']])
-        ->whereNotIn('bus_id',$result)
-        ->delete();
+                ['project_id' => $model->id, 'city_id' => $citye['id']]
+            )->get();
+            $busstack = array();
+            foreach ($busss as $key => $value) {
+                array_push($busstack, $value->bus_id);
+            }
+            $result = array_intersect($stack, $busstack);
+            //    dd($busstack);
+            // dd( $result);
+            $deleted = DB::table('project_bus')->where(['project_id' => $model->id, 'city_id' => $citye['id']])
+                ->whereNotIn('bus_id', $result)
+                ->delete();
 
             // dd(gettype($buss));
             // $bus_id=$buss[0]->id;
@@ -542,19 +598,6 @@ class Project extends Resource
 
             //     );
         }
-        // if ($request->bus) {
-
-
-        //     foreach ($request->busus as $user) {
-        //         //  dd($user);
-        //         DB::table('project_bus')
-        //             ->updateOrInsert(
-        //                 ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $user],
-
-        //             );
-        //         // dd($user);
-        //     }
-        // }
         if ($request->newbus) {
             $buss = json_decode($request->newbus);
 
@@ -578,6 +621,18 @@ class Project extends Resource
                     );
             }
         }
+        // if ($request->City) {
+
+        //     $City = json_decode($request->City);
+
+        //     foreach ($City as $key => $value) {
+        //         DB::table('project_status')
+        //         ->updateOrInsert(
+        //             ['project_id' => $model->id, 'city_id' => $City[0]->id],
+        //             ['status' => ' تحت الانشاء']
+        //         );
+        //     }
+        // }
     }
 
     /**
@@ -624,7 +679,7 @@ class Project extends Resource
         return [
 
             new ApprovalRejectProjec,
-            new ProjectStatu
+
 
 
         ];

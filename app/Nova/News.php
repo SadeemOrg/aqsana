@@ -25,6 +25,8 @@ use App\Nova\Actions\PostNews;
 use AwesomeNova\Cards\FilterCard;
 use App\Nova\Filters\StateFilter;
 use App\Nova\Filters\PostNewsFilters;
+use Illuminate\Support\Facades\Auth;
+
 class News extends Resource
 {
     /**
@@ -264,32 +266,19 @@ class News extends Resource
 
         ];
     }
-        // public static function fill(NovaRequest $request, $model)
-        // {
-        //     return static::fillFields(
-        //         $request, $model,
-        //         (new static($model))->creationFieldsWithoutReadonly($request)->reject(function ($field) use ($request) {
-        //             return in_array('ignoreOnSaving', $field->meta);
-        //         })
-        //     );
-        // }
     public static function beforeSave(Request $request, $model)
     {
-        // if($request->ccc)  dd($request->ccc);
-        // $user = Auth::user();
-
-        // $model->update([
-        //     'main_type'=>'1',
-        // ]);
+        $id = Auth::id();
+        $model->created_by=$id;
     }
- public static function beforeUpdate(Request $request, $model)
+
+
+    public static function beforeUpdate(Request $request, $model)
     {
-        return static::fillFields(
-            $request, $model,
-            (new static($model))->creationFieldsWithoutReadonly($request)->reject(function ($field) use ($request) {
-                return in_array('ignoreOnSaving', $field->meta);
-            })
-        );
+        $id = Auth::id();
+        $model->update_by=$id;
+
+
     }
     /**
      * Get the cards available for the request.

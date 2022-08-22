@@ -37,14 +37,14 @@
             @endphp
             <div class="pt-6 shaddow relative pb-[72px] overflow-hidden rounded-[16px]">
                 <div class="flow-root rounded-lg bg-[#FFFFFF] px-6 pb-8 ">
-                    <div class="-mt-6">
+                    <!-- <div class=""> -->
                         <img src="{{ asset($img) }}" alt="Brand_icon" class="w-16 h-16">
                         <h3 class="mt-8 text-lg font-FlatBold text-[#101426]">{{ $sector['data']['text_main_workplace']
                             }}</h3>
                         <p class="mt-4 text-[16px] font-noto_Regular text-[#6B7280]">
                             {{Illuminate\Support\Str::limit($sector['data']['sup_text_workplace'],200) }}
                         </p>
-                    </div>
+                    <!-- </div> -->
                 </div>
                 @php
                 $link = str_replace(" ", "-", $sector['data']['text_main_workplace']);
