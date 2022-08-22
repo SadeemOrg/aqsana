@@ -154,13 +154,13 @@ $videohome = nova_get_setting('videohome', 'default_value');
     @php
     $img = $video['data']['cover'];
     @endphp
-    <div class="p-3 item bg-white Card_shadow relative rounded-[5px] ">
+    <div class="p-3 scalabel-img-box item bg-white Card_shadow relative rounded-[5px] ">
         <div class="absolute leftline"></div>
         <div
-            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px]  py-2 px-2 ">
+            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585]  rounded-[5px]  p-3 ">
             <div class="relative">
-                <a href={{ $video['data']['link'] }} class="mediabox"><img
-                        class=" lg:block max-w-[380px] lg:h-[280px]  max-h-[280px] object-cover rounded-[5px] my-1"
+                <a href={{ $video['data']['link'] }} class="mediabox rounded-[5px] overflow-hidden block">
+                    <img class="scale-hover lg:block max-w-[380px] lg:h-[280px]  max-h-[280px] object-cover"
                         src="{{ asset($img) }}" alt="people_on_Mousq" />
                     <img src="{{ asset('assets/image/play_Svg.svg') }}"
                         class="absolute max-w-[46px] top-[48%] left-[46%]" /></a>
