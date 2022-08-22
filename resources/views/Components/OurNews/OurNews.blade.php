@@ -38,7 +38,7 @@
             <p class="font-FlatBold text-3xl text-center xl:text-right"> {{ $type }} </p>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
-        <div class="lg:grid lg:grid-cols-2 gap-x-8 gap-y-6 text-center lg:text-right">
+        <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-x-8 gap-y-6 text-center lg:text-right">
             <!--first card -->
             @if(!empty($news))
             @foreach ($news as $new )
@@ -49,20 +49,16 @@
             <div
                 class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]">
                 <div class="absolute leftline"></div>
-                <div class="max-w-[600px] bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
+                <div class="bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
                     @php
                         $title = str_replace(" ", "-", $new->title);
                     @endphp
                     <div onclick="location.href='{{ route('getnewDetail', ['title'=>$title,'id' => $new->id]) }}'">
-                        <img src="{{ asset($img) }}" alt="people_on_Mousq" class="w-full lg:w-[550px] lg:max-h-52">
+                        <img src="{{ asset($img) }}" alt="people_on_Mousq" class="lg:w-[360px] w-full lg:max-h-56 rounded-[5px]">
                         <p class="text-[#349A37] text-[16px] pt-4 text-right max-w-none pl-4">
                             {{Illuminate\Support\Str::limit($new->title,113) }}
-                            {{-- اكثر من 10 الاف مشارك بمعسكر "القدس اولا" الذي نظمته الحركة الاسلامية وجمعية الاقصى
-                            --}}
                         </p>
-
                 @if(!empty($new->new_date))
-
                         <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 pl-4">
                             {{ $new->new_date }}
                         </p>

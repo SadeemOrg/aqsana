@@ -5,11 +5,11 @@ $news_detail = $new;
 $image = 'storage/'.$news_detail->image;
 @endphp
 <style>
-    /* .Card_shadow {
+    .Card_shadow {
         box-shadow: 0px 0px 1px 0px #0000000A;
         box-shadow: 0px 2px 6px 0px #0000000A;
         box-shadow: 0px 16px 12px 0px #0000000F;
-    } */
+    }
     .leftline1 {
         /* content:"\A"; */
         width: 10px;
@@ -57,19 +57,16 @@ $image = 'storage/'.$news_detail->image;
                 @if($news_detail)
                 {{ $news_detail->title }}
                 @endif
-                {{-- أكثر من 10 آلاف مشارك بمعسكر “القدس أولًا 13” الذي نظمته الحركة الإسلامية وجمعية الأقصى --}}
             </p>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
         <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full">
             <div class="absolute leftline1"></div>
             <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
-                <img src="{{ asset($image) }}" {{-- src="{{ asset('assets/image/Alquds_First.png') }}" --}}
-                    alt="people_on_Mousq" class="w-full max-h-[510px]">
-                <p class="text-[#349A37] text-[18px] md:text-[22px] pt-4 text-right pr-4">
+                <img src="{{ asset($image) }}"
+                    alt="people_on_Mousq" class="w-full max-h-[670px] rounded-[5px]">
+                <p class="text-[#349A37] text-[18px] md:text-[22px] pt-14 text-right pr-4">
                     {{ $news_detail->title }}
-                    {{-- أكثر من 10 آلاف مشارك بمعسكر “القدس أولًا 13” الذي نظمته الحركة الإسلامية وجمعية الأقصى --}}
-
                 </p>
                 @if(!empty($news_detail->new_date))
                 <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">
@@ -82,12 +79,6 @@ $image = 'storage/'.$news_detail->image;
                 </p>
                 <p class="text-base text-[rgb(16,20,38)] font-noto_Regular px-4 pt-2 text-right">
                     {!! $news_detail->contents !!}
-                    {{-- نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف
-                    والمقدسات،
-                    للسنة
-                    الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
-                    لاستقبال
-                    المصلين في شهر رمضان المبارك، ولدعم... --}}
                 </p>
                 <div class="flex flex-row items-center justify-start px-4 pt-4 pb-10 font-noto_Regular gap-x-2">
                     <p class="text-[#101426] text-sm">شارك عبر</p>
