@@ -23,7 +23,7 @@ class PostProjectNews extends Action
     {
         foreach ($models as $model) {
             $model->update([
-            'report_status'=>'2',
+            'report_status'=>'1',
 
         ]);
     }
