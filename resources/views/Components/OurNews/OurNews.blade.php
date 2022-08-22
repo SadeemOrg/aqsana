@@ -38,23 +38,27 @@
             <p class="font-FlatBold text-3xl text-center xl:text-right"> {{ $type }} </p>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
+        @if(empty($news[0]))
+            <p class="text-[24px] text-center text-black font-FlatBold w-full pt-16 pl-4">لا يوجد اي
+                <span class="text-[#349A37]">{{ $type }} </span>
+                 للعرض</p>
+            @endif
         <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-x-8 gap-y-6 text-center lg:text-right">
             <!--first card -->
             @if(!empty($news))
             @foreach ($news as $new )
             @php
-            // dd($news);
             $img = 'storage/'.$new->image;
             @endphp
             <div
-                class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-center rounded-[5px]">
+                class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-start rounded-[5px]">
                 <div class="absolute leftline"></div>
-                <div class="bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
+                <div class="bg-[#E4FFE585] rounded-[5px] py-3 px-4 h-full">
                     @php
                         $title = str_replace(" ", "-", $new->title);
                     @endphp
                     <div onclick="location.href='{{ route('getnewDetail', ['title'=>$title,'id' => $new->id]) }}'">
-                        <img src="{{ asset($img) }}" alt="people_on_Mousq" class="lg:w-[360px] w-full lg:max-h-56 rounded-[5px]">
+                        <img src="{{ asset($img) }}" alt="people_on_Mousq" class="lg:w-[360px] w-full lg:h-56 max-h-56 rounded-[5px]">
                         <p class="text-[#349A37] text-[16px] pt-4 text-right max-w-none pl-4">
                             {{Illuminate\Support\Str::limit($new->title,113) }}
                         </p>
@@ -63,11 +67,11 @@
                             {{ $new->new_date }}
                         </p>
                        @endif
-                        <p class="text-[11px] text-[#8F9BB3] font-noto_Regular text-right pt-2 pl-4">
+                        {{-- <p class="text-[11px] text-[#8F9BB3] font-noto_Regular text-right pt-2 pl-4">
                             أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية
                             الأقصى,
                             مشاريعنا
-                        </p>
+                        </p> --}}
                         <p class="text-xs text-[#101426] font-noto_Regular pl-4 pt-2 text-right slider-paragraph">
                             {{ Illuminate\Support\Str::limit(strip_tags( $new->description),240) }}
                             @if(strip_tags(Str::length($new->description)) > 240)

@@ -459,6 +459,30 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-6{
   right: 1.5rem;
 }
+.left-\[10\%\]{
+  left: 10%;
+}
+.right-\[10\%\]{
+  right: 10%;
+}
+.right-\[15\%\]{
+  right: 15%;
+}
+.right-\[20\%\]{
+  right: 20%;
+}
+.right-\[18\%\]{
+  right: 18%;
+}
+.right-\[50\%\]{
+  right: 50%;
+}
+.right-\[46\%\]{
+  right: 46%;
+}
+.right-\[45\%\]{
+  right: 45%;
+}
 .z-30{
   z-index: 30;
 }
@@ -701,6 +725,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-\[265px\]{
   max-height: 265px;
 }
+.max-h-\[670px\]{
+  max-height: 670px;
+}
 .max-h-\[460px\]{
   max-height: 460px;
 }
@@ -712,6 +739,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-h-\[280px\]{
   max-height: 280px;
+}
+.max-h-56{
+  max-height: 14rem;
 }
 .max-h-\[17px\]{
   max-height: 17px;
@@ -727,9 +757,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-h-14{
   max-height: 3.5rem;
-}
-.max-h-\[670px\]{
-  max-height: 670px;
 }
 .min-h-\[294px\]{
   min-height: 294px;
@@ -800,9 +827,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-8{
   width: 2rem;
 }
-.w-\[360px\]{
-  width: 360px;
-}
 .min-w-fit{
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
@@ -870,9 +894,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-w-\[17px\]{
   max-width: 17px;
-}
-.max-w-full{
-  max-width: 100%;
 }
 .flex-1{
   flex: 1 1 0%;
@@ -1243,6 +1264,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pl-4{
   padding-left: 1rem;
 }
+.pt-14{
+  padding-top: 3.5rem;
+}
 .pr-4{
   padding-right: 1rem;
 }
@@ -1284,9 +1308,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pr-2{
   padding-right: 0.5rem;
-}
-.pt-14{
-  padding-top: 3.5rem;
 }
 .pr-6{
   padding-right: 1.5rem;
@@ -1916,6 +1937,9 @@ body{
   .lg\:h-\[280px\]{
     height: 280px;
   }
+  .lg\:h-56{
+    height: 14rem;
+  }
   .lg\:h-auto{
     height: auto;
   }
@@ -1931,9 +1955,6 @@ body{
   .lg\:max-h-\[100\%\]{
     max-height: 100%;
   }
-  .lg\:max-h-56{
-    max-height: 14rem;
-  }
   .lg\:min-h-\[90px\]{
     min-height: 90px;
   }
@@ -1943,14 +1964,14 @@ body{
   .lg\:w-\[550px\]{
     width: 550px;
   }
+  .lg\:w-\[360px\]{
+    width: 360px;
+  }
   .lg\:w-\[80\%\]{
     width: 80%;
   }
   .lg\:w-\[150px\]{
     width: 150px;
-  }
-  .lg\:w-\[360px\]{
-    width: 360px;
   }
   .lg\:max-w-\[170px\]{
     max-width: 170px;

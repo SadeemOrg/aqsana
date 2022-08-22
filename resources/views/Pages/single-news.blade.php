@@ -5,11 +5,6 @@ $news_detail = $new;
 $image = 'storage/'.$news_detail->image;
 @endphp
 <style>
-    .Card_shadow {
-        box-shadow: 0px 0px 1px 0px #0000000A;
-        box-shadow: 0px 2px 6px 0px #0000000A;
-        box-shadow: 0px 16px 12px 0px #0000000F;
-    }
     .leftline1 {
         /* content:"\A"; */
         width: 10px;
@@ -19,6 +14,7 @@ $image = 'storage/'.$news_detail->image;
         /* display:inline-block; */
         margin: 0 -32px;
     }
+
     .leftline {
         /* content:"\A"; */
         width: 10px;
@@ -52,6 +48,9 @@ $image = 'storage/'.$news_detail->image;
 </div>
 <div class="bg-[#F2FFF285] py-16 pb-20 lg:mt-10">
     <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
+        {{-- @php
+        dd($news_detail->video_link);
+        @endphp --}}
         <div class="relative ">
             <p class="font-FlatBold text-xl sm:text-3xl max-w-6xl text-center mt-8 lg:mt-0 xl:text-right">
                 @if($news_detail)
@@ -63,8 +62,7 @@ $image = 'storage/'.$news_detail->image;
         <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full">
             <div class="absolute leftline1"></div>
             <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
-                <img src="{{ asset($image) }}"
-                    alt="people_on_Mousq" class="w-full max-h-[670px] rounded-[5px]">
+                <img src="{{ asset($image) }}" alt="people_on_Mousq" class="w-full max-h-[670px] rounded-[5px]">
                 <p class="text-[#349A37] text-[18px] md:text-[22px] pt-14 text-right pr-4">
                     {{ $news_detail->title }}
                 </p>
@@ -152,17 +150,39 @@ $image = 'storage/'.$news_detail->image;
                         </li>
                     </ul>
                 </div>
+
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
-                    @if(!empty($pictures))
+                    @if(!empty($pictures) && !empty($news_detail->video_link ))
+                    <a href={{ $news_detail->video_link }} class="mediabox relative">
+                        <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px]"
+                            src="https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mosque-afp-650_625x300_29_April_22.jpg"
+                            alt="people_on_Mousq" />
+                        <img src="{{ asset('assets/image/play_Svg.svg') }}"
+                            class="absolute max-w-[46px] top-[48%] right-[45%] " />
+                    </a>
                     @foreach ($pictures as $picture )
                     <div class="col-span-1">
-                        <img class="mx-auto w-full object-cover lg:h-[265px]" src="{{ asset($picture['url']) }}"
-                            alt="related image">
+                        <img class="mx-auto w-full object-cover lg:h-[265px] rounded-[5px]"
+                            src="{{ asset($picture['url']) }}" alt="related image">
+                    </div>
+                    @endforeach
+                    @elseif (empty($pictures) && !empty($news_detail->video_link ))
+                    <a href={{ $news_detail->video_link }} class="mediabox relative">
+                        <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px]"
+                            src="https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mosque-afp-650_625x300_29_April_22.jpg"
+                            alt="people_on_Mousq" />
+                        <img src="{{ asset('assets/image/play_Svg.svg') }}"
+                            class="absolute max-w-[46px] top-[48%] right-[45%] " />
+                    </a>
+                    @elseif (!empty($pictures) && empty($news_detail->video_link ))
+                    @foreach ($pictures as $picture )
+                    <div class="col-span-1">
+                        <img class="mx-auto w-full object-cover lg:h-[265px] rounded-[5px]"
+                            src="{{ asset($picture['url']) }}" alt="related image">
                     </div>
                     @endforeach
                     @endif
                 </div>
-
             </div>
         </div>
         @include('layout.front-end.partial.ProjectDetailsSlider')
