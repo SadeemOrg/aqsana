@@ -39,11 +39,12 @@
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
         @if(empty($news[0]))
-            <p class="text-[24px] text-center text-black font-FlatBold w-full pt-16 pl-4">لا يوجد اي
-                <span class="text-[#349A37]">{{ $type }} </span>
-                 للعرض</p>
-            @endif
-        <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-x-8 gap-y-6 text-center lg:text-right">
+        <p class="text-[24px] text-center text-black font-FlatBold w-full pt-16 pl-4">لا يوجد اي
+            <span class="text-[#349A37]">{{ $type }} </span>
+            للعرض
+        </p>
+        @endif
+        <div class="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-8 gap-y-6 text-center lg:text-right">
             <!--first card -->
             @if(!empty($news))
             @foreach ($news as $new )
@@ -51,43 +52,45 @@
             $img = 'storage/'.$new->image;
             @endphp
             <div
-                class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block lg:flex flex-col items-center justify-start rounded-[5px]">
+                class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block iphone13:flex sm:inline-block lg:flex flex-col items-center justify-start rounded-[5px]">
                 <div class="absolute leftline"></div>
                 <div class="bg-[#E4FFE585] rounded-[5px] py-3 px-4 h-full">
                     @php
-                        $title = str_replace(" ", "-", $new->title);
+                    $title = str_replace(" ", "-", $new->title);
                     @endphp
                     <div onclick="location.href='{{ route('getnewDetail', ['title'=>$title,'id' => $new->id]) }}'">
-                        <img src="{{ asset($img) }}" alt="people_on_Mousq" class="lg:w-[360px] w-full lg:h-56 max-h-56 rounded-[5px]">
-                        <p class="text-[#349A37] text-[16px] pt-4 text-right max-w-none pl-4">
+                        <img src="{{ asset($img) }}" alt="people_on_Mousq"
+                            class="lg:w-[360px] w-full sm:h-56 max-h-56 rounded-[5px]">
+                        <p class="text-[#349A37] text-[16px] pt-4 text-right max-w-none pl-4 h-[88px]">
                             {{Illuminate\Support\Str::limit($new->title,113) }}
                         </p>
-                @if(!empty($new->new_date))
+                        <!--old Date here!! -->
+                        @if(!empty($new->new_date))
                         <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 pl-4">
                             {{ $new->new_date }}
                         </p>
-                       @endif
-                        {{-- <p class="text-[11px] text-[#8F9BB3] font-noto_Regular text-right pt-2 pl-4">
-                            أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية
-                            الأقصى,
-                            مشاريعنا
-                        </p> --}}
-                        <p class="text-xs text-[#101426] font-noto_Regular pl-4 pt-2 text-right slider-paragraph">
-                            {{ Illuminate\Support\Str::limit(strip_tags( $new->description),240) }}
-                            @if(strip_tags(Str::length($new->description)) > 240)
+                        @else
+                        <p class="text-xs text-[#8F9BB3] font-noto_Regular text-right pt-2 pl-4">
+                            01-02-2020
+                        </p>
+                        @endif
+                        <p
+                            class="text-xs block sm:hidden md:block text-[#101426] font-noto_Regular pl-4 pt-2 text-right slider-paragraph">
+                            {{ Illuminate\Support\Str::limit(strip_tags( $new->description),97) }}
+                            @if(strip_tags(Str::length($new->description)) > 97)
                             <a href="{{ route('getnewDetail', ['title'=>$new->title,'id' => $new->id]) }}">
                                 <span class="text-[#349A37] text-[12px]">عرض المزيد</span>
                             </a>
                             @endif
                         </p>
                     </div>
-                    <div class="flex flex-row items-center justify-start pl-4 pt-2 font-noto_Regular gap-x-2">
-                        <p class="text-[#101426] text-sm">شارك عبر</p>
+                    <div class="flex flex-row items-center justify-start pl-4 pt-4 font-noto_Regular gap-x-2">
+                        <p class="text-[#101426] text-xs"> شارك عبر </p>
                         <ul class="share-us flex flex-row items-center justify-start">
                             <li class="px-1">
                                 <a class="facebook"
                                     href="javascript:openWindow('http://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}/{{ $new->id }} & title=')">
-                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                    <svg  width="25" height="25" viewBox="0 0 25 25" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                         <g clip-path="url(#clip0_38_2337)">
@@ -107,7 +110,7 @@
                             <li class="px-1">
                                 <a class="twitter"
                                     href="javascript:openWindow('http://twitter.com/intent/tweet?text=+{{ Request::url() }}/{{ $new->id }}')">
-                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                    <svg  width="25" height="25" viewBox="0 0 25 25" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                         <g clip-path="url(#clip0_38_2342)">
@@ -128,7 +131,7 @@
                                 <a class="pinterest"
                                     href="http://pinterest.com/pin/create/link/?url={{Request::url()}}/{{ $new->id }}"
                                     onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                    <svg  width="25" height="25" viewBox="0 0 25 25" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                         <path
@@ -138,8 +141,9 @@
                                 </a>
                             </li>
                             <li class="px-1">
-                                <a class="linkedin lisharelink" data-shareurl={{ Request::url() }} data-id={{ $new->id}} >
-                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                <a class="linkedin lisharelink" data-shareurl={{ Request::url() }} data-id={{ $new->id}}
+                                    >
+                                    <svg  width="25" height="25" viewBox="0 0 25 25" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
                                         <path

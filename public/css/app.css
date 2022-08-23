@@ -318,12 +318,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 @font-face {
         font-family:"alfont_com_JF-Flat-Bold" ;
         font-weight: 700px;
-        src: url('/assets/front-end/fonts/alfont_com_JF-Flat-Bold.ttf')
+        src: url('/assets/front-end/fonts/THESANSARABIC-BOLD.OTF')
     }
 @font-face {
         font-family:"alfont_com_JF-Flat-regular" ;
         font-weight: 400px;
-        src: url('/assets/front-end/fonts/alfont_com_JF-Flat-regular.ttf')
+        src: url('/assets/front-end/fonts/THESANSARABIC-LIGHT.OTF')
     }
 @font-face {
         font-family:"THESANSARABIC-SEMILIGHT" ;
@@ -414,6 +414,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-0{
   right: 0px;
 }
+.top-\[48\%\]{
+  top: 48%;
+}
+.right-\[45\%\]{
+  right: 45%;
+}
 .left-\[-50px\]{
   left: -50px;
 }
@@ -438,9 +444,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[100\%\]{
   top: 100%;
 }
-.top-\[48\%\]{
-  top: 48%;
-}
 .left-\[46\%\]{
   left: 46%;
 }
@@ -458,30 +461,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .right-6{
   right: 1.5rem;
-}
-.left-\[10\%\]{
-  left: 10%;
-}
-.right-\[10\%\]{
-  right: 10%;
-}
-.right-\[15\%\]{
-  right: 15%;
-}
-.right-\[20\%\]{
-  right: 20%;
-}
-.right-\[18\%\]{
-  right: 18%;
-}
-.right-\[50\%\]{
-  right: 50%;
-}
-.right-\[46\%\]{
-  right: 46%;
-}
-.right-\[45\%\]{
-  right: 45%;
 }
 .z-30{
   z-index: 30;
@@ -524,10 +503,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-2{
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-}
-.my-1{
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
 }
 .my-6{
   margin-top: 1.5rem;
@@ -719,6 +694,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-8{
   height: 2rem;
 }
+.h-\[88px\]{
+  height: 88px;
+}
 .max-h-\[510px\]{
   max-height: 510px;
 }
@@ -761,6 +739,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .min-h-\[294px\]{
   min-height: 294px;
 }
+.min-h-\[88px\]{
+  min-height: 88px;
+}
 .w-full{
   width: 100%;
 }
@@ -793,6 +774,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-\[65\%\]{
   width: 65%;
+}
+.w-\[100\%\]{
+  width: 100%;
 }
 .w-\[25opx\]{
   width: 25opx;
@@ -850,6 +834,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-\[448px\]{
   max-width: 448px;
 }
+.max-w-\[46px\]{
+  max-width: 46px;
+}
 .max-w-2xl{
   max-width: 42rem;
 }
@@ -879,9 +866,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-w-\[380px\]{
   max-width: 380px;
-}
-.max-w-\[46px\]{
-  max-width: 46px;
 }
 .max-w-\[220px\]{
   max-width: 220px;
@@ -1324,6 +1308,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pr-3{
   padding-right: 0.75rem;
 }
+.pb-0{
+  padding-bottom: 0px;
+}
 .pl-2{
   padding-left: 0.5rem;
 }
@@ -1452,6 +1439,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
+.text-black{
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
 .text-gray-500{
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -1464,9 +1455,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
 }
-.text-black{
+.text-\[\#CC9933\]{
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
+  color: rgb(204 153 51 / var(--tw-text-opacity));
 }
 .no-underline{
   -webkit-text-decoration-line: none;
@@ -1569,6 +1560,10 @@ body{
 .hover\:text-\[\#349A37\]:hover{
   --tw-text-opacity: 1;
   color: rgb(52 154 55 / var(--tw-text-opacity));
+}
+.hover\:text-\[\#CC9933\]:hover{
+  --tw-text-opacity: 1;
+  color: rgb(204 153 51 / var(--tw-text-opacity));
 }
 .hover\:text-gray-400:hover{
   --tw-text-opacity: 1;
@@ -1697,6 +1692,9 @@ body{
   .sm\:block{
     display: block;
   }
+  .sm\:inline-block{
+    display: inline-block;
+  }
   .sm\:flex{
     display: flex;
   }
@@ -1712,6 +1710,9 @@ body{
   .sm\:h-\[350px\]{
     height: 350px;
   }
+  .sm\:h-56{
+    height: 14rem;
+  }
   .sm\:h-\[300px\]{
     height: 300px;
   }
@@ -1720,6 +1721,12 @@ body{
   }
   .sm\:w-\[563px\]{
     width: 563px;
+  }
+  .sm\:w-full{
+    width: 100%;
+  }
+  .sm\:w-\[100\%\]{
+    width: 100%;
   }
   .sm\:max-w-\[210px\]{
     max-width: 210px;
@@ -1828,9 +1835,6 @@ body{
   .md\:max-w-\[170px\]{
     max-width: 170px;
   }
-  .md\:grid-cols-2{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
   .md\:flex-row{
     flex-direction: row;
   }
@@ -1936,9 +1940,6 @@ body{
   }
   .lg\:h-\[280px\]{
     height: 280px;
-  }
-  .lg\:h-56{
-    height: 14rem;
   }
   .lg\:h-auto{
     height: auto;
@@ -2140,6 +2141,17 @@ body{
 @media (min-width: 1536px){
   .\32xl\:h-96{
     height: 24rem;
+  }
+}
+@media (min-width: 450px){
+  .iphone13\:flex{
+    display: flex;
+  }
+  .iphone13\:w-\[80\%\]{
+    width: 80%;
+  }
+  .iphone13\:w-\[60\%\]{
+    width: 60%;
   }
 }
 
