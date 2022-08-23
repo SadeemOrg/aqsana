@@ -23,7 +23,7 @@ class ProjectController extends BaseController
             return $this->sendError('Validate Error', $validator->errors());
         }
 
-        $projects =   project::where("type",$request->get("type"))->orderBy('created_at', 'desc')->paginate(15);
+        $projects =   project::where("project_type",$request->get("project_type"))->orderBy('created_at', 'desc')->paginate(15);
         return $this->sendResponse($projects, 'Success get projects');
 
     }
