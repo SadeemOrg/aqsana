@@ -16,14 +16,14 @@ class ProjectController extends BaseController
     public function index(Request $request)
     {
         $validator =  Validator::make($request->all(),[
-            'type' => 'required',
+            'project_type' => 'required',
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Validate Error', $validator->errors());
         }
 
-        $projects =   project::where("project_type",$request->get("project_type"))->orderBy('created_at', 'desc')->paginate(15);
+        $projects = project::where("project_type",$request->get("project_type"))->orderBy('created_at', 'desc')->paginate(15);
         return $this->sendResponse($projects, 'Success get projects');
 
     }
