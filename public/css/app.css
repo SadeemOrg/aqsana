@@ -318,12 +318,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 @font-face {
         font-family:"alfont_com_JF-Flat-Bold" ;
         font-weight: 700px;
-        src: url('/assets/front-end/fonts/alfont_com_JF-Flat-Bold.ttf')
+        src: url('/assets/front-end/fonts/THESANSARABIC-BOLD.OTF')
     }
 @font-face {
         font-family:"alfont_com_JF-Flat-regular" ;
         font-weight: 400px;
-        src: url('/assets/front-end/fonts/alfont_com_JF-Flat-regular.ttf')
+        src: url('/assets/front-end/fonts/THESANSARABIC-LIGHT.OTF')
     }
 @font-face {
         font-family:"THESANSARABIC-SEMILIGHT" ;
@@ -450,17 +450,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-\[110\%\]{
   right: 110%;
 }
-.top-\[75\%\]{
-  top: 75%;
-}
-.right-6{
-  right: 1.5rem;
-}
 .right-\[-250px\]{
   right: -250px;
 }
 .top-\[84px\]{
   top: 84px;
+}
+.top-\[75\%\]{
+  top: 75%;
+}
+.right-6{
+  right: 1.5rem;
 }
 .z-30{
   z-index: 30;
@@ -685,12 +685,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-5{
   height: 1.25rem;
 }
-.h-\[160px\]{
-  height: 160px;
-}
-.h-96{
-  height: 24rem;
-}
 .h-\[450px\]{
   height: 450px;
 }
@@ -727,9 +721,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-\[17px\]{
   max-height: 17px;
 }
-.max-h-14{
-  max-height: 3.5rem;
-}
 .max-h-\[390px\]{
   max-height: 390px;
 }
@@ -739,8 +730,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-\[200px\]{
   max-height: 200px;
 }
+.max-h-14{
+  max-height: 3.5rem;
+}
 .min-h-\[294px\]{
   min-height: 294px;
+}
+.min-h-\[88px\]{
+  min-height: 88px;
 }
 .w-full{
   width: 100%;
@@ -775,6 +772,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-\[65\%\]{
   width: 65%;
 }
+.w-\[100\%\]{
+  width: 100%;
+}
 .w-\[25opx\]{
   width: 25opx;
 }
@@ -795,9 +795,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-\[250px\]{
   width: 250px;
-}
-.w-44{
-  width: 11rem;
 }
 .w-\[4oopx\]{
   width: 4oopx;
@@ -878,9 +875,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-w-\[17px\]{
   max-width: 17px;
-}
-.max-w-full{
-  max-width: 100%;
 }
 .flex-1{
   flex: 1 1 0%;
@@ -1012,9 +1006,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .overflow-hidden{
   overflow: hidden;
-}
-.overflow-y-hidden{
-  overflow-y: hidden;
 }
 .rounded-lg{
   border-radius: 0.5rem;
@@ -1698,6 +1689,9 @@ body{
   .sm\:block{
     display: block;
   }
+  .sm\:inline-block{
+    display: inline-block;
+  }
   .sm\:flex{
     display: flex;
   }
@@ -1713,6 +1707,9 @@ body{
   .sm\:h-\[350px\]{
     height: 350px;
   }
+  .sm\:h-56{
+    height: 14rem;
+  }
   .sm\:h-\[300px\]{
     height: 300px;
   }
@@ -1721,6 +1718,12 @@ body{
   }
   .sm\:w-\[563px\]{
     width: 563px;
+  }
+  .sm\:w-full{
+    width: 100%;
+  }
+  .sm\:w-\[100\%\]{
+    width: 100%;
   }
   .sm\:max-w-\[210px\]{
     max-width: 210px;
@@ -1799,17 +1802,8 @@ body{
   .md\:flex{
     display: flex;
   }
-  .md\:hidden{
-    display: none;
-  }
   .md\:h-\[300px\]{
     height: 300px;
-  }
-  .md\:h-\[221px\]{
-    height: 221px;
-  }
-  .md\:h-\[84px\]{
-    height: 84px;
   }
   .md\:h-\[320px\]{
     height: 320px;
@@ -1837,9 +1831,6 @@ body{
   }
   .md\:max-w-\[170px\]{
     max-width: 170px;
-  }
-  .md\:grid-cols-2{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .md\:flex-row{
     flex-direction: row;
@@ -1938,9 +1929,6 @@ body{
   .lg\:grid{
     display: grid;
   }
-  .lg\:hidden{
-    display: none;
-  }
   .lg\:h-\[265px\]{
     height: 265px;
   }
@@ -1949,12 +1937,6 @@ body{
   }
   .lg\:h-\[280px\]{
     height: 280px;
-  }
-  .lg\:h-56{
-    height: 14rem;
-  }
-  .lg\:h-\[333px\]{
-    height: 333px;
   }
   .lg\:h-auto{
     height: auto;
@@ -2088,20 +2070,8 @@ body{
   .xl\:h-80{
     height: 20rem;
   }
-  .xl\:h-48{
-    height: 12rem;
-  }
-  .xl\:h-40{
-    height: 10rem;
-  }
   .xl\:h-\[60px\]{
     height: 60px;
-  }
-  .xl\:h-auto{
-    height: auto;
-  }
-  .xl\:h-36{
-    height: 9rem;
   }
   .xl\:w-\[134px\]{
     width: 134px;
@@ -2111,12 +2081,6 @@ body{
   }
   .xl\:w-\[200px\]{
     width: 200px;
-  }
-  .xl\:max-w-sm{
-    max-width: 24rem;
-  }
-  .xl\:max-w-\[192px\]{
-    max-width: 192px;
   }
   .xl\:basis-3\/5{
     flex-basis: 60%;
@@ -2177,8 +2141,14 @@ body{
   }
 }
 @media (min-width: 450px){
-  .iphone13\:h-\[230px\]{
-    height: 230px;
+  .iphone13\:flex{
+    display: flex;
+  }
+  .iphone13\:w-\[80\%\]{
+    width: 80%;
+  }
+  .iphone13\:w-\[60\%\]{
+    width: 60%;
   }
 }
 
