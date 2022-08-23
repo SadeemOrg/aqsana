@@ -65,7 +65,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Text::make('Name'),
                             Link::make('Link')->resources([
                             Project::class,
-                            hisadAljameia::class
+
                             ])
                         ])->title('name'),
                         Image::make('Logo', 'logo')->disk('public'),

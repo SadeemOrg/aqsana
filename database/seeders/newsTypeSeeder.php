@@ -21,7 +21,7 @@ class newsTypeSeeder extends Seeder
                 'type' => '0',
             ],
             [
-                'name' => 'أخبار',
+                'name' => 'أخبارنا',
                 'main_type' => '1',
                 'type' => '1',
             ],
@@ -42,7 +42,7 @@ class newsTypeSeeder extends Seeder
                 'type' => '0',
             ],
             [
-                'name' => 'أخبار',
+                'name' => 'أخبارنا',
                 'main_type' => '2',
                 'type' => '1',
             ],
@@ -58,7 +58,7 @@ class newsTypeSeeder extends Seeder
             ],
 
             [
-                'name' => 'الأوقاف والمقدسات',
+                'name' => "الأوقاف-والمقدسات",
                 'main_type' => '3',
                 'type' => '0',
             ],

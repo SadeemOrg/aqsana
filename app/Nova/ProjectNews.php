@@ -36,7 +36,7 @@ class ProjectNews extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id','project_name'
     ];
     public static function label()
     {
@@ -69,7 +69,7 @@ class ProjectNews extends Resource
                 if ($this->project_type =="2")return "قوافل الاقصي";
             })->readonly(true)
             ,
-            Text::make("project name", "project_name"),
+            Text::make("project name", "project_name")->readonly(true),
 
                 Text::make("Title", 'report_title'),
                 Textarea::make('description', 'report_description'),
