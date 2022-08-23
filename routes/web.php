@@ -40,12 +40,16 @@ Route::get('/contact-us', function (){
 });
 Route::get('/search/{val}/', [HomeController::class, 'search'])->name('search');
 
-Route::get('our-project', function (){
-    return view('projects-page');
-});
-Route::get('our-project/1', function (){
-    return view('Pages.project-details-page');
-});
+Route::get('/project', [HomeController::class, 'project'])->name('project');
+Route::get('/project/{id}', [HomeController::class, 'getprojectDetail'])->name('getprojectDetail');
+
+
+// Route::get('our-project', function (){
+//     return view('projects-page');
+// });
+// Route::get('our-project/1', function (){
+//     return view('Pages.project-details-page');
+// });
 
 
 Route::get('project-donations', function (){
@@ -60,9 +64,9 @@ Route::get('/geniral-donations', function (){
     return view('Pages.geniral-donation');
 });
 
-Route::get('/contact', function (){
-    return view('Pages.contact-page');
-});
+// Route::get('/contact', function (){
+//     return view('Pages.contact-page');
+// });
 
 
 Route::get('/testNotfiy', function (){

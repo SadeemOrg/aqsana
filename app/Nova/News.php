@@ -84,82 +84,74 @@ class News extends Resource
 
             ID::make(__('ID'), 'id')->sortable(),
             ActionButton::make(__('POST NEWS'))
-            ->action((new PostNews) ->confirmText('Are you sure you want to read  this Massage?')
-            ->confirmButtonText(__('post'))
-            ->cancelButtonText(__('Dont post')), $this->id) ->readonly(function () {
-                return $this->status === '1';
-            })->text(__('post'))->showLoadingAnimation()
-            ->loadingColor('#fff') ->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
-            Boolean::make(__('is posted'),'status'),
+                ->action((new PostNews)->confirmText('Are you sure you want to read  this Massage?')
+                    ->confirmButtonText(__('post'))
+                    ->cancelButtonText(__('Dont post')), $this->id)->readonly(function () {
+                    return $this->status === '1';
+                })->text(__('post'))->showLoadingAnimation()
+                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+            Boolean::make(__('is posted'), 'status'),
             Text::make(__('TITLE'), 'title'),
             Textarea::make(__('description'), 'description'),
             Select::make(__('SECTOR'), 'sector')
                 ->options(function () {
                     $sectors = nova_get_setting('workplace', 'default_value');
                     $user_type_admin_array =  array();
-                        if($sectors != "default_value" ){
-                    foreach ($sectors as $sector) {
-                        $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
+                    if ($sectors != "default_value") {
+                        foreach ($sectors as $sector) {
+                            $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
+                        }
+                        return  $user_type_admin_array;
                     }
-                    return  $user_type_admin_array;
-                }
                 }),
 
-                Select::make(__('have multi category'), "mult", function () {
-
-                    $total=  json_decode($this->main_type);
-                    // dd(gettype( $total));
-                    // if( gettype( $total) == "string" ) return "2";
-                    // else return "1";
-                    return "1";
-                    $coutotal =  count( $total);
-                    // if( $coutotal >1) return "1";
-                    // else return "2";
-                    // // dd($coutotal);
-                    // return ($this->main_type );
-                })
+            Select::make(__('have multi category'), "mult", function () {
+                $total =  json_decode($this->main_type);
+                if (gettype($total) == "string") return "2";
+                else return "1";
+            })
                 ->options([
-                    '1' =>__('yes'),
+                    '1' => __('yes'),
                     '2' => __('no'),
 
                 ])->displayUsingLabels()
                 // ->withMeta(['ignoreOnSaving'])
-                ->fillUsing(function(NovaRequest $request, $model, $attribute, $requestAttribute) {
-                // dd($attribute);
+                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                    // dd($attribute);
                     return null;
                 }),
 
 
-//   Select::make(__('have dwdwmulti wdwdw'), "ccc")
-//   ->options([
-//     '1' =>__('yes'),
-//     '2' => __('no'),
+            //   Select::make(__('have dwdwmulti wdwdw'), "ccc")
+            //   ->options([
+            //     '1' =>__('yes'),
+            //     '2' => __('no'),
 
-// ])->displayUsingLabels()
-// ->fillUsing(function(NovaRequest $request, $model, $attribute, $requestAttribute) {
-//     // DB::table('project_toole')->insert([
-//     //     'project_id' => '3',
-//     //     'city_id' => '3',
+            // ])->displayUsingLabels()
+            // ->fillUsing(function(NovaRequest $request, $model, $attribute, $requestAttribute) {
+            //     // DB::table('project_toole')->insert([
+            //     //     'project_id' => '3',
+            //     //     'city_id' => '3',
 
-//     //     'tools' =>  $request->ccc,
+            //     //     'tools' =>  $request->ccc,
 
-//     // ]);
+            //     // ]);
 
-//     // dd($requestAttribute);
+            //     // dd($requestAttribute);
 
-//         return null;
-//     }),
+            //         return null;
+            //     }),
             NovaDependencyContainer::make([
                 Select::make(__('main Type'), "main_type", function () {
 
-                 $tt=  str_replace('"', "", $this->main_type);
-                 return $tt;
+                    $tt =  str_replace('"', "", $this->main_type);
+                    return $tt;
                     // dd($tt);
-                    $total=  json_decode($this->main_type);
+                    $total =  json_decode($this->main_type);
                     // dd(gettype( $total));
-                    if( gettype( $total) == "string" ) return "2";
+                    if (gettype($total) == "string") return "2";
                     else return "1";
-                    $coutotal =  count( $total);
+                    $coutotal =  count($total);
                     // if( $coutotal >1) return "1";
                     // else return "2";
                     // // dd($coutotal);
@@ -198,15 +190,15 @@ class News extends Resource
             ])->dependsOn('mult', "2"),
 
             NovaDependencyContainer::make([
-                 Multiselect::make(__('main Type'), "main_type")
-            ->options([
-                '1' => 'News',
-                '2' => 'alqudus walmasjid alaqsaa',
-                '3' => 'alqudus walmasjid alaqsaa',
+                Multiselect::make(__('main Type'), "main_type")
+                    ->options([
+                        '1' => 'News',
+                        '2' => 'alqudus walmasjid alaqsaa',
+                        '3' => 'alqudus walmasjid alaqsaa',
 
 
-            ]),
-             ])->dependsOn('mult', "1"),
+                    ]),
+            ])->dependsOn('mult', "1"),
             // Multiselect::make("main Type", "main_type")
             // ->options([
             //     '1' => 'News',
@@ -269,16 +261,14 @@ class News extends Resource
     public static function beforeSave(Request $request, $model)
     {
         $id = Auth::id();
-        $model->created_by=$id;
+        $model->created_by = $id;
     }
 
 
     public static function beforeUpdate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->update_by=$id;
-
-
+        $model->update_by = $id;
     }
     /**
      * Get the cards available for the request.
@@ -329,9 +319,9 @@ class News extends Resource
         return [
 
             (new PostNews)
-            ->confirmText('Are you sure you want to read  this Massage?')
-            ->confirmButtonText('Read')
-            ->cancelButtonText("Don't Read"),
+                ->confirmText('Are you sure you want to read  this Massage?')
+                ->confirmButtonText('Read')
+                ->cancelButtonText("Don't Read"),
         ];
     }
 }

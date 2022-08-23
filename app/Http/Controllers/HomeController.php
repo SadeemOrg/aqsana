@@ -72,7 +72,7 @@ class HomeController extends Controller
 
     public function news($maintype, $type)
     {
-// dd($maintype, $type);
+        // dd($maintype, $type);
         $main_type = newsType::where('name', $maintype)
             ->where('type', '0')
             ->select('main_type')->first();
@@ -199,18 +199,18 @@ class HomeController extends Controller
             ->orWhere('sector', 'like',  "%{$search}%")
             ->paginate(8);
         return view('Pages.our-news', compact('news', 'mainType', 'type'));
-
     }
     public function donation()
     {
-           $Projects = DB::table('projects')->where([
+        $Projects = DB::table('projects')->where([
             ['is_donation', '=', '1'],
-            ['is_reported', '=', '1'],])
-                ->get();
+            ['is_reported', '=', '1'],
+        ])
+            ->get();
 
 
-            // dd($Projects);
-        return view('projects-for-donations', compact('Projects' ));
+        // dd($Projects);
+        return view('projects-for-donations', compact('Projects'));
     }
     public function getdonationDetail($id)
     {
@@ -227,5 +227,27 @@ class HomeController extends Controller
 
 
         return view('project-donation-details', compact('project', 'pictures'));
+    }
+
+
+    public function project()
+    {
+        $projects = DB::table('projects')->orderBy('report_date', 'desc')->paginate(8);
+        return view('projects-page', compact('projects'));
+
+    }
+
+    public function getprojectDetail( $id)
+    {
+         $project = DB::table('projects')->where('id', $id)->first();
+
+        $goalsjson = $project->report_pictures;
+
+        $pictures = json_decode(json_decode($goalsjson, true), true);
+
+        $Articles = DB::table('projects')->orderBy('report_date', 'desc')->take(6)->get();
+
+        return view('Pages.project-details-page', compact('project', 'pictures', 'Articles' ));
+
     }
 }
