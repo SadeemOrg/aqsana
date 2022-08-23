@@ -4,6 +4,16 @@
 $news_detail = $new;
 $image = 'storage/'.$news_detail->image;
 @endphp
+
+@if (!empty($news_detail->video_link_cover))
+@php
+$imageVideoCover = 'storage/' .$news_detail->video_link_cover
+@endphp
+@else
+@php
+$imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mosque-afp-650_625x300_29_April_22.jpg"
+@endphp
+@endif
 <style>
     .leftline1 {
         /* content:"\A"; */
@@ -150,17 +160,16 @@ $image = 'storage/'.$news_detail->image;
                         </li>
                     </ul>
                 </div>
-
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
                     @if(!empty($pictures) && !empty($news_detail->video_link ))
-                    <div class="col-span-1">
-                    <a  href={{ $news_detail->video_link }} target="_self" class="mediabox relative">
-                        <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full"
-                            src="https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mosque-afp-650_625x300_29_April_22.jpg"
-                            alt="people_on_Mousq" />
-                        <img src="{{ asset('assets/image/play_Svg.svg') }}"
-                            class="absolute max-w-[46px] top-[48%] right-[45%] " />
-                    </a>
+                    <div class="col-span-1 scalabel-img-box">
+                        <a href={{ $news_detail->video_link }}  class="mediabox rounded-[5px]
+                            overflow-hidden relative">
+                            <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full"
+                                src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
+                            <img src="{{ asset('assets/image/play_Svg.svg') }}"
+                                class="absolute max-w-[46px] top-[48%] right-[45%] " />
+                        </a>
                     </div>
                     @foreach ($pictures as $picture )
                     <div class="col-span-1">
@@ -170,13 +179,12 @@ $image = 'storage/'.$news_detail->image;
                     @endforeach
                     @elseif (empty($pictures) && !empty($news_detail->video_link ))
                     <div class="col-span-1">
-                    <a  href={{ $news_detail->video_link }} target="_self" class="mediabox relative">
-                        <img class=" mx-auto w-full object-cover lg:h-[265px] h-full rounded-[5px]"
-                            src="https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mosque-afp-650_625x300_29_April_22.jpg"
-                            alt="people_on_Mousq" />
-                        <img src="{{ asset('assets/image/play_Svg.svg') }}"
-                            class="absolute max-w-[46px] top-[48%] right-[45%] " />
-                    </a>
+                        <a href={{ $news_detail->video_link }}  class="mediabox relative">
+                            <img class=" mx-auto w-full object-cover lg:h-[265px] h-full rounded-[5px]"
+                                src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
+                            <img src="{{ asset('assets/image/play_Svg.svg') }}"
+                                class="absolute max-w-[46px] top-[48%] right-[45%] " />
+                        </a>
                     </div>
                     @elseif (!empty($pictures) && empty($news_detail->video_link ))
                     @foreach ($pictures as $picture )
@@ -194,5 +202,3 @@ $image = 'storage/'.$news_detail->image;
 </div>
 
 @endsection
-
-
