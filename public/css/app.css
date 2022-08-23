@@ -694,6 +694,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-8{
   height: 2rem;
 }
+.h-\[88px\]{
+  height: 88px;
+}
 .max-h-\[510px\]{
   max-height: 510px;
 }

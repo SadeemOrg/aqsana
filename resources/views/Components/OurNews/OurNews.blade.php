@@ -61,7 +61,7 @@
                     <div onclick="location.href='{{ route('getnewDetail', ['title'=>$title,'id' => $new->id]) }}'">
                         <img src="{{ asset($img) }}" alt="people_on_Mousq"
                             class="lg:w-[360px] w-full sm:h-56 max-h-56 rounded-[5px]">
-                        <p class="text-[#349A37] text-[16px] pt-4 text-right max-w-none pl-4 min-h-[88px]">
+                        <p class="text-[#349A37] text-[16px] pt-4 text-right max-w-none pl-4 h-[88px]">
                             {{Illuminate\Support\Str::limit($new->title,113) }}
                         </p>
                         <!--old Date here!! -->
