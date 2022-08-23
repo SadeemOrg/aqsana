@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingController;
@@ -26,6 +27,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+//paymnet Api
+Route::post('/payment', [PaymentController::class, 'sendMoney']);
 
 
 Route::post('/register_login_social_media', [AuthController::class, 'register_login_social_media']);
