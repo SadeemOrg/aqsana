@@ -83,7 +83,14 @@ class QawafilAlaqsa extends Resource
     {
         return __('project');
     }
-
+    public static function availableForNavigation(Request $request)
+    {
+        if (  $request->user()->type()== 'website_admin')
+        {
+            return false;
+        }
+       else return true;
+    }
     /**
      * Get the fields displayed by the resource.
      *
@@ -96,7 +103,7 @@ class QawafilAlaqsa extends Resource
         $id = Auth::id();
         if ($user->type() == 'admin' ) {
 
-            return $query;
+            return $query->where('project_type', '2');
         } elseif ($user->type() == 'regular_area') {
 
             $Area = \App\Models\Area::where('admin_id', $id)->first();
@@ -112,7 +119,7 @@ class QawafilAlaqsa extends Resource
         foreach ($projects as $key => $value) {
             array_push($stack, $value->project_id);
         }
-        return $query->whereIn('id', $stack);
+        return $query->whereIn('id', $stack)->where('project_type', '2');
     }
     public function fields(Request $request)
     {
@@ -134,17 +141,7 @@ class QawafilAlaqsa extends Resource
                     ->hideWhenCreating()->hideWhenUpdating(),
                 Text::make(__("project name"), "project_name"),
                 Text::make(__("project describe"), "project_describe"),
-                Select::make(__('SECTOR'), 'sector')
-                    ->options(function () {
-                        $sectors = nova_get_setting('workplace', 'default_value');
-                        $user_type_admin_array =  array();
-                        if ($sectors != "default_value") {
-                            foreach ($sectors as $sector) {
-                                $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
-                            }
-                            return  $user_type_admin_array;
-                        }
-                    }),
+
                 BelongsToManyField::make(__('Area'),"Area" ,'\App\Nova\Area')
                     ->options(Area::all())
                     ->optionsLabel('name')->canSee(function ($request) {
@@ -158,62 +155,13 @@ class QawafilAlaqsa extends Resource
                 DateTime::make(__('projec end'), 'end_date'),
 
 
-                Boolean::make(__('is_bus'), 'is_bus'),
+
                 Boolean::make(__('is_has_volunteer'), 'is_volunteer'),
                 Boolean::make(__('is_has_Donations'), 'is_donation'),
-                Boolean::make(__('is_reported'), 'is_reported'),
-
-                // Select::make(__('is_reported'), 'is_reported')->options([
-                //     '1' => 'نعم',
-                //     '0' => 'لا',
-                // ])->displayUsingLabels(),
 
 
-                NovaDependencyContainer::make([
-                    Text::make(__("Title"), 'report_title'),
-                    Textarea::make(__('description'), 'report_description'),
-                    Tiptap::make(__('Contents'), 'report_contents')
-                        ->buttons([
-                            'heading',
-                            '|',
-                            'italic',
-                            'bold',
-                            '|',
-                            'link',
-                            'code',
-                            'strike',
-                            'underline',
-                            'highlight',
-                            '|',
-                            'bulletList',
-                            'orderedList',
-                            'br',
-                            'codeBlock',
-                            'blockquote',
-                            '|',
-                            'horizontalRule',
-                            'hardBreak',
-                            '|',
-                            'table',
-                            '|',
-                            'image',
-                            '|',
-                            'textAlign',
-                            '|',
-                            'rtl',
-                            '|',
-                            'history',
-                        ])
-                        ->headingLevels([1, 2, 3, 4, 5, 6]),
 
 
-                    Image::make(__('Image'), 'report_image')->disk('public')->prunable(),
-                    ArrayImages::make(__('Pictures'), 'report_pictures')
-                        ->disk('public'),
-                    Text::make(__("video link"), 'report_video_link'),
-                    Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y'),
-
-                ])->dependsOn('is_reported', '10'),
 
                 BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -487,6 +435,9 @@ class QawafilAlaqsa extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->project_type='2';
+        $model->is_bus='1';
+        $model->is_reported='0';
+        $model->sector='Null';
     }
     public static function beforeUpdate(Request $request, $model)
     {

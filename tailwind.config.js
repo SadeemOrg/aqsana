@@ -13,7 +13,11 @@ module.exports = {
             'noto_Regular':'THESANSARABIC-SEMILIGHT',
             Noto_Sans_Arabic: ["Noto Sans Arabic", "sans-serif"],
           },
-    },
+          screens: {
+            'iphone13':'450px'
+          }
+        },
+
   },
   plugins: [],
 }

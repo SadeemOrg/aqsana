@@ -234,29 +234,19 @@
                             0: {
                                 items: 1
                             },
-                            360: {
-                                items: 1
-                            },
-                            375: {
-                                items: 1
-                            },
-                            540: {
-                                items: 1
-                            },
-                            //Small
-                            576: {
-                                items: 1
-                            },
                             //Medium
                             768: {
-                                items: 1
+                                items: 2
                             },
                             850: {
                                 items: 2
                             },
+                            1024: {
+                                items: 3
+                            },
                             //Large
                             1120: {
-                                items: 2
+                                items: 3
                             },
                             //Extra large
                             1200: {

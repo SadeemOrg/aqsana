@@ -21,9 +21,9 @@ class HomeController extends Controller
         $Heros = nova_get_setting('heroo', 'default_value');
 
 
-        $lastnews = DB::table('news')->orderBy('created_at', 'desc')->take(2)->get();
+        $lastnews = DB::table('news')->orderBy('new_date', 'desc')->take(2)->get();
 
-        $news = DB::table('news')->orderBy('new_date', 'desc')->get();
+        $news = DB::table('news')->orderBy('new_date', 'desc')->take(9)->get();
 
         $ProjectsNews = nova_get_setting('Projects_News', 'default_value');
         // $ProjectsNews = json_decode($ProjectsNewsjson);
@@ -215,9 +215,9 @@ class HomeController extends Controller
     public function getdonationDetail($id)
     {
 
-        $projects = DB::table('projects')->where('id', $id)->first();
+        $project = DB::table('projects')->where('id', $id)->first();
 
-        $goalsjson = $projects->report_pictures;
+        $goalsjson = $project->report_pictures;
 
         $pictures = json_decode(json_decode($goalsjson, true), true);
 
@@ -226,6 +226,6 @@ class HomeController extends Controller
 
 
 
-        return view('project-donation-details', compact('projects', 'pictures'));
+        return view('project-donation-details', compact('project', 'pictures'));
     }
 }
