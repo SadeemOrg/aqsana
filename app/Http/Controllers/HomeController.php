@@ -232,7 +232,8 @@ class HomeController extends Controller
 
     public function project()
     {
-        $projects = DB::table('projects')->orderBy('report_date', 'desc')->paginate(8);
+
+        $projects = DB::table('projects')->where('is_reported', '=', '1')->orderBy('report_date', 'desc')->paginate(8);
         return view('Pages.projects-page', compact('projects'));
 
     }
