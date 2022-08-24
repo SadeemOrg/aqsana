@@ -219,7 +219,7 @@ class HomeController extends Controller
 
         $goalsjson = $project->report_pictures;
 
-        $pictures = json_decode(json_decode($goalsjson, true), true);
+        $pictures = json_decode($goalsjson, true);
 
 
 
