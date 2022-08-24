@@ -26,6 +26,7 @@ class PaymentVoucher extends Resource
      *
      * @var string
      */
+
     public static $title = 'id';
     public static function label()
     {
@@ -43,7 +44,7 @@ class PaymentVoucher extends Resource
     public static $search = [
         'id',
     ];
-
+    public static $priority = 2;
     /**
      * Get the fields displayed by the resource.
      *

@@ -30,7 +30,7 @@ class Bus extends Resource
         return __('Admin');
     }
 
-
+    public static $priority = 5;
     public static $model = \App\Models\Bus::class;
     // public static $displayInNavigation = false;
     /**

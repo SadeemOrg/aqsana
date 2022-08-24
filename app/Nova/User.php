@@ -31,7 +31,7 @@ class User extends Resource
      *
      * @var string
      */
-
+    public static $priority = 9 ;
     public static $title = 'name';
     public static function label()
     {
