@@ -30,12 +30,12 @@ Route::get('/categor/{title}/{id}/', [HomeController::class, 'getnewDetail'])->n
 Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch');
 
 // projects for donation
-Route::get('/donation', [HomeController::class, 'donation'])->name('donation');
+Route::get('/project-donations', [HomeController::class, 'donation'])->name('donation');
 // project details by id for donation
 
 Route::get('/donation/{id}', [HomeController::class, 'getdonationDetail'])->name('getdonationDetail');
 
-Route::get('project-donations', function (){
+Route::get('donations', function (){
     return view('Pages.project-donations');
 });
 
