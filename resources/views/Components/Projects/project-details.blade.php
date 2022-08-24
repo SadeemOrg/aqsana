@@ -21,15 +21,15 @@
 $image = 'storage/'.$project->report_image;
 @endphp
 
-{{-- @if (!empty($project->video_link_cover))
+@if (!empty($project->report_video_link_cover))
 @php
 $imageVideoCover = 'storage/' .$news_detail->video_link_cover
 @endphp
-@else --}}
+@else
 @php
 $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mosque-afp-650_625x300_29_April_22.jpg"
 @endphp
-{{-- @endif --}}
+@endif
 
 <div class="bg-[#F2FFF285] py-16 pb-20 lg:mt-10">
     <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">

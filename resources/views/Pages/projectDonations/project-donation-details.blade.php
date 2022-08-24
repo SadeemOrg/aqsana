@@ -1,5 +1,5 @@
 @php
-    $img = 'storage/'.$project->report_image;
+$img = 'storage/'.$project->report_image;
 @endphp
 @extends('layout.app')
 @section('content')
@@ -30,7 +30,7 @@
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#101426]">
-                <a href="/our-project">التبرع  بالمشاريع </a>
+                <a href="/our-project">التبرع بالمشاريع </a>
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px]  text-[#349A37]">
@@ -39,32 +39,39 @@
         </ul>
     </div>
 </div>
+@php
+$image = 'storage/'.$project->report_image;
+@endphp
+
+@if (!empty($project->report_video_link_cover))
+@php
+$imageVideoCover = 'storage/' .$news_detail->video_link_cover
+@endphp
+@else
+@php
+$imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mosque-afp-650_625x300_29_April_22.jpg"
+@endphp
+@endif
 <!--Reports Body -->
-<div class="bg-[#F2FFF285] py-16 pb-20 mt-10">
+<div class="bg-[#F2FFF285] py-16 pb-20 lg:mt-10">
     <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center">
-            <div class="relative ">
-                <p class="font-FlatBold text-xl sm:text-3xl max-w-6xl text-center mt-8 lg:mt-0 xl:text-right">
+        <div class="relative ">
+            <p class="font-FlatBold text-xl sm:text-3xl max-w-6xl text-center mt-8 lg:mt-0 xl:text-right">
+                @if($project)
                 {{ $project->project_name }}
-                </p>
-                <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
-            </div>
-            <div>
-                <a class="bg-[#349A37] hover:bg-[#101426] duration-200 py-3 ml-2 text-white rounded-[50px] w-[134px] lg:w-[110px] xl:w-[134px] inline-block text-center" target="_self" href="{{ route('donation', ['id' => $project->id]) }}">تبرع الان</a>
-            </div>
+                @endif
+            </p>
+            <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
-        <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full" >
-            <div class="absolute leftline"></div>
+        <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full">
+            <div class="absolute leftline1"></div>
             <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
-                <img src="{{ asset($img) }}"
-                alt="people_on_Mousq"
-                    class="w-full max-h-[510px]">
-                <p class="text-[#349A37] text-[22px] pt-4 text-right px-4">
+                <img src="{{ asset($image) }}" alt="people_on_Mousq" class="w-full max-h-[670px] rounded-[5px]">
+                <p class="text-[#349A37] text-[18px] md:text-[22px] pt-14 text-right pr-4">
                     {{ $project->project_name }}
                 </p>
-                @if(!empty($news_detail->new_date))
+                @if(!empty($project->report_date))
                 <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">
-                    {{-- أبريل 20, 2022 --}}
                     {{ $project->report_date }}
                 </p>
                 @endif
@@ -72,15 +79,10 @@
                     أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية الأقصى,
                     مشاريعنا
                 </p>
-                <p class="text-base text-[#101426] font-noto_Regular px-4 pt-2">
-                    {{ $project->report_contents }}
-                    {{-- نظّمت، اليوم السبت، الحركة الإسلامية في الداخل الفلسطيني وجمعية الأقصى لرعاية الأوقاف والمقدسات،
-                    للسنة
-                    الثالثة عشرة على التوالي، معسكر القدس أولًا الذي يهدف إلى تهيئة وتجهيز المسجد الأقصى المبارك
-                    لاستقبال
-                    المصلين في شهر رمضان المبارك، ولدعم... --}}
+                <p class="text-base text-[rgb(16,20,38)] font-noto_Regular px-4 pt-2 text-right">
+                    {!! $project->report_contents !!}
                 </p>
-                {{-- <div class="flex flex-row items-center justify-start px-4 pt-4 pb-10 font-noto_Regular gap-x-2">
+                <div class="flex flex-row items-center justify-start px-4 pt-4 pb-10 font-noto_Regular gap-x-2">
                     <p class="text-[#101426] text-sm">شارك عبر</p>
                     <ul class="share-us flex flex-row items-center justify-start">
                         <li class="px-1">
@@ -124,8 +126,9 @@
                             </a>
                         </li>
                         <li class="px-1">
-                            <a class="pinterest"
-                                href="https://pinterest.com/pin/create/button/?url={{ Request::url() }}&media={{ $img }}&description={{ $project->project_name  }}">
+                            <a class="pinterest" {{--
+                                href="https://pinterest.com/pin/create/button/?url={{ Request::url() }}&media={{ $image }}&description={{ $project->title }}"
+                                --}}>
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
@@ -151,38 +154,44 @@
                             </a>
                         </li>
                     </ul>
-                </div> --}}
-                <div class="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3">
-                    @if(!empty($pictures))
+                </div>
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
+                    @if(!empty($pictures) && !empty($project->report_video_link ))
+                    <div class="col-span-1 scalabel-img-box">
+                        <a href={{ $project->report_video_link }} class="mediabox rounded-[5px]
+                            overflow-hidden relative">
+                            <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full"
+                                src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
+                            <img src="{{ asset('assets/image/play_Svg.svg') }}"
+                                class="absolute max-w-[46px] top-[48%] right-[45%] " />
+                        </a>
+                    </div>
                     @foreach ($pictures as $picture )
                     <div class="col-span-1">
-                        <img class="mx-auto w-full object-cover lg:h-[265px]"
-                        {{-- src="/assets/image/image11.png"  --}}
-                        src="{{ asset($picture['url']) }}"
-                        alt="related image">
+                        <img class="mx-auto w-full object-cover lg:h-[265px] rounded-[5px]"
+                            src="{{ asset($picture['url']) }}" alt="related image">
+                    </div>
+                    @endforeach
+                    @elseif (empty($pictures) && !empty($project->video_link ))
+                    <div class="col-span-1">
+                        <a href={{ $project->video_link }} class="mediabox relative">
+                            <img class=" mx-auto w-full object-cover lg:h-[265px] h-full rounded-[5px]"
+                                src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
+                            <img src="{{ asset('assets/image/play_Svg.svg') }}"
+                                class="absolute max-w-[46px] top-[48%] right-[45%] " />
+                        </a>
+                    </div>
+                    @elseif (!empty($pictures) && empty($project->video_link ))
+                    @foreach ($pictures as $picture )
+                    <div class="col-span-1">
+                        <img class="mx-auto w-full object-cover lg:h-[265px] rounded-[5px]"
+                            src="{{ asset($picture['url']) }}" alt="related image">
                     </div>
                     @endforeach
                     @endif
-                    {{-- <div class="col-span-1">
-                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
-                    </div>
-                    <div class="col-span-1">
-                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
-                    </div>
-                    <div class="col-span-1">
-                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
-                    </div>
-                    <div class="col-span-1">
-                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
-                    </div>
-                    <div class="col-span-1">
-                        <img class="m-auto object-cover max-h-[265px]" src="/assets/image/image11.png" alt="related image">
-                    </div> --}}
                 </div>
-
             </div>
         </div>
-        {{-- @include('layout.front-end.partial.ProjectDetailsSlider') --}}
     </div>
 </div>
 
