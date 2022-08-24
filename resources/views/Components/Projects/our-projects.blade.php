@@ -23,13 +23,8 @@
             <p class="font-FlatBold text-3xl text-center xl:text-right"> مشاريعنا </p>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
-        @php
-        $arr = (array)$projects;
-        if (!$arr) {
-        dd('no data');
-        }
-        @endphp
-        @if(empty($projects))
+
+        @if(empty($projects[0]))
         <p class="text-[24px] text-center text-black font-FlatBold w-full pt-16 pl-4">لا يوجد اي
             <span class="text-[#349A37]">مشاريع </span>
             للعرض
