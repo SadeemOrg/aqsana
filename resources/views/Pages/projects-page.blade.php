@@ -7,16 +7,12 @@
                 <a href="/">الرئيسية</a>
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
-            <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] text-[#101426]">
-                <a href="/">التبرع بالمشاريع</a>
-            </li>
-            <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-[14px] text-[#349A37]">
-                تبرع الان
+                مشاريعنا
             </li>
         </ul>
     </div>
-    @include('Components.ProjectDonations.DonationSteps')
-    @include('Components.ProjectDonations.ProjectDonationsDetalis')
 </div>
+@include('Components.Projects.our-projects')
+{{ $projects->links() }}
 @endsection
