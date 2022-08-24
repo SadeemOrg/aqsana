@@ -112,6 +112,8 @@ class ProjectNews extends Resource
                 ArrayImages::make('Pictures', 'report_pictures')
                     ->disk('public'),
                 Text::make("video link", 'report_video_link'),
+                Image::make(__('video_img_cover'), 'report_video_link_cover')->disk('public')->prunable(),
+
                 Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y'),
 
 
