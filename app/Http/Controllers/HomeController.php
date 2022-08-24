@@ -131,7 +131,7 @@ class HomeController extends Controller
 
         // dd( $new->main_type);
 
-        return view('Pages.single-news', compact('new', 'pictures', 'Articles', 'mainType'));
+        return view('Pages.news-details-page', compact('new', 'pictures', 'Articles', 'mainType'));
     }
 
 
@@ -233,17 +233,17 @@ class HomeController extends Controller
     public function project()
     {
         $projects = DB::table('projects')->orderBy('report_date', 'desc')->paginate(8);
-        return view('projects-page', compact('projects'));
+        return view('Pages.projects-page', compact('projects'));
 
     }
 
-    public function getprojectDetail( $id)
+    public function     getprojectDetail( $id)
     {
          $project = DB::table('projects')->where('id', $id)->first();
 
         $goalsjson = $project->report_pictures;
 
-        $pictures = json_decode(json_decode($goalsjson, true), true);
+        $pictures = json_decode($goalsjson, true);
 
         $Articles = DB::table('projects')->orderBy('report_date', 'desc')->take(6)->get();
 
