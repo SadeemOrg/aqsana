@@ -50,7 +50,7 @@
                 <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
             </div>
             <div>
-                <a class="bg-[#349A37] hover:bg-[#101426] duration-200 py-3 ml-2 text-white rounded-[50px] w-[134px] lg:w-[110px] xl:w-[134px] inline-block text-center" href="/project-donations">تبرع الان</a>
+                <a class="bg-[#349A37] hover:bg-[#101426] duration-200 py-3 ml-2 text-white rounded-[50px] w-[134px] lg:w-[110px] xl:w-[134px] inline-block text-center" target="_self" href="{{ route('donation', ['id' => $project->id]) }}">تبرع الان</a>
             </div>
         </div>
         <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full" >
