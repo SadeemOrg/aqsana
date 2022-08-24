@@ -204,7 +204,7 @@ class HomeController extends Controller
     {
         $Projects = DB::table('projects')->where([
             ['is_donation', '=', '1'],
-            ['is_reported', '=', '1'],
+            ['report_status', '=', '1'],
         ])
             ->get();
 
@@ -233,7 +233,7 @@ class HomeController extends Controller
     public function project()
     {
 
-        $projects = DB::table('projects')->where('is_reported', '=', '1')->orderBy('report_date', 'desc')->paginate(8);
+        $projects = DB::table('projects')->where('report_status', '=', '1')->orderBy('report_date', 'desc')->paginate(8);
         return view('Pages.projects-page', compact('projects'));
 
     }
