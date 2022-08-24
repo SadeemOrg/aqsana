@@ -134,14 +134,24 @@ class QawafilAlaqsa extends Resource
                     ->canSee(function(){
                         $user = Auth::user();
 
-                        if ($user->type() == 'admin' ) {
+                        if  ($user->type() == 'regular_city' || $user->type() == 'regular_area'){
                             return true;
                         }
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
                 Text::make(__("project name"), "project_name"),
                 Text::make(__("project describe"), "project_describe"),
-
+                Select::make(__('SECTOR'), 'sector')
+                    ->options(function () {
+                        $sectors = nova_get_setting('workplace', 'default_value');
+                        $user_type_admin_array =  array();
+                        if ($sectors != "default_value") {
+                            foreach ($sectors as $sector) {
+                                $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
+                            }
+                            return  $user_type_admin_array;
+                        }
+                    }),
                 BelongsToManyField::make(__('Area'),"Area" ,'\App\Nova\Area')
                     ->options(Area::all())
                     ->optionsLabel('name')->canSee(function ($request) {
@@ -155,13 +165,62 @@ class QawafilAlaqsa extends Resource
                 DateTime::make(__('projec end'), 'end_date'),
 
 
-
+                Boolean::make(__('is_bus'), 'is_bus'),
                 Boolean::make(__('is_has_volunteer'), 'is_volunteer'),
                 Boolean::make(__('is_has_Donations'), 'is_donation'),
 
 
+                // Select::make(__('is_reported'), 'is_reported')->options([
+                //     '1' => 'نعم',
+                //     '0' => 'لا',
+                // ])->displayUsingLabels(),
 
 
+                NovaDependencyContainer::make([
+                    Text::make(__("Title"), 'report_title'),
+                    Textarea::make(__('description'), 'report_description'),
+                    Tiptap::make(__('Contents'), 'report_contents')
+                        ->buttons([
+                            'heading',
+                            '|',
+                            'italic',
+                            'bold',
+                            '|',
+                            'link',
+                            'code',
+                            'strike',
+                            'underline',
+                            'highlight',
+                            '|',
+                            'bulletList',
+                            'orderedList',
+                            'br',
+                            'codeBlock',
+                            'blockquote',
+                            '|',
+                            'horizontalRule',
+                            'hardBreak',
+                            '|',
+                            'table',
+                            '|',
+                            'image',
+                            '|',
+                            'textAlign',
+                            '|',
+                            'rtl',
+                            '|',
+                            'history',
+                        ])
+                        ->headingLevels([1, 2, 3, 4, 5, 6]),
+
+
+                    Image::make(__('Image'), 'report_image')->disk('public')->prunable(),
+                    ArrayImages::make(__('Pictures'), 'report_pictures')
+                        ->disk('public'),
+                    Text::make(__("video link"), 'report_video_link'),
+                    Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y'),
+
+                ])->dependsOn('is_reported', '10'),
 
                 BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -325,7 +384,7 @@ class QawafilAlaqsa extends Resource
 
             ])),
             (new Panel(__('status'), [
-                Text::make('approval ', 'approval', function () {
+                Select::make(__('status'), 'status', function () {
                     $id = Auth::id();
                     $user = Auth::user();
                     if ($user->type() == 'regular_city') {
@@ -337,12 +396,15 @@ class QawafilAlaqsa extends Resource
                                 ['city_id', '=', $citye['id']],
                             ])
                             ->first();
-                        // return  "1";
-                        // dd("1");
+
                         if ($acspet)  return   $acspet->status;
                         else return "__";
                     }
-                })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                })  ->options([
+                    '1' => 'active',
+                    '2' => 'not active',
+                  ])
+                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 })->canSee(function ($request) {
                     $user = Auth::user();

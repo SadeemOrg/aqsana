@@ -110,7 +110,7 @@ class Project extends Resource
 
             $Area = \App\Models\Area::where('admin_id', $id)->first();
             $projects = DB::table('project_area')->where('area_id', $Area->id)->get();
-        } else {
+        } else  {
             $citye =   City::where('admin_id', $id)
                 ->select('id')->first();
             $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
@@ -325,8 +325,7 @@ class Project extends Resource
                                 ['city_id', '=', $citye['id']],
                             ])
                             ->first();
-                        // return  "1";
-                        // dd("1");
+
                         if ($acspet) {
                             if ($acspet->accepted == "1") return "aproved";
                             elseif ($acspet->accepted == "2") return "not aproved";
@@ -386,7 +385,7 @@ class Project extends Resource
 
             ])),
             (new Panel(__('status'), [
-                Text::make('approval ', 'approval', function () {
+                Select::make(__('status'), 'status', function () {
                     $id = Auth::id();
                     $user = Auth::user();
                     if ($user->type() == 'regular_city') {
@@ -398,12 +397,15 @@ class Project extends Resource
                                 ['city_id', '=', $citye['id']],
                             ])
                             ->first();
-                        // return  "1";
-                        // dd("1");
+
                         if ($acspet)  return   $acspet->status;
                         else return "__";
                     }
-                })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                })  ->options([
+                    '1' => 'active',
+                    '2' => 'not active',
+                  ])
+                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 })->canSee(function ($request) {
                     $user = Auth::user();
