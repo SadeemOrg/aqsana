@@ -16,12 +16,8 @@ use App\Http\Controllers\NotificationTest;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
-
 Route::get('/من-نحن', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/conctus', [HomeController::class, 'conctus'])->name('conctus');
 Route::get('/category/{maintype}/{type}', [HomeController::class, 'news'])->name('news');
@@ -36,7 +32,7 @@ Route::get('/project-donations', [HomeController::class, 'donation'])->name('don
 Route::get('/donation/{id}', [HomeController::class, 'getdonationDetail'])->name('getdonationDetail');
 
 Route::get('/donation', function (){
-    return view('Pages.project-donations');
+    return view('Pages.donations-page');
 });
 
 Route::get('/sector/{sector}', [HomeController::class, 'sector'])->name('sector');
@@ -49,39 +45,10 @@ Route::get('/search/{val}/', [HomeController::class, 'search'])->name('search');
 Route::get('/project', [HomeController::class, 'project'])->name('project');
 Route::get('/project/{id}', [HomeController::class, 'getprojectDetail'])->name('getprojectDetail');
 
-
-// Route::get('our-project', function (){
-//     return view('projects-page');
-// });
-// Route::get('our-project/1', function (){
-//     return view('Pages.project-details-page');
-// });
-
-
-// Route::get('project-donations', function (){
-//     return view('Pages.project-donations');
-// });
-
-// Route::get('/annual-news', function (){
-//     return view('Pages.annual-news');
-// });
-
-
-// Route::get('/contact', function (){
-//     return view('Pages.contact-page');
-// });
-
-
 Route::get('/testNotfiy', function (){
     return view('Pages.testNotfiy');
 });
 
 Route::get('/SendNotificationTest',[NotificationTest::class,'sendNotfiy'])->name('sendNotfiy');
 
-// Route::get('/projects-for-donations', function (){
-//     return view('projects-for-donations');
-// });
-// Route::get('/donation-details/1', function (){
-//     return view('project-donation-details');
-// });
 

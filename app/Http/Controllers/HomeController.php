@@ -210,7 +210,7 @@ class HomeController extends Controller
 
 
         // dd($Projects);
-        return view('projects-for-donations', compact('Projects'));
+        return view('Pages.projects-donation', compact('Projects'));
     }
     public function getdonationDetail($id)
     {
@@ -226,7 +226,7 @@ class HomeController extends Controller
 
 
 
-        return view('project-donation-details', compact('project', 'pictures'));
+        return view('pages.project-donation-details', compact('project', 'pictures'));
     }
 
 
