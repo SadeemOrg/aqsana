@@ -58,9 +58,6 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
 </div>
 <div class="bg-[#F2FFF285] py-16 pb-20 lg:mt-10">
     <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
-        {{-- @php
-        dd($news_detail->video_link);
-        @endphp --}}
         <div class="relative ">
             <p class="font-FlatBold text-xl sm:text-3xl max-w-6xl text-center mt-8 lg:mt-0 xl:text-right">
                 @if($news_detail)
