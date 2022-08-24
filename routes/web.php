@@ -35,7 +35,7 @@ Route::get('/project-donations', [HomeController::class, 'donation'])->name('don
 
 Route::get('/donation/{id}', [HomeController::class, 'getdonationDetail'])->name('getdonationDetail');
 
-Route::get('donations', function (){
+Route::get('/donation', function (){
     return view('Pages.project-donations');
 });
 
@@ -58,9 +58,9 @@ Route::get('/project/{id}', [HomeController::class, 'getprojectDetail'])->name('
 // });
 
 
-Route::get('project-donations', function (){
-    return view('Pages.project-donations');
-});
+// Route::get('project-donations', function (){
+//     return view('Pages.project-donations');
+// });
 
 // Route::get('/annual-news', function (){
 //     return view('Pages.annual-news');
