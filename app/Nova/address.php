@@ -38,6 +38,7 @@ class address extends Resource
      *
      * @var array
      */
+    public static $priority = 3;
     public static $search = [
         'id',"name_address"
     ];

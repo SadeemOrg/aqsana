@@ -34,7 +34,7 @@ class Currency extends Resource
     }
 
     public static $title = 'name';
-    public static $priority = 4;
+    public static $priority = 6;
     /**
      * The columns that should be searched.
      *

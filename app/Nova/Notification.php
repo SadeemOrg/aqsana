@@ -32,6 +32,7 @@ class Notification extends Resource
         return __('Admin');
     }
     public static $displayInNavigation = true;
+    public static $priority = 8;
     /**
      * The columns that should be searched.
      *

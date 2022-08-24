@@ -3,35 +3,27 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\Boolean;
-class Role extends Resource
+
+class Donations extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Role::class;
+    public static $model = \App\Models\Donations::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
+    public static $title = 'id';
 
-    public static function label()
-    {
-        return __('Role');
-    }
-    public static function group()
-    {
-        return __('Admin');
-    }
-     public static $title = 'role';
-    public static $priority = 10;
     /**
      * The columns that should be searched.
      *
@@ -40,6 +32,15 @@ class Role extends Resource
     public static $search = [
         'id',
     ];
+    public static function label()
+    {
+        return __('Donations');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }
+    public static $priority = 7;
 
     /**
      * Get the fields displayed by the resource.
@@ -51,9 +52,12 @@ class Role extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('code_role'),
-            Text::make('role'),
-            Boolean::make("status","status"),
+            BelongsTo::make(__('project'), 'project', \App\Nova\Project::class),
+            BelongsTo::make(__('user'), 'User', \App\Nova\User::class),
+            Text::make(__('donor_name'), 'donor_name'),
+            Text::make(__('amount'), 'amount'),
+            Text::make(__('number_of_people'), 'number_of_people'),
+
         ];
     }
 

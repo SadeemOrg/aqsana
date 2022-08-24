@@ -34,6 +34,7 @@ class receiptVoucher extends Resource
     {
         return __('Financial management');
     }
+    public static $priority = 1;
     /**
      * The columns that should be searched.
      *

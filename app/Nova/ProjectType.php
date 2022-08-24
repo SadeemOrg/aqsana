@@ -17,6 +17,7 @@ class ProjectType extends Resource
      * @var string
      */
     public static $model = \App\Models\ProjectType::class;
+    public static $displayInNavigation = false;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -33,7 +34,6 @@ class ProjectType extends Resource
         return __('Admin');
     }
     public static $title = 'name';
-    public static $priority = 6;
     /**
      * The columns that should be searched.
      *

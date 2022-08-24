@@ -33,6 +33,10 @@ Route::get('/donation', [HomeController::class, 'donation'])->name('donation');
 
 Route::get('/donation/{id}', [HomeController::class, 'getdonationDetail'])->name('getdonationDetail');
 
+Route::get('project-donations', function (){
+    return view('Pages.project-donations');
+});
+
 Route::get('/sector/{sector}', [HomeController::class, 'sector'])->name('sector');
 
 Route::get('/contact-us', function (){
