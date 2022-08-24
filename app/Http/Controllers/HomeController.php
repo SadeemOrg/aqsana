@@ -91,7 +91,7 @@ class HomeController extends Controller
 
         $mainType = str_replace("-", " ", $maintype);
         $type = str_replace("-", " ", $type);
-        return view('Pages.our-news', compact('news', 'mainType', 'type'));
+        return view('Pages.news-page', compact('news', 'mainType', 'type'));
     }
 
     public function getnewDetail($title, $id)
@@ -145,7 +145,7 @@ class HomeController extends Controller
 
             ->paginate(8);
 
-        return view('Pages.our-news', compact('news', 'mainType', 'type'));
+        return view('Pages.news-page', compact('news', 'mainType', 'type'));
         // foreach ($News as $key => $value) {
         //     echo  $value->title;
         //     echo '<br>';
@@ -198,9 +198,9 @@ class HomeController extends Controller
             ->orWhere('title', 'like',  "%{$search}%")
             ->orWhere('sector', 'like',  "%{$search}%")
             ->paginate(8);
-        return view('Pages.our-news', compact('news', 'mainType', 'type'));
+        return view('Pages.news-page', compact('news', 'mainType', 'type'));
     }
-    public function donation()
+    public function projectdonation()
     {
         $Projects = DB::table('projects')->where([
             ['is_donation', '=', '1'],
@@ -210,7 +210,7 @@ class HomeController extends Controller
 
 
         // dd($Projects);
-        return view('Pages.projects-donation', compact('Projects'));
+        return view('Pages.projectDonations.projects-donation', compact('Projects'));
     }
     public function getdonationDetail($id)
     {
@@ -226,7 +226,7 @@ class HomeController extends Controller
 
 
 
-        return view('pages.project-donation-details', compact('project', 'pictures'));
+        return view('Pages.projectDonations.project-donation-details', compact('project', 'pictures'));
     }
 
 
@@ -234,7 +234,7 @@ class HomeController extends Controller
     {
 
         $projects = DB::table('projects')->where('report_status', '=', '1')->orderBy('report_date', 'desc')->paginate(8);
-        return view('Pages.projects-page', compact('projects'));
+        return view('Pages.ProjectsDetails.projects-page', compact('projects'));
 
     }
 
@@ -248,7 +248,11 @@ class HomeController extends Controller
 
         $Articles = DB::table('projects')->orderBy('report_date', 'desc')->take(6)->get();
 
-        return view('Pages.project-details-page', compact('project', 'pictures', 'Articles' ));
+        return view('Pages.ProjectsDetails.project-details-page', compact('project', 'pictures', 'Articles' ));
 
+    }
+    public function     donation( $id)
+    {
+    dd($id);
     }
 }

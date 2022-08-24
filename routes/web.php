@@ -25,14 +25,19 @@ Route::get('/categor/{title}/{id}/', [HomeController::class, 'getnewDetail'])->n
 
 Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch');
 
-// projects for donation
-Route::get('/project-donations', [HomeController::class, 'donation'])->name('donation');
-// project details by id for donation
 
-Route::get('/donation/{id}', [HomeController::class, 'getdonationDetail'])->name('getdonationDetail');
+// projects for donation
+Route::get('/project-donations', [HomeController::class, 'projectdonation'])->name('projectdonation');
+
+// project details by id for donation
+Route::get('/project-donations/{id}', [HomeController::class, 'getdonationDetail'])->name('getdonationDetail');
+
+
+
+Route::get('/donation/{id}', [HomeController::class, 'donation'])->name('donation');
 
 Route::get('/donation', function (){
-    return view('Pages.donations-page');
+    return view('Pages.donationsPage.donations-page');
 });
 
 Route::get('/sector/{sector}', [HomeController::class, 'sector'])->name('sector');
