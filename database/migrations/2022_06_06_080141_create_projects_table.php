@@ -33,6 +33,7 @@ class CreateProjectsTable extends Migration
             $table->string('report_image')->nullable();
             $table->json('report_pictures')->nullable();
             $table->string('report_video_link')->nullable();
+            $table->string('report_video_link_cover')->nullable();
             $table->date('report_date');
             $table->string('sector');
             $table->datetime('start_date');
