@@ -51,7 +51,7 @@ use Pdmfc\NovaFields\ActionButton;
 
 use Fourstacks\NovaRepeatableFields\Repeater;
 
-class Project extends Resource
+class Trip extends Resource
 {
     /**
      * The model the resource corresponds to.
@@ -65,16 +65,11 @@ class Project extends Resource
      *
      * @var string
      */
-    public static $title = 'project_name';
-    public static $priority = 1;
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
+    public static $title = 'id';
+    public static $priority = 3;
     public static function label()
     {
-        return __('project');
+        return __('Trip');
     }
     public static function group()
     {
@@ -89,23 +84,13 @@ class Project extends Resource
        else return true;
     }
 
-    public static $search = [
-        'id',
-    ];
-
-    /**
-     * Get the fields displayed by the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public static function indexQuery(NovaRequest $request, $query)
     {
         $user = Auth::user();
         $id = Auth::id();
         if ($user->type() == 'admin' ) {
 
-            return $query->where('project_type', '1');
+            return $query->where('project_type', '3');
         } elseif ($user->type() == 'regular_area') {
 
             $Area = \App\Models\Area::where('admin_id', $id)->first();
@@ -121,8 +106,23 @@ class Project extends Resource
         foreach ($projects as $key => $value) {
             array_push($stack, $value->project_id);
         }
-        return $query->whereIn('id', $stack)->where('project_type', '1');
+        return $query->whereIn('id', $stack)->where('project_type', '3');
     }
+    /**
+     * The columns that should be searched.
+     *
+     * @var array
+     */
+    public static $search = [
+        'id',
+    ];
+
+    /**
+     * Get the fields displayed by the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
     public function fields(Request $request)
     {
         return [
@@ -426,68 +426,67 @@ class Project extends Resource
                         return null;
                     })
                     ->canSee(function ($request) {
-
                         $user = Auth::user();
                         if ($user->type() == 'regular_city') return true;
                         return false;
                     }),
-                Flexible::make('Content', 'newbus')
-                    ->readonly(true)
-                    ->addLayout('Add new bus', 'bus', [
-
-                        Select::make('BusesCompany', 'BusesCompany')
-                            ->options(function () {
-                                $users =  \App\Models\BusesCompany::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name'])];
-                                }
-
-                                return $user_type_admin_array;
-                            }),
 
 
-                        Text::make("Bus Number", "bus_number"),
 
-                        Number::make("Number person on bus", "number_person_on_bus")->step(1.0),
+                Repeater::make('newbus')
+                    ->addField([
 
-                        Number::make("seat price", "seat_price")->step(1.0),
+                        'name' => 'name_driver',
+                        'label' => 'driver name',
 
-                        Select::make('travel from', 'from')
-                            ->options(function () {
-                                $users =  \App\Models\address::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name_address'])];
-                                }
-
-                                return $user_type_admin_array;
-                            }),
-
-
-                        Select::make('travel to', 'to')
-                            ->options(function () {
-                                $users =  \App\Models\address::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name_address'])];
-                                }
-
-                                return $user_type_admin_array;
-                            }),
-
-
-                        Text::make("Name Driver", "name_driver"),
-                        Text::make("phone_number", "phone_number"),
+                        'width' => 'w-full',
+                        'options' => [
+                            'fido' => 'Fido',
+                            'mr_bubbles' => 'Mr Bubbles',
+                            'preston' => 'Preston'
+                        ],
 
                     ])
+                    ->addField([
 
+                        'name' => 'bus_number',
+                        'label' => 'bus number',
+                        'options' => [
+                            'fido' => 'Fido',
+                            'mr_bubbles' => 'Mr Bubbles',
+                            'preston' => 'Preston'
+                        ],
 
+                    ])
+                    ->addField([
 
+                        'name' => 'number_of_seats',
+                        'label' => 'number of seats',
+                        'width' => 'w-full',
+                    ])
+                    ->addField([
+
+                        'name' => 'seat_price',
+                        'label' => 'seat price',
+                        'width' => 'w-full',
+                    ])
+                    ->addField([
+
+                        'name' => 'phone_number_driver',
+                        'label' => 'phone number driver',
+                        'width' => 'w-full',
+                    ])->hideFromDetail()->hideFromIndex()
+
+                    ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                        return null;
+                    })->canSee(function ($request) {
+                        $user = Auth::user();
+                        if ($user->type() == 'regular_city') return true;
+                        return false;
+                    }),
 
 
             ])),
-
 
 
 
@@ -498,7 +497,7 @@ class Project extends Resource
     {
                 $id = Auth::id();
         $model->created_by = $id;
-        $model->project_type='1';
+        $model->project_type='3';
         $model->is_reported='0';
 
        }
@@ -604,25 +603,20 @@ class Project extends Resource
             //     );
         }
         if ($request->newbus) {
-            $buss = $request->newbus;
-            // dd($request->newbus);
-            foreach ($buss as $bus) {
-                // dd($bus['attributes']);
+            $buss = json_decode($request->newbus);
+
+            foreach ($buss as $user) {
+                //  dd($user);
+
                 DB::table('buses')
                     ->insert(
-                        [
-                            'name_driver' => $bus['attributes']['name_driver'],
-                            'company_id' => $bus['attributes']['BusesCompany'],
-                            'bus_number' => $bus['attributes']['bus_number'],
-                            'number_of_seats' => $bus['attributes']['number_person_on_bus'],
-                            'seat_price' => $bus['attributes']['seat_price'],
-                            'travel_from' => $bus['attributes']['from'],
-                            'travel_to' => $bus['attributes']['to'],
-                            'phone_number_driver' => $bus['attributes']['phone_number'],
-                            'status' => '1',
-                        ]
+                        ['name_driver' => $user->name_driver, 'bus_number' => $user->bus_number, 'number_of_seats' => $user->number_of_seats, 'seat_price' => $user->seat_price, 'phone_number_driver' => $user->phone_number_driver],
+
                     );
-                $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
+                $bus =  \App\Models\Bus::where('bus_number', $user->bus_number)->first();
+
+
+                // dd($users['id']);
 
                 DB::table('project_bus')
                     ->updateOrInsert(
@@ -644,7 +638,6 @@ class Project extends Resource
         //     }
         // }
     }
-
     /**
      * Get the cards available for the request.
      *
@@ -686,12 +679,6 @@ class Project extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-
-            new ApprovalRejectProjec,
-
-
-
-        ];
+        return [];
     }
 }

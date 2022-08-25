@@ -62,7 +62,7 @@ class Alhisalat extends Resource
     public static $search = [
         'id',
     ];
-
+    public static $priority =4 ;
     /**
      * Get the fields displayed by the resource.
      *
