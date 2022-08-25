@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
+use App\Http\Controllers\DonationsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\ProjectController;
@@ -37,6 +38,9 @@ Route::post('/login_social_media', [AuthController::class, 'login_social_media']
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/user/update', [AuthController::class, 'update']);
+
+    //donations Api
+    Route::get('/donations', [DonationsController::class, 'index']);
 });
 
 Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
@@ -55,6 +59,12 @@ Route::get('/social_media', [SettingController::class, 'social_media']);
 Route::post('/volunteer_project', [VolunteerController::class, 'store']);
 Route::post('/cancel_volunteering', [VolunteerController::class, 'cancel_volunteering']);
 Route::get('/get_volunteering_user', [VolunteerController::class, 'get_volunteering_user']);
+
+
+//Donations api
+Route::post('/donations', [DonationsController::class, 'store']);
+
+
 
 
 

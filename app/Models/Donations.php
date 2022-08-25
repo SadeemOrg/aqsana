@@ -9,7 +9,7 @@ class Donations extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','project_id','User','donor_name','amount','number_of_people'
+        'id','project_id','project_type','user_id','bus_id','donor_name','amount','number_of_people'
     ];
 
     protected $hidden = [
@@ -24,6 +24,12 @@ class Donations extends Model
     public function project()
     {
         return $this->belongsTo('App\Models\project', 'project_id' );
+
+    }
+
+    public function bus()
+    {
+        return $this->belongsTo('App\Models\bus', 'bus_id' );
 
     }
 }
