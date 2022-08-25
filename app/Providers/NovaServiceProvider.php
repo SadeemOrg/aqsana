@@ -375,11 +375,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             ]),
         ]);
-        // \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-        //     new Tabs('privacy terms', [
+        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
+            new Tabs('donations', [
+                Text::make('check box text', 'checkbox_donation'),
 
-        //     ]),
-        // ]);
+            ]),
+        ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             new Tabs('website Settings', [
                 'website SEO'    => [
@@ -403,8 +404,44 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('email', 'email'),
                     Text::make('address', 'address'),
                 ],__('privacy terms') => [
-                    Text::make('check box text', 'checkbox_donation'),
-                    Tiptap::make(__('privacy terms'), 'privacy terms')
+
+                    Tiptap::make(__('privacy terms'), 'privacy_terms')
+                    ->buttons([
+                        'heading',
+                        '|',
+                        'italic',
+                        'bold',
+                        '|',
+                        'link',
+                        'code',
+                        'strike',
+                        'underline',
+                        'highlight',
+                        '|',
+                        'bulletList',
+                        'orderedList',
+                        'br',
+                        'codeBlock',
+                        'blockquote',
+                        '|',
+                        'horizontalRule',
+                        'hardBreak',
+                        '|',
+                        'table',
+                        '|',
+                        'image',
+                        '|',
+                        'textAlign',
+                        '|',
+                        'rtl',
+                        '|',
+                        'history',
+                    ])
+                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+
+                ] ,__('Cancellation Policy') => [
+
+                    Tiptap::make(__('Cancellation Policy'), 'Cancellation_Policy')
                     ->buttons([
                         'heading',
                         '|',
