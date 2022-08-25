@@ -251,8 +251,13 @@ class HomeController extends Controller
         return view('Pages.ProjectsDetails.project-details-page', compact('project', 'pictures', 'Articles' ));
 
     }
-    public function     donation( $id)
+    public function  donation($id)
     {
-    dd($id);
+        $project = DB::table('projects')->where('id', $id)->first();
+        return view('Pages.donationsPage.donations-page',compact('project'));
+    }
+    public function donations()
+    {
+        return view('Pages.donationsPage.donations-page');
     }
 }
