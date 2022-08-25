@@ -403,6 +403,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('email', 'email'),
                     Text::make('address', 'address'),
                 ],__('privacy terms') => [
+                    Text::make('check box text', 'checkbox_donation'),
                     Tiptap::make(__('privacy terms'), 'privacy terms')
                     ->buttons([
                         'heading',
