@@ -94,8 +94,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                             'label' => 'image description',
                                             'multiple' => false,
                                             'required' => true
-                                        ]
-                                        ,
+                                        ],
 
                                         [
                                             'type' => 'text',
@@ -376,7 +375,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             ]),
         ]);
+        // \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
+        //     new Tabs('privacy terms', [
 
+        //     ]),
+        // ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             new Tabs('website Settings', [
                 'website SEO'    => [
@@ -399,6 +402,41 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('phone', 'phone'),
                     Text::make('email', 'email'),
                     Text::make('address', 'address'),
+                ],__('privacy terms') => [
+                    Tiptap::make(__('privacy terms'), 'privacy terms')
+                    ->buttons([
+                        'heading',
+                        '|',
+                        'italic',
+                        'bold',
+                        '|',
+                        'link',
+                        'code',
+                        'strike',
+                        'underline',
+                        'highlight',
+                        '|',
+                        'bulletList',
+                        'orderedList',
+                        'br',
+                        'codeBlock',
+                        'blockquote',
+                        '|',
+                        'horizontalRule',
+                        'hardBreak',
+                        '|',
+                        'table',
+                        '|',
+                        'image',
+                        '|',
+                        'textAlign',
+                        '|',
+                        'rtl',
+                        '|',
+                        'history',
+                    ])
+                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+
                 ],
             ]),
         ]);
