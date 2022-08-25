@@ -166,7 +166,7 @@ class HomeController extends Controller
             array_push($stack_main_type, $value->main_type);
         }
 
-        $News = News::query()->where('main_type', $stack_main_type)
+        $News = News::query()->wherein('main_type', $stack_main_type)
             ->orWhere('title', 'like',  "%{$search}%")
             ->orWhere('sector', 'like',  "%{$search}%")
             ->select('title', 'id')
@@ -176,8 +176,8 @@ class HomeController extends Controller
         //     echo  $value->title;
         //     echo '<br>';
         // }
+        //  dd($News);
         return $News;
-        // return dd($News);
     }
     public function pagesearch(Request $request)
     {
