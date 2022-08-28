@@ -45,45 +45,18 @@ class AuthController extends Controller
         $fields = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|unique:users|email',
-            'phone' => 'numeric|digits_between:9,15',
             'password' => 'required|string|confirmed',
             'user_role' => 'required|string',
-            'birth_date' => 'date_format:Y-m-d',
-
-
         ]);
-        $city_id = "";
-        $photo = "";
-        $birth_datep = "";
-        $phone = "";
-
-
-        if ($request->has('city_id')) {
-            $city_id = $request['city_id'];
-        }
-        if ($request->has('photo')) {
-            $photo = $request['photo'];
-        }
-        if ($request->has('birth_date')) {
-            $birth_datep = $request['birth_date'];
-        }
-        if ($request->has('phone')) {
-            $phone = $request['phone'];
-        }
+      
 
 
 
         $user = User::create([
             'name' => $fields['name'],
             'email' => $fields['email'],
-            'phone' => $fields['phone'],
             'password' => bcrypt($fields['password']),
             'user_role' => $fields['user_role'],
-            'city_id' => $request['city_id'],
-            'photo' => $request['photo'],
-            'birth_datep' => $request['birth_datep'],
-            'phone' => $request['phone'],
-
         ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;
@@ -245,6 +218,7 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
 
+        
         // Check email
         $user = User::where('email', $fields['email'])->first();
 
