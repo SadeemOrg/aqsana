@@ -4,11 +4,12 @@
     }
 </style>
 @php
+// dd($project);
 $project_Id =1 ;
-$PrivecyModal = 0;
 @endphp
 <div>
-    <form class="flex flex-col w-full items-center md:items-start justify-center">
+    <form class="flex flex-col w-full items-center md:items-start justify-center" action="{{ route('donations') }}" method="post">
+        @csrf
         <div class="flex flex-row items-center ">
             <div class="mt-10 firstPage">
                 <label for="price" class="block text-sm font-medium text-gray-700 pr-1">المبلغ المراد التبرع به</label>
@@ -16,7 +17,7 @@ $PrivecyModal = 0;
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <span class="text-gray-500 sm:text-sm"> ₪ </span>
                     </div>
-                    <input type="number" name="price" id="price"
+                    <input type="number" name="donation_amount" id="price"
                         class="focus:ring-green-500 focus:border-green-500 block  sm:text-sm border-gray-300 rounded-md w-[220px] md:w-full"
                         placeholder="0.00" aria-describedby="price-currency">
                 </div>
@@ -53,9 +54,9 @@ $PrivecyModal = 0;
         <!-- Second Page Input -->
         <div class="secondPage mt-10 sm:mt-20 flex flex-col gap-y-6 hidden w-full">
             <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
-                <input type="text" name="" placeholder=" الاسم الاول"
+                <input type="text" name="donation_amount" placeholder=" الاسم الاول"
                     class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
-                <input type="text" name="" placeholder=" الاسم الاخير"
+                <input type="text" name="lastName" placeholder=" الاسم الاخير"
                     class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
             </div>
             <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
@@ -76,7 +77,7 @@ $PrivecyModal = 0;
             <!-- Second Page Radio Input -->
             <div class="flex flex-col gap-y-2 items-start justify-start mt-4 mr-[9%] md:mr-0">
                 <div class="flex flex-row items-center mb-5 sm:mb-0">
-                    <input id="visa" name="notification-method" type="checkbox" value="visa"
+                    <input id="visa" name="notification-method"  type="checkbox" value="visa"
                         class="focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
                     <label for="visa"
                         class="ml-3 text-md font-medium text-[#201A3C] pr-2 flex flex-row-reverse items-center">
@@ -89,7 +90,7 @@ $PrivecyModal = 0;
                 <div class="flex flex-row items-start sm:items-center mb-5 sm:mb-0">
                     <input id="privecy" name="privecy" type="checkbox" value="privecy"
                         class="focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
-                    <div class="tabs ml-3 text-base sm:text-lg font-medium text-[#201A3C] pr-2 flex flex-row flex-wrap gap-x-1 sm:items-center justify-start">
+                    <label for="privecy" class="tabs ml-3 text-base sm:text-lg font-medium text-[#201A3C] pr-2 flex flex-row flex-wrap gap-x-1 sm:items-center justify-start">
                         <p > אני מאשר/ת </p>
                         <p data-tab="1"
                             class=" text-green-900 px-1  underline text-xl font-extrabold cursor-pointer showModal ">
@@ -126,7 +127,7 @@ $PrivecyModal = 0;
 
     <div class="flex flex-row items-center justify-center md:justify-start gap-x-2">
         <div class="mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5">
-            <button id="firstPageDonations"
+            <button id="firstPageDonations" type="submit"
                 class="Ctnbtn rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">متابعة</button>
         </div>
         <div

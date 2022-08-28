@@ -513,10 +513,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
-.mx-1{
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
-}
 .mx-5{
   margin-left: 1.25rem;
   margin-right: 1.25rem;
@@ -826,9 +822,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
   min-width: fit-content;
-}
-.min-w-\[390px\]{
-  min-width: 390px;
 }
 .max-w-7xl{
   max-width: 80rem;
@@ -1314,12 +1307,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pr-2{
   padding-right: 0.5rem;
 }
-.pb-0\.5{
-  padding-bottom: 0.125rem;
-}
-.pb-0{
-  padding-bottom: 0px;
-}
 .pr-6{
   padding-right: 1.5rem;
 }
@@ -1334,6 +1321,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pr-3{
   padding-right: 0.75rem;
+}
+.pb-0{
+  padding-bottom: 0px;
 }
 .pl-2{
   padding-left: 0.5rem;
@@ -1476,13 +1466,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
-.text-gray-400{
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
-}
 .text-green-900{
   --tw-text-opacity: 1;
   color: rgb(20 83 45 / var(--tw-text-opacity));
+}
+.text-gray-400{
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 .text-gray-500{
   --tw-text-opacity: 1;
@@ -1852,13 +1842,13 @@ body{
   .sm\:text-\[27px\]{
     font-size: 27px;
   }
-  .sm\:text-base{
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
   .sm\:text-2xl{
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+  .sm\:text-base{
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
 @media (min-width: 768px){
