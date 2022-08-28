@@ -83,7 +83,7 @@
                             <div class="flex text-center">
                                 <a target="_self"
                                     class="bg-[#349A37] hover:bg-[#101426] duration-200 py-3 ml-2 text-white  rounded-[50px] w-[134px] lg:w-[110px] xl:w-[134px] "
-                                    href="/project-donations">تبرع الان</a>
+                                    href="{{ route('donations', ['id' => $Project->id]) }}">تبرع الان</a>
                                 <a class="bg-transparent hover:text-white hover:bg-[#349A37] duration-200 py-3 text-[#349A37] rounded-[50px] w-[134px] lg:w-[110px] xl:w-[134px]  border border-[#349A37]"
                                     href="{{ route('getdonationDetail', ['id' => $Project->id]) }}" target="_self">رؤية
                                     التفاصيل</a>

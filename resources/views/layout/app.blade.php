@@ -270,10 +270,11 @@ var PagePrevious = 0;
 $("#firstPageDonations").click(function() {
 $(".firstPage").hide();
 pageNumber++;
-if(pageNumber==1){
+if(pageNumber ==1 ){
     pageNumber=1
     $(".secondPage").css("display", "flex");
     $(".Ctnbtn").text("تأكيد الدفع");
+    $(".Ctnbtn").attr("disabled", true);
 }
 else if(pageNumber == 2 ){
     $(".thirdPage").css("display","flex")
@@ -301,7 +302,6 @@ $(".tabs .showModal").click(function() {
     $(".PrivecySettingModal .tab").hide();
     console.log('.tab-'+$(this).data("tab"))
 if($(this).data("tab")==1){
-    // console.log("sss")
     $('.ModalContainer').css("max-width", "576px");
 }
 else{
@@ -309,6 +309,26 @@ else{
 }
 $('.tab-'+$(this).data('tab')).fadeIn();
 });
+
+$("#visa").click(function() {
+if($("#privecy").is(":checked")){
+    $(".Ctnbtn").attr("disabled", false);
+}
+else{
+    $(".Ctnbtn").attr("disabled", true);
+}
+});
+
+$("#privecy").click(function() {
+if($("#visa").is(":checked")){
+    $(".Ctnbtn").attr("disabled", false);
+}
+else{
+    $(".Ctnbtn").attr("disabled", true);
+}
+});
+
+
     </script>
     <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
     <script src="{{ asset('assets/front-end/js/main.js') }}"></script>
