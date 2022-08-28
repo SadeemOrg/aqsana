@@ -84,19 +84,21 @@ $PrivecyModal = 0;
                         <img src="{{asset('assets/image/visa_1.svg')}}" class="pl-3 w-[52px]" />
                     </label>
                 </div>
-                <div class="flex flex-row items-center mb-5 sm:mb-0">
+
+                {{-- אני מאשר/ת את מדיניות ביטולים וגם מדיניות פרטיות --}}
+                <div class="flex flex-row items-start sm:items-center mb-5 sm:mb-0">
                     <input id="privecy" name="privecy" type="checkbox" value="privecy"
                         class="focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
-                    <div class="tabs ml-3 text-md font-medium text-[#201A3C] pr-2 flex flex-row-reverse items-center">
-                        <p class="text-lg px-1">
-                        <p data-tab="2"
-                            class="mx-1 text-green-900 px-1 pb-0.5 underline text-xl font-extrabold cursor-pointer showModal">
-                            מדיניות פרטיות</p>
-                        בנוסף
+                    <div class="tabs ml-3 text-base sm:text-lg font-medium text-[#201A3C] pr-2 flex flex-row flex-wrap gap-x-1 sm:items-center justify-start">
+                        <p > אני מאשר/ת </p>
                         <p data-tab="1"
-                            class="mx-1 text-green-900 px-1 pb-0.5 underline text-xl font-extrabold cursor-pointer showModal">
+                            class=" text-green-900 px-1  underline text-xl font-extrabold cursor-pointer showModal ">
                             מדיניות ביטולים</p>
-                        אני מאשר/ת את</p>
+                            <p>וגם</p>
+                        </p>
+                        <p data-tab="2"
+                            class=" text-green-900 px-1  underline text-xl font-extrabold cursor-pointer showModal ">
+                            מדיניות פרטיות</p>
                     </div>
                 </div>
             </div>
