@@ -430,9 +430,9 @@ class QawafilAlaqsa extends Resource
                         if ($user->type() == 'regular_city') return true;
                         return false;
                     }),
-                Flexible::make('Content', 'newbus')
+                Flexible::make('newbus', 'newbus')
                     ->readonly(true)
-                    ->addLayout('Simple content section', 'bus', [
+                    ->addLayout('Add bus', 'bus', [
 
                         Select::make('BusesCompany', 'BusesCompany')
                             ->options(function () {
@@ -498,7 +498,7 @@ class QawafilAlaqsa extends Resource
         $model->created_by = $id;
         $model->project_type = '2';
         $model->is_bus = '1';
-        $model->is_reported = '0';
+        $model->is_reported = '1';
         $model->sector = 'Null';
     }
     public static function beforeUpdate(Request $request, $model)
@@ -667,6 +667,8 @@ class QawafilAlaqsa extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new ApprovalRejectProjec,
+        ];
     }
 }

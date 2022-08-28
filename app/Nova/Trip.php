@@ -498,7 +498,7 @@ class Trip extends Resource
                 $id = Auth::id();
         $model->created_by = $id;
         $model->project_type='3';
-        $model->is_reported='0';
+        $model->is_reported='1';
 
        }
 

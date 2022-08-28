@@ -405,7 +405,40 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('address', 'address'),
                 ],__('privacy terms') => [
 
-                    Tiptap::make(__('privacy terms'), 'privacy_terms')
+                    Tiptap::make(__('privacy terms arabic'), 'privacy_terms_ar')
+                    ->buttons([
+                        'heading',
+                        '|',
+                        'italic',
+                        'bold',
+                        '|',
+                        'link',
+                        'code',
+                        'strike',
+                        'underline',
+                        'highlight',
+                        '|',
+                        'bulletList',
+                        'orderedList',
+                        'br',
+                        'codeBlock',
+                        'blockquote',
+                        '|',
+                        'horizontalRule',
+                        'hardBreak',
+                        '|',
+                        'table',
+                        '|',
+                        'image',
+                        '|',
+                        'textAlign',
+                        '|',
+                        'rtl',
+                        '|',
+                        'history',
+                    ])
+                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+                    Tiptap::make(__('privacy terms Hebrew'), 'privacy_terms_he')
                     ->buttons([
                         'heading',
                         '|',
@@ -441,7 +474,40 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                 ] ,__('Cancellation Policy') => [
 
-                    Tiptap::make(__('Cancellation Policy'), 'Cancellation_Policy')
+                    Tiptap::make(__('Cancellation Policy arabic'), 'Cancellation_Policy_ar')
+                    ->buttons([
+                        'heading',
+                        '|',
+                        'italic',
+                        'bold',
+                        '|',
+                        'link',
+                        'code',
+                        'strike',
+                        'underline',
+                        'highlight',
+                        '|',
+                        'bulletList',
+                        'orderedList',
+                        'br',
+                        'codeBlock',
+                        'blockquote',
+                        '|',
+                        'horizontalRule',
+                        'hardBreak',
+                        '|',
+                        'table',
+                        '|',
+                        'image',
+                        '|',
+                        'textAlign',
+                        '|',
+                        'rtl',
+                        '|',
+                        'history',
+                    ])
+                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+                    Tiptap::make(__('Cancellation Policy Hebrew'), 'Cancellation_Policy_he')
                     ->buttons([
                         'heading',
                         '|',
@@ -475,7 +541,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     ])
                     ->headingLevels([1, 2, 3, 4, 5, 6]),
 
-                ],
+                ]
             ]),
         ]);
     }
