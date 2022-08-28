@@ -31,6 +31,7 @@ jQuery(document).ready(function(){
     $('.tabs-btn .tab-btn').click(function() {
       $(this).addClass('active').siblings().removeClass('active');
       $('.tabs-container .tab').hide()
+      console.log('aaaaaa',$(this).data('tab'));
       $( '.' + $(this).data('tab')).fadeIn()
     })
     //End text accodrion text + Start tabs system

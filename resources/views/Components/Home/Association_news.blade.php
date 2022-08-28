@@ -24,7 +24,7 @@
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-9 hidden xl:block"></div>
         </div>
         <div class="flex flex-row gap-x-2">
-            <a href="/our-news/1/1" target="_self" class="text-[#349A37] text-[16px] font-noto_Regular ">
+            <a href="/category/أخبار-الجمعية/أخبارنا" target="_self" class="text-[#349A37] text-[16px] font-noto_Regular ">
                 عرض المزيد
             </a>
             <svg class="mt-1.5" width="11" height="17" viewBox="0 0 11 17" fill="none"

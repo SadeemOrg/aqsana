@@ -291,10 +291,24 @@ $("#PreviousPageDonations").click(function() {
     $(".secondPage").css("display", "none");
     $(".Ctnbtn").text("متابعة");
     }
-
-
 });
 
+$( ".showModal" ).click(function() {
+    $( ".PrivecySettingModal" ).toggleClass( "hiddenModal" );
+});
+
+$(".tabs .showModal").click(function() {
+    $(".PrivecySettingModal .tab").hide();
+    console.log('.tab-'+$(this).data("tab"))
+if($(this).data("tab")==1){
+    // console.log("sss")
+    $('.ModalContainer').css("max-width", "576px");
+}
+else{
+    $('.ModalContainer').css("max-width", "1280px");
+}
+$('.tab-'+$(this).data('tab')).fadeIn();
+});
     </script>
     <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
     <script src="{{ asset('assets/front-end/js/main.js') }}"></script>
@@ -394,8 +408,7 @@ $("#PreviousPageDonations").click(function() {
 
 $('#search').on('keyup', function(){
     var val = $('#search').val();
-    // console.log("🚀 ~ file: app.blade.php ~ line 375 ~ $ ~ val", val)
-    if(val.length>1){
+    if(val.length>2){
         $('.search-bar').siblings().css('display','flex');
     $.get({
         url: '{{url('/')}}/search/'+val,
@@ -406,10 +419,8 @@ $('#search').on('keyup', function(){
         beforeSend: function () {
         },
         success: function (response) {
-            // console.log("🚀 ~ file: app.blade.php ~ line 350 ~ $ ~ response", response)
             var elements = '';
             response.map(item=>{
-            // console.log("🚀 ~ file: app.blade.php ~ line 389 ~ $ ~ item", item)
                 var trimmedString =item.title.substring(0, 80);
                 elements = elements +
                 '<div onclick="RouteToLink(`trimmedString`)" class="py-2 cursor-pointer routeLink">'+trimmedString+'</div>';
