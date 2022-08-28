@@ -30,6 +30,7 @@ class ApprovalRejectProjec extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
+        // dd("fkii");
         $user = Auth::user();
         $id = Auth::id();
         $citye =   City::where('admin_id', $id)
@@ -39,44 +40,46 @@ class ApprovalRejectProjec extends Action
                 ['project_id' => $model->id, 'area_id' =>  $citye['area_id'], 'city_id' =>  $citye['id']],
                 ['accepted' => $fields->approval,  'reject_reason' => $fields->reason_of_reject,]
             );
-
-        if ($fields->approval == "1") {
-
-            if ($user->type() == 'admin' ) {
-                DB::table('project_status')->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' =>  $citye['id']],
-                    ['status' => 'admin']
-                );
-            }
-            elseif ($user->type() == 'regular_area') {
-                DB::table('project_status')->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' =>  $citye['id']],
-                    ['status' => 'regular_area']
-                );
-            }
-            else if ($user->user_role == "regular_city") {
-                // dd('dd');
-                DB::table('project_status')->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' =>  $citye['id'],'status' => 'regular_city'],
-
-                );
-            }
-            else if ( $user->type() == 'website_admin') {
-                DB::table('project_status')->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' =>  $citye['id']],
-                    ['status' => 'website_admin']
-                );
-            }
         }
-    }    DB::table('project_status')->updateOrInsert(
-        [ 'project_id' => $model->id, 'city_id' =>  $citye['id']],
-        [ 'status' => $fields->Project_Status  ]
-    );
-        return Action::redirect('/Admin/resources/projects/' . $models[0]->id . '/edit');
+        if ($fields->approval == "1") {
+            DB::table('project_status')->updateOrInsert(
+                ['project_id' => $model->id, 'city_id' =>  $citye['id']],
+                ['status' => 'acsept project']
+            );
+            // if ($user->type() == 'admin') {
+            //     DB::table('project_status')->updateOrInsert(
+            //         ['project_id' => $model->id, 'city_id' =>  $citye['id']],
+            //         ['status' => ' admin acsept']
+            //     );
+            // } elseif ($user->type() == 'regular_area') {
+            //     DB::table('project_status')->updateOrInsert(
+            //         ['project_id' => $model->id, 'city_id' =>  $citye['id']],
+            //         ['status' => 'regular_area acsept']
+            //     );
+            // } else if ($user->user_role == "regular_city") {
+            //     // dd('dd');
+            //     DB::table('project_status')->updateOrInsert(
+            //         ['project_id' => $model->id, 'city_id' =>  $citye['id'], 'status' => 'regular_city'],
+
+            //     );
+            // } else if ($user->type() == 'website_admin') {
+            //     DB::table('project_status')->updateOrInsert(
+            //         ['project_id' => $model->id, 'city_id' =>  $citye['id']],
+            //         ['status' => 'website_admin']
+            //     );
+            // }
+        } else {
+            DB::table('project_status')->updateOrInsert(
+                ['project_id' => $model->id, 'city_id' =>  $citye['id']],
+                ['status' => 'regect']
+            );
+        }
+        if ($fields->approval == "1")    return Action::redirect('/Admin/resources/projects/' . $models[0]->id . '/edit');
 
         // Nova::initialPath('/resources/users');
         // return action::message('the done');
     }
+
 
     /**
      * Get the fields available on the action.

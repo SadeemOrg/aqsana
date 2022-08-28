@@ -86,7 +86,8 @@ class News extends Resource
             ActionButton::make(__('POST NEWS'))
                 ->action((new PostNews)->confirmText('Are you sure you want to read  this Massage?')
                     ->confirmButtonText(__('post'))
-                    ->cancelButtonText(__('Dont post')), $this->id)->readonly(function () {
+                    ->cancelButtonText(__('Dont post')), $this->id)
+                    ->readonly(function () {
                     return $this->status === '1';
                 })->text(__('post'))->showLoadingAnimation()
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),

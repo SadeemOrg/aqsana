@@ -66,7 +66,7 @@ class Project extends Resource
      * @var string
      */
     public static $title = 'project_name';
-
+    public static $priority = 1;
     /**
      * The columns that should be searched.
      *
@@ -82,11 +82,9 @@ class Project extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if (  $request->user()->type()== 'website_admin')
-        {
+        if ($request->user()->type() == 'website_admin') {
             return false;
-        }
-       else return true;
+        } else return true;
     }
 
     public static $search = [
@@ -103,14 +101,14 @@ class Project extends Resource
     {
         $user = Auth::user();
         $id = Auth::id();
-        if ($user->type() == 'admin' ) {
+        if ($user->type() == 'admin') {
 
             return $query->where('project_type', '1');
         } elseif ($user->type() == 'regular_area') {
 
             $Area = \App\Models\Area::where('admin_id', $id)->first();
             $projects = DB::table('project_area')->where('area_id', $Area->id)->get();
-        } else  {
+        } else {
             $citye =   City::where('admin_id', $id)
                 ->select('id')->first();
             $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
@@ -133,11 +131,31 @@ class Project extends Resource
                     ->text(__('acsept'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
-                    ->canSee(function(){
+                    ->canSee(function () {
                         $user = Auth::user();
 
-                        if ($user->type() == 'admin' ) {
+                        if ($user->type() == 'regular_city' ) {
                             return true;
+                        }
+                    })
+                    ->readonly(function () {
+                        $id = Auth::id();
+                        $user = Auth::user();
+                        if ($user->type() == 'regular_city') {
+                            $citye =   City::where('admin_id', $id)
+                                ->select('id')->first();
+                            $acspet = DB::table('accept_project')
+                                ->where([
+                                    ['project_id', '=', $this->id],
+                                    ['city_id', '=', $citye['id']],
+                                ])
+                                ->first();
+
+                            if ($acspet) {
+
+                                if ($acspet->accepted == "1")   return  true ;
+                                else return false;
+                            }
                         }
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
@@ -154,7 +172,7 @@ class Project extends Resource
                             return  $user_type_admin_array;
                         }
                     }),
-                BelongsToManyField::make(__('Area'),"Area" ,'\App\Nova\Area')
+                BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
                     ->options(Area::all())
                     ->optionsLabel('name')->canSee(function ($request) {
                         $user = Auth::user();
@@ -401,17 +419,17 @@ class Project extends Resource
                         if ($acspet)  return   $acspet->status;
                         else return "__";
                     }
-                })  ->options([
+                })->options([
                     '1' => 'active',
                     '2' => 'not active',
-                  ])
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    return null;
-                })->canSee(function ($request) {
-                    $user = Auth::user();
-                    if ($user->type() == 'regular_city') return true;
-                    return false;
-                })->readonly(true),
+                ])
+                    ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                        return null;
+                    })->canSee(function ($request) {
+                        $user = Auth::user();
+                        if ($user->type() == 'regular_city') return true;
+                        return false;
+                    })->readonly(true),
             ])),
             (new Panel(__('bus'), [
 
@@ -426,67 +444,68 @@ class Project extends Resource
                         return null;
                     })
                     ->canSee(function ($request) {
+
                         $user = Auth::user();
                         if ($user->type() == 'regular_city') return true;
                         return false;
                     }),
+                Flexible::make('newbus', 'newbus')
+                    ->readonly(true)
+                    ->addLayout('Add new bus', 'bus', [
+
+                        Select::make('BusesCompany', 'BusesCompany')
+                            ->options(function () {
+                                $users =  \App\Models\BusesCompany::all();
+                                $user_type_admin_array =  array();
+                                foreach ($users as $user) {
+                                    $user_type_admin_array += [$user['id'] => ($user['name'])];
+                                }
+
+                                return $user_type_admin_array;
+                            }),
 
 
+                        Text::make("Bus Number", "bus_number"),
 
-                Repeater::make('newbus')
-                    ->addField([
+                        Number::make("Number person on bus", "number_person_on_bus")->step(1.0),
 
-                        'name' => 'name_driver',
-                        'label' => 'driver name',
+                        Number::make("seat price", "seat_price")->step(1.0),
 
-                        'width' => 'w-full',
-                        'options' => [
-                            'fido' => 'Fido',
-                            'mr_bubbles' => 'Mr Bubbles',
-                            'preston' => 'Preston'
-                        ],
+                        Select::make('travel from', 'from')
+                            ->options(function () {
+                                $users =  \App\Models\address::all();
+                                $user_type_admin_array =  array();
+                                foreach ($users as $user) {
+                                    $user_type_admin_array += [$user['id'] => ($user['name_address'])];
+                                }
+
+                                return $user_type_admin_array;
+                            }),
+
+
+                        Select::make('travel to', 'to')
+                            ->options(function () {
+                                $users =  \App\Models\address::all();
+                                $user_type_admin_array =  array();
+                                foreach ($users as $user) {
+                                    $user_type_admin_array += [$user['id'] => ($user['name_address'])];
+                                }
+
+                                return $user_type_admin_array;
+                            }),
+
+
+                        Text::make("Name Driver", "name_driver"),
+                        Text::make("phone_number", "phone_number"),
 
                     ])
-                    ->addField([
 
-                        'name' => 'bus_number',
-                        'label' => 'bus number',
-                        'options' => [
-                            'fido' => 'Fido',
-                            'mr_bubbles' => 'Mr Bubbles',
-                            'preston' => 'Preston'
-                        ],
 
-                    ])
-                    ->addField([
 
-                        'name' => 'number_of_seats',
-                        'label' => 'number of seats',
-                        'width' => 'w-full',
-                    ])
-                    ->addField([
-
-                        'name' => 'seat_price',
-                        'label' => 'seat price',
-                        'width' => 'w-full',
-                    ])
-                    ->addField([
-
-                        'name' => 'phone_number_driver',
-                        'label' => 'phone number driver',
-                        'width' => 'w-full',
-                    ])->hideFromDetail()->hideFromIndex()
-
-                    ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                        return null;
-                    })->canSee(function ($request) {
-                        $user = Auth::user();
-                        if ($user->type() == 'regular_city') return true;
-                        return false;
-                    }),
 
 
             ])),
+
 
 
 
@@ -495,12 +514,11 @@ class Project extends Resource
     }
     public static function beforeCreate(Request $request, $model)
     {
-                $id = Auth::id();
+        $id = Auth::id();
         $model->created_by = $id;
-        $model->project_type='1';
-        $model->is_reported='0';
-
-       }
+        $model->project_type = '1';
+        $model->is_reported = '1';
+    }
 
     public static function afterCreate(Request $request, $model)
     {
@@ -519,17 +537,16 @@ class Project extends Resource
         if ($user->type() == 'regular_city') {
             // dd($citye);
             DB::table('project_area')
-            ->updateOrInsert(
-                ['project_id' => $model->id, 'area_id' =>  $citye['area_id']],
+                ->updateOrInsert(
+                    ['project_id' => $model->id, 'area_id' =>  $citye['area_id']],
 
-            );
+                );
             DB::table('project_city')
                 ->updateOrInsert(
                     ['project_id' => $model->id, 'city_id' =>  $citye['id']],
 
                 );
         }
-
     }
     public static function beforeUpdate(Request $request, $model)
     {
@@ -603,20 +620,25 @@ class Project extends Resource
             //     );
         }
         if ($request->newbus) {
-            $buss = json_decode($request->newbus);
-
-            foreach ($buss as $user) {
-                //  dd($user);
-
+            $buss = $request->newbus;
+            // dd($request->newbus);
+            foreach ($buss as $bus) {
+                // dd($bus['attributes']);
                 DB::table('buses')
                     ->insert(
-                        ['name_driver' => $user->name_driver, 'bus_number' => $user->bus_number, 'number_of_seats' => $user->number_of_seats, 'seat_price' => $user->seat_price, 'phone_number_driver' => $user->phone_number_driver],
-
+                        [
+                            'name_driver' => $bus['attributes']['name_driver'],
+                            'company_id' => $bus['attributes']['BusesCompany'],
+                            'bus_number' => $bus['attributes']['bus_number'],
+                            'number_of_seats' => $bus['attributes']['number_person_on_bus'],
+                            'seat_price' => $bus['attributes']['seat_price'],
+                            'travel_from' => $bus['attributes']['from'],
+                            'travel_to' => $bus['attributes']['to'],
+                            'phone_number_driver' => $bus['attributes']['phone_number'],
+                            'status' => '1',
+                        ]
                     );
-                $bus =  \App\Models\Bus::where('bus_number', $user->bus_number)->first();
-
-
-                // dd($users['id']);
+                $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
 
                 DB::table('project_bus')
                     ->updateOrInsert(
@@ -682,7 +704,13 @@ class Project extends Resource
     {
         return [
 
-            new ApprovalRejectProjec,
+            (new ApprovalRejectProjec)  ->canSee(function () {
+                        $user = Auth::user();
+
+                        if ($user->type() == 'regular_city' ) {
+                            return true;
+                        }
+                    }),
 
 
 
