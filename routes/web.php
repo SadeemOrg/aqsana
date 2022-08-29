@@ -47,6 +47,8 @@ Route::get('/contact-us', function (){
 });
 Route::get('/search/{val}/', [HomeController::class, 'search'])->name('search');
 
+Route::get('/searchpage/{val}/', [HomeController::class, 'searchpage'])->name('searchpage');
+
 Route::get('/project', [HomeController::class, 'project'])->name('project');
 Route::get('/project/{id}', [HomeController::class, 'getprojectDetail'])->name('getprojectDetail');
 

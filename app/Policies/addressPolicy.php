@@ -53,6 +53,10 @@ class addressPolicy
      */
     public function update(User $user, address $address)
     {
+        if($address->myid()==1 )
+        {
+            return false ;
+        }
          return $user->type() == 'admin';
     }
 
@@ -65,6 +69,10 @@ class addressPolicy
      */
     public function delete(User $user, address $address)
     {
+        if($address->myid()==1 )
+        {
+            return false ;
+        }
          return $user->type() == 'admin';
     }
 

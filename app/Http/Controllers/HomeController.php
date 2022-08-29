@@ -98,7 +98,7 @@ class HomeController extends Controller
     {
 
         $new = DB::table('news')->where('id', $id)->first();
-
+// dd($new);
 
         $Articles = DB::table('news')->where([
             ['type', '=', $new->type],
@@ -156,6 +156,7 @@ class HomeController extends Controller
 
     public function search($search)
     {
+
         $main_type = newsType::where('name', 'like',  "%{$search}%")
             ->select('main_type')
             ->get();
@@ -176,6 +177,31 @@ class HomeController extends Controller
 
         //  dd($News);
         return $News;
+    }
+    public function searchpage($search)
+    {
+
+        $main_type = newsType::where('name', 'like',  "%{$search}%")
+            ->select('main_type')
+            ->get();
+
+            // dd( $main_type[0]->type);
+
+        $stack_main_type = array();
+        foreach ($main_type as $key => $value) {
+            array_push($stack_main_type, $value->main_type);
+        }
+
+        $news = News::query()
+        ->wherein('type' , $stack_main_type)
+            ->orWhere('title', 'like',  "%{$search}%")
+            ->orWhere('sector', 'like',  "%{$search}%")
+            ->paginate(8);
+
+
+        $mainType='بجث';
+        $type=$search;
+        return view('Pages.news-page', compact('news', 'mainType', 'type'));
     }
     public function pagesearch(Request $request)
     {

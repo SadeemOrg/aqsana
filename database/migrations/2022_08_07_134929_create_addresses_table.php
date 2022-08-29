@@ -20,8 +20,7 @@ class CreateAddressesTable extends Migration
             $table->string('phone_number_address');
             $table->json('current_location')->nullable();
             $table->char('status', '1');
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('update_by')->nullable();
+
             $table->timestamps();
         });
     }

@@ -17,13 +17,10 @@ class address extends Model
 
     ];
 
+    public function myid()
+    {
+        return $this->id;
+    }
 
-    public function create()
-    {
-        return $this->belongsTo('App\Models\User','created_by');
-    }
-    public function Updateby()
-    {
-        return $this->belongsTo('App\Models\User','update_by');
-    }
+
 }
