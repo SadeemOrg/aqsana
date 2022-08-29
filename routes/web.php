@@ -23,7 +23,6 @@ Route::get('/conctus', [HomeController::class, 'conctus'])->name('conctus');
 Route::get('/category/{maintype}/{type}', [HomeController::class, 'news'])->name('news');
 Route::get('/categor/{title}/{id}/', [HomeController::class, 'getnewDetail'])->name('getnewDetail');
 
-Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch');
 
 
 // projects for donation
@@ -45,7 +44,12 @@ Route::get('/sector/{sector}', [HomeController::class, 'sector'])->name('sector'
 Route::get('/contact-us', function (){
     return view('Pages.contact-page');
 });
+
+Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch');
+
 Route::get('/search/{val}/', [HomeController::class, 'search'])->name('search');
+
+// Route::get('/searchpage', [HomeController::class, 'searchpage'])->name('searchpage');
 
 Route::get('/project', [HomeController::class, 'project'])->name('project');
 Route::get('/project/{id}', [HomeController::class, 'getprojectDetail'])->name('getprojectDetail');

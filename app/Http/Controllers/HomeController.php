@@ -98,7 +98,7 @@ class HomeController extends Controller
     {
 
         $new = DB::table('news')->where('id', $id)->first();
-
+// dd($new);
 
         $Articles = DB::table('news')->where([
             ['type', '=', $new->type],
@@ -156,6 +156,7 @@ class HomeController extends Controller
 
     public function search($search)
     {
+
         $main_type = newsType::where('name', 'like',  "%{$search}%")
             ->select('main_type')
             ->get();
@@ -177,8 +178,10 @@ class HomeController extends Controller
         //  dd($News);
         return $News;
     }
+
     public function pagesearch(Request $request)
     {
+
         $search = $request->get("search");
         $type = $request->get("search");
         $mainType = "بحث";
@@ -192,7 +195,8 @@ class HomeController extends Controller
             array_push($stack_main_type, $value->main_type);
         }
 
-        $news = News::query()->where('main_type', $stack_main_type)
+        $news = News::query()
+        ->wherein('type' , $stack_main_type)
             ->orWhere('title', 'like',  "%{$search}%")
             ->orWhere('sector', 'like',  "%{$search}%")
             ->paginate(8);

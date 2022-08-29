@@ -63,21 +63,12 @@ class address extends Resource
                 '1' => 'active',
                 '2' => 'not active',
               ]),
-              BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-              BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            //   BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            //   BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
         ];
     }
 
-    public static function beforeCreate(Request $request, $model)
-    {
-        $id = Auth::id();
-      $model->created_by=$id;
-    }
-    public static function beforeUpdate(Request $request, $model)
-    {
-        $id = Auth::id();
-        $model->update_by=$id;
-    }
+
     /**
      * Get the cards available for the request.
      *

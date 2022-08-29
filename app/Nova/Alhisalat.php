@@ -15,6 +15,9 @@ use Acme\MultiselectField\Multiselect;
 use App\Models\User;
 use App\Models\Income;
 use App\Nova\Actions\AlhisalatStatus;
+use App\Nova\Actions\AlhisalatStatuscompleted;
+use App\Nova\Filters\AlhisalatStatusFilters;
+use AwesomeNova\Cards\FilterCard;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Laravel\Nova\Fields\BelongsTo;
@@ -202,7 +205,9 @@ class Alhisalat extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new FilterCard(new AlhisalatStatusFilters()),
+        ];
     }
 
     /**
@@ -213,7 +218,9 @@ class Alhisalat extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new AlhisalatStatusFilters()
+        ];
     }
 
     /**
@@ -237,8 +244,16 @@ class Alhisalat extends Resource
     {
         return [
 
-            new AlhisalatStatus,
-
+            (new AlhisalatStatus) ->canSee(function () {
+                if ($this->status == '1' ) {
+                    return true;
+                }
+            }),
+            (new AlhisalatStatuscompleted)->canSee(function () {
+                if ($this->status == '2' ) {
+                    return true;
+                }
+            }),
         ];
     }
 }

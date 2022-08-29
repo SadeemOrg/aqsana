@@ -60,10 +60,10 @@ class PaymentVoucher extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('type','type')->withMeta([
-                'type' => 'hidden',
-                'value' => '1'
-            ]),
+            // Text::make('type','type')->withMeta([
+            //     'type' => 'hidden',
+            //     'value' => '1'
+            // ]),
             Select::make("transactions status", "status")->options([
                 '0' => 'not',
                 '1' => 'ok',
@@ -100,20 +100,23 @@ class PaymentVoucher extends Resource
 
         ];
     }
-    public static function beforeSave(Request $request, $model)
+    public static function beforeCreate(Request $request, $model)
     {
         $id = Auth::id();
         $model->created_by=$id;
+        $model->type='1';
+
+
     }
-
-
-    public static function beforeUpdate(Request $request, $model)
+    public static function beforeSave(Request $request, $model)
     {
         $id = Auth::id();
         $model->update_by=$id;
 
-
     }
+
+
+
 
 
     /**
