@@ -3,9 +3,6 @@
         background: linear-gradient(0.92deg, rgba(0, 0, 0, 0.3) 4.13%, rgba(0, 0, 0, 0) 96.18%);
     }
 </style>
-{{-- @php
-    dd($Heros[0])
-@endphp --}}
 <div itemscope class="owl-carousel dots-style1" id="main-home-slider">
     @if(is_array($Heros)==true && !empty($Heros))
     @foreach ( $Heros as $Hero )
@@ -22,7 +19,7 @@
 </div>
 <div itemscope class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
-    @include('Components.Home.Search')
+    {{-- @include('Components.Home.Search') --}}
 
     <div class="flex flex-row flex-wrap lg:flex-nowrap mt-16 items-center justify-center xl:justify-start gap-x-5">
         @if(!empty($lastnews))
