@@ -12,7 +12,6 @@ $linlk_bottom_Connectus = nova_get_setting('linlk_bottom_Connectus', 'default_va
 $whatsapp_phone = nova_get_setting('whatsapp_Connectus', 'default_value');
 $Correct_whatsapp_phone = str_replace(' ', '', $whatsapp_phone);
 $Final_Correct_whatsapp_phone = str_replace('-', '', $Correct_whatsapp_phone);
-
 $whatsapp_phone_Link = "https://wa.me/".$Final_Correct_whatsapp_phone ;
 @endphp
 <div itemscope itemtype="http://schema.org/LocalBusiness" class="max-w-7xl mx-auto px-0 lg:px-8 mt-8">
