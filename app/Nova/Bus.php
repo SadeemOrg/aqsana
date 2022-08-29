@@ -63,7 +63,7 @@ class Bus extends Resource
 
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make('company', 'company', \App\Nova\busescompany::class),
+            BelongsTo::make('company', 'company', \App\Nova\BusesCompany::class),
             Text::make("Bus Number","bus_number"),
             Number::make("Number person on bus","number_of_seats")->step(1.0),
             Number::make("seat price","seat_price")->step(1.0),
