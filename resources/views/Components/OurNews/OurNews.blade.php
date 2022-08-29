@@ -84,12 +84,15 @@
                             @endif
                         </p>
                     </div>
+                    {{-- @php
+                        dd($new);
+                    @endphp --}}
                     <div class="flex flex-row items-center justify-start pl-4 pt-4 font-noto_Regular gap-x-2">
                         <p class="text-[#101426] text-xs"> شارك عبر </p>
                         <ul class="share-us flex flex-row items-center justify-start">
                             <li class="px-1">
                                 <a class="facebook"
-                                    href="javascript:openWindow('http://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}/{{ $new->id }} & title=')">
+                                    href="javascript:openWindow('http://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}/{{ $new->id }}&title=')">
                                     <svg  width="25" height="25" viewBox="0 0 25 25" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
