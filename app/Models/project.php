@@ -84,4 +84,9 @@ class project extends Model
     {
         return $this->belongsTo('App\Models\User','update_by');
     }
+
+    public function scopeTrip($query)
+    {
+        return $query->where('project_type', 2);
+    }
 }
