@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\File;
 use Acme\MultiselectField\Multiselect;
 use App\Models\User;
 use App\Models\Income;
+use App\Nova\Actions\AlhisalatStatus;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Laravel\Nova\Fields\BelongsTo;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Select;
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
+
+
 
 class Alhisalat extends Resource
 {
@@ -62,7 +65,7 @@ class Alhisalat extends Resource
     public static $search = [
         'id',
     ];
-    public static $priority =4 ;
+    public static $priority = 4;
     /**
      * Get the fields displayed by the resource.
      *
@@ -110,7 +113,7 @@ class Alhisalat extends Resource
             ])->displayUsingLabels()
                 ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
-                }),
+                })->hideFromIndex()->hideFromDetail(),
 
             NovaDependencyContainer::make([
 
@@ -141,7 +144,7 @@ class Alhisalat extends Resource
 
             Multiselect::make("Status", "status")->options([
                 '1' => 'تم انشاء الحصالة',
-                '2' => 'نم جمع الحصالة',
+                '2' => 'تم جمع الحصالة',
                 '3' => 'مكتملة',
 
             ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
@@ -234,10 +237,8 @@ class Alhisalat extends Resource
     {
         return [
 
-            (new Actions\ApprovalRejectProjec)->canSee(function ($request) {
-                $user = Auth::user();
-                return ($user->type() == 'admin' || $user->type() == 'regular_area');
-            }),
+            new AlhisalatStatus,
+
         ];
     }
 }

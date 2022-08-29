@@ -134,8 +134,28 @@ class QawafilAlaqsa extends Resource
                     ->canSee(function () {
                         $user = Auth::user();
 
-                        if ($user->type() == 'regular_city' || $user->type() == 'regular_area') {
+                        if ($user->type() == 'regular_city' ) {
                             return true;
+                        }
+                    })
+                    ->readonly(function () {
+                        $id = Auth::id();
+                        $user = Auth::user();
+                        if ($user->type() == 'regular_city') {
+                            $citye =   City::where('admin_id', $id)
+                                ->select('id')->first();
+                            $acspet = DB::table('accept_project')
+                                ->where([
+                                    ['project_id', '=', $this->id],
+                                    ['city_id', '=', $citye['id']],
+                                ])
+                                ->first();
+
+                            if ($acspet) {
+
+                                if ($acspet->accepted == "1")   return  true ;
+                                else return false;
+                            }
                         }
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
@@ -323,8 +343,7 @@ class QawafilAlaqsa extends Resource
                                 ['city_id', '=', $citye['id']],
                             ])
                             ->first();
-                        // return  "1";
-                        // dd("1");
+
                         if ($acspet) {
                             if ($acspet->accepted == "1") return "aproved";
                             elseif ($acspet->accepted == "2") return "not aproved";
@@ -432,7 +451,7 @@ class QawafilAlaqsa extends Resource
                     }),
                 Flexible::make('newbus', 'newbus')
                     ->readonly(true)
-                    ->addLayout('Add bus', 'bus', [
+                    ->addLayout('Add new bus', 'bus', [
 
                         Select::make('BusesCompany', 'BusesCompany')
                             ->options(function () {
@@ -464,16 +483,16 @@ class QawafilAlaqsa extends Resource
                             }),
 
 
-                        Select::make('travel to', 'to')
-                            ->options(function () {
-                                $users =  \App\Models\address::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name_address'])];
-                                }
+                        // Select::make('travel to', 'to')
+                        //     ->options(function () {
+                        //         $users =  \App\Models\address::all();
+                        //         $user_type_admin_array =  array();
+                        //         foreach ($users as $user) {
+                        //             $user_type_admin_array += [$user['id'] => ($user['name_address'])];
+                        //         }
 
-                                return $user_type_admin_array;
-                            }),
+                        //         return $user_type_admin_array;
+                        //     }),
 
 
                         Text::make("Name Driver", "name_driver"),
@@ -486,6 +505,7 @@ class QawafilAlaqsa extends Resource
 
 
             ])),
+
 
 
 
@@ -574,6 +594,10 @@ class QawafilAlaqsa extends Resource
         }
         if ($request->newbus) {
             $buss = $request->newbus;
+            // $to='{"country":"Israel","countryCode":"il","latlng":{"lat":31.769,"lng":35.2163},"name":"Jerusalem","query":"ontefiore Windmill Sderot Blumfield Jerusalem","type":"city","value":"Jerusalem, Israel"}';
+            // $tojsone =
+            // dd( json_decode($to));
+            // dd($tojsone );
             // dd($request->newbus);
             foreach ($buss as $bus) {
                 // dd($bus['attributes']);
@@ -586,7 +610,7 @@ class QawafilAlaqsa extends Resource
                             'number_of_seats' => $bus['attributes']['number_person_on_bus'],
                             'seat_price' => $bus['attributes']['seat_price'],
                             'travel_from' => $bus['attributes']['from'],
-                            'travel_to' => $bus['attributes']['to'],
+                            'travel_to' => '1',
                             'phone_number_driver' => $bus['attributes']['phone_number'],
                             'status' => '1',
                         ]
