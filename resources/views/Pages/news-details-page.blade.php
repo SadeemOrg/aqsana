@@ -143,7 +143,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                             </a>
                         </li>
                         <li class="px-1">
-                            <a class="linkedin" target="_self"
+                            <a class="linkedin" target="_blank"
                                 href="https://www.linkedin.com/shareArticle?mini=true&url={{ Request::url()  }}">
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
