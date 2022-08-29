@@ -3,13 +3,16 @@
         background: linear-gradient(0.92deg, rgba(0, 0, 0, 0.3) 4.13%, rgba(0, 0, 0, 0) 96.18%);
     }
 </style>
+{{-- @php
+    dd($Heros[0])
+@endphp --}}
 <div itemscope class="owl-carousel dots-style1" id="main-home-slider">
     @if(is_array($Heros)==true && !empty($Heros))
     @foreach ( $Heros as $Hero )
     <div class="relative">
         <img itemprop="image" alt="Google" class="h-[250px] sm:h-[350px]  lg:h-[680px]"
             src="{{ URL::asset($Hero['data']['image'])}}" alt="topBanner">
-        <button
+        <button onclick="location.href='{{$Hero['data']['link']}}'"
             class="absolute bottom-[8%] right-[8%] Ctnbtn rounded-[50px] bg-[#349A37] text-white text-xl w-[200px] py-4 font-[700] hover:bg-[#101426] duration-200">تبرع
             الان</button>
 
