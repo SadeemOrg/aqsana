@@ -25,10 +25,10 @@ class BusesCompanyPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\BusesCompany  $busesCompany
+     * @param  \App\Models\BusesCompany  $BusesCompany
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, BusesCompany $busesCompany)
+    public function view(User $user, BusesCompany $BusesCompany)
     {
          return $user->type() == 'admin';
     }
@@ -48,10 +48,10 @@ class BusesCompanyPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\BusesCompany  $busesCompany
+     * @param  \App\Models\BusesCompany  $BusesCompany
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, BusesCompany $busesCompany)
+    public function update(User $user, BusesCompany $BusesCompany)
     {
          return $user->type() == 'admin';
     }
@@ -60,10 +60,10 @@ class BusesCompanyPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\BusesCompany  $busesCompany
+     * @param  \App\Models\BusesCompany  $BusesCompany
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, BusesCompany $busesCompany)
+    public function delete(User $user, BusesCompany $BusesCompany)
     {
          return $user->type() == 'admin';
     }
@@ -72,10 +72,10 @@ class BusesCompanyPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\BusesCompany  $busesCompany
+     * @param  \App\Models\BusesCompany  $BusesCompany
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, BusesCompany $busesCompany)
+    public function restore(User $user, BusesCompany $BusesCompany)
     {
          return $user->type() == 'admin';
     }
@@ -84,10 +84,10 @@ class BusesCompanyPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\BusesCompany  $busesCompany
+     * @param  \App\Models\BusesCompany  $BusesCompany
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, BusesCompany $busesCompany)
+    public function forceDelete(User $user, BusesCompany $BusesCompany)
     {
          return $user->type() == 'admin';
     }

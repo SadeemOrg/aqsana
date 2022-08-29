@@ -11,14 +11,14 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Illuminate\Support\Facades\Auth;
 
-class busescompany extends Resource
+class BusesCompany extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\busescompany::class;
+    public static $model = \App\Models\BusesCompany::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
