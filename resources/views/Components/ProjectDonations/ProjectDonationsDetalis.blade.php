@@ -3,15 +3,16 @@
         -webkit-appearance: none;
     }
 </style>
-@if ($project)
+@if($project == null)
 @php
-$project_Id = $project->id
+    $project_Id = null;
 @endphp
 @else
 @php
-$project_Id = null
+    $project_Id = $project->id;
 @endphp
 @endif
+
 <div>
     <form class="flex flex-col w-full items-center md:items-start justify-center" action="{{ route('donations') }}"
         method="post">
@@ -30,11 +31,14 @@ $project_Id = null
             </div>
         </div>
         <!-- Sector -->
+        {{-- @php
+            dd($project);
+        @endphp --}}
         @if($project_Id !== null)
         <div class="mt-4 firstPage">
             <label for="sector" class=" pr-1 block text-sm font-medium text-gray-700">القطاعات</label>
             <div class="mt-2">
-                <input type="text" name="sector" id="sector" value="قطاع الزراعه" disabled
+                <input type="text" name="sector" id="sector" value="{{ $project->sector }}" disabled
                     class="shadow-sm block sm:text-sm border-gray-300 rounded-md w-[220px] md:w-[200px]">
             </div>
         </div>
@@ -43,11 +47,14 @@ $project_Id = null
             <label for="title" class="block  text-sm font-medium text-gray-700">عنوان المشروع</label>
             <p
                 class="shadow-sm hidden md:block sm:text-sm border px-4 md:px-2 p-2 mt-2 border-gray-300 rounded-md w-[220px] md:w-full ">
-                اكثر من 10 الاف مشارك بمعسكر 'القدس اولا' الذي نظمته الحركة الاسلامية وجمعية الاقصى
+                               {{-- اكثر من 10 الاف مشارك بمعسكر 'القدس اولا' الذي نظمته الحركة الاسلامية وجمعية الاقصى --}}
+
+                {{Illuminate\Support\Str::limit($project->project_name,113) }}
             </p>
             <p
                 class="shadow-sm block md:hidden  text-sm border px-4 md:px-2 p-2 mt-2 border-gray-300 rounded-md w-[220px]">
-                اكثر من 10 الاف مشارك بمعسكر
+                {{Illuminate\Support\Str::limit($project->project_name,70) }}
+
             </p>
         </div>
         @else
