@@ -3,12 +3,18 @@
         -webkit-appearance: none;
     }
 </style>
+@if ($project)
 @php
-// dd($project);
-$project_Id =1 ;
+$project_Id = $project->id
 @endphp
+@else
+@php
+$project_Id = null
+@endphp
+@endif
 <div>
-    <form class="flex flex-col w-full items-center md:items-start justify-center" action="{{ route('donations') }}" method="post">
+    <form class="flex flex-col w-full items-center md:items-start justify-center" action="{{ route('donations') }}"
+        method="post">
         @csrf
         <div class="flex flex-row items-center ">
             <div class="mt-10 firstPage">
@@ -77,7 +83,7 @@ $project_Id =1 ;
             <!-- Second Page Radio Input -->
             <div class="flex flex-col gap-y-2 items-start justify-start mt-4 mr-[9%] md:mr-0">
                 <div class="flex flex-row items-center mb-5 sm:mb-0">
-                    <input id="visa" name="notification-method"  type="checkbox" value="visa"
+                    <input id="visa" name="notification-method" type="checkbox" value="visa"
                         class="focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
                     <label for="visa"
                         class="ml-3 text-md font-medium text-[#201A3C] pr-2 flex flex-row-reverse items-center">
@@ -90,50 +96,51 @@ $project_Id =1 ;
                 <div class="flex flex-row items-start sm:items-center mb-5 sm:mb-0">
                     <input id="privecy" name="privecy" type="checkbox" value="privecy"
                         class="focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
-                    <label for="privecy" class="tabs ml-3 text-base sm:text-lg font-medium text-[#201A3C] pr-2 flex flex-row flex-wrap gap-x-1 sm:items-center justify-start">
-                        <p > אני מאשר/ת </p>
+                    <label for="privecy"
+                        class="tabs ml-3 text-base sm:text-lg font-medium text-[#201A3C] pr-2 flex flex-row flex-wrap gap-x-1 sm:items-center justify-start">
+                        <p> אני מאשר/ת </p>
                         <p data-tab="1"
                             class=" text-green-900 px-1  underline text-xl font-extrabold cursor-pointer showModal ">
                             מדיניות ביטולים</p>
-                            <p>וגם</p>
+                        <p>וגם</p>
                         </p>
                         <p data-tab="2"
                             class=" text-green-900 px-1  underline text-xl font-extrabold cursor-pointer showModal ">
                             מדיניות פרטיות</p>
-                    </div>
                 </div>
             </div>
-            <div class="">
-                @include('Components.ProjectDonations.PrivecySetting')
-            </div>
         </div>
-    </form>
+        <div class="">
+            @include('Components.ProjectDonations.PrivecySetting')
+        </div>
+</div>
+</form>
 
-    <!-- third Page Input -->
-    <div class="thirdPage mt-24 flex flex-col items-center justify-center hidden">
-        @php
-        $img = 'storage/'. nova_get_setting('logo', 'default_value');
-        @endphp
-        <img class="w-[370px] h-24" src="/{{ $img }}" alt="logo">
-        <p class="text-[30px] max-w-md mt-8 text-center">
-            تم التبرع بنجاح لصالح مشروع اسم المشروع بمبلغ قدره
-            <span class="text-[#349A37]">500 شيكل </span>
-        </p>
-        <a target="_self"
-            class="bg-[#349A37] mt-5 hover:bg-[#101426] duration-200 py-3 px-4 ml-2 text-white  rounded-[50px] text-lg  "
-            href="/">الصفحة الرئيسية</a>
+<!-- third Page Input -->
+<div class="thirdPage mt-24 flex flex-col items-center justify-center hidden">
+    @php
+    $img = 'storage/'. nova_get_setting('logo', 'default_value');
+    @endphp
+    <img class="w-[370px] h-24" src="/{{ $img }}" alt="logo">
+    <p class="text-[30px] max-w-md mt-8 text-center">
+        تم التبرع بنجاح لصالح مشروع اسم المشروع بمبلغ قدره
+        <span class="text-[#349A37]">500 شيكل </span>
+    </p>
+    <a target="_self"
+        class="bg-[#349A37] mt-5 hover:bg-[#101426] duration-200 py-3 px-4 ml-2 text-white  rounded-[50px] text-lg  "
+        href="/">الصفحة الرئيسية</a>
 
+</div>
+
+<div class="flex flex-row items-center justify-center md:justify-start gap-x-2">
+    <div class="mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5">
+        <button id="firstPageDonations" type="submit"
+            class="Ctnbtn rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">متابعة</button>
     </div>
-
-    <div class="flex flex-row items-center justify-center md:justify-start gap-x-2">
-        <div class="mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5">
-            <button id="firstPageDonations" type="submit"
-                class="Ctnbtn rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">متابعة</button>
-        </div>
-        <div
-            class="secondPage mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5 hidden">
-            <button id="PreviousPageDonations"
-                class="rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">الخلف</button>
-        </div>
+    <div
+        class="secondPage mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5 hidden">
+        <button id="PreviousPageDonations"
+            class="rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">الخلف</button>
     </div>
+</div>
 </div>
