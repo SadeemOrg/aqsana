@@ -9,11 +9,11 @@ class Donations extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','project_id','project_type','user_id','bus_id','donor_name','amount','number_of_people'
+        'id','project_id','project_type','user_id','bus_id','donor_name','amount','number_of_people','created_at'
     ];
 
     protected $hidden = [
-        'created_at',
+       
         'updated_at',
 
     ];
