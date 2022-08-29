@@ -518,6 +518,7 @@ class Project extends Resource
         $model->created_by = $id;
         $model->project_type = '1';
         $model->is_reported = '1';
+
     }
 
     public static function afterCreate(Request $request, $model)
