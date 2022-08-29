@@ -14,7 +14,10 @@ use Laravel\Nova\Fields\Text;
 class AlhisalatStatus extends Action
 {
     use InteractsWithQueue, Queueable;
-
+    public  function name ()
+    {
+        return __('AlhisalatStatusfinsh');
+    }
     /**
      * Perform the action on the given models.
      *
