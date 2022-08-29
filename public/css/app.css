@@ -317,8 +317,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 @font-face {
         font-family:"alfont_com_JF-Flat-Bold" ;
-        font-weight: 700px;
-        src: url('/assets/front-end/fonts/THESANSARABIC-BOLD.OTF')
+        font-weight: 600px;
+        src: url('/assets/front-end/fonts/THESANSARABIC-SEMIBOLD.OTF')
     }
 @font-face {
         font-family:"alfont_com_JF-Flat-regular" ;
