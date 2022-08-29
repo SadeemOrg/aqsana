@@ -264,14 +264,13 @@
     return false;
 };
 // first Page Donation
-
 var pageNumber = 0 ;
-var PagePrevious = 0;
+var previousPage = 0;
 $("#firstPageDonations").click(function() {
 $(".firstPage").hide();
 pageNumber++;
-if(pageNumber ==1 ){
-    pageNumber=1
+if(pageNumber == 1 ){
+    pageNumber = 1
     $(".secondPage").css("display", "flex");
     $(".Ctnbtn").text("تأكيد الدفع");
     $(".Ctnbtn").attr("disabled", true);
@@ -283,12 +282,24 @@ else if(pageNumber == 2 ){
 }
 });
 
+
+$("#price").keyup(function() {
+    var price = $("#price").val();
+    if(price == ""){
+        $(".Ctnbtn").attr("disabled", true);
+    }
+    else{
+        $(".Ctnbtn").attr("disabled", false);
+    }
+} );
+
 $("#PreviousPageDonations").click(function() {
-    PagePrevious ++;
-    if(PagePrevious==1){
-        pageNumber=0;
-        PagePrevious=0;
+    previousPage ++;
+    if(previousPage == 1){
+        pageNumber = 0;
+        previousPage = 0;
     $(".firstPage").show();
+    $(".Ctnbtn").attr("disabled", false);
     $(".secondPage").css("display", "none");
     $(".Ctnbtn").text("متابعة");
     }
@@ -300,7 +311,6 @@ $( ".showModal" ).click(function() {
 
 $(".tabs .showModal").click(function() {
     $(".PrivecySettingModal .tab").hide();
-    console.log('.tab-'+$(this).data("tab"))
 if($(this).data("tab")==1){
     $('.ModalContainer').css("max-width", "576px");
 }
@@ -426,6 +436,17 @@ else{
     console.log(payload.notification);
 });
 
+jQuery(function($) {
+  var $firstname = $('input[name="firstName"]');
+  var $lastname = $('input[name="lastName"]');
+  var $fullname = $('input[name="donor_name"]');
+
+
+  $firstname.add($lastname).keyup(function() {
+    $fullname.val($firstname.val() + ' ' + $lastname.val());
+  });
+});
+
 $('#search').on('keyup', function(){
     var val = $('#search').val().toLowerCase();
     if(val.length>2){
@@ -439,7 +460,6 @@ $('#search').on('keyup', function(){
         beforeSend: function () {
         },
         success: function (response) {
-            console.log("🚀 ~ file: app.blade.php ~ line 442 ~ $ ~ response", response)
             var elements = [];
             response.map(item=>{
                 var trimmedString ={
