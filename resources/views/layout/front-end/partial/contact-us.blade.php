@@ -45,7 +45,7 @@ $whatsapp_phone_Link = "https://wa.me/".$Final_Correct_whatsapp_phone ;
                 </p>
             </div>
             <p class="text-[#8F9BB3] text-[16px] font-FlatBold pt-6 pb-4">هل تريد المشاركة بالتبرع؟ <a
-                    href="{{ $linlk_bottom_Connectus }}" class="text-[#349A37]">{{ $text_Button }}</a></p>
+                    href="{{ $linlk_bottom_Connectus }}" class="text-[#349A37]" target="_self">{{ $text_Button }}</a></p>
         </div>
         <form method="get" action="{{ route('conctus') }}" class=" h-[432px] basis-1/2 w-full lg:mr-0">
             @csrf

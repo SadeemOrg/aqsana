@@ -21,7 +21,7 @@ class DonationsController extends BaseController
     public function store(Request $request) {
         
         $validator =  Validator::make($request->all(),[
-            'project_id' => 'required|string',
+            'project_id' => 'string',
             'donor_name' => 'required|string',
             'donation_amount' => 'required',
         ]);
