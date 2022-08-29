@@ -18,7 +18,7 @@
 
                 <div class="absolute inset-y-0 left-6 flex items-center ">
                     <!-- Heroicon name: solid/mail -->
-                    <button  type="submit"
+                    <button type="submit"
                         class="inline-flex items-center px-8 py-2 text-sm font-medium rounded-3xl text-white bg-[#349A37] hover:bg-[#101426] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-transparent">بحث
                     </button>
                 </div>

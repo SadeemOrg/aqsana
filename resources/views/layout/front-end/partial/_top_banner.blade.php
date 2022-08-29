@@ -19,7 +19,7 @@
 </div>
 <div itemscope class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
-    {{-- @include('Components.Home.Search') --}}
+    @include('Components.Home.Search')
 
     <div class="flex flex-row flex-wrap lg:flex-nowrap mt-16 items-center justify-center xl:justify-start gap-x-5">
         @if(!empty($lastnews))

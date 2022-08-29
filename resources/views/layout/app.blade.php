@@ -427,7 +427,7 @@ else{
 });
 
 $('#search').on('keyup', function(){
-    var val = $('#search').val();
+    var val = $('#search').val().toLowerCase();
     if(val.length>2){
         $('.search-bar').siblings().css('display','flex');
     $.get({
@@ -439,25 +439,29 @@ $('#search').on('keyup', function(){
         beforeSend: function () {
         },
         success: function (response) {
-            var elements = '';
+            console.log("🚀 ~ file: app.blade.php ~ line 442 ~ $ ~ response", response)
+            var elements = [];
             response.map(item=>{
-                var trimmedString =item.title.substring(0, 80);
-                elements = elements +
-                '<div onclick="RouteToLink(`trimmedString`)" class="py-2 cursor-pointer routeLink">'+trimmedString+'</div>';
-                    $('.search-result-box').append(elements)
+                var trimmedString ={
+                    trumedTitle:item.title.substring(0, 80),
+                    title:item.title,
+                    id:item.id
+                };
+                    elements.push(trimmedString)
                 })
+                let searchData = $();
+            for(i = 0; i < elements.length; i++) {
+            searchData = searchData.add('<a target="_self" href="/categor/' + elements[i].title + '/' + elements[i].id + '">'+elements[i].trumedTitle+'</br> </a>');
+        }
+                $('.search-result-box').append(searchData)
         },
         complete: function () {
+            console.log('searchCompleted')
         },
     });
 }
 });
-function RouteToLink(trimmedString) {
-    console.log('string', trimmedString)
-// var x = trimmedString.getAttribute("data-id");
-//    console.log(name);
-//    console.log(user_id);
-}
+
 
 </script>
 
