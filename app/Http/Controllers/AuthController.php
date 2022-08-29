@@ -443,4 +443,21 @@ class AuthController extends Controller
        
     
     }
+
+
+    public function getInformationUser(){
+        
+        $user = User::where("id",Auth()->id())->with("Donations.Project","Volunteer.Project","TripBooking.Project")
+        ->withCount('Donations as donations_count')
+        ->withCount('Volunteer as volunteer_count')
+        ->withCount('TripBooking as trip_booking_count')
+        ->first();
+
+        $response = [
+            'success' => "true",
+            'user' => $user
+        ];
+        return response($response, 200);
+
+    }
 }

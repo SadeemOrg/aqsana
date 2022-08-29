@@ -264,14 +264,13 @@
     return false;
 };
 // first Page Donation
-
 var pageNumber = 0 ;
-var PagePrevious = 0;
+var previousPage = 0;
 $("#firstPageDonations").click(function() {
 $(".firstPage").hide();
 pageNumber++;
-if(pageNumber ==1 ){
-    pageNumber=1
+if(pageNumber == 1 ){
+    pageNumber = 1
     $(".secondPage").css("display", "flex");
     $(".Ctnbtn").text("تأكيد الدفع");
     $(".Ctnbtn").attr("disabled", true);
@@ -283,12 +282,24 @@ else if(pageNumber == 2 ){
 }
 });
 
+
+$("#price").keyup(function() {
+    var price = $("#price").val();
+    if(price == ""){
+        $(".Ctnbtn").attr("disabled", true);
+    }
+    else{
+        $(".Ctnbtn").attr("disabled", false);
+    }
+} );
+
 $("#PreviousPageDonations").click(function() {
-    PagePrevious ++;
-    if(PagePrevious==1){
-        pageNumber=0;
-        PagePrevious=0;
+    previousPage ++;
+    if(previousPage == 1){
+        pageNumber = 0;
+        previousPage = 0;
     $(".firstPage").show();
+    $(".Ctnbtn").attr("disabled", false);
     $(".secondPage").css("display", "none");
     $(".Ctnbtn").text("متابعة");
     }
@@ -300,7 +311,6 @@ $( ".showModal" ).click(function() {
 
 $(".tabs .showModal").click(function() {
     $(".PrivecySettingModal .tab").hide();
-    console.log('.tab-'+$(this).data("tab"))
 if($(this).data("tab")==1){
     $('.ModalContainer').css("max-width", "576px");
 }
@@ -426,8 +436,19 @@ else{
     console.log(payload.notification);
 });
 
+jQuery(function($) {
+  var $firstname = $('input[name="firstName"]');
+  var $lastname = $('input[name="lastName"]');
+  var $fullname = $('input[name="donor_name"]');
+
+
+  $firstname.add($lastname).keyup(function() {
+    $fullname.val($firstname.val() + ' ' + $lastname.val());
+  });
+});
+
 $('#search').on('keyup', function(){
-    var val = $('#search').val();
+    var val = $('#search').val().toLowerCase();
     if(val.length>2){
         $('.search-bar').siblings().css('display','flex');
     $.get({
@@ -439,25 +460,28 @@ $('#search').on('keyup', function(){
         beforeSend: function () {
         },
         success: function (response) {
-            var elements = '';
+            var elements = [];
             response.map(item=>{
-                var trimmedString =item.title.substring(0, 80);
-                elements = elements +
-                '<div onclick="RouteToLink(`trimmedString`)" class="py-2 cursor-pointer routeLink">'+trimmedString+'</div>';
-                    $('.search-result-box').append(elements)
+                var trimmedString ={
+                    trumedTitle:item.title.substring(0, 80),
+                    title:item.title,
+                    id:item.id
+                };
+                    elements.push(trimmedString)
                 })
+                let searchData = $();
+            for(i = 0; i < elements.length; i++) {
+            searchData = searchData.add('<a target="_self" href="/categor/' + elements[i].title + '/' + elements[i].id + '">'+elements[i].trumedTitle+'</br> </a>');
+        }
+                $('.search-result-box').append(searchData)
         },
         complete: function () {
+            console.log('searchCompleted')
         },
     });
 }
 });
-function RouteToLink(trimmedString) {
-    console.log('string', trimmedString)
-// var x = trimmedString.getAttribute("data-id");
-//    console.log(name);
-//    console.log(user_id);
-}
+
 
 </script>
 

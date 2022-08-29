@@ -41,6 +41,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //donations Api
     Route::get('/donations', [DonationsController::class, 'index']);
+    Route::post('/donations-app', [DonationsController::class, 'store']);
+    Route::get('/getInformationUser', [AuthController::class, 'getInformationUser']);
+    
 });
 
 Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);

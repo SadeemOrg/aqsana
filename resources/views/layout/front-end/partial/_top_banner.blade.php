@@ -3,9 +3,6 @@
         background: linear-gradient(0.92deg, rgba(0, 0, 0, 0.3) 4.13%, rgba(0, 0, 0, 0) 96.18%);
     }
 </style>
-{{-- @php
-    dd($Heros[0])
-@endphp --}}
 <div itemscope class="owl-carousel dots-style1" id="main-home-slider">
     @if(is_array($Heros)==true && !empty($Heros))
     @foreach ( $Heros as $Hero )

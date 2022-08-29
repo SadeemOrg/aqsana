@@ -89,7 +89,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                     <p class="text-[#101426] text-sm">شارك عبر</p>
                     <ul class="share-us flex flex-row items-center justify-start">
                         <li class="px-1">
-                            <a class="facebook"
+                            <a class="facebook" target="_self"
                                 href="javascript:openWindow('http://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}&title=')">
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +110,9 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                         </li>
                         <li class="px-1">
                             <a class="twitter"
-                                href="javascript:openWindow('http://twitter.com/intent/tweet?status=+{{ Request::url() }}')">
+                                target="_self"
+                                    href="javascript:openWindow('http://twitter.com/intent/tweet?text=+{{ Request::url()  }}')">
+
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
@@ -129,7 +131,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                             </a>
                         </li>
                         <li class="px-1">
-                            <a class="pinterest"
+                            <a class="pinterest" target="_self"
                                 href="https://pinterest.com/pin/create/button/?url={{ Request::url() }}&media={{ $image }}&description={{ $news_detail->title }}">
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -141,7 +143,8 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                             </a>
                         </li>
                         <li class="px-1">
-                            <a class="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={url}">
+                            <a class="linkedin" target="_blank"
+                                href="https://www.linkedin.com/shareArticle?mini=true&url={{ Request::url()  }}">
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
@@ -160,7 +163,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
                     @if(!empty($pictures) && !empty($news_detail->video_link ))
                     <div class="col-span-1 scalabel-img-box">
-                        <a href={{ $news_detail->video_link }}  class="mediabox rounded-[5px]
+                        <a href={{ $news_detail->video_link }} class="mediabox rounded-[5px]
                             overflow-hidden relative">
                             <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full"
                                 src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
@@ -176,7 +179,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                     @endforeach
                     @elseif (empty($pictures) && !empty($news_detail->video_link ))
                     <div class="col-span-1">
-                        <a href={{ $news_detail->video_link }}  class="mediabox relative">
+                        <a href={{ $news_detail->video_link }} class="mediabox relative">
                             <img class=" mx-auto w-full object-cover lg:h-[265px] h-full rounded-[5px]"
                                 src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
                             <img src="{{ asset('assets/image/play_Svg.svg') }}"
