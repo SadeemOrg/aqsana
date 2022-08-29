@@ -67,11 +67,13 @@
         <!-- Second Page Input -->
         <div class="secondPage mt-10 sm:mt-20 flex flex-col gap-y-6 hidden w-full">
             <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
-                <input type="text" name="donation_amount" placeholder=" الاسم الاول"
+                <input type="text" id="firstName" name="firstName" placeholder=" الاسم الاول" value=""
                     class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
-                <input type="text" name="lastName" placeholder=" الاسم الاخير"
+                <input type="text" id="firstName"  name="lastName" placeholder=" الاسم الاخير" value=""
                     class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
             </div>
+            <input type="hidden" id="donorName"  name="donor_name" value=""  placeholder=" الاسم كامل"
+                    class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
             <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
                 <input type="text" name="" placeholder="رقم الهاتف"
                     class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
@@ -141,7 +143,7 @@
 
 <div class="flex flex-row items-center justify-center md:justify-start gap-x-2">
     <div class="mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5">
-        <button id="firstPageDonations" type="submit"
+        <button id="firstPageDonations" type="submit" disabled
             class="Ctnbtn rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">متابعة</button>
     </div>
     <div
