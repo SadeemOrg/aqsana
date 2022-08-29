@@ -256,6 +256,7 @@ class HomeController extends Controller
     }
     public function donations()
     {
-        return view('Pages.donationsPage.donations-page');
+        $project =null;
+        return view('Pages.donationsPage.donations-page',compact('project'));
     }
 }
