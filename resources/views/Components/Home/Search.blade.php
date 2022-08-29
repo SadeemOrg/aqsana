@@ -3,7 +3,7 @@
         class="absolute z-10 mt-10 -top-48 w-[75%] bg-white rounded-[5px] h-20 flex flex-row justify-start items-center">
         <!--search Bar -->
         <div dir="rtl" class=" relative shadow-sm  w-full bg-white border-0 h-full  rounded-md">
-            <form action="{{ route('pagesearch') }}" method="get">
+            <form class="h-full" action="{{ route('pagesearch') }}" method="get">
                 <div class="absolute inset-y-0 right-10 pl-3 flex items-center pointer-events-none">
                     <!-- Heroicon name: solid/mail -->
                     <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">

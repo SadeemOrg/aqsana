@@ -91,8 +91,7 @@ class User extends Authenticatable
 
 
 
-
-    public function type ()
+    public function type()
     {
         return $this->user_role;
     }

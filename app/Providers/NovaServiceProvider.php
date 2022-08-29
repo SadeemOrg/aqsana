@@ -94,6 +94,14 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                             'label' => 'image description',
                                             'multiple' => false,
                                             'required' => true
+                                        ],
+
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'link',
+                                            'label' => 'button link',
+                                            'multiple' => false,
+                                            'required' => true
                                         ]
                                     ]
                                 ]
@@ -367,7 +375,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             ]),
         ]);
+        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
+            new Tabs('donations', [
+                Text::make('check box text', 'checkbox_donation'),
 
+            ]),
+        ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             new Tabs('website Settings', [
                 'website SEO'    => [
@@ -390,7 +403,145 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('phone', 'phone'),
                     Text::make('email', 'email'),
                     Text::make('address', 'address'),
-                ],
+                ],__('privacy terms') => [
+
+                    Tiptap::make(__('privacy terms arabic'), 'privacy_terms_ar')
+                    ->buttons([
+                        'heading',
+                        '|',
+                        'italic',
+                        'bold',
+                        '|',
+                        'link',
+                        'code',
+                        'strike',
+                        'underline',
+                        'highlight',
+                        '|',
+                        'bulletList',
+                        'orderedList',
+                        'br',
+                        'codeBlock',
+                        'blockquote',
+                        '|',
+                        'horizontalRule',
+                        'hardBreak',
+                        '|',
+                        'table',
+                        '|',
+                        'image',
+                        '|',
+                        'textAlign',
+                        '|',
+                        'rtl',
+                        '|',
+                        'history',
+                    ])
+                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+                    Tiptap::make(__('privacy terms Hebrew'), 'privacy_terms_he')
+                    ->buttons([
+                        'heading',
+                        '|',
+                        'italic',
+                        'bold',
+                        '|',
+                        'link',
+                        'code',
+                        'strike',
+                        'underline',
+                        'highlight',
+                        '|',
+                        'bulletList',
+                        'orderedList',
+                        'br',
+                        'codeBlock',
+                        'blockquote',
+                        '|',
+                        'horizontalRule',
+                        'hardBreak',
+                        '|',
+                        'table',
+                        '|',
+                        'image',
+                        '|',
+                        'textAlign',
+                        '|',
+                        'rtl',
+                        '|',
+                        'history',
+                    ])
+                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+
+                ] ,__('Cancellation Policy') => [
+
+                    Tiptap::make(__('Cancellation Policy arabic'), 'Cancellation_Policy_ar')
+                    ->buttons([
+                        'heading',
+                        '|',
+                        'italic',
+                        'bold',
+                        '|',
+                        'link',
+                        'code',
+                        'strike',
+                        'underline',
+                        'highlight',
+                        '|',
+                        'bulletList',
+                        'orderedList',
+                        'br',
+                        'codeBlock',
+                        'blockquote',
+                        '|',
+                        'horizontalRule',
+                        'hardBreak',
+                        '|',
+                        'table',
+                        '|',
+                        'image',
+                        '|',
+                        'textAlign',
+                        '|',
+                        'rtl',
+                        '|',
+                        'history',
+                    ])
+                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+                    Tiptap::make(__('Cancellation Policy Hebrew'), 'Cancellation_Policy_he')
+                    ->buttons([
+                        'heading',
+                        '|',
+                        'italic',
+                        'bold',
+                        '|',
+                        'link',
+                        'code',
+                        'strike',
+                        'underline',
+                        'highlight',
+                        '|',
+                        'bulletList',
+                        'orderedList',
+                        'br',
+                        'codeBlock',
+                        'blockquote',
+                        '|',
+                        'horizontalRule',
+                        'hardBreak',
+                        '|',
+                        'table',
+                        '|',
+                        'image',
+                        '|',
+                        'textAlign',
+                        '|',
+                        'rtl',
+                        '|',
+                        'history',
+                    ])
+                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+
+                ]
             ]),
         ]);
     }

@@ -51,7 +51,7 @@ use Pdmfc\NovaFields\ActionButton;
 
 use Fourstacks\NovaRepeatableFields\Repeater;
 
-class Project extends Resource
+class Trip extends Resource
 {
     /**
      * The model the resource corresponds to.
@@ -65,16 +65,11 @@ class Project extends Resource
      *
      * @var string
      */
-    public static $title = 'project_name';
-    public static $priority = 1;
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
+    public static $title = 'id';
+    public static $priority = 3;
     public static function label()
     {
-        return __('project');
+        return __('Trip');
     }
     public static function group()
     {
@@ -82,33 +77,25 @@ class Project extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ($request->user()->type() == 'website_admin') {
+        if (  $request->user()->type()== 'website_admin')
+        {
             return false;
-        } else return true;
+        }
+       else return true;
     }
 
-    public static $search = [
-        'id',
-    ];
-
-    /**
-     * Get the fields displayed by the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public static function indexQuery(NovaRequest $request, $query)
     {
         $user = Auth::user();
         $id = Auth::id();
-        if ($user->type() == 'admin') {
+        if ($user->type() == 'admin' ) {
 
-            return $query->where('project_type', '1');
+            return $query->where('project_type', '3');
         } elseif ($user->type() == 'regular_area') {
 
             $Area = \App\Models\Area::where('admin_id', $id)->first();
             $projects = DB::table('project_area')->where('area_id', $Area->id)->get();
-        } else {
+        } else  {
             $citye =   City::where('admin_id', $id)
                 ->select('id')->first();
             $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
@@ -119,8 +106,23 @@ class Project extends Resource
         foreach ($projects as $key => $value) {
             array_push($stack, $value->project_id);
         }
-        return $query->whereIn('id', $stack)->where('project_type', '1');
+        return $query->whereIn('id', $stack)->where('project_type', '3');
     }
+    /**
+     * The columns that should be searched.
+     *
+     * @var array
+     */
+    public static $search = [
+        'id',
+    ];
+
+    /**
+     * Get the fields displayed by the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
     public function fields(Request $request)
     {
         return [
@@ -514,12 +516,12 @@ class Project extends Resource
     }
     public static function beforeCreate(Request $request, $model)
     {
-        $id = Auth::id();
+                $id = Auth::id();
         $model->created_by = $id;
-        $model->project_type = '1';
-        $model->is_reported = '1';
+        $model->project_type='3';
+        $model->is_reported='1';
 
-    }
+       }
 
     public static function afterCreate(Request $request, $model)
     {
@@ -538,16 +540,17 @@ class Project extends Resource
         if ($user->type() == 'regular_city') {
             // dd($citye);
             DB::table('project_area')
-                ->updateOrInsert(
-                    ['project_id' => $model->id, 'area_id' =>  $citye['area_id']],
+            ->updateOrInsert(
+                ['project_id' => $model->id, 'area_id' =>  $citye['area_id']],
 
-                );
+            );
             DB::table('project_city')
                 ->updateOrInsert(
                     ['project_id' => $model->id, 'city_id' =>  $citye['id']],
 
                 );
         }
+
     }
     public static function beforeUpdate(Request $request, $model)
     {
@@ -621,25 +624,20 @@ class Project extends Resource
             //     );
         }
         if ($request->newbus) {
-            $buss = $request->newbus;
-            // dd($request->newbus);
-            foreach ($buss as $bus) {
-                // dd($bus['attributes']);
+            $buss = json_decode($request->newbus);
+
+            foreach ($buss as $user) {
+                //  dd($user);
+
                 DB::table('buses')
                     ->insert(
-                        [
-                            'name_driver' => $bus['attributes']['name_driver'],
-                            'company_id' => $bus['attributes']['BusesCompany'],
-                            'bus_number' => $bus['attributes']['bus_number'],
-                            'number_of_seats' => $bus['attributes']['number_person_on_bus'],
-                            'seat_price' => $bus['attributes']['seat_price'],
-                            'travel_from' => $bus['attributes']['from'],
-                            'travel_to' => $bus['attributes']['to'],
-                            'phone_number_driver' => $bus['attributes']['phone_number'],
-                            'status' => '1',
-                        ]
+                        ['name_driver' => $user->name_driver, 'bus_number' => $user->bus_number, 'number_of_seats' => $user->number_of_seats, 'seat_price' => $user->seat_price, 'phone_number_driver' => $user->phone_number_driver],
+
                     );
-                $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
+                $bus =  \App\Models\Bus::where('bus_number', $user->bus_number)->first();
+
+
+                // dd($users['id']);
 
                 DB::table('project_bus')
                     ->updateOrInsert(
@@ -661,7 +659,6 @@ class Project extends Resource
         //     }
         // }
     }
-
     /**
      * Get the cards available for the request.
      *
@@ -703,18 +700,6 @@ class Project extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-
-            (new ApprovalRejectProjec)  ->canSee(function () {
-                        $user = Auth::user();
-
-                        if ($user->type() == 'regular_city' ) {
-                            return true;
-                        }
-                    }),
-
-
-
-        ];
+        return [];
     }
 }

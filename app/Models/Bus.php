@@ -33,7 +33,7 @@ class Bus extends Model
 
     public function company()
     {
-        return $this->belongsTo(busescompany::class, 'company_id');
+        return $this->belongsTo(BusesCompany::class, 'company_id');
     }
 
     public function create()

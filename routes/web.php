@@ -33,10 +33,10 @@ Route::get('/project-donations', [HomeController::class, 'projectdonation'])->na
 Route::get('/project-donations/{id}', [HomeController::class, 'getdonationDetail'])->name('getdonationDetail');
 
 
+Route::get('/donation', [HomeController::class, 'donations'])->name('donations');
 
 Route::get('/donation/{id}', [HomeController::class, 'donation'])->name('donation');
 
-Route::get('/donation', [HomeController::class, 'donations'])->name('donations');
 
 
 

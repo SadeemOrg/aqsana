@@ -38,7 +38,7 @@ class Bus extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'bus_number';
 
     /**
      * The columns that should be searched.
@@ -63,14 +63,15 @@ class Bus extends Resource
 
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make('company', 'company', \App\Nova\busescompany::class),
+            BelongsTo::make('company', 'company', \App\Nova\BusesCompany::class),
             Text::make("Bus Number","bus_number"),
-            Number::make("Number person on bus","number_person_on_bus")->step(1.0),
+            Number::make("Number person on bus","number_of_seats")->step(1.0),
+            Number::make("seat price","seat_price")->step(1.0),
             BelongsTo::make('travel from', 'travelfrom', \App\Nova\address::class),
             BelongsTo::make('travel to', 'travelto', \App\Nova\address::class),
             BelongsTo::make('current location', 'currentlocation', \App\Nova\address::class),
             Text::make("Name Driver","name_driver"),
-            Text::make("phone_number","phone_number"),
+            Text::make("phone_number","phone_number_driver"),
             Select::make("status","status")
             ->options([
                 '1' => 'available',

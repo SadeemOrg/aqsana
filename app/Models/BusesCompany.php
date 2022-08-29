@@ -23,6 +23,10 @@ class BusesCompany extends Model
     }
 
 
+
+
+
+
     public function create()
     {
         return $this->belongsTo('App\Models\User','created_by');
