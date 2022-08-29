@@ -73,6 +73,24 @@ class User extends Authenticatable
     }
 
 
+    public function Donations()
+    {
+        return $this->hasMany('App\Models\Donations','user_id');
+    }
+
+
+    public function Volunteer()
+    {
+        return $this->hasMany('App\Models\Volunteer','user_id');
+    }
+
+    public function TripBooking()
+    {
+        return $this->hasMany('App\Models\TripBooking','user_id');
+    }
+
+
+
     public function type()
     {
         return $this->user_role;

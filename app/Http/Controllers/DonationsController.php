@@ -30,8 +30,7 @@ class DonationsController extends BaseController
             return $this->sendError('Validate Error', $validator->errors());
         }
 
-       
-        
+    
         $donation = Donations::create([
             'project_id' => $request->get("project_id"),
             'project_type' => $request->get("project_type"),
