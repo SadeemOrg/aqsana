@@ -92,7 +92,8 @@
                         <ul class="share-us flex flex-row items-center justify-start">
                             <li class="px-1">
                                 <a class="facebook"
-                                    href="javascript:openWindow('http://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}/{{ $new->id }}&title=')">
+                                target="_self"
+                                    href="javascript:openWindow('http://www.facebook.com/sharer/sharer.php?u={{ url('/') }}/categor/{{ $title }}/{{ $new->id }}&title=')">
                                     <svg  width="25" height="25" viewBox="0 0 25 25" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
@@ -112,7 +113,8 @@
                             </li>
                             <li class="px-1">
                                 <a class="twitter"
-                                    href="javascript:openWindow('http://twitter.com/intent/tweet?text=+{{ Request::url() }}/{{ $new->id }}')">
+                                target="_self"
+                                    href="javascript:openWindow('http://twitter.com/intent/tweet?text=+{{ url('/') }}/categor/{{ $title }}/{{ $new->id }}')">
                                     <svg  width="25" height="25" viewBox="0 0 25 25" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
@@ -132,7 +134,7 @@
                             </li>
                             <li class="px-1">
                                 <a class="pinterest"
-                                    href="http://pinterest.com/pin/create/link/?url={{Request::url()}}/{{ $new->id }}"
+                                    href="http://pinterest.com/pin/create/link/?url={{ url('/') }}/categor/{{ $title }}/{{ $new->id }}"
                                     onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                                     <svg  width="25" height="25" viewBox="0 0 25 25" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -144,7 +146,7 @@
                                 </a>
                             </li>
                             <li class="px-1">
-                                <a class="linkedin lisharelink" data-shareurl={{ Request::url() }} data-id={{ $new->id}}
+                                <a class="linkedin lisharelink" data-shareurl="{{ url('/') }}/categor/{{ $title }}/{{ $new->id }}"  data-id={{ $new->id}}
                                     >
                                     <svg  width="25" height="25" viewBox="0 0 25 25" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
