@@ -499,6 +499,8 @@ $('#search').on('keyup', function(){
         beforeSend: function () {
             // console.log('ameed',$('.search-result-box').html(''));
             $('.search-result-box').html('');
+            $('.svgSearch').css('display','none');
+
         },
         success: function (response) {
             var elements = [];

@@ -713,6 +713,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-8{
   height: 2rem;
 }
+.h-auto{
+  height: auto;
+}
 .max-h-\[670px\]{
   max-height: 670px;
 }
@@ -745,6 +748,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-h-14{
   max-height: 3.5rem;
+}
+.max-h-40{
+  max-height: 10rem;
 }
 .min-h-\[294px\]{
   min-height: 294px;
@@ -1016,6 +1022,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .overflow-y-visible{
   overflow-y: visible;
+}
+.overflow-y-scroll{
+  overflow-y: scroll;
 }
 .rounded-lg{
   border-radius: 0.5rem;
