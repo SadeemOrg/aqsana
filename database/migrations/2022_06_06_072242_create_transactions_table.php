@@ -26,7 +26,7 @@ class CreateTransactionsTable extends Migration
             $table->string('voucher')->nullable();
             $table->integer('approval')->nullable();
             $table->string("reason_of_reject")->nullable();
-            $table->time('transaction_date');
+            $table->date('transaction_date');
             $table->unsignedBigInteger('Created_By')->nullable();
             $table->unsignedBigInteger('Update_By')->nullable();
 
