@@ -17,7 +17,8 @@ class SettingController extends BaseController
         $vision_sub_text_Main = nova_get_setting('sup_text_vision_aboutus', 'default_value');
 
         $goalsjson = nova_get_setting('goals', 'default_value');
-
+        $goals = json_decode($goalsjson);
+        
         $text_main_workplace = nova_get_setting('text_main_workplace', 'default_value');
         $sub_text_workplace = nova_get_setting('sup_text_workplace', 'default_value');
 
@@ -28,7 +29,7 @@ class SettingController extends BaseController
             "sub_main_text"=>$aboutUs_sub_text_Main,
             "vision_main" => $vision_main,
             "vision_sub_text_Main" => $vision_sub_text_Main,
-            "goals" => $goalsjson,
+            "goals" => $goals,
             "text_main_workplace" => $text_main_workplace,
             "sub_text_workplace" => $sub_text_workplace
 
