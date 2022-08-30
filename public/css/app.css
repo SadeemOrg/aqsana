@@ -443,6 +443,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bottom-0{
   bottom: 0px;
 }
+.right-\[12\%\]{
+  right: 12%;
+}
 .-top-48{
   top: -12rem;
 }
@@ -478,18 +481,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .right-6{
   right: 1.5rem;
-}
-.right-20{
-  right: 5rem;
-}
-.right-auto{
-  right: auto;
-}
-.right-\[10\%\]{
-  right: 10%;
-}
-.right-\[12\%\]{
-  right: 12%;
 }
 .z-30{
   z-index: 30;
@@ -689,9 +680,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-\[250px\]{
   height: 250px;
 }
-.h-20{
-  height: 5rem;
-}
 .h-\[88px\]{
   height: 88px;
 }
@@ -752,12 +740,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-14{
   max-height: 3.5rem;
 }
-.max-h-full{
-  max-height: 100%;
-}
-.max-h-16{
-  max-height: 4rem;
-}
 .min-h-\[294px\]{
   min-height: 294px;
 }
@@ -790,9 +772,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-\[75\%\]{
   width: 75%;
-}
-.w-\[65\%\]{
-  width: 65%;
 }
 .w-\[220px\]{
   width: 220px;
@@ -1174,9 +1153,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .p-3{
   padding: 0.75rem;
 }
-.p-6{
-  padding: 1.5rem;
-}
 .p-4{
   padding: 1rem;
 }
@@ -1226,10 +1202,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-11{
   padding-top: 2.75rem;
   padding-bottom: 2.75rem;
-}
-.px-20{
-  padding-left: 5rem;
-  padding-right: 5rem;
 }
 .px-8{
   padding-left: 2rem;
@@ -1504,6 +1476,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
 }
+.text-red-600{
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
 .text-\[\#CC9933\]{
   --tw-text-opacity: 1;
   color: rgb(204 153 51 / var(--tw-text-opacity));
@@ -1750,6 +1726,9 @@ body{
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
+  .sm\:mt-10{
+    margin-top: 2.5rem;
+  }
   .sm\:mt-4{
     margin-top: 1rem;
   }
@@ -1761,9 +1740,6 @@ body{
   }
   .sm\:mt-0{
     margin-top: 0px;
-  }
-  .sm\:mt-10{
-    margin-top: 2.5rem;
   }
   .sm\:block{
     display: block;
@@ -1789,29 +1765,23 @@ body{
   .sm\:h-\[350px\]{
     height: 350px;
   }
-  .sm\:h-56{
-    height: 14rem;
-  }
-  .sm\:h-\[300px\]{
-    height: 300px;
-  }
   .sm\:h-20{
     height: 5rem;
   }
   .sm\:h-full{
     height: 100%;
   }
-  .sm\:max-h-full{
-    max-height: 100%;
+  .sm\:h-56{
+    height: 14rem;
+  }
+  .sm\:h-\[300px\]{
+    height: 300px;
   }
   .sm\:w-\[168px\]{
     width: 168px;
   }
   .sm\:w-\[563px\]{
     width: 563px;
-  }
-  .sm\:w-\[65\%\]{
-    width: 65%;
   }
   .sm\:max-w-xl{
     max-width: 36rem;
@@ -1926,9 +1896,6 @@ body{
   .md\:max-h-\[320px\]{
     max-height: 320px;
   }
-  .md\:max-h-14{
-    max-height: 3.5rem;
-  }
   .md\:w-full{
     width: 100%;
   }
@@ -1937,9 +1904,6 @@ body{
   }
   .md\:w-\[50\%\]{
     width: 50%;
-  }
-  .md\:w-\[65\%\]{
-    width: 65%;
   }
   .md\:max-w-2xl{
     max-width: 42rem;
@@ -2002,9 +1966,6 @@ body{
   }
 }
 @media (min-width: 1024px){
-  .lg\:right-0{
-    right: 0px;
-  }
   .lg\:right-auto{
     right: auto;
   }
@@ -2071,6 +2032,9 @@ body{
   .lg\:min-h-\[90px\]{
     min-height: 90px;
   }
+  .lg\:w-\[65\%\]{
+    width: 65%;
+  }
   .lg\:w-\[360px\]{
     width: 360px;
   }
@@ -2085,9 +2049,6 @@ body{
   }
   .lg\:w-\[150px\]{
     width: 150px;
-  }
-  .lg\:w-\[65\%\]{
-    width: 65%;
   }
   .lg\:max-w-\[170px\]{
     max-width: 170px;

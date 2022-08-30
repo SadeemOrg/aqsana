@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Actengage\Wizard\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -66,33 +67,48 @@ class HomeController extends Controller
     }
     public function conctus(Request $request)
     {
-
+        // session()->flash("success", "This is success message");
+        // session()->flash("error", "This is error message");
         // $test = $request->validate([
         //     'name' => 'required|string',
         //     'phone' => 'integer|digits_between:2,5',
-        //     'message' => 'required|string',
+        //     'message' => 'integer|digits_between:8,9',
 
         // ]);
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:2|max:255',
-            'phone' => 'required|numeric|digits:10',
-            'message' => 'required|string',
-        ]);
-        if ($validator->fails()) {
-            FormMassage::create([
-                'name' => $request['name'],
-                'phone' => $request['phone'],
-                'message' => $request['message'],
 
-            ]);
-            session()->flash("error", "This is error message");
-        } else {
-            session()->flash("success", "This is success message");
+        //
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'phone' => 'integer|digits_between:2,5',
+            'message' => 'integer|digits_between:8,9',
+        ]);
+        if ($validator->passes()) {
+            return response()->json(['success'=>'Added new records.']);
         }
 
+        return response()->json(['error'=>$validator->errors()->all()]);
+        // Session::flash('success', 'danger');
+        // $validator = Validator::make($request->all(), [
+        //     'name' => 'required|min:2|max:255',
+        //     'phone' => 'required|numeric|digits:10',
+        //     'message' => 'required|string',
+        // ]);
+        // if ($validator->fails()) {
+        //     FormMassage::create([
+        //         'name' => $request['name'],
+        //         'phone' => $request['phone'],
+        //         'message' => $request['message'],
+
+        //     ]);
+        //
+        // } else {
+        //
+        // }
 
 
-        return redirect()->back();
+
+        // return redirect()->back();
     }
 
 
