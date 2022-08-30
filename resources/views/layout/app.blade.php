@@ -22,8 +22,6 @@
     <meta itemprop="description" content="{{ nova_get_setting('og_description', '') }}" />
     <meta itemprop="image" content=" storage/{{ nova_get_setting('main_logo', 'default_value')}}" />
 
-
-
     <meta property="og:site_name" content="{{ nova_get_setting('og_site_name', '') }}" />
     <meta property="og:url" content="{{ Request::url() }}" />
     <meta property="og:type" content="https://schema.org/WebSite" />
@@ -68,8 +66,6 @@
     <!-- firebase integration end -->
 
     <!-- Comment out (or don't include) services that you don't want to use -->
-
-
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
     <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
     <style>
@@ -97,6 +93,7 @@
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{rand(0, 99)}}">
     <link rel="stylesheet" href="{{ asset('assets/front-end/css/main.css') }}?v={{rand(0, 99)}}">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 </head>
 
 <body dir="rtl">
@@ -110,6 +107,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}?v={{rand(0, 99)}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         var owl = $("#main-home-slider");
             owl.owlCarousel({
@@ -338,7 +336,49 @@ else{
 }
 });
 
+$(".contactUsForm").submit(function(e) {
+    e.preventDefault()
+    var $name = $('input[name="name"]').val();
+    var $phone = $('input[name="phone"]').val();
+    var $message = $('#contuctus-message').val();
+    $.ajax({
+        type: "get",
+        url: "/conctus",
+        data: {
+            name: $name,
+            phone: $phone,
+            message: $message
+        },
+        success: function(data) {
+            toastr.options = {
+            "closeButton": true,
+            "debug": true,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "2000",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr.success("{{ Session::get("success") }}");
+        },
+        error: function(data) {
+            console.log("Asdf")
+            toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "2000",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        }
+        toastr.error("{{ Session::get("error") }}");
 
+})
+})
     </script>
     <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
     <script src="{{ asset('assets/front-end/js/main.js') }}"></script>
