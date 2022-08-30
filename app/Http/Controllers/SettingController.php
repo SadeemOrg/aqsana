@@ -22,7 +22,8 @@ class SettingController extends BaseController
         $text_main_workplace = nova_get_setting('text_main_workplace', 'default_value');
         $sub_text_workplace = nova_get_setting('sup_text_workplace', 'default_value');
 
-        
+        $achievementsjson = nova_get_setting('achievements', 'default_value');
+        $achievements = json_decode($achievementsjson);
       
         $about_us = [
             "main_text"=>$aboutUs_main,
@@ -31,7 +32,8 @@ class SettingController extends BaseController
             "vision_sub_text_Main" => $vision_sub_text_Main,
             "goals" => $goals,
             "text_main_workplace" => $text_main_workplace,
-            "sub_text_workplace" => $sub_text_workplace
+            "sub_text_workplace" => $sub_text_workplace,
+            "achievements" => $achievements
 
         ];
         return $this->sendResponse($about_us, 'Contuct us information');
