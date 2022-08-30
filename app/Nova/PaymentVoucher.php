@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -54,26 +55,63 @@ class PaymentVoucher extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-        return $query->where('type', '1');
+        return $query->where('main_type', '1');
     }
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            // Text::make('type','type')->withMeta([
-            //     'type' => 'hidden',
-            //     'value' => '1'
-            // ]),
-            Select::make("transactions status", "status")->options([
-                '0' => 'not',
-                '1' => 'ok',
 
-            ])->default(0)
-                ->hideWhenCreating()->hideWhenUpdating(),
+            Select::make("type", "type")->options([
+                '1' => 'project',
+                '2' => 'qawael',
+                '3' => 'trip',
+                '4' => 'else',
+            ])->displayUsingLabels(),
 
+            NovaDependencyContainer::make([
+                Select::make(__('project'), "ref_id")
+                    ->options(function () {
+                        $projects =  \App\Models\project::where('project_type', '1')->get();
+                        $user_type_admin_array =  array();
+                        foreach ($projects as $project) {
+                            $user_type_admin_array += [$project['id'] => ($project['project_name'])];
+                        }
 
+                        return $user_type_admin_array;
+                    })
+                    ->displayUsingLabels(),
+            ])->dependsOn('type', '1')->hideFromDetail()->hideFromIndex(),
+            NovaDependencyContainer::make([
+                Select::make(__('QawafilAlaqsa'), "ref_id")
+                ->options(function () {
+                    $projects =  \App\Models\project::where('project_type', '2')->get();
+                    $user_type_admin_array =  array();
+                    foreach ($projects as $project) {
+                        $user_type_admin_array += [$project['id'] => ($project['project_name'])];
+                    }
 
-            Text::make('project', 'project_id'),
+                    return $user_type_admin_array;
+                })
+                ->displayUsingLabels(),
+            ])->dependsOn('type', '2')->hideFromDetail()->hideFromIndex(),
+            NovaDependencyContainer::make([
+                Select::make(__('Trip'), "ref_id")
+                ->options(function () {
+                    $projects =  \App\Models\project::where('project_type', '3')->get();
+                    $user_type_admin_array =  array();
+                    foreach ($projects as $project) {
+                        $user_type_admin_array += [$project['id'] => ($project['project_name'])];
+                    }
+
+                    return $user_type_admin_array;
+                })
+                ->displayUsingLabels(),
+            ])->dependsOn('type', '3')->hideFromDetail()->hideFromIndex(),
+
+            BelongsTo::make('project', 'project')->hideWhenCreating()->hideWhenUpdating(),
+
+            Text::make('description', 'description'),
             Text::make('transact amount', 'transact_amount'),
             BelongsTo::make('Currency', 'Currenc'),
 
@@ -82,10 +120,10 @@ class PaymentVoucher extends Resource
                 return $this->Currenc->rate;
             }),
             Text::make('equivalent amount', function () {
-                return ($this->Currenc->rate )*$this->transact_amount;
+                return ($this->Currenc->rate) * $this->transact_amount;
             }),
 
-                Image::make('voucher', 'voucher')->disk('public')->prunable(),
+            Image::make('voucher', 'voucher')->disk('public')->prunable(),
 
             Select::make('approval ', 'approval')->options([
                 1 => 'approval',
@@ -103,16 +141,13 @@ class PaymentVoucher extends Resource
     public static function beforeCreate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->created_by=$id;
-        $model->type='1';
-
-
+        $model->created_by = $id;
+        $model->main_type = '2';
     }
     public static function beforeSave(Request $request, $model)
     {
         $id = Auth::id();
-        $model->update_by=$id;
-
+        $model->update_by = $id;
     }
 
 

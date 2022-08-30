@@ -11,7 +11,9 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id','type', 'description','ref_id','transactions_type', 'transactions_status','Currency','equivalent_amount','date','reason_of_reject','approval','voucher','transaction_date'
+        'id','main_type','type','description', 'ref_id','transact_amount',
+         'Currency','equivelant_amount','voucher','transaction_date',
+         'reason_of_reject','approval'
     ];
 
     protected $hidden = [
@@ -26,13 +28,28 @@ class Transaction extends Model
 
     public function Trip()
     {
-        return $this->belongsTo('App\Models\Trip','ref_id');
+        return $this->belongsTo('App\Models\project','ref_id');
     }
 
 
+    public function Alhisalat()
+    {
+        return $this->belongsTo('App\Models\project','ref_id');
+    }
+
+    public function Donations()
+    {
+        return $this->belongsTo('App\Models\Donations','ref_id');
+    }
+
+    public function QawafilAlaqsa()
+    {
+        return $this->belongsTo('App\Models\QawafilAlaqsa','ref_id');
+    }
+
     public function project()
     {
-        return $this->belongsTo('App\Models\project','project_id');
+        return $this->belongsTo('App\Models\project','ref_id');
     }
 
     public function Currenc()

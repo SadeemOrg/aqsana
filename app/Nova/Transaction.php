@@ -63,18 +63,14 @@ class Transaction extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
             Select::make('Transactions Type ', 'type')->options([
                 1 => 'Payment voucher',
                 2 => 'receipt voucher',
             ])->displayUsingLabels(),
 
 
-            Select::make("transactions status", "status")->options([
-                '0' => 'not',
-                '1' => 'ok',
 
-            ])->default(0)
-                ->hideWhenCreating()->hideWhenUpdating(),
 
 
 
