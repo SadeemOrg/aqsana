@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\project;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,7 +23,7 @@ class ProjectController extends BaseController
             return $this->sendError('Validate Error', $validator->errors());
         }
 
-        $projects = project::where("project_type",$request->get("project_type"))->orderBy('created_at', 'desc')->paginate(15);
+        $projects = Project::where("project_type",$request->get("project_type"))->orderBy('created_at', 'desc')->paginate(15);
         return $this->sendResponse($projects, 'Success get projects');
 
     }
