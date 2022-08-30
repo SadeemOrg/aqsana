@@ -18,7 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->char('main_type', 1)->default(0);
             $table->char('type', 1)->default(0);
-            $table->char('status', 1)->default(0);
+            $table->string('description')->nullable();
             $table->bigInteger('ref_id')->nullable();
             $table->integer('transact_amount');
             $table->unsignedBigInteger('Currency')->nullable();
@@ -27,10 +27,9 @@ class CreateTransactionsTable extends Migration
             $table->integer('approval')->nullable();
             $table->string("reason_of_reject")->nullable();
             $table->time('transaction_date');
-
-
             $table->unsignedBigInteger('Created_By')->nullable();
             $table->unsignedBigInteger('Update_By')->nullable();
+
 
             // $table->foreign('Created_By')->references('id')->on('users')
             //     ->onDelete('cascade');
