@@ -48,11 +48,16 @@ class SettingController extends BaseController
     public function contact_us(){
       
         $phone_contact = nova_get_setting('phone_Connectus', 'default_value');
-        $email_contact = nova_get_setting('email_Connectus', 'default_value');
+        $email_contact = nova_get_setting('email_Connectus', 'default_value');  
+        $contact_Text_Main = nova_get_setting('text_main_Connectus', 'default_value');
+        $Contact_sub_text = nova_get_setting('sup_text_main_Connectus', 'default_value');
+      
 
         $contact_us = [
             "phone"=>$phone_contact,
             "email"=>$email_contact,
+            "web_url" => env("APP_URL"),
+            "location" => $contact_Text_Main
 
         ];
 
@@ -64,6 +69,7 @@ class SettingController extends BaseController
     public function report_problem(Request $request){
         $validator =  Validator::make($request->all(),[
             'name' => 'required|string',
+            'phone' => 'required|string',
             'message' => 'required|string',
 
         ]);
