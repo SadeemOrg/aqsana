@@ -362,8 +362,7 @@ $(".contactUsForm").submit(function(e) {
         };
         toastr.success("{{ Session::get("success") }}");
         },
-        error: function(data) {
-            console.log("Asdf")
+        error: function() {
             toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -374,8 +373,8 @@ $(".contactUsForm").submit(function(e) {
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        }
         toastr.error("{{ Session::get("error") }}");
+        }
 
 })
 })
@@ -505,7 +504,7 @@ $('#search').on('keyup', function(){
             var elements = [];
             response.map(item=>{
                 var trimmedString ={
-                    trumedTitle:item.title.substring(0, 70),
+                    trumedTitle:item.title.substring(0, 100),
                     title:item.title,
                     id:item.id
                 };

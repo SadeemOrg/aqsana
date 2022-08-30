@@ -19,7 +19,7 @@ class HomeController extends Controller
 
         // Flash messages settings
 
-        session()->flash("success", "This is success message");
+        session()->flash("success", "This is success efefefefefefefefefef");
 
         session()->flash("warning", "This is warning message");
 
@@ -27,7 +27,7 @@ class HomeController extends Controller
 
         session()->flash("error", "This is error message");
 
-        return view("toastr-notification");
+        // return session()->flash("error", "This is er/ror fbjkdbkdfbgkjdf");
     }
 
     public function index()
@@ -67,6 +67,7 @@ class HomeController extends Controller
     public function conctus(Request $request)
     {
 
+// dd("kdkdk");
         // $test = $request->validate([
         //     'name' => 'required|string',
         //     'phone' => 'integer|digits_between:2,5',
@@ -78,21 +79,27 @@ class HomeController extends Controller
             'phone' => 'required|numeric|digits:10',
             'message' => 'required|string',
         ]);
+        // dd($validator->fails());
+        dump($validator->fails());
         if ($validator->fails()) {
+            session()->flash("error", "This is error 2e2e2e");
+
+        } else {
+// dd("sec");
             FormMassage::create([
                 'name' => $request['name'],
                 'phone' => $request['phone'],
                 'message' => $request['message'],
 
             ]);
-            session()->flash("error", "This is error message");
-        } else {
-            session()->flash("success", "This is success message");
+            session()->flash("success", "This is success efefefefefefefefefef");
+
         }
 
 
+        return  session()->flash("success", "لقد تم تسجيل الرسالة بنجاح");
 
-        return redirect()->back();
+        // return redirect()->back();
     }
 
 
