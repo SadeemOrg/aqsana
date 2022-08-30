@@ -14,6 +14,6 @@ class Volunteer extends Model
 
     public function Project()
     {
-        return $this->belongsTo('App\Models\project','project_id','id');
+        return $this->belongsTo('App\Models\Project','project_id','id');
     }
 }
