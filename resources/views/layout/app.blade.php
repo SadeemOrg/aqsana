@@ -458,12 +458,14 @@ $('#search').on('keyup', function(){
         },
         dataType: 'json',
         beforeSend: function () {
+            // console.log('ameed',$('.search-result-box').html(''));
+            $('.search-result-box').html('');
         },
         success: function (response) {
             var elements = [];
             response.map(item=>{
                 var trimmedString ={
-                    trumedTitle:item.title.substring(0, 80),
+                    trumedTitle:item.title.substring(0, 70),
                     title:item.title,
                     id:item.id
                 };
@@ -471,7 +473,8 @@ $('#search').on('keyup', function(){
                 })
                 let searchData = $();
             for(i = 0; i < elements.length; i++) {
-            searchData = searchData.add('<a target="_self" href="/categor/' + elements[i].title + '/' + elements[i].id + '">'+elements[i].trumedTitle+'</br> </a>');
+                $('.search-result-box').html('');
+                searchData = searchData.add('<a class="searchList"  target="_self" href="/categor/' + elements[i].title + '/' + elements[i].id + '">'+elements[i].trumedTitle+'</br> </a>');
         }
                 $('.search-result-box').append(searchData)
         },
