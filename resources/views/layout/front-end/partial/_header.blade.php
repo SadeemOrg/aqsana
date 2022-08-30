@@ -6,8 +6,7 @@
             @php
             $img = 'storage/'. nova_get_setting('logo', 'default_value');
         @endphp
-
-            <a href="/">
+            <a target="_self" href="/">
                 <img class="w-[170px] md:w-[200px] xl:w-[200px] lg:h-auto xl:h-[60px]" src="/{{ $img }}" />
             </a>
             <div class="relative mt-2">
