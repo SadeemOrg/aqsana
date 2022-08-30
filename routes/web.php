@@ -16,6 +16,8 @@ use App\Http\Controllers\NotificationTest;
 |
 */
 
+Route::get("toastr-notification", [HomeController::class, "showToastrMessages"]);
+
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/من-نحن', [HomeController::class, 'aboutus'])->name('aboutus');
