@@ -21,9 +21,9 @@ class Donations extends Model
     {
         return $this->belongsTo('App\Models\User', 'user_id' );
     }
-    public function project()
+    public function Project()
     {
-        return $this->belongsTo('App\Models\project', 'project_id' );
+        return $this->belongsTo('App\Models\Project', 'project_id' );
 
     }
 

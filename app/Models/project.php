@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class project extends Model
+class Project extends Model
 {
     use HasFactory;
     protected $table = 'projects';
