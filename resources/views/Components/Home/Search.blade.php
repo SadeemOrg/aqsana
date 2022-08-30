@@ -26,7 +26,7 @@
         class="absolute z-10 mt-16 sm:mt-10 right-[12%] lg:right-auto -top-48 w-[75%] bg-white rounded-[5px] sm:h-20 flex flex-row justify-start items-center">
         <!--search Bar -->
         <div dir="rtl" class=" relative shadow-sm  w-full bg-white border-0 h-full  rounded-md">
-            <form class="h-full w-full" action="{{ route('pagesearch') }}" method="get">
+            <form class="h-full w-full" target="_self" action="{{ route('pagesearch') }}" method="get">
                 <div class="absolute inset-y-0 right-10 pl-3 hidden sm:flex items-center pointer-events-none">
                     <!-- Heroicon name: solid/mail -->
                     <svg class="hidden sm:flex" width="20" height="20" viewBox="0 0 30 30" fill="none"
