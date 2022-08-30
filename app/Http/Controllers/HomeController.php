@@ -14,7 +14,8 @@ use App\Models\newsType;
 
 class HomeController extends Controller
 {
-    public function showToastrMessages(){
+    public function showToastrMessages()
+    {
 
         // Flash messages settings
 
@@ -27,7 +28,7 @@ class HomeController extends Controller
         session()->flash("error", "This is error message");
 
         return view("toastr-notification");
-      }
+    }
 
     public function index()
     {
@@ -66,20 +67,30 @@ class HomeController extends Controller
     public function conctus(Request $request)
     {
 
-        $request->validate([
-            'name' => 'required|string',
-            'phone' => 'required|string',
+        // $test = $request->validate([
+        //     'name' => 'required|string',
+        //     'phone' => 'integer|digits_between:2,5',
+        //     'message' => 'required|string',
+
+        // ]);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:2|max:255',
+            'phone' => 'required|numeric|digits:10',
             'message' => 'required|string',
-
         ]);
+        if ($validator->fails()) {
+            FormMassage::create([
+                'name' => $request['name'],
+                'phone' => $request['phone'],
+                'message' => $request['message'],
+
+            ]);
+            session()->flash("error", "This is error message");
+        } else {
+            session()->flash("success", "This is success message");
+        }
 
 
-        FormMassage::create([
-            'name' => $request['name'],
-            'phone' => $request['phone'],
-            'message' => $request['message'],
-
-        ]);
 
         return redirect()->back();
     }
@@ -113,7 +124,7 @@ class HomeController extends Controller
     {
 
         $new = DB::table('news')->where('id', $id)->first();
-// dd($new);
+        // dd($new);
 
         $Articles = DB::table('news')->where([
             ['type', '=', $new->type],
@@ -176,7 +187,7 @@ class HomeController extends Controller
             ->select('main_type')
             ->get();
 
-            // dd( $main_type[0]->type);
+        // dd( $main_type[0]->type);
 
         $stack_main_type = array();
         foreach ($main_type as $key => $value) {
@@ -184,7 +195,7 @@ class HomeController extends Controller
         }
 
         $News = News::query()
-        ->wherein('type' , $stack_main_type)
+            ->wherein('type', $stack_main_type)
             ->orWhere('title', 'like',  "%{$search}%")
             ->orWhere('sector', 'like',  "%{$search}%")
             ->select('title', 'id')
@@ -211,7 +222,7 @@ class HomeController extends Controller
         }
 
         $news = News::query()
-        ->wherein('type' , $stack_main_type)
+            ->wherein('type', $stack_main_type)
             ->orWhere('title', 'like',  "%{$search}%")
             ->orWhere('sector', 'like',  "%{$search}%")
             ->paginate(8);
@@ -252,12 +263,11 @@ class HomeController extends Controller
 
         $projects = DB::table('projects')->where('report_status', '=', '1')->orderBy('report_date', 'desc')->paginate(8);
         return view('Pages.ProjectsDetails.projects-page', compact('projects'));
-
     }
 
-    public function     getprojectDetail( $id)
+    public function     getprojectDetail($id)
     {
-         $project = DB::table('projects')->where('id', $id)->first();
+        $project = DB::table('projects')->where('id', $id)->first();
 
         $goalsjson = $project->report_pictures;
 
@@ -265,17 +275,16 @@ class HomeController extends Controller
 
         $Articles = DB::table('projects')->orderBy('report_date', 'desc')->take(6)->get();
 
-        return view('Pages.ProjectsDetails.project-details-page', compact('project', 'pictures', 'Articles' ));
-
+        return view('Pages.ProjectsDetails.project-details-page', compact('project', 'pictures', 'Articles'));
     }
     public function  donation($id)
     {
         $project = DB::table('projects')->where('id', $id)->first();
-        return view('Pages.donationsPage.donations-page',compact('project'));
+        return view('Pages.donationsPage.donations-page', compact('project'));
     }
     public function donations()
     {
-        $project =null;
-        return view('Pages.donationsPage.donations-page',compact('project'));
+        $project = null;
+        return view('Pages.donationsPage.donations-page', compact('project'));
     }
 }
