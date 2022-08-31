@@ -337,6 +337,7 @@ else{
 });
 
 $(".contactUsForm").submit(function(e) {
+
     e.preventDefault()
     var $name = $('input[name="name"]').val();
     var $phone = $('input[name="phone"]').val();
@@ -350,20 +351,8 @@ $(".contactUsForm").submit(function(e) {
             message: $message
         },
         success: function(data) {
-            toastr.options = {
-            "closeButton": true,
-            "debug": true,
-            "positionClass": "toast-bottom-right",
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "2000",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-        toastr.success("{{ Session::get("success") }}");
-        },
-        error: function() {
-            toastr.options = {
+            if($.isEmptyObject(data.error)){
+                toastr.options = {
             "closeButton": true,
             "debug": false,
             "positionClass": "toast-bottom-right",
@@ -373,7 +362,30 @@ $(".contactUsForm").submit(function(e) {
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        toastr.error("{{ Session::get("error") }}");
+                toastr.success("ok");
+                    }else{
+                        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "2000",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+                        toastr.error(data.error);
+                    }
+
+
+        },
+        error: function() {
+
+        console.log("err");
+        console.log(data.error);
+        // toastr.error($message);
+
+        // toastr.error("{{ Session::get("error") }}");
         }
 
 })

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Actengage\Wizard\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +20,7 @@ class HomeController extends Controller
 
         // Flash messages settings
 
-        session()->flash("success", "This is success efefefefefefefefefef");
+        session()->flash("success", "This is success message");
 
         session()->flash("warning", "This is warning message");
 
@@ -27,7 +28,7 @@ class HomeController extends Controller
 
         session()->flash("error", "This is error message");
 
-        // return session()->flash("error", "This is er/ror fbjkdbkdfbgkjdf");
+        return view("toastr-notification");
     }
 
     public function index()
@@ -66,38 +67,46 @@ class HomeController extends Controller
     }
     public function conctus(Request $request)
     {
-
-// dd("kdkdk");
+        // session()->flash("success", "This is success message");
+        // session()->flash("error", "This is error message");
         // $test = $request->validate([
         //     'name' => 'required|string',
         //     'phone' => 'integer|digits_between:2,5',
-        //     'message' => 'required|string',
+        //     'message' => 'integer|digits_between:8,9',
 
         // ]);
+
+        //
+
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:2|max:255',
-            'phone' => 'required|numeric|digits:10',
-            'message' => 'required|string',
+            'name' => 'required|string',
+            'phone' => 'integer|digits_between:2,5',
+            'message' => 'integer|digits_between:8,9',
         ]);
-        // dd($validator->fails());
-        dump($validator->fails());
-        if ($validator->fails()) {
-            session()->flash("error", "This is error 2e2e2e");
-
-        } else {
-// dd("sec");
-            FormMassage::create([
-                'name' => $request['name'],
-                'phone' => $request['phone'],
-                'message' => $request['message'],
-
-            ]);
-            session()->flash("success", "This is success efefefefefefefefefef");
-
+        if ($validator->passes()) {
+            return response()->json(['success'=>'Added new records.']);
         }
 
+        return response()->json(['error'=>$validator->errors()->all()]);
+        // Session::flash('success', 'danger');
+        // $validator = Validator::make($request->all(), [
+        //     'name' => 'required|min:2|max:255',
+        //     'phone' => 'required|numeric|digits:10',
+        //     'message' => 'required|string',
+        // ]);
+        // if ($validator->fails()) {
+        //     FormMassage::create([
+        //         'name' => $request['name'],
+        //         'phone' => $request['phone'],
+        //         'message' => $request['message'],
 
-        return  session()->flash("success", "لقد تم تسجيل الرسالة بنجاح");
+        //     ]);
+        //
+        // } else {
+        //
+        // }
+
+
 
         // return redirect()->back();
     }

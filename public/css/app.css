@@ -686,6 +686,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-\[250px\]{
   height: 250px;
 }
+.h-auto{
+  height: auto;
+}
 .h-\[88px\]{
   height: 88px;
 }
@@ -713,9 +716,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-8{
   height: 2rem;
 }
-.h-auto{
-  height: auto;
-}
 .max-h-\[670px\]{
   max-height: 670px;
 }
@@ -727,6 +727,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-h-\[400px\]{
   max-height: 400px;
+}
+.max-h-40{
+  max-height: 10rem;
 }
 .max-h-\[280px\]{
   max-height: 280px;
@@ -749,20 +752,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-14{
   max-height: 3.5rem;
 }
-.max-h-40{
-  max-height: 10rem;
-}
 .min-h-\[294px\]{
   min-height: 294px;
 }
-.min-h-full{
-  min-height: 100%;
-}
-.min-h-\[40px\]{
-  min-height: 40px;
-}
 .min-h-\[50px\]{
   min-height: 50px;
+}
+.min-h-full{
+  min-height: 100%;
 }
 .w-full{
   width: 100%;
@@ -827,11 +824,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-\[170px\]{
   width: 170px;
 }
-.w-8{
-  width: 2rem;
-}
 .w-\[100px\]{
   width: 100px;
+}
+.w-8{
+  width: 2rem;
 }
 .min-w-fit{
   min-width: -webkit-fit-content;
@@ -1016,9 +1013,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .gap-x-3{
   -moz-column-gap: 0.75rem;
        column-gap: 0.75rem;
-}
-.overflow-auto{
-  overflow: auto;
 }
 .overflow-hidden{
   overflow: hidden;
@@ -1303,8 +1297,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pl-3{
   padding-left: 0.75rem;
 }
-.pr-10{
-  padding-right: 2.5rem;
+.pr-12{
+  padding-right: 3rem;
 }
 .pl-4{
   padding-left: 1rem;
@@ -1341,9 +1335,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pl-2{
   padding-left: 0.5rem;
-}
-.pr-12{
-  padding-right: 3rem;
 }
 .text-center{
   text-align: center;
@@ -1807,11 +1798,11 @@ body{
   .sm\:w-\[168px\]{
     width: 168px;
   }
-  .sm\:w-\[563px\]{
-    width: 563px;
-  }
   .sm\:w-\[150px\]{
     width: 150px;
+  }
+  .sm\:w-\[563px\]{
+    width: 563px;
   }
   .sm\:max-w-xl{
     max-width: 36rem;
@@ -1851,18 +1842,11 @@ body{
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
-  .sm\:px-20{
-    padding-left: 5rem;
+  .sm\:pr-20{
     padding-right: 5rem;
-  }
-  .sm\:pr-0{
-    padding-right: 0px;
   }
   .sm\:pt-4{
     padding-top: 1rem;
-  }
-  .sm\:pr-20{
-    padding-right: 5rem;
   }
   .sm\:text-right{
     text-align: right;

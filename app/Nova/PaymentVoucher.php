@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Image;
 
 class PaymentVoucher extends Resource
@@ -116,12 +117,8 @@ class PaymentVoucher extends Resource
             BelongsTo::make('Currency', 'Currenc'),
 
 
-            Text::make('Rate', function () {
-                return $this->Currenc->rate;
-            }),
-            Text::make('equivalent amount', function () {
-                return ($this->Currenc->rate) * $this->transact_amount;
-            }),
+
+            Text::make('equivalent amount', "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
             Image::make('voucher', 'voucher')->disk('public')->prunable(),
 
@@ -143,11 +140,18 @@ class PaymentVoucher extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->main_type = '2';
+
     }
     public static function beforeSave(Request $request, $model)
     {
+        // dd($request->Currenc);/
+        $new = DB::table('currencies')->where('id', $request->Currenc)->first();
+        // dd($new->rate*$request->transact_amount);
         $id = Auth::id();
         $model->update_by = $id;
+dd($request->Currenc);
+        $model->equivelant_amount = $new->rate*$request->transact_amount;
+        // $model->save();
     }
 
 
