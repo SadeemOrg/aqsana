@@ -351,6 +351,7 @@ $(".contactUsForm").submit(function(e) {
             message: $message
         },
         success: function(data) {
+            // console.log('data',data)
             if($.isEmptyObject(data.error)){
                 toastr.options = {
             "closeButton": true,
@@ -362,7 +363,7 @@ $(".contactUsForm").submit(function(e) {
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-                toastr.success("ok");
+                toastr.success("تم ارسال الرسالة بنجاح");
                     }else{
                         toastr.options = {
             "closeButton": true,

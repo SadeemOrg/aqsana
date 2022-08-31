@@ -67,44 +67,26 @@ class HomeController extends Controller
     }
     public function conctus(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|digits_between:3,100',
+            'name' => 'required|string|min:3|max:50',
             'phone' => 'digits_between:10,14',
             'message' => 'required',
         ],
         [
-            'name.required' => '.يجب ادخال الاسم',
-            'name.digits_between' => 'حقل الاسم يجب على الاقل ان يحتوي على ثلاثة احرف على الاقل. ',
-            'phone.digits_between' => ' .رقم الهاتف يجب ان يتكون من 10 الى 14 خانة .'  ,
-            'message.required' =>' .يجب ادخال الرسالة',
+            'name.required' => 'الرجاء ادخال الاسم. ',
+            'name.string' => 'الرجاء ادخال الاسم بشكل صحيح . ',
+            'name.min' => 'الاسم يجب ان يكون على الأقل 3 حروف. ',
+            'name.max' => 'الاسم يجب ان لا يزيد عن 50 حرف. ',
 
+            'phone.digits_between' => 'الرجاء ادخال رقم الهاتف بشكل صحيح. ',
+            'message.required' => 'الرجاء ادخال الرسالة. ',
         ]);
         if ($validator->passes()) {
             return response()->json(['success'=>'Added new records.']);
         }
 
         return response()->json(['error'=>$validator->errors()->all()]);
-        // Session::flash('success', 'danger');
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'required|min:2|max:255',
-        //     'phone' => 'required|numeric|digits:10',
-        //     'message' => 'required|string',
-        // ]);
-        // if ($validator->fails()) {
-        //     FormMassage::create([
-        //         'name' => $request['name'],
-        //         'phone' => $request['phone'],
-        //         'message' => $request['message'],
-
-        //     ]);
-        //
-        // } else {
-        //
-        // }
-
-
-
-        // return redirect()->back();
     }
 
 
