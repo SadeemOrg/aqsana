@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -10,6 +11,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Image;
 class receiptVoucher extends Resource
 {
@@ -53,39 +55,71 @@ class receiptVoucher extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-        return $query->where('type', '2');
+        return $query->where('main_type', '1');
     }
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            ID::make(__('ID'), 'id')->sortable(),
-            Text::make('type','type')->withMeta([
-                'type' => 'hidden',
-                'value' => '2'
-            ]),
-            Select::make("transactions status", "status")->options([
-                '0' => 'not',
-                '1' => 'ok',
 
-            ])->default(0)
-                ->hideWhenCreating()->hideWhenUpdating(),
+            Select::make("type", "type")->options([
+                '1' => 'project',
+                '2' => 'qawael',
+                '3' => 'trip',
+                '4' => 'else',
+            ])->displayUsingLabels(),
 
+            NovaDependencyContainer::make([
+                Select::make(__('project'), "ref_id")
+                    ->options(function () {
+                        $projects =  \App\Models\project::where('project_type', '1')->get();
+                        $user_type_admin_array =  array();
+                        foreach ($projects as $project) {
+                            $user_type_admin_array += [$project['id'] => ($project['project_name'])];
+                        }
 
+                        return $user_type_admin_array;
+                    })
+                    ->displayUsingLabels(),
+            ])->dependsOn('type', '1')->hideFromDetail()->hideFromIndex(),
+            NovaDependencyContainer::make([
+                Select::make(__('QawafilAlaqsa'), "ref_id")
+                    ->options(function () {
+                        $projects =  \App\Models\project::where('project_type', '2')->get();
+                        $user_type_admin_array =  array();
+                        foreach ($projects as $project) {
+                            $user_type_admin_array += [$project['id'] => ($project['project_name'])];
+                        }
 
-            Text::make('project', 'project_id'),
+                        return $user_type_admin_array;
+                    })
+                    ->displayUsingLabels(),
+            ])->dependsOn('type', '2')->hideFromDetail()->hideFromIndex(),
+            NovaDependencyContainer::make([
+                Select::make(__('Trip'), "ref_id")
+                    ->options(function () {
+                        $projects =  \App\Models\project::where('project_type', '3')->get();
+                        $user_type_admin_array =  array();
+                        foreach ($projects as $project) {
+                            $user_type_admin_array += [$project['id'] => ($project['project_name'])];
+                        }
+
+                        return $user_type_admin_array;
+                    })
+                    ->displayUsingLabels(),
+            ])->dependsOn('type', '3')->hideFromDetail()->hideFromIndex(),
+
+            BelongsTo::make('project', 'project')->hideWhenCreating()->hideWhenUpdating(),
+
+            Text::make('description', 'description'),
             Text::make('transact amount', 'transact_amount'),
             BelongsTo::make('Currency', 'Currenc'),
 
 
-            Text::make('Rate', function () {
-                return $this->Currenc->rate;
-            }),
-            Text::make('equivalent amount', function () {
-                return ($this->Currenc->rate )*$this->transact_amount;
-            }),
 
-                Image::make('voucher', 'voucher')->disk('public')->prunable(),
+            Text::make('equivalent amount', "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
+
+            Image::make('voucher', 'voucher')->disk('public')->prunable(),
 
             Select::make('approval ', 'approval')->options([
                 1 => 'approval',
@@ -100,8 +134,27 @@ class receiptVoucher extends Resource
 
         ];
     }
+    public static function beforeCreate(Request $request, $model)
+    {
+        $new = DB::table('currencies')->where('id', $request->Currenc)->first();
+        $id = Auth::id();
+        $model->created_by = $id;
+        $model->main_type = '1';
+        $model->equivelant_amount=$new->rate*$request->transact_amount;
+    }
+    public static function beforeUpdate(Request $request, $model)
+    {
 
+        $currencies = DB::table('currencies')->where('id', $request->Currenc)->first();
+        $id = Auth::id();
+        $model->update_by = $id;
+        if ($model->Currenc->id == $request->Currenc) {
+            $rate = ((int)$model->equivelant_amount / (int)$model->transact_amount);
+        }
+        else  $rate =$currencies->rate ;
+        $model->equivelant_amount = $rate * $request->transact_amount;
 
+    }
     /**
      * Get the cards available for the request.
      *

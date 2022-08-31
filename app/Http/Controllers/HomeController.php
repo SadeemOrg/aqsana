@@ -123,7 +123,7 @@ class HomeController extends Controller
         $news = DB::table('news')->where([
             ['main_type', 'like', '%' . $main_type->main_type . '%'],
             ['type', '=', $Type->type],
-        ])->orderBy('new_date', 'desc')->paginate(8);
+        ])->orderBy('new_date', 'desc')->paginate(9);
 
 
 
@@ -181,7 +181,7 @@ class HomeController extends Controller
         $type = $sector;
         $news = News::query()->where('sector', $sector)
 
-            ->paginate(8);
+            ->paginate(9);
 
         return view('Pages.news-page', compact('news', 'mainType', 'type'));
         // foreach ($News as $key => $value) {
@@ -237,7 +237,7 @@ class HomeController extends Controller
             ->wherein('type', $stack_main_type)
             ->orWhere('title', 'like',  "%{$search}%")
             ->orWhere('sector', 'like',  "%{$search}%")
-            ->paginate(8);
+            ->paginate(9);
         return view('Pages.news-page', compact('news', 'mainType', 'type'));
     }
     public function projectdonation()
@@ -273,7 +273,7 @@ class HomeController extends Controller
     public function project()
     {
 
-        $projects = DB::table('projects')->where('report_status', '=', '1')->orderBy('report_date', 'desc')->paginate(8);
+        $projects = DB::table('projects')->where('report_status', '=', '1')->orderBy('report_date', 'desc')->paginate(9);
         return view('Pages.ProjectsDetails.projects-page', compact('projects'));
     }
 

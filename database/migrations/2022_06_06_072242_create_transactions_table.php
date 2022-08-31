@@ -22,7 +22,7 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('ref_id')->nullable();
             $table->integer('transact_amount');
             $table->unsignedBigInteger('Currency')->nullable();
-            $table->string('equivelant_amount')->nullable();
+            $table->string('equivelant_amount');
             $table->string('voucher')->nullable();
             $table->integer('approval')->nullable();
             $table->string("reason_of_reject")->nullable();
