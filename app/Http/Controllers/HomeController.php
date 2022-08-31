@@ -61,56 +61,34 @@ class HomeController extends Controller
         $workplace = nova_get_setting('workplace', 'default_value');
         return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace'));
     }
-    public function conctusee(Request $request)
-    {
-        return "asa";
-    }
+
     public function conctus(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|digits_between:3,100',
+            'name' => 'required|string|min:3|max:50',
             'phone' => 'digits_between:10,14',
             'message' => 'required',
         ],
         [
-            'name.required' => '.يجب ادخال الاسم',
-            'name.digits_between' => 'حقل الاسم يجب على الاقل ان يحتوي على ثلاثة احرف على الاقل. ',
-            'phone.digits_between' => ' .رقم الهاتف يجب ان يتكون من 10 الى 14 خانة .'  ,
-            'message.required' =>' .يجب ادخال الرسالة',
+            'name.required' => 'الرجاء ادخال الاسم. ',
+            'name.string' => 'الرجاء ادخال الاسم بشكل صحيح . ',
+            'name.min' => 'الاسم يجب ان يكون على الأقل 3 حروف. ',
+            'name.max' => 'الاسم يجب ان لا يزيد عن 50 حرف. ',
 
+            'phone.digits_between' => 'الرجاء ادخال رقم الهاتف بشكل صحيح. ',
+            'message.required' => 'الرجاء ادخال الرسالة. ',
         ]);
         if ($validator->passes()) {
             return response()->json(['success'=>'Added new records.']);
         }
 
         return response()->json(['error'=>$validator->errors()->all()]);
-        // Session::flash('success', 'danger');
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'required|min:2|max:255',
-        //     'phone' => 'required|numeric|digits:10',
-        //     'message' => 'required|string',
-        // ]);
-        // if ($validator->fails()) {
-        //     FormMassage::create([
-        //         'name' => $request['name'],
-        //         'phone' => $request['phone'],
-        //         'message' => $request['message'],
-
-        //     ]);
-        //
-        // } else {
-        //
-        // }
-
-
-
-        // return redirect()->back();
     }
 
 
     public function news($maintype, $type)
     {
-        // dd($maintype, $type);
         $main_type = newsType::where('name', $maintype)
             ->where('type', '0')
             ->select('main_type')->first();
@@ -118,7 +96,6 @@ class HomeController extends Controller
         $Type = newsType::where('name', $type)
             ->where('main_type', $main_type->main_type)
             ->select('type')->first();
-        // dd($Type->type);
 
         $news = DB::table('news')->where([
             ['main_type', 'like', '%' . $main_type->main_type . '%'],
@@ -136,7 +113,6 @@ class HomeController extends Controller
     {
 
         $new = DB::table('news')->where('id', $id)->first();
-        // dd($new);
 
         $Articles = DB::table('news')->where([
             ['type', '=', $new->type],
@@ -159,15 +135,6 @@ class HomeController extends Controller
             $mainType =  $mainType->name;
             //  dd(   $mainType);
         } else $mainType = "اخبار";
-        // $coutotal =  count( $total);
-
-        //         $mainType = DB::table('news_types')->where([
-        //             ['main_type', '=', $new->main_type],
-        //             ['type', '=', '0'],
-        //         ])->first();
-
-
-        // dd( $new->main_type);
 
         return view('Pages.news-details-page', compact('new', 'pictures', 'Articles', 'mainType'));
     }
