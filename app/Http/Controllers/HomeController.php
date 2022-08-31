@@ -67,21 +67,17 @@ class HomeController extends Controller
     }
     public function conctus(Request $request)
     {
-        // session()->flash("success", "This is success message");
-        // session()->flash("error", "This is error message");
-        // $test = $request->validate([
-        //     'name' => 'required|string',
-        //     'phone' => 'integer|digits_between:2,5',
-        //     'message' => 'integer|digits_between:8,9',
-
-        // ]);
-
-        //
-
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'phone' => 'integer|digits_between:2,5',
-            'message' => 'integer|digits_between:8,9',
+            'name' => 'required|string|digits_between:3,100',
+            'phone' => 'digits_between:10,14',
+            'message' => 'required',
+        ],
+        [
+            'name.required' => '.يجب ادخال الاسم',
+            'name.digits_between' => 'حقل الاسم يجب على الاقل ان يحتوي على ثلاثة احرف على الاقل. ',
+            'phone.digits_between' => ' .رقم الهاتف يجب ان يتكون من 10 الى 14 خانة .'  ,
+            'message.required' =>' .يجب ادخال الرسالة',
+
         ]);
         if ($validator->passes()) {
             return response()->json(['success'=>'Added new records.']);
