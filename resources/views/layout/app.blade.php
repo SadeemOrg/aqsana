@@ -563,8 +563,11 @@ jQuery(function($) {
 
 $('#search').on('keyup', function(){
     var val = $('#search').val().toLowerCase();
+    console.log('val',val)
     if(val.length>2){
+    console.log('val',val)
         $('.search-bar').siblings().css('display','flex');
+    console.log('val1',val)
     $.get({
         url: '{{url('/')}}/search/'+val,
         data: {
@@ -577,6 +580,7 @@ $('#search').on('keyup', function(){
             $('.svgSearch').css('display','none');
 
         },
+
         success: function (response) {
             console.log("🚀 ~ file: app.blade.php ~ line 581 ~ $ ~ response", response)
             var elements = [];
