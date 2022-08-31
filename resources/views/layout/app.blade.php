@@ -578,6 +578,7 @@ $('#search').on('keyup', function(){
 
         },
         success: function (response) {
+            console.log("🚀 ~ file: app.blade.php ~ line 581 ~ $ ~ response", response)
             var elements = [];
             response.map(item=>{
                 var trimmedString ={
@@ -597,6 +598,9 @@ $('#search').on('keyup', function(){
         complete: function () {
             console.log('searchCompleted')
         },
+        error: function (err) {
+            console.log('searchError',err)
+        }
     });
 }
 });
