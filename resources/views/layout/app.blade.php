@@ -511,12 +511,14 @@ $('#search').on('keyup', function(){
         beforeSend: function () {
             // console.log('ameed',$('.search-result-box').html(''));
             $('.search-result-box').html('');
+            $('.svgSearch').css('display','none');
+
         },
         success: function (response) {
             var elements = [];
             response.map(item=>{
                 var trimmedString ={
-                    trumedTitle:item.title.substring(0, 70),
+                    trumedTitle:item.title.substring(0, 100),
                     title:item.title,
                     id:item.id
                 };

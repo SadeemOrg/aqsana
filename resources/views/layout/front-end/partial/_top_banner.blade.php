@@ -10,9 +10,8 @@
         <img itemprop="image" alt="Google" class="h-[250px] sm:h-[350px]  lg:h-[680px]"
             src="{{ URL::asset($Hero['data']['image'])}}" alt="topBanner">
         <button onclick="location.href='{{$Hero['data']['link']}}'"
-            class="absolute bottom-[8%] right-[8%] Ctnbtn rounded-[50px] bg-[#349A37] text-white text-xl w-[200px] py-4 font-[700] hover:bg-[#101426] duration-200">تبرع
+            class="absolute bottom-[8%] right-[8%] Ctnbtn rounded-[50px] bg-[#349A37] text-white text-base sm:text-xl w-[100px] sm:w-[150px] md:w-[200px] py-4 font-[700] hover:bg-[#101426] duration-200">تبرع
             الان</button>
-
     </div>
     @endforeach
     @endif

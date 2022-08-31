@@ -111,7 +111,7 @@
                         <p data-tab="1"
                             class=" text-green-900 px-1  underline text-xl font-extrabold cursor-pointer showModal ">
                             מדיניות ביטולים</p>
-                        <p>וגם</p>
+                        <p>בנוסף</p>
                         </p>
                         <p data-tab="2"
                             class=" text-green-900 px-1  underline text-xl font-extrabold cursor-pointer showModal ">
