@@ -45,8 +45,6 @@ jQuery(document).ready(function(){
         $('.arrow-icon').not($(this).find('.arrow-icon')).removeClass('rotate-90');
         $(this).find('.arrow-icon').toggleClass('rotate-90')
     });
-
-
 });
 
 // Auto animate for demo
@@ -81,5 +79,6 @@ jQuery(document).ready(function(){
         srText.text(openText);
       }
     });
-
   }($));
+
+
