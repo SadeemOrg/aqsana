@@ -58,7 +58,7 @@ class Project extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\project::class;
+    public static $model = \App\Models\Project::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -134,7 +134,7 @@ class Project extends Resource
                     ->canSee(function () {
                         $user = Auth::user();
 
-                        if ($user->type() == 'regular_city' ) {
+                        if ($user->type() == 'regular_city') {
                             return true;
                         }
                     })
@@ -153,7 +153,7 @@ class Project extends Resource
 
                             if ($acspet) {
 
-                                if ($acspet->accepted == "1")   return  true ;
+                                if ($acspet->accepted == "1")   return  true;
                                 else return false;
                             }
                         }
@@ -294,6 +294,34 @@ class Project extends Resource
                             ->first();
 
                         if ($bud)  return  $bud->budjet;
+                    }
+                })->canSee(function ($request) {
+                    $user = Auth::user();
+                    if ($user->type() == 'regular_city') return true;
+                    return false;
+                })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                    return null;
+                }),
+            ])),
+            (new Panel(__('Budget2'), [
+
+                Text::make("Budjet2", function () {
+
+                    $id = Auth::id();
+                    $user = Auth::user();
+                    if ($user->type() == 'regular_city') {
+                        $citye =   City::where('admin_id', $id)
+                            ->select('id')->first();
+                        // dd($id);
+                        // dd($citye);
+                        $bud = DB::table('transactions')
+                            ->where([
+                                ['ref_id', '=', $this->id],
+                                ['ref_cite_id', '=', $citye['id']],
+                            ])
+                            ->first();
+
+                        if ($bud)  return  $bud->equivelant_amount;
                     }
                 })->canSee(function ($request) {
                     $user = Auth::user();
@@ -518,7 +546,6 @@ class Project extends Resource
         $model->created_by = $id;
         $model->project_type = '1';
         $model->is_reported = '1';
-
     }
 
     public static function afterCreate(Request $request, $model)
@@ -564,6 +591,20 @@ class Project extends Resource
                 ->updateOrInsert(
                     ['project_id' => $model->id, 'city_id' => $citye['id']],
                     ['budjet' => $request->Budjet]
+                );
+
+            DB::table('transactions')
+                ->updateOrInsert(
+                    ['ref_id' => $model->id, 'ref_cite_id' => $citye['id']],
+                    [
+                        'main_type' => '2',
+                        'type' => '1',
+                        'Currency' => '3',
+                        'transact_amount' => $request->Budjet,
+                        'equivelant_amount' => $request->Budjet,
+                        'transaction_date' => $date = date('Y-m-d'),
+
+                    ]
                 );
         }
         if ($request->Toole) {
@@ -705,13 +746,13 @@ class Project extends Resource
     {
         return [
 
-            (new ApprovalRejectProjec)  ->canSee(function () {
-                        $user = Auth::user();
+            (new ApprovalRejectProjec)->canSee(function () {
+                $user = Auth::user();
 
-                        if ($user->type() == 'regular_city' ) {
-                            return true;
-                        }
-                    }),
+                if ($user->type() == 'regular_city') {
+                    return true;
+                }
+            }),
 
 
 
