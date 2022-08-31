@@ -45,8 +45,6 @@ jQuery(document).ready(function(){
         $('.arrow-icon').not($(this).find('.arrow-icon')).removeClass('rotate-90');
         $(this).find('.arrow-icon').toggleClass('rotate-90')
     });
-
-
 });
 
 // Auto animate for demo
@@ -81,5 +79,54 @@ jQuery(document).ready(function(){
         srText.text(openText);
       }
     });
-
   }($));
+
+
+  $('#search').on('keyup', function(){
+    var val = $('#search').val().toLowerCase();
+    console.log('val',val)
+    if(val.length>2){
+    console.log('val',val)
+        $('.search-bar').siblings().css('display','flex');
+    console.log('val1',val)
+    $.get({
+        url: '{{url('/')}}/search/'+val,
+        data: {
+            val: val,
+        },
+        dataType: 'json',
+        beforeSend: function () {
+            // console.log('ameed',$('.search-result-box').html(''));
+            $('.search-result-box').html('');
+            $('.svgSearch').css('display','none');
+
+        },
+
+        success: function (response) {
+            console.log("🚀 ~ file: app.blade.php ~ line 581 ~ $ ~ response", response)
+            var elements = [];
+            response.map(item=>{
+                var trimmedString ={
+                    trumedTitle:item.title.substring(0, 100),
+                    title:item.title,
+                    id:item.id
+                };
+                    elements.push(trimmedString)
+                })
+                let searchData = $();
+            for(i = 0; i < elements.length; i++) {
+                $('.search-result-box').html('');
+                searchData = searchData.add('<a class="searchList"  target="_self" href="/categor/' + elements[i].title + '/' + elements[i].id + '">'+elements[i].trumedTitle+'</br> </a>');
+        }
+                $('.search-result-box').append(searchData)
+        },
+        complete: function () {
+            console.log('searchCompleted')
+        },
+        error: function (err) {
+            console.log('searchError',err)
+        }
+    });
+}
+});
+
