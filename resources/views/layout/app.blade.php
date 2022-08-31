@@ -265,31 +265,96 @@
 var pageNumber = 0 ;
 var previousPage = 0;
 $("#firstPageDonations").click(function() {
-$(".firstPage").hide();
+    if($('input[name="donation_amount"]').val()==""){
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "2000",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr.error('الرجاء ادخال المبلغ المراد التبرع به');
+        return false;
+    }
+    else{
+        $(".firstPage").hide();
+    }
 pageNumber++;
 if(pageNumber == 1 ){
     pageNumber = 1
     $(".secondPage").css("display", "flex");
     $(".Ctnbtn").text("تأكيد الدفع");
-    $(".Ctnbtn").attr("disabled", true);
 }
-else if(pageNumber == 2 ){
-    $(".thirdPage").css("display","flex")
+if(pageNumber == 2 ){
+    if($('#privecy').is(":checked") == false && $('#visa').is(":checked") == false){
+        console.log("not checked");
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "2000",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr.error('  الرجاء وضع اشارة صح على شروط الخصوصية والالغاء والدفع عن طريق الفيزا');
+        pageNumber = 1;
+        return false;
+    }
+    if($('#privecy').is(":checked") == false && $('#visa').is(":checked") == true){
+        console.log("visa");
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "2000",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr.error(' الرجاء وضع اشارة صح على شروط الخصوصية والالغاء ');
+        pageNumber = 1;
+        return false;
+    }
+    if($('#privecy').is(":checked") == true && $('#visa').is(":checked") == false){
+        console.log("privecy");
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "2000",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr.error(' الرجاء وضع اشارة صح على التبرع في فيزا كارد');
+        pageNumber = 1;
+        return false;
+    }
+    else{
+        $(".thirdPage").css("display","flex")
     $(".secondPage").css("display", "none");
     $(".Ctnbtn").css("display", "none");
+    }
 }
 });
 
 
-$("#price").keyup(function() {
-    var price = $("#price").val();
-    if(price == ""){
-        $(".Ctnbtn").attr("disabled", true);
-    }
-    else{
-        $(".Ctnbtn").attr("disabled", false);
-    }
-} );
+// $("#price").keyup(function() {
+//     var price = $("#price").val();
+//     if(price == ""){
+//         $(".Ctnbtn").attr("disabled", true);
+//     }
+//     else{
+//         $(".Ctnbtn").attr("disabled", false);
+//     }
+// } );
 
 $("#PreviousPageDonations").click(function() {
     previousPage ++;
@@ -318,23 +383,23 @@ else{
 $('.tab-'+$(this).data('tab')).fadeIn();
 });
 
-$("#visa").click(function() {
-if($("#privecy").is(":checked")){
-    $(".Ctnbtn").attr("disabled", false);
-}
-else{
-    $(".Ctnbtn").attr("disabled", true);
-}
-});
+// $("#visa").click(function() {
+// if($("#privecy").is(":checked")){
+//     $(".Ctnbtn").attr("disabled", false);
+// }
+// else{
+//     $(".Ctnbtn").attr("disabled", true);
+// }
+// });
 
-$("#privecy").click(function() {
-if($("#visa").is(":checked")){
-    $(".Ctnbtn").attr("disabled", false);
-}
-else{
-    $(".Ctnbtn").attr("disabled", true);
-}
-});
+// $("#privecy").click(function() {
+// if($("#visa").is(":checked")){
+//     $(".Ctnbtn").attr("disabled", false);
+// }
+// else{
+//     $(".Ctnbtn").attr("disabled", true);
+// }
+// });
 
 $(".contactUsForm").submit(function(e) {
 
@@ -362,7 +427,7 @@ $(".contactUsForm").submit(function(e) {
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-                toastr.success("ok");
+                toastr.success("تم ارسال الرسالة بنجاح");
                     }else{
                         toastr.options = {
             "closeButton": true,
@@ -383,9 +448,7 @@ $(".contactUsForm").submit(function(e) {
 
         console.log("err");
         console.log(data.error);
-        // toastr.error($message);
 
-        // toastr.error("{{ Session::get("error") }}");
         }
 
 })
