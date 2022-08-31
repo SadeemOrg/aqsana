@@ -63,19 +63,18 @@ class receiptVoucher extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             Select::make("type", "type")->options([
-                '1' => 'project',
-                '2' => 'qawael',
-                '3' => 'trip',
-                '4' => 'else',
+                '1' => 'Alhisalat',
+                '2' => 'Donations',
+                '3' => 'else',
             ])->displayUsingLabels(),
 
             NovaDependencyContainer::make([
-                Select::make(__('project'), "ref_id")
+                Select::make(__('Alhisalat'), "ref_id")
                     ->options(function () {
-                        $projects =  \App\Models\project::where('project_type', '1')->get();
+                        $projects =  \App\Models\Alhisalat::all();
                         $user_type_admin_array =  array();
                         foreach ($projects as $project) {
-                            $user_type_admin_array += [$project['id'] => ($project['project_name'])];
+                            $user_type_admin_array += [$project['id'] => ($project['name'])];
                         }
 
                         return $user_type_admin_array;
@@ -83,9 +82,9 @@ class receiptVoucher extends Resource
                     ->displayUsingLabels(),
             ])->dependsOn('type', '1')->hideFromDetail()->hideFromIndex(),
             NovaDependencyContainer::make([
-                Select::make(__('QawafilAlaqsa'), "ref_id")
+                Select::make(__('Donations'), "ref_id")
                     ->options(function () {
-                        $projects =  \App\Models\project::where('project_type', '2')->get();
+                        $projects =  \App\Models\Donations::all();
                         $user_type_admin_array =  array();
                         foreach ($projects as $project) {
                             $user_type_admin_array += [$project['id'] => ($project['project_name'])];
@@ -95,19 +94,7 @@ class receiptVoucher extends Resource
                     })
                     ->displayUsingLabels(),
             ])->dependsOn('type', '2')->hideFromDetail()->hideFromIndex(),
-            NovaDependencyContainer::make([
-                Select::make(__('Trip'), "ref_id")
-                    ->options(function () {
-                        $projects =  \App\Models\project::where('project_type', '3')->get();
-                        $user_type_admin_array =  array();
-                        foreach ($projects as $project) {
-                            $user_type_admin_array += [$project['id'] => ($project['project_name'])];
-                        }
 
-                        return $user_type_admin_array;
-                    })
-                    ->displayUsingLabels(),
-            ])->dependsOn('type', '3')->hideFromDetail()->hideFromIndex(),
 
             BelongsTo::make('project', 'project')->hideWhenCreating()->hideWhenUpdating(),
 

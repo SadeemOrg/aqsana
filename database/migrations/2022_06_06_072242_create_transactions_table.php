@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->char('type', 1)->default(0);
             $table->string('description')->nullable();
             $table->bigInteger('ref_id')->nullable();
+            $table->bigInteger('ref_cite_id')->nullable();
             $table->integer('transact_amount');
             $table->unsignedBigInteger('Currency')->nullable();
             $table->string('equivelant_amount');

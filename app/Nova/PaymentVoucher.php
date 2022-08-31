@@ -70,7 +70,11 @@ class PaymentVoucher extends Resource
                 '3' => 'trip',
                 '4' => 'else',
             ])->displayUsingLabels(),
-
+            NovaDependencyContainer::make([
+                Text::make('ddd', function(){
+                    return $this->type;
+                }),
+              ])->dependsOn('type', '4')->hideFromDetail()->hideFromIndex(),
             NovaDependencyContainer::make([
                 Select::make(__('project'), "ref_id")
                     ->options(function () {
@@ -100,10 +104,15 @@ class PaymentVoucher extends Resource
             NovaDependencyContainer::make([
                 Select::make(__('Trip'), "ref_id")
                     ->options(function () {
-                        $projects =  \App\Models\project::where('project_type', '3')->get();
+                        $projects =  \App\Models\project::with("City")->get();
+                        $i = 0;
                         $user_type_admin_array =  array();
                         foreach ($projects as $project) {
-                            $user_type_admin_array += [$project['id'] => ($project['project_name'])];
+
+                            foreach ($project['City'] as $projectcite) {
+
+                                $user_type_admin_array += [($project['id']) => ($project['project_name'] . '=>' . $projectcite['name'])];
+                            }
                         }
 
                         return $user_type_admin_array;
@@ -142,20 +151,20 @@ class PaymentVoucher extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->main_type = '2';
-        $model->equivelant_amount=$new->rate*$request->transact_amount;
+        $model->equivelant_amount = $new->rate * $request->transact_amount;
     }
     public static function beforeUpdate(Request $request, $model)
     {
+        // dump();
+        dd($request->ref_id);
 
         $currencies = DB::table('currencies')->where('id', $request->Currenc)->first();
         $id = Auth::id();
         $model->update_by = $id;
         if ($model->Currenc->id == $request->Currenc) {
             $rate = ((int)$model->equivelant_amount / (int)$model->transact_amount);
-        }
-        else  $rate =$currencies->rate ;
+        } else  $rate = $currencies->rate;
         $model->equivelant_amount = $rate * $request->transact_amount;
-
     }
 
 
