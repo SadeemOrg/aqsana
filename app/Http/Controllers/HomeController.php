@@ -61,10 +61,7 @@ class HomeController extends Controller
         $workplace = nova_get_setting('workplace', 'default_value');
         return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace'));
     }
-    public function conctusee(Request $request)
-    {
-        return "asa";
-    }
+
     public function conctus(Request $request)
     {
 
@@ -92,7 +89,6 @@ class HomeController extends Controller
 
     public function news($maintype, $type)
     {
-        // dd($maintype, $type);
         $main_type = newsType::where('name', $maintype)
             ->where('type', '0')
             ->select('main_type')->first();
@@ -100,7 +96,6 @@ class HomeController extends Controller
         $Type = newsType::where('name', $type)
             ->where('main_type', $main_type->main_type)
             ->select('type')->first();
-        // dd($Type->type);
 
         $news = DB::table('news')->where([
             ['main_type', 'like', '%' . $main_type->main_type . '%'],
@@ -118,7 +113,6 @@ class HomeController extends Controller
     {
 
         $new = DB::table('news')->where('id', $id)->first();
-        // dd($new);
 
         $Articles = DB::table('news')->where([
             ['type', '=', $new->type],
@@ -141,15 +135,6 @@ class HomeController extends Controller
             $mainType =  $mainType->name;
             //  dd(   $mainType);
         } else $mainType = "اخبار";
-        // $coutotal =  count( $total);
-
-        //         $mainType = DB::table('news_types')->where([
-        //             ['main_type', '=', $new->main_type],
-        //             ['type', '=', '0'],
-        //         ])->first();
-
-
-        // dd( $new->main_type);
 
         return view('Pages.news-details-page', compact('new', 'pictures', 'Articles', 'mainType'));
     }
