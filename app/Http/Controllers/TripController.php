@@ -17,7 +17,7 @@ class TripController extends BaseController
     {
     
 
-        $projects = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelfrom')->orderBy('created_at', 'desc')->paginate(15);
+        $projects = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelfrom','BusTrip.travelfrom','tripfrom','tripto')->orderBy('created_at', 'desc')->paginate(15);
         return $this->sendResponse($projects, 'Success get Trips');
 
     }
