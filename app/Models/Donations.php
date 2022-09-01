@@ -13,7 +13,7 @@ class Donations extends Model
     ];
 
     protected $hidden = [
-       
+
         'updated_at',
 
     ];

@@ -26,9 +26,9 @@ class Bus extends Model
 
 
 
-    public function project()
+    public function Project()
     {
-        return $this->belongsToMany(project::class);
+        return $this->belongsToMany(Project::class);
     }
 
     public function company()

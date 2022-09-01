@@ -64,8 +64,7 @@ class receiptVoucher extends Resource
 
             Select::make("type", "type")->options([
                 '1' => 'Alhisalat',
-                '2' => 'Donations',
-                '3' => 'else',
+                '2' => 'else',
             ])->displayUsingLabels(),
 
             NovaDependencyContainer::make([
@@ -81,22 +80,22 @@ class receiptVoucher extends Resource
                     })
                     ->displayUsingLabels(),
             ])->dependsOn('type', '1')->hideFromDetail()->hideFromIndex(),
-            NovaDependencyContainer::make([
-                Select::make(__('Donations'), "ref_id")
-                    ->options(function () {
-                        $projects =  \App\Models\Donations::all();
-                        $user_type_admin_array =  array();
-                        foreach ($projects as $project) {
-                            $user_type_admin_array += [$project['id'] => ($project['project_name'])];
-                        }
+            // NovaDependencyContainer::make([
+            //     Select::make(__('Donations'), "ref_id")
+            //         ->options(function () {
+            //             $projects =  \App\Models\Donations::all();
+            //             $user_type_admin_array =  array();
+            //             foreach ($projects as $project) {
+            //                 $user_type_admin_array += [$project['id'] => ($project['project_name'])];
+            //             }
 
-                        return $user_type_admin_array;
-                    })
-                    ->displayUsingLabels(),
-            ])->dependsOn('type', '2')->hideFromDetail()->hideFromIndex(),
+            //             return $user_type_admin_array;
+            //         })
+            //         ->displayUsingLabels(),
+            // ])->dependsOn('type', '2')->hideFromDetail()->hideFromIndex(),
 
 
-            BelongsTo::make('project', 'project')->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make('project', 'Project')->hideWhenCreating()->hideWhenUpdating(),
 
             Text::make('description', 'description'),
             Text::make('transact amount', 'transact_amount'),

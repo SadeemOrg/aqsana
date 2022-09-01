@@ -24,9 +24,9 @@ class City extends Model
     {
         return $this->hasMany('App\Models\User', 'city_id' );
     }
-    public function project()
+    public function Project()
     {
-        return $this->belongsToMany(project::class);
+        return $this->belongsToMany(Project::class);
     }
     // public function Alhisalat()
     // {

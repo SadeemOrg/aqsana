@@ -286,34 +286,6 @@ class Project extends Resource
                             ->select('id')->first();
                         // dd($id);
                         // dd($citye);
-                        $bud = DB::table('project_budjet')
-                            ->where([
-                                ['project_id', '=', $this->id],
-                                ['city_id', '=', $citye['id']],
-                            ])
-                            ->first();
-
-                        if ($bud)  return  $bud->budjet;
-                    }
-                })->canSee(function ($request) {
-                    $user = Auth::user();
-                    if ($user->type() == 'regular_city') return true;
-                    return false;
-                })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    return null;
-                }),
-            ])),
-            (new Panel(__('Budget2'), [
-
-                Text::make("Budjet2", function () {
-
-                    $id = Auth::id();
-                    $user = Auth::user();
-                    if ($user->type() == 'regular_city') {
-                        $citye =   City::where('admin_id', $id)
-                            ->select('id')->first();
-                        // dd($id);
-                        // dd($citye);
                         $bud = DB::table('transactions')
                             ->where([
                                 ['ref_id', '=', $this->id],
@@ -587,11 +559,7 @@ class Project extends Resource
 
         if ($request->Budjet) {
 
-            DB::table('project_budjet')
-                ->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' => $citye['id']],
-                    ['budjet' => $request->Budjet]
-                );
+
 
             DB::table('transactions')
                 ->updateOrInsert(
