@@ -28,13 +28,13 @@ class Transaction extends Model
 
     public function Trip()
     {
-        return $this->belongsTo('App\Models\project','ref_id');
+        return $this->belongsTo('App\Models\Project','ref_id');
     }
 
 
     public function Alhisalat()
     {
-        return $this->belongsTo('App\Models\project','ref_id');
+        return $this->belongsTo('App\Models\Project','ref_id');
     }
 
     public function Donations()
@@ -47,9 +47,9 @@ class Transaction extends Model
         return $this->belongsTo('App\Models\QawafilAlaqsa','ref_id');
     }
 
-    public function project()
+    public function Project()
     {
-        return $this->belongsTo('App\Models\project','ref_id');
+        return $this->belongsTo('App\Models\Project','ref_id');
     }
 
     public function Currenc()

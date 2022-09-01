@@ -64,63 +64,59 @@ class PaymentVoucher extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Select::make("type", "type")->options([
-                '1' => 'project',
-                '2' => 'qawael',
-                '3' => 'trip',
-                '4' => 'else',
-            ])->displayUsingLabels(),
-            NovaDependencyContainer::make([
-                Text::make('ddd', function(){
-                    return $this->type;
-                }),
-              ])->dependsOn('type', '4')->hideFromDetail()->hideFromIndex(),
-            NovaDependencyContainer::make([
-                Select::make(__('project'), "ref_id")
-                    ->options(function () {
-                        $projects =  \App\Models\project::where('project_type', '1')->get();
-                        $user_type_admin_array =  array();
-                        foreach ($projects as $project) {
-                            $user_type_admin_array += [$project['id'] => ($project['project_name'])];
-                        }
+            // Select::make("type", "type")->options([
+            //     '1' => 'project',
+            //     '2' => 'qawael',
+            //     '3' => 'trip',
+            //     '4' => 'else',
+            // ])->displayUsingLabels(),
 
-                        return $user_type_admin_array;
-                    })
-                    ->displayUsingLabels(),
-            ])->dependsOn('type', '1')->hideFromDetail()->hideFromIndex(),
-            NovaDependencyContainer::make([
-                Select::make(__('QawafilAlaqsa'), "ref_id")
-                    ->options(function () {
-                        $projects =  \App\Models\project::where('project_type', '2')->get();
-                        $user_type_admin_array =  array();
-                        foreach ($projects as $project) {
-                            $user_type_admin_array += [$project['id'] => ($project['project_name'])];
-                        }
+            // NovaDependencyContainer::make([
+            //     Select::make(__('project'), "ref_id")
+            //         ->options(function () {
+            //             $projects =  \App\Models\project::where('project_type', '1')->get();
+            //             $user_type_admin_array =  array();
+            //             foreach ($projects as $project) {
+            //                 $user_type_admin_array += [$project['id'] => ($project['project_name'])];
+            //             }
 
-                        return $user_type_admin_array;
-                    })
-                    ->displayUsingLabels(),
-            ])->dependsOn('type', '2')->hideFromDetail()->hideFromIndex(),
-            NovaDependencyContainer::make([
-                Select::make(__('Trip'), "ref_id")
-                    ->options(function () {
-                        $projects =  \App\Models\project::with("City")->get();
-                        $i = 0;
-                        $user_type_admin_array =  array();
-                        foreach ($projects as $project) {
+            //             return $user_type_admin_array;
+            //         })
+            //         ->displayUsingLabels(),
+            // ])->dependsOn('type', '1')->hideFromDetail()->hideFromIndex(),
+            // NovaDependencyContainer::make([
+            //     Select::make(__('QawafilAlaqsa'), "ref_id")
+            //         ->options(function () {
+            //             $projects =  \App\Models\project::where('project_type', '2')->get();
+            //             $user_type_admin_array =  array();
+            //             foreach ($projects as $project) {
+            //                 $user_type_admin_array += [$project['id'] => ($project['project_name'])];
+            //             }
 
-                            foreach ($project['City'] as $projectcite) {
+            //             return $user_type_admin_array;
+            //         })
+            //         ->displayUsingLabels(),
+            // ])->dependsOn('type', '2')->hideFromDetail()->hideFromIndex(),
+            // NovaDependencyContainer::make([
+            //     Select::make(__('Trip'), "ref_id")
+            //         ->options(function () {
+            //             $projects =  \App\Models\project::with("City") ->get();
+            //                                     $i=0;
+            //                                     $user_type_admin_array =  array();
+            //                                     foreach ($projects as $project) {
 
-                                $user_type_admin_array += [($project['id']) => ($project['project_name'] . '=>' . $projectcite['name'])];
-                            }
-                        }
+            //                                         foreach ($project['City'] as $projectcite) {
 
-                        return $user_type_admin_array;
-                    })
-                    ->displayUsingLabels(),
-            ])->dependsOn('type', '3')->hideFromDetail()->hideFromIndex(),
+            //                                             $user_type_admin_array += [($project['id']) => ($project['project_name'].'=>'.$projectcite['name'])];
+            //                                         }
+            //                                 }
 
-            BelongsTo::make('project', 'project')->hideWhenCreating()->hideWhenUpdating(),
+            //             return $user_type_admin_array;
+            //         })
+            //         ->displayUsingLabels(),
+            // ])->dependsOn('type', '3')->hideFromDetail()->hideFromIndex(),
+
+            // BelongsTo::make('project', 'project')->hideWhenCreating()->hideWhenUpdating(),
 
             Text::make('description', 'description'),
             Text::make('transact amount', 'transact_amount'),
@@ -151,7 +147,7 @@ class PaymentVoucher extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->main_type = '2';
-        $model->equivelant_amount = $new->rate * $request->transact_amount;
+        $model->equivelant_amount=$new->rate*$request->transact_amount;
     }
     public static function beforeUpdate(Request $request, $model)
     {
@@ -163,8 +159,10 @@ class PaymentVoucher extends Resource
         $model->update_by = $id;
         if ($model->Currenc->id == $request->Currenc) {
             $rate = ((int)$model->equivelant_amount / (int)$model->transact_amount);
-        } else  $rate = $currencies->rate;
+        }
+        else  $rate =$currencies->rate ;
         $model->equivelant_amount = $rate * $request->transact_amount;
+
     }
 
 

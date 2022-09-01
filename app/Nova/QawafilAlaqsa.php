@@ -60,7 +60,7 @@ class QawafilAlaqsa extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\project::class;
+    public static $model = \App\Models\Project::class;
     public static $priority = 2;
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -134,7 +134,7 @@ class QawafilAlaqsa extends Resource
                     ->canSee(function () {
                         $user = Auth::user();
 
-                        if ($user->type() == 'regular_city' ) {
+                        if ($user->type() == 'regular_city') {
                             return true;
                         }
                     })
@@ -153,7 +153,7 @@ class QawafilAlaqsa extends Resource
 
                             if ($acspet) {
 
-                                if ($acspet->accepted == "1")   return  true ;
+                                if ($acspet->accepted == "1")   return  true;
                                 else return false;
                             }
                         }
@@ -286,14 +286,14 @@ class QawafilAlaqsa extends Resource
                             ->select('id')->first();
                         // dd($id);
                         // dd($citye);
-                        $bud = DB::table('project_budjet')
+                        $bud = DB::table('transactions')
                             ->where([
-                                ['project_id', '=', $this->id],
-                                ['city_id', '=', $citye['id']],
+                                ['ref_id', '=', $this->id],
+                                ['ref_cite_id', '=', $citye['id']],
                             ])
                             ->first();
 
-                        if ($bud)  return  $bud->budjet;
+                        if ($bud)  return  $bud->equivelant_amount;
                     }
                 })->canSee(function ($request) {
                     $user = Auth::user();
@@ -532,10 +532,18 @@ class QawafilAlaqsa extends Resource
 
         if ($request->Budjet) {
 
-            DB::table('project_budjet')
+            DB::table('transactions')
                 ->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' => $citye['id']],
-                    ['budjet' => $request->Budjet]
+                    ['ref_id' => $model->id, 'ref_cite_id' => $citye['id']],
+                    [
+                        'main_type' => '2',
+                        'type' => '1',
+                        'Currency' => '3',
+                        'transact_amount' => $request->Budjet,
+                        'equivelant_amount' => $request->Budjet,
+                        'transaction_date' => $date = date('Y-m-d'),
+
+                    ]
                 );
         }
         if ($request->Toole) {

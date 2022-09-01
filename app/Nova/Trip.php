@@ -58,7 +58,7 @@ class Trip extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\project::class;
+    public static $model = \App\Models\Project::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -288,14 +288,14 @@ class Trip extends Resource
                             ->select('id')->first();
                         // dd($id);
                         // dd($citye);
-                        $bud = DB::table('project_budjet')
+                        $bud = DB::table('transactions')
                             ->where([
-                                ['project_id', '=', $this->id],
-                                ['city_id', '=', $citye['id']],
+                                ['ref_id', '=', $this->id],
+                                ['ref_cite_id', '=', $citye['id']],
                             ])
                             ->first();
 
-                        if ($bud)  return  $bud->budjet;
+                        if ($bud)  return  $bud->equivelant_amount;
                     }
                 })->canSee(function ($request) {
                     $user = Auth::user();
@@ -563,11 +563,19 @@ class Trip extends Resource
 
         if ($request->Budjet) {
 
-            DB::table('project_budjet')
-                ->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' => $citye['id']],
-                    ['budjet' => $request->Budjet]
-                );
+            DB::table('transactions')
+            ->updateOrInsert(
+                ['ref_id' => $model->id, 'ref_cite_id' => $citye['id']],
+                [
+                    'main_type' => '2',
+                    'type' => '1',
+                    'Currency' => '3',
+                    'transact_amount' => $request->Budjet,
+                    'equivelant_amount' => $request->Budjet,
+                    'transaction_date' => $date = date('Y-m-d'),
+
+                ]
+            );
         }
         if ($request->Toole) {
 

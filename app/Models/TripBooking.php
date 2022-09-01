@@ -27,7 +27,7 @@ class TripBooking extends Model
 
     public function Project()
     {
-        return $this->belongsTo('App\Models\Project','project_id','id');
+        return $this->belongsTo('App\Models\Project','Project','id');
     }
 
 
@@ -35,11 +35,11 @@ class TripBooking extends Model
     {
         return $this->belongsTo('App\Models\Bus','bus_id');
     }
-     
+
     public function Users()
     {
         return $this->belongsTo('App\Models\User','user_id');
     }
 
-   
+
 }

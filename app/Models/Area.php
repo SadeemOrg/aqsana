@@ -34,9 +34,9 @@ class Area extends Model
     {
         return $this->belongsTo('App\Models\User','admin_id');
     }
-    public function project()
+    public function Project()
     {
-        return $this->belongsToMany(project::class);
+        return $this->belongsToMany(Project::class);
     }
     public function create()
     {
