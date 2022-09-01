@@ -6,18 +6,19 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ProjectController extends BaseController
+class TripController extends BaseController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-  
-        $projects = Project::where("project_type","1")->orderBy('created_at', 'desc')->paginate(15);
-        return $this->sendResponse($projects, 'Success get projects');
+    
+
+        $projects = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')->orderBy('created_at', 'desc')->paginate(15);
+        return $this->sendResponse($projects, 'Success get Trips');
 
     }
 
