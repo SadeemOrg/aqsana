@@ -4,7 +4,7 @@ namespace App\Nova\Filters;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
-class ProjectStatus extends Filter
+class  PostProjectFilters extends Filter
 {
     /**
      * The filter's component.
@@ -23,7 +23,9 @@ class ProjectStatus extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('Project_Status',$value);
+        if($value=="non" )
+        { return $query;}
+        return $query->where('report_status',$value);
     }
 
     /**
@@ -35,12 +37,9 @@ class ProjectStatus extends Filter
     public function options(Request $request)
     {
         return [
-
-            'Initial' => 'Initial',
-            'Acceptable' => 'Acceptable',
-            'project  in progress'=> 'project  in progress',
-            'locked' => 'locked',
-            'Collection the project' => 'Collection the project',
+            __('all') => 'non',
+            __('post') => '1',
+            __('not post') => '0',
 
         ];
     }

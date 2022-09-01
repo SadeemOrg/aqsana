@@ -3,45 +3,45 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Support\Facades\Auth;
-
-class Currency extends Resource
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Whitecube\NovaGoogleMaps\GoogleMaps;
+class ActionEvents extends Resource
 {
+
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Currency::class;
+    public static $model = \App\Models\ActionEvents::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
+    public static $title = 'name_address';
     public static function label()
     {
-        return __('Currency');
+        return __('Actions');
     }
     public static function group()
     {
-        return __('Admin');
+        return __('Actions');
     }
-
-    public static $title = 'name';
-    public static $priority = 6;
     /**
      * The columns that should be searched.
      *
      * @var array
      */
+    public static $priority = 12;
     public static $search = [
-        'id',
+        'id',"name_address"
     ];
 
     /**
@@ -51,13 +51,19 @@ class Currency extends Resource
      * @return array
      */
     public function fields(Request $request)
-    {    // 'Update_By'
-
-        return [
+    {
+        return
+        [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Name','name'),
-            Text::make('code','code'),
-            Number::make('rate','rate')->step(0.01),
+            Text::make("user_id ","user_id"),
+            Text::make("name ","name"),
+            Text::make("actionable_type  ","actionable_type"),
+            Text::make("actionable_id ","actionable_id"),
+            Text::make("model_id  ","model_id "),
+            Text::make("status ","status"),
+            Text::make("original ","original"),
+            Text::make("changes ","changes"),
+
 
         ];
     }

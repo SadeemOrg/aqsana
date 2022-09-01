@@ -18,13 +18,7 @@ class CreateCurrenciesTable extends Migration
             $table->string('name');
             $table->string('code');
             $table->string('rate');
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('update_by')->nullable();
 
-            // $table->foreign('created_by')->references('id')->on('users')
-            //     ->onDelete('cascade');
-            // $table->foreign('update_by')->references('id')->on('users')
-            //     ->onDelete('cascade');
             $table->timestamps();
         });
     }
