@@ -30,6 +30,14 @@ use Whitecube\NovaFlexibleContent\Flexible;
 use Illuminate\Support\Facades\Auth;
 use Comodolab\Nova\Fields\Help\Help;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
+use App\Nova\Metrics\DonationsSum;
+use App\Nova\Metrics\InComeTransaction;
+use App\Nova\Metrics\NewAlhisalat;
+use App\Nova\Metrics\NewBus;
+use App\Nova\Metrics\NewProject;
+use App\Nova\Metrics\NewQawafilAlaqsa;
+use App\Nova\Metrics\NewTrip;
+use App\Nova\Metrics\OutComeTransaction;
 use Chaseconey\ExternalImage\ExternalImage;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Epartment\NovaDependencyContainer\HasDependencies;
@@ -579,7 +587,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     protected function cards()
     {
-        return [];
+        return [
+
+            new NewProject(),
+           new NewQawafilAlaqsa(),
+           new NewTrip(),
+          new   NewAlhisalat(),
+           new InComeTransaction(),
+          new OutComeTransaction(),
+          new DonationsSum(),
+        ];
     }
     /**
      * Get the extra dashboards that should be displayed on the Nova dashboard.

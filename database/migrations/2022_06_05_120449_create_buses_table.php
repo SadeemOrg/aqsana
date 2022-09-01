@@ -17,13 +17,11 @@ class CreateBusesTable extends Migration
             $table->id();
             $table->string('name_driver');
             $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('city_id');
             $table->string('bus_number');
             $table->integer('number_of_seats');
             $table->double('seat_price');
             $table->unsignedBigInteger('travel_from')->nullable();
             $table->unsignedBigInteger('travel_to')->nullable();
-            $table->unsignedBigInteger('current_location')->nullable();
             $table->string('phone_number_driver');
             $table->char('status', '1');
             $table->unsignedBigInteger('created_by')->nullable();
