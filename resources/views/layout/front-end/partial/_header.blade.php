@@ -22,7 +22,6 @@
                 <nav class="">
                     <ul class="navbar-nav xl:flex xl:flex-row justify-between items-center">
                         @if (isset($nav))
-
                         @foreach ($nav as $key =>$item)
 
                             @if ($key == (round(count($nav)/2)))
@@ -46,17 +45,6 @@
 
                 </nav>
             </div>
-            <!-- End RT links -->
-            <!-- Start logo -->
-            {{-- <div class="hidden xl:block">
-                <a href="/">
-                    <img class=" lg:w-[150px] xl:w-[200px] lg:h-auto xl:h-[60px]" src="{{ asset('assets/image/image 1.svg') }}" />
-                </a>
-            </div> --}}
-            <!-- Start logo -->
-            <!-- Start LT nav links -->
-
-            <!-- End LT nav links -->
         </div>
     </div>
 </header>
