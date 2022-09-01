@@ -80,6 +80,12 @@ class HomeController extends Controller
             'message.required' => 'الرجاء ادخال الرسالة. ',
         ]);
         if ($validator->passes()) {
+            FormMassage::create([
+                'name' => $request['name'],
+                'phone' => $request['phone'],
+                'message' => $request['message'],
+
+            ]);
             return response()->json(['success'=>'Added new records.']);
         }
 

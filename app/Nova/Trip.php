@@ -163,6 +163,8 @@ class Trip extends Resource
                     ->hideWhenCreating()->hideWhenUpdating(),
                 Text::make(__("project name"), "project_name"),
                 Text::make(__("project describe"), "project_describe"),
+                BelongsTo::make('trip from', 'tripfrom', \App\Nova\address::class),
+                BelongsTo::make('trip to', 'tripto', \App\Nova\address::class),
                 Select::make(__('SECTOR'), 'sector')
                     ->options(function () {
                         $sectors = nova_get_setting('workplace', 'default_value');
@@ -568,7 +570,7 @@ class Trip extends Resource
                 ['ref_id' => $model->id, 'ref_cite_id' => $citye['id']],
                 [
                     'main_type' => '2',
-                    'type' => '1',
+                    'type' => '3',
                     'Currency' => '3',
                     'transact_amount' => $request->Budjet,
                     'equivelant_amount' => $request->Budjet,

@@ -15,7 +15,7 @@ class Project extends Model
         'is_reported','report_status','report_title','report_description','report_contents','report_image','report_pictures','report_video_link',
          'project_type', 'Project_Status', 'start_date', 'end_date',
         'Budjet', 'admin_id', 'approval', 'reason_of_reject'
-        ,'Financial_Type','is_has_volunteer','is_has_Donations','areas','cities','approval_Status',
+        ,'Financial_Type','is_has_volunteer','is_has_Donations','areas','cities','approval_Status','trip_from','trip_to'
         'update_by','created_by'
 
 
@@ -89,4 +89,16 @@ class Project extends Model
     {
         return $query->where('project_type', 2);
     }
+
+    public function tripto()
+    {
+        return $this->belongsTo('App\Models\address','trip_to');
+    }
+
+    public function tripfrom()
+    {
+        return $this->belongsTo('App\Models\address','trip_from');
+    }
 }
+
+
