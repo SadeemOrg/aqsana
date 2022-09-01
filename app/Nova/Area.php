@@ -111,7 +111,7 @@ class Area extends Resource
         ];
     }
 
-    public static function beforeSave(Request $request, $model)
+    public static function beforeCreate(Request $request, $model)
     {
         $id = Auth::id();
         $model->created_by=$id;
