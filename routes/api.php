@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TripBookingController;
+use App\Http\Controllers\TripController;
 use App\Http\Controllers\VolunteerController;
 
 /*
@@ -83,6 +84,10 @@ Route::get('/search_trip', [TripBookingController::class, 'search_trip']);
 
 //Prrojects
 Route::get('/projects', [ProjectController::class, 'index']);
+
+
+//Prrojects
+Route::get('/trips', [TripController::class, 'index']);
 
 
 //payment methods

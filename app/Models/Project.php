@@ -65,6 +65,13 @@ class Project extends Model
     {
         return $this->belongsToMany(City::class,'project_city')->withTimestamps();
     }
+
+
+    public function TripCity()
+    {
+        return $this->belongsTo(ProjectCity::class,'id','project_id');
+    }
+
     public function Bus()
     {
         $id = Auth::id();
@@ -73,6 +80,10 @@ class Project extends Model
         $citye =   City::where('admin_id', $id)
         ->select('id')->first();
         if ($user->type() == 'regular_city')     return $this->belongsToMany(Bus::class,'project_bus')->where('project_bus.city_id', '=', $citye['id']);
+        return $this->belongsToMany(Bus::class,'project_bus');
+    }
+
+    public function BusTrip(){
         return $this->belongsToMany(Bus::class,'project_bus');
     }
 
