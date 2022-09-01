@@ -830,10 +830,19 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-8{
   width: 2rem;
 }
+.w-\[210px\]{
+  width: 210px;
+}
 .min-w-fit{
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
   min-width: fit-content;
+}
+.min-w-\[220px\]{
+  min-width: 220px;
+}
+.min-w-\[210px\]{
+  min-width: 210px;
 }
 .max-w-7xl{
   max-width: 80rem;
@@ -1928,6 +1937,9 @@ body{
   }
   .md\:w-\[50\%\]{
     width: 50%;
+  }
+  .md\:w-\[210px\]{
+    width: 210px;
   }
   .md\:max-w-2xl{
     max-width: 42rem;

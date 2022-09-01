@@ -25,7 +25,7 @@
                         <span class="text-gray-500 sm:text-sm"> ₪ </span>
                     </div>
                     <input type="number" name="donation_amount" id="price"
-                        class="focus:ring-green-500 focus:border-green-500 block  sm:text-sm border-gray-300 rounded-md w-[220px] md:w-full"
+                        class="focus:ring-green-500 focus:border-green-500 block  sm:text-sm border-gray-300 rounded-md w-[220px] md:w-[210px]"
                         placeholder="0.00" aria-describedby="price-currency">
                 </div>
             </div>
@@ -39,15 +39,14 @@
             <label for="sector" class=" pr-1 block text-sm font-medium text-gray-700">القطاعات</label>
             <div class="mt-2">
                 <input type="text" name="sector" id="sector" value="{{ $project->sector }}" disabled
-                    class="shadow-sm block sm:text-sm border-gray-300 rounded-md w-[220px] md:w-[200px]">
+                    class="shadow-sm block sm:text-sm border-gray-300 rounded-md w-[220px] md:w-[210px]">
             </div>
         </div>
         <!-- title -->
         <div class="mt-4 firstPage ">
             <label for="title" class="block  text-sm font-medium text-gray-700">عنوان المشروع</label>
             <p
-                class="shadow-sm hidden md:block sm:text-sm border px-4 md:px-2 p-2 mt-2 border-gray-300 rounded-md w-[220px] md:w-full ">
-                               {{-- اكثر من 10 الاف مشارك بمعسكر 'القدس اولا' الذي نظمته الحركة الاسلامية وجمعية الاقصى --}}
+                class="shadow-sm hidden md:block sm:text-sm border px-4 md:px-2 p-2 mt-2 min-w-[210px] border-gray-300 rounded-md   ">
 
                 {{Illuminate\Support\Str::limit($project->project_name,113) }}
             </p>

@@ -3,6 +3,18 @@
         font-size: 17px;
     }
 
+    ::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
     input[type="search"]::-webkit-search-decoration,
     input[type="search"]::-webkit-search-cancel-button,
     input[type="search"]::-webkit-search-results-button,
@@ -36,7 +48,7 @@
                             fill="#349A37" />
                     </svg>
                 </div>
-                <input type="search" name="search" id="search"
+                <input type="search" name="search" id="search" autocomplete="off"
                     class="search-bar h-16 sm:h-full  pr-12 sm:pr-20 shadow-sm  block w-full bg-white border-0 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]"
                     placeholder="ابحث عن مشروع , خبر , تبرع ... ">
 
