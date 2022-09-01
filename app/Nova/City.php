@@ -140,23 +140,38 @@ class City extends Resource
     }
 
 
+    public static function beforeCreate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->created_by=$id;
+    }
+
+
     public static function beforeUpdate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->update_by = $id;
+        $model->update_by=$id;
+
+
     }
-    public static function beforeSave(Request $request, $model)
-    {
-        $user = Auth::user();
-        $id = Auth::id();
-        if ($user->type() == 'admin') {
-            $model->created_by = $id;
-        } else {
-            $user = DB::table('areas')->where('admin_id', $id)->select('id')->first();
-            $model->update_by = $id;
-            $model->area_id = $user->id;
-        }
-    }
+    // public static function beforeUpdate(Request $request, $model)
+    // {
+    //     $id = Auth::id();
+    //     $model->update_by = $id;
+    // }
+
+    // public static function beforeCreate(Request $request, $model)
+    // {
+    //     $user = Auth::user();
+    //     $id = Auth::id();
+    //     if ($user->type() == 'admin') {
+    //         $model->created_by = $id;
+    //     } else {
+    //         $user = DB::table('areas')->where('admin_id', $id)->select('id')->first();
+    //         $model->update_by = $id;
+    //         $model->area_id = $user->id;
+    //     }
+    // }
 
 
 

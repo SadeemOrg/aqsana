@@ -275,34 +275,34 @@ class QawafilAlaqsa extends Resource
                         return false;
                     }),
             ])),
-            (new Panel(__('Budget'), [
+            // (new Panel(__('Budget'), [
 
-                Text::make("Budjet", "Budjet", function () {
+            //     Text::make("Budjet", "Budjet", function () {
 
-                    $id = Auth::id();
-                    $user = Auth::user();
-                    if ($user->type() == 'regular_city') {
-                        $citye =   City::where('admin_id', $id)
-                            ->select('id')->first();
-                        // dd($id);
-                        // dd($citye);
-                        $bud = DB::table('transactions')
-                            ->where([
-                                ['ref_id', '=', $this->id],
-                                ['ref_cite_id', '=', $citye['id']],
-                            ])
-                            ->first();
+            //         $id = Auth::id();
+            //         $user = Auth::user();
+            //         if ($user->type() == 'regular_city') {
+            //             $citye =   City::where('admin_id', $id)
+            //                 ->select('id')->first();
+            //             // dd($id);
+            //             // dd($citye);
+            //             $bud = DB::table('transactions')
+            //                 ->where([
+            //                     ['ref_id', '=', $this->id],
+            //                     ['ref_cite_id', '=', $citye['id']],
+            //                 ])
+            //                 ->first();
 
-                        if ($bud)  return  $bud->equivelant_amount;
-                    }
-                })->canSee(function ($request) {
-                    $user = Auth::user();
-                    if ($user->type() == 'regular_city') return true;
-                    return false;
-                })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    return null;
-                }),
-            ])),
+            //             if ($bud)  return  $bud->equivelant_amount;
+            //         }
+            //     })->canSee(function ($request) {
+            //         $user = Auth::user();
+            //         if ($user->type() == 'regular_city') return true;
+            //         return false;
+            //     })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+            //         return null;
+            //     }),
+            // ])),
             (new Panel(__('tooles'), [
 
                 Text::make("Toole", "Toole", function () {
@@ -532,19 +532,19 @@ class QawafilAlaqsa extends Resource
 
         if ($request->Budjet) {
 
-            DB::table('transactions')
-                ->updateOrInsert(
-                    ['ref_id' => $model->id, 'ref_cite_id' => $citye['id']],
-                    [
-                        'main_type' => '2',
-                        'type' => '2',
-                        'Currency' => '3',
-                        'transact_amount' => $request->Budjet,
-                        'equivelant_amount' => $request->Budjet,
-                        'transaction_date' => $date = date('Y-m-d'),
+            // DB::table('transactions')
+            //     ->updateOrInsert(
+            //         ['ref_id' => $model->id, 'ref_cite_id' => $citye['id']],
+            //         [
+            //             'main_type' => '2',
+            //             'type' => '2',
+            //             'Currency' => '3',
+            //             'transact_amount' => $request->Budjet,
+            //             'equivelant_amount' => $request->Budjet,
+            //             'transaction_date' => $date = date('Y-m-d'),
 
-                    ]
-                );
+            //         ]
+            //     );
         }
         if ($request->Toole) {
 
