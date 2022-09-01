@@ -537,7 +537,7 @@ class QawafilAlaqsa extends Resource
                     ['ref_id' => $model->id, 'ref_cite_id' => $citye['id']],
                     [
                         'main_type' => '2',
-                        'type' => '1',
+                        'type' => '2',
                         'Currency' => '3',
                         'transact_amount' => $request->Budjet,
                         'equivelant_amount' => $request->Budjet,

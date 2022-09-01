@@ -64,9 +64,13 @@ class receiptVoucher extends Resource
 
             Select::make("type", "type")->options([
                 '1' => 'Alhisalat',
-                '2' => 'else',
-            ])->displayUsingLabels(),
-
+                '2' => 'doner',
+                '3' => 'else',
+            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            Select::make("type", "type")->options([
+                '1' => 'Alhisalat',
+                '3' => 'else',
+            ])->displayUsingLabels()->hideFromDetail()->hideFromIndex   (),
             NovaDependencyContainer::make([
                 Select::make(__('Alhisalat'), "ref_id")
                     ->options(function () {

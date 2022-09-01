@@ -64,12 +64,12 @@ class PaymentVoucher extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            // Select::make("type", "type")->options([
-            //     '1' => 'project',
-            //     '2' => 'qawael',
-            //     '3' => 'trip',
-            //     '4' => 'else',
-            // ])->displayUsingLabels(),
+            Select::make("type", "type")->options([
+                '1' => 'project',
+                '2' => 'qawael',
+                '3' => 'trip',
+                '4' => 'else',
+            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
 
             // NovaDependencyContainer::make([
             //     Select::make(__('project'), "ref_id")
