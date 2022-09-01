@@ -30,8 +30,8 @@ class CreateProjectsTable extends Migration
             $table->string('report_title')->nullable();
             $table->longText('report_contents')->nullable();
             $table->longText('report_description')->nullable();
-            $table->unsignedBigInteger('tripfrom')->nullable();
-            $table->unsignedBigInteger('tripto')->nullable();
+            $table->unsignedBigInteger('trip_from')->nullable();
+            $table->unsignedBigInteger('trip_to')->nullable();
             $table->string('report_image')->nullable();
             $table->json('report_pictures')->nullable();
             $table->string('report_video_link')->nullable();
