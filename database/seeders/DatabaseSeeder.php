@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ProjectTypeSeeder::class,
             CurrencySeeder::class,
             newsTypeSeeder::class,
+            AddressSeeder::class,
 
         ]);
     }

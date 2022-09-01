@@ -161,6 +161,7 @@ class Project extends Resource
                     ->hideWhenCreating()->hideWhenUpdating(),
                 Text::make(__("project name"), "project_name"),
                 Text::make(__("project describe"), "project_describe"),
+
                 Select::make(__('SECTOR'), 'sector')
                     ->options(function () {
                         $sectors = nova_get_setting('workplace', 'default_value');
