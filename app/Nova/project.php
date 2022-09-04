@@ -452,6 +452,12 @@ class Project extends Resource
                     }),
                 Flexible::make('newbus', 'newbus')
                     ->readonly(true)
+                    ->canSee(function ($request) {
+
+                        $user = Auth::user();
+                        if ($user->type() == 'regular_city') return true;
+                        return false;
+                    })->hideFromDetail()->hideFromIndex()
                     ->addLayout('Add new bus', 'bus', [
 
                         Select::make('BusesCompany', 'BusesCompany')

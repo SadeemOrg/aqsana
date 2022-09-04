@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\BelongsTo;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use Illuminate\Support\Facades\Auth;
+
 class Bus extends Resource
 {
     /**
@@ -64,32 +65,27 @@ class Bus extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make('company', 'company', \App\Nova\BusesCompany::class),
-            Text::make("Bus Number","bus_number"),
-            Number::make("Number person on bus","number_of_seats")->step(1.0),
-            Number::make("seat price","seat_price")->step(1.0),
+            Text::make("Bus Number", "bus_number"),
+            Number::make("Number person on bus", "number_of_seats")->step(1.0),
+            Number::make("seat price", "seat_price")->step(1.0),
             BelongsTo::make('travel from', 'travelfrom', \App\Nova\address::class),
             BelongsTo::make('travel to', 'travelto', \App\Nova\address::class),
-            BelongsTo::make('current location', 'currentlocation', \App\Nova\address::class),
-            Text::make("Name Driver","name_driver"),
-            Text::make("phone_number","phone_number_driver"),
-            Select::make("status","status")
-            ->options([
-                '1' => 'available',
-                '2' => 'un available',
+            Text::make("Name Driver", "name_driver"),
+            Text::make("phone_number", "phone_number_driver"),
+            Select::make("status", "status")
+                ->options([
+                    '1' => 'available',
+                    '2' => 'un available',
                 ])->displayUsingLabels(),
-                BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
-                hideWhenUpdating(),
-                BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
-                hideWhenUpdating(),
+            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
-            ];
-
-
+        ];
     }
 
 
-    public static function beforeSave(Request $request, $model)
+    public static function beforeCreate(Request $request, $model)
     {
         $id = Auth::id();
         $model->created_by=$id;

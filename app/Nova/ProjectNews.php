@@ -3,6 +3,9 @@
 namespace App\Nova;
 
 use App\Nova\Actions\PostProjectNews;
+use App\Nova\Filters\PostProjectFilters;
+use App\Nova\Filters\ProjectTypeFilters;
+use AwesomeNova\Cards\FilterCard;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
@@ -131,7 +134,10 @@ class ProjectNews extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new FilterCard(new PostProjectFilters()),
+            new FilterCard(new ProjectTypeFilters()),
+        ];
     }
 
     /**
@@ -142,7 +148,11 @@ class ProjectNews extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new PostProjectFilters(),
+            new ProjectTypeFilters()
+
+           ];
     }
 
     /**
