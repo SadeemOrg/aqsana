@@ -27,8 +27,8 @@ class Project extends Model
     ];
 
     protected $casts = [
-        'start_date' => 'datetime',
-        'end_date' => 'datetime',
+        'start_date' => 'datetime:Y-m-d h:i:s',
+        'end_date' => 'datetime:Y-m-d h:i:s',
         'pictures' => 'array',
        ' cities'=> 'array',
         'areas'=> 'array',
