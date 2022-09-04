@@ -27,14 +27,16 @@ class Project extends Model
     ];
 
     protected $casts = [
-        'start_date' => 'datetime:c',
-        'end_date' => 'datetime:c',
+        'start_date' => 'datetime:utc',
+        'end_date' => 'datetime:utc',
         'pictures' => 'array',
        ' cities'=> 'array',
         'areas'=> 'array',
         'report_date' => 'date',
 
     ];
+
+
 
 
     public function buses()
