@@ -10,6 +10,10 @@ class Project extends Model
 {
     use HasFactory;
     protected $table = 'projects';
+
+    protected $dateFormat = 'U';
+
+    
     protected $fillable = [
         'id', 'project_name', 'project_describe', 'purpose',
         'is_reported','report_status','report_title','report_description','report_contents','report_image','report_pictures','report_video_link',
@@ -35,6 +39,8 @@ class Project extends Model
         'report_date' => 'date',
 
     ];
+
+    
 
 
     public function buses()
