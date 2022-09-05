@@ -101,9 +101,6 @@ class Alhisalat extends Resource
     public function fields(Request $request)
     {
         return [
-
-
-
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__("Name"), "name"),
             ActionButton::make(__('POST NEWS'))
@@ -135,13 +132,14 @@ class Alhisalat extends Resource
             ->text(__('Finsh'))->showLoadingAnimation()
             ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
-            BelongsTo::make(('address'), 'address')->nullable(),
+
+            BelongsTo::make(__('address'), 'address', \App\Nova\address::class),
 
 
 
             Select::make(__('add adres'), 'name_format')->options([
-                0 => 'no',
-                1 => 'yes',
+                0 => __('no'),
+                1 => __('yes'),
 
             ])->displayUsingLabels()
                 ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
@@ -164,8 +162,8 @@ class Alhisalat extends Resource
                         return null;
                     }),
                 Select::make(__("Status"), "address_status")->options([
-                    '1' => 'active',
-                    '2' => 'not active',
+                    '1' => __('active'),
+                    '2' => __('not active'),
                 ])->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 }),

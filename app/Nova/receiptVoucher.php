@@ -103,7 +103,8 @@ class receiptVoucher extends Resource
 
             Text::make(__('description'), 'description'),
             Text::make(__('transact amount'), 'transact_amount'),
-            BelongsTo::make('Currency','Currenc'),
+            BelongsTo::make(__('Currenc'), 'Currenc', \App\Nova\Currency::class),
+
 
 
 
