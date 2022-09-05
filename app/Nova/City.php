@@ -62,7 +62,7 @@ class City extends Resource
             return $query;
         } elseif ($user->type() == 'regular_area') {
 
-            $area = \App\Models\area::with('City')->where('admin_id', $id)->first();
+            $area = \App\Models\Area::with('City')->where('admin_id', $id)->first();
             $areas = $area->toArray();
             $cites = $areas['city'];
 
