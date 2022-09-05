@@ -54,16 +54,6 @@ class ActionEvents extends Resource
     {
         return
         [
-            ID::make(__('ID'), 'id')->sortable(),
-            Text::make("user_id ","user_id"),
-            Text::make("name ","name"),
-            Text::make("actionable_type  ","actionable_type"),
-            Text::make("actionable_id ","actionable_id"),
-            Text::make("model_id  ","model_id "),
-            Text::make("status ","status"),
-            Text::make("original ","original"),
-            Text::make("changes ","changes"),
-
 
         ];
     }

@@ -62,12 +62,12 @@ class receiptVoucher extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Select::make("type", "type")->options([
+            Select::make(__("type"), "type")->options([
                 '1' => 'Alhisalat',
                 '2' => 'doner',
                 '3' => 'else',
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
-            Select::make("type", "type")->options([
+            Select::make(__("type"), "type")->options([
                 '1' => 'Alhisalat',
                 '3' => 'else',
             ])->displayUsingLabels()->hideFromDetail()->hideFromIndex   (),
@@ -83,7 +83,7 @@ class receiptVoucher extends Resource
                         return $user_type_admin_array;
                     })
                     ->displayUsingLabels(),
-            ])->dependsOn('type', '1')->hideFromDetail()->hideFromIndex(),
+            ])->dependsOn("type", '1')->hideFromDetail()->hideFromIndex(),
             // NovaDependencyContainer::make([
             //     Select::make(__('Donations'), "ref_id")
             //         ->options(function () {
@@ -101,26 +101,26 @@ class receiptVoucher extends Resource
 
             BelongsTo::make('project', 'Project')->hideWhenCreating()->hideWhenUpdating(),
 
-            Text::make('description', 'description'),
-            Text::make('transact amount', 'transact_amount'),
-            BelongsTo::make('Currency', 'Currenc'),
+            Text::make(__('description'), 'description'),
+            Text::make(__('transact amount'), 'transact_amount'),
+            BelongsTo::make('Currency','Currenc'),
 
 
 
-            Text::make('equivalent amount', "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
+            Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
-            Image::make('voucher', 'voucher')->disk('public')->prunable(),
+            Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
 
-            Select::make('approval ', 'approval')->options([
+            Select::make(__('approval'), 'approval')->options([
                 1 => 'approval',
                 2 => 'reject',
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
-            Text::make("reason_of_reject", "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
+            Text::make(__("reason_of_reject"), "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
 
 
 
 
-            Date::make('date', 'transaction_date'),
+            Date::make(__('date'), 'transaction_date'),
 
         ];
     }

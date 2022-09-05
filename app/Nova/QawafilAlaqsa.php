@@ -242,9 +242,10 @@ class QawafilAlaqsa extends Resource
 
                 ])->dependsOn('is_reported', '10'),
 
-                BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-
+                BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->
+                  hideWhenUpdating(),
+                  BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
+                  hideWhenUpdating(),
 
 
             ]))->withToolbar(),
@@ -700,7 +701,14 @@ class QawafilAlaqsa extends Resource
     public function actions(Request $request)
     {
         return [
-            new ApprovalRejectProjec,
+            (new ApprovalRejectProjec)->canSee(function () {
+                $user = Auth::user();
+
+                if ($user->type() == 'regular_city') {
+                    return true;
+                }
+            }),
+
         ];
     }
 }

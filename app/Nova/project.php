@@ -243,9 +243,10 @@ class Project extends Resource
 
                 ])->dependsOn('is_reported', '10'),
 
-                BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-
+                BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->
+                hideWhenUpdating(),
+                BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
+                hideWhenUpdating(),
 
 
             ]))->withToolbar(),

@@ -27,6 +27,7 @@ use Laravel\Nova\Fields\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Select;
+use Pdmfc\NovaFields\ActionButton;
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 
@@ -104,12 +105,41 @@ class Alhisalat extends Resource
 
 
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Name", "name"),
-            BelongsTo::make('address', 'address')->nullable(),
+            Text::make(__("Name"), "name"),
+            ActionButton::make(__('POST NEWS'))
+            ->action((new AlhisalatStatus)->confirmText('Are you sure you want to read  this Massage?')
+                ->confirmButtonText(__('post'))
+                ->cancelButtonText(__('Dont post')), $this->id)
+                ->canSee(function () {
+                return $this->status === '1';
+            })->text(__('colect'))->showLoadingAnimation()
+            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
+            ActionButton::make(__('POST NEWS'))
+            ->action((new AlhisalatStatuscompleted)->confirmText('Are you sure you want to read  this Massage?')
+                ->confirmButtonText(__('post'))
+                ->cancelButtonText(__('Dont post')), $this->id)
+                ->canSee(function () {
+                return $this->status === '2';
+            })->text(__('Complet'))->showLoadingAnimation()
+            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
+            ActionButton::make(__('finsh'))
+            ->action((new AlhisalatStatuscompleted)->confirmText('Are you sure you want to read  this Massage?')
+                ->confirmButtonText(__('post'))
+                ->cancelButtonText(__('Dont post')), $this->id)
+                ->canSee(function () {
+                return $this->status === '3';
+            })
+            ->readonly()
+            ->text(__('Finsh'))->showLoadingAnimation()
+            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
+            BelongsTo::make(('address'), 'address')->nullable(),
 
 
 
-            Select::make('add adres', 'name_format')->options([
+            Select::make(__('add adres'), 'name_format')->options([
                 0 => 'no',
                 1 => 'yes',
 
@@ -120,20 +150,20 @@ class Alhisalat extends Resource
 
             NovaDependencyContainer::make([
 
-                Text::make("Name", "name_address")->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                Text::make(__('Name'), "name_address")->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 }),
-                Text::make("description", "description")->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                Text::make(__("description"), "description")->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 }),
-                Text::make("phone number", "phone_number_address")->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                Text::make(__("phone number"), "phone_number_address")->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 }),
-                GoogleMaps::make('current_location', 'current_location')
+                GoogleMaps::make(__('current_location'), 'current_location')
                     ->zoom(8)->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                         return null;
                     }),
-                Select::make("Status", "address_status")->options([
+                Select::make(__("Status"), "address_status")->options([
                     '1' => 'active',
                     '2' => 'not active',
                 ])->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
@@ -142,18 +172,19 @@ class Alhisalat extends Resource
             ])->dependsOn('name_format', 1),
 
 
-            Number::make("number alhisala", "number_alhisala"),
+            Number::make(__("number alhisala"), "number_alhisala"),
 
 
-            Multiselect::make("Status", "status")->options([
+            Multiselect::make(__("Status"), "status")->options([
                 '1' => 'تم انشاء الحصالة',
                 '2' => 'تم جمع الحصالة',
                 '3' => 'مكتملة',
 
             ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->
+                  hideWhenUpdating(),
+                  BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
+                  hideWhenUpdating(),
 
         ];
     }
@@ -244,16 +275,21 @@ class Alhisalat extends Resource
     {
         return [
 
-            (new AlhisalatStatus) ->canSee(function () {
-                if ($this->status == '1' ) {
-                    return true;
-                }
-            }),
-            (new AlhisalatStatuscompleted)->canSee(function () {
-                if ($this->status == '2' ) {
-                    return true;
-                }
-            }),
+            (new AlhisalatStatus),
+        //     ->canSee(function ($request) {
+        //         $model = $request->findModelQuery()->first();
+        //         if ($request->status == '1' ) {
+        //             return true;
+        //         }
+        //     }
+        // ),
+          (  new AlhisalatStatuscompleted)
+        //     ->canSee(function () {
+        //         if ($this->status == '2' ) {
+        //             return true;
+        //         }
+        //     }
+        // ),
         ];
     }
 }

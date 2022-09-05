@@ -64,7 +64,7 @@ class PaymentVoucher extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Select::make("type", "type")->options([
+            Select::make(__("type"), "type")->options([
                 '1' => 'project',
                 '2' => 'qawael',
                 '3' => 'trip',
@@ -118,26 +118,27 @@ class PaymentVoucher extends Resource
 
             // BelongsTo::make('project', 'project')->hideWhenCreating()->hideWhenUpdating(),
 
-            Text::make('description', 'description'),
-            Text::make('transact amount', 'transact_amount'),
+            Text::make(__('description'), 'description'),
+            Text::make(__('transact amount'), 'transact_amount'),
             BelongsTo::make('Currency', 'Currenc'),
 
 
 
-            Text::make('equivalent amount', "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
-            Image::make('voucher', 'voucher')->disk('public')->prunable(),
+            Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
-            Select::make('approval ', 'approval')->options([
+            Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
+
+            Select::make(__('approval'), 'approval')->options([
                 1 => 'approval',
                 2 => 'reject',
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
-            Text::make("reason_of_reject", "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
+            Text::make(__("reason_of_reject"), "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
 
 
 
 
-            Date::make('date', 'transaction_date'),
+            Date::make(__('date'), 'transaction_date'),
 
         ];
     }

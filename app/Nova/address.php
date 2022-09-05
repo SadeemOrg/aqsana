@@ -53,13 +53,13 @@ class address extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Name","name_address"),
-            Text::make("description","description"),
-            Text::make("phone number","phone_number_address"),
+            Text::make(__('Name'),"name_address"),
+            Text::make(__("description"),"description"),
+            Text::make(__("phone number"),"phone_number_address"),
 
-            GoogleMaps::make('current_location', 'current_location')
+            GoogleMaps::make(__('current_location'), 'current_location')
             ->zoom(8) ,
-            Select::make("Status","status")->options([
+            Select::make(__("Status"),"status")->options([
                 '1' => 'active',
                 '2' => 'not active',
               ]),

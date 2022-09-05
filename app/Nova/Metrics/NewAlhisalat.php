@@ -14,6 +14,10 @@ class NewAlhisalat extends Value
      * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return mixed
      */
+    public  function name ()
+    {
+        return __('NewAlhisalat');
+    }
     public function calculate(NovaRequest $request)
     {
         return $this->count($request, Alhisalat::class);

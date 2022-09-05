@@ -245,10 +245,10 @@ class Trip extends Resource
                     Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y'),
 
                 ])->dependsOn('is_reported', '10'),
-
-                BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-
+                BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->
+                hideWhenUpdating(),
+                BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
+                hideWhenUpdating(),
 
 
             ]))->withToolbar(),
