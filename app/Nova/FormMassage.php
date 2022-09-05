@@ -55,10 +55,10 @@ public static function group()
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('name','name')->readonly(),
-            Text::make('phone','phone')->readonly(),
-            Text::make('message','message')->readonly(),
-            Select::make("is read","is_read")
+            Text::make(__('Name'),'name')->readonly(),
+            Text::make(__('phone'),'phone')->readonly(),
+            Text::make(__('message'),'message')->readonly(),
+            Select::make(__("is read"),"is_read")
             ->options([
                 '0' => 'not read',
                 '1' => 'read',
@@ -66,12 +66,12 @@ public static function group()
 
                 ])->displayUsingLabels()->readonly(),
 
-                ActionButton::make('ReadMessage')
+                ActionButton::make(__('ReadMessage'))
                 ->action((new ReadMessage) ->confirmText('Are you sure you want to read  this Massage?')
                 ->confirmButtonText('Read')
                 ->cancelButtonText("Don't Read"), $this->id) ->readonly(function () {
                     return $this->is_read === '1';
-                })->text('Read')->showLoadingAnimation()
+                })->text(__('Read'))->showLoadingAnimation()
                 ->loadingColor('#fff') ->svg('VueComponentName')
 
         ];

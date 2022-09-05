@@ -51,9 +51,9 @@ class Role extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('code_role'),
-            Text::make('role'),
-            Boolean::make("status","status"),
+            Text::make(__('code_role')),
+            Text::make(__('role')),
+            Boolean::make(__("status"),"status"),
         ];
     }
 

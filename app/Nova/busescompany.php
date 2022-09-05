@@ -59,15 +59,15 @@ class BusesCompany extends Resource
 
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("name","name"),
-            Text::make("description","description"),
-            Number::make("cost","cost")->step(1.0),
-            Number::make("number of buses","number_of_buses")->step(1.0),
-            Text::make("contact person","contact_person"),
-            Number::make("phone number","phone_number"),
+            Text::make(__("Name"),"name"),
+            Text::make(__("Describtion"),"description"),
+            Number::make(__("cost"),"cost")->step(1.0),
+            Number::make(__("number of buses"),"number_of_buses")->step(1.0),
+            Text::make(__("contact person"),"contact_person"),
+            Number::make(__("phone number"),"phone_number"),
 
 
-            Select::make("status","status")
+            Select::make(__("status"),"status")
             ->options([
                 '1' => 'available',
                 '2' => 'un available',
@@ -77,9 +77,9 @@ class BusesCompany extends Resource
             ->hideWhenCreating()->
             hideWhenUpdating(),
 
-            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->
             hideWhenUpdating(),
-            BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
+            BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
             hideWhenUpdating(),
 
 

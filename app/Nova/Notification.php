@@ -52,8 +52,8 @@ class Notification extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Title","title"),
-            Textarea::make("Message","message")->showOnIndex()
+            Text::make(__("Title"),"title"),
+            Textarea::make(__("Message"),"message")->showOnIndex()
         ];
     }
 

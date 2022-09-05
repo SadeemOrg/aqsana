@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
+
 class address extends Resource
 {
     /**
@@ -40,7 +41,7 @@ class address extends Resource
      */
     public static $priority = 3;
     public static $search = [
-        'id',"name_address"
+        'id', "name_address"
     ];
 
     /**
@@ -53,18 +54,16 @@ class address extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Name","name_address"),
-            Text::make("description","description"),
-            Text::make("phone number","phone_number_address"),
+            Text::make(__('Name'), "name_address"),
+            Text::make(__("description"), "description"),
+            Text::make(__("phone number"), "phone_number_address"),
 
-            GoogleMaps::make('current_location', 'current_location')
-            ->zoom(8) ,
-            Select::make("Status","status")->options([
-                '1' => 'active',
-                '2' => 'not active',
-              ]),
-            //   BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            //   BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            GoogleMaps::make(__('current_location'), 'current_location')
+                ->zoom(8),
+            Select::make(__("Status"), "status")->options([
+                '1' => __('active'),
+                '2' => __('not active'),
+            ])->displayUsingLabels(),
         ];
     }
 

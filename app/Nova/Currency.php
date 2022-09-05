@@ -55,9 +55,9 @@ class Currency extends Resource
 
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Name','name'),
-            Text::make('code','code'),
-            Number::make('rate','rate')->step(0.01),
+            Text::make(__('Name'),'name'),
+            Text::make(__('code'),'code'),
+            Number::make(__('rate'),'rate')->step(0.01),
 
         ];
     }

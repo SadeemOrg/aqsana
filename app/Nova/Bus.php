@@ -64,21 +64,21 @@ class Bus extends Resource
 
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make('company', 'company', \App\Nova\BusesCompany::class),
-            Text::make("Bus Number", "bus_number"),
-            Number::make("Number person on bus", "number_of_seats")->step(1.0),
-            Number::make("seat price", "seat_price")->step(1.0),
-            BelongsTo::make('travel from', 'travelfrom', \App\Nova\address::class),
-            BelongsTo::make('travel to', 'travelto', \App\Nova\address::class),
-            Text::make("Name Driver", "name_driver"),
-            Text::make("phone_number", "phone_number_driver"),
-            Select::make("status", "status")
+            BelongsTo::make(__('company'), 'company', \App\Nova\BusesCompany::class),
+            Text::make(__("Bus Number"), "bus_number"),
+            Number::make(__("Number person on bus"), "number_of_seats")->step(1.0),
+            Number::make(__("seat price"), "seat_price")->step(1.0),
+            BelongsTo::make(__('travel from'), 'travelfrom', \App\Nova\address::class),
+            BelongsTo::make(__('travel to'), 'travelto', \App\Nova\address::class),
+            Text::make(__("Name Driver"), "name_driver"),
+            Text::make(__("phone_number"), "phone_number_driver"),
+            Select::make(__("status"), "status")
                 ->options([
                     '1' => 'available',
                     '2' => 'un available',
                 ])->displayUsingLabels(),
-            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
         ];

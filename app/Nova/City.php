@@ -90,9 +90,9 @@ class City extends Resource
         if ($user->type() == 'admin') {
             return [
                 ID::make(__('ID'), 'id')->sortable(),
-                Text::make('Name', 'name'),
+                Text::make(__('Name'), 'name'),
                 BelongsTo::make('Area', 'Area'),
-                Select::make('admin', 'admin_id')
+                Select::make(__('admin'), 'admin_id')
                     ->options(function () {
                         $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
 
@@ -107,10 +107,10 @@ class City extends Resource
                         }
                         return $user_type_admin_array;
                     })->hideFromIndex()->hideFromDetail(),
-                BelongsTo::make('admin city', 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
-                BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 hasMany::make('User', 'User'),
             ];
         }
@@ -133,8 +133,8 @@ class City extends Resource
                     return $user_type_admin_array;
                 })->hideFromIndex()->hideFromDetail(),
             BelongsTo::make('admin city', 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             // hasMany::make('User','User'),
         ];
     }
@@ -143,16 +143,23 @@ class City extends Resource
     public static function beforeCreate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->created_by=$id;
+        $model->created_by = $id;
+        $user = Auth::user();
+        $id = Auth::id();
+        if ($user->type() == 'admin') {
+            $model->created_by = $id;
+        } else {
+            $user = DB::table('areas')->where('admin_id', $id)->select('id')->first();
+            $model->update_by = $id;
+            $model->area_id = $user->id;
+        }
     }
 
 
     public static function beforeUpdate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->update_by=$id;
-
-
+        $model->update_by = $id;
     }
     // public static function beforeUpdate(Request $request, $model)
     // {
