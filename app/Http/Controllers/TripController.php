@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\CPU\Helpers;
 
 class TripController extends BaseController
 {
@@ -13,12 +14,40 @@ class TripController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
     
 
-        $projects = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')->orderBy('created_at', 'desc')->paginate(15);
-        return $this->sendResponse($projects, 'Success get Trips');
+        $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+        ->orderBy('created_at', 'desc')->paginate(15);
+
+        $next_page_url = json_encode($trips,true);
+        $next_page_url = json_decode($next_page_url)->next_page_url;
+
+        $trips->map(function($trip) use ($request){
+        $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
+        $from_lat = $from_latlng->lat;
+        $from_lng = $from_latlng->lng;
+
+        $to_latlng = json_decode($trip->tripto->current_location)->latlng;
+        $to_lat = $to_latlng->lat;
+        $to_lng = $to_latlng->lng;
+
+        $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K'); 
+        $trip->from_distance = round($from_distance, 2);
+
+
+        $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K'); 
+        $trip->to_distance = round($to_distance, 2);
+        });
+
+
+        $trips = $trips->sortBy('from_distance');
+        $trips = $trips->values()->all();
+
+        $trips = ["data"=>$trips,"next_page_url"=>$next_page_url];
+       
+        return $this->sendResponse($trips, 'Success get Trips');
 
     }
 
