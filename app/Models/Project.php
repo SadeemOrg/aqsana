@@ -116,6 +116,12 @@ class Project extends Model
     {
         return $this->belongsTo('App\Models\address','trip_from');
     }
+
+
+    public function distance()
+    {
+      return $this->distance = "0";
+    }
 }
 
 

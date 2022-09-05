@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\CPU\Helpers;
 
 class TripController extends BaseController
 {
@@ -13,12 +14,24 @@ class TripController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
     
 
-        $projects = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')->orderBy('created_at', 'desc')->paginate(15);
-        return $this->sendResponse($projects, 'Success get Trips');
+        $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+        ->orderBy('created_at', 'desc')->paginate(15);
+
+        $trips->map(function($trip) use ($request){
+        $latlng = json_decode($trip->tripfrom->current_location)->latlng;
+        $lat = $latlng->lat;
+        $lng = $latlng->lng;
+        $distance = Helpers::distance($request->lat,$request->lng,$lat,$lng,'K'); 
+        $trip->distance = $distance;
+        });
+        $trips = $trips->sortBy('distance');
+        $trips = $trips->values()->all();
+       
+        return $this->sendResponse($trips, 'Success get Trips');
 
     }
 
