@@ -21,6 +21,9 @@ class TripController extends BaseController
         $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
         ->orderBy('created_at', 'desc')->paginate(15);
 
+        $next_page_url = json_encode($trips,true);
+        $next_page_url = json_decode($next_page_url)->next_page_url;
+
         $trips->map(function($trip) use ($request){
         $latlng = json_decode($trip->tripfrom->current_location)->latlng;
         $lat = $latlng->lat;
@@ -30,6 +33,8 @@ class TripController extends BaseController
         });
         $trips = $trips->sortBy('distance');
         $trips = $trips->values()->all();
+
+        $trips = ["data"=>$trips,"next_page_url"=>$next_page_url];
        
         return $this->sendResponse($trips, 'Success get Trips');
 
