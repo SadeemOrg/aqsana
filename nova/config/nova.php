@@ -86,6 +86,8 @@ return [
 
     'passwords' => env('NOVA_PASSWORDS', null),
 
+    'timezone' =>  'UTC',
+
     /*
     |--------------------------------------------------------------------------
     | Nova Route Middleware
