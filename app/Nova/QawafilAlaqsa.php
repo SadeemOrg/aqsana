@@ -180,7 +180,7 @@ class QawafilAlaqsa extends Resource
                         return false;
                     }),
 
-
+                    BelongsTo::make('trip from', 'tripfrom', \App\Nova\address::class),
                 DateTime::make(__('projec start'), 'start_date'),
                 DateTime::make(__('projec end'), 'end_date'),
 
