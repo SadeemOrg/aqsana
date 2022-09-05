@@ -25,13 +25,24 @@ class TripController extends BaseController
         $next_page_url = json_decode($next_page_url)->next_page_url;
 
         $trips->map(function($trip) use ($request){
-        $latlng = json_decode($trip->tripfrom->current_location)->latlng;
-        $lat = $latlng->lat;
-        $lng = $latlng->lng;
-        $distance = Helpers::distance($request->lat,$request->lng,$lat,$lng,'K'); 
-        $trip->distance = $distance;
+        $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
+        $from_lat = $from_latlng->lat;
+        $from_lng = $from_latlng->lng;
+
+        $to_latlng = json_decode($trip->tripto->current_location)->latlng;
+        $to_lat = $to_latlng->lat;
+        $to_lng = $to_latlng->lng;
+
+        $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K'); 
+        $trip->from_distance = $from_distance;
+
+
+        $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K'); 
+        $trip->to_distance = $to_distance;
         });
-        $trips = $trips->sortBy('distance');
+
+
+        $trips = $trips->sortBy('from_distance');
         $trips = $trips->values()->all();
 
         $trips = ["data"=>$trips,"next_page_url"=>$next_page_url];
