@@ -34,11 +34,11 @@ class TripController extends BaseController
         $to_lng = $to_latlng->lng;
 
         $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K'); 
-        $trip->from_distance = $from_distance;
+        $trip->from_distance = round($from_distance, 2);
 
 
         $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K'); 
-        $trip->to_distance = $to_distance;
+        $trip->to_distance = round($to_distance, 2);
         });
 
 
