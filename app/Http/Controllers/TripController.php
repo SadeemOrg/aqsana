@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\CPU\Helpers;
 use App\Models\TripBooking;
+use Illuminate\Support\Facades\Auth;
 
 class TripController extends BaseController
 {
@@ -55,10 +56,10 @@ class TripController extends BaseController
     {
     
 
-      
-        if($request->get("user_id") != null){
 
-            $trip_bokking = TripBooking::where('user_id',$request->get('user_id'))->first();
+        if(Auth()->id() != null){
+
+            $trip_bokking = TripBooking::where('user_id',Auth()->id())->first();
             if($trip_bokking != null) {
                 $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
                 ->orderBy('created_at', 'desc')->where('id',$trip_bokking->project_id)->get();

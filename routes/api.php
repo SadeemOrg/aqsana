@@ -44,6 +44,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/donations', [DonationsController::class, 'index']);
     Route::post('/donations-app', [DonationsController::class, 'store']);
     Route::get('/getInformationUser', [AuthController::class, 'getInformationUser']);
+
+    Route::get('/getNearAndBokkingTrip-auth', [TripController::class, 'getNearAndBokkingTrip']);
+
     
 });
 
