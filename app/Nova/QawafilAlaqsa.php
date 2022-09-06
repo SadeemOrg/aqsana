@@ -180,7 +180,7 @@ class QawafilAlaqsa extends Resource
                         return false;
                     })->rules('required' ,'max:1'),
 
-                    BelongsTo::make('trip from', 'tripfrom', \App\Nova\address::class),
+                    BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class),
                 DateTime::make(__('projec start'), 'start_date'),
                 DateTime::make(__('projec end'), 'end_date'),
 
@@ -252,8 +252,7 @@ class QawafilAlaqsa extends Resource
 
             (new Panel(__('City'), [
 
-                BelongsToManyField::make('City', 'City')
-                    // ->options(Area::all())
+                BelongsToManyField::make(__('City'), "City", '\App\Nova\City')                    // ->options(Area::all())
                     ->options(function () {
 
                         $id = Auth::id();
@@ -278,7 +277,7 @@ class QawafilAlaqsa extends Resource
             ])),
             (new Panel(__('Budget'), [
 
-                Text::make("Budjet", "Budjet", function () {
+                Text::make(__('Budget'), "Budjet", function () {
 
                     $id = Auth::id();
                     $user = Auth::user();
@@ -306,7 +305,7 @@ class QawafilAlaqsa extends Resource
             ])),
             (new Panel(__('tooles'), [
 
-                Text::make("Toole", "Toole", function () {
+                Text::make(__('tooles'), "Toole", function () {
 
                     $id = Auth::id();
                     $user = Auth::user();
@@ -332,7 +331,7 @@ class QawafilAlaqsa extends Resource
             ])),
             (new Panel(__('Approved'), [
 
-                Text::make('approval ', 'approval', function () {
+                Text::make(__('Approved'), 'approval', function () {
                     $id = Auth::id();
                     $user = Auth::user();
                     if ($user->type() == 'regular_city') {
@@ -346,8 +345,8 @@ class QawafilAlaqsa extends Resource
                             ->first();
 
                         if ($acspet) {
-                            if ($acspet->accepted == "1") return "aproved";
-                            elseif ($acspet->accepted == "2") return "not aproved";
+                            if ($acspet->accepted == "1") return __("Approved");
+                            elseif ($acspet->accepted == "2") return __("not Approved");
                             else return "__";
                         }
                     }
@@ -362,7 +361,7 @@ class QawafilAlaqsa extends Resource
 
 
 
-                Text::make('reason_of_reject', 'reason_of_reject', function () {
+                Text::make(__('reason_of_reject'), 'reason_of_reject', function () {
                     $id = Auth::id();
                     $user = Auth::user();
                     if ($user->type() == 'regular_city') {
@@ -438,7 +437,7 @@ class QawafilAlaqsa extends Resource
 
 
 
-                BelongsToManyField::make('bus', 'bus', 'App\Nova\bus')
+                BelongsToManyField::make(__('bus'), 'bus', 'App\Nova\bus')
                     ->options(Bus::all())
                     ->optionsLabel('bus_number')
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
@@ -450,57 +449,61 @@ class QawafilAlaqsa extends Resource
                         if ($user->type() == 'regular_city') return true;
                         return false;
                     }),
-                Flexible::make('newbus', 'newbus')
-                    ->readonly(true)
-                    ->addLayout('Add new bus', 'bus', [
+                Flexible::make(__('newbus'), 'newbus')
+                ->readonly(true) ->canSee(function ($request) {
 
-                        Select::make('BusesCompany', 'BusesCompany')
-                            ->options(function () {
-                                $users =  \App\Models\BusesCompany::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name'])];
-                                }
+                    $user = Auth::user();
+                    if ($user->type() == 'regular_city') return true;
+                    return false;
+                })->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('Add new bus'), 'bus', [
 
-                                return $user_type_admin_array;
-                            }),
+                    Select::make(__('BusesCompany'), 'BusesCompany')
+                        ->options(function () {
+                            $users =  \App\Models\BusesCompany::all();
+                            $user_type_admin_array =  array();
+                            foreach ($users as $user) {
+                                $user_type_admin_array += [$user['id'] => ($user['name'])];
+                            }
 
-
-                        Text::make("Bus Number", "bus_number"),
-
-                        Number::make("Number person on bus", "number_person_on_bus")->step(1.0),
-
-                        Number::make("seat price", "seat_price")->step(1.0),
-
-                        Select::make('travel from', 'from')
-                            ->options(function () {
-                                $users =  \App\Models\address::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name_address'])];
-                                }
-
-                                return $user_type_admin_array;
-                            }),
+                            return $user_type_admin_array;
+                        }),
 
 
-                        // Select::make('travel to', 'to')
-                        //     ->options(function () {
-                        //         $users =  \App\Models\address::all();
-                        //         $user_type_admin_array =  array();
-                        //         foreach ($users as $user) {
-                        //             $user_type_admin_array += [$user['id'] => ($user['name_address'])];
-                        //         }
+                    Text::make(__("Bus Number"), "bus_number"),
 
-                        //         return $user_type_admin_array;
-                        //     }),
+                    Number::make(__("Number person on bus"), "number_person_on_bus")->step(1.0),
+
+                    Number::make(__("seat price"), "seat_price")->step(1.0),
+
+                    Select::make(__('travel from'), 'from')
+                        ->options(function () {
+                            $users =  \App\Models\address::all();
+                            $user_type_admin_array =  array();
+                            foreach ($users as $user) {
+                                $user_type_admin_array += [$user['id'] => ($user['name_address'])];
+                            }
+
+                            return $user_type_admin_array;
+                        }),
 
 
-                        Text::make("Name Driver", "name_driver"),
-                        Text::make("phone_number", "phone_number"),
+                    Select::make(__('travel to'), 'to')
+                        ->options(function () {
+                            $users =  \App\Models\address::all();
+                            $user_type_admin_array =  array();
+                            foreach ($users as $user) {
+                                $user_type_admin_array += [$user['id'] => ($user['name_address'])];
+                            }
 
-                    ])
+                            return $user_type_admin_array;
+                        }),
 
+
+                    Text::make(__("Name Driver"), "name_driver"),
+                    Text::make(__("phone_number"), "phone_number"),
+
+                ])
 
 
 

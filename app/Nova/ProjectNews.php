@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -67,16 +68,20 @@ class ProjectNews extends Resource
                 return $this->report_status === '1';
             })->text(__('post'))->showLoadingAnimation()
             ->loadingColor('#fff') ->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
-            Text::make("project type", "project_type",function(){
-                if ($this->project_type =="1")return "مشروع";
-                if ($this->project_type =="2")return "قوافل الاقصي";
-            })->readonly(true)
-            ,
-            Text::make("project name", "project_name")->readonly(true),
 
-                Text::make("Title", 'report_title'),
-                Textarea::make('description', 'report_description'),
-                Tiptap::make('Contents', 'report_contents')
+
+            Select::make(__("project type"), "project_type")->options([
+                '1' => __('project'),
+                '2' => __('QawafilAlaqsa'),
+                '3' => __('Trip'),
+
+            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+
+            Text::make(__("project name"), "project_name")->readonly(true),
+
+                Text::make(__('TITLE'),'report_title'),
+                Textarea::make(__('description'), 'report_description'),
+                Tiptap::make(__('Contents'), 'report_contents')
                     ->buttons([
                         'heading',
                         '|',
@@ -111,10 +116,10 @@ class ProjectNews extends Resource
                     ->headingLevels([1, 2, 3, 4, 5, 6]),
 
 
-                Image::make('Image', 'report_image')->disk('public')->prunable(),
-                ArrayImages::make('Pictures', 'report_pictures')
+                Image::make(__('IMAGE'), 'report_image')->disk('public')->prunable(),
+                ArrayImages::make(__('PICTURES'),  'report_pictures')
                     ->disk('public'),
-                Text::make("video link", 'report_video_link'),
+                Text::make(__('VIDEO LINK'), 'report_video_link'),
                 Image::make(__('video_img_cover'), 'report_video_link_cover')->disk('public')->prunable(),
 
                 Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y'),

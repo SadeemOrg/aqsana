@@ -63,14 +63,11 @@ class receiptVoucher extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             Select::make(__("type"), "type")->options([
-                '1' => 'Alhisalat',
-                '2' => 'doner',
-                '3' => 'else',
+                '1' => __('Alhisalat'),
+                '2' => __('doner'),
+                '3' => __('else'),
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
-            Select::make(__("type"), "type")->options([
-                '1' => 'Alhisalat',
-                '3' => 'else',
-            ])->displayUsingLabels()->hideFromDetail()->hideFromIndex   (),
+
             NovaDependencyContainer::make([
                 Select::make(__('Alhisalat'), "ref_id")
                     ->options(function () {
@@ -99,7 +96,7 @@ class receiptVoucher extends Resource
             // ])->dependsOn('type', '2')->hideFromDetail()->hideFromIndex(),
 
 
-            BelongsTo::make('project', 'Project')->hideWhenCreating()->hideWhenUpdating(),
+            // BelongsTo::make('project', 'Project')->hideWhenCreating()->hideWhenUpdating(),
 
             Text::make(__('description'), 'description'),
             Text::make(__('transact amount'), 'transact_amount'),

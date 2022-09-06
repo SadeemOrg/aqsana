@@ -64,8 +64,8 @@ class hisadAljameia extends Resource
             //     'type' => 'hidden',
             //     'value' => '8'
             // ])->hideFromIndex(),
-            Text::make("Title", 'title'),
-            Text::make("link", 'description'),
+            Text::make(__("Title"), 'title'),
+            Text::make(__("link"), 'description'),
         ];
     }
     public static function beforeSave(Request $request, $model)

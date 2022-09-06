@@ -103,33 +103,38 @@ class Alhisalat extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__("Name"), "name"),
-            ActionButton::make(__('POST NEWS'))
-            ->action((new AlhisalatStatus)->confirmText('Are you sure you want to read  this Massage?')
-                ->confirmButtonText(__('post'))
-                ->cancelButtonText(__('Dont post')), $this->id)
+
+            ActionButton::make(__('colect'))
+            ->action((new AlhisalatStatus)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
+                ->confirmButtonText(__('colect'))
+                ->cancelButtonText(__('Dont colect')), $this->id)
                 ->canSee(function () {
                 return $this->status === '1';
             })->text(__('colect'))->showLoadingAnimation()
             ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
-            ActionButton::make(__('POST NEWS'))
-            ->action((new AlhisalatStatuscompleted)->confirmText('Are you sure you want to read  this Massage?')
-                ->confirmButtonText(__('post'))
-                ->cancelButtonText(__('Dont post')), $this->id)
+
+            ActionButton::make(__('Complet'))
+            ->action((new AlhisalatStatuscompleted)->confirmText(__('Are you sure you want to Complet  this Alhisalat?'))
+                ->confirmButtonText(__('Complet'))
+                ->cancelButtonText(__('Dont Complet')), $this->id)
                 ->canSee(function () {
                 return $this->status === '2';
             })->text(__('Complet'))->showLoadingAnimation()
             ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
-            ActionButton::make(__('finsh'))
+
+
+
+            ActionButton::make(__('Finish'))
             ->action((new AlhisalatStatuscompleted)->confirmText('Are you sure you want to read  this Massage?')
-                ->confirmButtonText(__('post'))
-                ->cancelButtonText(__('Dont post')), $this->id)
+                ->confirmButtonText(__('Finish'))
+                ->cancelButtonText(__('Dont Finish')), $this->id)
                 ->canSee(function () {
                 return $this->status === '3';
             })
             ->readonly()
-            ->text(__('Finsh'))->showLoadingAnimation()
+            ->text(__('Finish'))->showLoadingAnimation()
             ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
 
