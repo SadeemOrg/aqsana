@@ -64,7 +64,8 @@ class TripController extends BaseController
                 $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
                 ->orderBy('created_at', 'desc')->where('id',$trip_bokking->project_id)->get();
             } else {
-                $trips = collect();
+                $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+                ->orderBy('created_at', 'desc')->get();
             }
             
         } else{
