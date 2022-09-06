@@ -411,143 +411,143 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make('phone', 'phone'),
                     Text::make('email', 'email'),
                     Text::make('address', 'address'),
-                ],__('privacy terms') => [
+                ], __('privacy terms') => [
 
                     Tiptap::make(__('privacy terms arabic'), 'privacy_terms_ar')
-                    ->buttons([
-                        'heading',
-                        '|',
-                        'italic',
-                        'bold',
-                        '|',
-                        'link',
-                        'code',
-                        'strike',
-                        'underline',
-                        'highlight',
-                        '|',
-                        'bulletList',
-                        'orderedList',
-                        'br',
-                        'codeBlock',
-                        'blockquote',
-                        '|',
-                        'horizontalRule',
-                        'hardBreak',
-                        '|',
-                        'table',
-                        '|',
-                        'image',
-                        '|',
-                        'textAlign',
-                        '|',
-                        'rtl',
-                        '|',
-                        'history',
-                    ])
-                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+                        ->buttons([
+                            'heading',
+                            '|',
+                            'italic',
+                            'bold',
+                            '|',
+                            'link',
+                            'code',
+                            'strike',
+                            'underline',
+                            'highlight',
+                            '|',
+                            'bulletList',
+                            'orderedList',
+                            'br',
+                            'codeBlock',
+                            'blockquote',
+                            '|',
+                            'horizontalRule',
+                            'hardBreak',
+                            '|',
+                            'table',
+                            '|',
+                            'image',
+                            '|',
+                            'textAlign',
+                            '|',
+                            'rtl',
+                            '|',
+                            'history',
+                        ])
+                        ->headingLevels([1, 2, 3, 4, 5, 6]),
                     Tiptap::make(__('privacy terms Hebrew'), 'privacy_terms_he')
-                    ->buttons([
-                        'heading',
-                        '|',
-                        'italic',
-                        'bold',
-                        '|',
-                        'link',
-                        'code',
-                        'strike',
-                        'underline',
-                        'highlight',
-                        '|',
-                        'bulletList',
-                        'orderedList',
-                        'br',
-                        'codeBlock',
-                        'blockquote',
-                        '|',
-                        'horizontalRule',
-                        'hardBreak',
-                        '|',
-                        'table',
-                        '|',
-                        'image',
-                        '|',
-                        'textAlign',
-                        '|',
-                        'rtl',
-                        '|',
-                        'history',
-                    ])
-                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+                        ->buttons([
+                            'heading',
+                            '|',
+                            'italic',
+                            'bold',
+                            '|',
+                            'link',
+                            'code',
+                            'strike',
+                            'underline',
+                            'highlight',
+                            '|',
+                            'bulletList',
+                            'orderedList',
+                            'br',
+                            'codeBlock',
+                            'blockquote',
+                            '|',
+                            'horizontalRule',
+                            'hardBreak',
+                            '|',
+                            'table',
+                            '|',
+                            'image',
+                            '|',
+                            'textAlign',
+                            '|',
+                            'rtl',
+                            '|',
+                            'history',
+                        ])
+                        ->headingLevels([1, 2, 3, 4, 5, 6]),
 
-                ] ,__('Cancellation Policy') => [
+                ], __('Cancellation Policy') => [
 
                     Tiptap::make(__('Cancellation Policy arabic'), 'Cancellation_Policy_ar')
-                    ->buttons([
-                        'heading',
-                        '|',
-                        'italic',
-                        'bold',
-                        '|',
-                        'link',
-                        'code',
-                        'strike',
-                        'underline',
-                        'highlight',
-                        '|',
-                        'bulletList',
-                        'orderedList',
-                        'br',
-                        'codeBlock',
-                        'blockquote',
-                        '|',
-                        'horizontalRule',
-                        'hardBreak',
-                        '|',
-                        'table',
-                        '|',
-                        'image',
-                        '|',
-                        'textAlign',
-                        '|',
-                        'rtl',
-                        '|',
-                        'history',
-                    ])
-                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+                        ->buttons([
+                            'heading',
+                            '|',
+                            'italic',
+                            'bold',
+                            '|',
+                            'link',
+                            'code',
+                            'strike',
+                            'underline',
+                            'highlight',
+                            '|',
+                            'bulletList',
+                            'orderedList',
+                            'br',
+                            'codeBlock',
+                            'blockquote',
+                            '|',
+                            'horizontalRule',
+                            'hardBreak',
+                            '|',
+                            'table',
+                            '|',
+                            'image',
+                            '|',
+                            'textAlign',
+                            '|',
+                            'rtl',
+                            '|',
+                            'history',
+                        ])
+                        ->headingLevels([1, 2, 3, 4, 5, 6]),
                     Tiptap::make(__('Cancellation Policy Hebrew'), 'Cancellation_Policy_he')
-                    ->buttons([
-                        'heading',
-                        '|',
-                        'italic',
-                        'bold',
-                        '|',
-                        'link',
-                        'code',
-                        'strike',
-                        'underline',
-                        'highlight',
-                        '|',
-                        'bulletList',
-                        'orderedList',
-                        'br',
-                        'codeBlock',
-                        'blockquote',
-                        '|',
-                        'horizontalRule',
-                        'hardBreak',
-                        '|',
-                        'table',
-                        '|',
-                        'image',
-                        '|',
-                        'textAlign',
-                        '|',
-                        'rtl',
-                        '|',
-                        'history',
-                    ])
-                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+                        ->buttons([
+                            'heading',
+                            '|',
+                            'italic',
+                            'bold',
+                            '|',
+                            'link',
+                            'code',
+                            'strike',
+                            'underline',
+                            'highlight',
+                            '|',
+                            'bulletList',
+                            'orderedList',
+                            'br',
+                            'codeBlock',
+                            'blockquote',
+                            '|',
+                            'horizontalRule',
+                            'hardBreak',
+                            '|',
+                            'table',
+                            '|',
+                            'image',
+                            '|',
+                            'textAlign',
+                            '|',
+                            'rtl',
+                            '|',
+                            'history',
+                        ])
+                        ->headingLevels([1, 2, 3, 4, 5, 6]),
 
                 ]
             ]),
@@ -589,13 +589,42 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
 
-            new NewProject(),
-           new NewQawafilAlaqsa(),
-           new NewTrip(),
-          new   NewAlhisalat(),
-           new InComeTransaction(),
-          new OutComeTransaction(),
-          new DonationsSum(),
+
+            (new NewProject())->canSee(function () {
+                $user = Auth::user();
+                if ($user->type() == 'admin') return true;
+                return false;
+            }),
+            (new NewQawafilAlaqsa())->canSee(function () {
+                $user = Auth::user();
+                if ($user->type() == 'admin') return true;
+                return false;
+            }),
+            (new NewTrip())->canSee(function () {
+                $user = Auth::user();
+                if ($user->type() == 'admin') return true;
+                return false;
+            }),
+            (new   NewAlhisalat())->canSee(function () {
+                $user = Auth::user();
+                if ($user->type() == 'admin') return true;
+                return false;
+            }),
+            (new InComeTransaction())->canSee(function () {
+                $user = Auth::user();
+                if ($user->type() == 'admin') return true;
+                return false;
+            }),
+            (new OutComeTransaction())->canSee(function () {
+                $user = Auth::user();
+                if ($user->type() == 'admin') return true;
+                return false;
+            }),
+            (new DonationsSum())->canSee(function () {
+                $user = Auth::user();
+                if ($user->type() == 'admin') return true;
+                return false;
+            }),
         ];
     }
     /**
