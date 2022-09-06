@@ -176,13 +176,13 @@ class Trip extends Resource
                             return  $user_type_admin_array;
                         }
                     }),
-                BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
+                BelongsToManyField::make(__('Arssea'), "Area", '\App\Nova\Area')
                     ->options(Area::all())
                     ->optionsLabel('name')->canSee(function ($request) {
                         $user = Auth::user();
                         if ($user->type() == 'admin') return true;
                         return false;
-                    }),
+                    })->rules('required' ,'max:1'),
 
 
                 DateTime::make(__('projec start'), 'start_date'),
@@ -277,7 +277,7 @@ class Trip extends Resource
                         $user = Auth::user();
                         if ($user->type() == 'regular_area') return true;
                         return false;
-                    }),
+                    })->rules('required' ,'max:1'),
             ])),
             (new Panel(__('Budget'), [
 

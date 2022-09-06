@@ -179,7 +179,7 @@ class Project extends Resource
                         $user = Auth::user();
                         if ($user->type() == 'admin') return true;
                         return false;
-                    }),
+                    })->rules('required' ,'max:1'),
 
 
                 DateTime::make(__('projec start'), 'start_date'),
@@ -275,7 +275,7 @@ class Project extends Resource
                         $user = Auth::user();
                         if ($user->type() == 'regular_area') return true;
                         return false;
-                    }),
+                    })->rules('required' ,'max:1'),
             ])),
             (new Panel(__('Budget'), [
 
