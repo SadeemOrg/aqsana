@@ -29,10 +29,10 @@ class Notification extends Resource
     }
     public static function group()
     {
-        return __('Admin');
+        return __('Notification');
     }
     public static $displayInNavigation = true;
-    public static $priority = 8;
+    public static $priority = 1;
     /**
      * The columns that should be searched.
      *

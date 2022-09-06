@@ -38,9 +38,9 @@ class Donations extends Resource
     }
     public static function group()
     {
-        return __('Admin');
+        return __('Donations');
     }
-    public static $priority = 7;
+    public static $priority = 1;
 
     /**
      * Get the fields displayed by the resource.

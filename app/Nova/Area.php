@@ -27,7 +27,7 @@ class Area extends Resource
     }
     public static function group()
     {
-        return __('Admin');
+        return __('address');
     }
 
 

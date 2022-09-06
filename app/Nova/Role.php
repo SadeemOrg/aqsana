@@ -28,10 +28,10 @@ class Role extends Resource
     }
     public static function group()
     {
-        return __('Admin');
+        return __('User');
     }
      public static $title = 'role';
-    public static $priority = 10;
+    public static $priority = 2;
     /**
      * The columns that should be searched.
      *

@@ -178,7 +178,7 @@ class QawafilAlaqsa extends Resource
                         $user = Auth::user();
                         if ($user->type() == 'admin') return true;
                         return false;
-                    }),
+                    })->rules('required' ,'max:1'),
 
                     BelongsTo::make('trip from', 'tripfrom', \App\Nova\address::class),
                 DateTime::make(__('projec start'), 'start_date'),
@@ -274,7 +274,7 @@ class QawafilAlaqsa extends Resource
                         $user = Auth::user();
                         if ($user->type() == 'regular_area') return true;
                         return false;
-                    }),
+                    })->rules('required' ,'max:1'),
             ])),
             (new Panel(__('Budget'), [
 
@@ -521,6 +521,7 @@ class QawafilAlaqsa extends Resource
         $model->is_bus = '1';
         $model->is_reported = '1';
         $model->sector = 'Null';
+        $model->trip_to = '1';
     }
     public static function beforeUpdate(Request $request, $model)
     {

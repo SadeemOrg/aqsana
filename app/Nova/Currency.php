@@ -30,11 +30,11 @@ class Currency extends Resource
     }
     public static function group()
     {
-        return __('Admin');
+        return __('Currency');
     }
 
     public static $title = 'name';
-    public static $priority = 6;
+    public static $priority = 1;
     /**
      * The columns that should be searched.
      *

@@ -57,17 +57,6 @@
     "Exception":"استثناء",
     "Currenc":"عملة",
     "not active":"غير فعالة",
-    "Actions":"أجراءات",
-    "Actions":"أجراءات",
-    "Actions":"أجراءات",
-    "Actions":"أجراءات",
-    "Actions":"أجراءات",
-    "Actions":"أجراءات",
-    "Actions":"أجراءات",
-
-
-
-
     "NewAlhisalat":"الحصالات الجديدة",
     "DonationsSum":"مجموع التبرعات",
     "InComeTransaction":"المدخلات ",
@@ -133,7 +122,7 @@
     "Payment Voucher": "سند دفع",
     "receipt Voucher": "سند القبض",
     "Admin": "ادمن",
-    "Area": "منطقة",
+    "Area": "الوية",
     "City": "مدينة",
     "Currency": "عملة",
     "Buses Company": "شركة الحافلات",
