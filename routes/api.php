@@ -44,6 +44,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/donations', [DonationsController::class, 'index']);
     Route::post('/donations-app', [DonationsController::class, 'store']);
     Route::get('/getInformationUser', [AuthController::class, 'getInformationUser']);
+
+    Route::get('/getNearAndBokkingTrip-auth', [TripController::class, 'getNearAndBokkingTrip']);
+
     
 });
 
@@ -88,6 +91,8 @@ Route::get('/projects', [ProjectController::class, 'index']);
 
 //Prrojects
 Route::get('/trips', [TripController::class, 'index']);
+
+Route::get('/getNearAndBokkingTrip', [TripController::class, 'getNearAndBokkingTrip']);
 
 
 //payment methods
