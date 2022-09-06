@@ -89,6 +89,8 @@ Route::get('/projects', [ProjectController::class, 'index']);
 //Prrojects
 Route::get('/trips', [TripController::class, 'index']);
 
+Route::get('/getNearAndBokkingTrip', [TripController::class, 'getNearAndBokkingTrip']);
+
 
 //payment methods
 Route::get('paymnet-methods/get-payment-methods', [PaymentMethodsController::class, 'index']);
