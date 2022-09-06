@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/getNearAndBokkingTrip-auth', [TripController::class, 'getNearAndBokkingTrip']);
 
+    Route::get('/trips-auth', [TripController::class, 'index']);
+
     
 });
 

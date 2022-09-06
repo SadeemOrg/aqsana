@@ -23,7 +23,6 @@ class TripController extends BaseController
         $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
         ->orderBy('created_at', 'desc')->get();
 
-
         $trips->map(function($trip) use ($request){
         $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
         $from_lat = $from_latlng->lat;
@@ -39,6 +38,20 @@ class TripController extends BaseController
 
         $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K'); 
         $trip->to_distance = round($to_distance, 2);
+
+        
+        if(Auth()->id() != null) {
+         $trip_bokking = TripBooking::where('user_id',Auth()->id())->where('project_id',$trip->id)->first();
+      
+         if($trip_bokking != null) {
+            $trip->isBooking = 1;
+         } else{
+            $trip->isBooking = 0;
+         }
+        } else {
+            $trip->isBooking = 0;
+        }
+
         });
 
         $trips = $trips->skip($request->get("skip"));
@@ -58,7 +71,7 @@ class TripController extends BaseController
 
 
         if(Auth()->id() != null){
-
+            print("owais");
             $trip_bokking = TripBooking::where('user_id',Auth()->id())->first();
             if($trip_bokking != null) {
                 $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
@@ -90,6 +103,19 @@ class TripController extends BaseController
 
         $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K'); 
         $trip->to_distance = round($to_distance, 2);
+
+
+        if(Auth()->id() != null) {
+            $trip_bokking = TripBooking::where('user_id',Auth()->id())->where('project_id',$trip->id)->first();
+         
+            if($trip_bokking != null) {
+               $trip->isBooking = 1;
+            } else{
+               $trip->isBooking = 0;
+            }
+           } else {
+               $trip->isBooking = 0;
+           }
         });
 
         $trip = $trips->sortBy('from_distance')->first();
