@@ -32,7 +32,7 @@ class address extends Resource
     }
     public static function group()
     {
-        return __('Admin');
+        return __('address');
     }
     /**
      * The columns that should be searched.

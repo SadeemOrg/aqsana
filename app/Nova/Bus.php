@@ -28,10 +28,10 @@ class Bus extends Resource
     }
     public static function group()
     {
-        return __('Admin');
+        return __('Bus');
     }
 
-    public static $priority = 5;
+    public static $priority = 2;
     public static $model = \App\Models\Bus::class;
     // public static $displayInNavigation = false;
     /**

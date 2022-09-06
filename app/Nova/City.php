@@ -26,7 +26,7 @@ class City extends Resource
     }
     public static function group()
     {
-        return __('Admin');
+        return __('address');
     }
 
     public static $model = \App\Models\City::class;

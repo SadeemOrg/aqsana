@@ -31,7 +31,7 @@ class User extends Resource
      *
      * @var string
      */
-    public static $priority = 9 ;
+    public static $priority = 1 ;
     public static $title = 'name';
     public static function label()
     {
@@ -39,7 +39,7 @@ class User extends Resource
     }
     public static function group()
     {
-        return __('Admin');
+        return __('User');
     }
     /**
      * The columns that should be searched.
