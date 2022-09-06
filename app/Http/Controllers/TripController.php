@@ -71,7 +71,7 @@ class TripController extends BaseController
 
 
         if(Auth()->id() != null){
-            print("owais");
+           
             $trip_bokking = TripBooking::where('user_id',Auth()->id())->first();
             if($trip_bokking != null) {
                 $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
