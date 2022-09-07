@@ -63,100 +63,100 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         });
 
         parent::boot();
-
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            Tabs::make('Home', [
+            Tabs::make(__('Home page'), [
                 Tab::make(
-                    'navbar ',
+                    __('Navigation Bar'),
                     [
-                        Tree::make('Items', 'Items')->fields([
-                            Text::make('Name'),
-                            Link::make('Link')->resources([
+                        Tree::make(__('Items'), 'Items')->fields([
+                            Text::make(__('Name')),
+                            Link::make(__('Link'))->resources([
                                 Project::class,
 
                             ])
                         ])->title('name'),
-                        Image::make('Logo', 'logo')->disk('public'),
+                        Image::make(__('Logo'), 'logo')->disk('public'),
                     ]
                 ),
                 Tab::make(
-                    'Heroo ',
+                    __('Heroo'),
                     [
-                        FlexibleContent::make('Heroo', 'Heroo')
-                            ->addLayout(
-                                [
-                                    'label' => 'Heroo',
-                                    'name' => 'Heroo',
-                                    'fields' => [
-                                        [
-                                            'type' => 'image',
-                                            'name' => 'image',
-                                            'label' => 'Image',
-                                            'multiple' => false,
-                                            'required' => true
-                                        ],
+                        FlexibleContent::make(__('Heroo'), 'Heroo')
+                        ->addLayout(
+                            [
+                                'label' => __('Heroo'),
+                                'name' => 'Heroo',
+                                'fields' => [
+                                    [
+                                        'type' => 'image',
+                                        'name' => 'image',
+                                        'label' => __('Image'),
 
-                                        [
-                                            'type' => 'text',
-                                            'name' => 'image_alt_Heroo',
-                                            'label' => 'image description',
-                                            'multiple' => false,
-                                            'required' => true
-                                        ],
+                                        'multiple' => false,
+                                        'required' => true
+                                    ],
 
-                                        [
-                                            'type' => 'text',
-                                            'name' => 'link',
-                                            'label' => 'button link',
-                                            'multiple' => false,
-                                            'required' => true
-                                        ]
+                                    [
+                                        'type' => 'text',
+                                        'name' => 'image_alt_Heroo',
+                                        'label' => __('image description'),
+                                        'multiple' => false,
+                                        'required' => false
+                                    ],
+
+                                    [
+                                        'type' => 'text',
+                                        'name' => 'link',
+                                        'label' => __('button link'),
+                                        'multiple' => false,
+                                        'required' => false
                                     ]
                                 ]
-                            ),
+                            ]
+                        ),
                     ]
                 ),
                 Tab::make(
-                    'Banner 1',
+                    __('Banner 1'),
                     [
-                        Image::make('main img', 'main_img_Banner_1'),
-                        Text::make('image description ', 'image_alt_Banner_1'),
-                        Text::make('main text', 'text_main_Banner_1'),
-                        Text::make('sup text ', 'sup_text_Banner_1'),
-                        Image::make('Logo', 'logo_Banner_1')->disk('public'),
-                        Text::make('text logo', 'text_loga_Banner_1'),
-                        Text::make('bottom  text ', 'text_bottom_Banner_1'),
-                        Text::make('bottom  link ', 'link_bottom_Banner_1'),
+                        Image::make(__('main img'), 'main_img_Banner_1'),
+                        Text::make(__('image description'), 'image_alt_Banner_1'),
+                        Text::make(__('main text'), 'text_main_Banner_1'),
+                        Text::make(__('sup text'), 'sup_text_Banner_1'),
+                        Image::make(__('Logo'), 'logo_Banner_1')->disk('public'),
+                        Text::make(__('text logo'), 'text_loga_Banner_1'),
+                        Text::make(__('button  text'), 'text_bottom_Banner_1'),
+                        Text::make(__('button  link'), 'link_bottom_Banner_1'),
                     ]
                 ),
                 Tab::make(
-                    'Projects News',
+                    __('Projects News'),
                     [
-                        Text::make('main text Projects News', 'text_main_projects_news'),
-                        FlexibleContent::make('Projects_News', 'Projects_News')
+                        Text::make(__('main text Projects News'), 'text_main_projects_news'),
+                        FlexibleContent::make(__('Projects News'), 'Projects_News')
                             ->addLayout(
                                 [
-                                    'label' => 'Heroo',
+                                    'label' => __('Projects News'),
                                     'name' => 'Heroo',
                                     'fields' => [
                                         [
                                             'type' => 'text',
                                             'name' => 'title',
-                                            'label' => 'title',
+                                            'label' => __('title'),
                                             'multiple' => false,
                                             'required' => true
                                         ],
                                         [
                                             'type' => 'text',
                                             'name' => 'sup_title',
-                                            'label' => 'sup_title',
+                                            'label' => __('sup_title'),
                                             'multiple' => false,
                                             'required' => true
                                         ],
                                         [
                                             'type' => 'image',
                                             'name' => 'image',
-                                            'label' => 'Image',
+                                            'label' => __('Image'),
                                             'multiple' => false,
                                             'required' => true
                                         ],
@@ -166,37 +166,37 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     ]
                 ),
                 Tab::make(
-                    'Banner 2',
+                    __('Banner 2'),
                     [
-                        Image::make('main img', 'main_img_Banner_2'),
-                        Text::make('main text', 'text_main_Banner_2'),
-                        Text::make('sup text ', 'sup_text_Banner_2'),
-                        Text::make('bottom view  text ', 'text_view_bottom_Banner_2'),
-                        Text::make('bottom view link ', 'link_view_bottom_Banner_2'),
+                        Image::make(__('main img'), 'main_img_Banner_2'),
+                        Text::make(__('main text'), 'text_main_Banner_2'),
+                        Text::make(__('sup text'), 'sup_text_Banner_2'),
+                        Text::make(__('button  text'), 'text_view_bottom_Banner_2'),
+                        Text::make(__('button  link'), 'link_view_bottom_Banner_2'),
                         // Text::make('bottom seen text ', 'text_seen_bottom_Banner_2'),
                         // Text::make('bottom seen link ', 'link_seen_bottom_Banner_2'),
                     ]
                 ),
                 Tab::make(
-                    'partner',
+                    __('partner'),
                     [
-                        FlexibleContent::make('partner', 'partner')
+                        FlexibleContent::make(__('partner'), 'partner')
                             ->addLayout(
                                 [
-                                    'label' => 'partner',
+                                    'label' => __('partner'),
                                     'name' => 'partner',
                                     'fields' => [
                                         [
                                             'type' => 'text',
                                             'name' => 'title',
-                                            'label' => 'title',
+                                            'label' => __('title'),
                                             'multiple' => false,
                                             'required' => true
                                         ],
                                         [
                                             'type' => 'image',
                                             'name' => 'image',
-                                            'label' => 'Image',
+                                            'label' => __('Image'),
                                             'multiple' => false,
                                             'required' => true
                                         ],
@@ -207,25 +207,25 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ),
 
                 Tab::make(
-                    'video',
+                    __('video'),
                     [
-                        FlexibleContent::make('video', 'videohome')
+                        FlexibleContent::make(__('video'), 'videohome')
                             ->addLayout(
                                 [
-                                    'label' => 'video',
+                                    'label' => __('video'),
                                     'name' => 'videohome',
                                     'fields' => [
                                         [
                                             'type' => 'text',
                                             'name' => 'link',
-                                            'label' => 'link',
+                                            'label' => __('link'),
                                             'multiple' => false,
                                             'required' => true
                                         ],
                                         [
                                             'type' => 'image',
                                             'name' => 'cover',
-                                            'label' => 'cover',
+                                            'label' => __('cover'),
                                             'multiple' => false,
                                             'required' => true
                                         ],
@@ -235,9 +235,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     ]
                 ),
 
-                Tab::make('footer', [
-                    Image::make('Logo', 'footer_logo')->disk('public'),
-                    Tree::make('Items (EN)', 'Itemsfooter')->fields([
+                Tab::make(__('footer'), [
+                    Image::make(__('Logo'), 'footer_logo')->disk('public'),
+                    Tree::make(__('Items'), 'Itemsfooter')->fields([
                         Text::make('Name'),
                         Link::make('Link')->resources([
                             User::class,
@@ -257,63 +257,56 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             // ...
         ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            Tabs::make('workplace', [
-                Tab::make('workplace', [
-                    Text::make('main text', 'text_main_workplace'),
-                    Text::make('sup text ', 'sup_text_workplace'),
-                    FlexibleContent::make('workplace', 'workplace')
+            Tabs::make(__('workplace'), [
+                Tab::make(__('workplace'), [
+                    Text::make(__('main text'), 'text_main_workplace'),
+                    Text::make(__('sup text'), 'sup_text_workplace'),
+                    FlexibleContent::make(__('workplace'), 'workplace')
                         ->addLayout(
                             [
-                                'label' => 'workplace',
+                                'label' => __('workplace'),
                                 'name' => 'workplace',
                                 'fields' => [
                                     [
                                         'type' => 'image',
                                         'name' => 'main_img_workplace',
-                                        'label' => 'Image',
+                                        'label' => __('Image'),
                                         'multiple' => false,
                                         'required' => false
                                     ],
                                     [
                                         'type' => 'text',
                                         'name' => 'searsh_text_workplace',
-                                        'label' => 'searsh text',
+                                        'label' => __('searsh text'),
                                         'multiple' => false,
                                         'required' => false
                                     ],
                                     [
                                         'type' => 'text',
                                         'name' => 'text_main_workplace',
-                                        'label' => 'title',
+                                        'label' => __('title'),
                                         'multiple' => false,
                                         'required' => false
                                     ],
                                     [
                                         'type' => 'text',
                                         'name' => 'sup_text_workplace',
-                                        'label' => 'sup title',
+                                        'label' => __('sup_title'),
                                         'multiple' => false,
                                         'required' => false
                                     ],
                                     [
                                         'type' => 'text',
                                         'name' => 'text_bottom_workplace_',
-                                        'label' => 'text bottom_',
+                                        'label' => __('button  text'),
                                         'multiple' => false,
                                         'required' => false
                                     ],
+
                                     [
                                         'type' => 'text',
-                                        'name' => 'valuo00',
-                                        'label' => 'Image',
-                                        'multiple' => false,
-                                        'required' => false,
-                                        'value' => '3487'
-                                    ],
-                                    [
-                                        'type' => 'text',
-                                        'name' => 'link_bottom_workplace_',
-                                        'label' => 'link bottom',
+                                        'name' =>  'link bottom',
+                                        'label' => __('button link'),
                                         'multiple' => false,
                                         'required' => false
                                     ],
@@ -327,33 +320,33 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             ])
         ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            new Tabs('about us', [
-                'main section'    => [
-                    Text::make('text', 'main_section_text'),
-                    Textarea::make('sup text', 'sup_text_main_aboutus'),
-                    Image::make('image', 'main_section_image'),
-                    Text::make('image description', 'image_alt_main_section_about_us'),
+            new Tabs(__('about us'), [
+                __('main section')    => [
+                    Text::make(__('title'), 'main_section_text'),
+                    Textarea::make(__('sup text'), 'sup_text_main_aboutus'),
+                    Image::make(__('IMAGE'), 'main_section_image'),
+                    Text::make(__('image description'), 'image_alt_main_section_about_us'),
                 ],
-                'our vision' => [
-                    Text::make('text', 'vision_section_text'),
-                    Textarea::make('sup text', 'sup_text_vision_aboutus'),
-                    Image::make('image', 'vision_section_image'),
-                    Text::make('image description', 'image_alt_our_vision_about_us'),
+                __('our vision') => [
+                    Text::make(__('title'), 'vision_section_text'),
+                    Textarea::make(__('sup text'), 'sup_text_vision_aboutus'),
+                    Image::make(__('IMAGE'), 'vision_section_image'),
+                    Text::make(__('image description'), 'image_alt_our_vision_about_us'),
 
-                ], ' Goals' => [
-                    Flexible::make('Goals')
-                        ->addLayout('Simple content section', 'wysiwyg', [
-                            Text::make('text', 'Goals_section_text'),
-                            Text::make('sup text', 'Goals_section_sup_text'),
+                ], __('Goals') => [
+                    Flexible::make(__('Goals'))
+                        ->addLayout(__('Goals'), 'wysiwyg', [
+                            Text::make(__('title'), 'Goals_section_text'),
+                            Text::make(__('sup text'), 'Goals_section_sup_text'),
                         ])
                 ],
-                ' achievements' => [
-                    Image::make('image', 'main_section_image_achievements'),
-                    Text::make('image description', 'image_alt_achievements_about_us'),
+                __('achievements') => [
+                    Image::make(__('IMAGE'), 'main_section_image_achievements'),
+                    Text::make(__('image description'), 'image_alt_achievements_about_us'),
 
-                    Flexible::make('achievements')
-                        ->addLayout('Simple content section', 'wysiwyg', [
-                            Text::make('text', 'achievements_section_text'),
+                    Flexible::make('achievements', 'achievements')
+                        ->addLayout(__('achievements'), 'wysiwyg', [
+                            Text::make(__('title'), 'achievements_section_text'),
                         ])
                 ],
 
@@ -362,55 +355,57 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             'workplaceabout' => 'array',
         ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            new Tabs('Connect with us', [
-                'Connect with us'    => [
+            new Tabs(__('Connect with us'), [
+                __('Connect with us')    => [
 
-                    Text::make('heder text', 'heder_text_main_Connectus'),
-                    Text::make('main text', 'text_main_Connectus'),
-                    Text::make('sup text text', 'sup_text_main_Connectus'),
-                    Text::make('phone', 'phone_Connectus'),
-                    Text::make('whatsapp', 'whatsapp_Connectus'),
-                    Text::make('Email', 'email_Connectus'),
-                    Text::make('Text bottome', 'text_bottom_Connectus'),
-                    Text::make('linlk bottom', 'linlk_bottom_Connectus'),
+                    Text::make(__('heder text'), 'heder_text_main_Connectus'),
+                    Text::make(__('main text'), 'text_main_Connectus'),
+                    Text::make(__('sup text'), 'sup_text_main_Connectus'),
+                    Text::make(__('phone'), 'phone_Connectus'),
+                    Text::make(__('whatsapp'), 'whatsapp_Connectus'),
+                    Text::make(__('Email'), 'email_Connectus'),
+                    Text::make(__('button  text'), 'text_bottom_Connectus'),
+                    Text::make(__('button  link'), 'linlk_bottom_Connectus'),
                 ],
-                'FORM'    => [
-                    Text::make('filed 1 ', 'filed1_Connectus'),
-                    Text::make('filed 2 ', 'filed2_Connectus'),
-                    Text::make('filed 3 ', 'filed3_Connectus'),
-                    Text::make('text form bottom', 'text_form_Connectus'),
+                __('FORM')    => [
+                    Text::make(__('filed 1'), 'filed1_Connectus'),
+                    Text::make(__('filed 2'), 'filed2_Connectus'),
+                    Text::make(__('filed 3'), 'filed3_Connectus'),
+                    Text::make(__('button  text'), 'text_form_Connectus'),
                 ],
+
+            ]),
+        ]);
+
+
+        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
+            new Tabs(__('donations'), [
+                Text::make(__('check box text'), 'checkbox_donation'),
 
             ]),
         ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            new Tabs('donations', [
-                Text::make('check box text', 'checkbox_donation'),
-
-            ]),
-        ]);
-        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            new Tabs('website Settings', [
-                'website SEO'    => [
-                    Text::make('Site name', 'Site_name')->help('enter the site name'),
-                    Text::make('Site description', 'Site_description'),
-                    Text::make('Site keywords', 'Site_keywords'),
-                    Text::make('Open Graph site name', 'og_site_name'),
-                    Text::make('Open Graph description', 'description'),
-                    Text::make('Site link', 'Site_link'),
-                    Image::make('Open Graph image', 'og_image'),
-                    Image::make('logo', 'main_logo'),
+            new Tabs(__('website Settings'), [
+                __('website SEO')    => [
+                    Text::make(__('Site name'), 'Site_name')->help('enter the site name'),
+                    Text::make(__('Site description'), 'Site_description'),
+                    Text::make(__('Site keywords'), 'Site_keywords'),
+                    Text::make(__('Open Graph site name'), 'og_site_name'),
+                    Text::make(__('Open Graph description'), 'description'),
+                    Text::make(__('Site link'), 'Site_link'),
+                    Image::make(__('Open Graph image'), 'og_image'),
+                    Image::make(__('Logo'), 'main_logo'),
                 ],
-                'website Soshal Midia ' => [
-                    Text::make('Facebook', 'Facebook'),
-                    Text::make('Instagram', 'Instagram'),
-                    Text::make('whatsapp', 'whatsapp'),
-                    Text::make('Twitter', 'twitter'),
-                    Text::make('youtube', 'youtube'),
-                ], 'website settings' => [
-                    Text::make('phone', 'phone'),
-                    Text::make('email', 'email'),
-                    Text::make('address', 'address'),
+                __('website Social Media') => [
+                    Text::make(__('Facebook'), 'Facebook'),
+                    Text::make(__('Instagram'), 'Instagram'),
+                    Text::make(__('whatsapp'), 'whatsapp'),
+                    Text::make(__('Twitter'), 'twitter'),
+                    Text::make(__('youtube'), 'youtube'),
+                ], __('website Settings') => [
+                    Text::make(__('phone'), 'phone'),
+                    Text::make(__('Email'), 'email'),
+                    Text::make(__('address'), 'address'),
                 ], __('privacy terms') => [
 
                     Tiptap::make(__('privacy terms arabic'), 'privacy_terms_ar')
