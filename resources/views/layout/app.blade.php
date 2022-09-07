@@ -159,9 +159,12 @@ $('#search').on('keyup', function(){
 }
 });
 
+$(document).click(function(e) {
 
-
-
+if( e.target.id != 'searchListId') {
+  $("#searchListId").hide();
+}
+});
 
         var owl = $("#main-home-slider");
             owl.owlCarousel({
