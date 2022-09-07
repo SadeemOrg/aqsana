@@ -163,8 +163,8 @@ class Trip extends Resource
                     ->hideWhenCreating()->hideWhenUpdating(),
                 Text::make(__("project name"), "project_name"),
                 Text::make(__("project describe"), "project_describe"),
-                BelongsTo::make('trip from', 'tripfrom', \App\Nova\address::class),
-                BelongsTo::make('trip to', 'tripto', \App\Nova\address::class),
+                BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class),
+                BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class),
                 Select::make(__('SECTOR'), 'sector')
                     ->options(function () {
                         $sectors = nova_get_setting('workplace', 'default_value');
@@ -176,7 +176,7 @@ class Trip extends Resource
                             return  $user_type_admin_array;
                         }
                     }),
-                BelongsToManyField::make(__('Arssea'), "Area", '\App\Nova\Area')
+                BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
                     ->options(Area::all())
                     ->optionsLabel('name')->canSee(function ($request) {
                         $user = Auth::user();
@@ -255,8 +255,7 @@ class Trip extends Resource
 
             (new Panel(__('City'), [
 
-                BelongsToManyField::make('City', 'City')
-                    // ->options(Area::all())
+                BelongsToManyField::make(__('City'), "City", '\App\Nova\City')                    // ->options(Area::all())
                     ->options(function () {
 
                         $id = Auth::id();
@@ -281,7 +280,7 @@ class Trip extends Resource
             ])),
             (new Panel(__('Budget'), [
 
-                Text::make("Budjet", "Budjet", function () {
+                Text::make(__('Budget'), "Budjet", function () {
 
                     $id = Auth::id();
                     $user = Auth::user();
@@ -309,7 +308,7 @@ class Trip extends Resource
             ])),
             (new Panel(__('tooles'), [
 
-                Text::make("Toole", "Toole", function () {
+                Text::make(__('tooles'), "Toole", function () {
 
                     $id = Auth::id();
                     $user = Auth::user();
@@ -335,7 +334,7 @@ class Trip extends Resource
             ])),
             (new Panel(__('Approved'), [
 
-                Text::make('approval ', 'approval', function () {
+                Text::make(__('Approved'), 'approval', function () {
                     $id = Auth::id();
                     $user = Auth::user();
                     if ($user->type() == 'regular_city') {
@@ -349,8 +348,8 @@ class Trip extends Resource
                             ->first();
 
                         if ($acspet) {
-                            if ($acspet->accepted == "1") return "aproved";
-                            elseif ($acspet->accepted == "2") return "not aproved";
+                            if ($acspet->accepted == "1") return __("Approved");
+                            elseif ($acspet->accepted == "2") return __("not Approved");
                             else return "__";
                         }
                     }
@@ -365,7 +364,7 @@ class Trip extends Resource
 
 
 
-                Text::make('reason_of_reject', 'reason_of_reject', function () {
+                Text::make(__('reason_of_reject'), 'reason_of_reject', function () {
                     $id = Auth::id();
                     $user = Auth::user();
                     if ($user->type() == 'regular_city') {
@@ -441,7 +440,7 @@ class Trip extends Resource
 
 
 
-                BelongsToManyField::make('bus', 'bus', 'App\Nova\bus')
+                BelongsToManyField::make(__('bus'), 'bus', 'App\Nova\bus')
                     ->options(Bus::all())
                     ->optionsLabel('bus_number')
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
@@ -453,11 +452,16 @@ class Trip extends Resource
                         if ($user->type() == 'regular_city') return true;
                         return false;
                     }),
-                Flexible::make('newbus', 'newbus')
-                    ->readonly(true)
-                    ->addLayout('Add new bus', 'bus', [
+                Flexible::make(__('newbus'), 'newbus')
+                    ->readonly(true) ->canSee(function ($request) {
 
-                        Select::make('BusesCompany', 'BusesCompany')
+                        $user = Auth::user();
+                        if ($user->type() == 'regular_city') return true;
+                        return false;
+                    })->hideFromDetail()->hideFromIndex()
+                    ->addLayout(__('Add new bus'), 'bus', [
+
+                        Select::make(__('BusesCompany'), 'BusesCompany')
                             ->options(function () {
                                 $users =  \App\Models\BusesCompany::all();
                                 $user_type_admin_array =  array();
@@ -469,13 +473,13 @@ class Trip extends Resource
                             }),
 
 
-                        Text::make("Bus Number", "bus_number"),
+                        Text::make(__("Bus Number"), "bus_number"),
 
-                        Number::make("Number person on bus", "number_person_on_bus")->step(1.0),
+                        Number::make(__("Number person on bus"), "number_person_on_bus")->step(1.0),
 
-                        Number::make("seat price", "seat_price")->step(1.0),
+                        Number::make(__("seat price"), "seat_price")->step(1.0),
 
-                        Select::make('travel from', 'from')
+                        Select::make(__('travel from'), 'from')
                             ->options(function () {
                                 $users =  \App\Models\address::all();
                                 $user_type_admin_array =  array();
@@ -487,7 +491,7 @@ class Trip extends Resource
                             }),
 
 
-                        Select::make('travel to', 'to')
+                        Select::make(__('travel to'), 'to')
                             ->options(function () {
                                 $users =  \App\Models\address::all();
                                 $user_type_admin_array =  array();
@@ -499,8 +503,8 @@ class Trip extends Resource
                             }),
 
 
-                        Text::make("Name Driver", "name_driver"),
-                        Text::make("phone_number", "phone_number"),
+                        Text::make(__("Name Driver"), "name_driver"),
+                        Text::make(__("phone_number"), "phone_number"),
 
                     ])
 

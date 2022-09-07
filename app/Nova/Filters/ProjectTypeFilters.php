@@ -39,8 +39,8 @@ class  ProjectTypeFilters extends Filter
         return [
             __('all') => 'non',
             __('project') => '1',
-            __('qawael') => '2',
-            __('trip') => '3',
+            __('QawafilAlaqsa') => '2',
+            __('Trip') => '3',
 
 
         ];

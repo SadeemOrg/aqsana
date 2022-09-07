@@ -65,10 +65,10 @@ class PaymentVoucher extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             Select::make(__("type"), "type")->options([
-                '1' => 'project',
-                '2' => 'qawael',
-                '3' => 'trip',
-                '4' => 'else',
+                '1' => __('project'),
+                '2' => __('qawael'),
+                '3' => __('trip'),
+                '4' => __('else'),
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
 
             // NovaDependencyContainer::make([
@@ -116,7 +116,7 @@ class PaymentVoucher extends Resource
             //         ->displayUsingLabels(),
             // ])->dependsOn('type', '3')->hideFromDetail()->hideFromIndex(),
 
-            // BelongsTo::make('project', 'project')->hideWhenCreating()->hideWhenUpdating(),
+            // BelongsTo::make('project' , 'project')->hideWhenCreating()->hideWhenUpdating(),
 
             Text::make(__('description'), 'description'),
             Text::make(__('transact amount'), 'transact_amount'),
