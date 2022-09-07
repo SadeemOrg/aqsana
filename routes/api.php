@@ -49,6 +49,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/trips-auth', [TripController::class, 'index']);
 
+    //search
+    Route::get('/search_trip-auth', [TripController::class, 'search_trip']);
+
     
 });
 
@@ -84,7 +87,8 @@ Route::get('/get_trip_booking_user', [TripBookingController::class, 'get_trip_bo
 
 
 //Search Trip
-Route::get('/search_trip', [TripBookingController::class, 'search_trip']);
+Route::get('/search_trip', [TripController::class, 'search_trip']);
+Route::get('/auto_compleate_search_trip', [TripController::class, 'auto_compleate_search_trip']);
 
 
 //Prrojects
