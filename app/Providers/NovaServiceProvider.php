@@ -334,7 +334,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make(__('image description'), 'image_alt_our_vision_about_us'),
 
                 ], __('Goals') => [
-                    Flexible::make(__('Goals'))
+                    Flexible::make('Goals'  )
                         ->addLayout(__('Goals'), 'wysiwyg', [
                             Text::make(__('title'), 'Goals_section_text'),
                             Text::make(__('sup text'), 'Goals_section_sup_text'),
