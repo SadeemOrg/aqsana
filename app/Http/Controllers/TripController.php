@@ -125,6 +125,89 @@ class TripController extends BaseController
 
     }
 
+
+    public function search_trip(Request $request)
+    {
+    
+
+        $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+        ->orderBy('created_at', 'desc')->get();
+
+        $search_trip = collect();
+        $trips->map(function($trip) use ($request,$search_trip){
+        $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
+        $from_lat = $from_latlng->lat;
+        $from_lng = $from_latlng->lng;
+
+        $to_latlng = json_decode($trip->tripto->current_location)->latlng;
+        $to_lat = $to_latlng->lat;
+        $to_lng = $to_latlng->lng;
+
+        $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K'); 
+        $trip->from_distance = round($from_distance, 2);
+
+
+        $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K'); 
+        $trip->to_distance = round($to_distance, 2);
+
+        
+        if(Auth()->id() != null) {
+         $trip_bokking = TripBooking::where('user_id',Auth()->id())->where('project_id',$trip->id)->first();
+      
+         if($trip_bokking != null) {
+            $trip->isBooking = 1;
+         } else{
+            $trip->isBooking = 0;
+         }
+        } else {
+            $trip->isBooking = 0;
+        }
+
+        $trip_to = json_decode($trip->tripto->current_location);
+        $trip_to_value = $trip_to->value;
+
+        if(stripos($trip_to_value,$request->get("search")) !== false){
+           $search_trip->push($trip);
+         }
+       
+
+        });
+
+       
+        return $this->sendResponse($search_trip, 'Success get Trips');
+
+    }
+
+    public function auto_compleate_search_trip(Request $request)
+    {
+    
+
+        $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+        ->orderBy('created_at', 'desc')->get();
+
+        $search_trip = collect();
+        $trips->map(function($trip) use ($request,$search_trip){
+    
+        $trip_to = json_decode($trip->tripto->current_location);
+        $trip_to_value = $trip_to->value;
+
+        if(stripos($trip_to_value,$request->get("search")) !== false){
+
+            if($search_trip->search($trip_to->value) === false) {
+                $search_trip->push($trip_to->value);
+            }
+          
+         }
+    
+        });
+
+
+       
+        return $this->sendResponse($search_trip, 'Success get Trips');
+
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
