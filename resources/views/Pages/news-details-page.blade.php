@@ -43,20 +43,32 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
 }
 .img-thumbnail a{
     margin:10px;
-    height: 100%;
 }
 .mfp-container .mfp-content .mfp-img{
 height: 500px;
 aspect-ratio: auto;
-
 }
+
+
+@media (max-width: 640px) {
+    .mfp-container .mfp-content {
+        vertical-align:top;
+        margin-top: 12%;
+}}
 
 @media (max-width: 640px) {
     .mfp-container .mfp-content .mfp-img{
-        height: 350px;
-aspect-ratio: auto;
+    height: 350px;
+    aspect-ratio: auto;
 }
 }
+/*
+@media (max-width: 640px) {
+    .mfp-container button.mfp-arrow{
+        position: absolute;
+    top: 7%;
+}
+} */
 
 
 </style>
