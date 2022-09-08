@@ -830,16 +830,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-8{
   width: 2rem;
 }
-.w-\[210px\]{
-  width: 210px;
-}
 .min-w-fit{
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
   min-width: fit-content;
-}
-.min-w-\[220px\]{
-  min-width: 220px;
 }
 .min-w-\[210px\]{
   min-width: 210px;
@@ -906,6 +900,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .basis-2\/5{
   flex-basis: 40%;
+}
+.basis-1\/5{
+  flex-basis: 20%;
 }
 .border-collapse{
   border-collapse: collapse;
@@ -1932,14 +1929,14 @@ body{
   .md\:w-full{
     width: 100%;
   }
-  .md\:w-\[200px\]{
-    width: 200px;
+  .md\:w-\[210px\]{
+    width: 210px;
   }
   .md\:w-\[50\%\]{
     width: 50%;
   }
-  .md\:w-\[210px\]{
-    width: 210px;
+  .md\:w-\[200px\]{
+    width: 200px;
   }
   .md\:max-w-2xl{
     max-width: 42rem;
