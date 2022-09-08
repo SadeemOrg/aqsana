@@ -29,7 +29,7 @@ class TripBookingController extends BaseController
                 $check_trip_booking->save();
                 return $this->sendResponse($check_trip_booking, 'Trib booking has been done');
             } else {
-                return $this->sendError('Error', ["message"=>"I have already trib booking for this project"]);
+                return $this->sendError('Error', ["message"=>"I have already trib booking for this project"],202);
             }
 
         }
@@ -38,6 +38,7 @@ class TripBookingController extends BaseController
             'project_id' => $request['project_id'],
             'bus_id' => $request->get("bus_id"),
             'user_id'=> Auth()->id(),
+            'number_phone'=>$request->get("number_phone"),
             'booking_type'=>"1",
             'status' => '1',
             'number_of_people'=> $request['number_of_people'],
