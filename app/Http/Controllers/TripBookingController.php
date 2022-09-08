@@ -14,7 +14,7 @@ class TripBookingController extends BaseController
             'project_id' => 'required|string',
             'number_phone' => 'required',
             'number_of_people'=> 'required',
-            'reservation_amount'=>'required'
+            
         ]);
 
         if ($validator->fails()) {
@@ -41,7 +41,7 @@ class TripBookingController extends BaseController
             'booking_type'=>"1",
             'status' => '1',
             'number_of_people'=> $request['number_of_people'],
-            'reservation_amount'=> $request['reservation_amount'],
+            'reservation_amount'=> '0.0',
             ]);
         return $this->sendResponse($tripBooking, 'Success create trib booking');
     }
