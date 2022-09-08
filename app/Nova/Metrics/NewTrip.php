@@ -2,7 +2,10 @@
 
 namespace App\Nova\Metrics;
 
+use App\Models\City;
 use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Value;
 
@@ -20,7 +23,28 @@ class NewTrip extends Value
     }
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Project::where('project_type', 3));
+        $user = Auth::user();
+        $id = Auth::id();
+        if ($user->type() == 'admin') {
+
+            return $this->count($request, Project::where('project_type', 3));
+
+        } elseif ($user->type() == 'regular_area') {
+
+            $Area = \App\Models\Area::where('admin_id', $id)->first();
+            $projects = DB::table('project_area')->where('area_id', $Area->id)->get();
+        } else {
+            $citye =   City::where('admin_id', $id)
+                ->select('id')->first();
+            $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
+        }
+
+
+        $stack = array();
+        foreach ($projects as $key => $value) {
+            array_push($stack, $value->project_id);
+        }
+        return $this->count($request, Project::where('project_type', 3)->whereIn('id', $stack));
     }
 
     /**
