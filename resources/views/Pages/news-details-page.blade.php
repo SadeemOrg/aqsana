@@ -34,6 +34,24 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
         /* display:inline-block; */
         margin: 0 -32px;
     }
+    .img-thumbnail{
+    display: flex;
+}
+.img-thumbnail a img{
+    width:100%;
+    height: 100%;
+}
+.img-thumbnail a{
+    margin:10px;
+    height: 100%;
+}
+.mfp-container .mfp-content .mfp-img{
+height: 500px;
+aspect-ratio: auto;
+
+}
+
+
 </style>
 
 
@@ -172,13 +190,15 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                         </a>
                     </div>
                     @foreach ($pictures as $picture )
-                    <div class="col-span-1">
+                    <div class="img-thumbnail">
+                        <a href="{{ asset($picture['url']) }}" >
                         <img class="mx-auto w-full object-cover lg:h-[265px] rounded-[5px]"
                             src="{{ asset($picture['url']) }}" alt="related image">
+                        </a>
                     </div>
                     @endforeach
                     @elseif (empty($pictures) && !empty($news_detail->video_link ))
-                    <div class="col-span-1">
+                    <div class="img-thumbnail">
                         <a href={{ $news_detail->video_link }} class="mediabox relative">
                             <img class=" mx-auto w-full object-cover lg:h-[265px] h-full rounded-[5px]"
                                 src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
@@ -188,10 +208,12 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                     </div>
                     @elseif (!empty($pictures) && empty($news_detail->video_link ))
                     @foreach ($pictures as $picture )
-                    <div class="col-span-1">
+                    <div class="img-thumbnail">
+                        <a href="{{ asset($picture['url']) }}">
                         <img class="mx-auto w-full object-cover lg:h-[265px] rounded-[5px]"
                             src="{{ asset($picture['url']) }}" alt="related image">
-                    </div>
+                        </a>
+                        </div>
                     @endforeach
                     @endif
                 </div>
@@ -202,3 +224,28 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
 </div>
 
 @endsection
+
+	<!-- Jquery js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js" integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js" integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js" integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- Magnific popup js -->
+    <script src="magnific-popup/jquery.magnific-popup.js"></script>
+    <script >
+    (function ($) {
+    "use strict";
+
+    /*--------------------------------------
+      Magnific popup Active
+    ----------------------------------------*/
+    $('.img-thumbnail').magnificPopup({
+      delegate: 'a',
+      type: 'image',
+      mainClass: 'mfp-with-zoom',
+      gallery:{
+        enabled:true
+      },
+    });
+
+    })(jQuery);
+    </script>

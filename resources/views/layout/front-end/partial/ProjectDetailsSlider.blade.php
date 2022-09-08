@@ -19,7 +19,7 @@
         <div
             class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585] rounded-[5px]  py-2 px-2 ">
             <div class="flex flex-col lg:max-w-[160px] ">
-                <p class="text-[#349A37] text-[14px] pt-4 text-right lg:min-h-[90px]"
+                <p class="text-[#349A37] text-[14px] pt-4 text-right lg:min-h-[90px] cursor-pointer"
                 onclick="location.href='{{ route('getnewDetail', ['title'=>$article->title,'id' => $article->id]) }}'"
                 >
                     {{Illuminate\Support\Str::limit($article->title,100) }}
@@ -34,7 +34,7 @@
                     @endif
                 </p>
             </div>
-            <img class=" lg:block lg:max-w-[185px] h-[250px] sm:h-[350px] md:max-h-[320px] object-cover rounded-[5px] my-6"
+            <img class=" lg:block lg:max-w-[185px] h-[250px] sm:h-[350px] md:max-h-[320px] object-cover rounded-[5px] my-6 cursor-pointer"
                 src="{{ asset($img) }}" alt="people_on_Mousq"
                  onclick="location.href='{{ route('getnewDetail', ['title'=>$article->title,'id' => $article->id]) }}'"
                  />
