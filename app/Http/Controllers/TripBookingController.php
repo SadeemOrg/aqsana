@@ -12,17 +12,16 @@ class TripBookingController extends BaseController
     public function store(Request $request){
         $validator =  Validator::make($request->all(),[
             'project_id' => 'required|string',
-            'user_id' => 'required|string',
+            'number_phone' => 'required',
             'number_of_people'=> 'required',
             'reservation_amount'=>'required'
-
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Validate Error', $validator->errors());
         }
 
-        $check_trip_booking = TripBooking::where("user_id",$request['user_id'])->where("project_id",$request['project_id'])->first();
+        $check_trip_booking = TripBooking::where("user_id",Auth()->id())->where("project_id",$request['project_id'])->first();
 
         if($check_trip_booking != null) {
             if($check_trip_booking->status == "0"){
@@ -37,7 +36,8 @@ class TripBookingController extends BaseController
 
         $tripBooking =  TripBooking::create([
             'project_id' => $request['project_id'],
-            'user_id'=> $request['user_id'],
+            'bus_id' => $request->get("bus_id"),
+            'user_id'=> Auth()->id(),
             'booking_type'=>"1",
             'status' => '1',
             'number_of_people'=> $request['number_of_people'],
