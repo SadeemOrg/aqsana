@@ -15,6 +15,10 @@
         right: 10px;
         margin: 0 -32px;
     }
+    .firstParagraph ~ p{
+    margin-right: 16px;
+    margin-left: 16px;
+}
 </style>
 
 @php
@@ -57,7 +61,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                     أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية الأقصى,
                     مشاريعنا
                 </p>
-                <p class="text-base text-[rgb(16,20,38)] font-noto_Regular px-4 pt-2 text-right">
+                <p class="firstParagraph text-base text-[rgb(16,20,38)] font-noto_Regular px-4 pt-2 text-right">
                     {!! $project->report_contents !!}
                 </p>
                 <div class="flex flex-row items-center justify-start px-4 pt-4 pb-10 font-noto_Regular gap-x-2">

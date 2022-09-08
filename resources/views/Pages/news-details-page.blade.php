@@ -49,6 +49,10 @@ height: 500px;
 aspect-ratio: auto;
 }
 
+.firstParagraph ~ p{
+    margin-right: 16px;
+    margin-left: 16px;
+}
 
 @media (max-width: 640px) {
     .mfp-container .mfp-content {
@@ -119,7 +123,7 @@ aspect-ratio: auto;
                     أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية الأقصى,
                     مشاريعنا
                 </p>
-                <p class="text-base text-[rgb(16,20,38)] font-noto_Regular px-4 pt-2 text-right">
+                <p class="firstParagraph text-base text-[rgb(16,20,38)] font-noto_Regular px-4 pt-2 text-right">
                     {!! $news_detail->contents !!}
                 </p>
                 <div class="flex flex-row items-center justify-start px-4 pt-4 pb-10 font-noto_Regular gap-x-2">
@@ -241,7 +245,6 @@ aspect-ratio: auto;
         @include('layout.front-end.partial.ProjectDetailsSlider')
     </div>
 </div>
-
 @endsection
 
 	<!-- Jquery js -->
