@@ -52,6 +52,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //search
     Route::get('/search_trip-auth', [TripController::class, 'search_trip']);
 
+    //Trip Booking api
+    Route::post('/trip_booking', [TripBookingController::class, 'store']);
+    Route::post('/cancel_trip_booking', [TripBookingController::class, 'cancel_trip_booking']);
+    Route::get('/get_trip_booking_user', [TripBookingController::class, 'get_trip_booking_user']);
     
 });
 
@@ -80,10 +84,6 @@ Route::post('/donations', [DonationsController::class, 'store']);
 
 
 
-//Trip Booking api
-Route::post('/trip_booking', [TripBookingController::class, 'store']);
-Route::post('/cancel_trip_booking', [TripBookingController::class, 'cancel_trip_booking']);
-Route::get('/get_trip_booking_user', [TripBookingController::class, 'get_trip_booking_user']);
 
 
 //Search Trip
