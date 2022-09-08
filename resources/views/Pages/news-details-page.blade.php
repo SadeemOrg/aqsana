@@ -51,6 +51,13 @@ aspect-ratio: auto;
 
 }
 
+@media (max-width: 640px) {
+    .mfp-container .mfp-content .mfp-img{
+        height: 350px;
+aspect-ratio: auto;
+}
+}
+
 
 </style>
 
