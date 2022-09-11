@@ -34,47 +34,52 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
         /* display:inline-block; */
         margin: 0 -32px;
     }
-    .img-thumbnail{
-    display: flex;
-}
-.img-thumbnail a img{
-    width:100%;
-    height: 100%;
-}
-.img-thumbnail a{
-    margin:10px;
-}
-.mfp-container .mfp-content .mfp-img{
-height: 500px;
-aspect-ratio: auto;
-}
 
-.firstParagraph ~ p{
-    margin-right: 16px;
-    margin-left: 16px;
-}
+    .img-thumbnail {
+        display: flex;
+    }
 
-@media (max-width: 640px) {
-    .mfp-container .mfp-content {
-        vertical-align:top;
-        margin-top: 12%;
-}}
+    .img-thumbnail a img {
+        width: 100%;
+        height: 100%;
+    }
 
-@media (max-width: 640px) {
-    .mfp-container .mfp-content .mfp-img{
-    height: 350px;
-    aspect-ratio: auto;
-}
-}
-/*
+    .img-thumbnail a {
+        margin: 10px;
+    }
+
+    .mfp-container .mfp-content .mfp-img {
+        height: 500px;
+        aspect-ratio: auto;
+    }
+
+    .firstParagraph~p {
+        margin-right: 16px;
+        margin-left: 16px;
+
+    }
+
+    @media (max-width: 640px) {
+        .mfp-container .mfp-content {
+            vertical-align: top;
+            margin-top: 12%;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .mfp-container .mfp-content .mfp-img {
+            height: 350px;
+            aspect-ratio: auto;
+        }
+    }
+
+    /*
 @media (max-width: 640px) {
     .mfp-container button.mfp-arrow{
         position: absolute;
     top: 7%;
 }
 } */
-
-
 </style>
 
 
@@ -110,7 +115,9 @@ aspect-ratio: auto;
         <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full">
             <div class="absolute leftline1"></div>
             <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
-                <img src="{{ asset($image) }}" alt="people_on_Mousq" class="w-full max-h-[670px] rounded-[5px]">
+                <div class="w-full flex items-center justify-center mt-4">
+                    <img src="{{ asset($image) }}" alt="people_on_Mousq" class="w-[90%] aspect-auto rounded-[5px]">
+                </div>
                 <p class="text-[#349A37] text-[18px] md:text-[22px] pt-14 text-right pr-4">
                     {{ $news_detail->title }}
                 </p>
@@ -150,9 +157,8 @@ aspect-ratio: auto;
                             </a>
                         </li>
                         <li class="px-1">
-                            <a class="twitter"
-                                target="_self"
-                                    href="javascript:openWindow('http://twitter.com/intent/tweet?text=+{{ Request::url()  }}')">
+                            <a class="twitter" target="_self"
+                                href="javascript:openWindow('http://twitter.com/intent/tweet?text=+{{ Request::url()  }}')">
 
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -214,9 +220,9 @@ aspect-ratio: auto;
                     </div>
                     @foreach ($pictures as $picture )
                     <div class="img-thumbnail">
-                        <a href="{{ asset($picture['url']) }}" >
-                        <img class="mx-auto w-full object-cover lg:h-[265px] rounded-[5px]"
-                            src="{{ asset($picture['url']) }}" alt="related image">
+                        <a href="{{ asset($picture['url']) }}">
+                            <img class="mx-auto w-full object-cover lg:h-[265px] rounded-[5px]"
+                                src="{{ asset($picture['url']) }}" alt="related image">
                         </a>
                     </div>
                     @endforeach
@@ -233,10 +239,10 @@ aspect-ratio: auto;
                     @foreach ($pictures as $picture )
                     <div class="img-thumbnail">
                         <a href="{{ asset($picture['url']) }}">
-                        <img class="mx-auto w-full object-cover lg:h-[265px] rounded-[5px]"
-                            src="{{ asset($picture['url']) }}" alt="related image">
+                            <img class="mx-auto w-full object-cover lg:h-[265px] rounded-[5px]"
+                                src="{{ asset($picture['url']) }}" alt="related image">
                         </a>
-                        </div>
+                    </div>
                     @endforeach
                     @endif
                 </div>
@@ -245,15 +251,22 @@ aspect-ratio: auto;
         @include('layout.front-end.partial.ProjectDetailsSlider')
     </div>
 </div>
+
 @endsection
 
-	<!-- Jquery js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js" integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js" integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js" integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!-- Magnific popup js -->
-    <script src="magnific-popup/jquery.magnific-popup.js"></script>
-    <script >
+<!-- Jquery js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"
+    integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
+    integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
+    integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Magnific popup js -->
+<script src="magnific-popup/jquery.magnific-popup.js"></script>
+<script>
     (function ($) {
     "use strict";
 
@@ -270,4 +283,4 @@ aspect-ratio: auto;
     });
 
     })(jQuery);
-    </script>
+</script>
