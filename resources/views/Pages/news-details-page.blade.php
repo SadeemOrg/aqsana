@@ -73,13 +73,12 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
         }
     }
 
-    /*
 @media (max-width: 640px) {
     .mfp-container button.mfp-arrow{
         position: absolute;
-    top: 7%;
+    top: 5%;
 }
-} */
+}
 </style>
 
 
