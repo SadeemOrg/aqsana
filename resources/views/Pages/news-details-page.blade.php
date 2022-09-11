@@ -253,33 +253,4 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
 
 @endsection
 
-<!-- Jquery js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"
-    integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
-    integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
-    integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- Magnific popup js -->
-<script src="magnific-popup/jquery.magnific-popup.js"></script>
-<script>
-    (function ($) {
-    "use strict";
 
-    /*--------------------------------------
-      Magnific popup Active
-    ----------------------------------------*/
-    $('.img-thumbnail').magnificPopup({
-      delegate: 'a',
-      type: 'image',
-      mainClass: 'mfp-with-zoom',
-      gallery:{
-        enabled:true
-      },
-    });
-
-    })(jQuery);
-</script>
