@@ -116,7 +116,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
             <div class="absolute leftline1"></div>
             <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
                 <div class="w-full flex items-center justify-center mt-4">
-                    <img src="{{ asset($image) }}" alt="people_on_Mousq" class="w-[90%] aspect-auto rounded-[5px]">
+                    <img src="{{ asset($image) }}" alt="people_on_Mousq" class="w-[85%] aspect-auto rounded-[5px]">
                 </div>
                 <p class="text-[#349A37] text-[18px] md:text-[22px] pt-14 text-right pr-4">
                     {{ $news_detail->title }}
