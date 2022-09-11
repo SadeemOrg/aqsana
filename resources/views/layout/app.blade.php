@@ -50,7 +50,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    <!-- Magnific popup css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
+        integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- firebase integration started -->
 
     <!-- Firebase App is always required and must be first -->
@@ -108,10 +111,10 @@
     <script src="{{ asset('js/app.js') }}?v={{rand(0, 99)}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-
-
-$('#search').on('keyup', function(){
+        $('#search').on('keyup', function(){
     var val = $('#search').val().toLowerCase();
     console.log('val',val)
     if(val.length>2){
@@ -318,6 +321,17 @@ if( e.target.id != 'searchListId') {
     window.open(url,'sharer','toolbar=0,status=0,width=580,height=400');
     return false;
 };
+
+
+$(document).ready(function() {
+    $('.img-thumbnail').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+        gallery: {
+            enabled: true
+        }
+    });
+});
 // first Page Donation
 var pageNumber = 0 ;
 var previousPage = 0;

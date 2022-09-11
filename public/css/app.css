@@ -659,6 +659,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hidden{
   display: none;
 }
+.aspect-auto{
+  aspect-ratio: auto;
+}
 .h-48{
   height: 12rem;
 }
@@ -716,9 +719,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-8{
   height: 2rem;
 }
-.max-h-\[670px\]{
-  max-height: 670px;
-}
 .max-h-\[460px\]{
   max-height: 460px;
 }
@@ -736,6 +736,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-h-56{
   max-height: 14rem;
+}
+.max-h-\[670px\]{
+  max-height: 670px;
 }
 .max-h-\[17px\]{
   max-height: 17px;
@@ -769,6 +772,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-6{
   width: 1.5rem;
+}
+.w-\[90\%\]{
+  width: 90%;
 }
 .w-7{
   width: 1.75rem;
@@ -830,16 +836,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-8{
   width: 2rem;
 }
-.w-\[210px\]{
-  width: 210px;
-}
 .min-w-fit{
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
   min-width: fit-content;
-}
-.min-w-\[220px\]{
-  min-width: 220px;
 }
 .min-w-\[210px\]{
   min-width: 210px;
@@ -906,6 +906,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .basis-2\/5{
   flex-basis: 40%;
+}
+.basis-1\/5{
+  flex-basis: 20%;
 }
 .border-collapse{
   border-collapse: collapse;
@@ -1932,14 +1935,14 @@ body{
   .md\:w-full{
     width: 100%;
   }
-  .md\:w-\[200px\]{
-    width: 200px;
+  .md\:w-\[210px\]{
+    width: 210px;
   }
   .md\:w-\[50\%\]{
     width: 50%;
   }
-  .md\:w-\[210px\]{
-    width: 210px;
+  .md\:w-\[200px\]{
+    width: 200px;
   }
   .md\:max-w-2xl{
     max-width: 42rem;
