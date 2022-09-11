@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\CPU\Helpers;
+use App\Models\TripBooking;
 /**
  * @group  Auth management
  *
@@ -445,13 +447,58 @@ class AuthController extends Controller
     }
 
 
-    public function getInformationUser(){
+    public function getInformationUser(Request $request){
         
-        $user = User::where("id",Auth()->id())->with("Donations.Project","Volunteer.Project","TripBooking.Project")
+        $user = User::where("id",Auth()->id())->with("Donations.Project","Volunteer.Project")
+        ->with(["TripBooking.Project"=>function($query) use($request){
+           $query->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')->get();
+    
+        }])
         ->withCount('Donations as donations_count')
         ->withCount('Volunteer as volunteer_count')
         ->withCount('TripBooking as trip_booking_count')
         ->first();
+
+        $trip_booking = json_decode($user)->trip_booking;
+        $trip_booking = collect($trip_booking);
+    
+            $trip_booking->map(function ($trip) use($request){
+         
+                $from_latlng = json_decode($trip->project->tripfrom->current_location)->latlng;
+                $from_lat = $from_latlng->lat;
+                $from_lng = $from_latlng->lng;
+        
+                $to_latlng = json_decode($trip->project->tripto->current_location)->latlng;
+                $to_lat = $to_latlng->lat;
+                $to_lng = $to_latlng->lng;
+        
+                $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K'); 
+                $trip->project->from_distance = round($from_distance, 2);
+        
+        
+                $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K'); 
+                $trip->project->to_distance = round($to_distance, 2);
+        
+                $trip_bokking = TripBooking::where('user_id',Auth()->id())->where('project_id',$trip->project->id)->first();
+              
+                 if($trip_bokking != null) {
+                    if($trip_bokking->status == 1){
+                        $trip->project->isBooking = 1;
+                    } else {
+                        $trip->project->isBooking = 0;
+                    }
+                 } else{
+                    $trip->project->isBooking = 0;
+                 }
+
+               
+            
+            });
+        
+         
+        $user->custom_trip_booking = $trip_booking;
+
+    
 
         $response = [
             'success' => "true",
