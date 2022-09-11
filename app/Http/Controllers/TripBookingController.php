@@ -57,7 +57,7 @@ class TripBookingController extends BaseController
             return $this->sendError('Validate Error', $validator->errors());
         }
 
-        $trip_booking = TripBooking::where("id",$request->get("id"))->first();
+        $trip_booking = TripBooking::where("project_id",$request->get("id"))->first();
 
         $trip_booking->status = '0';
         $trip_booking->save();
