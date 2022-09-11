@@ -75,8 +75,9 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
 
 @media (max-width: 640px) {
     .mfp-container button.mfp-arrow{
-        position: absolute;
-    top: 5%;
+        vertical-align: top;
+        margin-top: 9%;
+
 }
 }
 </style>
