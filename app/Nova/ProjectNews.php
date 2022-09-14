@@ -50,6 +50,12 @@ class ProjectNews extends Resource
     {
         return __('website');
     }
+    public static function availableForNavigation(Request $request)
+    {
+        if ($request->user()->type() == 'financial_user') {
+            return false;
+        } else return true;
+    }
     /**
      * Get the fields displayed by the resource.
      *

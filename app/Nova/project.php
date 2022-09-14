@@ -82,7 +82,7 @@ class Project extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ($request->user()->type() == 'website_admin') {
+        if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user') {
             return false;
         } else return true;
     }
@@ -179,9 +179,83 @@ class Project extends Resource
                         $user = Auth::user();
                         if ($user->type() == 'admin') return true;
                         return false;
-                    })->rules('required' ,'max:1'),
+                    }),
+
+                BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
+                Select::make(__('trip from'), 'trip_from')
+                    ->options(function () {
+                        $id = Auth::id();
+                        $addresss =  \App\Models\address::where('created_by',  $id)->get();
+                        $address_type_admin_array =  array();
+
+                        foreach ($addresss as $address) {
+
+                            if ($address->Area == null || $this->admin_id == $address['id']) {
+                                $address_type_admin_array += [$address['id'] => ($address['name_address'])];
+                            }
+                        }
+
+                        return $address_type_admin_array;
+                    })->hideFromIndex()->hideFromDetail()
+                    ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                        return null;
+                    }),
+                Flexible::make(__('newadres '), 'newadresfrom')
+                    ->readonly(true)
+                    ->limit(1)
+                    ->hideFromDetail()->hideFromIndex()
+                    ->addLayout(__('Add new bus'), 'bus', [
+
+                        Text::make(__('Name'), "name_address"),
+                        Text::make(__("description"), "description"),
+                        Text::make(__("phone number"), "phone_number_address"),
+                        GoogleMaps::make(__('current_location'), 'current_location'),
+                        Select::make(__("Status"), "address_status")->options([
+                            '1' => __('active'),
+                            '2' => __('not active'),
+                        ]),
+
+                    ]),
 
 
+
+
+                BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
+
+                Select::make(__('trip to'), 'trip_to')
+                    ->options(function () {
+                        $id = Auth::id();
+                        $addresss =  \App\Models\address::where('created_by',  $id)->get();
+                        $address_type_admin_array =  array();
+
+                        foreach ($addresss as $address) {
+
+                            if ($address->Area == null || $this->admin_id == $address['id']) {
+                                $address_type_admin_array += [$address['id'] => ($address['name_address'])];
+                            }
+                        }
+
+                        return $address_type_admin_array;
+                    })->hideFromIndex()->hideFromDetail()
+                    ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                        return null;
+                    }),
+                Flexible::make(__('newadres '), 'newadresto')
+                    ->readonly(true)
+                    ->limit(1)
+                    ->hideFromDetail()->hideFromIndex()
+                    ->addLayout(__('Add new bus'), 'bus', [
+
+                        Text::make(__('Name'), "name_address"),
+                        Text::make(__("description"), "description"),
+                        Text::make(__("phone number"), "phone_number_address"),
+                        GoogleMaps::make(__('current_location'), 'current_location'),
+                        Select::make(__("Status"), "address_status")->options([
+                            '1' => __('active'),
+                            '2' => __('not active'),
+                        ]),
+
+                    ]),
                 DateTime::make(__('projec start'), 'start_date'),
                 DateTime::make(__('projec end'), 'end_date'),
 
@@ -243,10 +317,8 @@ class Project extends Resource
 
                 ])->dependsOn('is_reported', '10'),
 
-                BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->
-                hideWhenUpdating(),
-                BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
-                hideWhenUpdating(),
+                BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
             ]))->withToolbar(),
@@ -274,7 +346,7 @@ class Project extends Resource
                         $user = Auth::user();
                         if ($user->type() == 'regular_area') return true;
                         return false;
-                    })->rules('required' ,'max:1'),
+                    }),
             ])),
             (new Panel(__('Budget'), [
 
@@ -302,7 +374,8 @@ class Project extends Resource
                     return false;
                 })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
-                }),
+                })
+                    ->readonly(),
             ])),
             (new Panel(__('tooles'), [
 
@@ -450,6 +523,8 @@ class Project extends Resource
                         if ($user->type() == 'regular_city') return true;
                         return false;
                     }),
+
+
                 Flexible::make(__('newbus'), 'newbus')
                     ->readonly(true)
                     ->canSee(function ($request) {
@@ -555,33 +630,15 @@ class Project extends Resource
                 );
         }
     }
-    public static function beforeUpdate(Request $request, $model)
+    public static function beforeSave(Request $request, $model)
     {
-
+        //   dd($request->trip_to);
         $id = Auth::id();
-        $model->update_by = $id;
 
         $citye =   City::where('admin_id', $id)
             ->select('id')->first();
+        $model->update_by = $id;
 
-        if ($request->Budjet) {
-
-
-
-            DB::table('transactions')
-                ->updateOrInsert(
-                    ['ref_id' => $model->id, 'ref_cite_id' => $citye['id']],
-                    [
-                        'main_type' => '2',
-                        'type' => '1',
-                        'Currency' => '3',
-                        'transact_amount' => $request->Budjet,
-                        'equivelant_amount' => $request->Budjet,
-                        'transaction_date' => $date = date('Y-m-d'),
-
-                    ]
-                );
-        }
         if ($request->Toole) {
 
             DB::table('project_toole')
@@ -664,18 +721,64 @@ class Project extends Resource
                     );
             }
         }
-        // if ($request->City) {
+        if ($request->City) {
 
-        //     $City = json_decode($request->City);
+            $City = json_decode($request->City);
 
-        //     foreach ($City as $key => $value) {
-        //         DB::table('project_status')
-        //         ->updateOrInsert(
-        //             ['project_id' => $model->id, 'city_id' => $City[0]->id],
-        //             ['status' => ' تحت الانشاء']
-        //         );
-        //     }
-        // }
+
+            DB::table('project_status')
+                ->updateOrInsert(
+                    ['project_id' => $model->id, 'city_id' => $City[0]->id],
+                    ['status' => '0']
+                );
+        }
+
+        if (!$request->trip_from) {
+            if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] && $request->newadresfrom[0]['attributes']['phone_number_address'] && $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['address_status']) {
+
+                //   dd("hf");
+                DB::table('addresses')
+                    ->Insert(
+                        [
+                            'name_address' => $request->newadresfrom[0]['attributes']['name_address'],
+                            'description' => $request->newadresfrom[0]['attributes']['description'],
+                            'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
+                            'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
+                            'status' => $request->newadresfrom[0]['attributes']['address_status'],
+                            'type' => '1',
+                            'created_by' => $id
+                        ]
+                    );
+                $address =  \App\Models\address::where('name_address',  $request->newadresfrom[0]['attributes']['name_address'])->first();
+                DB::table('projects')
+                    ->where('id', $model->id)
+                    ->update(['trip_from' => $address->id]);
+            }
+        } else   $model->trip_from = $request->trip_from;
+
+
+
+        if (!$request->trip_to) {
+            if ($request->newadresto[0]['attributes']['name_address'] && $request->newadresto[0]['attributes']['description'] && $request->newadresto[0]['attributes']['phone_number_address'] && $request->newadresto[0]['attributes']['current_location'] && $request->newadresto[0]['attributes']['address_status']) {
+                //   dd("hf");
+                DB::table('addresses')
+                    ->Insert(
+                        [
+                            'name_address' => $request->newadresto[0]['attributes']['name_address'],
+                            'description' => $request->newadresto[0]['attributes']['description'],
+                            'phone_number_address' => $request->newadresto[0]['attributes']['phone_number_address'],
+                            'current_location' => $request->newadresto[0]['attributes']['current_location'],
+                            'status' => $request->newadresto[0]['attributes']['address_status'],
+                            'type' => '1',
+                            'created_by' => $id
+                        ]
+                    );
+                $address =  \App\Models\address::where('name_address',  $request->newadresto[0]['attributes']['name_address'])->first();
+                DB::table('projects')
+                    ->where('id', $model->id)
+                    ->update(['trip_to' => $address->id]);
+            }
+        } else   $model->trip_to = $request->trip_to;
     }
 
     /**

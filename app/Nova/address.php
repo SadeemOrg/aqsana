@@ -54,6 +54,10 @@ class address extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Select::make(__("type"), "type")->options([
+                '1' => __('bus'),
+                '2' => __('Trip'),
+            ])->displayUsingLabels(),
             Text::make(__('Name'), "name_address"),
             Text::make(__("description"), "description"),
             Text::make(__("phone number"), "phone_number_address"),
@@ -64,9 +68,16 @@ class address extends Resource
                 '1' => __('active'),
                 '2' => __('not active'),
             ])->displayUsingLabels(),
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+
         ];
     }
+    public static function beforeCreate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->created_by = $id;
 
+    }
 
     /**
      * Get the cards available for the request.

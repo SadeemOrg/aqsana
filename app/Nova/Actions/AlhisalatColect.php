@@ -12,7 +12,7 @@ use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 
-class AlhisalatStatus extends Action
+class AlhisalatColect extends Action
 {
     use InteractsWithQueue, Queueable;
     public  function name ()
@@ -31,30 +31,32 @@ class AlhisalatStatus extends Action
         // dd("ee");
 
         foreach ($models as $model) {
+
             $model->update([
-                'status' => '2',
+                'status' => (++ $model->status),
 
             ]);
-            $new_data = $model->replicate();
-            $new_data->status ='1';
-            $new_data->number_alhisala =$fields->number_alhisala;
-            $new_data->created_by ='1';
-            $new_data->created_at = now();
-            $new_data->save();
 
-            DB::table('transactions')
-            ->Insert(
+            // $new_data = $model->replicate();
+            // $new_data->status ='1';
+            // $new_data->number_alhisala =$fields->number_alhisala;
+            // $new_data->created_by ='1';
+            // $new_data->created_at = now();
+            // $new_data->save();
 
-                [
-                    'main_type' => '1',
-                    'type' => '1',
-                    'ref_id' =>$model->id,
-                    'Currency' => '3',
-                    'transact_amount' => $fields->amount,
-                    'equivelant_amount' =>$fields->amount,
-                    'transaction_date' => $date = date('Y-m-d'),
-                ]
-            );
+            // DB::table('transactions')
+            // ->Insert(
+
+            //     [
+            //         'main_type' => '1',
+            //         'type' => '1',
+            //         'ref_id' =>$model->id,
+            //         'Currency' => '3',
+            //         'transact_amount' => $fields->amount,
+            //         'equivelant_amount' =>$fields->amount,
+            //         'transaction_date' => $date = date('Y-m-d'),
+            //     ]
+            // );
         }
 
         return action::message('the done');
@@ -68,8 +70,8 @@ class AlhisalatStatus extends Action
     public function fields()
     {
         return [
-            Text::make("alhisala amount","amount"),
-            Text::make("number alhisala","number_alhisala")
+            // Text::make("alhisala amount","amount"),
+            // Text::make("number alhisala","number_alhisala")
         ];
     }
 }

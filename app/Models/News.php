@@ -8,7 +8,6 @@ use App\Observers\NewsObserver;
 class News extends Model
 {
     use HasFactory;
-
     protected $observers = [
         News::class => [NewsObserver::class],
     ];

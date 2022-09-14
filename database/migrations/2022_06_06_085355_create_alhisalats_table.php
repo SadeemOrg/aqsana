@@ -15,7 +15,6 @@ class CreateAlhisalatsTable extends Migration
     {
         Schema::create('alhisalats', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->bigInteger('address_id');
             $table->string('number_alhisala');
             $table->char('status','1')->nullable();

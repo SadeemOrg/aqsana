@@ -18,7 +18,7 @@ class projectPolicy
      */
     public function viewAny(User $user)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city' ||$user->type() == 'website_admin' ) ;
+          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city' ||$user->type() == 'website_admin' ||$user->type() == 'financial_user'  ) ;
     }
 
     /**
@@ -30,7 +30,7 @@ class projectPolicy
      */
     public function view(User $user, project $project)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city'  ||$user->type() == 'website_admin') ;
+          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city'  ||$user->type() == 'website_admin'||$user->type() == 'financial_user' ) ;
     }
 
     /**
@@ -53,7 +53,7 @@ class projectPolicy
      */
     public function update(User $user, project $project)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city' ||$user->type() == 'website_admin' ) ;
+          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city' ||$user->type() == 'website_admin' ||$user->type() == 'financial_user' ) ;
     }
 
     /**
@@ -65,7 +65,7 @@ class projectPolicy
      */
     public function delete(User $user, project $project)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city'  ) ;
+          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city'   ) ;
     }
 
     /**
@@ -77,7 +77,7 @@ class projectPolicy
      */
     public function restore(User $user, project $project)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city' ) ;
     }
 
     /**
@@ -89,6 +89,6 @@ class projectPolicy
      */
     public function forceDelete(User $user, project $project)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city'  ) ;
+          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city'   ) ;
     }
 }
