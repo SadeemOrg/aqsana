@@ -70,7 +70,9 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
         <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full">
             <div class="absolute leftline1"></div>
             <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
-                <img src="{{ asset($image) }}" alt="people_on_Mousq" class="w-full max-h-[670px] rounded-[5px]">
+                <div class="w-full flex items-center justify-center mt-4">
+                    <img src="{{ asset($image) }}" alt="people_on_Mousq" class="w-[85%] aspect-auto rounded-[5px]">
+                </div>
                 <p class="text-[#349A37] text-[18px] md:text-[22px] pt-14 text-right pr-4">
                     {{ $project->project_name }}
                 </p>

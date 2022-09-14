@@ -73,13 +73,13 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
         }
     }
 
-    /*
 @media (max-width: 640px) {
     .mfp-container button.mfp-arrow{
-        position: absolute;
-    top: 7%;
+        vertical-align: top;
+        margin-top: 9%;
+
 }
-} */
+}
 </style>
 
 
@@ -116,7 +116,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
             <div class="absolute leftline1"></div>
             <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
                 <div class="w-full flex items-center justify-center mt-4">
-                    <img src="{{ asset($image) }}" alt="people_on_Mousq" class="w-[90%] aspect-auto rounded-[5px]">
+                    <img src="{{ asset($image) }}" alt="people_on_Mousq" class="w-[85%] aspect-auto rounded-[5px]">
                 </div>
                 <p class="text-[#349A37] text-[18px] md:text-[22px] pt-14 text-right pr-4">
                     {{ $news_detail->title }}
@@ -254,33 +254,4 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
 
 @endsection
 
-<!-- Jquery js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"
-    integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
-    integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
-    integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- Magnific popup js -->
-<script src="magnific-popup/jquery.magnific-popup.js"></script>
-<script>
-    (function ($) {
-    "use strict";
 
-    /*--------------------------------------
-      Magnific popup Active
-    ----------------------------------------*/
-    $('.img-thumbnail').magnificPopup({
-      delegate: 'a',
-      type: 'image',
-      mainClass: 'mfp-with-zoom',
-      gallery:{
-        enabled:true
-      },
-    });
-
-    })(jQuery);
-</script>
