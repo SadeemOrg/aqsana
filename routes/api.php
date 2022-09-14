@@ -56,6 +56,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/trip_booking', [TripBookingController::class, 'store']);
     Route::post('/cancel_trip_booking', [TripBookingController::class, 'cancel_trip_booking']);
     Route::get('/get_trip_booking_user', [TripBookingController::class, 'get_trip_booking_user']);
+
+
+    //volunteer api
+    Route::post('/volunteer_project', [VolunteerController::class, 'store']);
+    Route::post('/cancel_volunteering', [VolunteerController::class, 'cancel_volunteering']);
+    Route::get('/get_volunteering_user', [VolunteerController::class, 'get_volunteering_user']);
     
 });
 
@@ -71,10 +77,7 @@ Route::get('/contact_us', [SettingController::class, 'contact_us']);
 Route::post('/report_problem', [SettingController::class, 'report_problem']);
 Route::get('/social_media', [SettingController::class, 'social_media']);
 
-//volunteer api
-Route::post('/volunteer_project', [VolunteerController::class, 'store']);
-Route::post('/cancel_volunteering', [VolunteerController::class, 'cancel_volunteering']);
-Route::get('/get_volunteering_user', [VolunteerController::class, 'get_volunteering_user']);
+
 
 
 //Donations api
