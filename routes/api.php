@@ -62,6 +62,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/volunteer_project', [VolunteerController::class, 'store']);
     Route::post('/cancel_volunteering', [VolunteerController::class, 'cancel_volunteering']);
     Route::get('/get_volunteering_user', [VolunteerController::class, 'get_volunteering_user']);
+
+
+    //Prrojects
+    Route::get('/projects-auth', [ProjectController::class, 'index']);
     
 });
 
