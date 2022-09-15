@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,6 +18,26 @@ class ProjectController extends BaseController
     {
   
         $projects = Project::where("project_type","1")->orderBy('created_at', 'desc')->paginate(15);
+
+        $projects->map(function($project){
+            $check_volunteer = Volunteer::where("user_id",Auth()->id())->where("project_id",$project->id)->first();
+            
+            if($check_volunteer != null) {
+                if($check_volunteer->status == "0"){
+                   $project->is_volunteer_user = 0;
+                } else {
+                    $project->is_volunteer_user = 1;
+               }
+    
+            } else {
+                $project->is_volunteer_user = 0; 
+            }
+
+        });
+
+       
+
+
         return $this->sendResponse($projects, 'Success get projects');
 
     }
