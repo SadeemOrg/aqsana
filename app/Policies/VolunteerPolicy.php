@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Alhisalat;
 use App\Models\User;
+use App\Models\Volunteer;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AlhisalatPolicy
+class VolunteerPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class AlhisalatPolicy
      */
     public function viewAny(User $user)
     {
-        return  ($user->type() == 'admin' || $user->type() == 'regular_area' ||$user->type() == 'financial_user') ;
+        return $user->type() == 'admin';
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Alhisalat  $alhisalat
+     * @param  \App\Models\Volunteer  $volunteer
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Alhisalat $alhisalat)
+    public function view(User $user, Volunteer $volunteer)
     {
-          return  ($user->type() == 'admin' || $user->type() == 'regular_area' ||$user->type() == 'financial_user') ;
+        return $user->type() == 'admin';
     }
 
     /**
@@ -41,55 +41,54 @@ class AlhisalatPolicy
      */
     public function create(User $user)
     {
-          return  ($user->type() == 'admin' || $user->type() == 'regular_area' ) ;
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Alhisalat  $alhisalat
+     * @param  \App\Models\Volunteer  $volunteer
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Alhisalat $alhisalat)
+    public function update(User $user, Volunteer $volunteer)
     {
-          return  ($user->type() == 'admin' || $user->type() == 'regular_area' ||$user->type() == 'financial_user') ;
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Alhisalat  $alhisalat
+     * @param  \App\Models\Volunteer  $volunteer
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Alhisalat $alhisalat)
+    public function delete(User $user, Volunteer $volunteer)
     {
-          return  ($user->type() == 'admin' ) ;
+        return $user->type() == 'admin';
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Alhisalat  $alhisalat
+     * @param  \App\Models\Volunteer  $volunteer
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Alhisalat $alhisalat)
+    public function restore(User $user, Volunteer $volunteer)
     {
-          return  ($user->type() == 'admin' || $user->type() == 'regular_area') ;
+        //
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Alhisalat  $alhisalat
+     * @param  \App\Models\Volunteer  $volunteer
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Alhisalat $alhisalat)
+    public function forceDelete(User $user, Volunteer $volunteer)
     {
-          return  ($user->type() == 'admin' || $user->type() == 'regular_area') ;
-
+        //
     }
 }

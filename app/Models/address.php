@@ -9,7 +9,7 @@ class address extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name_address','description','phone_number_address','status','current_location'
+        'name_address','description','phone_number_address','status','current_location','address_id'
     ];
     protected $hidden = [
         'created_at',
@@ -21,6 +21,9 @@ class address extends Model
     {
         return $this->id;
     }
-
+    public function create()
+    {
+        return $this->belongsTo('App\Models\User','created_by');
+    }
 
 }
