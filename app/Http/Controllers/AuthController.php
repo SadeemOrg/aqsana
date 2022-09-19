@@ -89,8 +89,6 @@ class AuthController extends Controller
         $fields = $request->validate([
             'name' => 'required|string',
             'email' => 'string|email',
-            'id' => 'string|required'
-
         ]);
 
 
@@ -110,7 +108,7 @@ class AuthController extends Controller
         }
 
 
-        $user = User::where('social_media_id', $fields['id'])->first();
+        $user = User::where('social_media_id', $request->get("id"))->first();
 
         if ($user != null) {
 
@@ -133,7 +131,7 @@ class AuthController extends Controller
                     'name' => $fields['name'],
                     'email' => $fields['email'],
                     'password' =>  bcrypt($password),
-                    'social_media_id' => $fields['id'],
+                    'social_media_id' => $request->get("id"),
                     'role' => "user",
                     'nick_name' => $fields['name'],
                 ]);
