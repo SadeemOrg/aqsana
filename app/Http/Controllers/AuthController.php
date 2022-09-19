@@ -108,7 +108,7 @@ class AuthController extends Controller
         }
 
 
-        $user = User::where('social_media_id', $request->get("id"))->first();
+        $user = User::where('social_media_id', $request->get("social_media_id"))->first();
 
         if ($user != null) {
 
