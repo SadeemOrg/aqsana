@@ -36,6 +36,7 @@ Route::post('/payment', [PaymentController::class, 'sendMoney']);
 
 Route::post('/register_login_social_media', [AuthController::class, 'register_login_social_media']);
 Route::post('/login_social_media', [AuthController::class, 'login_social_media']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/user/update', [AuthController::class, 'update']);
