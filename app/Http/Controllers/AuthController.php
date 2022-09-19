@@ -108,7 +108,7 @@ class AuthController extends Controller
         }
 
 
-        $user = User::where('social_media_id', $request->get("id"))->first();
+        $user = User::where('social_media_id', $request->get("social_media_id"))->first();
 
         if ($user != null) {
 
@@ -131,8 +131,8 @@ class AuthController extends Controller
                     'name' => $fields['name'],
                     'email' => $fields['email'],
                     'password' =>  bcrypt($password),
-                    'social_media_id' => $request->get("id"),
-                    'role' => "user",
+                    'social_media_id' => $request->get("social_media_id"),
+                    'user_role' => "user",
                     'nick_name' => $fields['name'],
                 ]);
             }
@@ -143,9 +143,9 @@ class AuthController extends Controller
                $password = Str::random(8);
                 $user = User::create([
                 'name' => $fields['name'],
-                'social_media_id' => $fields['id'],
+                'social_media_id' => $fields['social_media_id'],
                 'password' =>  bcrypt($password),
-                'role' => "user",
+                'user_role' => "user",
                 'nick_name' => $fields['name'],
                 
                 ]);
