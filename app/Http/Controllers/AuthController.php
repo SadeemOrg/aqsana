@@ -96,7 +96,7 @@ class AuthController extends Controller
 
         // Check email
 
-        $user = User::where('social_media_id', $fields['email'])->first();
+        $user = User::where('email', $fields['email'])->first();
         if ($user != null) {
 
             $token = $user->createToken('myapptoken')->plainTextToken;
