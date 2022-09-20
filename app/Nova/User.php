@@ -39,7 +39,7 @@ class User extends Resource
     }
     public static function group()
     {
-        return __('User');
+        return __('The Users');
     }
     /**
      * The columns that should be searched.

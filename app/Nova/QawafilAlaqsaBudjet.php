@@ -69,7 +69,7 @@ class QawafilAlaqsaBudjet extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__("project name"), "project_name")->readonly(),
+            Text::make(__("QawafilAlaqsa name"), "project_name"),
             BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')->readonly(),
             BelongsToManyField::make(__('City'), "City", '\App\Nova\City')->readonly(),
 
