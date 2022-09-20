@@ -71,10 +71,10 @@ class ProjectBudjet extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__("project name"), "project_name")->readonly(),
-            BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')->readonly(),
-            BelongsToManyField::make(__('City'), "City", '\App\Nova\City')->readonly(),
-            Text::make(__("project describe"), "project_describe")->readonly(),
-            Text::make(__('SECTOR'), 'sector')->readonly(),
+            BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')->readonly()->hideFromIndex(),
+            BelongsToManyField::make(__('City'), "City", '\App\Nova\City')->readonly()->hideFromIndex(),
+            Text::make(__("project describe"), "project_describe")->readonly()->hideFromIndex(),
+            Text::make(__('SECTOR'), 'sector')->readonly()->hideFromIndex(),
 
 
 

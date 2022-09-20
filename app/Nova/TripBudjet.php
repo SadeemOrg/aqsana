@@ -71,6 +71,7 @@ class TripBudjet extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__("project name"), "project_name")->readonly(),
+            Text::make(__("Trip name"), "project_name")->readonly()->hideFromIndex(),
             BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')->readonly(),
             BelongsToManyField::make(__('City'), "City", '\App\Nova\City')->readonly(),
 
