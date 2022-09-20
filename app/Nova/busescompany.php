@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Fields\HasMany;
 
 class BusesCompany extends Resource
 {
@@ -82,7 +83,7 @@ class BusesCompany extends Resource
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
             hideWhenUpdating(),
 
-
+            HasMany::make(__('bus'),'Bus', \App\Nova\Bus::class),
 
         ];
     }
