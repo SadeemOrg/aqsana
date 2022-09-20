@@ -65,6 +65,10 @@ class QawafilAlaqsaBudjet extends Resource
         // ->whereIn('id', $stack)
         ->where('project_type', '2');
     }
+    public static function authorizedToCreate(Request $request)
+    {
+        return false;
+    }
     public function fields(Request $request)
     {
         return [

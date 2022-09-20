@@ -53,6 +53,10 @@ class ProjectBudjet extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function authorizedToCreate(Request $request)
+    {
+        return false;
+    }
     public static function indexQuery(NovaRequest $request, $query)
     {
 

@@ -66,6 +66,10 @@ class TripBudjet extends Resource
         // ->whereIn('id', $stack)
         ->where('project_type', '3');
     }
+    public static function authorizedToCreate(Request $request)
+    {
+        return false;
+    }
     public function fields(Request $request)
     {
         return [
