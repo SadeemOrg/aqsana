@@ -89,7 +89,7 @@ class User extends Resource
 
 
 
-            HasMany::make('Alhisalat'),
+
 
         ];
     }
