@@ -47,6 +47,10 @@ class AlhisalatAmount extends Resource
     {
         return __('Financial management');
     }
+    public static function authorizedToCreate(Request $request)
+    {
+        return false;
+    }
     /**
      * Get the fields displayed by the resource.
      *
