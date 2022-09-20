@@ -89,7 +89,7 @@ class QawafilAlaqsaBudjet extends Resource
             }),
             ActionButton::make(__('Action'))
             ->action(ProjectBudjetActions::class, $this->id)
-            ->text(__('finsh'))
+            ->text(__('finished'))
             ->showLoadingAnimation()
             ->loadingColor('#fff')->buttonColor('#21b970')
             ->canSee(function(){
@@ -104,7 +104,7 @@ class QawafilAlaqsaBudjet extends Resource
 
             ActionButton::make(__('Action'))
             ->action(ProjectBudjetActions::class, $this->id)
-            ->text(__('not finsh'))
+            ->text(__('not finished'))
                         ->showLoadingAnimation()
             ->loadingColor('#fff')->buttonColor('#070707')
             ->canSee(function(){

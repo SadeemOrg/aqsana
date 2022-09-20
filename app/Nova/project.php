@@ -159,6 +159,7 @@ class Project extends Resource
                         }
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
+
                 Text::make(__("project name"), "project_name"),
                 Text::make(__("project describe"), "project_describe"),
 
@@ -181,81 +182,89 @@ class Project extends Resource
                         return false;
                     }),
 
-                BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
-                Select::make(__('trip from'), 'trip_from')
-                    ->options(function () {
-                        $id = Auth::id();
-                        $addresss =  \App\Models\address::where('created_by',  $id)->get();
-                        $address_type_admin_array =  array();
+                // BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
+                // Select::make(__('trip from'), 'trip_from')
+                //     ->options(function () {
+                //         $id = Auth::id();
+                //         $addresss =  \App\Models\address::where('created_by',  $id)->get();
+                //         $address_type_admin_array =  array();
 
-                        foreach ($addresss as $address) {
+                //         foreach ($addresss as $address) {
 
-                            if ($address->Area == null || $this->admin_id == $address['id']) {
-                                $address_type_admin_array += [$address['id'] => ($address['name_address'])];
-                            }
-                        }
+                //             if ($address->Area == null || $this->admin_id == $address['id']) {
+                //                 $address_type_admin_array += [$address['id'] => ($address['name_address'])];
+                //             }
+                //         }
 
-                        return $address_type_admin_array;
-                    })->hideFromIndex()->hideFromDetail()
-                    ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                        return null;
-                    }),
-                Flexible::make(__('newadres '), 'newadresfrom')
-                    ->readonly(true)
-                    ->limit(1)
-                    ->hideFromDetail()->hideFromIndex()
-                    ->addLayout(__('Add new bus'), 'bus', [
+                //         return $address_type_admin_array;
+                //     })->hideFromIndex()->hideFromDetail()
+                //     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                //         return null;
+                //     }),
+                // Flexible::make(__('newadres '), 'newadresfrom')
+                //     ->readonly(true)
+                //     ->limit(1)
+                //     ->hideFromDetail()->hideFromIndex()
+                //     ->addLayout(__('Add new bus'), 'bus', [
 
-                        Text::make(__('Name'), "name_address"),
-                        Text::make(__("description"), "description"),
-                        Text::make(__("phone number"), "phone_number_address"),
-                        GoogleMaps::make(__('current_location'), 'current_location'),
-                        Select::make(__("Status"), "address_status")->options([
-                            '1' => __('active'),
-                            '2' => __('not active'),
-                        ]),
+                //         Text::make(__('Name'), "name_address"),
+                //         Text::make(__("description"), "description"),
+                //         Text::make(__("phone number"), "phone_number_address"),
+                //         GoogleMaps::make(__('current_location'), 'current_location'),
+                //         Select::make(__("Status"), "address_status")->options([
+                //             '1' => __('active'),
+                //             '2' => __('not active'),
+                //         ]),
 
-                    ]),
-
-
+                //     ]),
 
 
-                BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
-                Select::make(__('trip to'), 'trip_to')
-                    ->options(function () {
-                        $id = Auth::id();
-                        $addresss =  \App\Models\address::where('created_by',  $id)->get();
-                        $address_type_admin_array =  array();
 
-                        foreach ($addresss as $address) {
+                // BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
-                            if ($address->Area == null || $this->admin_id == $address['id']) {
-                                $address_type_admin_array += [$address['id'] => ($address['name_address'])];
-                            }
-                        }
+                // Select::make(__('trip to'), 'trip_to')
+                //     ->options(function () {
+                //         $id = Auth::id();
+                //         $addresss =  \App\Models\address::where('created_by',  $id)->get();
+                //         $address_type_admin_array =  array();
 
-                        return $address_type_admin_array;
-                    })->hideFromIndex()->hideFromDetail()
-                    ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                        return null;
-                    }),
-                Flexible::make(__('newadres '), 'newadresto')
-                    ->readonly(true)
-                    ->limit(1)
-                    ->hideFromDetail()->hideFromIndex()
-                    ->addLayout(__('Add new bus'), 'bus', [
+                //         foreach ($addresss as $address) {
 
-                        Text::make(__('Name'), "name_address"),
-                        Text::make(__("description"), "description"),
-                        Text::make(__("phone number"), "phone_number_address"),
-                        GoogleMaps::make(__('current_location'), 'current_location'),
-                        Select::make(__("Status"), "address_status")->options([
-                            '1' => __('active'),
-                            '2' => __('not active'),
-                        ]),
+                //             if ($address->Area == null || $this->admin_id == $address['id']) {
+                //                 $address_type_admin_array += [$address['id'] => ($address['name_address'])];
+                //             }
+                //         }
 
-                    ]),
+                //         return $address_type_admin_array;
+                //     })->hideFromIndex()->hideFromDetail()
+                //     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                //         return null;
+                //     }),
+                // Flexible::make(__('newadres '), 'newadresto')
+                //     ->readonly(true)
+                //     ->limit(1)
+                //     ->hideFromDetail()->hideFromIndex()
+                //     ->addLayout(__('Add new bus'), 'bus', [
+
+                //         Text::make(__('Name'), "name_address"),
+                //         Text::make(__("description"), "description"),
+                //         Text::make(__("phone number"), "phone_number_address"),
+                //         GoogleMaps::make(__('current_location'), 'current_location'),
+                //         Select::make(__("Status"), "address_status")->options([
+                //             '1' => __('active'),
+                //             '2' => __('not active'),
+                //         ]),
+
+                //     ]),
+
+
+
+
+
+
+
+
                 DateTime::make(__('projec start'), 'start_date'),
                 DateTime::make(__('projec end'), 'end_date'),
 
