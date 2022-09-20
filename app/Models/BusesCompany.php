@@ -17,9 +17,9 @@ class BusesCompany extends Model
         'updated_at',
 
     ];
-    public function City()
+    public function Bus()
     {
-        return $this->hasMany(Bus::class);
+        return $this->hasMany(Bus::class,'company_id');
     }
 
 
