@@ -505,4 +505,34 @@ class AuthController extends Controller
         return response($response, 200);
 
     }
+
+    public function delete()
+    {
+        
+            $user = Auth::user();
+            if($user != null) {
+                if($user->user_role == "user") {
+                    $user_delete =  User::where("id",$user->id)->delete();
+                    $response = [
+                      'success' => "true",
+                      'message' => "Success delete user"
+                  ];
+                   return response($response, 200); 
+                } else{
+                    $response = [
+                        'success' => "false",
+                        'message' => "Not Auth"
+                    ];
+                    return response($response, 401); 
+                }
+              
+            } else {
+                $response = [
+                    'success' => "false",
+                    'message' => "Not Auth"
+                ];
+                return response($response, 401); 
+            }
+        
+    }
 }
