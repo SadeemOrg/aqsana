@@ -53,6 +53,11 @@ class AlhisalatAmount extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+
+        return $query->where('status','>=','2');
+    }
     public function fields(Request $request)
     {
         return [
@@ -66,7 +71,7 @@ class AlhisalatAmount extends Resource
             ->confirmButtonText(__('Complet'))
             ->cancelButtonText(__('not collected')), $this->id)
             ->canSee(function () {
-                return $this->status < '3';
+                return $this->status < '2';
             })->readonly()->text(__('not collected'))->showLoadingAnimation()->buttonColor('#070707')
             ->loadingColor('#000000')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
@@ -76,7 +81,7 @@ class AlhisalatAmount extends Resource
             ->confirmButtonText(__('collected'))
             ->cancelButtonText(__('Dont collected')), $this->id)
             ->canSee(function () {
-                return $this->status === '3';
+                return $this->status === '2';
             })->text(__('collect'))->showLoadingAnimation()
             ->loadingColor('#FF5733')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
@@ -88,7 +93,7 @@ class AlhisalatAmount extends Resource
                 ->confirmButtonText(__('Finish'))
                 ->cancelButtonText(__('Dont Finish')), $this->id)
             ->canSee(function () {
-                return $this->status === '4';
+                return $this->status === '3';
             })
             ->readonly()
             ->text(__('Finish'))->showLoadingAnimation()->buttonColor('#21b970')

@@ -73,6 +73,9 @@ class ProjectBudjet extends Resource
             Text::make(__("project name"), "project_name")->readonly(),
             BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')->readonly(),
             BelongsToManyField::make(__('City'), "City", '\App\Nova\City')->readonly(),
+            Text::make(__("project describe"), "project_describe")->readonly(),
+            Text::make(__('SECTOR'), 'sector')->readonly(),
+
 
 
 
@@ -94,7 +97,7 @@ class ProjectBudjet extends Resource
             }),
             ActionButton::make(__('Action'))
             ->action(ProjectBudjetActions::class, $this->id)
-            ->text(__('finsh'))
+            ->text(__('finished'))
             ->showLoadingAnimation()
             ->loadingColor('#fff')->buttonColor('#21b970')
             ->canSee(function(){
@@ -109,7 +112,7 @@ class ProjectBudjet extends Resource
 
             ActionButton::make(__('Action'))
             ->action(ProjectBudjetActions::class, $this->id)
-            ->text(__('not finsh'))
+            ->text(__('not finished'))
                         ->showLoadingAnimation()
             ->loadingColor('#fff')->buttonColor('#070707')
             ->canSee(function(){

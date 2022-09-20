@@ -159,8 +159,8 @@ class Trip extends Resource
                         }
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
-                Text::make(__("project name"), "project_name"),
-                Text::make(__("project describe"), "project_describe"),
+                Text::make(__("Trip name"), "project_name"),
+                Text::make(__("Trip describe"), "project_describe"),
                 BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
@@ -180,7 +180,7 @@ class Trip extends Resource
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                         return null;
                     }),
-                Flexible::make(__('newadres '), 'newadresfrom')
+                Flexible::make(__('newadres'), 'newadresfrom')
                     ->readonly(true)
                     ->limit(1)
                     ->hideFromDetail()->hideFromIndex()
@@ -220,7 +220,7 @@ class Trip extends Resource
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                         return null;
                     }),
-                Flexible::make(__('newadres '), 'newadresto')
+                Flexible::make(__('newadres'), 'newadresto')
                     ->readonly(true)
                     ->limit(1)
                     ->hideFromDetail()->hideFromIndex()
@@ -257,8 +257,8 @@ class Trip extends Resource
                     })->rules('required', 'max:1'),
 
 
-                DateTime::make(__('projec start'), 'start_date'),
-                DateTime::make(__('projec end'), 'end_date'),
+                DateTime::make(__('Trip start'), 'start_date'),
+                DateTime::make(__('Trip end'), 'end_date'),
 
 
 

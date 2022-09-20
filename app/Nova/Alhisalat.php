@@ -110,10 +110,12 @@ class Alhisalat extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Number::make(__("number alhisala"), "number_alhisala")
-            ->withMeta([
-                'value' => $this->user_id ?? auth()->user()->id,
-            ])->readonly(),
+            Text::make(__("number alhisala"), "number_alhisala")->withMeta([
+                'value' =>uniqid(),
+            ])->readonly()->hideWhenUpdating()->hideFromDetail()->hideFromIndex() ,
+
+            Text::make(__("number alhisala"), "number_alhisala")
+            ->readonly()->hideWhenCreating() ,
 
             ActionButton::make(__('colect'))
             ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
@@ -124,14 +126,7 @@ class Alhisalat extends Resource
             })->text(__('colect'))->showLoadingAnimation()
             ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
-            ActionButton::make(__('colect'))
-            ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
-                ->confirmButtonText(__('sent'))
-                ->cancelButtonText(__('sent')), $this->id)
-            ->canSee(function () {
-                return $this->status  === '2';
-            })->text(__('sent'))->showLoadingAnimation()
-            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
 
 
             ActionButton::make(__('colect'))
@@ -139,8 +134,8 @@ class Alhisalat extends Resource
             ->confirmButtonText(__('colect '))
             ->cancelButtonText(__('sent done')), $this->id)
             ->canSee(function () {
-                return $this->status  > '2';
-            })->readonly()->text(__('sent Done'))->showLoadingAnimation()
+                return $this->status  >= '2';
+            })->readonly()->text(__('sent done'))->showLoadingAnimation()
             ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
             Select::make(__('address'),'address_id')
@@ -221,8 +216,7 @@ class Alhisalat extends Resource
             Multiselect::make(__("Status"), "status")->options([
                 '1' => 'تم  الوضع',
                 '2' => 'تم جمع ',
-                '3' => 'تم التسليم ',
-                '4' => 'تم العد',
+                '3' => 'تم العد',
 
             ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -233,12 +227,13 @@ class Alhisalat extends Resource
 
     public static function beforeCreate(Request $request, $model)
     {
+
         // dd($request->address_id);
         // $request->address_id=2;
         $id = Auth::id();
         $model->created_by = $id;
         $model->status = '1';
-        $model->number_alhisala = '1';
+        // $model->number_alhisala = '1';
 
         // dd( $model);
 
@@ -251,10 +246,10 @@ class Alhisalat extends Resource
     public static function beforeSave(Request $request, $model)
     {
 
-
+        $model->number_alhisala = $request->number_alhisala;
 
         // $request->address = '2';
-        // dd($request->address);
+        // dd($request->number_alhisala);
         // dd($request->address);
         // dd($request->newadres[0]['attributes']['name_address']);
         $id = Auth::id();

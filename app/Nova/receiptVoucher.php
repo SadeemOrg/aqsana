@@ -109,11 +109,11 @@ class receiptVoucher extends Resource
 
             Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
 
-            Select::make(__('approval'), 'approval')->options([
-                1 => 'approval',
-                2 => 'reject',
-            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
-            Text::make(__("reason_of_reject"), "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
+            // Select::make(__('approval'), 'approval')->options([
+            //     1 => 'approval',
+            //     2 => 'reject',
+            // ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            // Text::make(__("reason_of_reject"), "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
 
 
 

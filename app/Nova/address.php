@@ -28,7 +28,7 @@ class address extends Resource
     public static $title = 'name_address';
     public static function label()
     {
-        return __('address');
+        return __('saved addresss');
     }
     public static function group()
     {
@@ -56,7 +56,7 @@ class address extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Select::make(__("type"), "type")->options([
                 '1' => __('bus'),
-                '2' => __('Trip'),
+                '2' => __('addrese buss'),
             ])->displayUsingLabels(),
             Text::make(__('Name'), "name_address"),
             Text::make(__("description"), "description"),

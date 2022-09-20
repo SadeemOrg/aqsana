@@ -29,7 +29,7 @@ class Bus extends Resource
     }
     public static function group()
     {
-        return __('Bus');
+        return __('the Busss');
     }
 
     public static $priority = 2;
@@ -149,8 +149,8 @@ class Bus extends Resource
             Text::make(__("phone_number"), "phone_number_driver"),
             Select::make(__("status"), "status")
                 ->options([
-                    '1' => 'available',
-                    '2' => 'un available',
+                    '1' => __('available'),
+                    '2' => __('un available'),
                 ])->displayUsingLabels(),
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),

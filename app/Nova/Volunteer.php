@@ -3,7 +3,10 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Volunteer extends Resource
@@ -16,13 +19,14 @@ class Volunteer extends Resource
     public static $model = \App\Models\Volunteer::class;
     public static function label()
     {
-        return __('Volunteers');
-    }
-    public static function group()
-    {
         return __('Volunteer');
     }
-    public static $subGroup = 'Vendors';
+
+    public static function group()
+    {
+        return __('Volunteers');
+    }
+    // public static $subGroup = 'Vendors';
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
@@ -49,7 +53,16 @@ class Volunteer extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            BelongsTo::make(__('project'), 'project', \App\Nova\Project::class),
+            BelongsTo::make(__('user'), 'User', \App\Nova\User::class),
+            Select::make(__("Status"), "address_status")->options([
+                '1' => __('active'),
+                '2' => __('not active'),
+            ])->displayUsingLabels(),
+
+
         ];
+
     }
 
     /**
