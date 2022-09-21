@@ -338,12 +338,11 @@ class AuthController extends Controller
     public function  update_fcm_token(Request $request)
     {
         $fields = $request->validate([
-            'id' => 'required',
             'fcm_token' => 'required',
 
         ]);
 
-        $user = user::find($fields['id']);
+        $user = user::find(Auth()->id());
         $user->fcm_token = $request->get("fcm_token");
         $is_save = $user->save();
         if ($is_save) {
@@ -504,5 +503,35 @@ class AuthController extends Controller
         ];
         return response($response, 200);
 
+    }
+
+    public function delete()
+    {
+        
+            $user = Auth::user();
+            if($user != null) {
+                if($user->user_role == "user") {
+                    $user_delete =  User::where("id",$user->id)->delete();
+                    $response = [
+                      'success' => "true",
+                      'message' => "Success delete user"
+                  ];
+                   return response($response, 200); 
+                } else{
+                    $response = [
+                        'success' => "false",
+                        'message' => "Not Auth"
+                    ];
+                    return response($response, 401); 
+                }
+              
+            } else {
+                $response = [
+                    'success' => "false",
+                    'message' => "Not Auth"
+                ];
+                return response($response, 401); 
+            }
+        
     }
 }
