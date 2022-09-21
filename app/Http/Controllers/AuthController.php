@@ -338,12 +338,11 @@ class AuthController extends Controller
     public function  update_fcm_token(Request $request)
     {
         $fields = $request->validate([
-            'id' => 'required',
             'fcm_token' => 'required',
 
         ]);
 
-        $user = user::find($fields['id']);
+        $user = user::find(Auth()->id());
         $user->fcm_token = $request->get("fcm_token");
         $is_save = $user->save();
         if ($is_save) {
