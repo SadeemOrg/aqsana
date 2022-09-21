@@ -57,7 +57,7 @@ class ProjectBudjetActions extends Action
     public function fields()
     {
         return [
-            Text::make("Project Budjet","amount"),
+            Text::make(__("Project Budjet"),"amount"),
         ];
     }
 }

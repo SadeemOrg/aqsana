@@ -19,7 +19,7 @@ class Volunteer extends Resource
     public static $model = \App\Models\Volunteer::class;
     public static function label()
     {
-        return __('Volunteer');
+        return __('Volunteers');
     }
 
     public static function group()

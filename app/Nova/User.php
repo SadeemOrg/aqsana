@@ -35,7 +35,7 @@ class User extends Resource
     public static $title = 'name';
     public static function label()
     {
-        return __('User');
+        return __('The Users');
     }
     public static function group()
     {

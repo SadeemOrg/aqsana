@@ -69,12 +69,12 @@ public static function group()
 
 
             ActionButton::make(__('ReadMessage'))
-            ->action((new ReadMessage) ->confirmText('Are you sure you want to read  this Massage?')
+            ->action((new ReadMessage) ->confirmText(__('Are you sure you want to read this Message?'))
             ->confirmButtonText('Read')
-            ->cancelButtonText("dont Read"), $this->id) ->canSee(function () {
+           , $this->id) ->canSee(function () {
                 return $this->is_read === '0';
             })
-            ->text(__('not read yet'))->showLoadingAnimation()
+            ->text(__('Read'))->showLoadingAnimation()
             ->loadingColor('#fff') ->svg('VueComponentName'),
 
 

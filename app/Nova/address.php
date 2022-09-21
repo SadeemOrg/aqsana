@@ -56,7 +56,9 @@ class address extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Select::make(__("type"), "type")->options([
                 '1' => __('bus'),
-                '2' => __('addrese buss'),
+                '2' => __('Alhisalat'),
+                '3' => __('Project'),
+                '4' => __('addrese buss'),
             ])->displayUsingLabels(),
             Text::make(__('Name'), "name_address"),
             Text::make(__("description"), "description"),

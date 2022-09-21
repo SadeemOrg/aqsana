@@ -24,6 +24,10 @@ class Alhisalat extends Model
     //     'bus_id' => 'array',
 
     // ];
+    public function Alhisalat()
+    {
+        return $this->belongsTo(Alhisalat::class,'id');
+    }
 
     public function City()
     {
@@ -47,14 +51,7 @@ class Alhisalat extends Model
         return $this->belongsTo('App\Models\User','update_by');
     }
 
-    public function Transaction()
-    {
-        $users = DB::table('users')
-            ->join('transactions', 'users.id', '=', 'transactions.id')
 
-            ->select('users.*');
-        return  $users;
-    }
 
 
 

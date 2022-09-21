@@ -9,6 +9,7 @@ use Benjacho\BelongsToManyField\BelongsToManyField;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -60,25 +61,27 @@ class ProjectBudjet extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-            $projects = DB::table('project_status')->where('status', '2')->get();
+            $projects = DB::table('project_status')->where('status', '>',1)->get();
 
         $stack = array();
         foreach ($projects as $key => $value) {
             array_push($stack, $value->project_id);
         }
         return $query
-        // ->whereIn('id', $stack)
-        ->where('project_type', '1');
+        ->whereIn('id', $stack)
+        ->where('project_type', '1') ;
     }
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__("project name"), "project_name")->readonly(),
-            BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')->readonly()->hideFromIndex(),
-            BelongsToManyField::make(__('City'), "City", '\App\Nova\City')->readonly()->hideFromIndex(),
-            Text::make(__("project describe"), "project_describe")->readonly()->hideFromIndex(),
-            Text::make(__('SECTOR'), 'sector')->readonly()->hideFromIndex(),
+            BelongsTo::make(__('project'), 'project', \App\Nova\Project::class),
+
+            // Text::make(__("project name"), "project_name")->readonly(),
+            // BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')->readonly()->hideFromIndex(),
+            // BelongsToManyField::make(__('City'), "City", '\App\Nova\City')->readonly()->hideFromIndex(),
+            // Text::make(__("project describe"), "project_describe")->readonly()->hideFromIndex(),
+            // Text::make(__('SECTOR'), 'sector')->readonly()->hideFromIndex(),
 
 
 
@@ -99,6 +102,7 @@ class ProjectBudjet extends Resource
 
             }
             }),
+
             ActionButton::make(__('Action'))
             ->action(ProjectBudjetActions::class, $this->id)
             ->text(__('finished'))

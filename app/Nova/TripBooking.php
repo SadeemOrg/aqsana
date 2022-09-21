@@ -3,35 +3,34 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\Boolean;
-class Role extends Resource
+
+class TripBooking extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Role::class;
-
+    public static $model = \App\Models\TripBooking::class;
+    public static function label()
+    {
+        return __('TripBooking');
+    }
+    public static function group()
+    {
+        return __('TripBooking');
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
+    public static $title = 'id';
 
-    public static function label()
-    {
-        return __('Role');
-    }
-    public static function group()
-    {
-        return __('The Users');
-    }
-     public static $title = 'role';
-    public static $priority = 2;
     /**
      * The columns that should be searched.
      *
@@ -51,9 +50,15 @@ class Role extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('code_role'),'code_role'),
-            Text::make(__('role'),'role'),
-            Boolean::make(__("status"),"status"),
+            BelongsTo::make(__('project'), 'Project', \App\Nova\Project::class),
+            BelongsTo::make(__('user'), 'Users', \App\Nova\User::class),
+            BelongsTo::make(__('bus'), 'Buses', \App\Nova\Bus::class),
+            Text::make(__('number phone'), 'number_phone'),
+            Text::make(__('number_of_people'), 'number_of_people'),
+            Text::make(__('reservation_amount'), 'reservation_amount'),
+
+
+
         ];
     }
 

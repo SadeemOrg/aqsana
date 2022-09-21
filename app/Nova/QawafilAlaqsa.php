@@ -52,6 +52,7 @@ use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
 
 use Fourstacks\NovaRepeatableFields\Repeater;
+use Laravel\Nova\Fields\HasMany;
 
 class QawafilAlaqsa extends Resource
 {
@@ -67,7 +68,7 @@ class QawafilAlaqsa extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'project_name';
 
     /**
      * The columns that should be searched.
@@ -206,6 +207,11 @@ class QawafilAlaqsa extends Resource
 
                     ]),
 
+
+
+                BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->withMeta([
+                    'value' =>"1",
+                ])->readonly(),
 
                 DateTime::make(__('QawafilAlaqsa start'), 'start_date'),
                 DateTime::make(__('QawafilAlaqsa end'), 'end_date'),
@@ -443,8 +449,10 @@ class QawafilAlaqsa extends Resource
                         else return "__";
                     }
                 })->options([
-                    '1' => 'active',
-                    '2' => 'not active',
+                    '0' => __('Created'),
+                    '1' => __('started'),
+                    '2' => __('completed'),
+                    '3' => __('Finish'),
                 ])
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                         return null;
@@ -535,8 +543,9 @@ class QawafilAlaqsa extends Resource
 
 
 
-
-
+            HasMany::make(__('Donations'),'Donations', \App\Nova\Donations::class),
+            HasMany::make(__('TripBooking'),'TripBooking', \App\Nova\TripBooking::class),
+            belongsToMany::make(__('Bus'),'Bus', \App\Nova\Bus::class),
         ];
     }
     public static function beforeCreate(Request $request, $model)
