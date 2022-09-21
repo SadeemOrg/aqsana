@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
     Route::post('/delete', [AuthController::class, 'delete']);
-    
+    Route::put('/update_fcm_token', [AuthController::class, 'cm-firebase-token']);
 });
 
 Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
