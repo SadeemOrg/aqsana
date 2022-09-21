@@ -50,6 +50,7 @@ use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
 
 use Fourstacks\NovaRepeatableFields\Repeater;
+use Laravel\Nova\Fields\HasMany;
 
 class Trip extends Resource
 {
@@ -65,7 +66,7 @@ class Trip extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'project_name';
     public static $priority = 3;
     public static function label()
     {
@@ -237,17 +238,17 @@ class Trip extends Resource
 
                     ]),
 
-                Select::make(__('SECTOR'), 'sector')
-                    ->options(function () {
-                        $sectors = nova_get_setting('workplace', 'default_value');
-                        $user_type_admin_array =  array();
-                        if ($sectors != "default_value") {
-                            foreach ($sectors as $sector) {
-                                $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
-                            }
-                            return  $user_type_admin_array;
-                        }
-                    }),
+                // Select::make(__('SECTOR'), 'sector')
+                //     ->options(function () {
+                //         $sectors = nova_get_setting('workplace', 'default_value');
+                //         $user_type_admin_array =  array();
+                //         if ($sectors != "default_value") {
+                //             foreach ($sectors as $sector) {
+                //                 $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
+                //             }
+                //             return  $user_type_admin_array;
+                //         }
+                //     }),
                 BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
                     ->options(Area::all())
                     ->optionsLabel('name')->canSee(function ($request) {
@@ -493,8 +494,10 @@ class Trip extends Resource
                         else return "__";
                     }
                 })->options([
-                    '1' => 'active',
-                    '2' => 'not active',
+                    '0' => __('Created'),
+                    '1' => __('started'),
+                    '2' => __('completed'),
+                    '3' => __('Finish'),
                 ])
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                         return null;
@@ -586,8 +589,9 @@ class Trip extends Resource
 
 
 
-
-
+            HasMany::make(__('Donations'),'Donations', \App\Nova\Donations::class),
+            HasMany::make(__('TripBooking'),'TripBooking', \App\Nova\TripBooking::class),
+            belongsToMany::make(__('Bus'),'Bus', \App\Nova\Bus::class),
         ];
     }
     public static function beforeCreate(Request $request, $model)

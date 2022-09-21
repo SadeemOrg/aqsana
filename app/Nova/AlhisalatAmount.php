@@ -66,9 +66,15 @@ class AlhisalatAmount extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Number::make(__("number alhisala"), "number_alhisala")->readonly(),
-            BelongsTo::make(__('address'), 'address', \App\Nova\address::class)->readonly(),
+            BelongsTo::make(__('Alhisalat'), 'Alhisalat', \App\Nova\Alhisalat::class),
 
+            // Number::make(__("number alhisala"), "number_alhisala")->readonly(),
+            // BelongsTo::make(__('address'), 'address', \App\Nova\address::class)->readonly(),
+
+
+
+            // BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            // BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             ActionButton::make(__('Complet'))
             ->action((new AlhisalatStatuscompleted)
             ->confirmText(__('Are you sure you want to Complet  this Alhisalat?'))

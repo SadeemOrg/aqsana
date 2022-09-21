@@ -63,7 +63,7 @@ class AlhisalatColect extends Action
         return [
             // Text::make("alhisala amount","amount"),
             // Text::make("number alhisala","number_alhisala")
-            Boolean::make("Add new  alhisala", "new_alhasele")
+            Boolean::make(__("Add new  alhisala"), "new_alhasele")
         ];
     }
 }

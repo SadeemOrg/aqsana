@@ -17,7 +17,7 @@ class CreateProjectStatusTable extends Migration
             $table->id();
             $table->bigInteger('project_id');
             $table->bigInteger('city_id');
-            $table->char('status');
+            $table->char('status', '1');
             $table->timestamps();
         });
     }

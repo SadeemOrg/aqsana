@@ -76,7 +76,7 @@ class AlhisalatStatuscompleted extends Action
     {
         return [
 
-            Text::make("alhisala amount", "amount"),
+            Text::make(__("alhisala amount"), "amount"),
             // Boolean::make("Add new  alhisala", "new_alhasele")
         ];
     }

@@ -8,6 +8,7 @@ use Benjacho\BelongsToManyField\BelongsToManyField;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -55,14 +56,14 @@ class QawafilAlaqsaBudjet extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-            $projects = DB::table('project_status')->where('status', '2')->get();
+        $projects = DB::table('project_status')->where('status', '>',1)->get();
 
         $stack = array();
         foreach ($projects as $key => $value) {
             array_push($stack, $value->project_id);
         }
         return $query
-        // ->whereIn('id', $stack)
+        ->whereIn('id', $stack)
         ->where('project_type', '2');
     }
     public static function authorizedToCreate(Request $request)
@@ -73,21 +74,24 @@ class QawafilAlaqsaBudjet extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__("QawafilAlaqsa name"), "project_name"),
-            BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')->readonly(),
-            BelongsToManyField::make(__('City'), "City", '\App\Nova\City')->readonly(),
+            BelongsTo::make(__('QawafilAlaqsa name'), 'project', \App\Nova\QawafilAlaqsa::class),
+
+            // Text::make(__("QawafilAlaqsa name"), "project_name"),
+            // BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')->readonly(),
+            // BelongsToManyField::make(__('City'), "City", '\App\Nova\City')->readonly(),
+
 
             ActionButton::make(__('Action'))
             ->action(ProjectBudjetActions::class, $this->id)
-            ->text(__('add budjet'))
+            ->text(__('Add budjet'))
             ->showLoadingAnimation()
             ->loadingColor('#fff')
             ->canSee(function(){
                 $projects = DB::table('project_status')->where('project_id', $this->id)->first();
             if ( $projects )
             {
-            if ($projects->status == '2')  return true;
 
+                if ($projects->status == '2')  return true;
 
             }
             }),
@@ -123,6 +127,7 @@ class QawafilAlaqsaBudjet extends Resource
             else return true;
 
             })->readonly(),
+
 
 
         ];

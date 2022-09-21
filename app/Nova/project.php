@@ -50,6 +50,7 @@ use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
 
 use Fourstacks\NovaRepeatableFields\Repeater;
+use Laravel\Nova\Fields\HasMany;
 
 class Project extends Resource
 {
@@ -500,12 +501,14 @@ class Project extends Resource
                             ->first();
 
                         if ($acspet)  return   $acspet->status;
-                        else return "__";
+                        else return "_d_";
                     }
                 })->options([
-                    '1' => 'active',
-                    '2' => 'not active',
-                ])
+                    '0' => __('Created'),
+                    '1' => __('started'),
+                    '2' => __('completed'),
+                    '3' => __('Finish'),
+                ])->displayUsingLabels()
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                         return null;
                     })->canSee(function ($request) {
@@ -600,7 +603,15 @@ class Project extends Resource
 
 
 
+            HasMany::make(__('Donations'),'Donations', \App\Nova\Donations::class),
+            HasMany::make(__('Volunteer'),'Volunteer', \App\Nova\Volunteer::class),
+            belongsToMany::make(__('Bus'),'Bus', \App\Nova\Bus::class),
+            // ->canSee(function ($request) {
 
+            //     $user = Auth::user();
+            //     if ($user->type() == 'regular_city') return true;
+            //     return false;
+            // }),
         ];
     }
     public static function beforeCreate(Request $request, $model)
@@ -742,52 +753,52 @@ class Project extends Resource
                 );
         }
 
-        if (!$request->trip_from) {
-            if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] && $request->newadresfrom[0]['attributes']['phone_number_address'] && $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['address_status']) {
+        // if (!$request->trip_from) {
+        //     if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] && $request->newadresfrom[0]['attributes']['phone_number_address'] && $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['address_status']) {
 
-                //   dd("hf");
-                DB::table('addresses')
-                    ->Insert(
-                        [
-                            'name_address' => $request->newadresfrom[0]['attributes']['name_address'],
-                            'description' => $request->newadresfrom[0]['attributes']['description'],
-                            'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
-                            'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
-                            'status' => $request->newadresfrom[0]['attributes']['address_status'],
-                            'type' => '1',
-                            'created_by' => $id
-                        ]
-                    );
-                $address =  \App\Models\address::where('name_address',  $request->newadresfrom[0]['attributes']['name_address'])->first();
-                DB::table('projects')
-                    ->where('id', $model->id)
-                    ->update(['trip_from' => $address->id]);
-            }
-        } else   $model->trip_from = $request->trip_from;
+        //         //   dd("hf");
+        //         DB::table('addresses')
+        //             ->Insert(
+        //                 [
+        //                     'name_address' => $request->newadresfrom[0]['attributes']['name_address'],
+        //                     'description' => $request->newadresfrom[0]['attributes']['description'],
+        //                     'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
+        //                     'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
+        //                     'status' => $request->newadresfrom[0]['attributes']['address_status'],
+        //                     'type' => '1',
+        //                     'created_by' => $id
+        //                 ]
+        //             );
+        //         $address =  \App\Models\address::where('name_address',  $request->newadresfrom[0]['attributes']['name_address'])->first();
+        //         DB::table('projects')
+        //             ->where('id', $model->id)
+        //             ->update(['trip_from' => $address->id]);
+        //     }
+        // } else   $model->trip_from = $request->trip_from;
 
 
 
-        if (!$request->trip_to) {
-            if ($request->newadresto[0]['attributes']['name_address'] && $request->newadresto[0]['attributes']['description'] && $request->newadresto[0]['attributes']['phone_number_address'] && $request->newadresto[0]['attributes']['current_location'] && $request->newadresto[0]['attributes']['address_status']) {
-                //   dd("hf");
-                DB::table('addresses')
-                    ->Insert(
-                        [
-                            'name_address' => $request->newadresto[0]['attributes']['name_address'],
-                            'description' => $request->newadresto[0]['attributes']['description'],
-                            'phone_number_address' => $request->newadresto[0]['attributes']['phone_number_address'],
-                            'current_location' => $request->newadresto[0]['attributes']['current_location'],
-                            'status' => $request->newadresto[0]['attributes']['address_status'],
-                            'type' => '1',
-                            'created_by' => $id
-                        ]
-                    );
-                $address =  \App\Models\address::where('name_address',  $request->newadresto[0]['attributes']['name_address'])->first();
-                DB::table('projects')
-                    ->where('id', $model->id)
-                    ->update(['trip_to' => $address->id]);
-            }
-        } else   $model->trip_to = $request->trip_to;
+        // if (!$request->trip_to) {
+        //     if ($request->newadresto[0]['attributes']['name_address'] && $request->newadresto[0]['attributes']['description'] && $request->newadresto[0]['attributes']['phone_number_address'] && $request->newadresto[0]['attributes']['current_location'] && $request->newadresto[0]['attributes']['address_status']) {
+        //         //   dd("hf");
+        //         DB::table('addresses')
+        //             ->Insert(
+        //                 [
+        //                     'name_address' => $request->newadresto[0]['attributes']['name_address'],
+        //                     'description' => $request->newadresto[0]['attributes']['description'],
+        //                     'phone_number_address' => $request->newadresto[0]['attributes']['phone_number_address'],
+        //                     'current_location' => $request->newadresto[0]['attributes']['current_location'],
+        //                     'status' => $request->newadresto[0]['attributes']['address_status'],
+        //                     'type' => '1',
+        //                     'created_by' => $id
+        //                 ]
+        //             );
+        //         $address =  \App\Models\address::where('name_address',  $request->newadresto[0]['attributes']['name_address'])->first();
+        //         DB::table('projects')
+        //             ->where('id', $model->id)
+        //             ->update(['trip_to' => $address->id]);
+        //     }
+        // } else   $model->trip_to = $request->trip_to;
     }
 
     /**

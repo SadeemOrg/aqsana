@@ -40,14 +40,21 @@ class Project extends Model
 
     ];
 
-    
+
 
 
     public function buses()
     {
         return $this->hasOne(Bus::class);
     }
-
+    public function Donations()
+    {
+        return $this->hasOne(Donations::class,'project_id');
+    }
+    public function Volunteer()
+    {
+        return $this->hasOne(Volunteer::class,'project_id');
+    }
     public function ProjectType()
     {
         return $this->belongsTo(ProjectType::class,'project_type','code');
@@ -76,6 +83,15 @@ class Project extends Model
     public function TripCity()
     {
         return $this->belongsTo(ProjectCity::class,'id','project_id');
+    }
+    public function Project()
+    {
+        return $this->belongsTo(Project::class,'id');
+    }
+
+    public function TripBooking()
+    {
+        return $this->belongsTo(TripBooking::class,'id','project_id');
     }
 
     public function Bus()

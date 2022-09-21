@@ -26,7 +26,7 @@ class Currency extends Resource
      */
     public static function label()
     {
-        return __('Currency');
+        return __('The Currency');
     }
     public static function group()
     {
