@@ -50,6 +50,13 @@ class address extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        $id = Auth::id();
+        // return $query->whereIn('created_by',  $id );
+
+
+    }
     public function fields(Request $request)
     {
         return [

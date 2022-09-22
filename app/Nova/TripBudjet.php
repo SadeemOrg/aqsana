@@ -85,7 +85,8 @@ class TripBudjet extends Resource
 
             ActionButton::make(__('Action'))
             ->action(ProjectBudjetActions::class, $this->id)
-            ->text(__('add budjet'))
+
+            ->text(__('Add budjet'))
             ->showLoadingAnimation()
             ->loadingColor('#fff')
             ->canSee(function(){

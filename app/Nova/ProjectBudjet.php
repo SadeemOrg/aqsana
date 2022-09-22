@@ -58,6 +58,13 @@ class ProjectBudjet extends Resource
     {
         return false;
     }
+    public static function availableForNavigation(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->type() == 'admin' || $user->type() == 'financial_user') {
+            return true;
+        } else return false;
+    }
     public static function indexQuery(NovaRequest $request, $query)
     {
 
@@ -92,6 +99,7 @@ class ProjectBudjet extends Resource
             ->action(ProjectBudjetActions::class, $this->id)
             ->text(__('Add budjet'))
             ->showLoadingAnimation()
+            ->confirmButtonText(__('Add budjet'))
             ->loadingColor('#fff')
             ->canSee(function(){
                 $projects = DB::table('project_status')->where('project_id', $this->id)->first();

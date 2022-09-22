@@ -53,6 +53,13 @@ class QawafilAlaqsaBudjet extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function availableForNavigation(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->type() == 'admin' || $user->type() == 'financial_user') {
+            return true;
+        } else return false;
+    }
     public static function indexQuery(NovaRequest $request, $query)
     {
 

@@ -159,7 +159,7 @@ class Alhisalat extends Resource
             BelongsTo::make(__('address'), 'address', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
-            Flexible::make(__('newadres '), 'newadres')
+            Flexible::make(__('newadres'), 'newadres')
                 ->readonly(true)
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()

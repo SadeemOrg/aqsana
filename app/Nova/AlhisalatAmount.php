@@ -6,6 +6,7 @@ use App\Nova\Actions\AlhisalatColect;
 use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\HasOne;
@@ -48,6 +49,13 @@ class AlhisalatAmount extends Resource
     public static function group()
     {
         return __('Financial management');
+    }
+    public static function availableForNavigation(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->type() == 'admin' || $user->type() == 'financial_user') {
+            return true;
+        } else return false;
     }
     public static function authorizedToCreate(Request $request)
     {
