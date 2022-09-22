@@ -31,7 +31,7 @@ class AlhisalatStatuscompleted extends Action
 
         foreach ($models as $model) {
             $model->update([
-                'status' => '3',
+                'status' => '4',
 
             ]);
 

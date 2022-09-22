@@ -18,7 +18,7 @@ class addressPolicy
      */
     public function viewAny(User $user)
     {
-         return $user->type() == 'admin';
+        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
     }
 
     /**
@@ -30,7 +30,7 @@ class addressPolicy
      */
     public function view(User $user, address $address)
     {
-         return $user->type() == 'admin';
+        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
     }
 
     /**
@@ -41,7 +41,7 @@ class addressPolicy
      */
     public function create(User $user)
     {
-         return $user->type() == 'admin';
+        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
     }
 
     /**
@@ -57,7 +57,7 @@ class addressPolicy
         {
             return false ;
         }
-         return $user->type() == 'admin';
+        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
     }
 
     /**
@@ -73,7 +73,7 @@ class addressPolicy
         {
             return false ;
         }
-         return $user->type() == 'admin';
+        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
     }
 
     /**
@@ -85,7 +85,7 @@ class addressPolicy
      */
     public function restore(User $user, address $address)
     {
-         return $user->type() == 'admin';
+        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
     }
 
     /**
@@ -97,6 +97,6 @@ class addressPolicy
      */
     public function forceDelete(User $user, address $address)
     {
-         return $user->type() == 'admin';
+        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
     }
 }

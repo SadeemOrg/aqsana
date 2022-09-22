@@ -16,7 +16,10 @@ use Laravel\Nova\Fields\Text;
 class ProjectBudjetActions extends Action
 {
     use InteractsWithQueue, Queueable;
-
+    public  function name()
+    {
+        return __('Project Budjet');
+    }
     /**
      * Perform the action on the given models.
      *
@@ -56,8 +59,9 @@ class ProjectBudjetActions extends Action
      */
     public function fields()
     {
+
         return [
-            Text::make(__("Project Budjet"),"amount"),
+            Text::make(__("Budjet"),"amount"),
         ];
     }
 }

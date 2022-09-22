@@ -17,6 +17,7 @@ use App\Models\Income;
 use App\Nova\Actions\AlhisalatColect;
 use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
+use App\Nova\Actions\AlhisalatSurrender;
 use App\Nova\Filters\AlhisalatStatusFilters;
 use AwesomeNova\Cards\FilterCard;
 use Epartment\NovaDependencyContainer\HasDependencies;
@@ -128,13 +129,21 @@ class Alhisalat extends Resource
 
 
 
+                ActionButton::make(__('colect'))
+                ->action((new AlhisalatSurrender)->confirmText(__('Are you sure you want to Surrender  this Alhisalat?'))
+                    ->confirmButtonText(__('Surrender'))
+                    , $this->id)
+                ->canSee(function () {
+                    return $this->status === '2';
+                })->text(__('AlhisalatSurrender'))->showLoadingAnimation()
+                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
             ActionButton::make(__('colect'))
                 ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
                     ->confirmButtonText(__('colect '))
                     ->cancelButtonText(__('sent done')), $this->id)
                 ->canSee(function () {
-                    return $this->status  >= '2';
+                    return $this->status  >= '3';
                 })->readonly()->text(__('sent done'))->showLoadingAnimation()
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
@@ -159,7 +168,7 @@ class Alhisalat extends Resource
             BelongsTo::make(__('address'), 'address', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
-            Flexible::make(__('newadres '), 'newadres')
+            Flexible::make(__('newadres'), 'newadres')
                 ->readonly(true)
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
@@ -216,7 +225,9 @@ class Alhisalat extends Resource
             Multiselect::make(__("Status"), "status")->options([
                 '1' => 'تم  الوضع',
                 '2' => 'تم جمع ',
-                '3' => 'تم العد',
+                '3' => 'تم التسليم',
+                '4' => 'تم العد',
+
 
             ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -335,13 +346,14 @@ class Alhisalat extends Resource
             //         }
             //     }
             // ),
-            (new AlhisalatStatuscompleted)
+            (new AlhisalatStatuscompleted),
             //     ->canSee(function () {
             //         if ($this->status == '2' ) {
             //             return true;
             //         }
             //     }
             // ),
+            (new AlhisalatSurrender),
         ];
     }
 }

@@ -6,6 +6,7 @@ use App\Nova\Actions\AlhisalatColect;
 use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\HasOne;
@@ -49,6 +50,13 @@ class AlhisalatAmount extends Resource
     {
         return __('Financial management');
     }
+    public static function availableForNavigation(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->type() == 'admin' || $user->type() == 'financial_user') {
+            return true;
+        } else return false;
+    }
     public static function authorizedToCreate(Request $request)
     {
         return false;
@@ -62,7 +70,7 @@ class AlhisalatAmount extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-        return $query->where('status','>=','2');
+        return $query->where('status','>','2');
     }
     public function fields(Request $request)
     {
@@ -83,7 +91,7 @@ class AlhisalatAmount extends Resource
             ->confirmButtonText(__('Complet'))
             ->cancelButtonText(__('not collected')), $this->id)
             ->canSee(function () {
-                return $this->status < '2';
+                return $this->status < '3';
             })->readonly()->text(__('not collected'))->showLoadingAnimation()->buttonColor('#070707')
             ->loadingColor('#000000')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
@@ -93,7 +101,7 @@ class AlhisalatAmount extends Resource
             ->confirmButtonText(__('collected'))
             ->cancelButtonText(__('Dont collected')), $this->id)
             ->canSee(function () {
-                return $this->status === '2';
+                return $this->status === '3';
             })->text(__('collect'))->showLoadingAnimation()
             ->loadingColor('#FF5733')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
@@ -105,7 +113,7 @@ class AlhisalatAmount extends Resource
                 ->confirmButtonText(__('Finish'))
                 ->cancelButtonText(__('Dont Finish')), $this->id)
             ->canSee(function () {
-                return $this->status === '3';
+                return $this->status === '4 ';
             })
             ->readonly()
             ->text(__('Finish'))->showLoadingAnimation()->buttonColor('#21b970')
