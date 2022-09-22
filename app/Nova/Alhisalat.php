@@ -66,7 +66,7 @@ class Alhisalat extends Resource
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'number_alhisala';
 
     /**
      * The columns that should be searched.

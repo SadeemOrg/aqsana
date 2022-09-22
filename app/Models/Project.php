@@ -60,6 +60,10 @@ class Project extends Model
         return $this->belongsTo(ProjectType::class,'project_type','code');
     }
 
+    public function Project()
+    {
+        return $this->belongsTo(Project::class,'id');
+    }
     public function newsTypes()
     {
         return $this->belongsTo(newsType::class,'');
@@ -83,10 +87,6 @@ class Project extends Model
     public function TripCity()
     {
         return $this->belongsTo(ProjectCity::class,'id','project_id');
-    }
-    public function Project()
-    {
-        return $this->belongsTo(Project::class,'id');
     }
 
     public function TripBooking()
