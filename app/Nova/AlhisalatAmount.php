@@ -113,7 +113,7 @@ class AlhisalatAmount extends Resource
                 ->confirmButtonText(__('Finish'))
                 ->cancelButtonText(__('Dont Finish')), $this->id)
             ->canSee(function () {
-                return $this->status === '4 ';
+                return $this->status === '4';
             })
             ->readonly()
             ->text(__('Finish'))->showLoadingAnimation()->buttonColor('#21b970')
