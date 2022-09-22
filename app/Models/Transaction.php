@@ -34,12 +34,14 @@ class Transaction extends Model
 
     public function Alhisalat()
     {
-        return $this->belongsTo('App\Models\Project','ref_id');
+     return $this->belongsTo('App\Models\Alhisalat','ref_id','id');
+
+
     }
 
     public function Donations()
     {
-        return $this->belongsTo('App\Models\Donations','ref_id');
+        return $this->belongsTo('App\Models\Donations','ref_id','id');
     }
 
     public function QawafilAlaqsa()
@@ -59,6 +61,13 @@ class Transaction extends Model
 
     // public function getCountryName() {
     //     return Currency::where('id', $this->id)->first()->name;
+    // }
+
+    // public function ref()
+    // {
+
+    //     if ($user->type() == 'regular_city')     return $this->belongsToMany(Bus::class,'project_bus')->where('project_bus.city_id', '=', $citye['id']);
+    //     return $this->belongsToMany(Bus::class,'project_bus');
     // }
 
 }

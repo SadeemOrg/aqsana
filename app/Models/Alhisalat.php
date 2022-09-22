@@ -26,7 +26,7 @@ class Alhisalat extends Model
     // ];
     public function Alhisalat()
     {
-        return $this->belongsTo(Alhisalat::class,'id');
+        return $this->belongsTo(Alhisalat::class,'id','id');
     }
 
     public function City()

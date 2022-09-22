@@ -67,6 +67,15 @@ class receiptVoucher extends Resource
                 '2' => __('doner'),
                 '3' => __('else'),
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class)->canSee(function(){
+                return $this->type === '1';
+            }),
+            BelongsTo::make(__('reference_id'), 'Donations', \App\Nova\Donations::class)->canSee(function(){
+                return $this->type === '2';
+            }),
+          Text::make(__('reference_id'), 'reference_id')->readonly()->hideWhenCreating()->hideWhenUpdating()->canSee(function(){
+            return $this->type === '3';
+        }),
 
             NovaDependencyContainer::make([
                 Select::make(__('Alhisalat'), "ref_id")
