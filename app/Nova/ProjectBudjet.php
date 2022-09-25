@@ -99,7 +99,7 @@ class ProjectBudjet extends Resource
             ->action(ProjectBudjetActions::class, $this->id)
             ->text(__('Add budjet'))
             ->showLoadingAnimation()
-            ->confirmButtonText(__('Add budjet'))
+            // ->confirmButtonText(__('Add budjet'), $this->id)
             ->loadingColor('#fff')
             ->canSee(function(){
                 $projects = DB::table('project_status')->where('project_id', $this->id)->first();
