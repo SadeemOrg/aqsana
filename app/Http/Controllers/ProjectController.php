@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Volunteer;
+use App\Models\ProjectCity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,6 +33,10 @@ class ProjectController extends BaseController
             } else {
                 $project->is_volunteer_user = 0; 
             }
+
+            $projectCities = ProjectCity::where("project_id",$project->id)->with('City');
+
+            $project->projectCities = $projectCities;
 
         });
 
