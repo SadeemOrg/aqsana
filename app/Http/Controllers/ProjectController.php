@@ -38,9 +38,16 @@ class ProjectController extends BaseController
             $projectCitiesString = "";
             if($projectCities != null && !empty($projectCities)) {
             
-                $projectCities->map(function($city) use ($projectCitiesString){
-                    $projectCitiesString = $projectCitiesString.$city->city->name;
-                });
+                for($i=0; $i< count($projectCities);$i++){
+                    $city = $projectCities[$i]; 
+                    if($projectCitiesString == "") {
+                        $projectCitiesString = $city->city->name;
+                    } else {
+                        $projectCitiesString = $projectCitiesString.','.$city->city->name;
+                    }
+                   
+                }
+            
             }
 
             $project->projectCities = $projectCitiesString;
