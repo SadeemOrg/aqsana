@@ -35,8 +35,15 @@ class ProjectController extends BaseController
             }
 
             $projectCities = ProjectCity::where("project_id",$project->id)->with('City')->get();
+            $projectCitiesString = "";
+            if($projectCities != null && !empty($projectCities)) {
+            
+                $projectCities->map(function($city) use ($projectCitiesString){
+                    $projectCitiesString += $city->city->name;
+                });
+            }
 
-            $project->projectCities = $projectCities;
+            $project->projectCities = $projectCitiesString;
 
         });
 
