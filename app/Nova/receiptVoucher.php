@@ -65,7 +65,7 @@ class receiptVoucher extends Resource
             Select::make(__("type"), "type")->options([
                 '1' => __('Alhisalat'),
                 '2' => __('doner'),
-                '3' => __('else'),
+                '3' => __('the receipt Voucher'),
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class)->canSee(function(){
                 return $this->type === '1';
@@ -137,7 +137,7 @@ class receiptVoucher extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->main_type = '1';
-        $model->type = '1';
+        $model->type = '3';
         $model->equivelant_amount=$new->rate*$request->transact_amount;
     }
     public static function beforeUpdate(Request $request, $model)
