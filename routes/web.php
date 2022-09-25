@@ -60,6 +60,11 @@ Route::get('/testNotfiy', function (){
     return view('Pages.testNotfiy');
 });
 
+Route::get('/bills', function (){
+    return view('Pages.Bills');
+});
+
+
 Route::get('/SendNotificationTest',[NotificationTest::class,'sendNotfiy'])->name('sendNotfiy');
 
 
