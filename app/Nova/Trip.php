@@ -98,7 +98,7 @@ class Trip extends Resource
             $citye =   City::where('admin_id', $id)
                 ->select('id')->first();
             $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
-        }
+        }  else   $projects = DB::table('project_city')->get();
 
 
         $stack = array();
