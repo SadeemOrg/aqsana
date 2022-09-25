@@ -646,9 +646,22 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
 
+            (new NovaSettings)->canSee(function () {
+                $user = Auth::user();
 
-            new NovaSettings,
-            new \Infinety\Filemanager\FilemanagerTool(),
+                if ($user->type() == 'admin' ||$user->type() == 'website_admin' ) {
+                    return true;
+                }
+            }),
+
+          (  new \Infinety\Filemanager\FilemanagerTool())->canSee(function () {
+            $user = Auth::user();
+
+            if ($user->type() == 'admin' ||$user->type() == 'website_admin' ) {
+                return true;
+            }
+        }),
+
             // ( new NovaSettings)->canSee(function ($request) {
             //     $user = Auth::user();
             //     return  ($user->type() == 'website_admin' ) ;
