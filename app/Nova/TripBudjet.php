@@ -60,14 +60,14 @@ class TripBudjet extends Resource
 
         $projects = DB::table('project_status')->where('status', '>',1)->get();
 
-        $stack = array();
-        foreach ($projects as $key => $value) {
-            array_push($stack, $value->project_id);
-        }
-        return $query
-        ->whereIn('id', $stack)
-        ->where('project_type', '3');
+    $stack = array();
+    foreach ($projects as $key => $value) {
+        array_push($stack, $value->project_id);
     }
+    return $query
+    ->whereIn('id', $stack)
+    ->where('project_type', '3') ;
+}
     public static function authorizedToCreate(Request $request)
     {
         return false;

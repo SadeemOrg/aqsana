@@ -41,7 +41,7 @@ class TripBookingPolicy
      */
     public function create(User $user)
     {
-       return $user->type() == 'admin';
+
     }
 
     /**
