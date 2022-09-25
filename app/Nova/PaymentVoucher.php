@@ -155,6 +155,7 @@ class PaymentVoucher extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->main_type = '2';
+        $model->type = '0';
         $model->equivelant_amount=$new->rate*$request->transact_amount;
     }
     public static function beforeUpdate(Request $request, $model)
