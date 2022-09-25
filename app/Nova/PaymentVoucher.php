@@ -72,7 +72,7 @@ class PaymentVoucher extends Resource
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('reference_id'), 'project', \App\Nova\Project::class)->canSee(function(){
                 return $this->type != '4';
-            }),
+            })->hideWhenUpdating()->hideWhenCreating(),
 
 
             Text::make(__('reference_id'), 'reference_id')->readonly()->hideWhenCreating()->hideWhenUpdating()->canSee(function(){
