@@ -109,7 +109,7 @@ class QawafilAlaqsa extends Resource
 
             $Area = \App\Models\Area::where('admin_id', $id)->first();
             $projects = DB::table('project_area')->where('area_id', $Area->id)->get();
-        } else {
+        } elseif ($user->type() == 'regular_city') {
             $citye =   City::where('admin_id', $id)
                 ->select('id')->first();
             $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
