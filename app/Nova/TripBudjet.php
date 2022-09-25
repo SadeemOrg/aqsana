@@ -12,6 +12,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Pdmfc\NovaFields\ActionButton;
 use App\Nova\Actions\ProjectBudjetActions;
+use Laravel\Nova\Fields\BelongsTo;
+
 class TripBudjet extends Resource
 {
     /**
@@ -56,27 +58,42 @@ class TripBudjet extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-            $projects = DB::table('project_status')->where('status', '2')->get();
+        $projects = DB::table('project_status')->where('status', '>',1)->get();
 
-        $stack = array();
-        foreach ($projects as $key => $value) {
-            array_push($stack, $value->project_id);
-        }
-        return $query
-        // ->whereIn('id', $stack)
-        ->where('project_type', '3');
+    $stack = array();
+    foreach ($projects as $key => $value) {
+        array_push($stack, $value->project_id);
+    }
+    return $query
+    ->whereIn('id', $stack)
+    ->where('project_type', '3') ;
+}
+    public static function authorizedToCreate(Request $request)
+    {
+        return false;
+    }
+    public static function availableForNavigation(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->type() == 'admin' || $user->type() == 'financial_user') {
+            return true;
+        } else return false;
     }
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__("project name"), "project_name")->readonly(),
-            BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')->readonly(),
-            BelongsToManyField::make(__('City'), "City", '\App\Nova\City')->readonly(),
+            BelongsTo::make(__('Trip name'), 'project', \App\Nova\Trip::class),
+
+            // Text::make(__("project name"), "project_name")->readonly(),
+            // Text::make(__("Trip name"), "project_name")->readonly()->hideFromIndex(),
+            // BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')->readonly(),
+            // BelongsToManyField::make(__('City'), "City", '\App\Nova\City')->readonly(),
 
             ActionButton::make(__('Action'))
             ->action(ProjectBudjetActions::class, $this->id)
-            ->text(__('add budjet'))
+
+            ->text(__('Add budjet'))
             ->showLoadingAnimation()
             ->loadingColor('#fff')
             ->canSee(function(){
@@ -90,7 +107,7 @@ class TripBudjet extends Resource
             }),
             ActionButton::make(__('Action'))
             ->action(ProjectBudjetActions::class, $this->id)
-            ->text(__('finsh'))
+            ->text(__('finished'))
             ->showLoadingAnimation()
             ->loadingColor('#fff')->buttonColor('#21b970')
             ->canSee(function(){
@@ -105,7 +122,7 @@ class TripBudjet extends Resource
 
             ActionButton::make(__('Action'))
             ->action(ProjectBudjetActions::class, $this->id)
-            ->text(__('not finsh'))
+            ->text(__('not finished'))
                         ->showLoadingAnimation()
             ->loadingColor('#fff')->buttonColor('#070707')
             ->canSee(function(){

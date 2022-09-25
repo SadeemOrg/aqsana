@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\BelongsTo;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Whitecube\NovaFlexibleContent\Flexible;
 
 class Bus extends Resource
@@ -29,7 +30,7 @@ class Bus extends Resource
     }
     public static function group()
     {
-        return __('Bus');
+        return __('the Busss');
     }
 
     public static $priority = 2;
@@ -71,10 +72,10 @@ class Bus extends Resource
             Number::make(__("seat price"), "seat_price")->step(1.0),
             BelongsTo::make(__('trip from'), 'travelfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            Select::make(__('trip from'), 'trip_from')
+            Select::make(__('trip from'), 'travel_from')
                 ->options(function () {
                     $id = Auth::id();
-                    $addresss =  \App\Models\address::where('created_by',  $id)->get();
+                    $addresss =  \App\Models\address::where('created_by',  $id)->where('type','1')->get();
                     $address_type_admin_array =  array();
 
                     foreach ($addresss as $address) {
@@ -89,7 +90,7 @@ class Bus extends Resource
                 ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 }),
-            Flexible::make(__('newadres '), 'newadresfrom')
+            Flexible::make(__('newadres'), 'newadresfrom')
                 ->readonly(true)
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
@@ -110,10 +111,10 @@ class Bus extends Resource
 
 
             BelongsTo::make(__('trip to'), 'travelto', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
-            Select::make(__('trip to'), 'trip_to')
+            Select::make(__('trip to'), 'travel_to')
                 ->options(function () {
                     $id = Auth::id();
-                    $addresss =  \App\Models\address::where('created_by',  $id)->get();
+                    $addresss =  \App\Models\address::where('created_by',  $id)->where('type','1')->get();
                     $address_type_admin_array =  array();
 
                     foreach ($addresss as $address) {
@@ -128,7 +129,7 @@ class Bus extends Resource
                 ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 }),
-            Flexible::make(__('newadres '), 'newadresto')
+            Flexible::make(__('newadres'), 'newadresto')
                 ->readonly(true)
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
@@ -149,8 +150,8 @@ class Bus extends Resource
             Text::make(__("phone_number"), "phone_number_driver"),
             Select::make(__("status"), "status")
                 ->options([
-                    '1' => 'available',
-                    '2' => 'un available',
+                    '1' => __('available'),
+                    '2' => __('un available'),
                 ])->displayUsingLabels(),
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -174,7 +175,8 @@ class Bus extends Resource
     }
     public static function beforeSave(Request $request, $model)
     {
-        if (!$request->trip_from) {
+        $id = Auth::id();
+        if (!$request->travel_from && $request->newadresfrom) {
             if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] && $request->newadresfrom[0]['attributes']['phone_number_address'] && $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['address_status']) {
 
                 //   dd("hf");
@@ -195,11 +197,11 @@ class Bus extends Resource
                     ->where('id', $model->id)
                     ->update(['trip_from' => $address->id]);
             }
-        } else   $model->trip_from = $request->trip_from;
+        } else   $model->travel_from = $request->travel_from;
 
 
 
-        if (!$request->trip_to) {
+        if (!$request->travel_to && $request->newadresfrom) {
             if ($request->newadresto[0]['attributes']['name_address'] && $request->newadresto[0]['attributes']['description'] && $request->newadresto[0]['attributes']['phone_number_address'] && $request->newadresto[0]['attributes']['current_location'] && $request->newadresto[0]['attributes']['address_status']) {
                 //   dd("hf");
                 DB::table('addresses')
@@ -219,7 +221,7 @@ class Bus extends Resource
                     ->where('id', $model->id)
                     ->update(['trip_to' => $address->id]);
             }
-        } else   $model->trip_to = $request->trip_to;
+        } else   $model->travel_to = $request->travel_to;
     }
 
 

@@ -58,21 +58,34 @@ public static function group()
             Text::make(__('Name'),'name')->readonly(),
             Text::make(__('phone'),'phone')->readonly(),
             Text::make(__('message'),'message')->readonly(),
-            Select::make(__("is read"),"is_read")
-            ->options([
-                '0' => 'not read',
-                '1' => 'read',
+
+            // ActionButton::make(__('ReadMessage'))
+
+            //  ->readonly(function () {
+            //     return $this->is_read === '1';
+            // })->text(__('read done'))->showLoadingAnimation()
+            // ->buttonColor('#21b970'),
 
 
-                ])->displayUsingLabels()->readonly(),
 
-                ActionButton::make(__('ReadMessage'))
-                ->action((new ReadMessage) ->confirmText('Are you sure you want to read  this Massage?')
-                ->confirmButtonText('Read')
-                ->cancelButtonText("Don't Read"), $this->id) ->readonly(function () {
-                    return $this->is_read === '1';
-                })->text(__('Read'))->showLoadingAnimation()
-                ->loadingColor('#fff') ->svg('VueComponentName')
+            ActionButton::make(__('ReadMessage'))
+            ->action((new ReadMessage) ->confirmText(__('Are you sure you want to read this Message?'))
+            ->confirmButtonText('Read')
+           , $this->id) ->canSee(function () {
+                return $this->is_read === '0';
+            })
+            ->text(__('Read'))->showLoadingAnimation()
+            ->loadingColor('#fff') ->svg('VueComponentName'),
+
+
+            ActionButton::make(__('ReadMessage'))
+
+
+            ->canSee(function () {
+                return $this->is_read === '1';
+            })->text(__('read done'))->readonly() ->buttonColor('#070707')
+           ,
+
 
         ];
     }

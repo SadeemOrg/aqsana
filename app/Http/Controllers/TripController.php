@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\CPU\Helpers;
 use App\Models\TripBooking;
+use DateTime;
 use Illuminate\Support\Facades\Auth;
 
 class TripController extends BaseController
@@ -21,16 +22,41 @@ class TripController extends BaseController
     
 
         $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-        ->orderBy('created_at', 'desc')->get();
+        ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
 
         $trips->map(function($trip) use ($request){
-        $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
-        $from_lat = $from_latlng->lat;
-        $from_lng = $from_latlng->lng;
+       
+        if(json_decode($trip->tripfrom) != null) {
+            if(json_decode($trip->tripfrom->current_location) != null){
+                $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
+                $from_lat = $from_latlng->lat;
+                $from_lng = $from_latlng->lng;
+            } else {
+                $from_lat = 180;
+                $from_lng = -180;
+            }
+           
+        } else {
+            $from_lat = 180;
+            $from_lng = -180;
+        }
+       
 
-        $to_latlng = json_decode($trip->tripto->current_location)->latlng;
-        $to_lat = $to_latlng->lat;
-        $to_lng = $to_latlng->lng;
+        if(json_decode($trip->tripto) != null) {
+            if($to_latlng = json_decode($trip->tripto->current_location) != null){
+                $to_latlng = json_decode($trip->tripto->current_location)->latlng;
+                $to_lat = $to_latlng->lat;
+                $to_lng = $to_latlng->lng;
+            } else {
+                $to_lat = 180;
+                $to_lng = -180;
+            }
+            
+        } else {
+            $to_lat = 180;
+            $to_lng = -180;
+        }
+       
 
         $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K'); 
         $trip->from_distance = round($from_distance, 2);
@@ -79,27 +105,51 @@ class TripController extends BaseController
             $trip_bokking = TripBooking::where('user_id',Auth()->id())->first();
             if($trip_bokking != null) {
                 $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-                ->orderBy('created_at', 'desc')->where('id',$trip_bokking->project_id)->get();
+                ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->where('id',$trip_bokking->project_id)->get();
             } else {
                 $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-                ->orderBy('created_at', 'desc')->get();
+                ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
             }
             
         } else{
             $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-            ->orderBy('created_at', 'desc')->get();
+            ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
         }
        
 
 
         $trips->map(function($trip) use ($request){
-        $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
-        $from_lat = $from_latlng->lat;
-        $from_lng = $from_latlng->lng;
 
-        $to_latlng = json_decode($trip->tripto->current_location)->latlng;
-        $to_lat = $to_latlng->lat;
-        $to_lng = $to_latlng->lng;
+
+          if(json_decode($trip->tripfrom) != null) {
+            if(json_decode($trip->tripfrom->current_location) != null){
+                $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
+                $from_lat = $from_latlng->lat;
+                $from_lng = $from_latlng->lng;
+            } else {
+                $from_lat = 180;
+                $from_lng = -180;
+            }
+        } else {
+            $from_lat = 180;
+            $from_lng = -180;
+        }
+       
+
+        if(json_decode($trip->tripto) != null) {
+            if($to_latlng = json_decode($trip->tripto->current_location) != null){
+                $to_latlng = json_decode($trip->tripto->current_location)->latlng;
+                $to_lat = $to_latlng->lat;
+                $to_lng = $to_latlng->lng;
+            } else {
+                $to_lat = 180;
+                $to_lng = -180;
+            }
+        } else {
+            $to_lat = 180;
+            $to_lng = -180;
+        }
+       
 
         $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K'); 
         $trip->from_distance = round($from_distance, 2);
@@ -139,17 +189,40 @@ class TripController extends BaseController
     
 
         $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-        ->orderBy('created_at', 'desc')->get();
+        ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
 
         $search_trip = collect();
         $trips->map(function($trip) use ($request,$search_trip){
-        $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
-        $from_lat = $from_latlng->lat;
-        $from_lng = $from_latlng->lng;
-
-        $to_latlng = json_decode($trip->tripto->current_location)->latlng;
-        $to_lat = $to_latlng->lat;
-        $to_lng = $to_latlng->lng;
+        
+            if(json_decode($trip->tripfrom) != null) {
+                if(json_decode($trip->tripfrom->current_location) != null){
+                $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
+                $from_lat = $from_latlng->lat;
+                $from_lng = $from_latlng->lng;
+                } else {
+                $from_lat = 180;
+                $from_lng = -180;
+               }
+            } else {
+                $from_lat = 180;
+                $from_lng = -180;
+            }
+           
+    
+            if(json_decode($trip->tripto) != null) {
+                if($to_latlng = json_decode($trip->tripto->current_location) != null){
+                    $to_latlng = json_decode($trip->tripto->current_location)->latlng;
+                    $to_lat = $to_latlng->lat;
+                    $to_lng = $to_latlng->lng;
+                } else {
+                    $to_lat = 180;
+                    $to_lng = -180;
+                }
+            } else {
+                $to_lat = 180;
+                $to_lng = -180;
+            }
+           
 
         $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K'); 
         $trip->from_distance = round($from_distance, 2);

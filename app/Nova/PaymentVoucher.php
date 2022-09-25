@@ -65,12 +65,19 @@ class PaymentVoucher extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             Select::make(__("type"), "type")->options([
+                '0' => __('the Payment Voucher'),
                 '1' => __('project'),
                 '2' => __('qawael'),
                 '3' => __('trip'),
-                '4' => __('else'),
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('reference_id'), 'project', \App\Nova\Project::class)->canSee(function(){
+                return $this->type != '0';
+            })->hideWhenUpdating()->hideWhenCreating(),
 
+
+            Text::make(__('reference_id'), 'reference_id')->readonly()->hideWhenCreating()->hideWhenUpdating()->canSee(function(){
+                return $this->type === '0';
+            }),
             // NovaDependencyContainer::make([
             //     Select::make(__('project'), "ref_id")
             //         ->options(function () {
@@ -129,11 +136,11 @@ class PaymentVoucher extends Resource
 
             Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
 
-            Select::make(__('approval'), 'approval')->options([
-                1 => 'approval',
-                2 => 'reject',
-            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
-            Text::make(__("reason_of_reject"), "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
+            // Select::make(__('approval'), 'approval')->options([
+            //     1 => 'approval',
+            //     2 => 'reject',
+            // ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            // Text::make(__("reason_of_reject"), "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
 
 
 
@@ -148,12 +155,13 @@ class PaymentVoucher extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->main_type = '2';
+        $model->type = '0';
         $model->equivelant_amount=$new->rate*$request->transact_amount;
     }
     public static function beforeUpdate(Request $request, $model)
     {
         // dump();
-        dd($request->ref_id);
+
 
         $currencies = DB::table('currencies')->where('id', $request->Currenc)->first();
         $id = Auth::id();

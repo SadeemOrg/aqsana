@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Fields\HasMany;
 
 class BusesCompany extends Resource
 {
@@ -35,7 +36,7 @@ class BusesCompany extends Resource
 
     public static function group()
     {
-        return __('Bus');
+        return __('the Busss');
     }
 
     /**
@@ -61,16 +62,16 @@ class BusesCompany extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__("Name"),"name"),
             Text::make(__("Describtion"),"description"),
-            Number::make(__("cost"),"cost")->step(1.0),
             Number::make(__("number of buses"),"number_of_buses")->step(1.0),
+            Number::make(__("cost"),"cost")->step(1.0),
             Text::make(__("contact person"),"contact_person"),
             Number::make(__("phone number"),"phone_number"),
 
 
             Select::make(__("status"),"status")
             ->options([
-                '1' => 'available',
-                '2' => 'un available',
+                '1' => __('available'),
+                '2' => __('un available'),
 
 
                 ])->displayUsingLabels()
@@ -82,7 +83,7 @@ class BusesCompany extends Resource
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
             hideWhenUpdating(),
 
-
+            HasMany::make(__('bus'),'Bus', \App\Nova\Bus::class),
 
         ];
     }

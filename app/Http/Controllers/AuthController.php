@@ -89,14 +89,12 @@ class AuthController extends Controller
         $fields = $request->validate([
             'name' => 'required|string',
             'email' => 'string|email',
-            'id' => 'string|required'
-
         ]);
 
 
         // Check email
 
-        $user = User::where('social_media_id', $fields['email'])->first();
+        $user = User::where('email', $fields['email'])->first();
         if ($user != null) {
 
             $token = $user->createToken('myapptoken')->plainTextToken;
@@ -110,7 +108,7 @@ class AuthController extends Controller
         }
 
 
-        $user = User::where('social_media_id', $fields['id'])->first();
+        $user = User::where('social_media_id', $request->get("social_media_id"))->first();
 
         if ($user != null) {
 
@@ -133,8 +131,8 @@ class AuthController extends Controller
                     'name' => $fields['name'],
                     'email' => $fields['email'],
                     'password' =>  bcrypt($password),
-                    'social_media_id' => $fields['id'],
-                    'role' => "user",
+                    'social_media_id' => $request->get("social_media_id"),
+                    'user_role' => "user",
                     'nick_name' => $fields['name'],
                 ]);
             }
@@ -145,9 +143,9 @@ class AuthController extends Controller
                $password = Str::random(8);
                 $user = User::create([
                 'name' => $fields['name'],
-                'social_media_id' => $fields['id'],
+                'social_media_id' => $fields['social_media_id'],
                 'password' =>  bcrypt($password),
-                'role' => "user",
+                'user_role' => "user",
                 'nick_name' => $fields['name'],
                 
                 ]);
@@ -340,12 +338,11 @@ class AuthController extends Controller
     public function  update_fcm_token(Request $request)
     {
         $fields = $request->validate([
-            'id' => 'required',
             'fcm_token' => 'required',
 
         ]);
 
-        $user = user::find($fields['id']);
+        $user = user::find(Auth()->id());
         $user->fcm_token = $request->get("fcm_token");
         $is_save = $user->save();
         if ($is_save) {
@@ -506,5 +503,35 @@ class AuthController extends Controller
         ];
         return response($response, 200);
 
+    }
+
+    public function delete()
+    {
+        
+            $user = Auth::user();
+            if($user != null) {
+                if($user->user_role == "user") {
+                    $user_delete =  User::where("id",$user->id)->delete();
+                    $response = [
+                      'success' => "true",
+                      'message' => "Success delete user"
+                  ];
+                   return response($response, 200); 
+                } else{
+                    $response = [
+                        'success' => "false",
+                        'message' => "Not Auth"
+                    ];
+                    return response($response, 401); 
+                }
+              
+            } else {
+                $response = [
+                    'success' => "false",
+                    'message' => "Not Auth"
+                ];
+                return response($response, 401); 
+            }
+        
     }
 }

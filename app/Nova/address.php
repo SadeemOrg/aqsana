@@ -28,7 +28,7 @@ class address extends Resource
     public static $title = 'name_address';
     public static function label()
     {
-        return __('address');
+        return __('saved addresss');
     }
     public static function group()
     {
@@ -50,13 +50,22 @@ class address extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        $id = Auth::id();
+        // return $query->whereIn('created_by',  $id );
+
+
+    }
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Select::make(__("type"), "type")->options([
                 '1' => __('bus'),
-                '2' => __('Trip'),
+                '2' => __('Alhisalat'),
+                '3' => __('Project'),
+                '4' => __('addrese buss'),
             ])->displayUsingLabels(),
             Text::make(__('Name'), "name_address"),
             Text::make(__("description"), "description"),

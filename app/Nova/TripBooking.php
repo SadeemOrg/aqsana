@@ -5,28 +5,25 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Volunteer extends Resource
+class TripBooking extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Volunteer::class;
+    public static $model = \App\Models\TripBooking::class;
     public static function label()
     {
-        return __('Volunteers');
+        return __('TripBooking');
     }
-
     public static function group()
     {
-        return __('Volunteers');
+        return __('TripBooking');
     }
-    // public static $subGroup = 'Vendors';
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
@@ -53,16 +50,16 @@ class Volunteer extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make(__('project'), 'project', \App\Nova\Project::class),
-            BelongsTo::make(__('user'), 'User', \App\Nova\User::class),
-            Select::make(__("Status"), "address_status")->options([
-                '1' => __('Volunteer'),
-                '0' => __('not Volunteer'),
-            ])->displayUsingLabels(),
+            BelongsTo::make(__('project'), 'Project', \App\Nova\Project::class),
+            BelongsTo::make(__('user'), 'Users', \App\Nova\User::class),
+            BelongsTo::make(__('bus'), 'Buses', \App\Nova\Bus::class),
+            Text::make(__('number phone'), 'number_phone'),
+            Text::make(__('number_of_people'), 'number_of_people'),
+            Text::make(__('reservation_amount'), 'reservation_amount'),
+
 
 
         ];
-
     }
 
     /**

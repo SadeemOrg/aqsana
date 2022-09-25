@@ -36,6 +36,7 @@ Route::post('/payment', [PaymentController::class, 'sendMoney']);
 
 Route::post('/register_login_social_media', [AuthController::class, 'register_login_social_media']);
 Route::post('/login_social_media', [AuthController::class, 'login_social_media']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/user/update', [AuthController::class, 'update']);
@@ -66,10 +67,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //Prrojects
     Route::get('/projects-auth', [ProjectController::class, 'index']);
-    
+
+
+    Route::post('/delete', [AuthController::class, 'delete']);
+    Route::put('/cm-firebase-token', [AuthController::class, 'update_fcm_token']);
 });
 
-Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
+// Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);
 Route::post('/reset_password_request', [AuthController::class, 'reset_password_request']);
 Route::post('/verification_token', [AuthController::class, 'verification_token']);
 Route::post('/update_password', [AuthController::class, 'update_password']);

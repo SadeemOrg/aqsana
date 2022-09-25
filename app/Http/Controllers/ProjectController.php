@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Volunteer;
+use App\Models\ProjectCity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,6 +33,24 @@ class ProjectController extends BaseController
             } else {
                 $project->is_volunteer_user = 0; 
             }
+
+            $projectCities = ProjectCity::where("project_id",$project->id)->with('City')->get();
+            $projectCitiesString = "";
+            if($projectCities != null && !empty($projectCities)) {
+            
+                for($i=0; $i< count($projectCities);$i++){
+                    $city = $projectCities[$i]; 
+                    if($projectCitiesString == "") {
+                        $projectCitiesString = $city->city->name;
+                    } else {
+                        $projectCitiesString = $projectCitiesString.','.$city->city->name;
+                    }
+                   
+                }
+            
+            }
+
+            $project->projectCities = $projectCitiesString;
 
         });
 

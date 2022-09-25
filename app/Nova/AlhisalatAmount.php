@@ -6,7 +6,10 @@ use App\Nova\Actions\AlhisalatColect;
 use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -47,19 +50,41 @@ class AlhisalatAmount extends Resource
     {
         return __('Financial management');
     }
+    public static function availableForNavigation(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->type() == 'admin' || $user->type() == 'financial_user') {
+            return true;
+        } else return false;
+    }
+    public static function authorizedToCreate(Request $request)
+    {
+        return false;
+    }
     /**
      * Get the fields displayed by the resource.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+
+        return $query->where('status','>','2');
+    }
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Number::make(__("number alhisala"), "number_alhisala")->readonly(),
-            BelongsTo::make(__('address'), 'address', \App\Nova\address::class)->readonly(),
+            BelongsTo::make(__('Alhisalat'), 'Alhisalat', \App\Nova\Alhisalat::class),
 
+            // Number::make(__("number alhisala"), "number_alhisala")->readonly(),
+            // BelongsTo::make(__('address'), 'address', \App\Nova\address::class)->readonly(),
+
+
+
+            // BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            // BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             ActionButton::make(__('Complet'))
             ->action((new AlhisalatStatuscompleted)
             ->confirmText(__('Are you sure you want to Complet  this Alhisalat?'))

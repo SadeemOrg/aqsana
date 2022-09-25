@@ -28,7 +28,7 @@ class Role extends Resource
     }
     public static function group()
     {
-        return __('User');
+        return __('The Users');
     }
      public static $title = 'role';
     public static $priority = 2;
@@ -51,8 +51,8 @@ class Role extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('code_role')),
-            Text::make(__('role')),
+            Text::make(__('code_role'),'code_role'),
+            Text::make(__('role'),'role'),
             Boolean::make(__("status"),"status"),
         ];
     }

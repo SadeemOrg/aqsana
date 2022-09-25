@@ -65,8 +65,17 @@ class receiptVoucher extends Resource
             Select::make(__("type"), "type")->options([
                 '1' => __('Alhisalat'),
                 '2' => __('doner'),
-                '3' => __('else'),
+                '3' => __('the receipt Voucher'),
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class)->canSee(function(){
+                return $this->type === '1';
+            }),
+            BelongsTo::make(__('reference_id'), 'Donations', \App\Nova\Donations::class)->canSee(function(){
+                return $this->type === '2';
+            }),
+          Text::make(__('reference_id'), 'reference_id')->readonly()->hideWhenCreating()->hideWhenUpdating()->canSee(function(){
+            return $this->type === '3';
+        }),
 
             NovaDependencyContainer::make([
                 Select::make(__('Alhisalat'), "ref_id")
@@ -109,11 +118,11 @@ class receiptVoucher extends Resource
 
             Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
 
-            Select::make(__('approval'), 'approval')->options([
-                1 => 'approval',
-                2 => 'reject',
-            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
-            Text::make(__("reason_of_reject"), "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
+            // Select::make(__('approval'), 'approval')->options([
+            //     1 => 'approval',
+            //     2 => 'reject',
+            // ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            // Text::make(__("reason_of_reject"), "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
 
 
 
@@ -128,6 +137,7 @@ class receiptVoucher extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->main_type = '1';
+        $model->type = '3';
         $model->equivelant_amount=$new->rate*$request->transact_amount;
     }
     public static function beforeUpdate(Request $request, $model)

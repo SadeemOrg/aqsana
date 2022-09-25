@@ -35,11 +35,11 @@ class User extends Resource
     public static $title = 'name';
     public static function label()
     {
-        return __('User');
+        return __('The Users');
     }
     public static function group()
     {
-        return __('User');
+        return __('The Users');
     }
     /**
      * The columns that should be searched.
@@ -63,17 +63,17 @@ class User extends Resource
 
             Gravatar::make()->maxWidth(50),
 
-            Text::make(__('Name'))
+            Text::make(__('Name'),'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make(__('Email'))
+            Text::make(__('Email'),'email')
                 ->sortable()
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
-            Password::make(__('Password'))
+            Password::make(__('Password'),'password')
                 ->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
@@ -85,11 +85,11 @@ class User extends Resource
             // Date::make('Birth Date', 'birth_date'),
             Image::make(__('photo'), 'photo')->disk('public'),
             BelongsTo::make('Role'),
-            BelongsTo::make('City'),
+            // BelongsTo::make('City'),
 
 
 
-            HasMany::make('Alhisalat'),
+
 
         ];
     }

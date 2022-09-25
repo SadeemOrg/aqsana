@@ -45,6 +45,9 @@ use Epartment\NovaDependencyContainer\ActionHasDependencies;
 use Laravel\Nova\Fields\Boolean;
 use Gwd\FlexibleContent\FlexibleContent;
 use Manogi\Tiptap\Tiptap;
+use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
+use DigitalCreative\CollapsibleResourceManager\Resources\TopLevelResource;
+use DigitalCreative\CollapsibleResourceManager\Resources\Group;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -334,7 +337,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make(__('image description'), 'image_alt_our_vision_about_us'),
 
                 ], __('Goals') => [
-                    Flexible::make('Goals'  )
+                    Flexible::make(__('Goals'),'Goals')
                         ->addLayout(__('Goals'), 'wysiwyg', [
                             Text::make(__('title'), 'Goals_section_text'),
                             Text::make(__('sup text'), 'Goals_section_sup_text'),
@@ -344,7 +347,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Image::make(__('IMAGE'), 'main_section_image_achievements'),
                     Text::make(__('image description'), 'image_alt_achievements_about_us'),
 
-                    Flexible::make('achievements', 'achievements')
+                    Flexible::make(__('achievements'), 'achievements')
                         ->addLayout(__('achievements'), 'wysiwyg', [
                             Text::make(__('title'), 'achievements_section_text'),
                         ])
@@ -359,7 +362,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 __('Connect with us')    => [
 
                     Text::make(__('heder text'), 'heder_text_main_Connectus'),
-                    Text::make(__('main text'), 'text_main_Connectus'),
+                    Text::make(__('title'), 'text_main_Connectus'),
                     Text::make(__('sup text'), 'sup_text_main_Connectus'),
                     Text::make(__('phone'), 'phone_Connectus'),
                     Text::make(__('whatsapp'), 'whatsapp_Connectus'),
@@ -642,8 +645,23 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-            new NovaSettings,
-            new \Infinety\Filemanager\FilemanagerTool(),
+
+            (new NovaSettings)->canSee(function () {
+                $user = Auth::user();
+
+                if ($user->type() == 'admin' ||$user->type() == 'website_admin' ) {
+                    return true;
+                }
+            }),
+
+          (  new \Infinety\Filemanager\FilemanagerTool())->canSee(function () {
+            $user = Auth::user();
+
+            if ($user->type() == 'admin' ||$user->type() == 'website_admin' ) {
+                return true;
+            }
+        }),
+
             // ( new NovaSettings)->canSee(function ($request) {
             //     $user = Auth::user();
             //     return  ($user->type() == 'website_admin' ) ;

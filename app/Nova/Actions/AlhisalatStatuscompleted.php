@@ -50,16 +50,16 @@ class AlhisalatStatuscompleted extends Action
                 );
 
 
-                if ($fields->new_alhasele) {
-                $new_data = $model->replicate();
-                $new_data->status ='1';
-                $new_data->number_alhisala ='1';
-                $new_data->created_by ='1';
-                $new_data->created_at = now();
-                $new_data->save();
+            //     if ($fields->new_alhasele) {
+            //     $new_data = $model->replicate();
+            //     $new_data->status ='1';
+            //     $new_data->number_alhisala ='1';
+            //     $new_data->created_by ='1';
+            //     $new_data->created_at = now();
+            //     $new_data->save();
 
-                return Action::redirect('/Admin/resources/alhisalat-amounts/' . $new_data->id . '/edit');
-            }
+            //     return Action::redirect('/Admin/resources/alhisalat-amounts/' . $new_data->id . '/edit');
+            // }
 
 
 
@@ -76,8 +76,8 @@ class AlhisalatStatuscompleted extends Action
     {
         return [
 
-            Text::make("alhisala amount", "amount"),
-            Boolean::make("Add new  alhisala", "new_alhasele")
+            Text::make(__("alhisala amount"), "amount"),
+            // Boolean::make("Add new  alhisala", "new_alhasele")
         ];
     }
 }

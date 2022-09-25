@@ -17,6 +17,7 @@ use App\Models\Income;
 use App\Nova\Actions\AlhisalatColect;
 use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
+use App\Nova\Actions\AlhisalatSurrender;
 use App\Nova\Filters\AlhisalatStatusFilters;
 use AwesomeNova\Cards\FilterCard;
 use Epartment\NovaDependencyContainer\HasDependencies;
@@ -66,7 +67,7 @@ class Alhisalat extends Resource
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'number_alhisala';
 
     /**
      * The columns that should be searched.
@@ -110,69 +111,72 @@ class Alhisalat extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Number::make(__("number alhisala"), "number_alhisala")
-            ->withMeta([
-                'value' => $this->user_id ?? auth()->user()->id,
-            ])->readonly(),
+            Text::make(__("number alhisala"), "number_alhisala")->withMeta([
+                'value' => uniqid(),
+            ])->readonly()->hideWhenUpdating()->hideFromDetail()->hideFromIndex(),
+
+            Text::make(__("number alhisala"), "number_alhisala")
+                ->readonly()->hideWhenCreating(),
 
             ActionButton::make(__('colect'))
-            ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
-                ->confirmButtonText(__('colect'))
-                ->cancelButtonText(__('Dont colect')), $this->id)
-            ->canSee(function () {
-                return $this->status === '1';
-            })->text(__('colect'))->showLoadingAnimation()
-            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to colect  this Alhisalat?'))
+                    ->confirmButtonText(__('colect'))
+                    ->cancelButtonText(__('Dont colect')), $this->id)
+                ->canSee(function () {
+                    return $this->status === '1';
+                })->text(__('colect'))->showLoadingAnimation()
+                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
+
+
+                ActionButton::make(__('colect'))
+                ->action((new AlhisalatSurrender)->confirmText(__('Are you sure you want to Surrender  this Alhisalat?'))
+                    ->confirmButtonText(__('Surrender'))
+                    , $this->id)
+                ->canSee(function () {
+                    return $this->status === '2';
+                })->text(__('AlhisalatSurrender'))->showLoadingAnimation()
+                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
             ActionButton::make(__('colect'))
-            ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
-                ->confirmButtonText(__('sent'))
-                ->cancelButtonText(__('sent')), $this->id)
-            ->canSee(function () {
-                return $this->status  === '2';
-            })->text(__('sent'))->showLoadingAnimation()
-            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
+                    ->confirmButtonText(__('colect '))
+                    ->cancelButtonText(__('sent done')), $this->id)
+                ->canSee(function () {
+                    return $this->status  >= '3';
+                })->readonly()->text(__('sent done'))->showLoadingAnimation()
+                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
+            Select::make(__('address'), 'address_id')
+                ->options(function () {
+                    $id = Auth::id();
+                    $addresss =  \App\Models\address::where('created_by',  $id)->where('type','2')->get();
+                    $address_type_admin_array =  array();
 
-            ActionButton::make(__('colect'))
-            ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
-            ->confirmButtonText(__('colect '))
-            ->cancelButtonText(__('sent done')), $this->id)
-            ->canSee(function () {
-                return $this->status  > '2';
-            })->readonly()->text(__('sent Done'))->showLoadingAnimation()
-            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                    foreach ($addresss as $address) {
 
-            Select::make(__('address'),'address_id')
-            ->options( function() {
-                $id = Auth::id();
-                $addresss =  \App\Models\address::where('created_by',  $id)->get();
-                $address_type_admin_array =  array();
+                        if ($address->Area == null || $this->admin_id == $address['id']) {
+                            $address_type_admin_array += [$address['id'] => ($address['name_address'])];
+                        }
+                    }
 
-                foreach($addresss as $address) {
-
-                    if ($address->Area == null || $this->admin_id== $address['id'] ) {
-                    $address_type_admin_array += [$address['id'] => ($address['name_address'] )];
-                }
-                }
-
-                return $address_type_admin_array;
-               })->hideFromIndex()->hideFromDetail()
-                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                        return null;
-                    }),
+                    return $address_type_admin_array;
+                })->hideFromIndex()->hideFromDetail()
+                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                    return null;
+                }),
             BelongsTo::make(__('address'), 'address', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
-            Flexible::make(__('newadres '), 'newadres')
-            ->readonly(true)
-            ->limit(1)
-            ->hideFromDetail()->hideFromIndex()
-            ->addLayout(__('Add new bus'), 'bus', [
+            Flexible::make(__('newadres'), 'newadres')
+                ->readonly(true)
+                ->limit(1)
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('Add new bus'), 'bus', [
 
-                Text::make(__('Name'), "name_address"),
-                Text::make(__("description"), "description"),
-                Text::make(__("phone number"), "phone_number_address"),
+                    Text::make(__('Name'), "name_address"),
+                    Text::make(__("description"), "description"),
+                    Text::make(__("phone number"), "phone_number_address"),
                     GoogleMaps::make(__('current_location'), 'current_location'),
                     Select::make(__("Status"), "address_status")->options([
                         '1' => __('active'),
@@ -221,8 +225,9 @@ class Alhisalat extends Resource
             Multiselect::make(__("Status"), "status")->options([
                 '1' => 'تم  الوضع',
                 '2' => 'تم جمع ',
-                '3' => 'تم التسليم ',
+                '3' => 'تم التسليم',
                 '4' => 'تم العد',
+
 
             ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -233,12 +238,13 @@ class Alhisalat extends Resource
 
     public static function beforeCreate(Request $request, $model)
     {
+
         // dd($request->address_id);
         // $request->address_id=2;
         $id = Auth::id();
         $model->created_by = $id;
         $model->status = '1';
-        $model->number_alhisala = '1';
+        // $model->number_alhisala = '1';
 
         // dd( $model);
 
@@ -251,17 +257,16 @@ class Alhisalat extends Resource
     public static function beforeSave(Request $request, $model)
     {
 
-
+        $model->number_alhisala = $request->number_alhisala;
 
         // $request->address = '2';
-        // dd($request->address);
+        // dd($request->number_alhisala);
         // dd($request->address);
         // dd($request->newadres[0]['attributes']['name_address']);
         $id = Auth::id();
         // $request->address='1';
         if (!$request->address_id) {
-            if($request->newadres[0]['attributes']['name_address']&&$request->newadres[0]['attributes']['description']&&$request->newadres[0]['attributes']['phone_number_address']&&$request->newadres[0]['attributes']['current_location']&&$request->newadres[0]['attributes']['address_status'])
-              {
+            if ($request->newadres[0]['attributes']['name_address'] && $request->newadres[0]['attributes']['description'] && $request->newadres[0]['attributes']['phone_number_address'] && $request->newadres[0]['attributes']['current_location'] && $request->newadres[0]['attributes']['address_status']) {
                 //   dd("hf");
                 DB::table('addresses')
                     ->Insert(
@@ -271,7 +276,7 @@ class Alhisalat extends Resource
                             'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
                             'current_location' => $request->newadres[0]['attributes']['current_location'],
                             'status' => $request->newadres[0]['attributes']['address_status'],
-                            'type'=>'1',
+                            'type' => '1',
                             'created_by' => $id
                         ]
                     );
@@ -280,8 +285,7 @@ class Alhisalat extends Resource
                     ->where('id', $model->id)
                     ->update(['address_id' => $address->id]);
             }
-        }
-        else   $model->address_id=$request->address_id;
+        } else   $model->address_id = $request->address_id;
         // dd("finsh");
     }
 
@@ -342,13 +346,14 @@ class Alhisalat extends Resource
             //         }
             //     }
             // ),
-            (new AlhisalatStatuscompleted)
+            (new AlhisalatStatuscompleted),
             //     ->canSee(function () {
             //         if ($this->status == '2' ) {
             //             return true;
             //         }
             //     }
             // ),
+            (new AlhisalatSurrender),
         ];
     }
 }

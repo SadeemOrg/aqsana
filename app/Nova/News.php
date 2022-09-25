@@ -84,7 +84,7 @@ class News extends Resource
 
             ID::make(__('ID'), 'id')->sortable(),
             ActionButton::make(__('POST NEWS'))
-                ->action((new PostNews)->confirmText('Are you sure you want to read  this Massage?')
+                ->action((new PostNews)->confirmText(__('Are you sure you want to post  this NEWS?'))
                     ->confirmButtonText(__('post'))
                     ->cancelButtonText(__('Dont post')), $this->id)
                     ->readonly(function () {
