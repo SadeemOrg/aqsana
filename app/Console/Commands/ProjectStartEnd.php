@@ -42,20 +42,29 @@ class ProjectStartEnd extends Command
     public function handle()
     {
 
+
         $start = Carbon::today();
         $end = Carbon::today()->addDays(0);
-        $startprojects = DB::table('projects')
-        ->whereBetween('start_date', [$start, $end])
+            $startprojects = DB::table('projects')
+        ->where([
+                ['start_date', '<' ,$start],
+                ['end_date', '>' ,$end],
+            ])
+
         ->get();
         $endprojects = DB::table('projects')
-        ->whereBetween('end_date', [$start, $end])
+        ->where([
+                ['start_date', '<' ,$start],
+                ['end_date', '<' ,$end],
+            ])
+
         ->get();
-        foreach ($startprojects as & $startproject) {
+        foreach ($startprojects as  $startproject) {
             DB::table('project_status')
             ->where('project_id', $startproject->id)
             ->update(['status' => 1]);
         }
-        foreach ($endprojects as & $endtproject) {
+        foreach ($endprojects as  $endtproject) {
             DB::table('project_status')
             ->where('project_id', $endtproject->id)
             ->update(['status' => 2]);
