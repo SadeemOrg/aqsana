@@ -18,7 +18,7 @@ class ProjectController extends BaseController
     public function index(Request $request)
     {
   
-        $projects = Project::where("project_type","1")->orderBy('created_at', 'desc')->paginate(15);
+        $projects = Project::where("project_type","1")->where("report_status","1")->orderBy('created_at', 'desc')->paginate(15);
 
         $projects->map(function($project){
             $check_volunteer = Volunteer::where("user_id",Auth()->id())->where("project_id",$project->id)->first();
