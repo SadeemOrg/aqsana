@@ -135,7 +135,7 @@ class QawafilAlaqsa extends Resource
                     ->canSee(function () {
                         $user = Auth::user();
 
-                        if ($user->type() == 'regular_city') {
+                        if ($user->type() == 'regular_city'||$user->type() == 'regular_area') {
                             return true;
                         }
                     })
