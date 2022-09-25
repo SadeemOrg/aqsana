@@ -72,6 +72,13 @@ class TripBudjet extends Resource
     {
         return false;
     }
+    public static function availableForNavigation(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->type() == 'admin' || $user->type() == 'financial_user') {
+            return true;
+        } else return false;
+    }
     public function fields(Request $request)
     {
         return [

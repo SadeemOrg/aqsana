@@ -29,10 +29,12 @@ class ApprovalRejectProjec extends Action
      * @return mixed
      */
     public function handle(ActionFields $fields, Collection $models)
-    {
-        // dd("fkii");
-        $user = Auth::user();
+    {    $user = Auth::user();
         $id = Auth::id();
+        // dd("fkii");
+        if ($user->type() == 'regular_city')
+        {
+
         $citye =   City::where('admin_id', $id)
             ->first();
         foreach ($models as $model) {
@@ -74,8 +76,9 @@ class ApprovalRejectProjec extends Action
         //         ['status' => 'regect']
         //     );
         // }
+    }
         if ($fields->approval == "1")    return Action::redirect('/Admin/resources/projects/' . $models[0]->id . '/edit');
-
+        if ($user->type() == 'regular_area') return Action::redirect('/Admin/resources/projects/' . $models[0]->id . '/edit');
         // Nova::initialPath('/resources/users');
         // return action::message('the done');
     }
@@ -88,6 +91,10 @@ class ApprovalRejectProjec extends Action
      */
     public function fields()
     {
+        $user = Auth::user();
+
+        if($user->type() == 'regular_city')
+        {
         return [
 
 
@@ -109,5 +116,8 @@ class ApprovalRejectProjec extends Action
 
 
         ];
+    }
+    else   return [];
+
     }
 }

@@ -18,7 +18,7 @@ class AlhisalatPolicy
      */
     public function viewAny(User $user)
     {
-        return  ($user->type() == 'admin' || $user->type() == 'regular_area' ||$user->type() == 'financial_user') ;
+        return  ($user->type() == 'admin' || $user->type() == 'regular_area' || $user->type() == 'regular_city'||$user->type() == 'financial_user') ;
     }
 
     /**
@@ -30,7 +30,7 @@ class AlhisalatPolicy
      */
     public function view(User $user, Alhisalat $alhisalat)
     {
-          return  ($user->type() == 'admin' || $user->type() == 'regular_area' ||$user->type() == 'financial_user') ;
+        return  ($user->type() == 'admin' || $user->type() == 'regular_area' || $user->type() == 'regular_city'||$user->type() == 'financial_user') ;
     }
 
     /**
@@ -41,7 +41,7 @@ class AlhisalatPolicy
      */
     public function create(User $user)
     {
-          return  ($user->type() == 'admin' || $user->type() == 'regular_area' ) ;
+        return  ($user->type() == 'admin' || $user->type() == 'regular_area' || $user->type() == 'regular_city'||$user->type() == 'financial_user') ;
     }
 
     /**
@@ -53,7 +53,7 @@ class AlhisalatPolicy
      */
     public function update(User $user, Alhisalat $alhisalat)
     {
-          return  ($user->type() == 'admin' || $user->type() == 'regular_area' ||$user->type() == 'financial_user') ;
+        return  ($user->type() == 'admin' || $user->type() == 'regular_area' || $user->type() == 'regular_city'||$user->type() == 'financial_user') ;
     }
 
     /**
