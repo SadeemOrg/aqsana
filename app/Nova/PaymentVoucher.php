@@ -65,10 +65,10 @@ class PaymentVoucher extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             Select::make(__("type"), "type")->options([
+                '0' => __('else'),
                 '1' => __('project'),
                 '2' => __('qawael'),
                 '3' => __('trip'),
-                '4' => __('else'),
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('reference_id'), 'project', \App\Nova\Project::class)->canSee(function(){
                 return $this->type != '4';
