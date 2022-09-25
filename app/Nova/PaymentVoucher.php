@@ -65,7 +65,7 @@ class PaymentVoucher extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             Select::make(__("type"), "type")->options([
-                '0' => __('else'),
+                '0' => __('the Payment Voucher'),
                 '1' => __('project'),
                 '2' => __('qawael'),
                 '3' => __('trip'),
