@@ -716,7 +716,7 @@ class Project extends Resource
         }
         if ($request->newbus) {
             $buss = $request->newbus;
-            // dd($request->newbus);
+
             foreach ($buss as $bus) {
                 // dd($bus['attributes']);
                 if ($bus['attributes']['name_driver']&&$bus['attributes']['BusesCompany']&&$bus['attributes']['bus_number']&&$bus['attributes']['number_person_on_bus']&&$bus['attributes']['seat_price']&&$bus['attributes']['from']&&$bus['attributes']['to']&&$bus['attributes']['phone_number']) {

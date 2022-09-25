@@ -98,7 +98,7 @@ class Trip extends Resource
             $citye =   City::where('admin_id', $id)
                 ->select('id')->first();
             $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
-        }  else   $projects = DB::table('project_city')->get();
+        } else   $projects = DB::table('project_city')->get();
 
 
         $stack = array();
@@ -135,7 +135,7 @@ class Trip extends Resource
                     ->canSee(function () {
                         $user = Auth::user();
 
-                        if ($user->type() == 'regular_city'||$user->type() == 'regular_area') {
+                        if ($user->type() == 'regular_city' || $user->type() == 'regular_area') {
                             return true;
                         }
                     })
@@ -166,7 +166,7 @@ class Trip extends Resource
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
                         $id = Auth::id();
-                        $addresss =  \App\Models\address::where('created_by',  $id)->where('type','4')->get();
+                        $addresss =  \App\Models\address::where('created_by',  $id)->where('type', '4')->get();
                         $address_type_admin_array =  array();
 
                         foreach ($addresss as $address) {
@@ -206,7 +206,7 @@ class Trip extends Resource
                 Select::make(__('trip to'), 'trip_to')
                     ->options(function () {
                         $id = Auth::id();
-                        $addresss =  \App\Models\address::where('created_by',  $id)->where('type','4')->get();
+                        $addresss =  \App\Models\address::where('created_by',  $id)->where('type', '4')->get();
                         $address_type_admin_array =  array();
 
                         foreach ($addresss as $address) {
@@ -589,9 +589,9 @@ class Trip extends Resource
 
 
 
-            HasMany::make(__('Donations'),'Donations', \App\Nova\Donations::class),
-            HasMany::make(__('TripBooking'),'TripBooking', \App\Nova\TripBooking::class),
-            belongsToMany::make(__('Bus'),'Bus', \App\Nova\Bus::class),
+            HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
+            HasMany::make(__('TripBooking'), 'TripBooking', \App\Nova\TripBooking::class),
+            belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
         ];
     }
     public static function beforeCreate(Request $request, $model)
@@ -601,6 +601,7 @@ class Trip extends Resource
         $model->project_type = '3';
         $model->is_reported = '1';
         $model->is_bus = '1';
+        $model->sector = '0';
     }
 
     public static function afterCreate(Request $request, $model)
@@ -631,7 +632,7 @@ class Trip extends Resource
                 );
         }
     }
-    public static function beforeSave(Request $request, $model)
+    public static function afterSave(Request $request, $model)
     {
 
         $id = Auth::id();
@@ -711,26 +712,35 @@ class Trip extends Resource
             //     );
         }
         if ($request->newbus) {
-            $buss = json_decode($request->newbus);
+            $buss = $request->newbus;
 
-            foreach ($buss as $user) {
-                //  dd($user);
-
-                DB::table('buses')
-                    ->insert(
-                        ['name_driver' => $user->name_driver, 'bus_number' => $user->bus_number, 'number_of_seats' => $user->number_of_seats, 'seat_price' => $user->seat_price, 'phone_number_driver' => $user->phone_number_driver],
-
-                    );
-                $bus =  \App\Models\Bus::where('bus_number', $user->bus_number)->first();
+            foreach ($buss as $bus) {
+                // dd($bus['attributes']);
+                if ($bus['attributes']['name_driver'] && $bus['attributes']['BusesCompany'] && $bus['attributes']['bus_number'] && $bus['attributes']['number_person_on_bus'] && $bus['attributes']['seat_price'] && $bus['attributes']['from'] && $bus['attributes']['to'] && $bus['attributes']['phone_number']) {
 
 
-                // dd($users['id']);
+                    DB::table('buses')
+                        ->insert(
+                            [
+                                'name_driver' => $bus['attributes']['name_driver'],
+                                'company_id' => $bus['attributes']['BusesCompany'],
+                                'bus_number' => $bus['attributes']['bus_number'],
+                                'number_of_seats' => $bus['attributes']['number_person_on_bus'],
+                                'seat_price' => $bus['attributes']['seat_price'],
+                                'travel_from' => $bus['attributes']['from'],
+                                'travel_to' => $bus['attributes']['to'],
+                                'phone_number_driver' => $bus['attributes']['phone_number'],
+                                'status' => '1',
+                            ]
+                        );
+                    $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
 
-                DB::table('project_bus')
-                    ->updateOrInsert(
-                        ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
+                    DB::table('project_bus')
+                        ->updateOrInsert(
+                            ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
 
-                    );
+                        );
+                }
             }
         }
         if ($request->City) {
@@ -833,7 +843,7 @@ class Trip extends Resource
             (new ApprovalRejectProjec)->canSee(function () {
                 $user = Auth::user();
 
-                if ($user->type() == 'regular_city'||$user->type() == 'regular_area') {
+                if ($user->type() == 'regular_city' || $user->type() == 'regular_area') {
                     return true;
                 }
             }),
