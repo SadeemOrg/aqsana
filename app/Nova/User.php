@@ -85,7 +85,7 @@ class User extends Resource
             // Date::make('Birth Date', 'birth_date'),
             Image::make(__('photo'), 'photo')->disk('public'),
             BelongsTo::make('Role'),
-            BelongsTo::make('City'),
+            // BelongsTo::make('City'),
 
 
 
