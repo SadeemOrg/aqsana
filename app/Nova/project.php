@@ -187,7 +187,7 @@ class Project extends Resource
                 // Select::make(__('trip from'), 'trip_from')
                 //     ->options(function () {
                 //         $id = Auth::id();
-                //         $addresss =  \App\Models\address::where('created_by',  $id)->get();
+                //         $addresss =  \App\Models\address::where('created_by',  $id)->where('type','3')->get();
                 //         $address_type_admin_array =  array();
 
                 //         foreach ($addresss as $address) {
@@ -227,7 +227,7 @@ class Project extends Resource
                 // Select::make(__('trip to'), 'trip_to')
                 //     ->options(function () {
                 //         $id = Auth::id();
-                //         $addresss =  \App\Models\address::where('created_by',  $id)->get();
+                //         $addresss =  \App\Models\address::where('created_by',  $id)->where('type','3')->get();
                 //         $address_type_admin_array =  array();
 
                 //         foreach ($addresss as $address) {
