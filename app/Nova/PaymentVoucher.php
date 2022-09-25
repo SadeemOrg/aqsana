@@ -71,12 +71,12 @@ class PaymentVoucher extends Resource
                 '3' => __('trip'),
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('reference_id'), 'project', \App\Nova\Project::class)->canSee(function(){
-                return $this->type != '4';
+                return $this->type != '0';
             })->hideWhenUpdating()->hideWhenCreating(),
 
 
             Text::make(__('reference_id'), 'reference_id')->readonly()->hideWhenCreating()->hideWhenUpdating()->canSee(function(){
-                return $this->type === '4';
+                return $this->type === '0';
             }),
             // NovaDependencyContainer::make([
             //     Select::make(__('project'), "ref_id")
