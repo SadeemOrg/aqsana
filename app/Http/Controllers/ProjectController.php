@@ -34,7 +34,7 @@ class ProjectController extends BaseController
                 $project->is_volunteer_user = 0; 
             }
 
-            $projectCities = ProjectCity::where("project_id",$project->id)->with('City');
+            $projectCities = ProjectCity::where("project_id",$project->id)->with('City')->get();
 
             $project->projectCities = $projectCities;
 
