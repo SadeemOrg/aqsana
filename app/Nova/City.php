@@ -91,7 +91,7 @@ class City extends Resource
             return [
                 ID::make(__('ID'), 'id')->sortable(),
                 Text::make(__('Name'), 'name'),
-                BelongsTo::make(__('Area'), 'Area', \App\Nova\Area::class)->hideWhenCreating()->hideWhenUpdating(),
+                BelongsTo::make(__('Area'), 'Area', \App\Nova\Area::class),
                 Select::make(__('admin'), 'admin_id')
                     ->options(function () {
                         $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
