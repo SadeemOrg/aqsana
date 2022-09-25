@@ -135,7 +135,7 @@ class Project extends Resource
                     ->canSee(function () {
                         $user = Auth::user();
 
-                        if ($user->type() == 'regular_city') {
+                        if ($user->type() == 'regular_city'||$user->type() == 'regular_area') {
                             return true;
                         }
                     })
@@ -847,7 +847,7 @@ class Project extends Resource
             (new ApprovalRejectProjec)->canSee(function () {
                 $user = Auth::user();
 
-                if ($user->type() == 'regular_city') {
+                if ($user->type() == 'regular_city'||$user->type() == 'regular_area') {
                     return true;
                 }
             }),
