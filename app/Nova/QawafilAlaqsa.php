@@ -175,7 +175,7 @@ class QawafilAlaqsa extends Resource
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
                         $id = Auth::id();
-                        $addresss =  \App\Models\address::where('created_by',  $id)->get();
+                        $addresss =  \App\Models\address::where('created_by',  $id)->where('type','4')->get();
                         $address_type_admin_array =  array();
 
                         foreach ($addresss as $address) {

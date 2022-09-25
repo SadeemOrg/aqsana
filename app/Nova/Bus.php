@@ -114,7 +114,7 @@ class Bus extends Resource
             Select::make(__('trip to'), 'travel_to')
                 ->options(function () {
                     $id = Auth::id();
-                    $addresss =  \App\Models\address::where('created_by',  $id)->get();
+                    $addresss =  \App\Models\address::where('created_by',  $id)->where('type','1')->get();
                     $address_type_admin_array =  array();
 
                     foreach ($addresss as $address) {
