@@ -51,7 +51,7 @@ class VolunteerController extends BaseController
             return $this->sendError('Validate Error', $validator->errors());
         }
 
-        $volunteer = Volunteer::where("project_id",$request->get("id"))->first();
+        $volunteer = Volunteer::where("project_id",$request->get("id"))->where("user_id",Auth()->id())->first();
 
         $volunteer->status = '0';
         $volunteer->save();
