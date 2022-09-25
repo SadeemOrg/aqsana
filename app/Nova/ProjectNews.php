@@ -50,6 +50,10 @@ class ProjectNews extends Resource
     {
         return __('website');
     }
+    public static function authorizedToCreate(Request $request)
+    {
+        return false;
+    }
     public static function availableForNavigation(Request $request)
     {
         if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user'|| $request->user()->type() == 'regular_area'|| $request->user()->type() == 'regular_city') {
