@@ -160,7 +160,7 @@ class PaymentVoucher extends Resource
     public static function beforeUpdate(Request $request, $model)
     {
         // dump();
-        dd($request->ref_id);
+
 
         $currencies = DB::table('currencies')->where('id', $request->Currenc)->first();
         $id = Auth::id();
