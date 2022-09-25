@@ -649,10 +649,11 @@ class Project extends Resource
 
                 );
         }
+
     }
-    public static function beforeSave(Request $request, $model)
+    public static function afterSave(Request $request, $model)
     {
-        //   dd($request->trip_to);
+
         $id = Auth::id();
 
         $citye =   City::where('admin_id', $id)
@@ -718,6 +719,9 @@ class Project extends Resource
             // dd($request->newbus);
             foreach ($buss as $bus) {
                 // dd($bus['attributes']);
+                if ($bus['attributes']['name_driver']&&$bus['attributes']['BusesCompany']&&$bus['attributes']['bus_number']&&$bus['attributes']['number_person_on_bus']&&$bus['attributes']['seat_price']&&$bus['attributes']['from']&&$bus['attributes']['to']&&$bus['attributes']['phone_number']) {
+
+
                 DB::table('buses')
                     ->insert(
                         [
@@ -741,6 +745,7 @@ class Project extends Resource
                     );
             }
         }
+    }
         if ($request->City) {
 
             $City = json_decode($request->City);

@@ -77,8 +77,19 @@ class ApprovalRejectProjec extends Action
         //     );
         // }
     }
-        if ($fields->approval == "1")    return Action::redirect('/Admin/resources/projects/' . $models[0]->id . '/edit');
-        if ($user->type() == 'regular_area') return Action::redirect('/Admin/resources/projects/' . $models[0]->id . '/edit');
+
+//  project_type', '1'
+
+   if ( $models[0]->project_type == '1') {
+    if ($fields->approval == "1" ||$user->type() == 'regular_area')    return Action::redirect('/Admin/resources/projects/' . $models[0]->id . '/edit');
+       }
+       if ( $models[0]->project_type == '2') {
+        if ($fields->approval == "1" ||$user->type() == 'regular_area')    return Action::redirect('/Admin/resources/qawafil-alaqsas/' . $models[0]->id . '/edit');
+           }
+           if ( $models[0]->project_type == '3') {
+            if ($fields->approval == "1" ||$user->type() == 'regular_area')    return Action::redirect('/Admin/resources/trips/' . $models[0]->id . '/edit');
+               }
+
         // Nova::initialPath('/resources/users');
         // return action::message('the done');
     }
