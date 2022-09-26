@@ -124,6 +124,12 @@
         Nova.liftOff()
     </script>
 
+    <script>
+
+    Notification.requestPermission().then(function(permission) { console.log('permiss', permission)});
+
+    </script>
+
 <script>
 
 
@@ -217,6 +223,10 @@ $.ajax({
   });
   console.log(payload.notification);
 });
+
+
 </script>
+
+
 </body>
 </html>

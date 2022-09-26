@@ -562,6 +562,13 @@ $(".contactUsForm").submit(function(e) {
     <script src="{{ asset('assets/front-end/js/main.js') }}"></script>
 </body>
 <!-- <script src="{{ mix('/js/app.js') }}"></script> -->
+
+<script>
+
+Notification.requestPermission().then(function(permission) { console.log('permiss', permission)});
+
+</script>
+
 <script>
     console.log("owais");
   // Your web app's Firebase configuration
