@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => ['auth:nova.auth']], function () {
+Route::group(['middleware' => ['nova.guest:admin']], function () {
     Route::put('/cm-firebase-token-nova', [AuthController::class, 'update_fcm_token']);
 });
 
