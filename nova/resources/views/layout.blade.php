@@ -172,7 +172,7 @@ console.log(token);
 
 ?>
 
-$.post({
+$.put({
       url: '{{url('/')}}/api/cm-firebase-token',
       data: {
           fcm_token: token,
