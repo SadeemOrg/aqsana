@@ -173,9 +173,8 @@ console.log(token);
 ?>
 
 $.post({
-      url: '{{url('/')}}/api/update_fcm_token',
+      url: '{{url('/')}}/api/cm-firebase-token',
       data: {
-          id: "{{Auth::user()->id}}",
           fcm_token: token,
       },
       dataType: 'json',
