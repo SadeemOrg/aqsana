@@ -27,6 +27,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('auth:guard')->get('/user', function (Request $request) {
+    Route::put('/cm-firebase-token-nova', [AuthController::class, 'update_fcm_token']);
+});
+
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 

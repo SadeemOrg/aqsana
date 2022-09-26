@@ -126,7 +126,7 @@
 
 <script>
 
-console.log("owais");
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -173,7 +173,7 @@ console.log(token);
 ?>
 
 $.ajax({
-      url: '{{url('/')}}/api/cm-firebase-token',
+      url: '{{url('/')}}/api/cm-firebase-token-nova',
       type: 'PUT',
       data: {
           fcm_token: token,
