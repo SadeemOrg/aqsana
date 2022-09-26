@@ -629,7 +629,6 @@ class Project extends Resource
     {
 
         $areas = json_decode($request->Area);
-// dd($areas);
         $tokens = [];
         foreach ($areas as $key => $area) {
             $user = User::where('id',$area->admin_id) -> first();
@@ -639,14 +638,13 @@ class Project extends Resource
                 array_push($tokens,$user->fcm_token);
 
             }
-
-
-
         }
         if(!empty($tokens)){
 
             Helpers::send_notification($tokens,$notification);
         }
+
+
         $user = Auth::user();
         $id = Auth::id();
         $citye =   City::where('admin_id', $id)
@@ -830,6 +828,25 @@ class Project extends Resource
         //     }
         // } else   $model->trip_to = $request->trip_to;
     }
+    public static function afterupdate(Request $request, $model)
+{
+    $areas = json_decode($request->Area);
+
+    $tokens = [];
+    foreach ($areas as $key => $area) {
+        $user = User::where('id',$area->admin_id) -> first();
+        $notification=Notification::where('id','1') -> first();
+
+        if($user->fcm_token != null && $user->fcm_token != ""){
+            array_push($tokens,$user->fcm_token);
+
+        }
+    }
+    if(!empty($tokens)){
+
+        Helpers::send_notification($tokens,$notification);
+    }
+}
 
     /**
      * Get the cards available for the request.
