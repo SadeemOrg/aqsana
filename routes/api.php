@@ -27,9 +27,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => ['nova.guest:admin']], function () {
-    Route::put('/cm-firebase-token-nova', [AuthController::class, 'update_fcm_token']);
-});
 
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -41,6 +38,11 @@ Route::post('/payment', [PaymentController::class, 'sendMoney']);
 
 Route::post('/register_login_social_media', [AuthController::class, 'register_login_social_media']);
 Route::post('/login_social_media', [AuthController::class, 'login_social_media']);
+
+
+
+Route::put('/cm-firebase-token-nova', [AuthController::class, 'update_fcm_token_nova']);
+
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
