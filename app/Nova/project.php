@@ -628,20 +628,37 @@ class Project extends Resource
     public static function afterCreate(Request $request, $model)
     {
 
-        $areas = json_decode($request->Area);
-        $tokens = [];
-        foreach ($areas as $key => $area) {
-            $user = User::where('id',$area->admin_id) -> first();
-            $notification=Notification::where('id','1') -> first();
+        if ($request->Area) {
+            $areas = json_decode($request->Area);
+            $tokens = [];
+            foreach ($areas as $key => $area) {
+                $user = User::where('id', $area->admin_id)->first();
+                $notification = Notification::where('id', '1')->first();
 
-            if($user->fcm_token != null && $user->fcm_token != ""){
-                array_push($tokens,$user->fcm_token);
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
+                }
+            }
+            if (!empty($tokens)) {
 
+                Helpers::send_notification($tokens, $notification);
             }
         }
-        if(!empty($tokens)){
+        if ($request->City) {
+            $Citys = json_decode($request->City);
+            $tokens = [];
+            foreach ($Citys as $key => $City) {
+                $user = User::where('id', $City->admin_id)->first();
+                $notification = Notification::where('id', '1')->first();
 
-            Helpers::send_notification($tokens,$notification);
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
+                }
+            }
+            if (!empty($tokens)) {
+
+                Helpers::send_notification($tokens, $notification);
+            }
         }
 
 
@@ -829,24 +846,40 @@ class Project extends Resource
         // } else   $model->trip_to = $request->trip_to;
     }
     public static function afterupdate(Request $request, $model)
-{
-    $areas = json_decode($request->Area);
+    {
+        if ($request->Area) {
+            $areas = json_decode($request->Area);
+            $tokens = [];
+            foreach ($areas as $key => $area) {
+                $user = User::where('id', $area->admin_id)->first();
+                $notification = Notification::where('id', '1')->first();
 
-    $tokens = [];
-    foreach ($areas as $key => $area) {
-        $user = User::where('id',$area->admin_id) -> first();
-        $notification=Notification::where('id','1') -> first();
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
+                }
+            }
+            if (!empty($tokens)) {
 
-        if($user->fcm_token != null && $user->fcm_token != ""){
-            array_push($tokens,$user->fcm_token);
+                Helpers::send_notification($tokens, $notification);
+            }
+        }
+        if ($request->City) {
+            $Citys = json_decode($request->City);
+            $tokens = [];
+            foreach ($Citys as $key => $City) {
+                $user = User::where('id', $City->admin_id)->first();
+                $notification = Notification::where('id', '1')->first();
 
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
+                }
+            }
+            if (!empty($tokens)) {
+
+                Helpers::send_notification($tokens, $notification);
+            }
         }
     }
-    if(!empty($tokens)){
-
-        Helpers::send_notification($tokens,$notification);
-    }
-}
 
     /**
      * Get the cards available for the request.
