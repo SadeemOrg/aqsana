@@ -5,9 +5,9 @@ namespace App\CPU;
 
 class Helpers {
 
-   public static function send_notification($token_fcm,$notification) {
+   public static function send_notification($tokens,$notification) {
 
-            $token = "$token_fcm";  
+            
             $server_key = "AAAAA_Hl3RU:APA91bG0Fqxoqxi703Ov637hTwDZx99ezBvlcpETyJOyXod65v2Wp9KVM-Bk_uGAYGyBmTpjbcp_RO9B8Y9P_AhM9K1DuB10zEHriHAFRcmrGrSMIQdKg-Scf05TWgN5ugdwnipdY3mv";
             $msg = array
                   (
@@ -20,7 +20,7 @@ class Helpers {
     
             $fields = array
                     (
-                        'to' => $token,
+                        'registration_ids' => $tokens, 
                         'notification'  => $msg
                     );
     
