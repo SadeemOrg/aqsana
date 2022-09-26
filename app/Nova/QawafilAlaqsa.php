@@ -31,6 +31,7 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Image;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
+use App\CPU\Helpers;
 use App\Models\address;
 use Laravel\Nova\Fields\BelongsTo;
 use Manogi\Tiptap\Tiptap;
@@ -40,6 +41,8 @@ use Laravel\Nova\Fields\DateTime;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use App\Models\Bus;
 use App\Models\BusesCompany;
+use App\Models\Notification;
+use App\Models\User;
 use App\Nova\Actions\AddBus;
 use Benjacho\BelongsToManyField\BelongsToManyField;
 
@@ -703,7 +706,41 @@ class QawafilAlaqsa extends Resource
             }
         } else   $model->trip_from = $request->trip_from;
     }
+    public static function aftersave(Request $request, $model)
+{
+    if ($request->Area) {
+        $areas = json_decode($request->Area);
+        $tokens = [];
+        foreach ($areas as $key => $area) {
+            $user = User::where('id', $area->admin_id)->first();
+            $notification = Notification::where('id', '1')->first();
 
+            if ($user->fcm_token != null && $user->fcm_token != "") {
+                array_push($tokens, $user->fcm_token);
+            }
+        }
+        if (!empty($tokens)) {
+
+            Helpers::send_notification($tokens, $notification);
+        }
+    }
+    if ($request->City) {
+        $Citys = json_decode($request->City);
+        $tokens = [];
+        foreach ($Citys as $key => $City) {
+            $user = User::where('id', $City->admin_id)->first();
+            $notification = Notification::where('id', '1')->first();
+
+            if ($user->fcm_token != null && $user->fcm_token != "") {
+                array_push($tokens, $user->fcm_token);
+            }
+        }
+        if (!empty($tokens)) {
+
+            Helpers::send_notification($tokens, $notification);
+        }
+    }
+}
     /**
      * Get the cards available for the request.
      *

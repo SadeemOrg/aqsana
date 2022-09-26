@@ -635,6 +635,41 @@ class Trip extends Resource
     public static function afterSave(Request $request, $model)
     {
 
+
+            if ($request->Area) {
+                $areas = json_decode($request->Area);
+                $tokens = [];
+                foreach ($areas as $key => $area) {
+                    $user = User::where('id', $area->admin_id)->first();
+                    $notification = Notification::where('id', '1')->first();
+
+                    if ($user->fcm_token != null && $user->fcm_token != "") {
+                        array_push($tokens, $user->fcm_token);
+                    }
+                }
+                if (!empty($tokens)) {
+
+                    Helpers::send_notification($tokens, $notification);
+                }
+            }
+            if ($request->City) {
+                $Citys = json_decode($request->City);
+                $tokens = [];
+                foreach ($Citys as $key => $City) {
+                    $user = User::where('id', $City->admin_id)->first();
+                    $notification = Notification::where('id', '1')->first();
+
+                    if ($user->fcm_token != null && $user->fcm_token != "") {
+                        array_push($tokens, $user->fcm_token);
+                    }
+                }
+                if (!empty($tokens)) {
+
+                    Helpers::send_notification($tokens, $notification);
+                }
+            }
+
+
         $id = Auth::id();
         $model->update_by = $id;
 
