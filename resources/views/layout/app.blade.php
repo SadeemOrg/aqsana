@@ -610,9 +610,8 @@ $(".contactUsForm").submit(function(e) {
   ?>
 
   $.post({
-        url: '{{url('/')}}api/update_fcm_token',
+        url: '{{url('/')}}api/cm-firebase-token',
         data: {
-            id: "{{Auth::user()->id}}",
             fcm_token: token,
         },
         dataType: 'json',
@@ -620,7 +619,7 @@ $(".contactUsForm").submit(function(e) {
 
         },
         success: function (response) {
-
+            console.log(response.body);
         },
         complete: function () {
 
