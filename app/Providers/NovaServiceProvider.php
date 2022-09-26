@@ -591,19 +591,19 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             (new NewProject())
             ->canSee(function () {
                 $user = Auth::user();
-                if ($user->type() == 'admin'||$user->type() == 'project_area'||$user->type() == 'project_city') return true;
+                if ($user->type() == 'admin'||$user->type() == 'regular_area'||$user->type() == 'regular_city') return true;
                 return false;
             }),
             (new NewQawafilAlaqsa())
             ->canSee(function () {
                 $user = Auth::user();
-                if ($user->type() == 'admin'||$user->type() == 'project_area'||$user->type() == 'project_city') return true;
+                if ($user->type() == 'admin'||$user->type() == 'regular_area'||$user->type() == 'regular_city') return true;
                 return false;
             }),
             (new NewTrip())
             ->canSee(function () {
                 $user = Auth::user();
-                if ($user->type() == 'admin'||$user->type() == 'project_area'||$user->type() == 'project_city') return true;
+                if ($user->type() == 'admin'||$user->type() == 'regular_area'||$user->type() == 'regular_city') return true;
                 return false;
             }),
             (new   NewAlhisalat())->canSee(function () {
