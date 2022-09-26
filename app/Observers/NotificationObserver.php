@@ -24,11 +24,18 @@ class NotificationObserver
         
             $users = User::all();
 
+            $tokens = [];
             foreach($users as $user){
+                
                 if($user->fcm_token != null && $user->fcm_token != ""){
-                    Helpers::send_notification($user->fcm_token,$notification);
+                    array_push($tokens,$user->fcm_token);
+                    
                 }
                
+            }
+
+            if(!empty($tokens)){
+                Helpers::send_notification($tokens,$notification);
             }
            
           
