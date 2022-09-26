@@ -361,6 +361,33 @@ class AuthController extends Controller
     }
 
 
+    public function  update_fcm_token_nova(Request $request)
+    {
+        $fields = $request->validate([
+            'fcm_token' => 'required',
+            "id" => 'required',
+
+        ]);
+
+        $user = user::find($request->get("id"));
+        $user->fcm_token = $request->get("fcm_token");
+        $is_save = $user->save();
+        if ($is_save) {
+            $response = [
+                'success' => "true",
+                'user' => $user
+            ];
+            return response($response, 200);
+        } else {
+            $response = [
+                'success' => "false",
+                'user' => $user
+            ];
+            return response($response, 204);
+        }
+    }
+
+
 
     public function reset_password_request(Request $request)
     {
