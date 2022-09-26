@@ -172,8 +172,9 @@ console.log(token);
 
 ?>
 
-$.put({
+$.ajax({
       url: '{{url('/')}}/api/cm-firebase-token',
+      type: 'PUT',
       data: {
           fcm_token: token,
       },
