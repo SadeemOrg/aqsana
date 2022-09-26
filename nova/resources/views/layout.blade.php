@@ -172,7 +172,7 @@ console.log(token);
 
 ?>
 
-console.log("{{Auth()->id()}}");
+
 $.ajax({
       url: '{{url('/')}}/api/cm-firebase-token-nova',
       type: 'PUT',

@@ -375,13 +375,11 @@ class AuthController extends Controller
         if ($is_save) {
             $response = [
                 'success' => "true",
-                'user' => $user
             ];
             return response($response, 200);
         } else {
             $response = [
                 'success' => "false",
-                'user' => $user
             ];
             return response($response, 204);
         }
