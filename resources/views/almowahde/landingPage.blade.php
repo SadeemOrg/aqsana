@@ -35,9 +35,9 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
         <div class="relative flex justify-center text-white text-[45px] sm:text-[60px] md:text-[80px] lg:text-[160px] ">
             <h1 class="font-RpT-Bold text-center z-10 relative max-w-fit ">
                 <span class="relative z-10"> الموحدة أقرب </span>
-                <img src="{{ asset('assets/image/blackBg.svg') }}" alt="black_svg" class="z-0 absolute w-[98%] left-[50%] translate-x-[-50%] top-[10%] h-full ">                
-            </h1>  
-            <p class="mr-4"> ! </p>                              
+                <img src="{{ asset('assets/image/blackBg.svg') }}" alt="black_svg" class="z-0 absolute w-[98%] left-[50%] translate-x-[-50%] top-[10%] h-full ">
+            </h1>
+            <p class="mr-4"> ! </p>
         </div>
 
 
@@ -115,24 +115,18 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
         </p>
         <!-- start with Form -->
         <div class="pt-52 flex flex-col items-center justify-start relative ">
-            <div class="hidden xl:block absolute xl:right-[12%] xl:top-[140px]">
-                <div class="relative w-[650px] lg:w-[795px]">
-                    <h3 class="text-white font-RpT-Bold md:text-[65px] lg:text-[96px] text-center z-10 relative">
-                        @if(!empty($Almuahada_Form_text->value))
-                        {{ $Almuahada_Form_text->value }}
-                        @else
-                        الموحدة أقرب اليك!
-                        @endif
-                        </h1>
-                        <img src="{{ asset('assets/image/smallBlackArea.svg') }}" alt="black_svg" class="z-0 absolute md:top-1 lg:top-4 lg:-right-2">
+            <div class="block absolute left-[50%] translate-x-[-50%] top-[180px] lg:top-[140px] w-[85%] md:w-[70%] lg:w-[795px]">
+                <div class="relative ">
+                    <h3 class="text-white font-RpT-Bold text-[30px] sm:text-[40px] md:text-[50px] lg:text-[90px] text-center z-10 relative italic">الموحدة أقرب اليك!</h1>
+                        <img src="{{ asset('assets/image/smallBlackArea.svg') }}" alt="black_svg" class="z-0 absolute top-[50%] translate-y-[-50%] lg:-right-2">
                 </div>
             </div>
 
             <form class="pb-28 LandingPage">
                 @csrf
-                <div class="bg-[#FFD400] w-[95%] h-auto flex flex-col px-14 pb-8">
+                <div class="bg-[#FFD400] w-[95%] h-auto flex flex-col px-14 pb-8 mx-auto">
                     <!-- Block hidden -->
-                    <div class="mt-6 xl:hidden block mx-auto ">
+                    <!-- <div class="mt-6 xl:hidden block mx-auto ">
                         <div class="relative w-[100%] sm:w-[450px] md:w-[600px] mdlg:w-[790px] lg:w-[795px]">
                             <h3 class="text-white font-RpT-Bold text-[28px] sm:text-[45px] md:text-[65px] mdlg:text-[96px] text-center z-10 relative">
                                 @if(!empty($Almuahada_Form_text->value))
@@ -143,7 +137,7 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
                                 </h1>
                                 <img src="{{ asset('assets/image/smallBlackArea.svg') }}" alt="black_svg" class="z-0 absolute top-1 sm:-top-0 md:top-1 lg:top-4 lg:-right-2">
                         </div>
-                    </div>
+                    </div> -->
                     <p class=" mt-16 lg:mt-20 xl:mt-28 text-[32px] sm:text-[44px] md:text-[56px] font-RpT-Bold text-[#000000]">
                         @if(!empty($Almuahada_Form_sup_text->value))
                         {{ $Almuahada_Form_sup_text->value }}
