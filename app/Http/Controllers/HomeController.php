@@ -114,7 +114,7 @@ class HomeController extends Controller
             Almuahada::create([
                 'name' => $request['name'],
                 'phone' => $request['phone'],
-                'city' => $request['message'],
+                'city' => $request['city'],
 
             ]);
             return response()->json(['success'=>'Added new records.']);

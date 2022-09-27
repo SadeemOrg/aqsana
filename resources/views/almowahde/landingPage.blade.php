@@ -79,7 +79,7 @@
                     </span>
                     @enderror
                     <div class=" ltr pt-10 px-6 lg:px-0">
-                        <input type="text" name="phone" placeholder="هاتف" class="rtl block w-full h-[95px]  border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
+                        <input type="number" name="phone" placeholder="هاتف" class="rtl block w-full h-[95px]  border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
                     </div>
                     @error('phone')
                     <span class="invalid-feedback text-red-600" role="alert">
