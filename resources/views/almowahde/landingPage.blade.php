@@ -17,7 +17,6 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
     .block1 {
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
         top: 180px;
     }
 
