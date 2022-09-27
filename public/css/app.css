@@ -497,6 +497,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-6{
   right: 1.5rem;
 }
+.top-\[70px\]{
+  top: 70px;
+}
+.top-\[86px\]{
+  top: 86px;
+}
 .z-30{
   z-index: 30;
 }
@@ -793,9 +799,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-6{
   width: 1.5rem;
-}
-.w-\[83\%\]{
-  width: 83%;
 }
 .w-\[98\%\]{
   width: 98%;
@@ -1369,8 +1372,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pb-6{
   padding-bottom: 1.5rem;
 }
-.pt-52{
-  padding-top: 13rem;
+.pt-28{
+  padding-top: 7rem;
 }
 .pb-28{
   padding-bottom: 7rem;
@@ -1380,6 +1383,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pt-4{
   padding-top: 1rem;
+}
+.pb-10{
+  padding-bottom: 2.5rem;
 }
 .pl-4{
   padding-left: 1rem;
@@ -1398,9 +1404,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pr-4{
   padding-right: 1rem;
-}
-.pb-10{
-  padding-bottom: 2.5rem;
 }
 .pt-12{
   padding-top: 3rem;
@@ -1459,6 +1462,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pl-2{
   padding-left: 0.5rem;
 }
+.pt-52{
+  padding-top: 13rem;
+}
 .text-center{
   text-align: center;
 }
@@ -1484,9 +1490,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1.5rem;
   line-height: 2rem;
 }
-.text-\[30px\]{
-  font-size: 30px;
-}
 .text-\[45px\]{
   font-size: 45px;
 }
@@ -1498,6 +1501,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .text-\[22px\]{
   font-size: 22px;
+}
+.text-\[30px\]{
+  font-size: 30px;
 }
 .text-base{
   font-size: 1rem;
@@ -2046,9 +2052,6 @@ body{
   .sm\:text-right{
     text-align: right;
   }
-  .sm\:text-\[50px\]{
-    font-size: 50px;
-  }
   .sm\:text-\[60px\]{
     font-size: 60px;
   }
@@ -2112,11 +2115,11 @@ body{
   .md\:hidden{
     display: none;
   }
-  .md\:h-\[95px\]{
-    height: 95px;
+  .md\:h-\[65px\]{
+    height: 65px;
   }
-  .md\:h-\[100px\]{
-    height: 100px;
+  .md\:h-\[75px\]{
+    height: 75px;
   }
   .md\:h-\[300px\]{
     height: 300px;
@@ -2196,6 +2199,9 @@ body{
   .md\:pt-10{
     padding-top: 2.5rem;
   }
+  .md\:pt-6{
+    padding-top: 1.5rem;
+  }
   .md\:pt-16{
     padding-top: 4rem;
   }
@@ -2217,8 +2223,8 @@ body{
   .md\:text-\[50px\]{
     font-size: 50px;
   }
-  .md\:text-\[46px\]{
-    font-size: 46px;
+  .md\:text-\[40px\]{
+    font-size: 40px;
   }
   .md\:text-\[22px\]{
     font-size: 22px;
@@ -2238,11 +2244,14 @@ body{
   }
 }
 @media (min-width: 1024px){
-  .lg\:top-\[140px\]{
-    top: 140px;
+  .lg\:top-\[45px\]{
+    top: 45px;
   }
   .lg\:right-auto{
     right: auto;
+  }
+  .lg\:top-\[140px\]{
+    top: 140px;
   }
   .lg\:-mx-8{
     margin-left: -2rem;
