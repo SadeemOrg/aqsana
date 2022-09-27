@@ -178,10 +178,10 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
         </p>
         <!-- start with Form -->
         <div class="pt-52 flex flex-col items-center justify-start relative ">
-            <div class="block1">
+            <div class="block1 block absolute left-[50%] translate-x-[-50%] top-[180px] lg:top-[140px] w-[85%] md:w-[70%] lg:w-[795px]">
                 <div class="relative ">
                     <h3 class=" text-white font-RpT-Bold text-[30px] sm:text-[40px] md:text-[50px] lg:text-[90px] text-center z-10 relative italic">الموحدة أقرب اليك!</h1>
-                        <img src="{{ asset('assets/image/smallBlackArea.svg') }}" alt="black_svg" class="imgform ">
+                        <img src="{{ asset('assets/image/smallBlackArea.svg') }}" alt="black_svg" class="imgform z-0 absolute top-[50%] translate-y-[-50%] lg:-right-2 ">
                 </div>
             </div>
 
