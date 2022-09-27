@@ -122,7 +122,7 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
                 </div>
             </div>
 
-            <form class="pb-28 LandingPage">
+            <form class="pb-28 LandingPage flex flex-col items-center">
                 @csrf
                 <div class="bg-[#FFD400] w-[95%] h-auto flex flex-col px-14 pb-8 mx-auto">
 
