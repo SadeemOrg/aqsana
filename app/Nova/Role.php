@@ -22,9 +22,16 @@ class Role extends Resource
      * @var string
      */
 
-    public static $group = 'Admin';
-    public static $title = 'role';
-
+    public static function label()
+    {
+        return __('Role');
+    }
+    public static function group()
+    {
+        return __('The Users');
+    }
+     public static $title = 'role';
+    public static $priority = 2;
     /**
      * The columns that should be searched.
      *
@@ -44,9 +51,9 @@ class Role extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('code_role'),
-            Text::make('role'),
-            Boolean::make("status","status"),
+            Text::make(__('code_role'),'code_role'),
+            Text::make(__('role'),'role'),
+            Boolean::make(__("status"),"status"),
         ];
     }
 

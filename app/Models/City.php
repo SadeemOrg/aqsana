@@ -24,7 +24,10 @@ class City extends Model
     {
         return $this->hasMany('App\Models\User', 'city_id' );
     }
-
+    public function Project()
+    {
+        return $this->belongsToMany(Project::class);
+    }
     // public function Alhisalat()
     // {
     //     return $this->hasMany('App\Models\Alhisalat', 'city_id' );
@@ -47,7 +50,6 @@ class City extends Model
     {
         return $this->belongsTo('App\Models\User','update_by');
     }
-
 
 
 }

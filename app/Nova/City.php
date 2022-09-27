@@ -20,7 +20,15 @@ class City extends Resource
      *
      * @var string
      */
-    public static $group = 'Admin';
+    public static function label()
+    {
+        return __('City');
+    }
+    public static function group()
+    {
+        return __('address');
+    }
+
     public static $model = \App\Models\City::class;
     public static $priority = 2;
     /**
@@ -54,20 +62,18 @@ class City extends Resource
             return $query;
         } elseif ($user->type() == 'regular_area') {
 
-            $area = \App\Models\area:: with('City')->where('admin_id',$id)->first();
-            $areas= $area->toArray();
-            $cites=$areas['city'];
+            $area = \App\Models\Area::with('City')->where('admin_id', $id)->first();
+            $areas = $area->toArray();
+            $cites = $areas['city'];
 
             $stack = array();
             foreach ($cites as $key => $value) {
                 array_push($stack, $value['name']);
             }
             return $query->whereIn('name', $stack);
-        }
-        else
-        {
+        } else {
 
-            $cites = \App\Models\City::where('admin_id',$id)->get();
+            $cites = \App\Models\City::where('admin_id', $id)->get();
 
 
             $stack = array();
@@ -84,9 +90,9 @@ class City extends Resource
         if ($user->type() == 'admin') {
             return [
                 ID::make(__('ID'), 'id')->sortable(),
-                Text::make('Name', 'name'),
-                BelongsTo::make('Area', 'Area'),
-                Select::make('admin', 'admin_id')
+                Text::make(__('Name'), 'name'),
+                BelongsTo::make(__('Area'), 'Area', \App\Nova\Area::class),
+                Select::make(__('admin'), 'admin_id')
                     ->options(function () {
                         $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
 
@@ -95,71 +101,86 @@ class City extends Resource
                         foreach ($users as $user) {
 
 
-
-                            $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
+                            if ($user->City == null || $this->admin_id == $user['id']) {
+                                $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
+                            }
                         }
-
                         return $user_type_admin_array;
                     })->hideFromIndex()->hideFromDetail(),
-                BelongsTo::make('admin city', 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
-                BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                // hasMany::make('User','User'),
+                BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                hasMany::make('User', 'User'),
             ];
         }
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Name', 'name'),
+            Text::make(__('Name'), 'name'),
 
-            BelongsTo::make('Area', 'Area')->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Area'), 'Area', \App\Nova\Area::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            Select::make('admin', 'admin_id')
+            Select::make(__('admin'), 'admin_id')
                 ->options(function () {
                     $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
 
                     $user_type_admin_array =  array();
 
                     foreach ($users as $user) {
-
-
-
                         $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
                     }
 
                     return $user_type_admin_array;
                 })->hideFromIndex()->hideFromDetail(),
-            BelongsTo::make('admin city', 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             // hasMany::make('User','User'),
         ];
     }
-    public static function afterCreate(Request $request, $model)
+
+
+    public static function beforeCreate(Request $request, $model)
     {
+        $id = Auth::id();
+        $model->created_by = $id;
         $user = Auth::user();
         $id = Auth::id();
         if ($user->type() == 'admin') {
-            $model->update([
-                'created_by' => $id,
-            ]);
+            $model->created_by = $id;
         } else {
             $user = DB::table('areas')->where('admin_id', $id)->select('id')->first();
-            $model->update([
-                'created_by' => $id,
-                'area_id' => $user->id,
-            ]);
+            $model->update_by = $id;
+            $model->area_id = $user->id;
         }
     }
+
 
     public static function beforeUpdate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->update([
-            'update_by' => $id,
-
-        ]);
+        $model->update_by = $id;
     }
+    // public static function beforeUpdate(Request $request, $model)
+    // {
+    //     $id = Auth::id();
+    //     $model->update_by = $id;
+    // }
+
+    // public static function beforeCreate(Request $request, $model)
+    // {
+    //     $user = Auth::user();
+    //     $id = Auth::id();
+    //     if ($user->type() == 'admin') {
+    //         $model->created_by = $id;
+    //     } else {
+    //         $user = DB::table('areas')->where('admin_id', $id)->select('id')->first();
+    //         $model->update_by = $id;
+    //         $model->area_id = $user->id;
+    //     }
+    // }
+
+
 
     /**
      * Get the cards available for the request.

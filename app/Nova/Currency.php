@@ -24,9 +24,17 @@ class Currency extends Resource
      *
      * @var string
      */
-    public static $group = 'Admin';
+    public static function label()
+    {
+        return __('The Currency');
+    }
+    public static function group()
+    {
+        return __('The Currency');
+    }
+
     public static $title = 'name';
-    public static $priority = 4;
+    public static $priority = 1;
     /**
      * The columns that should be searched.
      *
@@ -47,32 +55,13 @@ class Currency extends Resource
 
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Name','name'),
-            Text::make('code','code'),
-            Number::make('rate','rate')->step(0.01),
+            Text::make(__('Name'),'name'),
+            Text::make(__('code'),'code'),
+            Number::make(__('rate'),'rate')->step(0.01),
 
-            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
-            hideWhenUpdating(),
-            BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
-            hideWhenUpdating(),
         ];
     }
 
-    public static function afterCreate(Request $request, $model)
-    {   $id = Auth::id();
-        $model->update([
-            'created_by'=>$id,
-            ]);
-    }
-
-    public static function beforeUpdate(Request $request, $model)
-    {
-        $id = Auth::id();
-        $model->update([
-            'update_by'=>$id,
-
-        ]);
-    }
 
     /**
      * Get the cards available for the request.

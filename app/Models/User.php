@@ -49,11 +49,12 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'birth_date' => 'date',
     ];
 
     public function City()
     {
-        return $this->belongsTo('App\Models\City');
+        return $this->hasOne('App\Models\City','admin_id');
     }
 
     public function Role()
@@ -72,7 +73,25 @@ class User extends Authenticatable
     }
 
 
-    public function type ()
+    public function Donations()
+    {
+        return $this->hasMany('App\Models\Donations','user_id');
+    }
+
+
+    public function Volunteer()
+    {
+        return $this->hasMany('App\Models\Volunteer','user_id');
+    }
+
+    public function TripBooking()
+    {
+        return $this->hasMany('App\Models\TripBooking','user_id');
+    }
+
+
+
+    public function type()
     {
         return $this->user_role;
     }

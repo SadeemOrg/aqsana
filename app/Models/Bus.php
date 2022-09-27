@@ -19,23 +19,21 @@ class Bus extends Model
         'created_at',
         'updated_at',
     ];
-    protected $casts = [
-        'travel_from' => 'array',
-        'travel_to' => 'array',
-        'current_location' => 'array',
+    // protected $casts = [
 
-    ];
+
+    // ];
 
 
 
-    public function projects()
+    public function Project()
     {
-        return $this->belongsTo(project::class);
+        return $this->belongsToMany(Project::class);
     }
 
     public function company()
     {
-        return $this->belongsTo(busescompany::class, 'company_id');
+        return $this->belongsTo(BusesCompany::class, 'company_id');
     }
 
     public function create()
@@ -46,4 +44,19 @@ class Bus extends Model
     {
         return $this->belongsTo('App\Models\User','update_by');
     }
+    public function travelto()
+    {
+        return $this->belongsTo('App\Models\address','travel_to');
+    }
+
+    public function travelfrom()
+    {
+        return $this->belongsTo('App\Models\address','travel_from');
+    }
+
+    public function currentlocation()
+    {
+        return $this->belongsTo('App\Models\address','current_location');
+    }
+
 }

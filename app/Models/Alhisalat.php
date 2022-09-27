@@ -9,7 +9,8 @@ class Alhisalat extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','name', 'city_id','description','amount_total', 'status','lat','lon','information_location','start_time', 'end_time','recipient','giver','approval','reason_of_reject'
+        'id','name', 'address_id','city_id','number_alhisala',
+        'status', 'update_by','created_by'
     ];
 
     protected $hidden = [
@@ -17,31 +18,40 @@ class Alhisalat extends Model
         'updated_at',
     ];
 
-    protected $casts = [
-        'start_time' => 'date',
-        'end_time' => 'date',
-        'bus_id' => 'array',
-    ];
+    // protected $casts = [
+    //     'start_time' => 'date',
+    //     'end_time' => 'date',
+    //     'bus_id' => 'array',
+
+    // ];
+    public function Alhisalat()
+    {
+        return $this->belongsTo(Alhisalat::class,'id','id');
+    }
 
     public function City()
     {
         return $this->belongsTo('App\Models\City','city_id');
+    }
+    public function address()
+    {
+        return $this->belongsTo('App\Models\address','address_id');
     }
 
     public function user()
     {
         return $this->belongsTo('App\Models\User','giver');
     }
-
-
-    public function Transaction()
+    public function create()
     {
-        $users = DB::table('users')
-            ->join('transactions', 'users.id', '=', 'transactions.id')
-
-            ->select('users.*');
-        return  $users;
+        return $this->belongsTo('App\Models\User','created_by');
     }
+    public function Updateby()
+    {
+        return $this->belongsTo('App\Models\User','update_by');
+    }
+
+
 
 
 

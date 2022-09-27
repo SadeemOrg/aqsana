@@ -24,6 +24,8 @@ class Projectapproval extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
+        if($value=="non" )
+        { return $query;}
         return $query->where('approval',$value);
     }
 
@@ -36,6 +38,7 @@ class Projectapproval extends Filter
     public function options(Request $request)
     {
         return [
+            'non' => 'non',
             'approval' => 'approval',
             'reject' => 'reject',
 

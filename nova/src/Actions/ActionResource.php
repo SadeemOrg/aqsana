@@ -78,7 +78,7 @@ class ActionResource extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make('ID', 'id'),
+            ID::make(__('ID'), 'id'),
             Text::make(__('Action Name'), 'name', function ($value) {
                 return __($value);
             }),
@@ -146,6 +146,11 @@ class ActionResource extends Resource
      * @return string
      */
     public static function label()
+    {
+        return __('Actions');
+    }
+
+    public static function group()
     {
         return __('Actions');
     }

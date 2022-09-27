@@ -20,7 +20,17 @@ class Area extends Resource
      *
      * @var string
      */
-    public static $group = 'Admin';
+
+    public static function label()
+    {
+        return __('Area');
+    }
+    public static function group()
+    {
+        return __('address');
+    }
+
+
     public static $model = \App\Models\Area::class;
 
     /**
@@ -61,6 +71,7 @@ class Area extends Resource
                 ->select('areas.name')->get();
             $stack = array();
             foreach ($areas as $key => $value) {
+
                 array_push($stack, $value->name);
             }
             return $query->whereIn('name', $stack);
@@ -70,30 +81,29 @@ class Area extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Name','name'),
-            Text::make('Describtion','describtion'),
+            Text::make(__('Name'),'name'),
+            Text::make(__('Describtion'),'describtion'),
 
-            Select::make('admin','admin_id')
+            Select::make(__('admin'),'admin_id')
             ->options( function() {
                 $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
 
                 $user_type_admin_array =  array();
 
                 foreach($users as $user) {
-                    if ($user->Area == null  ) {
 
-
+                    if ($user->Area == null || $this->admin_id== $user['id'] ) {
                     $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
                 }
                 }
 
                 return $user_type_admin_array;
                })->hideFromIndex()->hideFromDetail(),
-                BelongsTo::make('admin city', 'admin', \App\Nova\User::class)->hideWhenCreating()->
+                BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->
                     hideWhenUpdating(),
-                  BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
+                  BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->
                   hideWhenUpdating(),
-                  BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
+                  BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
                   hideWhenUpdating(),
 
 
@@ -101,22 +111,19 @@ class Area extends Resource
         ];
     }
 
-    public static function afterCreate(Request $request, $model)
+    public static function beforeCreate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->update([
-            'created_by'=>$id,
-
-        ]);
+        $model->created_by=$id;
     }
+
 
     public static function beforeUpdate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->update([
-            'update_by'=>$id,
+        $model->update_by=$id;
 
-        ]);
+
     }
 
 

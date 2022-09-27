@@ -9,13 +9,14 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\BelongsTo;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\Number;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Epartment\NovaDependencyContainer\ActionHasDependencies;
-use Laravel\Nova\Fields\BelongsTo;
-use Illuminate\Support\Facades\Auth;
 
 class Transaction extends Resource
 {
@@ -25,15 +26,23 @@ class Transaction extends Resource
      * @var string
      */
     public static $model = \App\Models\Transaction::class;
+    public static $displayInNavigation = false;
+
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $displayInNavigation = false;
     public static $title = 'id';
-    public static $group = 'Admin';
+    public static function label()
+    {
+        return __('Transaction');
+    }
+    public static function group()
+    {
+        return __('Financial management');
+    }
 
     /**
      * The columns that should be searched.
@@ -54,110 +63,54 @@ class Transaction extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Select::make('Transactions Type ', 'transactions_type')->options([
-                0 => 'Payment voucher',
-                1 => 'receipt voucher',
-             ])->displayUsingLabels(),
 
-            Select::make('type ', 'type')->options([
-                "alhasala" => 'alhasala',
-                "donation"=> 'donation',
-                'trip' => 'trip',
+            Select::make('Transactions Type ', 'type')->options([
+                1 => 'Payment voucher',
+                2 => 'receipt voucher',
             ])->displayUsingLabels(),
 
 
-                NovaDependencyContainer::make([
-                Select::make('alhasala','ref_id')
-                ->options( function() {
-                $users =  \App\Models\Alhisalat::all();
-                $user_type_admin_array =  array();
-                foreach($users as $user) {
-                $user_type_admin_array += [$user['id'] => ($user['name'] )];
-                }
-                return $user_type_admin_array;
-                }),
 
 
 
 
+            Text::make('project', 'project_id'),
+            Text::make('transact amount', 'transact_amount'),
+            BelongsTo::make('Currency', 'Currenc'),
+
+
+            Text::make('Rate', function () {
+                return $this->Currenc->rate;
+            }),
+            Text::make('equivalent amount', function () {
+                return ($this->Currenc->rate )*$this->transact_amount;
+            }),
+
+                Image::make('voucher', 'voucher')->disk('public')->prunable(),
+
+            Select::make('approval ', 'approval')->options([
+                1 => 'approval',
+                2 => 'reject',
+            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            Text::make("reason_of_reject", "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
 
 
 
-                ])->dependsOn('type', 'alhasala'),
 
-                BelongsTo::make('Alhisalat ', 'Alhisalat', \App\Nova\Alhisalat::class)->hideWhenCreating()->
-                hideWhenUpdating(),
-
-
-
-                NovaDependencyContainer::make([
-                    Select::make('Trip','ref_id')
-                    ->options( function() {
-                    $users =  \App\Models\Trip::all();
-                    $user_type_admin_array =  array();
-                    foreach($users as $user) {
-                    $user_type_admin_array += [$user['id'] => ($user['name'] )];
-                    }
-                    return $user_type_admin_array;
-                    })->hideFromIndex()->hideFromDetail(),
-
-
-                   BelongsTo::make('Trip ', 'Trip', \App\Nova\Trip::class)->exceptOnForms(),
-
-                                    ])->dependsOn('type', "trip"),
-
-
-                // Select::make("transactions status","transactions_status")->options([
-                //     '0' => 'not',
-                //     '1' => 'ok',
-
-                //     ])->default(0)
-                //     ->hideFromIndex() ,
-
-                    // Text::make('Description')->rules('max:255')->displayUsing(function ($text) {
-
-                    //     if (strlen($text) > 30) {
-                    //         return substr($text, 0, 30) . '...';
-                    //     }
-                    //     return $text;
-                    // }),
-
-
-                    Text::make('equivalent amount','equivalent_amount'),
-
-
-                    // Select::make('Currency','Currency')->options(\App\Models\Currency::pluck('name')),
-                    Select::make('Currency','Currency')
-                    ->options( function() {
-                    $users =  \App\Models\Currency::all();
-                    $user_type_admin_array =  array();
-                    foreach($users as $user) {
-                    $user_type_admin_array += [$user['name'] => ($user['name'] )];
-                    }
-                    return $user_type_admin_array;
-                    }),
-                    Select::make('approval ', 'approval')->options([
-                        1 => 'approval',
-                        2=> 'reject',
-                    ])->displayUsingLabels()->hideWhenCreating()->
-                    hideWhenUpdating(),
-                    Text::make("reason_of_reject","reason_of_reject")->hideWhenCreating()->
-                    hideWhenUpdating(),
-
-
-            // Select::make("transactions_type","transactions_type")->options([
-            //     '0' => 'not',
-            //     '1' => 'ok',
-
-            //     ])->default(0)
-            //     ->hideFromIndex() ,
-
-            Date::make('date','date'),
+            Date::make('date', 'transaction_date'),
 
 
 
 
         ];
+    }
+    public static function beforeSave(Request $request, $model)
+    {
+        // $user = Auth::user();
+
+        $model->update([
+            'type'=>'1'
+        ]);
     }
 
     /**
@@ -204,7 +157,7 @@ class Transaction extends Resource
         return [
             (new Actions\ApprovalRejectProjec)->canSee(function ($request) {
                 $user = Auth::user();
-              return  ($user->type() == 'admin'|| $user->type() == 'financial_user');
+                return ($user->type() == 'admin' || $user->type() == 'financial_user');
             }),
         ];
     }

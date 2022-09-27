@@ -16,12 +16,12 @@ class newsTypeSeeder extends Seeder
     {
         $newsTypes = [
             [
-                'name' => 'أخبار',
+                'name' => 'أخبار-الجمعية',
                 'main_type' => '1',
                 'type' => '0',
             ],
             [
-                'name' => 'أخبار',
+                'name' => 'أخبارنا',
                 'main_type' => '1',
                 'type' => '1',
             ],
@@ -37,12 +37,12 @@ class newsTypeSeeder extends Seeder
             ],
 
             [
-                'name' => 'القدس والمسجد الأقصى',
+                'name' => 'القدس-والمسجد-الأقصى',
                 'main_type' => '2',
                 'type' => '0',
             ],
             [
-                'name' => 'أخبار',
+                'name' => 'أخبارنا',
                 'main_type' => '2',
                 'type' => '1',
             ],
@@ -52,23 +52,23 @@ class newsTypeSeeder extends Seeder
                 'type' => '2',
             ],
             [
-                'name' => 'إحصاءات',
+                'name' => 'إحصاءات-وتقارير',
                 'main_type' => '2',
                 'type' => '3',
             ],
 
             [
-                'name' => 'الأوقاف والمقدسات',
+                'name' => "الأوقاف-والمقدسات",
                 'main_type' => '3',
                 'type' => '0',
             ],
             [
-                'name' => 'أخبار',
+                'name' => 'أخبار-وتقارير',
                 'main_type' => '3',
                 'type' => '1',
             ],
             [
-                'name' => ' مشروع المسح الشامل',
+                'name' => 'مشروع-المسح-الشامل',
                 'main_type' => '3',
                 'type' => '2',
             ],

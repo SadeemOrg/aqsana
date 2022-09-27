@@ -2,32 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use Actengage\Wizard\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Models\FormMassage;
 use Mail;
 use App\Mail\TestMail;
-
+use App\Models\News;
+use App\Models\newsType;
 
 
 class HomeController extends Controller
 {
-
-
-
-
-
-    public function getProduct(int $id, string $slug)
+    public function showToastrMessages()
     {
-     dd("nbddj");
+
+        // Flash messages settings
+
+        session()->flash("success", "This is success message");
+
+        session()->flash("warning", "This is warning message");
+
+        session()->flash("info", "This is information message");
+
+        session()->flash("error", "This is error message");
+
+        return view("toastr-notification");
     }
-
-
-
-
-
-
-
 
     public function index()
     {
@@ -35,9 +37,9 @@ class HomeController extends Controller
         $Heros = nova_get_setting('heroo', 'default_value');
 
 
-        $lastnews = DB::table('news')->orderBy('created_at', 'desc')->take(2)->get();
+        $lastnews = DB::table('news')->orderBy('new_date', 'desc')->take(2)->get();
 
-        $news = DB::table('news')->orderBy('created_at', 'desc')->get();
+        $news = DB::table('news')->orderBy('new_date', 'desc')->take(9)->get();
 
         $ProjectsNews = nova_get_setting('Projects_News', 'default_value');
         // $ProjectsNews = json_decode($ProjectsNewsjson);
@@ -56,261 +58,218 @@ class HomeController extends Controller
         $goals = json_decode($goalsjson);
         $achievementsjson = nova_get_setting('achievements', 'default_value');
         $achievements = json_decode($achievementsjson);
-        $workplace = nova_get_setting('workplaceabout', 'default_value');
+        $workplace = nova_get_setting('workplace', 'default_value');
         return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace'));
     }
-    public function conctusee(Request $request)
-    {
-        return "asa";
-    }
+
     public function conctus(Request $request)
     {
 
-        $request->validate([
-            'name' => 'required|string',
-            'phone' => 'required|string',
-            'message' => 'required|string',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:3|max:50',
+            'phone' => 'digits_between:10,14',
+            'message' => 'required',
+        ],
+        [
+            'name.required' => 'الرجاء ادخال الاسم. ',
+            'name.string' => 'الرجاء ادخال الاسم بشكل صحيح . ',
+            'name.min' => 'الاسم يجب ان يكون على الأقل 3 حروف. ',
+            'name.max' => 'الاسم يجب ان لا يزيد عن 50 حرف. ',
 
+            'phone.digits_between' => 'الرجاء ادخال رقم الهاتف بشكل صحيح. ',
+            'message.required' => 'الرجاء ادخال الرسالة. ',
         ]);
+        if ($validator->passes()) {
+            FormMassage::create([
+                'name' => $request['name'],
+                'phone' => $request['phone'],
+                'message' => $request['message'],
 
-        $mail = 'your_email_id@gmail.com';
-        Mail::to($mail)->send(new TestMail);
+            ]);
+            return response()->json(['success'=>'Added new records.']);
+        }
 
-        // return redirect()->back();
-        // $input = $request->all();
-        // $validator = Validator::make($input,[
-        //     'name'=> 'required|string',
-        //     'phone'=> 'required|string',
-        //     'message'=>'required|string|email',
-
-        // ]);
-        // if ($validator->fails()) {
-        //     return redirect()->back()->with('error', 'Something went wrong.');
-        // }
-        // return redirect()->back();
-
+        return response()->json(['error'=>$validator->errors()->all()]);
     }
 
 
-    public function news($maintype,$type )
+    public function news($maintype, $type)
     {
+        $main_type = newsType::where('name', $maintype)
+            ->where('type', '0')
+            ->select('main_type')->first();
+
+        $Type = newsType::where('name', $type)
+            ->where('main_type', $main_type->main_type)
+            ->select('type')->first();
+
         $news = DB::table('news')->where([
-            ['main_type', '=', $maintype],
-            ['type', '=', $type],
-        ])->paginate(8);
-        $mainType = DB::table('news_types')->where([
-            ['main_type', '=', $maintype],
-            ['type', '=', '0'],
-        ])->first();
+            ['main_type', 'like', '%' . $main_type->main_type . '%'],
+            ['type', '=', $Type->type],
+        ])->orderBy('new_date', 'desc')->paginate(9);
 
 
-        $type = DB::table('news_types')->where([
-            ['main_type', '=', $maintype],
-            ['type', '=', $type ],
-        ])->first();
 
-        return view('Pages.our-news', compact('news', 'mainType', 'type'));
-        // $news = DB::table('news')->orderBy('created_at', 'desc')->paginate(8);
-        // return view('Pages.our-news', compact('news'));
+        $mainType = str_replace("-", " ", $maintype);
+        $type = str_replace("-", " ", $type);
+        return view('Pages.news-page', compact('news', 'mainType', 'type'));
     }
-    public function getnewDetail($id)
+
+    public function getnewDetail($title, $id)
     {
+
         $new = DB::table('news')->where('id', $id)->first();
-        // dd($news);
+
         $Articles = DB::table('news')->where([
             ['type', '=', $new->type],
             ['main_type', '=', $new->main_type],
-        ])->orderBy('created_at', 'desc')->take(6)->get();
-        // dd($newser);
-        // dd($news->pictures);
+        ])->orderBy('new_date', 'desc')->take(6)->get();
+
         $goalsjson = $new->pictures;
-        // dd($goalsjson);
-        // $goals = json_decode($goalsjson,true);
-        // dd(gettype($goals));
+
         $pictures = json_decode(json_decode($goalsjson, true), true);
 
-        // dd(gettype($pictures));
-        return view('pages.single-news', compact('new', 'pictures', 'Articles'));
+        $total =  json_decode(json_decode($new->main_type, true), true);
+
+        if (gettype($total) == "string") {
+            $tt =  str_replace('"', "", $total);
+
+            $mainType = DB::table('news_types')->where([
+                ['main_type', 'like',  $tt],
+                ['type', '=', '0'],
+            ])->first();
+            $mainType =  $mainType->name;
+            //  dd(   $mainType);
+        } else $mainType = "اخبار";
+
+        return view('Pages.news-details-page', compact('new', 'pictures', 'Articles', 'mainType'));
     }
 
-    // // Alquds
+
+
+    public function sector($sector)
+    {
+        // dd($sector);mainType
+        $mainType = "قطاع";
+        $type = $sector;
+        $news = News::query()->where('sector', $sector)
+
+            ->paginate(9);
+
+        return view('Pages.news-page', compact('news', 'mainType', 'type'));
+        // foreach ($News as $key => $value) {
+        //     echo  $value->title;
+        //     echo '<br>';
+        // }
+        // dd ($News);
+        // return dd($News);
+    }
+
+    public function search($search)
+    {
+
+        $main_type = newsType::where('name', 'like',  "%{$search}%")
+            ->select('main_type')
+            ->get();
+
+        // dd( $main_type[0]->type);
+
+        $stack_main_type = array();
+        foreach ($main_type as $key => $value) {
+            array_push($stack_main_type, $value->main_type);
+        }
+
+        $News = News::query()
+            ->wherein('type', $stack_main_type)
+            ->orWhere('title', 'like',  "%{$search}%")
+            ->orWhere('sector', 'like',  "%{$search}%")
+            ->select('title', 'id')
+            ->get();
+
+        //  dd($News);
+        return $News;
+    }
+
+    public function pagesearch(Request $request)
+    {
+
+        $search = $request->get("search");
+        $type = $request->get("search");
+        $mainType = "بحث";
+        $main_type = newsType::where('name', 'like',  '%' . $search . '%')
+            ->select('main_type')->get();
 
 
 
-    // public function Alquds_news()
-    // {
-    //     $news = DB::table('news')->where([
-    //         ['type', '=', '1'],
-    //         ['main_type', '=', '0'],
-    //     ])->paginate(8);
-    //     // dd($news);
-    //     // $Articles = DB::table('news')
+        $stack_main_type = array();
+        foreach ($main_type as $key => $value) {
+            array_push($stack_main_type, $value->main_type);
+        }
 
-    //     // ->where([
-    //     //     ['type', '=', $news[0]->type],
-    //     //     ['main_type', '=', '0'],
-    //     //             ])
-    //     // ->orderBy('created_at', 'desc')->take(6)->get();
-    //     // dd($Articles);
-    //     // dd($newser);
-    //     // dd($news->pictures);
-    //     // $goalsjson=$news->pictures;
-    //     // dd($goalsjson);
-    //     // $goals = json_decode($goalsjson,true);
-    //     // dd(gettype($goals));
-    //     // $pictures = json_decode( json_decode($goalsjson,true),true);
+        $news = News::query()
+            ->wherein('type', $stack_main_type)
+            ->orWhere('title', 'like',  "%{$search}%")
+            ->orWhere('sector', 'like',  "%{$search}%")
+            ->paginate(9);
+        return view('Pages.news-page', compact('news', 'mainType', 'type'));
+    }
+    public function projectdonation()
+    {
+        $Projects = DB::table('projects')->where([
+            ['is_donation', '=', '1'],
+            ['report_status', '=', '1'],
+        ])
+            ->get();
 
-    //     return view('Pages.our-news', compact('news'));
-    // }
-    // public function Alquds_blog()
-    // {
-    //     $news = DB::table('news')->where([
-    //         ['type', '=', '1'],
-    //         ['main_type', '=', '1'],
-    //     ])->paginate(8);
-    //     // dd($news);
-    //     // $Articles = DB::table('news')
 
-    //     // ->where([
-    //     //     ['type', '=', $news[0]->type],
-    //     //     ['main_type', '=', '1'],
-    //     //             ])
-    //     // ->orderBy('created_at', 'desc')->take(6)->get();
-    //     // // dd($Articles);
-    //     // // dd($newser);
-    //     // // dd($news->pictures);
-    //     // $goalsjson=$news->pictures;
-    //     // // dd($goalsjson);
-    //     // // $goals = json_decode($goalsjson,true);
-    //     // // dd(gettype($goals));
-    //     // $pictures = json_decode( json_decode($goalsjson,true),true);
+        // dd($Projects);
+        return view('Pages.projectDonations.projects-donation', compact('Projects'));
+    }
+    public function getdonationDetail($id)
+    {
 
-    //     return view('Pages.our-news', compact('news'));
-    // }
-    // public function Alquds_report()
-    // {
-    //     $news = DB::table('news')->where([
-    //         ['type', '=', '1'],
-    //         ['main_type', '=', '2'],
-    //     ])->paginate(8);
-    //     // dd($news);
-    //     // $Articles = DB::table('news')
+        $project = DB::table('projects')->where('id', $id)->first();
 
-    //     // ->where([
-    //     //     ['type', '=', $news[0]->type],
-    //     //     ['main_type', '=', '2'],
-    //     //             ])
-    //     // ->orderBy('created_at', 'desc')->take(6)->get();
-    //     // // dd($Articles);
-    //     // // dd($newser);
-    //     // // dd($news->pictures);
-    //     // $goalsjson=$news->pictures;
-    //     // // dd($goalsjson);
-    //     // // $goals = json_decode($goalsjson,true);
-    //     // // dd(gettype($goals));
-    //     // $pictures = json_decode( json_decode($goalsjson,true),true);
+        $goalsjson = $project->report_pictures;
 
-    //     return view('Pages.our-news', compact('news'));
-    // }
+        $pictures = json_decode($goalsjson, true);
 
 
 
-    // //holy
 
 
-    // public function holy_news()
-    // {
-    //     $news = DB::table('news')->where([
-    //         ['type', '=', '2'],
-    //         ['main_type', '=', '0'],
-    //     ])->paginate(8);
-    //     // dd($news);
-    //     // $Articles = DB::table('news')
 
-    //     // ->where([
-    //     //     ['type', '=', $news[0]->type],
-    //     //     ['main_type', '=', '0'],
-    //     //             ])
-    //     // ->orderBy('created_at', 'desc')->take(6)->get();
-    //     // dd($Articles);
-    //     // dd($newser);
-    //     // dd($news->pictures);
-    //     // $goalsjson=$news->pictures;
-    //     // dd($goalsjson);
-    //     // $goals = json_decode($goalsjson,true);
-    //     // dd(gettype($goals));
-    //     // $pictures = json_decode( json_decode($goalsjson,true),true);
+        return view('Pages.projectDonations.project-donation-details', compact('project', 'pictures'));
+    }
 
-    //     return view('Pages.our-news', compact('news'));
-    // }
-    // public function holy_blog()
-    // {
-    //     $news = DB::table('news')->where([
-    //         ['type', '=', '2'],
-    //         ['main_type', '=', '1'],
-    //     ])->paginate(8);
-    //     // dd($news);
-    //     // $Articles = DB::table('news')
 
-    //     // ->where([
-    //     //     ['type', '=', $news[0]->type],
-    //     //     ['main_type', '=', '1'],
-    //     //             ])
-    //     // ->orderBy('created_at', 'desc')->take(6)->get();
-    //     // // dd($Articles);
-    //     // // dd($newser);
-    //     // // dd($news->pictures);
-    //     // $goalsjson=$news->pictures;
-    //     // // dd($goalsjson);
-    //     // // $goals = json_decode($goalsjson,true);
-    //     // // dd(gettype($goals));
-    //     // $pictures = json_decode( json_decode($goalsjson,true),true);
+    public function project()
+    {
 
-    //     return view('Pages.our-news', compact('news'));
-    // }
-    // public function holy_report()
-    // {
-    //     $news = DB::table('news')->where([
-    //         ['type', '=', '2'],
-    //         ['main_type', '=', '2'],
-    //     ])->paginate(8);
-    //     // dd($news);
-    //     // $Articles = DB::table('news')
+        $projects = DB::table('projects')->where('report_status', '=', '1')->orderBy('report_date', 'desc')->paginate(9);
+        return view('Pages.ProjectsDetails.projects-page', compact('projects'));
+    }
 
-    //     // ->where([
-    //     //     ['type', '=', $news[0]->type],
-    //     //     ['main_type', '=', '2'],
-    //     //             ])
-    //     // ->orderBy('created_at', 'desc')->take(6)->get();
-    //     // // dd($Articles);
-    //     // // dd($newser);
-    //     // // dd($news->pictures);
-    //     // $goalsjson=$news->pictures;
-    //     // // dd($goalsjson);
-    //     // // $goals = json_decode($goalsjson,true);
-    //     // // dd(gettype($goals));
-    //     // $pictures = json_decode( json_decode($goalsjson,true),true);
+    public function     getprojectDetail($id)
+    {
+        $project = DB::table('projects')->where('id', $id)->first();
 
-    //     return view('Pages.our-news', compact('news'));
-    // }
+        $goalsjson = $project->report_pictures;
 
-    // public function annualnews($id)
-    // {
-    //     $new = DB::table('news')->where('id', $id)->first();
-    //     // dd($news);
-    //     $Articles = DB::table('news')->where([
-    //         ['type', '=', $new->type],
-    //         ['main_type', '=', $new->main_type],
-    //     ])->orderBy('created_at', 'desc')->take(6)->get();
-    //     // dd($newser);
-    //     // dd($news->pictures);
-    //     $goalsjson = $new->pictures;
-    //     // dd($goalsjson);
-    //     // $goals = json_decode($goalsjson,true);
-    //     // dd(gettype($goals));
-    //     $pictures = json_decode(json_decode($goalsjson, true), true);
+        $pictures = json_decode($goalsjson, true);
 
-    //     // dd(gettype($pictures));
-    //     return view('pages.annual-news', compact('new', 'pictures', 'Articles'));
-    // }
+        $Articles = DB::table('projects')->orderBy('report_date', 'desc')->take(6)->get();
+
+        return view('Pages.ProjectsDetails.project-details-page', compact('project', 'pictures', 'Articles'));
+    }
+    public function  donation($id)
+    {
+        $project = DB::table('projects')->where('id', $id)->first();
+        return view('Pages.donationsPage.donations-page', compact('project'));
+    }
+    public function donations()
+    {
+        $project = null;
+        return view('Pages.donationsPage.donations-page', compact('project'));
+    }
 }

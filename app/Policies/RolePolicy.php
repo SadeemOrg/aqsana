@@ -18,7 +18,7 @@ class RolePolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+              return ($user->type() == 'admin' ) ;
     }
 
     /**
@@ -30,7 +30,7 @@ class RolePolicy
      */
     public function view(User $user, Role $role)
     {
-        return true;
+              return ($user->type() == 'admin' ) ;
     }
 
     /**
@@ -53,7 +53,7 @@ class RolePolicy
      */
     public function update(User $user, Role $role)
     {
-        return true;
+              return ($user->type() == 'admin' ) ;
     }
 
     /**

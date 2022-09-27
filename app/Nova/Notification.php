@@ -23,8 +23,16 @@ class Notification extends Resource
      * @var string
      */
     public static $title = 'id';
-    public static $group = 'Admin';
-    public static $displayInNavigation = false;
+    public static function label()
+    {
+        return __('Notification');
+    }
+    public static function group()
+    {
+        return __('Notification');
+    }
+    public static $displayInNavigation = true;
+    public static $priority = 1;
     /**
      * The columns that should be searched.
      *
@@ -44,9 +52,14 @@ class Notification extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Title","title"),
-            Textarea::make("Message","message")->showOnIndex()
+            Text::make(__("Title"),"title"),
+            Textarea::make(__("Message"),"message")->showOnIndex()
         ];
+    }
+
+    public static function afterCreate(Request $request, $model)
+    {
+
     }
 
     /**

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotificationTest;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,71 +16,59 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get("toastr-notification", [HomeController::class, "showToastrMessages"]);
 
-Route::get('/', [HomeController::class, 'index'])->name('Home');
 
-Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/من-نحن', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/conctus', [HomeController::class, 'conctus'])->name('conctus');
-Route::get('/our-news/{maintype}/{type}', [HomeController::class, 'news'])->name('news');
-Route::get('/our-news/{id}/', [HomeController::class, 'getnewDetail'])->name('getnewDetail');
+Route::get('/category/{maintype}/{type}', [HomeController::class, 'news'])->name('news');
+Route::get('/categor/{title}/{id}/', [HomeController::class, 'getnewDetail'])->name('getnewDetail');
 
 
 
-// // Route::get('/our-news', [HomeController::class, 'news'])->name('news');
+// projects for donation
+Route::get('/project-donations', [HomeController::class, 'projectdonation'])->name('projectdonation');
 
-// Route::get('/alquds/news', [HomeController::class, 'Alquds_news'])->name('Alquds_news');
-// Route::get('/alquds/blog', [HomeController::class, 'Alquds_blog'])->name('Alquds_blog');
-// Route::get('/alquds/report', [HomeController::class, 'Alquds_report'])->name('Alquds_report');
-
-
-// Route::get('/holy/news', [HomeController::class, 'holy_news'])->name('holy_news');
-// Route::get('/holy/blog', [HomeController::class, 'holy_blog'])->name('holy_blog');
-// Route::get('/holy/report', [HomeController::class, 'holy_report'])->name('holy_report');
+// project details by id for donation
+Route::get('/project-donations/{id}', [HomeController::class, 'getdonationDetail'])->name('getdonationDetail');
 
 
-// Route::get('/annualnews/{id}/', [HomeController::class, 'annualnews'])->name('annualnews');
+Route::get('/donation', [HomeController::class, 'donations'])->name('donations');
 
-// Route::get('/ ', function () {
-//     return view('home');
-// });
-
-// Route::get('/aboutus', function (){
-//     return view('about-us-page');
-// });
-
-Route::get('our-project', function (){
-    return view('projects-page');
-});
-Route::get('our-project/1', function (){
-    return view('Pages.project-details-page');
-});
+Route::get('/donation/{id}', [HomeController::class, 'donation'])->name('donation');
 
 
-Route::get('project-donations', function (){
-    return view('Pages.project-donations');
-});
 
-Route::get('/annual-news', function (){
-    return view('Pages.annual-news');
-});
 
-// Route::get('/our-news', function (){
-//     return view('our-news');
-// });
-// Route::get('news/1', function (){
-//     return view('single-news');
-// });
-Route::get('/contact', function (){
+Route::get('/sector/{sector}', [HomeController::class, 'sector'])->name('sector');
+
+Route::get('/contact-us', function (){
     return view('Pages.contact-page');
 });
 
-Route::get('/projects-for-donations', function (){
-    return view('projects-for-donations');
+Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch');
+
+Route::get('/search/{val}/', [HomeController::class, 'search'])->name('search');
+
+// Route::get('/searchpage', [HomeController::class, 'searchpage'])->name('searchpage');
+
+Route::get('/project', [HomeController::class, 'project'])->name('project');
+Route::get('/project/{id}', [HomeController::class, 'getprojectDetail'])->name('getprojectDetail');
+
+Route::get('/testNotfiy', function (){
+    return view('Pages.testNotfiy');
 });
-Route::get('/donation-details/1', function (){
-    return view('project-donation-details');
+
+Route::get('/bills', function (){
+    return view('Pages.Bills');
 });
+
+
+Route::get('/landingPage', function (){
+    return view('almowahde.landingPage');
+});
+
+Route::get('/SendNotificationTest',[NotificationTest::class,'sendNotfiy'])->name('sendNotfiy');
+
 

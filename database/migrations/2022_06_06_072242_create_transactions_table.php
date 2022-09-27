@@ -16,23 +16,21 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-
-            $table->char('type', 1);
-            $table->char('status', 1);
-            $table->bigInteger('project_id')->nullable();
+            $table->char('main_type', 1)->default(0);
+            $table->char('type', 1)->default(0);
+            $table->string('description')->nullable();
+            $table->bigInteger('ref_id')->nullable();
+            $table->bigInteger('ref_cite_id')->nullable();
             $table->integer('transact_amount');
-            $table->string('equivelant_amount');
             $table->unsignedBigInteger('Currency')->nullable();
-            $table->string('Rate')->nullable();
-
-
-
+            $table->string('equivelant_amount');
+            $table->string('voucher')->nullable();
             $table->integer('approval')->nullable();
             $table->string("reason_of_reject")->nullable();
-            $table->time('transaction_date');
-
+            $table->date('transaction_date');
             $table->unsignedBigInteger('Created_By')->nullable();
             $table->unsignedBigInteger('Update_By')->nullable();
+
 
             // $table->foreign('Created_By')->references('id')->on('users')
             //     ->onDelete('cascade');

@@ -18,8 +18,8 @@ class ProjectType extends Model
     ];
 
 
-    public function project()
+    public function Project()
     {
-        return $this->hasMany(project::class);
+        return $this->hasMany(Project::class);
     }
 }

@@ -20,7 +20,18 @@ class newsType extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static function label()
+    {
+        return __('newsType');
+    }
+    public static function group()
+    {
+        return __('Admin');
+    }
+
+        public static $title = 'name';
+    // public static $priority = 7;\
+    public static $displayInNavigation = false;
 
     /**
      * The columns that should be searched.

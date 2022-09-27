@@ -8,7 +8,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Select;
-
+use App\Nova\Actions\ChangeRole;
+use Pdmfc\NovaFields\ActionButton;
 use Laravel\Nova\Fields\Text;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
@@ -16,6 +17,15 @@ use Laravel\Nova\Fields\BelongsTo;
 use Manogi\Tiptap\Tiptap;
 use Waynestate\Nova\CKEditor;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
+use Laravel\Nova\Fields\Date;
+use Illuminate\Support\Facades\DB;
+use Acme\MultiselectField\Multiselect;
+use Laravel\Nova\Fields\Boolean;
+use App\Nova\Actions\PostNews;
+use AwesomeNova\Cards\FilterCard;
+use App\Nova\Filters\StateFilter;
+use App\Nova\Filters\PostNewsFilters;
+use Illuminate\Support\Facades\Auth;
 
 class News extends Resource
 {
@@ -31,9 +41,19 @@ class News extends Resource
      *
      * @var string
      */
+    public static function label()
+    {
+        return __('News');
+    }
+    public static function group()
+    {
+        return __('website');
+    }
+
+
     public static $title = 'title';
-    public static $group = 'website';
-    public static $priority = 4;
+    // public static $group = 'website';
+    public static $priority = 1;
     /**
      * The columns that should be searched.
      *
@@ -49,77 +69,208 @@ class News extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
 
+        return $query->whereNotIn('type', [8]);
+    }
     public function fields(Request $request)
     {
         return [
+
+
+
+
+
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Title", 'title'),
-            //   BelongsTo::make("newsType",'newsTypes'),
-            Textarea::make('description', 'description'),
+            ActionButton::make(__('POST NEWS'))
+                ->action((new PostNews)->confirmText(__('Are you sure you want to post  this NEWS?'))
+                    ->confirmButtonText(__('post'))
+                    ->cancelButtonText(__('Dont post')), $this->id)
+                    ->readonly(function () {
+                    return $this->status === '1';
+                })->text(__('post'))->showLoadingAnimation()
+                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+            Boolean::make(__('is posted'), 'status'),
+            Text::make(__('TITLE'), 'title'),
+            Textarea::make(__('description'), 'description'),
+            Select::make(__('SECTOR'), 'sector')
+                ->options(function () {
+                    $sectors = nova_get_setting('workplace', 'default_value');
+                    $user_type_admin_array =  array();
+                    if ($sectors != "default_value") {
+                        foreach ($sectors as $sector) {
+                            $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
+                        }
+                        return  $user_type_admin_array;
+                    }
+                }),
 
-            Select::make("main Type", "main_type")
+            Select::make(__('have multi category'), "mult", function () {
+                $total =  json_decode($this->main_type);
+                if (gettype($total) == "string") return "2";
+                else return "1";
+            })
                 ->options([
-                    '1' => 'News',
-                    '2' => 'alqudus walmasjid alaqsaa',
-                    '3' => 'alqudus walmasjid alaqsaa',
-                    '4' => 'hisad aljameia',
+                    '1' => __('yes'),
+                    '2' => __('no'),
 
-                ])->displayUsingLabels(),
+                ])->displayUsingLabels()
+                // ->withMeta(['ignoreOnSaving'])
+                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                    // dd($attribute);
+                    return null;
+                }),
 
+
+            //   Select::make(__('have dwdwmulti wdwdw'), "ccc")
+            //   ->options([
+            //     '1' =>__('yes'),
+            //     '2' => __('no'),
+
+            // ])->displayUsingLabels()
+            // ->fillUsing(function(NovaRequest $request, $model, $attribute, $requestAttribute) {
+            //     // DB::table('project_toole')->insert([
+            //     //     'project_id' => '3',
+            //     //     'city_id' => '3',
+
+            //     //     'tools' =>  $request->ccc,
+
+            //     // ]);
+
+            //     // dd($requestAttribute);
+
+            //         return null;
+            //     }),
+            NovaDependencyContainer::make([
+                Select::make(__('main Type'), "main_type", function () {
+
+                    $tt =  str_replace('"', "", $this->main_type);
+                    return $tt;
+                    // dd($tt);
+                    $total =  json_decode($this->main_type);
+                    // dd(gettype( $total));
+                    if (gettype($total) == "string") return "2";
+                    else return "1";
+                    $coutotal =  count($total);
+                    // if( $coutotal >1) return "1";
+                    // else return "2";
+                    // // dd($coutotal);
+                    // return ($this->main_type );
+                })
+                    ->options([
+
+                        '1' => 'News',
+                        '2' => 'alqudus walmasjid alaqsaa',
+                        '3' => 'alqudus walmasjid alaqsaa',
+                    ])->displayUsingLabels(),
+
+                NovaDependencyContainer::make([
+                    Select::make(__('type'), "type")
+                        ->options([
+                            '1' => 'News',
+                            '2' => 'Blogs',
+                            '3' => 'Report',
+                        ])->displayUsingLabels(),
+                ])->dependsOn('main_type', '1'),
+                NovaDependencyContainer::make([
+                    Select::make(__('type'), "type")
+                        ->options([
+                            '1' => 'News',
+                            '2' => 'Blogs',
+                            '3' => 'Report',
+                        ])->displayUsingLabels(),
+                ])->dependsOn('main_type', '2'),
+                NovaDependencyContainer::make([
+                    Select::make(__('type'), "type")
+                        ->options([
+                            '1' => 'News',
+                            '2' => 'almas alsamel',
+                        ])->displayUsingLabels(),
+                ])->dependsOn('main_type', '3'),
+            ])->dependsOn('mult', "2"),
 
             NovaDependencyContainer::make([
-                Select::make(" type", "type")
+                Multiselect::make(__('main Type'), "main_type")
                     ->options([
                         '1' => 'News',
-                        '2' => 'Blogs',
-                        '3' => 'Report',
-                    ])->displayUsingLabels(),
-            ])->dependsOn('main_type', '1'),
+                        '2' => 'alqudus walmasjid alaqsaa',
+                        '3' => 'alqudus walmasjid alaqsaa',
 
 
-            NovaDependencyContainer::make([
-                Select::make(" type", "type")
-                    ->options([
-                        '1' => 'News',
-                        '2' => 'Blogs',
-                        '3' => 'Report',
-                    ])->displayUsingLabels(),
-            ])->dependsOn('main_type', '2'),
+                    ]),
+            ])->dependsOn('mult', "1"),
+            // Multiselect::make("main Type", "main_type")
+            // ->options([
+            //     '1' => 'News',
+            //     '2' => 'alqudus walmasjid alaqsaa',
+            //     '3' => 'alqudus walmasjid alaqsaa',
 
 
-            NovaDependencyContainer::make([
-                Select::make(" type", "type")
-                    ->options([
-                        '1' => 'News',
-                        '2' => 'almas alsamel',
-                    ])->displayUsingLabels(),
-            ])->dependsOn('main_type', '3'),
+            // ]),
 
+            // CKEditor::make('Contents', 'contents')->hidefromindex(),
+            Tiptap::make(__('Contents'), 'contents')
+                ->buttons([
+                    'heading',
+                    '|',
+                    'italic',
+                    'bold',
+                    '|',
+                    'link',
+                    'code',
+                    'strike',
+                    'underline',
+                    'highlight',
+                    '|',
+                    'bulletList',
+                    'orderedList',
+                    'br',
+                    'codeBlock',
+                    'blockquote',
+                    '|',
+                    'horizontalRule',
+                    'hardBreak',
+                    '|',
+                    'table',
+                    '|',
+                    'image',
+                    '|',
+                    'textAlign',
+                    '|',
+                    'rtl',
+                    '|',
+                    'history',
+                ])
+                ->headingLevels([1, 2, 3, 4, 5, 6]),
 
-
-            CKEditor::make('Contents', 'contents')->hidefromindex(),
-
-
-            Image::make('Image', 'image')->disk('public')->prunable(),
-            ArrayImages::make('Pictures', 'pictures')
+            Image::make(__('IMAGE'), 'image')->disk('public')->prunable(),
+            ArrayImages::make(__('PICTURES'), 'pictures')
                 ->disk('public'),
 
+            Text::make(__('VIDEO LINK'), 'video_link'),
+            Image::make(__('video_img_cover'), 'video_link_cover')->disk('public')->prunable(),
+            // Date::make('date', 'new_date'),
+            Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y'),
 
 
-            NovaDependencyContainer::make([])->dependsOn('is_reported', '1'),
+
+
 
         ];
     }
-    public static function afterCreate(Request $request, $model)
+    public static function beforeSave(Request $request, $model)
     {
-        // $user = Auth::user();
-
-        // $model->update([
-        //     'main_type'=>'1',
-        // ]);
+        $id = Auth::id();
+        $model->created_by = $id;
     }
 
+
+    public static function beforeUpdate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->update_by = $id;
+    }
     /**
      * Get the cards available for the request.
      *
@@ -128,7 +279,10 @@ class News extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new FilterCard(new PostNewsFilters()),
+
+        ];
     }
 
     /**
@@ -139,7 +293,9 @@ class News extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new PostNewsFilters()
+        ];
     }
 
     /**
@@ -161,6 +317,12 @@ class News extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+
+            (new PostNews)
+                ->confirmText('Are you sure you want to read  this Massage?')
+                ->confirmButtonText('Read')
+                ->cancelButtonText("Don't Read"),
+        ];
     }
 }

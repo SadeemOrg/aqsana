@@ -10,15 +10,16 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Fields\HasMany;
 
-class busescompany extends Resource
+class BusesCompany extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\busescompany::class;
+    public static $model = \App\Models\BusesCompany::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -27,11 +28,17 @@ class busescompany extends Resource
      */
     public static $title = 'name';
     public static $group = 'Admin';
-    public static $priority = 3;
+    public static $priority = 1;
     public static function label()
     {
         return __('Buses Company');
     }
+
+    public static function group()
+    {
+        return __('the Busss');
+    }
+
     /**
      * The columns that should be searched.
      *
@@ -53,48 +60,47 @@ class busescompany extends Resource
 
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("name","name"),
-            Text::make("description","description"),
-            Number::make("cost","cost")->step(1.0),
-            Number::make("number of buses","number_of_buses")->step(1.0),
-            Text::make("contact person","contact_person"),
-            Number::make("phone number","phone_number"),
+            Text::make(__("Name"),"name"),
+            Text::make(__("Describtion"),"description"),
+            Number::make(__("number of buses"),"number_of_buses")->step(1.0),
+            Number::make(__("cost"),"cost")->step(1.0),
+            Text::make(__("contact person"),"contact_person"),
+            Number::make(__("phone number"),"phone_number"),
 
 
-            Select::make("status","status")
+            Select::make(__("status"),"status")
             ->options([
-                '1' => 'available',
-                '2' => 'un available',
+                '1' => __('available'),
+                '2' => __('un available'),
 
 
                 ])->displayUsingLabels()
             ->hideWhenCreating()->
             hideWhenUpdating(),
 
-            BelongsTo::make('created by', 'create', \App\Nova\User::class)->hideWhenCreating()->
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->
             hideWhenUpdating(),
-            BelongsTo::make('Update by', 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
+            BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
             hideWhenUpdating(),
 
-
+            HasMany::make(__('bus'),'Bus', \App\Nova\Bus::class),
 
         ];
     }
 
-    public static function afterCreate(Request $request, $model)
-    {   $id = Auth::id();
-        $model->update([
-            'created_by'=>$id,
-            ]);
+    public static function beforeCreate(Request $request, $model)
+    {
+        $id = Auth::id();
+        $model->created_by=$id;
     }
+
 
     public static function beforeUpdate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->update([
-            'update_by'=>$id,
+        $model->update_by=$id;
 
-        ]);
+
     }
     /**
      * Get the cards available for the request.

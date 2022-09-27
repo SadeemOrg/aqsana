@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RolesSeeder::class,
             ProjectTypeSeeder::class,
+            CurrencySeeder::class,
+            newsTypeSeeder::class,
+            AddressSeeder::class,
 
         ]);
     }

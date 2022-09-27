@@ -1,10 +1,9 @@
 
-body{padding-top: 82px;}
 /* Start header **/
 header.sticky-h {box-shadow: 0 6px 12px -10px #349a37}
 
 /* header {
-  
+
 } */
 
 /** Start home page **/
@@ -192,7 +191,7 @@ svg path, svg circle {transition: .2s;}
 }
 .nav-links.open nav .nav-item > a{
   right: 100%;
- 
+
 }
 
 @media (max-width: 1280px) {
@@ -201,11 +200,15 @@ svg path, svg circle {transition: .2s;}
   .nav-links .rt-links nav .nav-item:nth-of-type(3) > a {transition-delay: 0.2s;}
   .nav-links .rt-links nav .nav-item:nth-of-type(4) > a {transition-delay: 0.3s;}
   .nav-links .rt-links nav .nav-item:nth-of-type(5) > a {transition-delay: 0.4s;}
+  .nav-links .rt-links nav .nav-item:nth-of-type(6) > a {transition-delay: 0.5s;}
+  .nav-links .rt-links nav .nav-item:nth-of-type(7) > a {transition-delay: 0.6s;}
+  .nav-links .rt-links nav .nav-item:nth-of-type(8) > a {transition-delay: 0.7s;}
+  .nav-links .rt-links nav .nav-item:nth-of-type(9) > a {transition-delay: 0.8s;}
 
-  .nav-links .lt-links nav .nav-item:nth-of-type(1) > a {transition-delay: 0.5s;}
+  /* .nav-links .lt-links nav .nav-item:nth-of-type(1) > a {transition-delay: 0.5s;}
   .nav-links .lt-links nav .nav-item:nth-of-type(2) > a {transition-delay: 0.6s;}
   .nav-links .lt-links nav .nav-item:nth-of-type(3) > a {transition-delay: 0.7s;}
-  .nav-links .lt-links nav .nav-item:nth-of-type(4) > a {transition-delay: 0.8s;}
+  .nav-links .lt-links nav .nav-item:nth-of-type(4) > a {transition-delay: 0.8s;} */
 
 }
 /* End nav links in mobile*/
@@ -248,7 +251,7 @@ svg path, svg circle {transition: .2s;}
 .hamburger {
   width: 37px;
   height: auto;
-  display: block; 
+  display: block;
 }
 .hamburger.is-active .hamburger__bar {
   background: transparent;
@@ -301,7 +304,22 @@ svg path, svg circle {transition: .2s;}
   background-color: #349A37;
 }
 
+.dots-style1 .owl-dots {text-align: center; margin-top: 25px;}
+.dots-style1 .owl-dots .owl-dot{
+  width: 16px;
+  height: 16px;
+  background-color: #CFE9FF;
+  border-radius: 50%;
+  margin: 12px 2px;
+}
+.dots-style1 .owl-dots .owl-dot.active{
+  background-color: #349A37;
+}
+
 .inter-font {
   font-family: 'Inter', sans-serif;
 }
+.avero-name:hover {color: #CC9933; transition: .2s;}
+.scale-hover {transition: .4s;}
+.scalabel-img-box:hover .scale-hover {transform: scale(1.1);}
 /*** End my css framework ***/

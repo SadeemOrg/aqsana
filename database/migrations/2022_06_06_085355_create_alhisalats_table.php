@@ -15,19 +15,11 @@ class CreateAlhisalatsTable extends Migration
     {
         Schema::create('alhisalats', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->bigInteger('city_id');
-            $table->string('description');
-            $table->double('amount_total')->default(0.0);
-            $table->char('status',1);
-            $table->json('adrees')->nullable();
-            $table->string('information_location');
-            $table->dateTime('start_time')->nullable();
-            $table->dateTime('end_time')->nullable();
-            $table->bigInteger('recipient')->nullable();
-            $table->bigInteger('giver')->nullable();
-            $table->integer('approval')->nullable();
-            $table->string("reason_of_reject")->nullable();
+            $table->bigInteger('address_id');
+            $table->string('number_alhisala');
+            $table->char('status','1')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('update_by')->nullable();
             $table->timestamps();
         });
     }
