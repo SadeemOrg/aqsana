@@ -110,8 +110,10 @@
 
             @font-face {
                 font-family: "Rpt-Bold";
+
                 font-weight: 700px;
                 src: url({{asset('assets/front-end/fonts/ArbFONTS-arbfonts-rpt-Bold.ttf')}});
+
             }
 
             .font-FlatBold {
@@ -122,7 +124,7 @@
                 font-family: 'Rpt-Bold' !important
             }
         }
-    </style>
+    </style> 
     <!-- Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> -->
     <!-- Datepicker -->
