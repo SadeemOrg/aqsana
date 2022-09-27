@@ -18,12 +18,12 @@ $Almuahada_Form_sup_text = nova_get_setting('Almuahada_Form_sup_text', 'رقم �
 </style>
 <div class="bg-green-700 min-h-full bgg" style="background-image:url('https://media.discordapp.net/attachments/938405759996276806/1024261075954319430/D77A8EED_3.png?width=306&height=606') " ;>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 xl:pt-24 ">
-        <div class="relative">
-            <h1 class="text-white text-[30px] sm:text-[50px] md:text-[80px] lg:text-[160px] font-RpT-Bold text-center z-10 relative max-w-fit m-auto">
-                <span class="relative z-10">الموحدة أقرب !</span>
-                <img src="{{ asset('assets/image/blackBg.svg') }}" alt="black_svg" class="z-0 absolute w-[83%] left-[50%] translate-x-[-50%] top-[10%] h-full ">
-                <span></span>
-            </h1>                                
+        <div class="relative flex justify-center text-white text-[45px] sm:text-[60px] md:text-[80px] lg:text-[160px] ">
+            <h1 class="font-RpT-Bold text-center z-10 relative max-w-fit ">
+                <span class="relative z-10"> الموحدة أقرب </span>
+                <img src="{{ asset('assets/image/blackBg.svg') }}" alt="black_svg" class="z-0 absolute w-[98%] left-[50%] translate-x-[-50%] top-[10%] h-full ">                
+            </h1>  
+            <p class="mr-4"> ! </p>                              
         </div>
 
         <!-- first Paragraph -->
@@ -68,15 +68,15 @@ $Almuahada_Form_sup_text = nova_get_setting('Almuahada_Form_sup_text', 'رقم �
         </p>
         <!-- start with Form -->
         <div class="pt-52 flex flex-col items-center justify-start relative ">
-            <div class="hidden xl:block absolute md:right-[14%] lg:right-[12%] top-[140px]">
-                <div class="relative w-[650px] lg:w-[795px]">
-                    <h3 class="text-white font-RpT-Bold md:text-[65px] lg:text-[96px] text-center z-10 relative">الموحدة أقرب اليك!</h1>
-                        <img src="{{ asset('assets/image/smallBlackArea.svg') }}" alt="black_svg" class="z-0 absolute md:top-1 lg:top-4 lg:-right-2">
+            <div class="block absolute left-[50%] translate-x-[-50%] top-[180px] lg:top-[140px] w-[85%] md:w-[70%] lg:w-[795px]">
+                <div class="relative ">
+                    <h3 class="text-white font-RpT-Bold text-[30px] sm:text-[40px] md:text-[50px] lg:text-[90px] text-center z-10 relative italic">الموحدة أقرب اليك!</h1>
+                        <img src="{{ asset('assets/image/smallBlackArea.svg') }}" alt="black_svg" class="z-0 absolute top-[50%] translate-y-[-50%] lg:-right-2">
                 </div>
             </div>
             <form class="pb-28 LandingPage">
                 @csrf
-                <div class="bg-[#FFD400] w-[95%] h-auto flex flex-col px-14 pb-8">
+                <div class="bg-[#FFD400] w-[95%] mx-auto h-auto flex flex-col px-14 pb-8">
                     <p class=" mt-16 md:mt-28 text-[32px] sm:text-[44px]  md:text-[56px] font-RpT-Bold text-[#000000]">
                         للأنضمام الى كوادر الموحدة والمشاركة في تحقيق الأنتصار الانتخابي
                     </p>
