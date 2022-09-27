@@ -608,7 +608,7 @@ Notification.requestPermission().then(function(permission) { console.log('permis
     })
     .then(function(token) {
     // print the token on the HTML page
-  console.log(token);
+ 
 
   <?php
    if(\Illuminate\Support\Facades\Auth::user() != null) {

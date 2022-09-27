@@ -36,18 +36,17 @@ class PaymentController extends BaseController
     $tranzila_api_path  =  '/cgi-bin/tranzila71u.cgi';
     
     // Prepare transaction parameters 
-    $query_parameters['supplier'] = 'test'; // 'TERMINAL_NAME' should be replaced by actual terminal name 
-    $query_parameters['CreditPass'] = 'test';
-    $query_parameters['tranmode'] = 'D123';
-    $query_parameters['authnr'] = '0000000';
-    // $query_parameters['sum']  =  '45';  // Transaction sum 
-    // $query_parameters['currency'] = '1';  // Type of currency 1 NIS, 2 USD, 978 EUR, 826 GBP, 392 JPY 
-    // $query_parameters['ccno']  = '12312312';  // Test card number 
-    // $query_parameters['expdate']= '0820';  // Card expiry date: mmyy 
-    // $query_parameters['myid']  = '12312312';  // ID number if required 
-    // $query_parameters['mycvv']  = '123';  // number if required 
-    // $query_parameters['cred_type'] = '1';  // This field specifies the type of transaction, 1 - normal transaction, 6 - credit, 8 - payments 
-    // $query_parameters['TranzilaPW'] = 'TranzilaPW' ; 
+    // Prepare transaction parameters
+    $query_parameters['supplier'] = 'TERMINAL_NAME';// 'TERMINAL_NAME' should be replaced by actual terminal name
+    $query_parameters['sum'] = '5'; //Transaction sum 
+    $query_parameters['tranmode'] = 'A';
+    $query_parameters['currency'] = '1'; //Type of currency 1 NIS, 2 USD, 978 EUR, 826 GBP, 392 JPY
+    $query_parameters['ccno'] = '12312312'; // Test card number
+    $query_parameters['expdate'] = '0820'; // Card expiry date: mmyy
+    $query_parameters['myid'] = '12312312'; //ID number if required
+    $query_parameters['mycvv'] = '123'; // number if required
+    $query_parameters['cred_type'] = '1'; // This field specifies the type of transaction, 1 - normal transaction, 6 - credit, 8 - payments
+    // $query_parameters['TranzilaPW'] = 'TranzilaPW';
     
     $query_string = '' ; 
     foreach($query_parameters as $name => $value) { 
@@ -56,24 +55,26 @@ class PaymentController extends BaseController
     
     $query_string  =  substr($query_string ,  0 ,  - 1 ) ;  // Remove trailing '&'
     
-    // Initiate CURL 
+    // Initiate CURL
     $cr = curl_init();
     
-    curl_setopt($cr,CURLOPT_URL ,"https://$tranzila_api_host$tranzila_api_path"); 
-    curl_setopt($cr,CURLOPT_POST,1); 
-    curl_setopt($cr,CURLOPT_FAILONERROR,true); 
-    curl_setopt($cr,CURLOPT_POSTFIELDS,$query_string) ; 
-    curl_setopt($cr,CURLOPT_RETURNTRANSFER,1); 
-    curl_setopt($cr,CURLOPT_SSL_VERIFYPEER,0);
+    curl_setopt($cr, CURLOPT_URL, "https://$tranzila_api_host$tranzila_api_path");
+    curl_setopt($cr, CURLOPT_POST, 1);
+    curl_setopt($cr, CURLOPT_FAILONERROR, true);
+    curl_setopt($cr, CURLOPT_POSTFIELDS, $query_string);
+    curl_setopt($cr, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($cr, CURLOPT_SSL_VERIFYPEER, 0);
+ 
     
-    // Execute request 
-    $result = curl_exec($cr); 
+    // Execute request
+    $result = curl_exec($cr);
     $error = curl_error($cr);
     
-    if(!empty($error)){ 
-        die( $error ); 
-    } 
-    curl_close ($cr);
+    if (!empty($error)) {
+        die ($error);
+    }
+    curl_close($cr);
+    
     
     // Preparing associative array with response data 
     $response_array = explode('&',$result); 
@@ -90,7 +91,7 @@ class PaymentController extends BaseController
     // Analyze the result string 
     if(!isset($response_assoc['Response'])){ 
         // die($result."\n"); 
-        return $this->sendResponse($result, 'Success ');
+        return $this->sendError($result);
         /**
          * When there is no 'Response' parameter it either means
          * that some pre-transaction error happened (like authentication
