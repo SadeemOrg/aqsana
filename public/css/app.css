@@ -497,6 +497,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-6{
   right: 1.5rem;
 }
+.-right-4{
+  right: -1rem;
+}
 .z-30{
   z-index: 30;
 }
@@ -1570,6 +1573,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-\[10px\]{
   font-size: 10px;
 }
+.text-\[60px\]{
+  font-size: 60px;
+}
+.text-\[45px\]{
+  font-size: 45px;
+}
 .font-bold{
   font-weight: 700;
 }
@@ -2404,6 +2413,9 @@ body{
   .xl\:w-\[200px\]{
     width: 200px;
   }
+  .xl\:w-\[795px\]{
+    width: 795px;
+  }
   .xl\:basis-3\/5{
     flex-basis: 60%;
   }
@@ -2450,6 +2462,12 @@ body{
   }
   .xl\:text-\[16px\]{
     font-size: 16px;
+  }
+  .xl\:text-\[88px\]{
+    font-size: 88px;
+  }
+  .xl\:text-\[50px\]{
+    font-size: 50px;
   }
   .xl\:text-\[\#000\]{
     --tw-text-opacity: 1;

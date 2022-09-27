@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\FormMassage;
 use Mail;
 use App\Mail\TestMail;
+use App\Models\Almuahada;
 use App\Models\News;
 use App\Models\newsType;
 
@@ -84,6 +85,36 @@ class HomeController extends Controller
                 'name' => $request['name'],
                 'phone' => $request['phone'],
                 'message' => $request['message'],
+
+            ]);
+            return response()->json(['success'=>'Added new records.']);
+        }
+
+        return response()->json(['error'=>$validator->errors()->all()]);
+    }
+
+    public function Almuahada(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:3|max:50',
+            'phone' => 'digits_between:10,14',
+            'city' => 'required',
+        ],
+        [
+            'name.required' => 'الرجاء ادخال الاسم. ',
+            'name.string' => 'الرجاء ادخال الاسم بشكل صحيح . ',
+            'name.min' => 'الاسم يجب ان يكون على الأقل 3 حروف. ',
+            'name.max' => 'الاسم يجب ان لا يزيد عن 50 حرف. ',
+
+            'phone.digits_between' => 'الرجاء ادخال رقم الهاتف بشكل صحيح. ',
+            'city.required' => 'الرجاء ادخال المدينة. ',
+        ]);
+        if ($validator->passes()) {
+            Almuahada::create([
+                'name' => $request['name'],
+                'phone' => $request['phone'],
+                'city' => $request['city'],
 
             ]);
             return response()->json(['success'=>'Added new records.']);

@@ -30,6 +30,7 @@ use Whitecube\NovaFlexibleContent\Flexible;
 use Illuminate\Support\Facades\Auth;
 use Comodolab\Nova\Fields\Help\Help;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
+use App\Nova\Metrics\AlmuahadaSum;
 use App\Nova\Metrics\DonationsSum;
 use App\Nova\Metrics\InComeTransaction;
 use App\Nova\Metrics\NewAlhisalat;
@@ -624,6 +625,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             (new DonationsSum())->canSee(function () {
                 $user = Auth::user();
                 if ($user->type() == 'admin') return true;
+                return false;
+            }),
+            (new AlmuahadaSum())->canSee(function () {
+                $user = Auth::user();
+                if ($user->type() == 'Almuahada_admin') return true;
                 return false;
             }),
         ];
