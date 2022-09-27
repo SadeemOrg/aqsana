@@ -250,9 +250,25 @@
     "The Users": "المستخدمين",
     "Voluntee":"متطوع",
     "not Volunteer":"تم الغاء التطوع",
-    "":"",
-    "":"",
-    "":"",
+    "number":"رقم",
+    "city":"مدينة",
+    "Almuahad":"الموحد",
+    "Almuahadas":"الموحد",
+    "hawl almuahada":"حول الموحدة",
+    "hawl almuahada 2":"حول الموحدة 2",
+    "hawl almuahada 3":"حول الموحدة 3",
+
+    "sup text 1":"عنوان الفرعي 1",
+
+    "title 1":"عنوان 1",
+
+    "sup text 2":"عنوان الفرعي 2",
+    "title 2":"عنوان 2",
+    "sup text 3":"عنوان الفرعي 3",
+    "title 3":"عنوان 3",
+
+ "Save settings":"حفظ",
+
     "Notification": "الاشعارات",
     "Transaction": "الاجراء",
     "Role": "صلاحيات",
