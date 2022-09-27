@@ -54,7 +54,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
         integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- firebase integration started -->
+    <!-- firebase integration started -->   
 
     <!-- Firebase App is always required and must be first -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -118,8 +118,8 @@
 
             @font-face {
                 font-family: "Rpt-Bold";
-                font-weight: 700px;
-                src:"{{asset('assets/front-end/fonts/ArbFONTS-arbfonts-rpt-Bold.ttf')}}";         
+                font-weight: 700px;                
+                src: url({{asset('assets/front-end/fonts/ArbFONTS-arbfonts-rpt-Bold.ttf')}});        
             }
 
             .font-FlatBold {
@@ -129,7 +129,7 @@
                 font-family: 'Rpt-Bold' !important
             }
         }
-    </style>
+    </style> 
     <!-- Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> -->
     <!-- Datepicker -->
