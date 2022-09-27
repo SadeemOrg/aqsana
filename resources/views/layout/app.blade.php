@@ -116,8 +116,17 @@
                 src: url('/public/assets/front-end/fonts/alfont_com_JF-Flat-regular.ttf')
             }
 
+            @font-face {
+                font-family: "Rpt-Bold";
+                font-weight: 700px;
+                src:"{{asset('assets/front-end/fonts/ArbFONTS-arbfonts-rpt-Bold.ttf')}}";         
+            }
+
             .font-FlatBold {
                 font-family: 'alfont_com_JF-Flat-Bold' !important
+            }
+            .font-RpT-Bold{
+                font-family: 'Rpt-Bold' !important
             }
         }
     </style>
