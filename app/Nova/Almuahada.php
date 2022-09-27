@@ -19,6 +19,15 @@ class Almuahada extends Resource
      */
     public static $model = \App\Models\Almuahada::class;
 
+    public static function label()
+    {
+        return __('Almuahad');
+    }
+
+    public static function group()
+    {
+        return __('Almuahad');
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
