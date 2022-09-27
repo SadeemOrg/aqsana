@@ -15,9 +15,10 @@ $Almuahada_Form_sup_text = nova_get_setting('Almuahada_Form_sup_text', 'رقم �
 <div class="bg-green-700 min-h-full " style="background-image:url('https://media.discordapp.net/attachments/938405759996276806/1024261075954319430/D77A8EED_3.png?width=306&height=606')" ;>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 xl:pt-24 ">
         <div class="relative">
-            <h3 class="text-white text-[30px] sm:text-[50px] md:text-[80px] lg:text-[160px] font-RpT-Bold text-center z-10 relative ">
+            <h1 class="text-white text-[30px] sm:text-[50px] md:text-[80px] lg:text-[160px] font-RpT-Bold text-center z-10 relative max-w-fit m-auto">
                 <span class="relative z-10">الموحدة أقرب !</span>
                 <img src="{{ asset('assets/image/blackBg.svg') }}" alt="black_svg" class="z-0 absolute w-[83%] left-[50%] translate-x-[-50%] top-[10%] h-full ">
+                <span></span>
             </h1>                                
         </div>
 
