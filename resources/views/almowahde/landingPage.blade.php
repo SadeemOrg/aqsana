@@ -79,7 +79,7 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
     }
 </style>
 <div class="bg-green-700 min-h-full bgg" style="background-image:url('https://media.discordapp.net/attachments/938405759996276806/1024261075954319430/D77A8EED_3.png?width=306&height=606') " ;>
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 xl:pt-24 ">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 xl:pt-14 ">
         <!-- <div class="relative">
             <h3 class="text-white text-[30px] sm:text-[50px] md:text-[80px] lg:text-[160px] font-RpT-Bold text-center z-10 relative ">
 
@@ -110,19 +110,19 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
 
         <!-- first Paragraph -->
         <div class="flex flex-row justify-between items-center  pt-9 max-w-full w-full pb-6 sm:pb-0 m-auto">
-            <div class="border-b-2 border-[#CDCCD2] w-[35%] md:w-[40%] lg:w-[44%]"></div>
-            <div class="rounded-[50%] h-16 w-16 sm:h-24 sm:w-24 bg-[#FFFFFF] flex flex-row items-center justify-center">
-                <p class="text-[24px] text-[#009245]">1</p>
+            <div class="border-b-2 border-[#CDCCD2] w-[40%] sm:w-[43%] md:w-[44%] lg:w-[46%]"></div>
+            <div class="rounded-[50%] h-12 w-12 sm:h-16 sm:w-16 bg-[#FFFFFF] flex flex-row items-center justify-center">
+                <p class="text-[38px] text-[#009245] font-bold">1</p>
             </div>
-            <div class="border-b-2 border-[#CDCCD2] w-[35%] md:w-[40%] lg:w-[44%]"></div>
+            <div class="border-b-2 border-[#CDCCD2] w-[40%] sm:w-[43%] md:w-[44%] lg:w-[46%]"></div>
         </div>
-        <p class="text-[28px] md:text-[36px] lg:text-[45px] font-RpT-Bold text-[#FFFFFF]">
+        <p class="text-[28px] md:text-[36px] lg:text-[22px] font-RpT-Bold text-[#FFFFFF] text-justify">
             @if(!empty($Almuahada_text_1->value))
             {{ $Almuahada_text_1->value }}
             @else
             القائمة العربية الموحدة
             @endif
-            <span class="text-[22px] md:text-[24px] lg:text-[36px] font-Flatnormal">
+            <span class="text-[22px] md:text-[24px] lg:text-[21px] font-Flatnormal">
                 @if(!empty($Almuahada_sup_text_1->value))
                 {{ $Almuahada_sup_text_1->value }}
                 @else
@@ -131,20 +131,20 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
             </span>
         </p>
         <!-- second Paragraph -->
-        <div class="flex flex-row justify-between items-center  pt-9 max-w-full w-full pb-6 sm:pb-0 m-auto">
-            <div class="border-b-2 border-[#CDCCD2] w-[35%] md:w-[40%] lg:w-[44%]"></div>
-            <div class="rounded-[50%]  h-16 w-16 sm:h-24 sm:w-24 bg-[#FFFFFF] flex flex-row items-center justify-center">
-                <p class="text-[24px] text-[#009245]">2</p>
+        <div class="flex flex-row justify-between items-center  pt-6 max-w-full w-full pb-6 sm:pb-0 m-auto">
+        <div class="border-b-2 border-[#CDCCD2] w-[40%] sm:w-[43%] md:w-[44%] lg:w-[46%]"></div>
+            <div class="rounded-[50%] h-12 w-12 sm:h-16 sm:w-16 bg-[#FFFFFF] flex flex-row items-center justify-center">
+                <p class="text-[38px] text-[#009245] font-bold">2</p>
             </div>
-            <div class="border-b-2 border-[#CDCCD2] w-[35%] md:w-[40%] lg:w-[44%]"></div>
+            <div class="border-b-2 border-[#CDCCD2] w-[40%] sm:w-[43%] md:w-[44%] lg:w-[46%]"></div>
         </div>
-        <p class="text-[28px] md:text-[36px] lg:text-[45px] font-RpT-Bold text-[#FFFFFF]">
+        <p class="text-[28px] md:text-[36px] lg:text-[22px] font-RpT-Bold text-[#FFFFFF] text-justify">
             @if(!empty($Almuahada_text_2->value))
             {{ $Almuahada_text_2->value }}
             @else
             نبض الشارع العربي أقرب الى الموحدة
             @endif
-            <span class="text-[22px] md:text-[24px] lg:text-[36px] font-Flatnormal">
+            <span class="text-[22px] md:text-[24px] lg:text-[21px] font-Flatnormal">
                 @if(!empty($Almuahada_sup_text_2->value))
                 {{ $Almuahada_sup_text_2 ->value}}
                 @else
@@ -154,20 +154,20 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
         </p>
 
         <!-- third Paragraph -->
-        <div class="flex flex-row justify-between items-center  pt-9 max-w-full w-full pb-6 sm:pb-0 m-auto">
-            <div class="border-b-2 border-[#CDCCD2] w-[35%] md:w-[40%] lg:w-[44%]"></div>
-            <div class="rounded-[50%]  h-16 w-16 sm:h-24 sm:w-24 bg-[#FFFFFF] flex flex-row items-center justify-center">
-                <p class="text-[24px] text-[#009245]">3</p>
+        <div class="flex flex-row justify-between items-center  pt-6 max-w-full w-full pb-6 sm:pb-0 m-auto">
+        <div class="border-b-2 border-[#CDCCD2] w-[40%] sm:w-[43%] md:w-[44%]  lg:w-[46%]"></div>
+            <div class="rounded-[50%] h-12 w-12 sm:h-16 sm:w-16 bg-[#FFFFFF] flex flex-row items-center justify-center">
+                <p class="text-[38px] text-[#009245] font-bold">3</p>
             </div>
-            <div class="border-b-2 border-[#CDCCD2] w-[35%] md:w-[40%] lg:w-[44%]"></div>
+            <div class="border-b-2 border-[#CDCCD2] w-[40%] sm:w-[43%] md:w-[44%]  lg:w-[46%]"></div>
         </div>
-        <p class="text-[28px] md:text-[36px] lg:text-[45px] font-RpT-Bold text-[#FFFFFF]">
+        <p class="text-[28px] md:text-[36px] lg:text-[22px] font-RpT-Bold text-[#FFFFFF] text-justify">
             @if(!empty($Almuahada_text_3->value))
             {{ $Almuahada_text_3->value}}
             @else
             الموحده بأسلوبها العقلاني أقرب الى مواجهة العتصرية,
             @endif
-            <span class="text-[22px] md:text-[24px] lg:text-[36px] font-Flatnormal">
+            <span class="text-[22px] md:text-[24px] lg:text-[21px] font-Flatnormal">
                 @if(!empty($Almuahada_sup_text_3->value))
                 {{ $Almuahada_sup_text_3->value }}
                 @else

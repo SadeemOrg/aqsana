@@ -743,6 +743,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-8{
   height: 2rem;
 }
+.h-12{
+  height: 3rem;
+}
 .max-h-\[460px\]{
   max-height: 460px;
 }
@@ -871,6 +874,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-8{
   width: 2rem;
+}
+.w-12{
+  width: 3rem;
+}
+.w-\[40\%\]{
+  width: 40%;
 }
 .min-w-full{
   min-width: 100%;
@@ -1560,6 +1569,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-\[10px\]{
   font-size: 10px;
 }
+.text-\[38px\]{
+  font-size: 38px;
+}
 .font-bold{
   font-weight: 700;
 }
@@ -1981,6 +1993,9 @@ body{
   .sm\:h-\[300px\]{
     height: 300px;
   }
+  .sm\:h-16{
+    height: 4rem;
+  }
   .sm\:w-24{
     width: 6rem;
   }
@@ -1992,6 +2007,15 @@ body{
   }
   .sm\:w-\[563px\]{
     width: 563px;
+  }
+  .sm\:w-20{
+    width: 5rem;
+  }
+  .sm\:w-16{
+    width: 4rem;
+  }
+  .sm\:w-\[43\%\]{
+    width: 43%;
   }
   .sm\:max-w-xl{
     max-width: 36rem;
@@ -2150,6 +2174,12 @@ body{
   }
   .md\:w-\[200px\]{
     width: 200px;
+  }
+  .md\:w-\[45\%\]{
+    width: 45%;
+  }
+  .md\:w-\[44\%\]{
+    width: 44%;
   }
   .md\:max-w-2xl{
     max-width: 42rem;
@@ -2338,6 +2368,9 @@ body{
   .lg\:w-\[150px\]{
     width: 150px;
   }
+  .lg\:w-\[46\%\]{
+    width: 46%;
+  }
   .lg\:max-w-\[170px\]{
     max-width: 170px;
   }
@@ -2410,6 +2443,12 @@ body{
   }
   .lg\:text-\[24px\]{
     font-size: 24px;
+  }
+  .lg\:text-\[22px\]{
+    font-size: 22px;
+  }
+  .lg\:text-\[21px\]{
+    font-size: 21px;
   }
 }
 @media (min-width: 1280px){
@@ -2504,6 +2543,15 @@ body{
   }
   .xl\:pt-24{
     padding-top: 6rem;
+  }
+  .xl\:pt-20{
+    padding-top: 5rem;
+  }
+  .xl\:pt-16{
+    padding-top: 4rem;
+  }
+  .xl\:pt-14{
+    padding-top: 3.5rem;
   }
   .xl\:text-right{
     text-align: right;
