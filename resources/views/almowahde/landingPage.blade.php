@@ -126,7 +126,7 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
                 @csrf
                 <div class="bg-[#FFD400] w-[95%] h-auto flex flex-col px-14 pb-8 mx-auto">
 
-                    <p class=" mt-16 lg:mt-20 xl:mt-28 text-[24px] sm:text-[28px] md:text-[46px] font-RpT-Bold text-[#000000]">
+                    <p class=" mt-14 lg:mt-20 xl:mt-28 text-[24px] sm:text-[28px] md:text-[46px] font-RpT-Bold text-[#000000]">
                         @if(!empty($Almuahada_Form_sup_text->value))
                         {{ $Almuahada_Form_sup_text->value }}
                         @else
