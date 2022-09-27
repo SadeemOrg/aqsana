@@ -14,7 +14,69 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
 @section('content')
 
 <style>
+    .block1 {
+        position: absolute;
+        left: 50%;
+        top: 180px;
+    }
 
+    @media screen and (min-width: 1024px) {
+        .block1 {
+            top: 140px;
+            width: 795px;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .block1 {
+            width: 70%;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .block1 {
+            width: 85%;
+        }
+    }
+
+    .imgform {
+        z-index: 0;
+        position: absolute;
+        top: 50%;
+        --tw-translate-y: -50%;
+        transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    }
+
+    @media screen and (min-width: 1024px) {
+        .imgform {
+            right: -8px;
+        }
+    }
+
+    .formtext {
+        color: white;
+        text-align: center;
+        z-index: 10;
+        position: relative;
+    }
+
+    @media screen and (min-width: 1024px) {
+        .formtext {
+            font-size: 90px;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .formtext {
+            font-size: 50px;
+        }
+    }
+
+    @media screen and (min-width: 640px) {
+        .formtext {
+            font-size: 40px;
+        }
+    }
 </style>
 <div class="bg-green-700 min-h-full bgg" style="background-image:url('https://media.discordapp.net/attachments/938405759996276806/1024261075954319430/D77A8EED_3.png?width=306&height=606') " ;>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 xl:pt-24 ">
@@ -115,10 +177,10 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
         </p>
         <!-- start with Form -->
         <div class="pt-52 flex flex-col items-center justify-start relative ">
-            <div class="block absolute left-[50%] translate-x-[-50%] top-[180px] lg:top-[140px] w-[85%] md:w-[70%] lg:w-[795px]">
+            <div class="block1 block absolute left-[50%] translate-x-[-50%] top-[180px] lg:top-[140px] w-[85%] md:w-[70%] lg:w-[795px]">
                 <div class="relative ">
-                    <h3 class="text-white font-RpT-Bold text-[30px] sm:text-[40px] md:text-[50px] lg:text-[90px] text-center z-10 relative italic">الموحدة أقرب اليك!</h1>
-                        <img src="{{ asset('assets/image/smallBlackArea.svg') }}" alt="black_svg" class="z-0 absolute top-[50%] translate-y-[-50%] lg:-right-2">
+                    <h3 class=" text-white font-RpT-Bold text-[30px] sm:text-[40px] md:text-[50px] lg:text-[90px] text-center z-10 relative italic">الموحدة أقرب اليك!</h1>
+                        <img src="{{ asset('assets/image/smallBlackArea.svg') }}" alt="black_svg" class="imgform ">
                 </div>
             </div>
 
