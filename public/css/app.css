@@ -500,6 +500,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[86px\]{
   top: 86px;
 }
+.top-\[20px\]{
+  top: 20px;
+}
 .z-30{
   z-index: 30;
 }
@@ -883,6 +886,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-\[40\%\]{
   width: 40%;
+}
+.w-\[42\%\]{
+  width: 42%;
 }
 .min-w-full{
   min-width: 100%;
@@ -1474,6 +1480,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pt-28{
   padding-top: 7rem;
 }
+.pb-1{
+  padding-bottom: 0.25rem;
+}
 .text-center{
   text-align: center;
 }
@@ -1578,6 +1587,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-\[38px\]{
   font-size: 38px;
 }
+.text-\[35px\]{
+  font-size: 35px;
+}
+.text-\[36px\]{
+  font-size: 36px;
+}
 .font-bold{
   font-weight: 700;
 }
@@ -1610,6 +1625,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .leading-5{
   line-height: 1.25rem;
+}
+.leading-3{
+  line-height: .75rem;
 }
 .text-gray-700{
   --tw-text-opacity: 1;
@@ -1960,6 +1978,9 @@ body{
   .sm\:mt-0{
     margin-top: 0px;
   }
+  .sm\:mt-14{
+    margin-top: 3.5rem;
+  }
   .sm\:block{
     display: block;
   }
@@ -2022,6 +2043,9 @@ body{
   }
   .sm\:w-\[43\%\]{
     width: 43%;
+  }
+  .sm\:w-\[75\%\]{
+    width: 75%;
   }
   .sm\:max-w-xl{
     max-width: 36rem;
@@ -2121,8 +2145,14 @@ body{
     font-size: 1rem;
     line-height: 1.5rem;
   }
+  .sm\:text-\[38px\]{
+    font-size: 38px;
+  }
 }
 @media (min-width: 768px){
+  .md\:top-\[86px\]{
+    top: 86px;
+  }
   .md\:mx-0{
     margin-left: 0px;
     margin-right: 0px;
@@ -2247,6 +2277,12 @@ body{
   .md\:pt-6{
     padding-top: 1.5rem;
   }
+  .md\:pt-9{
+    padding-top: 2.25rem;
+  }
+  .md\:pt-20{
+    padding-top: 5rem;
+  }
   .md\:text-right{
     text-align: right;
   }
@@ -2283,6 +2319,9 @@ body{
   }
   .md\:text-\[40px\]{
     font-size: 40px;
+  }
+  .md\:leading-7{
+    line-height: 1.75rem;
   }
 }
 @media (min-width: 1024px){
@@ -2447,6 +2486,9 @@ body{
   .lg\:pr-0{
     padding-right: 0px;
   }
+  .lg\:pt-28{
+    padding-top: 7rem;
+  }
   .lg\:text-right{
     text-align: right;
   }
@@ -2470,6 +2512,9 @@ body{
   }
   .lg\:text-\[21px\]{
     font-size: 21px;
+  }
+  .lg\:text-\[86px\]{
+    font-size: 86px;
   }
 }
 @media (min-width: 1280px){
