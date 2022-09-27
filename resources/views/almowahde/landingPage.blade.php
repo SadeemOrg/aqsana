@@ -125,20 +125,8 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
             <form class="pb-28 LandingPage">
                 @csrf
                 <div class="bg-[#FFD400] w-[95%] h-auto flex flex-col px-14 pb-8 mx-auto">
-                    <!-- Block hidden -->
-                    <!-- <div class="mt-6 xl:hidden block mx-auto ">
-                        <div class="relative w-[100%] sm:w-[450px] md:w-[600px] mdlg:w-[790px] lg:w-[795px]">
-                            <h3 class="text-white font-RpT-Bold text-[28px] sm:text-[45px] md:text-[65px] mdlg:text-[96px] text-center z-10 relative">
-                                @if(!empty($Almuahada_Form_text->value))
-                                {{ $Almuahada_Form_text->value }}
-                                @else
-                                الموحدة أقرب اليك!
-                                @endif
-                                </h1>
-                                <img src="{{ asset('assets/image/smallBlackArea.svg') }}" alt="black_svg" class="z-0 absolute top-1 sm:-top-0 md:top-1 lg:top-4 lg:-right-2">
-                        </div>
-                    </div> -->
-                    <p class=" mt-16 lg:mt-20 xl:mt-28 text-[32px] sm:text-[44px] md:text-[56px] font-RpT-Bold text-[#000000]">
+
+                    <p class=" mt-16 lg:mt-20 xl:mt-28 text-[24px] sm:text-[28px] md:text-[46px] font-RpT-Bold text-[#000000]">
                         @if(!empty($Almuahada_Form_sup_text->value))
                         {{ $Almuahada_Form_sup_text->value }}
                         @else
