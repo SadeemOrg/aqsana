@@ -497,6 +497,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-6{
   right: 1.5rem;
 }
+.top-\[86px\]{
+  top: 86px;
+}
 .z-30{
   z-index: 30;
 }
@@ -1468,6 +1471,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pl-2{
   padding-left: 0.5rem;
 }
+.pt-28{
+  padding-top: 7rem;
+}
 .text-center{
   text-align: center;
 }
@@ -2151,6 +2157,12 @@ body{
   .md\:h-\[375px\]{
     height: 375px;
   }
+  .md\:h-\[65px\]{
+    height: 65px;
+  }
+  .md\:h-\[75px\]{
+    height: 75px;
+  }
   .md\:max-h-72{
     max-height: 18rem;
   }
@@ -2232,6 +2244,9 @@ body{
   .md\:pt-14{
     padding-top: 3.5rem;
   }
+  .md\:pt-6{
+    padding-top: 1.5rem;
+  }
   .md\:text-right{
     text-align: right;
   }
@@ -2266,6 +2281,9 @@ body{
   .md\:text-\[18px\]{
     font-size: 18px;
   }
+  .md\:text-\[40px\]{
+    font-size: 40px;
+  }
 }
 @media (min-width: 1024px){
   .lg\:top-\[140px\]{
@@ -2273,6 +2291,9 @@ body{
   }
   .lg\:right-auto{
     right: auto;
+  }
+  .lg\:top-\[45px\]{
+    top: 45px;
   }
   .lg\:-mx-8{
     margin-left: -2rem;
