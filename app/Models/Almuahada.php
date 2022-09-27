@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Almuahada extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id','name', 'city','phone',
+        ];
 }

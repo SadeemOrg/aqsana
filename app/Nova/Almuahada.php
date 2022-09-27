@@ -79,8 +79,8 @@ class Almuahada extends Resource
                     Text::make(__('title 3'), 'Almuahada_text_3'),
                     Text::make(__('sup text 3'), 'Almuahada_sup_text_3'),
 
-                    Text::make(__('Form text'), 'Almuahada_Form_text_3'),
-                    Text::make(__('Form sup text'), 'Almuahada_Form_sup_text_3'),
+                    Text::make(__('Form text'), 'Almuahada_Form_text'),
+                    Text::make(__('Form sup text'), 'Almuahada_Form_sup_text'),
                 ],
                 // __(__('hawl almuahada 1')) => [
 
