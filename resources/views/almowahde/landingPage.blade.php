@@ -86,7 +86,7 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
                 <img src="{{ asset('assets/image/blackBg.svg') }}" alt="black_svg" class="z-0 absolute w-[98%] left-[50%] translate-x-[-50%] top-[10%] h-full ">
             </h1>
             <p class="mr-4"> ! </p> -->
-            <img src="{{asset('assets/image/title.webp')}}" alt="title">
+            <img class="max-w-[90%]" src="{{asset('assets/image/title.webp')}}" alt="title">
         </div>
 
         <!-- first Paragraph -->
