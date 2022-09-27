@@ -1,13 +1,14 @@
 @php
-$text_main = nova_get_setting('text_main', 'default_value');
-$Almuahada_text_1 = nova_get_setting('Almuahada_text_1', 'default_value');
-$Almuahada_sup_text_1= nova_get_setting('Almuahada_sup_text_1', 'default_value');
-$Almuahada_text_2 = nova_get_setting('Almuahada_text_2', 'default_value');
-$Almuahada_sup_text_2 = nova_get_setting('Almuahada_sup_text_2', 'default_value');
-$Almuahada_text_3 = nova_get_setting('Almuahada_text_3', 'الاسم كامل');
-$Almuahada_sup_text_3 = nova_get_setting('Almuahada_sup_text_3', 'رقم الهاتف');
-$Almuahada_Form_text = nova_get_setting('Almuahada_Form_text', 'الاسم كامل');
-$Almuahada_Form_sup_text = nova_get_setting('Almuahada_Form_sup_text', 'رقم الهاتف');
+
+$text_main =  DB::table('settings')->where('key','text_main' )->select('key')->first();
+$Almuahada_text_1 = DB::table('settings')->where('key','Almuahada_text_1' )->select('key')->first();
+$Almuahada_sup_text_1= DB::table('settings')->where('key','Almuahada_sup_text_1' )->select('key')->first();
+$Almuahada_text_2 = DB::table('settings')->where('key','Almuahada_text_2' )->select('key')->first();
+$Almuahada_sup_text_2 = DB::table('settings')->where('key','Almuahada_text_2' )->select('key')->first();
+$Almuahada_text_3 = DB::table('settings')->where('key','Almuahada_text_3' )->select('key')->first();
+$Almuahada_sup_text_3 =DB::table('settings')->where('key','Almuahada_sup_text_3' )->select('key')->first();/
+$Almuahada_Form_text = DB::table('settings')->where('key','Almuahada_Form_text' )->select('key')->first();
+$Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup_text' )->select('key')->first();
 @endphp
 @extends('layout.app', ['hasHeader' => false, 'hasFooter' => false ])
 @section('content')
@@ -18,9 +19,9 @@ $Almuahada_Form_sup_text = nova_get_setting('Almuahada_Form_sup_text', 'رقم �
             <h3 class="text-white text-[30px] sm:text-[50px] md:text-[80px] lg:text-[160px] font-RpT-Bold text-center z-10 relative ">
                 <span class="relative z-10">الموحدة أقرب !</span>
                 <img src="{{ asset('assets/image/blackBg.svg') }}" alt="black_svg" class="z-0 absolute w-[83%] left-[50%] translate-x-[-50%] top-[10%] h-full ">
-            </h1>                                
+            </h1>
         </div>
-
+{{ $text_main->key }}
         <!-- first Paragraph -->
         <div class="flex flex-row justify-between items-center  pt-9 max-w-[250px] sm:max-w-[290px] md:max-w-full w-full m-auto">
             <div class="border-b-2 border-[#CDCCD2] w-[44%]"></div>
