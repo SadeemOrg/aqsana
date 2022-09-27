@@ -22,6 +22,11 @@ class UserSeeder extends Seeder
                 'email' => 'alaqsaAdmine@averotech.com',
                 'user_role' => 'admin',
             ],
+               [
+                'name' => 'Almuahadaadmin',
+                'email' => 'Almuahadaadmin@averotech.com',
+                'user_role' => 'Almuahada_admin',
+            ],
             [
                 'name' => 'alaqsaFinancialUser',
                 'email' => 'alaqsaFinancialUser@averotech.com',

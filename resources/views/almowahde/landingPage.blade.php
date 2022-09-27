@@ -1,5 +1,7 @@
 @extends('layout.app', ['hasHeader' => false, 'hasFooter' => false ])
-<div class="bg-green-700 min-h-full ">
+@section('content')
+
+<div class="bg-green-700 min-h-full " style="background-image:url('https://media.discordapp.net/attachments/938405759996276806/1024261075954319430/D77A8EED_3.png?width=306&height=606')" ;>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 xl:pt-24 ">
         <div class="relative">
             <h3 class="text-white text-[186px] font-RpT-Bold text-center z-10 relative ">الموحدة أقرب !</h1>
@@ -49,28 +51,45 @@
         <!-- start with Form -->
         <div class="pt-52 flex flex-col items-center justify-start relative ">
             <div class="absolute top-[150px]">
-                <div class="relative w-[795px]">
-                    <h3 class="text-white text-[88px] font-FlatBold text-center z-10 relative">الموحدة أقرب اليك!</h1>
-                        <img src="{{ asset('assets/image/smallBlackArea.svg') }}" alt="black_svg" class="z-0 absolute top-0 ">
+                <div class="relative xl:w-[795px]">
+                    <h3 class="text-white text-[60px] xl:text-[88px] font-FlatBold text-center z-10 relative">الموحدة أقرب اليك!</h1>
+                        <img src="{{ asset('assets/image/smallBlackArea.svg') }}" alt="black_svg" class="z-0 absolute top-0 -right-4">
                 </div>
             </div>
-            <form class="pb-28">
+            <form class="pb-28 LandingPage"  >
+                @csrf
                 <div class="bg-[#FFD400] w-[95%] h-auto flex flex-col px-14 pb-8">
-                    <p class=" mt-28 text-[50px] text-[#000000]">
+                    <p class=" mt-28 text-[45px] xl:text-[50px] text-[#000000]">
                         للأنضمام الى كوادر الموحدة والمشاركة في تحقيق الأنتصار الانتخابي
                     </p>
                     <div class=" ltr pt-10 px-6 lg:px-0">
                         <input type="text" name="name" placeholder="الاسم" class="rtl block w-full h-[95px]  border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
                     </div>
+                    @error('name')
+                    <span class="invalid-feedback text-red-600" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <div class=" ltr pt-10 px-6 lg:px-0">
-                        <input type="text" name="name" placeholder="البلد" class="rtl block w-full h-[95px]  border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
+                        <input type="text" name="city" placeholder="البلد" class="rtl block w-full h-[95px]  border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
                     </div>
+                    @error('city')
+                    <span class="invalid-feedback text-red-600" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <div class=" ltr pt-10 px-6 lg:px-0">
-                        <input type="text" name="name" placeholder="هاتف" class="rtl block w-full h-[95px]  border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
+                        <input type="number" name="phone" placeholder="هاتف" class="rtl block w-full h-[95px]  border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
                     </div>
+                    @error('phone')
+                    <span class="invalid-feedback text-red-600" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
-                <button class="mt-9 bg-[#000000] text-white text-base sm:text-xl w-[100px] sm:w-[150px] md:w-[95%] h-[100px] py-4 font-[700] hover:bg-[#101426] duration-200">ارسال</button>
+                <button type="submit" class="mt-9 bg-[#000000] text-white text-base sm:text-xl w-[100px] sm:w-[150px] md:w-[95%] h-[100px] py-4 font-[700] hover:bg-[#101426] duration-200">ارسال</button>
             </form>
         </div>
     </div>
 </div>
+@endsection

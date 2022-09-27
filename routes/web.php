@@ -22,6 +22,7 @@ Route::get("toastr-notification", [HomeController::class, "showToastrMessages"])
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/من-نحن', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/conctus', [HomeController::class, 'conctus'])->name('conctus');
+Route::get('/Almuahada', [HomeController::class, 'Almuahada'])->name('Almuahada');
 Route::get('/category/{maintype}/{type}', [HomeController::class, 'news'])->name('news');
 Route::get('/categor/{title}/{id}/', [HomeController::class, 'getnewDetail'])->name('getnewDetail');
 
