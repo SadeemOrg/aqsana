@@ -81,20 +81,21 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
 <div class="bg-green-700 min-h-full bgg" style="background-image:url('https://media.discordapp.net/attachments/938405759996276806/1024261075954319430/D77A8EED_3.png?width=306&height=606') " ;>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 xl:pt-14 ">
         <div class="relative flex justify-center text-white text-[36px] sm:text-[60px] md:text-[80px] lg:text-[160px] ">
-            <h1 class="font-RpT-Bold text-center z-10 relative max-w-fit ">
+            <!-- <h1 class="font-RpT-Bold text-center z-10 relative max-w-fit ">
                 <span class="relative z-10"> الموحدة أقرب </span>
                 <img src="{{ asset('assets/image/blackBg.svg') }}" alt="black_svg" class="z-0 absolute w-[98%] left-[50%] translate-x-[-50%] top-[10%] h-full ">
             </h1>
-            <p class="mr-4"> ! </p>
+            <p class="mr-4"> ! </p> -->
+            <img src="{{asset('assets/image/title.webp')}}" alt="title">
         </div>
 
         <!-- first Paragraph -->
         <div class="flex flex-row justify-between items-center pt-5 md:pt-9 max-w-full w-full pb-1 sm:pb-0 m-auto">
-            <div class="border-b-2 border-[#CDCCD2] w-[42%] sm:w-[43%] md:w-[44%] lg:w-[46%]"></div>
-            <div class="rounded-[50%] h-8 w-8 sm:h-16 sm:w-16 bg-[#FFFFFF] flex flex-row items-center justify-center">
+            <div class="border-b-2 border-[#CDCCD2] w-[42%] sm:w-[44%] md:w-[45%] lg:w-[46%]"></div>
+            <div class="rounded-[50%] h-8 w-8 sm:h-14 sm:w-14 lg:h-16 lg:w-16 bg-[#FFFFFF] flex flex-row items-center justify-center">
                 <p class="text-[30px] sm:text-[38px] text-[#009245] font-bold">1</p>
             </div>
-            <div class="border-b-2 border-[#CDCCD2] w-[42%] sm:w-[43%] md:w-[44%] lg:w-[46%]"></div>
+            <div class="border-b-2 border-[#CDCCD2] w-[42%] sm:w-[44%] md:w-[45%] lg:w-[46%]"></div>
         </div>
         <p class="text-[16px] md:text-[36px] lg:text-[22px] font-RpT-Bold text-[#FFFFFF] text-justify leading-5 md:leading-7">
             @if(!empty($Almuahada_text_1->value))
@@ -112,11 +113,11 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
         </p>
         <!-- second Paragraph -->
         <div class="flex flex-row justify-between items-center  py-3 max-w-full w-full sm:pb-0 m-auto">
-        <div class="border-b-2 border-[#CDCCD2] w-[42%] sm:w-[43%] md:w-[44%] lg:w-[46%]"></div>
-            <div class="rounded-[50%] h-8 w-8 sm:h-16 sm:w-16 bg-[#FFFFFF] flex flex-row items-center justify-center">
+        <div class="border-b-2 border-[#CDCCD2] w-[42%] sm:w-[44%] md:w-[45%] lg:w-[46%]"></div>
+            <div class="rounded-[50%] h-8 w-8 sm:h-14 sm:w-14 lg:h-16 lg:w-16 bg-[#FFFFFF] flex flex-row items-center justify-center">
                 <p class="text-[30px] sm:text-[38px] text-[#009245] font-bold">2</p>
             </div>
-            <div class="border-b-2 border-[#CDCCD2] w-[42%] sm:w-[43%] md:w-[44%] lg:w-[46%]"></div>
+            <div class="border-b-2 border-[#CDCCD2] w-[42%] sm:w-[44%] md:w-[44%] lg:w-[46%]"></div>
         </div>
         <p class="text-[16px] md:text-[36px] lg:text-[22px] font-RpT-Bold text-[#FFFFFF] text-justify leading-5 md:leading-7">
             @if(!empty($Almuahada_text_2->value))
@@ -134,11 +135,11 @@ $Almuahada_Form_sup_text =DB::table('settings')->where('key','Almuahada_Form_sup
         </p>
         <!-- third Paragraph -->
         <div class="flex flex-row justify-between items-center  py-3 max-w-full w-full sm:pb-0 m-auto">
-        <div class="border-b-2 border-[#CDCCD2] w-[42%] sm:w-[43%] md:w-[44%]  lg:w-[46%]"></div>
-            <div class="rounded-[50%] h-8 w-8 sm:h-16 sm:w-16 bg-[#FFFFFF] flex flex-row items-center justify-center">
+        <div class="border-b-2 border-[#CDCCD2] w-[42%] sm:w-[44%] md:w-[45%]  lg:w-[46%]"></div>
+            <div class="rounded-[50%] h-8 w-8 sm:h-14 sm:w-14 lg:h-16 lg:w-16 bg-[#FFFFFF] flex flex-row items-center justify-center">
                 <p class="text-[30px] sm:text-[38px] text-[#009245] font-bold">3</p>
             </div>
-            <div class="border-b-2 border-[#CDCCD2] w-[42%] sm:w-[43%] md:w-[44%]  lg:w-[46%]"></div>
+            <div class="border-b-2 border-[#CDCCD2] w-[42%] sm:w-[44%] md:w-[44%]  lg:w-[46%]"></div>
         </div>
         <p class="text-[16px] md:text-[36px] lg:text-[22px] font-RpT-Bold text-[#FFFFFF] text-justify leading-5 md:leading-7">
             @if(!empty($Almuahada_text_3->value))
