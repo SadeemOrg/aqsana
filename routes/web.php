@@ -65,6 +65,10 @@ Route::get('/bills', function (){
 });
 
 
+Route::get('/landingPage', function (){
+    return view('almowahde.landingPage');
+});
+
 Route::get('/SendNotificationTest',[NotificationTest::class,'sendNotfiy'])->name('sendNotfiy');
 
 

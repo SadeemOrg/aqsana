@@ -1,3 +1,4 @@
+@if (!isset($hasFooter) || (isset($hasFooter) && $hasFooter))
 <footer class="bg-[#101426] text-white mt-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-start">
         @php
@@ -130,3 +131,4 @@
         </div>
     </div>
 </footer>
+@endif
