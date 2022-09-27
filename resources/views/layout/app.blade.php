@@ -111,7 +111,7 @@
             @font-face {
                 font-family: "Rpt-Bold";
                 font-weight: 700px;
-                src:"{{asset('assets/front-end/fonts/ArbFONTS-arbfonts-rpt-Bold.ttf')}}";
+                src: url({{asset('assets/front-end/fonts/ArbFONTS-arbfonts-rpt-Bold.ttf')}});
             }
 
             .font-FlatBold {
