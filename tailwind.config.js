@@ -14,7 +14,8 @@ module.exports = {
             Noto_Sans_Arabic: ["Noto Sans Arabic", "sans-serif"],
           },
           screens: {
-            'iphone13':'450px'
+            'iphone13':'450px',
+            'mdlg':'900px',
           }
         },
 
