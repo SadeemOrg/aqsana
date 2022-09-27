@@ -1,3 +1,14 @@
+@php
+$text_main = nova_get_setting('text_main', 'default_value');
+$Almuahada_text_1 = nova_get_setting('Almuahada_text_1', 'default_value');
+$Almuahada_sup_text_1= nova_get_setting('Almuahada_sup_text_1', 'default_value');
+$Almuahada_text_2 = nova_get_setting('Almuahada_text_2', 'default_value');
+$Almuahada_sup_text_2 = nova_get_setting('Almuahada_sup_text_2', 'default_value');
+$Almuahada_text_3 = nova_get_setting('Almuahada_text_3', 'الاسم كامل');
+$Almuahada_sup_text_3 = nova_get_setting('Almuahada_sup_text_3', 'رقم الهاتف');
+$Almuahada_Form_text = nova_get_setting('Almuahada_Form_text', 'الاسم كامل');
+$Almuahada_Form_sup_text = nova_get_setting('Almuahada_Form_sup_text', 'رقم الهاتف');
+@endphp
 @extends('layout.app', ['hasHeader' => false, 'hasFooter' => false ])
 @section('content')
 
