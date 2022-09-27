@@ -943,6 +943,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-\[17px\]{
   max-width: 17px;
 }
+.max-w-fit{
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
 .flex-1{
   flex: 1 1 0%;
 }
