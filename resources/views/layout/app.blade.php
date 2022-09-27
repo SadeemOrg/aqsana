@@ -641,12 +641,12 @@
 
             console.log("Notification permission granted.");
 
-            // get the token in the form of promise
-            return messaging.getToken()
-        })
-        .then(function(token) {
-            // print the token on the HTML page
-            console.log(token);
+     // get the token in the form of promise
+	return messaging.getToken()
+    })
+    .then(function(token) {
+    // print the token on the HTML page
+ 
 
             <?php
             if (\Illuminate\Support\Facades\Auth::user() != null) {

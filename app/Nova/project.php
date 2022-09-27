@@ -86,7 +86,7 @@ class Project extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user') {
+        if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user'|| $request->user()->type() == 'Almuahada_admin') {
             return false;
         } else return true;
     }

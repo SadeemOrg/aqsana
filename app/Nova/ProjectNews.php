@@ -56,7 +56,7 @@ class ProjectNews extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user'|| $request->user()->type() == 'regular_area'|| $request->user()->type() == 'regular_city') {
+        if ( $request->user()->type() == 'financial_user'|| $request->user()->type() == 'regular_area'|| $request->user()->type() == 'regular_city' || $request->user()->type() == 'Almuahada_admin') {
             return false;
         } else return true;
     }

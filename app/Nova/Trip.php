@@ -31,6 +31,7 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Image;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
+use App\CPU\Helpers;
 use Laravel\Nova\Fields\BelongsTo;
 use Manogi\Tiptap\Tiptap;
 use Waynestate\Nova\CKEditor;
@@ -38,6 +39,8 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use App\Models\Bus;
+use App\Models\Notification;
+use App\Models\User;
 use App\Nova\Actions\AddBus;
 use Benjacho\BelongsToManyField\BelongsToManyField;
 
@@ -78,7 +81,7 @@ class Trip extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user') {
+        if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user'|| $request->user()->type() == 'Almuahada_admin') {
             return false;
         } else return true;
     }

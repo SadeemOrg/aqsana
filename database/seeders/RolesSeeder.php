@@ -21,6 +21,10 @@ class RolesSeeder extends Seeder
                 'role' => 'Admin',
             ],
             [
+                'code_role' => 'Almuahada_admin',
+                'role' => 'Almuahada Admin',
+            ],
+            [
                 'code_role' => 'financial_user',
                 'role' => 'Financial User',
             ],
