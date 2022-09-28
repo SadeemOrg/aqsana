@@ -12,8 +12,10 @@ use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\File;
 use Acme\MultiselectField\Multiselect;
+use App\CPU\Helpers;
 use App\Models\User;
 use App\Models\Income;
+use App\Models\Notification;
 use App\Nova\Actions\AlhisalatColect;
 use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
@@ -129,10 +131,11 @@ class Alhisalat extends Resource
 
 
 
-                ActionButton::make(__('colect'))
+            ActionButton::make(__('colect'))
                 ->action((new AlhisalatSurrender)->confirmText(__('Are you sure you want to Surrender  this Alhisalat?'))
-                    ->confirmButtonText(__('Surrender'))
-                    , $this->id)
+                        ->confirmButtonText(__('Surrender')),
+                    $this->id
+                )
                 ->canSee(function () {
                     return $this->status === '2';
                 })->text(__('AlhisalatSurrender'))->showLoadingAnimation()
@@ -150,7 +153,7 @@ class Alhisalat extends Resource
             Select::make(__('address'), 'address_id')
                 ->options(function () {
                     $id = Auth::id();
-                    $addresss =  \App\Models\address::where('created_by',  $id)->where('type','2')->get();
+                    $addresss =  \App\Models\address::where('created_by',  $id)->where('type', '2')->get();
                     $address_type_admin_array =  array();
 
                     foreach ($addresss as $address) {
@@ -244,6 +247,25 @@ class Alhisalat extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->status = '1';
+        $users = User::where('user_role', 'admin')->get();
+
+
+
+        $tokens = [];
+
+        foreach ($users as $key => $user) {
+
+            $notification = Notification::where('id', '1')->first();
+
+            if ($user->fcm_token != null && $user->fcm_token != "") {
+                array_push($tokens, $user->fcm_token);
+            }
+        }
+
+        if (!empty($tokens)) {
+
+            Helpers::send_notification($tokens, $notification);
+        }
         // $model->number_alhisala = '1';
 
         // dd( $model);
