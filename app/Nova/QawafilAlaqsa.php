@@ -713,7 +713,7 @@ class QawafilAlaqsa extends Resource
         $tokens = [];
         foreach ($areas as $key => $area) {
             $user = User::where('id', $area->admin_id)->first();
-            $notification = Notification::where('id', '1')->first();
+            $notification = Notification::where('id', '2')->first();
 
             if ($user->fcm_token != null && $user->fcm_token != "") {
                 array_push($tokens, $user->fcm_token);
@@ -729,7 +729,7 @@ class QawafilAlaqsa extends Resource
         $tokens = [];
         foreach ($Citys as $key => $City) {
             $user = User::where('id', $City->admin_id)->first();
-            $notification = Notification::where('id', '1')->first();
+            $notification = Notification::where('id', '2')->first();
 
             if ($user->fcm_token != null && $user->fcm_token != "") {
                 array_push($tokens, $user->fcm_token);

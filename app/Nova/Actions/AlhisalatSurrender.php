@@ -2,6 +2,9 @@
 
 namespace App\Nova\Actions;
 
+use App\CPU\Helpers;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -27,6 +30,25 @@ class AlhisalatSurrender extends Action
                 'status' => '3',
 
             ]);
+            $users = User::where('user_role', 'financial_user')->get();
+
+
+
+            $tokens = [];
+
+            foreach ($users as $key => $user) {
+
+                $notification = Notification::where('id', '5')->first();
+
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
+                }
+            }
+
+            if (!empty($tokens)) {
+
+                Helpers::send_notification($tokens, $notification);
+            }
         }
     }
 
