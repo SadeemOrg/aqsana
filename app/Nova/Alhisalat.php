@@ -255,7 +255,7 @@ class Alhisalat extends Resource
 
         foreach ($users as $key => $user) {
 
-            $notification = Notification::where('id', '1')->first();
+            $notification = Notification::where('id', '4')->first();
 
             if ($user->fcm_token != null && $user->fcm_token != "") {
                 array_push($tokens, $user->fcm_token);

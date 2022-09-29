@@ -38,7 +38,7 @@ class AlhisalatSurrender extends Action
 
             foreach ($users as $key => $user) {
 
-                $notification = Notification::where('id', '1')->first();
+                $notification = Notification::where('id', '5')->first();
 
                 if ($user->fcm_token != null && $user->fcm_token != "") {
                     array_push($tokens, $user->fcm_token);
