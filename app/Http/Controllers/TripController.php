@@ -21,7 +21,7 @@ class TripController extends BaseController
     {
     
 
-        $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+        $trips = Project::where("project_type","2")->orWhere("project_type","3")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
         ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
 
         $trips->map(function($trip) use ($request){
@@ -107,7 +107,7 @@ class TripController extends BaseController
                 $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
                 ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->where('id',$trip_bokking->project_id)->get();
             } else {
-                $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+                $trips = Project::where("project_type","2")->orWhere("project_type","3")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
                 ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
             }
             
@@ -188,7 +188,7 @@ class TripController extends BaseController
     {
     
 
-        $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+        $trips = Project::where("project_type","2")->orWhere("project_type","3")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
         ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
 
         $search_trip = collect();
@@ -268,7 +268,7 @@ class TripController extends BaseController
     {
     
 
-        $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+        $trips = Project::where("project_type","2")->orWhere("project_type","3")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
         ->orderBy('created_at', 'desc')->get();
 
         $search_trip = collect();
