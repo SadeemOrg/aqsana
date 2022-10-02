@@ -23,7 +23,7 @@ class CreateBusesTable extends Migration
             $table->unsignedBigInteger('travel_from')->nullable();
             $table->unsignedBigInteger('travel_to')->nullable();
             $table->string('phone_number_driver');
-            $table->char('status', '1');
+            $table->char('status', '1')->default('0');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('update_by')->nullable();
             $table->timestamps();

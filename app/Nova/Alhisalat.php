@@ -153,7 +153,7 @@ class Alhisalat extends Resource
             Select::make(__('address'), 'address_id')
                 ->options(function () {
                     $id = Auth::id();
-                    $addresss =  \App\Models\address::where('created_by',  $id)->where('type', '2')->get();
+                    $addresss =  \App\Models\address::where('type', '2')->get();
                     $address_type_admin_array =  array();
 
                     foreach ($addresss as $address) {
@@ -298,7 +298,7 @@ class Alhisalat extends Resource
                             'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
                             'current_location' => $request->newadres[0]['attributes']['current_location'],
                             'status' => $request->newadres[0]['attributes']['address_status'],
-                            'type' => '1',
+                            'type' => '2',
                             'created_by' => $id
                         ]
                     );

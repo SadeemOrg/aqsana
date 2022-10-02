@@ -21,6 +21,11 @@ class ApprovalRejectProjec extends Action
 {
     use InteractsWithQueue, Queueable;
 
+    public  function name()
+    {
+        return __('ApprovalRejectProjec');
+    }
+
     /**
      * Perform the action on the given models.
      *
@@ -110,7 +115,7 @@ class ApprovalRejectProjec extends Action
 
 
 
-            Select::make('approval ', 'approval')->options([
+            Select::make(__('approval'), 'approval')->options([
                 1 => 'approval',
                 2 => 'reject',
             ])->displayUsingLabels(),
@@ -118,7 +123,7 @@ class ApprovalRejectProjec extends Action
             NovaDependencyContainer::make([
 
 
-                Text::make('reason_of_reject', 'reason_of_reject'),
+                Text::make(__('reason_of_reject'), 'reason_of_reject'),
 
 
             ])->dependsOn('approval', '2'),
