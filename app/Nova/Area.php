@@ -107,7 +107,7 @@ class Area extends Resource
                   hideWhenUpdating(),
 
 
-               HasMany::make("City","City")
+               HasMany::make(__("City"),"City",\App\Nova\City::class)
         ];
     }
 

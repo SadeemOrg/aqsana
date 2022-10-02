@@ -178,7 +178,7 @@ class QawafilAlaqsa extends Resource
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
                         $id = Auth::id();
-                        $addresss =  \App\Models\address::where('created_by',  $id)->where('type','4')->get();
+                        $addresss =  \App\Models\address::where('type','4')->get();
                         $address_type_admin_array =  array();
 
                         foreach ($addresss as $address) {
@@ -695,7 +695,7 @@ class QawafilAlaqsa extends Resource
                             'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
                             'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
                             'status' => $request->newadresfrom[0]['attributes']['address_status'],
-                            'type' => '1',
+                            'type' => '4',
                             'created_by' => $id
                         ]
                     );

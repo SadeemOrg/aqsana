@@ -28,7 +28,9 @@ class Bus extends Model
 
     public function Project()
     {
-        return $this->belongsToMany(Project::class);
+        return $this->belongsToMany(Project::class,'project_bus')->withTimestamps();
+
+        // return $this->belongsToMany(Project::class);
     }
 
     public function company()
