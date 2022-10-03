@@ -249,12 +249,18 @@ class TripController extends BaseController
             $trip->isBooking = 0;
         }
 
+        if(json_decode($trip->tripto) != null) {
+            if(json_decode($trip->tripto->current_location) != null){
         $trip_to = json_decode($trip->tripto->current_location);
         $trip_to_value = $trip_to->value;
+
 
         if(stripos($trip_to_value,$request->get("search")) !== false){
            $search_trip->push($trip);
          }
+
+         }
+        }
        
 
         });
