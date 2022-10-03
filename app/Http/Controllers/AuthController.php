@@ -486,6 +486,14 @@ class AuthController extends Controller
     
             $trip_booking->map(function ($trip) use($request){
          
+                // $from_latlng = json_decode($trip->project->tripfrom->current_location)->latlng;
+                // $from_lat = $from_latlng->lat;
+                // $from_lng = $from_latlng->lng;
+        
+                // $to_latlng = json_decode($trip->project->tripto->current_location)->latlng;
+                // $to_lat = $to_latlng->lat;
+                // $to_lng = $to_latlng->lng;
+
                 if(json_decode($trip->project->tripfrom) != null) {
                     if(json_decode($trip->project->tripfrom->current_location) != null){
                         $from_latlng = json_decode($trip->project->tripfrom->current_location)->latlng;
@@ -500,7 +508,8 @@ class AuthController extends Controller
                     $from_lng = -180;
                 }
                
-        
+                print_r(($trip->project->tripto));
+                print_r(json_decode($trip->project->tripto));
                 if(json_decode($trip->project->tripto) != null) {
                     if($to_latlng = json_decode($trip->project->tripto->current_location) != null){
                         $to_latlng = json_decode($trip->project->tripto->current_location)->latlng;
