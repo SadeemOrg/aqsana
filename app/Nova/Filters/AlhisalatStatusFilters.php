@@ -40,9 +40,11 @@ class AlhisalatStatusFilters extends Filter
 
             return [
                 __('all') => 'non',
-                __('active') => '1',
-                __('collected') => '2',
-                __('completed') => '3',
+                __('تم  الوضع ') => '1',
+                __('تم جمع ') => '2',
+                __('تم التسليم') => '3',
+                __('تم العد') => '4',
+
 
 
         ];
