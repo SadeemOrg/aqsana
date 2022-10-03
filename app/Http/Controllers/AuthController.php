@@ -510,7 +510,7 @@ class AuthController extends Controller
                
                 print_r(($trip->project->tripto));
              
-                if(json_decode($trip->project->tripto->toString()) != null) {
+                if(json_decode(($trip->project->tripto)->toString()) != null) {
                     if($to_latlng = json_decode($trip->project->tripto->current_location) != null){
                         $to_latlng = json_decode($trip->project->tripto->current_location)->latlng;
                         $to_lat = $to_latlng->lat;
