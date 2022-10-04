@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationTest;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +16,8 @@ use App\Http\Controllers\NotificationTest;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 
 Route::get("toastr-notification", [HomeController::class, "showToastrMessages"]);
 
@@ -61,12 +64,17 @@ Route::get('/testNotfiy', function (){
     return view('Pages.testNotfiy');
 });
 
-Route::get('/bills', function (){
-    return view('Pages.Bills');
-});
+// Route::get('/bills', function (){
+
+//     return view('Pages.Bills');
+// });
+Route::get('bills/{id}', [HomeController::class, 'bills']);
+
+Route::get('bill', [HomeController::class, 'billsPdf']);
 
 
 Route::get('/landingPage', function (){
+
     return view('almowahde.landingPage');
 });
 

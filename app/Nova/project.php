@@ -49,12 +49,14 @@ use Gwd\FlexibleContent\FlexibleContent;
 
 use Laravel\Nova\Panel;
 use App\Nova\Actions\ChangeRole;
+use App\Nova\Actions\ProjectStartEnd;
 use Carbon\Carbon;
 use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
 
 use Fourstacks\NovaRepeatableFields\Repeater;
 use Laravel\Nova\Fields\HasMany;
+
 
 class Project extends Resource
 {
@@ -87,7 +89,7 @@ class Project extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user'|| $request->user()->type() == 'Almuahada_admin') {
+        if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user' || $request->user()->type() == 'Almuahada_admin') {
             return false;
         } else return true;
     }
@@ -131,6 +133,70 @@ class Project extends Resource
         return [
             (new Panel(__('main'), [
                 ID::make(__('ID'), 'id')->sortable(),
+                ActionButton::make(__('Action'))
+                    ->action(ProjectStartEnd::class, $this->id)
+                    ->text(__('start'))
+                    ->showLoadingAnimation()
+                    ->loadingColor('#fff')->buttonColor('#21b970')
+                    ->canSee(function () {
+                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                        if ($projects) {
+
+                            if ($projects->status == '0')  return true;
+                        }
+                    })
+                    ->readonly(function () {
+                        return false;
+                    })
+                    ->hideWhenCreating()->hideWhenUpdating(),
+
+                ActionButton::make(__('Action'))
+                    ->action(ProjectStartEnd::class, $this->id)
+                    ->text(__('end'))
+                    ->showLoadingAnimation()
+                    ->loadingColor('#fff')->buttonColor('#21b970')
+                    ->canSee(function () {
+                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                        if ($projects) {
+
+                            if ($projects->status == '1')  return true;
+                        }
+                    })
+                    ->readonly(function () {
+                        return false;
+                    })
+                    ->hideWhenCreating()->hideWhenUpdating(),
+                ActionButton::make(__('Action'))
+                    ->action(ProjectStartEnd::class, $this->id)
+                    ->text(__('Finished'))
+                    ->showLoadingAnimation()
+                    ->loadingColor('#fff')->buttonColor('#21b970')
+                    ->canSee(function () {
+                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                        if ($projects) {
+
+                            if ($projects->status > '1')  return true;
+                        }
+                    })
+                    ->readonly()
+                    ->hideWhenCreating()->hideWhenUpdating(),
+                ActionButton::make(__('Action'))
+                    ->action(ProjectStartEnd::class, $this->id)
+                    ->text(__('dd'))
+                    ->showLoadingAnimation()
+                    ->loadingColor('#fff')->buttonColor('#21b970')
+                    ->canSee(function () {
+                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                        if (!$projects) {
+                            return true;
+                        }
+                    })
+                    ->readonly()
+                    ->hideWhenCreating()->hideWhenUpdating(),
+
+
+
+
                 ActionButton::make(__('Action'))
                     ->action(ApprovalRejectProjec::class, $this->id)
                     ->text(__('acsept'))
@@ -324,31 +390,49 @@ class Project extends Resource
 
 
             ])),
-      (new Panel(__('tooles'), [
+            (new Panel(__('tooles'), [
 
-                Textarea::make(__('tooles'), "Toole", function () {
+                Flexible::make(__('tooles'), 'tooles')
+                    ->readonly(true)
+                    ->addLayout(__('tooles'), 'toole', [
+                        Select::make(__('user'), 'user_tools')
+                            ->options(function () {
+                                $users =  \App\Models\User::all();
+                                $user_type_admin_array =  array();
+                                foreach ($users as $user) {
+                                    $user_type_admin_array += [$user['id'] => ($user['name'])];
+                                }
 
-                    $id = Auth::id();
-                    $user = Auth::user();
-                    if ($user->type() == 'regular_city') {
-                        $citye =   City::where('admin_id', $id)
-                            ->select('id')->first();
-                        $Tooles = DB::table('project_toole')
-                            ->where([
-                                ['project_id', '=', $this->id],
-                                ['city_id', '=', $citye['id']],
-                            ])
-                            ->first();
+                                return $user_type_admin_array;
+                            }),
 
-                        if ($Tooles)  return  $Tooles->tools;
-                    }
-                })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    return null;
-                })->canSee(function ($request) {
-                    $user = Auth::user();
-                    if ($user->type() == 'regular_city') return true;
-                    return false;
-                }),
+                        Textarea::make(__('tooles'), "text_tools", function () {
+
+                            $id = Auth::id();
+                            $user = Auth::user();
+                            if ($user->type() == 'regular_city') {
+                                $citye =   City::where('admin_id', $id)
+                                    ->select('id')->first();
+                                $Tooles = DB::table('project_toole')
+                                    ->where([
+                                        ['project_id', '=', $this->id],
+                                        ['city_id', '=', $citye['id']],
+                                    ])
+                                    ->first();
+
+                                if ($Tooles)  return  $Tooles->tools;
+                            }
+                        })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                            return null;
+                        })->canSee(function ($request) {
+                            $user = Auth::user();
+                            if ($user->type() == 'regular_city') return true;
+                            return false;
+                        }),
+
+                    ]),
+
+
             ])),
 
 
@@ -441,8 +525,8 @@ class Project extends Resource
     }
     public static function afterSave(Request $request, $model)
     {
-
-
+        //
+        // dd($request->tooles[0]['attributes']['user_tools']);
 
 
         $id = Auth::id();
@@ -451,13 +535,15 @@ class Project extends Resource
             ->select('id')->first();
         $model->update_by = $id;
 
-        if ($request->Toole) {
-
-            DB::table('project_toole')
-                ->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' => $citye['id']],
-                    ['tools' => $request->Toole]
-                );
+        if ($request->tooles) {
+            $toooles = $request->tooles;
+            foreach ($toooles as $key => $tooole) {
+                DB::table('project_toole')
+                    ->updateOrInsert(
+                        ['project_id' => $model->id, 'city_id' => $citye['id'], 'user_id' => $tooole['attributes']['user_tools']],
+                        ['tools' => $request->tooles]
+                    );
+            }
         }
         if ($request->bus) {
 
@@ -682,6 +768,7 @@ class Project extends Resource
                     return true;
                 }
             }),
+            new ProjectStartEnd,
 
 
 
