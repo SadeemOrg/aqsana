@@ -169,7 +169,7 @@ class Trip extends Resource
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
                         $id = Auth::id();
-                        $addresss =  \App\Models\address::where('created_by',  $id)->where('type', '4')->get();
+                        $addresss =  \App\Models\address::where('type', '4')->get();
                         $address_type_admin_array =  array();
 
                         foreach ($addresss as $address) {
@@ -209,7 +209,7 @@ class Trip extends Resource
                 Select::make(__('trip to'), 'trip_to')
                     ->options(function () {
                         $id = Auth::id();
-                        $addresss =  \App\Models\address::where('created_by',  $id)->where('type', '4')->get();
+                        $addresss =  \App\Models\address::where('type', '4')->get();
                         $address_type_admin_array =  array();
 
                         foreach ($addresss as $address) {
@@ -644,7 +644,7 @@ class Trip extends Resource
                 $tokens = [];
                 foreach ($areas as $key => $area) {
                     $user = User::where('id', $area->admin_id)->first();
-                    $notification = Notification::where('id', '1')->first();
+                    $notification = Notification::where('id', '3')->first();
 
                     if ($user->fcm_token != null && $user->fcm_token != "") {
                         array_push($tokens, $user->fcm_token);
@@ -660,7 +660,7 @@ class Trip extends Resource
                 $tokens = [];
                 foreach ($Citys as $key => $City) {
                     $user = User::where('id', $City->admin_id)->first();
-                    $notification = Notification::where('id', '1')->first();
+                    $notification = Notification::where('id', '3')->first();
 
                     if ($user->fcm_token != null && $user->fcm_token != "") {
                         array_push($tokens, $user->fcm_token);
@@ -804,7 +804,7 @@ class Trip extends Resource
                             'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
                             'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
                             'status' => $request->newadresfrom[0]['attributes']['address_status'],
-                            'type' => '1',
+                            'type' => '4',
                             'created_by' => $id
                         ]
                     );
@@ -825,7 +825,7 @@ class Trip extends Resource
                             'phone_number_address' => $request->newadresto[0]['attributes']['phone_number_address'],
                             'current_location' => $request->newadresto[0]['attributes']['current_location'],
                             'status' => $request->newadresto[0]['attributes']['address_status'],
-                            'type' => '1',
+                            'type' => '4',
                             'created_by' => $id
                         ]
                     );

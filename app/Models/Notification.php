@@ -18,4 +18,9 @@ class Notification extends Model
         'updated_at',
 
     ];
+
+    public function myid()
+    {
+        return $this->id;
+    }
 }

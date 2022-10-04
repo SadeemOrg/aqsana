@@ -486,13 +486,43 @@ class AuthController extends Controller
     
             $trip_booking->map(function ($trip) use($request){
          
-                $from_latlng = json_decode($trip->project->tripfrom->current_location)->latlng;
-                $from_lat = $from_latlng->lat;
-                $from_lng = $from_latlng->lng;
+                // $from_latlng = json_decode($trip->project->tripfrom->current_location)->latlng;
+                // $from_lat = $from_latlng->lat;
+                // $from_lng = $from_latlng->lng;
         
-                $to_latlng = json_decode($trip->project->tripto->current_location)->latlng;
-                $to_lat = $to_latlng->lat;
-                $to_lng = $to_latlng->lng;
+                // $to_latlng = json_decode($trip->project->tripto->current_location)->latlng;
+                // $to_lat = $to_latlng->lat;
+                // $to_lng = $to_latlng->lng;
+
+                if(($trip->project->tripfrom) != null) {
+                    if(json_decode($trip->project->tripfrom->current_location) != null){
+                        $from_latlng = json_decode($trip->project->tripfrom->current_location)->latlng;
+                        $from_lat = $from_latlng->lat;
+                        $from_lng = $from_latlng->lng;
+                    } else {
+                        $from_lat = 180;
+                        $from_lng = -180;
+                    }
+                } else {
+                    $from_lat = 180;
+                    $from_lng = -180;
+                }
+               
+               
+             
+                if($trip->project->tripto != null) {
+                    if($to_latlng = json_decode($trip->project->tripto->current_location) != null){
+                        $to_latlng = json_decode($trip->project->tripto->current_location)->latlng;
+                        $to_lat = $to_latlng->lat;
+                        $to_lng = $to_latlng->lng;
+                    } else {
+                        $to_lat = 180;
+                        $to_lng = -180;
+                    }
+                } else {
+                    $to_lat = 180;
+                    $to_lng = -180;
+                }
         
                 $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K'); 
                 $trip->project->from_distance = round($from_distance, 2);

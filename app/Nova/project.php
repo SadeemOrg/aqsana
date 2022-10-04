@@ -49,6 +49,7 @@ use Gwd\FlexibleContent\FlexibleContent;
 
 use Laravel\Nova\Panel;
 use App\Nova\Actions\ChangeRole;
+use Carbon\Carbon;
 use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
 
@@ -186,81 +187,6 @@ class Project extends Resource
                         return false;
                     }),
 
-                // BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
-                // Select::make(__('trip from'), 'trip_from')
-                //     ->options(function () {
-                //         $id = Auth::id();
-                //         $addresss =  \App\Models\address::where('created_by',  $id)->where('type','3')->get();
-                //         $address_type_admin_array =  array();
-
-                //         foreach ($addresss as $address) {
-
-                //             if ($address->Area == null || $this->admin_id == $address['id']) {
-                //                 $address_type_admin_array += [$address['id'] => ($address['name_address'])];
-                //             }
-                //         }
-
-                //         return $address_type_admin_array;
-                //     })->hideFromIndex()->hideFromDetail()
-                //     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                //         return null;
-                //     }),
-                // Flexible::make(__('newadres '), 'newadresfrom')
-                //     ->readonly(true)
-                //     ->limit(1)
-                //     ->hideFromDetail()->hideFromIndex()
-                //     ->addLayout(__('Add new bus'), 'bus', [
-
-                //         Text::make(__('Name'), "name_address"),
-                //         Text::make(__("description"), "description"),
-                //         Text::make(__("phone number"), "phone_number_address"),
-                //         GoogleMaps::make(__('current_location'), 'current_location'),
-                //         Select::make(__("Status"), "address_status")->options([
-                //             '1' => __('active'),
-                //             '2' => __('not active'),
-                //         ]),
-
-                //     ]),
-
-
-
-
-                // BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
-
-                // Select::make(__('trip to'), 'trip_to')
-                //     ->options(function () {
-                //         $id = Auth::id();
-                //         $addresss =  \App\Models\address::where('created_by',  $id)->where('type','3')->get();
-                //         $address_type_admin_array =  array();
-
-                //         foreach ($addresss as $address) {
-
-                //             if ($address->Area == null || $this->admin_id == $address['id']) {
-                //                 $address_type_admin_array += [$address['id'] => ($address['name_address'])];
-                //             }
-                //         }
-
-                //         return $address_type_admin_array;
-                //     })->hideFromIndex()->hideFromDetail()
-                //     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                //         return null;
-                //     }),
-                // Flexible::make(__('newadres '), 'newadresto')
-                //     ->readonly(true)
-                //     ->limit(1)
-                //     ->hideFromDetail()->hideFromIndex()
-                //     ->addLayout(__('Add new bus'), 'bus', [
-
-                //         Text::make(__('Name'), "name_address"),
-                //         Text::make(__("description"), "description"),
-                //         Text::make(__("phone number"), "phone_number_address"),
-                //         GoogleMaps::make(__('current_location'), 'current_location'),
-                //         Select::make(__("Status"), "address_status")->options([
-                //             '1' => __('active'),
-                //             '2' => __('not active'),
-                //         ]),
-
-                //     ]),
 
 
 
@@ -278,57 +204,10 @@ class Project extends Resource
                 Boolean::make(__('is_has_Donations'), 'is_donation'),
 
 
-                // Select::make(__('is_reported'), 'is_reported')->options([
-                //     '1' => 'نعم',
-                //     '0' => 'لا',
-                // ])->displayUsingLabels(),
 
 
-                NovaDependencyContainer::make([
-                    Text::make(__("Title"), 'report_title'),
-                    Textarea::make(__('description'), 'report_description'),
-                    Tiptap::make(__('Contents'), 'report_contents')
-                        ->buttons([
-                            'heading',
-                            '|',
-                            'italic',
-                            'bold',
-                            '|',
-                            'link',
-                            'code',
-                            'strike',
-                            'underline',
-                            'highlight',
-                            '|',
-                            'bulletList',
-                            'orderedList',
-                            'br',
-                            'codeBlock',
-                            'blockquote',
-                            '|',
-                            'horizontalRule',
-                            'hardBreak',
-                            '|',
-                            'table',
-                            '|',
-                            'image',
-                            '|',
-                            'textAlign',
-                            '|',
-                            'rtl',
-                            '|',
-                            'history',
-                        ])
-                        ->headingLevels([1, 2, 3, 4, 5, 6]),
 
 
-                    Image::make(__('Image'), 'report_image')->disk('public')->prunable(),
-                    ArrayImages::make(__('Pictures'), 'report_pictures')
-                        ->disk('public'),
-                    Text::make(__("video link"), 'report_video_link'),
-                    Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y'),
-
-                ])->dependsOn('is_reported', '10'),
 
                 BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -361,165 +240,7 @@ class Project extends Resource
                         return false;
                     }),
             ])),
-            // (new Panel(__('Budget'), [
 
-            //     Text::make(__('Budget'), "Budjet", function () {
-
-            //         $id = Auth::id();
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') {
-            //             $citye =   City::where('admin_id', $id)
-            //                 ->select('id')->first();
-            //             // dd($id);
-            //             // dd($citye);
-            //             $bud = DB::table('transactions')
-            //                 ->where([
-            //                     ['ref_id', '=', $this->id],
-            //                     ['ref_cite_id', '=', $citye['id']],
-            //                 ])
-            //                 ->first();
-
-            //             if ($bud)  return  $bud->equivelant_amount;
-            //         }
-            //     })->canSee(function ($request) {
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') return true;
-            //         return false;
-            //     })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     })
-            //         ->readonly(),
-            // ])),
-            // (new Panel(__('tooles'), [
-
-            //     Text::make(__('tooles'), "Toole", function () {
-
-            //         $id = Auth::id();
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') {
-            //             $citye =   City::where('admin_id', $id)
-            //                 ->select('id')->first();
-            //             $Tooles = DB::table('project_toole')
-            //                 ->where([
-            //                     ['project_id', '=', $this->id],
-            //                     ['city_id', '=', $citye['id']],
-            //                 ])
-            //                 ->first();
-
-            //             if ($Tooles)  return  $Tooles->tools;
-            //         }
-            //     })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     })->canSee(function ($request) {
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') return true;
-            //         return false;
-            //     }),
-            // ])),
-            // (new Panel(__('Approved'), [
-
-            //     Text::make(__('Approved'), 'approval', function () {
-            //         $id = Auth::id();
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') {
-            //             $citye =   City::where('admin_id', $id)
-            //                 ->select('id')->first();
-            //             $acspet = DB::table('accept_project')
-            //                 ->where([
-            //                     ['project_id', '=', $this->id],
-            //                     ['city_id', '=', $citye['id']],
-            //                 ])
-            //                 ->first();
-
-            //             if ($acspet) {
-            //                 if ($acspet->accepted == "1") return __("Approved");
-            //                 elseif ($acspet->accepted == "2") return __("not Approved");
-            //                 else return "__";
-            //             }
-            //         }
-            //     })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     })->canSee(function ($request) {
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') return true;
-            //         return false;
-            //     })->readonly(true),
-
-
-
-
-            //     Text::make(__('reason_of_reject'), 'reason_of_reject', function () {
-            //         $id = Auth::id();
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') {
-            //             $citye =   City::where('admin_id', $id)
-            //                 ->select('id')->first();
-            //             $acspet = DB::table('accept_project')
-            //                 ->where([
-            //                     ['project_id', '=', $this->id],
-            //                     ['city_id', '=', $citye['id']],
-            //                 ])
-            //                 ->first();
-            //             // return  "1";
-            //             // dd("1");
-            //             if ($acspet)  return  $acspet->reject_reason;
-            //         }
-            //     })->canSee(function ($request) {
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') {
-            //             $id = Auth::id();
-            //             $citye =   City::where('admin_id', $id)
-            //                 ->select('id')->first();
-
-            //             $acspet = DB::table('accept_project')
-            //                 ->where([
-            //                     ['project_id', '=', $this->id],
-            //                     ['city_id', '=', $citye['id']],
-            //                 ])
-            //                 ->first();
-            //             if ($acspet) if ($acspet->accepted == "2")   return true;
-            //             return false;
-            //         }
-            //     })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     }),
-
-
-
-
-
-            // ])),
-            // (new Panel(__('status'), [
-            //     Select::make(__('status'), 'status', function () {
-            //         $id = Auth::id();
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') {
-            //             $citye =   City::where('admin_id', $id)
-            //                 ->select('id')->first();
-            //             $acspet = DB::table('project_status')
-            //                 ->where([
-            //                     ['project_id', '=', $this->id],
-            //                     ['city_id', '=', $citye['id']],
-            //                 ])
-            //                 ->first();
-
-            //             if ($acspet)  return   $acspet->status;
-            //             else return "_d_";
-            //         }
-            //     })->options([
-            //         '0' => __('Created'),
-            //         '1' => __('started'),
-            //         '2' => __('completed'),
-            //         '3' => __('Finish'),
-            //     ])->displayUsingLabels()
-            //         ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //             return null;
-            //         })->canSee(function ($request) {
-            //             $user = Auth::user();
-            //             if ($user->type() == 'regular_city') return true;
-            //             return false;
-            //         })->readonly(true),
-            // ])),
             (new Panel(__('bus'), [
 
 
@@ -527,6 +248,7 @@ class Project extends Resource
 
 
                 BelongsToManyField::make(__('bus'), 'bus', 'App\Nova\bus')
+                    // ->options(Bus::all())
                     ->options(Bus::all())
                     ->optionsLabel('bus_number')
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
@@ -602,7 +324,32 @@ class Project extends Resource
 
 
             ])),
+      (new Panel(__('tooles'), [
 
+                Textarea::make(__('tooles'), "Toole", function () {
+
+                    $id = Auth::id();
+                    $user = Auth::user();
+                    if ($user->type() == 'regular_city') {
+                        $citye =   City::where('admin_id', $id)
+                            ->select('id')->first();
+                        $Tooles = DB::table('project_toole')
+                            ->where([
+                                ['project_id', '=', $this->id],
+                                ['city_id', '=', $citye['id']],
+                            ])
+                            ->first();
+
+                        if ($Tooles)  return  $Tooles->tools;
+                    }
+                })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                    return null;
+                })->canSee(function ($request) {
+                    $user = Auth::user();
+                    if ($user->type() == 'regular_city') return true;
+                    return false;
+                }),
+            ])),
 
 
 
@@ -617,6 +364,10 @@ class Project extends Resource
             // }),
         ];
     }
+
+
+
+
     public static function beforeCreate(Request $request, $model)
     {
         $id = Auth::id();

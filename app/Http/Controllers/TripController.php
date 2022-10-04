@@ -21,7 +21,7 @@ class TripController extends BaseController
     {
     
 
-        $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+        $trips = Project::where("project_type","2")->orWhere("project_type","3")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
         ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
 
         $trips->map(function($trip) use ($request){
@@ -43,7 +43,7 @@ class TripController extends BaseController
        
 
         if(json_decode($trip->tripto) != null) {
-            if($to_latlng = json_decode($trip->tripto->current_location) != null){
+            if(json_decode($trip->tripto->current_location) != null){
                 $to_latlng = json_decode($trip->tripto->current_location)->latlng;
                 $to_lat = $to_latlng->lat;
                 $to_lng = $to_latlng->lng;
@@ -107,7 +107,7 @@ class TripController extends BaseController
                 $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
                 ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->where('id',$trip_bokking->project_id)->get();
             } else {
-                $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+                $trips = Project::where("project_type","2")->orWhere("project_type","3")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
                 ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
             }
             
@@ -137,7 +137,7 @@ class TripController extends BaseController
        
 
         if(json_decode($trip->tripto) != null) {
-            if($to_latlng = json_decode($trip->tripto->current_location) != null){
+            if(json_decode($trip->tripto->current_location) != null){
                 $to_latlng = json_decode($trip->tripto->current_location)->latlng;
                 $to_lat = $to_latlng->lat;
                 $to_lng = $to_latlng->lng;
@@ -188,7 +188,7 @@ class TripController extends BaseController
     {
     
 
-        $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+        $trips = Project::where("project_type","2")->orWhere("project_type","3")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
         ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
 
         $search_trip = collect();
@@ -210,7 +210,7 @@ class TripController extends BaseController
            
     
             if(json_decode($trip->tripto) != null) {
-                if($to_latlng = json_decode($trip->tripto->current_location) != null){
+                if(json_decode($trip->tripto->current_location) != null){
                     $to_latlng = json_decode($trip->tripto->current_location)->latlng;
                     $to_lat = $to_latlng->lat;
                     $to_lng = $to_latlng->lng;
@@ -249,12 +249,18 @@ class TripController extends BaseController
             $trip->isBooking = 0;
         }
 
+        if(json_decode($trip->tripto) != null) {
+            if(json_decode($trip->tripto->current_location) != null){
         $trip_to = json_decode($trip->tripto->current_location);
         $trip_to_value = $trip_to->value;
+
 
         if(stripos($trip_to_value,$request->get("search")) !== false){
            $search_trip->push($trip);
          }
+
+         }
+        }
        
 
         });
@@ -268,22 +274,28 @@ class TripController extends BaseController
     {
     
 
-        $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+        $trips = Project::where("project_type","2")->orWhere("project_type","3")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
         ->orderBy('created_at', 'desc')->get();
 
         $search_trip = collect();
         $trips->map(function($trip) use ($request,$search_trip){
     
-        $trip_to = json_decode($trip->tripto->current_location);
-        $trip_to_value = $trip_to->value;
+        if(json_decode($trip->tripto) != null) {
+            if(json_decode($trip->tripto->current_location) != null){
+                
+                $trip_to = json_decode($trip->tripto->current_location);
+                $trip_to_value = $trip_to->value;
 
-        if(stripos($trip_to_value,$request->get("search")) !== false){
+                if(stripos($trip_to_value,$request->get("search")) !== false){
 
-            if($search_trip->search($trip_to->value) === false) {
-                $search_trip->push($trip_to->value);
-            }
-          
-         }
+                    if($search_trip->search($trip_to->value) === false) {
+                        $search_trip->push($trip_to->value);
+                    }
+                
+                }
+            } 
+        }
+        
     
         });
 
