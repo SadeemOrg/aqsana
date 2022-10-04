@@ -8,9 +8,11 @@ $imgBanner2 = 'storage/'.nova_get_setting('main_img_Banner_2', 'default_value');
 $main_text_Banner2 = nova_get_setting('text_main_Banner_2', 'default_value');
 $view_Number = nova_get_setting('text_view_bottom_Banner_2', 'default_value');
 $seen_button = nova_get_setting('text_seen_bottom_Banner_2', 'default_value');
-// nova_get_setting('sup_text_Banner_2', 'default_value');
 $link_View = nova_get_setting('link_view_bottom_Banner_2', 'default_value');
-// nova_get_setting('link_seen_bottom_Banner_2', 'default_value');
+$whatsapp_phone = nova_get_setting('whatsapp_Connectus', 'default_value');
+$Correct_whatsapp_phone = str_replace(' ', '', $whatsapp_phone);
+$Final_Correct_whatsapp_phone = str_replace('-', '', $Correct_whatsapp_phone);
+$whatsapp_phone_Link = "https://wa.me/".$Final_Correct_whatsapp_phone ;
 @endphp
 <div class="relative mt-24 md:max-h-72">
     <div class="absolute inset-0">
@@ -106,6 +108,23 @@ $link_View = nova_get_setting('link_view_bottom_Banner_2', 'default_value');
                         </svg>
                     </a>
                 </li>
+                <li>
+                        <a class="youtube" href="https://www.youtube.com/channel/UCuumAw7vPSQJeC6FTOkH37g" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 23 22" fill="none">
+                                <circle cx="11.5697" cy="10.9328" r="10.4328" stroke="white"></circle>
+                                <g clip-path="url(#clip0_21_1202)">
+                                    <path d="M10.5185 12.113L12.4806 11.0579L10.5185 9.98425V12.113Z" fill="white">
+                                    </path>
+                                    <path d="M17.1863 8.79206L17.1858 8.78662C17.1757 8.69097 17.0756 7.84009 16.6619 7.40745C16.1839 6.89846 15.6419 6.83663 15.3812 6.80698C15.3597 6.80445 15.3399 6.80227 15.3222 6.79991L15.3015 6.79774C13.7304 6.6835 11.3579 6.66791 11.3341 6.66772H11.3299C11.3062 6.66791 8.93362 6.6835 7.34847 6.79774L7.32752 6.79991C7.31066 6.80218 7.29207 6.80426 7.27186 6.80662C7.01419 6.83636 6.47801 6.89828 5.99858 7.42558C5.60465 7.85378 5.49077 8.68635 5.47908 8.77991L5.47772 8.79206C5.47418 8.83186 5.39032 9.77939 5.39032 10.7306V11.6199C5.39032 12.5711 5.47418 13.5186 5.47772 13.5584L5.47835 13.5645C5.48842 13.6585 5.58851 14.4937 6.00021 14.9266C6.44972 15.4187 7.01809 15.4837 7.32381 15.5187C7.37213 15.5242 7.41383 15.529 7.44212 15.534L7.46959 15.5377C8.37668 15.6241 11.2207 15.6666 11.3413 15.6683L11.3449 15.6684L11.3484 15.6683C11.3723 15.6682 13.7448 15.6527 15.3158 15.5383L15.3365 15.5362C15.3563 15.5336 15.3786 15.5313 15.4031 15.5287C15.6594 15.5015 16.1926 15.445 16.6655 14.9249C17.0594 14.4967 17.1733 13.6641 17.185 13.5706L17.1863 13.5584C17.1899 13.5186 17.2737 12.5711 17.2737 11.6199V10.7306C17.2737 9.77939 17.1899 8.83195 17.1863 8.79206ZM13.1581 11.4842L10.5327 12.8959C10.4607 12.9347 10.3823 12.9541 10.3042 12.9541C10.2189 12.9541 10.1337 12.931 10.0569 12.8852C9.90989 12.7973 9.82212 12.6425 9.82212 12.4713V9.62299C9.82212 9.45091 9.91043 9.29588 10.0584 9.20811C10.2064 9.12044 10.3849 9.11727 10.5358 9.19986L13.1612 10.6364C13.3165 10.7214 13.4126 10.8842 13.4119 11.0613C13.4113 11.2383 13.314 11.4004 13.1581 11.4842Z" fill="white"></path>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_21_1202">
+                                        <rect width="11.8834" height="11.8834" fill="white" transform="translate(5.39032 5.22876)"></rect>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </a>
+                    </li>
             </ul>
         </div>
 
