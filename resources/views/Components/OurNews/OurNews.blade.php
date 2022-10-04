@@ -63,9 +63,9 @@ $whatsapp_phone_Link = "https://wa.me/".$Final_Correct_whatsapp_phone ;
                     @php
                     $title = str_replace(" ", "-", $new->title);
                     @endphp
-                    <div onclick="location.href='{{ route('getnewDetail', ['title'=>$title,'id' => $new->id]) }}'">
-                        <img src="{{ asset($img) }}" alt="people_on_Mousq" class="lg:w-[360px] w-full sm:h-56 max-h-56 rounded-[5px]">
-                        <p class="text-[#349A37] text-[16px] pt-4 text-right max-w-none pl-4 h-[88px]">
+                    <div  onclick="location.href='{{ route('getnewDetail', ['title'=>$title,'id' => $new->id]) }}'">
+                        <img src="{{ asset($img) }}" alt="people_on_Mousq" class="cursor-pointer lg:w-[360px] w-full sm:h-56 max-h-56 rounded-[5px]">
+                        <p class="cursor-pointer text-[#349A37] text-[16px] pt-4 text-right max-w-none pl-4 h-[88px]">
                             {{Illuminate\Support\Str::limit($new->title,113) }}
                         </p>
                         <!--old Date here!! -->
@@ -78,7 +78,7 @@ $whatsapp_phone_Link = "https://wa.me/".$Final_Correct_whatsapp_phone ;
                             01-02-2020
                         </p>
                         @endif
-                        <p class="text-xs block sm:hidden md:block text-[#101426] font-noto_Regular pl-4 pt-2 text-right slider-paragraph">
+                        <p class=" text-xs block sm:hidden md:block text-[#101426] font-noto_Regular pl-4 pt-2 text-right slider-paragraph">
                             {{ Illuminate\Support\Str::limit(strip_tags( $new->description),97) }}
                             @if(strip_tags(Str::length($new->description)) > 97)
                             <a href="{{ route('getnewDetail', ['title'=>$new->title,'id' => $new->id]) }}">
