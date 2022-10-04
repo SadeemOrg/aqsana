@@ -160,42 +160,36 @@ class News extends Resource
                 })
                     ->options([
 
-                        '1' => 'News',
-                        '2' => 'alqudus walmasjid alaqsaa',
-                        '3' => 'alqudus walmasjid alaqsaa',
+                        '1' => __('News'),
+                        '2' => __('alqudus walmasjid alaqsaa'),
+
                     ])->displayUsingLabels(),
 
                 NovaDependencyContainer::make([
                     Select::make(__('type'), "type")
                         ->options([
-                            '1' => 'News',
-                            '2' => 'Blogs',
-                            '3' => 'Report',
+                            '1' => __('News'),
+                            '2' => __('Blogs'),
+                            '3' => __('Report'),
                         ])->displayUsingLabels(),
                 ])->dependsOn('main_type', '1'),
+
                 NovaDependencyContainer::make([
                     Select::make(__('type'), "type")
                         ->options([
-                            '1' => 'News',
-                            '2' => 'Blogs',
-                            '3' => 'Report',
+                            '1' => __('News'),
+                            '2' => __('almas alsamel'),
+                            '3' => __('Report'),
                         ])->displayUsingLabels(),
                 ])->dependsOn('main_type', '2'),
-                NovaDependencyContainer::make([
-                    Select::make(__('type'), "type")
-                        ->options([
-                            '1' => 'News',
-                            '2' => 'almas alsamel',
-                        ])->displayUsingLabels(),
-                ])->dependsOn('main_type', '3'),
             ])->dependsOn('mult', "2"),
 
             NovaDependencyContainer::make([
                 Multiselect::make(__('main Type'), "main_type")
                     ->options([
-                        '1' => 'News',
-                        '2' => 'alqudus walmasjid alaqsaa',
-                        '3' => 'alqudus walmasjid alaqsaa',
+                        '1' => __('News'),
+                        '2' => __('alqudus walmasjid alaqsaa'),
+
 
 
                     ]),
