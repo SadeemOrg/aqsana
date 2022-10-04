@@ -90,7 +90,7 @@ $whatsapp_phone_Link = "https://wa.me/".$Final_Correct_whatsapp_phone ;
                     <div class="flex flex-col items-start justify-start pl-4 pt-4 gap-y-2 font-noto_Regular ">
                         <p class="text-[#101426] text-sm"> شارك عبر </p>
                         <ul class="share-us flex flex-row items-center justify-start gap-x-2">
-                            <li class="px-1">
+                            <li >
                                 <a class="facebook" target="_self" href="javascript:openWindow('http://www.facebook.com/sharer/sharer.php?u={{ url('/') }}/categor/{{ $title }}/{{ $new->id }}&title=')">
                                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.1687" cy="12.1687" r="11.6687" stroke="#101426" />
