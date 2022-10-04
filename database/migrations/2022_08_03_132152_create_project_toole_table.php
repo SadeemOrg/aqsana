@@ -18,6 +18,7 @@ class CreateProjectTooleTable extends Migration
             $table->bigInteger('project_id');
             $table->bigInteger('city_id');
             $table->string('tools');
+            $table->bigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }

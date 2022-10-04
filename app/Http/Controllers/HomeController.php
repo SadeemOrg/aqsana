@@ -10,12 +10,24 @@ use App\Models\FormMassage;
 use Mail;
 use App\Mail\TestMail;
 use App\Models\Almuahada;
+use App\Models\Donations;
 use App\Models\News;
 use App\Models\newsType;
 
 
 class HomeController extends Controller
 {
+
+
+
+
+    public function bills($id)
+    {
+     $Donations=  Donations::where("id",$id)->first();
+
+                return view('Pages.Bills',compact('Donations'));
+    }
+
     public function showToastrMessages()
     {
 

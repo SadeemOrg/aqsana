@@ -113,6 +113,22 @@ class ProjectBudjet extends Resource
 
             ActionButton::make(__('Action'))
             ->action(ProjectBudjetActions::class, $this->id)
+            ->text(__('Add pill'))
+            ->showLoadingAnimation()
+            // ->confirmButtonText(__('Add budjet'), $this->id)
+            ->loadingColor('#fff')
+            ->canSee(function(){
+                $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+            if ( $projects )
+            {
+
+                if ($projects->status == '3 ')  return true;
+
+            }
+            }),
+
+            ActionButton::make(__('Action'))
+            ->action(ProjectBudjetActions::class, $this->id)
             ->text(__('finished'))
             ->showLoadingAnimation()
             ->loadingColor('#fff')->buttonColor('#21b970')
@@ -120,7 +136,7 @@ class ProjectBudjet extends Resource
                 $projects = DB::table('project_status')->where('project_id', $this->id)->first();
             if ( $projects )
             {
-            if ($projects->status == '3')  return true;
+            if ($projects->status == '4')  return true;
 
 
             }
