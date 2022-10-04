@@ -73,8 +73,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     __('Navigation Bar'),
                     [
                         Tree::make(__('Items'), 'Items')->fields([
-                            Text::make(__('Name')),
-                            Link::make(__('Link'))->resources([
+                            Text::make(__('Name'),'name'),
+                            Link::make(__('Link'),'link')->resources([
                                 Project::class,
 
                             ])

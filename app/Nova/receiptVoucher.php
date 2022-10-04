@@ -116,7 +116,7 @@ class receiptVoucher extends Resource
 
             Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
-            Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
+            // Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
 
             // Select::make(__('approval'), 'approval')->options([
             //     1 => 'approval',

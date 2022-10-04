@@ -116,8 +116,8 @@ class ApprovalRejectProjec extends Action
 
 
             Select::make(__('approval'), 'approval')->options([
-                1 => 'approval',
-                2 => 'reject',
+                1 => __('approval'),
+                2 => __('reject'),
             ])->displayUsingLabels(),
 
             NovaDependencyContainer::make([
