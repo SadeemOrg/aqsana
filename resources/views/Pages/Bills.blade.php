@@ -7,7 +7,7 @@
         $address = nova_get_setting('address', 'default_value');
         $newaddress = explode(',', $address);
         $newDate = explode(' ', $Donations->created_at);
-        // dd($Donations->donor_name);
+        // dd($Donations->amount);
     @endphp
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10 px-2">
         <div class="flex sm:flex-row flex-col-reverse items-center justify-between mt-24">
@@ -84,12 +84,12 @@
                                         <td
                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                             חשבון</td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">26/08/2022</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $newDate[0] }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">12</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">632</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">161479</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">00120006</td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">5.000 ₪</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $Donations->amount }} ₪</td>
                                     </tr>
                                     <tr>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
@@ -98,7 +98,7 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                         <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-lg">סך הכל סופי :</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                        <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">5.000 ₪</td>
+                                        <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">{{ $Donations->amount }} ₪</td>
                                     </tr>
 
                                     <!-- More people... -->
