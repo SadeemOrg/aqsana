@@ -8,7 +8,12 @@
     <div class="flex flex-row flex-wrap gap-y-8 md:gap-y-8 justify-center items-center gap-x-6">
         @if(is_array($partners)==true && !empty($partners))
         @foreach ($partners as $partner)
-        <img src="{{ asset($partner['data']['image']) }}" alt="emar_deen" class="max-w-[140px] max-h-[135px]" />
+        @if (empty($partner['data']['link']))
+        <img  src="{{ asset($partner['data']['image']) }}" alt="emar_deen" class="max-w-[140px] max-h-[135px]" />    
+        @else
+        <img  src="{{ asset($partner['data']['image']) }}" alt="emar_deen" class="max-w-[140px] max-h-[135px]" 
+             onclick="location.href='{{ $partner['data']['link'] }}'" />
+        @endif
         @endforeach
         @endif
     </div>
