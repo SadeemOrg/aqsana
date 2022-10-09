@@ -150,11 +150,8 @@
     <script>
         $('#search').on('keyup', function() {
             var val = $('#search').val().toLowerCase();
-            console.log('val', val)
             if (val.length > 2) {
-                console.log('val', val)
                 $('.search-bar').siblings().css('display', 'flex');
-                console.log('val1', val)
                 $.get({
                     url: '{{url(' / ')}}/search/' + val,
                     data: {
@@ -169,7 +166,6 @@
                     },
 
                     success: function(response) {
-                        console.log("🚀 ~ file: app.blade.php ~ line 581 ~ $ ~ response", response)
                         var elements = [];
                         response.map(item => {
                             var trimmedString = {
@@ -393,8 +389,7 @@
                 $(".Ctnbtn").text("تأكيد الدفع");
             }
             if (pageNumber == 2) {
-                if ($('#privecy').is(":checked") == false && $('#visa').is(":checked") == false) {
-                    console.log("not checked");
+                if ($('#privecy').is(":checked") == false && $('.paymentMethod').is(":checked") == false ) {
                     toastr.options = {
                         "closeButton": true,
                         "debug": false,
@@ -405,12 +400,11 @@
                         "showMethod": "fadeIn",
                         "hideMethod": "fadeOut"
                     };
-                    toastr.error('  الرجاء وضع اشارة صح على شروط الخصوصية والالغاء والدفع عن طريق الفيزا');
+                    toastr.error('  الرجاء وضع اشارة صح على شروط الخصوصية والالغاء واختيار طريقة الدفع المناسبة ');
                     pageNumber = 1;
                     return false;
                 }
-                if ($('#privecy').is(":checked") == false && $('#visa').is(":checked") == true) {
-                    console.log("visa");
+                if ($('#privecy').is(":checked") == false && $('.paymentMethod').is(":checked") == true ) {
                     toastr.options = {
                         "closeButton": true,
                         "debug": false,
@@ -425,8 +419,8 @@
                     pageNumber = 1;
                     return false;
                 }
-                if ($('#privecy').is(":checked") == true && $('#visa').is(":checked") == false) {
-                    console.log("privecy");
+                if ($('#privecy').is(":checked") == true && $('.paymentMethod').is(":checked") == false ) {
+                   console.log($('#privecy').is(":checked") == true && $('.paymentMethod').is(":checked") == false )
                     toastr.options = {
                         "closeButton": true,
                         "debug": false,
@@ -437,7 +431,7 @@
                         "showMethod": "fadeIn",
                         "hideMethod": "fadeOut"
                     };
-                    toastr.error(' الرجاء وضع اشارة صح على التبرع في فيزا كارد');
+                    toastr.error(' الرجاء اختيار طريقة الدفع المناسبة ');
                     pageNumber = 1;
                     return false;
                 } else {
@@ -447,18 +441,6 @@
                 }
             }
         });
-
-
-        // $("#price").keyup(function() {
-        //     var price = $("#price").val();
-        //     if(price == ""){
-        //         $(".Ctnbtn").attr("disabled", true);
-        //     }
-        //     else{
-        //         $(".Ctnbtn").attr("disabled", false);
-        //     }
-        // } );
-
         $("#PreviousPageDonations").click(function() {
             previousPage++;
             if (previousPage == 1) {
@@ -485,23 +467,6 @@
             $('.tab-' + $(this).data('tab')).fadeIn();
         });
 
-        // $("#visa").click(function() {
-        // if($("#privecy").is(":checked")){
-        //     $(".Ctnbtn").attr("disabled", false);
-        // }
-        // else{
-        //     $(".Ctnbtn").attr("disabled", true);
-        // }
-        // });
-
-        // $("#privecy").click(function() {
-        // if($("#visa").is(":checked")){
-        //     $(".Ctnbtn").attr("disabled", false);
-        // }
-        // else{
-        //     $(".Ctnbtn").attr("disabled", true);
-        // }
-        // });
         $(".contactUsForm").submit(function(e) {
 
             e.preventDefault()
@@ -551,7 +516,6 @@
         })
 
         $(".LandingPage").submit(function(e) {
-            console.log("asss")
             e.preventDefault();
             var $name = $('input[name="name"]').val();
             var $phone = $('input[name="phone"]').val();
@@ -566,6 +530,9 @@
                 },
                 success: function(data) {
                     if ($.isEmptyObject(data.error)) {
+                        $(".formInputData").hide();
+                        $(".thanksMsg").removeClass("hidden");
+
                         toastr.options = {
                             "closeButton": true,
                             "debug": false,

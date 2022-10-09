@@ -1012,6 +1012,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .justify-start{
   justify-content: flex-start;
 }
+.justify-end{
+  justify-content: flex-end;
+}
 .justify-center{
   justify-content: center;
 }
@@ -1031,6 +1034,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   -moz-column-gap: 2.5rem;
        column-gap: 2.5rem;
 }
+.gap-y-3{
+  row-gap: 0.75rem;
+}
 .gap-x-2{
   -moz-column-gap: 0.5rem;
        column-gap: 0.5rem;
@@ -1044,9 +1050,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .gap-y-12{
   row-gap: 3rem;
-}
-.gap-y-3{
-  row-gap: 0.75rem;
 }
 .gap-x-6{
   -moz-column-gap: 1.5rem;
@@ -1314,10 +1317,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
-.px-1{
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-}
 .py-10{
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
@@ -1341,6 +1340,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-8{
   padding-left: 2rem;
   padding-right: 2rem;
+}
+.px-1{
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 .px-0{
   padding-left: 0px;
@@ -2013,6 +2016,9 @@ body{
   }
   .sm\:justify-between{
     justify-content: space-between;
+  }
+  .sm\:gap-y-0{
+    row-gap: 0px;
   }
   .sm\:p-0{
     padding: 0px;
