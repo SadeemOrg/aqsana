@@ -182,9 +182,9 @@ class Project extends Resource
                     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
                     ->action(ProjectStartEnd::class, $this->id)
-                    ->text(__('dd'))
+                    ->text(__('incomplete'))
                     ->showLoadingAnimation()
-                    ->loadingColor('#fff')->buttonColor('#21b970')
+                    ->loadingColor('#fff')->buttonColor('#787878')
                     ->canSee(function () {
                         $projects = DB::table('project_status')->where('project_id', $this->id)->first();
                         if (!$projects) {
@@ -231,7 +231,10 @@ class Project extends Resource
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
 
-                Text::make(__("project name"), "project_name"),
+
+
+
+           Text::make(__("project name"), "project_name"),
                 Text::make(__("project describe"), "project_describe"),
 
                 Select::make(__('SECTOR'), 'sector')
@@ -319,23 +322,12 @@ class Project extends Resource
                     ->optionsLabel('bus_number')
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                         return null;
-                    })
-                    ->canSee(function ($request) {
-
-                        $user = Auth::user();
-                        if ($user->type() == 'regular_city') return true;
-                        return false;
                     }),
 
 
                 Flexible::make(__('newbus'), 'newbus')
                     ->readonly(true)
-                    ->canSee(function ($request) {
-
-                        $user = Auth::user();
-                        if ($user->type() == 'regular_city') return true;
-                        return false;
-                    })->hideFromDetail()->hideFromIndex()
+                    ->hideFromDetail()->hideFromIndex()
                     ->addLayout(__('Add new bus'), 'bus', [
 
                         Select::make(__('BusesCompany'), 'BusesCompany')
@@ -392,8 +384,8 @@ class Project extends Resource
             ])),
             (new Panel(__('tooles'), [
 
-                Flexible::make(__('tooles'), 'tooles')
-                    ->readonly(true)
+                Flexible::make(__('tooles'), 'tools')
+
                     ->addLayout(__('tooles'), 'toole', [
                         Select::make(__('user'), 'user_tools')
                             ->options(function () {
@@ -406,29 +398,7 @@ class Project extends Resource
                                 return $user_type_admin_array;
                             }),
 
-                        Textarea::make(__('tooles'), "text_tools", function () {
-
-                            $id = Auth::id();
-                            $user = Auth::user();
-                            if ($user->type() == 'regular_city') {
-                                $citye =   City::where('admin_id', $id)
-                                    ->select('id')->first();
-                                $Tooles = DB::table('project_toole')
-                                    ->where([
-                                        ['project_id', '=', $this->id],
-                                        ['city_id', '=', $citye['id']],
-                                    ])
-                                    ->first();
-
-                                if ($Tooles)  return  $Tooles->tools;
-                            }
-                        })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                            return null;
-                        })->canSee(function ($request) {
-                            $user = Auth::user();
-                            if ($user->type() == 'regular_city') return true;
-                            return false;
-                        }),
+                        Textarea::make(__('tooles'), "text_tools"),
 
                     ]),
 
@@ -535,16 +505,16 @@ class Project extends Resource
             ->select('id')->first();
         $model->update_by = $id;
 
-        if ($request->tooles) {
-            $toooles = $request->tooles;
-            foreach ($toooles as $key => $tooole) {
-                DB::table('project_toole')
-                    ->updateOrInsert(
-                        ['project_id' => $model->id, 'city_id' => $citye['id'], 'user_id' => $tooole['attributes']['user_tools']],
-                        ['tools' => $request->tooles]
-                    );
-            }
-        }
+        // if ($request->tooles) {
+        //     $toooles = $request->tooles;
+        //     foreach ($toooles as $key => $tooole) {
+        //         DB::table('project_toole')
+        //             ->updateOrInsert(
+        //                 ['project_id' => $model->id, 'city_id' => $citye['id'], 'user_id' => $tooole['attributes']['user_tools']],
+        //                 ['tools' => $request->tooles]
+        //             );
+        //     }
+        // }
         if ($request->bus) {
 
             $buss = json_decode($request->bus);

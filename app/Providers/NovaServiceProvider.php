@@ -414,6 +414,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make(__('Twitter'), 'twitter'),
                     Text::make(__('youtube'), 'youtube'),
                 ], __('website Settings') => [
+                    Text::make(__('society id'), 'society_id'),
                     Text::make(__('phone'), 'phone'),
                     Text::make(__('Email'), 'email'),
                     Text::make(__('address'), 'address'),
@@ -621,12 +622,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             }),
             (new InComeTransaction())->canSee(function () {
                 $user = Auth::user();
-                if ($user->type() == 'admin') return true;
+                if ($user->type() == 'admin'||$user->type() == 'financial_user') return true;
                 return false;
             }),
             (new OutComeTransaction())->canSee(function () {
                 $user = Auth::user();
-                if ($user->type() == 'admin') return true;
+                if  ($user->type() == 'admin'||$user->type() == 'financial_user')  return true;
                 return false;
             }),
             (new DonationsSum())->canSee(function () {

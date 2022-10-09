@@ -13,7 +13,7 @@ use App\Nova\Filters\StateFilter;
 use App\Nova\Filters\ReadMessageFilters;
 use Pdmfc\NovaFields\ActionButton;
 
-class FormMassage extends Resource
+class Reports extends Resource
 {
     /**
      * The model the resource corresponds to.
@@ -39,7 +39,7 @@ class FormMassage extends Resource
     ];
     public static function label()
 {
-    return __('Form Massage');
+    return __('Reports');
 }
 public static function group()
 {
@@ -54,7 +54,7 @@ public static function group()
     public static function indexQuery(NovaRequest $request, $query)
     {
         // $id = Auth::id();
-        return $query->where('type',  '0' );
+        return $query->where('type',  '1' );
 
 
     }

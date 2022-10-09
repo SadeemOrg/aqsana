@@ -52,6 +52,11 @@ class User extends Authenticatable
         'birth_date' => 'date',
     ];
 
+    public function Bus()
+    {
+        return $this->belongsToMany('App\Models\Bus','user_id');
+    }
+
     public function City()
     {
         return $this->hasOne('App\Models\City','admin_id');

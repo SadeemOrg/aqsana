@@ -31,6 +31,7 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Image;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
+// use App\Console\Commands\ProjectStartEnd;
 use App\CPU\Helpers;
 use App\Models\address;
 use Laravel\Nova\Fields\BelongsTo;
@@ -51,6 +52,7 @@ use Gwd\FlexibleContent\FlexibleContent;
 
 use Laravel\Nova\Panel;
 use App\Nova\Actions\ChangeRole;
+use App\Nova\Actions\ProjectStartEnd;
 use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
 
@@ -131,40 +133,109 @@ class QawafilAlaqsa extends Resource
             (new Panel(__('main'), [
                 ID::make(__('ID'), 'id')->sortable(),
                 ActionButton::make(__('Action'))
-                    ->action(ApprovalRejectProjec::class, $this->id)
-                    ->text(__('acsept'))
-                    ->showLoadingAnimation()
-                    ->loadingColor('#fff')->buttonColor('#21b970')
-                    ->canSee(function () {
-                        $user = Auth::user();
+                ->action(ProjectStartEnd::class, $this->id)
+                ->text(__('start'))
+                ->showLoadingAnimation()
+                ->loadingColor('#fff')->buttonColor('#21b970')
+                ->canSee(function () {
+                    $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                    if ($projects) {
 
-                        if ($user->type() == 'regular_city'||$user->type() == 'regular_area') {
-                            return true;
+                        if ($projects->status == '0')  return true;
+                    }
+                })
+                ->readonly(function () {
+                    return false;
+                })
+                ->hideWhenCreating()->hideWhenUpdating(),
+
+            ActionButton::make(__('Action'))
+                ->action(ProjectStartEnd::class, $this->id)
+                ->text(__('end'))
+                ->showLoadingAnimation()
+                ->loadingColor('#fff')->buttonColor('#21b970')
+                ->canSee(function () {
+                    $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                    if ($projects) {
+
+                        if ($projects->status == '1')  return true;
+                    }
+                })
+                ->readonly(function () {
+                    return false;
+                })
+                ->hideWhenCreating()->hideWhenUpdating(),
+            ActionButton::make(__('Action'))
+                ->action(ProjectStartEnd::class, $this->id)
+                ->text(__('Finished'))
+                ->showLoadingAnimation()
+                ->loadingColor('#fff')->buttonColor('#21b970')
+                ->canSee(function () {
+                    $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                    if ($projects) {
+
+                        if ($projects->status > '1')  return true;
+                    }
+                })
+                ->readonly()
+                ->hideWhenCreating()->hideWhenUpdating(),
+            ActionButton::make(__('Action'))
+                ->action(ProjectStartEnd::class, $this->id)
+                ->text(__('incomplete'))
+                ->showLoadingAnimation()
+                ->loadingColor('#fff')->buttonColor('#787878')
+                ->canSee(function () {
+                    $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                    if (!$projects) {
+                        return true;
+                    }
+                })
+                ->readonly()
+                ->hideWhenCreating()->hideWhenUpdating(),
+
+
+
+
+            ActionButton::make(__('Action'))
+                ->action(ApprovalRejectProjec::class, $this->id)
+                ->text(__('acsept'))
+                ->showLoadingAnimation()
+                ->loadingColor('#fff')->buttonColor('#21b970')
+                ->canSee(function () {
+                    $user = Auth::user();
+
+                    if ($user->type() == 'regular_city' || $user->type() == 'regular_area') {
+                        return true;
+                    }
+                })
+                ->readonly(function () {
+                    $id = Auth::id();
+                    $user = Auth::user();
+                    if ($user->type() == 'regular_city') {
+                        $citye =   City::where('admin_id', $id)
+                            ->select('id')->first();
+                        $acspet = DB::table('accept_project')
+                            ->where([
+                                ['project_id', '=', $this->id],
+                                ['city_id', '=', $citye['id']],
+                            ])
+                            ->first();
+
+                        if ($acspet) {
+
+                            if ($acspet->accepted == "1")   return  true;
+                            else return false;
                         }
-                    })
-                    ->readonly(function () {
-                        $id = Auth::id();
-                        $user = Auth::user();
-                        if ($user->type() == 'regular_city') {
-                            $citye =   City::where('admin_id', $id)
-                                ->select('id')->first();
-                            $acspet = DB::table('accept_project')
-                                ->where([
-                                    ['project_id', '=', $this->id],
-                                    ['city_id', '=', $citye['id']],
-                                ])
-                                ->first();
+                    }
+                })
+                ->hideWhenCreating()->hideWhenUpdating(),
 
-                            if ($acspet) {
 
-                                if ($acspet->accepted == "1")   return  true;
-                                else return false;
-                            }
-                        }
-                    })
-                    ->hideWhenCreating()->hideWhenUpdating(),
-                Text::make(__("QawafilAlaqsa name"), "project_name"),
+
+
+       Text::make(__("QawafilAlaqsa name"), "project_name"),
                 Text::make(__("QawafilAlaqsa describe"), "project_describe"),
+
 
                 BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
                     ->options(Area::all())
@@ -173,6 +244,15 @@ class QawafilAlaqsa extends Resource
                         if ($user->type() == 'admin') return true;
                         return false;
                     })->rules('required', 'max:1'),
+
+                    Select::make("Repetition", "repetition")->options([
+                        '0' => __('Once'),
+                        '1' => __('daily'),
+                        '2' => __('weekly'),
+                        '3' => __('fortnightly'),
+                        '4' => __('Monthly'),
+                        '5' => __('annual'),
+                    ]),
 
                    BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
                 Select::make(__('trip from'), 'trip_from')
@@ -790,6 +870,7 @@ class QawafilAlaqsa extends Resource
                     return true;
                 }
             }),
+            new ProjectStartEnd,
 
         ];
     }
