@@ -84,7 +84,7 @@ class User extends Resource
                 ->textAlign('left'),
             // Date::make('Birth Date', 'birth_date'),
             Image::make(__('photo'), 'photo')->disk('public'),
-            BelongsTo::make('Role'),
+            BelongsTo::make(__('Role'),'Role',\App\Nova\Role::class),
             // BelongsTo::make('City'),
 
 

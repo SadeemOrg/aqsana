@@ -68,9 +68,9 @@ Route::get('/testNotfiy', function (){
 
 //     return view('Pages.Bills');
 // });
-Route::get('bills/{id}', [HomeController::class, 'bills']);
+Route::get('bill/{id}', [HomeController::class, 'bills'])->name('bills');
 
-Route::get('bill', [HomeController::class, 'billsPdf']);
+// Route::get('bill', [HomeController::class, 'billsPdf']);
 
 
 Route::get('/landingPage', function (){

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +25,18 @@ class Bus extends Model
 
     // ];
 
+    public function TripBookings()
+    {
+        return $this->hasMany(TripBooking::class,'bus_id');
+
+        // return $this->belongsToMany(Project::class);
+    }
+    public function Users()
+    {
+        return $this->hasMany(User::class,'id');
+
+        // return $this->belongsToMany(Project::class);
+    }
 
 
     public function Project()
