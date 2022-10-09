@@ -37,7 +37,7 @@ class PaymentController extends BaseController
     
     // Prepare transaction parameters 
     // Prepare transaction parameters
-    $query_parameters['supplier'] = 'TERMINAL_NAME';// 'TERMINAL_NAME' should be replaced by actual terminal name
+    $query_parameters['supplier'] = 'alaqsaqudstok-9049770';// 'TERMINAL_NAME' should be replaced by actual terminal name
     $query_parameters['sum'] = '5'; //Transaction sum 
     $query_parameters['tranmode'] = 'A';
     $query_parameters['currency'] = '1'; //Type of currency 1 NIS, 2 USD, 978 EUR, 826 GBP, 392 JPY
@@ -46,7 +46,7 @@ class PaymentController extends BaseController
     $query_parameters['myid'] = '12312312'; //ID number if required
     $query_parameters['mycvv'] = '123'; // number if required
     $query_parameters['cred_type'] = '1'; // This field specifies the type of transaction, 1 - normal transaction, 6 - credit, 8 - payments
-    // $query_parameters['TranzilaPW'] = 'TranzilaPW';
+    // $query_parameters['TranzilaPW'] = 'cdEf';
     
     $query_string = '' ; 
     foreach($query_parameters as $name => $value) { 
