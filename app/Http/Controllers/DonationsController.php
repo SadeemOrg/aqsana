@@ -31,11 +31,14 @@ class DonationsController extends BaseController
             return $this->sendError('Validate Error', $validator->errors());
         }
 
-
+        $donor_name = $request->get("donor_name");
+        if(Auth()->user() != null) {
+            $donor_name = Auth()->user()->name;
+        }
         $donation = Donations::create([
             'project_id' => $request->get("project_id"),
             'project_type' => $request->get("project_type"),
-            'donor_name' => $request->get("donor_name"),
+            'donor_name' => $donor_name,
             'amount' => $request->get("donation_amount"),
             'bus_id' => $request->get("bus_id"),
             'user_id' => Auth()->id(),
