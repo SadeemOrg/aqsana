@@ -102,7 +102,7 @@ class Project extends Model
 
         $citye =   City::where('admin_id', $id)
         ->select('id')->first();
-        if ($user->type() == 'regular_city')     return $this->belongsToMany(Bus::class,'project_bus')->where('project_bus.city_id', '=', $citye['id']);
+        // if ($user->type() == 'regular_city')     return $this->belongsToMany(Bus::class,'project_bus')->where('project_bus.city_id', '=', $citye['id']);
         return $this->belongsToMany(Bus::class,'project_bus');
     }
 
