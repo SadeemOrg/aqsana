@@ -93,7 +93,7 @@ class QawafilAlaqsa extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ($request->user()->type() == 'website_admin'  &&  (!($request->user()->cite))) {
+        if ($request->user()->type() == 'regular_city'  &&  (!($request->user()->cite))) {
             return false;
         }
         if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user' || $request->user()->type() == 'Almuahada_admin') {
@@ -250,7 +250,7 @@ class QawafilAlaqsa extends Resource
                         return false;
                     })->rules('required', 'max:1'),
 
-                Select::make("Repetition", "repetition")->options([
+                Select::make(__("Repetition"), "repetition")->options([
                     '0' => __('Once'),
                     '1' => __('daily'),
                     '2' => __('weekly'),
@@ -258,7 +258,16 @@ class QawafilAlaqsa extends Resource
                     '4' => __('Monthly'),
                     '5' => __('annual'),
                 ]),
+                Select::make(__('Admin'), 'admin_id')
+                    ->options(function () {
+                        $users =  \App\Models\User::all();
+                        $user_type_admin_array =  array();
+                        foreach ($users as $user) {
+                            $user_type_admin_array += [$user['id'] => ($user['name'])];
+                        }
 
+                        return $user_type_admin_array;
+                    }),
                 BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
@@ -274,10 +283,10 @@ class QawafilAlaqsa extends Resource
                         }
 
                         return $address_type_admin_array;
-                    })->hideFromIndex()->hideFromDetail()
-                    ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                        return null;
-                    }),
+                    })->hideFromIndex()->hideFromDetail(),
+                // ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                //     return null;
+                // }),
                 Flexible::make(__('newadres'), 'newadresfrom')
                     ->readonly(true)
                     ->limit(1)
@@ -286,7 +295,7 @@ class QawafilAlaqsa extends Resource
 
                         Text::make(__('Name'), "name_address"),
                         Text::make(__("description"), "description"),
-                        Text::make(__("phone number"), "phone_number_address"),
+
                         GoogleMaps::make(__('current_location'), 'current_location'),
                         Select::make(__("Status"), "address_status")->options([
                             '1' => __('active'),
@@ -309,57 +318,9 @@ class QawafilAlaqsa extends Resource
                 Boolean::make(__('is_has_Donations'), 'is_donation'),
 
 
-                // Select::make(__('is_reported'), 'is_reported')->options([
-                //     '1' => 'نعم',
-                //     '0' => 'لا',
-                // ])->displayUsingLabels(),
 
 
-                NovaDependencyContainer::make([
-                    Text::make(__("Title"), 'report_title'),
-                    Textarea::make(__('description'), 'report_description'),
-                    Tiptap::make(__('Contents'), 'report_contents')
-                        ->buttons([
-                            'heading',
-                            '|',
-                            'italic',
-                            'bold',
-                            '|',
-                            'link',
-                            'code',
-                            'strike',
-                            'underline',
-                            'highlight',
-                            '|',
-                            'bulletList',
-                            'orderedList',
-                            'br',
-                            'codeBlock',
-                            'blockquote',
-                            '|',
-                            'horizontalRule',
-                            'hardBreak',
-                            '|',
-                            'table',
-                            '|',
-                            'image',
-                            '|',
-                            'textAlign',
-                            '|',
-                            'rtl',
-                            '|',
-                            'history',
-                        ])
-                        ->headingLevels([1, 2, 3, 4, 5, 6]),
 
-
-                    Image::make(__('Image'), 'report_image')->disk('public')->prunable(),
-                    ArrayImages::make(__('Pictures'), 'report_pictures')
-                        ->disk('public'),
-                    Text::make(__("video link"), 'report_video_link'),
-                    Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y'),
-
-                ])->dependsOn('is_reported', '10'),
 
                 BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -424,31 +385,16 @@ class QawafilAlaqsa extends Resource
                         Number::make(__("Number person on bus"), "number_person_on_bus")->step(1.0),
 
                         Number::make(__("seat price"), "seat_price")->step(1.0),
-
-                        Select::make(__('travel from'), 'from')
+                        Select::make(__('Admin'), 'adminbus')
                             ->options(function () {
-                                $users =  \App\Models\address::all();
+                                $users =  \App\Models\User::all();
                                 $user_type_admin_array =  array();
                                 foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name_address'])];
+                                    $user_type_admin_array += [$user['id'] => ($user['name'])];
                                 }
 
                                 return $user_type_admin_array;
                             }),
-
-
-                        Select::make(__('travel to'), 'to')
-                            ->options(function () {
-                                $users =  \App\Models\address::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name_address'])];
-                                }
-
-                                return $user_type_admin_array;
-                            }),
-
-
                         Text::make(__("Name Driver"), "name_driver"),
                         Text::make(__("phone_number"), "phone_number"),
 
@@ -492,19 +438,51 @@ class QawafilAlaqsa extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->project_type = '2';
-
-        $model->is_reported = '1';
         $model->sector = 'قطاع الأوقاف والمقدسات';
+        $model->is_reported = '1';
+
         $model->trip_to = '1';
     }
-    public static function beforeUpdate(Request $request, $model)
+
+    public static function aftersave(Request $request, $model)
     {
-        // dd($request->newbus);
         $id = Auth::id();
         $model->update_by = $id;
 
         $citye =   City::where('admin_id', $id)
             ->select('id')->first();
+        if ($request->Area) {
+            $areas = json_decode($request->Area);
+            $tokens = [];
+            foreach ($areas as $key => $area) {
+                $user = User::where('id', $area->admin_id)->first();
+                $notification = Notification::where('id', '2')->first();
+
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
+                }
+            }
+            if (!empty($tokens)) {
+
+                Helpers::send_notification($tokens, $notification);
+            }
+        }
+        if ($request->City) {
+            $Citys = json_decode($request->City);
+            $tokens = [];
+            foreach ($Citys as $key => $City) {
+                $user = User::where('id', $City->admin_id)->first();
+                $notification = Notification::where('id', '2')->first();
+
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
+                }
+            }
+            if (!empty($tokens)) {
+
+                Helpers::send_notification($tokens, $notification);
+            }
+        }
 
         if ($request->Budjet) {
 
@@ -593,9 +571,8 @@ class QawafilAlaqsa extends Resource
                             'bus_number' => $bus['attributes']['bus_number'],
                             'number_of_seats' => $bus['attributes']['number_person_on_bus'],
                             'seat_price' => $bus['attributes']['seat_price'],
-                            'travel_from' => $bus['attributes']['from'],
-                            'travel_to' => '1',
                             'phone_number_driver' => $bus['attributes']['phone_number'],
+                            'admin_id' => $bus['attributes']['adminbus'],
                             'status' => '1',
                         ]
                     );
@@ -617,26 +594,15 @@ class QawafilAlaqsa extends Resource
             }
         }
 
-        if ($request->City) {
 
-            $City = json_decode($request->City);
-
-
-            DB::table('project_status')
-                ->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' => $City[0]->id],
-                    ['status' => '0']
-                );
-        }
         if (!$request->trip_from) {
-            if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] && $request->newadresfrom[0]['attributes']['phone_number_address'] && $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['address_status']) {
-                //   dd("hf");
+            if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] &&  $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['address_status']) {
+                // dd("hf");
                 DB::table('addresses')
                     ->Insert(
                         [
                             'name_address' => $request->newadresfrom[0]['attributes']['name_address'],
                             'description' => $request->newadresfrom[0]['attributes']['description'],
-                            'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
                             'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
                             'status' => $request->newadresfrom[0]['attributes']['address_status'],
                             'type' => '4',
@@ -649,41 +615,6 @@ class QawafilAlaqsa extends Resource
                     ->update(['trip_from' => $address->id]);
             }
         } else   $model->trip_from = $request->trip_from;
-    }
-    public static function aftersave(Request $request, $model)
-    {
-        if ($request->Area) {
-            $areas = json_decode($request->Area);
-            $tokens = [];
-            foreach ($areas as $key => $area) {
-                $user = User::where('id', $area->admin_id)->first();
-                $notification = Notification::where('id', '2')->first();
-
-                if ($user->fcm_token != null && $user->fcm_token != "") {
-                    array_push($tokens, $user->fcm_token);
-                }
-            }
-            if (!empty($tokens)) {
-
-                Helpers::send_notification($tokens, $notification);
-            }
-        }
-        if ($request->City) {
-            $Citys = json_decode($request->City);
-            $tokens = [];
-            foreach ($Citys as $key => $City) {
-                $user = User::where('id', $City->admin_id)->first();
-                $notification = Notification::where('id', '2')->first();
-
-                if ($user->fcm_token != null && $user->fcm_token != "") {
-                    array_push($tokens, $user->fcm_token);
-                }
-            }
-            if (!empty($tokens)) {
-
-                Helpers::send_notification($tokens, $notification);
-            }
-        }
     }
     /**
      * Get the cards available for the request.

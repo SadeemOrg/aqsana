@@ -97,6 +97,7 @@ class HomeController extends Controller
                 'name' => $request['name'],
                 'phone' => $request['phone'],
                 'message' => $request['message'],
+                'type' => '0',
 
             ]);
             return response()->json(['success'=>'Added new records.']);

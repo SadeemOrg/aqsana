@@ -9,12 +9,15 @@ class address extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name_address','description','phone_number_address','status','current_location','address_id'
+        'name_address','description','phone_number_address','status','address_id'
     ];
     protected $hidden = [
         'created_at',
         'updated_at',
 
+    ];
+    protected $casts = [
+        'current_location' => 'array'
     ];
 
     public function myid()
