@@ -59,7 +59,7 @@ class Alhisalat extends Resource
 
     public static function availableForNavigation(Request $request)
     {
-        if ($request->user()->type() == 'financial_user') {
+        if ($request->user()->type() == 'financial_user' || (!( $request->user()->cite)) ) {
             return false;
         } else return true;
     }
