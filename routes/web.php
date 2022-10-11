@@ -59,6 +59,7 @@ Route::get('/search/{val}/', [HomeController::class, 'search'])->name('search');
 
 Route::get('/project', [HomeController::class, 'project'])->name('project');
 Route::get('/project/{id}', [HomeController::class, 'getprojectDetail'])->name('getprojectDetail');
+Route::get('/projectapi/{id}', [HomeController::class, 'getprojectDetailapi'])->name('getprojectDetail');
 
 Route::get('/testNotfiy', function (){
     return view('Pages.testNotfiy');
