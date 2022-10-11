@@ -31,9 +31,6 @@
             </div>
         </div>
         <!-- Sector -->
-        {{-- @php
-            dd($project);
-        @endphp --}}
         @if ($project_Id !== null)
             <div class="mt-4 firstPage">
                 <label for="sector" class=" pr-1 block text-sm font-medium text-gray-700">القطاعات</label>
@@ -74,16 +71,16 @@
             <input type="hidden" id="donorName" name="donor_name" value="" placeholder=" الاسم كامل"
                 class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
             <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
-                <input type="text" name="" placeholder="رقم الهاتف"
+                <input type="number" name="telephone" placeholder="رقم الهاتف"
                     class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
-                <input type="text" name="" placeholder="رقم البطاقة"
+                <input type="number" name="visaid" placeholder="رقم البطاقة"
                     class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
             </div>
             <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
-                <input type="text" name="" placeholder="CVV"
+                <input type="number" name="CVV" placeholder="CVV"
                     class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
                 <div dir="ltr" class="w-[80%] md:w-[50%]">
-                    <input datepicker type="text"
+                    <input datepicker type="text" name="VisaDate"
                         class="block w-full border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4 text-right"
                         placeholder="MM/YY">
                 </div>
@@ -99,9 +96,10 @@
                         <img src="{{ asset('assets/image/visa_1.svg') }}" class="pl-3 w-[52px]" />
                     </label>
                     <!--PayPal -->
-                    <input id="masterCard" name="notification-method" type="radio" value="masterCard"
+                    <input id="payPal" name="notification-method" type="radio" value="payPal"
                         class="paymentMethod focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
-                    <label for="masterCard"
+                    
+                        <label for="payPal"
                         class="ml-3 text-md font-medium text-[#201A3C] pr-2 flex flex-row-reverse items-center">
                         <span>Paypal</span>
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48"
@@ -117,15 +115,6 @@
                             </path>
                         </svg>
                     </label>
-                    {{-- <input type="radio" id="masterCard" name="fav_language" value="HTML"
-                        class="focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
-                    <label for="html"
-                        class="ml-3 text-md font-medium text-[#201A3C] pr-2 flex flex-row-reverse items-center">فيزا
-                        كارد</label><br>
-                    <input type="radio" id="css" name="fav_language" value="CSS">
-                    <label for="css">CSS</label><br>
-                    <input type="radio" id="javascript" name="fav_language" value="JavaScript">
-                    <label for="javascript">JavaScript</label> --}}
                 </div>
 
                 {{-- אני מאשר/ת את מדיניות ביטולים וגם מדיניות פרטיות --}}
@@ -169,14 +158,15 @@
 </div>
 
 <div class="flex flex-row items-center justify-center md:justify-start gap-x-2">
+    <div class="btn-btn-payPal hidden mt-10" id="btn-paypal-checkout"></div>
     <div class="mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5">
-        <button id="firstPageDonations" type="submit"
-            class="Ctnbtn rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">متابعة</button>
+        <button id="" type="submit"
+            class="firstPageDonations Ctnbtn rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">متابعة</button>
     </div>
     <div
         class="secondPage mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5 hidden">
         <button id="PreviousPageDonations"
-            class="rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">الخلف</button>
+            class=" rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">الخلف</button>
     </div>
 </div>
 </div>
