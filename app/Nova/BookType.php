@@ -15,7 +15,15 @@ class BookType extends Resource
      * @var string
      */
     public static $model = \App\Models\BookType::class;
-
+    public static function label()
+    {
+        return __('BookType');
+    }
+    public static function group()
+    {
+        return __('Cultural Section');
+    }
+    public static $priority = 2 ;
     /**
      * The single value that should be used to represent the resource when being displayed.
      *

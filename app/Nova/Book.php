@@ -22,6 +22,17 @@ class Book extends Resource
      * @var string
      */
     public static $model = \App\Models\Book::class;
+    public static function label()
+    {
+        return __('Book');
+    }
+    public static function group()
+    {
+        return __('Cultural Section');
+    }
+    public static $priority = 1;
+
+
 
     /**
      * The single value that should be used to represent the resource when being displayed.
