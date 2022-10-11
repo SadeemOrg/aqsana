@@ -20,7 +20,7 @@ class Project extends Model
          'project_type', 'Project_Status', 'start_date', 'end_date',
         'Budjet', 'admin_id', 'approval', 'reason_of_reject'
         ,'Financial_Type','is_has_volunteer','is_has_Donations','areas','cities','approval_Status','trip_from','trip_to',
-        'update_by','created_by'
+        'update_by','created_by','tools'
 
 
     ];
@@ -36,6 +36,7 @@ class Project extends Model
         'pictures' => 'array',
        ' cities'=> 'array',
         'areas'=> 'array',
+        'tools'=> 'array',
         'report_date' => 'date',
 
     ];
@@ -101,7 +102,7 @@ class Project extends Model
 
         $citye =   City::where('admin_id', $id)
         ->select('id')->first();
-        if ($user->type() == 'regular_city')     return $this->belongsToMany(Bus::class,'project_bus')->where('project_bus.city_id', '=', $citye['id']);
+        // if ($user->type() == 'regular_city')     return $this->belongsToMany(Bus::class,'project_bus')->where('project_bus.city_id', '=', $citye['id']);
         return $this->belongsToMany(Bus::class,'project_bus');
     }
 

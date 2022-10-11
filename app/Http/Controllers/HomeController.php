@@ -97,6 +97,7 @@ class HomeController extends Controller
                 'name' => $request['name'],
                 'phone' => $request['phone'],
                 'message' => $request['message'],
+                'type' => '0',
 
             ]);
             return response()->json(['success'=>'Added new records.']);
@@ -292,7 +293,18 @@ class HomeController extends Controller
         $projects = DB::table('projects')->where('report_status', '=', '1')->orderBy('report_date', 'desc')->paginate(9);
         return view('Pages.ProjectsDetails.projects-page', compact('projects'));
     }
+    public function     getprojectDetailapi($id)
+    {
+        $project = DB::table('projects')->where('id', $id)->first();
 
+        $goalsjson = $project->report_pictures;
+
+        $pictures = json_decode($goalsjson, true);
+
+        $Articles = DB::table('projects')->orderBy('report_date', 'desc')->take(6)->get();
+return         $project;
+        // return view('Pages.ProjectsDetails.project-details-page', compact('project', 'pictures', 'Articles'));
+    }
     public function     getprojectDetail($id)
     {
         $project = DB::table('projects')->where('id', $id)->first();

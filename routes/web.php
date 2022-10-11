@@ -59,18 +59,27 @@ Route::get('/search/{val}/', [HomeController::class, 'search'])->name('search');
 
 Route::get('/project', [HomeController::class, 'project'])->name('project');
 Route::get('/project/{id}', [HomeController::class, 'getprojectDetail'])->name('getprojectDetail');
+Route::get('/projectapi/{id}', [HomeController::class, 'getprojectDetailapi'])->name('getprojectDetail');
 
 Route::get('/testNotfiy', function (){
     return view('Pages.testNotfiy');
 });
 
+
+Route::get('/library', function (){
+    return view('Pages.library');
+});
+
+Route::get('/libraryDetail', function (){
+    return view('Pages.libraryDetail');
+});
 // Route::get('/bills', function (){
 
 //     return view('Pages.Bills');
 // });
-Route::get('bills/{id}', [HomeController::class, 'bills']);
+Route::get('bill/{id}', [HomeController::class, 'bills'])->name('bills');
 
-Route::get('bill', [HomeController::class, 'billsPdf']);
+// Route::get('bill', [HomeController::class, 'billsPdf']);
 
 
 Route::get('/landingPage', function (){

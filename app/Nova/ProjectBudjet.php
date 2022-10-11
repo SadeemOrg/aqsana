@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Models\Area;
 use App\Models\City;
+use App\Nova\Actions\ProjectBillActions;
 use App\Nova\Actions\ProjectBudjetActions;
 use Benjacho\BelongsToManyField\BelongsToManyField;
 use Illuminate\Http\Request;
@@ -112,8 +113,8 @@ class ProjectBudjet extends Resource
             }),
 
             ActionButton::make(__('Action'))
-            ->action(ProjectBudjetActions::class, $this->id)
-            ->text(__('Add pill'))
+            ->action(ProjectBillActions::class, $this->id)
+            ->text(__('Add bill'))
             ->showLoadingAnimation()
             // ->confirmButtonText(__('Add budjet'), $this->id)
             ->loadingColor('#fff')
@@ -122,7 +123,7 @@ class ProjectBudjet extends Resource
             if ( $projects )
             {
 
-                if ($projects->status == '3 ')  return true;
+                if ($projects->status == '3')  return true;
 
             }
             }),
@@ -207,6 +208,7 @@ class ProjectBudjet extends Resource
     {
         return [
             new ProjectBudjetActions,
+            new ProjectBillActions,
         ];
     }
 }
