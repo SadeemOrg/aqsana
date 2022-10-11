@@ -78,6 +78,11 @@ Route::get('/landingPage', function (){
     return view('almowahde.landingPage');
 });
 
+Route::get('/payPal', function (){
+
+    return view('almowahde.PayPal');
+});
+
 Route::get('/SendNotificationTest',[NotificationTest::class,'sendNotfiy'])->name('sendNotfiy');
 
 
