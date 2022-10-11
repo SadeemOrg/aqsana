@@ -88,7 +88,6 @@
                     enabled: true
                 },
             });
-
         })(jQuery);
     </script>
 
@@ -101,25 +100,19 @@
                 font-weight: 700px;
                 src: url('/public/assets/front-end/fonts/alfont_com_JF-Flat-Bold.ttf')
             }
-
             @font-face {
                 font-family: "alfont_com_JF-Flat-regular";
                 font-weight: 400px;
                 src: url('/public/assets/front-end/fonts/alfont_com_JF-Flat-regular.ttf')
             }
-
             @font-face {
                 font-family: "Rpt-Bold";
-
                 font-weight: 700px;
                 src: url({{asset('assets/front-end/fonts/ArbFONTS-arbfonts-rpt-Bold.ttf')}});
-
             }
-
             .font-FlatBold {
                 font-family: 'alfont_com_JF-Flat-Bold' !important
             }
-
             .font-RpT-Bold {
                 font-family: 'Rpt-Bold' !important
             }
@@ -162,9 +155,7 @@
                         // console.log('ameed',$('.search-result-box').html(''));
                         $('.search-result-box').html('');
                         $('.svgSearch').css('display', 'none');
-
                     },
-
                     success: function(response) {
                         var elements = [];
                         response.map(item => {
@@ -191,14 +182,11 @@
                 });
             }
         });
-
         $(document).click(function(e) {
-
             if (e.target.id != 'searchListId') {
                 $("#searchListId").hide();
             }
         });
-
         var owl = $("#main-home-slider");
         owl.owlCarousel({
             rtl: true,
@@ -261,8 +249,6 @@
                 }
             }
         })
-
-
         var owl2 = $("#association-news-slider-1");
         owl2.owlCarousel({
             rtl: true,
@@ -308,8 +294,6 @@
                 }
             }
         })
-
-
         var owl3 = $("#association-news-slider-2");
         owl3.owlCarousel({
             rtl: true,
@@ -346,13 +330,10 @@
                 }
             }
         })
-
         function openWindow(url) {
             window.open(url, 'sharer', 'toolbar=0,status=0,width=580,height=400');
             return false;
         };
-
-
         $(document).ready(function() {
             $('.img-thumbnail').magnificPopup({
                 delegate: 'a',
@@ -452,11 +433,9 @@
                 $(".Ctnbtn").text("متابعة");
             }
         });
-
         $(".showModal").click(function() {
             $(".PrivecySettingModal").toggleClass("hiddenModal");
         });
-
         $(".tabs .showModal").click(function() {
             $(".PrivecySettingModal .tab").hide();
             if ($(this).data("tab") == 1) {
@@ -466,9 +445,7 @@
             }
             $('.tab-' + $(this).data('tab')).fadeIn();
         });
-
         $(".contactUsForm").submit(function(e) {
-
             e.preventDefault()
             var $name = $('input[name="name"]').val();
             var $phone = $('input[name="phone"]').val();
@@ -514,7 +491,6 @@
                 }
             })
         })
-
         $(".LandingPage").submit(function(e) {
             e.preventDefault();
             var $name = $('input[name="name"]').val();
@@ -532,7 +508,6 @@
                     if ($.isEmptyObject(data.error)) {
                         $(".formInputData").hide();
                         $(".thanksMsg").removeClass("hidden");
-
                         toastr.options = {
                             "closeButton": true,
                             "debug": false,
@@ -589,17 +564,11 @@
         appId: "1:16943275285:web:c95070543cf570cb265d1c",
         measurementId: "G-FHN8R2KH3M"
     };
-
     firebase.initializeApp(firebaseConfig);
-
-
-
     const messaging = firebase.messaging();
-
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register("../firebase-messaging-sw.js")
             .then(function(registration) {
-
                 console.log('Registration successful, scope is:', registration.scope);
             }).catch(function(err) {
                 console.log('Service worker registration failed, error:', err);
@@ -607,22 +576,16 @@
     }
     messaging.requestPermission()
         .then(function() {
-
             console.log("Notification permission granted.");
-
      // get the token in the form of promise
 	return messaging.getToken()
     })
     .then(function(token) {
     // print the token on the HTML page
  
-
             <?php
             if (\Illuminate\Support\Facades\Auth::user() != null) {
-
-
             ?>
-
                 $.post({
                     url: '{{url(' / ')}}api/cm-firebase-token',
                     data: {
@@ -630,32 +593,24 @@
                     },
                     dataType: 'json',
                     beforeSend: function() {
-
                     },
                     success: function(response) {
                         console.log(response.body);
                     },
                     complete: function() {
-
                     },
                 });
             <?php
             } else {
-
-
             ?>
                 console.log("not Auth")
-
             <?php
             }
             ?>
-
-
         })
         .catch(function(err) {
             console.log("Unable to get permission to notify.", err);
         });
-
     messaging.onMessage(function(payload) {
         console.log(payload);
         var notify;
@@ -666,13 +621,10 @@
         });
         console.log(payload.notification);
     });
-
     jQuery(function($) {
         var $firstname = $('input[name="firstName"]');
         var $lastname = $('input[name="lastName"]');
         var $fullname = $('input[name="donor_name"]');
-
-
         $firstname.add($lastname).keyup(function() {
             $fullname.val($firstname.val() + ' ' + $lastname.val());
         });
