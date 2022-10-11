@@ -160,9 +160,8 @@
 <div class="flex flex-row items-center justify-center md:justify-start gap-x-2">
     <div class="btn-btn-payPal hidden mt-10" id="btn-paypal-checkout"></div>
     <div class="mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5">
-        <button id="" type="submit"
-            class="firstPageDonations Ctnbtn rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">متابعة</button>
-    </div>
+        <button id="firstPageDonations" type="submit"
+        class="Ctnbtn rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">متابعة</button>
     <div
         class="secondPage mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5 hidden">
         <button id="PreviousPageDonations"
