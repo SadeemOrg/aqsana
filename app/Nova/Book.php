@@ -10,11 +10,11 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
-use Laravel\Nova\Fields\Select;
+
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Pdmfc\NovaFields\ActionButton;
-
+use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 class Book extends Resource
 {
     /**
@@ -73,7 +73,7 @@ class Book extends Resource
             Text::make(__('name'),'name')->rules('required', 'max:255'),
             Text::make(__('author'),'author'),
             Text::make(__('description'),'description'),
-            Multiselect::make(__('main Type'), "type")
+            Select::make(__('main Type'), "type")
             ->options(function(){
                $types=  BookType::all() ;
                $type_array =  array();
@@ -82,7 +82,7 @@ class Book extends Resource
             }
 
             return $type_array;
-            })->singleSelect(),
+            }),
             // Select::make(__("type"), "type")
             //   ->options(function(){
             //    $types=  BookType::all() ;

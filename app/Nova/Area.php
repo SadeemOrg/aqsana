@@ -7,7 +7,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Select;
+use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 

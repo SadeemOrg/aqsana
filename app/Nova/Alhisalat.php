@@ -30,12 +30,12 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Laravel\Nova\Fields\Select;
+
 use Pdmfc\NovaFields\ActionButton;
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
-
+use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 
 
 class Alhisalat extends Resource
