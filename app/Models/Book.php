@@ -9,7 +9,7 @@ class Book extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','file','cover_photo','name','author','description','post',
+        'id','file','cover_photo','name','author','description','post','type'
 
         ];
         protected $hidden = [
@@ -17,7 +17,7 @@ class Book extends Model
             'updated_at',
         ];
         protected $casts = [
-            'type' => 'array',
+            // 'type' => 'array',
         ];
 
 }

@@ -20,7 +20,8 @@ class CreateBooksTable extends Migration
             $table->string('name');
             $table->string('author');
             $table->longText('description');
-            $table->json('type');
+            // $table->json('type');
+            $table->char('type', 3);
             $table->boolean('post')->default(1);
             $table->timestamps();
         });

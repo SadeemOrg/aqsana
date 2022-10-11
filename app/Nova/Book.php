@@ -4,12 +4,13 @@ namespace App\Nova;
 
 use Acme\MultiselectField\Multiselect;
 use App\Models\BookType;
-use App\Nova\Actions\PostNews;
+use App\Nova\Actions\PostBook;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Pdmfc\NovaFields\ActionButton;
@@ -62,11 +63,11 @@ class Book extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Boolean::make(__('is posted'),'post'),
             ActionButton::make(__('POST NEWS'))
-            ->action((new PostNews)->confirmText(__('Are you sure you want to post  this NEWS?'))
+            ->action((new PostBook)->confirmText(__('Are you sure you want to post  this NEWS?'))
                 ->confirmButtonText(__('post'))
                 ->cancelButtonText(__('Dont post')), $this->id)
                 ->readonly(function () {
-                return $this->status === '1';
+                return $this->post === 1;
             })->text(__('post'))->showLoadingAnimation()
             ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('name'),'name')->rules('required', 'max:255'),
@@ -81,7 +82,18 @@ class Book extends Resource
             }
 
             return $type_array;
-            }),
+            })->singleSelect(),
+            // Select::make(__("type"), "type")
+            //   ->options(function(){
+            //    $types=  BookType::all() ;
+            //    $type_array =  array();
+            //    foreach ($types as $type) {
+            //     $type_array += [$type['id'] => ($type['name'])];
+            // }
+
+            // return $type_array;
+            // })
+            // ->displayUsingLabels(),
             Image::make(__('cover_photo'), 'cover_photo')->disk('public')->prunable(),
             File::make(__('file'),'file')->disk('public')->deletable(),
         ];
@@ -129,7 +141,7 @@ class Book extends Resource
     public function actions(Request $request)
     {
         return [
-            new PostNews,
+            new PostBook,
         ];
     }
 }
