@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <title>{{ nova_get_setting('Site_name', config('app.name', 'Laravel')) }}</title>
 
-    <link rel="icon" type="image/x-icon" href=" storage/{{ nova_get_setting('main_logo', 'default_value') }}">
+    <link rel="icon" type="image/x-icon" href=" storage/{{ nova_get_setting('main_logo', 'default_value')}}">
     <meta name="description" content="{{ nova_get_setting('Site_description', '') }}" />
     <meta name="keywords" content="{{ nova_get_setting('Site_keywords', '') }}" />
     <link rel="alternate" media="only screen and (max-width: 640px)" href="{{ nova_get_setting('Site_link', '') }}">
@@ -15,12 +15,11 @@
 
 
     <link rel="canonical" href="https://aqsana.org/" />
-    <meta rel="sitemap" type="application/xml"
-        content="https://www.google.com/maps/place/Salah+ad-Din%2FEntry/@32.1287772,34.9666098,15z/data=!4m13!1m7!3m6!1s0x151d30a07d1c8d37:0xe4ff2734981fb335!2sKafr+Bara,+Israel!3b1!8m2!3d32.130911!4d34.970108!3m4!1s0x151d30a7771ae475:0x3a3ffa51d8ced657!8m2!3d32.13195!4d34.965225" />
+    <meta rel="sitemap" type="application/xml" content="https://www.google.com/maps/place/Salah+ad-Din%2FEntry/@32.1287772,34.9666098,15z/data=!4m13!1m7!3m6!1s0x151d30a07d1c8d37:0xe4ff2734981fb335!2sKafr+Bara,+Israel!3b1!8m2!3d32.130911!4d34.970108!3m4!1s0x151d30a7771ae475:0x3a3ffa51d8ced657!8m2!3d32.13195!4d34.965225" />
     <!-- Schema.org markup for Google+ -->
     <meta itemprop="name" content="{{ nova_get_setting('og_site_name', '') }}" />
     <meta itemprop="description" content="{{ nova_get_setting('og_description', '') }}" />
-    <meta itemprop="image" content=" storage/{{ nova_get_setting('main_logo', 'default_value') }}" />
+    <meta itemprop="image" content=" storage/{{ nova_get_setting('main_logo', 'default_value')}}" />
 
     <meta property="og:site_name" content="{{ nova_get_setting('og_site_name', '') }}" />
     <meta property="og:url" content="{{ Request::url() }}" />
@@ -40,8 +39,7 @@
 
 
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css" />
     <!-- Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> -->
@@ -51,9 +49,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Magnific popup css -->
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
-        integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- firebase integration started -->
 
     <!-- Firebase App is always required and must be first -->
@@ -72,17 +68,13 @@
     <!-- Comment out (or don't include) services that you don't want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
 
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
-        integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
-        integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js" integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js" integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Magnific popup js -->
-    {{-- <script src="magnific-popup/jquery.magnific-popup.js"></script> --}}
+    <script src="magnific-popup/jquery.magnific-popup.js"></script>
 
-    {{-- <script>
+    <script>
         (function($) {
             "use strict";
             /*--------------------------------------
@@ -96,9 +88,8 @@
                     enabled: true
                 },
             });
-
         })(jQuery);
-    </script> --}}
+    </script>
 
 
     <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
@@ -109,36 +100,30 @@
                 font-weight: 700px;
                 src: url('/public/assets/front-end/fonts/alfont_com_JF-Flat-Bold.ttf')
             }
-
             @font-face {
                 font-family: "alfont_com_JF-Flat-regular";
                 font-weight: 400px;
                 src: url('/public/assets/front-end/fonts/alfont_com_JF-Flat-regular.ttf')
             }
-
             @font-face {
                 font-family: "Rpt-Bold";
-
                 font-weight: 700px;
-                src: url({{ asset('assets/front-end/fonts/ArbFONTS-arbfonts-rpt-Bold.ttf') }});
-
+                src: url({{asset('assets/front-end/fonts/ArbFONTS-arbfonts-rpt-Bold.ttf')}});
             }
-
             .font-FlatBold {
                 font-family: 'alfont_com_JF-Flat-Bold' !important
             }
-
             .font-RpT-Bold {
                 font-family: 'Rpt-Bold' !important
             }
         }
-    </style>
+    </style> 
     <!-- Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> -->
     <!-- Datepicker -->
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ rand(0, 99) }}">
-    <link rel="stylesheet" href="{{ asset('assets/front-end/css/main.css') }}?v={{ rand(0, 99) }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{rand(0, 99)}}">
+    <link rel="stylesheet" href="{{ asset('assets/front-end/css/main.css') }}?v={{rand(0, 99)}}">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 </head>
 
@@ -147,137 +132,21 @@
     @yield('content')
     @include('layout.front-end.partial._footer')
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- <script src="{{ asset('js/app.js') }}"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{{ asset('js/app.js') }}?v={{ rand(0, 99) }}"></script>
+    <script src="{{ asset('js/app.js') }}?v={{rand(0, 99)}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"
-        integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- start PayPal scripts -->
-    <!-- Load the required checkout.js script -->
-    <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
-
-    <!-- Load the required Braintree components. -->
-    <script src="https://js.braintreegateway.com/web/3.39.0/js/client.min.js"></script>
-    <script src="https://js.braintreegateway.com/web/3.39.0/js/paypal-checkout.min.js"></script>
-
-    <!-- start PayPal scripts -->
-    <!-- Load the required checkout.js script -->
-    <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
-
-    <!-- Load the required Braintree components. -->
-    <script src="https://js.braintreegateway.com/web/3.39.0/js/client.min.js"></script>
-    <script src="https://js.braintreegateway.com/web/3.39.0/js/paypal-checkout.min.js"></script>
-    
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        window.addEventListener("load", function() {
-            var cartItems = [{
-                name: "Product 1",
-                description: "Description of product 1",
-                quantity: 1,
-                price: 10.00,
-                sku: "prod1",
-                currency: "ILS"
-            }];
-    
-            var total = 0;
-            for (var a = 0; a < cartItems.length; a++) {
-                total += (cartItems[a].price * cartItems[a].quantity);
-            }
-    
-            // Render the PayPal button
-            paypal.Button.render({
-    
-                // Set your environment
-                env: 'sandbox', // sandbox | production
-    
-                // Specify the style of the button
-                style: {
-                    height: 55,
-                    tagline: false,
-                    label: 'paypal',
-                    size: 'responsive', // small | medium | large | responsive
-                    shape: 'pill', // pill | rect
-                    color: 'black', // gold | blue | silver | black,
-                    layout: 'horizontal' // horizontal | vertical,
-                },
-    
-                // PayPal Client IDs - replace with your own
-                // Create a PayPal app: https://developer.paypal.com/developer/applications/create
-    
-                client: {
-                    sandbox: 'AQrUNiqeaUR5hFL1CRzuAwZQCPQ2KD35hVAM0s_jIhw6mgydgbxvPFVfd3GQ7r3Z-wEyX8FPN3bxJyxL',
-                    production: ''
-                },
-    
-                funding: {
-                    allowed: [
-                        paypal.FUNDING.CARD,
-                        paypal.FUNDING.ELV
-                    ]
-                },
-    
-                payment: function(data, actions) {
-                    return actions.payment.create({
-                        payment: {
-                            transactions: [{
-                                amount: {
-                                    total: total,
-                                    currency: 'ILS'
-                                },
-                                item_list: {
-                                    // custom cartItems array created specifically for PayPal
-                                    items: cartItems
-                                }
-                            }]
-                        }
-                    });
-                },
-    
-                onAuthorize: function(data, actions) {
-                    return actions.payment.execute().then(function() {
-                        console.log('printSuccess', data)
-                        // you can use all the values received from PayPal as you want
-                        console.log({
-                            "intent": data.intent,
-                            "orderID": data.orderID,
-                            "payerID": data.payerID,
-                            "paymentID": data.paymentID,
-                            "paymentToken": data.paymentToken
-                        });
-                        console.log('data', data);
-    
-    
-    
-                        // [call AJAX here]
-                    });
-                },
-    
-                onCancel: function(data, actions) {
-                    console.log(data);
-                }
-    
-            }, '#btn-paypal-checkout');
-        });
-    </script> 
-
-
-
-    <script>
-
         $('#search').on('keyup', function() {
             var val = $('#search').val().toLowerCase();
             if (val.length > 2) {
                 $('.search-bar').siblings().css('display', 'flex');
                 $.get({
-                    url: '{{ url(' / ') }}/search/' + val,
+                    url: '{{url(' / ')}}/search/' + val,
                     data: {
                         val: val,
                     },
@@ -286,9 +155,7 @@
                         // console.log('ameed',$('.search-result-box').html(''));
                         $('.search-result-box').html('');
                         $('.svgSearch').css('display', 'none');
-
                     },
-
                     success: function(response) {
                         var elements = [];
                         response.map(item => {
@@ -302,10 +169,7 @@
                         let searchData = $();
                         for (i = 0; i < elements.length; i++) {
                             $('.search-result-box').html('');
-                            searchData = searchData.add(
-                                '<a class="searchList"  target="_self" href="/categor/' + elements[
-                                    i].title + '/' + elements[i].id + '">' + elements[i]
-                                .trumedTitle + '</br> </a>');
+                            searchData = searchData.add('<a class="searchList"  target="_self" href="/categor/' + elements[i].title + '/' + elements[i].id + '">' + elements[i].trumedTitle + '</br> </a>');
                         }
                         $('.search-result-box').append(searchData)
                     },
@@ -318,14 +182,11 @@
                 });
             }
         });
-
         $(document).click(function(e) {
-
             if (e.target.id != 'searchListId') {
                 $("#searchListId").hide();
             }
         });
-
         var owl = $("#main-home-slider");
         owl.owlCarousel({
             rtl: true,
@@ -388,8 +249,6 @@
                 }
             }
         })
-
-
         var owl2 = $("#association-news-slider-1");
         owl2.owlCarousel({
             rtl: true,
@@ -435,8 +294,6 @@
                 }
             }
         })
-
-
         var owl3 = $("#association-news-slider-2");
         owl3.owlCarousel({
             rtl: true,
@@ -473,13 +330,10 @@
                 }
             }
         })
-
         function openWindow(url) {
             window.open(url, 'sharer', 'toolbar=0,status=0,width=580,height=400');
             return false;
         };
-
-
         $(document).ready(function() {
             $('.img-thumbnail').magnificPopup({
                 delegate: 'a',
@@ -492,7 +346,7 @@
         // first Page Donation
         var pageNumber = 0;
         var previousPage = 0;
-        $(".firstPageDonations").click(function() {
+        $("#firstPageDonations").click(function() {
             if ($('input[name="donation_amount"]').val() == "") {
                 toastr.options = {
                     "closeButton": true,
@@ -514,27 +368,9 @@
                 pageNumber = 1
                 $(".secondPage").css("display", "flex");
                 $(".Ctnbtn").text("تأكيد الدفع");
-
-                $('input[type=radio][name=notification-method]').change(function() {
-                    if (this.value == 'payPal') {
-                    $(".Ctnbtn").css("display", "none");
-                    $(".btn-btn-payPal").css("display", "block");
-                        $("input[name=telephone]").attr("type", "hidden");
-                        $("input[name=visaid]").attr("type", "hidden");
-                        $("input[name=CVV]").attr("type", "hidden");
-                        $("input[name=VisaDate]").attr("type", "hidden");
-                    } else {
-                    $(".Ctnbtn").css("display", "block");
-                    $(".btn-btn-payPal").css("display", "none");
-                        $("input[name=telephone]").attr("type", "number");
-                        $("input[name=visaid]").attr("type", "number");
-                        $("input[name=CVV]").attr("type", "number");
-                        $("input[name=VisaDate]").attr("type", "text");
-                    }
-                })
             }
             if (pageNumber == 2) {
-                if ($('#privecy').is(":checked") == false && $('.paymentMethod').is(":checked") == false) {
+                if ($('#privecy').is(":checked") == false && $('.paymentMethod').is(":checked") == false ) {
                     toastr.options = {
                         "closeButton": true,
                         "debug": false,
@@ -549,7 +385,7 @@
                     pageNumber = 1;
                     return false;
                 }
-                if ($('#privecy').is(":checked") == false && $('.paymentMethod').is(":checked") == true) {
+                if ($('#privecy').is(":checked") == false && $('.paymentMethod').is(":checked") == true ) {
                     toastr.options = {
                         "closeButton": true,
                         "debug": false,
@@ -564,8 +400,8 @@
                     pageNumber = 1;
                     return false;
                 }
-                if ($('#privecy').is(":checked") == true && $('.paymentMethod').is(":checked") == false) {
-                    console.log($('#privecy').is(":checked") == true && $('.paymentMethod').is(":checked") == false)
+                if ($('#privecy').is(":checked") == true && $('.paymentMethod').is(":checked") == false ) {
+                   console.log($('#privecy').is(":checked") == true && $('.paymentMethod').is(":checked") == false )
                     toastr.options = {
                         "closeButton": true,
                         "debug": false,
@@ -580,11 +416,6 @@
                     pageNumber = 1;
                     return false;
                 } else {
-                    var paymentMethod = $('.paymentMethod:checked').val();
-                    if (paymentMethod == "payPal") {
-                        // payPal Btn
-                    }
-
                     $(".thirdPage").css("display", "flex")
                     $(".secondPage").css("display", "none");
                     $(".Ctnbtn").css("display", "none");
@@ -602,11 +433,9 @@
                 $(".Ctnbtn").text("متابعة");
             }
         });
-
         $(".showModal").click(function() {
             $(".PrivecySettingModal").toggleClass("hiddenModal");
         });
-
         $(".tabs .showModal").click(function() {
             $(".PrivecySettingModal .tab").hide();
             if ($(this).data("tab") == 1) {
@@ -616,11 +445,7 @@
             }
             $('.tab-' + $(this).data('tab')).fadeIn();
         });
-
-
-
         $(".contactUsForm").submit(function(e) {
-
             e.preventDefault()
             var $name = $('input[name="name"]').val();
             var $phone = $('input[name="phone"]').val();
@@ -666,7 +491,6 @@
                 }
             })
         })
-
         $(".LandingPage").submit(function(e) {
             e.preventDefault();
             var $name = $('input[name="name"]').val();
@@ -684,7 +508,6 @@
                     if ($.isEmptyObject(data.error)) {
                         $(".formInputData").hide();
                         $(".thanksMsg").removeClass("hidden");
-
                         toastr.options = {
                             "closeButton": true,
                             "debug": false,
@@ -741,17 +564,11 @@
         appId: "1:16943275285:web:c95070543cf570cb265d1c",
         measurementId: "G-FHN8R2KH3M"
     };
-
     firebase.initializeApp(firebaseConfig);
-
-
-
     const messaging = firebase.messaging();
-
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register("../firebase-messaging-sw.js")
             .then(function(registration) {
-
                 console.log('Registration successful, scope is:', registration.scope);
             }).catch(function(err) {
                 console.log('Service worker registration failed, error:', err);
@@ -759,55 +576,41 @@
     }
     messaging.requestPermission()
         .then(function() {
-
             console.log("Notification permission granted.");
-
-            // get the token in the form of promise
-            return messaging.getToken()
-        })
-        .then(function(token) {
-            // print the token on the HTML page
-
-
+     // get the token in the form of promise
+	return messaging.getToken()
+    })
+    .then(function(token) {
+    // print the token on the HTML page
+ 
             <?php
             if (\Illuminate\Support\Facades\Auth::user() != null) {
-
-
             ?>
-
-            $.post({
-                url: '{{ url(' / ') }}api/cm-firebase-token',
-                data: {
-                    fcm_token: token,
-                },
-                dataType: 'json',
-                beforeSend: function() {
-
-                },
-                success: function(response) {
-                    console.log(response.body);
-                },
-                complete: function() {
-
-                },
-            });
+                $.post({
+                    url: '{{url(' / ')}}api/cm-firebase-token',
+                    data: {
+                        fcm_token: token,
+                    },
+                    dataType: 'json',
+                    beforeSend: function() {
+                    },
+                    success: function(response) {
+                        console.log(response.body);
+                    },
+                    complete: function() {
+                    },
+                });
             <?php
             } else {
-
-
             ?>
-            console.log("not Auth")
-
+                console.log("not Auth")
             <?php
             }
             ?>
-
-
         })
         .catch(function(err) {
             console.log("Unable to get permission to notify.", err);
         });
-
     messaging.onMessage(function(payload) {
         console.log(payload);
         var notify;
@@ -818,7 +621,6 @@
         });
         console.log(payload.notification);
     });
-
     jQuery(function($) {
         var $firstname = $('input[name="firstName"]');
         var $lastname = $('input[name="lastName"]');
