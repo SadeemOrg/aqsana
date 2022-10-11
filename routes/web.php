@@ -65,6 +65,14 @@ Route::get('/testNotfiy', function (){
     return view('Pages.testNotfiy');
 });
 
+
+Route::get('/library', function (){
+    return view('Pages.library');
+});
+
+Route::get('/libraryDetail', function (){
+    return view('Pages.libraryDetail');
+});
 // Route::get('/bills', function (){
 
 //     return view('Pages.Bills');
