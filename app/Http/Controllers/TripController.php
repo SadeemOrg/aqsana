@@ -28,7 +28,7 @@ class TripController extends BaseController
        
         if(json_decode($trip->tripfrom) != null) {
                 
-                $from_latlng = json_decode($trip->tripfrom);
+                $from_latlng = $trip->tripfrom;
                 $from_lat = $from_latlng->latitude;
                 $from_lng = $from_latlng->longitude;
            
@@ -39,7 +39,7 @@ class TripController extends BaseController
        
 
         if(json_decode($trip->tripto) != null) {
-                $to_latlng = json_decode($trip->tripto);
+                $to_latlng = $trip->tripto;
                 $to_lat = $to_latlng->latitude;
                 $to_lng = $to_latlng->longitude;
             
