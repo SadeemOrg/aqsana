@@ -29,35 +29,34 @@
     </style>
 
     @php
+        // $books = [
+        //     [
+        //         'id' => '1',
+        //         'name' => 'The Alchemist',
+        //         'author' => 'Paulo Coelho',
+        //         'cover_photo' => 'https://m.media-amazon.com/images/I/41ybG235TcL._AC_SY780_.jpg',
+        //         'description' => 'The Alchemist is a novel by Brazilian author Paulo Coelho that was first published in 1988. Originally written in Portuguese, it became a widely translated international bestseller. An allegorical novel, The Alchemist follows a young Andalusian shepherd in his journey to the pyramids of Egypt, after having a recurring dream of finding a treasure there. ',
+        //         'file' => 'https://www.pdfdrive.com/the-alchemist-a-fable-about-following-your-dreams-e1541016.html',
+        //     ],
         
-        $books = [
-            [
-                'id' => '1',
-                'name' => 'The Alchemist',
-                'author' => 'Paulo Coelho',
-                'cover_photo' => 'https://m.media-amazon.com/images/I/41ybG235TcL._AC_SY780_.jpg',
-                'description' => 'The Alchemist is a novel by Brazilian author Paulo Coelho that was first published in 1988. Originally written in Portuguese, it became a widely translated international bestseller. An allegorical novel, The Alchemist follows a young Andalusian shepherd in his journey to the pyramids of Egypt, after having a recurring dream of finding a treasure there. ',
-                'file' => 'https://www.pdfdrive.com/the-alchemist-a-fable-about-following-your-dreams-e1541016.html',
-            ],
+        //     [
+        //         'id' => '2',
+        //         'name' => 'The Alchemist',
+        //         'author' => 'Paulo Coelho',
+        //         'cover_photo' => 'https://m.media-amazon.com/images/I/41ybG235TcL._AC_SY780_.jpg',
+        //         'description' => 'The Alchemist is a novel by Brazilian author Paulo Coelho that was first published in 1988. Originally written in Portuguese, it became a widely translated international bestseller. An allegorical novel, The Alchemist follows a young Andalusian shepherd in his journey to the pyramids of Egypt, after having a recurring dream of finding a treasure there. ',
+        //         'file' => 'https://www.pdfdrive.com/the-alchemist-a-fable-about-following-your-dreams-e1541016.html',
+        //     ],
         
-            [
-                'id' => '2',
-                'name' => 'The Alchemist',
-                'author' => 'Paulo Coelho',
-                'cover_photo' => 'https://m.media-amazon.com/images/I/41ybG235TcL._AC_SY780_.jpg',
-                'description' => 'The Alchemist is a novel by Brazilian author Paulo Coelho that was first published in 1988. Originally written in Portuguese, it became a widely translated international bestseller. An allegorical novel, The Alchemist follows a young Andalusian shepherd in his journey to the pyramids of Egypt, after having a recurring dream of finding a treasure there. ',
-                'file' => 'https://www.pdfdrive.com/the-alchemist-a-fable-about-following-your-dreams-e1541016.html',
-            ],
-        
-            [
-                'id' => '3',
-                'name' => 'The Alchemist',
-                'author' => 'Paulo Coelho',
-                'cover_photo' => 'https://m.media-amazon.com/images/I/41ybG235TcL._AC_SY780_.jpg',
-                'description' => 'The Alchemist is a novel by Brazilian author Paulo Coelho that was first published in 1988. Originally written in Portuguese, it became a widely translated international bestseller. An allegorical novel, The Alchemist follows a young Andalusian shepherd in his journey to the pyramids of Egypt, after having a recurring dream of finding a treasure there. ',
-                'file' => 'https://www.pdfdrive.com/the-alchemist-a-fable-about-following-your-dreams-e1541016.html',
-            ],
-        ];
+        //     [
+        //         'id' => '3',
+        //         'name' => 'The Alchemist',
+        //         'author' => 'Paulo Coelho',
+        //         'cover_photo' => 'https://m.media-amazon.com/images/I/41ybG235TcL._AC_SY780_.jpg',
+        //         'description' => 'The Alchemist is a novel by Brazilian author Paulo Coelho that was first published in 1988. Originally written in Portuguese, it became a widely translated international bestseller. An allegorical novel, The Alchemist follows a young Andalusian shepherd in his journey to the pyramids of Egypt, after having a recurring dream of finding a treasure there. ',
+        //         'file' => 'https://www.pdfdrive.com/the-alchemist-a-fable-about-following-your-dreams-e1541016.html',
+        //     ],
+        // ];
         
         $whatsapp_phone = nova_get_setting('whatsapp_Connectus', 'default_value');
         $Correct_whatsapp_phone = str_replace(' ', '', $whatsapp_phone);
@@ -115,12 +114,10 @@
                 @if (!empty($books))
                     @foreach ($books as $book)
                         @php
-                            // dd($book);
-                            // $img = 'storage/'.$Project->report_image;
-                            $img = $book['cover_photo'];
-                            // dd($img)
+                            $img = 'storage/'.$book['cover_photo'];
                         @endphp
                         <div
+                        onclick="location.href='{{ route('libraryDetail', ['id' => $book->id]) }}'"
                             class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block iphone13:flex sm:inline-block lg:flex flex-col items-center justify-start rounded-[5px]">
                             <div class="absolute leftline"></div>
                             <div class="bg-[#E4FFE585] rounded-[5px] py-3 px-4 h-full w-full">

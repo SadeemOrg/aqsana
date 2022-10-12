@@ -18,15 +18,9 @@
         }
     </style>
     @php
-        $book = [
-            'id' => '1',
-            'name' => 'The Alchemist',
-            'author' => 'Paulo Coelho',
-            'cover_photo' => 'https://m.media-amazon.com/images/I/41ybG235TcL._AC_SY780_.jpg',
-            'description' => 'The Alchemist is a novel by Brazilian author Paulo Coelho that was first published in 1988. Originally written in Portuguese, it became a widely translated international bestseller. An allegorical novel, The Alchemist follows a young Andalusian shepherd in his journey to the pyramids of Egypt, after having a recurring dream of finding a treasure there. ',
-            'file' => 'https://www.pdfdrive.com/the-alchemist-a-fable-about-following-your-dreams-e1541016.html',
-        ];
-        $img = $book['cover_photo'];
+    $htmlLink ='storage/'.$book['file'];
+
+        $img ='storage/' .$book['cover_photo'];
         $whatsapp_phone = nova_get_setting('whatsapp_Connectus', 'default_value');
         $Correct_whatsapp_phone = str_replace(' ', '', $whatsapp_phone);
         $Final_Correct_whatsapp_phone = str_replace('-', '', $Correct_whatsapp_phone);
@@ -72,11 +66,11 @@
                             </div>
                             <p
                                 class="firstParagraph text-base md:text-xl text-[rgb(16,20,38)]  font-FlatBold pt-8 text-right">
-                                {{-- {!! $news_detail->contents !!} --}}
+                                { !! $book['description'] !! }
                                 {{-- {{ $book['description'] }} --}}
-                                هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على
+                                {{-- هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على
                                 الشكل
-                                الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها.
+                                الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. --}}
                             </p>
                             <div
                                 class="flex flex-col sm:flex-row items-start gap-y-3 sm:gap-y-0 sm:items-center justify-start pl-4 pt-4 pb-10 font-FlatBold gap-x-2">
@@ -186,8 +180,7 @@
                     <p class="firstParagraph text-xl text-[rgb(16,20,38)]  font-FlatBold pt-8 text-right">
                         {{-- {!! $news_detail->contents !!} --}}
                         {{-- {{ $book['description'] }} --}}
-                        هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل
-                        الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها.
+                        {!! $book['description'] !!}
                     </p>
                     <div
                         class="flex flex-col sm:flex-row items-start gap-y-3 sm:gap-y-0 sm:items-center justify-start pl-4 pt-4 pb-10 font-FlatBold gap-x-2">
@@ -271,14 +264,15 @@
                             </li>
                         </ul>
                     </div>
-                    <button
+                    <button 
+                    onclick="location.href='/{{ $htmlLink}}'"
                         class=" Ctnbtn rounded-[50px] bg-[#349A37] text-white text-base sm:text-sm w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
                         تصفح نسخة HTML
                     </button>
                     <div class="flex flex-row items-center justify-between w-full mt-4 gap-x-4">
                         <button
                             class=" Ctnbtn rounded-[50px] bg-[#349A37] text-white text-base sm: w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
-                            تخميل نسخة PDF
+                            تحميل نسخة PDF
                         </button>
                         <button
                             class=" Ctnbtn rounded-[50px] bg-[#349A37] text-white text-base sm: w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
@@ -287,7 +281,7 @@
                     </div>
                 </div>
             </div>
+            @include('layout.front-end.partial.LibraryDetailsSlider')
         </div>
-    @include('layout.front-end.partial.LibraryDetailsSlider')
 
     @endsection

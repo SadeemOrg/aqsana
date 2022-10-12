@@ -199,17 +199,17 @@ class HomeController extends Controller
 
     public function library()
     {
-        $Books = Book::all()->paginate(9);
+        $books = Book::paginate(9);
 
-        return view('Pages.Library.Library', compact('Books'));
+        return view('Pages.Library.Library', compact('books'));
     }
     public function libraryDetail($id)
     {
 
-        $Book = Book::where('id', $id)->first();
-        $book_type = Book::where('type',  $Book->type)->whereNotIn('id', [$id])->take(6)->get();
+        $book = Book::where('id', $id)->first();
+        $book_type = Book::where('type',  $book->type)->whereNotIn('id', [$id])->take(6)->get();
 
-        return view('Pages.Library.libraryDetail', compact('Book', 'book_type'));
+        return view('Pages.Library.libraryDetail', compact('book', 'book_type'));
     }
     public function sector($sector)
     {
