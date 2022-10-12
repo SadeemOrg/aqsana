@@ -1,5 +1,5 @@
 @if (!isset($hasHeader) || (isset($hasHeader) && $hasHeader))
-<header class="py-3 fixed w-full top-0 right-0 left-0  bg-white sticky-h z-20">
+<header class="py-3  fixed w-full top-0 right-0 left-0  bg-white sticky-h z-20">
     @php
     $img = 'storage/' . nova_get_setting('logo', 'default_value');
     $rightNaVNumber = round(count($nav)/2);

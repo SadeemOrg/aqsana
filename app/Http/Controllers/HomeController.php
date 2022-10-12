@@ -209,7 +209,6 @@ class HomeController extends Controller
         $Book = Book::where('id', $id)->first();
         $book_type = Book::where('type',  $Book->type)->whereNotIn('id', [$id])->take(6)->get();
 
-
         return view('Pages.Library.libraryDetail', compact('Book', 'book_type'));
     }
     public function sector($sector)

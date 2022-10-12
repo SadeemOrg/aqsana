@@ -65,14 +65,16 @@ Route::get('/testNotfiy', function (){
     return view('Pages.testNotfiy');
 });
 
-Route::get('/library', [HomeController::class, 'library'])->name('library');
-Route::get('/libraryDetail/{id}', [HomeController::class, 'libraryDetail'])->name('libraryDetail');
+
 // Route::get('/library', function (){
 //     return view('Pages.Library.Library');
 // });
 // Route::get('/libraryDetail', function (){
-//     return view('Pages.libraryDetail');
+//     return view('Pages.Library.libraryDetail');
 // });
+Route::get('/library', [HomeController::class, 'library'])->name('library');
+Route::get('/librarydetail/{id}', [HomeController::class, 'libraryDetail'])->name('libraryDetail');
+
 // Route::get('/bills', function (){
 
 //     return view('Pages.Bills');
