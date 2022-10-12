@@ -26,9 +26,9 @@ class TripController extends BaseController
 
         $trips->map(function($trip) use ($request){
        
-        if(json_decode($trip->tripfrom) != null) {
+        if(($trip->tripfrom) != null) {
                 
-                $from_latlng = json_decode($trip->tripfrom);
+                $from_latlng = ($trip->tripfrom);
                 $from_lat = $from_latlng->latitude;
                 $from_lng = $from_latlng->longitude;
            
@@ -38,8 +38,8 @@ class TripController extends BaseController
         }
        
 
-        if(json_decode($trip->tripto) != null) {
-                $to_latlng = json_decode($trip->tripto);
+        if(($trip->tripto) != null) {
+                $to_latlng = ($trip->tripto);
                 $to_lat = $to_latlng->latitude;
                 $to_lng = $to_latlng->longitude;
             
