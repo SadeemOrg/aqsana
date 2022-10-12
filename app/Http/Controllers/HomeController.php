@@ -199,7 +199,7 @@ class HomeController extends Controller
 
     public function library()
     {
-        $Books = Book::all();
+        $Books = Book::all()->paginate(9);
 
         return view('Pages.Library.Library', compact('Books'));
     }
