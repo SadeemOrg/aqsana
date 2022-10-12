@@ -220,10 +220,10 @@ class TripController extends BaseController
             $trip->isBooking = 0;
         }
 
-        if(($trip->tripto) != null) {
+        if(($trip->tripfrom) != null) {
         
-            $trip_to = ($trip->tripto);
-            $trip_to_value = $trip_to->formatted_address;
+            $tripfrom = json_decode($trip->tripfrom)->current_location;
+            $trip_to_value = $tripfrom->formatted_address;
 
 
             if(stripos($trip_to_value,$request->get("search")) !== false){
@@ -251,14 +251,14 @@ class TripController extends BaseController
         $search_trip = collect();
         $trips->map(function($trip) use ($request,$search_trip){
     
-        if(($trip->tripto) != null) {
-            $trip_to = ($trip->tripto);
-            $trip_to_value = $trip_to->formatted_address;
+        if($trip->tripto != null) {
+            $tripfrom = json_decode($trip->tripfrom)->current_location;
+            $trip_to_value = $tripfrom->formatted_address;
 
             if(stripos($trip_to_value,$request->get("search")) !== false){
-
-                if($search_trip->search($trip_to->formatted_address) === false) {
-                    $search_trip->push($trip_to->formatted_address);
+                
+                if($search_trip->search($tripfrom->formatted_address) === false) {
+                    $search_trip->push($tripfrom->formatted_address);
                 }
             
             }
@@ -267,6 +267,7 @@ class TripController extends BaseController
     
         });
 
+        
 
        
         return $this->sendResponse($search_trip, 'Success get Trips');
