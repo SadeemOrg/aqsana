@@ -53,10 +53,10 @@ class addressPolicy
      */
     public function update(User $user, address $address)
     {
-        if($address->myid()==1 )
-        {
-            return false ;
-        }
+        // if($address->myid()==1 )
+        // {
+        //     return false ;
+        // }
         return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
     }
 

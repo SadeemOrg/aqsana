@@ -1,6 +1,11 @@
 {
     "not read": "غير مقروء",
     "Once":"مرة",
+    "BookType":"نوع الكتاب",
+    "Book":"كتاب",
+    "events":"فعاليات",
+    "Books":"كتب",
+    "Cultural Section":"القسم الثقافي",
     "daily":"اليومي",
     "name address":"اسم المنطقة",
     "description address":"وصف المكان",

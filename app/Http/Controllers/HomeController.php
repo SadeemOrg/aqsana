@@ -10,6 +10,7 @@ use App\Models\FormMassage;
 use Mail;
 use App\Mail\TestMail;
 use App\Models\Almuahada;
+use App\Models\Book;
 use App\Models\Donations;
 use App\Models\News;
 use App\Models\newsType;
@@ -23,9 +24,9 @@ class HomeController extends Controller
 
     public function bills($id)
     {
-     $Donations=  Donations::where("id",$id)->first();
+        $Donations =  Donations::where("id", $id)->first();
 
-                return view('Pages.Bills',compact('Donations'));
+        return view('Pages.Bills', compact('Donations'));
     }
 
     public function showToastrMessages()
@@ -78,20 +79,23 @@ class HomeController extends Controller
     public function conctus(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|min:3|max:50',
-            'phone' => 'digits_between:10,14',
-            'message' => 'required',
-        ],
-        [
-            'name.required' => 'الرجاء ادخال الاسم. ',
-            'name.string' => 'الرجاء ادخال الاسم بشكل صحيح . ',
-            'name.min' => 'الاسم يجب ان يكون على الأقل 3 حروف. ',
-            'name.max' => 'الاسم يجب ان لا يزيد عن 50 حرف. ',
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required|string|min:3|max:50',
+                'phone' => 'digits_between:10,14',
+                'message' => 'required',
+            ],
+            [
+                'name.required' => 'الرجاء ادخال الاسم. ',
+                'name.string' => 'الرجاء ادخال الاسم بشكل صحيح . ',
+                'name.min' => 'الاسم يجب ان يكون على الأقل 3 حروف. ',
+                'name.max' => 'الاسم يجب ان لا يزيد عن 50 حرف. ',
 
-            'phone.digits_between' => 'الرجاء ادخال رقم الهاتف بشكل صحيح. ',
-            'message.required' => 'الرجاء ادخال الرسالة. ',
-        ]);
+                'phone.digits_between' => 'الرجاء ادخال رقم الهاتف بشكل صحيح. ',
+                'message.required' => 'الرجاء ادخال الرسالة. ',
+            ]
+        );
         if ($validator->passes()) {
             FormMassage::create([
                 'name' => $request['name'],
@@ -100,29 +104,32 @@ class HomeController extends Controller
                 'type' => '0',
 
             ]);
-            return response()->json(['success'=>'Added new records.']);
+            return response()->json(['success' => 'Added new records.']);
         }
 
-        return response()->json(['error'=>$validator->errors()->all()]);
+        return response()->json(['error' => $validator->errors()->all()]);
     }
 
     public function Almuahada(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|min:3|max:50',
-            'phone' => 'digits_between:10,14',
-            'city' => 'required',
-        ],
-        [
-            'name.required' => 'الرجاء ادخال الاسم. ',
-            'name.string' => 'الرجاء ادخال الاسم بشكل صحيح . ',
-            'name.min' => 'الاسم يجب ان يكون على الأقل 3 حروف. ',
-            'name.max' => 'الاسم يجب ان لا يزيد عن 50 حرف. ',
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required|string|min:3|max:50',
+                'phone' => 'digits_between:10,14',
+                'city' => 'required',
+            ],
+            [
+                'name.required' => 'الرجاء ادخال الاسم. ',
+                'name.string' => 'الرجاء ادخال الاسم بشكل صحيح . ',
+                'name.min' => 'الاسم يجب ان يكون على الأقل 3 حروف. ',
+                'name.max' => 'الاسم يجب ان لا يزيد عن 50 حرف. ',
 
-            'phone.digits_between' => 'الرجاء ادخال رقم الهاتف بشكل صحيح. ',
-            'city.required' => 'الرجاء ادخال المدينة. ',
-        ]);
+                'phone.digits_between' => 'الرجاء ادخال رقم الهاتف بشكل صحيح. ',
+                'city.required' => 'الرجاء ادخال المدينة. ',
+            ]
+        );
         if ($validator->passes()) {
             Almuahada::create([
                 'name' => $request['name'],
@@ -130,10 +137,10 @@ class HomeController extends Controller
                 'city' => $request['city'],
 
             ]);
-            return response()->json(['success'=>'Added new records.']);
+            return response()->json(['success' => 'Added new records.']);
         }
 
-        return response()->json(['error'=>$validator->errors()->all()]);
+        return response()->json(['error' => $validator->errors()->all()]);
     }
 
 
@@ -168,13 +175,13 @@ class HomeController extends Controller
             ['type', '=', $new->type],
             ['main_type', '=', $new->main_type],
         ])->orderBy('new_date', 'desc')->take(6)->get();
-
+        // dd(  $Articles);
         $goalsjson = $new->pictures;
 
         $pictures = json_decode(json_decode($goalsjson, true), true);
 
         $total =  json_decode(json_decode($new->main_type, true), true);
-
+        gettype($total);
         if (gettype($total) == "string") {
             $tt =  str_replace('"', "", $total);
 
@@ -182,6 +189,7 @@ class HomeController extends Controller
                 ['main_type', 'like',  $tt],
                 ['type', '=', '0'],
             ])->first();
+
             $mainType =  $mainType->name;
             //  dd(   $mainType);
         } else $mainType = "اخبار";
@@ -189,8 +197,20 @@ class HomeController extends Controller
         return view('Pages.news-details-page', compact('new', 'pictures', 'Articles', 'mainType'));
     }
 
+    public function library()
+    {
+        $Books = Book::all();
 
+        return view('Pages.Library.Library', compact('Books'));
+    }
+    public function libraryDetail($id)
+    {
 
+        $Book = Book::where('id', $id)->first();
+        $book_type = Book::where('type',  $Book->type)->whereNotIn('id', [$id])->take(6)->get();
+
+        return view('Pages.Library.libraryDetail', compact('Book', 'book_type'));
+    }
     public function sector($sector)
     {
         // dd($sector);mainType
@@ -302,7 +322,7 @@ class HomeController extends Controller
         $pictures = json_decode($goalsjson, true);
 
         $Articles = DB::table('projects')->orderBy('report_date', 'desc')->take(6)->get();
-return         $project;
+        return         $project;
         // return view('Pages.ProjectsDetails.project-details-page', compact('project', 'pictures', 'Articles'));
     }
     public function     getprojectDetail($id)

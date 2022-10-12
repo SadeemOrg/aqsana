@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Models\User;
+use Benjacho\BelongsToManyField\BelongsToManyField;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -11,7 +12,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Laravel\Nova\Fields\Select;
+use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 
 class City extends Resource
 {
@@ -92,6 +93,8 @@ class City extends Resource
                 ID::make(__('ID'), 'id')->sortable(),
                 Text::make(__('Name'), 'name'),
                 BelongsTo::make(__('Area'), 'Area', \App\Nova\Area::class),
+
+
                 Select::make(__('admin'), 'admin_id')
                     ->options(function () {
                         $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
@@ -102,10 +105,12 @@ class City extends Resource
 
 
 
-                            $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
+                            $user_type_admin_array += [$user['id'] => ($user['name'])];
                         }
                         return $user_type_admin_array;
-                    })->rules('required')->hideFromIndex()->hideFromDetail(),
+                    })
+                    ->displayUsingLabels()
+                    ->rules('required')->hideFromIndex()->hideFromDetail(),
                 Select::make(__('Alhisalat_admin'), 'Alhisalat_admin')
                     ->options(function () {
                         $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
@@ -116,8 +121,7 @@ class City extends Resource
 
 
 
-                                $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
-
+                            $user_type_admin_array += [$user['id'] => ($user['name'])];
                         }
                         return $user_type_admin_array;
                     })->rules('required')->hideFromIndex()->hideFromDetail(),
@@ -130,8 +134,7 @@ class City extends Resource
                         foreach ($users as $user) {
 
 
-                                $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
-
+                            $user_type_admin_array += [$user['id'] => ($user['name'])];
                         }
                         return $user_type_admin_array;
                     })->rules('required')->hideFromIndex()->hideFromDetail(),

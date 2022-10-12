@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\BillPdf;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
@@ -13,6 +14,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Image;
+use Pdmfc\NovaFields\ActionButton;
 
 class receiptVoucher extends Resource
 {
@@ -62,6 +64,12 @@ class receiptVoucher extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            ActionButton::make(__('POST NEWS'))
+            ->action((new BillPdf)->confirmText(__('Are you sure you want to post  this NEWS?'))
+                ->confirmButtonText(__('print'))
+                ->cancelButtonText(__('Dont print')), $this->id)
+              ->text(__('print'))->showLoadingAnimation()
+            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('Name'),'name'),
             Select::make(__("type"), "type")->options([
                 '1' => __('Alhisalat'),
@@ -237,6 +245,8 @@ class receiptVoucher extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new BillPdf,
+        ];
     }
 }
