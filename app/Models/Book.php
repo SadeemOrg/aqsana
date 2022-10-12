@@ -20,4 +20,9 @@ class Book extends Model
             // 'type' => 'array',
         ];
 
+        public function BookType()
+        {
+            return $this->belongsTo('App\Models\BookType','type');
+        }
+
 }
