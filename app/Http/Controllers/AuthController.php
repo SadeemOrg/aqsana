@@ -495,7 +495,7 @@ class AuthController extends Controller
                 // $to_lng = $to_latlng->lng;
 
                 if(($trip->project->tripfrom) != null) {
-                    $from_latlng = json_decode($trip->project->tripfrom);
+                    $from_latlng = ($trip->project->tripfrom);
                     $from_lat = $from_latlng->latitude;
                     $from_lng = $from_latlng->longitude;
                 } else {
@@ -506,7 +506,7 @@ class AuthController extends Controller
                
              
                 if($trip->project->tripto != null) {
-                    $to_latlng = json_decode($trip->project->tripto);
+                    $to_latlng = ($trip->project->tripto);
                     $to_lat = $to_latlng->latitude;
                     $to_lng = $to_latlng->longitude;
                 } else {
