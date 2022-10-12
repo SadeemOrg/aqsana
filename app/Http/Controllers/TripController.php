@@ -27,14 +27,10 @@ class TripController extends BaseController
         $trips->map(function($trip) use ($request){
        
         if(json_decode($trip->tripfrom) != null) {
-            if(json_decode($trip->tripfrom->current_location) != null){
-                $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
-                $from_lat = $from_latlng->lat;
-                $from_lng = $from_latlng->lng;
-            } else {
-                $from_lat = 180;
-                $from_lng = -180;
-            }
+                
+                $from_latlng = json_decode($trip->tripfrom);
+                $from_lat = $from_latlng->latitude;
+                $from_lng = $from_latlng->longitude;
            
         } else {
             $from_lat = 180;
@@ -43,14 +39,9 @@ class TripController extends BaseController
        
 
         if(json_decode($trip->tripto) != null) {
-            if(json_decode($trip->tripto->current_location) != null){
-                $to_latlng = json_decode($trip->tripto->current_location)->latlng;
-                $to_lat = $to_latlng->lat;
-                $to_lng = $to_latlng->lng;
-            } else {
-                $to_lat = 180;
-                $to_lng = -180;
-            }
+                $to_latlng = json_decode($trip->tripto);
+                $to_lat = $to_latlng->latitude;
+                $to_lng = $to_latlng->longitude;
             
         } else {
             $to_lat = 180;
@@ -122,14 +113,9 @@ class TripController extends BaseController
 
 
           if(json_decode($trip->tripfrom) != null) {
-            if(json_decode($trip->tripfrom->current_location) != null){
-                $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
-                $from_lat = $from_latlng->lat;
-                $from_lng = $from_latlng->lng;
-            } else {
-                $from_lat = 180;
-                $from_lng = -180;
-            }
+                $from_latlng = json_decode($trip->tripfrom);
+                $from_lat = $from_latlng->latitude;
+                $from_lng = $from_latlng->longitude;
         } else {
             $from_lat = 180;
             $from_lng = -180;
@@ -137,14 +123,9 @@ class TripController extends BaseController
        
 
         if(json_decode($trip->tripto) != null) {
-            if(json_decode($trip->tripto->current_location) != null){
-                $to_latlng = json_decode($trip->tripto->current_location)->latlng;
-                $to_lat = $to_latlng->lat;
-                $to_lng = $to_latlng->lng;
-            } else {
-                $to_lat = 180;
-                $to_lng = -180;
-            }
+            $to_latlng = json_decode($trip->tripto);
+            $to_lat = $to_latlng->latitude;
+            $to_lng = $to_latlng->longitude;
         } else {
             $to_lat = 180;
             $to_lng = -180;
@@ -195,14 +176,9 @@ class TripController extends BaseController
         $trips->map(function($trip) use ($request,$search_trip){
         
             if(json_decode($trip->tripfrom) != null) {
-                if(json_decode($trip->tripfrom->current_location) != null){
-                $from_latlng = json_decode($trip->tripfrom->current_location)->latlng;
-                $from_lat = $from_latlng->lat;
-                $from_lng = $from_latlng->lng;
-                } else {
-                $from_lat = 180;
-                $from_lng = -180;
-               }
+                $from_latlng = json_decode($trip->tripfrom);
+                $from_lat = $from_latlng->latitude;
+                $from_lng = $from_latlng->longitude;
             } else {
                 $from_lat = 180;
                 $from_lng = -180;
@@ -210,14 +186,9 @@ class TripController extends BaseController
            
     
             if(json_decode($trip->tripto) != null) {
-                if(json_decode($trip->tripto->current_location) != null){
-                    $to_latlng = json_decode($trip->tripto->current_location)->latlng;
-                    $to_lat = $to_latlng->lat;
-                    $to_lng = $to_latlng->lng;
-                } else {
-                    $to_lat = 180;
-                    $to_lng = -180;
-                }
+                $to_latlng = json_decode($trip->tripto);
+                $to_lat = $to_latlng->latitude;
+                $to_lng = $to_latlng->longitude;
             } else {
                 $to_lat = 180;
                 $to_lng = -180;
@@ -281,19 +252,16 @@ class TripController extends BaseController
         $trips->map(function($trip) use ($request,$search_trip){
     
         if(json_decode($trip->tripto) != null) {
-            if(json_decode($trip->tripto->current_location) != null){
-                
-                $trip_to = json_decode($trip->tripto->current_location);
-                $trip_to_value = $trip_to->value;
+            $trip_to = json_decode($trip->tripto);
+            $trip_to_value = $trip_to->formatted_address;
 
-                if(stripos($trip_to_value,$request->get("search")) !== false){
+            if(stripos($trip_to_value,$request->get("search")) !== false){
 
-                    if($search_trip->search($trip_to->value) === false) {
-                        $search_trip->push($trip_to->value);
-                    }
-                
+                if($search_trip->search($trip_to->formatted_address) === false) {
+                    $search_trip->push($trip_to->formatted_address);
                 }
-            } 
+            
+            }
         }
         
     
