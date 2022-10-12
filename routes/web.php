@@ -70,7 +70,7 @@ Route::get('/library', function (){
     return view('Pages.Library.Library');
 });
 Route::get('/libraryDetail', function (){
-    return view('Pages.libraryDetail');
+    return view('Pages.Library.libraryDetail');
 });
 // Route::get('/bills', function (){
 

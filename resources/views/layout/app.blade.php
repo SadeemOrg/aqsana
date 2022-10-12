@@ -127,7 +127,7 @@
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 </head>
 
-<body dir="rtl">
+<body class="mt-32" dir="rtl">
     @include('layout.front-end.partial._header')
     @yield('content')
     @include('layout.front-end.partial._footer')
@@ -296,6 +296,42 @@
         })
         var owl3 = $("#association-news-slider-2");
         owl3.owlCarousel({
+            rtl: true,
+            loop: false,
+            margin: 30,
+            stagePadding: 20,
+            dots: true,
+            responsive: {
+                //X-Small
+                0: {
+                    items: 1
+                },
+                //Medium
+                768: {
+                    items: 2
+                },
+                850: {
+                    items: 2
+                },
+                1024: {
+                    items: 3
+                },
+                //Large
+                1120: {
+                    items: 3
+                },
+                //Extra large
+                1200: {
+                    items: 3
+                },
+                //Extra extra large
+                1400: {
+                    items: 3
+                }
+            }
+        })
+        var owl4 = $("#association-news-slider-3");
+        owl4.owlCarousel({
             rtl: true,
             loop: false,
             margin: 30,
