@@ -47,7 +47,7 @@ class PaymentVoucher extends Resource
     public static $search = [
         'id',
     ];
-    public static $priority = 2;
+    public static $priority = 3;
     /**
      * Get the fields displayed by the resource.
      *
@@ -126,7 +126,7 @@ class PaymentVoucher extends Resource
             // BelongsTo::make('project' , 'project')->hideWhenCreating()->hideWhenUpdating(),
 
             Text::make(__('description'), 'description'),
-            Text::make(__('transact amount'), 'transact_amount'),
+            Text::make(__('transact amount pay'), 'transact_amount'),
             BelongsTo::make(__('Currenc'), 'Currenc', \App\Nova\Currency::class),
 
 

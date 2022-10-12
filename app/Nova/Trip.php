@@ -81,6 +81,7 @@ class Trip extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
+        return false;
         if ($request->user()->type() == 'regular_city'  &&  (!($request->user()->cite))) {
             return false;
         }
@@ -776,11 +777,11 @@ class Trip extends Resource
                         );
                     $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
 
-                    DB::table('project_bus')
+                dd(    DB::table('project_bus')
                         ->updateOrInsert(
                             ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
 
-                        );
+                        ));
                 }
             }
         }
