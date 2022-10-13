@@ -183,18 +183,18 @@
             if (val.length > 2) {
                 $('.search-bar').siblings().css('display', 'flex');
                 $.get({
-                    url: '{{ url(' / ') }}/search/' + val,
+                    url: '{{ url(' / ') }}/search/' + data,
                     data: {
                         val: val,
                     },
                     dataType: 'json',
                     beforeSend: function() {
-                        // console.log('ameed',$('.search-result-box').html(''));
                         $('.search-result-box').html('');
                         $('.svgSearch').css('display', 'none');
                     },
                     success: function(response) {
                         var elements = [];
+                        console.log('response',response)
                         response.map(item => {
                             var trimmedString = {
                                 trumedTitle: item.title.substring(0, 100),
@@ -206,8 +206,7 @@
                         let searchData = $();
                         for (i = 0; i < elements.length; i++) {
                             $('.search-result-box').html('');
-                            searchData = searchData.add(
-                                '<a class="searchList"  target="_self" href="/categor/' + elements[
+                            searchData = searchData.add('<a class="searchList"  target="_self" href="/categor/' + elements[
                                     i].title + '/' + elements[i].id + '">' + elements[i]
                                 .trumedTitle + '</br> </a>');
                         }
@@ -222,9 +221,53 @@
                 });
             }
         });
+
+// Library Search
+
+$('#searchLibrary').on('keyup', function() {
+    var librarySearchval = $('#searchLibrary').val().toLowerCase();
+// console.log(librarySearchval);
+if (librarySearchval.length > 2) {
+    $('.search-bar').siblings().css('display', 'flex');
+
+    $.ajax({
+                type: "get",
+                url: `/librarysearch/${librarySearchval}`,
+                dataType: "json",
+                    beforeSend: function() {
+                        $('.search-result-box').html('');
+                    },
+                    success: function(response) {
+                        var elements = response;                
+                        let searchData = $();
+                        for (i = 0; i < elements.length; i++) {
+                            console.log(elements[i]);
+                            $('.search-result-box').html('');
+                            searchData = searchData.add('<a class="searchList"  target="_self" href="/categor/' + elements[i].title + '/' + elements[i].id + '">' + elements[i].name + '</br> </a>');
+                        }
+                        $('.search-result-box').append(searchData)
+                    },
+                })
+
+}
+})
+
+
         $(document).click(function(e) {
+
             if (e.target.id != 'searchListId') {
                 $("#searchListId").hide();
+            }
+            if(e.target.id === 'searchLibrary'){
+                console.log('assde',e.target.id)
+                $(".selectdiv").hide();
+            }
+            else if(e.target.id != 'searchLibrary'){
+                console.log('assde',e.target.id)
+                $(".selectdiv").show();
+            }
+            if(e.target.id != 'searchLibrary'){
+                $("#librarySearchListId").hide();
             }
         });
         var owl = $("#main-home-slider");

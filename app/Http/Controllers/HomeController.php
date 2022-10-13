@@ -211,6 +211,15 @@ class HomeController extends Controller
 
         return view('Pages.Library.libraryDetail', compact('book', 'book_type'));
     }
+
+    public function librarySearch($search)
+    {
+        $books = Book::where('name', 'like',  "%{$search}%") ->orWhere('author', 'like',  "%{$search}%")
+
+        ->get();
+        return $books;
+    }
+
     public function sector($sector)
     {
         // dd($sector);mainType

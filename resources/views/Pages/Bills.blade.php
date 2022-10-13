@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false])
 @section('content')
     @php
         $society_id = nova_get_setting('society_id', '580179794');
@@ -9,7 +9,7 @@
         $newDate = explode(' ', $Donations->created_at);
         // dd($Donations->amount);
     @endphp
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10 px-2">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 -mt-14 px-2" id="printJS-table">
         <div class="flex sm:flex-row flex-col-reverse items-center justify-between mt-24">
             <div class="basis-1/2">
                 <h3 class="mt-8 text-4xl font-FlatBold text-[#101426]">ארגון אקצא</h3>
@@ -46,7 +46,7 @@
             <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">לפתח את נכסי ההקדש</span>
         </div>
         <p class="font-FlatBold text-[#101426] mt-3 text-[22px]">התשלום בוצע דרך :
-          <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $Donations->donor_name }} </span>
+            <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $Donations->donor_name }} </span>
         </p>
 
 
@@ -84,12 +84,14 @@
                                         <td
                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                             חשבון</td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $newDate[0] }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $newDate[0] }}
+                                        </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">12</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">632</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">161479</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">00120006</td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $Donations->amount }} ₪</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{ $Donations->amount }} ₪</td>
                                     </tr>
                                     <tr>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
@@ -98,9 +100,9 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                         <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-lg">סך הכל סופי :</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                        <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">{{ $Donations->amount }} ₪</td>
+                                        <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
+                                            {{ $Donations->amount }} ₪</td>
                                     </tr>
-
                                     <!-- More people... -->
                                 </tbody>
                             </table>
@@ -109,8 +111,12 @@
                 </div>
             </div>
         </div>
-
-
+<div  class="flex flex-row items-center justify-end mx-7 mb-6">
+        <button dir="ltr" type="button" onclick="window.print()"
+            class=" rounded-[50px] bg-[#349A37] text-white text-base w-28 py-4 mt-4 font-[700] hover:bg-[#101426] duration-200">
+            طباعة
+        </button>
+    </div>
 
     </div>
 @endsection
