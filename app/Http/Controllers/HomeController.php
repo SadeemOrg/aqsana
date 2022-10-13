@@ -11,6 +11,7 @@ use Mail;
 use App\Mail\TestMail;
 use App\Models\Almuahada;
 use App\Models\Book;
+use App\Models\BookType;
 use App\Models\Donations;
 use App\Models\News;
 use App\Models\newsType;
@@ -200,8 +201,8 @@ class HomeController extends Controller
     public function library()
     {
         $books = Book::paginate(9);
-
-        return view('Pages.Library.Library', compact('books'));
+        $book_type = BookType::all();
+        return view('Pages.Library.Library', compact('books', 'book_type'));
     }
     public function libraryDetail($id)
     {
@@ -214,10 +215,18 @@ class HomeController extends Controller
 
     public function librarySearch($search)
     {
-        $books = Book::where('name', 'like',  "%{$search}%") ->orWhere('author', 'like',  "%{$search}%")
+        $books = Book::where('name', 'like',  "%{$search}%")->orWhere('author', 'like',  "%{$search}%")
 
-        ->get();
+            ->get();
         return $books;
+    }
+
+    public function librarySearchType($id)
+    {
+        $type = BookType::where('id', $id)->first();
+        $books = Book::where('type',  $type->id)->get();
+
+        return  $books;
     }
 
     public function sector($sector)

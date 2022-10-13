@@ -69,6 +69,7 @@ Route::get('/testNotfiy', function (){
 Route::get('/library', [HomeController::class, 'library'])->name('library');
 Route::get('/librarydetail/{id}', [HomeController::class, 'libraryDetail'])->name('libraryDetail');
 Route::get('/librarysearch/{search}', [HomeController::class, 'librarySearch'])->name('librarySearch');
+Route::get('/librarySearchType/{id}', [HomeController::class, 'librarySearchType'])->name('librarySearchType');
 
 
 Route::get('bill/{id}', [HomeController::class, 'bills'])->name('bills');
