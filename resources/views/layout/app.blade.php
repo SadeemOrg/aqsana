@@ -207,9 +207,7 @@
                         for (i = 0; i < elements.length; i++) {
                             $('.search-result-box').html('');
                             searchData = searchData.add(
-                                '<a class="searchList"  target="_self" href="/categor/' + elements[
-                                    i].title + '/' + elements[i].id + '">' + elements[i]
-                                .trumedTitle + '</br> </a>');
+                                '<a class="searchList"  target="_self" href="/categor/' + elements[i].title + '/' + elements[i].id + '">' + elements[i].trumedTitle + '</br> </a>');
                         }
                         $('.search-result-box').append(searchData)
                     },
