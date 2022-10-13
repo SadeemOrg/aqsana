@@ -270,11 +270,11 @@
                         تصفح نسخة HTML
                     </button>
                     <div class="flex flex-row items-center justify-between w-full mt-4 gap-x-4">
-                        <button
-                            class=" Ctnbtn rounded-[50px] bg-[#349A37] text-white text-base sm: w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
+                        <a href="/{{ $htmlLink }}" download
+                            class=" Ctnbtn rounded-[50px] bg-[#349A37] text-white text-center text-base sm: w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
                             تحميل نسخة PDF
-                        </button>
-                        <button
+                        </a>
+                        <button type="button" onclick="printJS('/{{ $htmlLink}}')"
                             class=" Ctnbtn rounded-[50px] bg-[#349A37] text-white text-base sm: w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
                             طباعة
                         </button>
