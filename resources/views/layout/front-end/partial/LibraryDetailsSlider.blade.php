@@ -1,4 +1,5 @@
 @php
+// dd($book_type);
          $books = [
             [
                 'id' => '1',
