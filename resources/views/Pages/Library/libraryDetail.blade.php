@@ -18,9 +18,9 @@
         }
     </style>
     @php
-    $htmlLink ='storage/'.$book['file'];
-
-        $img ='storage/' .$book['cover_photo'];
+        $htmlLink = 'storage/' . $book['file'];
+        
+        $img = 'storage/' . $book['cover_photo'];
         $whatsapp_phone = nova_get_setting('whatsapp_Connectus', 'default_value');
         $Correct_whatsapp_phone = str_replace(' ', '', $whatsapp_phone);
         $Final_Correct_whatsapp_phone = str_replace('-', '', $Correct_whatsapp_phone);
@@ -66,14 +66,14 @@
                             </div>
                             <p
                                 class="firstParagraph text-base md:text-xl text-[rgb(16,20,38)]  font-FlatBold pt-8 text-right">
-                                { !! $book['description'] !! }
+                                {!! $book['description'] !!}
                                 {{-- {{ $book['description'] }} --}}
                                 {{-- هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على
                                 الشكل
                                 الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. --}}
                             </p>
                             <div
-                                class="flex flex-col sm:flex-row items-start gap-y-3 sm:gap-y-0 sm:items-center justify-start pl-4 pt-4 pb-10 font-FlatBold gap-x-2">
+                                class="flex flex-col sm:flex-row  gap-y-3 sm:gap-y-0 items-center  sm:justify-start pl-4 pt-4 pb-10 font-FlatBold gap-x-2">
                                 <p class="text-[#101426] text-lg">شارك الكتاب مع اصدقائك</p>
                                 <ul class="share-us flex flex-row items-center justify-start gap-x-2">
                                     <li>
@@ -154,16 +154,16 @@
                                     </li>
                                 </ul>
                             </div>
-                            <button
+                            <button onclick="location.href='/{{ $htmlLink }}'"
                                 class=" rounded-[50px] bg-[#349A37] text-white text-base w-full py-4 font-[700] hover:bg-[#101426] duration-200">
                                 تصفح نسخة HTML
                             </button>
                             <div class="flex flex-row items-center justify-between w-full mt-4 gap-x-4">
-                                <button
-                                    class=" rounded-[50px] bg-[#349A37] text-white text-base w-full py-4 font-[700] hover:bg-[#101426] duration-200">
+                                <a href="/{{ $htmlLink }}" download
+                                    class=" rounded-[50px] bg-[#349A37] text-center text-white text-base w-full py-4 font-[700] hover:bg-[#101426] duration-200">
                                     تخميل نسخة PDF
-                                </button>
-                                <button
+                                </a>
+                                <button type="button" onclick="printJS('/{{ $htmlLink }}')"
                                     class=" rounded-[50px] bg-[#349A37] text-white text-base w-full py-4 font-[700] hover:bg-[#101426] duration-200">
                                     طباعة
                                 </button>
@@ -264,8 +264,7 @@
                             </li>
                         </ul>
                     </div>
-                    <button 
-                    onclick="location.href='/{{ $htmlLink}}'"
+                    <button onclick="location.href='/{{ $htmlLink }}'"
                         class=" Ctnbtn rounded-[50px] bg-[#349A37] text-white text-base sm:text-sm w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
                         تصفح نسخة HTML
                     </button>
@@ -274,7 +273,7 @@
                             class=" Ctnbtn rounded-[50px] bg-[#349A37] text-white text-center text-base sm: w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
                             تحميل نسخة PDF
                         </a>
-                        <button type="button" onclick="printJS('/{{ $htmlLink}}')"
+                        <button type="button" onclick="printJS('/{{ $htmlLink }}')"
                             class=" Ctnbtn rounded-[50px] bg-[#349A37] text-white text-base sm: w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
                             طباعة
                         </button>
@@ -283,5 +282,4 @@
             </div>
             @include('layout.front-end.partial.LibraryDetailsSlider')
         </div>
-
     @endsection
