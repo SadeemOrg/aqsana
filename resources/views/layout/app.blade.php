@@ -91,7 +91,7 @@
     <!-- Magnific popup js -->
     <script src="magnific-popup/jquery.magnific-popup.js"></script>
 
-    <script>
+    {{-- <script>
         (function($) {
             "use strict";
             /*--------------------------------------
@@ -105,8 +105,8 @@
                     enabled: true
                 },
             });
-        })(jQuery);
-    </script>
+        })
+    </script> --}}
 
 
     <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
@@ -194,7 +194,7 @@
                     },
                     success: function(response) {
                         var elements = [];
-                        console.log('response',response)
+                        console.log('response', response)
                         response.map(item => {
                             var trimmedString = {
                                 trumedTitle: item.title.substring(0, 100),
@@ -206,7 +206,8 @@
                         let searchData = $();
                         for (i = 0; i < elements.length; i++) {
                             $('.search-result-box').html('');
-                            searchData = searchData.add('<a class="searchList"  target="_self" href="/categor/' + elements[
+                            searchData = searchData.add(
+                                '<a class="searchList"  target="_self" href="/categor/' + elements[
                                     i].title + '/' + elements[i].id + '">' + elements[i]
                                 .trumedTitle + '</br> </a>');
                         }
@@ -222,54 +223,86 @@
             }
         });
 
-// Library Search
+        // Library Search
+        $('#searchLibrary').on('keyup', function() {
+            var librarySearchval = $('#searchLibrary').val().toLowerCase();
+            if (librarySearchval.length > 2) {
+                $('.search-bar').siblings().css('display', 'flex');
 
-$('#searchLibrary').on('keyup', function() {
-    var librarySearchval = $('#searchLibrary').val().toLowerCase();
-// console.log(librarySearchval);
-if (librarySearchval.length > 2) {
-    $('.search-bar').siblings().css('display', 'flex');
-
-    $.ajax({
-                type: "get",
-                url: `/librarysearch/${librarySearchval}`,
-                dataType: "json",
+                $.ajax({
+                    type: "get",
+                    url: `/librarysearch/${librarySearchval}`,
+                    dataType: "json",
                     beforeSend: function() {
                         $('.search-result-box').html('');
                     },
                     success: function(response) {
-                        var elements = response;                
+                        var elements = response;
                         let searchData = $();
                         for (i = 0; i < elements.length; i++) {
                             console.log(elements[i]);
                             $('.search-result-box').html('');
-                            searchData = searchData.add('<a class="searchList"  target="_self" href="/categor/' + elements[i].title + '/' + elements[i].id + '">' + elements[i].name + '</br> </a>');
+                            searchData = searchData.add('<a class="searchList"  target="_self" href="/librarydetail/' + elements[i].id + '">' + elements[i].name +'</br> </a>');
                         }
                         $('.search-result-box').append(searchData)
                     },
+                    complete: function() {
+                        console.log('searchCompleted')
+                    },
+                    error: function(err) {
+                        console.log('searchError', err)
+                    }
                 })
-
-}
-})
-
+            }
+        })
 
         $(document).click(function(e) {
 
             if (e.target.id != 'searchListId') {
                 $("#searchListId").hide();
             }
-            if(e.target.id === 'searchLibrary'){
-                console.log('assde',e.target.id)
-                $(".selectdiv").hide();
-            }
-            else if(e.target.id != 'searchLibrary'){
-                console.log('assde',e.target.id)
-                $(".selectdiv").show();
-            }
-            if(e.target.id != 'searchLibrary'){
+            if (e.target.id != 'searchLibrary' ) {
                 $("#librarySearchListId").hide();
             }
+            if (e.target.id === 'searchLibrary' && screen.width <= 640) {
+                $(".selectdiv").hide();
+            } 
+            else if (e.target.id != 'searchLibrary' ) {
+                console.log('assde', e.target.id)
+                $(".selectdiv").show();
+            }
         });
+
+        // ajax for Dropdown Search
+
+        $('#bookType').change(function() {
+            var id = $(this).val();
+            // console.log('id',id)
+            // $('#sel_emp').find('option').not(':first').remove();
+            // AJAX request 
+            $.ajax({
+                type: "get",
+                url: `/librarySearchType/${id}`,
+                dataType: "json",
+                beforeSend: function() {},
+                success: function(response) {
+                    // console.log('here')
+                    // console.log('here',response)
+                    $('#show_cities').html(response);  
+                }
+            })
+        })
+
+
+        $('.img-thumbnail').magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                mainClass: 'mfp-with-zoom',
+                gallery: {
+                    enabled: true
+                },
+            });
+
         var owl = $("#main-home-slider");
         owl.owlCarousel({
             rtl: true,
