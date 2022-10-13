@@ -91,7 +91,7 @@
     <!-- Magnific popup js -->
     <script src="magnific-popup/jquery.magnific-popup.js"></script>
 
-    <script>
+    {{-- <script>
         (function($) {
             "use strict";
             /*--------------------------------------
@@ -105,8 +105,8 @@
                     enabled: true
                 },
             });
-        })(jQuery);
-    </script>
+        })
+    </script> --}}
 
 
     <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
@@ -224,7 +224,6 @@
         });
 
         // Library Search
-
         $('#searchLibrary').on('keyup', function() {
             var librarySearchval = $('#searchLibrary').val().toLowerCase();
             if (librarySearchval.length > 2) {
@@ -294,6 +293,15 @@
             })
         })
 
+
+        $('.img-thumbnail').magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                mainClass: 'mfp-with-zoom',
+                gallery: {
+                    enabled: true
+                },
+            });
 
         var owl = $("#main-home-slider");
         owl.owlCarousel({
