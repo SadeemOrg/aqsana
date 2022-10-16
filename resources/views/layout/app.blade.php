@@ -135,6 +135,8 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ rand(0, 99) }}">
     <link rel="stylesheet" href="{{ asset('assets/front-end/css/main.css') }}?v={{ rand(0, 99) }}">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+    @livewireStyles
+
 </head>
 
 <body class="mt-32" dir="rtl">
@@ -143,18 +145,18 @@
     @include('layout.front-end.partial._footer')
 
 
-        <!-- Comment out (or don't include) services that you don't want to use -->
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    <!-- Comment out (or don't include) services that you don't want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
 
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
             integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
             integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-    
-        <!-- Magnific popup js -->
-        <script src="magnific-popup/jquery.magnific-popup.js"></script>
+
+    <!-- Magnific popup js -->
+    <script src="magnific-popup/jquery.magnific-popup.js"></script>
 
     <!--Print js -->
     {{-- <script src="print.js"></script>  --}}
@@ -178,7 +180,10 @@
         integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
+    <!--Paypal  -->
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AQrUNiqeaUR5hFL1CRzuAwZQCPQ2KD35hVAM0s_jIhw6mgydgbxvPFVfd3GQ7r3Z-wEyX8FPN3bxJyxL&currency=ILS">
+    </script>
     <script>
         $('#search').on('keyup', function() {
             var val = $('#search').val().toLowerCase();
@@ -209,7 +214,9 @@
                         for (i = 0; i < elements.length; i++) {
                             $('.search-result-box').html('');
                             searchData = searchData.add(
-                                '<a class="searchList"  target="_self" href="/categor/' + elements[i].title + '/' + elements[i].id + '">' + elements[i].trumedTitle + '</br> </a>');
+                                '<a class="searchList"  target="_self" href="/categor/' + elements[
+                                    i].title + '/' + elements[i].id + '">' + elements[i]
+                                .trumedTitle + '</br> </a>');
                         }
                         $('.search-result-box').append(searchData)
                     },
@@ -242,7 +249,9 @@
                         for (i = 0; i < elements.length; i++) {
                             console.log(elements[i]);
                             $('.search-result-box').html('');
-                            searchData = searchData.add('<a class="searchList"  target="_self" href="/librarydetail/' + elements[i].id + '">' + elements[i].name +'</br> </a>');
+                            searchData = searchData.add(
+                                '<a class="searchList"  target="_self" href="/librarydetail/' +
+                                elements[i].id + '">' + elements[i].name + '</br> </a>');
                         }
                         $('.search-result-box').append(searchData)
                     },
@@ -261,14 +270,12 @@
             if (e.target.id != 'searchListId') {
                 $("#searchListId").hide();
             }
-            if (e.target.id != 'searchLibrary' ) {
+            if (e.target.id != 'searchLibrary') {
                 $("#librarySearchListId").hide();
             }
             if (e.target.id === 'searchLibrary' && screen.width <= 640) {
                 $(".selectdiv").hide();
-            } 
-            else if (e.target.id != 'searchLibrary' ) {
-                console.log('assde', e.target.id)
+            } else if (e.target.id != 'searchLibrary') {
                 $(".selectdiv").show();
             }
         });
@@ -279,7 +286,7 @@
             var id = $(this).val();
             // console.log('id',id)
             // $('#sel_emp').find('option').not(':first').remove();
-            // AJAX request 
+            // AJAX request
             $.ajax({
                 type: "get",
                 url: `/librarySearchType/${id}`,
@@ -288,20 +295,10 @@
                 success: function(response) {
                     // console.log('here')
                     // console.log('here',response)
-                    $('#show_cities').html(response);  
+                    $('#show_cities').html(response);
                 }
             })
         })
-
-
-        // $('.img-thumbnail').magnificPopup({
-        //         delegate: 'a',
-        //         type: 'image',
-        //         mainClass: 'mfp-with-zoom',
-        //         gallery: {
-        //             enabled: true
-        //         },
-        //     });
 
         var owl = $("#main-home-slider");
         owl.owlCarousel({
@@ -521,6 +518,118 @@
                 pageNumber = 1
                 $(".secondPage").css("display", "flex");
                 $(".Ctnbtn").text("تأكيد الدفع");
+                var counter = 0;
+                $('input[type=radio][name=notification-method]').change(function() {
+                    if (this.value == 'payPal') {
+                        $(".Ctnbtn").css("display", "none");
+                        $(".btn-btn-payPal").css("display", "block");
+                        $("input[name=telephone]").attr("type", "hidden");
+                        $("input[name=visaid]").attr("type", "hidden");
+                        $("input[name=CVV]").attr("type", "hidden");
+                        $("input[name=VisaDate]").attr("type", "hidden");
+                        var amount = $('input[name="donation_amount"]').val();
+                        paypal.Buttons({
+                            env: 'sandbox', // sandbox | production
+                            // Specify the style of the button
+                            style: {
+                                height: 55,
+                                tagline: false,
+                                label: 'paypal',
+                                size: 'responsive', // small | medium | large | responsive
+                                shape: 'pill', // pill | rect
+                                color: 'black', // gold | blue | silver | black,
+                                layout: 'horizontal' // horizontal | vertical,
+                            },
+                            client: {
+                                sandbox: 'AQrUNiqeaUR5hFL1CRzuAwZQCPQ2KD35hVAM0s_jIhw6mgydgbxvPFVfd3GQ7r3Z-wEyX8FPN3bxJyxL',
+                                production: ''
+                            },
+                            funding: {
+                                allowed: [
+                                    paypal.FUNDING.CARD,
+                                    paypal.FUNDING.ELV
+                                ]
+                            },
+                            createOrder: (data, actions) => {
+                                if ($('input[name="firstName"]').val() == "" || $('input[name="lastName"]').val() == "") {
+                                    toastr.options = {
+                                        "closeButton": true,
+                                        "debug": false,
+                                        "positionClass": "toast-bottom-right",
+                                        "onclick": null,
+                                        "showDuration": "300",
+                                        "hideDuration": "2000",
+                                        "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                                    };
+                                    toastr.error(' الرجاء ادخال الاسم الاول او الاسم الاخير');
+                                    return false;
+                                } 
+                                if($('#privecy').is(":checked") == false ){
+                                    toastr.options = {
+                                        "closeButton": true,
+                                        "debug": false,
+                                        "positionClass": "toast-bottom-right",
+                                        "onclick": null,
+                                        "showDuration": "300",
+                                        "hideDuration": "2000",
+                                        "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                                    };
+                                    toastr.error('الرجاء الموافقة على الشروط والاحكام');
+                                    return false;
+                                }
+                                else {
+                                    return actions.order.create({
+                                        purchase_units: [{
+                                            amount: {
+                                                value: amount
+                                            }
+                                        }]
+                                    });
+                                }
+                            },
+                            onAuthorize: (data, actions) => {
+                                return actions.payment.execute().then(function() {});
+                            },
+                            // onApprove: function(data, actions) {
+                            //     return actions.order.capture().then(function(details) {
+                            //         alert('Transaction completed by ' + details.payer
+                            //             .name.given_name + '!');
+                            //     });
+                            // },
+                            // Finalize the transaction after payer approval
+                            onApprove: (data, actions) => {
+                                return actions.order.capture().then(function(orderData) {
+                                    // Successful capture! For dev/demo purposes:
+                                    console.log('Capture result', orderData, JSON
+                                        .stringify(orderData, null, 2));
+                                    const transaction = orderData.purchase_units[0]
+                                        .payments.captures[0];
+                                    // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+                                    // When ready to go live, remove the alert and show a success message within this page. For example:
+                                    // const element = document.getElementById('paypal-button-container');
+                                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                                    // Or go to another URL:  actions.redirect('thank_you.html');
+                                    $(".thirdPage").css("display", "flex");
+                                    $(".secondPage").css("display", "none");
+                                    $(".Ctnbtn").css("display", "none");
+                                    $(".btn-btn-payPal").css("display", "none");
+                                });
+                            },
+                            onError: function(err) {
+                                console.log('err', err);
+                            }
+                        }).render('#paypal-button-container');
+                    } else {
+                        $(".Ctnbtn").css("display", "block");
+                        $(".btn-btn-payPal").css("display", "none");
+                        $("input[name=telephone]").attr("type", "number");
+                        $("input[name=visaid]").attr("type", "number");
+                        $("input[name=CVV]").attr("type", "number");
+                        $("input[name=VisaDate]").attr("type", "text");
+                    }
+                })
             }
             if (pageNumber == 2) {
                 if ($('#privecy').is(":checked") == false && $('.paymentMethod').is(":checked") == false) {
@@ -569,6 +678,12 @@
                     pageNumber = 1;
                     return false;
                 } else {
+                    var paymentMethod = $('.paymentMethod:checked').val();
+                    if (paymentMethod == "payPal") {
+                        $(".Ctnbtn").css("display", "none");
+                        $(".btn-btn-payPal").css("display", "block");
+                    }
+                    // console.log($('input[type=radio][name=notification-method]').val())
                     $(".thirdPage").css("display", "flex")
                     $(".secondPage").css("display", "none");
                     $(".Ctnbtn").css("display", "none");
@@ -695,6 +810,7 @@
     </script>
     <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
     <script src="{{ asset('assets/front-end/js/main.js') }}"></script>
+    @livewireScripts
 </body>
 <!-- <script src="{{ mix('/js/app.js') }}"></script> -->
 

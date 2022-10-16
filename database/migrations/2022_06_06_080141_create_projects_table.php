@@ -37,7 +37,7 @@ class CreateProjectsTable extends Migration
             $table->string('report_video_link')->nullable();
             $table->string('report_video_link_cover')->nullable();
             $table->date('report_date')->nullable();
-            $table->string('sector');
+            $table->unsignedBigInteger('sector')->nullable();
             $table->longText('tools')->nullable();
             $table->char('repetition', 1)->default(0);
             $table->datetime('start_date');

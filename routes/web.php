@@ -17,7 +17,13 @@ use App\Http\Controllers\NotificationTest;
 |
 */
 
+Route::get('/live', function (){
+    return view('livae');
+});
+Route::post("first/", [HomeController::class, "first"])->name('first');
+Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');
 
+Route::get("/cars",[HomeController::class,'index']);
 
 Route::get("toastr-notification", [HomeController::class, "showToastrMessages"]);
 
