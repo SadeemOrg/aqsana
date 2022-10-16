@@ -11,7 +11,8 @@ class Type extends Component
     public $size = 'mercedes';
     public $goals;
     public $goal;
-    public $Books ;
+    public $books ;
+    public $book_type ;
 
     public function mount()
     {
@@ -23,12 +24,12 @@ class Type extends Component
         if($value==0)
         {
             $Book= Book::all();
-            $this->Books = $Book;
+            $this->books = $Book;
         }
         else
         {
         $Book= Book::where('type',$value)->get();
-        $this->Books = $Book;
+        $this->books = $Book;
     }
 }
     public function increment()

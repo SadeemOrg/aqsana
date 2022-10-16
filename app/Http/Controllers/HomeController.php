@@ -218,7 +218,7 @@ class HomeController extends Controller
 
     public function library()
     {
-        $books = Book::paginate(9);
+        $books = Book::all();
         $book_type = BookType::all();
         return view('Pages.Library.Library', compact('books', 'book_type'));
     }
