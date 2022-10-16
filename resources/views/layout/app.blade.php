@@ -78,18 +78,7 @@
 
     <!-- firebase integration end -->
 
-    <!-- Comment out (or don't include) services that you don't want to use -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
-        integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
-        integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- Magnific popup js -->
-    <script src="magnific-popup/jquery.magnific-popup.js"></script>
 
     {{-- <script>
         (function($) {
@@ -153,6 +142,19 @@
     @yield('content')
     @include('layout.front-end.partial._footer')
 
+
+        <!-- Comment out (or don't include) services that you don't want to use -->
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
+            integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
+            integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    
+        <!-- Magnific popup js -->
+        <script src="magnific-popup/jquery.magnific-popup.js"></script>
 
     <!--Print js -->
     {{-- <script src="print.js"></script>  --}}
@@ -292,14 +294,14 @@
         })
 
 
-        $('.img-thumbnail').magnificPopup({
-                delegate: 'a',
-                type: 'image',
-                mainClass: 'mfp-with-zoom',
-                gallery: {
-                    enabled: true
-                },
-            });
+        // $('.img-thumbnail').magnificPopup({
+        //         delegate: 'a',
+        //         type: 'image',
+        //         mainClass: 'mfp-with-zoom',
+        //         gallery: {
+        //             enabled: true
+        //         },
+        //     });
 
         var owl = $("#main-home-slider");
         owl.owlCarousel({
