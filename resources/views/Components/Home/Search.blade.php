@@ -1,6 +1,8 @@
 <style>
     .searchList {
+        width: 100%;
         font-size: 17px;
+        text-align: center;
     }
 
     ::-webkit-scrollbar {

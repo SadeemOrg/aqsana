@@ -69,20 +69,13 @@ Route::get('/testNotfiy', function (){
     return view('Pages.testNotfiy');
 });
 
-
-// Route::get('/library', function (){
-//     return view('Pages.Library.Library');
-// });
-// Route::get('/libraryDetail', function (){
-//     return view('Pages.Library.libraryDetail');
-// });
+// Library
 Route::get('/library', [HomeController::class, 'library'])->name('library');
 Route::get('/librarydetail/{id}', [HomeController::class, 'libraryDetail'])->name('libraryDetail');
+Route::get('/librarysearch/{search}', [HomeController::class, 'librarySearch'])->name('librarySearch');
+Route::get('/librarySearchType/{id}', [HomeController::class, 'librarySearchType'])->name('librarySearchType');
 
-// Route::get('/bills', function (){
 
-//     return view('Pages.Bills');
-// });
 Route::get('bill/{id}', [HomeController::class, 'bills'])->name('bills');
 
 // Route::get('bill', [HomeController::class, 'billsPdf']);
