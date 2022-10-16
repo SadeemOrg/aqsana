@@ -528,65 +528,100 @@
                         $("input[name=CVV]").attr("type", "hidden");
                         $("input[name=VisaDate]").attr("type", "hidden");
                         var amount = $('input[name="donation_amount"]').val();
-                            paypal.Buttons({
-                                env: 'sandbox', // sandbox | production
-                                // Specify the style of the button
-                                style: {
-                                    height: 55,
-                                    tagline: false,
-                                    label: 'paypal',
-                                    size: 'responsive', // small | medium | large | responsive
-                                    shape: 'pill', // pill | rect
-                                    color: 'black', // gold | blue | silver | black,
-                                    layout: 'horizontal' // horizontal | vertical,
-                                },
-                                client: {
-                                    sandbox: 'AQrUNiqeaUR5hFL1CRzuAwZQCPQ2KD35hVAM0s_jIhw6mgydgbxvPFVfd3GQ7r3Z-wEyX8FPN3bxJyxL',
-                                    production: ''
-                                },
-                                funding: {
-                                    allowed: [
-                                        paypal.FUNDING.CARD,
-                                        paypal.FUNDING.ELV
-                                    ]
-                                },
-                                createOrder: (data, actions) => {
+                        paypal.Buttons({
+                            env: 'sandbox', // sandbox | production
+                            // Specify the style of the button
+                            style: {
+                                height: 55,
+                                tagline: false,
+                                label: 'paypal',
+                                size: 'responsive', // small | medium | large | responsive
+                                shape: 'pill', // pill | rect
+                                color: 'black', // gold | blue | silver | black,
+                                layout: 'horizontal' // horizontal | vertical,
+                            },
+                            client: {
+                                sandbox: 'AQrUNiqeaUR5hFL1CRzuAwZQCPQ2KD35hVAM0s_jIhw6mgydgbxvPFVfd3GQ7r3Z-wEyX8FPN3bxJyxL',
+                                production: ''
+                            },
+                            funding: {
+                                allowed: [
+                                    paypal.FUNDING.CARD,
+                                    paypal.FUNDING.ELV
+                                ]
+                            },
+                            createOrder: (data, actions) => {
+                                if ($('input[name="firstName"]').val() == "" || $('input[name="lastName"]').val() == "") {
+                                    toastr.options = {
+                                        "closeButton": true,
+                                        "debug": false,
+                                        "positionClass": "toast-bottom-right",
+                                        "onclick": null,
+                                        "showDuration": "300",
+                                        "hideDuration": "2000",
+                                        "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                                    };
+                                    toastr.error(' الرجاء ادخال الاسم الاول او الاسم الاخير');
+                                    return false;
+                                } 
+                                if($('#privecy').is(":checked") == false ){
+                                    toastr.options = {
+                                        "closeButton": true,
+                                        "debug": false,
+                                        "positionClass": "toast-bottom-right",
+                                        "onclick": null,
+                                        "showDuration": "300",
+                                        "hideDuration": "2000",
+                                        "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                                    };
+                                    toastr.error('الرجاء الموافقة على الشروط والاحكام');
+                                    return false;
+                                }
+                                else {
                                     return actions.order.create({
                                         purchase_units: [{
                                             amount: {
-                                                value: amount // Can also reference a variable or function
-                                            },
+                                                value: amount
+                                            }
                                         }]
                                     });
-                                },
-                                onAuthorize: (data, actions) => {
-                                    return actions.payment.execute().then(function() {});
-                                },
-                                // onApprove: function(data, actions) {
-                                //     return actions.order.capture().then(function(details) {
-                                //         alert('Transaction completed by ' + details.payer
-                                //             .name.given_name + '!');
-                                //     });
-                                // },
-                                // Finalize the transaction after payer approval
-                                onApprove: (data, actions) => {
-                                    return actions.order.capture().then(function(orderData) {
-                                        // Successful capture! For dev/demo purposes:
-                                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                                        const transaction = orderData.purchase_units[0].payments.captures[0];
-                                        // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-                                        // When ready to go live, remove the alert and show a success message within this page. For example:
-                                        // const element = document.getElementById('paypal-button-container');
-                                        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                                        // Or go to another URL:  actions.redirect('thank_you.html');
-                                    });
-                                },
-                                onError: function(err) {
-                                    console.log('err', err);
                                 }
-                            }).render('#paypal-button-container');
-                        }
-                    else {
+                            },
+                            onAuthorize: (data, actions) => {
+                                return actions.payment.execute().then(function() {});
+                            },
+                            // onApprove: function(data, actions) {
+                            //     return actions.order.capture().then(function(details) {
+                            //         alert('Transaction completed by ' + details.payer
+                            //             .name.given_name + '!');
+                            //     });
+                            // },
+                            // Finalize the transaction after payer approval
+                            onApprove: (data, actions) => {
+                                return actions.order.capture().then(function(orderData) {
+                                    // Successful capture! For dev/demo purposes:
+                                    console.log('Capture result', orderData, JSON
+                                        .stringify(orderData, null, 2));
+                                    const transaction = orderData.purchase_units[0]
+                                        .payments.captures[0];
+                                    // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+                                    // When ready to go live, remove the alert and show a success message within this page. For example:
+                                    // const element = document.getElementById('paypal-button-container');
+                                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                                    // Or go to another URL:  actions.redirect('thank_you.html');
+                                    $(".thirdPage").css("display", "flex");
+                                    $(".secondPage").css("display", "none");
+                                    $(".Ctnbtn").css("display", "none");
+                                    $(".btn-btn-payPal").css("display", "none");
+                                });
+                            },
+                            onError: function(err) {
+                                console.log('err', err);
+                            }
+                        }).render('#paypal-button-container');
+                    } else {
                         $(".Ctnbtn").css("display", "block");
                         $(".btn-btn-payPal").css("display", "none");
                         $("input[name=telephone]").attr("type", "number");
