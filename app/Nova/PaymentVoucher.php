@@ -14,7 +14,8 @@ use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Image;
-
+use Epartment\NovaDependencyContainer\HasDependencies;
+use Alaqsa\Project\Project;
 class PaymentVoucher extends Resource
 {
     /**
@@ -63,6 +64,9 @@ class PaymentVoucher extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
+            Project::make(__('ref_id'),'ref_id'),
+
 
             Select::make(__("type"), "type")->options([
                 '0' => __('the Payment Voucher'),
@@ -149,8 +153,13 @@ class PaymentVoucher extends Resource
 
         ];
     }
+    public static function beforeSave(Request $request, $model)
+    {
+        // dd($request->Color);
+    }
     public static function beforeCreate(Request $request, $model)
     {
+
         $new = DB::table('currencies')->where('id', $request->Currenc)->first();
         $id = Auth::id();
         $model->created_by = $id;

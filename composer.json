@@ -12,6 +12,7 @@
         "acme/multiselect-field": "*",
         "acme/projecs": "*",
         "ajhaupt7/image-upload-preview": "^1.0",
+        "alaqsa/project": "*",
         "averotech/link": "*",
         "averotech/tree": "*",
         "awesome-nova/filter-card": "^1.0",
@@ -80,6 +81,11 @@
         {
             "type": "path",
             "url": "./nova-components/Projecs"
+        },
+
+        {
+            "type": "path",
+            "url": "./nova-components/Project"
         }
     ],
     "autoload": {
