@@ -135,6 +135,8 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ rand(0, 99) }}">
     <link rel="stylesheet" href="{{ asset('assets/front-end/css/main.css') }}?v={{ rand(0, 99) }}">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+    @livewireStyles
+
 </head>
 
 <body class="mt-32" dir="rtl">
@@ -284,7 +286,7 @@
             var id = $(this).val();
             // console.log('id',id)
             // $('#sel_emp').find('option').not(':first').remove();
-            // AJAX request 
+            // AJAX request
             $.ajax({
                 type: "get",
                 url: `/librarySearchType/${id}`,
@@ -776,6 +778,7 @@
     </script>
     <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
     <script src="{{ asset('assets/front-end/js/main.js') }}"></script>
+    @livewireScripts
 </body>
 <!-- <script src="{{ mix('/js/app.js') }}"></script> -->
 
