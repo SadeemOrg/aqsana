@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Models\User;
+use Benjacho\BelongsToManyField\BelongsToManyField;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -11,7 +12,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Laravel\Nova\Fields\Select;
+use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 
 class City extends Resource
 {
@@ -92,6 +93,8 @@ class City extends Resource
                 ID::make(__('ID'), 'id')->sortable(),
                 Text::make(__('Name'), 'name'),
                 BelongsTo::make(__('Area'), 'Area', \App\Nova\Area::class),
+
+
                 Select::make(__('admin'), 'admin_id')
                     ->options(function () {
                         $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
@@ -101,14 +104,43 @@ class City extends Resource
                         foreach ($users as $user) {
 
 
-                            if ($user->City == null || $this->admin_id == $user['id']) {
-                                $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
-                            }
+
+                            $user_type_admin_array += [$user['id'] => ($user['name'])];
                         }
                         return $user_type_admin_array;
-                    })->hideFromIndex()->hideFromDetail(),
-                BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                    })
+                    ->displayUsingLabels()
+                    ->rules('required')->hideFromIndex()->hideFromDetail(),
+                Select::make(__('Alhisalat_admin'), 'Alhisalat_admin')
+                    ->options(function () {
+                        $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
 
+                        $user_type_admin_array =  array();
+
+                        foreach ($users as $user) {
+
+
+
+                            $user_type_admin_array += [$user['id'] => ($user['name'])];
+                        }
+                        return $user_type_admin_array;
+                    })->rules('required')->hideFromIndex()->hideFromDetail(),
+                Select::make(__('Qawafil_admin'), 'Qawafil_admin')
+                    ->options(function () {
+                        $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
+
+                        $user_type_admin_array =  array();
+
+                        foreach ($users as $user) {
+
+
+                            $user_type_admin_array += [$user['id'] => ($user['name'])];
+                        }
+                        return $user_type_admin_array;
+                    })->rules('required')->hideFromIndex()->hideFromDetail(),
+                BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                BelongsTo::make(__('Alhisalat_admin'), 'AlhisalatAdmin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                BelongsTo::make(__('Qawafil_admin'), 'QawafilAdmin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 hasMany::make('User', 'User'),
@@ -120,19 +152,14 @@ class City extends Resource
 
             BelongsTo::make(__('Area'), 'Area', \App\Nova\Area::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            Select::make(__('admin'), 'admin_id')
-                ->options(function () {
-                    $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
 
-                    $user_type_admin_array =  array();
 
-                    foreach ($users as $user) {
-                        $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
-                    }
 
-                    return $user_type_admin_array;
-                })->hideFromIndex()->hideFromDetail(),
+
             BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Alhisalat_admin'), 'Alhisalat_admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Qawafil_admin'), 'Qawafil_admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             // hasMany::make('User','User'),
@@ -142,6 +169,8 @@ class City extends Resource
 
     public static function beforeCreate(Request $request, $model)
     {
+
+
         $id = Auth::id();
         $model->created_by = $id;
         $user = Auth::user();
@@ -155,11 +184,32 @@ class City extends Resource
         }
     }
 
+    public static function beforeSave(Request $request, $model)
+    {
 
+        if (!$request->Alhisalat_admin) {
+            $model->Alhisalat_admin = $request->admin_id;
+            // dd($model->Alhisalat_admin);
+        }
+        if (!$request->Qawafil_admin) {
+            $model->Qawafil_admin = $request->admin_id;
+            // dd($request->Qawafil_admin);
+        }
+    }
     public static function beforeUpdate(Request $request, $model)
     {
+
         $id = Auth::id();
         $model->update_by = $id;
+
+        // if (! $request->Alhisalat_admin) {
+        //     $model->Alhisalat_admin = $request->admin_id;
+        //     // dd($model->Alhisalat_admin);
+        //   }
+        //   if (! $request->Qawafil_admin) {
+        //     $model->Qawafil_admin = $request->admin_id;
+        //     // dd($request->Qawafil_admin);
+        //   }
     }
     // public static function beforeUpdate(Request $request, $model)
     // {

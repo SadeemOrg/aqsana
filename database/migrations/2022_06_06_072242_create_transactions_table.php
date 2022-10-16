@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->char('main_type', 1)->default(0);
             $table->char('type', 1)->default(0);
+            $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->bigInteger('ref_id')->nullable();
             $table->bigInteger('ref_cite_id')->nullable();

@@ -10,7 +10,7 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
-
+use Mauricewijnia\NovaMapsAddress\MapsAddress;
 class address extends Resource
 {
     /**
@@ -67,12 +67,16 @@ class address extends Resource
                 '3' => __('Project'),
                 '4' => __('addrese buss'),
             ])->displayUsingLabels(),
-            Text::make(__('Name'), "name_address"),
-            Text::make(__("description"), "description"),
+            Text::make(__('name address'), "name_address"),
+            Text::make(__("description address"), "description"),
             Text::make(__("phone number"), "phone_number_address"),
 
-            GoogleMaps::make(__('current_location'), 'current_location')
-                ->zoom(8),
+            // GoogleMaps::make(__('current_location'), 'current_location')
+                // ->zoom(8),
+
+                MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
+                ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
+
             Select::make(__("Status"), "status")->options([
                 '1' => __('active'),
                 '2' => __('not active'),
@@ -83,6 +87,7 @@ class address extends Resource
     }
     public static function beforeCreate(Request $request, $model)
     {
+        // dd($request->current_location);
         $id = Auth::id();
         $model->created_by = $id;
 

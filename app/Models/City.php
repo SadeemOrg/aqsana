@@ -37,6 +37,14 @@ class City extends Model
         return $this->belongsTo('App\Models\User','admin_id');
     }
 
+    public function AlhisalatAdmin()
+    {
+        return $this->belongsTo('App\Models\User','Alhisalat_admin');
+    }
+    public function QawafilAdmin()
+    {
+        return $this->belongsTo('App\Models\User','Qawafil_admin');
+    }
     public function Area()
     {
         return $this->belongsTo('App\Models\Area','area_id');

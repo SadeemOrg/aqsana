@@ -2,12 +2,15 @@
 
 namespace App\Nova;
 
+use App\Models\Bus;
+use App\Rules\CustomRule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-
+use Illuminate\Validation\ValidationException;
 class TripBooking extends Resource
 {
     /**
@@ -52,7 +55,7 @@ class TripBooking extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make(__('project'), 'Project', \App\Nova\Project::class),
             BelongsTo::make(__('user'), 'Users', \App\Nova\User::class),
-            BelongsTo::make(__('bus'), 'Buses', \App\Nova\Bus::class),
+            BelongsTo::make(__('bus'), 'Buses', \App\Nova\Bus::class)->rules(new CustomRule()),
             Text::make(__('number phone'), 'number_phone'),
             Text::make(__('number_of_people'), 'number_of_people'),
             Text::make(__('reservation_amount'), 'reservation_amount'),
@@ -60,6 +63,12 @@ class TripBooking extends Resource
 
 
         ];
+    }
+
+    public static function beforeSave(Request $request, $model)
+    {
+
+        $model->booking_type = 2 ;
     }
 
     /**

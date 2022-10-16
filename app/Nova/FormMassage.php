@@ -51,6 +51,13 @@ public static function group()
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        // $id = Auth::id();
+        return $query->where('type',  '0' );
+
+
+    }
     public function fields(Request $request)
     {
         return [

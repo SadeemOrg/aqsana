@@ -13,7 +13,13 @@
         "build-projecs": "cd nova-components/Projecs && npm run dev",
         "build-projecs-prod": "cd nova-components/Projecs && npm run prod",
         "build-price-tracker": "cd nova-components/PriceTracker && npm run dev",
-        "build-price-tracker-prod": "cd nova-components/PriceTracker && npm run prod"
+        "build-price-tracker-prod": "cd nova-components/PriceTracker && npm run prod",
+        "build-color-picker": "cd nova-components/ColorPicker && npm run dev",
+        "build-color-picker-prod": "cd nova-components/ColorPicker && npm run prod",
+        "build-project": "cd nova-components/Project && npm run dev",
+        "build-project-prod": "cd nova-components/Project && npm run prod",
+        "build-sector-rff": "cd nova-components/SectorRff && npm run dev",
+        "build-sector-rff-prod": "cd nova-components/SectorRff && npm run prod"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.7",

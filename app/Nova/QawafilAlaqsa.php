@@ -31,6 +31,7 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Image;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
+// use App\Console\Commands\ProjectStartEnd;
 use App\CPU\Helpers;
 use App\Models\address;
 use Laravel\Nova\Fields\BelongsTo;
@@ -51,6 +52,7 @@ use Gwd\FlexibleContent\FlexibleContent;
 
 use Laravel\Nova\Panel;
 use App\Nova\Actions\ChangeRole;
+use App\Nova\Actions\ProjectStartEnd;
 use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
 
@@ -91,7 +93,10 @@ class QawafilAlaqsa extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user'|| $request->user()->type() == 'Almuahada_admin') {
+        if ($request->user()->type() == 'regular_city'  &&  (!($request->user()->cite))) {
+            return false;
+        }
+        if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user' || $request->user()->type() == 'Almuahada_admin') {
             return false;
         } else return true;
     }
@@ -112,11 +117,13 @@ class QawafilAlaqsa extends Resource
 
             $Area = \App\Models\Area::where('admin_id', $id)->first();
             $projects = DB::table('project_area')->where('area_id', $Area->id)->get();
-        } elseif ($user->type() == 'regular_city') {
+        } elseif ($user->type() == 'regular_city' && $user->City) {
+
             $citye =   City::where('admin_id', $id)
                 ->select('id')->first();
+            dd($citye);
             $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
-        }else   $projects = DB::table('project_city')->get();
+        } else   $projects = DB::table('project_city')->get();
 
 
         $stack = array();
@@ -131,6 +138,70 @@ class QawafilAlaqsa extends Resource
             (new Panel(__('main'), [
                 ID::make(__('ID'), 'id')->sortable(),
                 ActionButton::make(__('Action'))
+                    ->action(ProjectStartEnd::class, $this->id)
+                    ->text(__('start'))
+                    ->showLoadingAnimation()
+                    ->loadingColor('#fff')->buttonColor('#21b970')
+                    ->canSee(function () {
+                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                        if ($projects) {
+
+                            if ($projects->status == '0')  return true;
+                        }
+                    })
+                    ->readonly(function () {
+                        return false;
+                    })
+                    ->hideWhenCreating()->hideWhenUpdating(),
+
+                ActionButton::make(__('Action'))
+                    ->action(ProjectStartEnd::class, $this->id)
+                    ->text(__('end'))
+                    ->showLoadingAnimation()
+                    ->loadingColor('#fff')->buttonColor('#21b970')
+                    ->canSee(function () {
+                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                        if ($projects) {
+
+                            if ($projects->status == '1')  return true;
+                        }
+                    })
+                    ->readonly(function () {
+                        return false;
+                    })
+                    ->hideWhenCreating()->hideWhenUpdating(),
+                ActionButton::make(__('Action'))
+                    ->action(ProjectStartEnd::class, $this->id)
+                    ->text(__('Finished'))
+                    ->showLoadingAnimation()
+                    ->loadingColor('#fff')->buttonColor('#21b970')
+                    ->canSee(function () {
+                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                        if ($projects) {
+
+                            if ($projects->status > '1')  return true;
+                        }
+                    })
+                    ->readonly()
+                    ->hideWhenCreating()->hideWhenUpdating(),
+                ActionButton::make(__('Action'))
+                    ->action(ProjectStartEnd::class, $this->id)
+                    ->text(__('incomplete'))
+                    ->showLoadingAnimation()
+                    ->loadingColor('#fff')->buttonColor('#787878')
+                    ->canSee(function () {
+                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                        if (!$projects) {
+                            return true;
+                        }
+                    })
+                    ->readonly()
+                    ->hideWhenCreating()->hideWhenUpdating(),
+
+
+
+
+                ActionButton::make(__('Action'))
                     ->action(ApprovalRejectProjec::class, $this->id)
                     ->text(__('acsept'))
                     ->showLoadingAnimation()
@@ -138,7 +209,7 @@ class QawafilAlaqsa extends Resource
                     ->canSee(function () {
                         $user = Auth::user();
 
-                        if ($user->type() == 'regular_city'||$user->type() == 'regular_area') {
+                        if ($user->type() == 'regular_city' || $user->type() == 'regular_area') {
                             return true;
                         }
                     })
@@ -163,8 +234,13 @@ class QawafilAlaqsa extends Resource
                         }
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
+
+
+
+
                 Text::make(__("QawafilAlaqsa name"), "project_name"),
                 Text::make(__("QawafilAlaqsa describe"), "project_describe"),
+
 
                 BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
                     ->options(Area::all())
@@ -174,11 +250,29 @@ class QawafilAlaqsa extends Resource
                         return false;
                     })->rules('required', 'max:1'),
 
-                   BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
+                Select::make(__("Repetition"), "repetition")->options([
+                    '0' => __('Once'),
+                    '1' => __('daily'),
+                    '2' => __('weekly'),
+                    '3' => __('fortnightly'),
+                    '4' => __('Monthly'),
+                    '5' => __('annual'),
+                ]),
+                Select::make(__('Admin'), 'admin_id')
+                    ->options(function () {
+                        $users =  \App\Models\User::all();
+                        $user_type_admin_array =  array();
+                        foreach ($users as $user) {
+                            $user_type_admin_array += [$user['id'] => ($user['name'])];
+                        }
+
+                        return $user_type_admin_array;
+                    }),
+                BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
                         $id = Auth::id();
-                        $addresss =  \App\Models\address::where('created_by',  $id)->where('type','4')->get();
+                        $addresss =  \App\Models\address::where('type', '4')->get();
                         $address_type_admin_array =  array();
 
                         foreach ($addresss as $address) {
@@ -189,10 +283,10 @@ class QawafilAlaqsa extends Resource
                         }
 
                         return $address_type_admin_array;
-                    })->hideFromIndex()->hideFromDetail()
-                    ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                        return null;
-                    }),
+                    })->hideFromIndex()->hideFromDetail(),
+                // ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                //     return null;
+                // }),
                 Flexible::make(__('newadres'), 'newadresfrom')
                     ->readonly(true)
                     ->limit(1)
@@ -201,7 +295,7 @@ class QawafilAlaqsa extends Resource
 
                         Text::make(__('Name'), "name_address"),
                         Text::make(__("description"), "description"),
-                        Text::make(__("phone number"), "phone_number_address"),
+
                         GoogleMaps::make(__('current_location'), 'current_location'),
                         Select::make(__("Status"), "address_status")->options([
                             '1' => __('active'),
@@ -213,7 +307,7 @@ class QawafilAlaqsa extends Resource
 
 
                 BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->withMeta([
-                    'value' =>"1",
+                    'value' => "1",
                 ])->readonly(),
 
                 DateTime::make(__('QawafilAlaqsa start'), 'start_date'),
@@ -224,57 +318,9 @@ class QawafilAlaqsa extends Resource
                 Boolean::make(__('is_has_Donations'), 'is_donation'),
 
 
-                // Select::make(__('is_reported'), 'is_reported')->options([
-                //     '1' => 'نعم',
-                //     '0' => 'لا',
-                // ])->displayUsingLabels(),
 
 
-                NovaDependencyContainer::make([
-                    Text::make(__("Title"), 'report_title'),
-                    Textarea::make(__('description'), 'report_description'),
-                    Tiptap::make(__('Contents'), 'report_contents')
-                        ->buttons([
-                            'heading',
-                            '|',
-                            'italic',
-                            'bold',
-                            '|',
-                            'link',
-                            'code',
-                            'strike',
-                            'underline',
-                            'highlight',
-                            '|',
-                            'bulletList',
-                            'orderedList',
-                            'br',
-                            'codeBlock',
-                            'blockquote',
-                            '|',
-                            'horizontalRule',
-                            'hardBreak',
-                            '|',
-                            'table',
-                            '|',
-                            'image',
-                            '|',
-                            'textAlign',
-                            '|',
-                            'rtl',
-                            '|',
-                            'history',
-                        ])
-                        ->headingLevels([1, 2, 3, 4, 5, 6]),
 
-
-                    Image::make(__('Image'), 'report_image')->disk('public')->prunable(),
-                    ArrayImages::make(__('Pictures'), 'report_pictures')
-                        ->disk('public'),
-                    Text::make(__("video link"), 'report_video_link'),
-                    Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y'),
-
-                ])->dependsOn('is_reported', '10'),
 
                 BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -307,189 +353,19 @@ class QawafilAlaqsa extends Resource
                         return false;
                     })->rules('required', 'max:1'),
             ])),
-            // (new Panel(__('Budget'), [
 
-            //     Text::make(__('Budget'), "Budjet", function () {
-
-            //         $id = Auth::id();
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') {
-            //             $citye =   City::where('admin_id', $id)
-            //                 ->select('id')->first();
-            //             // dd($id);
-            //             // dd($citye);
-            //             $bud = DB::table('transactions')
-            //                 ->where([
-            //                     ['ref_id', '=', $this->id],
-            //                     ['ref_cite_id', '=', $citye['id']],
-            //                 ])
-            //                 ->first();
-
-            //             if ($bud)  return  $bud->equivelant_amount;
-            //         }
-            //     })->readonly()->canSee(function ($request) {
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') return true;
-            //         return false;
-            //     })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     }),
-            // ])),
-            // (new Panel(__('tooles'), [
-
-            //     Text::make(__('tooles'), "Toole", function () {
-
-            //         $id = Auth::id();
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') {
-            //             $citye =   City::where('admin_id', $id)
-            //                 ->select('id')->first();
-            //             $Tooles = DB::table('project_toole')
-            //                 ->where([
-            //                     ['project_id', '=', $this->id],
-            //                     ['city_id', '=', $citye['id']],
-            //                 ])
-            //                 ->first();
-
-            //             if ($Tooles)  return  $Tooles->tools;
-            //         }
-            //     })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     })->canSee(function ($request) {
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') return true;
-            //         return false;
-            //     }),
-            // ])),
-            // (new Panel(__('Approved'), [
-
-            //     Text::make(__('Approved'), 'approval', function () {
-            //         $id = Auth::id();
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') {
-            //             $citye =   City::where('admin_id', $id)
-            //                 ->select('id')->first();
-            //             $acspet = DB::table('accept_project')
-            //                 ->where([
-            //                     ['project_id', '=', $this->id],
-            //                     ['city_id', '=', $citye['id']],
-            //                 ])
-            //                 ->first();
-
-            //             if ($acspet) {
-            //                 if ($acspet->accepted == "1") return __("Approved");
-            //                 elseif ($acspet->accepted == "2") return __("not Approved");
-            //                 else return "__";
-            //             }
-            //         }
-            //     })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     })->canSee(function ($request) {
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') return true;
-            //         return false;
-            //     })->readonly(true),
-
-
-
-
-            //     Text::make(__('reason_of_reject'), 'reason_of_reject', function () {
-            //         $id = Auth::id();
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') {
-            //             $citye =   City::where('admin_id', $id)
-            //                 ->select('id')->first();
-            //             $acspet = DB::table('accept_project')
-            //                 ->where([
-            //                     ['project_id', '=', $this->id],
-            //                     ['city_id', '=', $citye['id']],
-            //                 ])
-            //                 ->first();
-            //             // return  "1";
-            //             // dd("1");
-            //             if ($acspet)  return  $acspet->reject_reason;
-            //         }
-            //     })->canSee(function ($request) {
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') {
-            //             $id = Auth::id();
-            //             $citye =   City::where('admin_id', $id)
-            //                 ->select('id')->first();
-
-            //             $acspet = DB::table('accept_project')
-            //                 ->where([
-            //                     ['project_id', '=', $this->id],
-            //                     ['city_id', '=', $citye['id']],
-            //                 ])
-            //                 ->first();
-            //             if ($acspet) if ($acspet->accepted == "2")   return true;
-            //             return false;
-            //         }
-            //     })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     }),
-
-
-
-
-
-            // ])),
-            // (new Panel(__('status'), [
-            //     Select::make(__('status'), 'status', function () {
-            //         $id = Auth::id();
-            //         $user = Auth::user();
-            //         if ($user->type() == 'regular_city') {
-            //             $citye =   City::where('admin_id', $id)
-            //                 ->select('id')->first();
-            //             $acspet = DB::table('project_status')
-            //                 ->where([
-            //                     ['project_id', '=', $this->id],
-            //                     ['city_id', '=', $citye['id']],
-            //                 ])
-            //                 ->first();
-
-            //             if ($acspet)  return   $acspet->status;
-            //             else return "__";
-            //         }
-            //     })->options([
-            //         '0' => __('Created'),
-            //         '1' => __('started'),
-            //         '2' => __('completed'),
-            //         '3' => __('Finish'),
-            //     ])
-            //         ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //             return null;
-            //         })->canSee(function ($request) {
-            //             $user = Auth::user();
-            //             if ($user->type() == 'regular_city') return true;
-            //             return false;
-            //         })->readonly(true),
-            // ])),
             (new Panel(__('bus'), [
-
-
-
-
 
                 BelongsToManyField::make(__('bus'), 'bus', 'App\Nova\bus')
                     ->options(Bus::all())
                     ->optionsLabel('bus_number')
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                         return null;
-                    })
-                    ->canSee(function ($request) {
-
-                        $user = Auth::user();
-                        if ($user->type() == 'regular_city') return true;
-                        return false;
                     }),
                 Flexible::make(__('newbus'), 'newbus')
-                    ->readonly(true)->canSee(function ($request) {
+                    ->readonly(true)
 
-                        $user = Auth::user();
-                        if ($user->type() == 'regular_city') return true;
-                        return false;
-                    })->hideFromDetail()->hideFromIndex()
+                    ->hideFromDetail()->hideFromIndex()
                     ->addLayout(__('Add new bus'), 'bus', [
 
                         Select::make(__('BusesCompany'), 'BusesCompany')
@@ -509,31 +385,16 @@ class QawafilAlaqsa extends Resource
                         Number::make(__("Number person on bus"), "number_person_on_bus")->step(1.0),
 
                         Number::make(__("seat price"), "seat_price")->step(1.0),
-
-                        Select::make(__('travel from'), 'from')
+                        Select::make(__('Admin'), 'adminbus')
                             ->options(function () {
-                                $users =  \App\Models\address::all();
+                                $users =  \App\Models\User::all();
                                 $user_type_admin_array =  array();
                                 foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name_address'])];
+                                    $user_type_admin_array += [$user['id'] => ($user['name'])];
                                 }
 
                                 return $user_type_admin_array;
                             }),
-
-
-                        Select::make(__('travel to'), 'to')
-                            ->options(function () {
-                                $users =  \App\Models\address::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name_address'])];
-                                }
-
-                                return $user_type_admin_array;
-                            }),
-
-
                         Text::make(__("Name Driver"), "name_driver"),
                         Text::make(__("phone_number"), "phone_number"),
 
@@ -543,12 +404,33 @@ class QawafilAlaqsa extends Resource
 
 
             ])),
+            (new Panel(__('tooles'), [
+
+                Flexible::make(__('tooles'), 'tools')
+
+                    ->addLayout(__('tooles'), 'toole', [
+                        Select::make(__('user'), 'user_tools')
+                            ->options(function () {
+                                $users =  \App\Models\User::all();
+                                $user_type_admin_array =  array();
+                                foreach ($users as $user) {
+                                    $user_type_admin_array += [$user['id'] => ($user['name'])];
+                                }
+
+                                return $user_type_admin_array;
+                            }),
+
+                        Textarea::make(__('tooles'), "text_tools"),
+
+                    ]),
 
 
+            ])),
 
-            HasMany::make(__('Donations'),'Donations', \App\Nova\Donations::class),
-            HasMany::make(__('TripBooking'),'TripBooking', \App\Nova\TripBooking::class),
-            belongsToMany::make(__('Bus'),'Bus', \App\Nova\Bus::class),
+
+            HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
+            HasMany::make(__('TripBooking'), 'TripBooking', \App\Nova\TripBooking::class),
+            belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
         ];
     }
     public static function beforeCreate(Request $request, $model)
@@ -556,19 +438,51 @@ class QawafilAlaqsa extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->project_type = '2';
-
-        $model->is_reported = '1';
         $model->sector = 'قطاع الأوقاف والمقدسات';
+        $model->is_reported = '1';
+
         $model->trip_to = '1';
     }
-    public static function beforeUpdate(Request $request, $model)
+
+    public static function aftersave(Request $request, $model)
     {
-        // dd($request->newbus);
         $id = Auth::id();
         $model->update_by = $id;
 
         $citye =   City::where('admin_id', $id)
             ->select('id')->first();
+        if ($request->Area) {
+            $areas = json_decode($request->Area);
+            $tokens = [];
+            foreach ($areas as $key => $area) {
+                $user = User::where('id', $area->admin_id)->first();
+                $notification = Notification::where('id', '2')->first();
+
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
+                }
+            }
+            if (!empty($tokens)) {
+
+                Helpers::send_notification($tokens, $notification);
+            }
+        }
+        if ($request->City) {
+            $Citys = json_decode($request->City);
+            $tokens = [];
+            foreach ($Citys as $key => $City) {
+                $user = User::where('id', $City->admin_id)->first();
+                $notification = Notification::where('id', '2')->first();
+
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
+                }
+            }
+            if (!empty($tokens)) {
+
+                Helpers::send_notification($tokens, $notification);
+            }
+        }
 
         if ($request->Budjet) {
 
@@ -602,18 +516,18 @@ class QawafilAlaqsa extends Resource
             foreach ($buss as $key => $value) {
                 array_push($stack, $value->id);
             }
-            // dd($stack);
+
+
             $busss = DB::table('project_bus')->where(
-                ['project_id' => $model->id, 'city_id' => $citye['id']]
+                ['project_id' => $model->id]
             )->get();
             $busstack = array();
             foreach ($busss as $key => $value) {
                 array_push($busstack, $value->bus_id);
             }
             $result = array_intersect($stack, $busstack);
-            //    dd($busstack);
-            // dd( $result);
-            $deleted = DB::table('project_bus')->where(['project_id' => $model->id, 'city_id' => $citye['id']])
+
+            $deleted = DB::table('project_bus')->where(['project_id' => $model->id])
                 ->whereNotIn('bus_id', $result)
                 ->delete();
 
@@ -626,7 +540,7 @@ class QawafilAlaqsa extends Resource
 
                 DB::table('project_bus')
                     ->updateOrInsert(
-                        ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $user->id],
+                        ['project_id' => $model->id, 'bus_id' => $user->id],
 
                     );
             }
@@ -657,45 +571,41 @@ class QawafilAlaqsa extends Resource
                             'bus_number' => $bus['attributes']['bus_number'],
                             'number_of_seats' => $bus['attributes']['number_person_on_bus'],
                             'seat_price' => $bus['attributes']['seat_price'],
-                            'travel_from' => $bus['attributes']['from'],
-                            'travel_to' => '1',
                             'phone_number_driver' => $bus['attributes']['phone_number'],
+                            'admin_id' => $bus['attributes']['adminbus'],
                             'status' => '1',
                         ]
                     );
                 $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
+                $user = Auth::user();
+                if ($user->type() == 'regular_city') {
+                    DB::table('project_bus')
+                        ->updateOrInsert(
+                            ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
 
-                DB::table('project_bus')
-                    ->updateOrInsert(
-                        ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
+                        );
+                } else {
+                    DB::table('project_bus')
+                        ->updateOrInsert(
+                            ['project_id' => $model->id, 'bus_id' => $bus['id']],
 
-                    );
+                        );
+                }
             }
         }
 
-        if ($request->City) {
 
-            $City = json_decode($request->City);
-
-
-            DB::table('project_status')
-                ->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' => $City[0]->id],
-                    ['status' => '0']
-                );
-        }
         if (!$request->trip_from) {
-            if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] && $request->newadresfrom[0]['attributes']['phone_number_address'] && $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['address_status']) {
-                //   dd("hf");
+            if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] &&  $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['address_status']) {
+                // dd("hf");
                 DB::table('addresses')
                     ->Insert(
                         [
                             'name_address' => $request->newadresfrom[0]['attributes']['name_address'],
                             'description' => $request->newadresfrom[0]['attributes']['description'],
-                            'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
                             'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
                             'status' => $request->newadresfrom[0]['attributes']['address_status'],
-                            'type' => '1',
+                            'type' => '4',
                             'created_by' => $id
                         ]
                     );
@@ -706,41 +616,6 @@ class QawafilAlaqsa extends Resource
             }
         } else   $model->trip_from = $request->trip_from;
     }
-    public static function aftersave(Request $request, $model)
-{
-    if ($request->Area) {
-        $areas = json_decode($request->Area);
-        $tokens = [];
-        foreach ($areas as $key => $area) {
-            $user = User::where('id', $area->admin_id)->first();
-            $notification = Notification::where('id', '1')->first();
-
-            if ($user->fcm_token != null && $user->fcm_token != "") {
-                array_push($tokens, $user->fcm_token);
-            }
-        }
-        if (!empty($tokens)) {
-
-            Helpers::send_notification($tokens, $notification);
-        }
-    }
-    if ($request->City) {
-        $Citys = json_decode($request->City);
-        $tokens = [];
-        foreach ($Citys as $key => $City) {
-            $user = User::where('id', $City->admin_id)->first();
-            $notification = Notification::where('id', '1')->first();
-
-            if ($user->fcm_token != null && $user->fcm_token != "") {
-                array_push($tokens, $user->fcm_token);
-            }
-        }
-        if (!empty($tokens)) {
-
-            Helpers::send_notification($tokens, $notification);
-        }
-    }
-}
     /**
      * Get the cards available for the request.
      *
@@ -786,10 +661,11 @@ class QawafilAlaqsa extends Resource
             (new ApprovalRejectProjec)->canSee(function () {
                 $user = Auth::user();
 
-                if ($user->type() == 'regular_city'||$user->type() == 'regular_area') {
+                if ($user->type() == 'regular_city' || $user->type() == 'regular_area') {
                     return true;
                 }
             }),
+            new ProjectStartEnd,
 
         ];
     }

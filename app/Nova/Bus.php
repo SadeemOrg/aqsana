@@ -32,6 +32,7 @@ class Bus extends Resource
     {
         return __('the Busss');
     }
+    // public static $displayInNavigation = false;
 
     public static $priority = 2;
     public static $model = \App\Models\Bus::class;
@@ -67,84 +68,84 @@ class Bus extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make(__('company'), 'company', \App\Nova\BusesCompany::class),
-            Text::make(__("Bus Number"), "bus_number"),
+            Text::make(__("Bus Name"), "bus_number"),
             Number::make(__("Number person on bus"), "number_of_seats")->step(1.0),
             Number::make(__("seat price"), "seat_price")->step(1.0),
-            BelongsTo::make(__('trip from'), 'travelfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
+            // BelongsTo::make(__('trip from'), 'travelfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            Select::make(__('trip from'), 'travel_from')
-                ->options(function () {
-                    $id = Auth::id();
-                    $addresss =  \App\Models\address::where('created_by',  $id)->where('type','1')->get();
-                    $address_type_admin_array =  array();
+            // Select::make(__('trip from'), 'travel_from')
+            //     ->options(function () {
+            //         $id = Auth::id();
+            //         $addresss =  \App\Models\address::where('type','1')->get();
+            //         $address_type_admin_array =  array();
 
-                    foreach ($addresss as $address) {
+            //         foreach ($addresss as $address) {
 
-                        if ($address->Area == null || $this->admin_id == $address['id']) {
-                            $address_type_admin_array += [$address['id'] => ($address['name_address'])];
-                        }
-                    }
+            //             if ($address->Area == null || $this->admin_id == $address['id']) {
+            //                 $address_type_admin_array += [$address['id'] => ($address['name_address'])];
+            //             }
+            //         }
 
-                    return $address_type_admin_array;
-                })->hideFromIndex()->hideFromDetail()
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    return null;
-                }),
-            Flexible::make(__('newadres'), 'newadresfrom')
-                ->readonly(true)
-                ->limit(1)
-                ->hideFromDetail()->hideFromIndex()
-                ->addLayout(__('Add new bus'), 'bus', [
+            //         return $address_type_admin_array;
+            //     })->hideFromIndex()->hideFromDetail()
+            //     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+            //         return null;
+            //     }),
+            // Flexible::make(__('newadres'), 'newadresfrom')
+            //     ->readonly(true)
+            //     ->limit(1)
+            //     ->hideFromDetail()->hideFromIndex()
+            //     ->addLayout(__('Add new bus'), 'bus', [
 
-                    Text::make(__('Name'), "name_address"),
-                    Text::make(__("description"), "description"),
-                    Text::make(__("phone number"), "phone_number_address"),
-                    GoogleMaps::make(__('current_location'), 'current_location'),
-                    Select::make(__("Status"), "address_status")->options([
-                        '1' => __('active'),
-                        '2' => __('not active'),
-                    ]),
+            //         Text::make(__('Name'), "name_address"),
+            //         Text::make(__("description"), "description"),
+            //         Text::make(__("phone number"), "phone_number_address"),
+            //         GoogleMaps::make(__('current_location'), 'current_location'),
+            //         Select::make(__("Status"), "address_status")->options([
+            //             '1' => __('active'),
+            //             '2' => __('not active'),
+            //         ]),
 
-                ]),
-
-
+            //     ]),
 
 
-            BelongsTo::make(__('trip to'), 'travelto', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
-            Select::make(__('trip to'), 'travel_to')
-                ->options(function () {
-                    $id = Auth::id();
-                    $addresss =  \App\Models\address::where('created_by',  $id)->where('type','1')->get();
-                    $address_type_admin_array =  array();
 
-                    foreach ($addresss as $address) {
 
-                        if ($address->Area == null || $this->admin_id == $address['id']) {
-                            $address_type_admin_array += [$address['id'] => ($address['name_address'])];
-                        }
-                    }
+            // BelongsTo::make(__('trip to'), 'travelto', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
+            // Select::make(__('trip to'), 'travel_to')
+            //     ->options(function () {
+            //         $id = Auth::id();
+            //         $addresss =  \App\Models\address::where('type','1')->get();
+            //         $address_type_admin_array =  array();
 
-                    return $address_type_admin_array;
-                })->hideFromIndex()->hideFromDetail()
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    return null;
-                }),
-            Flexible::make(__('newadres'), 'newadresto')
-                ->readonly(true)
-                ->limit(1)
-                ->hideFromDetail()->hideFromIndex()
-                ->addLayout(__('Add new bus'), 'bus', [
+            //         foreach ($addresss as $address) {
 
-                    Text::make(__('Name'), "name_address"),
-                    Text::make(__("description"), "description"),
-                    Text::make(__("phone number"), "phone_number_address"),
-                    GoogleMaps::make(__('current_location'), 'current_location'),
-                    Select::make(__("Status"), "address_status")->options([
-                        '1' => __('active'),
-                        '2' => __('not active'),
-                    ]),
+            //             if ($address->Area == null || $this->admin_id == $address['id']) {
+            //                 $address_type_admin_array += [$address['id'] => ($address['name_address'])];
+            //             }
+            //         }
 
-                ]),
+            //         return $address_type_admin_array;
+            //     })->hideFromIndex()->hideFromDetail()
+            //     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+            //         return null;
+            //     }),
+            // Flexible::make(__('newadres'), 'newadresto')
+            //     ->readonly(true)
+            //     ->limit(1)
+            //     ->hideFromDetail()->hideFromIndex()
+            //     ->addLayout(__('Add new bus'), 'bus', [
+
+            //         Text::make(__('Name'), "name_address"),
+            //         Text::make(__("description"), "description"),
+            //         Text::make(__("phone number"), "phone_number_address"),
+            //         GoogleMaps::make(__('current_location'), 'current_location'),
+            //         Select::make(__("Status"), "address_status")->options([
+            //             '1' => __('active'),
+            //             '2' => __('not active'),
+            //         ]),
+
+            //     ]),
 
             Text::make(__("Name Driver"), "name_driver"),
             Text::make(__("phone_number"), "phone_number_driver"),
@@ -156,7 +157,7 @@ class Bus extends Resource
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
-
+HasMany::make('TripBookings')
         ];
     }
 

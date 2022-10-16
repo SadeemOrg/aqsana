@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 
 class ProjectBudjetActions extends Action
 {
+
     use InteractsWithQueue, Queueable;
     public  function name()
     {
@@ -30,25 +32,58 @@ class ProjectBudjetActions extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         $id = Auth::id();
-        DB::table('project_status')
-        ->where('project_id', $models[0]->id)
-        ->update(['status' => 3]);
 
 
 
-                DB::table('transactions')
-                ->updateOrInsert(
-                    ['ref_id' => $models[0]->id],
-                    [
-                        'main_type' => '2',
-                        'type' => '1',
-                        'Currency' => '3',
-                        'transact_amount' => $fields->amount,
-                        'equivelant_amount' => $fields->amount,
-                        'transaction_date' => $date = date('Y-m-d'),
+        if ($fields->voucher) {
+            $imageName = time() . '.' . $fields->voucher->extension();
+            $fields->voucher->move(public_path('storage'), $imageName);
 
-                    ]
-                );
+            DB::table('project_status')
+            ->where('project_id', $models[0]->id)
+            ->update(['status' => 4]);
+            DB::table('transactions')
+            ->updateOrInsert(
+                ['ref_id' => $models[0]->id],
+                [
+                    'main_type' => '2',
+                    'type' => '1',
+                    'Currency' => '3',
+                    'transact_amount' => $fields->amount,
+                    'equivelant_amount' => $fields->amount,
+                    'transaction_date' => $date = date('Y-m-d'),
+                    'voucher' => $imageName,
+
+                ]
+            );
+
+        }
+        else{
+            DB::table('project_status')
+            ->where('project_id', $models[0]->id)
+            ->update(['status' => 3]);
+            DB::table('transactions')
+            ->updateOrInsert(
+                ['ref_id' => $models[0]->id],
+                [
+                    'main_type' => '2',
+                    'type' => '1',
+                    'Currency' => '3',
+                    'transact_amount' => $fields->amount,
+                    'equivelant_amount' => $fields->amount,
+                    'transaction_date' => $date = date('Y-m-d'),
+
+
+                ]
+            );
+        }
+
+
+
+
+
+
+
 
     }
 
@@ -61,7 +96,8 @@ class ProjectBudjetActions extends Action
     {
 
         return [
-            Text::make(__("Budjet"),"amount"),
+            Text::make(__("Budjet"), "amount"),
+            Image::make(__('voucher'), 'voucher')->disk('storage')->prunable(),
         ];
     }
 }

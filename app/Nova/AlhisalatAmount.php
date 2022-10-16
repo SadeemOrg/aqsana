@@ -40,7 +40,7 @@ class AlhisalatAmount extends Resource
     public static $search = [
         'id',
     ];
-    public static $priority = 3;
+    public static $priority = 2;
     public static function label()
     {
         return __('Alhisalat');

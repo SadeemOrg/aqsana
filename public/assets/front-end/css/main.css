@@ -7,7 +7,7 @@ header.sticky-h {box-shadow: 0 6px 12px -10px #349a37}
 } */
 
 /** Start home page **/
-#association-news-slider-1 .owl-stage, #association-news-slider .owl-stage, #association-news-slider-2 .owl-stage {
+#association-news-slider-1 .owl-stage, #association-news-slider .owl-stage, #association-news-slider-2 .owl-stage,#association-news-slider-3 .owl-stage {
   padding: 2.5rem 0;
   padding-top: 1.5rem;
 }
@@ -44,6 +44,8 @@ svg path, svg circle {transition: .2s;}
 .facebook svg:hover circle {stroke: #4267B2;  }
 .instagram svg:hover path {fill: #ffcb52;}
 .instagram svg:hover circle {stroke: #ffcb52;}
+.whatsApp svg:hover path {fill: #1fb141;}
+
 .twitter svg:hover path {fill: #1DA1F2;}
 .twitter svg:hover circle {stroke: #1DA1F2;}
 .youtube svg:hover path {fill: #FF0000;}

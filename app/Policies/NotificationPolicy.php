@@ -30,6 +30,7 @@ class NotificationPolicy
      */
     public function view(User $user, Notification $notification)
     {
+
         return ($user->type() == 'admin');
     }
 
@@ -65,7 +66,12 @@ class NotificationPolicy
      */
     public function delete(User $user, Notification $notification)
     {
-        return ($user->type() == 'admin');
+        if(! ($notification->myid() > 0  &&  $notification->myid() < 6) )
+        {
+            return true;
+        }
+        else false;
+
     }
 
     /**

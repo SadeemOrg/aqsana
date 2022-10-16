@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Models\Area;
 use App\Models\City;
+use App\Nova\Actions\ProjectBillActions;
 use App\Nova\Actions\ProjectBudjetActions;
 use Benjacho\BelongsToManyField\BelongsToManyField;
 use Illuminate\Http\Request;
@@ -112,6 +113,22 @@ class ProjectBudjet extends Resource
             }),
 
             ActionButton::make(__('Action'))
+            ->action(ProjectBillActions::class, $this->id)
+            ->text(__('Add bill'))
+            ->showLoadingAnimation()
+            // ->confirmButtonText(__('Add budjet'), $this->id)
+            ->loadingColor('#fff')
+            ->canSee(function(){
+                $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+            if ( $projects )
+            {
+
+                if ($projects->status == '3')  return true;
+
+            }
+            }),
+
+            ActionButton::make(__('Action'))
             ->action(ProjectBudjetActions::class, $this->id)
             ->text(__('finished'))
             ->showLoadingAnimation()
@@ -120,7 +137,7 @@ class ProjectBudjet extends Resource
                 $projects = DB::table('project_status')->where('project_id', $this->id)->first();
             if ( $projects )
             {
-            if ($projects->status == '3')  return true;
+            if ($projects->status == '4')  return true;
 
 
             }
@@ -191,6 +208,7 @@ class ProjectBudjet extends Resource
     {
         return [
             new ProjectBudjetActions,
+            new ProjectBillActions,
         ];
     }
 }

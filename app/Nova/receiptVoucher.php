@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\BillPdf;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
@@ -13,6 +14,8 @@ use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Image;
+use Pdmfc\NovaFields\ActionButton;
+
 class receiptVoucher extends Resource
 {
     /**
@@ -61,35 +64,66 @@ class receiptVoucher extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-
+            ActionButton::make(__('POST NEWS'))
+            ->action((new BillPdf)->confirmText(__('Are you sure you want to post  this NEWS?'))
+                ->confirmButtonText(__('print'))
+                ->cancelButtonText(__('Dont print')), $this->id)
+              ->text(__('print'))->showLoadingAnimation()
+            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+            Text::make(__('Name'),'name'),
             Select::make(__("type"), "type")->options([
                 '1' => __('Alhisalat'),
-                '2' => __('doner'),
+                '2' => __('Donations'),
                 '3' => __('the receipt Voucher'),
+
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class)->canSee(function(){
-                return $this->type === '1';
-            }),
-            BelongsTo::make(__('reference_id'), 'Donations', \App\Nova\Donations::class)->canSee(function(){
-                return $this->type === '2';
-            }),
-          Text::make(__('reference_id'), 'reference_id')->readonly()->hideWhenCreating()->hideWhenUpdating()->canSee(function(){
-            return $this->type === '3';
-        }),
+
+            Select::make(__("type"), "type")->options([
+
+                '2' => __('Donations'),
+                '3' => __('the receipt Voucher'),
+
+            ])->displayUsingLabels()->hideFromIndex()->hideFromDetail(),
+
 
             NovaDependencyContainer::make([
-                Select::make(__('Alhisalat'), "ref_id")
+                Select::make(__('project'), "ref_id")
                     ->options(function () {
-                        $projects =  \App\Models\Alhisalat::all();
+                        $projects =  \App\Models\Project::all();
                         $user_type_admin_array =  array();
                         foreach ($projects as $project) {
-                            $user_type_admin_array += [$project['id'] => ($project['name'])];
+                            $user_type_admin_array += [$project['id'] => ($project['project_name'])];
                         }
 
                         return $user_type_admin_array;
                     })
                     ->displayUsingLabels(),
-            ])->dependsOn("type", '1')->hideFromDetail()->hideFromIndex(),
+            ])->dependsOn("type", '2')->hideFromDetail()->hideFromIndex(),
+
+            BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class)->canSee(function () {
+                return $this->type === '1';
+            }),
+            BelongsTo::make(__('reference_id'), 'Donations', \App\Nova\Donations::class)->canSee(function () {
+                return $this->type === '2';
+            }),
+            Text::make(__('reference_id'), 'reference_id')->readonly()->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
+                return $this->type === '3';
+            }),
+
+
+            // NovaDependencyContainer::make([
+            //     Select::make(__('Alhisalat'), "ref_id")
+            //         ->options(function () {
+            //             $projects =  \App\Models\Alhisalat::all();
+            //             $user_type_admin_array =  array();
+            //             foreach ($projects as $project) {
+            //                 $user_type_admin_array += [$project['id'] => ($project['name'])];
+            //             }
+
+            //             return $user_type_admin_array;
+            //         })
+            //         ->displayUsingLabels(),
+            // ])->dependsOn("type", '1')->hideFromDetail()->hideFromIndex(),
             // NovaDependencyContainer::make([
             //     Select::make(__('Donations'), "ref_id")
             //         ->options(function () {
@@ -116,7 +150,7 @@ class receiptVoucher extends Resource
 
             Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
-            Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
+            // Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
 
             // Select::make(__('approval'), 'approval')->options([
             //     1 => 'approval',
@@ -138,19 +172,36 @@ class receiptVoucher extends Resource
         $model->created_by = $id;
         $model->main_type = '1';
         $model->type = '3';
-        $model->equivelant_amount=$new->rate*$request->transact_amount;
+        $model->equivelant_amount = $new->rate * $request->transact_amount;
     }
     public static function beforeUpdate(Request $request, $model)
     {
+
 
         $currencies = DB::table('currencies')->where('id', $request->Currenc)->first();
         $id = Auth::id();
         $model->update_by = $id;
         if ($model->Currenc->id == $request->Currenc) {
             $rate = ((int)$model->equivelant_amount / (int)$model->transact_amount);
-        }
-        else  $rate =$currencies->rate ;
+        } else  $rate = $currencies->rate;
         $model->equivelant_amount = $rate * $request->transact_amount;
+    }
+    public static function beforesave(Request $request, $model)
+    {
+        // dd(date('Y-m-d'));
+        $new = DB::table('currencies')->where('id', $request->Currenc)->first();
+        if($request->type ==2){
+            DB::table('donations')
+            ->Insert(
+
+                [
+                    'project_id' => $request->ref_id,
+                    'donor_name' => $request->name  ,
+                    'amount' => $new->rate * $request->transact_amount,
+                    'created_at' =>  date('Y-m-d'),
+                ]
+            );
+        }
 
     }
     /**
@@ -194,6 +245,8 @@ class receiptVoucher extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new BillPdf,
+        ];
     }
 }

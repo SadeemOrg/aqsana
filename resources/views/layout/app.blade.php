@@ -88,7 +88,6 @@
                     enabled: true
                 },
             });
-
         })(jQuery);
     </script>
 
@@ -101,25 +100,19 @@
                 font-weight: 700px;
                 src: url('/public/assets/front-end/fonts/alfont_com_JF-Flat-Bold.ttf')
             }
-
             @font-face {
                 font-family: "alfont_com_JF-Flat-regular";
                 font-weight: 400px;
                 src: url('/public/assets/front-end/fonts/alfont_com_JF-Flat-regular.ttf')
             }
-
             @font-face {
                 font-family: "Rpt-Bold";
-
                 font-weight: 700px;
                 src: url({{asset('assets/front-end/fonts/ArbFONTS-arbfonts-rpt-Bold.ttf')}});
-
             }
-
             .font-FlatBold {
                 font-family: 'alfont_com_JF-Flat-Bold' !important
             }
-
             .font-RpT-Bold {
                 font-family: 'Rpt-Bold' !important
             }
@@ -134,7 +127,7 @@
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 </head>
 
-<body dir="rtl">
+<body class="mt-32" dir="rtl">
     @include('layout.front-end.partial._header')
     @yield('content')
     @include('layout.front-end.partial._footer')
@@ -150,11 +143,8 @@
     <script>
         $('#search').on('keyup', function() {
             var val = $('#search').val().toLowerCase();
-            console.log('val', val)
             if (val.length > 2) {
-                console.log('val', val)
                 $('.search-bar').siblings().css('display', 'flex');
-                console.log('val1', val)
                 $.get({
                     url: '{{url(' / ')}}/search/' + val,
                     data: {
@@ -165,11 +155,8 @@
                         // console.log('ameed',$('.search-result-box').html(''));
                         $('.search-result-box').html('');
                         $('.svgSearch').css('display', 'none');
-
                     },
-
                     success: function(response) {
-                        console.log("🚀 ~ file: app.blade.php ~ line 581 ~ $ ~ response", response)
                         var elements = [];
                         response.map(item => {
                             var trimmedString = {
@@ -195,14 +182,11 @@
                 });
             }
         });
-
         $(document).click(function(e) {
-
             if (e.target.id != 'searchListId') {
                 $("#searchListId").hide();
             }
         });
-
         var owl = $("#main-home-slider");
         owl.owlCarousel({
             rtl: true,
@@ -265,8 +249,6 @@
                 }
             }
         })
-
-
         var owl2 = $("#association-news-slider-1");
         owl2.owlCarousel({
             rtl: true,
@@ -312,8 +294,6 @@
                 }
             }
         })
-
-
         var owl3 = $("#association-news-slider-2");
         owl3.owlCarousel({
             rtl: true,
@@ -350,13 +330,46 @@
                 }
             }
         })
-
+        var owl4 = $("#association-news-slider-3");
+        owl4.owlCarousel({
+            rtl: true,
+            loop: false,
+            margin: 30,
+            stagePadding: 20,
+            dots: true,
+            responsive: {
+                //X-Small
+                0: {
+                    items: 1
+                },
+                //Medium
+                768: {
+                    items: 2
+                },
+                850: {
+                    items: 2
+                },
+                1024: {
+                    items: 3
+                },
+                //Large
+                1120: {
+                    items: 3
+                },
+                //Extra large
+                1200: {
+                    items: 3
+                },
+                //Extra extra large
+                1400: {
+                    items: 3
+                }
+            }
+        })
         function openWindow(url) {
             window.open(url, 'sharer', 'toolbar=0,status=0,width=580,height=400');
             return false;
         };
-
-
         $(document).ready(function() {
             $('.img-thumbnail').magnificPopup({
                 delegate: 'a',
@@ -393,8 +406,7 @@
                 $(".Ctnbtn").text("تأكيد الدفع");
             }
             if (pageNumber == 2) {
-                if ($('#privecy').is(":checked") == false && $('#visa').is(":checked") == false) {
-                    console.log("not checked");
+                if ($('#privecy').is(":checked") == false && $('.paymentMethod').is(":checked") == false ) {
                     toastr.options = {
                         "closeButton": true,
                         "debug": false,
@@ -405,12 +417,11 @@
                         "showMethod": "fadeIn",
                         "hideMethod": "fadeOut"
                     };
-                    toastr.error('  الرجاء وضع اشارة صح على شروط الخصوصية والالغاء والدفع عن طريق الفيزا');
+                    toastr.error('  الرجاء وضع اشارة صح على شروط الخصوصية والالغاء واختيار طريقة الدفع المناسبة ');
                     pageNumber = 1;
                     return false;
                 }
-                if ($('#privecy').is(":checked") == false && $('#visa').is(":checked") == true) {
-                    console.log("visa");
+                if ($('#privecy').is(":checked") == false && $('.paymentMethod').is(":checked") == true ) {
                     toastr.options = {
                         "closeButton": true,
                         "debug": false,
@@ -425,8 +436,8 @@
                     pageNumber = 1;
                     return false;
                 }
-                if ($('#privecy').is(":checked") == true && $('#visa').is(":checked") == false) {
-                    console.log("privecy");
+                if ($('#privecy').is(":checked") == true && $('.paymentMethod').is(":checked") == false ) {
+                   console.log($('#privecy').is(":checked") == true && $('.paymentMethod').is(":checked") == false )
                     toastr.options = {
                         "closeButton": true,
                         "debug": false,
@@ -437,7 +448,7 @@
                         "showMethod": "fadeIn",
                         "hideMethod": "fadeOut"
                     };
-                    toastr.error(' الرجاء وضع اشارة صح على التبرع في فيزا كارد');
+                    toastr.error(' الرجاء اختيار طريقة الدفع المناسبة ');
                     pageNumber = 1;
                     return false;
                 } else {
@@ -447,18 +458,6 @@
                 }
             }
         });
-
-
-        // $("#price").keyup(function() {
-        //     var price = $("#price").val();
-        //     if(price == ""){
-        //         $(".Ctnbtn").attr("disabled", true);
-        //     }
-        //     else{
-        //         $(".Ctnbtn").attr("disabled", false);
-        //     }
-        // } );
-
         $("#PreviousPageDonations").click(function() {
             previousPage++;
             if (previousPage == 1) {
@@ -470,11 +469,9 @@
                 $(".Ctnbtn").text("متابعة");
             }
         });
-
         $(".showModal").click(function() {
             $(".PrivecySettingModal").toggleClass("hiddenModal");
         });
-
         $(".tabs .showModal").click(function() {
             $(".PrivecySettingModal .tab").hide();
             if ($(this).data("tab") == 1) {
@@ -484,26 +481,7 @@
             }
             $('.tab-' + $(this).data('tab')).fadeIn();
         });
-
-        // $("#visa").click(function() {
-        // if($("#privecy").is(":checked")){
-        //     $(".Ctnbtn").attr("disabled", false);
-        // }
-        // else{
-        //     $(".Ctnbtn").attr("disabled", true);
-        // }
-        // });
-
-        // $("#privecy").click(function() {
-        // if($("#visa").is(":checked")){
-        //     $(".Ctnbtn").attr("disabled", false);
-        // }
-        // else{
-        //     $(".Ctnbtn").attr("disabled", true);
-        // }
-        // });
         $(".contactUsForm").submit(function(e) {
-
             e.preventDefault()
             var $name = $('input[name="name"]').val();
             var $phone = $('input[name="phone"]').val();
@@ -549,9 +527,7 @@
                 }
             })
         })
-
         $(".LandingPage").submit(function(e) {
-            console.log("asss")
             e.preventDefault();
             var $name = $('input[name="name"]').val();
             var $phone = $('input[name="phone"]').val();
@@ -566,6 +542,8 @@
                 },
                 success: function(data) {
                     if ($.isEmptyObject(data.error)) {
+                        $(".formInputData").hide();
+                        $(".thanksMsg").removeClass("hidden");
                         toastr.options = {
                             "closeButton": true,
                             "debug": false,
@@ -622,17 +600,11 @@
         appId: "1:16943275285:web:c95070543cf570cb265d1c",
         measurementId: "G-FHN8R2KH3M"
     };
-
     firebase.initializeApp(firebaseConfig);
-
-
-
     const messaging = firebase.messaging();
-
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register("../firebase-messaging-sw.js")
             .then(function(registration) {
-
                 console.log('Registration successful, scope is:', registration.scope);
             }).catch(function(err) {
                 console.log('Service worker registration failed, error:', err);
@@ -640,22 +612,16 @@
     }
     messaging.requestPermission()
         .then(function() {
-
             console.log("Notification permission granted.");
-
      // get the token in the form of promise
 	return messaging.getToken()
     })
     .then(function(token) {
     // print the token on the HTML page
  
-
             <?php
             if (\Illuminate\Support\Facades\Auth::user() != null) {
-
-
             ?>
-
                 $.post({
                     url: '{{url(' / ')}}api/cm-firebase-token',
                     data: {
@@ -663,32 +629,24 @@
                     },
                     dataType: 'json',
                     beforeSend: function() {
-
                     },
                     success: function(response) {
                         console.log(response.body);
                     },
                     complete: function() {
-
                     },
                 });
             <?php
             } else {
-
-
             ?>
                 console.log("not Auth")
-
             <?php
             }
             ?>
-
-
         })
         .catch(function(err) {
             console.log("Unable to get permission to notify.", err);
         });
-
     messaging.onMessage(function(payload) {
         console.log(payload);
         var notify;
@@ -699,13 +657,10 @@
         });
         console.log(payload.notification);
     });
-
     jQuery(function($) {
         var $firstname = $('input[name="firstName"]');
         var $lastname = $('input[name="lastName"]');
         var $fullname = $('input[name="donor_name"]');
-
-
         $firstname.add($lastname).keyup(function() {
             $fullname.val($firstname.val() + ' ' + $lastname.val());
         });

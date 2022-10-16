@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationTest;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +16,12 @@ use App\Http\Controllers\NotificationTest;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::post("first/", [HomeController::class, "first"])->name('first');
+Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');
+
+Route::get("/cars",[HomeController::class,'index']);
 
 Route::get("toastr-notification", [HomeController::class, "showToastrMessages"]);
 
@@ -56,18 +63,39 @@ Route::get('/search/{val}/', [HomeController::class, 'search'])->name('search');
 
 Route::get('/project', [HomeController::class, 'project'])->name('project');
 Route::get('/project/{id}', [HomeController::class, 'getprojectDetail'])->name('getprojectDetail');
+Route::get('/projectapi/{id}', [HomeController::class, 'getprojectDetailapi'])->name('getprojectDetailapi');
 
 Route::get('/testNotfiy', function (){
     return view('Pages.testNotfiy');
 });
 
-Route::get('/bills', function (){
-    return view('Pages.Bills');
-});
+
+// Route::get('/library', function (){
+//     return view('Pages.Library.Library');
+// });
+// Route::get('/libraryDetail', function (){
+//     return view('Pages.Library.libraryDetail');
+// });
+Route::get('/library', [HomeController::class, 'library'])->name('library');
+Route::get('/librarydetail/{id}', [HomeController::class, 'libraryDetail'])->name('libraryDetail');
+
+// Route::get('/bills', function (){
+
+//     return view('Pages.Bills');
+// });
+Route::get('bill/{id}', [HomeController::class, 'bills'])->name('bills');
+
+// Route::get('bill', [HomeController::class, 'billsPdf']);
 
 
 Route::get('/landingPage', function (){
+
     return view('almowahde.landingPage');
+});
+
+Route::get('/payPal', function (){
+
+    return view('almowahde.PayPal');
 });
 
 Route::get('/SendNotificationTest',[NotificationTest::class,'sendNotfiy'])->name('sendNotfiy');

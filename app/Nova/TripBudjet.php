@@ -55,6 +55,7 @@ class TripBudjet extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
     public static function indexQuery(NovaRequest $request, $query)
     {
 
@@ -74,6 +75,7 @@ class TripBudjet extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
+        return false;
         $user = Auth::user();
         if ($user->type() == 'admin' || $user->type() == 'financial_user') {
             return true;

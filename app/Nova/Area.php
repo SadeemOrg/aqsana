@@ -7,7 +7,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Select;
+use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -81,49 +81,43 @@ class Area extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('Name'),'name'),
-            Text::make(__('Describtion'),'describtion'),
+            Text::make(__('Name'), 'name'),
+            Text::make(__('Describtion'), 'describtion'),
 
-            Select::make(__('admin'),'admin_id')
-            ->options( function() {
-                $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
+            Select::make(__('admin'), 'admin_id')
+                ->options(function () {
+                    $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
 
-                $user_type_admin_array =  array();
+                    $user_type_admin_array =  array();
 
-                foreach($users as $user) {
-
-                    if ($user->Area == null || $this->admin_id== $user['id'] ) {
-                    $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
-                }
-                }
-
-                return $user_type_admin_array;
-               })->hideFromIndex()->hideFromDetail(),
-                BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->
-                    hideWhenUpdating(),
-                  BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->
-                  hideWhenUpdating(),
-                  BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->
-                  hideWhenUpdating(),
+                    foreach ($users as $user) {
 
 
-               HasMany::make("City","City")
+                        $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
+                    }
+
+                    return $user_type_admin_array;
+                })->hideFromIndex()->hideFromDetail(),
+            BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+
+
+            HasMany::make(__("City"), "City", \App\Nova\City::class)
         ];
     }
 
     public static function beforeCreate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->created_by=$id;
+        $model->created_by = $id;
     }
 
 
     public static function beforeUpdate(Request $request, $model)
     {
         $id = Auth::id();
-        $model->update_by=$id;
-
-
+        $model->update_by = $id;
     }
 
 
