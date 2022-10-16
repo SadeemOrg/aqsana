@@ -615,6 +615,7 @@
                                     $(".secondPage").css("display", "none");
                                     $(".Ctnbtn").css("display", "none");
                                     $(".btn-btn-payPal").css("display", "none");
+                                    $(".InputValue").html(amount +".00"+"شيكل اسرائيلي ");
                                 });
                             },
                             onError: function(err) {
