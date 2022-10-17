@@ -45,7 +45,7 @@ class HomeController extends Controller
     {
         $Donations =  Donations::where("id", $id)->first();
 
-        return view('Pages.Bills', compact('Donations'));
+        return view('Pages.Bills.Bills', compact('Donations'));
     }
 
     public function showToastrMessages()

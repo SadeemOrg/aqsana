@@ -9,6 +9,7 @@
         $newDate = explode(' ', $Donations->created_at);
         // dd($Donations->amount);
     @endphp
+    <!--Hebrow Bills -->
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 -mt-14 px-2" id="printJS-table">
         <div class="flex sm:flex-row flex-col-reverse items-center justify-between mt-24">
             <div class="basis-1/2">
@@ -111,12 +112,12 @@
                 </div>
             </div>
         </div>
-<div  class="flex flex-row items-center justify-end mx-7 mb-6">
-        <button dir="ltr" type="button" onclick="window.print()"
-            class=" rounded-[50px] bg-[#349A37] text-white text-base w-28 py-4 mt-4 font-[700] hover:bg-[#101426] duration-200">
-            طباعة
-        </button>
-    </div>
+        <div class="flex flex-row items-center justify-end mx-7 mb-6">
+            <button dir="ltr" type="button" onclick="window.print()"
+                class=" rounded-[50px] bg-[#349A37] text-white text-base w-28 py-4 mt-4 font-[700] hover:bg-[#101426] duration-200">
+                طباعة
+            </button>
+        </div>
 
     </div>
 @endsection
