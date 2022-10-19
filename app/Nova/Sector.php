@@ -24,6 +24,15 @@ class Sector extends Resource
      */
     public static $title = 'id';
 
+    public static function label()
+    {
+        return __('sectors');
+    }
+    public static function group()
+    {
+        return __('sectors');
+    }
+
     /**
      * The columns that should be searched.
      *
