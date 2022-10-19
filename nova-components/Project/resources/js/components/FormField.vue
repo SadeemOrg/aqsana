@@ -5,19 +5,22 @@
         :show-help-text="showHelpText"
     >
         <template slot="field">
-<p > القطاع  </p>
+            <p>القطاع</p>
             <select
                 class="w-full form-control form-input form-input-bordered mt-4"
                 name="LeaveType"
                 @change="onChange($event)"
                 v-model="key"
             >
-             <option v-for="item in Sectors" :key="item.id" :value="item.id">
-                    {{ item.text}}</option
+               <option  :value="0">
+                    مخرجات عامة</option
+                >
+                <option v-for="item in Sectors" :key="item.id" :value="item.id">
+                    {{ item.text }}</option
                 >
             </select>
-            <p class="mt-4"> المشروع  </p>
-  <!-- <select  @change="onChange($event)"
+            <p  v-if="projectshow" class="mt-4">المشروع</p>
+            <!-- <select  @change="onChange($event)"
                 class="w-full form-control form-input form-input-bordered mt-4"
                 name="LeaveTypde"
             >
@@ -26,11 +29,14 @@
                 >
             </select> -->
             <select
+            v-if="projectshow"
                 :id="field.name"
                 v-model="value"
                 class="w-full form-control form-input form-input-bordered mt-4"
                 name="LeaveTypde"
             >
+
+
                 <option
                     v-for="item in items"
                     :key="item.project_type"
@@ -39,9 +45,10 @@
                     {{ item.project_name }}</option
                 >
             </select>
-
         </template>
+
     </default-field>
+
 </template>
 
 <script>
@@ -50,8 +57,9 @@ import { FormField, HandlesValidationErrors } from "laravel-nova";
 export default {
     data() {
         return {
-            items: [{ message: "Foo" }, { message: "Bar" }],
-            Sectors:  [{ id: "Foo" }, { id: "Bar" }],
+             projectshow: false,
+            items: [],
+            Sectors: []
         };
     },
 
@@ -73,9 +81,17 @@ export default {
                     project_id: event.target.value
                 })
                 .then(response => {
-                    //  alert(response.data),axios
                     this.items = response.data;
-                });
+                                 });
+                              if ( event.target.value != 0) {
+                          this.projectshow = true;
+                              }
+                              else{
+                                 this.projectshow = false;
+                              }
+
+
+
         },
         Sectors: function() {
             // console.log("dddjdskk");

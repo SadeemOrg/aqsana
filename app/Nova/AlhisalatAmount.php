@@ -52,6 +52,7 @@ class AlhisalatAmount extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
+        return false;
         $user = Auth::user();
         if ($user->type() == 'admin' || $user->type() == 'financial_user') {
             return true;

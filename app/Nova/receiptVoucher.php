@@ -2,7 +2,10 @@
 
 namespace App\Nova;
 
+use App\Models\Alhisalat;
+use App\Models\Donations;
 use App\Nova\Actions\BillPdf;
+use Benjacho\BelongsToManyField\BelongsToManyField;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
@@ -13,8 +16,10 @@ use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
 use Pdmfc\NovaFields\ActionButton;
+use Whitecube\NovaFlexibleContent\Flexible;
 
 class receiptVoucher extends Resource
 {
@@ -45,6 +50,12 @@ class receiptVoucher extends Resource
      *
      * @var array
      */
+
+    protected $casts = [
+        'shek_date' => 'date',
+        'Payment_type_details' => FlexibleCast::class,
+
+    ];
     public static $search = [
         'id',
     ];
@@ -65,109 +76,169 @@ class receiptVoucher extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             ActionButton::make(__('POST NEWS'))
-            ->action((new BillPdf)->confirmText(__('Are you sure you want to post  this NEWS?'))
-                ->confirmButtonText(__('print'))
-                ->cancelButtonText(__('Dont print')), $this->id)
-              ->text(__('print'))->showLoadingAnimation()
-            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
-            Text::make(__('Name'),'name'),
+                ->action((new BillPdf)->confirmText(__('Are you sure you want to post  this NEWS?'))
+                    ->confirmButtonText(__('print'))
+                    ->cancelButtonText(__('Dont print')), $this->id)
+                ->text(__('print'))->showLoadingAnimation()
+                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
             Select::make(__("type"), "type")->options([
                 '1' => __('Alhisalat'),
                 '2' => __('Donations'),
-                '3' => __('the receipt Voucher'),
-
-            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
-
-            Select::make(__("type"), "type")->options([
-
-                '2' => __('Donations'),
-                '3' => __('the receipt Voucher'),
-
-            ])->displayUsingLabels()->hideFromIndex()->hideFromDetail(),
-
+            ])->displayUsingLabels(),
 
             NovaDependencyContainer::make([
-                Select::make(__('project'), "ref_id")
+                Select::make(__('Alhisalat'), "ref_id")
                     ->options(function () {
-                        $projects =  \App\Models\Project::all();
+                        $Alhisalats =  \App\Models\Alhisalat::all();
                         $user_type_admin_array =  array();
-                        foreach ($projects as $project) {
-                            $user_type_admin_array += [$project['id'] => ($project['project_name'])];
+                        foreach ($Alhisalats as $Alhisalat) {
+                            $user_type_admin_array += [$Alhisalat['id'] => ($Alhisalat['address_id'])];
                         }
 
                         return $user_type_admin_array;
                     })
                     ->displayUsingLabels(),
+
+
+
+
+            ])->dependsOn("type", '1')->hideFromDetail()->hideFromIndex(),
+
+
+            Text::make(__('transact amount'), 'transact_amount'),
+            Select::make(__('Currenc'), "Currency")
+                ->options(function () {
+                    $Alhisalats =  \App\Models\Currency::all();
+                    $user_type_admin_array =  array();
+                    foreach ($Alhisalats as $Alhisalat) {
+                        $user_type_admin_array += [$Alhisalat['id'] => ($Alhisalat['name'])];
+                    }
+
+                    return $user_type_admin_array;
+                })
+                ->displayUsingLabels(),
+            Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
+            Text::make(__('description'), 'description'),
+            Date::make(__('date'), 'transaction_date'),
+
+
+            NovaDependencyContainer::make([
+                Text::make(__('Name'), 'name'),
+                // Select::make(__('project'), "ref_id")
+                //     ->options(function () {
+                //         $Alhisalats =  \App\Models\User::all();
+                //         $user_type_admin_array =  array();
+                //         foreach ($Alhisalats as $Alhisalat) {
+                //             $user_type_admin_array += [$Alhisalat['id'] => ($Alhisalat['name'])];
+                //         }
+
+                //         return $user_type_admin_array;
+                //     })
+                //     ->displayUsingLabels(),
+
+                Select::make(__("billing language"), "lang")->options([
+                    '1' => __('ar'),
+                    '2' => __('en'),
+                    '3' => __('hr'),
+                ])->displayUsingLabels(),
+                Select::make(__("Payment_type"), "Payment_type")->options([
+                    '1' => __('cash'),
+                    '2' => __('shek'),
+                    '3' => __('visa'),
+                    '4' => __('hawale'),
+                    '5' => __('Other'),
+                ])->displayUsingLabels(),
+
+
+
+                NovaDependencyContainer::make([
+                    Flexible::make(__('Payment_type_details'), 'Payment_type_details')
+
+                        ->addLayout(__('tooles'), 'Payment_type_details ', [
+                            Text::make(__('Doubt value'), "equivelant_amount")->rules('required'),
+                            Text::make(__('bank number'), "equivelant_amount"),
+                            Text::make(__('Branch number'), "equivelant_amount"),
+                            Text::make(__('account number'), "equivelant_amount"),
+                            Text::make(__('Doubt number'), "equivelant_amount"),
+
+                            DateTime::make(__('History of doubt'), 'Date')
+                            ->format('DD/MM/YYYY HH:mm')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
+
+                        ]),
+                ])->dependsOn("Payment_type", '2')->hideFromDetail()->hideFromIndex(),
+
+                NovaDependencyContainer::make([
+                    Flexible::make(__('Payment_type_details'), 'Payment_type_details')
+
+                        ->addLayout(__('tooles'), 'Payment_type_details ', [
+                            Text::make(__('Doubt value'), "equivelant_amount")->rules('required'),
+
+                            Text::make(__('card type'), "equivelant_amount"),
+                            Text::make(__('card number'), "equivelant_amount"),
+                            Text::make(__('number of installments'), "equivelant_amount"),
+
+                            DateTime::make(__('History of doubt'), 'Date')
+                            ->format('DD/MM/YYYY HH:mm')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
+
+                        ]),
+                ])->dependsOn("Payment_type", '3')->hideFromDetail()->hideFromIndex(),
+
+                NovaDependencyContainer::make([
+                    Flexible::make(__('Payment_type_details'), 'Payment_type_details')
+
+                        ->addLayout(__('tooles'), 'Payment_type_details ', [
+                            Text::make(__('Doubt value'), "equivelant_amount")->rules('required'),
+
+                            Text::make(__('bank number'), "equivelant_amount"),
+                            Text::make(__('Branch number'), "equivelant_amount"),
+                            Text::make(__('account number'), "equivelant_amount"),
+
+                            DateTime::make(__('History of doubt'), 'Date')
+                            ->format('DD/MM/YYYY HH:mm')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
+
+                        ])->stacked(),
+                ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
+
+                NovaDependencyContainer::make([
+                    Flexible::make(__('Payment_type_details'), 'Payment_type_details')
+
+                        ->addLayout(__('tooles'), 'Payment_type_details ', [
+                            Text::make(__('Doubt value'), "equivelant_amount")->rules('required'),
+
+                            Text::make(__('type'), "equivelant_amount1")->rules('required'),
+
+
+                            DateTime::make(__('History of doubt'), 'Date')
+                            ->format('DD/MM/YYYY HH:mm')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
+
+                        ]),
+                ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
+
+                // BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class),
+
             ])->dependsOn("type", '2')->hideFromDetail()->hideFromIndex(),
 
-            BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class)->canSee(function () {
-                return $this->type === '1';
-            }),
-            BelongsTo::make(__('reference_id'), 'Donations', \App\Nova\Donations::class)->canSee(function () {
-                return $this->type === '2';
-            }),
-            Text::make(__('reference_id'), 'reference_id')->readonly()->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
-                return $this->type === '3';
-            }),
 
-
-            // NovaDependencyContainer::make([
-            //     Select::make(__('Alhisalat'), "ref_id")
-            //         ->options(function () {
-            //             $projects =  \App\Models\Alhisalat::all();
-            //             $user_type_admin_array =  array();
-            //             foreach ($projects as $project) {
-            //                 $user_type_admin_array += [$project['id'] => ($project['name'])];
-            //             }
-
-            //             return $user_type_admin_array;
-            //         })
-            //         ->displayUsingLabels(),
-            // ])->dependsOn("type", '1')->hideFromDetail()->hideFromIndex(),
-            // NovaDependencyContainer::make([
-            //     Select::make(__('Donations'), "ref_id")
-            //         ->options(function () {
-            //             $projects =  \App\Models\Donations::all();
-            //             $user_type_admin_array =  array();
-            //             foreach ($projects as $project) {
-            //                 $user_type_admin_array += [$project['id'] => ($project['project_name'])];
-            //             }
-
-            //             return $user_type_admin_array;
-            //         })
-            //         ->displayUsingLabels(),
-            // ])->dependsOn('type', '2')->hideFromDetail()->hideFromIndex(),
-
-
-            // BelongsTo::make('project', 'Project')->hideWhenCreating()->hideWhenUpdating(),
-
-            Text::make(__('description'), 'description'),
-            Text::make(__('transact amount'), 'transact_amount'),
-            BelongsTo::make(__('Currenc'), 'Currenc', \App\Nova\Currency::class),
-
-
-
-
-            Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
-
-            // Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
-
-            // Select::make(__('approval'), 'approval')->options([
-            //     1 => 'approval',
-            //     2 => 'reject',
-            // ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
-            // Text::make(__("reason_of_reject"), "reason_of_reject")->hideWhenCreating()->hideWhenUpdating(),
-
-
-
-
-            Date::make(__('date'), 'transaction_date'),
 
         ];
     }
     public static function beforeCreate(Request $request, $model)
     {
-        $new = DB::table('currencies')->where('id', $request->Currenc)->first();
+
+        $new = DB::table('currencies')->where('id', $request->Currency)->first();
         $id = Auth::id();
         $model->created_by = $id;
         $model->main_type = '1';
@@ -178,7 +249,7 @@ class receiptVoucher extends Resource
     {
 
 
-        $currencies = DB::table('currencies')->where('id', $request->Currenc)->first();
+        $currencies = DB::table('currencies')->where('id', $request->Currency)->first();
         $id = Auth::id();
         $model->update_by = $id;
         if ($model->Currenc->id == $request->Currenc) {
@@ -189,20 +260,19 @@ class receiptVoucher extends Resource
     public static function beforesave(Request $request, $model)
     {
         // dd(date('Y-m-d'));
-        $new = DB::table('currencies')->where('id', $request->Currenc)->first();
-        if($request->type ==2){
-            DB::table('donations')
-            ->Insert(
+        // $new = DB::table('currencies')->where('id', $request->Currency)->first();
+        // if ($request->type == 2) {
+        //     DB::table('donations')
+        //         ->Insert(
 
-                [
-                    'project_id' => $request->ref_id,
-                    'donor_name' => $request->name  ,
-                    'amount' => $new->rate * $request->transact_amount,
-                    'created_at' =>  date('Y-m-d'),
-                ]
-            );
-        }
-
+        //             [
+        //                 'project_id' => $request->ref_id,
+        //                 'donor_name' => $request->name,
+        //                 'amount' => $new->rate * $request->transact_amount,
+        //                 'created_at' =>  date('Y-m-d'),
+        //             ]
+        //         );
+        // }
     }
     /**
      * Get the cards available for the request.

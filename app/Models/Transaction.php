@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
 
 class Transaction extends Model
 {
@@ -22,8 +23,16 @@ class Transaction extends Model
     ];
 
     protected $casts = [
+        // 'Payment_type_details' => FlexibleCast::class,
+        'Payment_type_details' => 'json',
         'transaction_date' => 'date',
+        'Date' => 'date',
 
+    ];
+
+    protected $dates = [
+        'transaction_date' => 'date',
+        'Date' => 'date',
     ];
 
     public function Trip()
@@ -34,7 +43,7 @@ class Transaction extends Model
 
     public function Alhisalat()
     {
-     return $this->belongsTo('App\Models\Alhisalat','ref_id','id');
+     return $this->belongsTo('App\Models\Alhisalat','id','ref_id');
 
 
     }
