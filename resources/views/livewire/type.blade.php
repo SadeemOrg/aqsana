@@ -13,9 +13,7 @@ use App\Models\Book;
 </body>
 </html>
 @endsection --}}
-@php
-    // dd($books);
-@endphp
+
 <div class="bg-[#F2FFF285] py-8 mt-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative xl:mt-8 mb-7 lg:mb-0">
@@ -39,8 +37,7 @@ use App\Models\Book;
                 <div class="selectdiv w-60 flex flex-row justify-between items-center relative">
                     <select pla  wire:model="goal" name="goal"
                     class="mt-1 text-[16px] text-[#8F9BB3] block w-full rounded-md border-gray-300 py-4 pl-3 px-4 text-base focus:border-[#349A37] focus:outline-none focus:ring-[#349A37] ">
-                    <option value="">تصنيفات المكتبة</option>
-                    <option value="0">all</option>
+                    <option value="0">تصنيفات المكتبة</option>
                     @foreach($book_type as $type)
                     <option value="{{ $type['id'] }}">{{ $type['name'] }}</option>
                     @endforeach
