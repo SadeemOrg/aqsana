@@ -455,14 +455,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            items: [{ message: "Foo" }, { message: "Bar" }],
-            Sectors: [{ id: "Foo" }, { id: "Bar" }]
+            projectshow: false,
+            items: [],
+            Sectors: []
         };
     },
 
@@ -484,9 +492,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post("/first", {
                 project_id: event.target.value
             }).then(function (response) {
-                //  alert(response.data),axios
                 _this.items = response.data;
             });
+            if (event.target.value != 0) {
+                this.projectshow = true;
+            } else {
+                this.projectshow = false;
+            }
         },
 
         Sectors: function Sectors() {
@@ -26876,7 +26888,7 @@ var render = function() {
     },
     [
       _c("template", { slot: "field" }, [
-        _c("p", [_vm._v(" القطاع  ")]),
+        _c("p", [_vm._v("القطاع")]),
         _vm._v(" "),
         _c(
           "select",
@@ -26913,57 +26925,67 @@ var render = function() {
               ]
             }
           },
-          _vm._l(_vm.Sectors, function(item) {
-            return _c(
-              "option",
-              { key: item.id, domProps: { value: item.id } },
-              [_vm._v("\n                    " + _vm._s(item.text))]
-            )
-          }),
-          0
+          [
+            _c("option", { domProps: { value: 0 } }, [
+              _vm._v("\n                مخرجات عامة")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.Sectors, function(item) {
+              return _c(
+                "option",
+                { key: item.id, domProps: { value: item.id } },
+                [_vm._v("\n                " + _vm._s(item.text))]
+              )
+            })
+          ],
+          2
         ),
         _vm._v(" "),
-        _c("p", { staticClass: "mt-4" }, [_vm._v(" المشروع  ")]),
+        _vm.projectshow
+          ? _c("p", { staticClass: "mt-4" }, [_vm._v("المشروع")])
+          : _vm._e(),
         _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
+        _vm.projectshow
+          ? _c(
+              "select",
               {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.value,
-                expression: "value"
-              }
-            ],
-            staticClass:
-              "w-full form-control form-input form-input-bordered mt-4",
-            attrs: { id: _vm.field.name, name: "LeaveTypde" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.value = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          _vm._l(_vm.items, function(item) {
-            return _c(
-              "option",
-              { key: item.project_type, domProps: { value: item.id } },
-              [_vm._v("\n                    " + _vm._s(item.project_name))]
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.value,
+                    expression: "value"
+                  }
+                ],
+                staticClass:
+                  "w-full form-control form-input form-input-bordered mt-4",
+                attrs: { id: _vm.field.name, name: "LeaveTypde" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.value = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              _vm._l(_vm.items, function(item) {
+                return _c(
+                  "option",
+                  { key: item.project_type, domProps: { value: item.id } },
+                  [_vm._v("\n                " + _vm._s(item.project_name))]
+                )
+              }),
+              0
             )
-          }),
-          0
-        )
+          : _vm._e()
       ])
     ],
     2

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Actengage\Wizard\Session;
-use Alaqsa\Project\Project;
+// use Alaqsa\Project\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -16,6 +16,7 @@ use App\Models\BookType;
 use App\Models\Donations;
 use App\Models\News;
 use App\Models\newsType;
+use App\Models\Project;
 use App\Models\Sector;
 
 class HomeController extends Controller
@@ -29,6 +30,8 @@ class HomeController extends Controller
         //  $projects = DB::tableس('projects')->where('report_status', '=', '1')->orderBy('report_date', 'desc')->paginate(9);
         $projects = Project::where('sector', '=', $request->project_id)->get();
         // $    projects =$projects = Project::where('report_status', '=', '1');
+        // $projects = Project::all();
+        // dd($projects);
         return $projects;
     }
     public function Sectors()

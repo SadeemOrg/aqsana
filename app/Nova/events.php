@@ -9,7 +9,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
-
+use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 
 class events extends Resource
 {
@@ -58,11 +58,17 @@ class events extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('name'),'name'),
             Textarea::make(__('note'),'note'),
-            File::make(__('file'),'file')->disk('public')->deletable(),
+            Files::make('Multiple files', 'file'),
+            // File::make(__('file'),'file')->disk('public')->deletable(),
             Date::make(__('DATE'), 'events_date')->pickerDisplayFormat('d.m.Y'),
         ];
     }
+    public static function afterSave(Request $request, $model)
+    {
+        // dd("ddd");
+        // dd($request->file);
 
+    }
     /**
      * Get the cards available for the request.
      *
