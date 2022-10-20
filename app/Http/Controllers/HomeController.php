@@ -18,6 +18,7 @@ use App\Models\News;
 use App\Models\newsType;
 use App\Models\Project;
 use App\Models\Sector;
+use App\Models\Transaction;
 
 class HomeController extends Controller
 {
@@ -46,9 +47,9 @@ class HomeController extends Controller
 
     public function bills($id)
     {
-        $Donations =  Donations::where("id", $id)->first();
+        $Transaction =  Transaction::where("id", $id)->first();
 
-        return view('Pages.Bills.Bills', compact('Donations'));
+        return view('Pages.Bills.Bills', compact('Transaction'));
     }
 
     public function showToastrMessages()
