@@ -1,8 +1,13 @@
 @extends('layout.app', ['hasHeader' => false, 'hasFooter' => false])
 @section('content')
-{{-- @include('Pages.Bills.HebrowBills') --}}
+@if($Transaction->lang == 1)
 @include('Pages.Bills.ArabicBills')
-{{-- @include('Pages.Bills.EnglishBills') --}}
+@elseif($Transaction->lang == 2)
+@include('Pages.Bills.EnglishBills')
+@else 
+@include('Pages.Bills.HebrowBills')
+@endif
+
 
 
 @endsection
