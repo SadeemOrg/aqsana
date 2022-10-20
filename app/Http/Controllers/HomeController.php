@@ -48,8 +48,9 @@ class HomeController extends Controller
     public function bills($id)
     {
         $Transaction =  Transaction::where("id", $id)->first();
+        $original=1;
 
-        return view('Pages.Bills.Bills', compact('Transaction'));
+        return view('Pages.Bills.Bills', compact('Transaction','original'));
     }
 
     public function showToastrMessages()
