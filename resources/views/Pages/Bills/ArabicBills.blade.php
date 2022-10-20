@@ -6,8 +6,8 @@
         $email = nova_get_setting('email', 'default_value');
         $address = nova_get_setting('address', 'default_value');
         $newaddress = explode(',', $address);
-        $newDate = explode(' ', $Donations->created_at);
-        // dd($Donations->amount);
+        $newDate = explode(' ', $Transaction->transaction_date);
+        // dd($Transaction);
     @endphp
     <!--Arabic Bills -->
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 -mt-14 px-2" id="printJS-table">
@@ -23,33 +23,36 @@
                     <span class="font-FlatBold text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>
                 </p>
                 <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">رقم الهاتف :
-                    <span dir="ltr"
-                        class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
+                    <span dir="ltr" class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
                 </p>
                 <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">البريد الالكتروني :
                     <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
                 </p>
             </div>
             <div class="flex basis-1/2 justify-center">
-                <img src="{{ asset('assets/image/2SG4XFNXK4WfehAE1eroA7kp7Y341RMs8f4ObPLO.png') }}"
-                    class="w-48 h-48 " alt="">
+                <img src="{{ asset('assets/image/2SG4XFNXK4WfehAE1eroA7kp7Y341RMs8f4ObPLO.png') }}" class="w-48 h-48 "
+                    alt="">
             </div>
         </div>
         <div class="flex flex-col items-center mt-10">
             <p dir="ltr" class="">{{ $newDate[0] }}</p>
             <p class="font-FlatBold text-[17px] text-[#101426] ">سند قبض رقم
                 <span class="text-base">
-                    F-1000{{ $Donations->id }}
+                    F-1000{{ $Transaction->id }}
                 </span>
             </p>
-            <p class="font-FlatBold text-[17px] text-[#101426] ">نسحة عن النسخة ألاصلية</p>
+            @if ($original == 1)
+                <p class="font-FlatBold text-[17px] text-[#101426] "> النسخة ألاصلية</p>
+            @else
+                <p class="font-FlatBold text-[17px] text-[#101426] ">نسحة عن النسخة ألاصلية</p>
+            @endif
         </div>
         <div class="flex flex-row items-center xl:justify-between justify-start gap-x-10 max-w-xl mt-4">
             <p class="text-[18px] font-FlatBold text-[#101426]">لحساب :</p>
             <span class="font-FlatBold text-[#6B7280] mx-1 text-[17px]"></span>
         </div>
         <p class="font-FlatBold text-[#101426] mt-3 text-[17px]">تم الدفع من خلال :
-            <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $Donations->donor_name }} </span>
+            <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $Transaction->name }} </span>
         </p>
 
 
@@ -68,23 +71,17 @@
                                         <th scope="col"
                                             class=" py-3.5 pl-4 pr-3  text-sm font-semibold text-white text-right sm:pl-6">
                                             طريقة الدفع</th>
-                                        <th scope="col"
-                                            class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-right">
                                             التاريخ</th>
-                                        <th scope="col"
-                                            class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-right">
                                             البنك</th>
-                                        <th scope="col"
-                                            class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-right">
                                             الفرع</th>
-                                        <th scope="col"
-                                            class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-right">
                                             رقم الحساب</th>
-                                        <th scope="col"
-                                            class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-right">
                                             رقم سند القبض</th>
-                                        <th scope="col"
-                                            class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-right">
                                             المجموع</th>
                                     </tr>
                                 </thead>
@@ -105,7 +102,7 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             00120006</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $Donations->amount }} ₪</td>
+                                            {{ $Transaction->transact_amount }} ₪</td>
                                     </tr>
                                     <tr>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
@@ -116,7 +113,7 @@
                                             المجموع الكلي :</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                         <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
-                                            {{ $Donations->amount }} ₪</td>
+                                            {{ $Transaction->transact_amount }} ₪</td>
                                     </tr>
                                     <!-- More people... -->
                                 </tbody>

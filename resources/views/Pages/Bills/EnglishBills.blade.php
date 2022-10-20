@@ -6,7 +6,7 @@
         $email = nova_get_setting('email', 'default_value');
         $address = nova_get_setting('address', 'default_value');
         $newaddress = explode(',', $address);
-        $newDate = explode(' ', $Donations->created_at);
+        $newDate = explode(' ', $Transaction->transaction_date);
         // dd($Donations->amount);
     @endphp
     <!--Arabic Bills -->
@@ -37,7 +37,7 @@
             <p dir="ltr" class="">{{ $newDate[0] }}</p>
             <p class="font-FlatBold text-[17px] text-[#101426] ">receipt voucher number
                 <span class="text-base">
-                    F-1000{{ $Donations->id }}
+                    F-1000{{ $Transaction->id  }}
                 </span>
             </p>
             <p class="font-FlatBold text-[17px] text-[#101426] ">Copy from orginal Bill</p>
@@ -47,7 +47,7 @@
             <span class="font-FlatBold text-[#6B7280] mx-1 text-[17px]"></span>
         </div>
         <p class="font-FlatBold text-[#101426] mt-3 text-[17px]">pay done by:
-            <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $Donations->donor_name }} </span>
+            <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $Transaction->name }} </span>
         </p>
 
 
@@ -84,7 +84,7 @@
                                     <tr>
                                         <td
                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                            حساب</td>
+                                            Account </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {{ $newDate[0] }}
                                         </td>
@@ -97,7 +97,7 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             00120006</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $Donations->amount }} ₪</td>
+                                            {{ $Transaction->transact_amount }} ₪</td>
                                     </tr>
                                     <tr>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
@@ -108,7 +108,7 @@
                                             total summation :</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                         <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
-                                            {{ $Donations->amount }} ₪</td>
+                                            {{ $Transaction->transact_amount }} ₪</td>
                                     </tr>
                                     <!-- More people... -->
                                 </tbody>
