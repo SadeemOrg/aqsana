@@ -54,10 +54,10 @@
                 </p>
             </div>
         @else
-            <div class="firstPage pt-6  lg:px-0 w-[25opx] lg:w-[80%]">
+            <div class="firstPage pt-6  lg:px-0 w-[220px] lg:w-[80%]">
                 <label for="donationAim" class=" pr-1 block text-sm font-medium text-gray-700">سبب التبرع</label>
                 <textarea rows="4" name="donationAim" id="order_note" placeholder="سبب التبرع" required=""
-                    class="w-full mt-2 inline-flex items-center text-right  justify-center  border rounded-md focus:ring-green-500 focus:border-green-500  border-gray-300 sm:text-sm p-4"></textarea>
+                    class="w-full mt-2 inline-flex items-center text-right  justify-center  border rounded-md focus:ring-green-500 focus:border-green-500  border-gray-300 sm:text-sm p-4 ml-6 md:ml-0"></textarea>
             </div>
         @endif
         <!-- Second Page Input -->

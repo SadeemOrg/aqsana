@@ -527,6 +527,7 @@
                         $("input[name=visaid]").attr("type", "hidden");
                         $("input[name=CVV]").attr("type", "hidden");
                         $("input[name=VisaDate]").attr("type", "hidden");
+
                         var amount = $('input[name="donation_amount"]').val();
                         paypal.Buttons({
                             env: 'sandbox', // sandbox | production
@@ -629,6 +630,7 @@
                         $("input[name=visaid]").attr("type", "number");
                         $("input[name=CVV]").attr("type", "number");
                         $("input[name=VisaDate]").attr("type", "text");
+
                     }
                 })
             }
