@@ -93,6 +93,13 @@ Route::get('/payPal', function (){
     return view('almowahde.PayPal');
 });
 
+
+Route::get('/mainbill', function (){
+
+    return view('Pages.Bills.mainBill');
+});
+
+
 Route::get('/SendNotificationTest',[NotificationTest::class,'sendNotfiy'])->name('sendNotfiy');
 
 
