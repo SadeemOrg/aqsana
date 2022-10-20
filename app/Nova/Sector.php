@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -54,7 +55,7 @@ class Sector extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('text'),'text'),
             Text::make(__('sup_text'),'sup_text'),
-            File::make(__('file'),'file')->disk('public')->deletable(),
+            // Image::make(__('img'),'img')->disk('public')->deletable(),
 
         ];
     }
