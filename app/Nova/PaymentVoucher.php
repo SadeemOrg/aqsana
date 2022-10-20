@@ -128,7 +128,24 @@ class PaymentVoucher extends Resource
             // ])->dependsOn('type', '3')->hideFromDetail()->hideFromIndex(),
 
             // BelongsTo::make('project' , 'project')->hideWhenCreating()->hideWhenUpdating(),
+            Select::make(__('name'), "name")
+                    ->options(function () {
+                        $Users =  \App\Models\User::where('user_role', 'company')->get();;
+                                                $i=0;
+                                                $user_type_admin_array =  array();
+                                                foreach ($Users as $User) {
 
+
+                                                        $user_type_admin_array += [($User['id']) => ($User['name'])];
+
+                                            }
+
+                        return $user_type_admin_array;
+                    })
+                    ->displayUsingLabels(),
+            // Text::make(__('name'), 'name'),
+            Text::make(__('company_number'), 'company_number'),
+            Text::make(__('bill_number'), 'bill_number'),
             Text::make(__('description'), 'description'),
             Text::make(__('transact amount pay'), 'transact_amount'),
             BelongsTo::make(__('Currenc'), 'Currenc', \App\Nova\Currency::class),

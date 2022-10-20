@@ -52,6 +52,12 @@ class RolesSeeder extends Seeder
                 'code_role' => 'website_admin',
                 'role' => 'Website Admin',
             ]
+            ,
+            [
+                'code_role' => 'company',
+                'role' => 'company',
+            ]
+
 
 
         ];

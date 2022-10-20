@@ -17,9 +17,6 @@ use App\Http\Controllers\NotificationTest;
 |
 */
 
-Route::get('/live', function (){
-    return view('livae');
-});
 Route::post("first/", [HomeController::class, "first"])->name('first');
 Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');
 
