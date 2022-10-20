@@ -124,7 +124,21 @@ class receiptVoucher extends Resource
 
 
             NovaDependencyContainer::make([
-                Text::make(__('Name'), 'name'),
+                Select::make(__('name'), "name")
+                ->options(function () {
+                    $Users =  \App\Models\User::where('user_role', 'company')->get();;
+                                            $i=0;
+                                            $user_type_admin_array =  array();
+                                            foreach ($Users as $User) {
+
+
+                                                    $user_type_admin_array += [($User['id']) => ($User['name'])];
+
+                                        }
+
+                    return $user_type_admin_array;
+                })
+                ->displayUsingLabels(),
                 // Select::make(__('project'), "ref_id")
                 //     ->options(function () {
                 //         $Alhisalats =  \App\Models\User::all();

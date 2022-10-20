@@ -24,6 +24,8 @@ class CreateTransactionsTable extends Migration
             $table->string('equivelant_amount');
 
             $table->unsignedBigInteger('name')->nullable();
+            $table->string('company_number')->nullable();
+            $table->string('bill_number')->nullable();
             $table->string('description')->nullable();
 
             $table->char('lang', 1)->default(0);
