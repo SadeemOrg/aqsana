@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\FormMassage;
-use Mail;
+
 use App\Mail\TestMail;
 use App\Models\Almuahada;
 use App\Models\Book;
@@ -19,7 +19,7 @@ use App\Models\newsType;
 use App\Models\Project;
 use App\Models\Sector;
 use App\Models\Transaction;
-
+use Illuminate\Support\Facades\Mail;
 class HomeController extends Controller
 {
 
@@ -45,10 +45,18 @@ class HomeController extends Controller
         return $Sectors;
     }
 
-    public function bills($id)
+    public function originalbillbills($id)
     {
         $Transaction =  Transaction::where("id", $id)->first();
         $original=1;
+
+        return view('Pages.Bills.Bills', compact('Transaction','original'));
+    }
+
+    public function bills($id)
+    {
+        $Transaction =  Transaction::where("id", $id)->first();
+        $original=0;
 
         return view('Pages.Bills.Bills', compact('Transaction','original'));
     }
@@ -388,4 +396,11 @@ class HomeController extends Controller
         $project = null;
         return view('Pages.donationsPage.donations-page', compact('project'));
     }
+
+    public function mainbill($id)
+    {
+        return view('Pages.Bills.mainBill',compact('id'));
+    }
+
+
 }

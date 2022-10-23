@@ -143,6 +143,7 @@ class PaymentVoucher extends Resource
                         return $user_type_admin_array;
                     })
                     ->displayUsingLabels(),
+
             // Text::make(__('name'), 'name'),
             Text::make(__('company_number'), 'company_number'),
             Text::make(__('bill_number'), 'bill_number'),
