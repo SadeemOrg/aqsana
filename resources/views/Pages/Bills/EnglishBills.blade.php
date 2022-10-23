@@ -14,8 +14,9 @@
         <div class="flex sm:flex-row flex-col-reverse items-center justify-between mt-24 ">
             <div class="basis-1/2 flex flex-col items-center sm:items-start">
                 <h3 class="mt-8 text-2xl font-FlatBold text-[#101426]">Al-Aqsa Organization</h3>
-                <p class="mt-2 text-[17px] font-FlatBold text-center  text-[#6B7280]">Al-Aqsa Association for the Care of Endowments and Islamic Sanctuaries</p>
-                <p  class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">Association Id :
+                <p class="mt-2 text-[17px] font-FlatBold text-center  text-[#6B7280]">Al-Aqsa Association for the Care of
+                    Endowments and Islamic Sanctuaries</p>
+                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">Association Id :
                     <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                 </p>
                 <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">title :
@@ -37,10 +38,14 @@
             <p dir="ltr" class="">{{ $newDate[0] }}</p>
             <p class="font-FlatBold text-[17px] text-[#101426] ">receipt voucher number
                 <span class="text-base">
-                    F-1000{{ $Transaction->id  }}
+                    F-1000{{ $Transaction->id }}
                 </span>
             </p>
-            <p class="font-FlatBold text-[17px] text-[#101426] ">Copy from orginal Bill</p>
+            @if ($original == 1)
+                <p class="font-FlatBold text-[17px] text-[#101426] "> orginal Bill</p>
+            @else
+                <p class="font-FlatBold text-[17px] text-[#101426] ">Copy from orginal Bill</p>
+            @endif
         </div>
         <div class="flex flex-row items-center xl:justify-between justify-start gap-x-10 max-w-xl mt-4">
             <p class="text-[18px] font-FlatBold text-[#101426]">for :</p>
@@ -119,7 +124,7 @@
             </div>
         </div>
         <div class="flex flex-row items-center justify-start mx-1 mb-6">
-            <button  type="button" onclick="window.print()"
+            <button type="button" onclick="window.print()"
                 class=" rounded-[50px] bg-[#349A37] text-white text-base w-28 py-4 mt-4 font-[700] hover:bg-[#101426] duration-200">
                 Print
             </button>
