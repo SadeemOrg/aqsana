@@ -16,6 +16,7 @@ use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
 use Pdmfc\NovaFields\ActionButton;
@@ -125,20 +126,30 @@ class receiptVoucher extends Resource
 
             NovaDependencyContainer::make([
                 Select::make(__('name'), "name")
-                ->options(function () {
-                    $Users =  \App\Models\User::where('user_role', 'company')->get();;
-                                            $i=0;
-                                            $user_type_admin_array =  array();
-                                            foreach ($Users as $User) {
+                    ->options(function () {
+                        $Users =  \App\Models\User::where('user_role', 'company')->get();;
+                        $i = 0;
+                        $user_type_admin_array =  array();
+                        foreach ($Users as $User) {
 
 
-                                                    $user_type_admin_array += [($User['id']) => ($User['name'])];
+                            $user_type_admin_array += [($User['id']) => ($User['name'])];
+                        }
 
-                                        }
+                        return $user_type_admin_array;
+                    })
+                    ->displayUsingLabels(),
+                Flexible::make(__('add yser'),'add_user')
+                ->readonly(true)
 
-                    return $user_type_admin_array;
-                })
-                ->displayUsingLabels(),
+                    ->hideFromDetail()->hideFromIndex()
+                    ->addLayout(__('tooles'), 'Payment_type_details ', [
+                        Text::make(__('name'), "name")->rules('required'),
+                        Text::make(__('email'), "email")->rules('required'),
+                        Text::make(__('phone'), "phone")->rules('required'),
+                    ]),
+
+
                 // Select::make(__('project'), "ref_id")
                 //     ->options(function () {
                 //         $Alhisalats =  \App\Models\User::all();
@@ -177,10 +188,10 @@ class receiptVoucher extends Resource
                             Text::make(__('Doubt number'), "equivelant_amount"),
 
                             DateTime::make(__('History of doubt'), 'Date')
-                            ->format('DD/MM/YYYY HH:mm')
-                            ->resolveUsing(function ($value) {
-                                return $value;
-                            })->rules('required'),
+                                ->format('DD/MM/YYYY HH:mm')
+                                ->resolveUsing(function ($value) {
+                                    return $value;
+                                })->rules('required'),
 
                         ]),
                 ])->dependsOn("Payment_type", '2')->hideFromDetail()->hideFromIndex(),
@@ -196,10 +207,10 @@ class receiptVoucher extends Resource
                             Text::make(__('number of installments'), "equivelant_amount"),
 
                             DateTime::make(__('History of doubt'), 'Date')
-                            ->format('DD/MM/YYYY HH:mm')
-                            ->resolveUsing(function ($value) {
-                                return $value;
-                            })->rules('required'),
+                                ->format('DD/MM/YYYY HH:mm')
+                                ->resolveUsing(function ($value) {
+                                    return $value;
+                                })->rules('required'),
 
                         ]),
                 ])->dependsOn("Payment_type", '3')->hideFromDetail()->hideFromIndex(),
@@ -215,10 +226,10 @@ class receiptVoucher extends Resource
                             Text::make(__('account number'), "equivelant_amount"),
 
                             DateTime::make(__('History of doubt'), 'Date')
-                            ->format('DD/MM/YYYY HH:mm')
-                            ->resolveUsing(function ($value) {
-                                return $value;
-                            })->rules('required'),
+                                ->format('DD/MM/YYYY HH:mm')
+                                ->resolveUsing(function ($value) {
+                                    return $value;
+                                })->rules('required'),
 
                         ])->stacked(),
                 ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
@@ -233,10 +244,10 @@ class receiptVoucher extends Resource
 
 
                             DateTime::make(__('History of doubt'), 'Date')
-                            ->format('DD/MM/YYYY HH:mm')
-                            ->resolveUsing(function ($value) {
-                                return $value;
-                            })->rules('required'),
+                                ->format('DD/MM/YYYY HH:mm')
+                                ->resolveUsing(function ($value) {
+                                    return $value;
+                                })->rules('required'),
 
                         ]),
                 ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
@@ -271,22 +282,28 @@ class receiptVoucher extends Resource
         } else  $rate = $currencies->rate;
         $model->equivelant_amount = $rate * $request->transact_amount;
     }
-    public static function beforesave(Request $request, $model)
+    public static function aftersave(Request $request, $model)
     {
-        // dd(date('Y-m-d'));
-        // $new = DB::table('currencies')->where('id', $request->Currency)->first();
-        // if ($request->type == 2) {
-        //     DB::table('donations')
-        //         ->Insert(
+        return redirect('itsolutionstuff/tags');
+        // dd($request->add_user);
+        if (!$request->name) {
+            if ($request->add_user[0]['attributes']['name'] &&    $request->add_user[0]['attributes']['email'] && $request->add_user[0]['attributes']['phone']) {
+                DB::table('users')
+                    ->insert(
+                        [
+                            'name' => $request->add_user[0]['attributes']['name'],
+                            'email' =>  $request->add_user[0]['attributes']['email'],
+                            'password' => '10203040',
+                            'user_role' => 'company',
+                            'phone' =>  $request->add_user[0]['attributes']['phone']
+                        ],
 
-        //             [
-        //                 'project_id' => $request->ref_id,
-        //                 'donor_name' => $request->name,
-        //                 'amount' => $new->rate * $request->transact_amount,
-        //                 'created_at' =>  date('Y-m-d'),
-        //             ]
-        //         );
-        // }
+                    );
+
+            }
+            $User =  \App\Models\User::where('email',  $request->add_user[0]['attributes']['email'])->first();
+            $model->name =  $User->id;
+        }
     }
     /**
      * Get the cards available for the request.

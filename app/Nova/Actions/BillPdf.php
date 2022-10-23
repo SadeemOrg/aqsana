@@ -24,7 +24,7 @@ class BillPdf extends Action
     {
         foreach ($models as $model) {
 
-            return Action::openInNewTab("/bill/". $model->ref_id);
+            return Action::openInNewTab("/mainbill/". $model->id);
 
 
     }
