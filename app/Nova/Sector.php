@@ -53,9 +53,9 @@ class Sector extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('text'),'text'),
-            Text::make(__('sup_text'),'sup_text'),
-            Image::make(__('img'),'img')->disk('public')->deletable(),
+            Text::make(__('main text'),'text'),
+            Text::make(__('sup text'),'sup_text'),
+            Image::make(__('Image'),'img')->disk('public')->deletable(),
 
         ];
     }
