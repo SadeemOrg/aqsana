@@ -7,7 +7,7 @@
         $address = nova_get_setting('address', 'default_value');
         $newaddress = explode(',', $address);
         $newDate = explode(' ', $Transaction->transaction_date);
-
+        
     @endphp
     <!--Hebrow Bills -->
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 -mt-14 px-2" id="printJS-table">
@@ -37,10 +37,14 @@
             <p dir="ltr" class="">{{ $newDate[0] }}</p>
             <p class="font-FlatBold text-[20px] text-[#101426] ">קבלה מספר
                 <span class="text-base">
-                    F-1000{{$Transaction->id  }}
+                    F-1000{{ $Transaction->id }}
                 </span>
             </p>
-            <p class="font-FlatBold text-[20px] text-[#101426] ">עותק קשיח של המקור</p>
+            @if ($original == 1)
+                <p class="font-FlatBold text-[20px] text-[#101426] ">קבלה מקורית</p>
+            @else
+                <p class="font-FlatBold text-[20px] text-[#101426] ">עותק קשיח של המקור</p>
+            @endif
         </div>
         <div class="flex flex-row items-center xl:justify-between justify-start gap-x-10 max-w-xl mt-4">
             <p class="text-[18px] font-FlatBold text-[#101426]">חשבון עבור :</p>
@@ -92,7 +96,7 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">161479</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">00120006</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $Transaction->transact_amount  }} ₪</td>
+                                            {{ $Transaction->transact_amount }} ₪</td>
                                     </tr>
                                     <tr>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
@@ -102,7 +106,7 @@
                                         <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-lg">סך הכל סופי :</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                         <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
-                                            {{ $Transaction->transact_amount  }} ₪</td>
+                                            {{ $Transaction->transact_amount }} ₪</td>
                                     </tr>
                                     <!-- More people... -->
                                 </tbody>

@@ -7,7 +7,4 @@
 @else 
 @include('Pages.Bills.HebrowBills')
 @endif
-
-
-
 @endsection
