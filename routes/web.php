@@ -75,7 +75,7 @@ Route::get('/librarysearch/{search}', [HomeController::class, 'librarySearch'])-
 Route::get('/librarySearchType/{id}', [HomeController::class, 'librarySearchType'])->name('librarySearchType');
 
 
-Route::get('originalbill/{id}', [HomeController::class, 'originalbillbills'])->name('originalbillbills');
+Route::get('originalbill/{id}', [HomeController::class, 'originalbillbills'])->name('originalbill');
 Route::get('bill/{id}', [HomeController::class, 'bills'])->name('bills');
 Route::get('/mainbill/{id}', [HomeController::class, 'mainbill'])->name('mainbill');
 
