@@ -399,7 +399,8 @@ class HomeController extends Controller
 
     public function mainbill($id)
     {
-        return view('Pages.Bills.mainBill',compact('id'));
+        $type='1';
+        return view('Pages.Bills.mainBill',compact('id','type'));
     }
 
 
