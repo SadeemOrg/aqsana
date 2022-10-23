@@ -76,8 +76,8 @@ class receiptVoucher extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            ActionButton::make(__('POST NEWS'))
-                ->action((new BillPdf)->confirmText(__('Are you sure you want to post  this NEWS?'))
+            ActionButton::make(__('print'))
+                ->action((new BillPdf)->confirmText(__('Are you sure you want to print  this?'))
                     ->confirmButtonText(__('print'))
                     ->cancelButtonText(__('Dont print')), $this->id)
                 ->text(__('print'))->showLoadingAnimation()
@@ -139,7 +139,7 @@ class receiptVoucher extends Resource
                         return $user_type_admin_array;
                     })
                     ->displayUsingLabels(),
-                Flexible::make(__('add yser'),'add_user')
+                Flexible::make(__('add user'),'add_user')
                 ->readonly(true)
 
                     ->hideFromDetail()->hideFromIndex()
@@ -200,13 +200,13 @@ class receiptVoucher extends Resource
                     Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
                         ->addLayout(__('tooles'), 'Payment_type_details ', [
-                            Text::make(__('Doubt value'), "equivelant_amount")->rules('required'),
+                            Text::make(__('value'), "equivelant_amount")->rules('required'),
 
                             Text::make(__('card type'), "equivelant_amount"),
                             Text::make(__('card number'), "equivelant_amount"),
                             Text::make(__('number of installments'), "equivelant_amount"),
 
-                            DateTime::make(__('History of doubt'), 'Date')
+                            DateTime::make(__('History'), 'Date')
                                 ->format('DD/MM/YYYY HH:mm')
                                 ->resolveUsing(function ($value) {
                                     return $value;
@@ -219,31 +219,31 @@ class receiptVoucher extends Resource
                     Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
                         ->addLayout(__('tooles'), 'Payment_type_details ', [
-                            Text::make(__('Doubt value'), "equivelant_amount")->rules('required'),
+                            Text::make(__('value'), "equivelant_amount")->rules('required'),
 
                             Text::make(__('bank number'), "equivelant_amount"),
                             Text::make(__('Branch number'), "equivelant_amount"),
                             Text::make(__('account number'), "equivelant_amount"),
 
-                            DateTime::make(__('History of doubt'), 'Date')
+                            DateTime::make(__('History'), 'Date')
                                 ->format('DD/MM/YYYY HH:mm')
                                 ->resolveUsing(function ($value) {
                                     return $value;
                                 })->rules('required'),
 
-                        ])->stacked(),
+                            ]),
                 ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
 
                 NovaDependencyContainer::make([
                     Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
                         ->addLayout(__('tooles'), 'Payment_type_details ', [
-                            Text::make(__('Doubt value'), "equivelant_amount")->rules('required'),
+                            Text::make(__('value'), "equivelant_amount")->rules('required'),
 
                             Text::make(__('type'), "equivelant_amount1")->rules('required'),
 
 
-                            DateTime::make(__('History of doubt'), 'Date')
+                            DateTime::make(__('History'), 'Date')
                                 ->format('DD/MM/YYYY HH:mm')
                                 ->resolveUsing(function ($value) {
                                     return $value;

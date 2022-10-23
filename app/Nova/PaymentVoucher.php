@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Image;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Alaqsa\Project\Project;
+use App\Nova\Actions\BillPdf;
+use Pdmfc\NovaFields\ActionButton;
+
 class PaymentVoucher extends Resource
 {
     /**
@@ -64,7 +67,12 @@ class PaymentVoucher extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-
+            ActionButton::make(__('POST NEWS'))
+            ->action((new BillPdf)->confirmText(__('Are you sure you want to post  this NEWS?'))
+                ->confirmButtonText(__('print'))
+                ->cancelButtonText(__('Dont print')), $this->id)
+            ->text(__('print'))->showLoadingAnimation()
+            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
             Project::make(__('ref_id'),'ref_id'),
 
 
@@ -248,6 +256,7 @@ class PaymentVoucher extends Resource
     {
         return [
             new ApprovalRejectTransaction,
+            new BillPdf
         ];
     }
 }
