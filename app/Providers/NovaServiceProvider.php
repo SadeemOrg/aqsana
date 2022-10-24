@@ -413,6 +413,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make(__('whatsapp'), 'whatsapp'),
                     Text::make(__('Twitter'), 'twitter'),
                     Text::make(__('youtube'), 'youtube'),
+                    Text::make(__('TikTok'), 'tiktok'),
                 ], __('website Settings') => [
                     Text::make(__('society id'), 'society_id'),
                     Text::make(__('phone'), 'phone'),
