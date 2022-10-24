@@ -44,6 +44,8 @@ svg path, svg circle {transition: .2s;}
 .facebook svg:hover circle {stroke: #4267B2;  }
 .instagram svg:hover path {fill: #ffcb52;}
 .instagram svg:hover circle {stroke: #ffcb52;}
+.TikTok svg:hover path {fill: black;}
+.TikTok svg:hover circle {stroke: black;}
 .whatsApp svg:hover path {fill: #1fb141;}
 
 .twitter svg:hover path {fill: #1DA1F2;}
