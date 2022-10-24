@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use App\Models\Project;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -62,81 +64,218 @@ class Budget extends Resource
             Text::make(__('year'), 'year'),
 
 
-            Tabs::make('Some Title', [
+            Tabs::make('budget', [
                 Tab::make(__('humanitarian sector'), [
 
                     Text::make(__('humanitarian sector budjet'), 'humanitarian_sector')->hideFromIndex(),
-                    Text::make(__('income of the humanitarian sector'), function () {
-                        // $income =
-                        return 'income';
-                    })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
                     Text::make(__('humanitarian sector expenditures'), function () {
-                        return 'expenditures';
+                        $total = 0;
+                        $Transactions = Transaction::where('main_type', '2')->get();
+                        foreach ($Transactions as $key => $Transaction) {
+
+                            $Projects = Project::where([
+                                ['id', $Transaction->ref_id],
+                                ['sector', '1']
+                            ])->first();
+                            if (!empty($Projects)) {
+                                $total += $Transaction->equivelant_amount;
+                            }
+                        }
+                        return $total;
+
                     })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
                     Text::make(__('net budget'), function () {
-                        return 'net budget';
+                        $total = 0;
+                        $Transactions = Transaction::where('main_type', '2')->get();
+                        foreach ($Transactions as $key => $Transaction) {
+
+                            $Projects = Project::where([
+                                ['id', $Transaction->ref_id],
+                                ['sector', '1']
+                            ])->first();
+                            if (!empty($Projects)) {
+                                $total += $Transaction->equivelant_amount;
+                            }
+                        }
+
+                        return ( $this->humanitarian_sector - $total);
                     })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
                 ]),
                 Tab::make(__('health sector'), [
                     Text::make(__('health sector budjet'), 'health_sector')->hideFromIndex(),
-                    Text::make(__('income of the health sector'), function () {
-                        return 'ddd';
-                    })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
+
                     Text::make(__('health sector expenditures'), function () {
-                        return 'ddd';
+                        $total = 0;
+                        $Transactions = Transaction::where('main_type', '2')->get();
+                        foreach ($Transactions as $key => $Transaction) {
+
+                            $Projects = Project::where([
+                                ['id', $Transaction->ref_id],
+                                ['sector', '2']
+                            ])->first();
+                            if (!empty($Projects)) {
+                                $total += $Transaction->equivelant_amount;
+                            }
+                        }
+                        return $total;
                     })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
                     Text::make(__('net budget'), function () {
-                        return 'net budget';
+                        $total = 0;
+                        $Transactions = Transaction::where('main_type', '2')->get();
+                        foreach ($Transactions as $key => $Transaction) {
+
+                            $Projects = Project::where([
+                                ['id', $Transaction->ref_id],
+                                ['sector', '2']
+                            ])->first();
+                            if (!empty($Projects)) {
+                                $total += $Transaction->equivelant_amount;
+                            }
+                        }
+
+                        return ( $this->humanitarian_sector - $total);
                     })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
                 ]),
                 Tab::make(__('educational sector'), [
                     Text::make(__('educational sector budjet'), 'educational_sector')->hideFromIndex(),
-                    Text::make(__('income of the educational sector'), function () {
-                        return 'ddd';
-                    })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
+
                     Text::make(__('educational sector expenditures'), function () {
-                        return 'ddd';
+                        $total = 0;
+                        $Transactions = Transaction::where('main_type', '2')->get();
+                        foreach ($Transactions as $key => $Transaction) {
+
+                            $Projects = Project::where([
+                                ['id', $Transaction->ref_id],
+                                ['sector', '3']
+                            ])->first();
+                            if (!empty($Projects)) {
+                                $total += $Transaction->equivelant_amount;
+                            }
+                        }
+                        return $total;
                     })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
                     Text::make(__('net budget'), function () {
-                        return 'net budget';
+                        $total = 0;
+                        $Transactions = Transaction::where('main_type', '2')->get();
+                        foreach ($Transactions as $key => $Transaction) {
+
+                            $Projects = Project::where([
+                                ['id', $Transaction->ref_id],
+                                ['sector', '3']
+                            ])->first();
+                            if (!empty($Projects)) {
+                                $total += $Transaction->equivelant_amount;
+                            }
+                        }
+
+                        return ( $this->humanitarian_sector - $total);
                     })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
                 ]),
                 Tab::make(__('economic sector'), [
 
                     Text::make(__('economic sector budjet'), 'economic_sector')->hideFromIndex(),
-                    Text::make(__('income of the economic sector'), function () {
-                        return 'ddd';
-                    })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
+
                     Text::make(__('economic sector expenditures'), function () {
-                        return 'ddd';
+                        $total = 0;
+                        $Transactions = Transaction::where('main_type', '2')->get();
+                        foreach ($Transactions as $key => $Transaction) {
+
+                            $Projects = Project::where([
+                                ['id', $Transaction->ref_id],
+                                ['sector', '4']
+                            ])->first();
+                            if (!empty($Projects)) {
+                                $total += $Transaction->equivelant_amount;
+                            }
+                        }
+                        return $total;
                     })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
                     Text::make(__('net budget'), function () {
-                        return 'net budget';
+                        $total = 0;
+                        $Transactions = Transaction::where('main_type', '2')->get();
+                        foreach ($Transactions as $key => $Transaction) {
+
+                            $Projects = Project::where([
+                                ['id', $Transaction->ref_id],
+                                ['sector', '4']
+                            ])->first();
+                            if (!empty($Projects)) {
+                                $total += $Transaction->equivelant_amount;
+                            }
+                        }
+
+                        return ( $this->humanitarian_sector - $total);
                     })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
 
                 ]),
                 Tab::make(__('al_aqsa sector'), [
                     Text::make(__('al_aqsa sector budjet'), 'al_aqsa_sector')->hideFromIndex(),
-                    Text::make(__('income of the al_aqsa sector'), function () {
-                        return 'ddd';
-                    })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
+
                     Text::make(__('al_aqsa sector expenditures'), function () {
-                        return 'ddd';
+                        $total = 0;
+                        $Transactions = Transaction::where('main_type', '2')->get();
+                        foreach ($Transactions as $key => $Transaction) {
+
+                            $Projects = Project::where([
+                                ['id', $Transaction->ref_id],
+                                ['sector', '5']
+                            ])->first();
+                            if (!empty($Projects)) {
+                                $total += $Transaction->equivelant_amount;
+                            }
+                        }
+                        return $total;
                     })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
                     Text::make(__('net budget'), function () {
-                        return 'net budget';
+                        $total = 0;
+                        $Transactions = Transaction::where('main_type', '2')->get();
+                        foreach ($Transactions as $key => $Transaction) {
+
+                            $Projects = Project::where([
+                                ['id', $Transaction->ref_id],
+                                ['sector', '5']
+                            ])->first();
+                            if (!empty($Projects)) {
+                                $total += $Transaction->equivelant_amount;
+                            }
+                        }
+
+                        return ( $this->humanitarian_sector - $total);
                     })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
                 ]),
                 Tab::make(__('sanctuaries sector'), [
                     Text::make(__('sanctuaries sector budjet'), 'sanctuaries_sector')->hideFromIndex(),
-                    Text::make(__('income of the sanctuaries sector'), function () {
-                        return 'ddd';
-                    })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
+
                     Text::make(__('sanctuaries sector expenditures'), function () {
-                        return 'ddd';
+                        $total = 0;
+                        $Transactions = Transaction::where('main_type', '2')->get();
+                        foreach ($Transactions as $key => $Transaction) {
+
+                            $Projects = Project::where([
+                                ['id', $Transaction->ref_id],
+                                ['sector', '6']
+                            ])->first();
+                            if (!empty($Projects)) {
+                                $total += $Transaction->equivelant_amount;
+                            }
+                        }
+                        return $total;
                     })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
                     Text::make(__('net budget'), function () {
-                        return 'net budget';
+                        $total = 0;
+                        $Transactions = Transaction::where('main_type', '2')->get();
+                        foreach ($Transactions as $key => $Transaction) {
+
+                            $Projects = Project::where([
+                                ['id', $Transaction->ref_id],
+                                ['sector', '6']
+                            ])->first();
+                            if (!empty($Projects)) {
+                                $total += $Transaction->equivelant_amount;
+                            }
+                        }
+
+                        return ( $this->humanitarian_sector - $total);
                     })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
                 ]),
             ]),
