@@ -612,9 +612,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .ml-3{
   margin-left: 0.75rem;
 }
-.mr-2{
-  margin-right: 0.5rem;
-}
 .mb-8{
   margin-bottom: 2rem;
 }
@@ -807,6 +804,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .min-h-\[294px\]{
   min-height: 294px;
 }
+.min-h-\[145px\]{
+  min-height: 145px;
+}
 .w-full{
   width: 100%;
 }
@@ -907,6 +907,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .min-w-full{
   min-width: 100%;
+}
+.min-w-\[260px\]{
+  min-width: 260px;
 }
 .min-w-\[500px\]{
   min-width: 500px;
@@ -1214,9 +1217,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-t-\[6px\]{
   border-top-width: 6px;
 }
-.border-l-2{
-  border-left-width: 2px;
-}
 .border-b{
   border-bottom-width: 1px;
 }
@@ -1492,6 +1492,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pr-3{
   padding-right: 0.75rem;
 }
+.pl-2{
+  padding-left: 0.5rem;
+}
 .pt-8{
   padding-top: 2rem;
 }
@@ -1503,9 +1506,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pb-0{
   padding-bottom: 0px;
-}
-.pl-2{
-  padding-left: 0.5rem;
 }
 .text-left{
   text-align: left;
@@ -2241,6 +2241,9 @@ body{
   .md\:w-\[200px\]{
     width: 200px;
   }
+  .md\:min-w-0{
+    min-width: 0px;
+  }
   .md\:max-w-2xl{
     max-width: 42rem;
   }
@@ -2270,6 +2273,12 @@ body{
   }
   .md\:rounded-lg{
     border-radius: 0.5rem;
+  }
+  .md\:border-b-0{
+    border-bottom-width: 0px;
+  }
+  .md\:border-l-2{
+    border-left-width: 2px;
   }
   .md\:px-14{
     padding-left: 3.5rem;
@@ -2534,6 +2543,18 @@ body{
   }
   .lg\:text-\[24px\]{
     font-size: 24px;
+  }
+  .lg\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+  .lg\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  .lg\:text-lg{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 }
 @media (min-width: 1280px){
