@@ -121,7 +121,7 @@
                                                 type="submit"
                                                 @click="save()"
                                             >
-                                                Sign Up
+                                               save
                                             </button>
                                         </div>
                                     </div>
@@ -189,7 +189,7 @@
                                                 type="submit"
                                                 @click="savenew()"
                                             >
-                                                Sign Up
+                                               save
                                             </button>
                                         </div>
                                     </div>
@@ -258,7 +258,7 @@
                                                 type="submit"
                                                 @click="delet()"
                                             >
-                                                Sign Up
+                                                delet
                                             </button>
                                         </div>
                                     </div>
