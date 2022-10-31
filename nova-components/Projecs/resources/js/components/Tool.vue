@@ -865,7 +865,7 @@ import PureVueChart from "pure-vue-chart";
 export default {
     data() {
         return {
-            openTab: 4,
+            openTab: 1,
             openTabstatistic: 0,
 
             years: [2022],
