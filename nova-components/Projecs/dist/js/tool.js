@@ -1114,7 +1114,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            openTab: 4,
+            openTab: 1,
             openTabstatistic: 0,
 
             years: [2022],
