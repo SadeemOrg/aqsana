@@ -16,12 +16,9 @@ class CreateBudgetsTable extends Migration
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
             $table->string('year');
-            $table->string('humanitarian_sector');
-            $table->string('health_sector');
-            $table->string('educational_sector');
-            $table->string('economic_sector');
-            $table->string('al_aqsa_sector');
-            $table->string('sanctuaries_sector');
+            $table->bigInteger('sector_id');
+            $table->string('budget');
+
             $table->timestamps();
         });
     }

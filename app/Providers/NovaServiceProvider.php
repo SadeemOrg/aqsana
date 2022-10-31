@@ -688,7 +688,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             //     $user = Auth::user();
             //     return  ($user->type() == 'website_admin' ) ;
             // }),
-            // new projecs
+            new projecs
         ];
     }
     /**
