@@ -41,9 +41,9 @@
     "income of the economic sector": "دخل القطاع الاقتصادي",
     "economic sector expenditures": "نفقات القطاع الاقتصادي",
 
-    "al_aqsa sector budjet": "ميزانية قطاع الاقصى",
-    "income of the al_aqsa sector": "دخل قطاع الاقصى",
-    "al_aqsa sector expenditures": "نفقات قطاع الاقصى",
+    "al_aqsa sector budjet": "ميزانية قطاع قوافل الاقصى وشد الرحال",
+    "income of the al_aqsa sector": "دخل قطاع قوافل الاقصى وشد الرحال",
+    "al_aqsa sector expenditures": "نفقات قطاع قوافل الاقصى وشد الرحال",
 
 
     "sanctuaries sector budjet": "ميزانية قطاع المقدسات",
@@ -191,7 +191,7 @@
     "add user":"إضافة مستخدم",
     "value":"القيمة",
     "History":"تاريخ",
-
+"budget":"ميزانية",
 
     "Contents": "محتويات",
     "description": "ملاحظة",
