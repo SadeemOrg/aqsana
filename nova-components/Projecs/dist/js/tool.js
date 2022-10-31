@@ -8292,7 +8292,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                            Sign Up\n                                        "
+                                        "\n                                           save\n                                        "
                                       )
                                     ]
                                   )
@@ -8438,7 +8438,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                            Sign Up\n                                        "
+                                        "\n                                           save\n                                        "
                                       )
                                     ]
                                   )
@@ -8615,7 +8615,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                            Sign Up\n                                        "
+                                        "\n                                            delet\n                                        "
                                       )
                                     ]
                                   )
