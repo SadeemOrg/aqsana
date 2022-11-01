@@ -17,6 +17,7 @@ use App\Http\Controllers\NotificationTest;
 |
 */
 
+
 Route::post("first/", [HomeController::class, "first"])->name('first');
 Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');
 Route::post("delet/", [HomeController::class, "delet"])->name('delet');
