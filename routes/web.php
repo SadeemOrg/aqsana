@@ -19,6 +19,15 @@ use App\Http\Controllers\NotificationTest;
 
 Route::post("first/", [HomeController::class, "first"])->name('first');
 Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');
+Route::post("delet/", [HomeController::class, "delet"])->name('delet');
+
+Route::post("SectorsBudget", [HomeController::class, "SectorsBudget"])->name('SectorsBudget');
+Route::post("Sectorstatistics", [HomeController::class, "Sectorstatistics"])->name('Sectorstatistics');
+
+Route::post("year", [HomeController::class, "year"])->name('year');
+Route::post("save", [HomeController::class, "save"])->name('save');
+
+
 
 Route::get("/cars",[HomeController::class,'index']);
 

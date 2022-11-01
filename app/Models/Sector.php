@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Sector extends Model
 {
     use HasFactory;
+
+    public function Budget()
+    {
+        return $this->hasMany(Budget::class,'sector_id');
+    }
 }

@@ -202,7 +202,14 @@ class receiptVoucher extends Resource
                         ->addLayout(__('tooles'), 'Payment_type_details ', [
                             Text::make(__('value'), "equivelant_amount")->rules('required'),
 
-                            Text::make(__('card type'), "equivelant_amount"),
+                            Select::make(__('card type'), "card_type")  ->options([
+                                '1' => 'אמירקן אקספרס',
+                                '2' => 'שראכרט, ויזה',
+                                '3' => 'מסטרקארד',
+                                '4' => 'דיינרס',
+
+                            ]),
+
                             Text::make(__('card number'), "equivelant_amount"),
                             Text::make(__('number of installments'), "equivelant_amount"),
 
@@ -240,7 +247,11 @@ class receiptVoucher extends Resource
                         ->addLayout(__('tooles'), 'Payment_type_details ', [
                             Text::make(__('value'), "equivelant_amount")->rules('required'),
 
-                            Text::make(__('type'), "equivelant_amount1")->rules('required'),
+                            Select::make(__('type'), "type")->options([
+                                '1' => 'paybox',
+                                '2' => 'bit',
+                                '3' => 'פייפאל',
+                            ])->displayUsingLabels()->rules('required'),
 
 
                             DateTime::make(__('History'), 'Date')

@@ -13,6 +13,7 @@ use App\Mail\TestMail;
 use App\Models\Almuahada;
 use App\Models\Book;
 use App\Models\BookType;
+use App\Models\Budget;
 use App\Models\Donations;
 use App\Models\News;
 use App\Models\newsType;
@@ -20,45 +21,241 @@ use App\Models\Project;
 use App\Models\Sector;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Mail;
+
 class HomeController extends Controller
 {
 
 
     public function first(Request $request)
     {
-        // return $request->project_id;
-        // dd($project_id);
-        //  $projects = DB::tableس('projects')->where('report_status', '=', '1')->orderBy('report_date', 'desc')->paginate(9);
         $projects = Project::where('sector', '=', $request->project_id)->get();
-        // $    projects =$projects = Project::where('report_status', '=', '1');
-        // $projects = Project::all();
-        // dd($projects);
         return $projects;
     }
-    public function Sectors()
+    public function save(Request $request)
     {
-        // return $request->project_id;
-        // dd($project_id);
-        //  $projects = DB::tableس('projects')->where('report_status', '=', '1')->orderBy('report_date', 'desc')->paginate(9);
-        $Sectors = Sector::all();
-        // $    projects =$projects = Project::where('report_status', '=', '1');
-        return $Sectors;
+
+        foreach ($request->Sectors as $key => $value) {
+            DB::table('budgets')
+                ->updateOrInsert(
+                    ['year' => $request->year, 'sector_id' =>  $value['sector_id']],
+                    ['budget' => $value['Budget']]
+
+                );
+        }
     }
+    public function delet(Request $request)
+    {
+        DB::table('budgets')
+            ->where('year', $request->year)
+            ->delete();
+    }
+    public function SectorsBudget(Request $request)
+    {
+
+        $sector = array();
+        $Sectors = Sector::all();
+        foreach ($Sectors as $key => $Sector) {
+            $Budgets = Budget::where([
+                ['year', '=', $request->year],
+                ['sector_id', '=', $Sector->id],
+            ])->first();
+
+            // echo ( ! empty ( $Budgets ));
+
+
+            if (!empty($Budgets)) {
+
+                $pus = array(
+                    "sector_id" => $Sector->id,
+                    "Sector" => $Sector->text,
+                    "Budget" => $Budgets->budget
+                );
+            } else {
+                $pus = array(
+                    "sector_id" => $Sector->id,
+                    "Sector" => $Sector->text,
+                    "Budget" => '0'
+                );
+            }
+            array_push($sector, $pus);
+        }
+        return $sector;
+    }
+    public function Sectorstatistics(Request $request)
+    {
+
+        $sector = array();
+        $Sectors = Sector::all();
+        foreach ($Sectors as $key => $Sector) {
+            $Budgets = Budget::where([
+                ['year', '=', $request->year],
+                ['sector_id', '=', $Sector->id],
+            ])->first();
+
+            $year = $request->year;
+            //years
+            $expenses_year = 0;
+            $date_from = $year . '-1-1';
+            $date_to = $year . '-12-31';
+            $from = date($date_from);
+            $to = date($date_to);
+            $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
+            foreach ($Transactions as $key => $Transaction) {
+                $Projects = Project::where([
+                    ['id', $Transaction->ref_id],
+                    ['sector', $Sector->id]
+                ])->first();
+                if (!empty($Projects)) {
+                    $expenses_year += $Transaction->equivelant_amount;
+                }
+            }
+
+            //First Quarter
+            $expenses_First = 0;
+            $date_from = $year . '-1-1';
+            $date_to = $year . '-3-31';
+              $from = date($date_from);
+            $to = date($date_to);
+            $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
+            foreach ($Transactions as $key => $Transaction) {
+                $Projects = Project::where([
+                    ['id', $Transaction->ref_id],
+                    ['sector', $Sector->id]
+                ])->first();
+                if (!empty($Projects)) {
+                    $expenses_First += $Transaction->equivelant_amount;
+                }
+            }
+
+            //Second Quarter
+            $expenses_Second = 0;
+            $date_from = $year . '-4-1';
+            $date_to = $year . '-6-30';
+              $from = date($date_from);
+            $to = date($date_to);
+            $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
+            foreach ($Transactions as $key => $Transaction) {
+                $Projects = Project::where([
+                    ['id', $Transaction->ref_id],
+                    ['sector', $Sector->id]
+                ])->first();
+                if (!empty($Projects)) {
+                    $expenses_Second += $Transaction->equivelant_amount;
+                }
+            }
+
+            //Third Quarter
+            $expenses_Third = 0;
+            $date_from = $year . '-7-1';
+            $date_to = $year . '-9-30';
+              $from = date($date_from);
+            $to = date($date_to);
+            $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
+            foreach ($Transactions as $key => $Transaction) {
+                $Projects = Project::where([
+                    ['id', $Transaction->ref_id],
+                    ['sector', $Sector->id]
+                ])->first();
+                if (!empty($Projects)) {
+                    $expenses_Third += $Transaction->equivelant_amount;
+                }
+            }
+
+            //fourth Quarter
+            $expenses_fourth = 0;
+            $date_from = $year . '-8-1';
+            $date_to = $year . '-12-31';
+              $from = date($date_from);
+            $to = date($date_to);
+            $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
+            foreach ($Transactions as $key => $Transaction) {
+                $Projects = Project::where([
+                    ['id', $Transaction->ref_id],
+                    ['sector', $Sector->id]
+                ])->first();
+                if (!empty($Projects)) {
+                    $expenses_fourth += $Transaction->equivelant_amount;
+                }
+            }
+
+
+            if (!empty($Budgets)) {
+
+                $pus = array(
+                    "sector_id" => $Sector->id,
+                    "Sector" => $Sector->text,
+                    "Budget" => $Budgets->budget,
+                    "expenses_year" =>  $expenses_year,
+                    "expenses_First" => $expenses_First,
+                    "expenses_Second" =>  $expenses_Second,
+                    "expenses_Third" =>  $expenses_Third,
+                    "expenses_fourth" =>  $expenses_fourth,
+
+
+
+
+                );
+            } else {
+                $pus = array(
+                    "sector_id" => $Sector->id,
+                    "Sector" => $Sector->text,
+                    "Budget" => '0',
+                    "expenses_year" =>  $expenses_year,
+                    "expenses_First" => $expenses_First,
+                    "expenses_Second" =>  $expenses_Second,
+                    "expenses_Third" =>  $expenses_Third,
+                    "expenses_fourth" =>  $expenses_fourth,
+
+                );
+            }
+            array_push($sector, $pus);
+        }
+        return $sector;
+    }
+    public function Sectors(Request $request)
+    {
+
+        $sector = array();
+        $Sectors = Sector::all();
+        foreach ($Sectors as $key => $Sector) {
+
+
+
+
+
+            $pus = array(
+                "sector_id" => $Sector->id,
+                "Sector" => $Sector->text,
+                "Budget" => '0'
+            );
+
+
+            array_push($sector, $pus);
+        }
+        // dd($sector);
+        return $sector;
+    }
+    public function year()
+    {
+        $years = Budget::select('year')->get()->unique('year');
+        return  $years;
+    }
+
 
     public function originalbillbills($id)
     {
         $Transaction =  Transaction::where("id", $id)->first();
-        $original=1;
+        $original = 1;
 
-        return view('Pages.Bills.Bills', compact('Transaction','original'));
+        return view('Pages.Bills.Bills', compact('Transaction', 'original'));
     }
 
     public function bills($id)
     {
         $Transaction =  Transaction::where("id", $id)->first();
-        $original=0;
+        $original = 0;
 
-        return view('Pages.Bills.Bills', compact('Transaction','original'));
+        return view('Pages.Bills.Bills', compact('Transaction', 'original'));
     }
 
     public function showToastrMessages()
@@ -399,9 +596,7 @@ class HomeController extends Controller
 
     public function mainbill($id)
     {
-        $type='1';
-        return view('Pages.Bills.mainBill',compact('id','type'));
+        $type = '1';
+        return view('Pages.Bills.mainBill', compact('id', 'type'));
     }
-
-
 }

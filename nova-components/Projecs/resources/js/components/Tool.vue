@@ -1,52 +1,973 @@
 <template>
     <div>
-        <heading class="mb-6">Projecs</heading>
+        <div class="flex flex-wrap">
+            <div class="w-full">
+                <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a
+                            class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                            v-on:click="toggleTabs(1)"
+                            v-bind:class="{
+                                'text-green-600 bg-white': openTab !== 1,
+                                'text-white bg-green-600': openTab === 1
+                            }"
+                        >
+                            الميزانيات
+                        </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a
+                            class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                            v-on:click="toggleTabs(2)"
+                            v-bind:class="{
+                                'text-green-600 bg-white': openTab !== 2,
+                                'text-white bg-green-600': openTab === 2
+                            }"
+                        >
+                            اضافة جدييد
+                        </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a
+                            class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                            v-on:click="toggleTabs(3)"
+                            v-bind:class="{
+                                'text-green-600 bg-white': openTab !== 3,
+                                'text-white bg-green-600': openTab === 3
+                            }"
+                        >
+                            حذف
+                        </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a
+                            class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                            v-on:click="toggleTabs(4)"
+                            v-bind:class="{
+                                'text-green-600 bg-white': openTab !== 4,
+                                'text-white bg-green-600': openTab === 4
+                            }"
+                        >
+                            احصائبات
+                        </a>
+                    </li>
+                </ul>
+                <div
+                    class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
+                >
+                    <div class="px-4 py-5 flex-auto">
+                        <div class="tab-content tab-space">
+                            <!-- first from -->
+                            <div
+                                v-bind:class="{
+                                    hidden: openTab !== 1,
+                                    block: openTab === 1
+                                }"
+                            >
+                                <select
+                                    class="w-full form-control form-input form-input-bordered mt-4"
+                                    @change="onChange($event)"
+                                    v-model="year"
+                                >
+                                    <option selected disabled value=""
+                                        >Please select one</option
+                                    >
 
-        <card
-            class="bg-90 flex flex-col items-center justify-center"
-            style="min-height: 300px"
-        >
-            <svg
-                class="spin fill-80 mb-6"
-                width="69"
-                height="72"
-                viewBox="0 0 23 24"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                    d="M20.12 20.455A12.184 12.184 0 0 1 11.5 24a12.18 12.18 0 0 1-9.333-4.319c4.772 3.933 11.88 3.687 16.36-.738a7.571 7.571 0 0 0 0-10.8c-3.018-2.982-7.912-2.982-10.931 0a3.245 3.245 0 0 0 0 4.628 3.342 3.342 0 0 0 4.685 0 1.114 1.114 0 0 1 1.561 0 1.082 1.082 0 0 1 0 1.543 5.57 5.57 0 0 1-7.808 0 5.408 5.408 0 0 1 0-7.714c3.881-3.834 10.174-3.834 14.055 0a9.734 9.734 0 0 1 .03 13.855zM4.472 5.057a7.571 7.571 0 0 0 0 10.8c3.018 2.982 7.912 2.982 10.931 0a3.245 3.245 0 0 0 0-4.628 3.342 3.342 0 0 0-4.685 0 1.114 1.114 0 0 1-1.561 0 1.082 1.082 0 0 1 0-1.543 5.57 5.57 0 0 1 7.808 0 5.408 5.408 0 0 1 0 7.714c-3.881 3.834-10.174 3.834-14.055 0a9.734 9.734 0 0 1-.015-13.87C5.096 1.35 8.138 0 11.5 0c3.75 0 7.105 1.68 9.333 4.319C16.06.386 8.953.632 4.473 5.057z"
-                    fill-rule="evenodd"
-                />
-            </svg>
+                                    <option
+                                        v-for="year in years"
+                                        :key="year.year"
+                                        :value="year.year"
+                                    >
+                                        {{ year.year }}
+                                    </option>
+                                </select>
 
-            <h1 class="text-white text-4xl text-90 font-light mb-6">
-                We're in a black hole.
-            </h1>
+                                <form
+                                    @submit.prevent="onSubmit"
+                                    class="add-form"
+                                >
+                                    <div
+                                        v-for="Sector in Sectors"
+                                        :key="Sector.Sector"
+                                        :value="Sector.Sector"
+                                        class="md:flex md:items-center mb-6"
+                                    >
+                                        <div class="md:w-1/3">
+                                            <label
+                                                class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                                                for="inline-full-name"
+                                            >
+                                                {{ Sector.Sector }}
+                                            </label>
+                                        </div>
+                                        <div class="md:w-2/3">
+                                            <input
+                                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                                                id="inline-full-name"
+                                                type="text"
+                                                v-model="Sector.Budget"
+                                            />
+                                        </div>
+                                    </div>
 
-            <p class="text-white-50% text-lg">
-                You can edit this tool's component at:
-                <code class="ml-1 border border-80 text-sm font-mono text-white bg-black  px-2 py-1">
-                    <div class="bg-black ro text-9xl"> ffff</div>
-                    /nova-components/Projecs/reso/Tool.vue
-                </code>
-            </p>
-        </card>
+                                    <div
+                                        v-if="Sectors.length"
+                                        class="md:flex md:items-center"
+                                    >
+                                        <div class="md:w-1/3"></div>
+                                        <div class="md:w-2/3">
+                                            <button
+                                                class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                                                type="submit"
+                                                @click="save()"
+                                            >
+                                               save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div
+                                v-bind:class="{
+                                    hidden: openTab !== 2,
+                                    block: openTab === 2
+                                }"
+                            >
+                                <div class="md:w-1/3">
+                                    <label
+                                        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                                    >
+                                        ddd
+                                    </label>
+                                </div>
+                                <div class="md:w-2/3">
+                                    <input
+                                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                                        id="inline-full-name"
+                                        type="text"
+                                        v-model="newyear"
+                                    />
+                                </div>
+
+                                <form
+                                    @submit.prevent="onSubmit"
+                                    class="add-form"
+                                >
+                                    <div
+                                        v-for="Sector in newSectors"
+                                        :key="Sector.Sector"
+                                        :value="Sector.Sector"
+                                        class="md:flex md:items-center mb-6"
+                                    >
+                                        <div class="md:w-1/3">
+                                            <label
+                                                class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                                                for="inline-full-name"
+                                            >
+                                                {{ Sector.Sector }}
+                                            </label>
+                                        </div>
+                                        <div class="md:w-2/3">
+                                            <input
+                                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                                                id="inline-full-name"
+                                                type="text"
+                                                v-model="Sector.Budget"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        v-if="newSectors.length"
+                                        class="md:flex md:items-center"
+                                    >
+                                        <div class="md:w-1/3"></div>
+                                        <div class="md:w-2/3">
+                                            <button
+                                                class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                                                type="submit"
+                                                @click="savenew()"
+                                            >
+                                               save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div
+                                v-bind:class="{
+                                    hidden: openTab !== 3,
+                                    block: openTab === 3
+                                }"
+                            >
+                                <select
+                                    class="w-full form-control form-input form-input-bordered mt-4"
+                                    @change="onChangedelet($event)"
+                                    v-model="year"
+                                >
+                                    <option selected disabled value=""
+                                        >Please select one</option
+                                    >
+
+                                    <option
+                                        v-for="year in years"
+                                        :key="year.year"
+                                        :value="year.year"
+                                    >
+                                        {{ year.year }}
+                                    </option>
+                                </select>
+
+                                <form
+                                    @submit.prevent="onSubmit"
+                                    class="add-form"
+                                >
+                                    <div
+                                        v-for="Sector in deletSectors"
+                                        :key="Sector.Sector"
+                                        :value="Sector.Sector"
+                                        class="md:flex md:items-center mb-6"
+                                    >
+                                        <div class="md:w-1/3">
+                                            <label
+                                                class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                                                for="inline-full-name"
+                                            >
+                                                {{ Sector.Sector }}
+                                            </label>
+                                        </div>
+                                        <div class="md:w-2/3">
+                                            <input
+                                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                                                id="inline-full-name"
+                                                type="text"
+                                                v-model="Sector.Budget"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        v-if="deletSectors.length"
+                                        class="md:flex md:items-center"
+                                    >
+                                        <div class="md:w-1/3"></div>
+                                        <div class="md:w-2/3">
+                                            <button
+                                                class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                                                type="submit"
+                                                @click="delet()"
+                                            >
+                                                delet
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div
+                                v-bind:class="{
+                                    hidden: openTab !== 4,
+                                    block: openTab === 4
+                                }"
+                            >
+                                <div class="flex flex-wrap">
+                                    <select
+                                        class="w-full form-control form-input form-input-bordered mt-4"
+                                        @change="getSectorstatistics($event)"
+                                        v-model="year"
+                                    >
+                                        <option selected disabled value=""
+                                            >Please select one</option
+                                        >
+
+                                        <option
+                                            v-for="year in years"
+                                            :key="year.year"
+                                            :value="year.year"
+                                        >
+                                            {{ year.year }}
+                                        </option>
+                                    </select>
+                                    <div class="w-full">
+                                        <ul
+                                            class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
+                                        >
+                                            <li
+                                                class="-mb-px mr-2 last:mr-0 flex-auto text-center"
+                                                v-for="(Sector,
+                                                index) in budjetSector"
+                                                :key="Sector.Sector"
+                                                :value="Sector.Sector"
+                                            >
+                                                <a
+                                                    class="text-xs font-bold uppercase px-5 py-4 my-2 shadow-lg rounded block leading-normal"
+                                                    v-on:click="
+                                                        toggleTabsstatistic(
+                                                            index
+                                                        )
+                                                    "
+                                                    v-bind:class="{
+                                                        'text-pink-600 bg-white':
+                                                            openTabstatistic !==
+                                                            index,
+                                                        'text-white bg-pink-600':
+                                                            openTabstatistic ===
+                                                            index
+                                                    }"
+                                                >
+                                                    {{ Sector.Sector }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div
+                                            class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
+                                        >
+                                            <div class="px-4 py-5 flex-auto">
+                                                <div
+                                                    class="tab-content tab-space"
+                                                >
+                                                    <div
+                                                        v-for="(Sector,
+                                                        index) in budjetSector"
+                                                        :key="Sector.Sector"
+                                                        :value="Sector.Sector"
+                                                        v-bind:class="{
+                                                            hidden:
+                                                                openTabstatistic !==
+                                                                index,
+                                                            block:
+                                                                openTabstatistic ===
+                                                                index
+                                                        }"
+                                                    >
+                                                        <p>
+                                                            <heading
+                                                                class="mb-6 mx-4"
+                                                            >
+                                                                {{
+                                                                    Sector.Sector
+                                                                }}</heading
+                                                            >
+                                                        </p>
+                                                        <div
+                                                            class="space-y-8 divide-y divide-gray-200"
+                                                        >
+                                                            <div
+                                                                class="space-y-8 divide-y divide-gray-200"
+                                                            >
+                                                                <div
+                                                                    class="pt-8"
+                                                                >
+                                                                    <div
+                                                                        class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
+                                                                    >
+                                                                        <div
+                                                                            class="sm:col-span-6"
+                                                                        >
+                                                                            <label
+                                                                                for="street-address"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >ميزانبة
+                                                                                القطاع
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="street-address"
+                                                                                    id="street-address"
+                                                                                    autocomplete="street-address"
+                                                                                    :value="
+                                                                                        Sector.Budget
+                                                                                    "
+                                                                                    class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div
+                                                                            class="sm:col-span-6"
+                                                                        >
+                                                                            <label
+                                                                                for="street-address"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                            >
+                                                                                مصاريف
+                                                                                القطاع
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="street-address"
+                                                                                    id="street-address"
+                                                                                    autocomplete="street-address"
+                                                                                    :value="
+                                                                                        Sector.expenses_year
+                                                                                    "
+                                                                                    class=" p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="sm:col-span-6"
+                                                                        >
+                                                                            <label
+                                                                                for="street-address"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                            >
+                                                                                صافي
+                                                                                الانفاق
+                                                                                القطاع
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="street-address"
+                                                                                    id="street-address"
+                                                                                    autocomplete="street-address"
+                                                                                    :value="
+                                                                                        Sector.Budget -
+                                                                                            Sector.expenses_year
+                                                                                    "
+                                                                                    class=" p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--First Quarter -->
+                                                                        <div
+                                                                            class="sm:col-span-2"
+                                                                        >
+                                                                            <label
+                                                                                for="city"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >الربع
+                                                                                الاول
+                                                                                ميزانية
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="city"
+                                                                                    id="city"
+                                                                                    autocomplete="address-level2"
+                                                                                    :value="
+                                                                                        Sector.Budget /
+                                                                                            4
+                                                                                    "
+                                                                                    class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="sm:col-span-2"
+                                                                        >
+                                                                            <label
+                                                                                for="region"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >الربع
+                                                                                الاول
+                                                                                مصاريف</label
+                                                                            >
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="region"
+                                                                                    id="region"
+                                                                                    autocomplete="address-level1"
+                                                                                    :value="
+                                                                                        Sector.expenses_First
+                                                                                    "
+                                                                                    class=" p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="sm:col-span-2"
+                                                                        >
+                                                                            <label
+                                                                                for="postal-code"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >الربع
+                                                                                الاول
+                                                                                صافي
+                                                                                الانفاق</label
+                                                                            >
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="postal-code"
+                                                                                    id="postal-code"
+                                                                                    autocomplete="postal-code"
+                                                                                    :value="
+                                                                                        Sector.Budget /
+                                                                                            4 -
+                                                                                            Sector.expenses_First
+                                                                                    "
+                                                                                    class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--Second Quarter -->
+                                                                        <div
+                                                                            class="sm:col-span-2"
+                                                                        >
+                                                                            <label
+                                                                                for="city"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >الربع
+                                                                                الثاني
+                                                                                ميزانية
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="city"
+                                                                                    id="city"
+                                                                                    autocomplete="address-level2"
+                                                                                    :value="
+                                                                                        Sector.Budget /
+                                                                                            4
+                                                                                    "
+                                                                                    class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="sm:col-span-2"
+                                                                        >
+                                                                            <label
+                                                                                for="region"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >الربع
+                                                                                الثاني
+                                                                                مصاريف
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="region"
+                                                                                    id="region"
+                                                                                    autocomplete="address-level1"
+                                                                                    :value="
+                                                                                        Sector.expenses_Second
+                                                                                    "
+                                                                                    class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="sm:col-span-2"
+                                                                        >
+                                                                            <label
+                                                                                for="postal-code"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >الربع
+                                                                                الثاني
+                                                                                صافي
+                                                                                الانفاق
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="postal-code"
+                                                                                    id="postal-code"
+                                                                                    autocomplete="postal-code"
+                                                                                    :value="
+                                                                                        Sector.Budget /
+                                                                                            4 -
+                                                                                            Sector.expenses_Second
+                                                                                    "
+                                                                                    class=" p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--Third quarter  -->
+                                                                        <div
+                                                                            class="sm:col-span-2"
+                                                                        >
+                                                                            <label
+                                                                                for="city"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >الربع
+                                                                                الثالت
+                                                                                ميزانية
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="city"
+                                                                                    id="city"
+                                                                                    autocomplete="address-level2"
+                                                                                    :value="
+                                                                                        Sector.Budget /
+                                                                                            4
+                                                                                    "
+                                                                                    class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="sm:col-span-2"
+                                                                        >
+                                                                            <label
+                                                                                for="region"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >الربع
+                                                                                الثالت
+                                                                                مصاريف
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="region"
+                                                                                    id="region"
+                                                                                    autocomplete="address-level1"
+                                                                                    :value="
+                                                                                        Sector.expenses_Third
+                                                                                    "
+                                                                                    class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="sm:col-span-2"
+                                                                        >
+                                                                            <label
+                                                                                for="postal-code"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >الربع
+                                                                                الثالت
+                                                                                صافي
+                                                                                الانفاق
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="postal-code"
+                                                                                    id="postal-code"
+                                                                                    autocomplete="postal-code"
+                                                                                    :value="
+                                                                                        Sector.Budget /
+                                                                                            4 -
+                                                                                            Sector.expenses_Third
+                                                                                    "
+                                                                                    class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- The fourth quarter  -->
+                                                                        <div
+                                                                            class="sm:col-span-2"
+                                                                        >
+                                                                            <label
+                                                                                for="city"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >الربع
+                                                                                الرابع
+                                                                                ميزانية
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="city"
+                                                                                    id="city"
+                                                                                    autocomplete="address-level2"
+                                                                                    :value="
+                                                                                        Sector.Budget /
+                                                                                            4
+                                                                                    "
+                                                                                    class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="sm:col-span-2"
+                                                                        >
+                                                                            <label
+                                                                                for="region"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >الربع
+                                                                                الرابع
+                                                                                مصاريف
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="region"
+                                                                                    id="region"
+                                                                                    autocomplete="address-level1"
+                                                                                    :value="
+                                                                                        Sector.expenses_fourth
+                                                                                    "
+                                                                                    class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="sm:col-span-2"
+                                                                        >
+                                                                            <label
+                                                                                for="postal-code"
+                                                                                class="block text-sm font-medium text-gray-700"
+                                                                                >الربع
+                                                                                الرابع
+                                                                                صافي
+                                                                                الانفاق
+                                                                            </label>
+                                                                            <div
+                                                                                class="mt-1"
+                                                                            >
+                                                                                <input
+                                                                                    readonly
+                                                                                    type="text"
+                                                                                    name="postal-code"
+                                                                                    id="postal-code"
+                                                                                    autocomplete="postal-code"
+                                                                                    :value="
+                                                                                        Sector.Budget /
+                                                                                            4 -
+                                                                                            Sector.expenses_fourth
+                                                                                    "
+                                                                                    class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="flex">
+                                                            <p>
+                                                                pp
+                                                            </p>
+                                                            <pure-vue-chart
+                                                                :points="points"
+                                                                :show-y-axis="
+                                                                    true
+                                                                "
+                                                                :show-x-axis="
+                                                                    true
+                                                                "
+                                                                :width="400"
+                                                                :height="200"
+                                                                :show-values="
+                                                                    true
+                                                                "
+                                                                :use-month-labels="
+                                                                    true
+                                                                "
+                                                                :months="months"
+                                                            />
+                                                            <p></p>
+                                                            <p>
+                                                                pp
+                                                            </p>
+
+                                                            <pure-vue-chart
+                                                                :points="points"
+                                                                :show-y-axis="
+                                                                    true
+                                                                "
+                                                                :show-x-axis="
+                                                                    true
+                                                                "
+                                                                :width="400"
+                                                                :height="200"
+                                                                :show-values="
+                                                                    true
+                                                                "
+                                                                :use-month-labels="
+                                                                    true
+                                                                "
+                                                                :months="months"
+                                                            />
+                                                            <p>
+                                                                pp
+                                                            </p>
+                                                            <pure-vue-chart
+                                                                :points="points"
+                                                                :show-y-axis="
+                                                                    true
+                                                                "
+                                                                :show-x-axis="
+                                                                    true
+                                                                "
+                                                                :width="400"
+                                                                :height="200"
+                                                                :show-values="
+                                                                    true
+                                                                "
+                                                                :use-month-labels="
+                                                                    true
+                                                                "
+                                                                :months="months"
+                                                            />
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import PureVueChart from "pure-vue-chart";
 export default {
-    metaInfo() {
+    data() {
         return {
-          title: 'Projecs',
+            openTab: 1,
+            openTabstatistic: 0,
+
+            years: [2022],
+            Sectors: [],
+            newSectors: [],
+            budjetSector: [],
+            deletSectors: [],
+            points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
+            months: [
+                "Jan",
+                "Fev",
+                "Mar",
+                "Abr",
+                "Mai",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Set",
+                "Out",
+                "Nov",
+                "Dez"
+            ],
+            projectshow: false
+        };
+    },
+    methods: {
+        toggleTabs: function(tabNumber) {
+            this.openTab = tabNumber;
+        },
+        toggleTabsstatistic: function(tabNumber) {
+            this.openTabstatistic = tabNumber;
+        },
+        getYears: function() {
+            axios.post("/year").then(response => {
+                this.years = response.data;
+            });
+        },
+
+        getSector: function() {
+            axios.post("/Sectors").then(response => {
+                this.newSectors = response.data;
+            });
+        },
+        getSectorstatistics(event) {
+            axios
+                .post("/Sectorstatistics", {
+                    year: event.target.value
+                })
+                .then(response => {
+                    this.budjetSector = response.data;
+                });
+        },
+
+        onChange(event) {
+            axios
+                .post("/SectorsBudget", {
+                    year: event.target.value
+                })
+                .then(response => {
+                    this.Sectors = response.data;
+                });
+        },
+        onChangedelet(event) {
+            axios
+                .post("/SectorsBudget", {
+                    year: event.target.value
+                })
+                .then(response => {
+                    this.deletSectors = response.data;
+                });
+        },
+        save() {
+            axios.post("/save", {
+                year: this.year,
+                Sectors: this.Sectors
+            });
+        },
+        savenew() {
+            axios.post("/save", {
+                year: this.newyear,
+                Sectors: this.newSectors
+            });
+
+            this.getYears();
+        },
+        delet() {
+            console.log(this.year);
+            // console.log(this.deletSectors);
+            axios.post("/delet", {
+                year: this.year
+            });
+            this.deletSectors = [];
+            this.getYears();
         }
     },
-    mounted() {
-        //
-    },
-}
-</script>
 
-<style>
-/* Scoped Styles */
-</style>
+    beforeMount() {
+        this.getYears();
+        this.getSector();
+    },
+    components: {
+        PureVueChart
+    }
+};
+</script>
