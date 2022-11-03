@@ -40,6 +40,7 @@ use Laravel\Nova\Fields\DateTime;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use App\Models\Bus;
 use App\Models\Notification;
+use App\Models\Sector;
 use App\Models\User;
 use App\Nova\Actions\AddBus;
 use Benjacho\BelongsToManyField\BelongsToManyField;
@@ -241,16 +242,32 @@ class Project extends Resource
                 Text::make(__("project describe"), "project_describe"),
 
                 Select::make(__('SECTOR'), 'sector')
-                    ->options(function () {
-                        $sectors = nova_get_setting('workplace', 'default_value');
-                        $user_type_admin_array =  array();
-                        if ($sectors != "default_value") {
-                            foreach ($sectors as $sector) {
-                                $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
-                            }
-                            return  $user_type_admin_array;
-                        }
-                    }),
+                ->options(function(){
+                    $Sectors =  \App\Models\Sector::all();
+                    $Sectors_type_admin_array =  array();
+
+                    foreach ($Sectors as $Sector) {
+
+
+                            $Sectors_type_admin_array += [$Sector['id'] => ($Sector['text'])];
+
+                    }
+
+                    return $Sectors_type_admin_array;
+                })
+                ,
+                    // ->options(
+
+                    //     function () {
+                    //     $sectors = nova_get_setting('workplace', 'default_value');
+                    //     $user_type_admin_array =  array();
+                    //     if ($sectors != "default_value") {
+                    //         foreach ($sectors as $sector) {
+                    //             $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
+                    //         }
+                    //         return  $user_type_admin_array;
+                    //     }
+                    // }),
                 BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
                     ->options(Area::all())
                     ->optionsLabel('name')->canSee(function ($request) {
@@ -528,7 +545,7 @@ class Project extends Resource
             }
             // dd($stack);
             $busss = DB::table('project_bus')->where(
-                ['project_id' => $model->id, 'city_id' => $citye['id']]
+                ['project_id' => $model->id]
             )->get();
             $busstack = array();
             foreach ($busss as $key => $value) {
