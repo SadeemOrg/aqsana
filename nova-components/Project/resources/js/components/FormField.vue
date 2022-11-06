@@ -15,8 +15,8 @@
                <option  :value="0">
                     مخرجات عامة</option
                 >
-                <option v-for="item in Sectors" :key="item.id" :value="item.id">
-                    {{ item.text }}</option
+                <option v-for="item in Sectors" :key="item.sector_id" :value="item.sector_id">
+                    {{ item.Sector }}</option
                 >
             </select>
             <p  v-if="projectshow" class="mt-4">المشروع</p>
@@ -104,9 +104,9 @@ export default {
 
         getUnits: function() {
             // alert("ss");
-            axios.post("/Sectors").then(response => {
-                // alert(this.Sectors);
+            axios.post("/SectorsPill").then(response => {
                 this.Sectors = response.data;
+                console.log("ddd",this.Sectors);
             });
         },
 

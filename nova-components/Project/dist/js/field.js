@@ -514,9 +514,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             // alert("ss");
-            axios.post("/Sectors").then(function (response) {
-                // alert(this.Sectors);
+            axios.post("/SectorsPill").then(function (response) {
                 _this2.Sectors = response.data;
+                console.log("ddd", _this2.Sectors);
             });
         },
 
@@ -26933,8 +26933,8 @@ var render = function() {
             _vm._l(_vm.Sectors, function(item) {
               return _c(
                 "option",
-                { key: item.id, domProps: { value: item.id } },
-                [_vm._v("\n                " + _vm._s(item.text))]
+                { key: item.sector_id, domProps: { value: item.sector_id } },
+                [_vm._v("\n                " + _vm._s(item.Sector))]
               )
             })
           ],

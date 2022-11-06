@@ -28,6 +28,7 @@ Route::post("Sectorstatistics", [HomeController::class, "Sectorstatistics"])->na
 Route::post("year", [HomeController::class, "year"])->name('year');
 Route::post("save", [HomeController::class, "save"])->name('save');
 
+Route::post("SectorsPill/", [HomeController::class, "SectorsPill"])->name('SectorsPill');
 
 
 Route::get("/cars",[HomeController::class,'index']);
