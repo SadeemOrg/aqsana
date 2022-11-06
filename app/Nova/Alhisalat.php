@@ -116,11 +116,6 @@ class Alhisalat extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            DynamicSelect::make('Country', 'country')
-            ->options(['US' => 'United States', 'UK' => 'United Kingdom'])
-            ->rules('required')
-        ,
-
             Text::make(__("number alhisala"), "number_alhisala")->withMeta([
                 'value' => uniqid(),
             ])->readonly()->hideWhenUpdating()->hideFromDetail()->hideFromIndex(),

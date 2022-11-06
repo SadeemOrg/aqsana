@@ -39,7 +39,7 @@ class receiptVoucher extends Resource
     public static $title = 'id';
     public static function label()
     {
-        return __('receipt Voucher');
+        return __('Alhisalat');
     }
     public static function group()
     {
@@ -70,7 +70,10 @@ class receiptVoucher extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-        return $query->where('main_type', '1');
+        return $query->where([
+            ['main_type', 1],
+            ['type', 1]
+        ]);
     }
     public function fields(Request $request)
     {
@@ -83,12 +86,9 @@ class receiptVoucher extends Resource
                 ->text(__('print'))->showLoadingAnimation()
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
-            Select::make(__("type"), "type")->options([
-                '1' => __('Alhisalat'),
-                '2' => __('Donations'),
-            ])->displayUsingLabels(),
 
-            NovaDependencyContainer::make([
+
+
                 Select::make(__('Alhisalat'), "ref_id")
                     ->options(function () {
                         $Alhisalats =  \App\Models\Alhisalat::all();
@@ -104,7 +104,7 @@ class receiptVoucher extends Resource
 
 
 
-            ])->dependsOn("type", '1')->hideFromDetail()->hideFromIndex(),
+
 
 
             Text::make(__('transact amount'), 'transact_amount'),
@@ -124,148 +124,7 @@ class receiptVoucher extends Resource
             Date::make(__('date'), 'transaction_date'),
 
 
-            NovaDependencyContainer::make([
-                Select::make(__('name'), "name")
-                    ->options(function () {
-                        $Users =  \App\Models\User::where('user_role', 'company')->get();;
-                        $i = 0;
-                        $user_type_admin_array =  array();
-                        foreach ($Users as $User) {
 
-
-                            $user_type_admin_array += [($User['id']) => ($User['name'])];
-                        }
-
-                        return $user_type_admin_array;
-                    })
-                    ->displayUsingLabels(),
-                Flexible::make(__('add user'),'add_user')
-                ->readonly(true)
-
-                    ->hideFromDetail()->hideFromIndex()
-                    ->addLayout(__('tooles'), 'Payment_type_details ', [
-                        Text::make(__('name'), "name")->rules('required'),
-                        Text::make(__('email'), "email")->rules('required'),
-                        Text::make(__('phone'), "phone")->rules('required'),
-                    ]),
-
-
-                // Select::make(__('project'), "ref_id")
-                //     ->options(function () {
-                //         $Alhisalats =  \App\Models\User::all();
-                //         $user_type_admin_array =  array();
-                //         foreach ($Alhisalats as $Alhisalat) {
-                //             $user_type_admin_array += [$Alhisalat['id'] => ($Alhisalat['name'])];
-                //         }
-
-                //         return $user_type_admin_array;
-                //     })
-                //     ->displayUsingLabels(),
-
-                Select::make(__("billing language"), "lang")->options([
-                    '1' => __('ar'),
-                    '2' => __('en'),
-                    '3' => __('hr'),
-                ])->displayUsingLabels(),
-                Select::make(__("Payment_type"), "Payment_type")->options([
-                    '1' => __('cash'),
-                    '2' => __('shek'),
-                    '3' => __('visa'),
-                    '4' => __('hawale'),
-                    '5' => __('Other'),
-                ])->displayUsingLabels(),
-
-
-
-                NovaDependencyContainer::make([
-                    Flexible::make(__('Payment_type_details'), 'Payment_type_details')
-
-                        ->addLayout(__('tooles'), 'Payment_type_details ', [
-                            Text::make(__('Doubt value'), "equivelant_amount")->rules('required'),
-                            Text::make(__('bank number'), "equivelant_amount"),
-                            Text::make(__('Branch number'), "equivelant_amount"),
-                            Text::make(__('account number'), "equivelant_amount"),
-                            Text::make(__('Doubt number'), "equivelant_amount"),
-
-                            DateTime::make(__('History of doubt'), 'Date')
-                                ->format('DD/MM/YYYY HH:mm')
-                                ->resolveUsing(function ($value) {
-                                    return $value;
-                                })->rules('required'),
-
-                        ]),
-                ])->dependsOn("Payment_type", '2')->hideFromDetail()->hideFromIndex(),
-
-                NovaDependencyContainer::make([
-                    Flexible::make(__('Payment_type_details'), 'Payment_type_details')
-
-                        ->addLayout(__('tooles'), 'Payment_type_details ', [
-                            Text::make(__('value'), "equivelant_amount")->rules('required'),
-
-                            Select::make(__('card type'), "card_type")  ->options([
-                                '1' => 'אמירקן אקספרס',
-                                '2' => 'שראכרט, ויזה',
-                                '3' => 'מסטרקארד',
-                                '4' => 'דיינרס',
-
-                            ]),
-
-                            Text::make(__('card number'), "equivelant_amount"),
-                            Text::make(__('number of installments'), "equivelant_amount"),
-
-                            DateTime::make(__('History'), 'Date')
-                                ->format('DD/MM/YYYY HH:mm')
-                                ->resolveUsing(function ($value) {
-                                    return $value;
-                                })->rules('required'),
-
-                        ]),
-                ])->dependsOn("Payment_type", '3')->hideFromDetail()->hideFromIndex(),
-
-                NovaDependencyContainer::make([
-                    Flexible::make(__('Payment_type_details'), 'Payment_type_details')
-
-                        ->addLayout(__('tooles'), 'Payment_type_details ', [
-                            Text::make(__('value'), "equivelant_amount")->rules('required'),
-
-                            Text::make(__('bank number'), "equivelant_amount"),
-                            Text::make(__('Branch number'), "equivelant_amount"),
-                            Text::make(__('account number'), "equivelant_amount"),
-
-                            DateTime::make(__('History'), 'Date')
-                                ->format('DD/MM/YYYY HH:mm')
-                                ->resolveUsing(function ($value) {
-                                    return $value;
-                                })->rules('required'),
-
-                            ]),
-                ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
-
-                NovaDependencyContainer::make([
-                    Flexible::make(__('Payment_type_details'), 'Payment_type_details')
-
-                        ->addLayout(__('tooles'), 'Payment_type_details ', [
-                            Text::make(__('value'), "equivelant_amount")->rules('required'),
-
-                            Select::make(__('type'), "type")->options([
-                                '1' => 'paybox',
-                                '2' => 'bit',
-                                '3' => 'פייפאל',
-                            ])->displayUsingLabels()->rules('required'),
-
-
-                            DateTime::make(__('History'), 'Date')
-                                ->format('DD/MM/YYYY HH:mm')
-                                ->resolveUsing(function ($value) {
-                                    return $value;
-                                })->rules('required'),
-
-                        ]),
-                ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
-
-                // BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class),
-
-            ])->dependsOn("type", '2')->hideFromDetail()->hideFromIndex(),
 
 
 
@@ -278,7 +137,7 @@ class receiptVoucher extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->main_type = '1';
-        $model->type = '3';
+        $model->type = '1';
         $model->equivelant_amount = $new->rate * $request->transact_amount;
     }
     public static function beforeUpdate(Request $request, $model)

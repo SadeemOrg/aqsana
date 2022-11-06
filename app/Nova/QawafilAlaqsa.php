@@ -428,7 +428,7 @@ class QawafilAlaqsa extends Resource
             ])),
 
 
-            HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
+            // HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
             HasMany::make(__('TripBooking'), 'TripBooking', \App\Nova\TripBooking::class),
             belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
         ];
@@ -438,7 +438,7 @@ class QawafilAlaqsa extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->project_type = '2';
-        $model->sector = 'قطاع الأوقاف والمقدسات';
+        $model->sector = '5';
         $model->is_reported = '1';
 
         $model->trip_to = '1';
