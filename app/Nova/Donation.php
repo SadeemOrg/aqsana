@@ -156,10 +156,9 @@ class Donation extends Resource
                                 Text::make(__('Doubt number'), "equivelant_amount"),
 
                                 DateTime::make(__('History of doubt'), 'Date')
-                                    ->format('DD/MM/YYYY HH:mm')
-                                    ->resolveUsing(function ($value) {
-                                        return $value;
-                                    })->rules('required'),
+                                ->resolveUsing(function ($date) {
+                                    return $date->format('d/m/Y');
+                                })->rules('required'),
 
                             ]),
                     ])->dependsOn("Payment_type", '2')->hideFromDetail()->hideFromIndex(),
@@ -248,7 +247,6 @@ class Donation extends Resource
         $model->created_by = $id;
         $model->main_type = '1';
         $model->type = '2';
-        $model->type = '3';
         $model->equivelant_amount = $new->rate * $request->transact_amount;
     }
     public static function beforeUpdate(Request $request, $model)
