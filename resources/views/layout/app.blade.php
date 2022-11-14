@@ -122,7 +122,7 @@
 <body class="mt-44" dir="rtl">
     @include('layout.front-end.partial._top-header')
     @include('layout.front-end.partial._header')
-        @yield('content')
+    @yield('content')
     @include('layout.front-end.partial._footer')
 
 
@@ -166,51 +166,6 @@
         src="https://www.paypal.com/sdk/js?client-id=AQrUNiqeaUR5hFL1CRzuAwZQCPQ2KD35hVAM0s_jIhw6mgydgbxvPFVfd3GQ7r3Z-wEyX8FPN3bxJyxL&currency=ILS">
     </script>
     <script>
-        $('#search').on('keyup', function() {
-            var val = $('#search').val().toLowerCase();
-            if (val.length > 2) {
-                $('.search-bar').siblings().css('display', 'flex');
-                $.get({
-                    url: '{{ url(' / ') }}/search/' + data,
-                    data: {
-                        val: val,
-                    },
-                    dataType: 'json',
-                    beforeSend: function() {
-                        $('.search-result-box').html('');
-                        $('.svgSearch').css('display', 'none');
-                    },
-                    success: function(response) {
-                        var elements = [];
-                        console.log('response', response)
-                        response.map(item => {
-                            var trimmedString = {
-                                trumedTitle: item.title.substring(0, 100),
-                                title: item.title,
-                                id: item.id
-                            };
-                            elements.push(trimmedString)
-                        })
-                        let searchData = $();
-                        for (i = 0; i < elements.length; i++) {
-                            $('.search-result-box').html('');
-                            searchData = searchData.add(
-                                '<a class="searchList"  target="_self" href="/categor/' + elements[
-                                    i].title + '/' + elements[i].id + '">' + elements[i]
-                                .trumedTitle + '</br> </a>');
-                        }
-                        $('.search-result-box').append(searchData)
-                    },
-                    complete: function() {
-                        console.log('searchCompleted')
-                    },
-                    error: function(err) {
-                        console.log('searchError', err)
-                    }
-                });
-            }
-        });
-
         // Library Search
         $('#searchLibrary').on('keyup', function() {
             var librarySearchval = $('#searchLibrary').val().toLowerCase();
@@ -698,6 +653,51 @@
             }
             $('.tab-' + $(this).data('tab')).fadeIn();
         });
+
+        $('#search').on('keyup', function() {
+            var val = $('#search').val().toLowerCase();
+            if (val.length > 2) {
+                $('.search-bar').siblings().css('display', 'flex');
+                $.ajax({
+                    type:"get",
+                    url:  '/search/'+val ,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        console.log('herererer')
+                        $('.search-result-box').html('');
+                        $('.svgSearch').css('display', 'none');
+                    },
+                    success: function(response) {
+                        var elements = [];
+                        console.log('response', response)
+                        response.map(item => {
+                            var trimmedString = {
+                                trumedTitle: item.title.substring(0, 100),
+                                title: item.title,
+                                id: item.id
+                            };
+                            elements.push(trimmedString)
+                        })
+                        let searchData = $();
+                        for (i = 0; i < elements.length; i++) {
+                            $('.search-result-box').html('');
+                            searchData = searchData.add(
+                                '<a class="searchList"  target="_self" href="/categor/' + elements[
+                                    i].title + '/' + elements[i].id + '">' + elements[i]
+                                .trumedTitle + '</br> </a>');
+                        }
+                        $('.search-result-box').append(searchData)
+                    },
+                    complete: function() {
+                        console.log('searchCompleted')
+                    },
+                    error: function(err) {
+                        console.log('searchError', err)
+                    }
+                });
+            }
+        });
+
         $(".contactUsForm").submit(function(e) {
             e.preventDefault()
             var $name = $('input[name="name"]').val();

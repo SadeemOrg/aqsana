@@ -519,7 +519,6 @@ class HomeController extends Controller
             ->select('title', 'id')
             ->get();
 
-        //  dd($News);
         return $News;
     }
 

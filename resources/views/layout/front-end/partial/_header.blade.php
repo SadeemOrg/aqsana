@@ -5,7 +5,7 @@
         @endphp
 
 
-        <div dir="rtl" class="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 ">
+<div dir="rtl" class="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 ">
             <!-- Start for mobile -->
             <div class="xl:hidden flex justify-between items-center">
                 @php
@@ -37,7 +37,7 @@
                         </li>
                         <!--end Logo side -->
                         <!-- Start RT logo -->
-                        <ul class="navbar-nav xl:flex xl:flex-row justify-between items-center gap-x-4 basis-4/6 mr-16 xl:mr-0">
+                        <ul class="navbar-nav xl:flex xl:flex-row justify-between items-center gap-x-4 basis-4/6 mr-16 lg:mr-0">
                             @if (isset($nav))
                                 @foreach ($nav as $key => $item)
                                     @if (empty($item->children))
