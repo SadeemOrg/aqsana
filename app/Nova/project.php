@@ -40,6 +40,7 @@ use Laravel\Nova\Fields\DateTime;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use App\Models\Bus;
 use App\Models\Notification;
+use App\Models\Sector;
 use App\Models\User;
 use App\Nova\Actions\AddBus;
 use Benjacho\BelongsToManyField\BelongsToManyField;
@@ -241,16 +242,32 @@ class Project extends Resource
                 Text::make(__("project describe"), "project_describe"),
 
                 Select::make(__('SECTOR'), 'sector')
-                    ->options(function () {
-                        $sectors = nova_get_setting('workplace', 'default_value');
-                        $user_type_admin_array =  array();
-                        if ($sectors != "default_value") {
-                            foreach ($sectors as $sector) {
-                                $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
-                            }
-                            return  $user_type_admin_array;
-                        }
-                    }),
+                ->options(function(){
+                    $Sectors =  \App\Models\Sector::all();
+                    $Sectors_type_admin_array =  array();
+
+                    foreach ($Sectors as $Sector) {
+
+
+                            $Sectors_type_admin_array += [$Sector['id'] => ($Sector['text'])];
+
+                    }
+
+                    return $Sectors_type_admin_array;
+                })
+                ,
+                    // ->options(
+
+                    //     function () {
+                    //     $sectors = nova_get_setting('workplace', 'default_value');
+                    //     $user_type_admin_array =  array();
+                    //     if ($sectors != "default_value") {
+                    //         foreach ($sectors as $sector) {
+                    //             $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
+                    //         }
+                    //         return  $user_type_admin_array;
+                    //     }
+                    // }),
                 BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
                     ->options(Area::all())
                     ->optionsLabel('name')->canSee(function ($request) {
@@ -410,7 +427,7 @@ class Project extends Resource
 
 
 
-            HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
+            // HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
             HasMany::make(__('Volunteer'), 'Volunteer', \App\Nova\Volunteer::class),
             belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
             // ->canSee(function ($request) {
@@ -496,28 +513,70 @@ class Project extends Resource
                 );
         }
     }
-    public static function afterSave(Request $request, $model)
+    public static function aftersave(Request $request, $model)
     {
-        //
-        // dd($request->tooles[0]['attributes']['user_tools']);
-
-
         $id = Auth::id();
+        $model->update_by = $id;
 
         $citye =   City::where('admin_id', $id)
             ->select('id')->first();
-        $model->update_by = $id;
+        if ($request->Area) {
+            $areas = json_decode($request->Area);
+            $tokens = [];
+            foreach ($areas as $key => $area) {
+                $user = User::where('id', $area->admin_id)->first();
+                $notification = Notification::where('id', '2')->first();
 
-        // if ($request->tooles) {
-        //     $toooles = $request->tooles;
-        //     foreach ($toooles as $key => $tooole) {
-        //         DB::table('project_toole')
-        //             ->updateOrInsert(
-        //                 ['project_id' => $model->id, 'city_id' => $citye['id'], 'user_id' => $tooole['attributes']['user_tools']],
-        //                 ['tools' => $request->tooles]
-        //             );
-        //     }
-        // }
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
+                }
+            }
+            if (!empty($tokens)) {
+
+                Helpers::send_notification($tokens, $notification);
+            }
+        }
+        if ($request->City) {
+            $Citys = json_decode($request->City);
+            $tokens = [];
+            foreach ($Citys as $key => $City) {
+                $user = User::where('id', $City->admin_id)->first();
+                $notification = Notification::where('id', '2')->first();
+
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
+                }
+            }
+            if (!empty($tokens)) {
+
+                Helpers::send_notification($tokens, $notification);
+            }
+        }
+
+        if ($request->Budjet) {
+
+            DB::table('transactions')
+                ->updateOrInsert(
+                    ['ref_id' => $model->id, 'ref_cite_id' => $citye['id']],
+                    [
+                        'main_type' => '2',
+                        'type' => '2',
+                        'Currency' => '3',
+                        'transact_amount' => $request->Budjet,
+                        'equivelant_amount' => $request->Budjet,
+                        'transaction_date' => $date = date('Y-m-d'),
+
+                    ]
+                );
+        }
+        if ($request->Toole) {
+
+            DB::table('project_toole')
+                ->updateOrInsert(
+                    ['project_id' => $model->id, 'city_id' => $citye['id']],
+                    ['tools' => $request->Toole]
+                );
+        }
         if ($request->bus) {
 
             $buss = json_decode($request->bus);
@@ -526,18 +585,18 @@ class Project extends Resource
             foreach ($buss as $key => $value) {
                 array_push($stack, $value->id);
             }
-            // dd($stack);
+
+
             $busss = DB::table('project_bus')->where(
-                ['project_id' => $model->id, 'city_id' => $citye['id']]
+                ['project_id' => $model->id]
             )->get();
             $busstack = array();
             foreach ($busss as $key => $value) {
                 array_push($busstack, $value->bus_id);
             }
             $result = array_intersect($stack, $busstack);
-            //    dd($busstack);
-            // dd( $result);
-            $deleted = DB::table('project_bus')->where(['project_id' => $model->id, 'city_id' => $citye['id']])
+
+            $deleted = DB::table('project_bus')->where(['project_id' => $model->id])
                 ->whereNotIn('bus_id', $result)
                 ->delete();
 
@@ -550,7 +609,7 @@ class Project extends Resource
 
                 DB::table('project_bus')
                     ->updateOrInsert(
-                        ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $user->id],
+                        ['project_id' => $model->id, 'bus_id' => $user->id],
 
                     );
             }
@@ -566,94 +625,45 @@ class Project extends Resource
         }
         if ($request->newbus) {
             $buss = $request->newbus;
-
+            // $to='{"country":"Israel","countryCode":"il","latlng":{"lat":31.769,"lng":35.2163},"name":"Jerusalem","query":"ontefiore Windmill Sderot Blumfield Jerusalem","type":"city","value":"Jerusalem, Israel"}';
+            // $tojsone =
+            // dd( json_decode($to));
+            // dd($tojsone );
+            // dd($request->newbus);
             foreach ($buss as $bus) {
                 // dd($bus['attributes']);
-                if ($bus['attributes']['name_driver'] && $bus['attributes']['BusesCompany'] && $bus['attributes']['bus_number'] && $bus['attributes']['number_person_on_bus'] && $bus['attributes']['seat_price'] && $bus['attributes']['from'] && $bus['attributes']['to'] && $bus['attributes']['phone_number']) {
-
-
-                    DB::table('buses')
-                        ->insert(
-                            [
-                                'name_driver' => $bus['attributes']['name_driver'],
-                                'company_id' => $bus['attributes']['BusesCompany'],
-                                'bus_number' => $bus['attributes']['bus_number'],
-                                'number_of_seats' => $bus['attributes']['number_person_on_bus'],
-                                'seat_price' => $bus['attributes']['seat_price'],
-                                'travel_from' => $bus['attributes']['from'],
-                                'travel_to' => $bus['attributes']['to'],
-                                'phone_number_driver' => $bus['attributes']['phone_number'],
-                                'status' => '1',
-                            ]
-                        );
-                    $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
-
+                DB::table('buses')
+                    ->insert(
+                        [
+                            'name_driver' => $bus['attributes']['name_driver'],
+                            'company_id' => $bus['attributes']['BusesCompany'],
+                            'bus_number' => $bus['attributes']['bus_number'],
+                            'number_of_seats' => $bus['attributes']['number_person_on_bus'],
+                            'seat_price' => $bus['attributes']['seat_price'],
+                            'phone_number_driver' => $bus['attributes']['phone_number'],
+                            // 'admin_id' => $bus['attributes']['adminbus'],
+                            'status' => '1',
+                        ]
+                    );
+                $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
+                $user = Auth::user();
+                if ($user->type() == 'regular_city') {
                     DB::table('project_bus')
                         ->updateOrInsert(
                             ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
 
                         );
+                } else {
+                    DB::table('project_bus')
+                        ->updateOrInsert(
+                            ['project_id' => $model->id, 'bus_id' => $bus['id']],
+
+                        );
                 }
             }
         }
-        if ($request->City) {
-
-            $City = json_decode($request->City);
 
 
-            DB::table('project_status')
-                ->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' => $City[0]->id],
-                    ['status' => '0']
-                );
-        }
-
-        // if (!$request->trip_from) {
-        //     if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] && $request->newadresfrom[0]['attributes']['phone_number_address'] && $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['address_status']) {
-
-        //         //   dd("hf");
-        //         DB::table('addresses')
-        //             ->Insert(
-        //                 [
-        //                     'name_address' => $request->newadresfrom[0]['attributes']['name_address'],
-        //                     'description' => $request->newadresfrom[0]['attributes']['description'],
-        //                     'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
-        //                     'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
-        //                     'status' => $request->newadresfrom[0]['attributes']['address_status'],
-        //                     'type' => '1',
-        //                     'created_by' => $id
-        //                 ]
-        //             );
-        //         $address =  \App\Models\address::where('name_address',  $request->newadresfrom[0]['attributes']['name_address'])->first();
-        //         DB::table('projects')
-        //             ->where('id', $model->id)
-        //             ->update(['trip_from' => $address->id]);
-        //     }
-        // } else   $model->trip_from = $request->trip_from;
-
-
-
-        // if (!$request->trip_to) {
-        //     if ($request->newadresto[0]['attributes']['name_address'] && $request->newadresto[0]['attributes']['description'] && $request->newadresto[0]['attributes']['phone_number_address'] && $request->newadresto[0]['attributes']['current_location'] && $request->newadresto[0]['attributes']['address_status']) {
-        //         //   dd("hf");
-        //         DB::table('addresses')
-        //             ->Insert(
-        //                 [
-        //                     'name_address' => $request->newadresto[0]['attributes']['name_address'],
-        //                     'description' => $request->newadresto[0]['attributes']['description'],
-        //                     'phone_number_address' => $request->newadresto[0]['attributes']['phone_number_address'],
-        //                     'current_location' => $request->newadresto[0]['attributes']['current_location'],
-        //                     'status' => $request->newadresto[0]['attributes']['address_status'],
-        //                     'type' => '1',
-        //                     'created_by' => $id
-        //                 ]
-        //             );
-        //         $address =  \App\Models\address::where('name_address',  $request->newadresto[0]['attributes']['name_address'])->first();
-        //         DB::table('projects')
-        //             ->where('id', $model->id)
-        //             ->update(['trip_to' => $address->id]);
-        //     }
-        // } else   $model->trip_to = $request->trip_to;
     }
     public static function afterupdate(Request $request, $model)
     {

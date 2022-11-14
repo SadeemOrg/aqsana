@@ -60,7 +60,7 @@ class News extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id','title'
     ];
 
     /**
@@ -82,7 +82,7 @@ class News extends Resource
 
 
 
-            ID::make(__('ID'), 'id')->sortable(),
+            ID::make(__('ID'), 'id'),
             ActionButton::make(__('POST NEWS'))
                 ->action((new PostNews)->confirmText(__('Are you sure you want to post  this NEWS?'))
                     ->confirmButtonText(__('post'))
@@ -245,7 +245,7 @@ class News extends Resource
             Text::make(__('VIDEO LINK'), 'video_link'),
             Image::make(__('video_img_cover'), 'video_link_cover')->disk('public')->prunable(),
             // Date::make('date', 'new_date'),
-            Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y'),
+            Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y')->sortable(),
 
 
 

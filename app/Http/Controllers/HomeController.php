@@ -235,6 +235,29 @@ class HomeController extends Controller
         // dd($sector);
         return $sector;
     }
+
+    public function SectorsPill(Request $request)
+    {
+
+        $sector = array();
+        $Sectors = Sector::all();
+        foreach ($Sectors as $key => $Sector) {
+
+
+
+
+
+            $pus = array(
+                "sector_id" => $Sector->id,
+                "Sector" => $Sector->text,
+            );
+
+
+            array_push($sector, $pus);
+        }
+
+        return $sector;
+    }
     public function year()
     {
         $years = Budget::select('year')->get()->unique('year');
