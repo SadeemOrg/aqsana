@@ -264,7 +264,7 @@
                             </li>
                         </ul>
                     </div>
-                    <button onclick="location.href='/{{ $htmlLink }}'"
+                    <button onclick="location.href='/{{ $htmlLink }}'" target="_blank"
                         class=" Ctnbtn rounded-[50px] bg-[#349A37] text-white text-base sm:text-sm w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
                         تصفح نسخة HTML
                     </button>
