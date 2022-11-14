@@ -140,8 +140,9 @@
 </head>
 
 <body class="" dir="rtl">
+    @include('layout.front-end.partial._top-header')
     @include('layout.front-end.partial._header')
-    @yield('content')
+        @yield('content')
     @include('layout.front-end.partial._footer')
 
 
@@ -552,7 +553,8 @@
                                 ]
                             },
                             createOrder: (data, actions) => {
-                                if ($('input[name="firstName"]').val() == "" || $('input[name="lastName"]').val() == "") {
+                                if ($('input[name="firstName"]').val() == "" || $(
+                                        'input[name="lastName"]').val() == "") {
                                     toastr.options = {
                                         "closeButton": true,
                                         "debug": false,
@@ -565,8 +567,8 @@
                                     };
                                     toastr.error(' الرجاء ادخال الاسم الاول او الاسم الاخير');
                                     return false;
-                                } 
-                                if($('#privecy').is(":checked") == false ){
+                                }
+                                if ($('#privecy').is(":checked") == false) {
                                     toastr.options = {
                                         "closeButton": true,
                                         "debug": false,
@@ -579,8 +581,7 @@
                                     };
                                     toastr.error('الرجاء الموافقة على الشروط والاحكام');
                                     return false;
-                                }
-                                else {
+                                } else {
                                     return actions.order.create({
                                         purchase_units: [{
                                             amount: {
@@ -616,7 +617,8 @@
                                     $(".secondPage").css("display", "none");
                                     $(".Ctnbtn").css("display", "none");
                                     $(".btn-btn-payPal").css("display", "none");
-                                    $(".InputValue").html(amount +".00"+"شيكل اسرائيلي ");
+                                    $(".InputValue").html(amount + ".00" +
+                                        "شيكل اسرائيلي ");
                                 });
                             },
                             onError: function(err) {

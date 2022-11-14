@@ -1,5 +1,5 @@
 @if (!isset($hasHeader) || (isset($hasHeader) && $hasHeader))
-    <header class="py-3  fixed w-full top-0 right-0 left-0  bg-white sticky-h z-20">
+    <header class="py-3  fixed w-full top-12 right-0 left-0  bg-white sticky-h z-20">
         @php
             $img = 'storage/' . nova_get_setting('logo', 'default_value');
         @endphp
@@ -13,8 +13,7 @@
                 @endphp
                 <a target="_self" href="/">
                     <img class="w-32 h-[70px]" 
-                    src="/{{ $img }}"
-                     />
+                    src="/{{ $img }}"/>
                 </a>
                 <div class="relative mt-2">
                     <a class="hamburger" href="#" role="button" title="Open menu" aria-label="Open menu">
@@ -31,8 +30,7 @@
                         <!--logo Right Side Side -->
                         <li class="hidden xl:flex justify-center items-center basis-1/6">
                             <a href="/" target="_self">
-                                <img class="w-32 h-[70px]"
-                                 src="/{{ $img }}"
+                                <img class="w-32 h-[70px]" src="/{{ $img }}"
                                     {{-- src="https://media.discordapp.net/attachments/938405759996276806/1041689893664985118/9a67de7e-4803-4aba-9b46-e7c1e8d3885b.jpg?width=659&height=606"  --}}
                                     />
                             </a>
