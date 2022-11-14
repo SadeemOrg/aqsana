@@ -753,6 +753,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-\[247px\]{
   height: 247px;
 }
+.h-\[80px\]{
+  height: 80px;
+}
+.h-\[70px\]{
+  height: 70px;
+}
 .max-h-40{
   max-height: 10rem;
 }
@@ -897,6 +903,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-\[170px\]{
   width: 170px;
 }
+.w-36{
+  width: 9rem;
+}
+.w-32{
+  width: 8rem;
+}
+.w-auto{
+  width: auto;
+}
 .min-w-fit{
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
@@ -996,6 +1011,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .basis-2\/5{
   flex-basis: 40%;
+}
+.basis-3\/5{
+  flex-basis: 60%;
+}
+.basis-1\/6{
+  flex-basis: 16.666667%;
+}
+.basis-4\/6{
+  flex-basis: 66.666667%;
 }
 .border-collapse{
   border-collapse: collapse;
@@ -2603,6 +2627,15 @@ body{
   .xl\:h-\[60px\]{
     height: 60px;
   }
+  .xl\:h-auto{
+    height: auto;
+  }
+  .xl\:h-\[70px\]{
+    height: 70px;
+  }
+  .xl\:h-\[80px\]{
+    height: 80px;
+  }
   .xl\:max-h-\[550px\]{
     max-height: 550px;
   }
@@ -2614,6 +2647,27 @@ body{
   }
   .xl\:w-\[200px\]{
     width: 200px;
+  }
+  .xl\:w-\[300px\]{
+    width: 300px;
+  }
+  .xl\:w-\[150px\]{
+    width: 150px;
+  }
+  .xl\:w-\[130px\]{
+    width: 130px;
+  }
+  .xl\:w-16{
+    width: 4rem;
+  }
+  .xl\:w-32{
+    width: 8rem;
+  }
+  .xl\:w-36{
+    width: 9rem;
+  }
+  .xl\:w-\[\]{
+    width: ;
   }
   .xl\:basis-3\/5{
     flex-basis: 60%;
