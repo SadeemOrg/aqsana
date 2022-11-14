@@ -264,10 +264,10 @@
                             </li>
                         </ul>
                     </div>
-                    <button onclick="location.href='/{{ $htmlLink }}'" target="_blank"
-                        class=" Ctnbtn rounded-[50px] bg-[#349A37] text-white text-base sm:text-sm w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
+                    <a href='/{{ $htmlLink }}' target="_blank"
+                        class=" Ctnbtn rounded-[50px] bg-[#349A37] text-center text-white text-base sm:text-sm w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
                         تصفح نسخة HTML
-                    </button>
+                    </a>
                     <div class="flex flex-row items-center justify-between w-full mt-4 gap-x-4">
                         <a href="/{{ $htmlLink }}" download
                             class=" Ctnbtn rounded-[50px] bg-[#349A37] text-white text-center text-base sm: w-[100px] sm:w-[150px] md:w-full py-4 font-[700] hover:bg-[#101426] duration-200">
