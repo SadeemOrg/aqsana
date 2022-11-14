@@ -139,7 +139,7 @@
 
 </head>
 
-<body class="mt-32" dir="rtl">
+<body class="" dir="rtl">
     @include('layout.front-end.partial._header')
     @yield('content')
     @include('layout.front-end.partial._footer')
