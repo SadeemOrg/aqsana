@@ -5,8 +5,7 @@
         @endphp
 
 
-        <div dir="rtl" class=" max-w-full mx-auto px-4 sm:px-6 lg:px-8 ">
-
+        <div dir="rtl" class="max-w-7xl mx-auto xl:max-w-full  px-4 sm:px-6 lg:px-8 ">
             <!-- Start for mobile -->
             <div class="xl:hidden flex justify-between items-center">
                 @php
