@@ -675,6 +675,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-mt-8{
   margin-top: -2rem;
 }
+.mr-40{
+  margin-right: 10rem;
+}
+.mr-12{
+  margin-right: 3rem;
+}
+.mr-24{
+  margin-right: 6rem;
+}
+.mr-16{
+  margin-right: 4rem;
+}
 .block{
   display: block;
 }
@@ -2606,6 +2618,9 @@ body{
   }
   .xl\:mb-0{
     margin-bottom: 0px;
+  }
+  .xl\:mr-0{
+    margin-right: 0px;
   }
   .xl\:block{
     display: block;

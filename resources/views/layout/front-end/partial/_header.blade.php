@@ -37,7 +37,7 @@
                         </li>
                         <!--end Logo side -->
                         <!-- Start RT logo -->
-                        <ul class="navbar-nav xl:flex xl:flex-row justify-between items-center gap-x-4 basis-4/6">
+                        <ul class="navbar-nav xl:flex xl:flex-row justify-between items-center gap-x-4 basis-4/6 mr-16 xl:mr-0">
                             @if (isset($nav))
                                 @foreach ($nav as $key => $item)
                                     @if (empty($item->children))
