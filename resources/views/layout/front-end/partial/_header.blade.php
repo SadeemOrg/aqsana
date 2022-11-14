@@ -1,11 +1,11 @@
 @if (!isset($hasHeader) || (isset($hasHeader) && $hasHeader))
-    <header class="py-3  fixed w-full top-12 right-0 left-0  bg-white sticky-h z-20">
+    <header class="py-3 fixed w-full top-12 right-0 left-0  bg-white sticky-h z-20 ">
         @php
             $img = 'storage/' . nova_get_setting('logo', 'default_value');
         @endphp
 
 
-        <div dir="rtl" class="max-w-7xl mx-auto xl:max-w-full  px-4 sm:px-6 lg:px-8 ">
+        <div dir="rtl" class="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 ">
             <!-- Start for mobile -->
             <div class="xl:hidden flex justify-between items-center">
                 @php

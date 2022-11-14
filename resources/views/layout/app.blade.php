@@ -78,26 +78,6 @@
 
     <!-- firebase integration end -->
 
-
-
-    {{-- <script>
-        (function($) {
-            "use strict";
-            /*--------------------------------------
-              Magnific popup Active
-            ----------------------------------------*/
-            $('.img-thumbnail').magnificPopup({
-                delegate: 'a',
-                type: 'image',
-                mainClass: 'mfp-with-zoom',
-                gallery: {
-                    enabled: true
-                },
-            });
-        })
-    </script> --}}
-
-
     <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
     <style>
         @layer base {
@@ -139,7 +119,7 @@
 
 </head>
 
-<body class="" dir="rtl">
+<body class="mt-44" dir="rtl">
     @include('layout.front-end.partial._top-header')
     @include('layout.front-end.partial._header')
         @yield('content')

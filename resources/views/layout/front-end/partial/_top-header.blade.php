@@ -12,7 +12,7 @@ $email_contact = nova_get_setting('email_Connectus', 'default_value');
 
 @endphp
 <header class="py-3  fixed w-full top-0 right-0 left-0   sticky-h z-20 bg-[#349a37]">
-    <div dir="rtl" class="max-w-7xl mx-auto xl:max-w-full  px-4 sm:px-6 lg:px-8 ">
+    <div dir="rtl" class="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 ">
         <div class="flex flex-row items-center justify-start ">
             <ul class=" flex flex-start items-center gap-x-2 justify-center basis-1/3">
                 <li>
@@ -121,7 +121,7 @@ $email_contact = nova_get_setting('email_Connectus', 'default_value');
                     </a>
                 </li>
             </ul>
-            <div class="hidden xl:flex flex-start items-center gap-x-8 justify-start basis-2/3">
+            <div class="hidden md:flex flex-start items-center gap-x-8 justify-start basis-2/3">
                 <div class="flex flex-row items-center justify-start gap-x-2">
                     <img src="{{ asset('assets/image/message.svg') }}" alt="message" class="max-w-[17px] max-h-[17px]">
                     <p dir="ltr" itemprop="email" class="text-white text-[16px] inter-font">{{ $email_contact }}
