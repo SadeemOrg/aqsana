@@ -42,18 +42,18 @@
                                 @foreach ($nav as $key => $item)
                                     @if (empty($item->children))
                                         <li class="nav-item relative ">
-                                            <a class="w-auto text-base mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
+                                            <a class="w-auto text-[15px] mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
                                                 href="/{{ $item->data->link->id }}"
                                                 target="_self">{{ $item->data->name }}</a>
                                         </li>
                                     @else
                                         <li class="nav-item relative">
                                             @if ($item->data->link->resource == 'external')
-                                                <a class="w-auto text-base mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
+                                                <a class="w-auto text-[15px] mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
                                                     href="/{{ $item->data->link->id }}"
                                                     target="_self">{{ $item->data->name }}</a>
                                             @else
-                                                <a class="stop-link w-auto text-base mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
+                                                <a class="stop-link w-auto text-[15px] mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
                                                     href=""> {{ $item->data->name }}
                                                 </a>
                                             @endif
