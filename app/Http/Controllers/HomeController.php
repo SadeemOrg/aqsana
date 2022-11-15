@@ -524,7 +524,6 @@ return Auth::user();
             ->select('title', 'id')
             ->get();
 
-        //  dd($News);
         return $News;
     }
 

@@ -3,10 +3,10 @@
         background: linear-gradient(0.92deg, rgba(0, 0, 0, 0.3) 4.13%, rgba(0, 0, 0, 0) 96.18%);
     }
 </style>
-<div itemscope class="owl-carousel dots-style1" id="main-home-slider">
+<div itemscope class="owl-carousel dots-style1 -mt-8" id="main-home-slider">
     @if(is_array($Heros)==true && !empty($Heros))
     @foreach ( $Heros as $Hero )
-    <div class="relative">
+    <div class="relative ">
         <img itemprop="image" alt="Google" class="h-[250px] sm:h-[350px]  lg:h-[680px]"
             src="{{ URL::asset($Hero['data']['image'])}}" alt="topBanner">
         <button onclick="location.href='{{$Hero['data']['link']}}'"
