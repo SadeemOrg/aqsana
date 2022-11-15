@@ -20,12 +20,17 @@ use App\Models\newsType;
 use App\Models\Project;
 use App\Models\Sector;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
 
+    public function user()
+    {
+return Auth::user();
 
+    }
     public function first(Request $request)
     {
         $projects = Project::where('sector', '=', $request->project_id)->get();
