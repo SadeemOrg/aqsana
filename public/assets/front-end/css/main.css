@@ -21,6 +21,7 @@ header.sticky-h {box-shadow: 0 6px 12px -10px #349a37}
   background-color: #fff;
 }
 
+
                     /* Contact section */
 .right-color::after {
   content: '';
@@ -327,3 +328,18 @@ svg path, svg circle {transition: .2s;}
 .scale-hover {transition: .4s;}
 .scalabel-img-box:hover .scale-hover {transform: scale(1.1);}
 /*** End my css framework ***/
+
+.lateral-social-list {
+  left:32px;
+  top:225px;
+  padding: 32px 12px;
+  width: 250px;
+  background: #349a37;
+  z-index: 999;
+}
+
+@media (max-width: 1334px) {.lateral-social-list{display: none;} }
+ul.lateral-social-list li svg path {transition: .2s;}
+ul.lateral-social-list li:not(:last-child) svg:hover path{fill: var(--main-clr);}
+ul.lateral-social-list li.whats-app svg:hover path:first-child {fill:  var(--main-clr);}
+ul.lateral-social-list li.whats-app svg:hover path:not(:first-child) {fill: #fff;}
