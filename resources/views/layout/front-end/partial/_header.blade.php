@@ -5,7 +5,7 @@
         @endphp
 
 
-<div dir="rtl" class="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 ">
+<div dir="rtl" class="max-w-7xl xl:max-w-full mx-auto  px-4 sm:px-6 lg:px-8 ">
             <!-- Start for mobile -->
             <div class="xl:hidden flex justify-between items-center">
                 @php
@@ -30,7 +30,7 @@
                         <!--logo Right Side Side -->
                         <li class="hidden xl:flex justify-center items-center basis-1/6">
                             <a href="/" target="_self">
-                                <img class="w-32 h-[70px]" src="/{{ $img }}"
+                                <img class="w-32 h-[90px]" src="/{{ $img }}"
                                     {{-- src="https://media.discordapp.net/attachments/938405759996276806/1041689893664985118/9a67de7e-4803-4aba-9b46-e7c1e8d3885b.jpg?width=659&height=606"  --}}
                                     />
                             </a>
@@ -42,18 +42,18 @@
                                 @foreach ($nav as $key => $item)
                                     @if (empty($item->children))
                                         <li class="nav-item relative ">
-                                            <a class="w-auto text-sm mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
+                                            <a class="w-auto text-base mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
                                                 href="/{{ $item->data->link->id }}"
                                                 target="_self">{{ $item->data->name }}</a>
                                         </li>
                                     @else
                                         <li class="nav-item relative">
                                             @if ($item->data->link->resource == 'external')
-                                                <a class="w-auto text-sm mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
+                                                <a class="w-auto text-base mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
                                                     href="/{{ $item->data->link->id }}"
                                                     target="_self">{{ $item->data->name }}</a>
                                             @else
-                                                <a class="stop-link w-auto text-sm mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
+                                                <a class="stop-link w-auto text-base mb-3 xl:mb-0 xl:hover:text-[#349A37] bg-[#349A37] xl:bg-transparent text-white xl:text-[#000] block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
                                                     href=""> {{ $item->data->name }}
                                                 </a>
                                             @endif
@@ -77,7 +77,7 @@
                         <!--logo left Side -->
                         <li class="hidden xl:flex justify-center items-center basis-1/6">
                             <a href="/" target="_self">
-                                <img class="w-32 h-[70px]"
+                                <img class="w-32 h-[90px]"
                                     {{-- src="/{{ $img }}"  --}}
                                     src="https://media.discordapp.net/attachments/938405759996276806/1041691394949005352/Screenshot_2022-11-14_142923.png" />
                             </a>

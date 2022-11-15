@@ -1,6 +1,7 @@
 @extends('layout.app')
 @section('content')
 @include('layout.front-end.partial._top_banner')
+@include('layout.front-end.partial._left-sidebar')
 @include('Components.Home.Association_news')
 @include('Components.Home.AlaqsaBaneer')
 @include('Components.Home.ProjectNews')
