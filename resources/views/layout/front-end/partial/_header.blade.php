@@ -1,5 +1,5 @@
 @if (!isset($hasHeader) || (isset($hasHeader) && $hasHeader))
-    <header class="py-3 fixed w-full top-12 right-0 left-0  bg-white sticky-h z-20 ">
+    <header class="fixed w-full top-12 right-0 left-0  bg-white sticky-h z-20 ">
         @php
             $img = 'storage/' . nova_get_setting('logo', 'default_value');
         @endphp
@@ -12,7 +12,7 @@
                     $img = 'storage/' . nova_get_setting('logo', 'default_value');
                 @endphp
                 <a target="_self" href="/">
-                    <img class="w-32 h-[70px]" 
+                    <img class="w-32 h-[90px]" 
                     src="/{{ $img }}"/>
                 </a>
                 <div class="relative mt-2">
