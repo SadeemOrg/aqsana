@@ -122,13 +122,14 @@ $email_contact = nova_get_setting('email_Connectus', 'default_value');
                 </li>
             </ul>
             <div class="hidden md:flex flex-start items-center gap-x-8 justify-start basis-2/3">
-                <form action="mailto:alaqsaquds@gmail.com" method="post" enctype="text/plain">
-                    @csrf
+                {{-- <form action="mailto:alaqsaquds@gmail.com" method="post" >
+                    @csrf --}}
                 <div class="flex flex-row items-center justify-start gap-x-2">
                     <img src="{{ asset('assets/image/message.svg') }}" alt="message" class="max-w-[17px] max-h-[17px]">
-                    <input type="submit" dir="ltr" itemprop="email" class="text-white text-[16px] inter-font" value="{{ $email_contact }}" />
+                    <a href = "mailto:alaqsaquds@gmail.com" class="text-white text-[16px] inter-font">{{ $email_contact }}</a>
+                    {{-- <input type="submit" dir="ltr" itemprop="email" class="text-white text-[16px] inter-font" value="{{ $email_contact }}" /> --}}
                 </div>
-                </form>
+                {{-- </form> --}}
                 <div class="flex flex-row items-center justify-start gap-x-2 ">
                     <img src="{{ asset('assets/image/telephone.svg') }}" alt="telephone" class="max-w-[17px] max-h-[17px]">
                     <p itemprop="telephone" dir="ltr" class="text-white text-[16px] inter-font">
