@@ -2,6 +2,7 @@
     <header class="fixed w-full top-12 right-0 left-0  bg-white sticky-h z-20 ">
         @php
             $img = 'storage/' . nova_get_setting('logo', 'default_value');
+            // dd($nav);
         @endphp
 
 
@@ -62,7 +63,7 @@
                                                 class="dropdown-menu drop-shadow-lg bg-white rounded-[5px] right-[110%] xl:right-[0] top-[100%]">
                                                 <ul>
                                                     @include('layout.front-end.partial.navbar-dropdown', [
-                                                        'items' => $item->children,
+                                                        'items' => $item->children, 'itemName'=>$item->data->name
                                                     ])
                                                 </ul>
                                             </div>
