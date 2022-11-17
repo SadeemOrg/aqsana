@@ -26,10 +26,14 @@ use Illuminate\Support\Facades\Mail;
 class HomeController extends Controller
 {
 
+
+    public function userprofile()
+    {
+        return view('Pages.user.profile');
+    }
     public function user()
     {
-return Auth::user();
-
+        return Auth::user();
     }
     public function first(Request $request)
     {
@@ -119,7 +123,7 @@ return Auth::user();
             $expenses_First = 0;
             $date_from = $year . '-1-1';
             $date_to = $year . '-3-31';
-              $from = date($date_from);
+            $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
             foreach ($Transactions as $key => $Transaction) {
@@ -136,7 +140,7 @@ return Auth::user();
             $expenses_Second = 0;
             $date_from = $year . '-4-1';
             $date_to = $year . '-6-30';
-              $from = date($date_from);
+            $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
             foreach ($Transactions as $key => $Transaction) {
@@ -153,7 +157,7 @@ return Auth::user();
             $expenses_Third = 0;
             $date_from = $year . '-7-1';
             $date_to = $year . '-9-30';
-              $from = date($date_from);
+            $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
             foreach ($Transactions as $key => $Transaction) {
@@ -170,7 +174,7 @@ return Auth::user();
             $expenses_fourth = 0;
             $date_from = $year . '-8-1';
             $date_to = $year . '-12-31';
-              $from = date($date_from);
+            $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
             foreach ($Transactions as $key => $Transaction) {

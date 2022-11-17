@@ -3,23 +3,19 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Http\Requests\NovaRequest;
-
-class Donations extends Resource
+use Laravel\Nova\Fields\Text;
+class TelephoneDirectory extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Donations::class;
-    public static function availableForNavigation(Request $request)
-    {
-        return false;
-    }
+    public static $model = \App\Models\TelephoneDirectory::class;
+
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
@@ -35,15 +31,6 @@ class Donations extends Resource
     public static $search = [
         'id',
     ];
-    public static function label()
-    {
-        return __('Donations');
-    }
-    public static function group()
-    {
-        return __('Donations');
-    }
-    public static $priority = 1;
 
     /**
      * Get the fields displayed by the resource.
@@ -51,16 +38,39 @@ class Donations extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make(__('project'), 'project', \App\Nova\Project::class),
-            BelongsTo::make(__('user'), 'User', \App\Nova\User::class),
-            Text::make(__('donor_name'), 'donor_name'),
-            Text::make(__('amount'), 'amount'),
-            Text::make(__('number_of_people'), 'number_of_people'),
+
+            Text::make(__('Name'),'name')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
+            Text::make(__('Email'),'email')
+                ->sortable()
+                ->rules('required', 'email', 'max:254')
+                ->creationRules('unique:users,email')
+                ->updateRules('unique:users,email,{{resourceId}}'),
+            Select::make(__('type'), 'type')->options([
+                1 => __('متبرعين سجب ثابت'),
+                2 => __('متبرعين لمرة واحدة '),
+                3 => __('مندوبين'),
+                4 => __('متطوعين'),
+                5 => __('جهات اتصال عامة'),
+                6 => __('مرشدين'),
+                7 => __('منح'),
+            ])->displayUsingLabels(),
+
+            Text::make(__('phone_number'),'phone_number'),
+            Text::make(__('city'),'city'),
+            Text::make(__('roles'),'roles'),
+            Text::make(__('jop'),'jop'),
+            Text::make(__('id_number'),'id_number'),
+
+
+
+
 
         ];
     }
