@@ -61,9 +61,9 @@ Route::get('/donation/{id}', [HomeController::class, 'donation'])->name('donatio
 
 Route::get('/sector/{sector}', [HomeController::class, 'sector'])->name('sector');
 
-Route::get('/contact-us', function (){
-    return view('Pages.contact-page');
-});
+Route::get('/contact-us',[HomeController::class,'contactus']);
+
+Route::get('/contact-us/donation',[HomeController::class,'contactusDonation']);
 
 Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch');
 
