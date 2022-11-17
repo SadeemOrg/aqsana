@@ -81,6 +81,18 @@ class HomeController extends Controller
         }
         return $sector;
     }
+
+    public function contactus()
+    {
+        $type= 2;
+        return view('Pages.contact-page',compact('type'));
+    }
+
+    public function contactusDonation()
+    {
+        $type= 1;
+        return view('Pages.contact-page',compact('type'));
+    }
     public function Sectorstatistics(Request $request)
     {
 

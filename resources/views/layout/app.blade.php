@@ -641,6 +641,9 @@
                 $(".Ctnbtn").text("متابعة");
             }
         });
+        $(".closeModal").click(function(){
+            $(".contactusModel").css("display","none");
+        })
         $(".showModal").click(function() {
             $(".PrivecySettingModal").toggleClass("hiddenModal");
         });
