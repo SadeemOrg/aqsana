@@ -881,6 +881,8 @@
             $fullname.val($firstname.val() + ' ' + $lastname.val());
         });
     });
+    var height = $(window).height();
+    console.log(height)
 </script>
 
 </html>
