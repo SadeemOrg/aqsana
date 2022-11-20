@@ -90,6 +90,18 @@ class HomeController extends Controller
         }
         return $sector;
     }
+
+    public function contactus()
+    {
+        $type= 2;
+        return view('Pages.contact-page',compact('type'));
+    }
+
+    public function contactusDonation()
+    {
+        $type= 1;
+        return view('Pages.contact-page',compact('type'));
+    }
     public function Sectorstatistics(Request $request)
     {
 
@@ -323,9 +335,10 @@ class HomeController extends Controller
         // $partners = json_decode($partnerjson);
 
         $sectors = nova_get_setting('workplace', 'default_value');
+        $type=2;
         // $sectors= json_decode($sectorsjson);
 
-        return view('Pages.home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'partners', 'sectors'));
+        return view('Pages.home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'partners', 'sectors','type'));
     }
     public function aboutus()
     {
