@@ -37,7 +37,7 @@ class PaymentVoucher extends Resource
     public static $title = 'id';
     public static function label()
     {
-        return __('Payment Voucher');
+        return __('the Payment Voucher');
     }
     public static function group()
     {

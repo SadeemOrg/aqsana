@@ -28,7 +28,7 @@ class Role extends Resource
     }
     public static function group()
     {
-        return __('The Users');
+        return __('address');
     }
      public static $title = 'role';
     public static $priority = 2;

@@ -31,7 +31,7 @@ class Sector extends Resource
     }
     public static function group()
     {
-        return __('sectors');
+        return __('else');
     }
 
     /**

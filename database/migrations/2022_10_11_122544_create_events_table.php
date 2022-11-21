@@ -18,7 +18,12 @@ class CreateEventsTable extends Migration
             $table->string('name');
             $table->longText('note');
             $table->json('file')->nullable();
-            $table->date('events_date')->nullable();
+            $table->string('number_of_encounters');
+            $table->json('new_event')->nullable();
+            $table->date('start_events_date')->nullable();
+            $table->date('end_events_date')->nullable();
+            $table->string('Budget');
+            $table->bigInteger('Contacts')->nullable();
             $table->timestamps();
         });
     }

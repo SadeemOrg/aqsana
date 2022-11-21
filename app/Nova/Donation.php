@@ -34,7 +34,7 @@ class Donation extends Resource
 
     public static function label()
     {
-        return __('Donations');
+        return __('the receipt Voucher');
     }
     public static function group()
     {

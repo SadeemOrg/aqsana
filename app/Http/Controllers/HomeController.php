@@ -29,7 +29,8 @@ class HomeController extends Controller
 
     public function userprofile()
     {
-        return view('Pages.user.profile');
+        $user=Auth::user();
+        return view('Pages.user.profile',compact('user'));
     }
     public function user()
     {
@@ -347,7 +348,8 @@ class HomeController extends Controller
         $achievementsjson = nova_get_setting('achievements', 'default_value');
         $achievements = json_decode($achievementsjson);
         $workplace = nova_get_setting('workplace', 'default_value');
-        return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace'));
+        $type=2;
+        return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace','     $type=2;'));
     }
 
     public function conctus(Request $request)

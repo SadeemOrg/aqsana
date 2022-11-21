@@ -85,11 +85,11 @@ class QawafilAlaqsa extends Resource
     ];
     public static function label()
     {
-        return __('QawafilAlaqsa');
+        return __('Qawafil');
     }
     public static function group()
     {
-        return __('project');
+        return __('QawafilAlaqsa');
     }
     public static function availableForNavigation(Request $request)
     {

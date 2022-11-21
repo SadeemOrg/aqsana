@@ -10,6 +10,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
+use Laravel\Nova\Fields\BelongsTo;
+use Whitecube\NovaFlexibleContent\Flexible;
 
 class events extends Resource
 {
@@ -59,8 +61,20 @@ class events extends Resource
             Text::make(__('name'),'name'),
             Textarea::make(__('note'),'note'),
             Files::make('Multiple files', 'file'),
+            Text::make(__('Number of encounters'),'number_of_encounters'),
             // File::make(__('file'),'file')->disk('public')->deletable(),
-            Date::make(__('DATE'), 'events_date')->pickerDisplayFormat('d.m.Y'),
+            Flexible::make(__('new event'), 'new_event')
+
+            ->hideFromDetail()->hideFromIndex()
+            ->addLayout(__('Add new event'), 'type', [
+                Date::make(__('DATE'), 'events_date')->pickerDisplayFormat('d.m.Y'),
+            ]),
+            Date::make(__('start DATE'), 'start_events_date')->pickerDisplayFormat('d.m.Y'),
+            Date::make(__('end DATE'), 'end_events_date')->pickerDisplayFormat('d.m.Y'),
+            Text::make(__('Budget'),'Budget'),
+            BelongsTo::make(__('TelephoneDirectory'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class),
+
+
         ];
     }
     public static function afterSave(Request $request, $model)

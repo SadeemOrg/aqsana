@@ -24,7 +24,7 @@ class Volunteer extends Resource
 
     public static function group()
     {
-        return __('Volunteers');
+        return __('VolunteersE');
     }
     // public static $subGroup = 'Vendors';
     /**

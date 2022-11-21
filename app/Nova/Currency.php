@@ -30,7 +30,7 @@ class Currency extends Resource
     }
     public static function group()
     {
-        return __('The Currency');
+        return __('else');
     }
 
     public static $title = 'name';

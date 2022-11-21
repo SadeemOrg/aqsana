@@ -50,6 +50,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'birth_date' => 'date',
+        'start_work_date' => 'date',
+
     ];
 
     public function Bus()

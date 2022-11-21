@@ -47,7 +47,7 @@ class News extends Resource
     }
     public static function group()
     {
-        return __('website');
+        return __('Association website');
     }
 
 

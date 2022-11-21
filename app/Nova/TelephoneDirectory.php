@@ -21,8 +21,15 @@ class TelephoneDirectory extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
-
+    public static $title = 'name';
+    public static function label()
+    {
+        return __('TelephoneDirectory');
+    }
+    public static function group()
+    {
+        return __('address');
+    }
     /**
      * The columns that should be searched.
      *

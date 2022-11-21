@@ -41,7 +41,7 @@ class VolunteerPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->type() == 'admin';
     }
 
     /**
@@ -53,7 +53,7 @@ class VolunteerPolicy
      */
     public function update(User $user, Volunteer $volunteer)
     {
-        //
+        return $user->type() == 'admin';
     }
 
     /**

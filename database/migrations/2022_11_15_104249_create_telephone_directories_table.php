@@ -24,6 +24,7 @@ class CreateTelephoneDirectoriesTable extends Migration
             $table->string('jop');
             $table->string('id_number');
 
+
             $table->timestamps();
         });
     }

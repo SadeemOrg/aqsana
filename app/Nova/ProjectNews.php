@@ -48,7 +48,7 @@ class ProjectNews extends Resource
     }
     public static function group()
     {
-        return __('website');
+        return __('Association website');
     }
     public static function authorizedToCreate(Request $request)
     {

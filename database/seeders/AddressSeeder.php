@@ -27,15 +27,15 @@ class AddressSeeder extends Seeder
             ],
         ];
             collect($Address)->each(function($Address) {
-                address::create([
-                    'id' => '1',
-                    'name_address' => $Address['name_address'],
-                    'description' => $Address['description'],
-                    'phone_number_address' => $Address['phone_number_address'],
-                    'current_location' => $Address['current_location'],
-                    'status' => $Address['status'],
+                // address::create([
+                //     'id' => '1',
+                //     'name_address' => $Address['name_address'],
+                //     'description' => $Address['description'],
+                //     'phone_number_address' => $Address['phone_number_address'],
+                //     'current_location' => $Address['current_location'],
+                //     'status' => $Address['status'],
 
-                ]);
+                // ]);
             });
 
     }
