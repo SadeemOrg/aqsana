@@ -349,7 +349,7 @@ class HomeController extends Controller
         $achievements = json_decode($achievementsjson);
         $workplace = nova_get_setting('workplace', 'default_value');
         $type=2;
-        return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace','     $type=2;'));
+        return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace','type'));
     }
 
     public function conctus(Request $request)
