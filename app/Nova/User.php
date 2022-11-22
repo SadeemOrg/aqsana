@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Acme\MultiselectField\Multiselect;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
@@ -25,6 +26,13 @@ class User extends Resource
      * @var string
      */
     public static $model = \App\Models\User::class;
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Userparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
+    }
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -90,6 +98,36 @@ class User extends Resource
             ->sortable()
             ->rules('required', 'max:255'),
             BelongsTo::make(__('Role'),'Role',\App\Nova\Role::class),
+            Multiselect::make('Permations','role')
+            ->options(
+                [
+                    "super-admin" => "Super Admin",
+                    "Userparmation" => "Userparmation",
+                    "addressparmation" => "addressparmation",
+                    "Alhisalatparmation" => "Alhisalatparmation",
+                    "Areaparmation" => "Areaparmation",
+                    "Bookparmation" => "Bookparmation",
+                    "BusesCompanyparmation" => "BusesCompanyparmation",
+                    "Cityparmation" => "Cityparmation",
+                    "Currencyparmation" => "Currencyparmation",
+                    "Donationparmation" => "Donationparmation",
+                    "eventsparmation" => "eventsparmation",
+                    "FormMassageparmation" => "FormMassageparmation",
+                    "Newsparmation" => "Newsparmation",
+                    "Notificationparmation" => "Notificationparmation",
+                    "PaymentVoucherparmation" => "PaymentVoucherparmation",
+                    "projectparmation" => "projectparmation",
+                    "ProjectNewsparmation" => "ProjectNewsparmation",
+                    "QawafilAlaqsaparmation" => "QawafilAlaqsaparmation",
+                    "receiptVoucherparmation" => "receiptVoucherparmation",
+                    "Reportsparmation" => "Reportsparmation",
+                    "Sectorparmation" => "Sectorparmation",
+                    "TelephoneDirectoryparmation" => "TelephoneDirectoryparmation",
+                    "Volunteerparmation" => "Volunteerparmation",
+
+
+                ]
+            )->saveAsJSON(),
             Date::make('start_work_date', 'start_work_date'),
             Select::make(__('martial_status'), 'martial_status')->options([
                 1 => __('single'),

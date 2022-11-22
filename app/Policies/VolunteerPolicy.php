@@ -18,7 +18,7 @@ class VolunteerPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->type() == 'admin';
+         return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class VolunteerPolicy
      */
     public function view(User $user, Volunteer $volunteer)
     {
-        return $user->type() == 'admin';
+         return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class VolunteerPolicy
      */
     public function create(User $user)
     {
-        return $user->type() == 'admin';
+         return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class VolunteerPolicy
      */
     public function update(User $user, Volunteer $volunteer)
     {
-        return $user->type() == 'admin';
+         return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class VolunteerPolicy
      */
     public function delete(User $user, Volunteer $volunteer)
     {
-        return $user->type() == 'admin';
+        return true;
     }
 
     /**

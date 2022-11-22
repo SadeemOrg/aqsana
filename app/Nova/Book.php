@@ -29,6 +29,14 @@ class Book extends Resource
      * @var string
      */
     public static $model = \App\Models\Book::class;
+
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Bookparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
+    }
     public static function label()
     {
         return __('Book');

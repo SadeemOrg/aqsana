@@ -24,6 +24,7 @@ class Bus extends Resource
      *
      * @var string
      */
+
     public static function label()
     {
         return __('Bus');

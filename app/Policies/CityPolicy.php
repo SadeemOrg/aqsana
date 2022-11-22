@@ -18,7 +18,7 @@ class CityPolicy
      */
     public function viewAny(User $user)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+         return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class CityPolicy
      */
     public function view(User $user, City $city)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+         return true;
 
     }
 
@@ -42,7 +42,7 @@ class CityPolicy
      */
     public function create(User $user)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area') ;
+         return true;
     }
 
     /**
@@ -54,7 +54,7 @@ class CityPolicy
      */
     public function update(User $user, City $city)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area') ;
+         return true;
 
     }
 
@@ -67,7 +67,7 @@ class CityPolicy
      */
     public function delete(User $user, City $city)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area') ;
+         return true;
     }
 
     /**
@@ -79,7 +79,7 @@ class CityPolicy
      */
     public function restore(User $user, City $city)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area') ;
+         return true;
     }
 
     /**
@@ -91,6 +91,6 @@ class CityPolicy
      */
     public function forceDelete(User $user, City $city)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area') ;
+         return true;
     }
 }

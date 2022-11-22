@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('fcm_token')->nullable();
             $table->string('user_role');
+            $table->json('role');
             $table->string('phone')->nullable();
             $table->string('photo')->nullable();
             $table->date('birth_date')->nullable();

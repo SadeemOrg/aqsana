@@ -18,7 +18,7 @@ class eventsPolicy
      */
     public function viewAny(User $user)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+           return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class eventsPolicy
      */
     public function view(User $user, events $events)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+           return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class eventsPolicy
      */
     public function create(User $user)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+           return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class eventsPolicy
      */
     public function update(User $user, events $events)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+           return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class eventsPolicy
      */
     public function delete(User $user, events $events)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+           return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class eventsPolicy
      */
     public function restore(User $user, events $events)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+           return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class eventsPolicy
      */
     public function forceDelete(User $user, events $events)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+           return true;
     }
 }

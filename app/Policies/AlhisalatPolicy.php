@@ -18,19 +18,19 @@ class AlhisalatPolicy
      */
     public function viewAny(User $user)
     {
-        return  ($user->type() == 'admin' || $user->type() == 'regular_area' || $user->type() == 'regular_city'||$user->type() == 'financial_user') ;
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Alhisalat  $alhisalat
+     * @param  \App\Models\ActionEvents  $actionEvents
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Alhisalat $alhisalat)
+    public function view(User $user, Alhisalat $Alhisalat)
     {
-        return  ($user->type() == 'admin' || $user->type() == 'regular_area' || $user->type() == 'regular_city'||$user->type() == 'financial_user') ;
+        return true;
     }
 
     /**
@@ -41,55 +41,54 @@ class AlhisalatPolicy
      */
     public function create(User $user)
     {
-        return  ($user->type() == 'admin' || $user->type() == 'regular_area' || $user->type() == 'regular_city'||$user->type() == 'financial_user') ;
+        return true;
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Alhisalat  $alhisalat
+     * @param  \App\Models\Alhisalat  $Alhisalat
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Alhisalat $alhisalat)
+    public function update(User $user, Alhisalat $Alhisalat)
     {
-        return  ($user->type() == 'admin' || $user->type() == 'regular_area' || $user->type() == 'regular_city'||$user->type() == 'financial_user') ;
+        return true;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Alhisalat  $alhisalat
+     * @param  \App\Models\Alhisalat  $Alhisalat
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Alhisalat $alhisalat)
+    public function delete(User $user, Alhisalat $Alhisalat)
     {
-          return  ($user->type() == 'admin' ) ;
+        return true;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Alhisalat  $alhisalat
+     * @param  \App\Models\Alhisalat  $Alhisalat
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Alhisalat $alhisalat)
+    public function restore(User $user, Alhisalat $Alhisalat)
     {
-          return  ($user->type() == 'admin' || $user->type() == 'regular_area') ;
+        return true;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Alhisalat  $alhisalat
+     * @param  \App\Models\Alhisalat  $Alhisalat
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Alhisalat $alhisalat)
+    public function forceDelete(User $user, Alhisalat $Alhisalat)
     {
-          return  ($user->type() == 'admin' || $user->type() == 'regular_area') ;
-
+        return true;
     }
 }

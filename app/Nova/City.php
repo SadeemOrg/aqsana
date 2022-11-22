@@ -29,7 +29,13 @@ class City extends Resource
     {
         return __('address');
     }
-
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Cityparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
+    }
     public static $model = \App\Models\City::class;
     public static $priority = 2;
     /**

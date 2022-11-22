@@ -28,7 +28,13 @@ class Reports extends Resource
      * @var string
      */
     public static $title = 'id';
-
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Reportsparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
+    }
     /**
      * The columns that should be searched.
      *

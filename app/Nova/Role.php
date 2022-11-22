@@ -41,6 +41,7 @@ class Role extends Resource
         'id',
     ];
 
+
     /**
      * Get the fields displayed by the resource.
      *

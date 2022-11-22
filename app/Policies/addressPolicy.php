@@ -18,19 +18,19 @@ class addressPolicy
      */
     public function viewAny(User $user)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\address  $address
+     * @param  \App\Models\ActionEvents  $actionEvents
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user, address $address)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class addressPolicy
      */
     public function create(User $user)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+        return true;
     }
 
     /**
@@ -53,11 +53,7 @@ class addressPolicy
      */
     public function update(User $user, address $address)
     {
-        // if($address->myid()==1 )
-        // {
-        //     return false ;
-        // }
-        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+        return true;
     }
 
     /**
@@ -69,11 +65,7 @@ class addressPolicy
      */
     public function delete(User $user, address $address)
     {
-        if($address->myid()==1 )
-        {
-            return false ;
-        }
-        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+        return true;
     }
 
     /**
@@ -85,7 +77,7 @@ class addressPolicy
      */
     public function restore(User $user, address $address)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+        return true;
     }
 
     /**
@@ -97,6 +89,6 @@ class addressPolicy
      */
     public function forceDelete(User $user, address $address)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+        return true;
     }
 }

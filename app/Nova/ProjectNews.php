@@ -54,11 +54,13 @@ class ProjectNews extends Resource
     {
         return false;
     }
-    public static function availableForNavigation(Request $request)
+
+     public static function availableForNavigation(Request $request)
     {
-        if ( $request->user()->type() == 'financial_user'|| $request->user()->type() == 'regular_area'|| $request->user()->type() == 'regular_city' || $request->user()->type() == 'Almuahada_admin') {
-            return false;
-        } else return true;
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("ProjectNewsparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
     }
     /**
      * Get the fields displayed by the resource.

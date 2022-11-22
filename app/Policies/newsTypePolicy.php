@@ -18,7 +18,7 @@ class newsTypePolicy
      */
     public function viewAny(User $user)
     {
-          return ($user->type() == 'admin');
+          return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class newsTypePolicy
      */
     public function view(User $user, newsType $newsType)
     {
-          return ($user->type() == 'admin');
+          return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class newsTypePolicy
      */
     public function create(User $user)
     {
-          return ($user->type() == 'admin');
+          return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class newsTypePolicy
      */
     public function update(User $user, newsType $newsType)
     {
-          return ($user->type() == 'admin');
+          return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class newsTypePolicy
      */
     public function delete(User $user, newsType $newsType)
     {
-          return ($user->type() == 'admin');
+          return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class newsTypePolicy
      */
     public function restore(User $user, newsType $newsType)
     {
-          return ($user->type() == 'admin');
+          return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class newsTypePolicy
      */
     public function forceDelete(User $user, newsType $newsType)
     {
-          return ($user->type() == 'admin');
+          return true;
     }
 }

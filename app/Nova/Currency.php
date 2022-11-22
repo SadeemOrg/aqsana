@@ -32,7 +32,13 @@ class Currency extends Resource
     {
         return __('else');
     }
-
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Currencyparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
+    }
     public static $title = 'name';
     public static $priority = 1;
     /**

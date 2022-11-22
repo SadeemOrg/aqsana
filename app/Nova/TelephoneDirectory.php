@@ -30,6 +30,14 @@ class TelephoneDirectory extends Resource
     {
         return __('address');
     }
+
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("TelephoneDirectoryparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
+    }
     /**
      * The columns that should be searched.
      *

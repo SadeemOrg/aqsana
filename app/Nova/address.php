@@ -50,13 +50,14 @@ class address extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public static function indexQuery(NovaRequest $request, $query)
+    public static function availableForNavigation(Request $request)
     {
-        $id = Auth::id();
-        // return $query->whereIn('created_by',  $id );
-
-
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("addressparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
     }
+
     public function fields(Request $request)
     {
         return [

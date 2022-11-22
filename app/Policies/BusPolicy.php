@@ -18,7 +18,7 @@ class BusPolicy
      */
     public function viewAny(User $user)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+         return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class BusPolicy
      */
     public function view(User $user, Bus $bus)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+         return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class BusPolicy
      */
     public function create(User $user)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+         return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class BusPolicy
      */
     public function update(User $user, Bus $bus)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+           return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class BusPolicy
      */
     public function delete(User $user, Bus $bus)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+           return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class BusPolicy
      */
     public function restore(User $user, Bus $bus)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+           return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class BusPolicy
      */
     public function forceDelete(User $user, Bus $bus)
     {
-          return ($user->type() == 'admin' || $user->type() == 'regular_area'|| $user->type() == 'regular_city') ;
+           return true;
     }
 }

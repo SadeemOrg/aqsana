@@ -18,7 +18,7 @@ class DonationsPolicy
      */
     public function viewAny(User $user)
     {
-         return $user->type() == 'admin';
+          return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class DonationsPolicy
      */
     public function view(User $user, Donations $donations)
     {
-         return $user->type() == 'admin';
+          return true;
     }
 
     /**

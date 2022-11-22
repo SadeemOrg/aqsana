@@ -49,7 +49,13 @@ class News extends Resource
     {
         return __('Association website');
     }
-
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Newsparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
+    }
 
     public static $title = 'title';
     // public static $group = 'website';

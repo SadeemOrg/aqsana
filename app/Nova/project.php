@@ -90,12 +90,10 @@ class Project extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ($request->user()->type() == 'regular_city'  &&  (!($request->user()->cite))) {
-            return false;
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("projectparmation",  $request->user()->userrole()) )){
+            return true;
         }
-        if ($request->user()->type() == 'website_admin' || $request->user()->type() == 'financial_user' || $request->user()->type() == 'Almuahada_admin') {
-            return false;
-        } else return true;
+       else return false;
     }
 
     public static $search = [
