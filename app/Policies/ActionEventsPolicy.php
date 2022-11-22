@@ -18,7 +18,7 @@ class ActionEventsPolicy
      */
     public function viewAny(User $user)
     {
-         return $user->type() == 'admin';
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class ActionEventsPolicy
      */
     public function view(User $user, ActionEvents $actionEvents)
     {
-         return $user->type() == 'admin';
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class ActionEventsPolicy
      */
     public function create(User $user)
     {
-
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class ActionEventsPolicy
      */
     public function update(User $user, ActionEvents $actionEvents)
     {
-
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class ActionEventsPolicy
      */
     public function delete(User $user, ActionEvents $actionEvents)
     {
-
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class ActionEventsPolicy
      */
     public function restore(User $user, ActionEvents $actionEvents)
     {
-
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class ActionEventsPolicy
      */
     public function forceDelete(User $user, ActionEvents $actionEvents)
     {
-
+        return true;
     }
 }

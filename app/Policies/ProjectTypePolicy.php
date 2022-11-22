@@ -18,7 +18,7 @@ class ProjectTypePolicy
      */
     public function viewAny(User $user)
     {
-          return ($user->type() == 'admin');
+           return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class ProjectTypePolicy
      */
     public function view(User $user, ProjectType $projectType)
     {
-          return ($user->type() == 'admin');
+           return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class ProjectTypePolicy
      */
     public function create(User $user)
     {
-          return ($user->type() == 'admin');
+           return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class ProjectTypePolicy
      */
     public function update(User $user, ProjectType $projectType)
     {
-          return ($user->type() == 'admin');
+           return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class ProjectTypePolicy
      */
     public function delete(User $user, ProjectType $projectType)
     {
-          return ($user->type() == 'admin');
+           return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class ProjectTypePolicy
      */
     public function restore(User $user, ProjectType $projectType)
     {
-          return ($user->type() == 'admin');
+           return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class ProjectTypePolicy
      */
     public function forceDelete(User $user, ProjectType $projectType)
     {
-          return ($user->type() == 'admin');
+           return true;
     }
 }

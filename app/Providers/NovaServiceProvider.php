@@ -49,6 +49,7 @@ use Manogi\Tiptap\Tiptap;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\TopLevelResource;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
+use Zeyad\Profile\Profile;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -65,6 +66,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Nova::sortResourcesBy(function ($resource) {
             return $resource::$priority ?? 9999;
         });
+        // Nova::initialPath('/resources/users');
 
         parent::boot();
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
@@ -688,7 +690,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             //     $user = Auth::user();
             //     return  ($user->type() == 'website_admin' ) ;
             // }),
-            new projecs
+            new projecs,
+
         ];
     }
     /**
@@ -698,6 +701,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(LoginController::class, \App\Http\Controllers\LoginController::class);
     }
 }

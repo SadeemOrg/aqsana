@@ -18,7 +18,7 @@ class BookPolicy
      */
     public function viewAny(User $user)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+          return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class BookPolicy
      */
     public function view(User $user, Book $book)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+          return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class BookPolicy
      */
     public function create(User $user)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+          return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class BookPolicy
      */
     public function update(User $user, Book $book)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+          return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class BookPolicy
      */
     public function delete(User $user, Book $book)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+          return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class BookPolicy
      */
     public function restore(User $user, Book $book)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+          return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class BookPolicy
      */
     public function forceDelete(User $user, Book $book)
     {
-          return ($user->type() == 'admin' ||$user->type() == 'website_admin'  ) ;
+          return true;
     }
 }

@@ -20,12 +20,22 @@ use App\Models\newsType;
 use App\Models\Project;
 use App\Models\Sector;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
 
 
+    public function userprofile()
+    {
+        $user=Auth::user();
+        return view('Pages.user.profile',compact('user'));
+    }
+    public function user()
+    {
+        return Auth::user();
+    }
     public function first(Request $request)
     {
         $projects = Project::where('sector', '=', $request->project_id)->get();
@@ -126,7 +136,7 @@ class HomeController extends Controller
             $expenses_First = 0;
             $date_from = $year . '-1-1';
             $date_to = $year . '-3-31';
-              $from = date($date_from);
+            $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
             foreach ($Transactions as $key => $Transaction) {
@@ -143,7 +153,7 @@ class HomeController extends Controller
             $expenses_Second = 0;
             $date_from = $year . '-4-1';
             $date_to = $year . '-6-30';
-              $from = date($date_from);
+            $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
             foreach ($Transactions as $key => $Transaction) {
@@ -160,7 +170,7 @@ class HomeController extends Controller
             $expenses_Third = 0;
             $date_from = $year . '-7-1';
             $date_to = $year . '-9-30';
-              $from = date($date_from);
+            $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
             foreach ($Transactions as $key => $Transaction) {
@@ -177,7 +187,7 @@ class HomeController extends Controller
             $expenses_fourth = 0;
             $date_from = $year . '-8-1';
             $date_to = $year . '-12-31';
-              $from = date($date_from);
+            $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
             foreach ($Transactions as $key => $Transaction) {
@@ -338,7 +348,8 @@ class HomeController extends Controller
         $achievementsjson = nova_get_setting('achievements', 'default_value');
         $achievements = json_decode($achievementsjson);
         $workplace = nova_get_setting('workplace', 'default_value');
-        return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace'));
+        $type=2;
+        return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace','     $type=2;'));
     }
 
     public function conctus(Request $request)

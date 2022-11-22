@@ -16,7 +16,10 @@ class Donations extends Resource
      * @var string
      */
     public static $model = \App\Models\Donations::class;
-
+    public static function availableForNavigation(Request $request)
+    {
+        return false;
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *

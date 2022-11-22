@@ -18,7 +18,7 @@ class NotificationPolicy
      */
     public function viewAny(User $user)
     {
-        return ($user->type() == 'admin');
+         return true;
     }
 
     /**
@@ -31,7 +31,7 @@ class NotificationPolicy
     public function view(User $user, Notification $notification)
     {
 
-        return ($user->type() == 'admin');
+         return true;
     }
 
     /**
@@ -42,7 +42,7 @@ class NotificationPolicy
      */
     public function create(User $user)
     {
-        return ($user->type() == 'admin');
+         return true;
     }
 
     /**
@@ -54,7 +54,7 @@ class NotificationPolicy
      */
     public function update(User $user, Notification $notification)
     {
-        return ($user->type() == 'admin');
+         return true;
     }
 
     /**
@@ -83,7 +83,7 @@ class NotificationPolicy
      */
     public function restore(User $user, Notification $notification)
     {
-        return ($user->type() == 'admin');
+         return true;
     }
 
     /**
@@ -95,6 +95,6 @@ class NotificationPolicy
      */
     public function forceDelete(User $user, Notification $notification)
     {
-        return ($user->type() == 'admin');
+         return true;
     }
 }

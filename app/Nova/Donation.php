@@ -34,11 +34,18 @@ class Donation extends Resource
 
     public static function label()
     {
-        return __('Donations');
+        return __('the receipt Voucher');
     }
     public static function group()
     {
         return __('Financial management');
+    }
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Donationparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
     }
     public static $priority = 2;
     /**

@@ -17,6 +17,7 @@ use App\Http\Controllers\NotificationTest;
 |
 */
 
+Route::post("user", [HomeController::class, "user"])->name('user');
 
 Route::post("first/", [HomeController::class, "first"])->name('first');
 Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');
@@ -115,3 +116,6 @@ Route::get('/SendNotificationTest',[NotificationTest::class,'sendNotfiy'])->name
 Route::get('sendbasicemail','HomeController@basic_email');
 Route::get('sendhtmlemail','HomeController@html_email');
 Route::get('sendattachmentemail','HomeController@attachment_email');
+
+
+Route::get('userprofile', [HomeController::class, 'userprofile'])->name('userprofile');

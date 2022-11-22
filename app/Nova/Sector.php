@@ -17,7 +17,13 @@ class Sector extends Resource
      * @var string
      */
     public static $model = \App\Models\Sector::class;
-
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Sectorparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
@@ -31,7 +37,7 @@ class Sector extends Resource
     }
     public static function group()
     {
-        return __('sectors');
+        return __('else');
     }
 
     /**

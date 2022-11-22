@@ -19,7 +19,9 @@
         "build-project": "cd nova-components/Project && npm run dev",
         "build-project-prod": "cd nova-components/Project && npm run prod",
         "build-sector-rff": "cd nova-components/SectorRff && npm run dev",
-        "build-sector-rff-prod": "cd nova-components/SectorRff && npm run prod"
+        "build-sector-rff-prod": "cd nova-components/SectorRff && npm run prod",
+        "build-profile": "cd nova-components/Profile && npm run dev",
+        "build-profile-prod": "cd nova-components/Profile && npm run prod"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.7",

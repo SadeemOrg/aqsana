@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +23,7 @@ class UserSeeder extends Seeder
                 'email' => 'alaqsaAdmine@averotech.com',
                 'user_role' => 'admin',
             ],
-               [
+            [
                 'name' => 'Almuahadaadmin',
                 'email' => 'Almuahadaadmin@averotech.com',
                 'user_role' => 'Almuahada_admin',
@@ -68,19 +69,17 @@ class UserSeeder extends Seeder
         ];
 
 
-            collect($users)->each(function($users) {
-                User::create([
-                    'name' =>$users['name'],
-                    'email' => $users['email'],
-                    'password' => bcrypt('10203040'),
-                    'remember_token' => Str::random(10),
-                    'user_role'=>$users['user_role'],
-                    'phone'=>'0569465465',
-                    'city_id'=>'1']);
-            });
-
-
-
-
+        collect($users)->each(function ($users) {
+            User::create([
+                'id_number' => '0000',
+                'name' => $users['name'],
+                'email' => $users['email'],
+                'password' => bcrypt('10203040'),
+                'remember_token' => Str::random(10),
+                'user_role' => $users['user_role'],
+                'phone' => '0569465465',
+                'city' => '1'
+            ]);
+        });
     }
 }

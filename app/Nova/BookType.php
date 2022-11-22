@@ -23,6 +23,14 @@ class BookType extends Resource
     {
         return __('Cultural Section');
     }
+    public static function availableForNavigation(Request $request)
+    {
+        return false;
+        $user = Auth::user();
+        if ($user->type() == 'admin' || $user->type() == 'financial_user') {
+            return true;
+        } else return false;
+    }
     public static $priority = 2 ;
     /**
      * The single value that should be used to represent the resource when being displayed.

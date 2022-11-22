@@ -18,7 +18,7 @@ class AreaPolicy
      */
     public function viewAny(User $user)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area') ;
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class AreaPolicy
      */
     public function view(User $user, Area $area)
     {
-        return ($user->type() == 'admin' || $user->type() == 'regular_area') ;
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class AreaPolicy
      */
     public function create(User $user)
     {
-        return $user->type() == 'admin';
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class AreaPolicy
      */
     public function update(User $user, Area $area)
     {
-        return $user->type() == 'admin';
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class AreaPolicy
      */
     public function delete(User $user, Area $area)
     {
-        return $user->type() == 'admin';
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class AreaPolicy
      */
     public function restore(User $user, Area $area)
     {
-        return $user->type() == 'admin';
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class AreaPolicy
      */
     public function forceDelete(User $user, Area $area)
     {
-        return $user->type() == 'admin';
+        return true;
     }
 }

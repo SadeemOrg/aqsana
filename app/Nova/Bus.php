@@ -24,6 +24,7 @@ class Bus extends Resource
      *
      * @var string
      */
+
     public static function label()
     {
         return __('Bus');
@@ -36,7 +37,7 @@ class Bus extends Resource
 
     public static $priority = 2;
     public static $model = \App\Models\Bus::class;
-    // public static $displayInNavigation = false;
+    public static $displayInNavigation = false;
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
