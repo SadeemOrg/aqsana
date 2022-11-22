@@ -16,7 +16,6 @@ class CreateFormMassagesTable extends Migration
         Schema::create('form_massages', function (Blueprint $table) {
             $table->id();
             $table->char('type', 1)->default('0');
-              $table->bigInteger('type');
             $table->string('name');
             $table->string('phone');
             $table->string('message');

@@ -24,6 +24,12 @@ class LoginController extends Controller
 
     use AuthenticatesUsers, ValidatesRequests;
 
+
+
+    // protected function authenticated(Request $request)
+    // {
+    //     return redirect("/");
+    // }
     /**
      * Create a new controller instance.
      *
@@ -31,7 +37,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('nova.guest:'.config('nova.guard'))->except('logout');
+        $this->middleware('nova.guest:' . config('nova.guard'))->except('logout');
     }
 
     /**

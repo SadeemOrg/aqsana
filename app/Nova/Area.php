@@ -29,7 +29,13 @@ class Area extends Resource
     {
         return __('address');
     }
-
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Areaparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
+    }
 
     public static $model = \App\Models\Area::class;
 

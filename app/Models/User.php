@@ -50,6 +50,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'birth_date' => 'date',
+        'start_work_date' => 'date',
+        'role' => 'array',
+
     ];
 
     public function Bus()
@@ -99,5 +102,9 @@ class User extends Authenticatable
     public function type()
     {
         return $this->user_role;
+    }
+    public function userrole()
+    {
+        return $this->role;
     }
 }

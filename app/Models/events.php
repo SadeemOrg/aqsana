@@ -31,15 +31,21 @@ class events extends Model implements HasMedia
     ];
 
     public function registerMediaConversions(Media $media = null): void
-{
-    $this->addMediaConversion('file')
-        ->width(130)
-        ->height(130);
-}
+    {
+        $this->addMediaConversion('file')
+            ->width(130)
+            ->height(130);
+    }
 
-public function registerMediaCollections(): void
-{
-    $this->addMediaCollection('main')->singleFile();
-    $this->addMediaCollection('my_multi_collection');
-}
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('main')->singleFile();
+        $this->addMediaCollection('my_multi_collection');
+    }
+
+    public function TelephoneDirectory()
+    {
+        return $this->belongsTo('App\Models\TelephoneDirectory', 'Contacts' );
+
+    }
 }

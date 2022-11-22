@@ -18,19 +18,19 @@ class AlmuahadaPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->type() == 'Almuahada_admin';
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Almuahada  $almuahada
+     * @param  \App\Models\ActionEvents  $actionEvents
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Almuahada $almuahada)
+    public function view(User $user, Almuahada $Almuahada)
     {
-        return $user->type() == 'Almuahada_admin';
+        return true;
     }
 
     /**
@@ -41,54 +41,54 @@ class AlmuahadaPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Almuahada  $almuahada
+     * @param  \App\Models\Almuahada  $Almuahada
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Almuahada $almuahada)
+    public function update(User $user, Almuahada $Almuahada)
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Almuahada  $almuahada
+     * @param  \App\Models\Almuahada  $Almuahada
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Almuahada $almuahada)
+    public function delete(User $user, Almuahada $Almuahada)
     {
-        return $user->type() == 'Almuahada_admin';
+        return true;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Almuahada  $almuahada
+     * @param  \App\Models\Almuahada  $Almuahada
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Almuahada $almuahada)
+    public function restore(User $user, Almuahada $Almuahada)
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Almuahada  $almuahada
+     * @param  \App\Models\Almuahada  $Almuahada
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Almuahada $almuahada)
+    public function forceDelete(User $user, Almuahada $Almuahada)
     {
-        //
+        return true;
     }
 }

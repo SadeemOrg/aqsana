@@ -49,7 +49,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}?v={{rand(0, 99)}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
+    {{-- <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"> --}}
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
 <!-- firebase integration end -->
 </head>
 <body class="min-w-site bg-40 text-90 font-medium min-h-full">
@@ -81,7 +82,14 @@
                     @if (count(\Laravel\Nova\Nova::globallySearchableResources(request())) > 0)
                         <global-search dusk="global-search-component"></global-search>
                     @endif
-
+                    @php
+                    $img = 'storage/' . nova_get_setting('qawafelLogo', 'default_value');
+                @endphp
+                <div class=" flex justify-end w-full mr-10">
+                    <a target="_self" href="/">
+                        <img class="w-16 h-16" src="/{{ $img }}" />
+                    </a>
+                </div>
                     <dropdown class="ml-auto h-9 flex items-center dropdown-right">
                         @include('nova::partials.user')
                     </dropdown>
@@ -109,7 +117,22 @@
     <script>
         window.Nova = new CreateNova(config)
     </script>
+<script>
+    // Fetch all the details element.
+const details = document.querySelectorAll("details");
 
+// Add the onclick listeners.
+details.forEach((targetDetail) => {
+  targetDetail.addEventListener("click", () => {
+    // Close all the details that are not targetDetail.
+    details.forEach((detail) => {
+      if (detail !== targetDetail) {
+        detail.removeAttribute("open");
+      }
+    });
+  });
+});
+</script>
     <!-- Tool Scripts -->
     @foreach (\Laravel\Nova\Nova::availableScripts(request()) as $name => $path)
         @if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://']))

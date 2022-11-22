@@ -18,7 +18,7 @@ class TripPolicy
      */
     public function viewAny(User $user)
     {
-         return $user->type() == 'admin';
+          return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class TripPolicy
      */
     public function view(User $user, Trip $trip)
     {
-         return $user->type() == 'admin';
+          return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class TripPolicy
      */
     public function create(User $user)
     {
-         return $user->type() == 'admin';
+          return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class TripPolicy
      */
     public function update(User $user, Trip $trip)
     {
-         return $user->type() == 'admin';
+          return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class TripPolicy
      */
     public function delete(User $user, Trip $trip)
     {
-         return $user->type() == 'admin';
+          return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class TripPolicy
      */
     public function restore(User $user, Trip $trip)
     {
-         return $user->type() == 'admin';
+          return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class TripPolicy
      */
     public function forceDelete(User $user, Trip $trip)
     {
-         return $user->type() == 'admin';
+          return true;
     }
 }

@@ -20,7 +20,13 @@ class BusesCompany extends Resource
      * @var string
      */
     public static $model = \App\Models\BusesCompany::class;
-
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("BusesCompanyparmation",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
