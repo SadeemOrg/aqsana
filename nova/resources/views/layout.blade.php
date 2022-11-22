@@ -82,7 +82,14 @@
                     @if (count(\Laravel\Nova\Nova::globallySearchableResources(request())) > 0)
                         <global-search dusk="global-search-component"></global-search>
                     @endif
-
+                    @php
+                    $img = 'storage/' . nova_get_setting('qawafelLogo', 'default_value');
+                @endphp
+                <div class=" flex justify-end w-full mr-10">
+                    <a target="_self" href="/">
+                        <img class="w-16 h-16" src="/{{ $img }}" />
+                    </a>
+                </div>
                     <dropdown class="ml-auto h-9 flex items-center dropdown-right">
                         @include('nova::partials.user')
                     </dropdown>
