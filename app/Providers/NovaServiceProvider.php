@@ -82,6 +82,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             ])
                         ])->title('name'),
                         Image::make(__('Logo'), 'logo')->disk('public'),
+                        Image::make(__('qawafelLogo'), 'qawafelLogo')->disk('public'),
+
                     ]
                 ),
                 Tab::make(

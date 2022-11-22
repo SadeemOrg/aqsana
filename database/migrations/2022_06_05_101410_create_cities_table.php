@@ -21,6 +21,8 @@ class CreateCitiesTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('update_by')->nullable();
             $table->unsignedBigInteger('admin_id');
+            $table->unsignedBigInteger('Qawafil_admin');
+            $table->unsignedBigInteger('Alhisalat_admin');
 
             $table->foreign('admin_id')->references('id')->on('users')
             ->onDelete('cascade');
