@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         News::observe(NewsObserver::class);
         Notification::observe(NotificationObserver::class);
 
-        View::composer(['layout.front-end.partial._header'],
+        View::composer(['layout.front-end.partial._header','layout.front-end.partial._Top-header-new'],
          function ($view) {
             $Navjson=nova_get_setting('Items', 'default_value');
             $nav = json_decode($Navjson);

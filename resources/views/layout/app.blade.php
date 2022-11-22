@@ -119,9 +119,11 @@
 
 </head>
 
-<body class="mt-44" dir="rtl">
-    @include('layout.front-end.partial._top-header')
-    @include('layout.front-end.partial._header')
+<body class="" dir="rtl">
+    {{-- @include('layout.front-end.partial._top-header') --}}
+    @include('layout.front-end.partial._Top-header-new')
+
+    {{-- @include('layout.front-end.partial._header') --}}
     @yield('content')
     @include('layout.front-end.partial._footer')
 
