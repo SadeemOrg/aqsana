@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->date('birth_date')->nullable();
             $table->string('city')->nullable();
             $table->string('jop')->nullable();
+            $table->bigInteger('social_media_id')->nullable();
             $table->date('start_work_date')->nullable();
             $table->char('martial_status', 1)->nullable();
             $table->string('user_number')->nullable();
