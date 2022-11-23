@@ -12,18 +12,23 @@
 @if (!isset($hasHeader) || (isset($hasHeader) && $hasHeader))
     @php
         $img = 'storage/' . nova_get_setting('logo', 'default_value');
+        $imgRight = 'storage/' . nova_get_setting('qawafelLogo', 'default_value');
+        // dd($imgRight);
+
     @endphp
 @endif
 
 <header class="h-24 bg-[#349a37] sticky top-0 z-20">
     <div class="flex flex-row justify-start items-start">
         <!--Start Header left Logo -->
-        <div class="hidden lg:flex flex-row items-center justify-center basis-1/6">
-            <img class="" src="{{ $img }}" alt="">
+        <div class="hidden lg:flex flex-row items-center justify-center basis-1/6 cursor-pointer" onclick="location.href='/'">
+            <img class="" 
+            src="{{ $img }}"
+             alt="">
         </div>
-        <div class="lg:hidden flex flex-row items-center justify-center h-24 w-32">
+        <a class="lg:hidden flex flex-row items-center justify-center h-24 w-32 cursor-pointer" onclick="location.href='/'" >
             <img class="h-full  " src="{{ $img }}" alt="">
-        </div>
+        </a>
         <!--End Header left Logo -->
         <!--Start Center Section -->
         <div class="flex flex-col basis-4/6">
@@ -218,12 +223,12 @@
         </div>
         <!--End Center Section -->
         <!--Start Header Right Logo -->
-        <div class="hidden xl:flex flex-row items-center justify-center basis-1/6">
+        <div class="hidden xl:flex flex-row items-center justify-center basis-1/6 cursor-pointer" onclick="location.href='/Qawafel-Alaqsa'">
             <img class=""
-                src="https://media.discordapp.net/attachments/938405759996276806/1044538836044230676/Group_62187.png"
-                alt="">
+                src="{{ $imgRight }}"
+                alt="logoQawafel">
         </div>
-        <div class="xl:hidden flex justify-center basis-[20%] items-center">
+        <div class="xl:hidden flex justify-center basis-[20%] items-center cursor-pointer">
             <div class="relative mt-12">
                 <a class="hamburger" href="#" role="button" title="Open menu"
                     aria-label="Open menu">
