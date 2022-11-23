@@ -19,7 +19,7 @@
 @endif
 
 <header class="h-24 bg-[#349a37] sticky top-0 z-20">
-    <div class="flex flex-row justify-start items-start">
+    <div class="flex flex-row justify-start items-start ">
         <!--Start Header left Logo -->
         <div class="hidden lg:flex flex-row items-center justify-center basis-1/6 cursor-pointer" onclick="location.href='/'">
             <img class="" 
@@ -31,7 +31,7 @@
         </a>
         <!--End Header left Logo -->
         <!--Start Center Section -->
-        <div class="flex flex-col basis-4/6">
+        <div class="flex flex-col basis-4/6 max-w-5xl mx-auto">
             <!--Start TopCenter Section -->
             <div class="flex flex-row items-center justify-start ">
                 <!--Start first Section On TopHeader -->
