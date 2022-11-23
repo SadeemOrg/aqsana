@@ -148,7 +148,7 @@
                     </ul>
                     <!--End SocialMedia On First Section -->
                     <!--Start Email and Telephone Sections -->
-                    <div class="hidden lg:flex flex-start items-center gap-x-4 lg:gap-x-8 justify-start basis-2/3">
+                    <div class="hidden lg:flex flex-start items-center gap-x-4  xl:gap-x-8 justify-start basis-2/3">
                         <div class="flex flex-row items-center justify-start gap-x-2">
                             <img src="{{ asset('assets/image/message.svg') }}" alt="message"
                                 class="max-w-[17px] max-h-[17px]">
@@ -225,7 +225,8 @@
         <!--Start Header Right Logo -->
         <div class="hidden xl:flex flex-row items-center justify-center basis-1/6 cursor-pointer" onclick="location.href='/Qawafel-Alaqsa'">
             <img class=""
-                src="{{ $imgRight }}"
+                {{-- src="{{ $imgRight }}" --}}
+                src="https://media.discordapp.net/attachments/938405759996276806/1044538836044230676/Group_62187.png"
                 alt="logoQawafel">
         </div>
         <div class="xl:hidden flex justify-center basis-[20%] items-center cursor-pointer">
