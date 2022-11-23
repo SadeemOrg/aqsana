@@ -13,6 +13,7 @@
     $Correct_whatsapp_phone = str_replace(' ', '', $whatsapp_phone);
     $Final_Correct_whatsapp_phone = str_replace('-', '', $Correct_whatsapp_phone);
     $whatsapp_phone_Link = 'https://wa.me/' . $Final_Correct_whatsapp_phone;
+    // dd($type)
 @endphp
 
 @if($type==1)

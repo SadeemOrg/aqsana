@@ -224,7 +224,7 @@ svg path, svg circle {transition: .2s;}
   display: block;
   width: 100%;
   height: 3px;
-  background: #349A37;
+  background: white;
   position: absolute;
   left: 0;
   -moz-transition: all 300ms ease-in;
