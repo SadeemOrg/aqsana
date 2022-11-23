@@ -584,6 +584,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[90px\]{
   top: 90px;
 }
+.right-\[-158px\]{
+  right: -158px;
+}
+.top-\[99px\]{
+  top: 99px;
+}
+.top-\[96px\]{
+  top: 96px;
+}
 .z-30{
   z-index: 30;
 }
