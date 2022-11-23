@@ -120,7 +120,8 @@
 </head>
 
 <body class="" dir="rtl">
-    @include('layout.front-end.partial._Top-header-new')    
+    @include('layout.front-end.partial._Top-header-new')  
+    {{-- @include('layout.front-end.partial._header') --}}
     @include('layout.front-end.partial._left-sidebar')
 <div class="mt-4">
     @yield('content')
