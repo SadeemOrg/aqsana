@@ -572,6 +572,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-6{
   right: 1.5rem;
 }
+.top-20{
+  top: 5rem;
+}
+.top-36{
+  top: 9rem;
+}
+.right-\[-200px\]{
+  right: -200px;
+}
+.top-\[90px\]{
+  top: 90px;
+}
 .z-30{
   z-index: 30;
 }
@@ -2279,6 +2291,9 @@ body{
   }
   .sm\:gap-y-0{
     row-gap: 0px;
+  }
+  .sm\:bg-transparent{
+    background-color: transparent;
   }
   .sm\:p-0{
     padding: 0px;

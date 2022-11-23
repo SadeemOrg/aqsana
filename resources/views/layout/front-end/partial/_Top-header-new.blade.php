@@ -14,19 +14,18 @@
         $img = 'storage/' . nova_get_setting('logo', 'default_value');
         $imgRight = 'storage/' . nova_get_setting('qawafelLogo', 'default_value');
         // dd($imgRight);
-
     @endphp
 @endif
 
 <header class="h-24 bg-[#349a37] sticky top-0 z-20">
     <div class="flex flex-row justify-start items-start ">
         <!--Start Header left Logo -->
-        <div class="hidden lg:flex flex-row items-center justify-center basis-1/6 cursor-pointer" onclick="location.href='/'">
-            <img class="" 
-            src="{{ $img }}"
-             alt="">
+        <div class="hidden lg:flex flex-row items-center justify-center basis-1/6 cursor-pointer"
+            onclick="location.href='/'">
+            <img class="" src="{{ $img }}" alt="">
         </div>
-        <a class="lg:hidden flex flex-row items-center justify-center h-24 w-32 cursor-pointer" onclick="location.href='/'" >
+        <a class="lg:hidden flex flex-row items-center justify-center h-24 w-32 cursor-pointer"
+            onclick="location.href='/'">
             <img class="h-full  " src="{{ $img }}" alt="">
         </a>
         <!--End Header left Logo -->
@@ -178,44 +177,47 @@
             <!--Start BottomCenter Section -->
             @if (!isset($hasHeader) || (isset($hasHeader) && $hasHeader))
                 <!--Start NavBar Section -->
-                <div class="nav nav-links ">
-                    <nav >
-                        <ul
-                            class="navbar-nav h-[50px] hidden xl:flex xl:flex-row justify-start items-center gap-x-4 2xl:gap-x-8">
-                            @if (isset($nav))
-                                @foreach ($nav as $key => $item)
-                                    @if (empty($item->children))
-                                        <li class="nav-item relative ">
-                                            <a class="w-auto text-[15px] mb-3 xl:mb-0 xl:hover:text-[#e69c25] bg-transparent text-white block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
-                                                href="/{{ $item->data->link->id }}"
-                                                target="_self">{{ $item->data->name }}</a>
-                                        </li>
-                                    @else
-                                        <li class="nav-item relative">
-                                            @if ($item->data->link->resource == 'external')
-                                                <a class="w-auto text-[15px] mb-3 xl:mb-0 xl:hover:text-[#e69c25] bg-transparent text-white block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
+                <div class="nav xl:flex-row justify-between items-center fixed xl:static right-[-200px] top-[90px]  z-10 nav-links ">
+                    <div class="rt-links">
+                        <nav>
+                            <ul
+                                class="navbar-nav h-[50px] xl:flex xl:flex-row justify-start items-center gap-x-4 2xl:gap-x-8">
+                                @if (isset($nav))
+                                    @foreach ($nav as $key => $item)
+                                        @if (empty($item->children))
+                                            <li class="nav-item relative ">
+                                                <a class="w-auto text-[15px] mb-3 xl:mb-0 xl:hover:text-[#e69c25] bg-[#349A37] xl:bg-transparent text-white block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
                                                     href="/{{ $item->data->link->id }}"
                                                     target="_self">{{ $item->data->name }}</a>
-                                            @else
-                                                <a class="stop-link w-auto text-[15px] mb-3 xl:mb-0 xl:hover:text-[#e69c25] bg-transparent text-white block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
-                                                    href=""> {{ $item->data->name }}
-                                                </a>
-                                            @endif
-                                            <div
-                                                class="dropdown-menu drop-shadow-lg bg-white rounded-[5px] right-[110%] xl:right-[0] top-[100%]">
-                                                <ul>
-                                                    @include('layout.front-end.partial.navbar-dropdown', [
-                                                        'items' => $item->children,
-                                                        'itemName' => $item->data->name,
-                                                    ])
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    @endif
-                                @endforeach
-                            @endif
-                        </ul>
-                    </nav>
+                                            </li>
+                                        @else
+                                            <li class="nav-item relative">
+                                                @if ($item->data->link->resource == 'external')
+                                                    <a class="w-auto text-[15px] mb-3 xl:mb-0 xl:hover:text-[#e69c25] bg-[#349A37] xl:bg-transparent text-white block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
+                                                        href="/{{ $item->data->link->id }}"
+                                                        target="_self">{{ $item->data->name }}</a>
+                                                @else
+                                                    <a class="stop-link w-auto text-[15px] mb-3 xl:mb-0 xl:hover:text-[#e69c25] bg-[#349A37] xl:bg-transparent text-white block py-3 px-4 xl:py-0 xl:px-0  xl:inline-block relative xl:static"
+                                                        href=""> {{ $item->data->name }}
+                                                    </a>
+                                                @endif
+                                                <div
+                                                    class="dropdown-menu drop-shadow-lg bg-white rounded-[5px] right-[110%] xl:right-[0] top-[100%]">
+                                                    <ul>
+                                                        @include('layout.front-end.partial.navbar-dropdown',
+                                                            [
+                                                                'items' => $item->children,
+                                                                'itemName' => $item->data->name,
+                                                            ])
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
                 <!--End NavBar Section -->
             @endif
@@ -223,16 +225,15 @@
         </div>
         <!--End Center Section -->
         <!--Start Header Right Logo -->
-        <div class="hidden xl:flex flex-row items-center justify-center basis-1/6 cursor-pointer" onclick="location.href='/Qawafel-Alaqsa'">
-            <img class=""
-                {{-- src="{{ $imgRight }}" --}}
+        <div class="hidden xl:flex flex-row items-center justify-center basis-1/6 cursor-pointer"
+            onclick="location.href='/Qawafel-Alaqsa'">
+            <img class="" {{-- src="{{ $imgRight }}" --}}
                 src="https://media.discordapp.net/attachments/938405759996276806/1044538836044230676/Group_62187.png"
                 alt="logoQawafel">
         </div>
         <div class="xl:hidden flex justify-center basis-[20%] items-center cursor-pointer">
             <div class="relative mt-12">
-                <a class="hamburger" href="#" role="button" title="Open menu"
-                    aria-label="Open menu">
+                <a class="hamburger" href="#" role="button" title="Open menu" aria-label="Open menu">
                     <span class="hamburger__bar"></span>
                 </a>
             </div>
