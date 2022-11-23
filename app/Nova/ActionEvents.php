@@ -47,7 +47,7 @@ class ActionEvents extends Resource
      */
     public static $priority = 12;
     public static $search = [
-        'id',"name_address"
+        'id'
     ];
 
     /**
