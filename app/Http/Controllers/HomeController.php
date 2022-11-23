@@ -521,7 +521,27 @@ class HomeController extends Controller
         // dd ($News);
         // return dd($News);
     }
+    public function qawafel()
+    {
+        // dd($sector);mainType
+        $mainType = "قوافل الاقصي";
+        $type = "اخبار";
+        $projects = Project::where([
+            ['project_type', '=' ,'2'],
+            ['report_status', '=' ,'1'],
+        ]) ->paginate(9);
+        // $news = News::query()->where('sector', $sector)
 
+        //     ->paginate(9);
+        return view('Pages.ProjectsDetails.projects-page', compact('projects'));
+
+        // foreach ($News as $key => $value) {
+        //     echo  $value->title;
+        //     echo '<br>';
+        // }
+        // dd ($News);
+        // return dd($News);
+    }
     public function search($search)
     {
 
