@@ -97,7 +97,7 @@ class Project extends Resource
     }
 
     public static $search = [
-        'id',
+        'id','project_name'
     ];
 
     /**

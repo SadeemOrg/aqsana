@@ -44,7 +44,7 @@ class TelephoneDirectory extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id','name','phone_number'
     ];
 
     /**

@@ -51,7 +51,7 @@ class Bus extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id','bus_number'
     ];
 
     /**

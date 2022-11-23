@@ -45,7 +45,7 @@ class BookType extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id','name'
     ];
 
     /**
