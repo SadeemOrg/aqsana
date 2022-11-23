@@ -78,7 +78,7 @@ class Alhisalat extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id',number_alhisala
     ];
     public static $priority = 4;
     /**

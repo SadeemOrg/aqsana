@@ -27,7 +27,7 @@ class Reports extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
     public static function availableForNavigation(Request $request)
     {
         if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Reportsparmation",  $request->user()->userrole()) )){
@@ -41,7 +41,7 @@ class Reports extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id','name'
     ];
     public static function label()
 {

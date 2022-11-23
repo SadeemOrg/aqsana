@@ -25,7 +25,7 @@ class Donations extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'donor_name';
 
     /**
      * The columns that should be searched.
@@ -33,7 +33,7 @@ class Donations extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id','donor_name'
     ];
     public static function label()
     {

@@ -33,7 +33,7 @@ class events extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = "name";
 
     /**
      * The columns that should be searched.
@@ -51,7 +51,7 @@ class events extends Resource
     }
     public static $priority = 3 ;
     public static $search = [
-        'id',
+        'id',"name"
     ];
 
     /**

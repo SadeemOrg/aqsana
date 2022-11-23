@@ -29,7 +29,7 @@ class Sector extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'text';
 
     public static function label()
     {
@@ -46,7 +46,7 @@ class Sector extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id','text'
     ];
 
     /**
