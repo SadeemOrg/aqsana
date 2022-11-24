@@ -119,22 +119,18 @@
 
 </head>
 
-<body class="mt-44" dir="rtl">
-    @include('layout.front-end.partial._top-header')
-    @include('layout.front-end.partial._header')
+<body class="" dir="rtl">
+    @include('layout.front-end.partial._Top-header-new')  
+    {{-- @include('layout.front-end.partial._header') --}}
+    @include('layout.front-end.partial._left-sidebar')
+<div class="mt-4">
     @yield('content')
+</div>
     @include('layout.front-end.partial._footer')
 
 
     <!-- Comment out (or don't include) services that you don't want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
-
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
-            integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
-            integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
     <!-- Magnific popup js -->
     <script src="magnific-popup/jquery.magnific-popup.js"></script>
