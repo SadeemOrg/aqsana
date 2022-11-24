@@ -16,13 +16,13 @@ class CreateTelephoneDirectoriesTable extends Migration
         Schema::create('telephone_directories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-             $table->string('email');
+             $table->string('email')->nullable();
             $table->char('type', 1)->nullable();
-            $table->string('phone_number');
-            $table->string('city');
-            $table->string('roles');
-            $table->string('jop');
-            $table->string('id_number');
+            $table->string('phone_number')->nullable();
+            $table->string('city')->nullable();
+            $table->string('roles')->nullable();
+            $table->string('jop')->nullable();
+            $table->string('id_number')->nullable();
 
 
             $table->timestamps();

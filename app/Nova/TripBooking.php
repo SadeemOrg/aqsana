@@ -25,7 +25,7 @@ class TripBooking extends Resource
     }
     public static function group()
     {
-        return __('TripBooking');
+        return __('QawafilAlaqsa');
     }
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -42,9 +42,9 @@ class TripBooking extends Resource
     public static $search = [
         'id',
     ];
-    public static function groupOrder() {
-        return 10;
-    }
+    // public static function groupOrder() {
+    //     return 10;
+    // }
     /**
      * Get the fields displayed by the resource.
      *

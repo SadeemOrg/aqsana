@@ -68,6 +68,11 @@ class Transaction extends Model
         return $this->belongsTo('App\Models\Currency','Currency');
     }
 
+    public function TelephoneDirectory()
+    {
+        return $this->belongsTo('App\Models\TelephoneDirectory','name');
+    }
+
     // public function getCountryName() {
     //     return Currency::where('id', $this->id)->first()->name;
     // }
