@@ -34,6 +34,7 @@ class address extends Resource
     {
         return __('address');
     }
+
     /**
      * The columns that should be searched.
      *

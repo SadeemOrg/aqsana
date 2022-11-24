@@ -41,6 +41,9 @@ abstract class Resource extends NovaResource
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
+    public static function groupOrder() {
+        return 9999999;
+    }
     public static function detailQuery(NovaRequest $request, $query)
     {
         return parent::detailQuery($request, $query);

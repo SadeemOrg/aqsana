@@ -42,9 +42,8 @@ class BusesCompany extends Resource
 
     public static function group()
     {
-        return __('the Busss');
+        return __('QawafilAlaqsa');
     }
-
     /**
      * The columns that should be searched.
      *

@@ -56,7 +56,9 @@ class News extends Resource
         }
        else return false;
     }
-
+    public static function groupOrder() {
+        return 2;
+    }
     public static $title = 'title';
     // public static $group = 'website';
     public static $priority = 1;

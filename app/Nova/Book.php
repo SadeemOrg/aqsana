@@ -46,7 +46,9 @@ class Book extends Resource
         return __('Cultural Section');
     }
     public static $priority = 1;
-
+    public static function groupOrder() {
+        return 8;
+    }
 
 
     /**

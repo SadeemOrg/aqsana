@@ -62,6 +62,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
     public function boot()
     {
+        Nova::resources([
+            User::class,
+
+        ]);
 
         Nova::sortResourcesBy(function ($resource) {
             return $resource::$priority ?? 9999;

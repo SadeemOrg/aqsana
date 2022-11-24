@@ -43,6 +43,9 @@ class PaymentVoucher extends Resource
     {
         return __('Financial management');
     }
+    public static function groupOrder() {
+        return 3;
+    }
     public static function availableForNavigation(Request $request)
     {
         if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("PaymentVoucherparmation",  $request->user()->userrole()) )){
