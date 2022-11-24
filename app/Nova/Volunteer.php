@@ -34,6 +34,9 @@ class Volunteer extends Resource
     {
         return __('VolunteersE');
     }
+    public static function groupOrder() {
+        return 6 ;
+    }
     // public static $subGroup = 'Vendors';
     /**
      * The single value that should be used to represent the resource when being displayed.

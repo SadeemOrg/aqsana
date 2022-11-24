@@ -37,7 +37,7 @@ class ProjectType extends Resource
     }
     public static function group()
     {
-        return __('Admin');
+        return __('project');
     }
     public static $title = 'name';
     /**

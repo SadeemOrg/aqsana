@@ -33,7 +33,9 @@ class User extends Resource
         }
        else return false;
     }
-
+    public static function groupOrder() {
+        return 5;
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *

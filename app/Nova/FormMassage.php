@@ -51,6 +51,9 @@ public static function group()
 {
     return __('Email');
 }
+public static function groupOrder() {
+    return 9;
+}
     /**
      * Get the fields displayed by the resource.
      *

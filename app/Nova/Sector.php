@@ -39,7 +39,9 @@ class Sector extends Resource
     {
         return __('else');
     }
-
+    public static function groupOrder() {
+        return 12;
+    }
     /**
      * The columns that should be searched.
      *

@@ -40,6 +40,9 @@ class ActionEvents extends Resource
     {
         return __('Actions');
     }
+    public static function groupOrder() {
+        return 11;
+    }
     /**
      * The columns that should be searched.
      *

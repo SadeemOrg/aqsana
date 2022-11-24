@@ -91,6 +91,9 @@ class QawafilAlaqsa extends Resource
     {
         return __('QawafilAlaqsa');
     }
+    public static function groupOrder() {
+        return 1;
+    }
     public static function availableForNavigation(Request $request)
     {
         if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("QawafilAlaqsaparmation",  $request->user()->userrole()) )){

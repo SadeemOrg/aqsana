@@ -42,7 +42,9 @@ class TripBooking extends Resource
     public static $search = [
         'id',
     ];
-
+    public static function groupOrder() {
+        return 10;
+    }
     /**
      * Get the fields displayed by the resource.
      *

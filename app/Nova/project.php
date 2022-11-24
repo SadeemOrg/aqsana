@@ -99,7 +99,9 @@ class Project extends Resource
     public static $search = [
         'id','project_name'
     ];
-
+    public static function groupOrder() {
+        return 7 ;
+    }
     /**
      * Get the fields displayed by the resource.
      *

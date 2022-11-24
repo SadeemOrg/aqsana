@@ -74,7 +74,7 @@
 
             <!-- Content -->
             <div class="content ">
-                <div class="flex items-center relative shadow h-header bg-white z-20 px-view">
+                <div class="flex items-center relative shadow  bg-white z-20 px-view">
                     <a v-if="@json(\Laravel\Nova\Nova::name() !== null)" href="{{ \Illuminate\Support\Facades\Config::get('nova.url') }}" class="no-underline dim font-bold text-90 mr-6">
                         AlAqsa
                                         </a>
@@ -86,7 +86,7 @@
                     $img = 'storage/' . nova_get_setting('qawafelLogo', 'default_value');
                 @endphp
                 <div class=" flex justify-end w-full mr-10">
-                    <a target="_self" href="/">
+                    <a target="_self" href="/Qawafel-Alaqsa">
                         <img class="w-16 h-16" src="/{{ $img }}" />
                     </a>
                 </div>

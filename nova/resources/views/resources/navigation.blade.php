@@ -9,8 +9,24 @@
         <span class="sidebar-label">{{ __('Resources') }}</span>
     </h3>
 
-    @foreach ($navigation as $group => $resources)
-        <details class="mr-2" >
+
+    @php
+
+
+    $arrSort = [];
+    foreach ($navigation as $group => $resources) {
+          $resourcesGruoupOrders = [];
+          foreach ($resources as $aResource) {
+                $resourcesGruoupOrders[] = $aResource::groupOrder();
+          }
+          $arrSort[] = min($resourcesGruoupOrders);
+    }
+          $navigation = json_decode(json_encode($navigation), true);
+          array_multisort($navigation, SORT_ASC, SORT_NUMERIC, $arrSort);
+        //   dd($navigation);
+          @endphp
+              @foreach ($navigation as $group => $resources)
+        <details class="mr-2"  onclick="closeAll(thisindex(this));">
 
 
             @if (count($groups) > 1)
@@ -40,6 +56,25 @@
             </ul>
         </details>
     @endforeach
+    <script>
+        function thisindex(elm) {
+            var nodes = elm.parentNode.childNodes,
+                node;
+            var i = 0,
+                count = i;
+            while ((node = nodes.item(i++)) && node != elm)
+                if (node.nodeType == 1) count++;
+            return count;
+        }
+
+        function closeAll(index) {
+            var len = document.getElementsByTagName("details").length;
+
+            for (var i = 0; i < len; i++) {
+                if (i != index) {
+                    document.getElementsByTagName("details")[i].removeAttribute("open");
+                }
+            }
+        }
+    </script>
 @endif
-
-
