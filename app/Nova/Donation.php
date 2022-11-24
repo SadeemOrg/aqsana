@@ -2,11 +2,13 @@
 
 namespace App\Nova;
 
+use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
@@ -102,7 +104,7 @@ class Donation extends Resource
 
                     Select::make(__('name'), "name")
                         ->options(function () {
-                            $Users =  \App\Models\User::where('user_role', 'company')->get();;
+                            $Users =  \App\Models\TelephoneDirectory::where('type', '2')->get();
                             $i = 0;
                             $user_type_admin_array =  array();
                             foreach ($Users as $User) {
@@ -113,18 +115,18 @@ class Donation extends Resource
 
                             return $user_type_admin_array;
                         })
-                        ->displayUsingLabels(),
+                        ->displayUsingLabels()      ->hideFromDetail()->hideFromIndex(),
+
                     Flexible::make(__('add user'),'add_user')
                     ->readonly(true)
 
                         ->hideFromDetail()->hideFromIndex()
                         ->addLayout(__('tooles'), 'Payment_type_details ', [
                             Text::make(__('name'), "name")->rules('required'),
-                            Text::make(__('email'), "email")->rules('required'),
                             Text::make(__('phone'), "phone")->rules('required'),
                         ]),
 
-
+                        BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
                     // Select::make(__('project'), "ref_id")
                     //     ->options(function () {
                     //         $Alhisalats =  \App\Models\User::all();
@@ -163,8 +165,8 @@ class Donation extends Resource
                                 Text::make(__('Doubt number'), "equivelant_amount"),
 
                                 DateTime::make(__('History of doubt'), 'Date')
-                                ->resolveUsing(function ($date) {
-                                    return $date->format('d/m/Y');
+                                ->resolveUsing(function ($value) {
+                                    return $value;
                                 })->rules('required'),
 
                             ]),
@@ -274,24 +276,19 @@ class Donation extends Resource
 
         if (!$request->name) {
             // dd($request->add_user);
-            if ($request->add_user[0]['attributes']['name'] &&    $request->add_user[0]['attributes']['email'] && $request->add_user[0]['attributes']['phone']) {
-                DB::table('users')
-                    ->insert(
-                        [
-                            'name' => $request->add_user[0]['attributes']['name'],
-                            'email' =>  $request->add_user[0]['attributes']['email'],
-                            'password' => '10203040',
-                            'user_role' => 'company',
-                            'phone' =>  $request->add_user[0]['attributes']['phone']
-                        ],
-
+            if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
+                $telfone=  TelephoneDirectory::create([
+                        'name' => $request->add_user[0]['attributes']['name'],
+                        'type' => '2',
+                        'phone_number' =>  $request->add_user[0]['attributes']['phone']
+                    ],
                     );
 
             }
-            $User =  \App\Models\User::where('email',  $request->add_user[0]['attributes']['email'])->first();
+            // dd( $telfone);
             DB::table('transactions')
             ->where('id', $model->id)
-            ->update(['name' => $User->id]);
+            ->update(['name' => $telfone->id]);
         }
     }
 

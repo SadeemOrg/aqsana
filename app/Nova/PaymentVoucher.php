@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Image;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Alaqsa\Project\Project;
+use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
 use Pdmfc\NovaFields\ActionButton;
+use Whitecube\NovaFlexibleContent\Flexible;
 
 class PaymentVoucher extends Resource
 {
@@ -147,20 +149,30 @@ class PaymentVoucher extends Resource
 
             // BelongsTo::make('project' , 'project')->hideWhenCreating()->hideWhenUpdating(),
             Select::make(__('name'), "name")
-                    ->options(function () {
-                        $Users =  \App\Models\User::where('user_role', 'company')->get();;
-                                                $i=0;
-                                                $user_type_admin_array =  array();
-                                                foreach ($Users as $User) {
+            ->options(function () {
+                $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
+                $i = 0;
+                $user_type_admin_array =  array();
+                foreach ($Users as $User) {
 
 
-                                                        $user_type_admin_array += [($User['id']) => ($User['name'])];
+                    $user_type_admin_array += [($User['id']) => ($User['name'])];
+                }
 
-                                            }
+                return $user_type_admin_array;
+            })
+            ->displayUsingLabels()      ->hideFromDetail()->hideFromIndex(),
 
-                        return $user_type_admin_array;
-                    })
-                    ->displayUsingLabels(),
+        Flexible::make(__('add user'),'add_user')
+        ->readonly(true)
+
+            ->hideFromDetail()->hideFromIndex()
+            ->addLayout(__('tooles'), 'Payment_type_details ', [
+                Text::make(__('name'), "name")->rules('required'),
+                Text::make(__('phone'), "phone")->rules('required'),
+            ]),
+
+            BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
             // Text::make(__('name'), 'name'),
             Text::make(__('company_number'), 'company_number'),
@@ -220,7 +232,27 @@ class PaymentVoucher extends Resource
     }
 
 
+    public static function aftersave(Request $request, $model)
+    {
 
+
+        if (!$request->name) {
+            // dd($request->add_user);
+            if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
+                $telfone=  TelephoneDirectory::create([
+                        'name' => $request->add_user[0]['attributes']['name'],
+                        'type' => '2',
+                        'phone_number' =>  $request->add_user[0]['attributes']['phone']
+                    ],
+                    );
+
+            }
+            // dd( $telfone);
+            DB::table('transactions')
+            ->where('id', $model->id)
+            ->update(['name' => $telfone->id]);
+        }
+    }
 
 
     /**

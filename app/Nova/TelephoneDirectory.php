@@ -75,6 +75,8 @@ class TelephoneDirectory extends Resource
                 5 => __('جهات اتصال عامة'),
                 6 => __('مرشدين'),
                 7 => __('منح'),
+                8 => __('شركات'),
+
             ])->displayUsingLabels(),
 
             Text::make(__('phone_number'),'phone_number'),
