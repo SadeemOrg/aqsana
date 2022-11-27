@@ -125,6 +125,9 @@ class User extends Resource
                     "Sectorparmation" => __( "Sectorparmation"),
                     "TelephoneDirectoryparmation" => __( "TelephoneDirectoryparmation"),
                     "Volunteerparmation" => __( "Volunteerparmation"),
+                    "budjet" => __( "budjet"),
+                    "FilemanagerTool" => __( "FilemanagerTool"),
+                    "NovaSettings" => __( "Settings"),
 
 
                 ]

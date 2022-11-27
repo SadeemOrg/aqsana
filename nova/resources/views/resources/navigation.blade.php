@@ -1,4 +1,25 @@
 @if (count(\Laravel\Nova\Nova::resourcesForNavigation(request())))
+<h3   onclick="location.href='/userprofile'" class="flex items-center font-normal text-white mb-6 text-base no-underline ">
+    <?xml version="1.0" standalone="no"?>
+    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+     "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+     width="20.000000pt" height="20.000000pt" viewBox="0 0 24.000000 24.000000"
+     preserveAspectRatio="xMidYMid meet">
+
+    <g transform="translate(0.000000,24.000000) scale(0.100000,-0.100000)"
+    fill="#000000" stroke="none">
+    <path d="M90 195 c-15 -18 -10 -45 13 -59 34 -22 73 27 47 59 -16 19 -44 19
+    -60 0z"/>
+    <path d="M105 89 c-4 -6 -14 -8 -22 -5 -22 9 -53 -12 -53 -34 0 -18 7 -20 90
+    -20 83 0 90 2 90 20 0 22 -31 43 -53 34 -8 -3 -18 -1 -22 5 -8 14 -22 14 -30
+    0z"/>
+    </g>
+    </svg>
+
+  <span class="sidebar-label m-2">{{ __('profile') }}</span>
+</h3>
+
     <h3 class="flex items-center font-normal text-white mb-6 text-base no-underline ">
         <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path fill="var(--sidebar-icon)"
@@ -6,7 +27,7 @@
         </svg>
 
 
-        <span class="sidebar-label">{{ __('Resources') }}</span>
+        <span     class="sidebar-label">{{ __('Resources') }}</span>
     </h3>
 
 

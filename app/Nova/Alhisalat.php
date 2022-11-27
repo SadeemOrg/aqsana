@@ -87,25 +87,25 @@ class Alhisalat extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public static function indexQuery(NovaRequest $request, $query)
-    {
-        $user = Auth::user();
-        $id = Auth::id();
-        if ($user->type() == 'admin') {
-            return $query;
-        }
-        // elseif($user->type() == 'regular_area'){
-        // $areas = DB::table('areas')->where('admin_id', $id)
-        // ->join('cities', 'cities.area_id', '=', 'areas.id')
-        // ->join('alhisalats', 'alhisalats.city_id', '=', 'cities.id')
-        // ->select('alhisalats.name')->get();
-        // $stack = array();
-        // foreach ( $areas as $key => $value) {
-        //     array_push($stack, $value->name);
-        // }
-        // return $query->whereIn('name', $stack);
-        // }
-    }
+    // public static function indexQuery(NovaRequest $request, $query)
+    // {
+    //     $user = Auth::user();
+    //     $id = Auth::id();
+    //     if ($user->type() == 'admin') {
+    //         return $query;
+    //     }
+    //     // elseif($user->type() == 'regular_area'){
+    //     // $areas = DB::table('areas')->where('admin_id', $id)
+    //     // ->join('cities', 'cities.area_id', '=', 'areas.id')
+    //     // ->join('alhisalats', 'alhisalats.city_id', '=', 'cities.id')
+    //     // ->select('alhisalats.name')->get();
+    //     // $stack = array();
+    //     // foreach ( $areas as $key => $value) {
+    //     //     array_push($stack, $value->name);
+    //     // }
+    //     // return $query->whereIn('name', $stack);
+    //     // }
+    // }
 
 
 
