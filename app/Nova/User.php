@@ -73,8 +73,7 @@ class User extends Resource
 
             Gravatar::make()->maxWidth(50),
             Text::make(__('id_number'),'id_number')
-            ->sortable()
-            ->rules('required', 'max:255'),
+            ->sortable(),
             Text::make(__('Name'),'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
@@ -142,17 +141,13 @@ class User extends Resource
 
             ])->displayUsingLabels(),
             Text::make(__('user_number'),'user_number')
-            ->sortable()
-            ->rules('required', 'max:255'),
+            ->sortable(),
             Text::make(__('bank_name'),'bank_name')
-            ->sortable()
-            ->rules('required', 'max:255'),
+            ->sortable(),
             Text::make(__('bank_branch'),'bank_branch')
-            ->sortable()
-            ->rules('required', 'max:255'),
+            ->sortable(),
             Text::make(__('account_number'),'account_number')
-            ->sortable()
-            ->rules('required', 'max:255'),
+            ->sortable(),
             // BelongsTo::make('City'),
 
 
