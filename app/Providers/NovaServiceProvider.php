@@ -677,27 +677,29 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
 
-            (new NovaSettings)->canSee(function () {
-                $user = Auth::user();
-
-                if ($user->type() == 'admin' ||$user->type() == 'website_admin' ) {
+            (new NovaSettings)->canSee(function ($request) {
+                if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("NovaSettings",  $request->user()->userrole()) )){
                     return true;
                 }
-            }),
-
-          (  new \Infinety\Filemanager\FilemanagerTool())->canSee(function () {
-            $user = Auth::user();
-
-            if ($user->type() == 'admin' ||$user->type() == 'website_admin' ) {
+               else return false;
+                }),
+          (  new \Infinety\Filemanager\FilemanagerTool())->canSee(function ($request) {
+            if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("FilemanagerTool",  $request->user()->userrole()) )){
                 return true;
             }
-        }),
+           else return false;
+            }),
 
             // ( new NovaSettings)->canSee(function ($request) {
             //     $user = Auth::user();
             //     return  ($user->type() == 'website_admin' ) ;
             // }),
-            new projecs,
+            (new projecs)->canSee(function ($request) {
+                if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("budjet",  $request->user()->userrole()) )){
+                    return true;
+                }
+               else return false;
+                }),
 
         ];
     }

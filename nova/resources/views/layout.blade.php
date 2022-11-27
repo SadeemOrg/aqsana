@@ -83,7 +83,7 @@
                 <div class="flex items-center relative shadow  bg-white z-20 ">
 
                     <a v-if="@json(\Laravel\Nova\Nova::name() !== null)" href="{{ \Illuminate\Support\Facades\Config::get('nova.url') }}" >
-                        <div class=" flex justify-end w-1/5 mr-10">
+                        <div class=" ml-12 justify-end w-1/5 mr-10">
                             {{-- <a target="_self" href="/Qawafel-Alaqsa">
                                 <img class="w-23 h-23" src="/{{ $img }}" />
                             </a> --}}
