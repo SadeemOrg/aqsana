@@ -93,13 +93,13 @@ class User extends Resource
 
             Number::make(__('Phone'), 'phone')
                 ->textAlign('left'),
-            Date::make('Birth Date', 'birth_date'),
+            Date::make(__('Birth Date'), 'birth_date'),
             Image::make(__('photo'), 'photo')->disk('public'),
             Text::make(__('city'),'city')
             ->sortable()
             ->rules('required', 'max:255'),
-            BelongsTo::make(__('Role'),'Role',\App\Nova\Role::class),
-            Multiselect::make('Permations','role')
+            BelongsTo::make(__('Role_user'),'Role',\App\Nova\Role::class),
+            Multiselect::make(__('Permations'),'role')
             ->options(
                 [
                     "super-admin" => __("Super Admin"),
@@ -128,11 +128,12 @@ class User extends Resource
                     "budjet" => __( "budjet"),
                     "FilemanagerTool" => __( "FilemanagerTool"),
                     "NovaSettings" => __( "Settings"),
+                    "delegatee" => __( "delegatee"),
 
 
                 ]
             )->saveAsJSON(),
-            Date::make('start_work_date', 'start_work_date'),
+            Date::make(__('start_work_date'), 'start_work_date'),
             Select::make(__('martial_status'), 'martial_status')->options([
                 1 => __('single'),
                 2 => __('married'),

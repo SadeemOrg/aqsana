@@ -1,3 +1,4 @@
+@if (!isset($hasHeader) || (isset($hasHeader) && $hasHeader))
 @php
     $img = 'storage/' . nova_get_setting('logo', 'default_value');
     // dd($lastnews);
@@ -18,4 +19,4 @@
         alt="">
     </div>
 </div>
-
+@endif

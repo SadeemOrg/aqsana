@@ -21,6 +21,7 @@ export default [
     component: Dashboard,
     props: true,
   },
+
   {
     name: 'action-events.edit',
     path: '/resources/action-events/:id/edit',

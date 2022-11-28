@@ -15,7 +15,7 @@
         $imgRight = 'storage/' . nova_get_setting('qawafelLogo', 'default_value');
         // dd($imgRight);
     @endphp
-@endif
+
 
 <header class="h-24 bg-[#349a37] sticky top-0 z-20">
     <div class="flex flex-row justify-start items-start ">
@@ -241,3 +241,4 @@
         <!--End Header Right Logo -->
     </div>
 </header>
+@endif
