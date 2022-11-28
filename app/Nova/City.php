@@ -103,7 +103,7 @@ class City extends Resource
 
                 Select::make(__('admin'), 'admin_id')
                     ->options(function () {
-                        $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
+                        $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
 
                         $user_type_admin_array =  array();
 
@@ -119,7 +119,7 @@ class City extends Resource
                     ->rules('required')->hideFromIndex()->hideFromDetail(),
                 Select::make(__('Alhisalat_admin'), 'Alhisalat_admin')
                     ->options(function () {
-                        $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
+                        $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
 
                         $user_type_admin_array =  array();
 
@@ -133,7 +133,7 @@ class City extends Resource
                     })->rules('required')->hideFromIndex()->hideFromDetail(),
                 Select::make(__('Qawafil_admin'), 'Qawafil_admin')
                     ->options(function () {
-                        $users =  \App\Models\User::where('user_role', '=', 'regular_city')->get();
+                        $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
 
                         $user_type_admin_array =  array();
 

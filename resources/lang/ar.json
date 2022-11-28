@@ -21,13 +21,13 @@
 "account_number":"رقم حساب",
 "Permations":"صلاحيات",
 "Role_user":"المسمي الوظيفي",
-"":"",
-"":"",
-"":"",
-"":"",
-"":"",
-"":"",
-
+"delegatee":"مندوبين",
+"guide":"مرشدين",
+"num_hower":"عدد  ساعات",
+"done":"تم",
+"hower":" ساعات التبرع",
+"Grant":"صندوق المنح",
+"volunteersHower":"متطوعين ",
 
 
     "addressparmation":"مسؤول العناوين",
