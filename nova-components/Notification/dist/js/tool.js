@@ -934,6 +934,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         Notifications: this.Notifications,
         user: this.selected.id
       });
+      this.myNotifications();
+      this.Notifications = [];
+      this.selected.id = 0;
     },
 
     toggleTabs: function toggleTabs(tabNumber) {

@@ -295,6 +295,10 @@ export default {
         Notifications: this.Notifications,
         user: this.selected.id,
       });
+   this.myNotifications();
+   this.Notifications =[];
+   this.selected.id=0;
+
     },
     toggleTabs: function (tabNumber) {
       this.openTab = tabNumber;
