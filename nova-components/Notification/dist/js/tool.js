@@ -1294,7 +1294,7 @@ var staticRenderFns = [
           staticClass:
             "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
         },
-        [_vm._v("\n               السنة\n             ")]
+        [_vm._v("\n               المهمة\n             ")]
       )
     ])
   }
