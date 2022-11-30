@@ -10,13 +10,17 @@ class Notification extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id','title','message'
+        'title','message'
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
 
+    ];
+    protected $casts = [
+
+        'id' => 'string'
     ];
 
     public function myid()

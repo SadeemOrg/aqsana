@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationTest;
+use App\Http\Controllers\NotificationController;
 
 
 
@@ -18,6 +19,7 @@ use App\Http\Controllers\NotificationTest;
 */
 
 Route::post("user", [HomeController::class, "user"])->name('user');
+Route::post("users", [HomeController::class, "users"])->name('users');
 
 Route::post("first/", [HomeController::class, "first"])->name('first');
 Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');
@@ -120,3 +122,9 @@ Route::get('sendattachmentemail','HomeController@attachment_email');
 
 
 Route::get('userprofile', [HomeController::class, 'userprofile'])->name('userprofile');
+
+
+Route::get('/send-notification', [NotificationController::class, 'sendOfferNotification']);
+Route::post('/sendNotification', [NotificationController::class, 'sendNotification'])->name('sendNotification');
+Route::post('/myNotification', [NotificationController::class, 'myNotification'])->name('myNotification');
+Route::post('/CompletNotifications', [NotificationController::class, 'CompletNotifications'])->name('CompletNotifications');

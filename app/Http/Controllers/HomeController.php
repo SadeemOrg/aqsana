@@ -20,6 +20,7 @@ use App\Models\newsType;
 use App\Models\Project;
 use App\Models\Sector;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -35,6 +36,10 @@ class HomeController extends Controller
     public function user()
     {
         return Auth::user();
+    }
+    public function users()
+    {
+        return User::all();
     }
     public function first(Request $request)
     {
