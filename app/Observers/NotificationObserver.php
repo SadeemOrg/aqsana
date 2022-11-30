@@ -17,29 +17,29 @@ class NotificationObserver
      * @return void
      */
 
-    
+
     public function created(Notification $notification)
     {
-        
-        
-            $users = User::all();
 
-            $tokens = [];
-            foreach($users as $user){
-                
-                if($user->fcm_token != null && $user->fcm_token != ""){
-                    array_push($tokens,$user->fcm_token);
-                    
-                }
-               
-            }
 
-            if(!empty($tokens)){
-                Helpers::send_notification($tokens,$notification);
-            }
-           
-          
-        
+            // $users = User::all();
+
+            // $tokens = [];
+            // foreach($users as $user){
+
+            //     if($user->fcm_token != null && $user->fcm_token != ""){
+            //         array_push($tokens,$user->fcm_token);
+
+            //     }
+
+            // }
+
+            // if(!empty($tokens)){
+            //     Helpers::send_notification($tokens,$notification);
+            // }
+
+
+
     }
 
     /**

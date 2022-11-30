@@ -38,7 +38,7 @@ class Notification extends Resource
     {
         return __('Notification');
     }
-    public static $displayInNavigation = true;
+    public static $displayInNavigation = false;
     public static $priority = 1;
     /**
      * The columns that should be searched.

@@ -49,6 +49,7 @@ use Manogi\Tiptap\Tiptap;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\TopLevelResource;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
+use Zeyad\Notification\Notification;
 use Zeyad\Profile\Profile;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
@@ -700,7 +701,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 }
                else return false;
                 }),
-
+                new Notification,
         ];
     }
     /**
