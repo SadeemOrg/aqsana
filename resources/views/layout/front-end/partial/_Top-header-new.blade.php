@@ -22,11 +22,18 @@
         <!--Start Header left Logo -->
         <div class="hidden lg:flex flex-row items-center justify-center basis-1/6 cursor-pointer"
             onclick="location.href='/'">
-            <img class="" src="{{ $img }}" alt="">
+            <img class="" 
+            {{-- src="{{ $img }}" --}}
+            src="https://media.discordapp.net/attachments/938405759996276806/1044538835763200040/Group_62188.png"
+             alt="DATA1">
         </div>
         <a class="lg:hidden flex flex-row items-center justify-center h-24 w-32 cursor-pointer"
             onclick="location.href='/'">
-            <img class="h-full  " src="{{ $img }}" alt="">
+            <img class="h-full  " 
+            {{-- src="{{ $img }}" --}}
+            src="https://media.discordapp.net/attachments/938405759996276806/1044538835763200040/Group_62188.png"
+             
+            alt="DATA1">
         </a>
         <!--End Header left Logo -->
         <!--Start Center Section -->
