@@ -1,7 +1,7 @@
-@if (!isset($hasHeader) || (isset($hasHeader) && $hasHeader))
+@if (!isset($left_SideBar) || (isset($left_SideBar) && $left_SideBar)) 
 @php
+
     $img = 'storage/' . nova_get_setting('logo', 'default_value');
-    // dd($lastnews);
 @endphp
 
 <div dir="ltr" class="sticky top-3/4 z-40 cursor-pointer" onclick="location.href='/Qawafel-Alaqsa'">

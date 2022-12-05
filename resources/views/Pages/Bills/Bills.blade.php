@@ -1,4 +1,4 @@
-@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false])
+@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false,'left_SideBar'=>false])
 @section('content')
 @if($Transaction->lang == 1)
 @include('Pages.Bills.ArabicBills')

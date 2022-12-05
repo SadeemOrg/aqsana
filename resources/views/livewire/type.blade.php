@@ -1,18 +1,4 @@
 
-{{-- @extends('layout.app', ['hasHeader' => false, 'hasFooter' => false])
-@section('content')
-
-@php
-use App\Models\Book;
- $Books = Book::all();
-@endphp
-    @livewire('type', ['Books' => $Books])
-
-
-    @livewireScripts
-</body>
-</html>
-@endsection --}}
 
 <div class="bg-[#F2FFF285] py-8 mt-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
