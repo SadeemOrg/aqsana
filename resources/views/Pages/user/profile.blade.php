@@ -1,91 +1,235 @@
-@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false])
+@extends('layout.app', ['hasHeader' => true, 'hasFooter' => true, 'left_SideBar' => false])
 
 @section('content')
     @php
         // dd($user);
-        
+        $name = '@' . $user['name'];
+        $newDate = date('d-m-Y', strtotime($user['birth_date']));
     @endphp
 
-    <div dir="ltr" class="relative z-10" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 hidden transition-opacity md:block"
-            style="background: url('https://media.discordapp.net/attachments/938405759996276806/1047127547718144090/aqsana_welcome_slider_1_1.png?width=1440&height=700');opacity: .8;background-repeat: no-repeat;background-position:top;background-size: 100%;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+        <div class="flex sm:flex-row flex-col sm:gap-y-0 gap-y-6 items-center justify-between mt-4 xl:mt-8">
+            <div class="relative ">
+                <p itemprop="name" class="font-FlatBold text-3xl text-center xl:text-right"> لوحة التحكم</p>
+                <div class="absolute border-b-[4px] pt-2 border-b-[#349A37]  w-28 hidden xl:block"></div>
+            </div>
+            <button onclick="location.href='/'"
+                class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">الذهاب
+                الى المنظومة</button>
         </div>
-        <div class="fixed inset-0 z-10 overflow-y-auto">
-            <div class="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
-
-                <div class="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
-                    <div
-                        class="relative flex w-full items-center overflow-hidden bg-white bg-opacity-50 mt-[10%] px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-
-                        <div
-                            class="grid w-full grid-cols-1 items-start gap-y-8 gap-x-6 sm:grid-cols-12 lg:items-start lg:gap-x-8">
-                            <div
-                                class="aspect-w-2 aspect-h-3 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-                                <img src="https://media.discordapp.net/attachments/938405759996276806/1042005410330202152/zey.jpg"
-                                    class="" alt="Back of women&#039;s Basic Tee in black."
-                                    class="object-cover object-center">
-                            </div>
-                            <div class="sm:col-span-8 lg:col-span-7 h-full">
-                                @php
-                                    $name = '@' . $user['name'];
-                                    $newDate = date("d-m-Y", strtotime($user['birth_date'])); 
-                                    $newWorkData = date("d-m-Y", strtotime($user['start_work_date']));
-                                @endphp
-                                <div class="flex flex-col justify-start h-full gap-y-6">
-                                    <div class="flex flex-row items-center justify-start gap-x-2">
-                                        <img src="{{ asset('assets/image/user-name-svgrepo-com.svg') }}" class=""
-                                            alt="">
-                                        <h2 class="text-xl font-FlatBold text-[#349a37] sm:pr-12 ">
-                                            {{ $name }}
-                                        </h2>
-                                    </div>
-                                    <div class="flex flex-row items-center justify-start gap-x-2 ">
-                                        <img src="{{ asset('assets/image/user-email-svgrepo-com.svg') }}" class="" />
-                                        <h2 class="text-xl font-FlatBold text-[#349a37]  sm:pr-12">{{ $user['email'] }}
-                                        </h2>
-                                    </div>
-                                    <div class="flex flex-row items-center justify-start gap-x-2 ">
-                                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M24.3429 19.06L20.5354 15.2523C19.6606 14.3774 18.2372 14.3775 17.3624 15.2523L16.8595 15.7553C16.4709 16.1439 15.9543 16.3579 15.4047 16.3579C14.8551 16.3579 14.3386 16.1439 13.95 15.7553L9.24445 11.0495C8.85585 10.6609 8.64181 10.1443 8.64181 9.59466C8.64181 9.04504 8.85585 8.52845 9.24445 8.13984L9.74738 7.63688C10.6222 6.76211 10.6222 5.3386 9.74738 4.46382L5.93968 0.656152C5.06493 -0.218717 3.64149 -0.218717 2.76674 0.656152C-0.449901 3.87283 -0.917025 8.93052 1.65588 12.6821C4.53391 16.8787 8.12102 20.4658 12.3173 23.344C13.9384 24.4559 15.8029 25.0001 17.6579 25C20.0955 24.9999 22.5162 24.0598 24.3428 22.2331C24.7666 21.8093 25 21.2459 25 20.6466C25 20.0472 24.7667 19.4838 24.3429 19.06ZM3.90902 1.79829C4.02766 1.67973 4.18543 1.6144 4.35325 1.6144C4.52108 1.6144 4.67885 1.67973 4.79749 1.79838L8.60502 5.60605C8.72366 5.7247 8.78899 5.88248 8.78899 6.05031C8.78899 6.21814 8.72366 6.37583 8.60502 6.49457L8.37841 6.72118L3.68744 2.03002C3.75968 1.95167 3.83318 1.87422 3.90902 1.79829ZM13.231 22.0117C9.1994 19.2465 5.75319 15.8001 2.98805 11.7684C1.23156 9.20721 1.18561 5.91264 2.71262 3.3399L7.3835 8.01096C7.14989 8.49919 7.02622 9.03741 7.02622 9.59466C7.02622 10.5758 7.40827 11.4981 8.10199 12.1918L12.8075 16.8975C13.5012 17.5913 14.4235 17.9733 15.4045 17.9733C15.9618 17.9733 16.5 17.8497 16.9882 17.616L21.6592 22.2872C19.0866 23.8142 15.7922 23.7684 13.231 22.0117ZM23.2006 21.0907C23.1247 21.1667 23.0472 21.2402 22.969 21.3123L18.278 16.6212L18.5046 16.3945C18.6233 16.2759 18.781 16.2106 18.9489 16.2106C19.1167 16.2106 19.2744 16.2759 19.3931 16.3945L23.2006 20.2022C23.4455 20.4471 23.4455 20.8458 23.2006 21.0907Z"
-                                                fill="#349A37" />
-                                        </svg>
-                                        <h2 class="text-xl font-FlatBold text-[#349a37]  sm:pr-12">{{ $user['phone'] }}
-                                        </h2>
-                                    </div>
-                                    <div class="flex flex-row items-center justify-start gap-x-2 ">
-                                        <svg width="25" height="25" viewBox="0 0 36 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8.74941 0.258698C8.13462 0.258698 7.64545 0.671084 7.64545 1.17648V7.19196C7.64545 7.69736 8.13462 8.09977 8.74941 8.09977H9.34645C9.96124 8.09977 10.4617 7.69736 10.4617 7.19196V1.17648C10.4617 0.671084 9.96124 0.258698 9.34645 0.258698H8.74941V0.258698ZM26.8183 0.258698C26.2035 0.258698 25.7031 0.671084 25.7031 1.17648V7.19196C25.7031 7.69736 26.2035 8.09977 26.8183 8.09977H27.4041C28.0188 8.09977 28.5193 7.69736 28.5193 7.19196V1.17648C28.5193 0.671084 28.0188 0.258698 27.4041 0.258698H26.8183V0.258698ZM4.17587 4.6481C2.18742 4.6481 0.582367 6.03953 0.582367 7.77057V26.1263C0.582367 27.8573 2.18742 29.2587 4.17587 29.2587H31.9889C33.9773 29.2587 35.5824 27.8573 35.5824 26.1263V7.77057C35.5824 6.03953 33.9773 4.6481 31.9889 4.6481H29.2628V7.70073C29.2628 8.47391 28.5023 9.09736 27.5618 9.09736H26.6606C25.7201 9.09736 24.9596 8.47391 24.9596 7.70073V4.6481H11.2052V7.70073C11.2052 8.47391 10.4447 9.09736 9.50416 9.09736H8.5917C7.65117 9.09736 6.90197 8.47391 6.90197 7.70073V4.6481H4.17587V4.6481ZM2.83534 13.3571H33.3181V24.9291C33.3181 26.0944 32.2683 27.0241 30.9525 27.0241H5.21223C3.89647 27.0241 2.83534 26.0944 2.83534 24.9291V13.3571V13.3571Z" fill="#349A37"/>
-                                            </svg>                                            
-                                        <h2 class="text-xl font-FlatBold text-[#349a37]  sm:pr-12">{{$newDate }}
-                                        </h2>
-                                    </div>
-                                    <div class="flex flex-row items-center justify-start gap-x-2 ">
-                                        <svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M15.354 17.8416L12.6289 16.554L11.3198 15.4208L9.22608 17.5583L10.1289 23.7529C10.132 23.7744 10.1267 23.7964 10.1142 23.814L9.15916 25.1555C9.14397 25.177 9.11972 25.1895 9.09391 25.1895C9.0681 25.1895 9.04386 25.1769 9.02866 25.1555L8.07362 23.814C8.06112 23.7964 8.05584 23.7744 8.05902 23.7529L8.9618 17.5582L6.86808 15.4209L5.55903 16.5541L2.83398 17.8416C2.43074 18.0114 2.03902 18.2671 1.83298 18.7182C1.83298 18.7182 -1.12899 25.956 0.477539 25.956H17.7105C19.317 25.956 16.3551 18.7182 16.3551 18.7182C16.1795 18.2874 15.7572 18.0114 15.354 17.8416Z" fill="#349A37"/>
-                                            <path d="M9.09381 15.38C11.8808 15.38 13.9606 12.7149 14.008 8.24549C14.0383 5.14416 12.5992 3.28804 9.09381 3.28804C5.5884 3.28804 4.14907 5.1441 4.17968 8.24549C4.22698 12.7149 6.30675 15.38 9.09381 15.38Z" fill="#349A37"/>
-                                            <path d="M18.5841 0.956001C16.5228 0.956001 14.6857 1.95916 13.5112 3.51444C13.6327 3.61658 13.749 3.72437 13.8591 3.83856C14.0769 4.06436 14.2694 4.31338 14.4396 4.58258C15.3529 3.23866 16.87 2.35749 18.5841 2.35749C21.3688 2.35749 23.6343 4.68279 23.6343 7.5409C23.6343 10.399 21.3688 12.7242 18.5841 12.7242C17.1888 12.7242 15.924 12.1404 15.0091 11.1985C14.8873 11.7131 14.7328 12.1996 14.5465 12.654C15.6499 13.5736 17.0553 14.1256 18.5841 14.1256C22.1217 14.1256 24.9998 11.1716 24.9998 7.54085C24.9999 3.90996 22.1218 0.956001 18.5841 0.956001Z" fill="#349A37"/>
-                                            <path d="M18.5844 3.34345C18.3015 3.34345 18.0723 3.5787 18.0723 3.86903V7.72306C18.0723 8.01328 18.3015 8.24859 18.5844 8.24859H21.5611C21.844 8.24859 22.0732 8.01328 22.0732 7.72306C22.0732 7.43279 21.844 7.19748 21.5611 7.19748H19.0964V3.86903C19.0964 3.5787 18.8671 3.34345 18.5844 3.34345Z" fill="#349A37"/>
-                                            </svg>
-                                        <h2 class="text-xl font-FlatBold text-[#349a37]  sm:pr-12">{{$newWorkData }}
-                                        </h2>
-                                    </div>
-                                    <div class="flex flex-row items-center justify-start gap-x-2 ">
-                                        <svg width="28" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M13.603 0C6.15913 0 0.102997 4.14405 0.102997 9.23786C0.102997 14.1694 12.4102 24.3542 12.9341 24.7853C13.0994 24.9213 13.3445 25 13.603 25C13.8614 25 14.1066 24.9214 14.2719 24.7853C14.7959 24.3541 27.103 14.1694 27.103 9.23786C27.103 4.14405 21.047 0 13.603 0ZM13.603 23.4602C12.5117 22.5277 10.2444 20.541 8.0007 18.2699C3.97217 14.1922 1.84273 11.069 1.84273 9.23786C1.84273 4.80048 7.11842 1.19048 13.603 1.19048C20.0876 1.19048 25.3633 4.80048 25.3633 9.23786C25.3633 11.0689 23.2339 14.1921 19.2053 18.2699C16.9615 20.541 14.6943 22.5277 13.603 23.4602Z" fill="#349A37"/>
-                                            <path d="M18.0285 16.9806C17.6305 16.7966 17.0897 16.8683 16.8208 17.1407C15.647 18.3297 14.332 19.5759 12.9123 20.8447C12.6203 21.1057 12.6927 21.4793 13.0741 21.6791C13.2319 21.7618 13.4178 21.8018 13.6023 21.8018C13.8637 21.8018 14.1224 21.7214 14.2936 21.5684C15.7341 20.2811 17.0694 19.0156 18.2624 17.8071C18.5313 17.5347 18.4267 17.1647 18.0285 16.9806Z" fill="#349A37"/>
-                                            <path d="M13.603 4.56351C9.66992 4.56351 6.47008 6.75311 6.47008 9.44446C6.47008 12.1358 9.66992 14.3254 13.603 14.3254C17.5361 14.3254 20.7359 12.1358 20.7359 9.44446C20.7359 6.75311 17.5361 4.56351 13.603 4.56351ZM13.603 13.1349C10.6292 13.1349 8.20981 11.4794 8.20981 9.44446C8.20981 7.40954 10.6292 5.75398 13.603 5.75398C16.5769 5.75398 18.9962 7.40954 18.9962 9.44446C18.9962 11.4794 16.5769 13.1349 13.603 13.1349Z" fill="#349A37"/>
-                                            </svg>
-                                        <h2 class="text-xl font-FlatBold text-[#349a37]  sm:pr-12">{{$user['city'] }}
-                                        </h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!--Tabs -->
+        <div class="mt-12">
+            <div class="block">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex" aria-label="Tabs">
+                        <a href="#" target="_self"
+                            class="border-transparent text-[#101426] hover:text-[#349A37] hover:border-[1px] hover:border-b-[#349A37] w-1/2 sm:w-1/4 py-4 px-1 text-center border-b-2 font-FlatBold text-[16px]">التفاصيل
+                            الشخصية</a>
+                        <a href="#" target="_self"
+                            class="border-transparent text-[#101426] hover:text-[#349A37] hover:border-[1px] hover:border-b-[#349A37] w-1/2 sm:w-1/4 py-4 px-1 text-center border-b-2 font-FlatBold text-[16px]">ساعات
+                            العمل</a>
+                    </nav>
                 </div>
             </div>
         </div>
+        <!--Perosonal Information -->
+        <div class="flex flex-row items-center justify-between mt-8">
+            <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">البيانات الشخصية</p>
+            <div class="flex flex-row items-center  gap-x-2 ">
+                <div class="relative">
+                    <button
+                        class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#4F37FD] hover:bg-[#101426] hover:text-white ">
+                        تعديل
+                    </button>
+                    <svg class=" absolute top-5 right-4" width="17" height="17" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1042_277)">
+                            <path
+                                d="M12.3511 3.35913L1.3468 14.3642C1.29144 14.4197 1.25146 14.4898 1.23242 14.5652L0.0127046 19.4609C-0.0237807 19.6083 0.0195258 19.765 0.127078 19.8725C0.208456 19.9539 0.31934 19.999 0.432762 19.999C0.467502 19.999 0.503035 19.9947 0.537617 19.986L5.43331 18.7661C5.50961 18.747 5.57893 18.7072 5.6343 18.6519L16.6395 7.64758L12.3511 3.35913Z"
+                                fill="white" />
+                            <path
+                                d="M19.3659 1.8587L18.141 0.633746C17.3223 -0.184952 15.8954 -0.184159 15.0776 0.633746L13.5771 2.13424L17.8654 6.42254L19.3659 4.92204C19.7749 4.51324 20.0001 3.96914 20.0001 3.39045C20.0001 2.81176 19.7749 2.26765 19.3659 1.8587Z"
+                                fill="white" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_1042_277">
+                                <rect width="20" height="20" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="relative">
+                    <button
+                        class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                        حفظ
+                    </button>
+                    <svg class="absolute top-5 right-4" width="16" height="20" viewBox="0 0 16 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M13.8337 0H2.2295C1.28441 0 0.45459 0.777477 0.45459 1.69775V18.8639C0.45459 19.172 0.540326 19.4287 0.678505 19.6271C0.843753 19.8642 1.10983 20.0001 1.39514 20C1.6649 20 1.9521 19.8799 2.21733 19.6534L7.40906 15.2453C7.5694 15.1084 7.79973 15.0299 8.03921 15.0299C8.27859 15.0299 8.50845 15.1084 8.66926 15.2457L13.8436 19.6527C14.1098 19.8799 14.3772 20.0001 14.6465 20.0001C15.1019 20.0001 15.5457 19.6488 15.5457 18.864V1.69775C15.5457 0.777477 14.7788 0 13.8337 0Z"
+                            fill="white" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-row items-center justify-center">
+            <img class="inline-block h-40 w-40 mt-6 rounded-full"
+                src="https://media.discordapp.net/attachments/938405759996276806/1042005410330202152/zey.jpg"
+                alt="">
+        </div>
+        <!--Form -->
+        <form class="mt-8">
+            <section class="border-b-2 max-w-7xl border-[#9CA9B6] pb-12">
+                <!--first div Dev -->
+                <div class="flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
+                    <div class="">
+                        <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الاسم </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder=" الاسم" value={{ $user['name'] }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الوظيفة </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder="الوظيفة" value={{ $user['name'] }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="email" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> البريد الالكتروني
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder=" الاسم" value={{ $user['email'] }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="phone" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> البريد الالكتروني
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="phone" placeholder=" رقم التلفون" value={{ $user['phone'] }}
+                                class="block md:min-w-[300px] w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                </div>
+                <!--Second Dev -->
+                <div class="mt-8 flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
+                    <div class="">
+                        <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> تاريخ الميلاد
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder=" الاسم" value={{ $newDate }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم الهوية </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder="الوظيفة" value={{ $user['name'] }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="email" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> بدء العمل بالجمعية
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder=" الاسم" value={{ $user['email'] }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="phone" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> المدينة
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="phone" placeholder=" رقم التلفون" value={{ $user['phone'] }}
+                                class="block md:min-w-[300px] w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                </div>
+                <!--third Dev -->
+                <div class="mt-8 flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
+                    <div class="">
+                        <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الحالة الاجتماعية
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder=" الاسم" value={{ $newDate }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> تاريخ المغادرة
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder="الوظيفة" value={{ $user['name'] }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Second Section -->
+            <section class="border-b-2 max-w-7xl border-[#9CA9B6] pb-12">
+                <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-12 lg:mt-8 xl:text-right">البيانات البنكية
+                </p>
+                <!--first div Dev -->
+                <div class="mt-4 flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
+                    <div class="">
+                        <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> اسم البنك </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder=" الاسم" value={{ $user['name'] }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم البنك </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder="الوظيفة" value={{ $user['name'] }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="email" class="block text-sm mr-4 text-[#349A37] font-FlatBold">رقم الحساب
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder=" الاسم" value={{ $user['email'] }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--third Section -->
+            <section class="border-b-2 max-w-7xl border-[#9CA9B6] pb-12">
+                <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-12 lg:mt-8 xl:text-right">كلمة المرور
+                </p>
+                <!--first div Dev -->
+                <div class="mt-4 flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
+                    <div class="">
+                        <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> كلمة المرور الحالية
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder=" الاسم" value={{ $user['name'] }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> كلمة المرور الجديدة
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder="الوظيفة" value={{ $user['name'] }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="email" class="block text-sm mr-4 text-[#349A37] font-FlatBold">تأكيد كلمة المرور
+                            الجديدة
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="" placeholder=" الاسم" value={{ $user['email'] }}
+                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
     </div>
 @endsection
