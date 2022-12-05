@@ -1,4 +1,4 @@
-@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false])
+@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false,'left_SideBar'=>false])
 @section('content')
     @php
         $society_id = nova_get_setting('society_id', '580179794');

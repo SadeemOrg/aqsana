@@ -1,4 +1,4 @@
-@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false])
+@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false,'left_SideBar'=>false])
 @section('content')
     @php
         $whatsapp_phone = nova_get_setting('whatsapp_Connectus', 'default_value');
