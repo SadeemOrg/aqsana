@@ -633,7 +633,6 @@ class HomeController extends Controller
     public function     getprojectDetailapi($id)
     {
         $project = DB::table('projects')->where('id', $id)->first();
-
         $goalsjson = $project->report_pictures;
 
         $pictures = json_decode($goalsjson, true);
