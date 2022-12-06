@@ -31,20 +31,30 @@ class HomeController extends Controller
 
     public function userprofile()
     {
-        $user=Auth::user();
-        return view('Pages.user.profile',compact('user'));
+        $user = Auth::user();
+        return view('Pages.user.profile', compact('user'));
     }
     public function updateuser(Request $request)
     {
         $user = User::findOrFail(Auth::id());
         // dd( $request->all());
-        $validatedData = $request->validate([
-            // 'name' => 'required|string|max:255',
-            // 'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
-            // 'phone' => 'required|string|max:255',
-            // 'image' => 'image'
-        ]);
 
+
+
+        $validatedData = $request->validate($request->all(), [
+            'name' => 'required|string|max:255|min:3',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'phone' => 'required|digits_between:10,14',
+            'image' => 'image'
+        ], [
+            'name.required' => 'الرجاء ادخال اسم',
+            'name.string' => 'الاسم يجب ان يكون احرف فقط',
+            'name.min' => 'الاسم يجب ان يكون على الاقل 3 حروف',
+            'email.required' => 'الرجاء ادخال ايميل',
+            'email.unique'=>'يجب ان يكون الايميل غير مكرر',
+            'phone.required'=>'ارجاء ادخال رقم الهاتف',
+            'phone.digits_between' => 'الرجاء ادخال رقم الهاتف بشكل صحيح. ',
+        ]);
         $user->update([
             'id_number' => $request->id_number,
             'name' => $request->name,
@@ -52,31 +62,21 @@ class HomeController extends Controller
             'phone' => $request->phone,
             'birth_date' => $request->birth_date,
             'city' => $request->city,
-            'jop' => $request->jop,
+            'job' => $request->job,
             'martial_status' => $request->martial_status,
             'bank_name' => $request->bank_name,
             'bank_branch' => $request->bank_branch,
             'account_number' => $request->account_number,
-
         ]);
-
-        // if ($request->photo) {
-        //     $user->photo = $request->photo->store('images', 'public');
-        // }
         if ($request->password) {
-
-           if((Hash::check($request->password, $user->password)))
-           {
-            if($request->new_password==$request->Confirm_password)
-
-            $user->password = Hash::make($request->new_password);
-           }
+            if ((Hash::check($request->password, $user->password))) {
+                if ($request->new_password == $request->Confirm_password)
+                    $user->password = Hash::make($request->new_password);
+            }
         }
         if ($request->image) {
             $user->photo = $request->image->store('images', 'public');
         }
-// dd($user);
-
         $user->save();
 
         return redirect('/userprofile')->with('changes_success', 'success');
@@ -147,14 +147,14 @@ class HomeController extends Controller
 
     public function contactus()
     {
-        $type= 2;
-        return view('Pages.contact-page',compact('type'));
+        $type = 2;
+        return view('Pages.contact-page', compact('type'));
     }
 
     public function contactusDonation()
     {
-        $type= 1;
-        return view('Pages.contact-page',compact('type'));
+        $type = 1;
+        return view('Pages.contact-page', compact('type'));
     }
     public function Sectorstatistics(Request $request)
     {
@@ -389,10 +389,10 @@ class HomeController extends Controller
         // $partners = json_decode($partnerjson);
 
         $sectors = nova_get_setting('workplace', 'default_value');
-        $type=2;
+        $type = 2;
         // $sectors= json_decode($sectorsjson);
 
-        return view('Pages.home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'partners', 'sectors','type'));
+        return view('Pages.home', compact('Heros', 'lastnews', 'news', 'ProjectsNews', 'partners', 'sectors', 'type'));
     }
     public function aboutus()
     {
@@ -401,13 +401,12 @@ class HomeController extends Controller
         $achievementsjson = nova_get_setting('achievements', 'default_value');
         $achievements = json_decode($achievementsjson);
         $workplace = nova_get_setting('workplace', 'default_value');
-        $type=2;
-        return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace','type'));
+        $type = 2;
+        return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace', 'type'));
     }
 
     public function conctus(Request $request)
     {
-
         $validator = Validator::make(
             $request->all(),
             [
@@ -580,9 +579,9 @@ class HomeController extends Controller
         $mainType = "قوافل الاقصي";
         $type = "اخبار";
         $projects = Project::where([
-            ['project_type', '=' ,'2'],
-            ['report_status', '=' ,'1'],
-        ]) ->paginate(9);
+            ['project_type', '=', '2'],
+            ['report_status', '=', '1'],
+        ])->paginate(9);
         // $news = News::query()->where('sector', $sector)
 
         //     ->paginate(9);

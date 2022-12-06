@@ -123,9 +123,9 @@
     @include('layout.front-end.partial._Top-header-new')
     {{-- @include('layout.front-end.partial._header') --}}
     @include('layout.front-end.partial._left-sidebar')
-<div class="mt-4">
-    @yield('content')
-</div>
+    <div class="mt-4">
+        @yield('content')
+    </div>
     @include('layout.front-end.partial._footer')
 
 
@@ -157,21 +157,21 @@
         integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        <script>
-            function readURL(elementId, input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+    <script>
+        function readURL(elementId, input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-        reader.onload = function (e) {
-            $('#'+elementId)
-                .attr('src', e.target.result);
-        };
+                reader.onload = function(e) {
+                    $('#' + elementId)
+                        .attr('src', e.target.result);
+                };
 
-        reader.readAsDataURL(input.files[0]);
-        console.log(input.files[0]);
-    }
-}
-        </script>
+                reader.readAsDataURL(input.files[0]);
+                console.log(input.files[0]);
+            }
+        }
+    </script>
     <!--Paypal  -->
     <script
         src="https://www.paypal.com/sdk/js?client-id=AQrUNiqeaUR5hFL1CRzuAwZQCPQ2KD35hVAM0s_jIhw6mgydgbxvPFVfd3GQ7r3Z-wEyX8FPN3bxJyxL&currency=ILS">
@@ -652,8 +652,8 @@
                 $(".Ctnbtn").text("متابعة");
             }
         });
-        $(".closeModal").click(function(){
-            $(".contactusModel").css("display","none");
+        $(".closeModal").click(function() {
+            $(".contactusModel").css("display", "none");
         })
         $(".showModal").click(function() {
             $(".PrivecySettingModal").toggleClass("hiddenModal");
@@ -673,8 +673,8 @@
             if (val.length > 2) {
                 $('.search-bar').siblings().css('display', 'flex');
                 $.ajax({
-                    type:"get",
-                    url:  '/search/'+val ,
+                    type: "get",
+                    url: '/search/' + val,
                     dataType: 'json',
                     beforeSend: function() {
                         console.log('herererer')
@@ -711,7 +711,28 @@
                 });
             }
         });
+        // $(".ProfileForm").submit(function(e) {
+        //     e.preventDefault();
+        //     var $name = $('input[name="name"]').val();
+        //     var $img = $('input[name="image"]').val();
+        //     var $email = $('input[name="email"]').val();
+        //     var $jop = $('input[name="jop"]').val();
+        //     var $phone = $('input[name="phone"]').val();
+        //     var $birth_date = $('input[name="birth_date"]').val();
+        //     var $id_number = $('input[name="id_number"]').val();
+        //     var $start_work_date = $('input[name="start_work_date"]').val();
+        //     var $city = $('input[name="city"]').val();
+        //     var $martial_status = $('input[name="martial_status"]').val();
+        //     var $bank_name = $('input[name="bank_name"]').val();
+        //     var $bank_branch = $('input[name="bank_branch"]').val();
+        //     var $account_number = $('input[name="account_number"]').val();
+        //     var $password = $('input[name="password"]').val();
+        //     var $new_password = $('input[name="bank_branch"]').val();
+        //     var $Confirm_password = $('input[name="bank_branch"]').val();
 
+
+
+        // })
         $(".contactUsForm").submit(function(e) {
             e.preventDefault()
             var $name = $('input[name="name"]').val();
