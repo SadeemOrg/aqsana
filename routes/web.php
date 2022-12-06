@@ -20,6 +20,7 @@ use App\Http\Controllers\NotificationController;
 
 Route::post("user", [HomeController::class, "user"])->name('user');
 Route::post("users", [HomeController::class, "users"])->name('users');
+Route::post('user/update', [HomeController::class, "updateuser"])->name('updateuser');
 
 Route::post("first/", [HomeController::class, "first"])->name('first');
 Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');

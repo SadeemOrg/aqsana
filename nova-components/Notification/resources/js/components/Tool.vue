@@ -72,7 +72,8 @@
           <table class="text-center">
             <tr>
               <th style="width: 70%">المهمة</th>
-              <th style="width: 20%">تم</th>
+              <th style="width:30%">الوقت</th>
+
               <th>تم</th>
             </tr>
             <tr
@@ -81,13 +82,15 @@
               :value="Notification.id"
             >
               <td>{{ Notification.Notifications.Notifications }}</td>
-              <td v-if="Notification.done">yes</td>
-                <td v-else>no</td>
- <td v-if="Notification.done">   <button
+              <td v-if="Notification.Notifications.date">{{ Notification.Notifications.date }}</td>
+              <td v-else>no Time</td>
+
+
+              <td v-if="Notification.done">
+                <button
                   class="
                     shadow
                     bg-gray-500
-
                     focus:shadow-outline focus:outline-none
                     text-white
                     font-bold
@@ -97,11 +100,12 @@
                   "
                   disabled
                   type="submit"
-
                 >
-                 complet
-                </button></td>
-                <td v-else>   <button
+                  complet
+                </button>
+              </td>
+              <td v-else>
+                <button
                   class="
                     shadow
                     bg-green-500
@@ -117,8 +121,8 @@
                   @click="CompletNotifications(Notification.id)"
                 >
                   do
-                </button></td>
-
+                </button>
+              </td>
             </tr>
           </table>
         </div>
@@ -189,6 +193,41 @@
                   {{ user.name }}
                 </option>
               </select>
+            </div>
+            <div class="md:w-1/3">
+              <label
+                class="
+                  block
+                  text-black text-base
+                  ml-4
+                  py-2
+                  font-bold
+                  md:text-right
+                  mb-1
+                  md:mb-0
+                  pr-4
+                "
+              >
+                التاريج
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <input
+                type="date"
+                v-model="date"
+                class="
+                  bg-gray-200
+                  appearance-none
+                  border-2 border-gray-200
+                  rounded
+                  w-full
+                  py-2
+                  px-4
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none focus:bg-white focus:border-black
+                "
+              />
             </div>
             <div class="md:w-1/3">
               <label
@@ -276,7 +315,11 @@ export default {
       console.log("dkdehfj");
       axios.post("/myNotification").then((response) => {
         this.myNotification = response.data;
-        console.log(this.myNotifications);
+        console.log("**********************************");
+
+        console.log(this.myNotification[0].Notifications.Notifications);
+        console.log("**********************************");
+
         // console.log(this.myNotification[0]);
         // console.log(( this.myNotification[0].Notifications.Notifications));
         //   console.log(( this.myNotification[0].done));
@@ -293,23 +336,23 @@ export default {
     sendNotifications() {
       axios.post("/sendNotification", {
         Notifications: this.Notifications,
+        date: this.date,
         user: this.selected.id,
       });
-   this.myNotifications();
-   this.Notifications =[];
-   this.selected.id=0;
-
+      this.myNotifications();
+      this.Notifications = [];
+      this.selected.id = 0;
+      alert("send done");
     },
     toggleTabs: function (tabNumber) {
       this.openTab = tabNumber;
     },
-      CompletNotifications: function ($event) {
- axios.post("/CompletNotifications", {
+    CompletNotifications: function ($event) {
+      axios.post("/CompletNotifications", {
         Notificationsid: $event,
-
       });
-       this.myNotifications();
-},
+      this.myNotifications();
+    },
   },
 
   beforeMount() {

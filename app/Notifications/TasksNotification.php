@@ -10,15 +10,16 @@ class TasksNotification extends Notification
 {
     use Queueable;
     private $offerData;
-
+    private $date;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($offerData)
+    public function __construct($offerData , $date)
     {
         $this->offerData = $offerData;
+        $this->date = $date;
     }
 
     /**
@@ -55,7 +56,8 @@ class TasksNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'Notifications' => $this->offerData
+            'Notifications' => $this->offerData,
+            'date' => $this->date,
         ];
     }
 }

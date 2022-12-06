@@ -50,17 +50,19 @@ class NotificationController extends Controller
         // dd(  $userSchema);
         // dd($request->user);
         $offerData = $request->Notifications;
-        Notification::send($userSchema, new TasksNotification($offerData));
+        $date= $request->date;
+        // dd($date);
+        Notification::send($userSchema, new TasksNotification($offerData,$date));
 
-        dd('Task completed!');
+        return 'Task completed!';
     }
-    public function sendOfferNotification() {
-        $userSchema =Auth::user();
+    // public function sendOfferNotification() {
+    //     $userSchema =Auth::user();
 
-        $offerData ='aa';
+    //     $offerData ='aa';
 
-        Notification::send($userSchema, new TasksNotification($offerData));
+    //     Notification::send($userSchema, new TasksNotification($offerData));
 
-        dd('Task completed!');
-    }
+    //     dd('Task completed!');
+    // }
 }
