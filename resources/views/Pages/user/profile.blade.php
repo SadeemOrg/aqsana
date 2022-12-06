@@ -33,11 +33,12 @@
             </div>
         </div>
         <!--Perosonal Information -->
+
         <div class="flex flex-row items-center justify-between mt-8">
             <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">البيانات الشخصية</p>
             <div class="flex flex-row items-center  gap-x-2 ">
                 <div class="relative">
-                    <button
+                    <button onclick=" document.getElementById('button_form').click();"
                         class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#4F37FD] hover:bg-[#101426] hover:text-white ">
                         تعديل
                     </button>
@@ -72,164 +73,204 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row items-center justify-center">
+        {{-- <div class="flex flex-row items-center justify-center">
             <img class="inline-block h-40 w-40 mt-6 rounded-full"
                 src="https://media.discordapp.net/attachments/938405759996276806/1042005410330202152/zey.jpg"
                 alt="">
-        </div>
-        <!--Form -->
-        <form class="mt-8">
-            <section class="border-b-2 max-w-7xl border-[#9CA9B6] pb-12">
-                <!--first div Dev -->
-                <div class="flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
-                    <div class="">
-                        <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الاسم </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder=" الاسم" value={{ $user['name'] }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+        </div> --}}
+        @php
+            $img = 'storage/' . $user['photo'];
+        @endphp
+        <form method="POST" action="{{ '/user/update' }}" enctype="multipart/form-data" class="mt-8">
+            @csrf
+            <div class="flex flex-row items-center justify-center">
+                <img src="/{{ $img }}" alt="" class="inline-block h-40 w-40 mt-6 rounded-full"
+                    id="chosen" onclick=" document.getElementById('user_image_uploader').click();">
+                <input type="file" name="image" id="user_image_uploader" onchange="readURL('chosen', this);" hidden />
+            </div>
+
+
+            <!--Form -->
+
+            <div class="mt-8">
+
+                <section class="border-b-2 max-w-7xl border-[#9CA9B6] pb-12">
+                    <!--first div Dev -->
+                    <div
+                        class="flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
+                        <div class="">
+                            <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الاسم </label>
+                            <div class="mt-1">
+                                <input type="text" name="name" placeholder=" الاسم" value={{ $user['name'] }}
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الوظيفة </label>
+                            <div class="mt-1">
+                                <input type="text" name="jop" placeholder=" الوظيفة" value={{ $user['jop'] }}
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="email" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> البريد الالكتروني
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="email" placeholder=" الاسم" value={{ $user['email'] }}
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="phone" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم الهاتف
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="phone" placeholder=" رقم التلفون" value={{ $user['phone'] }}
+                                    class="block md:min-w-[300px] w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
                         </div>
                     </div>
-                    <div class="">
-                        <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الوظيفة </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder="الوظيفة" value={{ $user['name'] }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                    <!--Second Dev -->
+                    <div
+                        class="mt-8 flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
+                        <div class="">
+                            <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> تاريخ الميلاد
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="birth_date" placeholder=" الاسم" value={{ $newDate }}
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم الهوية
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="id_number" placeholder="الوظيفة"
+                                    value={{ $user['id_number'] }}
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="email" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> بدء العمل
+                                بالجمعية
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="start_work_date" placeholder=" الاسم"
+                                    value={{ $user['start_work_date'] }}
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="phone" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> المدينة
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="city" placeholder=" رقم التلفون" value={{ $user['city'] }}
+                                    class="block md:min-w-[300px] w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
                         </div>
                     </div>
-                    <div class="">
-                        <label for="email" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> البريد الالكتروني
-                        </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder=" الاسم" value={{ $user['email'] }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                    <!--third Dev -->
+                    <div
+                        class="mt-8 flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
+                        <div class="">
+                            <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الحالة
+                                الاجتماعية
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="martial_status" placeholder=" الاسم"
+                                    value={{ $user['martial_status'] }}
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
                         </div>
-                    </div>
-                    <div class="">
-                        <label for="phone" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> البريد الالكتروني
-                        </label>
-                        <div class="mt-1">
-                            <input type="text" name="phone" placeholder=" رقم التلفون" value={{ $user['phone'] }}
-                                class="block md:min-w-[300px] w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-                        </div>
-                    </div>
-                </div>
-                <!--Second Dev -->
-                <div class="mt-8 flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
-                    <div class="">
-                        <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> تاريخ الميلاد
-                        </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder=" الاسم" value={{ $newDate }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-                        </div>
-                    </div>
-                    <div class="">
-                        <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم الهوية </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder="الوظيفة" value={{ $user['name'] }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-                        </div>
-                    </div>
-                    <div class="">
-                        <label for="email" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> بدء العمل بالجمعية
-                        </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder=" الاسم" value={{ $user['email'] }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-                        </div>
-                    </div>
-                    <div class="">
-                        <label for="phone" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> المدينة
-                        </label>
-                        <div class="mt-1">
-                            <input type="text" name="phone" placeholder=" رقم التلفون" value={{ $user['phone'] }}
-                                class="block md:min-w-[300px] w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-                        </div>
-                    </div>
-                </div>
-                <!--third Dev -->
-                <div class="mt-8 flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
-                    <div class="">
-                        <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الحالة الاجتماعية
-                        </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder=" الاسم" value={{ $newDate }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-                        </div>
-                    </div>
-                    <div class="">
+                        {{-- <div class="">
                         <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> تاريخ المغادرة
                         </label>
                         <div class="mt-1">
                             <input type="text" name="" placeholder="الوظيفة" value={{ $user['name'] }}
                                 class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                         </div>
+                    </div> --}}
                     </div>
-                </div>
-            </section>
-            <!--Second Section -->
-            <section class="border-b-2 max-w-7xl border-[#9CA9B6] pb-12">
-                <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-12 lg:mt-8 xl:text-right">البيانات البنكية
-                </p>
-                <!--first div Dev -->
-                <div class="mt-4 flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
-                    <div class="">
-                        <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> اسم البنك </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder=" الاسم" value={{ $user['name'] }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                </section>
+                <!--Second Section -->
+                <section class="border-b-2 max-w-7xl border-[#9CA9B6] pb-12">
+                    <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-12 lg:mt-8 xl:text-right">البيانات
+                        البنكية
+                    </p>
+                    <!--first div Dev -->
+                    <div
+                        class="mt-4 flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
+                        <div class="">
+                            <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> اسم البنك
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="bank_name" placeholder=" الاسم"
+                                    value={{ $user['bank_name'] }}
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم البنك
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="bank_branch" placeholder="الوظيفة"
+                                    value={{ $user['bank_branch'] }}
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="email" class="block text-sm mr-4 text-[#349A37] font-FlatBold">رقم الحساب
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="account_number" placeholder=" الاسم"
+                                    value={{ $user['account_number'] }}
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
                         </div>
                     </div>
-                    <div class="">
-                        <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم البنك </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder="الوظيفة" value={{ $user['name'] }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                </section>
+                <!--third Section -->
+                <section class="border-b-2 max-w-7xl border-[#9CA9B6] pb-12">
+                    <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-12 lg:mt-8 xl:text-right">كلمة المرور
+                    </p>
+                    <!--first div Dev -->
+                    <div
+                        class="mt-4 flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
+                        <div class="">
+                            <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> كلمة المرور
+                                الحالية
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="password" placeholder="  كلمة المرور الحالية"
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> كلمة المرور
+                                الجديدة
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="new_password" placeholder="كلمة المرور الجديدة"
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="email" class="block text-sm mr-4 text-[#349A37] font-FlatBold">تأكيد كلمة
+                                المرور
+                                الجديدة
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="Confirm_password" placeholder=" تأكيد كلمة المرور"
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
                         </div>
                     </div>
-                    <div class="">
-                        <label for="email" class="block text-sm mr-4 text-[#349A37] font-FlatBold">رقم الحساب
-                        </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder=" الاسم" value={{ $user['email'] }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!--third Section -->
-            <section class="border-b-2 max-w-7xl border-[#9CA9B6] pb-12">
-                <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-12 lg:mt-8 xl:text-right">كلمة المرور
-                </p>
-                <!--first div Dev -->
-                <div class="mt-4 flex flex-row items-center justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
-                    <div class="">
-                        <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> كلمة المرور الحالية
-                        </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder=" الاسم" value={{ $user['name'] }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-                        </div>
-                    </div>
-                    <div class="">
-                        <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> كلمة المرور الجديدة
-                        </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder="الوظيفة" value={{ $user['name'] }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-                        </div>
-                    </div>
-                    <div class="">
-                        <label for="email" class="block text-sm mr-4 text-[#349A37] font-FlatBold">تأكيد كلمة المرور
-                            الجديدة
-                        </label>
-                        <div class="mt-1">
-                            <input type="text" name="" placeholder=" الاسم" value={{ $user['email'] }}
-                                class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-                        </div>
-                    </div>
-                </div>
-            </section>
+                </section>
+                <button hidden id="button_form"
+                    class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#4F37FD] hover:bg-[#101426] hover:text-white ">
+                    تعديل
+                </button>
+            </div>
         </form>
     </div>
 @endsection

@@ -22,13 +22,23 @@ class User extends Authenticatable
 
     protected $primaryKey = 'id';
     protected $fillable = [
+        'id_number',
         'name',
         'email',
         'password',
         'user_role',
+        'role',
         'phone',
-        'city_id',
-        'birth_date'
+        'photo',
+        'birth_date',
+        'city',
+        'jop',
+        'start_work_date',
+        'martial_status',
+        'bank_name',
+        'bank_branch',
+        'account_number',
+
 
     ];
 

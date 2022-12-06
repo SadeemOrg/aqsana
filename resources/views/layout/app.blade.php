@@ -120,7 +120,7 @@
 </head>
 
 <body class="" dir="rtl">
-    @include('layout.front-end.partial._Top-header-new')  
+    @include('layout.front-end.partial._Top-header-new')
     {{-- @include('layout.front-end.partial._header') --}}
     @include('layout.front-end.partial._left-sidebar')
 <div class="mt-4">
@@ -157,6 +157,21 @@
         integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+        <script>
+            function readURL(elementId, input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#'+elementId)
+                .attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+        console.log(input.files[0]);
+    }
+}
+        </script>
     <!--Paypal  -->
     <script
         src="https://www.paypal.com/sdk/js?client-id=AQrUNiqeaUR5hFL1CRzuAwZQCPQ2KD35hVAM0s_jIhw6mgydgbxvPFVfd3GQ7r3Z-wEyX8FPN3bxJyxL&currency=ILS">

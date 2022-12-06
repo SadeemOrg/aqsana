@@ -888,6 +888,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -915,7 +954,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       console.log("dkdehfj");
       axios.post("/myNotification").then(function (response) {
         _this2.myNotification = response.data;
-        console.log(_this2.myNotifications);
+        console.log("**********************************");
+
+        console.log(_this2.myNotification[0].Notifications.Notifications);
+        console.log("**********************************");
+
         // console.log(this.myNotification[0]);
         // console.log(( this.myNotification[0].Notifications.Notifications));
         //   console.log(( this.myNotification[0].done));
@@ -932,8 +975,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     sendNotifications: function sendNotifications() {
       axios.post("/sendNotification", {
         Notifications: this.Notifications,
+        date: this.date,
         user: this.selected.id
       });
+      this.myNotifications();
+      this.Notifications = [];
+      this.selected.id = 0;
+      alert("send done");
     },
 
     toggleTabs: function toggleTabs(tabNumber) {
@@ -942,7 +990,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     CompletNotifications: function CompletNotifications($event) {
       axios.post("/CompletNotifications", {
         Notificationsid: $event
-
       });
       this.myNotifications();
     }
@@ -998,7 +1045,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("\n             مهامي\n           ")]
+                    [_vm._v("\n            مهامي\n          ")]
                   )
                 ]
               ),
@@ -1025,7 +1072,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("\n             اضافة مهام\n           ")]
+                    [_vm._v("\n            اضافة مهام\n          ")]
                   )
                 ]
               )
@@ -1063,9 +1110,11 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        Notification.done
-                          ? _c("td", [_vm._v("yes")])
-                          : _c("td", [_vm._v("no")]),
+                        Notification.Notifications.date
+                          ? _c("td", [
+                              _vm._v(_vm._s(Notification.Notifications.date))
+                            ])
+                          : _c("td", [_vm._v("no Time")]),
                         _vm._v(" "),
                         Notification.done
                           ? _c("td", [
@@ -1078,7 +1127,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                complet\n               "
+                                    "\n                complet\n              "
                                   )
                                 ]
                               )
@@ -1098,11 +1147,7 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [
-                                  _vm._v(
-                                    "\n                 do\n               "
-                                  )
-                                ]
+                                [_vm._v("\n                do\n              ")]
                               )
                             ])
                       ]
@@ -1185,9 +1230,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                 " +
+                                "\n                " +
                                   _vm._s(user.name) +
-                                  "\n               "
+                                  "\n              "
                               )
                             ]
                           )
@@ -1198,6 +1243,33 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "md:w-2/3" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.date,
+                          expression: "date"
+                        }
+                      ],
+                      staticClass:
+                        "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                      attrs: { type: "date" },
+                      domProps: { value: _vm.date },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.date = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c("div", { staticClass: "md:w-2/3" }, [
                     _c("textarea", {
@@ -1242,7 +1314,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("\n               save\n             ")]
+                      [_vm._v("\n              save\n            ")]
                     )
                   ])
                 ]
@@ -1263,7 +1335,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", { staticStyle: { width: "70%" } }, [_vm._v("المهمة")]),
       _vm._v(" "),
-      _c("th", { staticStyle: { width: "20%" } }, [_vm._v("تم")]),
+      _c("th", { staticStyle: { width: "30%" } }, [_vm._v("الوقت")]),
       _vm._v(" "),
       _c("th", [_vm._v("تم")])
     ])
@@ -1279,7 +1351,7 @@ var staticRenderFns = [
           staticClass:
             "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
         },
-        [_vm._v("\n               المستخدم\n             ")]
+        [_vm._v("\n              المستخدم\n            ")]
       )
     ])
   },
@@ -1294,7 +1366,22 @@ var staticRenderFns = [
           staticClass:
             "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
         },
-        [_vm._v("\n               المهمة\n             ")]
+        [_vm._v("\n              التاريج\n            ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/3" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+        },
+        [_vm._v("\n              المهمة\n            ")]
       )
     ])
   }

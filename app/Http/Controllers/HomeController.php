@@ -22,6 +22,7 @@ use App\Models\Sector;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
@@ -32,6 +33,53 @@ class HomeController extends Controller
     {
         $user=Auth::user();
         return view('Pages.user.profile',compact('user'));
+    }
+    public function updateuser(Request $request)
+    {
+        $user = User::findOrFail(Auth::id());
+        // dd( $request->all());
+        $validatedData = $request->validate([
+            // 'name' => 'required|string|max:255',
+            // 'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            // 'phone' => 'required|string|max:255',
+            // 'image' => 'image'
+        ]);
+
+        $user->update([
+            'id_number' => $request->id_number,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'birth_date' => $request->birth_date,
+            'city' => $request->city,
+            'jop' => $request->jop,
+            'martial_status' => $request->martial_status,
+            'bank_name' => $request->bank_name,
+            'bank_branch' => $request->bank_branch,
+            'account_number' => $request->account_number,
+
+        ]);
+
+        // if ($request->photo) {
+        //     $user->photo = $request->photo->store('images', 'public');
+        // }
+        if ($request->password) {
+
+           if((Hash::check($request->password, $user->password)))
+           {
+            if($request->new_password==$request->Confirm_password)
+
+            $user->password = Hash::make($request->new_password);
+           }
+        }
+        if ($request->image) {
+            $user->photo = $request->image->store('images', 'public');
+        }
+// dd($user);
+
+        $user->save();
+
+        return redirect('/userprofile')->with('changes_success', 'success');
     }
     public function user()
     {
@@ -633,7 +681,6 @@ class HomeController extends Controller
     public function     getprojectDetailapi($id)
     {
         $project = DB::table('projects')->where('id', $id)->first();
-
         $goalsjson = $project->report_pictures;
 
         $pictures = json_decode($goalsjson, true);
