@@ -558,9 +558,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .m-auto{
   margin: auto;
 }
-.m-20{
-  margin: 5rem;
-}
 .mx-auto{
   margin-left: auto;
   margin-right: auto;
@@ -718,9 +715,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mr-3{
   margin-right: 0.75rem;
 }
-.mr-8{
-  margin-right: 2rem;
-}
 .block{
   display: block;
 }
@@ -865,9 +859,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-14{
   max-height: 3.5rem;
 }
-.max-h-\[100px\]{
-  max-height: 100px;
-}
 .min-h-full{
   min-height: 100%;
 }
@@ -978,9 +969,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-auto{
   width: auto;
-}
-.w-44{
-  width: 11rem;
 }
 .min-w-fit{
   min-width: -webkit-fit-content;
@@ -1311,9 +1299,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-0{
   border-width: 0px;
 }
-.border-2{
-  border-width: 2px;
-}
 .border-b-2{
   border-bottom-width: 2px;
 }
@@ -1371,14 +1356,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-\[\#CCDDFF\]{
   --tw-border-opacity: 1;
   border-color: rgb(204 221 255 / var(--tw-border-opacity));
-}
-.border-gray-50{
-  --tw-border-opacity: 1;
-  border-color: rgb(249 250 251 / var(--tw-border-opacity));
-}
-.border-black{
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 .border-b-\[\#349A37\]{
   --tw-border-opacity: 1;
