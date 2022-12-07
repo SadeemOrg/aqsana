@@ -3,7 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-
+use Illuminate\Support\Facades\Hash;
 class passwordRule implements Rule
 {
     /**
@@ -11,9 +11,11 @@ class passwordRule implements Rule
      *
      * @return void
      */
-    public function __construct()
+    protected $Oldpasw;
+
+    public function __construct($Oldpasw)
     {
-        //
+        $this->Oldpasw = $Oldpasw;
     }
 
     /**
@@ -25,7 +27,7 @@ class passwordRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return $value >= 1990 && $value <= date('Y');
+       return (Hash::check($value,$this->Oldpasw));
     }
 
     /**
@@ -35,6 +37,6 @@ class passwordRule implements Rule
      */
     public function message()
     {
-        return 'The jfjfjf error message.';
+        return 'كلمة المرور خاطئة';
     }
 }

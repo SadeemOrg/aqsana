@@ -122,7 +122,7 @@ Route::get('sendhtmlemail','HomeController@html_email');
 Route::get('sendattachmentemail','HomeController@attachment_email');
 
 
-Route::get('userprofile', [HomeController::class, 'userprofile'])->name('userprofile');
+Route::get('Admin/userprofile', [HomeController::class, 'userprofile'])->name('userprofile');
 
 
 Route::get('/send-notification', [NotificationController::class, 'sendOfferNotification']);
