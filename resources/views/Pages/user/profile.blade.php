@@ -42,7 +42,7 @@
                     <div class="relative">
                         <button type="submit"
                             class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#4F37FD] hover:bg-[#101426] hover:text-white ">
-                            تعديل
+                            حفظ
                         </button>
                         <svg class=" absolute top-5 right-4" width="17" height="17" viewBox="0 0 20 20"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
