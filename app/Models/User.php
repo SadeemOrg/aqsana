@@ -32,12 +32,13 @@ class User extends Authenticatable
         'photo',
         'birth_date',
         'city',
-        'jop',
+        'job',
         'start_work_date',
         'martial_status',
         'bank_name',
         'bank_branch',
         'account_number',
+        'bank_number'
 
 
     ];

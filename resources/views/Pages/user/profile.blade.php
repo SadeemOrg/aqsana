@@ -1,8 +1,9 @@
-@extends('layout.app', ['hasHeader' => true, 'hasFooter' => true, 'left_SideBar' => false])
+@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false, 'left_SideBar' => false])
 
 @section('content')
     @php
-        $newDate = date('d-m-Y', strtotime($user['birth_date']));
+        $newDate = date('Y-m-d', strtotime($user['birth_date']));
+        $StatWorknewDate = date('Y-m-d', strtotime($user['start_work_date']));
         // dd($userJob);
     @endphp
 
@@ -12,7 +13,7 @@
                 <p itemprop="name" class="font-FlatBold text-3xl text-center xl:text-right"> لوحة التحكم</p>
                 <div class="absolute border-b-[4px] pt-2 border-b-[#349A37]  w-28 hidden xl:block"></div>
             </div>
-            <button onclick="location.href='/'"
+            <button onclick="location.href='/Admin'"
                 class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">الذهاب
                 الى المنظومة</button>
         </div>
@@ -41,7 +42,7 @@
                     <div class="relative">
                         <button type="submit"
                             class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#4F37FD] hover:bg-[#101426] hover:text-white ">
-                            تعديل
+                            حفظ
                         </button>
                         <svg class=" absolute top-5 right-4" width="17" height="17" viewBox="0 0 20 20"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,6 +83,9 @@
                                 <input type="text" name="name" placeholder=" الاسم" value="{{ $user['name'] }}"
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
+                            @if ($errors->has('name'))
+                            <span class="text-red-700 ">{{ $errors->first('name') }}</span>
+                        @endif
                         </div>
                         <div class="">
                             <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الوظيفة </label>
@@ -99,6 +103,9 @@
                                 <input type="text" name="email" placeholder=" الاسم" value="{{ $user['email'] }}"
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
+                            @if ($errors->has('email'))
+                            <span class="text-red-700 ">{{ $errors->first('email') }}</span>
+                        @endif
                         </div>
                         <div class="">
                             <label for="phone" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم الهاتف
@@ -108,6 +115,9 @@
                                     value="{{ $user['phone'] ? $user['phone'] : '' }}"
                                     class="block md:min-w-[300px] w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
+                            @if ($errors->has('phone'))
+                            <span class="text-danger text-left">{{ $errors->first('phone') }}</span>
+                        @endif
                         </div>
                     </div>
                     <!--Second Dev -->
@@ -117,8 +127,8 @@
                             <label for="birth_date" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> تاريخ الميلاد
                             </label>
                             <div class="mt-1">
-                                <input type="text" name="birth_date" placeholder="الرجاء ادخال تاريخ الميلاد"
-                                    value="{{ $user['birth_date'] ? $newDate : '' }}"
+                                <input type="date" value={{ $newDate }}   name="birth_date" placeholder="الرجاء ادخال تاريخ الميلاد"
+
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
                         </div>
@@ -136,8 +146,8 @@
                                 بالجمعية
                             </label>
                             <div class="mt-1">
-                                <input type="text" name="start_work_date" placeholder=" الرجاء ادخال تاريخ بدء العمل"
-                                    value="{{ $user['start_work_date'] ? $user['start_work_date'] : '' }}"
+                                <input type="date" value={{ $StatWorknewDate }} name="start_work_date" placeholder="الرجاء ادخال تاريخ الميلاد"
+                                    {{-- value="{{ $user['start_work_date'] ? $StatWorknewDate : '' }}" --}}
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
                         </div>
@@ -159,9 +169,18 @@
                                 الاجتماعية
                             </label>
                             <div class="mt-1">
-                                <input type="text" name="martial_status" placeholder="الرجاء ادخال الحالة الاجتماعية"
+                                <select name="martial_status" id="martial_status"   class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                    <option @if ($user['martial_status']== null) selected @endif value="">الرجاء ادخال الحالة الاجتماعية</option>
+                                    <option @if ($user['martial_status']== '1') selected @endif value="1"> {{ __('single') }}</option>
+                                    <option @if ($user['martial_status']== '2') selected @endif value="2">{{ __('married') }}</option>
+                                    <option @if ($user['martial_status']== '3') selected @endif value="3">{{ __('separated') }}</option>
+                                    <option @if ($user['martial_status']== '4') selected @endif value="4"> {{ __('engaged') }}</option>
+                                    <option @if ($user['martial_status']== '5') selected @endif value="5">{{ __('divorced') }}</option>
+                                    <option @if ($user['martial_status']== '6') selected @endif value="6"> {{ __('widower') }}</option>
+                                  </select>
+                                {{-- <input type="text" name="martial_status" placeholder="الرجاء ادخال الحالة الاجتماعية"
                                     value="{{ $user['martial_status'] ? $user['martial_status'] : '' }}"
-                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4"> --}}
                             </div>
                         </div>
                     </div>
@@ -187,8 +206,17 @@
                             <label for="bank_branch" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم البنك
                             </label>
                             <div class="mt-1">
-                                <input type="text" name="bank_branch" placeholder="الرجاء ادخال رقم البنك"
-                                    value="{{ $user['bank_branch'] ? $user['bank_branch'] : 'الرجاء ادخال رقم البنك' }}"
+                                <input type="text" name="bank_number" placeholder="الرجاء ادخال رقم البنك"
+                                    value="{{ $user['bank_number'] ? $user['bank_number'] : 'الرجاء ادخال رقم البنك' }}"
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="bank_branch" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم الفرع
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="bank_branch" placeholder="الرجاء ادخال رقم الفرع"
+                                    value="{{ $user['bank_branch'] ? $user['bank_branch'] : 'الرجاء ادخال رقم الفرع' }}"
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
                         </div>
@@ -215,9 +243,12 @@
                                 الحالية
                             </label>
                             <div class="mt-1">
-                                <input type="password" name="password" placeholder="كلمة المرور الحالية"
+                                <input type="password" name="password" placeholder="كلمة المرور الحالية"  autocomplete="off"
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
+                            @if ($errors->has('password'))
+                            <span class="text-red-700 ">{{ $errors->first('password') }}</span>
+                        @endif
                         </div>
                         <div class="">
                             <label for="new_password" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> كلمة المرور
@@ -237,6 +268,9 @@
                                 <input type="password" name="Confirm_password" placeholder=" تأكيد كلمة المرور"
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
+                            @if ($errors->has('Confirm_password'))
+                            <span class="text-red-700 ">{{ $errors->first('Confirm_password') }}</span>
+                        @endif
                         </div>
                     </div>
                 </section>

@@ -26,11 +26,11 @@
     <span class="text-white sidebar-label">{{ __('Dashboard') }}</span>
 </router-link>
 
-<h3 onclick="location.href='/userprofile'"
-    class="flex items-center font-normal text-white mb-6 text-base no-underline ">
+<h3
+    class="flex items-center font-normal text-white mb-6 text-base no-underline 	 ">
     <?xml version="1.0" standalone="no"?>
     <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="20.000000pt" height="20.000000pt"
+    <svg class="cursor-pointer" version="1.0" xmlns="http://www.w3.org/2000/svg" width="20.000000pt" height="20.000000pt"
         viewBox="0 0 24.000000 24.000000" preserveAspectRatio="xMidYMid meet">
 
         <g transform="translate(0.000000,24.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -43,7 +43,7 @@
         </g>
     </svg>
 
-    <span class="sidebar-label m-2">{{ __('profile') }}</span>
+    <span class="sidebar-label m-2 cursor-pointer"   onclick="location.href='/Admin/userprofile'">{{ __('profile') }}</span>
 </h3>
 @if (\Laravel\Nova\Nova::availableDashboards(request()))
     <ul class="list-reset mb-8">

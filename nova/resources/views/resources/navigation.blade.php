@@ -8,7 +8,7 @@
         </svg>
 
 
-        <span     class="sidebar-label">{{ __('Resources') }}</span>
+        <span     class="sidebar-label cursor-pointer">{{ __('Resources') }}</span>
     </h3>
 
 
@@ -28,12 +28,12 @@
         //   dd($navigation);
           @endphp
               @foreach ($navigation as $group => $resources)
-        <details class="mr-2"  onclick="closeAll(thisindex(this));">
+        <details class="mr-2 "  onclick="closeAll(thisindex(this));">
 
 
             @if (count($groups) > 1)
 
-                <summary style="line-height: 2rem/* 40px */; font-weight: 700;"  class="ml-8 mb-4 text-base text-white uppercase tracking-wide ">
+                <summary style="line-height: 2rem/* 40px */; font-weight: 700; "  class="ml-8 mb-4 text-base text-white uppercase tracking-wide cursor-pointer">
 
                     {{ $group }}
                 </summary>
