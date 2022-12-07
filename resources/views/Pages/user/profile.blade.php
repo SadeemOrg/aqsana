@@ -12,7 +12,7 @@
                 <p itemprop="name" class="font-FlatBold text-3xl text-center xl:text-right"> لوحة التحكم</p>
                 <div class="absolute border-b-[4px] pt-2 border-b-[#349A37]  w-28 hidden xl:block"></div>
             </div>
-            <button onclick="location.href='/'"
+            <button onclick="location.href='/Admin'"
                 class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">الذهاب
                 الى المنظومة</button>
         </div>
@@ -82,6 +82,9 @@
                                 <input type="text" name="name" placeholder=" الاسم" value="{{ $user['name'] }}"
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
+                            @if ($errors->has('name'))
+                            <span class="text-danger text-left">{{ $errors->first('name') }}</span>
+                        @endif
                         </div>
                         <div class="">
                             <label for="job" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الوظيفة </label>
@@ -108,6 +111,9 @@
                                     value="{{ $user['phone'] ? $user['phone'] : '' }}"
                                     class="block md:min-w-[300px] w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
+                            @if ($errors->has('phone'))
+                            <span class="text-danger text-left">{{ $errors->first('phone') }}</span>
+                        @endif
                         </div>
                     </div>
                     <!--Second Dev -->
