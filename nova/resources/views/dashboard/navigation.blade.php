@@ -27,28 +27,20 @@
 </router-link>
 
 <h3
-    class="flex items-center font-normal text-white mb-6 text-base no-underline 	 ">
+    class="flex items-center font-normal text-white mb-6 text-base no-underline cursor-pointer hover:text-black	 ">
     <?xml version="1.0" standalone="no"?>
     <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-    <svg class="cursor-pointer" version="1.0" xmlns="http://www.w3.org/2000/svg" width="20.000000pt" height="20.000000pt"
-        viewBox="0 0 24.000000 24.000000" preserveAspectRatio="xMidYMid meet">
+    <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.5 0.000976562C5.59716 0.000976562 0 5.59729 0 12.501C0 19.4047 5.59661 25.001 12.5 25.001C19.4039 25.001 25 19.4047 25 12.501C25 5.59729 19.4039 0.000976562 12.5 0.000976562ZM12.5 3.73862C14.7841 3.73862 16.635 5.59015 16.635 7.87326C16.635 10.1569 14.7841 12.0079 12.5 12.0079C10.217 12.0079 8.36609 10.1569 8.36609 7.87326C8.36609 5.59015 10.217 3.73862 12.5 3.73862ZM12.4973 21.7328C10.2192 21.7328 8.13274 20.9031 6.52343 19.5299C6.1314 19.1955 5.90519 18.7051 5.90519 18.1906C5.90519 15.8751 7.77914 14.022 10.0951 14.022H14.906C17.2225 14.022 19.0893 15.8751 19.0893 18.1906C19.0893 18.7057 18.8642 19.1949 18.4716 19.5293C16.8629 20.9031 14.7759 21.7328 12.4973 21.7328Z" fill="#B2C0D0"/>
+        </svg>
+        
 
-        <g transform="translate(0.000000,24.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-            <path d="M90 195 c-15 -18 -10 -45 13 -59 34 -22 73 27 47 59 -16 19 -44 19
-    -60 0z" />
-            <path
-                d="M105 89 c-4 -6 -14 -8 -22 -5 -22 9 -53 -12 -53 -34 0 -18 7 -20 90
-    -20 83 0 90 2 90 20 0 22 -31 43 -53 34 -8 -3 -18 -1 -22 5 -8 14 -22 14 -30
-    0z" />
-        </g>
-    </svg>
-
-    <span class="sidebar-label m-2 cursor-pointer"   onclick="location.href='/Admin/userprofile'">{{ __('profile') }}</span>
+    <span class="sidebar-label m-2 "   onclick="location.href='/Admin/userprofile'">{{ __('profile') }}</span>
 </h3>
 @if (\Laravel\Nova\Nova::availableDashboards(request()))
     <ul class="list-reset mb-8">
         @foreach (\Laravel\Nova\Nova::availableDashboards(request()) as $dashboard)
-            <li class="leading-wide mb-4 ml-8 text-sm">
+            <li class="leading-wide mb-4 ml-8 text-sm ">
                 <router-link
                     :to='{
                         name: "dashboard.custom",
@@ -57,7 +49,7 @@
                         },
                         query: @json($dashboard->meta()),
                     }'
-                    exact class="text-white no-underline dim">
+                    exact class="text-white no-underline dim hover:text-black">
                     {{ $dashboard::label() }}
                 </router-link>
             </li>
