@@ -47,9 +47,11 @@
                 <p class="font-FlatBold text-[17px] text-[#101426] ">Copy from orginal Bill</p>
             @endif
         </div>
-        <div class="flex flex-row items-center xl:justify-between justify-start gap-x-10 max-w-xl mt-4">
-            <p class="text-[18px] font-FlatBold text-[#101426]">for :</p>
-            <span class="font-FlatBold text-[#6B7280] mx-1 text-[17px]"></span>
+        <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 max-w-xl mt-4">
+            <p class="text-[18px] font-FlatBold text-[#101426]">لحساب :</p>
+            <span class="font-FlatBold text-[#6B7280]  text-[18px] text-right">
+                {{ $Transaction->TelephoneDirectory->name }}
+            </span>
         </div>
         <p class="font-FlatBold text-[#101426] mt-3 text-[17px]">pay done by:
             <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $Transaction->name }} </span>
