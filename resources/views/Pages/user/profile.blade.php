@@ -169,9 +169,18 @@
                                 الاجتماعية
                             </label>
                             <div class="mt-1">
-                                <input type="text" name="martial_status" placeholder="الرجاء ادخال الحالة الاجتماعية"
+                                <select name="martial_status" id="martial_status"   class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                    <option @if ($user['martial_status']== null) selected @endif value="">الرجاء ادخال الحالة الاجتماعية</option>
+                                    <option @if ($user['martial_status']== '1') selected @endif value="1"> {{ __('single') }}</option>
+                                    <option @if ($user['martial_status']== '2') selected @endif value="2">{{ __('married') }}</option>
+                                    <option @if ($user['martial_status']== '3') selected @endif value="3">{{ __('separated') }}</option>
+                                    <option @if ($user['martial_status']== '4') selected @endif value="4"> {{ __('engaged') }}</option>
+                                    <option @if ($user['martial_status']== '5') selected @endif value="5">{{ __('divorced') }}</option>
+                                    <option @if ($user['martial_status']== '6') selected @endif value="6"> {{ __('widower') }}</option>
+                                  </select>
+                                {{-- <input type="text" name="martial_status" placeholder="الرجاء ادخال الحالة الاجتماعية"
                                     value="{{ $user['martial_status'] ? $user['martial_status'] : '' }}"
-                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4"> --}}
                             </div>
                         </div>
                     </div>
@@ -234,7 +243,7 @@
                                 الحالية
                             </label>
                             <div class="mt-1">
-                                <input type="password" name="password" placeholder="كلمة المرور الحالية"
+                                <input type="password" name="password" placeholder="كلمة المرور الحالية"  autocomplete="off"
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
                             @if ($errors->has('password'))
