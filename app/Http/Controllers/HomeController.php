@@ -372,7 +372,8 @@ class HomeController extends Controller
 
     public function bills($id)
     {
-        $Transaction =  Transaction::where("id", $id)->first();
+        $Transaction =  Transaction::where("id", $id)->with('TelephoneDirectory')->first();
+        dd($Transaction);
         $original = 0;
 
         return view('Pages.Bills.Bills', compact('Transaction', 'original'));
