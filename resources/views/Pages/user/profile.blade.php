@@ -1,8 +1,9 @@
-@extends('layout.app', ['hasHeader' => true, 'hasFooter' => true, 'left_SideBar' => false])
+@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false, 'left_SideBar' => false])
 
 @section('content')
     @php
-        $newDate = date('d-m-Y', strtotime($user['birth_date']));
+        $newDate = date('Y-m-d', strtotime($user['birth_date']));
+        $StatWorknewDate = date('Y-m-d', strtotime($user['start_work_date']));
         // dd($userJob);
     @endphp
 
@@ -83,7 +84,7 @@
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
                             @if ($errors->has('name'))
-                            <span class="text-danger text-left">{{ $errors->first('name') }}</span>
+                            <span class="text-red-700 ">{{ $errors->first('name') }}</span>
                         @endif
                         </div>
                         <div class="">
@@ -102,6 +103,9 @@
                                 <input type="text" name="email" placeholder=" الاسم" value="{{ $user['email'] }}"
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
+                            @if ($errors->has('email'))
+                            <span class="text-red-700 ">{{ $errors->first('email') }}</span>
+                        @endif
                         </div>
                         <div class="">
                             <label for="phone" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم الهاتف
@@ -123,8 +127,8 @@
                             <label for="birth_date" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> تاريخ الميلاد
                             </label>
                             <div class="mt-1">
-                                <input type="text" name="birth_date" placeholder="الرجاء ادخال تاريخ الميلاد"
-                                    value="{{ $user['birth_date'] ? $newDate : '' }}"
+                                <input type="date" value={{ $newDate }}   name="birth_date" placeholder="الرجاء ادخال تاريخ الميلاد"
+
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
                         </div>
@@ -142,8 +146,8 @@
                                 بالجمعية
                             </label>
                             <div class="mt-1">
-                                <input type="text" name="start_work_date" placeholder=" الرجاء ادخال تاريخ بدء العمل"
-                                    value="{{ $user['start_work_date'] ? $user['start_work_date'] : '' }}"
+                                <input type="date" value={{ $StatWorknewDate }} name="start_work_date" placeholder="الرجاء ادخال تاريخ الميلاد"
+                                    {{-- value="{{ $user['start_work_date'] ? $StatWorknewDate : '' }}" --}}
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
                         </div>
@@ -193,8 +197,17 @@
                             <label for="bank_branch" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم البنك
                             </label>
                             <div class="mt-1">
-                                <input type="text" name="bank_branch" placeholder="الرجاء ادخال رقم البنك"
-                                    value="{{ $user['bank_branch'] ? $user['bank_branch'] : 'الرجاء ادخال رقم البنك' }}"
+                                <input type="text" name="bank_number" placeholder="الرجاء ادخال رقم البنك"
+                                    value="{{ $user['bank_number'] ? $user['bank_number'] : 'الرجاء ادخال رقم البنك' }}"
+                                    class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="bank_branch" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> رقم الفرع
+                            </label>
+                            <div class="mt-1">
+                                <input type="text" name="bank_branch" placeholder="الرجاء ادخال رقم الفرع"
+                                    value="{{ $user['bank_branch'] ? $user['bank_branch'] : 'الرجاء ادخال رقم الفرع' }}"
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
                         </div>
@@ -224,6 +237,9 @@
                                 <input type="password" name="password" placeholder="كلمة المرور الحالية"
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
+                            @if ($errors->has('password'))
+                            <span class="text-red-700 ">{{ $errors->first('password') }}</span>
+                        @endif
                         </div>
                         <div class="">
                             <label for="new_password" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> كلمة المرور
@@ -243,6 +259,9 @@
                                 <input type="password" name="Confirm_password" placeholder=" تأكيد كلمة المرور"
                                     class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                             </div>
+                            @if ($errors->has('Confirm_password'))
+                            <span class="text-red-700 ">{{ $errors->first('Confirm_password') }}</span>
+                        @endif
                         </div>
                     </div>
                 </section>
