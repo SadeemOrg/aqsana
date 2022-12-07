@@ -85,7 +85,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                 Project::class,
 
                             ]),
-                            Boolean::make(__('Extra link'),'extra_link')
+                            Boolean::make(__('external link'),'external_link')
                         ])->title('name'),
                         Image::make(__('Logo'), 'logo')->disk('public'),
                         Image::make(__('qawafelLogo'), 'qawafelLogo')->disk('public'),
