@@ -53,7 +53,7 @@ class HomeController extends Controller
             'phone' => $request->phone,
             'birth_date' => $request->birth_date,
             'city' => $request->city,
-            'jop' => $request->jop,
+            'job' => $request->job,
             'martial_status' => $request->martial_status,
             'bank_name' => $request->bank_name,
             'bank_branch' => $request->bank_branch,
