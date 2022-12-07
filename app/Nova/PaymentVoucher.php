@@ -241,7 +241,7 @@ class PaymentVoucher extends Resource
             if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
                 $telfone=  TelephoneDirectory::create([
                         'name' => $request->add_user[0]['attributes']['name'],
-                        'type' => '2',
+                        'type' => '8',
                         'phone_number' =>  $request->add_user[0]['attributes']['phone']
                     ],
                     );
