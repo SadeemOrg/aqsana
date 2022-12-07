@@ -373,7 +373,7 @@ class HomeController extends Controller
     public function bills($id)
     {
         $Transaction =  Transaction::where("id", $id)->with('TelephoneDirectory')->first();
-        dd($Transaction);
+        // dd($Transaction->TelephoneDirectory->name);
         $original = 0;
 
         return view('Pages.Bills.Bills', compact('Transaction', 'original'));
