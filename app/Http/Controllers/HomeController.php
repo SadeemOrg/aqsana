@@ -52,9 +52,11 @@ class HomeController extends Controller
             'name.min' => 'الاسم يجب ان يكون على الاقل 3 حروف',
             'name.max' => 'الاسم لا يجب ان يكون فوق ال 255 حرف',
             'email.required' => 'الرجاء ادخال ايميل',
+            'email.email'=>"يجب ان يكون الايميل صحيح",
             'email.unique' => 'يجب ان يكون الايميل غير مكرر',
             'phone.required' => 'ارجاء ادخال رقم الهاتف',
             'phone.digits_between' => 'الرجاء ادخال رقم الهاتف بشكل صحيح. ',
+            'Confirm_password.same'=>"كلمة السر الجديده غير متطابقة"
 
 
 

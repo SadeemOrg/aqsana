@@ -36,7 +36,14 @@ jQuery(document).ready(function(){
     })
     //End text accodrion text + Start tabs system
 
+    // start with Tabs in Profile Page
 
+    $('.tabs-Number .tabs').click(function(){
+      $(this).addClass('active').siblings().removeClass('active');
+      $('.tabs-container .tab').hide()
+      $( '.' + $(this).data('tab')).fadeIn()
+
+    })
     // Start goals in about us page
     $('.goal-title').click(function() {
         $('.goal-text').not($(this).siblings('.goal-text')).slideUp();
