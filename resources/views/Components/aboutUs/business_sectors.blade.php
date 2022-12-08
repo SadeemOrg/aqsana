@@ -17,27 +17,32 @@
         {{ $sub_text_workplace }}
     </p>
     <!-- first card -->
-    @if (!empty($workplace))
 
-        @foreach ($workplace as $oneworkplace)
+
+        @foreach ($sectors as $sector)
             <div itemscope itemtype="https://schema.org/LocalBusiness"
                 class="flex flex-col pt-16 lg:gap-y-28 gap-y-12 mb-12 lg:mb-32">
                 <div class=" shaddow px-6 rounded-[16px]">
                     <div class="flow-root rounded-lg bg-[#FFFFFF]  pb-8 ">
                         <div class="-mt-6">
-                            <img itemprop="image" src="{{ asset($oneworkplace['data']['main_img_workplace']) }}" alt="finance_Brand"
+                            @php
+                            $img ='storage/' . $sector->img;
+
+                            // dd($sector['data']['text_bottom_workplace_']);
+                            @endphp
+                            <img itemprop="image" src="{{ asset($img) }}" alt="finance_Brand"
                                 class="w-16 h-16 mr-6">
                             <h3 itemprop="name" class="mt-8 text-lg font-FlatBold text-[#101426]">
-                                {{ $oneworkplace['data']['text_main_workplace'] }}
+                                {{ $sector->text }}
                             </h3>
                             <p itemprop="description"
                                 class="mt-4 text-sm text-justify md:text-right md:text-[16px] font-noto_Regular text-[#6B7280] max-w-6xl">
-                                {{ $oneworkplace['data']['sup_text_workplace'] }}
+                             {{ $sector->sup_text }}
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         @endforeach
-    @endif
+
 </div>
