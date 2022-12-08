@@ -40,7 +40,7 @@
 
             @foreach ($sectors as $sector)
             @php
-            $img = $sector->img;
+            $img ='storage/' . $sector->img;
 
             // dd($sector['data']['text_bottom_workplace_']);
             @endphp
