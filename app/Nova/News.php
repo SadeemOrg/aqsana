@@ -251,7 +251,7 @@ class News extends Resource
                 ->disk('public'),
 
             Text::make(__('VIDEO LINK'), 'video_link'),
-            Image::make(__('video_img_cover'), 'video_link_cover')->disk('public')->prunable(),
+            Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
             // Date::make('date', 'new_date'),
             Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y')->sortable(),
 
