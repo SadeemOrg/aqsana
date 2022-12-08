@@ -581,12 +581,16 @@ class HomeController extends Controller
 
     public function sector($sector)
     {
-        // dd($sector);mainType
+        // dd($sector);
         $mainType = "قطاع";
-        $type = $sector;
+        $sectorname = Sector::find($sector);
+        $type = $sectorname->text;
+// dd($type);
+
         $news = News::query()->where('sector', $sector)
 
             ->paginate(9);
+            // dd($news);
 
         return view('Pages.news-page', compact('news', 'mainType', 'type'));
         // foreach ($News as $key => $value) {

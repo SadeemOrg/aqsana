@@ -22,13 +22,13 @@ class Notification extends Resource
      *
      * @var string
      */
-    public static function availableForNavigation(Request $request)
-    {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Notificationparmation",  $request->user()->userrole()) )){
-            return true;
-        }
-       else return false;
-    }
+    // public static function availableForNavigation(Request $request)
+    // {
+    //     if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Notificationparmation",  $request->user()->userrole()) )){
+    //         return true;
+    //     }
+    //    else return false;
+    // }
     public static $title = 'id';
     public static function label()
     {
@@ -38,7 +38,7 @@ class Notification extends Resource
     {
         return __('Notification');
     }
-    public static $displayInNavigation = false;
+    public static $displayInNavigation = false  ;
     public static $priority = 1;
     /**
      * The columns that should be searched.

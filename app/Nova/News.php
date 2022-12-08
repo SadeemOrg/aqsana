@@ -20,6 +20,7 @@ use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Laravel\Nova\Fields\Date;
 use Illuminate\Support\Facades\DB;
 use Acme\MultiselectField\Multiselect;
+use App\Models\Sector;
 use Laravel\Nova\Fields\Boolean;
 use App\Nova\Actions\PostNews;
 use AwesomeNova\Cards\FilterCard;
@@ -104,15 +105,14 @@ class News extends Resource
             Textarea::make(__('description'), 'description'),
             Select::make(__('SECTOR'), 'sector')
                 ->options(function () {
-                    $sectors = nova_get_setting('workplace', 'default_value');
+                    $sectors = Sector::all();
                     $user_type_admin_array =  array();
-                    if ($sectors != "default_value") {
                         foreach ($sectors as $sector) {
-                            $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
+                            $user_type_admin_array += [$sector['id'] => ($sector['text'] )];
                         }
                         return  $user_type_admin_array;
-                    }
-                }),
+
+                })->displayUsingLabels(),
 
             Select::make(__('have multi category'), "mult", function () {
                 $total =  json_decode($this->main_type);
