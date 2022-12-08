@@ -102,7 +102,7 @@
         {{-- <a target="_self" href="/Qawafel-Alaqsa">
                         <img class="w-23 h-23" src="/{{ $img }}" />
                     </a> --}}
-        <a class=" flex flex-row items-center justify-center h-24 w-32 cursor-pointer" onclick="location.href='/'">
+        <a class=" flex flex-row items-center justify-center h-24 w-32 cursor-pointer" onclick="location.href='/Qawafel-Alaqsa'">
             <img class="h-full  " src="/{{ $imgRight }}" alt="">
         </a>
     </div>
