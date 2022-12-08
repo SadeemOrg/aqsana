@@ -410,8 +410,8 @@ class HomeController extends Controller
 
         $partners = nova_get_setting('partner', 'default_value');
         // $partners = json_decode($partnerjson);
-
-        $sectors = nova_get_setting('workplace', 'default_value');
+        $sectors=Sector::all();
+        // $sectors = nova_get_setting('workplace', 'default_value');
         $type = 2;
         // $sectors= json_decode($sectorsjson);
 

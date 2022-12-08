@@ -9,9 +9,9 @@
         @if(is_array($partners)==true && !empty($partners))
         @foreach ($partners as $partner)
         @if (empty($partner['data']['link']))
-        <img  src="{{ asset($partner['data']['image']) }}" alt="emar_deen" class="max-w-[140px] max-h-[135px]" />    
+        <img  src="{{ asset($partner['data']['image']) }}" alt="emar_deen" class="max-w-[140px] max-h-[135px]" />
         @else
-        <img  src="{{ asset($partner['data']['image']) }}" alt="emar_deen" class="cursor-pointer max-w-[140px] max-h-[135px]" 
+        <img  src="{{ asset($partner['data']['image']) }}" alt="emar_deen" class="cursor-pointer max-w-[140px] max-h-[135px]"
              onclick="location.href='{{ $partner['data']['link'] }}'" />
         @endif
         @endforeach
@@ -34,32 +34,36 @@
     <div class="mt-12">
         <div class="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             <!-- first card -->
-            @if(!empty($news) && is_array($sectors)==true)
+            @php
+                // dd($sectors);
+            @endphp
+
             @foreach ($sectors as $sector)
             @php
-            $img = $sector['data']['main_img_workplace'];
+            $img = $sector->img;
+
             // dd($sector['data']['text_bottom_workplace_']);
             @endphp
             <div class="pt-6 shaddow relative pb-[72px] overflow-hidden rounded-[16px]">
                 <div class="flow-root rounded-lg bg-[#FFFFFF] px-6 pb-8 ">
                     <!-- <div class=""> -->
                         <img src="{{ asset($img) }}" alt="Brand_icon" class="w-16 h-16">
-                        <h3 class="mt-8 text-lg font-FlatBold text-[#101426]">{{ $sector['data']['text_main_workplace']
+                        <h3 class="mt-8 text-lg font-FlatBold text-[#101426]">{{ $sector->text
                             }}</h3>
                         <p class="mt-4 text-[16px] font-noto_Regular text-[#6B7280]">
-                            {{Illuminate\Support\Str::limit($sector['data']['sup_text_workplace'],200) }}
+                            {{Illuminate\Support\Str::limit($sector->sup_text,200) }}
                         </p>
                     <!-- </div> -->
                 </div>
                 @php
-                $link = str_replace(" ", "-", $sector['data']['text_main_workplace']);
+                $link = str_replace(" ", "-", $sector->id);
 
                 @endphp
                 <div
                     class="h-[72px] absolute bottom-0 right-0 left-0 w-full flex flex-row justify-between items-center px-6 cursor-pointer bg-[#F9FAFB]">
                     <a class="reltive link-wrap font-FlatBold text-[#349A37] text-base h-full w-full flex flex-row justify-between items-center"
-                    onclick="location.href='{{ route('sector', ['sector'=>$sector['data']['searsh_text_workplace']]) }}'">
-                        <span class="relative z-10">{{ $sector['data']['text_bottom_workplace_'] }}</span>
+                    onclick="location.href='{{ route('sector', ['id'=>$sector->id]) }}'">
+                        <span class="relative z-10">عرض المزيد</span>
                         <svg class="relative z-10" width="11" height="17" viewBox="0 0 11 17" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -70,7 +74,7 @@
                 </div>
             </div>
             @endforeach
-            @endif
+
         </div>
     </div>
 </div>

@@ -61,9 +61,7 @@ Route::get('/donation', [HomeController::class, 'donations'])->name('donations')
 Route::get('/donation/{id}', [HomeController::class, 'donation'])->name('donation');
 
 
-
-
-Route::get('/sector/{sector}', [HomeController::class, 'sector'])->name('sector');
+Route::get('/sector/{id}', [HomeController::class, 'sector'])->name('sector');
 Route::get('/Qawafel-Alaqsa', [HomeController::class, 'qawafel'])->name('qawafel');
 
 Route::get('/contact-us',[HomeController::class,'contactus']);
