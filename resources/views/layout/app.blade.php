@@ -13,7 +13,7 @@
     <link rel="amphtml" href="{{ nova_get_setting('Site_link', '') }}">
     <base href="{{ nova_get_setting('Site_link', '') }}" target="_blank">
 
-
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.4/dist/flowbite.min.css" />
     <link rel="canonical" href="https://aqsana.org/" />
     <meta rel="sitemap" type="application/xml"
         content="https://www.google.com/maps/place/Salah+ad-Din%2FEntry/@32.1287772,34.9666098,15z/data=!4m13!1m7!3m6!1s0x151d30a07d1c8d37:0xe4ff2734981fb335!2sKafr+Bara,+Israel!3b1!8m2!3d32.130911!4d34.970108!3m4!1s0x151d30a7771ae475:0x3a3ffa51d8ced657!8m2!3d32.13195!4d34.965225" />
@@ -156,7 +156,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"
         integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+        
+        <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
     <script>
         function readURL(elementId, input) {
             if (input.files && input.files[0]) {
@@ -711,28 +712,6 @@
                 });
             }
         });
-        // $(".ProfileForm").submit(function(e) {
-        //     e.preventDefault();
-        //     var $name = $('input[name="name"]').val();
-        //     var $img = $('input[name="image"]').val();
-        //     var $email = $('input[name="email"]').val();
-        //     var $jop = $('input[name="jop"]').val();
-        //     var $phone = $('input[name="phone"]').val();
-        //     var $birth_date = $('input[name="birth_date"]').val();
-        //     var $id_number = $('input[name="id_number"]').val();
-        //     var $start_work_date = $('input[name="start_work_date"]').val();
-        //     var $city = $('input[name="city"]').val();
-        //     var $martial_status = $('input[name="martial_status"]').val();
-        //     var $bank_name = $('input[name="bank_name"]').val();
-        //     var $bank_branch = $('input[name="bank_branch"]').val();
-        //     var $account_number = $('input[name="account_number"]').val();
-        //     var $password = $('input[name="password"]').val();
-        //     var $new_password = $('input[name="bank_branch"]').val();
-        //     var $Confirm_password = $('input[name="bank_branch"]').val();
-
-
-
-        // })
         $(".contactUsForm").submit(function(e) {
             e.preventDefault()
             var $name = $('input[name="name"]').val();

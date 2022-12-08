@@ -30,13 +30,13 @@
                 <div class="border-b border-gray-200">
                     <nav class="-mb-px flex" aria-label="Tabs">
                         <a href="#" target="_self" data-tab="tab-1"
-                            class="tabs border-transparent text-[#101426] hover:text-[#349A37] hover:border-[1px] hover:border-b-[#349A37] w-1/2 sm:w-1/3 py-4 px-1 text-center sm:text-right border-b-2 font-FlatBold text-[16px]">التفاصيل
+                            class="tabs border-transparent text-[#101426] hover:text-[#349A37] hover:border-[1px] hover:border-b-[#349A37] w-1/2 sm:w-1/3 py-4 px-1 text-center sm:text-right border-b-2 font-FlatBold text-sm sm:text-[16px]">التفاصيل
                             الشخصية</a>
                         <a href="#" target="_self" data-tab="tab-2"
-                            class="tabs border-transparent text-[#101426] hover:text-[#349A37] hover:border-[1px] hover:border-b-[#349A37] w-1/2 sm:w-1/3 py-4 px-1 text-center sm:text-right border-b-2 font-FlatBold text-[16px]">ساعات
+                            class="tabs border-transparent text-[#101426] hover:text-[#349A37] hover:border-[1px] hover:border-b-[#349A37] w-1/2 sm:w-1/3 py-4 px-1 text-center sm:text-right border-b-2 font-FlatBold text-sm sm:text-[16px]">ساعات
                             العمل</a>
                         <a href="#" target="_self" data-tab="tab-3"
-                            class="tabs border-transparent text-[#101426] hover:text-[#349A37] hover:border-[1px] hover:border-b-[#349A37] w-1/2 sm:w-1/3 py-4 px-1 text-center sm:text-right border-b-2 font-FlatBold text-[16px]">ساعات
+                            class="tabs border-transparent text-[#101426] hover:text-[#349A37] hover:border-[1px] hover:border-b-[#349A37] w-1/2 sm:w-1/3 py-4 px-1 text-center sm:text-right border-b-2 font-FlatBold text-sm sm:text-[16px]">ساعات
                             عمل الموظفين</a>
                     </nav>
                 </div>
@@ -109,7 +109,6 @@
                                     <input type="text" name="job" placeholder=" الوظيفة"
                                         value="{{ $user['job'] ? $user['job'] : '' }}"
                                         class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-
                                 </div>
                             </div>
                             <div class="">
@@ -147,7 +146,7 @@
                                 <div class="mt-1">
                                     <input type="date" value={{ $newDate }} name="birth_date"
                                         placeholder="الرجاء ادخال تاريخ الميلاد"
-                                        class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 text-right ">
+                                        class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 ">
                                 </div>
                             </div>
                             <div class="">
@@ -305,12 +304,135 @@
                             </div>
                         </div>
                     </section>
-                    {{-- <button hidden id="button_form" type="submit"
-                    class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#4F37FD] hover:bg-[#101426] hover:text-white ">
-                    تعديل
-                </button> --}}
                 </div>
             </form>
+            <!--End Form -->
+            <!--start Hourly work Time -->
+            <div class="tab tab-2 ">
+                <!--Perosonal Information -->
+                <div class="flex sm:flex-row flex-col gap-y-4 sm:gap-y-0 items-center justify-between mt-8">
+                    <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات العمل</p>
+                    <div class="flex flex-row items-center  gap-x-2 ">
+
+                        <!--Date Picker -->
+                        <div dir="ltr" class="relative">
+                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="#349A37"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <input datepicker type="text"
+                                class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
+                                placeholder="من">
+                        </div>
+                        <div dir="ltr" class="relative">
+                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="#349A37"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <input datepicker type="text"
+                                class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
+                                placeholder="الى">
+                        </div>
+                        <!--end Picker -->
+                        <div class="-mt-2">
+                            <button type="submit"
+                                class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                                تطبيق
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--End Perosonal Information -->
+                <!--Start Timer -->
+                <div class="mt-8 flex flex-row items-center justify-center">
+                    <div class="w-60 h-60 rounded-[50%] bg-[#4F37FD] relative">
+                        <p class="absolute bottom-24 left-[25%] text-white text-3xl">00:00:00</p>
+                        <svg class="absolute bottom-5 left-[45%] " width="46" height="54" viewBox="0 0 46 54"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.151367 54V0L45.8482 27.0013L0.151367 54Z" fill="white" />
+                        </svg>
+
+                    </div>
+                </div>
+                <!--End Timer -->
+                <!--Start with Table -->
+                @include('Components.User.UserTable',['tab' => '2'])
+                <!--End with Table -->
+
+                <!--End Hourly work Time -->
+            </div>
+            <!--End Hourly work Time -->
+            <!--start Manger Hourly work Time -->
+            <div class="tab tab-3 ">
+                <!--Perosonal Information -->
+                <div class="flex sm:flex-row flex-col gap-y-4 sm:gap-y-0 items-center justify-between mt-8">
+                    <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات عمل الموظفين</p>
+                    <div class="flex flex-row items-center  gap-x-2 ">
+                        <div class="mt-1">
+                            <input type="text" name="name" placeholder=" اسم الموظف" value=""
+                                class="block md:min-w-[235px] w-full max-h-[42px] border-[#349A37] border rounded-[60px] sm:text-sm p-4 placeholder-[#349A37]">
+                        </div>
+                        <!--Date Picker -->
+                        <div dir="ltr" class="relative">
+                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="#349A37"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <input datepicker type="text"
+                                class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
+                                placeholder="من">
+                        </div>
+                        <div dir="ltr" class="relative">
+                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="#349A37"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <input datepicker type="text"
+                                class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
+                                placeholder="الى">
+                        </div>
+                        <!--end Picker -->
+                        <div class="-mt-2">
+                            <button type="submit"
+                                class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                                تطبيق
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--End Perosonal Information -->
+                <!--from Date -->
+                <div class="mt-8 flex flex-row items-center justify-start gap-x-3">
+            <p class="text-[#8A8B9F] text-sm ">من تاريخ : 12-5-2022</p>
+            <p class="text-[#8A8B9F] text-sm ">الى تاريخ : 12-5-2022</p>
+
+                </div>
+                <!--End Date -->
+                <!--Start with Table -->
+                @include('Components.User.UserTable', ['tab' => '3'])
+                <!--End with Table -->
+
+                <!--End Hourly work Time -->
+            </div>
+            <!--End Manger Hourly work Time -->
+
+
         </div>
     </div>
 @endsection
