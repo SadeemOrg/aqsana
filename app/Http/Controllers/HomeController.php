@@ -26,11 +26,17 @@ use App\Rules\passwordRule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
     public function StartTimerWorkHours(Request $request)
     {
+        $mytime = Carbon::now();
+        // $date = date('Format String', time());
+        // $mytime = Carbon::now();
+        dd($mytime);
+        // dd("hi");
         dd($request->all());
     }
 
