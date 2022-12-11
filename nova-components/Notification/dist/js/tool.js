@@ -927,6 +927,130 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -934,7 +1058,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       users: [],
       myNotification: [],
       openTab: 1,
-      myNotificationT: []
+      Admin: 1,
+      myNotificationT: [],
+      allNotifications: []
     };
   },
 
@@ -944,19 +1070,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.post("/users").then(function (response) {
         _this.users = response.data;
-        // console.log(this.users);
+        // console.log("user admin", this.users);
+      });
+    },
+    UserAdmin: function UserAdmin() {
+      var _this2 = this;
+
+      axios.post("/UserAdmin").then(function (response) {
+        console.log("start");
+        console.log(_this2.Admin);
+        _this2.Admin = response.data;
+
+        console.log("user admin");
+        console.log(_this2.Admin);
+        console.log("finsh");
       });
     },
     myNotifications: function myNotifications() {
-      var _this2 = this;
+      var _this3 = this;
 
       // alert("dbnf");
       console.log("dkdehfj");
       axios.post("/myNotification").then(function (response) {
-        _this2.myNotification = response.data;
+        _this3.myNotification = response.data;
         console.log("**********************************");
 
-        console.log(_this2.myNotification[0].Notifications.Notifications);
+        console.log(_this3.myNotification[0].Notifications.Notifications);
         console.log("**********************************");
 
         // console.log(this.myNotification[0]);
@@ -983,6 +1122,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.selected.id = 0;
       alert("send done");
     },
+    AdminNotifications: function AdminNotifications(event) {
+      var _this4 = this;
+
+      // alert(event.target.value);
+      axios.post("/AdminNotifications", {
+        user: event.target.value
+      }).then(function (response) {
+        _this4.allNotifications = response.data;
+      });
+    },
 
     toggleTabs: function toggleTabs(tabNumber) {
       this.openTab = tabNumber;
@@ -998,6 +1147,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   beforeMount: function beforeMount() {
     this.getusers();
     this.myNotifications();
+    this.UserAdmin();
   }
 });
 
@@ -1075,7 +1225,36 @@ var render = function() {
                     [_vm._v("\n            اضافة مهام\n          ")]
                   )
                 ]
-              )
+              ),
+              _vm._v(" "),
+              _vm.Admin == 1
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "flex flex-row items-center justify-center cursor-pointer w-1/2"
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          class: {
+                            "text-green-600 bg-white w-full py-4 text-center rounded-md":
+                              _vm.openTab !== 3,
+                            "text-white  bg-green-600 w-full py-4 text-center rounded-md":
+                              _vm.openTab === 3
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.toggleTabs(3)
+                            }
+                          }
+                        },
+                        [_vm._v("\n          مهام الموظفين\n          ")]
+                      )
+                    ]
+                  )
+                : _vm._e()
             ]
           ),
           _vm._v(" "),
@@ -1112,7 +1291,11 @@ var render = function() {
                         _vm._v(" "),
                         Notification.Notifications.date
                           ? _c("td", [
-                              _vm._v(_vm._s(Notification.Notifications.date))
+                              _vm._v(
+                                "\n              " +
+                                  _vm._s(Notification.Notifications.date) +
+                                  "\n            "
+                              )
                             ])
                           : _c("td", [_vm._v("no Time")]),
                         _vm._v(" "),
@@ -1320,6 +1503,127 @@ var render = function() {
                 ]
               )
             ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4",
+              class: {
+                hidden: _vm.openTab !== 3,
+                block: _vm.openTab === 3
+              }
+            },
+            [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "md:w-2/3" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selectedAdmin,
+                        expression: "selectedAdmin"
+                      }
+                    ],
+                    staticClass:
+                      "select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+                    on: {
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.selectedAdmin = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        },
+                        function($event) {
+                          return _vm.AdminNotifications($event)
+                        }
+                      ]
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      { attrs: { selected: "", disabled: "", value: "0" } },
+                      [_vm._v("Please select one")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.users, function(user) {
+                      return _c(
+                        "option",
+                        { key: user.id, domProps: { value: user.id } },
+                        [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(user.name) +
+                              "\n              "
+                          )
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "table",
+                { staticClass: "text-center" },
+                [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _vm._l(_vm.allNotifications, function(Notification) {
+                    return _c(
+                      "tr",
+                      {
+                        key: Notification.id,
+                        attrs: { value: Notification.id }
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(Notification.Notifications.Notifications)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        Notification.Notifications.date
+                          ? _c("td", [
+                              _vm._v(
+                                "\n              " +
+                                  _vm._s(Notification.Notifications.date) +
+                                  "\n            "
+                              )
+                            ])
+                          : _c("td", [_vm._v("no Time")]),
+                        _vm._v(" "),
+                        Notification.done
+                          ? _c("td", [
+                              _vm._v("\n                 complet\n            ")
+                            ])
+                          : _c("td", [
+                              _vm._v(
+                                "\n\n            not complet\n            "
+                              )
+                            ])
+                      ]
+                    )
+                  })
+                ],
+                2
+              )
+            ]
           )
         ])
       ])
@@ -1383,6 +1687,33 @@ var staticRenderFns = [
         },
         [_vm._v("\n              المهمة\n            ")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/3" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+        },
+        [_vm._v("\n              المستخدم\n            ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticStyle: { width: "70%" } }, [_vm._v("المهمة")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { width: "30%" } }, [_vm._v("الوقت")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("تم")])
     ])
   }
 ]
