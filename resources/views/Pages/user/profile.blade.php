@@ -352,8 +352,8 @@
                 </div>
                 <!--End Perosonal Information -->
                 <!--Start Timer -->
-                <div class="mt-8 flex flex-row items-center justify-center">
-                    <div class="w-60 h-60 rounded-[50%] bg-[#4F37FD] relative">
+                <div onclick="location.href='/StartTimerWorkHours'" class="mt-8 flex flex-row items-center justify-center">
+                    <div class="w-60 h-60 rounded-[50%] bg-[#4F37FD] relative ">
                         <p class="absolute bottom-24 left-[25%] text-white text-3xl">00:00:00</p>
                         <svg class="absolute bottom-5 left-[45%] " width="46" height="54" viewBox="0 0 46 54"
                             fill="none" xmlns="http://www.w3.org/2000/svg">

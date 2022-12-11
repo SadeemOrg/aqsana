@@ -156,8 +156,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"
         integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        
-        <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
+
+    <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
     <script>
         function readURL(elementId, input) {
             if (input.files && input.files[0]) {
