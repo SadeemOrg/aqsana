@@ -44,7 +44,28 @@ class NotificationController extends Controller
         }
         return $myNotifications;
     }
+    public function AdminNotifications(Request $request)
+    {
 
+
+        $Notifications= \App\Models\Notification::where('notifiable_id', $request->user)->get();
+       $myNotifications = array();
+       foreach ($Notifications as $key => $value) {
+        // echo $value->type;
+        // echo $value->id;
+        // dd($value);
+
+          $data=json_decode($value->data);
+          $pus = array(
+            "id" => $value->id,
+            "Notifications" => $data,
+            "done" => $value->read_at,
+
+        );
+          array_push($myNotifications, $pus);
+        }
+        return $myNotifications;
+    }
     public function sendNotification(Request $request) {
         $userSchema = User::find($request->user);
         // dd(  $userSchema);

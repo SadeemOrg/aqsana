@@ -21,6 +21,7 @@ use App\Models\Project;
 use App\Models\Sector;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\WorkHours;
 use App\Rules\passwordRule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -28,8 +29,38 @@ use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
+    public function StartTimerWorkHours(Request $request)
+    {
+        dd($request->all());
+    }
 
+    public function WorkHours()
+    {
+        $user = Auth::user();
+        // dd( $user->id);
+        $WorkHours = WorkHours::where('user_id', '=', $user->id)->get();
 
+        dd($WorkHours);
+        return view('Pages.user.profile', compact('user'));
+    }
+    public function WorkHoursUser(Request $request)
+    {
+        $id = 186;
+
+        // dd( $user->id);
+        $year = 2022;
+        $date_from = $year . '-1-1';
+        $date_to = $year . '-12-31';
+        $from = date($date_from);
+        $to = date($date_to);
+        $WorkHours = WorkHours::where('user_id', '=', $id)->get();
+        dd($WorkHours);
+
+        $WorkHours = WorkHours::where('user_id', '=', $id)->whereBetween('date', [$from, $to])->get();
+        // dd(  $WorkHours);
+
+        return view('Pages.user.profile', compact('user'));
+    }
     public function userprofile()
     {
         $user = Auth::user();
@@ -39,24 +70,24 @@ class HomeController extends Controller
     {
         $user = User::findOrFail(Auth::id());
         $request->validate([
-            'name'=>'required|string|max:255|min:3',
-            'email'=>'required|email|max:255|unique:users,email,' . $user->id,
+            'name' => 'required|string|max:255|min:3',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'phone' => 'required|digits_between:10,14',
-            'password'=>[ new passwordRule($user->password)],
+            'password' => [new passwordRule($user->password)],
             'Confirm_password' => 'same:new_password'
 
             // 'email'=>['required', new passwordRule]
-        ],[
+        ], [
             'name.required' => 'الرجاء ادخال اسم',
             'name.string' => 'الاسم يجب ان يكون احرف فقط',
             'name.min' => 'الاسم يجب ان يكون على الاقل 3 حروف',
             'name.max' => 'الاسم لا يجب ان يكون فوق ال 255 حرف',
             'email.required' => 'الرجاء ادخال ايميل',
-            'email.email'=>"يجب ان يكون الايميل صحيح",
+            'email.email' => "يجب ان يكون الايميل صحيح",
             'email.unique' => 'يجب ان يكون الايميل غير مكرر',
             'phone.required' => 'ارجاء ادخال رقم الهاتف',
             'phone.digits_between' => 'الرجاء ادخال رقم الهاتف بشكل صحيح. ',
-            'Confirm_password.same'=>"كلمة السر الجديده غير متطابقة"
+            'Confirm_password.same' => "كلمة السر الجديده غير متطابقة"
 
 
 
@@ -97,7 +128,7 @@ class HomeController extends Controller
         if ($request->image) {
             $user->photo = $request->image->store('images', 'public');
         }
-// dd($user);
+        // dd($user);
 
         $user->save();
 
@@ -106,6 +137,17 @@ class HomeController extends Controller
     public function user()
     {
         return Auth::user();
+    }
+    public function Admin()
+    {
+
+        $user =  Auth::user();
+
+        if ((in_array('super-admin',   $user->userrole()))) {
+            return true;
+        } else {
+            return false;
+        }
     }
     public function users()
     {
@@ -410,7 +452,7 @@ class HomeController extends Controller
 
         $partners = nova_get_setting('partner', 'default_value');
         // $partners = json_decode($partnerjson);
-        $sectors=Sector::all();
+        $sectors = Sector::all();
         // $sectors = nova_get_setting('workplace', 'default_value');
         $type = 2;
         // $sectors= json_decode($sectorsjson);
@@ -424,10 +466,10 @@ class HomeController extends Controller
         $achievementsjson = nova_get_setting('achievements', 'default_value');
         $achievements = json_decode($achievementsjson);
         $workplace = nova_get_setting('workplace', 'default_value');
-        $sectors=Sector::all();
+        $sectors = Sector::all();
 
         $type = 2;
-        return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace', 'type','sectors'));
+        return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace', 'type', 'sectors'));
     }
 
     public function conctus(Request $request)
@@ -587,12 +629,12 @@ class HomeController extends Controller
         $mainType = "قطاع";
         $sectorname = Sector::find($sector);
         $type = $sectorname->text;
-// dd($type);
+        // dd($type);
 
         $news = News::query()->where('sector', $sector)
 
             ->paginate(9);
-            // dd($news);
+        // dd($news);
 
         return view('Pages.news-page', compact('news', 'mainType', 'type'));
         // foreach ($News as $key => $value) {

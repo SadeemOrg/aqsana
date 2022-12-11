@@ -20,7 +20,9 @@ use App\Http\Controllers\NotificationController;
 
 Route::post("user", [HomeController::class, "user"])->name('user');
 Route::post("users", [HomeController::class, "users"])->name('users');
-Route::post('user/update', [HomeController::class, "updateuser"])->name('updateuser');
+Route::post("UserAdmin", [HomeController::class, "Admin"])->name('Admin');
+
+
 
 Route::post("first/", [HomeController::class, "first"])->name('first');
 Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');
@@ -126,4 +128,17 @@ Route::get('Admin/userprofile', [HomeController::class, 'userprofile'])->name('u
 Route::get('/send-notification', [NotificationController::class, 'sendOfferNotification']);
 Route::post('/sendNotification', [NotificationController::class, 'sendNotification'])->name('sendNotification');
 Route::post('/myNotification', [NotificationController::class, 'myNotification'])->name('myNotification');
+Route::post('/AdminNotifications', [NotificationController::class, 'AdminNotifications'])->name('AdminNotifications');
+
 Route::post('/CompletNotifications', [NotificationController::class, 'CompletNotifications'])->name('CompletNotifications');
+
+
+
+
+
+Route::post('user/update', [HomeController::class, "updateuser"])->name('updateuser');
+Route::get("/WorkHours", [HomeController::class, "WorkHours"])->name('WorkHours');
+Route::get("/WorkHoursUser", [HomeController::class, "WorkHoursUser"])->name('WorkHoursUser');
+Route::get("/StartTimerWorkHours", [HomeController::class, "StartTimerWorkHours"])->name('StartTimerWorkHours');
+
+

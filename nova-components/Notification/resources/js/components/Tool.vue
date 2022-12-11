@@ -50,6 +50,29 @@
               اضافة مهام
             </a>
           </div>
+         <div
+         v-if="Admin == 1"
+            class="
+              flex flex-row
+              items-center
+              justify-center
+              cursor-pointer
+              w-1/2
+            "
+          >
+            <a
+              class=""
+              v-on:click="toggleTabs(3)"
+              v-bind:class="{
+                'text-green-600 bg-white w-full py-4 text-center rounded-md':
+                  openTab !== 3,
+                'text-white  bg-green-600 w-full py-4 text-center rounded-md':
+                  openTab === 3,
+              }"
+            >
+            مهام الموظفين
+            </a>
+          </div>
         </div>
         <div
           class="
@@ -72,7 +95,7 @@
           <table class="text-center">
             <tr>
               <th style="width: 70%">المهمة</th>
-              <th style="width:30%">الوقت</th>
+              <th style="width: 30%">الوقت</th>
 
               <th>تم</th>
             </tr>
@@ -80,11 +103,13 @@
               v-for="Notification in myNotification"
               :key="Notification.id"
               :value="Notification.id"
+
             >
               <td>{{ Notification.Notifications.Notifications }}</td>
-              <td v-if="Notification.Notifications.date">{{ Notification.Notifications.date }}</td>
+              <td v-if="Notification.Notifications.date">
+                {{ Notification.Notifications.date }}
+              </td>
               <td v-else>no Time</td>
-
 
               <td v-if="Notification.done">
                 <button
@@ -288,6 +313,105 @@
             </div>
           </form>
         </div>
+        <div
+          class="
+            relative
+            flex flex-col
+            min-w-0
+            break-words
+            bg-white
+            w-full
+            mb-6
+            shadow-lg
+            rounded
+            p-4
+          "
+          v-bind:class="{
+            hidden: openTab !== 3,
+            block: openTab === 3,
+          }"
+        >
+         <div class="md:w-1/3">
+              <label
+                class="
+                  block
+                  text-black text-base
+                  ml-4
+                  py-2
+                  font-bold
+                  md:text-right
+                  mb-1
+                  md:mb-0
+                  pr-4
+                "
+              >
+                المستخدم
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <select
+                @change="AdminNotifications($event)"
+                class="
+                  select1
+                  mt-1
+                  block
+                  w-full
+                  rounded-md
+                  border-2 border-balck
+                  px-4
+                  py-2
+                  pl-3
+                  pr-10
+                  text-base
+                  max-w-4xl
+                  mx-auto
+                  focus:border-black focus:outline-none focus:ring-black
+                  sm:text-sm
+                "
+                v-model="selectedAdmin"
+              >
+                <option selected disabled value="0">Please select one</option>
+
+                <option
+                  v-for="user in users"
+                  :key="user.id"
+                     :value="user.id"
+
+                >
+                  {{ user.name }}
+                </option>
+              </select>
+            </div>
+
+                 <table class="text-center">
+            <tr>
+              <th style="width: 70%">المهمة</th>
+              <th style="width: 30%">الوقت</th>
+
+              <th>تم</th>
+            </tr>
+            <tr
+              v-for="Notification in allNotifications"
+              :key="Notification.id"
+              :value="Notification.id"
+
+            >
+              <td>{{ Notification.Notifications.Notifications }}</td>
+              <td v-if="Notification.Notifications.date">
+                {{ Notification.Notifications.date }}
+              </td>
+              <td v-else>no Time</td>
+
+              <td v-if="Notification.done">
+                   complet
+              </td>
+              <td v-else>
+
+              not complet
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -300,14 +424,27 @@ export default {
       users: [],
       myNotification: [],
       openTab: 1,
+      Admin: 1,
       myNotificationT: [],
+      allNotifications :[]
     };
   },
   methods: {
     getusers: function () {
       axios.post("/users").then((response) => {
         this.users = response.data;
-        // console.log(this.users);
+        // console.log("user admin", this.users);
+      });
+    },
+    UserAdmin: function () {
+      axios.post("/UserAdmin").then((response) => {
+        console.log("start");
+        console.log(this.Admin);
+        this.Admin = response.data;
+
+        console.log("user admin");
+        console.log(this.Admin);
+        console.log("finsh");
       });
     },
     myNotifications: function () {
@@ -344,6 +481,17 @@ export default {
       this.selected.id = 0;
       alert("send done");
     },
+
+      AdminNotifications(event) {
+        // alert(event.target.value);
+      axios
+        .post("/AdminNotifications", {
+      user:  event.target.value,
+        })
+        .then((response) => {
+          this.allNotifications = response.data;
+        });
+    },
     toggleTabs: function (tabNumber) {
       this.openTab = tabNumber;
     },
@@ -358,6 +506,7 @@ export default {
   beforeMount() {
     this.getusers();
     this.myNotifications();
+    this.UserAdmin();
   },
 };
 </script>
