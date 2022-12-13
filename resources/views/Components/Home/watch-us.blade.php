@@ -160,7 +160,7 @@ $videohome = nova_get_setting('videohome', 'default_value');
             class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585]  rounded-[5px]  p-3 ">
             <div class="relative">
                 <a href={{ $video['data']['link'] }} class="mediabox rounded-[5px] overflow-hidden block">
-                    <img class="scale-hover lg:block max-w-[380px] lg:h-[280px]  max-h-[280px] object-cover"
+                    <img class="scale-hover lg:block max-w-[380px] lg:h-[280px]  max-h-[280px] object-fill"
                         src="{{ asset($img) }}" alt="people_on_Mousq" />
                     <img src="{{ asset('assets/image/play_Svg.svg') }}"
                         class="absolute max-w-[46px] top-[48%] left-[46%]" /></a>
