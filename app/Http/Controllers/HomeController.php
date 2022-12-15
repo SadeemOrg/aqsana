@@ -32,12 +32,72 @@ class HomeController extends Controller
 {
     public function StartTimerWorkHours(Request $request)
     {
-        $mytime = Carbon::now();
-        // $date = date('Format String', time());
-        // $mytime = Carbon::now();
-        dd($mytime);
-        // dd("hi");
-        dd($request->all());
+        // dd("ff");
+
+        $user = Auth::user();
+        $WorkHours = WorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::today())->first();
+
+        if ($WorkHours != null) {
+
+            if ($WorkHours->day_hours != null) {
+                if ($WorkHours->on_work != 0) {
+
+                    $starttime = Carbon::parse($WorkHours->fake_time);
+
+                    $finishTime = Carbon::now();
+
+                    // $totalDuration = $starttime->diffInHours($finishTime);
+                    $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
+                    $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
+
+
+                    $days = $startDate->diffInDays($endDate);
+                    $Hours = $startDate->copy()->addDays($days)->diffInHours($endDate);
+                    $minutes = $startDate->copy()->addDays($days)->addHours($Hours)->diffInMinutes($endDate);
+                    $Seconds = $startDate->copy()->addDays($days)->addHours($Hours)->addMinute($minutes)->diffInMinutes($endDate);
+                    $oldttime = Carbon::parse($WorkHours->day_hours);
+                    $Hours += $oldttime->hour;
+                    $minutes += $oldttime->minute;
+                    $Seconds += $oldttime->second;
+                    // // $diff_in_hours =   $to->diffInHours($from);
+                    dd($startDate, $endDate,   $Hours, $minutes, $Seconds);
+                } else {
+                    $starttime = Carbon::parse($WorkHours->day_hours);
+                    $Hours = $starttime->hour;
+                    $minutes = $starttime->minute;
+                    $Seconds = $starttime->second;
+                    dd($Hours, $minutes, $Seconds);
+                }
+            } else {
+                $starttime = Carbon::parse($WorkHours->start_time);
+
+                // dd(Carbon::parse($WorkHours[0]->start_time));
+
+                $finishTime = Carbon::now();
+
+                // $totalDuration = $starttime->diffInHours($finishTime);
+                $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
+                $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
+
+
+                $days = $startDate->diffInDays($endDate);
+                $Hours = $startDate->copy()->addDays($days)->diffInHours($endDate);
+                $minutes = $startDate->copy()->addDays($days)->addHours($Hours)->diffInMinutes($endDate);
+                $Seconds = $startDate->copy()->addDays($days)->addHours($Hours)->addMinute($minutes)->diffInMinutes($endDate);
+                // // $diff_in_hours =   $to->diffInHours($from);
+                // $Hours =   $to->diffInHours($from);
+                // $minutes =   $to->diffInMinutes($from);
+                // $Seconds =   $to->diffInSeconds($from);
+
+                dd($startDate, $endDate,   $Hours, $minutes, $Seconds);
+            }
+            // dd( $totalDuration);
+        } else {
+            $Hours = 0;
+            $minutes = 0;
+            $Seconds = 0;
+            dd($Hours, $minutes, $Seconds);
+        }
     }
 
     public function WorkHours()
