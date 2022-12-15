@@ -13,7 +13,7 @@
             background-image: none;
         }
     </style>
-<livewire:work-hours />
+    {{-- <livewire:work-hours /> --}}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <div class="flex sm:flex-row flex-col sm:gap-y-0 gap-y-6 items-center justify-between mt-4 xl:mt-8">
             <div class="relative ">
@@ -86,7 +86,6 @@
                         hidden />
                 </div>
                 <div class="mt-8">
-
                     <section class="border-b-2 max-w-7xl border-[#9CA9B6] pb-12">
                         <!--first div Dev -->
                         <div
@@ -309,72 +308,15 @@
             <!--End Form -->
             <!--start Hourly work Time -->
             <div class="tab tab-2 ">
-                <!--Perosonal Information -->
-                <div class="flex sm:flex-row flex-col gap-y-4 sm:gap-y-0 items-center justify-between mt-8">
-                    <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات العمل</p>
-                    <div class="flex flex-row items-center  gap-x-2 ">
-
-                        <!--Date Picker -->
-                        <div dir="ltr" class="relative">
-                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="#349A37"
-                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <input datepicker type="text"
-                                class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
-                                placeholder="من">
-                        </div>
-                        <div dir="ltr" class="relative">
-                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="#349A37"
-                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <input datepicker type="text"
-                                class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
-                                placeholder="الى">
-                        </div>
-                        <!--end Picker -->
-                        <div class="-mt-2">
-                            <button type="submit"
-                                class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
-                                تطبيق
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!--End Perosonal Information -->
-                <!--Start Timer -->
-                <div onclick="location.href='/StartTimerWorkHours'" class="mt-8 flex flex-row items-center justify-center">
-                    <div class="w-60 h-60 rounded-[50%] bg-[#4F37FD] relative ">
-                        <p class="absolute bottom-24 left-[25%] text-white text-3xl">00:00:00</p>
-                        <svg class="absolute bottom-5 left-[45%] " width="46" height="54" viewBox="0 0 46 54"
-                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0.151367 54V0L45.8482 27.0013L0.151367 54Z" fill="white" />
-                        </svg>
-
-                    </div>
-                </div>
-                <!--End Timer -->
-                <!--Start with Table -->
-                @include('Components.User.UserTable',['tab' => '2'])
-                <!--End with Table -->
-
-                <!--End Hourly work Time -->
+                <livewire:work-hours />
             </div>
             <!--End Hourly work Time -->
             <!--start Manger Hourly work Time -->
             <div class="tab tab-3 ">
                 <!--Perosonal Information -->
                 <div class="flex sm:flex-row flex-col gap-y-4 sm:gap-y-0 items-center justify-between mt-8">
-                    <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات عمل الموظفين</p>
+                    <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات عمل
+                        الموظفين</p>
                     <div class="flex flex-row items-center  gap-x-2 ">
                         <div class="mt-1">
                             <input type="text" name="name" placeholder=" اسم الموظف" value=""
@@ -419,8 +361,8 @@
                 <!--End Perosonal Information -->
                 <!--from Date -->
                 <div class="mt-8 flex flex-row items-center justify-start gap-x-3">
-            <p class="text-[#8A8B9F] text-sm ">من تاريخ : 12-5-2022</p>
-            <p class="text-[#8A8B9F] text-sm ">الى تاريخ : 12-5-2022</p>
+                    <p class="text-[#8A8B9F] text-sm ">من تاريخ : 12-5-2022</p>
+                    <p class="text-[#8A8B9F] text-sm ">الى تاريخ : 12-5-2022</p>
 
                 </div>
                 <!--End Date -->
