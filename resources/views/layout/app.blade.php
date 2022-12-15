@@ -1,3 +1,11 @@
+@php
+//     use Carbon\Carbon;
+//     $teste= '2014-12-12 15:00:00';
+
+// $entrada = Carbon::createFromFormat('Y-m-d  H:i:s', $teste);
+
+// dd($entrada->addSecond()->format('H:i:s') );
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
