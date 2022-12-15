@@ -2,6 +2,7 @@
     <h1>Hello World!</h1>
     <div wire:poll.1000ms>
         {{ $this->realtimw }}
+        {{ $this->WorkHoursLastMAnth }}
     </div>
     @if ($hide)
     <button wire:click="StartTimerWorkHours"

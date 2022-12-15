@@ -15,6 +15,8 @@ class WorkHours extends Component
     public $Hours;
     public $minutes;
     public $Seconds;
+    public $sersh=0;
+    public $WorkHoursLastMAnth;
     public function StartTimerWorkHours()
     {
 
@@ -82,12 +84,16 @@ class WorkHours extends Component
             $this->Seconds = 0;
             // dd($Hours, $minutes, $Seconds);
         }
-        $Timetimetime="2014-12-12 0:00:00";
+        $Timetimetime = "2014-12-12 0:00:00";
         $this->entrada = Carbon::createFromFormat('Y-m-d  H:i:s',  $Timetimetime);
-        $this->entrada =  $this->entrada->addHour(  $this->Hours);
-        $this->entrada =  $this->entrada->addMinute(  $this->minutes);
-        $this->entrada =  $this->entrada->addSecond(  $this->Seconds);
+        $this->entrada =  $this->entrada->addHour($this->Hours);
+        $this->entrada =  $this->entrada->addMinute($this->minutes);
+        $this->entrada =  $this->entrada->addSecond($this->Seconds);
         $this->hide = 0;
+    }
+    public function sershWorkHours()
+    {
+
     }
     // public function Time()
     // {
@@ -115,6 +121,18 @@ class WorkHours extends Component
         if ($this->hide == 0) {
             $this->realtimw =  $this->entrada->addSecond()->format('H:i:s');
         }
+        $currentDateTime = Carbon::now();
+        $newDateTime = Carbon::now()->subMonth();
+        // dd( $currentDateTime, $newDateTime );
+        $from = date('2022-01-01');
+        $to = date('2022-12-31');
+
+ if ($this->sersh == 0) {
+    $this->WorkHoursLastMAnth= ModelsWorkHours::whereBetween('date', [$newDateTime , $currentDateTime])->get();
+        }
+
+    //    dd( $WorkHoursLastMAnth);
+
         return view('livewire.work-hours');
     }
 }
