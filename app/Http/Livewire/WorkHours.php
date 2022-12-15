@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class WorkHours extends Component
 {
-    public $entrada = '2014-12-12 2:12:00';
-    public $realtimw;
+    public $enterDate = '2014-12-12 2:12:00';
+    public $realTime;
     public $hide = 1;
     public $Hours;
     public $minutes;
@@ -84,11 +84,19 @@ class WorkHours extends Component
             $this->Seconds = 0;
             // dd($Hours, $minutes, $Seconds);
         }
+<<<<<<< HEAD
         $Timetimetime = "2014-12-12 0:00:00";
         $this->entrada = Carbon::createFromFormat('Y-m-d  H:i:s',  $Timetimetime);
         $this->entrada =  $this->entrada->addHour($this->Hours);
         $this->entrada =  $this->entrada->addMinute($this->minutes);
         $this->entrada =  $this->entrada->addSecond($this->Seconds);
+=======
+        $Timetimetime="2014-12-12 0:00:00";
+        $this->enterDate = Carbon::createFromFormat('Y-m-d  H:i:s',  $Timetimetime);
+        $this->enterDate =  $this->enterDate->addHour(  $this->Hours);
+        $this->enterDate =  $this->enterDate->addMinute(  $this->minutes);
+        $this->enterDate =  $this->enterDate->addSecond(  $this->Seconds);
+>>>>>>> 323a64f63fa9fd7bbc82a8e4609f0d2d8fee13c0
         $this->hide = 0;
     }
     public function sershWorkHours()
@@ -98,15 +106,15 @@ class WorkHours extends Component
     // public function Time()
     // {
     //     $Timetimetime="2014-12-12 0:00:00";
-    //     $this->entrada = Carbon::createFromFormat('Y-m-d  H:i:s',  $Timetimetime);
+    //     $this->enterDate = Carbon::createFromFormat('Y-m-d  H:i:s',  $Timetimetime);
 
     //     $hower=2;
     //     $minet=1;
     //     $secnd=0;
-    //     $this->entrada =  $this->entrada->addHour( $hower);
-    //     $this->entrada =  $this->entrada->addMinute( $minet);
-    //     $this->entrada =  $this->entrada->addSecond( $secnd);
-    //     // dd(( $this->entrada));
+    //     $this->enterDate =  $this->enterDate->addHour( $hower);
+    //     $this->enterDate =  $this->enterDate->addMinute( $minet);
+    //     $this->enterDate =  $this->enterDate->addSecond( $secnd);
+    //     // dd(( $this->enterDate));
     //     // $Timetimetime="2014-12-12 ". $hower.":".$minet.":".$secnd;
     //     $this->hide = 0;
 
@@ -119,7 +127,7 @@ class WorkHours extends Component
     public function render()
     {
         if ($this->hide == 0) {
-            $this->realtimw =  $this->entrada->addSecond()->format('H:i:s');
+            $this->realTime =  $this->enterDate->addSecond()->format('H:i:s');
         }
         $currentDateTime = Carbon::now();
         $newDateTime = Carbon::now()->subMonth();
