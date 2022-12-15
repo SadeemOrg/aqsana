@@ -84,19 +84,11 @@ class WorkHours extends Component
             $this->Seconds = 0;
             // dd($Hours, $minutes, $Seconds);
         }
-<<<<<<< HEAD
-        $Timetimetime = "2014-12-12 0:00:00";
-        $this->entrada = Carbon::createFromFormat('Y-m-d  H:i:s',  $Timetimetime);
-        $this->entrada =  $this->entrada->addHour($this->Hours);
-        $this->entrada =  $this->entrada->addMinute($this->minutes);
-        $this->entrada =  $this->entrada->addSecond($this->Seconds);
-=======
         $Timetimetime="2014-12-12 0:00:00";
         $this->enterDate = Carbon::createFromFormat('Y-m-d  H:i:s',  $Timetimetime);
         $this->enterDate =  $this->enterDate->addHour(  $this->Hours);
         $this->enterDate =  $this->enterDate->addMinute(  $this->minutes);
         $this->enterDate =  $this->enterDate->addSecond(  $this->Seconds);
->>>>>>> 323a64f63fa9fd7bbc82a8e4609f0d2d8fee13c0
         $this->hide = 0;
     }
     public function sershWorkHours()
