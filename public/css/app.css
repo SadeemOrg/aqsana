@@ -529,8 +529,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[77px\]{
   top: 77px;
 }
-.right-\[-158px\]{
-  right: -158px;
+.right-\[-43\%\]{
+  right: -43%;
 }
 .top-\[96px\]{
   top: 96px;
@@ -547,56 +547,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-6{
   right: 1.5rem;
 }
-.right-\[-178px\]{
-  right: -178px;
-}
-.right-\[30\%\]{
-  right: 30%;
-}
-.right-\[24\%\]{
-  right: 24%;
-}
-.right-\[20\%\]{
-  right: 20%;
-}
-.right-\[10\%\]{
-  right: 10%;
-}
-.right-\[40\%\]{
-  right: 40%;
-}
-.left-\[10\%\]{
-  left: 10%;
-}
-.left-\[20\%\]{
-  left: 20%;
-}
-.left-\[2\%\]{
-  left: 2%;
-}
-.right-\[2\%\]{
-  right: 2%;
-}
-.right-\[-2\%\%\]{
-  right: -2%%;
-}
-.right-\[-2\%\]{
-  right: -2%;
-}
-.right-\[-10\%\]{
-  right: -10%;
-}
-.right-\[-20\%\]{
-  right: -20%;
-}
-.right-\[-40\%\]{
-  right: -40%;
-}
-.right-\[-44\%\]{
-  right: -44%;
-}
-.right-\[-43\%\]{
-  right: -43%;
+.top-\[3\%\]{
+  top: 3%;
 }
 .z-30{
   z-index: 30;
@@ -618,6 +570,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .m-auto{
   margin: auto;
+}
+.m-4{
+  margin: 1rem;
 }
 .mx-auto{
   margin-left: auto;
@@ -778,6 +733,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mr-3{
   margin-right: 0.75rem;
+}
+.ml-4{
+  margin-left: 1rem;
+}
+.ml-1{
+  margin-left: 0.25rem;
 }
 .block{
   display: block;
@@ -1039,6 +1000,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-auto{
   width: auto;
+}
+.w-\[99\%\]{
+  width: 99%;
 }
 .min-w-fit{
   min-width: -moz-fit-content;
@@ -1932,6 +1896,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(204 153 51 / var(--tw-text-opacity));
 }
+.text-\[\#151630\]{
+  --tw-text-opacity: 1;
+  color: rgb(21 22 48 / var(--tw-text-opacity));
+}
 .underline{
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -2501,6 +2469,15 @@ body{
   }
   .md\:w-\[200px\]{
     width: 200px;
+  }
+  .md\:w-\[300px\]{
+    width: 300px;
+  }
+  .md\:w-\[400px\]{
+    width: 400px;
+  }
+  .md\:w-\[450px\]{
+    width: 450px;
   }
   .md\:min-w-0{
     min-width: 0px;

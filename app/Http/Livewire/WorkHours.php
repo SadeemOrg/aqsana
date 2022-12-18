@@ -15,6 +15,8 @@ class WorkHours extends Component
     public $Hours;
     public $minutes;
     public $Seconds;
+    public $showModel = false;
+    public $leaveGoal;
     public function StartTimerWorkHours()
     {
 
@@ -82,11 +84,11 @@ class WorkHours extends Component
             $this->Seconds = 0;
             // dd($Hours, $minutes, $Seconds);
         }
-        $Timetimetime="2014-12-12 0:00:00";
+        $Timetimetime = "2014-12-12 0:00:00";
         $this->enterDate = Carbon::createFromFormat('Y-m-d  H:i:s',  $Timetimetime);
-        $this->enterDate =  $this->enterDate->addHour(  $this->Hours);
-        $this->enterDate =  $this->enterDate->addMinute(  $this->minutes);
-        $this->enterDate =  $this->enterDate->addSecond(  $this->Seconds);
+        $this->enterDate =  $this->enterDate->addHour($this->Hours);
+        $this->enterDate =  $this->enterDate->addMinute($this->minutes);
+        $this->enterDate =  $this->enterDate->addSecond($this->Seconds);
         $this->hide = 0;
     }
     // public function Time()
@@ -109,7 +111,15 @@ class WorkHours extends Component
     public function stop()
     {
         $this->hide = 1;
+        $this->showModel = !$this->showModel;
+        // dd($this->showModel);
     }
+    public function closeModel()
+    {
+
+        $this->showModel = false;
+    }
+
     public function render()
     {
         if ($this->hide == 0) {
