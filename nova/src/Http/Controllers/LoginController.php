@@ -26,10 +26,10 @@ class LoginController extends Controller
 
 
 
-    // protected function authenticated(Request $request)
-    // {
-    //     return redirect("/");
-    // }
+    protected function authenticated(Request $request)
+    {
+        return redirect("/Admin/userprofile");
+    }
     /**
      * Create a new controller instance.
      *

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Select;
+use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Pdmfc\NovaFields\ActionButton;
@@ -105,6 +105,7 @@ class Donation extends Resource
                     Select::make(__('name'), "name")
                         ->options(function () {
                             $Users =  \App\Models\TelephoneDirectory::where('type', '2')->get();
+
                             $i = 0;
                             $user_type_admin_array =  array();
                             foreach ($Users as $User) {
@@ -116,6 +117,8 @@ class Donation extends Resource
                             return $user_type_admin_array;
                         })
                         ->displayUsingLabels()      ->hideFromDetail()->hideFromIndex(),
+
+
 
                     Flexible::make(__('add user'),'add_user')
                     ->readonly(true)

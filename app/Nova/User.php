@@ -129,6 +129,7 @@ class User extends Resource
                     "FilemanagerTool" => __( "FilemanagerTool"),
                     "NovaSettings" => __( "Settings"),
                     "delegatee" => __( "delegatee"),
+                    "Tours" => __( "Tours"),
 
 
                 ]
