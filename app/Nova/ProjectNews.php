@@ -42,6 +42,7 @@ class ProjectNews extends Resource
     public static $search = [
         'id','project_name'
     ];
+
     public static function label()
     {
         return __('ProjectNews');

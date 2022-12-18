@@ -313,64 +313,7 @@
             <!--End Hourly work Time -->
             <!--start Manger Hourly work Time -->
             <div class="tab tab-3 ">
-                <!--Perosonal Information -->
-                <div class="flex sm:flex-row flex-col gap-y-4 sm:gap-y-0 items-center justify-between mt-8">
-                    <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات عمل
-                        الموظفين</p>
-                    <div class="flex flex-row items-center  gap-x-2 ">
-                        <div class="mt-1">
-                            <input type="text" name="name" placeholder=" اسم الموظف" value=""
-                                class="block md:min-w-[235px] w-full max-h-[42px] border-[#349A37] border rounded-[60px] sm:text-sm p-4 placeholder-[#349A37]">
-                        </div>
-                        <!--Date Picker -->
-                        <div dir="ltr" class="relative">
-                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="#349A37"
-                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <input datepicker type="text"
-                                class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
-                                placeholder="من">
-                        </div>
-                        <div dir="ltr" class="relative">
-                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="#349A37"
-                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <input datepicker type="text"
-                                class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
-                                placeholder="الى">
-                        </div>
-                        <!--end Picker -->
-                        <div class="-mt-2">
-                            <button type="submit"
-                                class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
-                                تطبيق
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!--End Perosonal Information -->
-                <!--from Date -->
-                <div class="mt-8 flex flex-row items-center justify-start gap-x-3">
-                    <p class="text-[#8A8B9F] text-sm ">من تاريخ : 12-5-2022</p>
-                    <p class="text-[#8A8B9F] text-sm ">الى تاريخ : 12-5-2022</p>
-
-                </div>
-                <!--End Date -->
-                <!--Start with Table -->
-                @include('Components.User.UserTable', ['tab' => '3'])
-                <!--End with Table -->
-
-                <!--End Hourly work Time -->
+                <livewire:admin-work-hours />
             </div>
             <!--End Manger Hourly work Time -->
 
