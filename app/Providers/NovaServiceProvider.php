@@ -244,6 +244,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                             'required' => true
                                         ],
                                         [
+                                            'type' => 'text',
+                                            'name' => 'Title',
+                                            'label' => __('title'),
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
+                                        [
                                             'type' => 'image',
                                             'name' => 'cover',
                                             'label' => __('cover'),

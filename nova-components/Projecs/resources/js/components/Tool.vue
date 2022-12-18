@@ -1106,11 +1106,57 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="container mx-auto">
+                            <div class="flex justify-between"
+                            >
                               <pure-vue-chart
-                                :points="[3, 5, 2, 5, 4]"
+                                :points="[1, 4, 5, 3, 4,1,1,1,1,1,1,1]"
+                                :show-y-axis="true"
+                                :show-x-axis="true"
                                 :width="400"
                                 :height="200"
+                                :show-values="true"
+                                :use-month-labels="true"
+                                :use-points-labels="true"
+                                :months="[
+                                  'Jan',
+                                  'Fev',
+                                  'Mar',
+                                  'Abr',
+                                  'Mai',
+                                  'Jun',
+                                  'Jul',
+                                  'Ago',
+                                  'Set',
+                                  'Out',
+                                  'Nov',
+                                  'Dez',
+                                ]"
+
+                              />
+                              <pure-vue-chart
+                                :points="[1, 4, 5, 3, 4,1,1,1,1,1,1,1]"
+                                :show-y-axis="true"
+                                :show-x-axis="true"
+                                :width="400"
+                                :height="200"
+                                :show-values="true"
+                                :use-month-labels="true"
+                                :use-points-labels="true"
+                                :months="[
+                                  'Jan',
+                                  'Fev',
+                                  'Mar',
+                                  'Abr',
+                                  'Mai',
+                                  'Jun',
+                                  'Jul',
+                                  'Ago',
+                                  'Set',
+                                  'Out',
+                                  'Nov',
+                                  'Dez',
+                                ]"
+
                               />
                             </div>
                           </div>
@@ -1133,7 +1179,7 @@ import PureVueChart from "pure-vue-chart";
 export default {
   data() {
     return {
-      openTab: 1,
+      openTab: 4,
       openTabstatistic: 0,
       selectedItem: "0",
       selectedyear: "0",
