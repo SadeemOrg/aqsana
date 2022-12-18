@@ -51,6 +51,7 @@ class address extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
     public static function availableForNavigation(Request $request)
     {
         if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("addressparmation",  $request->user()->userrole()) )){
