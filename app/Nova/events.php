@@ -43,7 +43,7 @@ class events extends Resource
 
     public static function label()
     {
-        return __('لقاء');
+        return __('events');
     }
     public static function group()
     {
