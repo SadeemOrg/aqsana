@@ -1106,6 +1106,13 @@
                                 </div>
                               </div>
                             </div>
+                            <div class="container mx-auto">
+                              <pure-vue-chart
+                                :points="[3, 5, 2, 5, 4]"
+                                :width="400"
+                                :height="200"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>

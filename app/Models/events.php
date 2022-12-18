@@ -27,6 +27,9 @@ class events extends Model implements HasMedia
 
     protected $casts = [
         'events_date' => 'date',
+        'end_events_date' => 'date',
+        'start_events_date' => 'date',
+
 
     ];
 
