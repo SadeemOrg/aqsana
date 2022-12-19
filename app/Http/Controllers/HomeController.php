@@ -30,6 +30,40 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
+
+    public function schedulelast()
+    {
+        $year = Carbon::now()->year;
+        $month = Carbon::now()->month;
+
+        $date_from = $year . '-' . $month . '-1';
+        $from = date($date_from);
+
+        $date = Carbon::parse($from)->subYear();
+        $schedule = array();
+        for ($i = 0; $i < 12; $i++) {
+            $year = $date->year;
+            $month = $date->month;
+            $date_from = $year . '-' . $month . '-1';
+            $date_to = $year . '-' . $month . '-31';
+            $from = date($date_from);
+            $to = date($date_to);
+            $spendingTransactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type",'1')->sum('equivelant_amount');
+            $Transactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type",'2')->sum('equivelant_amount');
+
+            $pus = array(
+                        "month" => $month,
+                        "year" =>  $year,
+                        "spendingTransactions" => $spendingTransactions,
+                        "Transactions" =>   $Transactions
+                    );
+
+                    array_push($schedule, $pus);
+
+                    $date=$date->addMonth();
+                }
+                return $schedule;
+    }
     public function StartTimerWorkHours(Request $request)
     {
         // dd("ff");

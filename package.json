@@ -23,7 +23,11 @@
         "build-profile": "cd nova-components/Profile && npm run dev",
         "build-profile-prod": "cd nova-components/Profile && npm run prod",
         "build-notification": "cd nova-components/Notification && npm run dev",
-        "build-notification-prod": "cd nova-components/Notification && npm run prod"
+        "build-notification-prod": "cd nova-components/Notification && npm run prod",
+        "build-BillingSchedule": "cd nova-components/BillingSchedule && npm run dev",
+        "build-BillingSchedule-prod": "cd nova-components/BillingSchedule && npm run prod",
+        "build-analytics": "cd nova-components/Analytics && npm run dev",
+        "build-analytics-prod": "cd nova-components/Analytics && npm run prod"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.7",

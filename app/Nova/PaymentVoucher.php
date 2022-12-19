@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Acme\Analytics\Analytics;
 use App\Nova\Actions\ApprovalRejectTransaction;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ use Epartment\NovaDependencyContainer\HasDependencies;
 use Alaqsa\Project\Project;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
-use App\Nova\Lenses\BillingSchedule;
+use MyApp\BillingSchedule\BillingSchedule ;
 use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 
@@ -264,7 +265,10 @@ class PaymentVoucher extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+
+           new Analytics(),
+        ];
     }
 
     /**
@@ -287,7 +291,7 @@ class PaymentVoucher extends Resource
     public function lenses(Request $request)
     {
         return [
-            new BillingSchedule(),
+
         ];
     }
 
