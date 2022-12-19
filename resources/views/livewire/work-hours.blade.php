@@ -98,11 +98,11 @@
                         alt="donation"> --}}
                         <p class="w-full text-center mt-2 text-[20px] text-[#151630]">سبب المغادرة</p>
                         <!--First One -->
-                        {{-- <div class="mt-2 selectdiv">
+                        <div class="mt-2 selectdiv">
                             <select wire:model="leaveGoal"
                                 class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:border-[#349A37]">
-                                <option selected disabled value="">الرجاء
-                                    ادخال الحالة الاجتماعية</option>
+                                <option selected value="">الرجاء
+                                    ادخال سبب المغادرة</option>
                                 <option value="1">
                                     العمل الميداني</option>
                                 <option value="2">
@@ -110,10 +110,11 @@
                                 <option value="3">
                                     اخرى</option>
                             </select>
-                        </div> --}}
+                        </div>
+                        
                         <!--EndFirst One -->
                         <!--second Page -->
-                        <div class="mt-2 selectdiv">
+                        {{-- <div class="mt-2 selectdiv">
                             <select wire:model="leaveGoal"
                                 class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                 <option selected value="" >
@@ -142,7 +143,7 @@
                                 <option value="3">
                                     اخرى</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <!--Endsecond Page -->
                     </div>
                 </div>

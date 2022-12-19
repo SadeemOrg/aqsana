@@ -19,7 +19,7 @@ class WorkHours extends Component
     public $showModel = false;
     public $leaveGoal;
     public $tags;
-    public $sersh = 0;
+    public $sersh = 0; 
     public $WorkHoursLastMAnth;
 
     public $FromDate;
