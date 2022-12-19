@@ -16,8 +16,10 @@ class WorkHours extends Component
     public $Hours;
     public $minutes;
     public $Seconds;
+    public $showModel = false;
+    public $leaveGoal;
     public $tags;
-    public $sersh = 0;
+    public $sersh = 0; 
     public $WorkHoursLastMAnth;
 
     public $FromDate;
@@ -26,10 +28,9 @@ class WorkHours extends Component
 
     public function StartTimerWorkHours()
     {
-
-
         $this->hide = 0;
     }
+
     public function sershWorkHours()
     {
         $this->sersh = 1;
@@ -38,28 +39,18 @@ class WorkHours extends Component
 
         $this->WorkHoursLastMAnth = ModelsWorkHours::whereBetween('date', [$from, $to])->get();
     }
-    // public function Time()
-    // {
-    //     $Timetimetime="2014-12-12 0:00:00";
-    //     $this->enterDate = Carbon::createFromFormat('Y-m-d  H:i:s',  $Timetimetime);
 
-    //     $hower=2;
-    //     $minet=1;
-    //     $secnd=0;
-    //     $this->enterDate =  $this->enterDate->addHour( $hower);
-    //     $this->enterDate =  $this->enterDate->addMinute( $minet);
-    //     $this->enterDate =  $this->enterDate->addSecond( $secnd);
-    //     // dd(( $this->enterDate));
-    //     // $Timetimetime="2014-12-12 ". $hower.":".$minet.":".$secnd;
-    //     $this->hide = 0;
-
-
-    // }
     public function stop()
     {
         $this->hide = 2;
-
+        $this->showModel = !$this->showModel;
     }
+    public function closeModel()
+    {
+
+        $this->showModel = false;
+    }
+
     public function render()
     {
         if ($this->hide == 1) {

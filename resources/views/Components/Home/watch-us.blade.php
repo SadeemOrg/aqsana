@@ -136,6 +136,7 @@
 
 @php
 $videohome = nova_get_setting('videohome', 'default_value');
+
 @endphp
 <div class="relative mt-20 xl:mt-20 mb-10 lg:mb-0">
     <p class="font-FlatBold text-xl sm:text-[27px] text-center mt-8 lg:mt-0 xl:text-right">
@@ -166,6 +167,9 @@ $videohome = nova_get_setting('videohome', 'default_value');
                         class="absolute max-w-[46px] top-[48%] left-[46%]" /></a>
             </div>
         </div>
+        <p class="w-full text-center absolute font-FlatBold -bottom-8 overflow-y-hidden max-h-7">
+            
+            {{ $video['data']['Title']?$video['data']['Title']:"منظومة الاقصى" }}  </p>
     </div>
     @endforeach
     @endif
