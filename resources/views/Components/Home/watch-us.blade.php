@@ -166,6 +166,7 @@ $videohome = nova_get_setting('videohome', 'default_value');
                         class="absolute max-w-[46px] top-[48%] left-[46%]" /></a>
             </div>
         </div>
+        <p class="w-full text-center absolute -bottom-8 overflow-y-hidden max-h-7">ameeeed Qasim Saeed Asmahhhhasdasf asasfdssaaaaaaaaahfdsjkkgh</p>
     </div>
     @endforeach
     @endif
