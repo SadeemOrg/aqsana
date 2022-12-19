@@ -1377,12 +1377,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      openTab: 1,
+      openTab: 4,
       openTabstatistic: 0,
       selectedItem: "0",
       selectedyear: "0",
@@ -9930,13 +9976,85 @@ var render = function() {
                                       _vm._v(" "),
                                       _c(
                                         "div",
-                                        { staticClass: "container mx-auto" },
+                                        { staticClass: "flex justify-between" },
                                         [
                                           _c("pure-vue-chart", {
                                             attrs: {
-                                              points: [3, 5, 2, 5, 4],
+                                              points: [
+                                                1,
+                                                4,
+                                                5,
+                                                3,
+                                                4,
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                1
+                                              ],
+                                              "show-y-axis": true,
+                                              "show-x-axis": true,
                                               width: 400,
-                                              height: 200
+                                              height: 200,
+                                              "show-values": true,
+                                              "use-month-labels": true,
+                                              "use-points-labels": true,
+                                              months: [
+                                                "Jan",
+                                                "Fev",
+                                                "Mar",
+                                                "Abr",
+                                                "Mai",
+                                                "Jun",
+                                                "Jul",
+                                                "Ago",
+                                                "Set",
+                                                "Out",
+                                                "Nov",
+                                                "Dez"
+                                              ]
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("pure-vue-chart", {
+                                            attrs: {
+                                              points: [
+                                                1,
+                                                4,
+                                                5,
+                                                3,
+                                                4,
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                1
+                                              ],
+                                              "show-y-axis": true,
+                                              "show-x-axis": true,
+                                              width: 400,
+                                              height: 200,
+                                              "show-values": true,
+                                              "use-month-labels": true,
+                                              "use-points-labels": true,
+                                              months: [
+                                                "Jan",
+                                                "Fev",
+                                                "Mar",
+                                                "Abr",
+                                                "Mai",
+                                                "Jun",
+                                                "Jul",
+                                                "Ago",
+                                                "Set",
+                                                "Out",
+                                                "Nov",
+                                                "Dez"
+                                              ]
                                             }
                                           })
                                         ],

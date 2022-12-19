@@ -18,6 +18,7 @@ use Epartment\NovaDependencyContainer\HasDependencies;
 use Alaqsa\Project\Project;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
+use App\Nova\Lenses\BillingSchedule;
 use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 
@@ -285,7 +286,9 @@ class PaymentVoucher extends Resource
      */
     public function lenses(Request $request)
     {
-        return [];
+        return [
+            new BillingSchedule(),
+        ];
     }
 
     /**
