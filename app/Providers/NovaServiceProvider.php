@@ -413,168 +413,21 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             ]),
         ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            new Tabs(__('website Settings'), [
-                __('website SEO')    => [
-                    Text::make(__('Site name'), 'Site_name')->help('enter the site name'),
-                    Text::make(__('Site description'), 'Site_description'),
-                    Text::make(__('Site keywords'), 'Site_keywords'),
-                    Text::make(__('Open Graph site name'), 'og_site_name'),
-                    Text::make(__('Open Graph description'), 'description'),
-                    Text::make(__('Site link'), 'Site_link'),
-                    Image::make(__('Open Graph image'), 'og_image'),
-                    Image::make(__('Logo'), 'main_logo'),
+            new Tabs(__('Reasons to stop'), [
+                __('main section')    => [
+                    Flexible::make(__('Reasons_to_stop'), 'Reasons_to_stop')
+                    ->addLayout(__('Reasons_to_stop'), 'Reasons_to_stop', [
+                        Text::make(__('title'), 'Reasons_to_stop'),
+                    ])
                 ],
-                __('website Social Media') => [
-                    Text::make(__('Facebook'), 'Facebook'),
-                    Text::make(__('Instagram'), 'Instagram'),
-                    Text::make(__('whatsapp'), 'whatsapp'),
-                    Text::make(__('Twitter'), 'twitter'),
-                    Text::make(__('youtube'), 'youtube'),
-                    Text::make(__('TikTok'), 'tiktok'),
-                ], __('website Settings') => [
-                    Text::make(__('society id'), 'society_id'),
-                    Text::make(__('phone'), 'phone'),
-                    Text::make(__('Email'), 'email'),
-                    Text::make(__('address'), 'address'),
-                ], __('privacy terms') => [
+                __('main sessdsdsction')    => [
+                    Flexible::make(__('time_departure'), 'time_departure')
+                    ->addLayout(__('time_departure'), 'time_departure', [
+                        Text::make(__('title'), 'title_departure'),
+                        Text::make(__('time in minet'), 'time_departure'),
+                    ])
+                ],
 
-                    Tiptap::make(__('privacy terms arabic'), 'privacy_terms_ar')
-                        ->buttons([
-                            'heading',
-                            '|',
-                            'italic',
-                            'bold',
-                            '|',
-                            'link',
-                            'code',
-                            'strike',
-                            'underline',
-                            'highlight',
-                            '|',
-                            'bulletList',
-                            'orderedList',
-                            'br',
-                            'codeBlock',
-                            'blockquote',
-                            '|',
-                            'horizontalRule',
-                            'hardBreak',
-                            '|',
-                            'table',
-                            '|',
-                            'image',
-                            '|',
-                            'textAlign',
-                            '|',
-                            'rtl',
-                            '|',
-                            'history',
-                        ])
-                        ->headingLevels([1, 2, 3, 4, 5, 6]),
-                    Tiptap::make(__('privacy terms Hebrew'), 'privacy_terms_he')
-                        ->buttons([
-                            'heading',
-                            '|',
-                            'italic',
-                            'bold',
-                            '|',
-                            'link',
-                            'code',
-                            'strike',
-                            'underline',
-                            'highlight',
-                            '|',
-                            'bulletList',
-                            'orderedList',
-                            'br',
-                            'codeBlock',
-                            'blockquote',
-                            '|',
-                            'horizontalRule',
-                            'hardBreak',
-                            '|',
-                            'table',
-                            '|',
-                            'image',
-                            '|',
-                            'textAlign',
-                            '|',
-                            'rtl',
-                            '|',
-                            'history',
-                        ])
-                        ->headingLevels([1, 2, 3, 4, 5, 6]),
-
-                ], __('Cancellation Policy') => [
-
-                    Tiptap::make(__('Cancellation Policy arabic'), 'Cancellation_Policy_ar')
-                        ->buttons([
-                            'heading',
-                            '|',
-                            'italic',
-                            'bold',
-                            '|',
-                            'link',
-                            'code',
-                            'strike',
-                            'underline',
-                            'highlight',
-                            '|',
-                            'bulletList',
-                            'orderedList',
-                            'br',
-                            'codeBlock',
-                            'blockquote',
-                            '|',
-                            'horizontalRule',
-                            'hardBreak',
-                            '|',
-                            'table',
-                            '|',
-                            'image',
-                            '|',
-                            'textAlign',
-                            '|',
-                            'rtl',
-                            '|',
-                            'history',
-                        ])
-                        ->headingLevels([1, 2, 3, 4, 5, 6]),
-                    Tiptap::make(__('Cancellation Policy Hebrew'), 'Cancellation_Policy_he')
-                        ->buttons([
-                            'heading',
-                            '|',
-                            'italic',
-                            'bold',
-                            '|',
-                            'link',
-                            'code',
-                            'strike',
-                            'underline',
-                            'highlight',
-                            '|',
-                            'bulletList',
-                            'orderedList',
-                            'br',
-                            'codeBlock',
-                            'blockquote',
-                            '|',
-                            'horizontalRule',
-                            'hardBreak',
-                            '|',
-                            'table',
-                            '|',
-                            'image',
-                            '|',
-                            'textAlign',
-                            '|',
-                            'rtl',
-                            '|',
-                            'history',
-                        ])
-                        ->headingLevels([1, 2, 3, 4, 5, 6]),
-
-                ]
             ]),
         ]);
     }
