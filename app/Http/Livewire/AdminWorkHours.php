@@ -11,15 +11,15 @@ class AdminWorkHours extends Component
     public $FromDate;
     public $ToDate;
     public $Name;
-
+    public $WorkHourssearch;
 
     public function sershWorkHours()
     {
         $from = date($this->FromDate);
         $to = date( $this->ToDate);
 
-        $this->WorkHoursLastMAnth = WorkHours::whereBetween('date', [$from, $to])->where("user_id",$this->Name)->get();
-        dd( $this->WorkHoursLastMAnth);
+        $this->WorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id",$this->Name)->get();
+
     }
     public function render()
     {

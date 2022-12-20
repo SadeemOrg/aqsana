@@ -1,4 +1,5 @@
 <div>
+
         <!--Perosonal Information -->
         <form wire:submit.prevent="sershWorkHours">
         <div class="flex sm:flex-row flex-col gap-y-4 sm:gap-y-0 items-center justify-between mt-8">
@@ -39,14 +40,74 @@
         </form>
         <!--End Perosonal Information -->
         <!--from Date -->
+        @if ($this->FromDate &&  $this->ToDate)
         <div class="mt-8 flex flex-row items-center justify-start gap-x-3">
-            <p class="text-[#8A8B9F] text-sm ">من تاريخ : 12-5-2022</p>
-            <p class="text-[#8A8B9F] text-sm ">الى تاريخ : 12-5-2022</p>
+            <p class="text-[#8A8B9F] text-sm ">من تاريخ : {{ $this->FromDate }}</p>
+            <p class="text-[#8A8B9F] text-sm ">الى تاريخ :{{  $this->ToDate }}</p>
 
         </div>
+        @endif
+
         <!--End Date -->
         <!--Start with Table -->
-        @include('Components.User.UserTable', ['tab' => '3'])
+        <div class="px-4 sm:px-6 lg:px-8 mt-8">
+            <div class="mt-8 flex flex-col">
+                <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                        @if($WorkHourssearch)
+                        <table class="min-w-full divide-y divide-gray-300">
+                            <thead>
+                                <tr>
+
+                                        <th scope="col"
+                                            class="py-3.5 pl-4 pr-3 text-right text-sm font-semibold text-[#349A37] ">
+                                            اسم الموظف</th>
+
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-right text-sm font-semibold text-[#349A37] ">
+                                        اليوم</th>
+                                    <th scope="col" class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">
+                                        التاريخ
+                                    </th>
+                                    <th scope="col" class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">ساعة
+                                        البدء
+                                    </th>
+                                    <th scope="col" class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">ساعة
+                                        الانتهاء</th>
+                                    <th scope="col"
+                                        class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37] min-w-[150px]">عدد
+                                        ساعات العمل</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                @foreach ($WorkHourssearch as $WorkHoursearch)
+                                    <tr>
+
+                                            <td
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
+                                            {{-- {{ $dataaaa[0]['start_time'] }} --}}
+                                            {{ $WorkHoursearch->user_id}}                                            </td>
+
+                                            <td
+                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
+                                            {{ $WorkHoursearch->day}}</td>
+                                        <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">  {{ $WorkHoursearch->date}}</td>
+                                        <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                            {{ $WorkHoursearch->start_time}}</td>
+                                        <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">{{ $WorkHoursearch->end_time}}</td>
+                                        <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">{{ $WorkHoursearch->day_hours}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+
+                            </tbody>
+                        </table>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- @include('Components.User.UserTable', ['tab' => '3']) --}}
         <!--End with Table -->
 
         <!--End Hourly work Time -->

@@ -112,7 +112,7 @@
 
                                 </div>
                                 @if ($showTable == 2)
-                                   <div class="mt-2 selectdiv">
+                                    <div class="mt-2 selectdiv">
                                         <select wire:model="Timeleave"
                                             class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                             <option selected value="">الوقت</option>
@@ -157,55 +157,6 @@
                         @endif
 
 
-                        {{-- <div class="mt-2 selectdiv">
-                            <select wire:model="leaveGoal"
-                                class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:border-[#349A37]">
-                                <option selected value="">الرجاء
-                                    ادخال سبب المغادرة</option>
-                                    @foreach ($Reasons_to_stop as $Reasons)
-                                    <option value={{$Reasons->attributes->Reasons_to_stop}}>
-                                        {{ $Reasons->attributes->Reasons_to_stop }}
-                                    </option>
-
-                                    @endforeach
-                                    <option value="اخرى">
-                                        اخرى
-                                    </option>
-                            </select>
-                        </div> --}}
-
-                        <!--EndFirst One -->
-                        <!--second Page -->
-                        {{-- <div class="mt-2 selectdiv">
-                            <select wire:model="leaveGoal"
-                                class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
-                                <option selected value="" >
-                                    مغادرة لمدة</option>
-                                <option>
-                                    العمل الميداني</option>
-                                <option value="2">
-                                    انهاء العمل بشكل كامل</option>
-                                <option>
-                                    اخرى</option>
-                            </select>
-                        </div>
-                        <div class="ml-1  pt-6 px-8 lg:px-0 ">
-                            <textarea rows="4" name="message"  placeholder="سبب المغادرة"
-                                class="w-full  inline-flex items-center text-right  justify-center border-[#349A37] border  rounded-[10px] focus:ring-[#349A37] focus:border-[#349A37] sm:text-sm p-4"></textarea>
-                        </div>
-                        <div class="mt-2 selectdiv">
-                            <select wire:model="leaveGoal"
-                                class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
-                                <option selected  value="">
-                                    مدة المغادرة</option>
-                                <option value="1">
-                                    العمل الميداني</option>
-                                <option value="2">
-                                    انهاء العمل بشكل كامل</option>
-                                <option value="3">
-                                    اخرى</option>
-                            </select>
-                        </div> --}}
                         <!--Endsecond Page -->
                     </div>
                 </div>
@@ -217,20 +168,74 @@
 
     <!--End Timer -->
     <!--Start with Table -->
-    @include('Components.User.UserTable', ['tab' => '2'])
+
+
+
+
+    <div class="px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="mt-8 flex flex-col">
+            <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                            <tr>
+
+                                <th scope="col"
+                                    class="py-3.5 pl-4 pr-3 text-right text-sm font-semibold text-[#349A37] ">
+                                    اليوم</th>
+                                <th scope="col"
+                                    class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">
+                                    التاريخ
+                                </th>
+                                <th scope="col"
+                                    class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">ساعة
+                                    البدء
+                                </th>
+                                <th scope="col"
+                                    class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">ساعة
+                                    الانتهاء</th>
+                                <th scope="col"
+                                    class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37] min-w-[150px]">
+                                    عدد
+                                    ساعات العمل</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            @foreach ($WorkHourssearch as $WorkHoursearch)
+                                <tr>
+
+                                    <td
+                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
+                                        {{ $WorkHoursearch->day}}</td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">  {{ $WorkHoursearch->date}}</td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                        {{ $WorkHoursearch->start_time}}</td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">{{ $WorkHoursearch->end_time}}</td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">{{ $WorkHoursearch->day_hours}}
+                                    </td>
+                                </tr>
+                            @endforeach
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    {{-- @include('Components.User.UserTable', ['tab' => '2','dataaaa'=> $WorkHoursearchs]) --}}
+
+    {{-- @include('Components.User.UserTable', ['items' => $item['children']])
+    @include('Components.User.UserTable', ['ee'=>$WorkHoursearchs]) --}}
     <!--End with Table -->
 
 
 
-    <script type="text/javascript">
-        $('#parent_id').on('change', function() {
-            console.log("Hello world!");
 
-            $(".some").hide();
-            var some = $(this).find('option:selected').val();
-            $("#some_" + some).show();
-            console.log("Hello world!");
-
-        });
-    </script>
 </div>
