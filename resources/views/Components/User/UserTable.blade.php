@@ -1,3 +1,16 @@
+@php
+    // dd($ee);
+    // use App\Models\WorkHours as ModelsWorkHours;
+    // use Carbon\Carbon;
+    // $currentDateTime = Carbon::now();
+    // $newDateTime = Carbon::now()->subMonth();
+    // dd($tab)
+    // $from = date('2022-01-01');
+    // $to = date('2022-12-31');
+    // dd(  $WorkHoursLastMAnths );
+    // $WorkHoursLastMAnths = ModelsWorkHours::whereBetween('date', [$newDateTime, $currentDateTime])->get();
+    // dd( $dataaaa );
+@endphp
 <div class="px-4 sm:px-6 lg:px-8 mt-8">
     <div class="mt-8 flex flex-col">
         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -26,51 +39,28 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                        <tr>
-                            @if ($tab != 2)
+                        {{-- @foreach ($newData as $item) --}}
+                            <tr>
+                                @if ($tab != 2)
+                                    <td
+                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
+                                    {{-- {{ $dataaaa[0]['start_time'] }} --}}
+                                        زياد سلمان
+                                    </td>
+                                @endif
                                 <td
                                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
-                                    زياد سلمان</td>
-                            @endif
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
-                                السبت</td>
-                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">12-12-2022</td>
-                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                12:20:00 مساءا</td>
-                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">5:00:00 مساءا</td>
-                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">5 ساعات</td>
-                        </tr>
+                                    السبت</td>
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">12-12-2022</td>
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                    12:20:00 مساءا</td>
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">5:00:00 مساءا</td>
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">5 ساعات
+                                </td>
+                            </tr>
+                        {{-- @endforeach --}}
 
-                        <!-- More people... -->
-                        <tr>
-                            @if ($tab != 2)
-                                <td
-                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
-                                    زياد سلمان</td>
-                            @endif
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
-                                السبت</td>
-                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">12-12-2022</td>
-                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                12:20:00 مساءا</td>
-                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">5:00:00 مساءا</td>
-                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">5 ساعات</td>
-                        </tr>
-                        <!-- More people... -->
-                        <tr>
-                            @if ($tab != 2)
-                                <td
-                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
-                                    زياد سلمان</td>
-                            @endif
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
-                                السبت</td>
-                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">12-12-2022</td>
-                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                12:20:00 مساءا</td>
-                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">5:00:00 مساءا</td>
-                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">5 ساعات</td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
