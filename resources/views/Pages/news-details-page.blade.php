@@ -91,11 +91,11 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10 px-2">
         <ul class="breadcrumbs flex flex-row flex-wrap font-FlatBold ">
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#101426]">
-                <a href="/">الرئيسية</a>
+                <a target="_self" href="/">الرئيسية</a>
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
             <li class="navBarContainer ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#101426]">
-                <a href="/"> {{ $mainType }}</a>
+                <a target="_self" href="/"> {{ $mainType }}</a>
             </li>
 
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
@@ -266,7 +266,7 @@
                                     <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full"
                                         src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
                                     <img src="{{ asset('assets/image/play_Svg.svg') }}"
-                                        class="absolute max-w-[46px] top-[48%] right-[45%] " />
+                                        class="absolute max-w-[46px] top-[2%] right-[45%] " />
                                 </a>
                             </div>
                             @foreach ($pictures as $picture)
@@ -283,7 +283,7 @@
                                     <img class=" mx-auto w-full object-cover lg:h-[265px] h-full rounded-[5px]"
                                         src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
                                     <img src="{{ asset('assets/image/play_Svg.svg') }}"
-                                        class="absolute max-w-[46px] top-[48%] right-[45%] " />
+                                        class="absolute max-w-[46px] top-[2%] right-[45%] " />
                                 </a>
                             </div>
                         @elseif (!empty($pictures) && empty($news_detail->video_link))
