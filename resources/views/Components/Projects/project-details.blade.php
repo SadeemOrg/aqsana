@@ -164,7 +164,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                         <a href={{ $project->report_video_link }} class="mediabox rounded-[5px]
                             overflow-hidden relative">
                             <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full" src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
-                            <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[48%] right-[-16%] " />
+                            <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[2%] right-[46%] " />
                         </a>
                     </div>
                     @foreach ($pictures as $picture )
