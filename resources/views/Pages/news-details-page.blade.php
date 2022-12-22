@@ -91,11 +91,11 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10 px-2">
         <ul class="breadcrumbs flex flex-row flex-wrap font-FlatBold ">
             <li class="ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#101426]">
-                <a href="/">الرئيسية</a>
+                <a target="_self" href="/">الرئيسية</a>
             </li>
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
             <li class="navBarContainer ltr:mr-2 rtl:ml-2 ml-2 font-FlatBold text-xs sm:text-[14px] text-[#101426]">
-                <a href="/"> {{ $mainType }}</a>
+                <a target="_self" href="/"> {{ $mainType }}</a>
             </li>
 
             <li class="ltr:mr-2 rtl:ml-2 ml-2 ">/</li>
