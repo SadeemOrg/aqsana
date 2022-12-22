@@ -1108,6 +1108,7 @@
                             </div>
                             <div class="flex justify-between"
                             >
+                            <div>
                               <pure-vue-chart
                                 :points="[1, 4, 5, 3, 4,1,1,1,1,1,1,1]"
                                 :show-y-axis="true"
@@ -1133,6 +1134,9 @@
                                 ]"
 
                               />
+                              <h1>مدخلات</h1>
+                              </div>
+                                <div>
                               <pure-vue-chart
                                 :points="[1, 4, 5, 3, 4,1,1,1,1,1,1,1]"
                                 :show-y-axis="true"
@@ -1158,6 +1162,8 @@
                                 ]"
 
                               />
+                              <h1>مخرجات</h1>
+                              </div>
                             </div>
                           </div>
                         </div>
