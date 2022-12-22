@@ -457,8 +457,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-10{
   top: 2.5rem;
 }
-.top-\[48\%\]{
-  top: 48%;
+.top-\[2\%\]{
+  top: 2%;
 }
 .right-\[45\%\]{
   right: 45%;
@@ -493,11 +493,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-4{
   right: 1rem;
 }
+.top-\[48\%\]{
+  top: 48%;
+}
 .left-\[46\%\]{
   left: 46%;
 }
 .-bottom-8{
   bottom: -2rem;
+}
+.right-\[46\%\]{
+  right: 46%;
 }
 .top-5{
   top: 1.25rem;
@@ -550,14 +556,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-6{
   right: 1.5rem;
 }
-.right-\[-16\%\]{
-  right: -16%;
-}
-.top-\[2\%\]{
-  top: 2%;
-}
-.right-\[46\%\]{
-  right: 46%;
+.top-\[40\%\]{
+  top: 40%;
 }
 .z-30{
   z-index: 30;
@@ -841,6 +841,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .h-\[270px\]{
   height: 270px;
+}
+.h-\[320px\]{
+  height: 320px;
+}
+.h-\[200px\]{
+  height: 200px;
 }
 .max-h-\[42px\]{
   max-height: 42px;
@@ -2383,6 +2389,9 @@ body{
   .md\:top-\[86px\]{
     top: 86px;
   }
+  .md\:top-\[48\%\]{
+    top: 48%;
+  }
   .md\:mx-0{
     margin-left: 0px;
     margin-right: 0px;
@@ -2420,11 +2429,17 @@ body{
   .md\:h-\[375px\]{
     height: 375px;
   }
+  .md\:h-\[280px\]{
+    height: 280px;
+  }
   .md\:max-h-72{
     max-height: 18rem;
   }
   .md\:max-h-\[320px\]{
     max-height: 320px;
+  }
+  .md\:max-h-\[280px\]{
+    max-height: 280px;
   }
   .md\:w-\[45\%\]{
     width: 45%;
@@ -2461,6 +2476,9 @@ body{
   }
   .md\:max-w-\[170px\]{
     max-width: 170px;
+  }
+  .md\:max-w-\[380px\]{
+    max-width: 380px;
   }
   .md\:flex-row{
     flex-direction: row;
