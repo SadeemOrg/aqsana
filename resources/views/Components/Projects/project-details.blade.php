@@ -176,7 +176,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                     <div class="col-span-1">
                         <a href={{ $project->video_link }} class="mediabox relative">
                             <img class=" mx-auto w-full object-cover lg:h-[265px] h-full rounded-[5px]" src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
-                            <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[48%] right-[45%] " />
+                            <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[2%] right-[45%] " />
                         </a>
                     </div>
                     @elseif (!empty($pictures) && empty($project->video_link ))
