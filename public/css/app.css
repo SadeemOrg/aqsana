@@ -556,6 +556,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[2\%\]{
   top: 2%;
 }
+.right-\[46\%\]{
+  right: 46%;
+}
 .z-30{
   z-index: 30;
 }
