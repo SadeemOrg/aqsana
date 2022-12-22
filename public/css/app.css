@@ -550,6 +550,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-6{
   right: 1.5rem;
 }
+.right-\[-16\%\]{
+  right: -16%;
+}
 .z-30{
   z-index: 30;
 }

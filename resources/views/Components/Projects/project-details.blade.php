@@ -23,6 +23,7 @@
 </style>
 
 @php
+// dd($project);
 $image = 'storage/'.$project->report_image;
 $whatsapp_phone = nova_get_setting('whatsapp_Connectus', 'default_value');
 $Correct_whatsapp_phone = str_replace(' ', '', $whatsapp_phone);
@@ -40,7 +41,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
 @endphp
 @endif
 
-<div class="bg-[#F2FFF285] py-16 pb-20 lg:mt-10">
+<div class=" py-16 pb-20 lg:mt-10">
     <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
         <div class="relative ">
             <p class="font-FlatBold text-xl sm:text-3xl max-w-6xl text-center mt-8 lg:mt-0 xl:text-right">
@@ -52,22 +53,22 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
         </div>
         <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full">
             <div class="absolute leftline1"></div>
-            <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 ">
-                <div class="w-full flex items-center justify-center mt-4">
+            <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 w-full text-center">
+                {{-- <div class="w-full flex items-center justify-center mt-4">
                     <img src="{{ asset($image) }}" alt="people_on_Mousq" class="w-[85%] aspect-auto rounded-[5px]">
-                </div>
-                <p class="text-[#349A37] text-[18px] md:text-[22px] pt-14 text-right pr-4">
+                </div> --}}
+                <p class="text-[#349A37] text-[18px] md:text-[22px] p-4 text-right pr-4 ">
                     {{ $project->project_name }}
                 </p>
                 @if(!empty($project->report_date))
-                <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">
+                <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4 w-full">
                     {{ $project->report_date }}
                 </p>
                 @endif
-                <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">
+                {{-- <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4">
                     أخبار الجمعية, أخبار وتقارير, أخبارنا, القدس والمسجد الأقصى, مشاريع الجمعية, مشاريع جمعية الأقصى,
                     مشاريعنا
-                </p>
+                </p> --}}
                 <p class="firstParagraph text-base text-[rgb(16,20,38)] font-noto_Regular px-4 pt-2 text-right">
                     {!! $project->report_contents !!}
                 </p>
@@ -163,7 +164,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                         <a href={{ $project->report_video_link }} class="mediabox rounded-[5px]
                             overflow-hidden relative">
                             <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full" src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
-                            <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[48%] right-[45%] " />
+                            <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[48%] right-[-16%] " />
                         </a>
                     </div>
                     @foreach ($pictures as $picture )
