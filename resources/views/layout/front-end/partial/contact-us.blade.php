@@ -19,10 +19,10 @@
 @if($type==1)
 <div class="relative z-10 contactusModel" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-    <div class="fixed inset-0 top-[14%] z-10 overflow-y-auto">
-        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+    <div class="fixed inset-0 top-[14%] 2xl:top-[8%] z-10 overflow-y-auto">
+        <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
             <div
-                class="tab relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:p-6">
+                class="tab relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <button type="button"
                 class="bg-white absolute right-8 top-10 closeModal mr-4 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <span class="sr-only">Close</span>
@@ -32,9 +32,11 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-                <img class="max-h-[550px] w-full" src="https://media.discordapp.net/attachments/938405759996276806/1042766455139217488/55.jpg?width=468&height=606"
+            <div class="flex flex-row items-center justify-center">
+                <img class="h-[550px] 2xl:h-[590px] max-w-[468px]" src="{{ asset('assets/image/e1c40753-6791-4deb-a462-df0c9997ac2f.jpg') }} "
                     alt="donation">
             </div>
+        </div>
         </div>
     </div>
 </div>
