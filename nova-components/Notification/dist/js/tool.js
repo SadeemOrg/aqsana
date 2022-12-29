@@ -1051,6 +1051,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1135,6 +1136,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     toggleTabs: function toggleTabs(tabNumber) {
       this.openTab = tabNumber;
+    },
+    UNCompletNotifications: function UNCompletNotifications($event) {
+      axios.post("/UNCompletNotifications", {
+        Notificationsid: $event
+      });
+      this.myNotifications();
     },
     CompletNotifications: function CompletNotifications($event) {
       axios.post("/CompletNotifications", {
@@ -1306,7 +1313,14 @@ var render = function() {
                                 {
                                   staticClass:
                                     "shadow bg-gray-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded",
-                                  attrs: { disabled: "", type: "submit" }
+                                  attrs: { type: "submit" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.UNCompletNotifications(
+                                        Notification.id
+                                      )
+                                    }
+                                  }
                                 },
                                 [
                                   _vm._v(

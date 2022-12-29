@@ -5,7 +5,7 @@ use App\Models\User;
 use Notification;
 use App\Notifications\TasksNotification;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 class NotificationController extends Controller
 {
     public function __construct()
@@ -19,7 +19,13 @@ class NotificationController extends Controller
     }
     public function CompletNotifications(Request $request)
     {
-        \App\Models\Notification::where('id',$request->Notificationsid) ->update(['read_at' =>' 2022-11-01 12:41:30']);
+        \App\Models\Notification::where('id',$request->Notificationsid) ->update(['read_at' => Carbon::now()]);
+
+    }
+
+    public function UNCompletNotifications(Request $request)
+    {
+        \App\Models\Notification::where('id',$request->Notificationsid) ->update(['read_at' => null]);
 
     }
     public function myNotification()

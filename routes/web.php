@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationTest;
 use App\Http\Controllers\NotificationController;
 
-
+// use App\Http\Livewire\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -132,8 +132,7 @@ Route::post('/myNotification', [NotificationController::class, 'myNotification']
 Route::post('/AdminNotifications', [NotificationController::class, 'AdminNotifications'])->name('AdminNotifications');
 
 Route::post('/CompletNotifications', [NotificationController::class, 'CompletNotifications'])->name('CompletNotifications');
-
-
+Route::post('/UNCompletNotifications', [NotificationController::class, 'UNCompletNotifications'])->name('UNCompletNotifications');
 
 
 
@@ -141,5 +140,8 @@ Route::post('user/update', [HomeController::class, "updateuser"])->name('updateu
 Route::get("/WorkHours", [HomeController::class, "WorkHours"])->name('WorkHours');
 Route::get("/WorkHoursUser", [HomeController::class, "WorkHoursUser"])->name('WorkHoursUser');
 Route::get("/StartTimerWorkHours", [HomeController::class, "StartTimerWorkHours"])->name('StartTimerWorkHours');
+
+
+
 
 

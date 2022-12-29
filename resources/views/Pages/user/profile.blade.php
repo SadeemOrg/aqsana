@@ -13,8 +13,9 @@
             background-image: none;
         }
     </style>
-    {{-- <livewire:work-hours /> --}}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+
+        <livewire:notification />
         <div class="flex sm:flex-row flex-col sm:gap-y-0 gap-y-6 items-center justify-between mt-4 xl:mt-8">
             <div class="relative ">
                 <p itemprop="name" class="font-FlatBold text-3xl text-center xl:text-right"> لوحة التحكم</p>
