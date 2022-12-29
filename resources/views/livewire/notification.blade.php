@@ -1,5 +1,5 @@
 {{-- wire:poll.75ms --}}
-<div    class="flex ">
+<div   wire:poll.75ms  class="flex ">
 
     <div x-data="{ dropdownOpen: false }" class="relative ">
 
@@ -28,7 +28,8 @@
 
                 @php
                 $dataNotifications = json_decode($notification->data);
-                $img='/storage/'. $notification->user->photo;
+                // $img='/storage/'. $notification->user->photo;
+                $img='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVztexIh8wNm6hDjIwvVAQ73mfzMuWB6yqdviYpcyqQ&s'
                 // dd($img );
 
             @endphp
@@ -48,7 +49,7 @@
                   </div>
                   <div class="flex">
 
-                      <span class="font-bold" href="#">{{ $notification->user->name }}</span>
+                      {{-- <span class="font-bold" href="#">{{ $notification->user->name }}</span> --}}
                       <img class="h-8 w-8 rounded-full object-cover mx-1" src={{  $img }} alt="avatar">
                     </div>
 

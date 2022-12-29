@@ -24,16 +24,12 @@ class Notification extends Component
 
         $wordlist = ModelsNotification::where([
             ['notifiable_id',$id],
-            ['receive',null],
+            ['read_at',null],
 
         ])->get();
         $this->count = $wordlist->count();
 
-        ModelsNotification::where([
-            ['notifiable_id',$id],
-            ['receive',null],
 
-        ])->update(['receive' => 1]);
 
 
 
@@ -42,7 +38,7 @@ class Notification extends Component
         ->with('user')->get();
 
 
-        // $this->alertSuccess();
+        $this->alertSuccess();
         return view('livewire.notification');
     }
 
@@ -53,9 +49,27 @@ class Notification extends Component
      */
     public function alertSuccess()
     {
-        $this->count++;
-        $this->dispatchBrowserEvent('alert',
-                ['type' => 'success',  'message' => 'User Created Successfully! ' .$this->count]);
+        // $this->count++;
+
+        $id = Auth::id();
+        $receiveNotification=  ModelsNotification::where([
+            ['notifiable_id',$id],
+            ['receive',null],
+
+        ])->get();
+
+        foreach ($receiveNotification as $key => $notification) {
+            $dataNotifications = json_decode($notification->data);
+            $this->dispatchBrowserEvent('alert',
+            ['type' => 'success',  'message' => 'لديك مهمة جديدة ' .$dataNotifications->Notifications]);
+        }
+
+
+                ModelsNotification::where([
+                    ['notifiable_id',$id],
+                    ['receive',null],
+
+                ])->update(['receive' => 1]);
     }
 
     /**
