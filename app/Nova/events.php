@@ -75,8 +75,8 @@ class events extends Resource
             ->addLayout(__('Add new event'), 'type', [
                 Date::make(__('DATE'), 'events_date')->pickerDisplayFormat('d.m.Y'),
             ]),
-            Date::make(__('start DATE'), 'start_events_date')->pickerDisplayFormat('d.m.Y'),
-            Date::make(__('end DATE'), 'end_events_date')->pickerDisplayFormat('d.m.Y'),
+            Date::make(__('start Time'), 'start_events_date')->pickerDisplayFormat('d.m.Y'),
+            Date::make(__('end Time'), 'end_events_date')->pickerDisplayFormat('d.m.Y'),
             Text::make(__('Budget'),'Budget'),
             Flexible::make(__('Contacts'), 'Contacts')
 

@@ -123,7 +123,8 @@
                     py-2
                     rounded
                   "
-                  disabled
+                  @click="UNCompletNotifications(Notification.id)"
+
                   type="submit"
                 >
                   complet
@@ -494,6 +495,12 @@ export default {
     },
     toggleTabs: function (tabNumber) {
       this.openTab = tabNumber;
+    },
+    UNCompletNotifications: function ($event) {
+      axios.post("/UNCompletNotifications", {
+        Notificationsid: $event,
+      });
+      this.myNotifications();
     },
     CompletNotifications: function ($event) {
       axios.post("/CompletNotifications", {

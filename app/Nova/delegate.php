@@ -23,6 +23,13 @@ class delegate extends Resource
     {
         return __('QawafilAlaqsa');
     }
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("delegatee",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
