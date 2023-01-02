@@ -9,7 +9,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
-
+use AwesomeNova\Cards\FilterCard;
 class delegate extends Resource
 {
     /**
@@ -107,7 +107,9 @@ class delegate extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new FilterCard(new AreaDelegate()),
+        ];
     }
 
     /**
