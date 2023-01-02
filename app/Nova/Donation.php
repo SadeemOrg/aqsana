@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
+use App\Nova\Metrics\OutComeTransaction;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -304,7 +305,9 @@ class Donation extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new OutComeTransaction()
+        ];
     }
 
     /**

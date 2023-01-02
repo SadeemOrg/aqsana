@@ -1,5 +1,5 @@
 {{-- wire:poll.75ms --}}
-{{-- <script src="{{ asset('assets/js/push.min.js') }}"></script>
+<script src="{{ asset('assets/js/push.min.js') }}"></script>
 <script>
     const iconPath = '{{ asset('alaqsa.PNG') }}';
 </script>
@@ -25,7 +25,7 @@
             });
         </script>
     @endforeach
-@endif --}}
+@endif
 <div wire:poll.75ms class="flex ">
 
 
@@ -39,11 +39,13 @@
                         class="text-white absolute -top-1 -right-0 h-5 w-5 rounded-full bg-red-600 flex justify-center items-center items">
                         <span>{{ $count }}</span></span>
                 @endif
-                <svg class=" ml-1.5  h-7 w-7" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M23.4346 19.3279C23.3999 19.3279 23.3679 19.3333 23.3333 19.3333C17.4519 19.3333 12.6667 14.5481 12.6667 8.66675C12.6667 6.35596 13.4133 4.22144 14.6667 2.47192V1.33325C14.6667 0.595947 14.0693 0 13.3333 0C12.5974 0 12 0.595947 12 1.33325V2.77344C7.48389 3.42407 4 7.30811 4 12V15.7173C4 18.356 2.84399 20.8467 0.815918 22.5613C0.297363 23.0054 0 23.6506 0 24.3333C0 25.6201 1.04663 26.6667 2.33325 26.6667H24.3333C25.6201 26.6667 26.6667 25.6201 26.6667 24.3333C26.6667 23.6506 26.3694 23.0054 25.8374 22.5508C24.7866 21.6614 23.9761 20.5547 23.4346 19.3279Z" fill="#101426"/>
-                    </svg>
 
 
+                <svg class=" ml-1.5  h-7 w-7 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path
+                        d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                </svg>
             </strong>
         </button>
 
