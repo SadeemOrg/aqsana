@@ -28,6 +28,9 @@ class AreaDelegate extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
+         if($value=="non" )
+        { return $query;}
+
         return $query->where('Area',$value);
     }
 
@@ -41,6 +44,7 @@ class AreaDelegate extends Filter
     {
         $Areas = Area::all();
         $foo = array();
+        $foo['All']='non';
         foreach ($Areas as $Area)
         $foo[$Area->name]=$Area->id;
         return $foo;
