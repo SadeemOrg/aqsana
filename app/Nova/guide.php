@@ -23,6 +23,13 @@ class guide extends Resource
     {
         return __('Cultural Section');
     }
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("guide",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
