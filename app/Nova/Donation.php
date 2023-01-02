@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
-use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
+use Techouse\SelectAutoComplete\SelectAutoComplete ;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Pdmfc\NovaFields\ActionButton;
@@ -89,7 +90,7 @@ class Donation extends Resource
 
 
             Text::make(__('transact amount'), 'transact_amount'),
-            Select::make(__('Currenc'), "Currency")
+            SelectAutoComplete::make(__('Currenc'), "Currency")
                 ->options(function () {
                     $Alhisalats =  \App\Models\Currency::all();
                     $user_type_admin_array =  array();
@@ -102,7 +103,7 @@ class Donation extends Resource
                 ->displayUsingLabels(),
 
 
-                    Select::make(__('name'), "name")
+                SelectAutoComplete::make(__('name'), "name")
                         ->options(function () {
                             $Users =  \App\Models\TelephoneDirectory::where('type', '2')->get();
 
@@ -142,7 +143,7 @@ class Donation extends Resource
                     //     })
                     //     ->displayUsingLabels(),
 
-                    Select::make(__("billing language"), "lang")->options([
+                    SelectAutoComplete::make(__("billing language"), "lang")->options([
                         '1' => __('ar'),
                         '2' => __('en'),
                         '3' => __('hr'),
