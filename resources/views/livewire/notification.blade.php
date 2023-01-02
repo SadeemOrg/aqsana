@@ -1,5 +1,5 @@
 {{-- wire:poll.75ms --}}
-<script src="{{ asset('assets/js/push.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/push.min.js') }}"></script>
 <script>
     const iconPath = '{{ asset('alaqsa.PNG') }}';
 </script>
@@ -25,7 +25,7 @@
             });
         </script>
     @endforeach
-@endif
+@endif --}}
 <div wire:poll.75ms class="flex ">
 
 
