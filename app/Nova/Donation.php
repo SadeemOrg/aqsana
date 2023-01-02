@@ -143,6 +143,7 @@ class Donation extends Resource
                     //         return $user_type_admin_array;
                     //     })
                     //     ->displayUsingLabels(),
+                    Text::make(__('payment_reason'), "payment_reason")->rules('required'),
 
                     SelectAutoComplete::make(__("billing language"), "lang")->options([
                         '1' => __('ar'),
