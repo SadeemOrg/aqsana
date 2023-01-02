@@ -29,6 +29,8 @@ class CreateTransactionsTable extends Migration
             $table->string('description')->nullable();
 
             $table->char('lang', 1)->default(0);
+            $table->string('payment_reason')->nullable();
+
             $table->char('Payment_type', 1)->default(0);
             $table->json('Payment_type_details')->nullable();;
             $table->string('voucher')->nullable();
