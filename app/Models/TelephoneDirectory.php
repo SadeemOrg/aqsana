@@ -11,7 +11,7 @@ class TelephoneDirectory extends Model
     use HasFactory;
 
     protected $fillable = [
-    'name','email','type','phone_number','city','roles','jop','id_number'
+    'name','email','type','phone_number','city','roles','jop','id_number','Area'
    ];
 
    protected $casts = [
@@ -21,4 +21,10 @@ class TelephoneDirectory extends Model
 
 
 ];
+
+
+public function AreaDelegate()
+{
+    return $this->belongsTo(Area::class,'Area');
+}
 }
