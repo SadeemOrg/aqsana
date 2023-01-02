@@ -79,6 +79,7 @@ class Notification extends Component
      */
     public function alertError()
     {
+        $this->notify('Hello Web Artisan', 'Love beautiful code? We do too!');
         $this->dispatchBrowserEvent('alert',
                 ['type' => 'error',  'message' => 'Something is Wrong!']);
     }

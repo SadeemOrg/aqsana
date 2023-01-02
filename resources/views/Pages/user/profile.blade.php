@@ -15,15 +15,19 @@
     </style>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
 
-        <livewire:notification />
+
         <div class="flex sm:flex-row flex-col sm:gap-y-0 gap-y-6 items-center justify-between mt-4 xl:mt-8">
             <div class="relative ">
                 <p itemprop="name" class="font-FlatBold text-3xl text-center xl:text-right"> لوحة التحكم</p>
                 <div class="absolute border-b-[4px] pt-2 border-b-[#349A37]  w-28 hidden xl:block"></div>
             </div>
-            <button onclick="location.href='/Admin'"
-                class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">الذهاب
-                الى المنظومة</button>
+            <div class="flex ">
+                <livewire:notification />
+                <button onclick="location.href='/Admin'"
+                    class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">الذهاب
+                    الى المنظومة</button>
+            </div>
+
         </div>
         <!--Tabs -->
         <div class="mt-12 tabs-Number">

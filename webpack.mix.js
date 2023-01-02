@@ -15,3 +15,7 @@
  mix.js("resources/js/app.js", "public/js")
  .vue()
  .postCss("resources/css/app.css", "public/css", [require("tailwindcss")]);
+
+
+ mix.copy('node_modules/push.js/bin/push.min.js',
+    'public/assets/js/push.min.js');
