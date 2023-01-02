@@ -53,6 +53,7 @@ use Gwd\FlexibleContent\FlexibleContent;
 use Laravel\Nova\Panel;
 use App\Nova\Actions\ChangeRole;
 use App\Nova\Actions\ProjectStartEnd;
+use App\Nova\Metrics\NewQawafilAlaqsa;
 use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
 
@@ -625,7 +626,9 @@ class QawafilAlaqsa extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new NewQawafilAlaqsa()
+        ];
     }
 
     /**

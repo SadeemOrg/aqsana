@@ -19,6 +19,7 @@ use Epartment\NovaDependencyContainer\HasDependencies;
 use Alaqsa\Project\Project;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
+use App\Nova\Metrics\InComeTransaction;
 use MyApp\BillingSchedule\BillingSchedule ;
 use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -266,8 +267,9 @@ class PaymentVoucher extends Resource
     public function cards(Request $request)
     {
         return [
-
+           new InComeTransaction(),
            new Analytics(),
+
         ];
     }
 

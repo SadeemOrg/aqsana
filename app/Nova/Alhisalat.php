@@ -22,6 +22,7 @@ use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
 use App\Nova\Actions\AlhisalatSurrender;
 use App\Nova\Filters\AlhisalatStatusFilters;
+use App\Nova\Metrics\NewAlhisalat;
 use AwesomeNova\Cards\FilterCard;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
@@ -326,6 +327,7 @@ class Alhisalat extends Resource
     {
         return [
             new FilterCard(new AlhisalatStatusFilters()),
+            new NewAlhisalat()
         ];
     }
 
