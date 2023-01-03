@@ -1,11 +1,4 @@
-@php
-//     use Carbon\Carbon;
-//     $teste= '2014-12-12 15:00:00';
 
-// $enterDate = Carbon::createFromFormat('Y-m-d  H:i:s', $teste);
-
-// dd($enterDate->addSecond()->format('H:i:s') );
-@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -432,6 +425,43 @@
                 //Extra extra large
                 1400: {
                     items: 3
+                }
+            }
+        })
+
+        var owl5 = $("#association-news-slider-5");
+        owl5.owlCarousel({
+            rtl: true,
+            loop: false,
+            margin: 70,
+            stagePadding: 20,
+            dots: true,
+            responsive: {
+                //X-Small
+                0: {
+                    items: 1
+                },
+                //Medium
+                768: {
+                    items: 1
+                },
+                850: {
+                    items: 1
+                },
+                1024: {
+                    items:1
+                },
+                //Large
+                1120: {
+                    items: 1
+                },
+                //Extra large
+                1200: {
+                    items: 2
+                },
+                //Extra extra large
+                1400: {
+                    items: 2
                 }
             }
         })

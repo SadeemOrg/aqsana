@@ -457,11 +457,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-10{
   top: 2.5rem;
 }
-.top-\[2\%\]{
-  top: 2%;
+.top-\[42\%\]{
+  top: 42%;
 }
 .right-\[45\%\]{
   right: 45%;
+}
+.top-\[45\%\]{
+  top: 45%;
 }
 .left-\[-50px\]{
   left: -50px;
@@ -501,6 +504,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .-bottom-8{
   bottom: -2rem;
+}
+.bottom-\[3\%\]{
+  bottom: 3%;
+}
+.right-6{
+  right: 1.5rem;
+}
+.top-\[2\%\]{
+  top: 2%;
 }
 .right-\[46\%\]{
   right: 46%;
@@ -552,24 +564,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .top-\[75\%\]{
   top: 75%;
-}
-.right-6{
-  right: 1.5rem;
-}
-.bottom-8{
-  bottom: 2rem;
-}
-.bottom-2{
-  bottom: 0.5rem;
-}
-.-bottom-12{
-  bottom: -3rem;
-}
-.-bottom-16{
-  bottom: -4rem;
-}
-.bottom-\[3\%\]{
-  bottom: 3%;
 }
 .z-30{
   z-index: 30;
@@ -818,8 +812,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-\[250px\]{
   height: 250px;
 }
-.h-\[200px\]{
-  height: 200px;
+.h-\[80px\]{
+  height: 80px;
 }
 .h-\[88px\]{
   height: 88px;
@@ -833,14 +827,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-9{
   height: 2.25rem;
 }
+.h-\[550px\]{
+  height: 550px;
+}
 .h-\[432px\]{
   height: 432px;
 }
 .h-5{
   height: 1.25rem;
 }
-.h-\[450px\]{
-  height: 450px;
+.h-\[310px\]{
+  height: 310px;
+}
+.h-\[175px\]{
+  height: 175px;
 }
 .h-\[247px\]{
   height: 247px;
@@ -856,42 +856,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .h-\[270px\]{
   height: 270px;
-}
-.h-\[470px\]{
-  height: 470px;
-}
-.h-\[475px\]{
-  height: 475px;
-}
-.h-\[85px\]{
-  height: 85px;
-}
-.h-\[80px\]{
-  height: 80px;
-}
-.h-\[320px\]{
-  height: 320px;
-}
-.h-\[85\%\]{
-  height: 85%;
-}
-.h-\[100\%\]{
-  height: 100%;
-}
-.h-\[360px\]{
-  height: 360px;
-}
-.h-\[490px\]{
-  height: 490px;
-}
-.h-\[400px\]{
-  height: 400px;
-}
-.h-\[606px\]{
-  height: 606px;
-}
-.h-\[550px\]{
-  height: 550px;
 }
 .max-h-\[42px\]{
   max-height: 42px;
@@ -929,6 +893,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-\[17px\]{
   max-height: 17px;
 }
+.max-h-\[175px\]{
+  max-height: 175px;
+}
 .max-h-\[390px\]{
   max-height: 390px;
 }
@@ -941,27 +908,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-14{
   max-height: 3.5rem;
 }
-.max-h-16{
-  max-height: 4rem;
-}
-.max-h-20{
-  max-height: 5rem;
-}
-.max-h-\[85px\]{
-  max-height: 85px;
-}
-.max-h-\[320px\]{
-  max-height: 320px;
-}
-.max-h-\[360px\]{
-  max-height: 360px;
-}
-.max-h-full{
-  max-height: 100%;
-}
-.max-h-\[606px\]{
-  max-height: 606px;
-}
 .min-h-full{
   min-height: 100%;
 }
@@ -971,14 +917,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .min-h-\[294px\]{
   min-height: 294px;
 }
-.min-h-\[145px\]{
-  min-height: 145px;
-}
 .min-h-\[56px\]{
   min-height: 56px;
 }
-.min-h-\[350px\]{
-  min-height: 350px;
+.min-h-\[145px\]{
+  min-height: 145px;
 }
 .w-full{
   width: 100%;
@@ -1070,6 +1013,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-\[4oopx\]{
   width: 4oopx;
 }
+.w-\[184px\]{
+  width: 184px;
+}
 .w-\[165px\]{
   width: 165px;
 }
@@ -1078,21 +1024,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-auto{
   width: auto;
-}
-.w-\[620px\]{
-  width: 620px;
-}
-.w-\[90\%\]{
-  width: 90%;
-}
-.w-\[100\%\]{
-  width: 100%;
-}
-.w-\[00\%\]{
-  width: 00%;
-}
-.w-\[10\%\]{
-  width: 10%;
 }
 .min-w-fit{
   min-width: -moz-fit-content;
@@ -1177,23 +1108,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-4xl{
   max-width: 56rem;
 }
-.max-w-\[17px\]{
-  max-width: 17px;
-}
-.max-w-\[80\%\]{
-  max-width: 80%;
-}
-.max-w-\[95\%\]{
-  max-width: 95%;
-}
-.max-w-\[100\%\]{
-  max-width: 100%;
-}
-.max-w-\[640px\]{
-  max-width: 640px;
-}
 .max-w-\[468px\]{
   max-width: 468px;
+}
+.max-w-\[17px\]{
+  max-width: 17px;
 }
 .flex-1{
   flex: 1 1 0%;
@@ -1206,6 +1125,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .basis-1\/5{
   flex-basis: 20%;
+}
+.basis-\[50\%\]{
+  flex-basis: 50%;
 }
 .basis-1\/6{
   flex-basis: 16.666667%;
@@ -2342,17 +2264,17 @@ body{
   .sm\:h-full{
     height: 100%;
   }
+  .sm\:h-\[490px\]{
+    height: 490px;
+  }
+  .sm\:h-\[360px\]{
+    height: 360px;
+  }
   .sm\:h-56{
     height: 14rem;
   }
   .sm\:h-\[300px\]{
     height: 300px;
-  }
-  .sm\:h-\[360px\]{
-    height: 360px;
-  }
-  .sm\:h-\[490px\]{
-    height: 490px;
   }
   .sm\:max-h-\[360px\]{
     max-height: 360px;
@@ -2387,20 +2309,14 @@ body{
   .sm\:max-w-xl{
     max-width: 36rem;
   }
-  .sm\:max-w-2xl{
-    max-width: 42rem;
-  }
-  .sm\:max-w-\[250px\]{
-    max-width: 250px;
-  }
   .sm\:max-w-\[620px\]{
     max-width: 620px;
   }
-  .sm\:max-w-3xl{
-    max-width: 48rem;
-  }
   .sm\:max-w-lg{
     max-width: 32rem;
+  }
+  .sm\:max-w-\[250px\]{
+    max-width: 250px;
   }
   .sm\:flex-1{
     flex: 1 1 0%;
@@ -2411,8 +2327,8 @@ body{
   .sm\:flex-row{
     flex-direction: row;
   }
-  .sm\:flex-nowrap{
-    flex-wrap: nowrap;
+  .sm\:flex-col{
+    flex-direction: column;
   }
   .sm\:items-start{
     align-items: flex-start;
@@ -2533,12 +2449,6 @@ body{
   .md\:mr-0{
     margin-right: 0px;
   }
-  .md\:mt-8{
-    margin-top: 2rem;
-  }
-  .md\:mt-12{
-    margin-top: 3rem;
-  }
   .md\:block{
     display: block;
   }
@@ -2557,32 +2467,17 @@ body{
   .md\:h-\[300px\]{
     height: 300px;
   }
-  .md\:h-\[280px\]{
-    height: 280px;
-  }
   .md\:h-\[320px\]{
     height: 320px;
   }
   .md\:h-\[375px\]{
     height: 375px;
   }
-  .md\:h-\[360px\]{
-    height: 360px;
-  }
   .md\:max-h-72{
     max-height: 18rem;
   }
-  .md\:max-h-\[280px\]{
-    max-height: 280px;
-  }
   .md\:max-h-\[320px\]{
     max-height: 320px;
-  }
-  .md\:max-h-\[360px\]{
-    max-height: 360px;
-  }
-  .md\:max-h-\[325px\]{
-    max-height: 325px;
   }
   .md\:w-\[45\%\]{
     width: 45%;
@@ -2602,6 +2497,9 @@ body{
   .md\:w-\[50\%\]{
     width: 50%;
   }
+  .md\:w-\[184px\]{
+    width: 184px;
+  }
   .md\:w-\[200px\]{
     width: 200px;
   }
@@ -2614,29 +2512,20 @@ body{
   .md\:min-w-\[300px\]{
     min-width: 300px;
   }
-  .md\:max-w-\[380px\]{
-    max-width: 380px;
-  }
   .md\:max-w-2xl{
     max-width: 42rem;
   }
   .md\:max-w-\[170px\]{
     max-width: 170px;
   }
-  .md\:max-w-\[620px\]{
-    max-width: 620px;
+  .md\:basis-\[40\%\]{
+    flex-basis: 40%;
   }
-  .md\:max-w-\[640px\]{
-    max-width: 640px;
+  .md\:basis-\[60\%\]{
+    flex-basis: 60%;
   }
   .md\:flex-row{
     flex-direction: row;
-  }
-  .md\:flex-wrap-reverse{
-    flex-wrap: wrap-reverse;
-  }
-  .md\:flex-nowrap{
-    flex-wrap: nowrap;
   }
   .md\:items-start{
     align-items: flex-start;
@@ -2778,6 +2667,9 @@ body{
   .lg\:mb-4{
     margin-bottom: 1rem;
   }
+  .lg\:mt-12{
+    margin-top: 3rem;
+  }
   .lg\:mt-2{
     margin-top: 0.5rem;
   }
@@ -2786,9 +2678,6 @@ body{
   }
   .lg\:mr-0{
     margin-right: 0px;
-  }
-  .lg\:mt-12{
-    margin-top: 3rem;
   }
   .lg\:block{
     display: block;
@@ -2817,14 +2706,14 @@ body{
   .lg\:max-h-\[100\%\]{
     max-height: 100%;
   }
+  .lg\:max-h-\[320px\]{
+    max-height: 320px;
+  }
   .lg\:max-h-52{
     max-height: 13rem;
   }
   .lg\:max-h-\[400px\]{
     max-height: 400px;
-  }
-  .lg\:max-h-\[320px\]{
-    max-height: 320px;
   }
   .lg\:min-h-\[90px\]{
     min-height: 90px;
@@ -2853,41 +2742,20 @@ body{
   .lg\:w-\[110px\]{
     width: 110px;
   }
-  .lg\:w-\[620px\]{
-    width: 620px;
-  }
-  .lg\:w-\[600px\]{
-    width: 600px;
-  }
-  .lg\:w-\[580px\]{
-    width: 580px;
-  }
-  .lg\:w-\[560px\]{
-    width: 560px;
-  }
-  .lg\:w-\[570px\]{
-    width: 570px;
-  }
-  .lg\:w-\[460px\]{
-    width: 460px;
-  }
-  .lg\:w-\[640px\]{
-    width: 640px;
-  }
   .lg\:max-w-\[170px\]{
     max-width: 170px;
   }
   .lg\:max-w-\[200px\]{
     max-width: 200px;
   }
+  .lg\:max-w-\[640px\]{
+    max-width: 640px;
+  }
   .lg\:max-w-\[160px\]{
     max-width: 160px;
   }
   .lg\:max-w-\[185px\]{
     max-width: 185px;
-  }
-  .lg\:max-w-\[640px\]{
-    max-width: 640px;
   }
   .lg\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3019,14 +2887,17 @@ body{
   .xl\:max-h-\[550px\]{
     max-height: 550px;
   }
+  .xl\:w-\[570px\]{
+    width: 570px;
+  }
   .xl\:w-\[134px\]{
     width: 134px;
   }
   .xl\:w-auto{
     width: auto;
   }
-  .xl\:w-\[570px\]{
-    width: 570px;
+  .xl\:max-w-\[184px\]{
+    max-width: 184px;
   }
   .xl\:max-w-full{
     max-width: 100%;
@@ -3096,35 +2967,14 @@ body{
   }
 }
 @media (min-width: 1536px){
-  .\32xl\:top-\[5\%\]{
-    top: 5%;
-  }
-  .\32xl\:top-\[-4\%\]{
-    top: -4%;
-  }
-  .\32xl\:top-\[4\%\]{
-    top: 4%;
-  }
-  .\32xl\:top-\[14\%\]{
-    top: 14%;
-  }
   .\32xl\:top-\[8\%\]{
     top: 8%;
   }
   .\32xl\:h-96{
     height: 24rem;
   }
-  .\32xl\:h-\[606px\]{
-    height: 606px;
-  }
   .\32xl\:h-\[590px\]{
     height: 590px;
-  }
-  .\32xl\:max-h-\[60\%\]{
-    max-height: 60%;
-  }
-  .\32xl\:max-w-5xl{
-    max-width: 64rem;
   }
   .\32xl\:gap-x-8{
     -moz-column-gap: 2rem;

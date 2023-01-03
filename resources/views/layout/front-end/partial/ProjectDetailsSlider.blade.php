@@ -11,7 +11,6 @@
     @if(!empty($Articles))
     @foreach ($Articles as $article)
     @php
-    // dd($article);
     $img = 'storage/'.$article->image;
     @endphp
     <div class="p-3 item bg-white Card_shadow relative rounded-[5px] ">
