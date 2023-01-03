@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Alaqsa\Project\Project;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
 use App\Nova\Metrics\OutComeTransaction;
@@ -89,7 +90,7 @@ class Donation extends Resource
 
 
 
-
+            Project::make(__('ref_id'),'ref_id'),
             Text::make(__('transact amount'), 'transact_amount'),
             SelectAutoComplete::make(__('Currenc'), "Currency")
                 ->options(function () {
