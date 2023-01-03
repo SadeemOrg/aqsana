@@ -1,33 +1,5 @@
-{{-- wire:poll.75ms --}}
-<script src="{{ asset('assets/js/push.min.js') }}"></script>
-<script>
-    const iconPath = '{{ asset('alaqsa.PNG') }}';
-</script>
-@if (!$count == 0)
 
-    @foreach ($notificationsArray as $notification)
-        @php
-          $notificationsArraycount = $notificationsArray->count();
-            $dataNotifications = json_decode($notification->data);
-        @endphp
-
-        <script>
-            var bool = {!! json_encode($dataNotifications->Notifications) !!};
-            var bonotificationsArraycountol = {!! json_encode($notificationsArraycount) !!};
-            // toastr.error(bool);
-
-            // Loading button plugin (removed from BS4)
-
-            Push.create("Al-Aqsa Association", {
-                body: bool,
-                timeout: bonotificationsArraycountol*5000,
-                icon: iconPath
-            });
-        </script>
-    @endforeach
-@endif
-<div wire:poll.75ms class="flex ">
-
+<div wire:poll.1000ms class="flex ">
 
     <div x-data="{ dropdownOpen: false }" class="relative ">
 
@@ -101,4 +73,33 @@
             @endif
         </div>
     </div>
+    <script src="{{ asset('assets/js/push.min.js') }}"></script>
+<script>
+    const iconPath = '{{ asset('alaqsa.PNG') }}';
+</script>
+@if (!$receiveNotificationcount == 0)
+
+    @foreach ($receiveNotification as $notification)
+        @php
+            $notificationsArraycount = $notificationsArray->count();
+            $dataNotifications = json_decode($notification->data);
+        @endphp
+
+        <script>
+            var bool = {!! json_encode($dataNotifications->Notifications) !!};
+            var bonotificationsArraycountol = {!! json_encode($notificationsArraycount) !!};
+            // toastr.error(bool);
+
+            // Loading button plugin (removed from BS4)
+
+            Push.create("Al-Aqsa Association", {
+                body: bool,
+                timeout: bonotificationsArraycountol * 5000,
+                icon: iconPath
+            });
+        </script>
+    @endforeach
+@endif
 </div>
+{{--
+ --}}

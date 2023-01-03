@@ -14,8 +14,10 @@ class Notification extends Component
      *
      * @return response()
      */
-    public $count ;
-    public $notificationsArray= array();
+    public $count;
+    public $notificationsArray = array();
+    public  $receiveNotification;
+    public $receiveNotificationcount;
 
 
     public function render()
@@ -23,8 +25,8 @@ class Notification extends Component
         $id = Auth::id();
 
         $wordlist = ModelsNotification::where([
-            ['notifiable_id',$id],
-            ['read_at',null],
+            ['notifiable_id', $id],
+            ['read_at', null],
 
         ])->get();
         $this->count = $wordlist->count();
@@ -33,12 +35,25 @@ class Notification extends Component
 
 
 
-         $this->notificationsArray= ModelsNotification::where('notifiable_id', $id)->latest()->take(10)
-        ->orderBy('created_at', 'ASC')
-        ->with('user')->get();
+        $this->notificationsArray = ModelsNotification::where('notifiable_id', $id)->latest()->take(10)
+            ->orderBy('created_at', 'ASC')
+            ->with('user')->get();
 
 
-        $this->alertSuccess();
+            $this->receiveNotification =  ModelsNotification::where([
+                ['notifiable_id', $id],
+                ['receive', null],
+
+            ])->get();
+            $this->receiveNotificationcount = $this->receiveNotification->count();
+
+
+            ModelsNotification::where([
+                ['notifiable_id', $id],
+                ['receive', null],
+            ])->update(['receive' => 1]);
+            // $this->alertSuccess();
+
         return view('livewire.notification');
     }
 
@@ -49,27 +64,21 @@ class Notification extends Component
      */
     public function alertSuccess()
     {
+        $this->dd++;
         // $this->count++;
 
-        $id = Auth::id();
-        $receiveNotification=  ModelsNotification::where([
-            ['notifiable_id',$id],
-            ['receive',null],
+        // $id = Auth::id();
+        // $receiveNotification =  ModelsNotification::where([
+        //     ['notifiable_id', $id],
+        //     ['receive', null],
 
-        ])->get();
-
-        foreach ($receiveNotification as $key => $notification) {
-            $dataNotifications = json_decode($notification->data);
-            $this->dispatchBrowserEvent('alert',
-            ['type' => 'success',  'message' => 'لديك مهمة جديدة ' .$dataNotifications->Notifications]);
-        }
+        // ])->get();
 
 
-                ModelsNotification::where([
-                    ['notifiable_id',$id],
-                    ['receive',null],
-
-                ])->update(['receive' => 1]);
+        // ModelsNotification::where([
+        //     ['notifiable_id', $id],
+        //     ['receive', null],
+        // ])->update(['receive' => 1]);
     }
 
     /**
@@ -80,8 +89,10 @@ class Notification extends Component
     public function alertError()
     {
         $this->notify('Hello Web Artisan', 'Love beautiful code? We do too!');
-        $this->dispatchBrowserEvent('alert',
-                ['type' => 'error',  'message' => 'Something is Wrong!']);
+        $this->dispatchBrowserEvent(
+            'alert',
+            ['type' => 'error',  'message' => 'Something is Wrong!']
+        );
     }
 
     /**
@@ -91,8 +102,10 @@ class Notification extends Component
      */
     public function alertInfo()
     {
-        $this->dispatchBrowserEvent('alert',
-                ['type' => 'info',  'message' => 'Going Well!']);
+        $this->dispatchBrowserEvent(
+            'alert',
+            ['type' => 'info',  'message' => 'Going Well!']
+        );
     }
 }
 
