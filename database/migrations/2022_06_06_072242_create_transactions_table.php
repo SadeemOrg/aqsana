@@ -34,6 +34,7 @@ class CreateTransactionsTable extends Migration
             $table->char('Payment_type', 1)->default(0);
             $table->json('Payment_type_details')->nullable();;
             $table->string('voucher')->nullable();
+            $table->string('file')->nullable();
             $table->date('transaction_date');
 
             $table->unsignedBigInteger('Created_By')->nullable();

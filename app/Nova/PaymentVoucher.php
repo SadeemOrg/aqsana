@@ -20,6 +20,7 @@ use Alaqsa\Project\Project;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
 use App\Nova\Metrics\InComeTransaction;
+use Laravel\Nova\Fields\File;
 use MyApp\BillingSchedule\BillingSchedule ;
 use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -190,6 +191,7 @@ class PaymentVoucher extends Resource
             Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
             Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
+            File::make(__('file'), 'file')->disk('public')->prunable(),
 
             // Select::make(__('approval'), 'approval')->options([
             //     1 => 'approval',
