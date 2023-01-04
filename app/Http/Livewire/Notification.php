@@ -6,6 +6,7 @@ use App\Models\Notification as ModelsNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Carbon\Carbon;
 
 class Notification extends Component
 {
@@ -16,7 +17,8 @@ class Notification extends Component
      */
     public $count;
     public $notificationsArray = array();
-    public  $receiveNotification;
+    public $receiveNotification;
+    public $notificationTime;
     public $receiveNotificationcount;
 
 

@@ -559,6 +559,21 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[75\%\]{
   top: 75%;
 }
+.right-2{
+  right: 0.5rem;
+}
+.-right-10{
+  right: -2.5rem;
+}
+.-right-8{
+  right: -2rem;
+}
+.-right-4{
+  right: -1rem;
+}
+.-right-2{
+  right: -0.5rem;
+}
 .z-30{
   z-index: 30;
 }
@@ -925,6 +940,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-14{
   max-height: 3.5rem;
 }
+.max-h-\[30px\]{
+  max-height: 30px;
+}
 .min-h-full{
   min-height: 100%;
 }
@@ -942,6 +960,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .min-h-screen{
   min-height: 100vh;
+}
+.min-h-\[400px\]{
+  min-height: 400px;
+}
+.min-h-\[250px\]{
+  min-height: 250px;
+}
+.min-h-\[150px\]{
+  min-height: 150px;
 }
 .w-full{
   width: 100%;
@@ -1143,6 +1170,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-\[65px\]{
   max-width: 65px;
 }
+.max-w-\[30px\]{
+  max-width: 30px;
+}
 .flex-none{
   flex: none;
 }
@@ -1175,6 +1205,21 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .basis-\[20\%\]{
   flex-basis: 20%;
+}
+.basis-1\/4{
+  flex-basis: 25%;
+}
+.basis-3\/4{
+  flex-basis: 75%;
+}
+.basis-2\/4{
+  flex-basis: 50%;
+}
+.basis-2\/5{
+  flex-basis: 40%;
+}
+.basis-3\/5{
+  flex-basis: 60%;
 }
 .border-collapse{
   border-collapse: collapse;
@@ -1402,6 +1447,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-0{
   border-width: 0px;
 }
+.border-2{
+  border-width: 2px;
+}
 .border-b-2{
   border-bottom-width: 2px;
 }
@@ -1459,6 +1507,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-\[\#CCDDFF\]{
   --tw-border-opacity: 1;
   border-color: rgb(204 221 255 / var(--tw-border-opacity));
+}
+.border-black{
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 .border-b-\[\#349A37\]{
   --tw-border-opacity: 1;
@@ -1550,6 +1602,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-\[\#349a37\]{
   --tw-bg-opacity: 1;
   background-color: rgb(52 154 55 / var(--tw-bg-opacity));
+}
+.bg-\[\#242526\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(36 37 38 / var(--tw-bg-opacity));
+}
+.bg-\[\#ffffff\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+.bg-\[\#f1fff1\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 255 241 / var(--tw-bg-opacity));
 }
 .bg-opacity-75{
   --tw-bg-opacity: 0.75;
