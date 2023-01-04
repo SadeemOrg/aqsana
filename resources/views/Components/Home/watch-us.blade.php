@@ -16,15 +16,17 @@
         -webkit-animation-name: mediabox;
         animation-name: mediabox;
     }
-    .leftline {
+
+    .leftline12 {
         /* content:"\A"; */
         width: 13px;
         height: 97.5%;
         background: #349A37;
         right: 10;
         /* display:inline-block; */
-        margin: 0 -32px;
+        margin: 0 -23px;
     }
+
     @-webkit-keyframes mediabox {
         0% {
             opacity: 0;
@@ -143,8 +145,8 @@
 
 
 @php
-$videohome = nova_get_setting('videohome', 'default_value');
-
+    $videohome = nova_get_setting('videohome', 'default_value');
+    
 @endphp
 <div class="relative mt-20 xl:mt-20 mb-10 lg:mb-0">
     <p class="font-FlatBold text-xl sm:text-[27px] text-center mt-8 lg:mt-0 xl:text-right">
@@ -155,134 +157,143 @@ $videohome = nova_get_setting('videohome', 'default_value');
 <!--Starting Slider -->
 
 <!--Slider Content -->
-<div class="owl-carousel owl-theme owl-loaded dots-style" id="association-news-slider-2">
+<div class="owl-carousel owl-theme owl-loaded dots-style" id="association-news-slider-5">
 
-    @if(is_array($videohome)==true && !empty($videohome))
-    @foreach ($videohome as $video)
-
-    @php
-    $img = $video['data']['cover'];
-    @endphp
-    <div class="p-3 scalabel-img-box item bg-white Card_shadow relative rounded-[5px] ">
-        <div class="absolute leftline"></div>
-        <div
-            class="flex flex-row flex-wrap-reverse lg:flex-nowrap items-center lg:items-start justify-center gap-x-2 bg-[#E4FFE585]  rounded-[5px]  p-3 ">
-            <div class="relative">
-                <a href={{ $video['data']['link'] }} class="mediabox rounded-[5px] overflow-hidden block">
-                    <img class="scale-hover lg:block md:max-w-[380px] md:h-[280px] h-[200px] md:max-h-[280px] object-fill"
-                        src="{{ asset($img) }}" alt="people_on_Mousq" />
-                    <img src="{{ asset('assets/image/play_Svg.svg') }}"
-                        class="absolute max-w-[46px] top-[40%] md:top-[48%] left-[46%]" /></a>
-            </div>
-        </div>
-        <p class="w-full text-center absolute font-FlatBold -bottom-8 overflow-y-hidden max-h-7">
+    @if (is_array($videohome) == true && !empty($videohome))
+        @foreach ($videohome as $video)
+            @php
+                $img = $video['data']['cover'];
+            @endphp
+            <div class="p-3 scalabel-img-box item bg-white Card_shadow relative rounded-[5px] ">
+                <div class="absolute leftline12"></div>
+                <div
+                    class=" relative flex flex-row flex-nowrap items-start lg:items-start justify-center gap-x-2 bg-[#E4FFE585] xl:w-[570px] h-auto sm:h-[490px] rounded-[5px]  p-3 ">
+                    <div class="relative flex justify-center items-center w-full lg:max-w-[640px] lg:max-h-[320px]">
+                        <a href={{ $video['data']['link'] }} class="mediabox rounded-[5px] overflow-hidden block">
+                            <img class="scale-hover lg:block w-[85%] sm:max-w-[620px] sm:h-[360px] h-auto sm:max-h-[360px] object-fill lg:mt-12 rounded-md"
+                                src="{{ asset($img) }}" alt="people_on_Mousq" />
+                            <img src="{{ asset('assets/image/play_Svg.svg') }}"
+                                class="absolute max-w-[46px] top-[40%] md:top-[48%] left-[46%]" /></a>
+                    </div>
+                    <p class="block sm:hidden w-full text-center absolute font-FlatBold -bottom-8 overflow-y-hidden max-h-7">
             
-            {{ $video['data']['Title']?$video['data']['Title']:"منظومة الاقصى" }}  </p>
-    </div>
-    @endforeach
+                        {{ $video['data']['Title']?$video['data']['Title']:"منظومة الاقصى" }}  </p>
+                    <div
+                        class="writing sm:flex justify-center absolute hidden bottom-[3%] right-6 left-6 h-[80px] text-center w-[95%]  ">
+                        <div itemprop="title"
+                            class="flex flex-row items-center justify-center text-white bg-[#349A37]  font-bold text-sm sm:text-lg min-h-[56px] rounded-md px-2 overflow-y-hidden text-center w-[95%]">
+                            <p> {{ $video['data']['Title'] ? $video['data']['Title'] : 'منظومة الاقصى' }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     @endif
 </div>
 
 <script type="text/javascript">
-    (function (root, factory) {
-    "use strict";
-    if (typeof define === 'function' && define.amd) {
-        define([], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory();
-    } else {
-        root.MediaBox = factory();
-    }
-}(this, function () {
-    "use strict";
-
-    var MediaBox = function (element) {
-        if (!this || !(this instanceof MediaBox)) {
-            return new MediaBox(element);
+    (function(root, factory) {
+        "use strict";
+        if (typeof define === 'function' && define.amd) {
+            define([], factory);
+        } else if (typeof exports === 'object') {
+            module.exports = factory();
+        } else {
+            root.MediaBox = factory();
         }
+    }(this, function() {
+        "use strict";
 
-        this.selector = document.querySelectorAll(element);
-        this.root     = document.querySelector('body');
-        this.run();
-    };
+        var MediaBox = function(element) {
+            if (!this || !(this instanceof MediaBox)) {
+                return new MediaBox(element);
+            }
 
-    MediaBox.prototype = {
-        run: function () {
-            Array.prototype.forEach.call(this.selector, function (el) {
-                el.addEventListener('click', function (e) {
-                    e.preventDefault();
+            this.selector = document.querySelectorAll(element);
+            this.root = document.querySelector('body');
+            this.run();
+        };
 
-                    var link = this.parseUrl(el.getAttribute('href'));
-                    this.render(link);
-                    this.close();
+        MediaBox.prototype = {
+            run: function() {
+                Array.prototype.forEach.call(this.selector, function(el) {
+                    el.addEventListener('click', function(e) {
+                        e.preventDefault();
+
+                        var link = this.parseUrl(el.getAttribute('href'));
+                        this.render(link);
+                        this.close();
+                    }.bind(this), false);
+                }.bind(this));
+            },
+            template: function(s, d) {
+                var p;
+
+                for (p in d) {
+                    if (d.hasOwnProperty(p)) {
+                        s = s.replace(new RegExp('{' + p + '}', 'g'), d[p]);
+                    }
+                }
+                return s;
+            },
+            parseUrl: function(url) {
+                var service = {},
+                    matches;
+
+                if (matches = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/)) {
+                    service.provider = "youtube";
+                    service.id = matches[2];
+                } else if (matches = url.match(
+                        /https?:\/\/(?:www\.)?vimeo.com\/(?:channels\/|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/
+                    )) {
+                    service.provider = "vimeo";
+                    service.id = matches[3];
+                } else {
+                    service.provider = "Unknown";
+                    service.id = '';
+                }
+
+                return service;
+            },
+            render: function(service) {
+                var embedLink,
+                    lightbox;
+
+                if (service.provider === 'youtube') {
+                    embedLink = 'https://www.youtube.com/embed/' + service.id;
+                } else if (service.provider === 'vimeo') {
+                    embedLink = 'https://player.vimeo.com/video/' + service.id;
+                } else {
+                    throw new Error("Invalid video URL");
+                }
+
+                lightbox = this.template(
+                    '<div class="mediabox-wrap"><div class="mediabox-content"><span class="mediabox-close"></span><iframe src="{embed}?autoplay=1" frameborder="0" allowfullscreen></iframe></div></div>', {
+                        embed: embedLink
+                    });
+
+                this.root.insertAdjacentHTML('beforeend', lightbox);
+            },
+            close: function() {
+                var wrapper = document.querySelector('.mediabox-wrap');
+
+                wrapper.addEventListener('click', function(e) {
+                    if (e.target && e.target.nodeName === 'SPAN' && e.target.className ===
+                        'mediabox-close') {
+                        wrapper.classList.add('mediabox-hide');
+                        setTimeout(function() {
+                            this.root.removeChild(wrapper);
+                        }.bind(this), 500);
+                    }
                 }.bind(this), false);
-            }.bind(this));
-        },
-        template: function (s, d) {
-            var p;
-
-            for (p in d) {
-                if (d.hasOwnProperty(p)) {
-                    s = s.replace(new RegExp('{' + p + '}', 'g'), d[p]);
-                }
             }
-            return s;
-        },
-        parseUrl: function (url) {
-            var service = {},
-                matches;
+        };
 
-            if (matches = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/)) {
-                service.provider = "youtube";
-                service.id       = matches[2];
-            } else if (matches = url.match(/https?:\/\/(?:www\.)?vimeo.com\/(?:channels\/|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/)) {
-                service.provider = "vimeo";
-                service.id       = matches[3];
-            } else {
-                service.provider = "Unknown";
-                service.id       = '';
-            }
-
-            return service;
-        },
-        render: function (service) {
-            var embedLink,
-                lightbox;
-
-            if (service.provider === 'youtube') {
-                embedLink = 'https://www.youtube.com/embed/' + service.id;
-            } else if (service.provider === 'vimeo') {
-                embedLink = 'https://player.vimeo.com/video/' + service.id;
-            } else {
-                throw new Error("Invalid video URL");
-            }
-
-            lightbox = this.template(
-                '<div class="mediabox-wrap"><div class="mediabox-content"><span class="mediabox-close"></span><iframe src="{embed}?autoplay=1" frameborder="0" allowfullscreen></iframe></div></div>', {
-                    embed: embedLink
-                });
-
-            this.root.insertAdjacentHTML('beforeend', lightbox);
-        },
-        close: function () {
-            var wrapper = document.querySelector('.mediabox-wrap');
-
-            wrapper.addEventListener('click', function (e) {
-                if (e.target && e.target.nodeName === 'SPAN' && e.target.className === 'mediabox-close') {
-                    wrapper.classList.add('mediabox-hide');
-                    setTimeout(function() {
-                        this.root.removeChild(wrapper);
-                    }.bind(this), 500);
-                }
-            }.bind(this), false);
-        }
-    };
-
-    return MediaBox;
-}));
+        return MediaBox;
+    }));
 
 
-//Initialize the MediaBox.
+    //Initialize the MediaBox.
 
-MediaBox('.mediabox');
+    MediaBox('.mediabox');
 </script>
