@@ -694,6 +694,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-\[9\%\]{
   right: 9%;
 }
+.-bottom-\[25\%\]{
+  bottom: -25%;
+}
 .z-30{
   z-index: 30;
 }
