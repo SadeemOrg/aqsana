@@ -33,7 +33,7 @@
                 <img src="{{ asset('assets/image/2SG4XFNXK4WfehAE1eroA7kp7Y341RMs8f4ObPLO.png') }}" class="w-48 h-48 "
                     alt="">
             </div>
-            <div class="lg:block hidden absolute right-[9%] xl:right-[15%] -bottom-[70%]">
+            <div class="lg:block hidden absolute right-[9%] xl:right-[15%] -bottom-[25%]">
                 <svg width="280" height="150" viewBox="0 0 355 178" fill="none" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink">
                     <rect width="355" height="178" fill="url(#pattern0)" />
