@@ -385,7 +385,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
             new Tabs(__('Connect with us'), [
                 __('Connect with us')    => [
-
                     Text::make(__('heder text'), 'heder_text_main_Connectus'),
                     Text::make(__('title'), 'text_main_Connectus'),
                     Text::make(__('sup text'), 'sup_text_main_Connectus'),
@@ -401,7 +400,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make(__('filed 3'), 'filed3_Connectus'),
                     Text::make(__('button  text'), 'text_form_Connectus'),
                 ],
-
             ]),
         ]);
 
