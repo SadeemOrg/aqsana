@@ -2,11 +2,14 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\AreaDelegate;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
-
+use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
+use AwesomeNova\Cards\FilterCard;
 class delegate extends Resource
 {
     /**
@@ -22,6 +25,13 @@ class delegate extends Resource
     public static function group()
     {
         return __('QawafilAlaqsa');
+    }
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("delegatee",  $request->user()->userrole()) )){
+            return true;
+        }
+       else return false;
     }
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -66,6 +76,21 @@ class delegate extends Resource
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
             Text::make(__('phone_number'), 'phone_number'),
+            Select::make(__('Area'), 'Area')
+            ->options(function () {
+                $Areas =  \App\Models\Area::all();
+
+                $Area_type_admin_array =  array();
+
+                foreach ($Areas as $Area) {
+
+
+                    $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                }
+
+                return $Area_type_admin_array;
+            })->hideFromIndex()->hideFromDetail(),
+            BelongsTo::make(__('Area'), 'AreaDelegate', \App\Nova\Area::class)->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('city'), 'city'),
         ];
     }
@@ -82,7 +107,9 @@ class delegate extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new FilterCard(new AreaDelegate()),
+        ];
     }
 
     /**
@@ -93,7 +120,9 @@ class delegate extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new AreaDelegate
+        ];
     }
 
     /**

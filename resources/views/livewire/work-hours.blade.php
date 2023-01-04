@@ -3,37 +3,37 @@
     <div class="flex sm:flex-row flex-col gap-y-4 sm:gap-y-0 items-center justify-between mt-8">
         <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات العمل</p>
         <form wire:submit.prevent="sershWorkHours">
-        <div class="flex flex-row items-center  gap-x-2 ">
-            <!--Date Picker -->
+            <div class="flex flex-row items-center  gap-x-2 ">
+                <!--Date Picker -->
 
 
-            <div dir="ltr" class="relative">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <div dir="ltr" class="relative">
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    </div>
+
+                    <input type="date" wire:model="FromDate"
+                        class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
+                        placeholder="من">
+                </div>
+                <div dir="ltr" class="relative">
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    </div>
+                    <input type="date" wire:model="ToDate"
+                        class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
+                        placeholder="من">
                 </div>
 
-                <input  type="date" wire:model="FromDate"
-                    class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
-                    placeholder="من">
-            </div>
-            <div dir="ltr" class="relative">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+
+
+                <!--end Picker -->
+                <div class="-mt-2">
+                    <button type="submit"
+                        class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                        تطبيق
+                    </button>
                 </div>
-                <input  type="date" wire:model="ToDate"
-                class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
-                placeholder="من">
             </div>
-
-
-
-            <!--end Picker -->
-            <div class="-mt-2">
-                <button type="submit"
-                    class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
-                    تطبيق
-                </button>
-            </div>
-        </div>
-    </form>
+        </form>
     </div>
     <!--End Perosonal Information -->
     <!--Start Timer -->
@@ -84,66 +84,79 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-                        {{-- <button type="button"
-                            class="bg-white w-full absolute right-8 top-10 closeModal mr-4 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            <span class="sr-only">Close</span>
-                            <!-- Heroicon name: outline/x -->
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="2" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button> --}}
-                        {{-- <img class="max-h-[550px] w-full"
-                        src="https://media.discordapp.net/attachments/938405759996276806/1042766455139217488/55.jpg?width=468&height=606"
-                        alt="donation"> --}}
-                        <p class="w-full text-center mt-2 text-[20px] text-[#151630]">سبب المغادرة</p>
-                        <!--First One -->
-                        <div class="mt-2 selectdiv">
-                            <select wire:model="leaveGoal"
-                                class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:border-[#349A37]">
-                                <option selected value="">الرجاء
-                                    ادخال سبب المغادرة</option>
-                                <option value="1">
-                                    العمل الميداني</option>
-                                <option value="2">
-                                    انهاء العمل بشكل كامل</option>
-                                <option value="3">
-                                    اخرى</option>
-                            </select>
-                        </div>
-                        
-                        <!--EndFirst One -->
-                        <!--second Page -->
-                        {{-- <div class="mt-2 selectdiv">
-                            <select wire:model="leaveGoal"
-                                class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
-                                <option selected value="" >
-                                    مغادرة لمدة</option>
-                                <option>
-                                    العمل الميداني</option>
-                                <option value="2">
-                                    انهاء العمل بشكل كامل</option>
-                                <option>
-                                    اخرى</option>
-                            </select>
-                        </div>
-                        <div class="ml-1  pt-6 px-8 lg:px-0 ">
-                            <textarea rows="4" name="message"  placeholder="سبب المغادرة"
-                                class="w-full  inline-flex items-center text-right  justify-center border-[#349A37] border  rounded-[10px] focus:ring-[#349A37] focus:border-[#349A37] sm:text-sm p-4"></textarea>
-                        </div>
-                        <div class="mt-2 selectdiv">
-                            <select wire:model="leaveGoal"
-                                class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
-                                <option selected  value="">
-                                    مدة المغادرة</option>
-                                <option value="1">
-                                    العمل الميداني</option>
-                                <option value="2">
-                                    انهاء العمل بشكل كامل</option>
-                                <option value="3">
-                                    اخرى</option>
-                            </select>
-                        </div> --}}
+
+                        @if ($form == 0)
+                            <form wire:submit.prevent="ModelForm">
+                                <p class="w-full text-center mt-2 text-[20px] text-[#151630]">سبب المغادرة</p>
+                                <!--First One -->
+                                <div class="mt-2 selectdiv">
+
+                                    <select name="offer_id" id="parent_id" data-dependent="details"
+                                        wire:model="ModelSelct" wire:click="changeEvent($event.target.value)"
+                                        class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:border-[#349A37]">
+                                        <option value="0">
+                                            اختر
+                                        </option>
+                                        <option value="1">
+                                            انهاء دوام
+                                        </option>
+                                        <option value="2">
+                                            مغادرة
+                                        </option>
+
+
+
+
+                                    </select>
+
+
+                                </div>
+                                @if ($showTable == 2)
+                                    <div class="mt-2 selectdiv">
+                                        <select wire:model="Timeleave"
+                                            class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
+                                            <option selected value="">الوقت</option>
+                                            @foreach ($TimeDpartures as $TimeDparture)
+                                                <option value={{ $TimeDparture->attributes->time_departure }}>
+                                                    {{ $TimeDparture->attributes->title_departure }}
+                                                </option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                    <div class="mt-2 selectdiv">
+                                        <select wire:model="leaveGoal" wire:click="changeEvent2($event.target.value)"
+                                            class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
+                                            <option selected value="">الرجاء
+                                                ادخال سبب المغادرة</option>
+                                            @foreach ($Reasons_to_stop as $Reasons)
+                                                <option value={{ $Reasons->attributes->Reasons_to_stop }}>
+                                                    {{ $Reasons->attributes->Reasons_to_stop }}
+                                                </option>
+                                            @endforeach
+                                            <option value="اخرى">
+                                                اخرى
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                @endif
+                                @if ($showTable2 == 'اخرى' && $showTable == 2)
+                                    <div class="ml-1  pt-6 px-8 lg:px-0 ">
+                                        <textarea wire:model="leaveGoalTextarea" rows="4" name="message" placeholder="سبب المغادرة"
+                                            class="w-full  inline-flex items-center text-right  justify-center border-[#349A37] border  rounded-[10px] focus:ring-[#349A37] focus:border-[#349A37] sm:text-sm p-4"></textarea>
+                                    </div>
+                                @endif
+                                <div class="mt-2">
+                                    <button type="submit"
+                                        class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                                        تطبيق
+                                    </button>
+                                </div>
+                            </form>
+                        @endif
+
+
                         <!--Endsecond Page -->
                     </div>
                 </div>
@@ -155,7 +168,71 @@
 
     <!--End Timer -->
     <!--Start with Table -->
-    @include('Components.User.UserTable', ['tab' => '2'])
+
+
+
+
+    <div class="px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="mt-8 flex flex-col">
+            <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                            <tr>
+
+                                <th scope="col"
+                                    class="py-3.5 pl-4 pr-3 text-right text-sm font-semibold text-[#349A37] ">
+                                    اليوم</th>
+                                <th scope="col"
+                                    class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">
+                                    التاريخ
+                                </th>
+                                <th scope="col"
+                                    class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">ساعة
+                                    البدء
+                                </th>
+                                <th scope="col"
+                                    class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">ساعة
+                                    الانتهاء</th>
+                                <th scope="col"
+                                    class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37] min-w-[150px]">
+                                    عدد
+                                    ساعات العمل</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            @foreach ($WorkHourssearch as $WorkHoursearch)
+                                <tr>
+
+                                    <td
+                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
+                                        {{ $WorkHoursearch->day}}</td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">  {{ $WorkHoursearch->date}}</td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                        {{ $WorkHoursearch->start_time}}</td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">{{ $WorkHoursearch->end_time}}</td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">{{ $WorkHoursearch->day_hours}}
+                                    </td>
+                                </tr>
+                            @endforeach
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    {{-- @include('Components.User.UserTable', ['tab' => '2','dataaaa'=> $WorkHoursearchs]) --}}
+
+    {{-- @include('Components.User.UserTable', ['items' => $item['children']])
+    @include('Components.User.UserTable', ['ee'=>$WorkHoursearchs]) --}}
     <!--End with Table -->
 
 

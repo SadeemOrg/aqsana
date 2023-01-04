@@ -22,7 +22,10 @@ class Notification extends Model
 
         'id' => 'string'
     ];
-
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User','sender_id');
+    }
     public function myid()
     {
         return $this->id;

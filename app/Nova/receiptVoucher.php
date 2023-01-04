@@ -39,7 +39,7 @@ class receiptVoucher extends Resource
     public static $title = 'id';
     public static function label()
     {
-        return __('Alhisalat');
+        return __('Collect Alhisalat');
     }
     public static function group()
     {

@@ -2,8 +2,10 @@
 
 namespace App\Nova;
 
+use Alaqsa\Project\Project;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
+use App\Nova\Metrics\OutComeTransaction;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
-use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
+use Techouse\SelectAutoComplete\SelectAutoComplete ;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Pdmfc\NovaFields\ActionButton;
@@ -87,9 +90,9 @@ class Donation extends Resource
 
 
 
-
+            Project::make(__('ref_id'),'ref_id'),
             Text::make(__('transact amount'), 'transact_amount'),
-            Select::make(__('Currenc'), "Currency")
+            SelectAutoComplete::make(__('Currenc'), "Currency")
                 ->options(function () {
                     $Alhisalats =  \App\Models\Currency::all();
                     $user_type_admin_array =  array();
@@ -102,7 +105,7 @@ class Donation extends Resource
                 ->displayUsingLabels(),
 
 
-                    Select::make(__('name'), "name")
+                SelectAutoComplete::make(__('name'), "name")
                         ->options(function () {
                             $Users =  \App\Models\TelephoneDirectory::where('type', '2')->get();
 
@@ -141,8 +144,9 @@ class Donation extends Resource
                     //         return $user_type_admin_array;
                     //     })
                     //     ->displayUsingLabels(),
+                    Text::make(__('payment_reason'), "payment_reason")->rules('required'),
 
-                    Select::make(__("billing language"), "lang")->options([
+                    SelectAutoComplete::make(__("billing language"), "lang")->options([
                         '1' => __('ar'),
                         '2' => __('en'),
                         '3' => __('hr'),
@@ -303,7 +307,9 @@ class Donation extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new OutComeTransaction()
+        ];
     }
 
     /**

@@ -13,6 +13,7 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\File;
 use Acme\MultiselectField\Multiselect;
 use App\CPU\Helpers;
+use App\Models\address;
 use App\Models\User;
 use App\Models\Income;
 use App\Models\Notification;
@@ -21,6 +22,7 @@ use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
 use App\Nova\Actions\AlhisalatSurrender;
 use App\Nova\Filters\AlhisalatStatusFilters;
+use App\Nova\Metrics\NewAlhisalat;
 use AwesomeNova\Cards\FilterCard;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
@@ -36,7 +38,7 @@ use phpDocumentor\Reflection\PseudoTypes\True_;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
-
+use Mauricewijnia\NovaMapsAddress\MapsAddress;
 
 class Alhisalat extends Resource
 {
@@ -151,7 +153,7 @@ class Alhisalat extends Resource
                 })->readonly()->text(__('sent done'))->showLoadingAnimation()
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
-            Select::make(__('address'), 'address_id')
+            Select::make(__('saved addresss'), 'address_id')
                 ->options(function () {
                     $id = Auth::id();
                     $addresss =  \App\Models\address::where('type', '2')->get();
@@ -169,7 +171,7 @@ class Alhisalat extends Resource
                 ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 }),
-            BelongsTo::make(__('address'), 'address', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('saved addresss'), 'address', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
             Flexible::make(__('newadres'), 'newadres')
@@ -181,7 +183,8 @@ class Alhisalat extends Resource
                     Text::make(__('Name'), "name_address"),
                     Text::make(__("description"), "description"),
                     Text::make(__("phone number"), "phone_number_address"),
-                    GoogleMaps::make(__('current_location'), 'current_location'),
+                    MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
+                    ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
                     Select::make(__("Status"), "address_status")->options([
                         '1' => __('active'),
                         '2' => __('not active'),
@@ -263,10 +266,10 @@ class Alhisalat extends Resource
             }
         }
 
-        if (!empty($tokens)) {
+        // if (!empty($tokens)) {
 
-            Helpers::send_notification($tokens, $notification);
-        }
+        //     Helpers::send_notification($tokens, $notification);
+        // }
         // $model->number_alhisala = '1';
 
         // dd( $model);
@@ -277,7 +280,7 @@ class Alhisalat extends Resource
         $id = Auth::id();
         $model->update_by = $id;
     }
-    public static function beforeSave(Request $request, $model)
+    public static function aftersave(Request $request, $model)
     {
 
         $model->number_alhisala = $request->number_alhisala;
@@ -285,28 +288,28 @@ class Alhisalat extends Resource
         // $request->address = '2';
         // dd($request->number_alhisala);
         // dd($request->address);
-        // dd($request->newadres[0]['attributes']['name_address']);
+        // dd($request->newadres[0]['attributes']['current_location']);
         $id = Auth::id();
         // $request->address='1';
         if (!$request->address_id) {
+            // dd("hf");
             if ($request->newadres[0]['attributes']['name_address'] && $request->newadres[0]['attributes']['description'] && $request->newadres[0]['attributes']['phone_number_address'] && $request->newadres[0]['attributes']['current_location'] && $request->newadres[0]['attributes']['address_status']) {
-                //   dd("hf");
-                DB::table('addresses')
-                    ->Insert(
-                        [
-                            'name_address' => $request->newadres[0]['attributes']['name_address'],
-                            'description' => $request->newadres[0]['attributes']['description'],
-                            'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
-                            'current_location' => $request->newadres[0]['attributes']['current_location'],
-                            'status' => $request->newadres[0]['attributes']['address_status'],
-                            'type' => '2',
-                            'created_by' => $id
-                        ]
-                    );
-                $address =  \App\Models\address::where('name_address',  $request->newadres[0]['attributes']['name_address'])->first();
-                DB::table('alhisalats')
+                $address = address::create([
+                    'name_address' => $request->newadres[0]['attributes']['name_address'],
+                    'description' => $request->newadres[0]['attributes']['description'],
+                    'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
+                    'current_location' => $request->newadres[0]['attributes']['current_location'],
+                    'status' => $request->newadres[0]['attributes']['address_status'],
+                    'type' => 2,
+                    'created_by' => $id
+                  ]);
+
+            //    dd( $address->id);
+
+           DB::table('alhisalats')
                     ->where('id', $model->id)
                     ->update(['address_id' => $address->id]);
+                    // dd( $addresstt);
             }
         } else   $model->address_id = $request->address_id;
         // dd("finsh");
@@ -324,6 +327,7 @@ class Alhisalat extends Resource
     {
         return [
             new FilterCard(new AlhisalatStatusFilters()),
+            new NewAlhisalat()
         ];
     }
 

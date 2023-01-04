@@ -13,12 +13,15 @@ use Whitecube\NovaFlexibleContent\Flexible;
 
 class volunteersHower extends Resource
 {
+
+
+
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\TelephoneDirectory::class;
+    public static $model = \App\Models\volunteersHower::class;
     public static function label()
     {
         return __('volunteersHower');
@@ -48,46 +51,41 @@ class volunteersHower extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public static function indexQuery(NovaRequest $request, $query)
-    {
-        return $query->where('type', '4');
 
-    }
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('Name'),'name')
-            ->sortable()
-            ->rules('required', 'max:255'),
+            Text::make(__('Name'), 'name')
+                ->sortable()
+                ->rules('required', 'max:255'),
 
-        Text::make(__('email'),'email')
-            ->sortable()
-            ->rules('required', 'email', 'max:254')
-            ->creationRules('unique:users,email')
-            ->updateRules('unique:users,email,{{resourceId}}'),
+            Text::make(__('email'), 'email')
+                ->sortable()
+                ->rules('required', 'email', 'max:254')
+                ->creationRules('unique:users,email')
+                ->updateRules('unique:users,email,{{resourceId}}'),
 
-            Text::make(__('phone_number'),'phone_number'),
-            Text::make(__('city'),'city'),
+            Text::make(__('phone_number'), 'phone_number'),
+            Text::make(__('city'), 'city'),
+            Text::make(__('volunteer_from'), 'volunteer_from'),
+
             Flexible::make(__('hower'), 'hower')
+                ->addLayout(__('Add new type'), 'type', [
+                    DateTime::make(__('History'), 'Date')
+                        ->format('DD/MM/YYYY')
+                        ->resolveUsing(function ($value) {
+                            return $value;
+                        }),
 
+                    Text::make(__('num_hower'), 'num_hower'),
+                    Text::make(__('project'), 'project'),
 
-            ->addLayout(__('Add new type'), 'type', [
-                DateTime::make(__('History'), 'Date')
-                ->format('DD/MM/YYYY')
-                ->resolveUsing(function ($value) {
-                    return $value;
-                }),
-
-                Text::make(__('num_hower'), 'num_hower'),
-                Boolean::make(__('done'),'done'),
-            ]),
+                    Boolean::make(__('done'), 'done'),
+                ]),
         ];
     }
-    public static function beforeCreate(Request $request, $model)
-    {
-        $model->type = 4;
-    }
+
     /**
      * Get the cards available for the request.
      *

@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationTest;
 use App\Http\Controllers\NotificationController;
 
-
+// use App\Http\Livewire\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +22,7 @@ Route::post("user", [HomeController::class, "user"])->name('user');
 Route::post("users", [HomeController::class, "users"])->name('users');
 Route::post("UserAdmin", [HomeController::class, "Admin"])->name('Admin');
 
+Route::post("schedulelast", [HomeController::class, "schedulelast"])->name('schedulelast');
 
 
 Route::post("first/", [HomeController::class, "first"])->name('first');
@@ -131,8 +132,7 @@ Route::post('/myNotification', [NotificationController::class, 'myNotification']
 Route::post('/AdminNotifications', [NotificationController::class, 'AdminNotifications'])->name('AdminNotifications');
 
 Route::post('/CompletNotifications', [NotificationController::class, 'CompletNotifications'])->name('CompletNotifications');
-
-
+Route::post('/UNCompletNotifications', [NotificationController::class, 'UNCompletNotifications'])->name('UNCompletNotifications');
 
 
 
@@ -140,5 +140,8 @@ Route::post('user/update', [HomeController::class, "updateuser"])->name('updateu
 Route::get("/WorkHours", [HomeController::class, "WorkHours"])->name('WorkHours');
 Route::get("/WorkHoursUser", [HomeController::class, "WorkHoursUser"])->name('WorkHoursUser');
 Route::get("/StartTimerWorkHours", [HomeController::class, "StartTimerWorkHours"])->name('StartTimerWorkHours');
+
+
+
 
 

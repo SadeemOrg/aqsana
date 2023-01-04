@@ -130,6 +130,9 @@ class User extends Resource
                     "NovaSettings" => __( "Settings"),
                     "delegatee" => __( "delegatee"),
                     "Tours" => __( "Tours"),
+                    "TripBooking" => __( "TripBooking"),
+                    "delegatee" => __( "delegatee"),
+                    "guide" => __( "guide"),
 
 
                 ]
