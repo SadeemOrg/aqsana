@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full font-sans antialiased">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1280">
@@ -8,13 +9,21 @@
     <title>{{ \Laravel\Nova\Nova::name() }}</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('app.css', 'vendor/nova') }}">
-
+<style>
+    .tryThis{
+    justify-content: space-between;
+    }
+    .searchItem{
+        margin-right: 5%;
+    }
+</style>
     <!-- Tool Styles -->
-    @foreach(\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
+    @foreach (\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
         @if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://']))
             <link rel="stylesheet" href="{!! $path !!}">
         @else
@@ -26,15 +35,16 @@
     @include('nova::partials.meta')
 
     <!-- Theme Styles -->
-    @foreach(\Laravel\Nova\Nova::themeStyles() as $publicPath)
+    @foreach (\Laravel\Nova\Nova::themeStyles() as $publicPath)
         <link rel="stylesheet" href="{{ $publicPath }}">
     @endforeach
 </head>
 @php
-$img = 'storage/' . nova_get_setting('logo', 'default_value');
-$imgRight = 'storage/' . nova_get_setting('qawafelLogo', 'default_value');
-
+    $img = 'storage/' . nova_get_setting('Headerlogo', 'default_value');
+    $imgRight = 'storage/' . nova_get_setting('HeaderqawafelLogo', 'default_value');
+    
 @endphp
+
 <body class="min-w-site bg-40 text-90 font-medium min-h-full">
     <div id="nova">
         <div v-cloak class="flex min-h-screen">
@@ -46,20 +56,17 @@ $imgRight = 'storage/' . nova_get_setting('qawafelLogo', 'default_value');
                     {!! $tool->renderNavigation() !!}
                 @endforeach
             </div>
-
             <!-- Content -->
             <div class="content">
-                <div class="flex items-center relative shadow h-header bg-white z-20 px-view">
-
-                        <img  class="rounded-full w-8 h-8 mr-3"  src="/{{ $img }}" alt="">
-
-
+                <div class="tryThis flex items-center justify-between relative shadow h-header bg-white z-20 px-view h-24">
+                    <img class="rounded-full w-24 h-20 mr-3" src="/{{ $img }}" alt="">
                     @if (count(\Laravel\Nova\Nova::globallySearchableResources(request())) > 0)
-                        <global-search dusk="global-search-component"></global-search>
+                        <global-search class="searchItem" dusk="global-search-component"></global-search>
                     @endif
                     <div class="ml-auto h-9 flex items-center dropdown-right">
 
-                        <img  class="rounded-full w-8 h-8 mr-3"  src="/{{ $imgRight }}" alt="">                    </div>
+                        <img class="rounded-full w-24 h-20 mr-3" src="/{{ $imgRight }}" alt="">
+                    </div>
                     <dropdown class=" h-9 flex items-center dropdown-right">
 
                         @include('nova::partials.user')
@@ -103,4 +110,5 @@ $imgRight = 'storage/' . nova_get_setting('qawafelLogo', 'default_value');
         Nova.liftOff()
     </script>
 </body>
+
 </html>

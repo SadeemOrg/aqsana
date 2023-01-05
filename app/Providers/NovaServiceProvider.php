@@ -89,6 +89,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         ])->title('name'),
                         Image::make(__('Logo'), 'logo')->disk('public'),
                         Image::make(__('qawafelLogo'), 'qawafelLogo')->disk('public'),
+                        Image::make(__('Header Logo Manzomeh'), 'Headerlogo')->disk('public'),
+                        Image::make(__('Header qawafelLogo'), 'HeaderqawafelLogo')->disk('public'),
+                        
 
                     ]
                 ),

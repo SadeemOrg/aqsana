@@ -72,8 +72,8 @@
                 <div class="flex flex-row items-center justify-start gap-x-2 mt-7 px-2">
                     <img src="{{ asset('assets/image/BIT.svg') }}" alt="telephone" class="max-w-[42px] max-h-[22px]">
 
-                    <p itemprop="telephone" dir="ltr" class="font-FlatBold text-[#101426] text-[16px] ">
-                        بواسطة تطبيق : <a>050-6940095</a>
+                    <p itemprop="telephone"  class="font-FlatBold text-[#101426] text-[16px] ">
+                        بواسطة تطبيق : <a dir="ltr">050-6940095</a>
                     </p>
                 </div>
                 <div class="flex flex-row items-center justify-start gap-x-2 mt-2 px-2">

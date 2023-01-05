@@ -32,16 +32,6 @@
                 <img src="{{ asset('assets/image/2SG4XFNXK4WfehAE1eroA7kp7Y341RMs8f4ObPLO.png') }}" class="w-48 h-48 "
                     alt="">
             </div>
-            <div class="lg:block hidden absolute left-[9%] xl:left-[22%] top-[35%]">
-                <img class="w-[280px] h-[150px]"
-                    src="https://cdn.discordapp.com/attachments/938405759996276806/1060265631393513472/-01_2.png"
-                    alt="tabb">
-            </div>
-        </div>
-        <div class="lg:hidden flex flex-row items-center sm:justify-end justify-center my-4" class="w-[250px] h-[150px]">
-            <img class="w-[250px]"
-                src="https://cdn.discordapp.com/attachments/938405759996276806/1060265631393513472/-01_2.png"
-                alt="">
         </div>
         <div class="flex flex-col items-center mt-10">
             <p dir="ltr" class="">{{ $newDate[0] }}</p>
@@ -128,14 +118,26 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row items-center justify-end mx-7 mb-6">
+        <div class="flex flex-col sm:flex-row items-center justify-start sm:justify-between mt-4 sm:mx-7 mb-6 ">
+            <div>
+                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">اسم القطاع:
+                    <span class="font-FlatBold text-[#101426] mx-1 text-sm"> قطاع الاغاثي الأنساني</span>
+                </p>
+                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">ملاحظات :
+                    <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
+                </p>
+            </div>
             <button dir="ltr" type="button" onclick="window.print()"
                 class=" rounded-[50px] bg-[#349A37] text-white text-base w-28 py-4 mt-4 font-[700] hover:bg-[#101426] duration-200">
                 طباعة
             </button>
-            <div class="absolute right-[12%] -bottom-0">
-                <img class="w-20 h-20"
-                    src="https://media.discordapp.net/attachments/938405759996276806/1060191298168049764/1.png"
+        </div>
+        <div class="relative flex flex-row items-center justify-center w-full -mt-12 ">
+            <img class="w-[280px] h-[240px]"
+                src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png" alt="logo">
+            <div class="absolute">
+                <img class="w-36 h-36"
+                    src="https://media.discordapp.net/attachments/938405759996276806/1060513822194028595/-removebg-preview.png"
                     alt="ttab">
             </div>
         </div>
