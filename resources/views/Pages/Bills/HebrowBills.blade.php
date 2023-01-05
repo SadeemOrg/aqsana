@@ -133,7 +133,7 @@
                 class=" rounded-[50px] bg-[#349A37] text-white text-base w-28 py-4 mt-4 font-[700] hover:bg-[#101426] duration-200">
                 طباعة
             </button>
-            <div class="absolute right-[12%] -bottom-4">
+            <div class="absolute right-[12%] -bottom-0">
                 <img class="w-20 h-20"
                     src="https://media.discordapp.net/attachments/938405759996276806/1060191298168049764/1.png"
                     alt="ttab">
