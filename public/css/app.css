@@ -841,6 +841,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-mt-8{
   margin-top: -2rem;
 }
+.mr-8{
+  margin-right: 2rem;
+}
 .block{
   display: block;
 }
@@ -1170,6 +1173,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-36{
   width: 9rem;
+}
+.w-14{
+  width: 3.5rem;
 }
 .min-w-full{
   min-width: 100%;
@@ -2688,6 +2694,9 @@ body{
   .md\:h-\[375px\]{
     height: 375px;
   }
+  .md\:h-20{
+    height: 5rem;
+  }
   .md\:max-h-72{
     max-height: 18rem;
   }
@@ -2717,6 +2726,9 @@ body{
   }
   .md\:w-\[200px\]{
     width: 200px;
+  }
+  .md\:w-24{
+    width: 6rem;
   }
   .md\:min-w-\[235px\]{
     min-width: 235px;
@@ -2914,6 +2926,9 @@ body{
   }
   .lg\:h-\[680px\]{
     height: 680px;
+  }
+  .lg\:h-24{
+    height: 6rem;
   }
   .lg\:max-h-\[430px\]{
     max-height: 430px;
