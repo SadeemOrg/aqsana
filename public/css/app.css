@@ -514,6 +514,21 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-\[46\%\]{
   right: 46%;
 }
+.right-\[9\%\]{
+  right: 9%;
+}
+.-bottom-\[25\%\]{
+  bottom: -25%;
+}
+.right-\[7\%\]{
+  right: 7%;
+}
+.top-2{
+  top: 0.5rem;
+}
+.-bottom-\[70\%\]{
+  bottom: -70%;
+}
 .top-5{
   top: 1.25rem;
 }
@@ -559,80 +574,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[75\%\]{
   top: 75%;
 }
-.right-2{
-  right: 0.5rem;
+.-top-\[0\%\]{
+  top: -0%;
 }
-.-right-10{
-  right: -2.5rem;
+.-top-\[20\%\]{
+  top: -20%;
 }
-.-right-8{
-  right: -2rem;
-}
-.-right-4{
-  right: -1rem;
-}
-.-right-2{
-  right: -0.5rem;
-}
-.top-10{
-  top: 2.5rem;
-}
-.top-20{
-  top: 5rem;
-}
-.top-36{
-  top: 9rem;
-}
-.top-44{
-  top: 11rem;
-}
-.top-52{
-  top: 13rem;
-}
-.right-16{
-  right: 4rem;
-}
-.right-28{
-  right: 7rem;
-}
-.right-\[20\%\]{
-  right: 20%;
-}
-.right-\[30\%\]{
-  right: 30%;
-}
-.right-\[40\%\]{
-  right: 40%;
-}
-.right-\[35\%\]{
-  right: 35%;
-}
-.top-4{
-  top: 1rem;
-}
-.top-28{
-  top: 7rem;
-}
-.right-\[36\%\]{
-  right: 36%;
-}
-.right-\[39\%\]{
-  right: 39%;
-}
-.right-\[38\%\]{
-  right: 38%;
-}
-.right-\[3\%\]{
-  right: 3%;
-}
-.top-2{
-  top: 0.5rem;
-}
-.right-\[13\%\]{
-  right: 13%;
-}
-.right-\[7\%\]{
-  right: 7%;
+.-top-\[10\%\]{
+  top: -10%;
 }
 .top-\[20\%\]{
   top: 20%;
@@ -640,62 +589,38 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[30\%\]{
   top: 30%;
 }
-.top-\[110\%\]{
-  top: 110%;
+.left-\[9\%\]{
+  left: 9%;
 }
-.top-\[120\%\]{
-  top: 120%;
+.top-\[33\%\]{
+  top: 33%;
 }
-.top-\[150\%\]{
-  top: 150%;
+.top-\[35\%\]{
+  top: 35%;
 }
-.top-\[145\%\]{
-  top: 145%;
+.top-\[39\%\]{
+  top: 39%;
 }
-.top-\[135\%\]{
-  top: 135%;
+.top-\[42\%\]{
+  top: 42%;
 }
-.right-\[25\%\]{
-  right: 25%;
+.bottom-2{
+  bottom: 0.5rem;
 }
-.right-\[15\%\]{
-  right: 15%;
+.-bottom-5{
+  bottom: -1.25rem;
 }
-.top-\[15\%\]{
-  top: 15%;
+.right-12{
+  right: 3rem;
 }
-.top-\[25\%\]{
-  top: 25%;
+.right-\[11\%\]{
+  right: 11%;
 }
-.top-\[55\%\]{
-  top: 55%;
+.-bottom-6{
+  bottom: -1.5rem;
 }
-.bottom-\[5\%\]{
-  bottom: 5%;
-}
-.bottom-\[0\%\]{
-  bottom: 0%;
-}
-.-bottom-\[10\%\]{
-  bottom: -10%;
-}
-.-bottom-\[20\%\]{
-  bottom: -20%;
-}
-.-bottom-\[40\%\]{
-  bottom: -40%;
-}
-.-bottom-\[60\%\]{
-  bottom: -60%;
-}
-.-bottom-\[70\%\]{
-  bottom: -70%;
-}
-.right-\[9\%\]{
-  right: 9%;
-}
-.-bottom-\[25\%\]{
-  bottom: -25%;
+.-bottom-4{
+  bottom: -1rem;
 }
 .z-30{
   z-index: 30;
@@ -730,13 +655,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: -1rem;
   margin-right: -1rem;
 }
-.mx-2{
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
 .mx-1{
   margin-left: 0.25rem;
   margin-right: 0.25rem;
+}
+.mx-2{
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 .my-2{
   margin-top: 0.5rem;
@@ -765,14 +690,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-6{
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-}
-.mx-\[30\%\]{
-  margin-left: 30%;
-  margin-right: 30%;
-}
-.mx-\[10\%\]{
-  margin-left: 10%;
-  margin-right: 10%;
 }
 .mt-24{
   margin-top: 6rem;
@@ -987,6 +904,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-24{
   height: 6rem;
 }
+.h-\[150px\]{
+  height: 150px;
+}
+.h-20{
+  height: 5rem;
+}
 .h-9{
   height: 2.25rem;
 }
@@ -1013,12 +936,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .h-\[270px\]{
   height: 270px;
-}
-.h-20{
-  height: 5rem;
-}
-.h-\[150px\]{
-  height: 150px;
 }
 .max-h-\[42px\]{
   max-height: 42px;
@@ -1077,14 +994,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-14{
   max-height: 3.5rem;
 }
-.max-h-\[30px\]{
-  max-height: 30px;
-}
-.max-h-\[100px\]{
-  max-height: 100px;
-}
 .min-h-full{
   min-height: 100%;
+}
+.min-h-\[150px\]{
+  min-height: 150px;
 }
 .min-h-\[50px\]{
   min-height: 50px;
@@ -1100,15 +1014,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .min-h-screen{
   min-height: 100vh;
-}
-.min-h-\[400px\]{
-  min-height: 400px;
-}
-.min-h-\[250px\]{
-  min-height: 250px;
-}
-.min-h-\[150px\]{
-  min-height: 150px;
 }
 .w-full{
   width: 100%;
@@ -1176,8 +1081,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-48{
   width: 12rem;
 }
+.w-\[250px\]{
+  width: 250px;
+}
 .w-28{
   width: 7rem;
+}
+.w-20{
+  width: 5rem;
 }
 .w-\[96\%\]{
   width: 96%;
@@ -1197,9 +1108,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-\[90\%\]{
   width: 90%;
 }
-.w-\[250px\]{
-  width: 250px;
-}
 .w-\[4oopx\]{
   width: 4oopx;
 }
@@ -1215,8 +1123,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-auto{
   width: auto;
 }
-.w-20{
-  width: 5rem;
+.w-\[280px\]{
+  width: 280px;
 }
 .min-w-full{
   min-width: 100%;
@@ -1313,20 +1221,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-\[65px\]{
   max-width: 65px;
 }
-.max-w-\[30px\]{
-  max-width: 30px;
-}
-.max-w-\[300px\]{
-  max-width: 300px;
-}
-.max-w-\[250px\]{
-  max-width: 250px;
-}
 .flex-none{
   flex: none;
 }
 .flex-1{
   flex: 1 1 0%;
+}
+.basis-1\/4{
+  flex-basis: 25%;
+}
+.basis-3\/4{
+  flex-basis: 75%;
 }
 .basis-1\/2{
   flex-basis: 50%;
@@ -1354,21 +1259,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .basis-\[20\%\]{
   flex-basis: 20%;
-}
-.basis-1\/4{
-  flex-basis: 25%;
-}
-.basis-3\/4{
-  flex-basis: 75%;
-}
-.basis-2\/4{
-  flex-basis: 50%;
-}
-.basis-2\/5{
-  flex-basis: 40%;
-}
-.basis-3\/5{
-  flex-basis: 60%;
 }
 .border-collapse{
   border-collapse: collapse;
@@ -1590,14 +1480,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border{
   border-width: 1px;
 }
+.border-2{
+  border-width: 2px;
+}
 .border-\[1px\]{
   border-width: 1px;
 }
 .border-0{
   border-width: 0px;
-}
-.border-2{
-  border-width: 2px;
 }
 .border-b-2{
   border-bottom-width: 2px;
@@ -1657,10 +1547,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1;
   border-color: rgb(204 221 255 / var(--tw-border-opacity));
 }
-.border-black{
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
-}
 .border-b-\[\#349A37\]{
   --tw-border-opacity: 1;
   border-bottom-color: rgb(52 154 55 / var(--tw-border-opacity));
@@ -1710,13 +1596,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
 }
-.bg-indigo-300{
+.bg-\[\#f1fff1\]{
   --tw-bg-opacity: 1;
-  background-color: rgb(165 180 252 / var(--tw-bg-opacity));
+  background-color: rgb(241 255 241 / var(--tw-bg-opacity));
 }
-.bg-gray-800{
+.bg-\[\#242526\]{
   --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+  background-color: rgb(36 37 38 / var(--tw-bg-opacity));
 }
 .bg-\[\#F2FFF285\]{
   background-color: #F2FFF285;
@@ -1751,18 +1637,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-\[\#349a37\]{
   --tw-bg-opacity: 1;
   background-color: rgb(52 154 55 / var(--tw-bg-opacity));
-}
-.bg-\[\#242526\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(36 37 38 / var(--tw-bg-opacity));
-}
-.bg-\[\#ffffff\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-.bg-\[\#f1fff1\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(241 255 241 / var(--tw-bg-opacity));
 }
 .bg-opacity-75{
   --tw-bg-opacity: 0.75;
@@ -2145,10 +2019,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-800{
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
-}
-.text-gray-600{
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 .text-black{
   --tw-text-opacity: 1;
@@ -3135,11 +3005,23 @@ body{
   .xl\:left-0{
     left: 0px;
   }
+  .xl\:right-\[15\%\]{
+    right: 15%;
+  }
   .xl\:right-\[0\]{
     right: 0;
   }
-  .xl\:right-\[15\%\]{
-    right: 15%;
+  .xl\:left-\[15\%\]{
+    left: 15%;
+  }
+  .xl\:left-\[25\%\]{
+    left: 25%;
+  }
+  .xl\:left-\[20\%\]{
+    left: 20%;
+  }
+  .xl\:left-\[22\%\]{
+    left: 22%;
   }
   .xl\:mt-28{
     margin-top: 7rem;
