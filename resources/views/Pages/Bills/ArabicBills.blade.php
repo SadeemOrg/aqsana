@@ -23,9 +23,9 @@
                     </br>
                     والمقدسات الاسلامية
                 </h3> --}}
-                <p class="mt-2 text-[16px] font-FlatBold text-[#6B7280]">
+                {{-- <p class="mt-2 text-[16px] font-FlatBold text-[#6B7280]">
                     بوابة العطاء في أرض الاسراء
-                </p>
+                </p> --}}
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">رقم الجمعية :
                     <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                 </p>
