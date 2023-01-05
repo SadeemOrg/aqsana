@@ -21,6 +21,9 @@
     .searchItem{
         margin-right: 5%;
     }
+    .imgSideBar{
+        margin-left: 4%;
+    }
 </style>
     <!-- Tool Styles -->
     @foreach (\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
@@ -58,14 +61,14 @@
             </div>
             <!-- Content -->
             <div class="content">
-                <div class="tryThis flex items-center justify-between relative shadow h-header bg-white z-20 px-view h-24">
-                    <img class="rounded-full w-24 h-20 mr-3" src="/{{ $img }}" alt="">
+                <div class="tryThis flex items-center justify-between relative shadow h-header bg-white z-20 px-view  lg:h-24">
+                    <img class="rounded-full w-24 h-20 lg:block hidden mr-3" src="/{{ $img }}" alt="">
                     @if (count(\Laravel\Nova\Nova::globallySearchableResources(request())) > 0)
                         <global-search class="searchItem" dusk="global-search-component"></global-search>
                     @endif
                     <div class="ml-auto h-9 flex items-center dropdown-right">
-
-                        <img class="rounded-full w-24 h-20 mr-3" src="/{{ $imgRight }}" alt="">
+                        <img class="rounded-full w-16 h-12 lg:hidden block mr-8 imgSideBar" src="/{{ $img }}" alt="">
+                        <img class="rounded-full w-24 h-20 mr-3 lg:block hidden" src="/{{ $imgRight }}" alt="">
                     </div>
                     <dropdown class=" h-9 flex items-center dropdown-right">
 

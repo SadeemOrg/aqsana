@@ -180,15 +180,15 @@
     <script
         src="https://www.paypal.com/sdk/js?client-id=AQrUNiqeaUR5hFL1CRzuAwZQCPQ2KD35hVAM0s_jIhw6mgydgbxvPFVfd3GQ7r3Z-wEyX8FPN3bxJyxL&currency=ILS">
     </script>
-      <script>
+    <script>
         window.addEventListener('alert', event => {
-                     toastr[event.detail.type](event.detail.message,
-                     event.detail.title ?? ''), toastr.options = {
-                            "closeButton": true,
-                            "progressBar": true,
-                        }
-                    });
-        </script>
+            toastr[event.detail.type](event.detail.message,
+                event.detail.title ?? ''), toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+            }
+        });
+    </script>
     <script>
         // Library Search
         $('#searchLibrary').on('keyup', function() {
@@ -556,12 +556,27 @@
                         return actions.payment.execute().then(function() {});
                     },
                     onApprove: (data, actions) => {
+                        var amount = $('input[name="PayPal_donation_amount"]').val();
                         return actions.order.capture().then(function(orderData) {
                             // Successful capture! For dev/demo purposes:
-                            console.log('Capture result', orderData, JSON
-                                .stringify(orderData, null, 2));
+                            // console.log('Capture result', orderData, JSON
+                            //     .stringify(orderData, null, 2));
                             const transaction = orderData.purchase_units[0]
                                 .payments.captures[0];
+
+                                toastr.options = {
+                                        "closeButton": true,
+                                        "debug": false,
+                                        "positionClass": "toast-bottom-right",
+                                        "onclick": null,
+                                        "showDuration": "300",
+                                        "hideDuration": "2000",
+                                        "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                                    };
+                                    console.log("aserw");
+                                    toastr.success(`تم التبرع بمبلغ ${amount}.00 ₪ شيكل `);
+
                             // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
                             // When ready to go live, remove the alert and show a success message within this page. For example:
                             // const element = document.getElementById('paypal-button-container');
