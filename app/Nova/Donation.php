@@ -92,7 +92,7 @@ class Donation extends Resource
 
             Project::make(__('ref_id'),'ref_id'),
             Text::make(__('transact amount'), 'transact_amount'),
-            SelectAutoComplete::make(__('Currenc'), "Currency")
+            Select::make(__('Currenc'), "Currency")
                 ->options(function () {
                     $Alhisalats =  \App\Models\Currency::all();
                     $user_type_admin_array =  array();
@@ -146,7 +146,7 @@ class Donation extends Resource
                     //     ->displayUsingLabels(),
                     Text::make(__('payment_reason'), "payment_reason")->rules('required'),
 
-                    SelectAutoComplete::make(__("billing language"), "lang")->options([
+                    Select::make(__("billing language"), "lang")->options([
                         '1' => __('ar'),
                         '2' => __('en'),
                         '3' => __('hr'),
