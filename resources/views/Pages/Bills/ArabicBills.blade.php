@@ -135,7 +135,7 @@
         <div class="flex flex-col sm:flex-row items-center justify-start sm:justify-between mt-4 sm:mx-7 mb-6 ">
             <div>
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">اسم القطاع:
-                    <span class="font-FlatBold text-[#101426] mx-1 text-sm"> {{ $sector_Text }}</span>
+                    <span class="font-FlatBold text-[#101426] mx-1 text-sm">  {{ $sector_Text }}</span>
                 </p>
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">ملاحظات :
                     <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
