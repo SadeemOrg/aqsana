@@ -175,6 +175,11 @@ svg path, svg circle {transition: .2s;}
   background-color: var(--dark-clr)
 }
 
+.select-auto-complete .single-select-wrapper .icons {
+  left: 0 !important;
+  
+}
+
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
