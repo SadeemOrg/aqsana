@@ -168,6 +168,9 @@ svg path, svg circle {transition: .2s;}
   background-color: transparent;
   /* border: 0; */
 }
+.activeTabs{
+  color: #1fb141;
+}
 
 .dropdown-item:hover,
 .dropdown-item:focus {
