@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Acme\MultiselectField\Multiselect;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -90,7 +91,7 @@ class Area extends Resource
             Text::make(__('Name'), 'name'),
             Text::make(__('Describtion'), 'describtion'),
 
-            Select::make(__('admin'), 'admin_id')
+            Multiselect::make(__('admin'), 'admin_id')
                 ->options(function () {
                     $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
 
@@ -103,7 +104,7 @@ class Area extends Resource
                     }
 
                     return $user_type_admin_array;
-                })->hideFromIndex()->hideFromDetail(),
+                })->singleSelect(),
             BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
