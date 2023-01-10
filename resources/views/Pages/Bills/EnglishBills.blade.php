@@ -1,4 +1,4 @@
-@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false,'left_SideBar'=>false])
+@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false, 'left_SideBar' => false])
 @section('content')
     @php
         $society_id = nova_get_setting('society_id', '580179794');
@@ -9,13 +9,17 @@
         $newDate = explode(' ', $Transaction->transaction_date);
         // dd($Donations->amount);
     @endphp
-    <!--Arabic Bills -->
+    <!--English Bills -->
     <div dir="ltr" class="max-w-7xl mx-auto sm:px-6 lg:px-8 -mt-14 px-8" id="printJS-table">
-        <div class="flex sm:flex-row flex-col-reverse items-center justify-between mt-24 ">
+        <img class="h-[250px] w-full"
+            src="https://media.discordapp.net/attachments/938405759996276806/1060518737767309342/iuktui.png?width=1440&height=302"
+            alt="alaqsa Logo">
+        <div class="flex sm:flex-row flex-col-reverse items-center justify-between  relative">
             <div class="basis-1/2 flex flex-col items-center sm:items-start">
-                <h3 class="mt-8 text-2xl font-FlatBold text-[#101426]">Al-Aqsa Organization</h3>
-                <p class="mt-2 text-[17px] font-FlatBold text-center  text-[#6B7280]">Al-Aqsa Association for the Care of
-                    Endowments and Islamic Sanctuaries</p>
+                {{-- <h3 class="mt-8 text-2xl font-FlatBold text-[#101426]">Al-Aqsa Association for the Care of
+                    Endowments and Islamic Sanctuaries</h3> --}}
+                {{-- <p class="mt-2 text-[17px] font-FlatBold text-center  text-[#6B7280]">Al-Aqsa Association for the Care of
+                    Endowments and Islamic Sanctuaries</p> --}}
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">Association Id :
                     <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                 </p>
@@ -28,10 +32,6 @@
                 <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">Email :
                     <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
                 </p>
-            </div>
-            <div class="flex basis-1/2 justify-center">
-                <img src="{{ asset('assets/image/2SG4XFNXK4WfehAE1eroA7kp7Y341RMs8f4ObPLO.png') }}" class="w-48 h-48 "
-                    alt="">
             </div>
         </div>
         <div class="flex flex-col items-center mt-10">
@@ -48,7 +48,7 @@
             @endif
         </div>
         <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 max-w-xl mt-4">
-            <p class="text-[18px] font-FlatBold text-[#101426]">لحساب :</p>
+            <p class="text-[18px] font-FlatBold text-[#101426]">account owner :</p>
             <span class="font-FlatBold text-[#6B7280]  text-[18px] text-right">
                 {{ $Transaction->TelephoneDirectory->name }}
             </span>
@@ -56,10 +56,7 @@
         <p class="font-FlatBold text-[#101426] mt-3 text-[17px]">pay done by:
             <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $Transaction->name }} </span>
         </p>
-
-
         <!-- table -->
-
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
             </div>
@@ -125,12 +122,29 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row items-center justify-start mx-1 mb-6">
-            <button type="button" onclick="window.print()"
+        <div dir="rtl"
+            class="flex flex-col sm:flex-row items-center justify-start sm:justify-between mt-4 sm:mx-7 mb-6 ">
+            <div>
+                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">اسم القطاع:
+                    <span class="font-FlatBold text-[#101426] mx-1 text-sm"> {{ $sector_Text }}</span>
+                </p>
+                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">ملاحظات :
+                    <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
+                </p>
+            </div>
+            <button dir="ltr" type="button" onclick="window.print()"
                 class=" rounded-[50px] bg-[#349A37] text-white text-base w-28 py-4 mt-4 font-[700] hover:bg-[#101426] duration-200">
-                Print
+                طباعة
             </button>
         </div>
-
+        <div class="relative flex flex-row items-center justify-center w-full -mt-12 ">
+            <img class="w-[280px] h-[240px]"
+                src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png" alt="logo">
+            <div class="absolute">
+                <img class="w-36 h-36"
+                    src="https://media.discordapp.net/attachments/938405759996276806/1060513822194028595/-removebg-preview.png"
+                    alt="ttab">
+            </div>
+        </div>
     </div>
 @endsection

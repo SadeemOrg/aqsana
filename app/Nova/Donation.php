@@ -93,7 +93,7 @@ class Donation extends Resource
             Project::make(__('ref_id'), 'ref_id')->hideFromIndex(),
 
             Text::make(__('transact amount'), 'transact_amount'),
-            SelectAutoComplete::make(__('Currenc'), "Currency")
+            Select::make(__('Currenc'), "Currency")
                 ->options(function () {
                     $Alhisalats =  \App\Models\Currency::all();
                     $user_type_admin_array =  array();
@@ -203,39 +203,18 @@ class Donation extends Resource
                                 return $value;
                             })->rules('required'),
 
-                    ]),
-            ])->dependsOn("Payment_type", '3')->hideFromDetail()->hideFromIndex(),
-
-            NovaDependencyContainer::make([
-                Flexible::make(__('Payment_type_details'), 'Payment_type_details')
-
-                    ->addLayout(__('tooles'), 'Payment_type_details ', [
-                        Text::make(__('value'), "equivelant_amount")->rules('required'),
-
-                        Text::make(__('bank number'), "equivelant_amount"),
-                        Text::make(__('Branch number'), "equivelant_amount"),
-                        Text::make(__('account number'), "equivelant_amount"),
-
-                        DateTime::make(__('History'), 'Date')
-                            ->format('DD/MM/YYYY HH:mm')
-                            ->resolveUsing(function ($value) {
-                                return $value;
-                            })->rules('required'),
-
-                    ]),
-            ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
-
-            NovaDependencyContainer::make([
-                Flexible::make(__('Payment_type_details'), 'Payment_type_details')
-
-                    ->addLayout(__('tooles'), 'Payment_type_details ', [
-                        Text::make(__('value'), "equivelant_amount")->rules('required'),
-
-                        Select::make(__('type'), "type")->options([
-                            '1' => 'paybox',
-                            '2' => 'bit',
-                            '3' => 'פייפאל',
-                        ])->displayUsingLabels()->rules('required'),
+                    Select::make(__("billing language"), "lang")->options([
+                        '1' => __('ar'),
+                        '2' => __('en'),
+                        '3' => __('hr'),
+                    ])->displayUsingLabels(),
+                    Select::make(__("Payment_type"), "Payment_type")->options([
+                        '1' => __('cash'),
+                        '2' => __('shek'),
+                        '3' => __('visa'),
+                        '4' => __('hawale'),
+                        '5' => __('Other'),
+                    ])->displayUsingLabels(),
 
 
                         DateTime::make(__('History'), 'Date')

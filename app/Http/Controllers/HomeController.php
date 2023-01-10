@@ -48,21 +48,21 @@ class HomeController extends Controller
             $date_to = $year . '-' . $month . '-31';
             $from = date($date_from);
             $to = date($date_to);
-            $spendingTransactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type",'1')->sum('equivelant_amount');
-            $Transactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type",'2')->sum('equivelant_amount');
+            $spendingTransactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type", '1')->sum('equivelant_amount');
+            $Transactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type", '2')->sum('equivelant_amount');
 
             $pus = array(
-                        "month" => $month,
-                        "year" =>  $year,
-                        "spendingTransactions" => $spendingTransactions,
-                        "Transactions" =>   $Transactions
-                    );
+                "month" => $month,
+                "year" =>  $year,
+                "spendingTransactions" => $spendingTransactions,
+                "Transactions" =>   $Transactions
+            );
 
-                    array_push($schedule, $pus);
+            array_push($schedule, $pus);
 
-                    $date=$date->addMonth();
-                }
-                return $schedule;
+            $date = $date->addMonth();
+        }
+        return $schedule;
     }
     public function StartTimerWorkHours(Request $request)
     {
@@ -507,18 +507,32 @@ class HomeController extends Controller
     public function originalbillbills($id)
     {
         $Transaction =  Transaction::where("id", $id)->first();
+        $projectId = $Transaction->ref_id;
+        $Project = Project::where("id", $projectId)->first();
+        if ($Project != null) {
+            $sectorId = Sector::where("id", $Project->sector)->first();
+            $sector_Text = $sectorId->text;
+        } else {
+            $sector_Text = "مخرجات عامة";
+        }
+
         $original = 1;
 
-        return view('Pages.Bills.Bills', compact('Transaction', 'original'));
+        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'sector_Text'));
     }
 
     public function bills($id)
     {
         $Transaction =  Transaction::where("id", $id)->with('TelephoneDirectory')->first();
         // dd($Transaction->TelephoneDirectory->name);
+        $projectId = $Transaction->ref_id;
+        $Project = Project::where("id", $projectId)->first();
+        $sectorId = Sector::where("id", $Project->sector)->first();
+        $sector_Text = $sectorId->text;
+        // dd($sector_Text);
         $original = 0;
 
-        return view('Pages.Bills.Bills', compact('Transaction', 'original'));
+        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'sector_Text'));
     }
 
     public function showToastrMessages()
