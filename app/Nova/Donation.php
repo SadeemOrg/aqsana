@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
-use Techouse\SelectAutoComplete\SelectAutoComplete ;
+use Techouse\SelectAutoComplete\SelectAutoComplete;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -21,6 +21,7 @@ use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Laravel\Nova\Fields\DateTime;
 use Acme\MultiselectField\Multiselect;
+
 
 class Donation extends Resource
 {
@@ -49,10 +50,9 @@ class Donation extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Donationparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Donationparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
     public static $priority = 2;
     /**
@@ -61,7 +61,7 @@ class Donation extends Resource
      * @var array
      */
     public static $search = [
-        'id',"name"
+        'id', "name"
     ];
 
     /**
@@ -83,16 +83,17 @@ class Donation extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             ActionButton::make(__('print'))
-            ->action((new BillPdf)->confirmText(__('Are you sure you want to print  this?'))
-                ->confirmButtonText(__('print'))
-                ->cancelButtonText(__('Dont print')), $this->id)
-            ->text(__('print'))->showLoadingAnimation()
-            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                ->action((new BillPdf)->confirmText(__('Are you sure you want to print  this?'))
+                    ->confirmButtonText(__('print'))
+                    ->cancelButtonText(__('Dont print')), $this->id)
+                ->text(__('print'))->showLoadingAnimation()
+                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
 
 
+            // BelongsTo::make(__('project'), 'project')->hideWhenCreating()->readonly(),
+            Project::make(__('ref_id'), 'ref_id')->hideFromIndex(),
 
-            Project::make(__('ref_id'),'ref_id'),
             Text::make(__('transact amount'), 'transact_amount'),
             Select::make(__('Currenc'), "Currency")
                 ->options(function () {
@@ -108,54 +109,97 @@ class Donation extends Resource
 
 
                 Multiselect::make(__('name'), "name")
-                        ->options(function () {
-                            $Users =  \App\Models\TelephoneDirectory::where('type', '2')->get();
+                ->options(function () {
+                    $Users =  \App\Models\TelephoneDirectory::where('type', '2')->get();
 
-                            $i = 0;
-                            $user_type_admin_array =  array();
-                            foreach ($Users as $User) {
-
-
-                                $user_type_admin_array += [($User['id']) => ($User['name'])];
-                            }
-
-                            return $user_type_admin_array;
-                        })
-                        ->singleSelect(),
+                    $i = 0;
+                    $user_type_admin_array =  array();
+                    foreach ($Users as $User) {
 
 
+                        $user_type_admin_array += [($User['id']) => ($User['name'])];
+                    }
 
-                    Flexible::make(__('add user'),'add_user')
-                    ->readonly(true)
+                    return $user_type_admin_array;
+                })
+                ->singleSelect(),
 
-                        ->hideFromDetail()->hideFromIndex()
-                        ->addLayout(__('tooles'), 'Payment_type_details ', [
-                            Text::make(__('name'), "name")->rules('required'),
-                            Text::make(__('phone'), "phone")->rules('required'),
+
+
+            Flexible::make(__('add user'), 'add_user')
+                ->readonly(true)
+
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('tooles'), 'Payment_type_details ', [
+                    Text::make(__('name'), "name")->rules('required'),
+                    Text::make(__('phone'), "phone")->rules('required'),
+                ]),
+
+            BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
+
+            Text::make(__('payment_reason'), "payment_reason")->rules('required'),
+
+            Select::make(__("billing language"), "lang")->options([
+                '1' => __('ar'),
+                '2' => __('en'),
+                '3' => __('hr'),
+            ])->displayUsingLabels(),
+            Select::make(__("Payment_type"), "Payment_type")->options([
+                '1' => __('cash'),
+                '2' => __('shek'),
+                '3' => __('visa'),
+                '4' => __('hawale'),
+                '5' => __('Other'),
+            ])->displayUsingLabels(),
+
+
+
+            NovaDependencyContainer::make([
+                Flexible::make(__('Payment_type_details'), 'Payment_type_details')
+
+                    ->addLayout(__('tooles'), 'Payment_type_details ', [
+                        Text::make(__('Doubt value'), "equivelant_amount")->rules('required'),
+                        Text::make(__('bank number'), "equivelant_amount"),
+                        Text::make(__('Branch number'), "equivelant_amount"),
+                        Text::make(__('account number'), "equivelant_amount"),
+                        Text::make(__('Doubt number'), "equivelant_amount"),
+
+                        DateTime::make(__('History of doubt'), 'Date')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
+
+                    ]),
+            ])->dependsOn("Payment_type", '2')->hideFromDetail()->hideFromIndex(),
+
+            NovaDependencyContainer::make([
+                Flexible::make(__('Payment_type_details'), 'Payment_type_details')
+
+                    ->addLayout(__('tooles'), 'Payment_type_details ', [
+                        Text::make(__('value'), "equivelant_amount")->rules('required'),
+
+                        Select::make(__('card type'), "card_type")->options([
+                            '1' => 'אמירקן אקספרס',
+                            '2' => 'שראכרט, ויזה',
+                            '3' => 'מסטרקארד',
+                            '4' => 'דיינרס',
+
                         ]),
 
-                        BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
-                    // Select::make(__('project'), "ref_id")
-                    //     ->options(function () {
-                    //         $Alhisalats =  \App\Models\User::all();
-                    //         $user_type_admin_array =  array();
-                    //         foreach ($Alhisalats as $Alhisalat) {
-                    //             $user_type_admin_array += [$Alhisalat['id'] => ($Alhisalat['name'])];
-                    //         }
+                        Text::make(__('card number'), "equivelant_amount"),
+                        Text::make(__('number of installments'), "equivelant_amount"),
 
-                    //         return $user_type_admin_array;
-                    //     })
-                    //     ->displayUsingLabels(),
-                    
-                    Text::make(__('payment_reason'), "payment_reason")->rules('required'),
-                    
+                        DateTime::make(__('History'), 'Date')
+                            ->format('DD/MM/YYYY HH:mm')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
 
-                    Multiselect::make(__("billing language"), "lang")->options([
+                    Select::make(__("billing language"), "lang")->options([
                         '1' => __('ar'),
                         '2' => __('en'),
                         '3' => __('hr'),
-                    ])->singleSelect(),
-                    
+                    ])->displayUsingLabels(),
                     Select::make(__("Payment_type"), "Payment_type")->options([
                         '1' => __('cash'),
                         '2' => __('shek'),
@@ -164,92 +208,17 @@ class Donation extends Resource
                         '5' => __('Other'),
                     ])->displayUsingLabels(),
 
-                    NovaDependencyContainer::make([
-                        Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
-                            ->addLayout(__('tooles'), 'Payment_type_details ', [
-                                Text::make(__('Doubt value'), "equivelant_amount")->rules('required'),
-                                Text::make(__('bank number'), "equivelant_amount"),
-                                Text::make(__('Branch number'), "equivelant_amount"),
-                                Text::make(__('account number'), "equivelant_amount"),
-                                Text::make(__('Doubt number'), "equivelant_amount"),
+                        DateTime::make(__('History'), 'Date')
+                            ->format('DD/MM/YYYY HH:mm')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
 
-                                DateTime::make(__('History of doubt'), 'Date')
-                                ->resolveUsing(function ($value) {
-                                    return $value;
-                                })->rules('required'),
+                    ]),
+            ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
 
-                            ]),
-                    ])->dependsOn("Payment_type", '2')->hideFromDetail()->hideFromIndex(),
-
-                    NovaDependencyContainer::make([
-                        Flexible::make(__('Payment_type_details'), 'Payment_type_details')
-
-                            ->addLayout(__('tooles'), 'Payment_type_details ', [
-                                Text::make(__('value'), "equivelant_amount")->rules('required'),
-
-                                Select::make(__('card type'), "card_type")  ->options([
-                                    '1' => 'אמירקן אקספרס',
-                                    '2' => 'שראכרט, ויזה',
-                                    '3' => 'מסטרקארד',
-                                    '4' => 'דיינרס',
-
-                                ]),
-
-                                Text::make(__('card number'), "equivelant_amount"),
-                                Text::make(__('number of installments'), "equivelant_amount"),
-
-                                DateTime::make(__('History'), 'Date')
-                                    ->format('DD/MM/YYYY HH:mm')
-                                    ->resolveUsing(function ($value) {
-                                        return $value;
-                                    })->rules('required'),
-
-                            ]),
-                    ])->dependsOn("Payment_type", '3')->hideFromDetail()->hideFromIndex(),
-
-                    NovaDependencyContainer::make([
-                        Flexible::make(__('Payment_type_details'), 'Payment_type_details')
-
-                            ->addLayout(__('tooles'), 'Payment_type_details ', [
-                                Text::make(__('value'), "equivelant_amount")->rules('required'),
-
-                                Text::make(__('bank number'), "equivelant_amount"),
-                                Text::make(__('Branch number'), "equivelant_amount"),
-                                Text::make(__('account number'), "equivelant_amount"),
-
-                                DateTime::make(__('History'), 'Date')
-                                    ->format('DD/MM/YYYY HH:mm')
-                                    ->resolveUsing(function ($value) {
-                                        return $value;
-                                    })->rules('required'),
-
-                                ]),
-                    ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
-
-                    NovaDependencyContainer::make([
-                        Flexible::make(__('Payment_type_details'), 'Payment_type_details')
-
-                            ->addLayout(__('tooles'), 'Payment_type_details ', [
-                                Text::make(__('value'), "equivelant_amount")->rules('required'),
-
-                                Select::make(__('type'), "type")->options([
-                                    '1' => 'paybox',
-                                    '2' => 'bit',
-                                    '3' => 'פייפאל',
-                                ])->displayUsingLabels()->rules('required'),
-
-
-                                DateTime::make(__('History'), 'Date')
-                                    ->format('DD/MM/YYYY HH:mm')
-                                    ->resolveUsing(function ($value) {
-                                        return $value;
-                                    })->rules('required'),
-
-                            ]),
-                    ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
-
-                    // BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class),
+            // BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class),
 
 
             Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
@@ -287,18 +256,18 @@ class Donation extends Resource
         if (!$request->name) {
             // dd($request->add_user);
             if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
-                $telfone=  TelephoneDirectory::create([
+                $telfone =  TelephoneDirectory::create(
+                    [
                         'name' => $request->add_user[0]['attributes']['name'],
                         'type' => '2',
                         'phone_number' =>  $request->add_user[0]['attributes']['phone']
                     ],
-                    );
-
+                );
             }
             // dd( $telfone);
             DB::table('transactions')
-            ->where('id', $model->id)
-            ->update(['name' => $telfone->id]);
+                ->where('id', $model->id)
+                ->update(['name' => $telfone->id]);
         }
     }
 

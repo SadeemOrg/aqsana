@@ -173,33 +173,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -813,7 +786,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".multiselect-field .reorder__tag {\n  background: #41b883;\n  border-radius: 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  transition: all 0.25s ease;\n  margin-bottom: 5px;\n}\n.multiselect-field .reorder__tag:hover {\n  cursor: pointer;\n  background: #3dab7a;\n  transition-duration: 0.05s;\n}\n.multiselect-field .multiselect__select {\n  position: absolute;\n  left: 0;\n}\n.multiselect-field .multiselect__clear {\n  position: absolute;\n  right: 41px;\n  height: 40px;\n  width: 40px;\n  display: block;\n  cursor: pointer;\n  z-index: 2;\n}\n.multiselect-field .multiselect__clear::before, .multiselect-field .multiselect__clear::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  width: 3px;\n  height: 16px;\n  background: #aaa;\n  top: 12px;\n  right: 4px;\n}\n.multiselect-field .multiselect__clear::before {\n  transform: rotate(45deg);\n}\n.multiselect-field .multiselect__clear::after {\n  transform: rotate(-45deg);\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".multiselect-field .reorder__tag {\n  background: #41b883;\n  border-radius: 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  transition: all 0.25s ease;\n  margin-bottom: 5px;\n}\n.multiselect-field .reorder__tag:hover {\n  cursor: pointer;\n  background: #3dab7a;\n  transition-duration: 0.05s;\n}\n.multiselect-field .multiselect {\n  text-align: right;\n}\n.multiselect-field .multiselect__tags {\n  padding: 8px 15px 0 8px;\n}\n.multiselect-field .multiselect__select {\n  position: absolute;\n  right: auto;\n}\n.multiselect-field .multiselect__clear {\n  position: absolute;\n  right: 41px;\n  height: 40px;\n  width: 40px;\n  display: block;\n  cursor: pointer;\n  z-index: 2;\n}\n.multiselect-field .multiselect__clear::before, .multiselect-field .multiselect__clear::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  width: 3px;\n  height: 16px;\n  background: #aaa;\n  top: 12px;\n  right: 4px;\n}\n.multiselect-field .multiselect__clear::before {\n  transform: rotate(45deg);\n}\n.multiselect-field .multiselect__clear::after {\n  transform: rotate(-45deg);\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -33077,7 +33050,7 @@ var render = function() {
       _c("template", { slot: "field" }, [
         _c(
           "div",
-          { staticClass: "multiselect-field flex flex-col" },
+          { staticClass: "multiselect-field flex flex-col justify-end" },
           [
             !_vm.reorderMode
               ? _c(

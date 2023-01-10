@@ -1,39 +1,18 @@
 <template>
   <default-field :field="field" :showHelpText="showHelpText" :errors="errors">
     <template slot="field">
-      <div class="multiselect-field flex flex-col">
+      <div class="multiselect-field flex flex-col justify-end">
         <!-- Multi select field -->
-        <multiselect 
-          v-if="!reorderMode"
-          @input="handleChange"
-          @open="handleOpen"
-          @search-change="tryToFetchOptions"
-          track-by="value"
-          label="label"
-          :group-label="isOptionGroups ? 'label' : void 0"
-          :group-values="isOptionGroups ? 'values' : void 0"
-          :group-select="field.groupSelect || false"
-          ref="multiselect"
-          :value="selected"
-          :options="field.apiUrl ? asyncOptions : computedOptions"
-          :internal-search="!field.apiUrl"
-          :class="errorClasses"
-          :disabled="isReadonly"
-          :placeholder="field.placeholder || field.name"
-          :close-on-select="field.max === 1 || !isMultiselect"
-          :multiple="isMultiselect"
-          :max="max || field.max || null"
-          :optionsLimit="field.optionsLimit || 1000"
-          :limit="field.limit"
-          :limitText="count => __('novaMultiselect.limitText', { count: String(count || '') })"
-          selectLabel=""
-          :loading="isLoading"
-          selectGroupLabel=""
-          selectedLabel=""
-          deselectLabel=""
-          deselectGroupLabel=""
-          :clearOnSelect="field.clearOnSelect || false"
-        >
+        <multiselect v-if="!reorderMode" @input="handleChange" @open="handleOpen" @search-change="tryToFetchOptions"
+          track-by="value" label="label" :group-label="isOptionGroups ? 'label' : void 0"
+          :group-values="isOptionGroups ? 'values' : void 0" :group-select="field.groupSelect || false"
+          ref="multiselect" :value="selected" :options="field.apiUrl ? asyncOptions : computedOptions"
+          :internal-search="!field.apiUrl" :class="errorClasses" :disabled="isReadonly"
+          :placeholder="field.placeholder || field.name" :close-on-select="field.max === 1 || !isMultiselect"
+          :multiple="isMultiselect" :max="max || field.max || null" :optionsLimit="field.optionsLimit || 1000"
+          :limit="field.limit" :limitText="count => __('novaMultiselect.limitText', { count: String(count || '') })"
+          selectLabel="" :loading="isLoading" selectGroupLabel="" selectedLabel="" deselectLabel=""
+          deselectGroupLabel="" :clearOnSelect="field.clearOnSelect || false">
           <template slot="maxElements">
             {{ __('novaMultiselect.maxElements', { max: String(field.max || '') }) }}
           </template>
@@ -47,11 +26,8 @@
           </template>
 
           <template slot="clear">
-            <div
-              class="multiselect__clear"
-              v-if="field.nullable && (isMultiselect ? value.length : value)"
-              @mousedown.prevent.stop="value = isMultiselect ? [] : null"
-            ></div>
+            <div class="multiselect__clear" v-if="field.nullable && (isMultiselect ? value.length : value)"
+              @mousedown.prevent.stop="value = isMultiselect ? [] : null"></div>
           </template>
         </multiselect>
 
@@ -66,12 +42,9 @@
           </vue-draggable>
         </div>
 
-        <div
-          v-if="field.reorderable"
-          class="ml-auto mt-2 text-sm font-bold text-primary cursor-pointer dim"
-          @click="reorderMode = !reorderMode"
-        >
-          {{ __(reorderMode ? 'novaMultiselect.doneReordering' : 'novaMultiselect.reorder') }}
+        <div v-if="field.reorderable" class="ml-auto mt-2 text-sm font-bold text-primary cursor-pointer dim"
+          @click="reorderMode = !reorderMode">
+          {{ __(reorderMode? 'novaMultiselect.doneReordering' : 'novaMultiselect.reorder') }}
         </div>
       </div>
     </template>
@@ -387,10 +360,21 @@ export default {
       transition-duration: 0.05s;
     }
   }
-.multiselect__select{
-  position: absolute;
-  left: 0;
-}
+
+  .multiselect {
+    text-align: right;
+  }
+  .multiselect__tags{
+    padding: 8px 15px 0 8px;
+  }
+
+  .multiselect__select {
+    // background-color: black;
+    position: absolute;
+    // left: 15% !important;
+    right: auto;
+  }
+
   .multiselect__clear {
     position: absolute;
     right: 41px;
