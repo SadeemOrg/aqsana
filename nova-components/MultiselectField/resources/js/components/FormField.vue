@@ -3,7 +3,7 @@
     <template slot="field">
       <div class="multiselect-field flex flex-col">
         <!-- Multi select field -->
-        <multiselect
+        <multiselect 
           v-if="!reorderMode"
           @input="handleChange"
           @open="handleOpen"
@@ -387,7 +387,10 @@ export default {
       transition-duration: 0.05s;
     }
   }
-
+.multiselect__select{
+  position: absolute;
+  left: 0;
+}
   .multiselect__clear {
     position: absolute;
     right: 41px;

@@ -20,6 +20,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Laravel\Nova\Fields\DateTime;
+use Acme\MultiselectField\Multiselect;
+
 class Donation extends Resource
 {
     /**
@@ -105,7 +107,7 @@ class Donation extends Resource
                 ->displayUsingLabels(),
 
 
-                SelectAutoComplete::make(__('name'), "name")
+                Multiselect::make(__('name'), "name")
                         ->options(function () {
                             $Users =  \App\Models\TelephoneDirectory::where('type', '2')->get();
 
@@ -119,7 +121,7 @@ class Donation extends Resource
 
                             return $user_type_admin_array;
                         })
-                        ->displayUsingLabels()      ->hideFromDetail()->hideFromIndex(),
+                        ->singleSelect(),
 
 
 
@@ -144,13 +146,16 @@ class Donation extends Resource
                     //         return $user_type_admin_array;
                     //     })
                     //     ->displayUsingLabels(),
+                    
                     Text::make(__('payment_reason'), "payment_reason")->rules('required'),
+                    
 
-                    Select::make(__("billing language"), "lang")->options([
+                    Multiselect::make(__("billing language"), "lang")->options([
                         '1' => __('ar'),
                         '2' => __('en'),
                         '3' => __('hr'),
-                    ])->displayUsingLabels(),
+                    ])->singleSelect(),
+                    
                     Select::make(__("Payment_type"), "Payment_type")->options([
                         '1' => __('cash'),
                         '2' => __('shek'),
@@ -158,8 +163,6 @@ class Donation extends Resource
                         '4' => __('hawale'),
                         '5' => __('Other'),
                     ])->displayUsingLabels(),
-
-
 
                     NovaDependencyContainer::make([
                         Flexible::make(__('Payment_type_details'), 'Payment_type_details')

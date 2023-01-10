@@ -1,5 +1,5 @@
 <template>
-  <div :class="`text-${field.textAlign}`" v-if="field.belongsToResourceName && field.viewable && field.value">
+  <div  :class="`text-${field.textAlign}`" v-if="field.belongsToResourceName && field.viewable && field.value">
     <span>
       <span v-if="field.viewable && field.value">
         <router-link
