@@ -478,6 +478,17 @@
         })
 
 
+        function printpage() {
+            console.log("Asd")
+        //Get the print button and put it into a variable
+        var printButton = document.getElementById("printpagebutton");
+        //Set the print button visibility to 'hidden' 
+        printButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print()
+        printButton.style.visibility = 'visible';
+    }
+
         $('input[type=radio][name=PaypalRadioInput]').change(function() {
             console.log('this.value', this.value);
             if (this.value == 'payPalv1') {
