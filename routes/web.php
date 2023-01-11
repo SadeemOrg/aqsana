@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationTest;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PDFController;
 
 // use App\Http\Livewire\Notification;
 
@@ -142,6 +143,6 @@ Route::get("/WorkHoursUser", [HomeController::class, "WorkHoursUser"])->name('Wo
 Route::get("/StartTimerWorkHours", [HomeController::class, "StartTimerWorkHours"])->name('StartTimerWorkHours');
 
 
-
+Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF'])->name('generate-pdf');
 
 
