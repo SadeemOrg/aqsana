@@ -64,7 +64,7 @@ class Transaction extends Model
     }
     public function Sectors()
     {
-        return $this->belongsTo('App\Models\Sector','ref_id');
+        return $this->belongsTo('App\Models\Sector','sector');
     }
     public function Currenc()
     {
