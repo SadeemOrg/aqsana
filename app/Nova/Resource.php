@@ -9,7 +9,7 @@ use Ganyicz\NovaCallbacks\HasCallbacks;
 abstract class Resource extends NovaResource
 {
     use HasCallbacks;
-
+    public static $perPageOptions = [10];
     /**
      * Build an "index" query for the given resource.
      *
