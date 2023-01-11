@@ -515,27 +515,66 @@ class HomeController extends Controller
         } else {
             $sector_Text = "مخرجات عامة";
         }
-        switch ($Transaction->Payment_type) {
-            case 1:
-                $PaymentType = "كاش";
-                break;
-            case 2:
-                 $PaymentType = "شك";
-                break;
-            case 3:
-                 $PaymentType = "فيزا";
-                break;
-            case 4:
-                 $PaymentType = "حوالة";
-                break;
-            case 5:
-                 $PaymentType = "غير ذالك";
-                break;
+        // dd($Transaction);
+        if ($Transaction->lang == 1) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "كاش";
+                    break;
+                case 2:
+                    $PaymentType = "شك";
+                    break;
+                case 3:
+                    $PaymentType = "فيزا";
+                    break;
+                case 4:
+                    $PaymentType = "حوالة";
+                    break;
+                case 5:
+                    $PaymentType = "غير ذالك";
+                    break;
+            }
+        } else if ($Transaction->lang == 2) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "cash";
+                    break;
+                case 2:
+                    $PaymentType = "Bank doubt";
+                    break;
+                case 3:
+                    $PaymentType = "visa";
+                    break;
+                case 4:
+                    $PaymentType = "Bank transfer";
+                    break;
+                case 5:
+                    $PaymentType = "else";
+                    break;
+            }
+        } else if ($Transaction->lang == 3) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "כסף מזומן";
+                    break;
+                case 2:
+                    $PaymentType = "ספק בבנק";
+                    break;
+                case 3:
+                    $PaymentType = "וִיזָה";
+                    break;
+                case 4:
+                    $PaymentType = "העברה בנקאית";
+                    break;
+                case 5:
+                    $PaymentType = "אחרת";
+                    break;
+            }
         }
         // dd($PaymentType);
         $original = 1;
 
-        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'sector_Text'));
+        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'sector_Text', 'PaymentType'));
     }
 
     public function bills($id)
@@ -551,29 +590,66 @@ class HomeController extends Controller
             $sector_Text = "مخرجات عامة";
         }
 
-        switch ($Transaction->Payment_type) {
-            case 1:
-                $PaymentType = "كاش";
-                break;
-            case 2:
-                 $PaymentType = "شك";
-                break;
-            case 3:
-                 $PaymentType = "فيزا";
-                break;
-            case 4:
-                 $PaymentType = "حوالة";
-                break;
-            case 5:
-                 $PaymentType = "غير ذالك";
-                break;
+        if ($Transaction->lang == 1) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "كاش";
+                    break;
+                case 2:
+                    $PaymentType = "شك";
+                    break;
+                case 3:
+                    $PaymentType = "فيزا";
+                    break;
+                case 4:
+                    $PaymentType = "حوالة";
+                    break;
+                case 5:
+                    $PaymentType = "غير ذالك";
+                    break;
+            }
+        } else if ($Transaction->lang == 2) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "cash";
+                    break;
+                case 2:
+                    $PaymentType = "Bank doubt";
+                    break;
+                case 3:
+                    $PaymentType = "visa";
+                    break;
+                case 4:
+                    $PaymentType = "Bank transfer";
+                    break;
+                case 5:
+                    $PaymentType = "else";
+                    break;
+            }
+        } else if ($Transaction->lang == 3) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "כסף מזומן";
+                    break;
+                case 2:
+                    $PaymentType = "ספק בבנק";
+                    break;
+                case 3:
+                    $PaymentType = "וִיזָה";
+                    break;
+                case 4:
+                    $PaymentType = "העברה בנקאית";
+                    break;
+                case 5:
+                    $PaymentType = "אחרת";
+                    break;
+            }
         }
-        // dd($PaymentType);
 
         // dd($sector_Text);
         $original = 0;
 
-        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'sector_Text'));
+        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'sector_Text', 'PaymentType'));
     }
 
     public function showToastrMessages()

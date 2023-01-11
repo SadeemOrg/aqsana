@@ -7,7 +7,7 @@
         $address = nova_get_setting('address', 'default_value');
         $newaddress = explode(',', $address);
         $newDate = explode(' ', $Transaction->transaction_date);
-        // dd($Transaction->TelephoneDirectory->name);
+        // dd($PaymentType);
     @endphp
     <!--Arabic Bills -->
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 -mt-14 px-2" id="printJS-table">
@@ -64,7 +64,7 @@
             </span>
         </div>
         <p class="font-FlatBold text-[#101426] mt-3 text-[17px]">تم الدفع من خلال :
-            <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $Transaction->name }} </span>
+            <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $PaymentType }} </span>
         </p>
         <!-- table -->
         <div class="px-4 sm:px-6 lg:px-8">
