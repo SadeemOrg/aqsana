@@ -515,7 +515,24 @@ class HomeController extends Controller
         } else {
             $sector_Text = "مخرجات عامة";
         }
-
+        switch ($Transaction->Payment_type) {
+            case 1:
+                $PaymentType = "كاش";
+                break;
+            case 2:
+                 $PaymentType = "شك";
+                break;
+            case 3:
+                 $PaymentType = "فيزا";
+                break;
+            case 4:
+                 $PaymentType = "حوالة";
+                break;
+            case 5:
+                 $PaymentType = "غير ذالك";
+                break;
+        }
+        // dd($PaymentType);
         $original = 1;
 
         return view('Pages.Bills.Bills', compact('Transaction', 'original', 'sector_Text'));
@@ -533,7 +550,26 @@ class HomeController extends Controller
         } else {
             $sector_Text = "مخرجات عامة";
         }
-      
+
+        switch ($Transaction->Payment_type) {
+            case 1:
+                $PaymentType = "كاش";
+                break;
+            case 2:
+                 $PaymentType = "شك";
+                break;
+            case 3:
+                 $PaymentType = "فيزا";
+                break;
+            case 4:
+                 $PaymentType = "حوالة";
+                break;
+            case 5:
+                 $PaymentType = "غير ذالك";
+                break;
+        }
+        // dd($PaymentType);
+
         // dd($sector_Text);
         $original = 0;
 
