@@ -14,7 +14,7 @@ class Transaction extends Model
     protected $fillable = [
         'id','main_type','type','description', 'ref_id','transact_amount',
          'Currency','equivelant_amount','voucher','transaction_date',
-         'reason_of_reject','approval'
+         'reason_of_reject','approval','sector'
     ];
 
     protected $hidden = [
@@ -62,7 +62,10 @@ class Transaction extends Model
     {
         return $this->belongsTo('App\Models\Project','ref_id');
     }
-
+    public function Sectors()
+    {
+        return $this->belongsTo('App\Models\Sector','ref_id');
+    }
     public function Currenc()
     {
         return $this->belongsTo('App\Models\Currency','Currency');
