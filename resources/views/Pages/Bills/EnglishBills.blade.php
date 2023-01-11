@@ -53,8 +53,8 @@
                 {{ $Transaction->TelephoneDirectory->name }}
             </span>
         </div>
-        <p class="font-FlatBold text-[#101426] mt-3 text-[17px]">pay done by:
-            <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $Transaction->name }} </span>
+        <p class="font-FlatBold text-[#101426] mt-3 text-[17px]">payment method:
+            <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $PaymentType}} </span>
         </p>
         <!-- table -->
         <div class="px-4 sm:px-6 lg:px-8">

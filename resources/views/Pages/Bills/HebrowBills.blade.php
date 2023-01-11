@@ -56,7 +56,7 @@
             </span>
         </div>
         <p class="font-FlatBold text-[#101426] mt-3 text-[22px]">התשלום בוצע דרך :
-            <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $Transaction->name }} </span>
+            <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $PaymentType }} </span>
         </p>
 
 
