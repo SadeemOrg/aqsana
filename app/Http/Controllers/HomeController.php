@@ -506,7 +506,7 @@ class HomeController extends Controller
 
     public function originalbillbills($id)
     {
-        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->first();
+        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
 
 
          // dd($Transaction);
@@ -573,7 +573,7 @@ class HomeController extends Controller
 
     public function bills($id)
     {
-        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->first();
+        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
 
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
@@ -1000,6 +1000,41 @@ class HomeController extends Controller
 
     public function mainbill($id)
     {
+        // $details = [
+        //     'title' => 'Mail from ItSolutionStuff.com',
+        //     'body' => 'This is for testing email using smtp'
+        // ];
+        // $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
+        // // return  view('emails.myTestMail', compact('Transaction'));
+        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
+
+
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "كاش";
+                    break;
+                case 2:
+                    $PaymentType = "شك";
+                    break;
+                case 3:
+                    $PaymentType = "فيزا";
+                    break;
+                case 4:
+                    $PaymentType = "حوالة";
+                    break;
+                case 5:
+                    $PaymentType = "غير ذالك";
+                    break;
+            }
+
+        // dd($sector_Text);
+        $original = 0;
+
+
+
+        \Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\BillMail($Transaction,$PaymentType));
+
+        // dd("Email is Sent.");
         $type = '1';
         return view('Pages.Bills.mainBill', compact('id', 'type'));
     }
