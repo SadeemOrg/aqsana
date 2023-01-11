@@ -527,8 +527,13 @@ class HomeController extends Controller
         // dd($Transaction->TelephoneDirectory->name);
         $projectId = $Transaction->ref_id;
         $Project = Project::where("id", $projectId)->first();
-        $sectorId = Sector::where("id", $Project->sector)->first();
-        $sector_Text = $sectorId->text;
+        if ($Project != null) {
+            $sectorId = Sector::where("id", $Project->sector)->first();
+            $sector_Text = $sectorId->text;
+        } else {
+            $sector_Text = "مخرجات عامة";
+        }
+      
         // dd($sector_Text);
         $original = 0;
 
