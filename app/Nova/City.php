@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Acme\MultiselectField\Multiselect;
 use App\Models\User;
 use Benjacho\BelongsToManyField\BelongsToManyField;
 use Illuminate\Http\Request;
@@ -31,10 +32,9 @@ class City extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Cityparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Cityparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
     public static $model = \App\Models\City::class;
     public static $priority = 2;
@@ -101,7 +101,7 @@ class City extends Resource
                 BelongsTo::make(__('Area'), 'Area', \App\Nova\Area::class),
 
 
-                Select::make(__('admin'), 'admin_id')
+                Multiselect::make(__('admin'), 'admin_id')
                     ->options(function () {
                         $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
 
@@ -115,9 +115,9 @@ class City extends Resource
                         }
                         return $user_type_admin_array;
                     })
-                    ->displayUsingLabels()
-                    ->rules('required')->hideFromIndex()->hideFromDetail(),
-                Select::make(__('Alhisalat_admin'), 'Alhisalat_admin')
+                    ->singleSelect()
+                    ->rules('required'),
+                Multiselect::make(__('Alhisalat_admin'), 'Alhisalat_admin')
                     ->options(function () {
                         $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
 
@@ -130,8 +130,8 @@ class City extends Resource
                             $user_type_admin_array += [$user['id'] => ($user['name'])];
                         }
                         return $user_type_admin_array;
-                    })->rules('required')->hideFromIndex()->hideFromDetail(),
-                Select::make(__('Qawafil_admin'), 'Qawafil_admin')
+                    })->rules('required')->singleSelect(),
+                Multiselect::make(__('Qawafil_admin'), 'Qawafil_admin')
                     ->options(function () {
                         $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
 
@@ -143,7 +143,7 @@ class City extends Resource
                             $user_type_admin_array += [$user['id'] => ($user['name'])];
                         }
                         return $user_type_admin_array;
-                    })->rules('required')->hideFromIndex()->hideFromDetail(),
+                    })->rules('required')->singleSelect(),
                 BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('Alhisalat_admin'), 'AlhisalatAdmin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('Qawafil_admin'), 'QawafilAdmin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),

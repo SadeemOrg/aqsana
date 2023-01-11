@@ -20,6 +20,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Laravel\Nova\Fields\DateTime;
+use Acme\MultiselectField\Multiselect;
+
 
 class Donation extends Resource
 {
@@ -106,7 +108,7 @@ class Donation extends Resource
                 ->displayUsingLabels(),
 
 
-            SelectAutoComplete::make(__('name'), "name")
+                Multiselect::make(__('name'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::where('type', '2')->get();
 
@@ -120,7 +122,7 @@ class Donation extends Resource
 
                     return $user_type_admin_array;
                 })
-                ->displayUsingLabels()->hideFromDetail()->hideFromIndex(),
+                ->singleSelect(),
 
 
 
@@ -134,20 +136,10 @@ class Donation extends Resource
                 ]),
 
             BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
-            // Select::make(__('project'), "ref_id")
-            //     ->options(function () {
-            //         $Alhisalats =  \App\Models\User::all();
-            //         $user_type_admin_array =  array();
-            //         foreach ($Alhisalats as $Alhisalat) {
-            //             $user_type_admin_array += [$Alhisalat['id'] => ($Alhisalat['name'])];
-            //         }
 
-            //         return $user_type_admin_array;
-            //     })
-            //     ->displayUsingLabels(),
             Text::make(__('payment_reason'), "payment_reason")->rules('required'),
 
-            SelectAutoComplete::make(__("billing language"), "lang")->options([
+            Select::make(__("billing language"), "lang")->options([
                 '1' => __('ar'),
                 '2' => __('en'),
                 '3' => __('hr'),
