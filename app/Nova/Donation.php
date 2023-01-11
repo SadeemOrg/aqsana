@@ -124,7 +124,7 @@ class Donation extends Resource
 
                     return $user_type_admin_array;
                 })
-                ->singleSelect(),
+                ->singleSelect()->hideFromDetail()->hideFromIndex(),
 
 
 
@@ -268,7 +268,7 @@ class Donation extends Resource
 
 
             Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
-            Text::make(__('description'), 'description'),
+            Text::make(__('description'), 'description')->hideFromIndex(),
             Date::make(__('date'), 'transaction_date'),
 
         ];
