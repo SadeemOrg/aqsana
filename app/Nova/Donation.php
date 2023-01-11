@@ -93,10 +93,8 @@ class Donation extends Resource
 
             // BelongsTo::make(__('project'), 'project')->hideWhenCreating()->readonly(),
             // Project::make(__('ref_id'), 'ref_id')->hideFromIndex(),
-            BelongsTo::make(__('Sector'), 'Sectors',\App\Nova\Sector::class),
-            // select::
-
-            BelongsTo::make(__('project'), 'project',\App\Nova\project::class),
+            BelongsTo::make(__('Sector'), 'Sectors',\App\Nova\Sector::class)->nullable(),
+            BelongsTo::make(__('project'), 'project',\App\Nova\project::class)->nullable(),
 
             Text::make(__('transact amount'), 'transact_amount'),
             Select::make(__('Currenc'), "Currency")
