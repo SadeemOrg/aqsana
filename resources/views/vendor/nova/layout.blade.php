@@ -45,7 +45,7 @@
 @php
     $img = 'storage/' . nova_get_setting('Headerlogo', 'default_value');
     $imgRight = 'storage/' . nova_get_setting('HeaderqawafelLogo', 'default_value');
-    
+
 @endphp
 
 <body class="min-w-site bg-40 text-90 font-medium min-h-full">
