@@ -522,10 +522,10 @@ class HomeController extends Controller
                     $PaymentType = "فيزا";
                     break;
                 case 4:
-                    $PaymentType = "حوالة";
+                    $PaymentType = "حوالة مصرفية";
                     break;
                 case 5:
-                    $PaymentType = "غير ذالك";
+                    $PaymentType = "غير ذلك";
                     break;
             }
         } else if ($Transaction->lang == 2) {
@@ -587,10 +587,10 @@ class HomeController extends Controller
                     $PaymentType = "فيزا";
                     break;
                 case 4:
-                    $PaymentType = "حوالة";
+                    $PaymentType = "حوالة مصرفية";
                     break;
                 case 5:
-                    $PaymentType = "غير ذالك";
+                    $PaymentType = "غير ذلك";
                     break;
             }
         } else if ($Transaction->lang == 2) {
@@ -1015,19 +1015,18 @@ class HomeController extends Controller
                     $PaymentType = "فيزا";
                     break;
                 case 4:
-                    $PaymentType = "حوالة";
+                    $PaymentType = " حوالة مصرفية";
                     break;
                 case 5:
-                    $PaymentType = "غير ذالك";
+                    $PaymentType = "غير ذلك";
                     break;
             }
 
-        // dd($sector_Text);
         $original = 0;
 
 
 
-        \Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\BillMail($Transaction,$PaymentType));
+        // Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\BillMail($Transaction,$PaymentType));
 
         // dd("Email is Sent.");
         $type = '1';

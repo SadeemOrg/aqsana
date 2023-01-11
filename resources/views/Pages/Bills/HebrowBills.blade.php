@@ -31,10 +31,6 @@
                     <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
                 </p>
             </div>
-            {{-- <div class="flex basis-1/2 justify-center">
-                <img src="{{ asset('assets/image/2SG4XFNXK4WfehAE1eroA7kp7Y341RMs8f4ObPLO.png') }}" class="w-48 h-48 "
-                    alt="">
-            </div> --}}
         </div>
         <div class="flex flex-col items-center mt-10">
             <p dir="ltr" class="">{{ $newDate[0] }}</p>
@@ -124,11 +120,17 @@
         <div class="flex flex-col sm:flex-row items-center justify-start sm:justify-between mt-4 sm:mx-7 mb-6 ">
             <div>
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">اسم القطاع:
-                    <span class="font-FlatBold text-[#101426] mx-1 text-sm"> {{ $sector_Text }}</span>
+                    @if ($Transaction->Sectors != null)
+                    <span class="font-FlatBold text-[#101426] mx-1 text-sm"> {{ $Transaction->Sectors->text }}</span>
+                @else
+                    <span class="font-FlatBold text-[#101426] mx-1 text-sm"> مخرجات عامة</span>
+                @endif
                 </p>
+                @if ($Transaction->description != null)
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">ملاحظات :
                     <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
                 </p>
+                @endif 
             </div>
             <button dir="ltr" type="button" onclick="window.print()"
                 class=" rounded-[50px] bg-[#349A37] text-white text-base w-28 py-4 mt-4 font-[700] hover:bg-[#101426] duration-200">
