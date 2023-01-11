@@ -506,16 +506,10 @@ class HomeController extends Controller
 
     public function originalbillbills($id)
     {
-        $Transaction =  Transaction::where("id", $id)->first();
-        $projectId = $Transaction->ref_id;
-        $Project = Project::where("id", $projectId)->first();
-        if ($Project != null) {
-            $sectorId = Sector::where("id", $Project->sector)->first();
-            $sector_Text = $sectorId->text;
-        } else {
-            $sector_Text = "مخرجات عامة";
-        }
-        // dd($Transaction);
+        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->first();
+
+
+         // dd($Transaction);
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
@@ -574,21 +568,12 @@ class HomeController extends Controller
         // dd($PaymentType);
         $original = 1;
 
-        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'sector_Text', 'PaymentType'));
+        return view('Pages.Bills.Bills', compact('Transaction', 'original','PaymentType'));
     }
 
     public function bills($id)
     {
-        $Transaction =  Transaction::where("id", $id)->with('TelephoneDirectory')->first();
-        // dd($Transaction->TelephoneDirectory->name);
-        $projectId = $Transaction->ref_id;
-        $Project = Project::where("id", $projectId)->first();
-        if ($Project != null) {
-            $sectorId = Sector::where("id", $Project->sector)->first();
-            $sector_Text = $sectorId->text;
-        } else {
-            $sector_Text = "مخرجات عامة";
-        }
+        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->first();
 
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
@@ -649,7 +634,7 @@ class HomeController extends Controller
         // dd($sector_Text);
         $original = 0;
 
-        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'sector_Text', 'PaymentType'));
+        return view('Pages.Bills.Bills', compact('Transaction', 'original',  'PaymentType'));
     }
 
     public function showToastrMessages()
