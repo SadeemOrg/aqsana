@@ -48,6 +48,10 @@ class Donation extends Resource
     {
         return __('Financial management');
     }
+    public function authorizedToDelete(Request $request)
+    {
+        return false;
+    }
     public static function availableForNavigation(Request $request)
     {
         if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Donationparmation",  $request->user()->userrole()))) {

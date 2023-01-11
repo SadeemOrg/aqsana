@@ -17,6 +17,7 @@
         "averotech/link": "*",
         "averotech/tree": "*",
         "awesome-nova/filter-card": "^1.0",
+        "barryvdh/laravel-dompdf": "^2.0",
         "benjacho/belongs-to-many-field": "^2.0",
         "chaseconey/nova-external-image": "^0.3.1",
         "coderello/laravel-nova-lang": "^1.8",
