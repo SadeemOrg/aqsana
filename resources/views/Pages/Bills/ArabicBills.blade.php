@@ -85,26 +85,31 @@
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
-                                        <tr>
-                                            <td
-                                                class="whitespace-nowrap py-4 pl-4 pr-3  font-FlatBold text-gray-900 sm:pl-6">
-                                                {{ $PaymentType }} </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
-                                                {{ $transactionBillDate }}
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
-                                                {{ $Transaction->Payment_type_details[0]['attributes']['bank_number'] }}
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
-                                                {{ $Transaction->Payment_type_details[0]['attributes']['Branch_number'] }}
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
-                                                {{ $Transaction->Payment_type_details[0]['attributes']['account_number'] }}
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
-                                                {{ $Transaction->Payment_type_details[0]['attributes']['equivelant_amount'] }}
-                                                ₪</td>
-                                        </tr>
+                                        @foreach ($Transaction->Payment_type_details as $ChikPayment)
+                                            @php
+                                                $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                                            @endphp
+                                            <tr>
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3  font-FlatBold text-gray-900 sm:pl-6">
+                                                    {{ $PaymentType }} </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChickBillDate  }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChikPayment['attributes']['bank_number'] }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChikPayment['attributes']['Branch_number'] }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChikPayment['attributes']['account_number'] }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChikPayment['attributes']['equivelant_amount'] }}
+                                                    ₪</td>
+                                            </tr>
+                                        @endforeach
                                         <tr>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
@@ -180,26 +185,31 @@
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
-                                        <tr>
-                                            <td
-                                                class="whitespace-nowrap py-4 pl-4 pr-3  font-FlatBold text-gray-900 sm:pl-6">
-                                                {{ $PaymentType }} </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
-                                                {{ $transactionBillDate }}
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
-                                                {{ $Transaction->Payment_type_details[0]['attributes']['bank_number'] }}
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
-                                                {{ $Transaction->Payment_type_details[0]['attributes']['Branch_number'] }}
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
-                                                {{ $Transaction->Payment_type_details[0]['attributes']['account_number'] }}
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
-                                                {{ $Transaction->Payment_type_details[0]['attributes']['equivelant_amount'] }}
-                                                ₪</td>
-                                        </tr>
+                                        @foreach ($Transaction->Payment_type_details as $ChikPayment)
+                                            @php
+                                                $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                                            @endphp
+                                            <tr>
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3  font-FlatBold text-gray-900 sm:pl-6">
+                                                    {{ $PaymentType }} </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChickBillDate }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChikPayment['attributes']['bank_number'] }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChikPayment['attributes']['Branch_number'] }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChikPayment['attributes']['account_number'] }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChikPayment['attributes']['Doubt_value'] }}₪
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         <tr>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
@@ -229,19 +239,24 @@
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
+                                        @foreach ($Transaction->Payment_type_details as $ChikPayment)
+                                        @php
+                                            $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                                        @endphp
                                         <tr>
                                             <td
                                                 class="whitespace-nowrap px-3 py-4  font-FlatBold text-base text-black-900">
                                                 {{ $PaymentType }}
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-base text-black-900">
-                                                {{ $transactionBillDate }}
+                                                {{ $ChickBillDate }}
                                             </td>
                                             <td
                                                 class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base text-black-900">
-                                                {{ $Transaction->Payment_type_details[0]['attributes']['Doubt_value'] }} ₪
+                                                {{ $ChikPayment['attributes']['equivelant_amount'] }} ₪
                                             </td>
                                         </tr>
+                                        @endforeach
                                         <tr>
                                             <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
                                             </td>
