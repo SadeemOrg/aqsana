@@ -164,11 +164,11 @@ class Donation extends Resource
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
                     ->addLayout(__('tooles'), 'Payment_type_details ', [
-                        Text::make(__('Doubt value'), "equivelant_amount")->rules('required'),
-                        Text::make(__('bank number'), "equivelant_amount"),
-                        Text::make(__('Branch number'), "equivelant_amount"),
-                        Text::make(__('account number'), "equivelant_amount"),
-                        Text::make(__('Doubt number'), "equivelant_amount"),
+                        Text::make(__('Doubt value'), "Doubt_value")->rules('required'),
+                        Text::make(__('bank number'), "bank_number"),
+                        Text::make(__('Branch number'), "Branch_number"),
+                        Text::make(__('account number'), "account_number"),
+                        Text::make(__('Doubt number'), "Doubt_number"),
 
                         DateTime::make(__('History of doubt'), 'Date')
                             ->resolveUsing(function ($value) {
@@ -191,8 +191,8 @@ class Donation extends Resource
 
                         ]),
 
-                        Text::make(__('card number'), "equivelant_amount"),
-                        Text::make(__('number of installments'), "equivelant_amount"),
+                        Text::make(__('card number'), "card_number"),
+                        Text::make(__('number of installments'), "number_of_installments"),
 
                         DateTime::make(__('History'), 'Date')
                             ->format('DD/MM/YYYY HH:mm')
@@ -209,9 +209,9 @@ class Donation extends Resource
                     ->addLayout(__('tooles'), 'Payment_type_details ', [
                         Text::make(__('value'), "equivelant_amount")->rules('required'),
 
-                        Text::make(__('bank number'), "equivelant_amount"),
-                        Text::make(__('Branch number'), "equivelant_amount"),
-                        Text::make(__('account number'), "equivelant_amount"),
+                        Text::make(__('bank number'), "bank_number"),
+                        Text::make(__('Branch number'), "Branch_number"),
+                        Text::make(__('account number'), "account_number"),
 
                         DateTime::make(__('History'), 'Date')
                             ->format('DD/MM/YYYY HH:mm')
@@ -235,8 +235,8 @@ class Donation extends Resource
 
                         ]),
 
-                        Text::make(__('card number'), "equivelant_amount"),
-                        Text::make(__('number of installments'), "equivelant_amount"),
+                        Text::make(__('card number'), "card_number"),
+                        Text::make(__('number of installments'), "number_of_installments"),
 
                         DateTime::make(__('History'), 'Date')
                             ->format('DD/MM/YYYY HH:mm')
