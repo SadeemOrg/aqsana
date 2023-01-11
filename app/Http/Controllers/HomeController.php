@@ -1000,12 +1000,7 @@ class HomeController extends Controller
 
     public function mainbill($id)
     {
-        // $details = [
-        //     'title' => 'Mail from ItSolutionStuff.com',
-        //     'body' => 'This is for testing email using smtp'
-        // ];
-        // $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
-        // // return  view('emails.myTestMail', compact('Transaction'));
+
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
 
 
