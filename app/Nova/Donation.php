@@ -244,18 +244,7 @@ class Donation extends Resource
                                 return $value;
                             })->rules('required'),
 
-                    Select::make(__("billing language"), "lang")->options([
-                        '1' => __('ar'),
-                        '2' => __('en'),
-                        '3' => __('hr'),
-                    ])->displayUsingLabels(),
-                    Select::make(__("Payment_type"), "Payment_type")->options([
-                        '1' => __('cash'),
-                        '2' => __('shek'),
-                        '3' => __('visa'),
-                        '4' => __('hawale'),
-                        '5' => __('Other'),
-                    ])->displayUsingLabels(),
+
 
 
                         DateTime::make(__('History'), 'Date')
