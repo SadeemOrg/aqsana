@@ -89,8 +89,8 @@ class PaymentVoucher extends Resource
                 ->cancelButtonText(__('Dont print')), $this->id)
             ->text(__('print'))->showLoadingAnimation()
             ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
-            Project::make(__('ref_id'),'ref_id'),
-
+            BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable(),
+            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable(),
 
             Select::make(__("type"), "type")->options([
                 '0' => __('the Payment Voucher'),

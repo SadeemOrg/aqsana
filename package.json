@@ -27,7 +27,13 @@
         "build-BillingSchedule": "cd nova-components/BillingSchedule && npm run dev",
         "build-BillingSchedule-prod": "cd nova-components/BillingSchedule && npm run prod",
         "build-analytics": "cd nova-components/Analytics && npm run dev",
-        "build-analytics-prod": "cd nova-components/Analytics && npm run prod"
+        "build-analytics-prod": "cd nova-components/Analytics && npm run prod",
+        "build-DonationNotReceive": "cd nova-components/DonationNotReceive && npm run dev",
+        "build-DonationNotReceive-prod": "cd nova-components/DonationNotReceive && npm run prod",
+        "build-DonationInBank": "cd nova-components/DonationInBank && npm run dev",
+        "build-DonationInBank-prod": "cd nova-components/DonationInBank && npm run prod",
+        "build-DonationInBox": "cd nova-components/DonationInBox && npm run dev",
+        "build-DonationInBox-prod": "cd nova-components/DonationInBox && npm run prod"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.7",

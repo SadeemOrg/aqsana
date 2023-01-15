@@ -1,7 +1,16 @@
 {
     "not read": "غير مقروء",
     "Once": "مرة",
+    "handy":"يدوية",
+    "automatic":"تلقائي",
+    "transaction_type":"طريقة الدفع",
+    "transaction_status":"حالة السند",
     "Tours":"جولات",
+    "Not Receive yet":"لم يتم التسليم بعد ",
+    "in the bank":"في  البنك",
+    "in a box":"في صندوق",
+
+
     "delegate": "مستخدمين",
     "Super Admin": "الادمن",
     "Userparmation": "مسؤول المستخدمين",
@@ -147,6 +156,9 @@
     "Update by": "تم تحديث بواسطة",
     "Budget": "ميزانية",
     "type": "النوع",
+    "ReceiveDonation":"استلام التبرع",
+    "Receive Done":"تم الاستلام",
+    "DepositedInBank":"مودعة في البنك",
     "transact amount": "مبلغ المتبرع به",
     "transact amount pay": "مبلغ المدفوع",
     "equivalent amount": "سعر الصرف",
