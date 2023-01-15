@@ -16,9 +16,8 @@ class PDFController extends Controller
     {
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
         $TransactionArray= @json_decode(json_encode($Transaction), true);
-
-        $pdf = PDF  ::loadView('myPDF', $TransactionArray);
-
+        // dd($TransactionArray);
+        $pdf = PDF::loadView('myPDF', $TransactionArray);
         return $pdf->download('codesolutionstuff.pdf');
     }
 }

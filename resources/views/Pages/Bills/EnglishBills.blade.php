@@ -7,19 +7,16 @@
         $address = nova_get_setting('address', 'default_value');
         $newaddress = explode(',', $address);
         $newDate = explode(' ', $Transaction->transaction_date);
-        // dd($Donations->amount);
+        $transactionBillDate = date('d/m/Y', strtotime($Transaction->Payment_type_details[0]['attributes']['Date']));
+        
     @endphp
     <!--English Bills -->
-    <div dir="ltr" class="max-w-7xl mx-auto sm:px-6 lg:px-8 -mt-14 px-8" id="printJS-table">
-        <img class="h-[250px] w-full"
+    <div dir="ltr" class="max-w-7xl  mx-auto sm:px-6 lg:px-8 -mt-12 px-8" id="printJS-table">
+        <img class="h-[250px] w-[90%] mt-1.5"
             src="https://media.discordapp.net/attachments/938405759996276806/1060518737767309342/iuktui.png?width=1440&height=302"
             alt="alaqsa Logo">
         <div class="flex sm:flex-row flex-col-reverse items-center justify-between  relative">
             <div class="basis-1/2 flex flex-col items-center sm:items-start">
-                {{-- <h3 class="mt-8 text-2xl font-FlatBold text-[#101426]">Al-Aqsa Association for the Care of
-                    Endowments and Islamic Sanctuaries</h3> --}}
-                {{-- <p class="mt-2 text-[17px] font-FlatBold text-center  text-[#6B7280]">Al-Aqsa Association for the Care of
-                    Endowments and Islamic Sanctuaries</p> --}}
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">Association Id :
                     <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                 </p>
@@ -53,9 +50,9 @@
                 {{ $Transaction->TelephoneDirectory->name }}
             </span>
         </div>
-        <p class="font-FlatBold text-[#101426] mt-3 text-[17px]">payment method:
+        {{-- <p class="font-FlatBold text-[#101426] mt-3 text-[17px]">payment method:
             <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $PaymentType }} </span>
-        </p>
+        </p> --}}
         <!-- table -->
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
@@ -64,59 +61,214 @@
                 <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle ">
                         <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-300">
-                                <thead class="bg-[#349A37]">
-                                    <tr class="">
-                                        <th scope="col"
-                                            class=" py-3.5 pl-4 pr-3  text-sm font-semibold text-white text-left sm:pl-6">
-                                            Pay way</th>
-                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                            date</th>
-                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                            Bank</th>
-                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                            Branch</th>
-                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                            Account Id</th>
-                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                            Receipt Voucher number</th>
-                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                            total</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
-                                    <tr>
-                                        <td
-                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                            Account </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $newDate[0] }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">12
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">632
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">161479
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            00120006</td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $Transaction->transact_amount }} ₪</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                        <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
-                                            total summation :</td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                        <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
-                                            {{ $Transaction->transact_amount }} ₪</td>
-                                    </tr>
-                                    <!-- More people... -->
-                                </tbody>
-                            </table>
+                            @if ($PaymentType == 'Bank transfer')
+                                <table class="min-w-full divide-y divide-gray-300">
+                                    <thead class="bg-[#349A37]">
+                                        <tr class="">
+                                            <th scope="col"
+                                                class=" py-3.5 pl-4 pr-3  text-sm font-semibold text-white text-left sm:pl-6">
+                                                Pay way</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                date</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                Bank</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                Branch</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                Account Id</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
+                                        @foreach ($Transaction->Payment_type_details as $ChikPayment)
+                                            @php
+                                                $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                                            @endphp
+                                            <tr>
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3  font-FlatBold text-gray-900 sm:pl-6">
+                                                    {{ $PaymentType }} </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChickBillDate }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChikPayment['attributes']['bank_number'] }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChikPayment['attributes']['Branch_number'] }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChikPayment['attributes']['account_number'] }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                    {{ $ChikPayment['attributes']['equivelant_amount'] }}
+                                                    ₪</td>
+                                            </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
+                                                المجموع الكلي :</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
+                                                {{ $Transaction->transact_amount }} ₪</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            @elseif($PaymentType == 'cash')
+                                <table class="min-w-full divide-y divide-gray-300">
+                                    <thead class="bg-[#349A37]">
+                                        <tr class="">
+                                            <th scope="col"
+                                                class=" py-3.5 pl-4 pr-3  text-sm font-semibold text-white text-left sm:pl-6">
+                                                Pay way</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                date</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
+                                        <tr>
+                                            <td class="whitespace-nowrap px-8 py-4  font-FlatBold text-base text-black">
+                                                {{ $PaymentType }} </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                {{ $newDate[0] }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                {{ $Transaction->transact_amount }} ₪</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
+                                                total summation :</td>
+                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
+                                                {{ $Transaction->transact_amount }} ₪</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            @elseif($PaymentType == 'Bank doubt')
+                                <table class="min-w-full divide-y divide-gray-300">
+                                    <thead class="bg-[#349A37]">
+                                        <tr class="">
+                                            <th scope="col"
+                                                class=" py-3.5 pl-4 pr-3  text-sm font-semibold text-white text-left sm:pl-6">
+                                                Pay way</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                date doubt</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                Bank number</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                Branch number</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                Account Id</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                doubt amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
+                                        @foreach ($Transaction->Payment_type_details as $ChikPayment)
+                                            @php
+                                                $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                                            @endphp
+                                            <tr>
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                    {{ $PaymentType }} </td>
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                    {{ $ChickBillDate }}
+                                                </td>
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                    {{ $ChikPayment['attributes']['bank_number'] }}
+                                                </td>
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                    {{ $ChikPayment['attributes']['Branch_number'] }}
+                                                </td>
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                    {{ $ChikPayment['attributes']['account_number'] }}
+                                                </td>
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                    {{ $ChikPayment['attributes']['Doubt_value'] }}₪</td>
+                                            </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
+                                                total summation :</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
+                                                {{ $Transaction->transact_amount }} ₪</td>
+                                        </tr>
+                                        <!-- More people... -->
+                                    </tbody>
+                                </table>
+                            @elseif($PaymentType == 'bit')
+                                <table class="min-w-full divide-y divide-gray-300">
+                                    <thead class="bg-[#349A37]">
+                                        <tr class="">
+                                            <th scope="col"
+                                                class=" py-3.5 pl-4 pr-3  text-sm font-semibold text-white text-left sm:pl-6">
+                                                Pay way</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                date</th>
+                                            {{-- <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                Bank</th> --}}
+                                            {{-- <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                Branch</th> --}}
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-left">
+                                                total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
+                                        {{-- @foreach ($Transaction->Payment_type_details as $ChikPayment)
+                                        @php
+                                            $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                                        @endphp
+                                        <tr>
+                                            <td
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                {{ $PaymentType }} </td>
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                {{ $ChickBillDate }}
+                                            </td>
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                {{ $ChikPayment['attributes']['equivelant_amount'] }} ₪</td>
+                                        </tr>
+                                        @endforeach --}}
+                                        <tr>
+                                            {{-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td> --}}
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
+                                                total summation :</td>
+                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
+                                                {{ $Transaction->transact_amount }} ₪</td>
+                                        </tr>
+                                        <!-- More people... -->
+                                    </tbody>
+                                </table>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -133,19 +285,20 @@
                     @endif
                 </p>
                 @if ($Transaction->description != null)
-                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">ملاحظات :
-                    <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
-                </p>
+                    <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">ملاحظات :
+                        <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
+                    </p>
                 @endif
             </div>
-            <button dir="ltr" type="button" onclick="window.print()"
+            <button dir="ltr" id="printpagebutton" type="button" onclick="printpage()"
                 class=" rounded-[50px] bg-[#349A37] text-white text-base w-28 py-4 mt-4 font-[700] hover:bg-[#101426] duration-200">
                 طباعة
             </button>
         </div>
         <div class="relative flex flex-row items-center justify-center w-full -mt-12 ">
             <img class="w-[280px] h-[240px]"
-                src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png" alt="logo">
+                src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png"
+                alt="logo">
             <div class="absolute">
                 <img class="w-36 h-36"
                     src="https://media.discordapp.net/attachments/938405759996276806/1060513822194028595/-removebg-preview.png"
