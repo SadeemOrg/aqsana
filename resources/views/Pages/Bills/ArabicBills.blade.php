@@ -120,7 +120,6 @@
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
                                                 {{ $Transaction->transact_amount }} ₪</td>
                                         </tr>
-                                        <!-- More people... -->
                                     </tbody>
                                 </table>
                             @elseif($PaymentType == 'كاش')
