@@ -61,10 +61,9 @@ class Alhisalat extends Resource
 
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Alhisalatparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Alhisalatparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
     public static $model = \App\Models\Alhisalat::class;
     /**
@@ -80,7 +79,7 @@ class Alhisalat extends Resource
      * @var array
      */
     public static $search = [
-        'id','number_alhisala'
+        'id', 'number_alhisala'
     ];
     public static $priority = 4;
     /**
@@ -116,9 +115,9 @@ class Alhisalat extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make(__("number alhisala"), "number_alhisala")->withMeta([
-                'value' => uniqid(),
-            ])->readonly()->hideWhenUpdating()->hideFromDetail()->hideFromIndex(),
+            // Text::make(__("number alhisala"), "number_alhisala")->withMeta([
+            //     'value' => uniqid(),
+            // ])->readonly()->hideWhenUpdating()->hideFromDetail()->hideFromIndex(),
 
             Text::make(__("number alhisala"), "number_alhisala")
                 ->readonly()->hideWhenCreating(),
@@ -153,7 +152,7 @@ class Alhisalat extends Resource
                 })->readonly()->text(__('sent done'))->showLoadingAnimation()
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
-            Select::make(__('saved addresss'), 'address_id')
+            Multiselect::make(__('saved addresss'), 'address_id')
                 ->options(function () {
                     $id = Auth::id();
                     $addresss =  \App\Models\address::where('type', '2')->get();
@@ -167,10 +166,7 @@ class Alhisalat extends Resource
                     }
 
                     return $address_type_admin_array;
-                })->hideFromIndex()->hideFromDetail()
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    return null;
-                }),
+                })->singleSelect()->hideFromIndex()->hideFromDetail(),
             BelongsTo::make(__('saved addresss'), 'address', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
@@ -183,8 +179,8 @@ class Alhisalat extends Resource
                     Text::make(__('Name'), "name_address"),
                     Text::make(__("description"), "description"),
                     Text::make(__("phone number"), "phone_number_address"),
-                    MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
-                    ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
+                    MapsAddress::make(__('Address'), 'current_location')->zoom(10)
+                        ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
                     Select::make(__("Status"), "address_status")->options([
                         '1' => __('active'),
                         '2' => __('not active'),
@@ -245,8 +241,57 @@ class Alhisalat extends Resource
 
     public static function beforeCreate(Request $request, $model)
     {
+        if ($request->address_id){
 
-        // dd($request->address_id);
+            $alhisalats = DB::table('alhisalats')->where('address_id', $request->address_id)->get();
+            $addresses = DB::table('addresses')->where('id', $request->address_id)->first();
+            $countt =  count($alhisalats) +1 ;
+
+
+
+            $model->number_alhisala=  $countt ."  ".$addresses->name_address ;
+            $model->number_alhisala=   $addresses->name_address." ".$countt ;
+
+        }
+        else
+        {
+
+            $id = Auth::id();
+
+            if (!$request->address_id) {
+                // dd("hf");
+                // if ($request->newadres[0]['attributes']['name_address'] && $request->newadres[0]['attributes']['description'] && $request->newadres[0]['attributes']['phone_number_address'] && $request->newadres[0]['attributes']['current_location'] && $request->newadres[0]['attributes']['address_status']) {
+
+                if ($request->newadres[0]['attributes']['name_address'] && $request->newadres[0]['attributes']['description'] && $request->newadres[0]['attributes']['phone_number_address']  && $request->newadres[0]['attributes']['address_status']) {
+                //    dd('dd');
+                    $address = address::create([
+                        'name_address' => $request->newadres[0]['attributes']['name_address'],
+                        'description' => $request->newadres[0]['attributes']['description'],
+                        'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
+                        'current_location' => $request->newadres[0]['attributes']['current_location'],
+                        'status' => $request->newadres[0]['attributes']['address_status'],
+                        'type' => 2,
+                        'created_by' => $id
+                    ]);
+
+                    //    dd( $address->id);
+                    $model->number_alhisala= $address->name_address." ".'1';
+                    $model->address_id=$address->id;
+                    // DB::table('alhisalats')
+                    //     ->where('id', $request  ->id)
+                    //     ->update(['address_id' => $address->id]);
+                    // dd( $addresstt);
+                }
+            } else   $model->address_id = $request->address_id;
+        }
+
+
+        // dd(   $model->number_alhisala );
+
+
+        //  $model->number_alhisala=12;
+
+
         // $request->address_id=2;
         $id = Auth::id();
         $model->created_by = $id;
@@ -283,39 +328,18 @@ class Alhisalat extends Resource
     public static function aftersave(Request $request, $model)
     {
 
-        $model->number_alhisala = $request->number_alhisala;
+        // dd($request->address_id);
+
+
 
         // $request->address = '2';
         // dd($request->number_alhisala);
         // dd($request->address);
         // dd($request->newadres[0]['attributes']['current_location']);
-        $id = Auth::id();
-        // $request->address='1';
-        if (!$request->address_id) {
-            // dd("hf");
-            if ($request->newadres[0]['attributes']['name_address'] && $request->newadres[0]['attributes']['description'] && $request->newadres[0]['attributes']['phone_number_address'] && $request->newadres[0]['attributes']['current_location'] && $request->newadres[0]['attributes']['address_status']) {
-                $address = address::create([
-                    'name_address' => $request->newadres[0]['attributes']['name_address'],
-                    'description' => $request->newadres[0]['attributes']['description'],
-                    'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
-                    'current_location' => $request->newadres[0]['attributes']['current_location'],
-                    'status' => $request->newadres[0]['attributes']['address_status'],
-                    'type' => 2,
-                    'created_by' => $id
-                  ]);
 
-            //    dd( $address->id);
-
-           DB::table('alhisalats')
-                    ->where('id', $model->id)
-                    ->update(['address_id' => $address->id]);
-                    // dd( $addresstt);
-            }
-        } else   $model->address_id = $request->address_id;
         // dd("finsh");
     }
 
-    // public static function  beforeSave(Request $request, $model)
 
     /**
      * Get the cards available for the request.
