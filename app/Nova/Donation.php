@@ -244,7 +244,7 @@ class Donation extends Resource
 
 
             Text::make(__('description'), 'description')->hideFromIndex(),
-            Date::make(__('date'), 'transaction_date'),
+            Date::make(__('date'), 'transaction_date')->rules('required'),
 
         ];
     }
