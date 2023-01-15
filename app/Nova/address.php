@@ -84,7 +84,7 @@ class address extends Resource
                 '1' => __('active'),
                 '2' => __('not active'),
             ])->displayUsingLabels(),
-            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            // BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
         ];
     }
