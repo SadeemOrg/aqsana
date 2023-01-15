@@ -21,7 +21,14 @@ use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Laravel\Nova\Fields\DateTime;
 use Acme\MultiselectField\Multiselect;
+use App\Nova\Actions\DepositedInBank;
+use App\Nova\Actions\ReceiveDonation;
+use App\Nova\Metrics\DonationInBank;
+use App\Nova\Metrics\DonationInBox;
+use App\Nova\Metrics\DonationNotReceive;
+use Laravel\Nova\Fields\Boolean;
 
+use function Clue\StreamFilter\fun;
 
 class Donation extends Resource
 {
@@ -93,12 +100,22 @@ class Donation extends Resource
                 ->text(__('print'))->showLoadingAnimation()
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
+            Select::make(__("transaction_type"), "transaction_type")->options([
+                '1' => __('handy'),
+                '2' => __('automatic'),
 
+            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            Select::make(__("transaction_status"), "transaction_status")->options([
+                '1' => __('Not Receive yet'),
+                '2' => __('in a box'),
+                '3' => __('in the bank'),
+
+            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
 
             // BelongsTo::make(__('project'), 'project')->hideWhenCreating()->readonly(),
             // Project::make(__('ref_id'), 'ref_id')->hideFromIndex(),
-            BelongsTo::make(__('Sector'), 'Sectors',\App\Nova\Sector::class)->nullable(),
-            BelongsTo::make(__('project'), 'project',\App\Nova\project::class)->nullable(),
+            BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable(),
+            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable(),
 
             Text::make(__('transact amount'), 'transact_amount'),
             Select::make(__('Currenc'), "Currency")
@@ -113,8 +130,20 @@ class Donation extends Resource
                 })
                 ->displayUsingLabels(),
 
+            Boolean::make(__('Receive Done'), 'ReceiveDonation', function () {
+                return ($this->transaction_status == 2) ? true : false;
+            })
 
-                Multiselect::make(__('name'), "name")
+                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                    return null;
+                })->canSee(function () {
+                    return ($this->transaction_status  < 3) ? true : false;
+
+                }),
+            Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
+
+
+            Multiselect::make(__('name'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::where('type', '2')->get();
 
@@ -208,13 +237,65 @@ class Donation extends Resource
                                 return $value;
                             })->rules('required'),
 
-                        ]),
+                    ]),
             ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
+<<<<<<< HEAD
         
+=======
+            NovaDependencyContainer::make([
+                Flexible::make(__('Payment_type_details'), 'Payment_type_details')
+
+                    ->addLayout(__('tooles'), 'Payment_type_details ', [
+                        Text::make(__('value'), "equivelant_amount")->rules('required'),
+
+                        Select::make(__('card type'), "card_type")->options([
+                            '1' => 'אמירקן אקספרס',
+                            '2' => 'שראכרט, ויזה',
+                            '3' => 'מסטרקארד',
+                            '4' => 'דיינרס',
+
+                        ]),
+
+                        Text::make(__('card number'), "card_number"),
+                        Text::make(__('number of installments'), "number_of_installments"),
+
+                        DateTime::make(__('History'), 'Date')
+                            ->format('DD/MM/YYYY HH:mm')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
+
+
+
+
+                        DateTime::make(__('History'), 'Date')
+                            ->format('DD/MM/YYYY HH:mm')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
+
+                    ]),
+            ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
+            NovaDependencyContainer::make([
+                Flexible::make(__('Payment_type_details'), 'Payment_type_details')
+
+                    ->addLayout(__('tooles'), 'Payment_type_details ', [
+                        Text::make(__('value'), "equivelant_amount")->rules('required'),
+
+                        DateTime::make(__('History'), 'Date')
+                            ->format('DD/MM/YYYY HH:mm')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
+
+                    ]),
+            ])->dependsOn("Payment_type", '6')->hideFromDetail()->hideFromIndex(),
+
+
+>>>>>>> 82f662ec3a17f28ae2527e17fcaf250bc28bebc2
             // BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class),
 
 
-            Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('description'), 'description')->hideFromIndex(),
             Date::make(__('date'), 'transaction_date'),
 
@@ -226,8 +307,13 @@ class Donation extends Resource
         $new = DB::table('currencies')->where('id', $request->Currency)->first();
         $id = Auth::id();
         $model->created_by = $id;
+        $model->transaction_type = '1';
         $model->main_type = '1';
         $model->type = '2';
+        if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
+        else  $model->transaction_status = '2';
+
+
         $model->equivelant_amount = $new->rate * $request->transact_amount;
     }
     public static function beforeUpdate(Request $request, $model)
@@ -273,7 +359,10 @@ class Donation extends Resource
     public function cards(Request $request)
     {
         return [
-            new OutComeTransaction()
+            // new OutComeTransaction()
+            new DonationNotReceive(),
+            new DonationInBox(),
+            new DonationInBank(),
         ];
     }
 
@@ -308,6 +397,8 @@ class Donation extends Resource
     public function actions(Request $request)
     {
         return [
+            new ReceiveDonation,
+            new DepositedInBank,
             new BillPdf,
         ];
     }

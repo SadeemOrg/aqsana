@@ -57,7 +57,10 @@
         "whitecube/nova-flexible-content": "^0.2.8",
         "whitecube/nova-google-maps": "^0.0.1",
         "yassi/nova-nested-form": "^3.0",
-        "zeyad/notification": "*"
+        "zeyad/notification": "*",
+        "acme/DonationNotReceive": "*",
+        "acme/DonationInBank": "*",
+        "acme/DonationInBox": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -100,6 +103,18 @@
         {
             "type": "path",
             "url": "./nova-components/Analytics"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/DonationNotReceive"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/DonationInBank"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/DonationInBox"
         }
     ],
     "autoload": {
