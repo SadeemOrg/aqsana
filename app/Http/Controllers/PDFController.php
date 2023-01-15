@@ -15,13 +15,9 @@ class PDFController extends Controller
     public function generatePDF($id)
     {
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
-        $data = [
-            'title' => $id,
-            'date' =>  $Transaction->id
-        ];
-
-        $pdf = PDF::loadView('myPDF', $data);
-
+        $TransactionArray= @json_decode(json_encode($Transaction), true);
+        dd($TransactionArray);
+        $pdf = PDF::loadView('myPDF', $TransactionArray);
         return $pdf->download('codesolutionstuff.pdf');
     }
 }
