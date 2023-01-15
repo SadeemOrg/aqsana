@@ -222,7 +222,7 @@
                                         <!-- More people... -->
                                     </tbody>
                                 </table>
-                            @elseif($PaymentType == 'فيزا')
+                            @elseif($PaymentType == 'بيت')
                                 <table class="min-w-full divide-y divide-gray-300">
                                     <thead class="bg-[#349A37]">
                                         <tr class="">
@@ -238,7 +238,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
-                                        @foreach ($Transaction->Payment_type_details as $ChikPayment)
+                                        {{-- @foreach ($Transaction->Payment_type_details as $ChikPayment)
                                         @php
                                             $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
                                         @endphp
@@ -255,46 +255,7 @@
                                                 {{ $ChikPayment['attributes']['equivelant_amount'] }} ₪
                                             </td>
                                         </tr>
-                                        @endforeach
-                                        <tr>
-                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base">
-                                                المجموع الكلي :</td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-center text-lg">
-                                                {{ $Transaction->transact_amount }} ₪</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            @elseif($PaymentType == 'غير ذلك')
-                                <table class="min-w-full divide-y divide-gray-300">
-                                    <thead class="bg-[#349A37]">
-                                        <tr class="">
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right w-48">
-                                                تم الدفع من خلال :</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                التاريخ :</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-center">
-                                                المجموع</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
-                                        <tr>
-                                            <td
-                                                class="whitespace-nowrap px-3 py-4  font-FlatBold text-base text-black-900">
-                                                {{ $PaymentType }}
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-base text-black-900">
-                                                {{ $transactionBillDate }}
-                                            </td>
-                                            <td
-                                                class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base text-black-900">
-                                                {{ $Transaction->Payment_type_details[0]['attributes']['Doubt_value'] }} ₪
-                                            </td>
-                                        </tr>
+                                        @endforeach --}}
                                         <tr>
                                             <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
                                             </td>

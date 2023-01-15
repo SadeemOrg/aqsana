@@ -219,7 +219,7 @@
                                         <!-- More people... -->
                                     </tbody>
                                 </table>
-                            @elseif($PaymentType == 'visa')
+                            @elseif($PaymentType == 'bit')
                                 <table class="min-w-full divide-y divide-gray-300">
                                     <thead class="bg-[#349A37]">
                                         <tr class="">
@@ -241,7 +241,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
-                                        @foreach ($Transaction->Payment_type_details as $ChikPayment)
+                                        {{-- @foreach ($Transaction->Payment_type_details as $ChikPayment)
                                         @php
                                             $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
                                         @endphp
@@ -252,14 +252,10 @@
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
                                                 {{ $ChickBillDate }}
                                             </td>
-                                            {{-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">12
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">632
-                                            </td> --}}
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
                                                 {{ $ChikPayment['attributes']['equivelant_amount'] }} ₪</td>
                                         </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                         <tr>
                                             {{-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td> --}}
@@ -272,60 +268,6 @@
                                         <!-- More people... -->
                                     </tbody>
                                 </table>
-                            @elseif($PaymentType == 'else')
-                              <table class="min-w-full divide-y divide-gray-300">
-                                <thead class="bg-[#349A37]">
-                                    <tr class="">
-                                        <th scope="col"
-                                            class=" py-3.5 pl-4 pr-3  text-sm font-semibold text-white text-left sm:pl-6">
-                                            Pay way</th>
-                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                            date</th>
-                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                            Bank</th>
-                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                            Branch</th>
-                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                            Account Id</th>
-                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                            Receipt Voucher number</th>
-                                        <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                            total</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
-                                    <tr>
-                                        <td
-                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                            Account </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $newDate[0] }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">12
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">632
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">161479
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            00120006</td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $Transaction->transact_amount }} ₪</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                        <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
-                                            total summation :</td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                        <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
-                                            {{ $Transaction->transact_amount }} ₪</td>
-                                    </tr>
-                                    <!-- More people... -->
-                                </tbody>
-                            </table>
                             @endif
                         </div>
                     </div>

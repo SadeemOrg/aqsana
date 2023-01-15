@@ -519,13 +519,10 @@ class HomeController extends Controller
                     $PaymentType = "شك";
                     break;
                 case 3:
-                    $PaymentType = "فيزا";
+                    $PaymentType = "بيت";
                     break;
                 case 4:
                     $PaymentType = "حوالة مصرفية";
-                    break;
-                case 5:
-                    $PaymentType = "غير ذلك";
                     break;
             }
         } else if ($Transaction->lang == 2) {
@@ -537,13 +534,10 @@ class HomeController extends Controller
                     $PaymentType = "Bank doubt";
                     break;
                 case 3:
-                    $PaymentType = "visa";
+                    $PaymentType = "bit";
                     break;
                 case 4:
                     $PaymentType = "Bank transfer";
-                    break;
-                case 5:
-                    $PaymentType = "else";
                     break;
             }
         } else if ($Transaction->lang == 3) {
@@ -559,9 +553,6 @@ class HomeController extends Controller
                     break;
                 case 4:
                     $PaymentType = "העברה בנקאית";
-                    break;
-                case 5:
-                    $PaymentType = "אחרת";
                     break;
             }
         }
@@ -584,13 +575,10 @@ class HomeController extends Controller
                     $PaymentType = "شك";
                     break;
                 case 3:
-                    $PaymentType = "فيزا";
+                    $PaymentType = "بيت";
                     break;
                 case 4:
                     $PaymentType = "حوالة مصرفية";
-                    break;
-                case 5:
-                    $PaymentType = "غير ذلك";
                     break;
             }
         } else if ($Transaction->lang == 2) {
@@ -602,13 +590,10 @@ class HomeController extends Controller
                     $PaymentType = "Bank doubt";
                     break;
                 case 3:
-                    $PaymentType = "visa";
+                    $PaymentType = "bit";
                     break;
                 case 4:
                     $PaymentType = "Bank transfer";
-                    break;
-                case 5:
-                    $PaymentType = "else";
                     break;
             }
         } else if ($Transaction->lang == 3) {
@@ -624,9 +609,6 @@ class HomeController extends Controller
                     break;
                 case 4:
                     $PaymentType = "העברה בנקאית";
-                    break;
-                case 5:
-                    $PaymentType = "אחרת";
                     break;
             }
         }
@@ -1003,7 +985,7 @@ class HomeController extends Controller
 
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
 
-
+        if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
                     $PaymentType = "كاش";
@@ -1012,18 +994,44 @@ class HomeController extends Controller
                     $PaymentType = "شك";
                     break;
                 case 3:
-                    $PaymentType = "فيزا";
+                    $PaymentType = "بيت";
                     break;
                 case 4:
-                    $PaymentType = " حوالة مصرفية";
-                    break;
-                case 5:
-                    $PaymentType = "غير ذلك";
+                    $PaymentType = "حوالة مصرفية";
                     break;
             }
-
+        } else if ($Transaction->lang == 2) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "cash";
+                    break;
+                case 2:
+                    $PaymentType = "Bank doubt";
+                    break;
+                case 3:
+                    $PaymentType = "bit";
+                    break;
+                case 4:
+                    $PaymentType = "Bank transfer";
+                    break;
+            }
+        } else if ($Transaction->lang == 3) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "כסף מזומן";
+                    break;
+                case 2:
+                    $PaymentType = "ספק בבנק";
+                    break;
+                case 3:
+                    $PaymentType = "וִיזָה";
+                    break;
+                case 4:
+                    $PaymentType = "העברה בנקאית";
+                    break;
+            }
+        }
         $original = 0;
-
 
 
         Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\BillMail($Transaction,$PaymentType));
