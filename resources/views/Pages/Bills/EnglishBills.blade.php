@@ -7,16 +7,14 @@
         $address = nova_get_setting('address', 'default_value');
         $newaddress = explode(',', $address);
         $newDate = explode(' ', $Transaction->transaction_date);
-        $transactionBillDate = date('d/m/Y', strtotime($Transaction->Payment_type_details[0]['attributes']['Date']));
-        
     @endphp
     <!--English Bills -->
-    <div dir="ltr" class="max-w-7xl  mx-auto sm:px-6 lg:px-8 -mt-12 px-8" id="printJS-table">
-        <img class="h-[250px] w-[90%] mt-1.5"
+    <div dir="ltr" class="max-w-7xl  mx-auto sm:px-6 lg:px-8 px-8" id="printJS-table">
+        <img class="sm:h-[250px] w-[90%] mt-1.5"
             src="https://media.discordapp.net/attachments/938405759996276806/1060518737767309342/iuktui.png?width=1440&height=302"
             alt="alaqsa Logo">
-        <div class="flex sm:flex-row flex-col-reverse items-center justify-between  relative">
-            <div class="basis-1/2 flex flex-col items-center sm:items-start">
+        <div class="flex sm:flex-row flex-col-reverse items-center justify-between relative">
+            <div class="basis-1/2 hidden sm:flex flex-col  items-start">
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">Association Id :
                     <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                 </p>
@@ -30,8 +28,26 @@
                     <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
                 </p>
             </div>
+            <div class="sm:hidden flex flex-col items-center justify-center w-full my-4 gap-y-2 mx-16">
+                <div class="flex flex-row flex-wrap items-start w-full justify-between gap-x-2">
+                    <p class=" mt-1 text-[17px] font-noto_Regular text-[#101426]">Association Id :
+                        <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
+                    </p>
+                    <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">title :
+                        <span class="font-FlatBold text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>
+                    </p>
+                </div>
+                <div class="flex flex-row flex-wrap items-start w-full justify-between gap-x-2 ">
+                    <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">Telephone :
+                        <span dir="ltr" class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
+                    </p>
+                    <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">Email :
+                        <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="flex flex-col items-center mt-10">
+        <div class="flex flex-col items-center mt-0">
             <p dir="ltr" class="">{{ $newDate[0] }}</p>
             <p class="font-FlatBold text-[17px] text-[#101426] ">receipt voucher number
                 <span class="text-base">
@@ -50,9 +66,6 @@
                 {{ $Transaction->TelephoneDirectory->name }}
             </span>
         </div>
-        {{-- <p class="font-FlatBold text-[#101426] mt-3 text-[17px]">payment method:
-            <span class="font-FlatBold text-[#6B7280] mx-1 text-[19px]">{{ $PaymentType }} </span>
-        </p> --}}
         <!-- table -->
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
@@ -190,19 +203,24 @@
                                                 <td
                                                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                                     {{ $PaymentType }} </td>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
                                                     {{ $ChickBillDate }}
                                                 </td>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
                                                     {{ $ChikPayment['attributes']['bank_number'] }}
                                                 </td>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
                                                     {{ $ChikPayment['attributes']['Branch_number'] }}
                                                 </td>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
                                                     {{ $ChikPayment['attributes']['account_number'] }}
                                                 </td>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
                                                     {{ $ChikPayment['attributes']['Doubt_value'] }}₪</td>
                                             </tr>
                                         @endforeach
@@ -229,9 +247,9 @@
                                             <th scope="col"
                                                 class="px-3 py-3.5  text-sm font-semibold text-white text-left">
                                                 date</th>
-                                            {{-- <th scope="col"
+                                            <th scope="col"
                                                 class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                                Bank</th> --}}
+                                                telephone Number</th>
                                             {{-- <th scope="col"
                                                 class="px-3 py-3.5  text-sm font-semibold text-white text-left">
                                                 Branch</th> --}}
@@ -241,24 +259,30 @@
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
-                                        {{-- @foreach ($Transaction->Payment_type_details as $ChikPayment)
-                                        @php
-                                            $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
-                                        @endphp
+                                        @foreach ($Transaction->Payment_type_details as $ChikPayment)
+                                            @php
+                                                $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                                            @endphp
+                                            <tr>
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                    {{ $PaymentType }} </td>
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                    {{ $ChickBillDate }}
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                    {{ $ChikPayment['attributes']['telephone'] }}
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                    {{ $ChikPayment['attributes']['equivelant_amount'] }} ₪</td>
+                                            </tr>
+                                        @endforeach
                                         <tr>
-                                            <td
-                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
-                                                {{ $PaymentType }} </td>
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
-                                                {{ $ChickBillDate }}
-                                            </td>
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
-                                                {{ $ChikPayment['attributes']['equivelant_amount'] }} ₪</td>
-                                        </tr>
-                                        @endforeach --}}
-                                        <tr>
-                                            {{-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td> --}}
+                                            {{-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td> --}}
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                             <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
                                                 total summation :</td>
@@ -275,7 +299,7 @@
             </div>
         </div>
         <div dir="rtl"
-            class="flex flex-col sm:flex-row items-center justify-start sm:justify-between mt-4 sm:mx-7 mb-6 ">
+            class="flex flex-row flex-wrap items-center justify-between mt-4 sm:mx-7 mb-6 ">
             <div>
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">اسم القطاع:
                     @if ($Transaction->Sectors != null)
@@ -295,7 +319,7 @@
                 طباعة
             </button>
         </div>
-        <div class="relative flex flex-row items-center justify-center w-full -mt-12 ">
+        <div class="relative flex flex-row items-center justify-center w-full -mt-14 ">
             <img class="w-[280px] h-[240px]"
                 src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png"
                 alt="logo">
