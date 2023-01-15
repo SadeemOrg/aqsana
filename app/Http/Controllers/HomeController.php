@@ -509,7 +509,7 @@ class HomeController extends Controller
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
 
 
-         // dd($Transaction);
+        // dd($Transaction);
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
@@ -549,7 +549,7 @@ class HomeController extends Controller
                     $PaymentType = "ספק בבנק";
                     break;
                 case 3:
-                    $PaymentType = "וִיזָה";
+                    $PaymentType = "קצת";
                     break;
                 case 4:
                     $PaymentType = "העברה בנקאית";
@@ -559,13 +559,13 @@ class HomeController extends Controller
         // dd($PaymentType);
         $original = 1;
 
-        return view('Pages.Bills.Bills', compact('Transaction', 'original','PaymentType'));
+        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'PaymentType'));
     }
 
     public function bills($id)
     {
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
-
+        // dd($Transaction );
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
@@ -605,7 +605,7 @@ class HomeController extends Controller
                     $PaymentType = "ספק בבנק";
                     break;
                 case 3:
-                    $PaymentType = "וִיזָה";
+                    $PaymentType = "קצת";
                     break;
                 case 4:
                     $PaymentType = "העברה בנקאית";
@@ -1024,7 +1024,7 @@ class HomeController extends Controller
                     $PaymentType = "ספק בבנק";
                     break;
                 case 3:
-                    $PaymentType = "וִיזָה";
+                    $PaymentType = "קצת";
                     break;
                 case 4:
                     $PaymentType = "העברה בנקאית";
@@ -1034,7 +1034,7 @@ class HomeController extends Controller
         $original = 0;
 
 
-        Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\BillMail($Transaction,$PaymentType));
+        Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\BillMail($Transaction, $PaymentType));
 
         // dd("Email is Sent.");
         $type = '1';
