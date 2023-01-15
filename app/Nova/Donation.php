@@ -117,18 +117,7 @@ class Donation extends Resource
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable(),
             BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable(),
 
-            Text::make(__('transact amount'), 'transact_amount'),
-            Select::make(__('Currenc'), "Currency")
-                ->options(function () {
-                    $Alhisalats =  \App\Models\Currency::all();
-                    $user_type_admin_array =  array();
-                    foreach ($Alhisalats as $Alhisalat) {
-                        $user_type_admin_array += [$Alhisalat['id'] => ($Alhisalat['name'])];
-                    }
 
-                    return $user_type_admin_array;
-                })
-                ->displayUsingLabels(),
 
             Boolean::make(__('Receive Done'), 'ReceiveDonation', function () {
                 return ($this->transaction_status == 2) ? true : false;
@@ -138,9 +127,10 @@ class Donation extends Resource
                     return null;
                 })->canSee(function () {
                     return ($this->transaction_status  < 3) ? true : false;
-
                 }),
-            Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
+
+
+            Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
 
             Multiselect::make(__('name'), "name")
@@ -186,6 +176,20 @@ class Donation extends Resource
                 '4' => __('hawale'),
                 // '5' => __('Other'),
             ])->displayUsingLabels(),
+            NovaDependencyContainer::make([
+                Text::make(__('transact amount'), 'transact_amount'),
+                // Select::make(__('Currenc'), "Currency")
+                //     ->options(function () {
+                //         $Alhisalats =  \App\Models\Currency::all();
+                //         $user_type_admin_array =  array();
+                //         foreach ($Alhisalats as $Alhisalat) {
+                //             $user_type_admin_array += [$Alhisalat['id'] => ($Alhisalat['name'])];
+                //         }
+
+                //         return $user_type_admin_array;
+                //     })
+                //     ->displayUsingLabels(),
+            ])->dependsOn("Payment_type", '1')->hideFromDetail()->hideFromIndex(),
 
             NovaDependencyContainer::make([
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
@@ -237,9 +241,9 @@ class Donation extends Resource
                                 return $value;
                             })->rules('required'),
 
-                    ]),
+                    ])->rules('required'),
             ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
-        
+
             // BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class),
 
 
@@ -251,7 +255,9 @@ class Donation extends Resource
     public static function beforeCreate(Request $request, $model)
     {
 
-        $new = DB::table('currencies')->where('id', $request->Currency)->first();
+
+
+        // $new = DB::table('currencies')->where('id', $request->Currency)->first();
         $id = Auth::id();
         $model->created_by = $id;
         $model->transaction_type = '1';
@@ -261,19 +267,53 @@ class Donation extends Resource
         else  $model->transaction_status = '2';
 
 
-        $model->equivelant_amount = $new->rate * $request->transact_amount;
+        // $model->equivelant_amount = $new->rate * $request->transact_amount;
     }
-    public static function beforeUpdate(Request $request, $model)
+    public static function beforesave(Request $request, $model)
     {
 
+        if ($request->Payment_type == '1') {
+            $model->Payment_type_details=null;
+            // dd($request->transact_amount);
+            $model->equivelant_amount=$request->transact_amount;
+        }elseif ($request->Payment_type == '2') {
+            $amount=0;
+            foreach ($request->Payment_type_details as $key => $value) {
 
-        $currencies = DB::table('currencies')->where('id', $request->Currency)->first();
-        $id = Auth::id();
-        $model->update_by = $id;
-        if ($model->Currenc->id == $request->Currenc) {
-            $rate = ((int)$model->equivelant_amount / (int)$model->transact_amount);
-        } else  $rate = $currencies->rate;
-        $model->equivelant_amount = $rate * $request->transact_amount;
+                $amount+=$value['attributes']['Doubt_value'];
+            }
+
+            $model->equivelant_amount=$amount;
+        }
+        elseif ($request->Payment_type == '3') {
+            $amount=0;
+            foreach ($request->Payment_type_details as $key => $value) {
+
+                $amount+=$value['attributes']['equivelant_amount'];
+            }
+
+            $model->equivelant_amount=$amount;
+
+            #  // $model->equivelant_amount
+        }
+        elseif ($request->Payment_type == '4') {
+            $amount=0;
+            foreach ($request->Payment_type_details as $key => $value) {
+
+                $amount+=$value['attributes']['equivelant_amount'];
+            }
+
+            $model->equivelant_amount=$amount;
+            #  // $model->equivelant_amount
+        }
+
+        // $currencies = DB::table('currencies')->where('id', $request->Currency)->first();
+        // $id = Auth::id();
+        // $model->update_by = $id;
+        // if ($model->Currenc->id == $request->Currenc) {
+        //     $rate = ((int)$model->equivelant_amount / (int)$model->transact_amount);
+        // } else  $rate = $currencies->rate;
+        // $model->equivelant_amount = $rate * $request->transact_amount;
     }
     public static function aftersave(Request $request, $model)
     {
