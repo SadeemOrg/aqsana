@@ -42,7 +42,7 @@
                     <h3 class="font-FlatBold text-center text-lg lg:text-xl">نسخة عن الأصلية</h3>
                 </div>
 
-                <a href="https://api.whatsapp.com/send?text=  {{ route('generate-pdf', ['id' => $id]) }}" class="flex flex-col justify-center items-center  pl-2 basis-1/5 min-h-[145px] cursor-pointer  gap-y-3">
+                <a href="https://api.whatsapp.com/send?text=  {{ route('bill', ['id' => $id]) }}" class="flex flex-col justify-center items-center  pl-2 basis-1/5 min-h-[145px] cursor-pointer  gap-y-3">
                     <img src="{{ asset('assets/image/whatsappbill.png') }}" class="w-8 h-8 " alt="">
                     <h3 class="font-FlatBold text-center text-lg lg:text-xl">ارسال عن طريق الواتس اب</h3>
                 </a>
