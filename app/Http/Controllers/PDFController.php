@@ -67,19 +67,27 @@ class PDFController extends Controller
         $mpdf = new \Mpdf\Mpdf([
             'margin_left' => 10,
             'margin_right' => 10,
-            'margin-top'=>0,
+            'margin-top' => 0,
             'autoArabic' => true
         ]);
 
         $data = [
-                'TransactionArray' => $TransactionArray,
-                'PaymentType' =>  $PaymentType
-            ];
+            'TransactionArray' => $TransactionArray,
+            'PaymentType' =>  $PaymentType
+        ];
+        // dd($data['TransactionArray']);
         $fileName = 'Invoices details';
         $mpdf->autoLangToFont = true;
         $mpdf->autoScriptToLang = true;
-// dd($data['TransactionArray']['description']);
-        $html = \view('pdf.myPDF', $data);
+        // for Arabic Bills PDF
+        if ($data['TransactionArray']['lang'] == 1) {
+            $html = \view('pdf.ArabicPDF', $data);
+            // for English Bills PDF
+        } else if ($data['TransactionArray']['lang'] == 2) {
+            $html = \view('pdf.myPDF', $data);
+        }
+
+
         $html = $html->render();
         $mpdf->WriteHTML($html);
         $mpdf->Output($fileName, 'I');
