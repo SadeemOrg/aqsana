@@ -111,10 +111,6 @@ Route::get('/payPal', function (){
 });
 
 
-// Route::get('/mainbill/{id}', function (){
-
-//     return view('Pages.Bills.mainBill');
-// });
 
 Route::get('/SendNotificationTest',[NotificationTest::class,'sendNotfiy'])->name('sendNotfiy');
 
@@ -143,6 +139,6 @@ Route::get("/WorkHoursUser", [HomeController::class, "WorkHoursUser"])->name('Wo
 Route::get("/StartTimerWorkHours", [HomeController::class, "StartTimerWorkHours"])->name('StartTimerWorkHours');
 
 
-Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF'])->name('generate-pdf');
+// Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF'])->name('generate-pdf');
 
 

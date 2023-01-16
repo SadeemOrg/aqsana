@@ -29,7 +29,7 @@
                 </p>
             </div>
             <div class="sm:hidden flex flex-col items-center justify-center w-full my-4 gap-y-2 mx-16">
-                <div class="flex flex-row flex-wrap items-start w-full justify-between gap-x-2">
+                <div class="flex flex-row flex-wrap items-start w-full justify-around gap-x-2">
                     <p class=" mt-1 text-[17px] font-noto_Regular text-[#101426]">Association Id :
                         <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                     </p>
@@ -37,7 +37,7 @@
                         <span class="font-FlatBold text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>
                     </p>
                 </div>
-                <div class="flex flex-row flex-wrap items-start w-full justify-between gap-x-2 ">
+                <div class="flex flex-row flex-wrap items-start w-full justify-around gap-x-2 ">
                     <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">Telephone :
                         <span dir="ltr" class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
                     </p>
@@ -299,9 +299,9 @@
             </div>
         </div>
         <div dir="rtl"
-            class="flex flex-row flex-wrap items-center justify-between mt-4 sm:mx-7 mb-6 ">
-            <div>
-                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">اسم القطاع:
+            class="flex flex-row-reverse flex-wrap items-center justify-around sm:justify-between mt-4 sm:mx-7 mb-6 ">
+            <div dir="ltr">
+                <p class=" mt-3 text-[18px] font-FlatBold text-[#101426]">sector name:
                     @if ($Transaction->Sectors != null)
                         <span class="font-FlatBold text-[#101426] mx-1 text-sm"> {{ $Transaction->Sectors->text }}</span>
                     @else
@@ -309,7 +309,7 @@
                     @endif
                 </p>
                 @if ($Transaction->description != null)
-                    <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">ملاحظات :
+                    <p class=" mt-3 text-[18px] font-FlatBold text-[#101426]">Notes :
                         <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
                     </p>
                 @endif

@@ -31,7 +31,7 @@
                 </p>
             </div>
             <div class="sm:hidden flex flex-col items-center justify-center w-full my-4 gap-y-2 px-16">
-                <div class=" flex flex-row flex-wrap items-start w-full justify-between gap-x-2">
+                <div class=" flex flex-row flex-wrap items-start w-full justify-around gap-x-2">
                     <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">رقم الجمعية :
                         <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                     </p>
@@ -39,7 +39,7 @@
                         <span class="font-FlatBold text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>
                     </p>
                 </div>
-                <div class=" flex flex-row flex-wrap items-start w-full justify-between gap-x-2">
+                <div class=" flex flex-row flex-wrap items-start w-full justify-around gap-x-2">
                     <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">رقم الجمعية :
                         <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                     </p>
@@ -298,7 +298,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row flex-wrap items-center justify-between mt-4 sm:mx-7 mb-6 ">
+        <div class="flex flex-row flex-wrap items-center justify-around mt-4 sm:mx-7 mb-6 ">
             <div>
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">اسم القطاع:
                     @if ($Transaction->Sectors != null)
