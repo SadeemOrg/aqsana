@@ -287,6 +287,7 @@ class Donation extends Resource
             $model->equivelant_amount=$amount;
         }
         elseif ($request->Payment_type == '3') {
+            $model->transact_amount=0;
             $amount=0;
             foreach ($request->Payment_type_details as $key => $value) {
 
@@ -298,6 +299,7 @@ class Donation extends Resource
             #  // $model->equivelant_amount
         }
         elseif ($request->Payment_type == '4') {
+            $model->transact_amount=0;
             $amount=0;
             foreach ($request->Payment_type_details as $key => $value) {
 
