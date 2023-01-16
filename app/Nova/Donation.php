@@ -277,6 +277,7 @@ class Donation extends Resource
             // dd($request->transact_amount);
             $model->equivelant_amount=$request->transact_amount;
         }elseif ($request->Payment_type == '2') {
+            $model->transact_amount=0;
             $amount=0;
             foreach ($request->Payment_type_details as $key => $value) {
 
