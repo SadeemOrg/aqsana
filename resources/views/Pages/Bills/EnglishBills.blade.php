@@ -188,7 +188,7 @@
                                                 Branch number</th>
                                             <th scope="col"
                                                 class="px-3 py-3.5  text-sm font-semibold text-white text-left">
-                                                Account Id</th>
+                                                doubt Id</th>
                                             <th scope="col"
                                                 class="px-3 py-3.5  text-sm font-semibold text-white text-left">
                                                 doubt amount</th>
