@@ -88,13 +88,13 @@
 
     <!--First Paragraph-->
     <div dir="rtl" style="align-items: left; padding-top: 70px;">
-        <p style="font-size: 16px;color:#101426">رقم الجمعية : <span
+        <p style="font-size: 16px;color:#101426">אִרגוּן  : <span
                 style="color: #6B7280;font-size: 16px;">{{ $society_id }}</span></p>
-        <p style="font-size: 16px;color:#101426">العنوان : <span
+        <p style="font-size: 16px;color:#101426">כותרת  : <span
                 style="color: #6B7280;font-size: 16px;">{{ $address }}</span></p>
-        <p style="font-size: 16px;color:#101426">رقم التلفون: <span
+        <p style="font-size: 16px;color:#101426">טלפון : <span
                 style="color: #6B7280;font-size: 16px;">{{ $phone }}</span></p>
-        <p style="font-size: 16px;color:#101426">الايميل : <span
+        <p style="font-size: 16px;color:#101426">אימייל  : <span
                 style="color: #6B7280;font-size: 16px;">{{ $email }}</span></p>
     </div>
     <!--End First Paragraph-->
@@ -102,12 +102,12 @@
     <!--Start Second Paragraph-->
     <div style="text-align: center">
         <p style="font-size: 16px;color:#101426">{{ $ChickBillDate }}</p>
-        <p style="font-size:16px; color:#101426 ">سند قبض رقم
+        <p style="font-size:16px; color:#101426 ">קבלה מספר
             <span>
                 F-1000{{ $TransactionArray['id'] }}
             </span>
         </p>
-        <p style="font-size:16px; color:#101426; ">نسخة عن الفاتورة الأصلية</p>
+        <p style="font-size:16px; color:#101426; ">קבלה מקורית </p>
     </div>
     <!--End Second Paragraph-->
 
@@ -119,16 +119,16 @@
 
     <!--Start Table -->
 
-    @if ($PaymentType == 'حوالة مصرفية')
+    @if ($PaymentType == 'העברה בנקאית')
         <table dir="rtl" class="blueTable">
             <thead>
                 <tr>
-                    <th>طريقة الدفع</th>
-                    <th>تاريخ الدفع</th>
-                    <th>البنك</th>
-                    <th>الفرع</th>
-                    <th>رقم الحساب</th>
-                    <th>المجموع</th>
+                    <th> שיטות תשלום</th>
+                    <th> תאריך</th>
+                    <th>בַּנק</th>
+                    <th>ענף</th>
+                    <th>מספר חשבון	 </th>
+                    <th>סך הכל  </th>
                 </tr>
             </thead>
             <tbody>
@@ -150,7 +150,7 @@
                     <td class=""></td>
                     <td class=""></td>
                     <td class="">
-                        المجموع :</td>
+                        סך הכל סופי  :</td>
                     <td class=""></td>
                     <td class="">
                         {{ $TransactionArray['equivelant_amount'] }} </td>
@@ -158,13 +158,13 @@
             </tbody>
             </tr>
         </table>
-    @elseif($PaymentType == 'كاش')
+    @elseif($PaymentType == 'כסף מזומן')
         <table dir="rtl" class="blueTable">
             <thead>
                 <tr>
-                    <th>طريقة الدفع</th>
-                    <th>التاريخ</th>
-                    <th>المجموع</th>
+                    <th>שיטות תשלום	</th>
+                    <th>תאריך</th>
+                    <th>סך הכל </th>
                 </tr>
             </thead>
             <tbody>
@@ -176,21 +176,21 @@
                 <tr>
                     <td class=""></td>
                     <td class="">
-                        المجموع :</td>
+                        סך הכל סופי :</td>
                     <td class="">
                         {{ $TransactionArray['transact_amount'] }} </td>
                 </tr>
             </tbody>
             </tr>
         </table>
-    @elseif($PaymentType == 'بيت')
+    @elseif($PaymentType == 'קצת')
         <table dir="rtl" class="blueTable">
             <thead>
                 <tr>
-                    <th>طريقة الدفع</th>
-                    <th>تاريخ الدفع</th>
-                    <th>رقم التلفون</th>
-                    <th>المحموع</th>
+                    <th>שיטות תשלום	</th>
+                    <th>תאריך</th>
+                    <th>מספר הטלפון </th>
+                    <th>סך הכל  </th>
                 </tr>
             </thead>
             <tbody>
@@ -209,7 +209,7 @@
                 <tr>
                     <td class=""></td>
                     <td class="">
-                        المجموع :</td>
+                        סך הכל סופי :</td>
                     <td class=""></td>
                     <td class="">
                         {{ $TransactionArray['equivelant_amount'] }} </td>
@@ -217,16 +217,16 @@
             </tbody>
             </tr>
         </table>
-    @elseif($PaymentType == 'شك')
+    @elseif($PaymentType == 'ספק בבנק')
         <table dir="rtl" class="blueTable">
             <thead>
                 <tr>
-                    <th>طريقة الدفع</th>
-                    <th>تاريخ الشك</th>
-                    <th>رقم البنك</th>
-                    <th>رقم الفرع</th>
-                    <th>رقم الشك</th>
-                    <th>المجموع</th>
+                    <th> שיטות תשלום</th>
+                    <th> תאריך ספק	</th>
+                    <th> בַּנק	</th>
+                    <th> מספר סניף	</th>
+                    <th> מספר החשבון	</th>
+                    <th>ערך ספק  </th>
                 </tr>
             </thead>
             <tbody>
@@ -248,7 +248,7 @@
                     <td class=""></td>
                     <td class=""></td>
                     <td class="">
-                        المجموع :</td>
+                        סך הכל סופי :</td>
                     <td class=""></td>
                     <td class="">
                         {{ $TransactionArray['equivelant_amount'] }} </td>
@@ -261,7 +261,7 @@
 
     <!--Start Sector Name-->
     <div style="width:full;">
-        <p style="font-size: 17px; text-align: right"> اسم القطاع :
+        <p style="font-size: 17px; text-align: right"> שם המגזר :
             @if ($TransactionArray['sectors'] != null)
                 <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
             @else
@@ -269,7 +269,7 @@
             @endif
         </p>
         {{-- @if ($TransactionArray['description'] != null)
-            <p style="font-size: 17px;"> Notes :
+            <p style="font-size: 17px;"> הערות  :
                 <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
             </p>
         @endif --}}

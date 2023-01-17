@@ -1034,7 +1034,7 @@ class HomeController extends Controller
         $original = 0;
 
 
-        Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\BillMail($Transaction, $PaymentType));
+        Mail::to('zeyad.hawash.test@gmail.com')->send(new \App\Mail\BillMail($Transaction, $PaymentType));
 
         // dd("Email is Sent.");
         $type = '1';
