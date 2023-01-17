@@ -86,6 +86,10 @@ class PDFController extends Controller
         } else if ($data['TransactionArray']['lang'] == 2) {
             $html = \view('pdf.myPDF', $data);
         }
+        else if($data['TransactionArray']['lang'] == 3){
+            $html = \view('pdf.HebrowPDF', $data);
+
+        }
 
 
         $html = $html->render();

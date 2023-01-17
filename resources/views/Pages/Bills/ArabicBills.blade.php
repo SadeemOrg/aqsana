@@ -134,7 +134,7 @@
                                                 المجموع الكلي :</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
-                                                {{ $Transaction->transact_amount }} ₪</td>
+                                                {{ $Transaction->equivelant_amount }} ₪</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -233,7 +233,7 @@
                                                 المجموع الكلي :</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
-                                                {{ $Transaction->transact_amount }} ₪</td>
+                                                {{ $Transaction->equivelant_amount }} ₪</td>
                                         </tr>
                                         <!-- More people... -->
                                     </tbody>
@@ -288,7 +288,7 @@
                                             <td class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base">
                                                 المجموع الكلي :</td>
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-center text-lg">
-                                                {{ $Transaction->transact_amount }} ₪</td>
+                                                {{ $Transaction->equivelant_amount }} ₪</td>
                                         </tr>
                                     </tbody>
                                 </table>
