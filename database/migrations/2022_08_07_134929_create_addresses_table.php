@@ -19,6 +19,7 @@ class CreateAddressesTable extends Migration
             $table->char('type', 1);
             $table->string('description');
             $table->string('phone_number_address');
+            $table->integer('number')->default('0');
             $table->json('current_location')->nullable();
             $table->char('status', '1');
             $table->unsignedBigInteger('created_by')->nullable();

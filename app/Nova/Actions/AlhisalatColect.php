@@ -40,7 +40,14 @@ class AlhisalatColect extends Action
                 if ($fields->new_alhasele) {
                     $new_data = $model->replicate();
                     $new_data->status = '1';
-                    $new_data->number_alhisala = uniqid();
+
+                    $addresses = DB::table('addresses')->where('id', $model->address_id)->first();
+                    $countt = $addresses->number + 1;
+                    // $addresses->number=$countt;
+                    DB::table('addresses')->where('id', $model->address_id)->update(['number' => $countt]);
+                    // dd( $model->number_alhisala);
+                    // $new_data->number_alhisala = uniqid();
+
                     $new_data->created_by = '1';
                     $new_data->created_at = now();
                     $new_data->save();

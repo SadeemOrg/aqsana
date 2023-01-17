@@ -23,17 +23,18 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('fcm_token')->nullable();
             $table->string('user_role');
-            $table->json('role');
+            $table->json('role')->nullable();
             $table->string('phone')->nullable();
             $table->string('photo')->nullable();
             $table->date('birth_date')->nullable();
             $table->string('city')->nullable();
-            $table->string('jop')->nullable();
+            $table->string('job')->nullable();
             $table->bigInteger('social_media_id')->nullable();
             $table->date('start_work_date')->nullable();
             $table->char('martial_status', 1)->nullable();
             $table->string('user_number')->nullable();
             $table->string('bank_name')->nullable();
+            $table->string('bank_number')->nullable();
             $table->string('bank_branch')->nullable();
             $table->string('account_number')->nullable();
 

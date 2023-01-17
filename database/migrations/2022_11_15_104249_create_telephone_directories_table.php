@@ -19,7 +19,9 @@ class CreateTelephoneDirectoriesTable extends Migration
              $table->string('email')->nullable();
             $table->char('type', 1)->nullable();
             $table->string('phone_number')->nullable();
+            $table->unsignedBigInteger('Area')->nullable();
             $table->string('city')->nullable();
+            $table->string('note')->nullable();
             $table->string('roles')->nullable();
             $table->string('jop')->nullable();
             $table->string('id_number')->nullable();
