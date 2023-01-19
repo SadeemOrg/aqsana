@@ -79,6 +79,16 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-
+     alpha/css/bootstrap.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css"
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
     <!-- firebase integration end -->
 
     <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
@@ -482,7 +492,7 @@
             console.log("Asd")
         //Get the print button and put it into a variable
         var printButton = document.getElementById("printpagebutton");
-        //Set the print button visibility to 'hidden' 
+        //Set the print button visibility to 'hidden'
         printButton.style.visibility = 'hidden';
         //Print the page content
         window.print()

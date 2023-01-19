@@ -4,7 +4,8 @@ namespace App\Nova\Filters;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
-class PostNewsFilters extends Filter
+
+class AlhisalatColect extends Filter
 {
     /**
      * The filter's component.
@@ -25,7 +26,7 @@ class PostNewsFilters extends Filter
     {
         if($value=="non" )
         { return $query;}
-        return $query->where('status',$value);
+        return $query->where('transaction_status','=',$value);
     }
 
     /**
@@ -38,8 +39,9 @@ class PostNewsFilters extends Filter
     {
         return [
             __('all') => 'non',
-            __('post') => '1',
-            __('not post') => '0',
+            __('Not Receive yet') => 1,
+            __('in a box') => 2,
+            __('in the bank') => 3,
 
         ];
     }

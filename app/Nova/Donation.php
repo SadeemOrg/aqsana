@@ -23,9 +23,11 @@ use Laravel\Nova\Fields\DateTime;
 use Acme\MultiselectField\Multiselect;
 use App\Nova\Actions\DepositedInBank;
 use App\Nova\Actions\ReceiveDonation;
+use App\Nova\Filters\AlhisalatColect;
 use App\Nova\Metrics\DonationInBank;
 use App\Nova\Metrics\DonationInBox;
 use App\Nova\Metrics\DonationNotReceive;
+use AwesomeNova\Cards\FilterCard;
 use Laravel\Nova\Fields\Boolean;
 
 use function Clue\StreamFilter\fun;
@@ -103,6 +105,7 @@ class Donation extends Resource
             Select::make(__("transaction_type"), "transaction_type")->options([
                 '1' => __('handy'),
                 '2' => __('automatic'),
+                '3' => __('Alhisalat'),
 
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
             Select::make(__("transaction_status"), "transaction_status")->options([
@@ -120,14 +123,15 @@ class Donation extends Resource
 
 
             Boolean::make(__('Receive Done'), 'ReceiveDonation', function () {
-                return ($this->transaction_status == 2) ? true : false;
+                return ($this->transaction_status > 1) ? true : false;
             })
 
                 ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
-                })->canSee(function () {
-                    return ($this->transaction_status  < 3) ? true : false;
                 }),
+            // ->canSee(function () {
+            //     return ($this->transaction_status  < 3) ? true : false;
+            // }),
 
 
             Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
@@ -168,16 +172,16 @@ class Donation extends Resource
                 '1' => __('ar'),
                 '2' => __('en'),
                 '3' => __('hr'),
-            ])->displayUsingLabels(),
+            ])->displayUsingLabels()->rules('required'),
             Select::make(__("Payment_type"), "Payment_type")->options([
                 '1' => __('cash'),
                 '2' => __('shek'),
                 '3' => __('bit'),
                 '4' => __('hawale'),
                 // '5' => __('Other'),
-            ])->displayUsingLabels(),
+            ])->displayUsingLabels()->default('1'),
             NovaDependencyContainer::make([
-                Text::make(__('transact amount'), 'transact_amount'),
+                Text::make(__('transact amount'), 'transact_amount')->rules('required'),
                 // Select::make(__('Currenc'), "Currency")
                 //     ->options(function () {
                 //         $Alhisalats =  \App\Models\Currency::all();
@@ -263,50 +267,50 @@ class Donation extends Resource
         $model->transaction_type = '1';
         $model->main_type = '1';
         $model->type = '2';
+        // dd($request->ReceiveDonation );
         if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
-        else  $model->transaction_status = '2';
+        else  $model->transaction_status = '1';
 
 
         // $model->equivelant_amount = $new->rate * $request->transact_amount;
     }
     public static function beforesave(Request $request, $model)
     {
-
+        if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
+        else  $model->transaction_status = '1';
         if ($request->Payment_type == '1') {
-            $model->Payment_type_details=null;
+            $model->Payment_type_details = null;
             // dd($request->transact_amount);
-            $model->equivelant_amount=$request->transact_amount;
-        }elseif ($request->Payment_type == '2') {
-            $model->transact_amount=0;
-            $amount=0;
+            $model->equivelant_amount = $request->transact_amount;
+        } elseif ($request->Payment_type == '2') {
+            $model->transact_amount = 0;
+            $amount = 0;
             foreach ($request->Payment_type_details as $key => $value) {
 
-                $amount+=$value['attributes']['Doubt_value'];
+                $amount += $value['attributes']['Doubt_value'];
             }
 
-            $model->equivelant_amount=$amount;
-        }
-        elseif ($request->Payment_type == '3') {
-            $model->transact_amount=0;
-            $amount=0;
+            $model->equivelant_amount = $amount;
+        } elseif ($request->Payment_type == '3') {
+            $model->transact_amount = 0;
+            $amount = 0;
             foreach ($request->Payment_type_details as $key => $value) {
 
-                $amount+=$value['attributes']['equivelant_amount'];
+                $amount += $value['attributes']['equivelant_amount'];
             }
 
-            $model->equivelant_amount=$amount;
+            $model->equivelant_amount = $amount;
 
             #  // $model->equivelant_amount
-        }
-        elseif ($request->Payment_type == '4') {
-            $model->transact_amount=0;
-            $amount=0;
+        } elseif ($request->Payment_type == '4') {
+            $model->transact_amount = 0;
+            $amount = 0;
             foreach ($request->Payment_type_details as $key => $value) {
 
-                $amount+=$value['attributes']['equivelant_amount'];
+                $amount += $value['attributes']['equivelant_amount'];
             }
 
-            $model->equivelant_amount=$amount;
+            $model->equivelant_amount = $amount;
             #  // $model->equivelant_amount
         }
 
@@ -321,10 +325,8 @@ class Donation extends Resource
     public static function aftersave(Request $request, $model)
     {
 
-
-        if (!$request->name) {
-            // dd($request->add_user);
-            if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
+        if (!$request->name && $request->add_user) {
+            if ($request->add_user[0]['attributes']['name'] &&  $request->add_user[0]['attributes']['phone']) {
                 $telfone =  TelephoneDirectory::create(
                     [
                         'name' => $request->add_user[0]['attributes']['name'],
@@ -353,6 +355,7 @@ class Donation extends Resource
             new DonationNotReceive(),
             new DonationInBox(),
             new DonationInBank(),
+            new FilterCard(new AlhisalatColect()),
         ];
     }
 
@@ -364,7 +367,9 @@ class Donation extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new AlhisalatColect(),
+        ];
     }
 
     /**

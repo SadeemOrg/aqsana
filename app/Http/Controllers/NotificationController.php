@@ -2,10 +2,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Notification;
 use App\Notifications\TasksNotification;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Notification;
 class NotificationController extends Controller
 {
     public function __construct()
@@ -20,6 +20,11 @@ class NotificationController extends Controller
     public function CompletNotifications(Request $request)
     {
         \App\Models\Notification::where('id',$request->Notificationsid) ->update(['read_at' => Carbon::now()]);
+
+    }
+    public function AddNoteNotifications(Request $request)
+    {
+        \App\Models\Notification::where('id',$request->Notificationsid) ->update(['note' =>$request->NotificationsNote ]);
 
     }
 
@@ -41,9 +46,11 @@ class NotificationController extends Controller
 
           $data=json_decode($value->data);
           $pus = array(
+
             "id" => $value->id,
             "Notifications" => $data,
             "done" => $value->read_at,
+            "note"=>$value->note,
 
         );
           array_push($myNotifications, $pus);
@@ -73,14 +80,16 @@ class NotificationController extends Controller
         return $myNotifications;
     }
     public function sendNotification(Request $request) {
+
         $userSchema = User::find($request->user);
         // dd(  $userSchema);
         // dd($request->user);
         $offerData = $request->Notifications;
         $date= $request->date;
         // dd($date);
+        // Auth::user()->notify(new PostNotif());
         Notification::send($userSchema, new TasksNotification($offerData,$date));
-
+        // $userSchema->notify($userSchema, new TasksNotification($offerData,$date));
         return 'Task completed!';
     }
     // public function sendOfferNotification() {

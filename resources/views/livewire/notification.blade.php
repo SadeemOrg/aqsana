@@ -1,5 +1,6 @@
 @php
     use Carbon\Carbon;
+    use App\Models\User;
 @endphp
 <div wire:poll.1000ms class="flex ">
 
@@ -30,20 +31,28 @@
                         @php
                             $dataNotifications = json_decode($notification->data);
                             // $newTimeShape = Carbon::createFromFormat('m/d/Y', $notification->created_at)->diffForHumans();
-                            $newTimeShape = date_format($notification->created_at, 'm/d/Y');                            
+                            $newTimeShape = date_format($notification->created_at, 'm/d/Y');
                             $result = Carbon::createFromFormat('m/d/Y', $newTimeShape)->diffForHumans();
                             // $img='/storage/'. $notification->user->photo;
-                            $img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVztexIh8wNm6hDjIwvVAQ73mfzMuWB6yqdviYpcyqQ&s';
+                               $user= user::find($dataNotifications->sender_id);
+                                // dd($user->photo);
+                                $img = 'storage/' . $user->photo;
+                                $name=$user->name;
+                                // dd($img);
+                            // $img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVztexIh8wNm6hDjIwvVAQ73mfzMuWB6yqdviYpcyqQ&s';
                         @endphp
                         <a href="">
                             <div
                                 class="flex flex-row items-center justify-start px-4 w-full py-3 border-b border-2 hover:bg-gray-100  @if ($notification->read_at == null) bg-[#f1fff1] @endif ">
                                 <div class="basis-1/4">
-                                    <img class=" h-10 w-10 rounded-full object-cover mx-1" src={{ $img }}
+                                    <img class=" h-10 w-10 rounded-full object-cover mx-1" src=/{{ $img }}
                                         alt="avatar">
                                 </div>
 
                                 <div class="flex basis-3/4 flex-col items-start justify-center">
+                                    <p class=" text-sm mx-2 font-bold text-black py-1">
+                                        {{ $name }} ارسل لك إشعار جديد
+                                    </p>
                                     <p class=" text-sm mx-2 font-bold text-black">
                                         {{ $dataNotifications->Notifications }}
                                     </p>

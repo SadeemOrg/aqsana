@@ -134,6 +134,7 @@ Route::post('/AdminNotifications', [NotificationController::class, 'AdminNotific
 
 Route::post('/CompletNotifications', [NotificationController::class, 'CompletNotifications'])->name('CompletNotifications');
 Route::post('/UNCompletNotifications', [NotificationController::class, 'UNCompletNotifications'])->name('UNCompletNotifications');
+Route::post('/AddNoteNotifications', [NotificationController::class, 'AddNoteNotifications'])->name('AddNoteNotifications');
 
 
 

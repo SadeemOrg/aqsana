@@ -43,7 +43,7 @@ class AlhisalatColect extends Action
 
                     $addresses = DB::table('addresses')->where('id', $model->address_id)->first();
                     $countt = $addresses->number + 1;
-                    // $addresses->number=$countt;
+                    $new_data->number_alhisala=  $addresses->name_address . " " . $countt;
                     DB::table('addresses')->where('id', $model->address_id)->update(['number' => $countt]);
                     // dd( $model->number_alhisala);
                     // $new_data->number_alhisala = uniqid();

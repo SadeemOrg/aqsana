@@ -23,7 +23,7 @@ class CreateTelephoneDirectoriesTable extends Migration
             $table->string('city')->nullable();
             $table->string('note')->nullable();
             $table->string('roles')->nullable();
-            $table->string('jop')->nullable();
+            $table->string('job')->nullable();
             $table->string('id_number')->nullable();
 
 

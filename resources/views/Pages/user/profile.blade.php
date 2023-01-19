@@ -325,4 +325,27 @@
 
         </div>
     </div>
+    @php
+    $firstName = '';
+
+@endphp
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                @php
+
+                    $firstName = $firstName . ' ' . $error . '<br>';
+
+                @endphp
+            @endforeach
+            <script>
+                var bool = {!! json_encode($firstName) !!};
+                toastr.error(bool);
+            </script>
+            {{-- {!! $firstName !!} --}}
+        </ul>
+    </div>
+@endif
 @endsection
+

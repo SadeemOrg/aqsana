@@ -220,6 +220,7 @@ class Alhisalat extends Resource
                     'description' => $request->newadres[0]['attributes']['description'],
                     'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
                     // 'current_location' => $request->newadres[0]['attributes']['current_location'],
+                    "number"=>"1",
                     'status' => 1,
                     'type' => 2,
                     'created_by' => $id

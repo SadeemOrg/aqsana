@@ -5,6 +5,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class TasksNotification extends Notification
 {
@@ -56,6 +57,7 @@ class TasksNotification extends Notification
     public function toArray($notifiable)
     {
         return [
+            'sender_id'=>Auth::id(),
             'Notifications' => $this->offerData,
             'date' => $this->date,
         ];
