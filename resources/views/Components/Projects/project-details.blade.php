@@ -33,7 +33,8 @@ $whatsapp_phone_Link = "https://wa.me/".$Final_Correct_whatsapp_phone ;
 
 @if (!empty($project->report_video_link_cover))
 @php
-$imageVideoCover = 'storage/' .$news_detail->video_link_cover
+// dd($project);
+$imageVideoCover = 'storage/' .$project->report_video_link_cover
 @endphp
 @else
 @php
@@ -61,7 +62,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                     {{ $project->project_name }}
                 </p>
                 @if(!empty($project->report_date))
-                <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4 w-full">
+                <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4 w-full pt-4">
                     {{ $project->report_date }}
                 </p>
                 @endif

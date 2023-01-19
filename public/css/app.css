@@ -2018,6 +2018,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
+.text-gray-400{
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
 .text-\[\#349A37\]{
   --tw-text-opacity: 1;
   color: rgb(52 154 55 / var(--tw-text-opacity));
@@ -2049,10 +2053,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-green-900{
   --tw-text-opacity: 1;
   color: rgb(20 83 45 / var(--tw-text-opacity));
-}
-.text-gray-400{
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 .text-gray-500{
   --tw-text-opacity: 1;
