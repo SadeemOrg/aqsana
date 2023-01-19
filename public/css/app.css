@@ -600,6 +600,51 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[75\%\]{
   top: 75%;
 }
+.top-\[52\%\]{
+  top: 52%;
+}
+.top-\[54\%\]{
+  top: 54%;
+}
+.right-\[55\%\]{
+  right: 55%;
+}
+.right-\[40\%\]{
+  right: 40%;
+}
+.left-\[40\%\]{
+  left: 40%;
+}
+.top-\[48\%\]{
+  top: 48%;
+}
+.right-28{
+  right: 7rem;
+}
+.right-5{
+  right: 1.25rem;
+}
+.right-8{
+  right: 2rem;
+}
+.right-1{
+  right: 0.25rem;
+}
+.-right-1{
+  right: -0.25rem;
+}
+.-right-5{
+  right: -1.25rem;
+}
+.-right-6{
+  right: -1.5rem;
+}
+.-right-10{
+  right: -2.5rem;
+}
+.top-\[45\%\]{
+  top: 45%;
+}
 .z-30{
   z-index: 30;
 }
