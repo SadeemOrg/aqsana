@@ -73,7 +73,7 @@ class User extends Resource
 
             Gravatar::make()->maxWidth(50),
             Text::make(__('id_number'),'id_number')
-            ->sortable(),
+            ->sortable() ->rules('required', 'max:255'),
             Text::make(__('Name'),'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
@@ -136,7 +136,7 @@ class User extends Resource
 
 
                 ]
-            )->saveAsJSON(),
+            )->saveAsJSON()->rules('required'),
             Date::make(__('start_work_date'), 'start_work_date'),
             Select::make(__('martial_status'), 'martial_status')->options([
                 1 => __('single'),

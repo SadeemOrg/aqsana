@@ -97,7 +97,7 @@ class City extends Resource
         if ($user->type() == 'admin') {
             return [
                 ID::make(__('ID'), 'id')->sortable(),
-                Text::make(__('Name'), 'name'),
+                Text::make(__('Name'), 'name')->rules('required'),
                 BelongsTo::make(__('Area'), 'Area', \App\Nova\Area::class),
 
 

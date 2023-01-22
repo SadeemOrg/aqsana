@@ -989,6 +989,52 @@
                 }
             });
         })
+        $(".MailBill").submit(function(e) {
+            e.preventDefault()
+
+            var $Mail = $('input[name="Mail"]').val();
+            var $id = $('input[name="id"]').val();
+
+            $.ajax({
+                type: "get",
+                url: "/SendMail",
+                data: {
+                    Mail: $Mail,
+                    id: $id,
+                },
+                success: function(data) {
+                    if ($.isEmptyObject(data.error)) {
+                        toastr.options = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-bottom-right",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "2000",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.success("تم ارسال الرسالة بنجاح");
+                    } else {
+                        toastr.options = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-bottom-right",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "2000",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.error(data.error);
+                    }
+                },
+                error: function() {
+                    console.log("err");
+                    console.log(data.error);
+                }
+            })
+        })
     </script>
     <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
     <script src="{{ asset('assets/front-end/js/main.js') }}"></script>

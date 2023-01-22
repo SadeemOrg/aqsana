@@ -88,8 +88,8 @@ class Area extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('Name'), 'name'),
-            Text::make(__('Describtion'), 'describtion'),
+            Text::make(__('Name'), 'name')->rules('required'),
+            Text::make(__('Describtion'), 'describtion')->rules('required'),
 
             Multiselect::make(__('admin'), 'admin_id')
                 ->options(function () {
@@ -104,7 +104,7 @@ class Area extends Resource
                     }
 
                     return $user_type_admin_array;
-                })->singleSelect(),
+                })->singleSelect()->rules('required'),
             BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),

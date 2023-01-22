@@ -104,12 +104,12 @@ class receiptVoucher extends Resource
 
             ActionButton::make(__('colect'))
             ->action((new AlhisalatStatuscompleted)->confirmText(__('Are you sure you want to Surrender  this Alhisalat?'))
-                    ->confirmButtonText(__('Surrender')),
+                    ->confirmButtonText(__('colect')),
                 $this->id
             )
             ->readonly(function () {
                 return $this->status > '3';
-            })->text(__('AlhisalatSurrender'))->showLoadingAnimation()
+            })->text(__('colect'))->showLoadingAnimation()
             ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
             BelongsTo::make(__('saved addresss'), 'address', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -153,7 +153,7 @@ class receiptVoucher extends Resource
     }
     public static function aftersave(Request $request, $model)
     {
-        return redirect('itsolutionstuff/tags');
+        // return redirect('itsolutionstuff/tags');
         // dd($request->add_user);
         if (!$request->name) {
             if ($request->add_user[0]['attributes']['name'] &&    $request->add_user[0]['attributes']['email'] && $request->add_user[0]['attributes']['phone']) {

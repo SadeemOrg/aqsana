@@ -32,6 +32,10 @@ class Role extends Resource
     }
      public static $title = 'role';
     public static $priority = 2;
+    public static function availableForNavigation(Request $request)
+    {
+        return false;
+    }
     /**
      * The columns that should be searched.
      *
