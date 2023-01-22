@@ -77,12 +77,12 @@ class TelephoneDirectory extends Resource
                 7 => __('منح'),
                 8 => __('شركات'),
 
-            ])->displayUsingLabels(),
+            ])->displayUsingLabels()->rules('required'),
 
             Text::make(__('phone_number'),'phone_number'),
             Text::make(__('city'),'city'),
-            Text::make(__('Note'),'note'),
-            Text::make(__('jop'),'jop'),
+            Text::make(__('note'),'note'),
+            Text::make(__('job'),'job'),
             Text::make(__('id_number'),'id_number'),
 
 

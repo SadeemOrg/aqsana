@@ -43,7 +43,7 @@ class Transaction extends Model
 
     public function Alhisalat()
     {
-     return $this->belongsTo('App\Models\Alhisalat','id','ref_id');
+     return $this->belongsTo('App\Models\Alhisalat','ref_id');
 
 
     }
@@ -60,6 +60,7 @@ class Transaction extends Model
 
     public function Project()
     {
+
         return $this->belongsTo('App\Models\Project','ref_id');
     }
     public function Sectors()

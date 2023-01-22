@@ -45,10 +45,7 @@ class AlhisalatSurrender extends Action
                 }
             }
 
-            if (!empty($tokens)) {
 
-                Helpers::send_notification($tokens, $notification);
-            }
         }
     }
 

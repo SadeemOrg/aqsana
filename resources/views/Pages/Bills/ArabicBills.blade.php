@@ -1,6 +1,7 @@
 @extends('layout.app', ['hasHeader' => false, 'hasFooter' => false, 'left_SideBar' => false])
 @section('content')
     @php
+
         $society_id = nova_get_setting('society_id', '580179794');
         $phone = nova_get_setting('phone', 'default_value');
         $email = nova_get_setting('email', 'default_value');
@@ -64,8 +65,15 @@
         </div>
         <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 max-w-xl mt-4">
             <p class="text-[18px] font-FlatBold text-[#101426]">لحساب :</p>
+
             <span class="font-FlatBold text-[#6B7280]  text-[18px] text-right">
-                {{ $Transaction->TelephoneDirectory->name }}
+
+                @if ($Transaction->Payment_type == 5)
+                    حصالة رقم:
+                    {{ $Transaction->Alhisalat->number_alhisala }}
+                @else
+                    {{ $Transaction->TelephoneDirectory->name }}
+                @endif
             </span>
         </div>
         <!-- table -->
@@ -289,6 +297,53 @@
                                                 المجموع الكلي :</td>
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-center text-lg">
                                                 {{ $Transaction->equivelant_amount }} ₪</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            @elseif($PaymentType == 'حصالة')
+                                <table class="min-w-full divide-y divide-gray-300">
+                                    <thead class="bg-[#349A37]">
+                                        <tr class="">
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right w-48">
+                                                تم الدفع من خلال :</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                التاريخ :</th>
+
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-center">
+                                                المجموع</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
+
+                                        <tr>
+                                            <td
+                                                class="whitespace-nowrap px-3 py-4  font-FlatBold text-base text-black-900">
+                                                {{ $Transaction->Alhisalat->number_alhisala }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-base text-black-900">
+                                                @php
+                                                    $ChickBillDate = date('d/m/Y', strtotime($Transaction->transaction_date));
+                                                @endphp
+                                                {{ $ChickBillDate }}
+                                            </td>
+
+                                            <td
+                                                class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base text-black-900">
+                                                {{ $Transaction->transact_amount }} ₪
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
+                                            </td>
+
+                                            <td class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base">
+                                                المجموع الكلي :</td>
+                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-center text-lg">
+                                                {{ $Transaction->transact_amount }} ₪</td>
                                         </tr>
                                     </tbody>
                                 </table>

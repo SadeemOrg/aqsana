@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\File;
 use Acme\MultiselectField\Multiselect;
 use App\CPU\Helpers;
 use App\Models\address;
+use App\Models\Alhisalat as ModelsAlhisalat;
 use App\Models\User;
 use App\Models\Income;
 use App\Models\Notification;
@@ -115,12 +116,8 @@ class Alhisalat extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            // Text::make(__("number alhisala"), "number_alhisala")->withMeta([
-            //     'value' => uniqid(),
-            // ])->readonly()->hideWhenUpdating()->hideFromDetail()->hideFromIndex(),
-
             Text::make(__("number alhisala"), "number_alhisala")
-                ->readonly()->hideWhenCreating(),
+                ->readonly()->hideWhenCreating()->hideWhenUpdating(),
 
             ActionButton::make(__('colect'))
                 ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to colect  this Alhisalat?'))
@@ -166,7 +163,10 @@ class Alhisalat extends Resource
                     }
 
                     return $address_type_admin_array;
-                })->singleSelect()->hideFromIndex()->hideFromDetail(),
+                })->singleSelect()->hideFromIndex()->hideFromDetail()
+                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                    return null;
+                }),
             BelongsTo::make(__('saved addresss'), 'address', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
@@ -175,170 +175,82 @@ class Alhisalat extends Resource
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('Add new bus'), 'bus', [
-
-                    Text::make(__('Name'), "name_address"),
-                    Text::make(__("description"), "description"),
-                    Text::make(__("phone number"), "phone_number_address"),
+                    Text::make(__('Name'), "name_address")->rules('required'),
+                    Text::make(__("description"), "description")->rules('required'),
+                    Text::make(__("phone number"), "phone_number_address")->rules('required'),
                     MapsAddress::make(__('Address'), 'current_location')->zoom(10)
                         ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
-                    Select::make(__("Status"), "address_status")->options([
-                        '1' => __('active'),
-                        '2' => __('not active'),
-                    ]),
 
                 ]),
-
-
-            //     Select::make(__('add adres'), 'name_format')->options([
-            //     0 => __('no'),
-            //     1 => __('yes'),
-
-            // ])->displayUsingLabels()
-            //     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     })->hideFromIndex()->hideFromDetail(),
-
-            // NovaDependencyContainer::make([
-
-            //     Text::make(__('Name'), "name_address")->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     }),
-            //     Text::make(__("description"), "description")->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     }),
-            //     Text::make(__("phone number"), "phone_number_address")->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     }),
-            //     GoogleMaps::make(__('current_location'), 'current_location')
-            //         ->zoom(8)->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //             return null;
-            //         }),
-            //     Select::make(__("Status"), "address_status")->options([
-            //         '1' => __('active'),
-            //         '2' => __('not active'),
-            //     ])->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //         return null;
-            //     }),
-            // ])->dependsOn('name_format', 1),
-
-
-
-
 
             Multiselect::make(__("Status"), "status")->options([
                 '1' => 'تم  الوضع',
                 '2' => 'تم جمع ',
                 '3' => 'تم التسليم',
                 '4' => 'تم العد',
-
-
             ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
         ];
     }
-
-    public static function beforeCreate(Request $request, $model)
+    public static function beforesave(Request $request, $model)
     {
-        if ($request->address_id){
 
-            $alhisalats = DB::table('alhisalats')->where('address_id', $request->address_id)->get();
+        if ($request->address_id && $request->address_id != $model->address_id) {
+
+            // $alhisalats = DB::table('alhisalats')->where('address_id', $request->address_id)->get();
             $addresses = DB::table('addresses')->where('id', $request->address_id)->first();
-            $countt =  count($alhisalats) +1 ;
+            $countt = $addresses->number + 1;
+            // $addresses->number=$countt;
+            DB::table('addresses')->where('id', $request->address_id)->update(['number' => $countt]);
 
 
 
-            $model->number_alhisala=  $countt ."  ".$addresses->name_address ;
-            $model->number_alhisala=   $addresses->name_address." ".$countt ;
+            // $model->number_alhisala =  $countt . "  " . $addresses->name_address;
+            $model->number_alhisala =   $addresses->name_address . " " . $countt;
+            $model->address_id= $addresses->id;
 
         }
         else
         {
 
             $id = Auth::id();
+            if ($request->newadres) {
+               $address= address::create([
+                    'name_address' => $request->newadres[0]['attributes']['name_address'],
+                    'description' => $request->newadres[0]['attributes']['description'],
+                    'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
+                    // 'current_location' => $request->newadres[0]['attributes']['current_location'],
+                    "number"=>"1",
+                    'status' => 1,
+                    'type' => 2,
+                    'created_by' => $id
+                ]);
 
-            if (!$request->address_id) {
-                // dd("hf");
-                // if ($request->newadres[0]['attributes']['name_address'] && $request->newadres[0]['attributes']['description'] && $request->newadres[0]['attributes']['phone_number_address'] && $request->newadres[0]['attributes']['current_location'] && $request->newadres[0]['attributes']['address_status']) {
 
-                if ($request->newadres[0]['attributes']['name_address'] && $request->newadres[0]['attributes']['description'] && $request->newadres[0]['attributes']['phone_number_address']  && $request->newadres[0]['attributes']['address_status']) {
-                //    dd('dd');
-                    $address = address::create([
-                        'name_address' => $request->newadres[0]['attributes']['name_address'],
-                        'description' => $request->newadres[0]['attributes']['description'],
-                        'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
-                        'current_location' => $request->newadres[0]['attributes']['current_location'],
-                        'status' => $request->newadres[0]['attributes']['address_status'],
-                        'type' => 2,
-                        'created_by' => $id
-                    ]);
+                $model->number_alhisala =  $address->name_address . " 1" ;
+                $model->address_id= $address->id;
 
-                    //    dd( $address->id);
-                    $model->number_alhisala= $address->name_address." ".'1';
-                    $model->address_id=$address->id;
-                    // DB::table('alhisalats')
-                    //     ->where('id', $request  ->id)
-                    //     ->update(['address_id' => $address->id]);
-                    // dd( $addresstt);
-                }
-            } else   $model->address_id = $request->address_id;
+                   }
+
+        // dd($model);
+
         }
+    }
 
 
-        // dd(   $model->number_alhisala );
-
-
-        //  $model->number_alhisala=12;
-
-
-        // $request->address_id=2;
+    public static function beforeCreate(Request $request, $model)
+    {
         $id = Auth::id();
         $model->created_by = $id;
         $model->status = '1';
-        $users = User::where('user_role', 'admin')->get();
-
-
-
-        $tokens = [];
-
-        foreach ($users as $key => $user) {
-
-            $notification = Notification::where('id', '4')->first();
-
-            if ($user->fcm_token != null && $user->fcm_token != "") {
-                array_push($tokens, $user->fcm_token);
-            }
-        }
-
-        // if (!empty($tokens)) {
-
-        //     Helpers::send_notification($tokens, $notification);
-        // }
-        // $model->number_alhisala = '1';
-
-        // dd( $model);
-
     }
     public static function beforeUpdate(Request $request, $model)
     {
         $id = Auth::id();
         $model->update_by = $id;
     }
-    public static function aftersave(Request $request, $model)
-    {
-
-        // dd($request->address_id);
 
 
-
-        // $request->address = '2';
-        // dd($request->number_alhisala);
-        // dd($request->address);
-        // dd($request->newadres[0]['attributes']['current_location']);
-
-        // dd("finsh");
-    }
 
 
     /**

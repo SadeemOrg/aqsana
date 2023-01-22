@@ -27,6 +27,7 @@
                     <img src="{{ asset('assets/image/paper-plane.png') }}" class="w-8 h-8 " alt="">
                     <h3 class="font-FlatBold text-center text-lg lg:text-xl">تم ارسال الملف للايمال التالي</h3>
                     <h3 class="font-FlatBold text-center text-base lg:text-lg">alqudsquds@gmail.com</h3>
+
                 </div>
 
                 <div onclick="location.href='{{ route('originalbill', ['id' => $id]) }}'"
@@ -46,7 +47,23 @@
                     <img src="{{ asset('assets/image/whatsappbill.png') }}" class="w-8 h-8 " alt="">
                     <h3 class="font-FlatBold text-center text-lg lg:text-xl">ارسال عن طريق الواتس اب</h3>
                 </a>
+
+            </div>
+            <div class="flex md:flex-row flex-col items-center justify-between  w-full mt-12">
+                <form  target="_self" class="MailBill h-full w-full" target="_self" action="{{ route('SendMail') }}" method="get">
+                    <input type="search" name="id" id="search" autocomplete="off" value="{{ $id }}"
+                    class="hidden search-bar h-16 sm:h-full  pr-12 sm:pr-20 shadow-sm   w-full bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]"
+                   >
+                    <input type="search" name="Mail" id="search" autocomplete="off"
+                    class="search-bar h-16 sm:h-full  pr-12 sm:pr-20 shadow-sm  block w-full bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]"
+                   >
+                    <button  type="submit"  id="btnCombine"
+                    class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                    تطبيق
+                </button>
+                </form>
             </div>
         </div>
     </div>
 @endsection
+

@@ -20,6 +20,9 @@ class CreateWorkHoursTable extends Migration
             $table->date('date');
             $table->time('start_time');
             $table->time('end_time')->nullable();
+            $table->char('on_work',1)->nullable();
+            $table->time('day_hours')->nullable();
+            $table->time('fake_time')->nullable();
             $table->json('departure')->nullable();
             $table->timestamps();
         });

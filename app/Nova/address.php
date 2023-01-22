@@ -69,10 +69,10 @@ class address extends Resource
                 '2' => __('Alhisalat'),
                 '3' => __('Project'),
                 '4' => __('addrese buss'),
-            ])->displayUsingLabels(),
-            Text::make(__('name address'), "name_address"),
-            Text::make(__("description address"), "description"),
-            Text::make(__("phone number"), "phone_number_address"),
+            ])->displayUsingLabels()->rules('required'),
+            Text::make(__('name address'), "name_address")->rules('required'),
+            Text::make(__("description address"), "description")->rules('required'),
+            Text::make(__("phone number"), "phone_number_address")->rules('required'),
 
             // GoogleMaps::make(__('current_location'), 'current_location')
                 // ->zoom(8),
@@ -80,10 +80,10 @@ class address extends Resource
                 MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
                 ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
 
-            Select::make(__("Status"), "status")->options([
-                '1' => __('active'),
-                '2' => __('not active'),
-            ])->displayUsingLabels(),
+            // Select::make(__("Status"), "status")->options([
+            //     '1' => __('active'),
+            //     '2' => __('not active'),
+            // ])->displayUsingLabels(),
             // BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
         ];
@@ -93,6 +93,7 @@ class address extends Resource
         // dd($request->current_location);
         $id = Auth::id();
         $model->created_by = $id;
+        $model->status = 1;
 
     }
 

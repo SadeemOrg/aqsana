@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Nova\Filters\AreaDelegate;
+use Acme\MultiselectField\Multiselect;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
@@ -76,7 +77,7 @@ class delegate extends Resource
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
             Text::make(__('phone_number'), 'phone_number'),
-            Select::make(__('Area'), 'Area')
+            Multiselect::make(__('Area'), 'Area')
             ->options(function () {
                 $Areas =  \App\Models\Area::all();
 
@@ -89,7 +90,7 @@ class delegate extends Resource
                 }
 
                 return $Area_type_admin_array;
-            })->hideFromIndex()->hideFromDetail(),
+            })->singleSelect()->hideFromIndex()->hideFromDetail(),
             BelongsTo::make(__('Area'), 'AreaDelegate', \App\Nova\Area::class)->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('city'), 'city'),
         ];

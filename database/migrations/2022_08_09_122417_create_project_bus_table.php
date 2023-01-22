@@ -17,7 +17,7 @@ class CreateProjectBusTable extends Migration
         Schema::create('project_bus', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('project_id');
-            $table->bigInteger('city_id');
+            $table->bigInteger('city_id')->nullable();
             $table->bigInteger('bus_id');
             $table->timestamps();
         });

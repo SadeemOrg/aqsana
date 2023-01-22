@@ -55,7 +55,10 @@ class ProjectNews extends Resource
     {
         return false;
     }
-
+    public function authorizedToDelete(Request $request)
+    {
+        return false;
+    }
      public static function availableForNavigation(Request $request)
     {
         if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("ProjectNewsparmation",  $request->user()->userrole()) )){
@@ -92,8 +95,8 @@ class ProjectNews extends Resource
 
             Text::make(__("project name"), "project_name")->readonly(true),
 
-                Text::make(__('TITLE'),'report_title'),
-                Textarea::make(__('description'), 'report_description'),
+                Text::make(__('TITLE'),'report_title')->rules('required'),
+                Textarea::make(__('description'), 'report_description')->rules('required'),
                 Tiptap::make(__('Contents'), 'report_contents')
                     ->buttons([
                         'heading',
@@ -126,16 +129,16 @@ class ProjectNews extends Resource
                         '|',
                         'history',
                     ])
-                    ->headingLevels([1, 2, 3, 4, 5, 6]),
+                    ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
 
 
-                Image::make(__('IMAGE'), 'report_image')->disk('public')->prunable(),
+                Image::make(__('IMAGE'), 'report_image')->disk('public')->prunable()->rules('required'),
                 ArrayImages::make(__('PICTURES'),  'report_pictures')
                     ->disk('public'),
                 Text::make(__('VIDEO LINK'), 'report_video_link'),
                 Image::make(__('video_img_cover'), 'report_video_link_cover')->disk('public')->prunable(),
 
-                Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y'),
+                Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y')->rules('required'),
 
 
 

@@ -506,8 +506,8 @@ class HomeController extends Controller
 
     public function originalbillbills($id)
     {
-        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
-
+        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
+        // dd(  $Transaction ->Alhisalat);
 
         // dd($Transaction);
         if ($Transaction->lang == 1) {
@@ -524,6 +524,9 @@ class HomeController extends Controller
                 case 4:
                     $PaymentType = "حوالة مصرفية";
                     break;
+                case 5:
+                    $PaymentType = "حصالة";
+                    break;
             }
         } else if ($Transaction->lang == 2) {
             switch ($Transaction->Payment_type) {
@@ -539,6 +542,9 @@ class HomeController extends Controller
                 case 4:
                     $PaymentType = "Bank transfer";
                     break;
+                case 5:
+                    $PaymentType = "moneybox";
+                    break;
             }
         } else if ($Transaction->lang == 3) {
             switch ($Transaction->Payment_type) {
@@ -553,6 +559,9 @@ class HomeController extends Controller
                     break;
                 case 4:
                     $PaymentType = "העברה בנקאית";
+                    break;
+                case 5:
+                    $PaymentType = "קופסת כסף";
                     break;
             }
         }
@@ -580,6 +589,9 @@ class HomeController extends Controller
                 case 4:
                     $PaymentType = "حوالة مصرفية";
                     break;
+                case 5:
+                    $PaymentType = "حصالة";
+                    break;
             }
         } else if ($Transaction->lang == 2) {
             switch ($Transaction->Payment_type) {
@@ -594,6 +606,9 @@ class HomeController extends Controller
                     break;
                 case 4:
                     $PaymentType = "Bank transfer";
+                    break;
+                case 5:
+                    $PaymentType = "moneybox";
                     break;
             }
         } else if ($Transaction->lang == 3) {
@@ -610,6 +625,9 @@ class HomeController extends Controller
                 case 4:
                     $PaymentType = "העברה בנקאית";
                     break;
+                case 5:
+                    $PaymentType = "קופסת כסף";
+                    break;
             }
         }
 
@@ -618,7 +636,138 @@ class HomeController extends Controller
 
         return view('Pages.Bills.Bills', compact('Transaction', 'original',  'PaymentType'));
     }
+    public function mainbill($id)
+    {
 
+        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
+
+        if ($Transaction->lang == 1) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "كاش";
+                    break;
+                case 2:
+                    $PaymentType = "شك";
+                    break;
+                case 3:
+                    $PaymentType = "بيت";
+                    break;
+                case 4:
+                    $PaymentType = "حوالة مصرفية";
+                    break;
+                case 5:
+                    $PaymentType = "حصالة";
+                    break;
+            }
+        } else if ($Transaction->lang == 2) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "cash";
+                    break;
+                case 2:
+                    $PaymentType = "Bank doubt";
+                    break;
+                case 3:
+                    $PaymentType = "bit";
+                    break;
+                case 4:
+                    $PaymentType = "Bank transfer";
+                    break;
+                case 5:
+                    $PaymentType = "moneybox";
+                    break;
+            }
+        } else if ($Transaction->lang == 3) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "כסף מזומן";
+                    break;
+                case 2:
+                    $PaymentType = "ספק בבנק";
+                    break;
+                case 3:
+                    $PaymentType = "קצת";
+                    break;
+                case 4:
+                    $PaymentType = "העברה בנקאית";
+                    break;
+                case 5:
+                    $PaymentType = "קופסת כסף";
+                    break;
+            }
+        }
+        $original = 0;
+
+
+        Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\BillMail($Transaction, $PaymentType));
+
+        // dd("Email is Sent.");
+        $type = '1';
+        return view('Pages.Bills.mainBill', compact('id', 'type'));
+    }
+    public function SendMail(Request $request)
+    {
+        $Transaction =  Transaction::where("id", $request->id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
+
+        if ($Transaction->lang == 1) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "كاش";
+                    break;
+                case 2:
+                    $PaymentType = "شك";
+                    break;
+                case 3:
+                    $PaymentType = "بيت";
+                    break;
+                case 4:
+                    $PaymentType = "حوالة مصرفية";
+                    break;
+                case 5:
+                    $PaymentType = "حصالة";
+                    break;
+            }
+        } else if ($Transaction->lang == 2) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "cash";
+                    break;
+                case 2:
+                    $PaymentType = "Bank doubt";
+                    break;
+                case 3:
+                    $PaymentType = "bit";
+                    break;
+                case 4:
+                    $PaymentType = "Bank transfer";
+                    break;
+                case 5:
+                    $PaymentType = "moneybox";
+                    break;
+            }
+        } else if ($Transaction->lang == 3) {
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "כסף מזומן";
+                    break;
+                case 2:
+                    $PaymentType = "ספק בבנק";
+                    break;
+                case 3:
+                    $PaymentType = "קצת";
+                    break;
+                case 4:
+                    $PaymentType = "העברה בנקאית";
+                    break;
+                case 5:
+                    $PaymentType = "קופסת כסף";
+                    break;
+            }
+        }
+
+        Mail::to( $request->Mail)->send(new \App\Mail\BillMail($Transaction, $PaymentType));
+
+    }
     public function showToastrMessages()
     {
 
@@ -978,66 +1127,5 @@ class HomeController extends Controller
     {
         $project = null;
         return view('Pages.donationsPage.donations-page', compact('project'));
-    }
-
-    public function mainbill($id)
-    {
-
-        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
-
-        if ($Transaction->lang == 1) {
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "كاش";
-                    break;
-                case 2:
-                    $PaymentType = "شك";
-                    break;
-                case 3:
-                    $PaymentType = "بيت";
-                    break;
-                case 4:
-                    $PaymentType = "حوالة مصرفية";
-                    break;
-            }
-        } else if ($Transaction->lang == 2) {
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "cash";
-                    break;
-                case 2:
-                    $PaymentType = "Bank doubt";
-                    break;
-                case 3:
-                    $PaymentType = "bit";
-                    break;
-                case 4:
-                    $PaymentType = "Bank transfer";
-                    break;
-            }
-        } else if ($Transaction->lang == 3) {
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "כסף מזומן";
-                    break;
-                case 2:
-                    $PaymentType = "ספק בבנק";
-                    break;
-                case 3:
-                    $PaymentType = "קצת";
-                    break;
-                case 4:
-                    $PaymentType = "העברה בנקאית";
-                    break;
-            }
-        }
-        $original = 0;
-
-
-        Mail::to('zeyad.hawash.test@gmail.com')->send(new \App\Mail\BillMail($Transaction, $PaymentType));
-
-        // dd("Email is Sent.");
-        $type = '1';
-        return view('Pages.Bills.mainBill', compact('id', 'type'));
     }
 }
