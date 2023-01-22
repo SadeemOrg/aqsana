@@ -112,8 +112,16 @@
     <!--End Second Paragraph-->
 
     <!--Start for Account Paragraph-->
-    <p  style="text-align: right;font-size: 16px;color:#101426">لحساب :
-        <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['telephone_directory']['name'] }}</span>
+    <p style="text-align: right;font-size: 16px;color:#101426">لحساب :
+        <span style="color: #6B7280;font-size: 16px;">
+            @if ($TransactionArray['Payment_type'] == 5)
+                حصالة رقم:
+
+                {{ $TransactionArray['alhisalat']['number_alhisala'] }}
+            @else
+                {{ $Transaction['TelephoneDirectory']['name'] }}
+            @endif
+        </span>
     </p>
     <!--End for Account Paragraph-->
 
@@ -197,7 +205,7 @@
                 @foreach ($TransactionArray['Payment_type_details'] as $ChikPayment)
                     @php
                         $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
-                        
+
                     @endphp
                     <tr>
                         <td> {{ $PaymentType }} </td>
@@ -254,9 +262,42 @@
                         {{ $TransactionArray['equivelant_amount'] }} </td>
                 </tr>
             </tbody>
-            </tr>
+
         </table>
-    @endif
+        @elseif($PaymentType == 'حصالة')
+        <table dir="rtl" class="blueTable">
+            <thead>
+                <tr>
+                    <th> تم الدفع من خلال :</th>
+                    <th>تاريخ </th>
+                    <th> المجموع</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                    @php
+                        // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                    @endphp
+                    <tr>
+                        <td> {{ $PaymentType }} {{ $TransactionArray['alhisalat']['number_alhisala'] }}  </td>
+                        <td>{{ $ChickBillDate }}</td>
+                        <td> {{ $TransactionArray['equivelant_amount']}}</td>
+
+                    </tr>
+
+                <tr>
+
+                    <td class="">
+                        المجموع :</td>
+                    <td class=""></td>
+                    <td class="">
+                        {{ $TransactionArray['equivelant_amount'] }} </td>
+                </tr>
+            </tbody>
+
+        </table>
+        @endif
     <!--End Table -->
 
     <!--Start Sector Name-->
