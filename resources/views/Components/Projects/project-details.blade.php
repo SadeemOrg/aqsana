@@ -33,7 +33,8 @@ $whatsapp_phone_Link = "https://wa.me/".$Final_Correct_whatsapp_phone ;
 
 @if (!empty($project->report_video_link_cover))
 @php
-$imageVideoCover = 'storage/' .$news_detail->video_link_cover
+// dd($project);
+$imageVideoCover = 'storage/' .$project->report_video_link_cover
 @endphp
 @else
 @php
@@ -61,7 +62,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                     {{ $project->project_name }}
                 </p>
                 @if(!empty($project->report_date))
-                <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4 w-full">
+                <p class="text-sm text-[#8F9BB3] font-noto_Regular text-right pt-2 px-4 w-full pt-4">
                     {{ $project->report_date }}
                 </p>
                 @endif
@@ -164,7 +165,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                         <a href={{ $project->report_video_link }} class="mediabox rounded-[5px]
                             overflow-hidden relative">
                             <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full" src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
-                            <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[2%] right-[46%] " />
+                            <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[45%] -right-10  " />
                         </a>
                     </div>
                     @foreach ($pictures as $picture )
@@ -176,7 +177,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
                     <div class="col-span-1">
                         <a href={{ $project->video_link }} class="mediabox relative">
                             <img class=" mx-auto w-full object-cover lg:h-[265px] h-full rounded-[5px]" src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
-                            <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[2%] right-[45%] " />
+                            <img src="{{ asset('assets/image/play_Svg.svg') }}" class="absolute max-w-[46px] top-[45%] -right-[1.5rem] " />
                         </a>
                     </div>
                     @elseif (!empty($pictures) && empty($project->video_link ))

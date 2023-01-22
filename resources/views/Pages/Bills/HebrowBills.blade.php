@@ -32,7 +32,7 @@
                 </p>
             </div>
             <div class="sm:hidden flex flex-col items-center justify-center w-full my-4 gap-y-2 px-14">
-                <div class=" flex flex-row flex-wrap items-start w-full justify-between gap-x-2">
+                <div class=" flex flex-row flex-wrap items-start w-full justify-around gap-x-2">
                     <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">אִרגוּן :
                         <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                     </p>
@@ -40,7 +40,7 @@
                         <span class="font-FlatBold text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>
                     </p>
                 </div>
-                <div class=" flex flex-row flex-wrap items-start w-full justify-between gap-x-2">
+                <div class=" flex flex-row flex-wrap items-start w-full justify-around gap-x-2">
                     <p class=" text-[17px] font-noto_Regular text-[#101426]">טלפון :
                         <span dir="ltr" class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
                     </p>
@@ -167,7 +167,7 @@
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
-                                                {{ $Transaction->transact_amount }} ₪</td>
+                                                {{ $Transaction->equivelant_amount }} ₪</td>
                                         </tr>
                                         <!-- More people... -->
                                     </tbody>
@@ -215,7 +215,7 @@
                                             <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-lg">סך הכל סופי :
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
-                                                {{ $Transaction->transact_amount }} ₪</td>
+                                                {{ $Transaction->equivelant_amount }} ₪</td>
                                         </tr>
                                         <!-- More people... -->
                                     </tbody>
@@ -274,7 +274,7 @@
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
-                                                {{ $Transaction->transact_amount }} ₪</td>
+                                                {{ $Transaction->equivelant_amount }} ₪</td>
                                         </tr>
                                         <!-- More people... -->
                                     </tbody>
@@ -285,7 +285,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row flex-wrap items-center justify-between mt-4 sm:mx-7 mb-6 ">
+        <div class="flex flex-row flex-wrap items-center justify-around sm:justify-between mt-4 sm:mx-7 mb-6 ">
             <div>
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">שם המגזר:
                     @if ($Transaction->Sectors != null)

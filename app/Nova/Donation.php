@@ -166,7 +166,7 @@ class Donation extends Resource
 
             BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            Text::make(__('payment_reason'), "payment_reason")->rules('required'),
+            Text::make(__('payment_reason'), "payment_reason")->rules('required')->hideFromIndex(),
 
             Select::make(__("billing language"), "lang")->options([
                 '1' => __('ar'),
@@ -252,7 +252,7 @@ class Donation extends Resource
 
 
             Text::make(__('description'), 'description')->hideFromIndex(),
-            Date::make(__('date'), 'transaction_date')->rules('required'),
+            Date::make(__('date'), 'transaction_date')->rules('required')->hideFromIndex(),
 
         ];
     }

@@ -114,10 +114,6 @@ Route::get('/payPal', function (){
 });
 
 
-// Route::get('/mainbill/{id}', function (){
-
-//     return view('Pages.Bills.mainBill');
-// });
 
 Route::get('/SendNotificationTest',[NotificationTest::class,'sendNotfiy'])->name('sendNotfiy');
 
