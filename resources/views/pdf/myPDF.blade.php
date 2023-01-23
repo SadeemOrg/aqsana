@@ -283,11 +283,8 @@
                     <td> {{ $PaymentType }} : {{ $TransactionArray['alhisalat']['number_alhisala'] }} </td>
                     <td>{{ $ChickBillDate }}</td>
                     <td> {{ $TransactionArray['equivelant_amount'] }}</td>
-
                 </tr>
-
                 <tr>
-
                     <td class="">
                         total :</td>
                     <td class=""></td>
