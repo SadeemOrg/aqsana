@@ -353,7 +353,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row flex-wrap items-center justify-around mt-4 sm:mx-7 mb-6 ">
+        <div class="flex flex-row flex-wrap items-center md:justify-between justify-around mt-4 sm:mx-7 mb-6 ">
             <div>
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">اسم القطاع:
                     @if ($Transaction->Sectors != null)
