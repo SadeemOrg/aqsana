@@ -119,7 +119,7 @@
 
                 {{ $TransactionArray['alhisalat']['number_alhisala'] }}
             @else
-                {{ $TransactionArray['TelephoneDirectory']['name'] }}
+                {{ $TransactionArray['telephone_directory']['name'] }}
             @endif
         </span>
     </p>

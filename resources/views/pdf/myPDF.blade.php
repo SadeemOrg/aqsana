@@ -115,12 +115,12 @@
     <p style="text-align: left;font-size: 16px;color:#101426">account owner :
         <span style="color: #6B7280;font-size: 16px;">
             @if ($TransactionArray['Payment_type'] == 5)
-            moneybox :
+                moneybox :
 
-            {{ $TransactionArray['alhisalat']['number_alhisala'] }}
-        @else
-            {{ $TransactionArray['TelephoneDirectory']['name'] }}
-        @endif
+                {{ $TransactionArray['alhisalat']['number_alhisala'] }}
+            @else
+                {{ $TransactionArray['telephone_directory']['name'] }}
+            @endif
         </span>
     </p>
     <!--End for Account Paragraph-->
@@ -264,7 +264,7 @@
             </tbody>
             </tr>
         </table>
-        @elseif($PaymentType == 'moneybox')
+    @elseif($PaymentType == 'moneybox')
         <table class="blueTable">
             <thead>
                 <tr>
@@ -276,15 +276,15 @@
             </thead>
             <tbody>
 
-                    @php
-                        // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
-                    @endphp
-                    <tr>
-                        <td> {{ $PaymentType }} : {{ $TransactionArray['alhisalat']['number_alhisala'] }}  </td>
-                        <td>{{ $ChickBillDate }}</td>
-                        <td> {{ $TransactionArray['equivelant_amount']}}</td>
+                @php
+                    // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                @endphp
+                <tr>
+                    <td> {{ $PaymentType }} : {{ $TransactionArray['alhisalat']['number_alhisala'] }} </td>
+                    <td>{{ $ChickBillDate }}</td>
+                    <td> {{ $TransactionArray['equivelant_amount'] }}</td>
 
-                    </tr>
+                </tr>
 
                 <tr>
 
