@@ -118,7 +118,7 @@
             ספק בבנק:
             {{ $TransactionArray['alhisalat']['number_alhisala'] }}
         @else
-            {{ $Transaction['TelephoneDirectory']['name'] }}
+            {{ $TransactionArray['TelephoneDirectory']['name'] }}
         @endif
         </span>
     </p>
