@@ -84,8 +84,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-	<link rel="stylesheet" type="text/css"
-     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
@@ -490,14 +490,14 @@
 
         function printpage() {
             console.log("Asd")
-        //Get the print button and put it into a variable
-        var printButton = document.getElementById("printpagebutton");
-        //Set the print button visibility to 'hidden'
-        printButton.style.visibility = 'hidden';
-        //Print the page content
-        window.print()
-        printButton.style.visibility = 'visible';
-    }
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("printpagebutton");
+            //Set the print button visibility to 'hidden'
+            printButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+            printButton.style.visibility = 'visible';
+        }
 
         $('input[type=radio][name=PaypalRadioInput]').change(function() {
             console.log('this.value', this.value);
@@ -585,18 +585,18 @@
                             const transaction = orderData.purchase_units[0]
                                 .payments.captures[0];
 
-                                toastr.options = {
-                                        "closeButton": true,
-                                        "debug": false,
-                                        "positionClass": "toast-bottom-right",
-                                        "onclick": null,
-                                        "showDuration": "300",
-                                        "hideDuration": "2000",
-                                        "showMethod": "fadeIn",
-                                        "hideMethod": "fadeOut"
-                                    };
-                                    console.log("aserw");
-                                    toastr.success(`تم التبرع بمبلغ ${amount}.00 ₪ شيكل `);
+                            toastr.options = {
+                                "closeButton": true,
+                                "debug": false,
+                                "positionClass": "toast-bottom-right",
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "2000",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            };
+                            console.log("aserw");
+                            toastr.success(`تم التبرع بمبلغ ${amount}.00 ₪ شيكل `);
 
                             // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
                             // When ready to go live, remove the alert and show a success message within this page. For example:
@@ -990,11 +990,11 @@
             });
         })
         $(".MailBill").submit(function(e) {
-            e.preventDefault()
-
+            e.preventDefault();
             var $Mail = $('input[name="Mail"]').val();
             var $id = $('input[name="id"]').val();
 
+            console.log("hello",$Mail,$id);
             $.ajax({
                 type: "get",
                 url: "/SendMail",
@@ -1003,6 +1003,7 @@
                     id: $id,
                 },
                 success: function(data) {
+                    console.log('dataAmeed',data);
                     if ($.isEmptyObject(data.error)) {
                         toastr.options = {
                             "closeButton": true,

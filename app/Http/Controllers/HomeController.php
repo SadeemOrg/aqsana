@@ -707,6 +707,83 @@ class HomeController extends Controller
     }
     public function SendMail(Request $request)
     {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'Mail' => 'required|email',
+
+
+            ],
+            [
+                'Mail.email' => "يجب ان يكون الايميل صحيح",
+
+            ]
+        );
+        if ($validator->passes()) {
+            $Transaction =  Transaction::where("id", $request->id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
+
+            if ($Transaction->lang == 1) {
+                switch ($Transaction->Payment_type) {
+                    case 1:
+                        $PaymentType = "كاش";
+                        break;
+                    case 2:
+                        $PaymentType = "شك";
+                        break;
+                    case 3:
+                        $PaymentType = "بيت";
+                        break;
+                    case 4:
+                        $PaymentType = "حوالة مصرفية";
+                        break;
+                    case 5:
+                        $PaymentType = "حصالة";
+                        break;
+                }
+            } else if ($Transaction->lang == 2) {
+                switch ($Transaction->Payment_type) {
+                    case 1:
+                        $PaymentType = "cash";
+                        break;
+                    case 2:
+                        $PaymentType = "Bank doubt";
+                        break;
+                    case 3:
+                        $PaymentType = "bit";
+                        break;
+                    case 4:
+                        $PaymentType = "Bank transfer";
+                        break;
+                    case 5:
+                        $PaymentType = "moneybox";
+                        break;
+                }
+            } else if ($Transaction->lang == 3) {
+                switch ($Transaction->Payment_type) {
+                    case 1:
+                        $PaymentType = "כסף מזומן";
+                        break;
+                    case 2:
+                        $PaymentType = "ספק בבנק";
+                        break;
+                    case 3:
+                        $PaymentType = "קצת";
+                        break;
+                    case 4:
+                        $PaymentType = "העברה בנקאית";
+                        break;
+                    case 5:
+                        $PaymentType = "קופסת כסף";
+                        break;
+                }
+            }
+
+            Mail::to( $request->Mail)->send(new \App\Mail\BillMail($Transaction, $PaymentType));
+            return response()->json(['success' => 'Added new records.']);
+        }
+
+        return response()->json(['error' => $validator->errors()->all()]);
         $Transaction =  Transaction::where("id", $request->id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
 
         if ($Transaction->lang == 1) {
