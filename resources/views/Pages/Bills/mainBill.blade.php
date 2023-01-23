@@ -1,4 +1,4 @@
-@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false,'left_SideBar'=>false])
+@extends('layout.app', ['hasHeader' => false, 'hasFooter' => false, 'left_SideBar' => false])
 @section('content')
     @php
         $whatsapp_phone = nova_get_setting('whatsapp_Connectus', 'default_value');
@@ -21,13 +21,31 @@
             <h3 class="mt-4 font-FlatBold text-center text-lg lg:text-xl ">تم ارسال الملف للايمال الحاص بك, وتم ارسال ايميل
                 للشخص المتبرع في
                 حالو وجود ايميل خاص به ,ايضا نسخة عن الملف تم حفظه في المنظومه</h3>
-            <div class="flex md:flex-row flex-col items-center justify-between  w-full mt-12">
+            <div class="flex md:flex-row flex-col items-center justify-between md:gap-y-0 gap-y-3  w-full mt-12">
 
-                <div class="flex flex-col items-center justify-center  pl-2 basis-2/6  border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 min-h-[145px]  border-gray-500  gap-y-3">
-                    <img src="{{ asset('assets/image/paper-plane.png') }}" class="w-8 h-8 " alt="">
+                <div
+                    class="relative flex flex-col items-center justify-center max-h-14 pt-16  pl-2 basis-2/6  border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 min-h-[145px]  border-gray-500  gap-y-3">
+                    <img src="{{ asset('assets/image/paper-plane.png') }}" class="w-8 h-8 absolute right-3 top-[45px]"
+                        alt="">
                     <h3 class="font-FlatBold text-center text-lg lg:text-xl">تم ارسال الملف للايمال التالي</h3>
                     <h3 class="font-FlatBold text-center text-base lg:text-lg">alqudsquds@gmail.com</h3>
-
+                    <div class="flex md:flex-row flex-col items-center justify-between  w-full mt-2">
+                        <form target="_self" class="MailBill h-full w-full" target="_self" action="{{ route('SendMail') }}"
+                            method="get">
+                            <input type="search" name="id" id="search" autocomplete="off"
+                                value="{{ $id }}"
+                                class="hidden search-bar h-16 sm:h-full  pr-12 sm:pr-20 shadow-sm  w-full bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]">
+                            <input type="search" name="Mail" id="search" autocomplete="off"
+                                placeholder="الرجاء ادخال الايميل "
+                                class="search-bar h-16 sm:h-full  pr-12 sm:pr-4 shadow-sm  block w-[85%] bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]">
+                            <div class="flex flex-row items-center justify-center w-full">
+                                <button type="submit" id="btnCombine"
+                                    class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                                    ارسال
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <div onclick="location.href='{{ route('originalbill', ['id' => $id]) }}'"
@@ -43,27 +61,14 @@
                     <h3 class="font-FlatBold text-center text-lg lg:text-xl">نسخة عن الأصلية</h3>
                 </div>
 
-                <a href="https://api.whatsapp.com/send?text=  {{ route('generate-pdf', ['id' => $id]) }}" class="flex flex-col justify-center items-center  pl-2 basis-1/5 min-h-[145px] cursor-pointer  gap-y-3">
+                <a href="https://api.whatsapp.com/send?text=  {{ route('generate-pdf', ['id' => $id]) }}"
+                    class="flex flex-col justify-center items-center  pl-2 basis-1/5 min-h-[145px] cursor-pointer  gap-y-3">
                     <img src="{{ asset('assets/image/whatsappbill.png') }}" class="w-8 h-8 " alt="">
                     <h3 class="font-FlatBold text-center text-lg lg:text-xl">ارسال عن طريق الواتس اب</h3>
                 </a>
 
             </div>
-            <div class="flex md:flex-row flex-col items-center justify-between  w-full mt-12">
-                <form  target="_self" class="MailBill h-full w-full" target="_self" action="{{ route('SendMail') }}" method="get">
-                    <input type="search" name="id" id="search" autocomplete="off" value="{{ $id }}"
-                    class="hidden search-bar h-16 sm:h-full  pr-12 sm:pr-20 shadow-sm   w-full bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]"
-                   >
-                    <input type="search" name="Mail" id="search" autocomplete="off"
-                    class="search-bar h-16 sm:h-full  pr-12 sm:pr-20 shadow-sm  block w-full bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]"
-                   >
-                    <button  type="submit"  id="btnCombine"
-                    class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
-                    تطبيق
-                </button>
-                </form>
-            </div>
+
         </div>
     </div>
 @endsection
-
