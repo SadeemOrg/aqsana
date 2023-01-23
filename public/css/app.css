@@ -552,8 +552,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-6{
   right: 1.5rem;
 }
-.right-\[46\%\]{
-  right: 46%;
+.top-\[45\%\]{
+  top: 45%;
+}
+.-right-10{
+  right: -2.5rem;
+}
+.-right-\[1\.5rem\]{
+  right: -1.5rem;
+}
+.right-3{
+  right: 0.75rem;
+}
+.top-\[26px\]{
+  top: 26px;
 }
 .top-5{
   top: 1.25rem;
@@ -600,53 +612,26 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[75\%\]{
   top: 75%;
 }
-.top-\[52\%\]{
-  top: 52%;
+.top-\[35px\]{
+  top: 35px;
 }
-.top-\[54\%\]{
-  top: 54%;
+.top-\[40px\]{
+  top: 40px;
 }
-.right-\[55\%\]{
-  right: 55%;
+.top-\[43px\]{
+  top: 43px;
 }
-.right-\[40\%\]{
-  right: 40%;
+.top-\[48px\]{
+  top: 48px;
 }
-.left-\[40\%\]{
-  left: 40%;
+.top-\[4px\]{
+  top: 4px;
 }
-.top-\[48\%\]{
-  top: 48%;
+.top-\[14px\]{
+  top: 14px;
 }
-.right-28{
-  right: 7rem;
-}
-.right-5{
-  right: 1.25rem;
-}
-.right-8{
-  right: 2rem;
-}
-.right-1{
-  right: 0.25rem;
-}
-.-right-1{
-  right: -0.25rem;
-}
-.-right-5{
-  right: -1.25rem;
-}
-.-right-6{
-  right: -1.5rem;
-}
-.-right-10{
-  right: -2.5rem;
-}
-.top-\[45\%\]{
-  top: 45%;
-}
-.-right-\[1\.5rem\]{
-  right: -1.5rem;
+.top-\[45px\]{
+  top: 45px;
 }
 .z-30{
   z-index: 30;
@@ -1005,6 +990,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-h-56{
   max-height: 14rem;
 }
+.max-h-14{
+  max-height: 3.5rem;
+}
 .max-h-\[450px\]{
   max-height: 450px;
 }
@@ -1031,9 +1019,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-h-\[200px\]{
   max-height: 200px;
-}
-.max-h-14{
-  max-height: 3.5rem;
 }
 .min-h-full{
   min-height: 100%;
@@ -2586,6 +2571,12 @@ body{
   .sm\:pt-4{
     padding-top: 1rem;
   }
+  .sm\:pr-8{
+    padding-right: 2rem;
+  }
+  .sm\:pr-4{
+    padding-right: 1rem;
+  }
   .sm\:text-right{
     text-align: right;
   }
@@ -2742,6 +2733,9 @@ body{
   .md\:flex-row{
     flex-direction: row;
   }
+  .md\:flex-col{
+    flex-direction: column;
+  }
   .md\:items-start{
     align-items: flex-start;
   }
@@ -2759,6 +2753,9 @@ body{
   }
   .md\:gap-y-0{
     row-gap: 0px;
+  }
+  .md\:gap-y-3{
+    row-gap: 0.75rem;
   }
   .md\:rounded-lg{
     border-radius: 0.5rem;

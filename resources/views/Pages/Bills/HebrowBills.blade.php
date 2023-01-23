@@ -7,7 +7,7 @@
         $address = nova_get_setting('address', 'default_value');
         $newaddress = explode(',', $address);
         $newDate = explode(' ', $Transaction->transaction_date);
-        
+
     @endphp
     <!--Hebrow Bills -->
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 px-2" id="printJS-table">
@@ -66,7 +66,12 @@
         <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 max-w-xl mt-4">
             <p class="text-[18px] font-FlatBold text-[#101426]">لحساب :</p>
             <span class="font-FlatBold text-[#6B7280]  text-[18px] text-right">
-                {{ $Transaction->TelephoneDirectory->name }}
+                @if ($Transaction->Payment_type == 5)
+                קופסת כסף  :
+                    {{ $Transaction->Alhisalat->number_alhisala }}
+                @else
+                    {{ $Transaction->TelephoneDirectory->name }}
+                @endif
             </span>
         </div>
         <!-- table -->
@@ -270,6 +275,51 @@
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-lg">סך הכל סופי :
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
+                                                {{ $Transaction->equivelant_amount }} ₪</td>
+                                        </tr>
+                                        <!-- More people... -->
+                                    </tbody>
+                                </table>
+                            @elseif($PaymentType == 'קופסת כסף')
+                                <table class="min-w-full divide-y divide-gray-300">
+                                    <thead class="bg-[#349A37]">
+                                        <tr class="">
+                                            <th scope="col"
+                                                class=" py-3.5 pl-4 pr-3  text-sm font-semibold text-white text-right sm:pl-6">
+                                                שיטות תשלום</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                תאריך</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                בַּנק</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
+
+                                        <tr>
+                                            <td
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                {{ $PaymentType }} : {{ $Transaction->Alhisalat->number_alhisala }} </td>
+                                            <td
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                @php
+                                                    $ChickBillDate = date('d/m/Y', strtotime($Transaction->transaction_date));
+                                                @endphp
+                                                {{ $ChickBillDate }}
+                                            </td>
+                                            <td
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
+                                                {{ $Transaction->equivelant_amount }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+
                                             <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-lg">סך הכל סופי :
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>

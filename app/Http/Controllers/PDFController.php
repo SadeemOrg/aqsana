@@ -18,6 +18,7 @@ class PDFController extends Controller
     {
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
         $TransactionArray = @json_decode(json_encode($Transaction), true);
+
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
