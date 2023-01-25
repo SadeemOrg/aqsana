@@ -63,8 +63,8 @@ class TripBooking extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make(__('project'), 'Project', \App\Nova\Project::class),
             BelongsTo::make(__('user'), 'Users', \App\Nova\User::class),
-            BelongsTo::make(__('bus'), 'Buses', \App\Nova\Bus::class)->rules(new CustomRule()),
-            Text::make(__('number phone'), 'number_phone'),
+            BelongsTo::make(__('bus'), 'Buses', \App\Nova\Bus::class)->rules(new CustomRule($request->number_of_people)),
+            // Text::make(__('number phone'), 'number_phone'),
             Text::make(__('number_of_people'), 'number_of_people'),
             Text::make(__('reservation_amount'), 'reservation_amount'),
 
