@@ -12,7 +12,7 @@ class TripBooking extends Model
     protected $table = 'trip_booking';
 
     protected $fillable = [
-        'id','user_id','project_id','booking_type','number_of_people','status','reservation_amount'
+        'id','user_id','project_id','booking_type','number_of_people','status','reservation_amount','bus_id'
     ];
 
     protected $hidden = [

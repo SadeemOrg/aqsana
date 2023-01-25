@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use App\Models\Bus;
+use App\Models\TripBooking;
 use Illuminate\Contracts\Validation\Rule;
 
 class CustomRule implements Rule
@@ -12,9 +13,10 @@ class CustomRule implements Rule
      *
      * @return void
      */
-    public function __construct()
+    public $number;
+    public function __construct($number)
     {
-        //
+       $this->number=$number;
     }
 
     /**
@@ -26,15 +28,21 @@ class CustomRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        // dd($value);
-
+        // dd( $this->number , $attribute , $va lue );
         $Buss =  Bus::where('id', $value)->withCount('TripBookings')->first();
-        // echo $post->id;
-        // dd($Buss->trip_bookings_count  < $Buss->number_of_seats);
-        if ( ($Buss->trip_bookings_count  < $Buss->number_of_seats)) {
-            return true;
+        $number_of_people =  TripBooking::where('bus_id', $value)->sum('number_of_people');
+        // dd(   $number_of_people);
+        $number_of_people+= $this->number ;
+        if ( ( $number_of_people  < $Buss->number_of_seats)) {
+                   return true;
         }
         return false;
+
+        // dd($Buss->trip_bookings_count  < $Buss->number_of_seats);
+        // if ( ($Buss->trip_bookings_count  < $Buss->number_of_seats)) {
+        //     return true;
+        // }
+        // return false;
     }
 
     /**
