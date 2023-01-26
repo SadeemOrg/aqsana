@@ -104,7 +104,7 @@ class NotificationController extends Controller
         // );
 
         $response = $client->sms()->send(
-            new \Vonage\SMS\Message\SMS("972506940095", "alaqsa", 'A text message sent using the Nexmo SMS API')
+            new \Vonage\SMS\Message\SMS("972506940095", "alaqsa", 'alaqsa test maseg')
         );
 
 
