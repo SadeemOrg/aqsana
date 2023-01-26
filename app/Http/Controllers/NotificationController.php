@@ -104,7 +104,7 @@ class NotificationController extends Controller
         // );
 
         $response = $client->sms()->send(
-            new \Vonage\SMS\Message\SMS("972506940095", "alaqsa", 'alaqtest maseg')
+            new \Vonage\SMS\Message\SMS("972506940095", "alaqsa", 'alaqsa test maseg')
         );
 
 
