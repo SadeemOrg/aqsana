@@ -20,6 +20,8 @@ class CreateProjectsTable extends Migration
             $table->char('project_type', 1)->default('0');
             $table->string('project_name');
             $table->string('project_describe');
+            $table->unsignedBigInteger('admin_id')->nullable();
+
 
             $table->boolean('is_bus')->default(0);
             $table->boolean('is_volunteer')->default(0);

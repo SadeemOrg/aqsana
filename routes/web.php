@@ -74,6 +74,8 @@ Route::get('/contact-us/donation',[HomeController::class,'contactusDonation']);
 
 Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch');
 
+
+
 Route::get('/search/{val}/', [HomeController::class, 'search'])->name('search');
 
 // Route::get('/searchpage', [HomeController::class, 'searchpage'])->name('searchpage');
@@ -96,6 +98,7 @@ Route::get('/librarySearchType/{id}', [HomeController::class, 'librarySearchType
 Route::get('originalbill/{id}', [HomeController::class, 'originalbillbills'])->name('originalbill');
 Route::get('bill/{id}', [HomeController::class, 'bills'])->name('bill');
 Route::get('/mainbill/{id}', [HomeController::class, 'mainbill'])->name('mainbill');
+Route::get('/SendMail', [HomeController::class, 'SendMail'])->name('SendMail');
 
 // Route::get('bill', [HomeController::class, 'billsPdf']);
 
@@ -130,6 +133,7 @@ Route::post('/AdminNotifications', [NotificationController::class, 'AdminNotific
 
 Route::post('/CompletNotifications', [NotificationController::class, 'CompletNotifications'])->name('CompletNotifications');
 Route::post('/UNCompletNotifications', [NotificationController::class, 'UNCompletNotifications'])->name('UNCompletNotifications');
+Route::post('/AddNoteNotifications', [NotificationController::class, 'AddNoteNotifications'])->name('AddNoteNotifications');
 
 
 
@@ -142,3 +146,4 @@ Route::get("/StartTimerWorkHours", [HomeController::class, "StartTimerWorkHours"
 Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF'])->name('generate-pdf');
 
 
+Route::get('send-sms-notification', [NotificationController::class, 'sendSmsNotificaition']);

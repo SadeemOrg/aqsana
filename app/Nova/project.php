@@ -238,8 +238,8 @@ class Project extends Resource
 
 
 
-           Text::make(__("project name"), "project_name"),
-                Text::make(__("project describe"), "project_describe"),
+           Text::make(__("project name"), "project_name")->rules('required'),
+                Text::make(__("project describe"), "project_describe")->rules('required'),
 
                 Select::make(__('SECTOR'), 'sector')
                 ->options(function(){
@@ -254,20 +254,8 @@ class Project extends Resource
                     }
 
                     return $Sectors_type_admin_array;
-                })
-                ,
-                    // ->options(
+                }),
 
-                    //     function () {
-                    //     $sectors = nova_get_setting('workplace', 'default_value');
-                    //     $user_type_admin_array =  array();
-                    //     if ($sectors != "default_value") {
-                    //         foreach ($sectors as $sector) {
-                    //             $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace'] . " (" . $sector['data']['text_main_workplace'] . ")")];
-                    //         }
-                    //         return  $user_type_admin_array;
-                    //     }
-                    // }),
                 BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
                     ->options(Area::all())
                     ->optionsLabel('name')->canSee(function ($request) {
@@ -284,7 +272,7 @@ class Project extends Resource
 
 
 
-                DateTime::make(__('projec start'), 'start_date'),
+                DateTime::make(__('projec start'), 'start_date')->rules('required'),
                 DateTime::make(__('projec end'), 'end_date'),
 
 

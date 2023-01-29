@@ -83,12 +83,12 @@ class PaymentVoucher extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            ActionButton::make(__('POST NEWS'))
-            ->action((new BillPdf)->confirmText(__('Are you sure you want to post  this NEWS?'))
-                ->confirmButtonText(__('print'))
-                ->cancelButtonText(__('Dont print')), $this->id)
-            ->text(__('print'))->showLoadingAnimation()
-            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+            // ActionButton::make(__('POST NEWS'))
+            // ->action((new BillPdf)->confirmText(__('Are you sure you want to post  this NEWS?'))
+            //     ->confirmButtonText(__('print'))
+            //     ->cancelButtonText(__('Dont print')), $this->id)
+            // ->text(__('print'))->showLoadingAnimation()
+            // ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable(),
             BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable(),
 
@@ -182,7 +182,7 @@ class PaymentVoucher extends Resource
             Text::make(__('company_number'), 'company_number'),
             Text::make(__('bill_number'), 'bill_number'),
             Text::make(__('description'), 'description'),
-            Text::make(__('transact amount pay'), 'transact_amount'),
+            Text::make(__('transact amount pay'), 'transact_amount')->rules('required'),
             BelongsTo::make(__('Currenc'), 'Currenc', \App\Nova\Currency::class),
 
 
@@ -202,7 +202,7 @@ class PaymentVoucher extends Resource
 
 
 
-            Date::make(__('date'), 'transaction_date'),
+            Date::make(__('date'), 'transaction_date')->rules('required'),
 
         ];
     }

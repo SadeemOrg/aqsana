@@ -100,9 +100,9 @@ class News extends Resource
                     return $this->status === '1';
                 })->text(__('post'))->showLoadingAnimation()
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
-            Boolean::make(__('is posted'), 'status'),
-            Text::make(__('TITLE'), 'title'),
-            Textarea::make(__('description'), 'description'),
+            Boolean::make(__('is posted'), 'status')->rules('required'),
+            Text::make(__('TITLE'), 'title')->rules('required'),
+            Textarea::make(__('description'), 'description')->rules('required'),
             Select::make(__('SECTOR'), 'sector')
                 ->options(function () {
                     $sectors = Sector::all();
@@ -123,7 +123,8 @@ class News extends Resource
                     '1' => __('yes'),
                     '2' => __('no'),
 
-                ])->displayUsingLabels()
+                ])->displayUsingLabels()->hideFromDetail()->hideFromIndex()
+                ->rules('required')
                 // ->withMeta(['ignoreOnSaving'])
                 ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     // dd($attribute);
@@ -131,25 +132,7 @@ class News extends Resource
                 }),
 
 
-            //   Select::make(__('have dwdwmulti wdwdw'), "ccc")
-            //   ->options([
-            //     '1' =>__('yes'),
-            //     '2' => __('no'),
 
-            // ])->displayUsingLabels()
-            // ->fillUsing(function(NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //     // DB::table('project_toole')->insert([
-            //     //     'project_id' => '3',
-            //     //     'city_id' => '3',
-
-            //     //     'tools' =>  $request->ccc,
-
-            //     // ]);
-
-            //     // dd($requestAttribute);
-
-            //         return null;
-            //     }),
             NovaDependencyContainer::make([
                 Select::make(__('main Type'), "main_type", function () {
 
@@ -171,7 +154,7 @@ class News extends Resource
                         '1' => __('News'),
                         '2' => __('alqudus walmasjid alaqsaa'),
 
-                    ])->displayUsingLabels(),
+                    ])->displayUsingLabels()->rules('required'),
 
                 NovaDependencyContainer::make([
                     Select::make(__('type'), "type")
@@ -180,7 +163,7 @@ class News extends Resource
                             '2' => __('Blogs'),
                             '3' => __('Report'),
                         ])->displayUsingLabels(),
-                ])->dependsOn('main_type', '1'),
+                ])->dependsOn('main_type', '1')->rules('required'),
 
                 NovaDependencyContainer::make([
                     Select::make(__('type'), "type")
@@ -190,7 +173,7 @@ class News extends Resource
                             '3' => __('Report'),
                         ])->displayUsingLabels(),
                 ])->dependsOn('main_type', '2'),
-            ])->dependsOn('mult', "2"),
+            ])->dependsOn('mult', "2")->rules('required'),
 
             NovaDependencyContainer::make([
                 Multiselect::make(__('main Type'), "main_type")
@@ -200,7 +183,7 @@ class News extends Resource
 
 
 
-                    ]),
+                    ])->rules('required'),
             ])->dependsOn('mult', "1"),
             // Multiselect::make("main Type", "main_type")
             // ->options([
@@ -244,16 +227,16 @@ class News extends Resource
                     '|',
                     'history',
                 ])
-                ->headingLevels([1, 2, 3, 4, 5, 6]),
+                ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
 
-            Image::make(__('IMAGE'), 'image')->disk('public')->prunable(),
+            Image::make(__('IMAGE'), 'image')->disk('public')->prunable()->rules('required'),
             ArrayImages::make(__('PICTURES'), 'pictures')
                 ->disk('public'),
 
             Text::make(__('VIDEO LINK'), 'video_link'),
             Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
             // Date::make('date', 'new_date'),
-            Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y')->sortable(),
+            Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y')->sortable()->rules('required'),
 
 
 

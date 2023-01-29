@@ -113,7 +113,14 @@
 
     <!--Start for Account Paragraph-->
     <p  style="text-align: right;font-size: 16px;color:#101426">لحساب :
-        <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['telephone_directory']['name'] }}</span>
+        <span style="color: #6B7280;font-size: 16px;">
+            @if ($TransactionArray['Payment_type'] == 5)
+            ספק בבנק:
+            {{ $TransactionArray['alhisalat']['number_alhisala'] }}
+        @else
+            {{ $TransactionArray['telephone_directory']['name'] }}
+        @endif
+        </span>
     </p>
     <!--End for Account Paragraph-->
 
@@ -197,7 +204,7 @@
                 @foreach ($TransactionArray['Payment_type_details'] as $ChikPayment)
                     @php
                         $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
-                        
+
                     @endphp
                     <tr>
                         <td> {{ $PaymentType }} </td>
@@ -255,6 +262,39 @@
                 </tr>
             </tbody>
             </tr>
+        </table>
+        @elseif($PaymentType == 'קופסת כסף')
+        <table dir="rtl" class="blueTable">
+            <thead>
+                <tr>
+                    <th> התשלום נעשה דרך:</th>
+                    <th>ערך ספק   </th>
+                    <th>  סך הכל סופי </th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                    @php
+                        // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                    @endphp
+                    <tr>
+                        <td> {{ $PaymentType }} {{ $TransactionArray['alhisalat']['number_alhisala'] }}  </td>
+                        <td>{{ $ChickBillDate }}</td>
+                        <td> {{ $TransactionArray['equivelant_amount']}}</td>
+
+                    </tr>
+
+                <tr>
+
+                    <td class="">
+                        סך הכל סופי  :</td>
+                    <td class=""></td>
+                    <td class="">
+                        {{ $TransactionArray['equivelant_amount'] }} </td>
+                </tr>
+            </tbody>
+
         </table>
     @endif
     <!--End Table -->

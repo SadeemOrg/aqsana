@@ -28,7 +28,7 @@ class AlhisalatStatuscompleted extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-
+        // dd("qqq");
         foreach ($models as $model) {
             $model->update([
                 'status' => '4',
@@ -40,11 +40,15 @@ class AlhisalatStatuscompleted extends Action
 
                 [
                     'main_type' => '1',
-                    'type' => '1',
+                    'type' => '2',
                     'ref_id' =>$model->id,
                     'Currency' => '3',
                     'transact_amount' => $fields->amount,
                     'equivelant_amount' =>$fields->amount,
+                    'transaction_type' => "3",
+                    'transaction_status' =>"2",
+                    "Payment_type"=>'5',
+                    "lang"=>1,
                     'transaction_date' => $date = date('Y-m-d'),
                     ]
                 );

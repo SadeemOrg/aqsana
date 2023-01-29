@@ -17,6 +17,7 @@ class CreateTripBookingTable extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('project_id')->nullable();
+            $table->bigInteger('bus_id')->nullable();
             $table->integer('booking_type');
             $table->integer('number_of_people');
             $table->char('status')->default('1');

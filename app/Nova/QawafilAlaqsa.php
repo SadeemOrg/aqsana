@@ -6,6 +6,7 @@ use App\Models\Area;
 
 
 use App\Models\City;
+use Laravel\Nova\Actions\Action;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
@@ -240,8 +241,8 @@ class QawafilAlaqsa extends Resource
 
 
 
-                Text::make(__("QawafilAlaqsa name"), "project_name"),
-                Text::make(__("QawafilAlaqsa describe"), "project_describe"),
+                Text::make(__("QawafilAlaqsa name"), "project_name")->rules('required'),
+                Text::make(__("QawafilAlaqsa describe"), "project_describe")->rules('required'),
 
 
                 BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
@@ -259,7 +260,7 @@ class QawafilAlaqsa extends Resource
                     '3' => __('fortnightly'),
                     '4' => __('Monthly'),
                     '5' => __('annual'),
-                ]),
+                ])->rules('required'),
                 Select::make(__('Admin'), 'admin_id')
                     ->options(function () {
                         $users =  \App\Models\User::all();
@@ -297,12 +298,13 @@ class QawafilAlaqsa extends Resource
 
                         Text::make(__('Name'), "name_address"),
                         Text::make(__("description"), "description"),
+                        Text::make(__("phone number"), "phone_number_address")->rules('required'),
 
                         GoogleMaps::make(__('current_location'), 'current_location'),
-                        Select::make(__("Status"), "address_status")->options([
-                            '1' => __('active'),
-                            '2' => __('not active'),
-                        ]),
+                        // Select::make(__("Status"), "address_status")->options([
+                        //     '1' => __('active'),
+                        //     '2' => __('not active'),
+                        // ]),
 
                     ]),
 
@@ -312,7 +314,7 @@ class QawafilAlaqsa extends Resource
                     'value' => "1",
                 ])->readonly(),
 
-                DateTime::make(__('QawafilAlaqsa start'), 'start_date'),
+                DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required'),
                 DateTime::make(__('QawafilAlaqsa end'), 'end_date'),
 
 
@@ -387,16 +389,6 @@ class QawafilAlaqsa extends Resource
                         Number::make(__("Number person on bus"), "number_person_on_bus")->step(1.0),
 
                         Number::make(__("seat price"), "seat_price")->step(1.0),
-                        Select::make(__('Admin'), 'adminbus')
-                            ->options(function () {
-                                $users =  \App\Models\User::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name'])];
-                                }
-
-                                return $user_type_admin_array;
-                            }),
                         Text::make(__("Name Driver"), "name_driver"),
                         Text::make(__("phone_number"), "phone_number"),
 
@@ -574,7 +566,6 @@ class QawafilAlaqsa extends Resource
                             'number_of_seats' => $bus['attributes']['number_person_on_bus'],
                             'seat_price' => $bus['attributes']['seat_price'],
                             'phone_number_driver' => $bus['attributes']['phone_number'],
-                            'admin_id' => $bus['attributes']['adminbus'],
                             'status' => '1',
                         ]
                     );
@@ -598,7 +589,7 @@ class QawafilAlaqsa extends Resource
 
 
         if (!$request->trip_from) {
-            if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] &&  $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['address_status']) {
+            if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] &&  $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['phone_number_address'] ) {
                 // dd("hf");
                 DB::table('addresses')
                     ->Insert(
@@ -606,7 +597,8 @@ class QawafilAlaqsa extends Resource
                             'name_address' => $request->newadresfrom[0]['attributes']['name_address'],
                             'description' => $request->newadresfrom[0]['attributes']['description'],
                             'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
-                            'status' => $request->newadresfrom[0]['attributes']['address_status'],
+                            'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
+                            'status' => '1',
                             'type' => '4',
                             'created_by' => $id
                         ]
@@ -616,6 +608,7 @@ class QawafilAlaqsa extends Resource
                     ->where('id', $model->id)
                     ->update(['trip_from' => $address->id]);
             }
+
         } else   $model->trip_from = $request->trip_from;
     }
     /**

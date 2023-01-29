@@ -606,6 +606,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-\[75\%\]{
   top: 75%;
 }
+.right-3{
+  right: 0.75rem;
+}
+.top-\[45px\]{
+  top: 45px;
+}
 .z-30{
   z-index: 30;
 }
@@ -2543,6 +2549,9 @@ body{
   }
   .sm\:pt-4{
     padding-top: 1rem;
+  }
+  .sm\:pr-4{
+    padding-right: 1rem;
   }
   .sm\:text-right{
     text-align: right;

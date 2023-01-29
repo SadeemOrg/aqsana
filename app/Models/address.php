@@ -9,7 +9,7 @@ class address extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name_address','description','phone_number_address','status','address_id','type'
+        'name_address','description','phone_number_address','status','address_id','type','number'
     ];
     protected $hidden = [
         'created_at',

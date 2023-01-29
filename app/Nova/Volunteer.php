@@ -66,7 +66,7 @@ class Volunteer extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make(__('project'), 'project', \App\Nova\Project::class),
             BelongsTo::make(__('user'), 'User', \App\Nova\User::class),
-            Select::make(__("Status"), "address_status")->options([
+            Select::make(__("Status"), "status")->options([
                 '1' => __('Volunteer'),
                 '0' => __('not Volunteer'),
             ])->displayUsingLabels(),

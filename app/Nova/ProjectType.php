@@ -82,6 +82,12 @@ class ProjectType extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
+     public static function beforeCreate(Request $request, $model)
+     {
+
+         $model->code = '1';
+     }
     public function cards(Request $request)
     {
         return [];

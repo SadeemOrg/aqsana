@@ -33,7 +33,7 @@ class BillMail extends Mailable
     public function build()
     {
         // dd($this->$Transaction);
-        return $this->subject('Mail from ItSolutionStuff.com')
+        return $this->subject('Mail from Al_Aqsa_Association')
                     ->view('emails.myTestMail');
     }
 }

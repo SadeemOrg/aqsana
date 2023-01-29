@@ -79,6 +79,16 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-
+     alpha/css/bootstrap.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
     <!-- firebase integration end -->
 
     <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
@@ -480,14 +490,14 @@
 
         function printpage() {
             console.log("Asd")
-        //Get the print button and put it into a variable
-        var printButton = document.getElementById("printpagebutton");
-        //Set the print button visibility to 'hidden' 
-        printButton.style.visibility = 'hidden';
-        //Print the page content
-        window.print()
-        printButton.style.visibility = 'visible';
-    }
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("printpagebutton");
+            //Set the print button visibility to 'hidden'
+            printButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+            printButton.style.visibility = 'visible';
+        }
 
         $('input[type=radio][name=PaypalRadioInput]').change(function() {
             console.log('this.value', this.value);
@@ -575,18 +585,18 @@
                             const transaction = orderData.purchase_units[0]
                                 .payments.captures[0];
 
-                                toastr.options = {
-                                        "closeButton": true,
-                                        "debug": false,
-                                        "positionClass": "toast-bottom-right",
-                                        "onclick": null,
-                                        "showDuration": "300",
-                                        "hideDuration": "2000",
-                                        "showMethod": "fadeIn",
-                                        "hideMethod": "fadeOut"
-                                    };
-                                    console.log("aserw");
-                                    toastr.success(`تم التبرع بمبلغ ${amount}.00 ₪ شيكل `);
+                            toastr.options = {
+                                "closeButton": true,
+                                "debug": false,
+                                "positionClass": "toast-bottom-right",
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "2000",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            };
+                            console.log("aserw");
+                            toastr.success(`تم التبرع بمبلغ ${amount}.00 ₪ شيكل `);
 
                             // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
                             // When ready to go live, remove the alert and show a success message within this page. For example:
@@ -978,6 +988,53 @@
                     console.log(data.error);
                 }
             });
+        })
+        $(".MailBill").submit(function(e) {
+            e.preventDefault();
+            var $Mail = $('input[name="Mail"]').val();
+            var $id = $('input[name="id"]').val();
+
+            console.log("hello",$Mail,$id);
+            $.ajax({
+                type: "get",
+                url: "/SendMail",
+                data: {
+                    Mail: $Mail,
+                    id: $id,
+                },
+                success: function(data) {
+                    console.log('dataAmeed',data);
+                    if ($.isEmptyObject(data.error)) {
+                        toastr.options = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-bottom-right",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "2000",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.success("تم ارسال الرسالة بنجاح");
+                    } else {
+                        toastr.options = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-bottom-right",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "2000",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.error(data.error);
+                    }
+                },
+                error: function() {
+                    console.log("err");
+                    console.log(data.error);
+                }
+            })
         })
     </script>
     <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>

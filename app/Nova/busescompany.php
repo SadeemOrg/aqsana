@@ -65,12 +65,12 @@ class BusesCompany extends Resource
 
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__("Name"),"name"),
-            Text::make(__("Describtion"),"description"),
-            Number::make(__("number of buses"),"number_of_buses")->step(1.0),
-            Number::make(__("cost"),"cost")->step(1.0),
-            Text::make(__("contact person"),"contact_person"),
-            Number::make(__("phone number"),"phone_number"),
+            Text::make(__("Name"),"name") ->rules('required'),
+            Text::make(__("Describtion"),"description")->rules('required'),
+            Number::make(__("number of buses"),"number_of_buses")->step(1.0)->rules('required'),
+            Number::make(__("cost"),"cost")->step(1.0)->rules('required'),
+            Text::make(__("contact person"),"contact_person")->rules('required'),
+            Number::make(__("phone number"),"phone_number")->rules('required'),
 
 
             Select::make(__("status"),"status")

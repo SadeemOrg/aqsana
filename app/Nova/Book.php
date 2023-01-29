@@ -87,7 +87,7 @@ class Book extends Resource
                 })->text(__('post'))->showLoadingAnimation()
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('Name'), 'name')->rules('required', 'max:255'),
-            Text::make(__('author'), 'author'),
+            Text::make(__('author'), 'author')->rules('required'),
             Tiptap::make(__('description'), 'description')
             ->buttons([
                 'heading',
@@ -120,7 +120,7 @@ class Book extends Resource
                 '|',
                 'history',
             ])
-            ->headingLevels([1, 2, 3, 4, 5, 6]),
+            ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
             // Textarea::make(__('description'), 'description'),
             BelongsTo::make(__('Book Type'), 'BookType', \App\Nova\BookType::class)->hideWhenCreating()->hideWhenUpdating(),
 
@@ -141,8 +141,8 @@ class Book extends Resource
                     Text::make(__('name'), 'name'),
                     Text::make(__('describtion'), 'describtion'),
                 ]),
-            Image::make(__('cover_photo'), 'cover_photo')->disk('public')->prunable(),
-            File::make(__('file'), 'file')->disk('public')->deletable(),
+            Image::make(__('cover_photo'), 'cover_photo')->disk('public')->prunable()->rules('required'),
+            File::make(__('file'), 'file')->disk('public')->deletable()->rules('required'),
         ];
     }
 

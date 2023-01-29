@@ -11,7 +11,7 @@ class TelephoneDirectory extends Model
     use HasFactory;
 
     protected $fillable = [
-    'name','email','type','phone_number','city','roles','jop','id_number','Area'
+    'name','email','type','phone_number','city','roles','job','id_number','Area'
    ];
 
    protected $casts = [

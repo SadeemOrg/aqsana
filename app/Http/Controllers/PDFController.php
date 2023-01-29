@@ -16,8 +16,9 @@ class PDFController extends Controller
      */
     public function generatePDF($id)
     {
-        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
+        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
         $TransactionArray = @json_decode(json_encode($Transaction), true);
+
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
@@ -31,6 +32,9 @@ class PDFController extends Controller
                     break;
                 case 4:
                     $PaymentType = "حوالة مصرفية";
+                    break;
+                case 5:
+                    $PaymentType = "حصالة";
                     break;
             }
         } else if ($Transaction->lang == 2) {
@@ -47,6 +51,9 @@ class PDFController extends Controller
                 case 4:
                     $PaymentType = "Bank transfer";
                     break;
+                case 5:
+                    $PaymentType = "moneybox";
+                    break;
             }
         } else if ($Transaction->lang == 3) {
             switch ($Transaction->Payment_type) {
@@ -62,6 +69,9 @@ class PDFController extends Controller
                 case 4:
                     $PaymentType = "העברה בנקאית";
                     break;
+                case 5:
+                    $PaymentType = "קופסת כסף";
+                    break;
             }
         }
         $mpdf = new \Mpdf\Mpdf([
@@ -75,7 +85,6 @@ class PDFController extends Controller
             'TransactionArray' => $TransactionArray,
             'PaymentType' =>  $PaymentType
         ];
-        // dd($data['TransactionArray']);
         $fileName = 'Invoices details';
         $mpdf->autoLangToFont = true;
         $mpdf->autoScriptToLang = true;

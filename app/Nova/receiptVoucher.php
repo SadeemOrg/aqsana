@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Models\Alhisalat;
 use App\Models\Donations;
+use App\Nova\Actions\AlhisalatStatuscompleted;
 use App\Nova\Actions\BillPdf;
 use Benjacho\BelongsToManyField\BelongsToManyField;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
@@ -21,7 +22,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
 use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
-
+use Acme\MultiselectField\Multiselect;
 class receiptVoucher extends Resource
 {
     /**
@@ -29,7 +30,7 @@ class receiptVoucher extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\Transaction::class;
+    public static $model = \App\Models\Alhisalat::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -47,10 +48,9 @@ class receiptVoucher extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("receiptVoucherparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("receiptVoucherparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
     public static $priority = 1;
     /**
@@ -74,61 +74,53 @@ class receiptVoucher extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public function authorizedToDelete(Request $request)
+    {
+        return false;
+    }
+    public static function authorizedToCreate(Request $request)
+    {
+        return false;
+    }
+    // public  function authorizedToUpdate(Request $request)
+    // {
+    //     return false;
+    // }
     public static function indexQuery(NovaRequest $request, $query)
     {
 
         return $query->where([
-            ['main_type', 1],
-            ['type', 1]
+            ['status', '>', 2],
+
         ]);
     }
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            ActionButton::make(__('print'))
-                ->action((new BillPdf)->confirmText(__('Are you sure you want to print  this?'))
-                    ->confirmButtonText(__('print'))
-                    ->cancelButtonText(__('Dont print')), $this->id)
-                ->text(__('print'))->showLoadingAnimation()
-                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
+            Text::make(__("number alhisala"), "number_alhisala")
+            ->readonly()->hideWhenCreating()->hideWhenUpdating(),
+
+            ActionButton::make(__('colect'))
+            ->action((new AlhisalatStatuscompleted)->confirmText(__('Are you sure you want to Surrender  this Alhisalat?'))
+                    ->confirmButtonText(__('colect')),
+                $this->id
+            )
+            ->readonly(function () {
+                return $this->status > '3';
+            })->text(__('colect'))->showLoadingAnimation()
+            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
+            BelongsTo::make(__('saved addresss'), 'address', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
-
-
-                Select::make(__('Alhisalat'), "ref_id")
-                    ->options(function () {
-                        $Alhisalats =  \App\Models\Alhisalat::all();
-                        $user_type_admin_array =  array();
-                        foreach ($Alhisalats as $Alhisalat) {
-                            $user_type_admin_array += [$Alhisalat['id'] => ($Alhisalat['address_id'])];
-                        }
-
-                        return $user_type_admin_array;
-                    })
-                    ->displayUsingLabels(),
-
-
-
-
-
-
-
-            Text::make(__('transact amount'), 'transact_amount'),
-            Select::make(__('Currenc'), "Currency")
-                ->options(function () {
-                    $Alhisalats =  \App\Models\Currency::all();
-                    $user_type_admin_array =  array();
-                    foreach ($Alhisalats as $Alhisalat) {
-                        $user_type_admin_array += [$Alhisalat['id'] => ($Alhisalat['name'])];
-                    }
-
-                    return $user_type_admin_array;
-                })
-                ->displayUsingLabels(),
-            Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
-            Text::make(__('description'), 'description'),
-            Date::make(__('date'), 'transaction_date'),
+            Multiselect::make(__("Status"), "status")->options([
+                '1' => 'تم  الوضع',
+                '2' => 'تم جمع ',
+                '3' => 'تم التسليم',
+                '4' => 'تم العد',
+            ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
 
 
 
@@ -161,7 +153,7 @@ class receiptVoucher extends Resource
     }
     public static function aftersave(Request $request, $model)
     {
-        return redirect('itsolutionstuff/tags');
+        // return redirect('itsolutionstuff/tags');
         // dd($request->add_user);
         if (!$request->name) {
             if ($request->add_user[0]['attributes']['name'] &&    $request->add_user[0]['attributes']['email'] && $request->add_user[0]['attributes']['phone']) {
@@ -176,7 +168,6 @@ class receiptVoucher extends Resource
                         ],
 
                     );
-
             }
             $User =  \App\Models\User::where('email',  $request->add_user[0]['attributes']['email'])->first();
             $model->name =  $User->id;
@@ -225,6 +216,7 @@ class receiptVoucher extends Resource
     {
         return [
             new BillPdf,
+            new AlhisalatStatuscompleted
         ];
     }
 }

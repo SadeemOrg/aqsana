@@ -1,11 +1,14 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\User;
-use Notification;
 use App\Notifications\TasksNotification;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Notification;
+
 class NotificationController extends Controller
 {
     public function __construct()
@@ -19,34 +22,38 @@ class NotificationController extends Controller
     }
     public function CompletNotifications(Request $request)
     {
-        \App\Models\Notification::where('id',$request->Notificationsid) ->update(['read_at' => Carbon::now()]);
-
+        \App\Models\Notification::where('id', $request->Notificationsid)->update(['read_at' => Carbon::now()]);
+    }
+    public function AddNoteNotifications(Request $request)
+    {
+        \App\Models\Notification::where('id', $request->Notificationsid)->update(['note' => $request->NotificationsNote]);
     }
 
     public function UNCompletNotifications(Request $request)
     {
-        \App\Models\Notification::where('id',$request->Notificationsid) ->update(['read_at' => null]);
-
+        \App\Models\Notification::where('id', $request->Notificationsid)->update(['read_at' => null]);
     }
     public function myNotification()
     {
 
-       $user= Auth::user();
-        $Notifications= \App\Models\Notification::where('notifiable_id', $user->id)->get();
-       $myNotifications = array();
-       foreach ($Notifications as $key => $value) {
-        // echo $value->type;
-        // echo $value->id;
-        // dd($value);
+        $user = Auth::user();
+        $Notifications = \App\Models\Notification::where('notifiable_id', $user->id)->get();
+        $myNotifications = array();
+        foreach ($Notifications as $key => $value) {
+            // echo $value->type;
+            // echo $value->id;
+            // dd($value);
 
-          $data=json_decode($value->data);
-          $pus = array(
-            "id" => $value->id,
-            "Notifications" => $data,
-            "done" => $value->read_at,
+            $data = json_decode($value->data);
+            $pus = array(
 
-        );
-          array_push($myNotifications, $pus);
+                "id" => $value->id,
+                "Notifications" => $data,
+                "done" => $value->read_at,
+                "note" => $value->note,
+
+            );
+            array_push($myNotifications, $pus);
         }
         return $myNotifications;
     }
@@ -54,34 +61,60 @@ class NotificationController extends Controller
     {
 
 
-        $Notifications= \App\Models\Notification::where('notifiable_id', $request->user)->get();
-       $myNotifications = array();
-       foreach ($Notifications as $key => $value) {
-        // echo $value->type;
-        // echo $value->id;
-        // dd($value);
+        $Notifications = \App\Models\Notification::where('notifiable_id', $request->user)->get();
+        $myNotifications = array();
+        foreach ($Notifications as $key => $value) {
+            // echo $value->type;
+            // echo $value->id;
+            // dd($value);
 
-          $data=json_decode($value->data);
-          $pus = array(
-            "id" => $value->id,
-            "Notifications" => $data,
-            "done" => $value->read_at,
+            $data = json_decode($value->data);
+            $pus = array(
+                "id" => $value->id,
+                "Notifications" => $data,
+                "done" => $value->read_at,
 
-        );
-          array_push($myNotifications, $pus);
+            );
+            array_push($myNotifications, $pus);
         }
         return $myNotifications;
     }
-    public function sendNotification(Request $request) {
+    public function sendNotification(Request $request)
+    {
+
         $userSchema = User::find($request->user);
         // dd(  $userSchema);
         // dd($request->user);
         $offerData = $request->Notifications;
-        $date= $request->date;
+        $date = $request->date;
         // dd($date);
-        Notification::send($userSchema, new TasksNotification($offerData,$date));
-
+        // Auth::user()->notify(new PostNotif());
+        Notification::send($userSchema, new TasksNotification($offerData, $date));
+        // $userSchema->notify($userSchema, new TasksNotification($offerData,$date));
         return 'Task completed!';
+    }
+
+    public function sendSmsNotificaition()
+    {
+        $basic  = new \Nexmo\Client\Credentials\Basic('89302929', 'EcfCP1BjWhrTWJNZ');
+        $client = new \Nexmo\Client($basic);
+
+        // $response = $client->sms()->send(
+        //     new \Vonage\SMS\Message\SMS("972506940095", "Al-Aqsa-Association", 'Al-Aqsa-Association SMS API')
+        // );
+
+        $response = $client->sms()->send(
+            new \Vonage\SMS\Message\SMS("970569465465", "Al_Aqsa_Association", 'alaqsa test maseg')
+        );
+
+
+        $message = $response->current();
+
+        if ($message->getStatus() == 0) {
+            echo "The message was sent successfully\n";
+        } else {
+            echo "The message failed with status: " . $message->getStatus() . "\n";
+        }
     }
     // public function sendOfferNotification() {
     //     $userSchema =Auth::user();

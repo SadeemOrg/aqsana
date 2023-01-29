@@ -91,7 +91,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         Image::make(__('qawafelLogo'), 'qawafelLogo')->disk('public'),
                         Image::make(__('Header Logo Manzomeh'), 'Headerlogo')->disk('public'),
                         Image::make(__('Header qawafelLogo'), 'HeaderqawafelLogo')->disk('public'),
-                        
+
 
                     ]
                 ),
@@ -414,16 +414,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             ]),
         ]);
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
-            new Tabs(__('Reasons to stop'), [
-                __('main section')    => [
-                    Flexible::make(__('Reasons_to_stop'), 'Reasons_to_stop')
-                    ->addLayout(__('Reasons_to_stop'), 'Reasons_to_stop', [
+            new Tabs(__('work hours'), [
+                __('Reasons to stop')    => [
+                    Flexible::make(__('Reasons to stop'), 'Reasons_to_stop')
+                    ->addLayout(__('Reasons to stop'), 'Reasons_to_stop', [
                         Text::make(__('title'), 'Reasons_to_stop'),
                     ])
                 ],
-                __('main sessdsdsction')    => [
-                    Flexible::make(__('time_departure'), 'time_departure')
-                    ->addLayout(__('time_departure'), 'time_departure', [
+                __('time departure')    => [
+                    Flexible::make(__('time departure'), 'time_departure')
+                    ->addLayout(__('time departure'), 'time_departure', [
                         Text::make(__('title'), 'title_departure'),
                         Text::make(__('time in minet'), 'time_departure'),
                     ])
