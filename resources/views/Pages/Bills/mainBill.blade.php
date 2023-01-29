@@ -18,9 +18,13 @@
                 @endif
                 رقم F-1000{{ $id }} تم انتاجة بنجاح
             </h2>
-            <h3 class="mt-4 font-FlatBold text-center text-lg lg:text-xl ">تم ارسال الملف للايمال الحاص بك, وتم ارسال ايميل
+            <h3 class="mt-4 font-FlatBold text-center text-lg lg:text-xl ">
+                
+                تم ارسال الملف للايميل الخاص بك, وبأمكانك ارسال الملف الى الشخص المتبرع ايضا 
+                {{-- تم ارسال الملف للايمال الحاص بك, وتم ارسال ايميل
                 للشخص المتبرع في
-                حالو وجود ايميل خاص به ,ايضا نسخة عن الملف تم حفظه في المنظومه</h3>
+                حالو وجود ايميل خاص به ,ايضا نسخة عن الملف تم حفظه في المنظومه --}}
+            </h3>
             <div class="flex md:flex-row flex-col items-center justify-between  w-full mt-12">
 
                 <div class="flex flex-col items-center justify-center  pl-2 basis-2/6  border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 min-h-[145px]  border-gray-500  gap-y-3">
