@@ -16,7 +16,7 @@
         <div class="flex md:flex-row flex-col items-center justify-between md:gap-y-0 gap-y-3  w-full mt-12">
 
             <div
-                class="relative flex flex-col items-center justify-center max-h-14 pt-16  pl-2 basis-2/6   md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 min-h-[145px]  border-gray-500  gap-y-3">
+                class=" relative flex flex-col items-center justify-center max-h-14 pt-16  pl-2 basis-2/6   md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 min-h-[145px]  border-gray-500  gap-y-3">
                 <img src="/assets/image/paper-plane.png" class="w-8 h-8 absolute right-3 top-[45px]" alt="">
                 <h3 class="font-FlatBold text-center text-lg lg:text-xl">تم ارسال الملف للايمال التالي</h3>
                 <h3 class="font-FlatBold text-center text-base lg:text-lg">alqudsquds@gmail.com</h3>
