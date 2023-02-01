@@ -44,7 +44,7 @@ Route::get("/cars",[HomeController::class,'index']);
 Route::get("toastr-notification", [HomeController::class, "showToastrMessages"]);
 
 
-Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('page.index');
 Route::get('/من-نحن', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/conctus', [HomeController::class, 'conctus'])->name('conctus');
 Route::get('/Almuahada', [HomeController::class, 'Almuahada'])->name('Almuahada');
@@ -98,7 +98,7 @@ Route::get('/librarySearchType/{id}', [HomeController::class, 'librarySearchType
 Route::get('originalbill/{id}', [HomeController::class, 'originalbillbills'])->name('originalbill');
 Route::get('bill/{id}', [HomeController::class, 'bills'])->name('bill');
 Route::get('/mainbill/{id}', [HomeController::class, 'mainbill'])->name('mainbill');
-Route::get('/SendMail', [HomeController::class, 'SendMail'])->name('SendMail');
+Route::post('/SendMail', [HomeController::class, 'SendMail'])->name('SendMail');
 
 // Route::get('bill', [HomeController::class, 'billsPdf']);
 

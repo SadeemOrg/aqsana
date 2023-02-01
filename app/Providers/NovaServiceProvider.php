@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Acme\Bill\Bill;
 use Illuminate\Support\Facades\Gate;
 
 use Laravel\Nova\Nova;
@@ -563,6 +564,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                else return false;
                 }),
                 new Notification,
+                 new Bill
         ];
     }
     /**

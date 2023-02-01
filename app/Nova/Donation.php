@@ -28,6 +28,7 @@ use App\Nova\Metrics\DonationInBank;
 use App\Nova\Metrics\DonationInBox;
 use App\Nova\Metrics\DonationNotReceive;
 use AwesomeNova\Cards\FilterCard;
+use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\Boolean;
 
 use function Clue\StreamFilter\fun;
@@ -39,6 +40,8 @@ class Donation extends Resource
      *
      * @var string
      */
+
+
     public static $model = \App\Models\Transaction::class;
 
     /**
@@ -129,6 +132,8 @@ class Donation extends Resource
                 ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 }),
+            Text::make(__('description'), 'description')->hideFromIndex(),
+
             // ->canSee(function () {
             //     return ($this->transaction_status  < 3) ? true : false;
             // }),
@@ -166,7 +171,7 @@ class Donation extends Resource
 
             BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            Text::make(__('payment_reason'), "payment_reason")->rules('required')->hideFromIndex(),
+            Text::make(__('payment_reason'), "payment_reason")->hideFromIndex(),
 
             Select::make(__("billing language"), "lang")->options([
                 '1' => __('ar'),
@@ -251,11 +256,24 @@ class Donation extends Resource
             // BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class),
 
 
-            Text::make(__('description'), 'description')->hideFromIndex(),
             Date::make(__('date'), 'transaction_date')->rules('required')->hideFromIndex(),
 
         ];
     }
+    // public static function redirectAfterUpdate(NovaRequest $request, $resource)
+    // {
+    //     return '/resources/'.static::uriKey().'/'.$resource->getKey();
+
+    // }
+    // public static function redirectAfterUpdate(NovaRequest $request, $resource)
+    // {
+    //     return '/bill?location='. $resource->id;
+    // }
+    // public static function afterCreate(Request $request, $model)
+    // {
+    //     return Action::redirect("/mainbill/" . $model->id);
+    // }
+
     public static function beforeCreate(Request $request, $model)
     {
 
@@ -276,6 +294,9 @@ class Donation extends Resource
     }
     public static function beforesave(Request $request, $model)
     {
+
+
+
         if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
         else  $model->transaction_status = '1';
         if ($request->Payment_type == '1') {
@@ -340,6 +361,7 @@ class Donation extends Resource
                 ->where('id', $model->id)
                 ->update(['name' => $telfone->id]);
         }
+        // return Action::openInNewTab("/mainbill/". $model->id);
     }
 
     /**

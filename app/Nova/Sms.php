@@ -4,10 +4,10 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
-class TelephoneDirectory extends Resource
+use Laravel\Nova\Http\Requests\NovaRequest;
+
+class Sms extends Resource
 {
     /**
      * The model the resource corresponds to.
@@ -21,30 +21,30 @@ class TelephoneDirectory extends Resource
      *
      * @var string
      */
-    public static $title = 'name';
     public static function label()
     {
-        return __('TelephoneDirectory');
+        return __('Sms');
     }
     public static function group()
     {
         return __('address');
-    }
-
+        }
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("TelephoneDirectoryparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("sms",  $request->user()->userrole()) )){
             return true;
         }
        else return false;
     }
+    public static $title = 'id';
+
     /**
      * The columns that should be searched.
      *
      * @var array
      */
     public static $search = [
-        'id','name','phone_number'
+        'id',
     ];
 
     /**
@@ -53,6 +53,12 @@ class TelephoneDirectory extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
+     public static function indexQuery(NovaRequest $request, $query)
+     {
+         return $query->where('type', '9');
+
+     }
     public function fields(Request $request)
     {
         return [
@@ -61,39 +67,14 @@ class TelephoneDirectory extends Resource
             Text::make(__('Name'),'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
-
-            Text::make(__('email'),'email')
-                ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
-            Select::make(__('type'), 'type')->options([
-                1 => __('متبرعين سجب ثابت'),
-                2 => __('متبرعين لمرة واحدة '),
-                3 => __('مندوبين'),
-                4 => __('متطوعين'),
-                5 => __('جهات اتصال عامة'),
-                6 => __('مرشدين'),
-                7 => __('منح'),
-                8 => __('شركات'),
-                9 => __('Sms'),
-
-
-            ])->displayUsingLabels()->rules('required'),
-
-            Text::make(__('phone_number'),'phone_number'),
-            Text::make(__('city'),'city'),
-            Text::make(__('note'),'note'),
-            Text::make(__('job'),'job'),
-            Text::make(__('id_number'),'id_number'),
-
-
-
-
-
+                Text::make(__('phone_number'),'phone_number')->rules('required'),
+                Text::make(__('city'),'city')->rules('required'),
         ];
     }
-
+    public static function beforeCreate(Request $request, $model)
+    {
+        $model->type = 9;
+    }
     /**
      * Get the cards available for the request.
      *

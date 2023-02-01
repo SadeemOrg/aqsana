@@ -133,6 +133,7 @@ class User extends Resource
                     "TripBooking" => __( "TripBooking"),
                     "delegatee" => __( "delegatee"),
                     "guide" => __( "guide"),
+                    "sms" => __( "Sms"),
 
 
                 ]

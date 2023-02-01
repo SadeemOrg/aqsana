@@ -20,6 +20,7 @@ use Alaqsa\Project\Project;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
 use App\Nova\Metrics\InComeTransaction;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
 use MyApp\BillingSchedule\BillingSchedule ;
 use Pdmfc\NovaFields\ActionButton;
@@ -27,6 +28,8 @@ use Whitecube\NovaFlexibleContent\Flexible;
 
 class PaymentVoucher extends Resource
 {
+
+
     /**
      * The model the resource corresponds to.
      *
@@ -187,8 +190,81 @@ class PaymentVoucher extends Resource
 
 
 
+            Select::make(__("Payment_type"), "Payment_type")->options([
+                '1' => __('cash'),
+                '2' => __('shek'),
+                '3' => __('bit'),
+                '4' => __('hawale'),
+                // '5' => __('Other'),
+            ])->displayUsingLabels()->default('1'),
+            NovaDependencyContainer::make([
+                Text::make(__('transact amount'), 'transact_amount')->rules('required'),
+                // Select::make(__('Currenc'), "Currency")
+                //     ->options(function () {
+                //         $Alhisalats =  \App\Models\Currency::all();
+                //         $user_type_admin_array =  array();
+                //         foreach ($Alhisalats as $Alhisalat) {
+                //             $user_type_admin_array += [$Alhisalat['id'] => ($Alhisalat['name'])];
+                //         }
 
-            Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
+                //         return $user_type_admin_array;
+                //     })
+                //     ->displayUsingLabels(),
+            ])->dependsOn("Payment_type", '1')->hideFromDetail()->hideFromIndex(),
+
+            NovaDependencyContainer::make([
+                Flexible::make(__('Payment_type_details'), 'Payment_type_details')
+
+                    ->addLayout(__('tooles'), 'Payment_type_details ', [
+                        Text::make(__('Doubt value'), "Doubt_value")->rules('required'),
+                        Text::make(__('bank number'), "bank_number"),
+                        Text::make(__('Branch number'), "Branch_number"),
+                        Text::make(__('account number'), "account_number"),
+                        Text::make(__('Doubt number'), "Doubt_number"),
+
+                        DateTime::make(__('History of doubt'), 'Date')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
+
+                    ]),
+            ])->dependsOn("Payment_type", '2')->hideFromDetail()->hideFromIndex(),
+            NovaDependencyContainer::make([
+                Flexible::make(__('Payment_type_details'), 'Payment_type_details')
+
+                    ->addLayout(__('tooles'), 'Payment_type_details ', [
+                        Text::make(__('value'), "equivelant_amount")->rules('required'),
+                        Text::make(__('telephone'), "telephone")->rules('required'),
+                        // Text::make(__('number of installments'), "number_of_installments"),
+
+                        DateTime::make(__('History'), 'Date')
+                            ->format('DD/MM/YYYY HH:mm')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
+
+                    ]),
+            ])->dependsOn("Payment_type", '3')->hideFromDetail()->hideFromIndex(),
+
+            NovaDependencyContainer::make([
+                Flexible::make(__('Payment_type_details'), 'Payment_type_details')
+
+                    ->addLayout(__('tooles'), 'Payment_type_details ', [
+                        Text::make(__('value'), "equivelant_amount")->rules('required'),
+
+                        Text::make(__('bank number'), "bank_number"),
+                        Text::make(__('Branch number'), "Branch_number"),
+                        Text::make(__('account number'), "account_number"),
+
+                        DateTime::make(__('History'), 'Date')
+                            ->format('DD/MM/YYYY HH:mm')
+                            ->resolveUsing(function ($value) {
+                                return $value;
+                            })->rules('required'),
+
+                    ])->rules('required'),
+            ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
+            // Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
             Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
             File::make(__('file'), 'file')->disk('public')->prunable(),
