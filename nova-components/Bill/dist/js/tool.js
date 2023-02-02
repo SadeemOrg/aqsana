@@ -163,19 +163,19 @@ Nova.booting(function (Vue, router, store) {
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(6)
+  __webpack_require__(35)
 }
 var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(12)
 /* template */
-var __vue_template__ = __webpack_require__(30)
+var __vue_template__ = __webpack_require__(37)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-68ff5483"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -208,46 +208,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(7);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(9)("290c3e45", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tool.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tool.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(8)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 6 */,
+/* 7 */,
 /* 8 */
 /***/ (function(module, exports) {
 
@@ -710,10 +672,6 @@ var _data$setup$data$meth;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
 //
 //
 //
@@ -17012,7 +16970,57 @@ class ApiProxy {
 
 
 /***/ }),
-/* 30 */
+/* 30 */,
+/* 31 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(36);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("18a4f44c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tool.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tool.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.scopeContainer[data-v-68ff5483] {\r\n  position: relative;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -ms-flex-preferred-size: 2/6;\r\n      flex-basis: 2/6;\r\n  padding-left: 8;\r\n  border-bottom-width: 2px;\r\n  padding: 16px 0;\r\n  min-width: 260px;\r\n  row-gap: 0.75rem;\r\n  min-height: 145px;\r\n  max-height: 3.5rem/* 56px */;\n}\n@media (min-width: 768px) {\n.scopeContainer[data-v-68ff5483] {\r\n    border-bottom-width: 0px;\r\n    border-left-width: 2px;\r\n    min-width: 0px;\r\n    border-color: rgb(107 114 128 / var(--tw-border-opacity));\n}\n}\n.secContainer[data-v-68ff5483] {\r\n  position: relative;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  max-height: 3.5rem;\r\n  padding-top: 4rem;\r\n  padding-left: 0.5rem;\r\n  -ms-flex-preferred-size: 33.333333%;\r\n      flex-basis: 33.333333%;\r\n  padding-top: 1rem;\r\n  padding-bottom: 1rem;\r\n  min-width: 260px;\r\n  min-height: 145px;\r\n  --tw-border-opacity: 1;\r\n  border-color: rgb(107 114 128 / var(--tw-border-opacity));\r\n  row-gap: 0.75rem;\n}\n@media (min-width: 768px) {\n.secContainer[data-v-68ff5483] {\r\n    border-bottom-width: 0px;\r\n    min-width: 0px;\r\n    border-left-width: 2px;\n}\n}\n.whatsappContainer[data-v-68ff5483] {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  padding-left: 0.5rem\r\n    /* 8px */\r\n  ;\r\n  -ms-flex-preferred-size: 20%;\r\n      flex-basis: 20%;\r\n  min-height: 145px;\r\n  cursor: pointer;\r\n  row-gap: 0.75rem\r\n    /* 12px */\r\n  ;\n}\n.inputDev[data-v-68ff5483] {\r\n  height: 4rem;\r\n  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);\r\n  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);\r\n  -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\r\n          box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\r\n  display: block;\r\n  width: 100%;\r\n  --tw-bg-opacity: 1;\r\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\r\n  border-width: 2px;\r\n  border-radius: 0.375rem;\r\n  --tw-ring-opacity: 1;\r\n  --tw-ring-color: green;\n}\n@media (min-width: 640px) {\n.inputDev[data-v-68ff5483]{\r\n        height: 40px;\r\n        font-size: 0.875rem;\r\n        line-height: 1.25rem;\r\n        padding-right: 1rem;\n}\n}\n.connectUs[data-v-68ff5483]{\r\n  -webkit-transition-duration: 200ms;\r\n          transition-duration: 200ms;\r\n  padding-left: 1.25rem/* 20px */;\r\n    padding-right: 1.25rem/* 20px */;\r\n    padding-top: 0.75rem/* 12px */;\r\n    padding-bottom: 0.75rem/* 12px */;\r\n    margin-top: 0.5rem/* 8px */;\r\n    font-size: 13px;\r\n    text-align: left;\r\n    border-radius: 30px;\r\n    --tw-text-opacity: 1;\r\n    color: rgb(255 255 255 / var(--tw-text-opacity));\r\n    --tw-bg-opacity: 1;\r\n    background-color: green;\r\n    --tw-text-opacity: 1;\r\n    color: rgb(255 255 255 / var(--tw-text-opacity));\n}\n@media (min-width: 1024px) {\n.connectUs[data-v-68ff5483] {\r\n        padding-left: 2.5rem/* 40px */;\r\n        padding-right: 2.5rem/* 40px */;\n}\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -17027,7 +17035,8 @@ var render = function() {
         "div",
         {
           staticClass:
-            "flex flex-col items-center justify-center mt-40 max-w-4xl mx-auto"
+            "flex flex-col items-center justify-center mt-40 max-w-4xl mx-auto",
+          staticStyle: { "max-width": "896px" }
         },
         [
           _c("img", {
@@ -17046,9 +17055,9 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n            يوفي! سند القبض رقم F-1000 " +
+                    "\n      يوفي! سند القبض رقم F-1000 " +
                       _vm._s(_vm.id) +
-                      " تم انتاجة بنجاح\n        "
+                      " تم انتاجة بنجاح\n    "
                   )
                 ]
               )
@@ -17060,14 +17069,24 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n            يوفي! فاتورة رقم F-1000" +
+                    "\n      يوفي! فاتورة رقم F-1000" +
                       _vm._s(_vm.id) +
-                      " تم انتاجة بنجاح\n        "
+                      " تم انتاجة بنجاح\n    "
                   )
                 ]
               ),
           _vm._v(" "),
-          _vm._m(0),
+          _c(
+            "h3",
+            {
+              staticClass: "mt-4 font-FlatBold text-center text-lg lg:text-xl"
+            },
+            [
+              _vm._v(
+                "\n      تم ارسال الملف للايميل الخاص بك, وبأمكانك ارسال الملف الى الشخص المتبرع ايضا\n    "
+              )
+            ]
+          ),
           _vm._v(" "),
           _c(
             "div",
@@ -17080,42 +17099,30 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "relative flex flex-col items-center justify-center max-h-14 pt-16 pl-2 basis-2/6 md:border-b-0 py-4 min-w-[260px] md:min-w-0 md:border-l-2 min-h-[145px] border-gray-500 gap-y-3"
+                    "scopeContainer relative flex flex-col items-center justify-center max-h-14 pt-16 pl-2 basis-2/6 md:border-b-0 py-4 min-w-[260px] md:min-w-0 md:border-l-2 min-h-[145px] border-gray-500 gap-y-3"
                 },
                 [
-                  _c("img", {
-                    staticClass: "w-8 h-8 absolute right-3 top-[45px]",
-                    attrs: { src: "/assets/image/paper-plane.png", alt: "" }
-                  }),
-                  _vm._v(" "),
                   _c(
                     "h3",
                     {
                       staticClass:
                         "font-FlatBold text-center text-lg lg:text-xl"
                     },
-                    [_vm._v("تم ارسال الملف للايمال التالي")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "h3",
-                    {
-                      staticClass:
-                        "font-FlatBold text-center text-base lg:text-lg"
-                    },
-                    [_vm._v("alqudsquds@gmail.com")]
+                    [_vm._v(" الرجاء ادخال الايميل المراد ارسال الملف له")]
                   ),
                   _vm._v(" "),
                   _c(
                     "div",
                     {
                       staticClass:
-                        "flex md:flex-row flex-col items-center justify-between w-full mt-2"
+                        "flex md:flex-row flex-col items-center justify-between w-full mt-2",
+                      staticStyle: { width: "100%" }
                     },
                     [
                       _c(
                         "form",
                         {
+                          staticStyle: { width: "90%" },
                           attrs: { method: "get" },
                           on: {
                             submit: function($event) {
@@ -17146,7 +17153,7 @@ var render = function() {
                               }
                             ],
                             staticClass:
-                              "h-16 sm:h-full pr-12 sm:pr-4 shadow-sm block w-[85%] bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]",
+                              "inputDev h-16 sm:h-full sm:pr-4 shadow-sm block w-[85%] bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]",
                             attrs: {
                               type: "search",
                               name: "Mail",
@@ -17186,7 +17193,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                ارسال\n                            "
+                                    "\n                ارسال\n              "
                                   )
                                 ]
                               )
@@ -17203,7 +17210,7 @@ var render = function() {
                 "a",
                 {
                   staticClass:
-                    "flex flex-col justify-center cursor-pointer items-center md:border-b-0 py-4 min-w-[260px] md:min-w-0 md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3",
+                    "secContainer flex flex-col justify-center cursor-pointer items-center md:border-b-0 py-4 min-w-[260px] md:min-w-0 md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3",
                   attrs: { href: "/originalbill/" + _vm.id }
                 },
                 [
@@ -17227,7 +17234,7 @@ var render = function() {
                 "a",
                 {
                   staticClass:
-                    "flex flex-col justify-center cursor-pointer items-center md:border-b-0 py-4 min-w-[260px] md:min-w-0 md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3",
+                    "secContainer flex flex-col justify-center cursor-pointer items-center md:border-b-0 py-4 min-w-[260px] md:min-w-0 md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3",
                   attrs: { href: "/bill/" + _vm.id }
                 },
                 [
@@ -17251,7 +17258,7 @@ var render = function() {
                 "a",
                 {
                   staticClass:
-                    "flex flex-col justify-center cursor-pointer items-center md:border-b-0 py-4 min-w-[260px] md:min-w-0 md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3",
+                    "whatsappContainer flex flex-col justify-center items-center pl-2 basis-1/5 min-h-[145px] cursor-pointer gap-y-3",
                   attrs: {
                     href:
                       "https://api.whatsapp.com/send?text=" +
@@ -17283,24 +17290,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h3",
-      { staticClass: "mt-4 font-FlatBold text-center text-lg lg:text-xl" },
-      [
-        _vm._v(
-          "\n            تم ارسال الملف للايمال الحاص بك, وتم ارسال ايميل للشخص المتبرع في حالو\n            وجود ايميل خاص به "
-        ),
-        _c("br"),
-        _vm._v(",ايضا نسخة عن الملف تم حفظه في المنظومه\n        ")
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -17309,12 +17299,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-68ff5483", module.exports)
   }
 }
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

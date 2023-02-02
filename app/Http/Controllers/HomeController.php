@@ -744,12 +744,14 @@ class HomeController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'Mail' => 'required|email',
+                'Mail' => 'required|email|',
 
 
             ],
             [
                 'Mail.email' => "يجب ان يكون الايميل صحيح",
+                'Mail.required' => "الرجاء ادخال الايميل المراد ارسال الملف له",
+
 
             ]
         );
