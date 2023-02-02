@@ -22,17 +22,18 @@
                 تم ارسال الملف للايميل الخاص بك, وبأمكانك ارسال الملف الى الشخص المتبرع ايضا
             </h3>
             <div class="flex md:flex-row flex-col items-center justify-between  w-full mt-12">
-
                 <div
-                    class="relative flex flex-col items-center justify-center md:max-h-14  pl-2 basis-2/6  border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 min-h-[145px]  border-gray-500  gap-y-3">
+                    class="scopeContainer relative flex flex-col items-center justify-center md:max-h-14  pl-2 basis-2/6  border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 min-h-[145px]  border-gray-500  gap-y-3">
                     </h3>
                     <div class="flex md:flex-row flex-col items-center justify-between  w-full mt-2">
-                        <form target="_self" class="MailBill h-full w-full flex flex-col items-center" target="_self" method="get">
+                        <form target="_self" class="MailBill h-full w-full flex flex-col items-center" target="_self"
+                            method="get">
                             <input type="search" name="id" id="search" autocomplete="off"
                                 value="{{ $id }}"
                                 class="hidden search-bar  sm:h-full  pr-12 sm:pr-20 shadow-sm  w-full bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]">
-                           <label for="Mail" class="font-FlatBold text-center "> الرجاء ادخال الايميل المراد ارسال الملف له</label>
-                                <input type="search" name="Mail" id="search" autocomplete="off"
+                            <label for="Mail" class="font-FlatBold text-center "> الرجاء ادخال الايميل المراد ارسال
+                                الملف له</label>
+                            <input type="search" name="Mail" id="search" autocomplete="off"
                                 placeholder="بريد الشخصل المتبرع"
                                 class="  mt-3 sm:h-full  pr-12 sm:pr-4 shadow-sm  block w-[85%] bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]">
                             <div class="flex flex-row items-center justify-center w-full">
@@ -69,3 +70,6 @@
         </div>
     </div>
 @endsection
+
+
+
