@@ -19,29 +19,22 @@
                 رقم F-1000{{ $id }} تم انتاجة بنجاح
             </h2>
             <h3 class="mt-4 font-FlatBold text-center text-lg lg:text-xl ">
-                
-                تم ارسال الملف للايميل الخاص بك, وبأمكانك ارسال الملف الى الشخص المتبرع ايضا 
-                {{-- تم ارسال الملف للايمال الحاص بك, وتم ارسال ايميل
-                للشخص المتبرع في
-                حالو وجود ايميل خاص به ,ايضا نسخة عن الملف تم حفظه في المنظومه --}}
+                تم ارسال الملف للايميل الخاص بك, وبأمكانك ارسال الملف الى الشخص المتبرع ايضا
             </h3>
             <div class="flex md:flex-row flex-col items-center justify-between  w-full mt-12">
 
                 <div
-                    class="relative flex flex-col items-center justify-center max-h-14 pt-16  pl-2 basis-2/6  border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 min-h-[145px]  border-gray-500  gap-y-3">
-                    <img src="{{ asset('assets/image/paper-plane.png') }}" class="w-8 h-8 absolute right-3 top-[45px]"
-                        alt="">
-                    <h3 class="font-FlatBold text-center text-lg lg:text-xl">تم ارسال الملف للايمال التالي</h3>
-                    <h3 class="font-FlatBold text-center text-base lg:text-lg">alqudsquds@gmail.com</h3>
+                    class="relative flex flex-col items-center justify-center md:max-h-14  pl-2 basis-2/6  border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 min-h-[145px]  border-gray-500  gap-y-3">
+                    </h3>
                     <div class="flex md:flex-row flex-col items-center justify-between  w-full mt-2">
-                        <form target="_self" class="MailBill h-full w-full" target="_self"
-                            method="get">
+                        <form target="_self" class="MailBill h-full w-full flex flex-col items-center" target="_self" method="get">
                             <input type="search" name="id" id="search" autocomplete="off"
                                 value="{{ $id }}"
-                                class="hidden search-bar h-16 sm:h-full  pr-12 sm:pr-20 shadow-sm  w-full bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]">
-                            <input type="search" name="Mail" id="search" autocomplete="off"
-                                placeholder="الرجاء ادخال الايميل "
-                                class=" h-16 sm:h-full  pr-12 sm:pr-4 shadow-sm  block w-[85%] bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]">
+                                class="hidden search-bar  sm:h-full  pr-12 sm:pr-20 shadow-sm  w-full bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]">
+                           <label for="Mail" class="font-FlatBold text-center "> الرجاء ادخال الايميل المراد ارسال الملف له</label>
+                                <input type="search" name="Mail" id="search" autocomplete="off"
+                                placeholder="بريد الشخصل المتبرع"
+                                class="  mt-3 sm:h-full  pr-12 sm:pr-4 shadow-sm  block w-[85%] bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]">
                             <div class="flex flex-row items-center justify-center w-full">
                                 <button type="submit" id="btnCombine"
                                     class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">

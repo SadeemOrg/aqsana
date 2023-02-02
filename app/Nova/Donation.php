@@ -182,17 +182,6 @@ class Donation extends Resource
             ])->displayUsingLabels()->default('1'),
             NovaDependencyContainer::make([
                 Text::make(__('transact amount'), 'transact_amount')->rules('required'),
-                // Select::make(__('Currenc'), "Currency")
-                //     ->options(function () {
-                //         $Alhisalats =  \App\Models\Currency::all();
-                //         $user_type_admin_array =  array();
-                //         foreach ($Alhisalats as $Alhisalat) {
-                //             $user_type_admin_array += [$Alhisalat['id'] => ($Alhisalat['name'])];
-                //         }
-
-                //         return $user_type_admin_array;
-                //     })
-                //     ->displayUsingLabels(),
             ])->dependsOn("Payment_type", '1')->hideFromDetail()->hideFromIndex(),
 
             NovaDependencyContainer::make([
