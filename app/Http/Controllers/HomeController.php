@@ -19,6 +19,7 @@ use App\Models\News;
 use App\Models\newsType;
 use App\Models\Project;
 use App\Models\Sector;
+use App\Models\TelephoneDirectory;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\WorkHours;
@@ -261,6 +262,12 @@ class HomeController extends Controller
     public function save(Request $request)
     {
 
+        DB::table('budgets')
+        ->updateOrInsert(
+            ['year' => $request->year, 'sector_id' =>  0],
+            ['budget' => $request->budgetsOfyear]
+
+        );
         foreach ($request->Sectors as $key => $value) {
             DB::table('budgets')
                 ->updateOrInsert(
@@ -275,6 +282,32 @@ class HomeController extends Controller
         DB::table('budgets')
             ->where('year', $request->year)
             ->delete();
+    }
+    public function SendMessage(Request $request)
+    {
+        $TelephoneDirectory = TelephoneDirectory::where('type', '9')->get();
+
+
+        $basic  = new \Nexmo\Client\Credentials\Basic('89302929', 'EcfCP1BjWhrTWJNZ');
+        $client = new \Nexmo\Client($basic);
+
+        // $response = $client->sms()->send(
+        //     new \Vonage\SMS\Message\SMS("972506940095", "Al-Aqsa-Association", 'Al-Aqsa-Association SMS API')
+        // );
+
+
+        foreach ($TelephoneDirectory as $key => $value) {
+
+        $client->sms()->send(
+                new \Vonage\SMS\Message\SMS($value->phone_number, "Al_Aqsa_Association",  $request->Message)
+            );
+        }
+
+
+
+
+
+
     }
     public function SectorsBudget(Request $request)
     {

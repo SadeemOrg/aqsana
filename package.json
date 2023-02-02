@@ -35,7 +35,9 @@
         "build-DonationInBox": "cd nova-components/DonationInBox && npm run dev",
         "build-DonationInBox-prod": "cd nova-components/DonationInBox && npm run prod",
         "build-bill": "cd nova-components/Bill && npm run dev",
-        "build-bill-prod": "cd nova-components/Bill && npm run prod"
+        "build-bill-prod": "cd nova-components/Bill && npm run prod",
+        "build-smssend": "cd nova-components/Smssend && npm run dev",
+        "build-smssend-prod": "cd nova-components/Smssend && npm run prod"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.7",
