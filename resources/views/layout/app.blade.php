@@ -1003,7 +1003,6 @@
                     id: $id,
                 },
                 success: function(data) {
-                    console.log('dataAmeed',data);
                     if ($.isEmptyObject(data.error)) {
                         toastr.options = {
                             "closeButton": true,
