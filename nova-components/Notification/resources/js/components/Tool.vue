@@ -39,7 +39,7 @@
             </a>
           </div>
           <div
-            v-if="Admin == 1"
+           
             class="flex flex-row items-center justify-center cursor-pointer w-1/2"
           >
             <a
