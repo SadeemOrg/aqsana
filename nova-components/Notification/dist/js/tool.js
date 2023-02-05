@@ -1104,34 +1104,32 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm.Admin == 1
-                ? _c(
-                    "div",
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex flex-row items-center justify-center cursor-pointer w-1/2"
+                },
+                [
+                  _c(
+                    "a",
                     {
-                      staticClass:
-                        "flex flex-row items-center justify-center cursor-pointer w-1/2"
+                      class: {
+                        "text-green-600 bg-white w-full py-4 text-center rounded-md":
+                          _vm.openTab !== 3,
+                        "text-white  bg-green-600 w-full py-4 text-center rounded-md":
+                          _vm.openTab === 3
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.toggleTabs(3)
+                        }
+                      }
                     },
-                    [
-                      _c(
-                        "a",
-                        {
-                          class: {
-                            "text-green-600 bg-white w-full py-4 text-center rounded-md":
-                              _vm.openTab !== 3,
-                            "text-white  bg-green-600 w-full py-4 text-center rounded-md":
-                              _vm.openTab === 3
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.toggleTabs(3)
-                            }
-                          }
-                        },
-                        [_vm._v("\n              مهام الموظفين\n            ")]
-                      )
-                    ]
+                    [_vm._v("\n              مهام الموظفين\n            ")]
                   )
-                : _vm._e()
+                ]
+              )
             ]
           ),
           _vm._v(" "),
