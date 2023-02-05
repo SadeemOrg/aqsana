@@ -74,10 +74,10 @@ class receiptVoucher extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    // public function authorizedToDelete(Request $request)
-    // {
-    //     return false;
-    // }
+    public function authorizedToDelete(Request $request)
+    {
+        return false;
+    }
     public static function authorizedToCreate(Request $request)
     {
         return false;
