@@ -106,9 +106,9 @@ class PaymentVoucher extends Resource
             })->hideWhenUpdating()->hideWhenCreating(),
 
 
-            Text::make(__('reference_id'), 'reference_id')->readonly()->hideWhenCreating()->hideWhenUpdating()->canSee(function(){
-                return $this->type === '0';
-            }),
+            // Text::make(__('reference_id'), 'reference_id')->readonly()->hideWhenCreating()->hideWhenUpdating()->canSee(function(){
+            //     return $this->type === '0';
+            // }),
             // NovaDependencyContainer::make([
             //     Select::make(__('project'), "ref_id")
             //         ->options(function () {
