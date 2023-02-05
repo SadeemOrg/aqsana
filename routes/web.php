@@ -36,6 +36,9 @@ Route::post("Sectorstatistics", [HomeController::class, "Sectorstatistics"])->na
 Route::post("year", [HomeController::class, "year"])->name('year');
 Route::post("save", [HomeController::class, "save"])->name('save');
 
+
+Route::post("SendMessage", [HomeController::class, "SendMessage"])->name('SendMessage');
+
 Route::post("SectorsPill/", [HomeController::class, "SectorsPill"])->name('SectorsPill');
 
 

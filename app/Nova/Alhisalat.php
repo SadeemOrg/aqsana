@@ -319,4 +319,12 @@ class Alhisalat extends Resource
             (new AlhisalatSurrender),
         ];
     }
+    public function tools(Request $request)
+    {
+        return [
+            (new AlhisalatColect)->canSee(function ($request) {
+                return true;
+            }),
+        ];
+    }
 }
