@@ -100,6 +100,12 @@ export default {
         id: this.id,
       });
     },
+    sendToAlaqsa() {
+      axios.post("/SendMail", {
+        Mail: 'alaqsaquds@gmail.com',
+        id: this.id,
+      });
+    },
     getYears: function () {
       let queryString = window.location.search;
       let urlParams = new URLSearchParams(queryString);
@@ -113,6 +119,7 @@ export default {
   },
   beforeMount() {
     this.getYears();
+    this.sendToAlaqsa()
   },
 };
 </script>

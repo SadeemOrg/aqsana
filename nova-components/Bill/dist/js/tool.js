@@ -163,13 +163,13 @@ Nova.booting(function (Vue, router, store) {
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(35)
+  __webpack_require__(6)
 }
 var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(12)
 /* template */
-var __vue_template__ = __webpack_require__(37)
+var __vue_template__ = __webpack_require__(30)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -208,8 +208,46 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 6 */,
-/* 7 */,
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(7);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("18a4f44c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tool.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tool.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.scopeContainer[data-v-68ff5483] {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-preferred-size: 2/6;\n      flex-basis: 2/6;\n  padding-left: 8;\n  border-bottom-width: 2px;\n  padding: 16px 0;\n  min-width: 260px;\n  row-gap: 0.75rem;\n  min-height: 145px;\n  max-height: 3.5rem/* 56px */;\n}\n@media (min-width: 768px) {\n.scopeContainer[data-v-68ff5483] {\n    border-bottom-width: 0px;\n    border-left-width: 2px;\n    min-width: 0px;\n    border-color: rgb(107 114 128 / var(--tw-border-opacity));\n}\n}\n.secContainer[data-v-68ff5483] {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  max-height: 3.5rem;\n  padding-top: 4rem;\n  padding-left: 0.5rem;\n  -ms-flex-preferred-size: 33.333333%;\n      flex-basis: 33.333333%;\n  padding-top: 1rem;\n  padding-bottom: 1rem;\n  min-width: 260px;\n  min-height: 145px;\n  --tw-border-opacity: 1;\n  border-color: rgb(107 114 128 / var(--tw-border-opacity));\n  row-gap: 0.75rem;\n}\n@media (min-width: 768px) {\n.secContainer[data-v-68ff5483] {\n    border-bottom-width: 0px;\n    min-width: 0px;\n    border-left-width: 2px;\n}\n}\n.whatsappContainer[data-v-68ff5483] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding-left: 0.5rem\n    /* 8px */\n  ;\n  -ms-flex-preferred-size: 20%;\n      flex-basis: 20%;\n  min-height: 145px;\n  cursor: pointer;\n  row-gap: 0.75rem\n    /* 12px */\n  ;\n}\n.inputDev[data-v-68ff5483] {\n  height: 4rem;\n  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);\n  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);\n  -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n          box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  display: block;\n  width: 100%;\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n  border-width: 2px;\n  border-radius: 0.375rem;\n  --tw-ring-opacity: 1;\n  --tw-ring-color: green;\n}\n@media (min-width: 640px) {\n.inputDev[data-v-68ff5483]{\n        height: 40px;\n        font-size: 0.875rem;\n        line-height: 1.25rem;\n        padding-right: 1rem;\n}\n}\n.connectUs[data-v-68ff5483]{\n  -webkit-transition-duration: 200ms;\n          transition-duration: 200ms;\n  padding-left: 1.25rem/* 20px */;\n    padding-right: 1.25rem/* 20px */;\n    padding-top: 0.75rem/* 12px */;\n    padding-bottom: 0.75rem/* 12px */;\n    margin-top: 0.5rem/* 8px */;\n    font-size: 13px;\n    text-align: left;\n    border-radius: 30px;\n    --tw-text-opacity: 1;\n    color: rgb(255 255 255 / var(--tw-text-opacity));\n    --tw-bg-opacity: 1;\n    background-color: green;\n    --tw-text-opacity: 1;\n    color: rgb(255 255 255 / var(--tw-text-opacity));\n}\n@media (min-width: 1024px) {\n.connectUs[data-v-68ff5483] {\n        padding-left: 2.5rem/* 40px */;\n        padding-right: 2.5rem/* 40px */;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
@@ -775,6 +813,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       id: this.id
     });
   },
+  sendToAlaqsa: function sendToAlaqsa() {
+    axios.post("/SendMail", {
+      Mail: 'alaqsaquds@gmail.com',
+      id: this.id
+    });
+  },
 
   getYears: function getYears() {
     var queryString = window.location.search;
@@ -788,6 +832,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }
 }), _defineProperty(_data$setup$data$meth, "beforeMount", function beforeMount() {
   this.getYears();
+  this.sendToAlaqsa();
 }), _data$setup$data$meth);
 
 /***/ }),
@@ -16970,57 +17015,7 @@ class ApiProxy {
 
 
 /***/ }),
-/* 30 */,
-/* 31 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(36);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(9)("18a4f44c", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tool.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tool.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(8)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.scopeContainer[data-v-68ff5483] {\r\n  position: relative;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -ms-flex-preferred-size: 2/6;\r\n      flex-basis: 2/6;\r\n  padding-left: 8;\r\n  border-bottom-width: 2px;\r\n  padding: 16px 0;\r\n  min-width: 260px;\r\n  row-gap: 0.75rem;\r\n  min-height: 145px;\r\n  max-height: 3.5rem/* 56px */;\n}\n@media (min-width: 768px) {\n.scopeContainer[data-v-68ff5483] {\r\n    border-bottom-width: 0px;\r\n    border-left-width: 2px;\r\n    min-width: 0px;\r\n    border-color: rgb(107 114 128 / var(--tw-border-opacity));\n}\n}\n.secContainer[data-v-68ff5483] {\r\n  position: relative;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  max-height: 3.5rem;\r\n  padding-top: 4rem;\r\n  padding-left: 0.5rem;\r\n  -ms-flex-preferred-size: 33.333333%;\r\n      flex-basis: 33.333333%;\r\n  padding-top: 1rem;\r\n  padding-bottom: 1rem;\r\n  min-width: 260px;\r\n  min-height: 145px;\r\n  --tw-border-opacity: 1;\r\n  border-color: rgb(107 114 128 / var(--tw-border-opacity));\r\n  row-gap: 0.75rem;\n}\n@media (min-width: 768px) {\n.secContainer[data-v-68ff5483] {\r\n    border-bottom-width: 0px;\r\n    min-width: 0px;\r\n    border-left-width: 2px;\n}\n}\n.whatsappContainer[data-v-68ff5483] {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  padding-left: 0.5rem\r\n    /* 8px */\r\n  ;\r\n  -ms-flex-preferred-size: 20%;\r\n      flex-basis: 20%;\r\n  min-height: 145px;\r\n  cursor: pointer;\r\n  row-gap: 0.75rem\r\n    /* 12px */\r\n  ;\n}\n.inputDev[data-v-68ff5483] {\r\n  height: 4rem;\r\n  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);\r\n  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);\r\n  -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\r\n          box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\r\n  display: block;\r\n  width: 100%;\r\n  --tw-bg-opacity: 1;\r\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\r\n  border-width: 2px;\r\n  border-radius: 0.375rem;\r\n  --tw-ring-opacity: 1;\r\n  --tw-ring-color: green;\n}\n@media (min-width: 640px) {\n.inputDev[data-v-68ff5483]{\r\n        height: 40px;\r\n        font-size: 0.875rem;\r\n        line-height: 1.25rem;\r\n        padding-right: 1rem;\n}\n}\n.connectUs[data-v-68ff5483]{\r\n  -webkit-transition-duration: 200ms;\r\n          transition-duration: 200ms;\r\n  padding-left: 1.25rem/* 20px */;\r\n    padding-right: 1.25rem/* 20px */;\r\n    padding-top: 0.75rem/* 12px */;\r\n    padding-bottom: 0.75rem/* 12px */;\r\n    margin-top: 0.5rem/* 8px */;\r\n    font-size: 13px;\r\n    text-align: left;\r\n    border-radius: 30px;\r\n    --tw-text-opacity: 1;\r\n    color: rgb(255 255 255 / var(--tw-text-opacity));\r\n    --tw-bg-opacity: 1;\r\n    background-color: green;\r\n    --tw-text-opacity: 1;\r\n    color: rgb(255 255 255 / var(--tw-text-opacity));\n}\n@media (min-width: 1024px) {\n.connectUs[data-v-68ff5483] {\r\n        padding-left: 2.5rem/* 40px */;\r\n        padding-right: 2.5rem/* 40px */;\n}\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 37 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -17299,6 +17294,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-68ff5483", module.exports)
   }
 }
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
