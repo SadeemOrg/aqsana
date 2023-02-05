@@ -70,8 +70,10 @@ class NotificationController extends Controller
 
             $data = json_decode($value->data);
             $pus = array(
+
                 "id" => $value->id,
                 "Notifications" => $data,
+                "note"=>$value->note,
                 "done" => $value->read_at,
 
             );

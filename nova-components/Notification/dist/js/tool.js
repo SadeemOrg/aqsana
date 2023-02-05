@@ -169,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\ntable {\n  font-family: arial, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\ntd,\nth {\n  border: 1px solid #dddddd;\n\n  padding: 8px;\n}\ntr:nth-child(even) {\n  background-color: #dddddd;\n}\n", ""]);
+exports.push([module.i, "\ntable {\r\n  font-family: arial, sans-serif;\r\n  border-collapse: collapse;\r\n  width: 100%;\n}\ntd,\r\nth {\r\n  border: 1px solid #dddddd;\r\n\r\n  padding: 8px;\n}\ntr:nth-child(even) {\r\n  background-color: #dddddd;\n}\r\n", ""]);
 
 // exports
 
@@ -904,6 +904,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -984,6 +988,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (response) {
         _this4.allNotifications = response.data;
       });
+      console.log(this.allNotifications);
     },
 
     toggleTabs: function toggleTabs(tabNumber) {
@@ -1546,6 +1551,8 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(Notification.note))]),
+                        _vm._v(" "),
                         Notification.Notifications.date
                           ? _c("td", [
                               _vm._v(
@@ -1661,9 +1668,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", { staticStyle: { width: "70%" } }, [_vm._v("المهمة")]),
+      _c("th", { staticStyle: { width: "40%" } }, [_vm._v("المهمة")]),
       _vm._v(" "),
-      _c("th", { staticStyle: { width: "30%" } }, [_vm._v("الوقت")]),
+      _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحضات")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { width: "20%" } }, [_vm._v("الوقت")]),
       _vm._v(" "),
       _c("th", [_vm._v("تم")])
     ])
