@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Acme\Smssend\Smssend;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -37,7 +38,10 @@ class Sms extends Resource
        else return false;
     }
     public static $title = 'id';
-
+    public static function createButtonLabel()
+    {
+        return 'اضافة';
+    }
     /**
      * The columns that should be searched.
      *
@@ -83,7 +87,9 @@ class Sms extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new Smssend()
+        ];
     }
 
     /**
@@ -118,4 +124,5 @@ class Sms extends Resource
     {
         return [];
     }
+
 }

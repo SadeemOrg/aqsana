@@ -282,7 +282,42 @@
                     v-model="newyear"
                   />
                 </div>
-
+                <div class="md:w-1/3">
+                  <label
+                    class="
+                      block
+                      text-black text-base
+                      ml-4
+                      py-2
+                      font-bold
+                      md:text-right
+                      mb-1
+                      md:mb-0
+                      pr-4
+                    "
+                  >
+                     ميزانبة السنة
+                  </label>
+                </div>
+                <div class="md:w-2/3">
+                  <input
+                    class="
+                      bg-gray-200
+                      appearance-none
+                      border-2 border-gray-200
+                      rounded
+                      w-full
+                      py-2
+                      px-4
+                      text-gray-700
+                      leading-tight
+                      focus:outline-none focus:bg-white focus:border-black
+                    "
+                    id="inline-full-name"
+                    type="text"
+                    v-model="budgetsOfyear"
+                  />
+                </div>
                 <form @submit.prevent="onSubmit" class="add-form py-4">
                   <div
                     v-for="Sector in newSectors"
@@ -1185,7 +1220,7 @@ import PureVueChart from "pure-vue-chart";
 export default {
   data() {
     return {
-      openTab: 4,
+      openTab: 2,
       openTabstatistic: 0,
       selectedItem: "0",
       selectedyear: "0",
@@ -1269,12 +1304,26 @@ export default {
       });
     },
     savenew() {
+        let sum=0;
+        this.newSectors.forEach(element => {
+            sum += parseInt(element['Budget']) ;
+        });
+
+        console.log(sum);
+    // alert(this.budgetsOfyear);
+    if (this.budgetsOfyear == sum) {
       axios.post("/save", {
         year: this.newyear,
+        budgetsOfyear: this.budgetsOfyear,
         Sectors: this.newSectors,
       });
 
       this.getYears();
+    }
+    else{
+    alert("ميزانية السنة لا تطابق مع ميزانية القطاعات");
+    }
+
     },
     delet() {
       console.log(this.year);

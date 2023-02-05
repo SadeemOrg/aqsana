@@ -1423,12 +1423,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      openTab: 4,
+      openTab: 2,
       openTabstatistic: 0,
       selectedItem: "0",
       selectedyear: "0",
@@ -1503,12 +1544,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     savenew: function savenew() {
-      axios.post("/save", {
-        year: this.newyear,
-        Sectors: this.newSectors
+      var sum = 0;
+      this.newSectors.forEach(function (element) {
+        sum += parseInt(element['Budget']);
       });
 
-      this.getYears();
+      console.log(sum);
+      // alert(this.budgetsOfyear);
+      if (this.budgetsOfyear == sum) {
+        axios.post("/save", {
+          year: this.newyear,
+          budgetsOfyear: this.budgetsOfyear,
+          Sectors: this.newSectors
+        });
+
+        this.getYears();
+      } else {
+        alert("ميزانية السنة لا تطابق مع ميزانية القطاعات");
+      }
     },
     delet: function delet() {
       console.log(this.year);
@@ -8675,6 +8728,33 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "md:w-2/3" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.budgetsOfyear,
+                            expression: "budgetsOfyear"
+                          }
+                        ],
+                        staticClass:
+                          "\n                    bg-gray-200\n                    appearance-none\n                    border-2 border-gray-200\n                    rounded\n                    w-full\n                    py-2\n                    px-4\n                    text-gray-700\n                    leading-tight\n                    focus:outline-none focus:bg-white focus:border-black\n                  ",
+                        attrs: { id: "inline-full-name", type: "text" },
+                        domProps: { value: _vm.budgetsOfyear },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.budgetsOfyear = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "form",
                       {
@@ -9978,87 +10058,102 @@ var render = function() {
                                         "div",
                                         { staticClass: "flex justify-between" },
                                         [
-                                          _c("pure-vue-chart", {
-                                            attrs: {
-                                              points: [
-                                                1,
-                                                4,
-                                                5,
-                                                3,
-                                                4,
-                                                1,
-                                                1,
-                                                1,
-                                                1,
-                                                1,
-                                                1,
-                                                1
-                                              ],
-                                              "show-y-axis": true,
-                                              "show-x-axis": true,
-                                              width: 400,
-                                              height: 200,
-                                              "show-values": true,
-                                              "use-month-labels": true,
-                                              "use-points-labels": true,
-                                              months: [
-                                                "Jan",
-                                                "Fev",
-                                                "Mar",
-                                                "Abr",
-                                                "Mai",
-                                                "Jun",
-                                                "Jul",
-                                                "Ago",
-                                                "Set",
-                                                "Out",
-                                                "Nov",
-                                                "Dez"
-                                              ]
-                                            }
-                                          }),
+                                          _c(
+                                            "div",
+                                            [
+                                              _c("pure-vue-chart", {
+                                                attrs: {
+                                                  points: [
+                                                    1,
+                                                    4,
+                                                    5,
+                                                    3,
+                                                    4,
+                                                    1,
+                                                    1,
+                                                    1,
+                                                    1,
+                                                    1,
+                                                    1,
+                                                    1
+                                                  ],
+                                                  "show-y-axis": true,
+                                                  "show-x-axis": true,
+                                                  width: 400,
+                                                  height: 200,
+                                                  "show-values": true,
+                                                  "use-month-labels": true,
+                                                  "use-points-labels": true,
+                                                  months: [
+                                                    "Jan",
+                                                    "Fev",
+                                                    "Mar",
+                                                    "Abr",
+                                                    "Mai",
+                                                    "Jun",
+                                                    "Jul",
+                                                    "Ago",
+                                                    "Set",
+                                                    "Out",
+                                                    "Nov",
+                                                    "Dez"
+                                                  ]
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("h1", [_vm._v("مدخلات")])
+                                            ],
+                                            1
+                                          ),
                                           _vm._v(" "),
-                                          _c("pure-vue-chart", {
-                                            attrs: {
-                                              points: [
-                                                1,
-                                                4,
-                                                5,
-                                                3,
-                                                4,
-                                                1,
-                                                1,
-                                                1,
-                                                1,
-                                                1,
-                                                1,
-                                                1
-                                              ],
-                                              "show-y-axis": true,
-                                              "show-x-axis": true,
-                                              width: 400,
-                                              height: 200,
-                                              "show-values": true,
-                                              "use-month-labels": true,
-                                              "use-points-labels": true,
-                                              months: [
-                                                "Jan",
-                                                "Fev",
-                                                "Mar",
-                                                "Abr",
-                                                "Mai",
-                                                "Jun",
-                                                "Jul",
-                                                "Ago",
-                                                "Set",
-                                                "Out",
-                                                "Nov",
-                                                "Dez"
-                                              ]
-                                            }
-                                          })
-                                        ],
-                                        1
+                                          _c(
+                                            "div",
+                                            [
+                                              _c("pure-vue-chart", {
+                                                attrs: {
+                                                  points: [
+                                                    1,
+                                                    4,
+                                                    5,
+                                                    3,
+                                                    4,
+                                                    1,
+                                                    1,
+                                                    1,
+                                                    1,
+                                                    1,
+                                                    1,
+                                                    1
+                                                  ],
+                                                  "show-y-axis": true,
+                                                  "show-x-axis": true,
+                                                  width: 400,
+                                                  height: 200,
+                                                  "show-values": true,
+                                                  "use-month-labels": true,
+                                                  "use-points-labels": true,
+                                                  months: [
+                                                    "Jan",
+                                                    "Fev",
+                                                    "Mar",
+                                                    "Abr",
+                                                    "Mai",
+                                                    "Jun",
+                                                    "Jul",
+                                                    "Ago",
+                                                    "Set",
+                                                    "Out",
+                                                    "Nov",
+                                                    "Dez"
+                                                  ]
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("h1", [_vm._v("مخرجات")])
+                                            ],
+                                            1
+                                          )
+                                        ]
                                       )
                                     ]
                                   )
@@ -10108,6 +10203,21 @@ var staticRenderFns = [
             "\n                    block\n                    text-black text-base\n                    ml-4\n                    py-2\n                    font-bold\n                    md:text-right\n                    mb-1\n                    md:mb-0\n                    pr-4\n                  "
         },
         [_vm._v("\n                  السنة\n                ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/3" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "\n                    block\n                    text-black text-base\n                    ml-4\n                    py-2\n                    font-bold\n                    md:text-right\n                    mb-1\n                    md:mb-0\n                    pr-4\n                  "
+        },
+        [_vm._v("\n                   ميزانبة السنة\n                ")]
       )
     ])
   }
