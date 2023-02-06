@@ -59,26 +59,54 @@ class NotificationController extends Controller
     }
     public function AdminNotifications(Request $request)
     {
-
-
-        $Notifications = \App\Models\Notification::where('notifiable_id', $request->user)->get();
+        $user = Auth::user();
         $myNotifications = array();
-        foreach ($Notifications as $key => $value) {
-            // echo $value->type;
-            // echo $value->id;
-            // dd($value);
 
-            $data = json_decode($value->data);
-            $pus = array(
+        if ((in_array('super-admin',   $user->userrole()))) {
+            $Notifications = \App\Models\Notification::where('notifiable_id', $request->user)->get();
+            foreach ($Notifications as $key => $value) {
+                // echo $value->type;
+                // echo $value->id;
+                // dd($value);
 
-                "id" => $value->id,
-                "Notifications" => $data,
-                "note"=>$value->note,
-                "done" => $value->read_at,
+                $data = json_decode($value->data);
+             if($user)
+                $pus = array(
 
-            );
-            array_push($myNotifications, $pus);
+                    "id" => $value->id,
+                    "Notifications" => $data,
+                    "note" => $value->note,
+                    "done" => $value->read_at,
+
+                );
+                array_push($myNotifications, $pus);
+            }
+        } else {
+            $Notifications = \App\Models\Notification::where('notifiable_id', $request->user)->get();
+
+            foreach ($Notifications as $key => $value) {
+                // echo $value->type;
+                // echo $value->id;
+                // dd($value);
+
+                $data = json_decode($value->data);
+
+                if($user->id ==  $data->sender_id)
+                {
+                   $pus = array(
+
+                       "id" => $value->id,
+                       "Notifications" => $data,
+                       "note" => $value->note,
+                       "done" => $value->read_at,
+
+                   );
+                   array_push($myNotifications, $pus);
+                }
+            }
         }
+
+
         return $myNotifications;
     }
     public function sendNotification(Request $request)
@@ -92,6 +120,7 @@ class NotificationController extends Controller
         // dd($date);
         // Auth::user()->notify(new PostNotif());
         Notification::send($userSchema, new TasksNotification($offerData, $date));
+
         // $userSchema->notify($userSchema, new TasksNotification($offerData,$date));
         return 'Task completed!';
     }
