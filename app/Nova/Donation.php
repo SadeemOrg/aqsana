@@ -254,10 +254,10 @@ class Donation extends Resource
     //     return '/resources/'.static::uriKey().'/'.$resource->getKey();
 
     // }
-    // public static function redirectAfterUpdate(NovaRequest $request, $resource)
-    // {
-    //     return '/bill?location='. $resource->id;
-    // }
+    public static function redirectAfterCreate(NovaRequest $request, $resource)
+    {
+        return '/bill?location='. $resource->id.'&type=1';
+    }
     // public static function afterCreate(Request $request, $model)
     // {
     //     return Action::redirect("/mainbill/" . $model->id);
@@ -336,7 +336,7 @@ class Donation extends Resource
     {
 
         if (!$request->name && $request->add_user) {
-            if ($request->add_user[0]['attributes']['name'] &&  $request->add_user[0]['attributes']['phone']) {
+            if ($request->add_user[0]['attributes']['name'] ) {
                 $telfone =  TelephoneDirectory::create(
                     [
                         'name' => $request->add_user[0]['attributes']['name'],

@@ -129,6 +129,10 @@ class receiptVoucher extends Resource
 
         ];
     }
+    public static function redirectAfterCreate(NovaRequest $request, $resource)
+    {
+        return '/bill?location='. $resource->id.'&type=2';
+    }
     public static function beforeCreate(Request $request, $model)
     {
 
