@@ -39,7 +39,7 @@
             </a>
           </div>
           <div
-            v-if="Admin == 1"
+           
             class="flex flex-row items-center justify-center cursor-pointer w-1/2"
           >
             <a
@@ -240,8 +240,10 @@
 
           <table class="text-center">
             <tr>
-              <th style="width: 70%;">المهمة</th>
-              <th style="width: 30%;">الوقت</th>
+              <th style="width: 40%;">المهمة</th>
+              <th style="width: 40%;">الملاحضات</th>
+
+              <th style="width: 20%;">الوقت</th>
 
               <th>تم</th>
             </tr>
@@ -251,6 +253,8 @@
               :value="Notification.id"
             >
               <td>{{ Notification.Notifications.Notifications }}</td>
+              <td>{{ Notification.note }}</td>
+
               <td v-if="Notification.Notifications.date">
                 {{ Notification.Notifications.date }}
               </td>
@@ -344,6 +348,7 @@ export default {
         .then((response) => {
           this.allNotifications = response.data;
         });
+        console.log( this.allNotifications);
     },
     toggleTabs: function (tabNumber) {
       this.openTab = tabNumber;
