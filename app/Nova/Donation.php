@@ -166,7 +166,7 @@ class Donation extends Resource
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('tooles'), 'Payment_type_details ', [
                     Text::make(__('name'), "name")->rules('required'),
-                    Text::make(__('phone'), "phone")->rules('required'),
+                    Text::make(__('phone'), "phone"),
                 ]),
 
             BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
