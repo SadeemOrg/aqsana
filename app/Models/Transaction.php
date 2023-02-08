@@ -88,4 +88,9 @@ class Transaction extends Model
     //     return $this->belongsToMany(Bus::class,'project_bus');
     // }
 
+    public function isdelete()
+    {
+        return $this->is_delete;
+    }
+
 }

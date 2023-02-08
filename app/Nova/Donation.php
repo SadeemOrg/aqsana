@@ -66,6 +66,10 @@ class Donation extends Resource
     {
         return false;
     }
+    // public function authorizedToUpdate(Request $request)
+    // {
+    //     dd($request->all());
+    // }
     public static function availableForNavigation(Request $request)
     {
         if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Donationparmation",  $request->user()->userrole()))) {
