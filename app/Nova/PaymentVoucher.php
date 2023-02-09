@@ -266,7 +266,7 @@ class PaymentVoucher extends Resource
             ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
             // Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
-            Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
+            File::make(__('voucher'), 'voucher')->disk('public')->prunable(),
             File::make(__('file'), 'file')->disk('public')->prunable(),
 
             // Select::make(__('approval'), 'approval')->options([
