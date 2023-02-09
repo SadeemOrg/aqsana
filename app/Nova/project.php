@@ -31,7 +31,7 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Image;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
-use App\CPU\Helpers;
+
 use Laravel\Nova\Fields\BelongsTo;
 use Manogi\Tiptap\Tiptap;
 use Waynestate\Nova\CKEditor;
@@ -452,10 +452,7 @@ class Project extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-            if (!empty($tokens)) {
 
-                Helpers::send_notification($tokens, $notification);
-            }
         }
         if ($request->City) {
             $Citys = json_decode($request->City);
@@ -468,10 +465,7 @@ class Project extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-            if (!empty($tokens)) {
 
-                Helpers::send_notification($tokens, $notification);
-            }
         }
 
 
@@ -519,10 +513,7 @@ class Project extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-            if (!empty($tokens)) {
 
-                Helpers::send_notification($tokens, $notification);
-            }
         }
         if ($request->City) {
             $Citys = json_decode($request->City);
@@ -535,10 +526,7 @@ class Project extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-            if (!empty($tokens)) {
 
-                Helpers::send_notification($tokens, $notification);
-            }
         }
 
         if ($request->Budjet) {
@@ -666,10 +654,7 @@ class Project extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-            if (!empty($tokens)) {
 
-                Helpers::send_notification($tokens, $notification);
-            }
         }
         if ($request->City) {
             $Citys = json_decode($request->City);
@@ -682,10 +667,7 @@ class Project extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-            if (!empty($tokens)) {
 
-                Helpers::send_notification($tokens, $notification);
-            }
         }
     }
 
