@@ -31,8 +31,8 @@
                     <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
                 </p>
             </div>
-            <div class="sm:hidden flex flex-col items-center justify-center w-full my-4 gap-y-2 px-16">
-                <div class=" flex flex-row flex-wrap items-start w-full justify-around gap-x-2">
+            <div class="sm:hidden flex flex-col items-center justify-between w-full my-4 gap-y-2 px-4">
+                <div class="flex flex-row flex-wrap items-center w-full justify-between gap-x-6">
                     <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">رقم الجمعية :
                         <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                     </p>
@@ -40,12 +40,12 @@
                         <span class="font-FlatBold text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>
                     </p>
                 </div>
-                <div class=" flex flex-row flex-wrap items-start w-full justify-around gap-x-2">
-                    <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">رقم الجمعية :
-                        <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
+                <div class=" flex flex-row flex-wrap items-center w-full justify-between gap-x-6">
+                    <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">رقم الهاتف  :
+                        <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
                     </p>
-                    <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">العنوان :
-                        <span class="font-FlatBold text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>
+                    <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">البريد الالكتروني :
+                        <span class="font-FlatBold text-[#6B7280] mx-1 ">{{ $email }}</span>
                     </p>
                 </div>
             </div>
