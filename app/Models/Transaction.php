@@ -76,6 +76,10 @@ class Transaction extends Model
     {
         return $this->belongsTo('App\Models\TelephoneDirectory','name');
     }
+    public function BusesCompany()
+    {
+        return $this->belongsTo('App\Models\BusesCompany','name');
+    }
 
     // public function getCountryName() {
     //     return Currency::where('id', $this->id)->first()->name;
