@@ -72,6 +72,12 @@ class BusesCompany extends Resource
             Text::make(__("contact person"),"contact_person")->rules('required'),
             Number::make(__("phone number"),"phone_number")->rules('required'),
 
+            Text::make(__("company id"),"company_id")->rules('required'),
+            Text::make(__("bank name"),"bank_name")->rules('required'),
+            Text::make(__("bank number"),"bank_number")->rules('required'),
+            Text::make(__("Branch number"),"bank_branch_number")->rules('required'),
+            Text::make(__("account number"),"account_number")->rules('required'),
+
 
             Select::make(__("status"),"status")
             ->options([
