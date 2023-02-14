@@ -1,7 +1,7 @@
 <div>
     <!--Perosonal Information -->
     <div class="flex sm:flex-row flex-col gap-y-4 sm:gap-y-0 items-center justify-between mt-8">
-        <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات العمل</p>
+        <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات عملي</p>
         <form wire:submit.prevent="sershWorkHours">
             <div class="flex flex-row items-center  gap-x-2 ">
                 <!--Date Picker -->
