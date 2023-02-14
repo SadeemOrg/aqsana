@@ -675,6 +675,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
+.mx-8{
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
 .mt-24{
   margin-top: 6rem;
 }
@@ -815,6 +819,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .ml-12{
   margin-left: 3rem;
+}
+.-mt-8{
+  margin-top: -2rem;
 }
 .block{
   display: block;
@@ -1403,6 +1410,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
   border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
 }
+.divide-x > :not([hidden]) ~ :not([hidden]){
+  --tw-divide-x-reverse: 0;
+  border-right-width: calc(1px * var(--tw-divide-x-reverse));
+  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
+}
 .divide-gray-300 > :not([hidden]) ~ :not([hidden]){
   --tw-divide-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-divide-opacity));
@@ -1410,6 +1422,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .divide-gray-200 > :not([hidden]) ~ :not([hidden]){
   --tw-divide-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-divide-opacity));
+}
+.divide-black > :not([hidden]) ~ :not([hidden]){
+  --tw-divide-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-divide-opacity));
 }
 .overflow-hidden{
   overflow: hidden;
@@ -1548,6 +1564,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-\[\#CCDDFF\]{
   --tw-border-opacity: 1;
   border-color: rgb(204 221 255 / var(--tw-border-opacity));
+}
+.border-black{
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 .border-b-\[\#349A37\]{
   --tw-border-opacity: 1;
@@ -2152,8 +2172,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
 }
+.ring-slate-700{
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(51 65 85 / var(--tw-ring-opacity));
+}
 .ring-opacity-5{
   --tw-ring-opacity: 0.05;
+}
+.ring-opacity-0{
+  --tw-ring-opacity: 0;
 }
 .drop-shadow-lg{
   --tw-drop-shadow: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
@@ -2379,6 +2406,10 @@ body{
   .sm\:mx-7{
     margin-left: 1.75rem;
     margin-right: 1.75rem;
+  }
+  .sm\:mx-0{
+    margin-left: 0px;
+    margin-right: 0px;
   }
   .sm\:mt-14{
     margin-top: 3.5rem;
@@ -2724,14 +2755,32 @@ body{
   .md\:gap-y-0{
     row-gap: 0px;
   }
+  .md\:divide-gray-200 > :not([hidden]) ~ :not([hidden]){
+    --tw-divide-opacity: 1;
+    border-color: rgb(229 231 235 / var(--tw-divide-opacity));
+  }
+  .md\:divide-gray-300 > :not([hidden]) ~ :not([hidden]){
+    --tw-divide-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-divide-opacity));
+  }
   .md\:rounded-lg{
     border-radius: 0.5rem;
+  }
+  .md\:border-2{
+    border-width: 2px;
+  }
+  .md\:border-0{
+    border-width: 0px;
   }
   .md\:border-b-0{
     border-bottom-width: 0px;
   }
   .md\:border-l-2{
     border-left-width: 2px;
+  }
+  .md\:border-black{
+    --tw-border-opacity: 1;
+    border-color: rgb(0 0 0 / var(--tw-border-opacity));
   }
   .md\:px-14{
     padding-left: 3.5rem;
@@ -2803,6 +2852,18 @@ body{
   }
   .md\:leading-7{
     line-height: 1.75rem;
+  }
+  .md\:text-gray-500{
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
+  }
+  .md\:text-gray-900{
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+  }
+  .md\:text-\[\#6B7280\]{
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
   }
 }
 @media (min-width: 1024px){
