@@ -355,7 +355,7 @@
                 طباعة
             </button>
         </div>
-        <div class="relative flex flex-row items-center justify-end w-full -mt-12 ">
+        <div class="relative flex flex-row items-center justify-end md:justify-center w-full -mt-12 ">
             <img class="w-[280px] h-[240px]"
                 src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png"
                 alt="logo">

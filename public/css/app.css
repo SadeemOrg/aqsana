@@ -2743,6 +2743,9 @@ body{
   .md\:justify-start{
     justify-content: flex-start;
   }
+  .md\:justify-center{
+    justify-content: center;
+  }
   .md\:justify-between{
     justify-content: space-between;
   }
