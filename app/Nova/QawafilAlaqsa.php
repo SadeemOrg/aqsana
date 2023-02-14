@@ -33,7 +33,7 @@ use Laravel\Nova\Fields\Image;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
 // use App\Console\Commands\ProjectStartEnd;
-use App\CPU\Helpers;
+// use App\CPU\Helpers;
 use App\Models\address;
 use Laravel\Nova\Fields\BelongsTo;
 use Manogi\Tiptap\Tiptap;
@@ -456,10 +456,10 @@ class QawafilAlaqsa extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-            if (!empty($tokens)) {
+            // if (!empty($tokens)) {
 
-                Helpers::send_notification($tokens, $notification);
-            }
+            //     Helpers::send_notification($tokens, $notification);
+            // }
         }
         if ($request->City) {
             $Citys = json_decode($request->City);
@@ -472,10 +472,10 @@ class QawafilAlaqsa extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-            if (!empty($tokens)) {
+            // if (!empty($tokens)) {
 
-                Helpers::send_notification($tokens, $notification);
-            }
+            //     Helpers::send_notification($tokens, $notification);
+            // }
         }
 
         if ($request->Budjet) {
