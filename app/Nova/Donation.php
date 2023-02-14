@@ -21,6 +21,7 @@ use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Laravel\Nova\Fields\DateTime;
 use Acme\MultiselectField\Multiselect;
+use App\Nova\Actions\DeleteBill;
 use App\Nova\Actions\DepositedInBank;
 use App\Nova\Actions\ReceiveDonation;
 use App\Nova\Filters\AlhisalatColect;
@@ -32,6 +33,7 @@ use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\Boolean;
 
 use function Clue\StreamFilter\fun;
+
 
 class Donation extends Resource
 {
@@ -64,6 +66,10 @@ class Donation extends Resource
     {
         return false;
     }
+    // public function authorizedToUpdate(Request $request)
+    // {
+    //     dd($request->all());
+    // }
     public static function availableForNavigation(Request $request)
     {
         if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Donationparmation",  $request->user()->userrole()))) {
@@ -102,6 +108,9 @@ class Donation extends Resource
                 ->action((new BillPdf)->confirmText(__('Are you sure you want to print  this?'))
                     ->confirmButtonText(__('print'))
                     ->cancelButtonText(__('Dont print')), $this->id)
+                     ->readonly(function () {
+                        return $this->is_delete > 0;
+                    })
                 ->text(__('print'))->showLoadingAnimation()
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
@@ -109,6 +118,7 @@ class Donation extends Resource
                 '1' => __('handy'),
                 '2' => __('automatic'),
                 '3' => __('Alhisalat'),
+                '4' => __('delet bill'),
 
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
             Select::make(__("transaction_status"), "transaction_status")->options([
@@ -166,7 +176,7 @@ class Donation extends Resource
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('tooles'), 'Payment_type_details ', [
                     Text::make(__('name'), "name")->rules('required'),
-                    Text::make(__('phone'), "phone")->rules('required'),
+                    Text::make(__('phone'), "phone"),
                 ]),
 
             BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -244,6 +254,14 @@ class Donation extends Resource
 
             // BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class),
 
+            ActionButton::make(__('Delet'))
+            ->action((new DeleteBill)->confirmText(__('Are you sure you want to Delet  this?'))
+                ->confirmButtonText(__('Delet'))
+                ->cancelButtonText(__('Dont Delet')), $this->id)
+            ->text(__('Delet'))->showLoadingAnimation() ->readonly(function () {
+                return $this->is_delete > 0;
+            })
+            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
             Date::make(__('date'), 'transaction_date')->rules('required')->hideFromIndex(),
 
@@ -254,10 +272,10 @@ class Donation extends Resource
     //     return '/resources/'.static::uriKey().'/'.$resource->getKey();
 
     // }
-    // public static function redirectAfterUpdate(NovaRequest $request, $resource)
-    // {
-    //     return '/bill?location='. $resource->id;
-    // }
+    public static function redirectAfterCreate(NovaRequest $request, $resource)
+    {
+        return '/bill?location='. $resource->id.'&type=1';
+    }
     // public static function afterCreate(Request $request, $model)
     // {
     //     return Action::redirect("/mainbill/" . $model->id);
@@ -336,7 +354,7 @@ class Donation extends Resource
     {
 
         if (!$request->name && $request->add_user) {
-            if ($request->add_user[0]['attributes']['name'] &&  $request->add_user[0]['attributes']['phone']) {
+            if ($request->add_user[0]['attributes']['name'] ) {
                 $telfone =  TelephoneDirectory::create(
                     [
                         'name' => $request->add_user[0]['attributes']['name'],
@@ -406,6 +424,8 @@ class Donation extends Resource
             new ReceiveDonation,
             new DepositedInBank,
             new BillPdf,
+            new DeleteBill,
+
         ];
     }
 }

@@ -22,7 +22,7 @@ use App\Nova\Actions\BillPdf;
 use App\Nova\Metrics\InComeTransaction;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
-use MyApp\BillingSchedule\BillingSchedule ;
+use MyApp\BillingSchedule\BillingSchedule;
 use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 
@@ -52,15 +52,15 @@ class PaymentVoucher extends Resource
     {
         return __('Financial management');
     }
-    public static function groupOrder() {
+    public static function groupOrder()
+    {
         return 3;
     }
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("PaymentVoucherparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("PaymentVoucherparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
     /**
      * The columns that should be searched.
@@ -101,7 +101,7 @@ class PaymentVoucher extends Resource
                 '2' => __('qawael'),
                 '3' => __('trip'),
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('reference_id'), 'project', \App\Nova\Project::class)->canSee(function(){
+            BelongsTo::make(__('reference_id'), 'project', \App\Nova\Project::class)->canSee(function () {
                 return $this->type != '0';
             })->hideWhenUpdating()->hideWhenCreating(),
 
@@ -154,7 +154,7 @@ class PaymentVoucher extends Resource
             //         ->displayUsingLabels(),
             // ])->dependsOn('type', '3')->hideFromDetail()->hideFromIndex(),
 
-            // BelongsTo::make('project' , 'project')->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make('project' , 'project')->hideWhenCreating()->hideWhenUpdating(),
             Select::make(__('name'), "name")
             ->options(function () {
                 $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
@@ -165,21 +165,54 @@ class PaymentVoucher extends Resource
 
                     $user_type_admin_array += [($User['id']) => ($User['name'])];
                 }
+                $Users =  \App\Models\BusesCompany::all();
+                foreach ($Users as $User) {
+
+
+                    $user_type_admin_array += [($User['id']) => ($User['name'])];
+                }
 
                 return $user_type_admin_array;
             })
-            ->displayUsingLabels()      ->hideFromDetail()->hideFromIndex(),
+            ->displayUsingLabels()->hideWhenCreating()->hideFromIndex()->hideFromDetail()->readonly(),
+            Select::make(__('name'), "name")
+                ->options(function () {
+                    $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
+                    $i = 0;
+                    $user_type_admin_array =  array();
+                    foreach ($Users as $User) {
 
-        Flexible::make(__('add user'),'add_user')
-        ->readonly(true)
 
-            ->hideFromDetail()->hideFromIndex()
-            ->addLayout(__('tooles'), 'Payment_type_details ', [
-                Text::make(__('name'), "name")->rules('required'),
-                Text::make(__('phone'), "phone")->rules('required'),
-            ]),
+                        $user_type_admin_array += ['T' . ($User['id']) => ($User['name'])];
+                    }
+                    $Users =  \App\Models\BusesCompany::all();
+                    foreach ($Users as $User) {
 
-            BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
+
+                        $user_type_admin_array += [('B' . $User['id']) => ($User['name'])];
+                    }
+
+                    return $user_type_admin_array;
+                })
+                ->displayUsingLabels()->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                    return null;
+                })->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
+
+            Flexible::make(__('add user'), 'add_user')
+                ->readonly(true)
+
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('tooles'), 'Payment_type_details ', [
+                    Text::make(__('name'), "name")->rules('required'),
+                    Text::make(__('phone'), "phone")->rules('required'),
+                ])->hideWhenUpdating(),
+
+            BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
+                return $this->transaction_type === '1';
+            }),
+            BelongsTo::make(__('reference_id'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
+                return $this->transaction_type === '2';
+            }),
 
             // Text::make(__('name'), 'name'),
             Text::make(__('company_number'), 'company_number'),
@@ -266,7 +299,7 @@ class PaymentVoucher extends Resource
             ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
             // Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
-            Image::make(__('voucher'), 'voucher')->disk('public')->prunable(),
+            File::make(__('voucher'), 'voucher')->disk('public')->prunable(),
             File::make(__('file'), 'file')->disk('public')->prunable(),
 
             // Select::make(__('approval'), 'approval')->options([
@@ -284,17 +317,32 @@ class PaymentVoucher extends Resource
     }
     public static function beforeSave(Request $request, $model)
     {
-        // dd($request->Color);
+        dd($request->size);
+        if (strpos($request->name, 'T') !== false) {
+            $model->transaction_type = '1';
+            $str = ltrim($request->name, 'T');
+            $model->name = $str;
+        } elseif (strpos($request->name, 'B') !== false) {
+            $model->transaction_type = '2';
+            $str = ltrim($request->name, 'B');
+            $model->name = $str;
+        }
+        // $str = 'T190';
+        // $str = ltrim($str, 'T');
+        // dd($str);
+
+        // dd(strpos($request->name, 'T') !== false);
     }
     public static function beforeCreate(Request $request, $model)
     {
+
 
         $new = DB::table('currencies')->where('id', $request->Currenc)->first();
         $id = Auth::id();
         $model->created_by = $id;
         $model->main_type = '2';
         $model->type = '0';
-        $model->equivelant_amount=$new->rate*$request->transact_amount;
+        $model->equivelant_amount = $new->rate * $request->transact_amount;
     }
     public static function beforeUpdate(Request $request, $model)
     {
@@ -306,10 +354,8 @@ class PaymentVoucher extends Resource
         $model->update_by = $id;
         if ($model->Currenc->id == $request->Currenc) {
             $rate = ((int)$model->equivelant_amount / (int)$model->transact_amount);
-        }
-        else  $rate =$currencies->rate ;
+        } else  $rate = $currencies->rate;
         $model->equivelant_amount = $rate * $request->transact_amount;
-
     }
 
 
@@ -320,18 +366,22 @@ class PaymentVoucher extends Resource
         if (!$request->name) {
             // dd($request->add_user);
             if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
-                $telfone=  TelephoneDirectory::create([
+                $telfone =  TelephoneDirectory::create(
+                    [
                         'name' => $request->add_user[0]['attributes']['name'],
                         'type' => '8',
                         'phone_number' =>  $request->add_user[0]['attributes']['phone']
                     ],
-                    );
-
+                );
             }
             // dd( $telfone);
             DB::table('transactions')
-            ->where('id', $model->id)
-            ->update(['name' => $telfone->id]);
+                ->where('id', $model->id)
+                ->update([
+                    'name' => $telfone->id,
+                    'transaction_type' => '1'
+                ]);
+
         }
     }
 
@@ -345,8 +395,8 @@ class PaymentVoucher extends Resource
     public function cards(Request $request)
     {
         return [
-           new InComeTransaction(),
-           new Analytics(),
+            new InComeTransaction(),
+            new Analytics(),
 
         ];
     }
@@ -370,9 +420,7 @@ class PaymentVoucher extends Resource
      */
     public function lenses(Request $request)
     {
-        return [
-
-        ];
+        return [];
     }
 
     /**

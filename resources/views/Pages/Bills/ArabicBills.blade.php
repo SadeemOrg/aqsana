@@ -31,10 +31,17 @@
                     <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
                 </p>
             </div>
+<<<<<<< HEAD
             <div class="sm:hidden flex flex-col items-center justify-center w-full mt-8  my-4 gap-y-2 px-16">
                 <div class=" flex flex-col items-center w-full justify-center gap-y-2">
                     <p class="  text-[17px] font-noto_Regular text-[#101426]">رقم الجمعية :
                         <span class="font-FlatBold text-[#101426] md:text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
+=======
+            <div class="sm:hidden flex flex-col items-center justify-between w-full my-4 gap-y-2 px-4">
+                <div class="flex flex-row flex-wrap items-center w-full justify-between gap-x-6">
+                    <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">رقم الجمعية :
+                        <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
+>>>>>>> 6b413e6a0b71f9df3d441a1dad53e7f727a72f65
                     </p>
                     <p class=" text-[17px] font-noto_Regular text-[#101426]">العنوان :
                         <span class="font-FlatBold text-[#101426] md:text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>

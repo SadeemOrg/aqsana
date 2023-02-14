@@ -55,7 +55,14 @@ class TransactionPolicy
      */
     public function update(User $user, Transaction $transaction)
     {
+       if($transaction->isdelete()  >0)
+       {
+        return false;
+       }
+       else
+       {
         return true;
+       }
     }
 
     /**

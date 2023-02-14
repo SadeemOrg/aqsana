@@ -474,26 +474,21 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             (new NewProject())
             ->canSee(function () {
                 $user = Auth::user();
-                if ($user->type() == 'regular_city'  &&  (!($user->cite))) return true;
-                if ($user->type() == 'regular_area'  &&  (!($user->Area))) return true;
-                if (($user->type() == 'admin') ) return true;
+                if ($user->type() == 'admin') return true;
                 return false;
             }),
             (new NewQawafilAlaqsa())
             ->canSee(function () {
                 $user = Auth::user();
-                if ($user->type() == 'regular_city'  &&  (!($user->cite))) return true;
-                if ($user->type() == 'regular_area'  &&  (!($user->Area))) return true;
-                if (($user->type() == 'admin') ) return true;
+                if ($user->type() == 'admin') return true;
                 return false;
             }),
             (new NewTrip())
             ->canSee(function () {
                 $user = Auth::user();
-                if ($user->type() == 'regular_city'  &&  (!($user->cite))) return true;
-                if ($user->type() == 'regular_area'  &&  (!($user->Area))) return true;
-                if (($user->type() == 'admin') ) return true;
+                if ($user->type() == 'admin') return true;
                 return false;
+
             }),
             (new   NewAlhisalat())->canSee(function () {
                 $user = Auth::user();
@@ -502,12 +497,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             }),
             (new InComeTransaction())->canSee(function () {
                 $user = Auth::user();
-                if ($user->type() == 'admin'||$user->type() == 'financial_user') return true;
+                if ($user->type() == 'admin') return true;
                 return false;
             }),
             (new OutComeTransaction())->canSee(function () {
                 $user = Auth::user();
-                if  ($user->type() == 'admin'||$user->type() == 'financial_user')  return true;
+                if ($user->type() == 'admin') return true;
                 return false;
             }),
             (new DonationsSum())->canSee(function () {

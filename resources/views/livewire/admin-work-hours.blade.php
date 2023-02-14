@@ -7,9 +7,17 @@
                 الموظفين</p>
             <div class="flex flex-row items-center  gap-x-2 ">
                 <div class="mt-1">
-                    <input type="text" wire:model="Name" name="name" placeholder=" اسم الموظف" value=""
-                        class="block md:min-w-[235px] w-full max-h-[42px] border-[#349A37] border rounded-[60px] sm:text-sm p-4 placeholder-[#349A37]">
-                </div>
+
+                    <select pla  wire:model="Name" name="name"
+                    class="block md:min-w-[235px] w-full  border-[#349A37] border rounded-[60px] sm:text-sm p-4 placeholder-[#349A37] text-left">
+                    <option value="0"> اسم الموظف </option>
+
+
+                    @foreach($users as $user)
+                    <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
+                    @endforeach
+                </select>
+              </div>
                 <!--Date Picker -->
                 <div dir="ltr" class="relative">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
