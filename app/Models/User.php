@@ -35,6 +35,7 @@ class User extends Authenticatable
         'job',
         'start_work_date',
         'martial_status',
+        "user_number",
         'bank_name',
         'bank_branch',
         'account_number',

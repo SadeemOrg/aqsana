@@ -51,7 +51,7 @@ class WorkHours extends Component
         if ($WorkHours == null) {
             ModelsWorkHours::create([
                 'user_id' => Auth::id(),
-                'day' => Carbon::now()->format('l'),
+                'day' => Carbon::now()->locale('ar')->dayName,
                 'date' => Carbon::now()->toDateTimeString(),
                 'start_time' => Carbon::now(),
                 'on_work' => 1,
@@ -141,8 +141,6 @@ class WorkHours extends Component
 
     public function render()
     {
-
-
         if ($this->hide == 1) {
             $user = Auth::user();
             $WorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::today())->first();
@@ -194,11 +192,6 @@ class WorkHours extends Component
             $this->realTime =  $this->enterDate->format('H:i:s');
         }
 
-
-
-
-
-
         if ($this->hide == 0) {
             $this->realTime =  $this->enterDate->addSecond()->format('H:i:s');
         }
@@ -218,7 +211,7 @@ class WorkHours extends Component
         $this->Reasons_to_stop = json_decode($this->Reasons_to_stop);
         $this->TimeDpartures = nova_get_setting('time_departure', 'Timdepartures');
         $this->TimeDpartures = json_decode($this->TimeDpartures);
-        // dd($Reasons_to_stop);
+
 
         return view('livewire.work-hours');
     }

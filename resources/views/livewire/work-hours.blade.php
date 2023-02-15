@@ -1,4 +1,6 @@
 <div>
+
+
     <!--Perosonal Information -->
     <div class="flex sm:flex-row flex-col gap-y-4 sm:gap-y-0 items-center justify-between mt-8">
         <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات عملي</p>
@@ -7,17 +9,19 @@
                 <!--Date Picker -->
 
 
-                <div dir="ltr" class="relative">
+                <div dir="ltr" class="relative text-right">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                     </div>
-
+                 من
                     <input type="date" wire:model="FromDate"
                         class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
                         placeholder="من">
                 </div>
-                <div dir="ltr" class="relative">
+                <div dir="ltr" class="relative text-right">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                     </div>
+                    الى
+
                     <input type="date" wire:model="ToDate"
                         class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
                         placeholder="من">
@@ -29,7 +33,7 @@
                 <div class="-mt-2">
                     <button type="submit"
                         class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
-                        تطبيق
+                    بحث
                     </button>
                 </div>
             </div>
@@ -201,15 +205,25 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
+                            @php
+                            use Carbon\Carbon;
+
+                        @endphp
                             @foreach ($WorkHourssearch as $WorkHoursearch)
+                            @php
+                                      $newTimeShape = date_format($WorkHoursearch->date, 'd/m/Y');
+
+                            @endphp
                                 <tr>
 
                                     <td
                                         class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
                                         {{ $WorkHoursearch->day}}</td>
-                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">  {{ $WorkHoursearch->date}}</td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">  {{  $newTimeShape}}</td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                        {{ $WorkHoursearch->start_time}}</td>
+
+                                        {{ $WorkHoursearch->start_time}}
+                                    </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">{{ $WorkHoursearch->end_time}}</td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">{{ $WorkHoursearch->day_hours}}
                                     </td>

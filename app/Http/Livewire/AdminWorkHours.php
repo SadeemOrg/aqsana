@@ -12,6 +12,7 @@ class AdminWorkHours extends Component
     public $ToDate;
     public $Name;
     public $WorkHourssearch;
+    public $sumWorkHourssearch;
 
     public function sershWorkHours()
     {
@@ -20,6 +21,7 @@ class AdminWorkHours extends Component
 
         $this->WorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id",$this->Name)->get();
 
+    $this->sumWorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id",$this->Name)->sum('day_hours');
     }
     public function render()
     {

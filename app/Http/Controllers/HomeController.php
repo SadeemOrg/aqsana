@@ -169,6 +169,7 @@ class HomeController extends Controller
     }
     public function updateuser(Request $request)
     {
+
         $user = User::findOrFail(Auth::id());
         $request->validate([
             'name' => 'required|string|max:255|min:3',
@@ -214,18 +215,19 @@ class HomeController extends Controller
 
         ]);
 
-        // if ($request->photo) {
-        //     $user->photo = $request->photo->store('images', 'public');
-        // }
-        // if ($request->password) {
+        if ($request->photo) {
+            $user->photo = $request->photo->store('images', 'public');
+        }
+        if ($request->password) {
 
-        //    if((Hash::check($request->password, $user->password)))
-        //    {
-        //     if($request->new_password==$request->Confirm_password)
+           if((Hash::check($request->password, $user->password)))
+           {
 
-        //     $user->password = Hash::make($request->new_password);
-        //    }
-        // }
+            if($request->new_password==$request->Confirm_password)
+
+            $user->password = Hash::make($request->new_password);
+           }
+        }
         if ($request->image) {
             $user->photo = $request->image->store('images', 'public');
         }
