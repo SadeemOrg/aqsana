@@ -51,6 +51,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}?v={{ rand(0, 99) }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
     {{-- <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"> --}}
     <link rel="stylesheet"
         href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
@@ -62,11 +64,7 @@
             <!-- Sidebar -->
 
             <div class="flex-none pt-header min-h-screen w-sideba bg-green-700 px-6 w-1/6" >
-                {{-- <a href="{{ \Laravel\Nova\Nova::path() }}">
-                    <div class="absolute pin-t pin-l pin-r bg-logo flex items-center  h-header px-6 text-white  bg-white w-full p-4 border-x-2 border-black " >
-                       @include('nova::partials.logo')
-                    </div>
-                </a> --}}
+
 
 
 
@@ -99,13 +97,10 @@
     @endif
 
     <div class=" flex justify-end w-4/12 mr-10">
-        {{-- <a target="_self" href="/Qawafel-Alaqsa">
-                        <img class="w-23 h-23" src="/{{ $img }}" />
-                    </a> --}}
-        <a class=" flex flex-row items-center justify-center h-24 w-32 cursor-pointer" >
-            <img class="h-full  " src="/{{ $imgRight }}" alt="">
-        </a>
+
+
     </div>
+
     <dropdown class=" h-9 flex items-center dropdown-right">
         @include('nova::partials.user')
     </dropdown>

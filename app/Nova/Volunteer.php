@@ -19,6 +19,7 @@ class Volunteer extends Resource
 
     public static function availableForNavigation(Request $request)
     {
+        return false;
         if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Volunteerparmation",  $request->user()->userrole()) )){
             return true;
         }
@@ -37,6 +38,7 @@ class Volunteer extends Resource
     public static function groupOrder() {
         return 6 ;
     }
+
     // public static $subGroup = 'Vendors';
     /**
      * The single value that should be used to represent the resource when being displayed.

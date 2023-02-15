@@ -142,7 +142,6 @@ class User extends Resource
             Select::make(__('martial_status'), 'martial_status')->options([
                 1 => __('single'),
                 2 => __('married'),
-                3 => __('separated'),
                 4 => __('engaged'),
                 5 => __('divorced'),
                 6 => __('widower'),

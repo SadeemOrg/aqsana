@@ -1,6 +1,6 @@
 <template>
   <div>
-    <heading class="mb-6">Notification</heading>
+    <heading class="mb-6">المهام و الاشعارات</heading>
 
     <div class="flex">
       <div class="w-full h-full">
@@ -39,7 +39,7 @@
             </a>
           </div>
           <div
-           
+
             class="flex flex-row items-center justify-center cursor-pointer w-1/2"
           >
             <a
@@ -68,7 +68,7 @@
               <th style="width: 40%;">المهمة</th>
               <th style="width: 40%;">الملاحضات</th>
 
-              <th style="width: 20%;">الوقت</th>
+              <th style="width: 20%;">التاريخ</th>
 
               <th>تم</th>
             </tr>
@@ -79,37 +79,13 @@
             >
               <td>{{ Notification.Notifications.Notifications }}</td>
               <td class="flex w-full h-full">
-                <input
-                  type="text"
-                  id="fname"
-                  class="w-full h-full"
-                  v-model="Notification.note"
-                />
-                <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-                <svg
-                  fill="#000000"
-                  height="12px"
-                  width="12px"
-                  version="1.1"
-                  id="Layer_1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  viewBox="0 0 300.003 300.003"
-                  xml:space="preserve"
-                  @click="AddNote(Notification.id,Notification.note)"
-                >
-                  <g>
-                    <g>
-                      <path
-                        d="M150,0C67.159,0,0.001,67.159,0.001,150c0,82.838,67.157,150.003,149.997,150.003S300.002,232.838,300.002,150
-			C300.002,67.159,232.839,0,150,0z M213.281,166.501h-48.27v50.469c-0.003,8.463-6.863,15.323-15.328,15.323
-			c-8.468,0-15.328-6.86-15.328-15.328v-50.464H87.37c-8.466-0.003-15.323-6.863-15.328-15.328c0-8.463,6.863-15.326,15.328-15.328
-			l46.984,0.003V91.057c0-8.466,6.863-15.328,15.326-15.328c8.468,0,15.331,6.863,15.328,15.328l0.003,44.787l48.265,0.005
-			c8.466-0.005,15.331,6.86,15.328,15.328C228.607,159.643,221.742,166.501,213.281,166.501z"
-                      />
-                    </g>
-                  </g>
-                </svg>
+                <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+    <div class="relative w-full">
+        <!-- <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        </div> -->
+        <input type="text"  id="fname" v-model="Notification.note" class="block w-full p-4  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required>
+        <button  @click="AddNote(Notification.id,Notification.note)" type="submit" class="text-white absolute  left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">اضافة</button>
+    </div>
               </td>
               <td v-if="Notification.Notifications.date">
                 {{ Notification.Notifications.date }}
@@ -122,7 +98,7 @@
                   @click="UNCompletNotifications(Notification.id)"
                   type="submit"
                 >
-                  complet
+                  مكتمل
                 </button>
               </td>
               <td v-else>
@@ -131,7 +107,7 @@
                   type="submit"
                   @click="CompletNotifications(Notification.id)"
                 >
-                  do
+                  تم
                 </button>
               </td>
             </tr>
@@ -243,7 +219,7 @@
               <th style="width: 40%;">المهمة</th>
               <th style="width: 40%;">الملاحضات</th>
 
-              <th style="width: 20%;">الوقت</th>
+              <th style="width: 20%;">التاريخ</th>
 
               <th>تم</th>
             </tr>
@@ -261,10 +237,10 @@
               <td v-else>no Time</td>
 
               <td v-if="Notification.done">
-                complet
+                مكتمل
               </td>
               <td v-else>
-                not complet
+              تم
               </td>
             </tr>
           </table>
@@ -404,7 +380,5 @@ th {
   padding: 8px;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
+
 </style>

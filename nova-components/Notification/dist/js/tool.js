@@ -169,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\ntable {\r\n  font-family: arial, sans-serif;\r\n  border-collapse: collapse;\r\n  width: 100%;\n}\ntd,\r\nth {\r\n  border: 1px solid #dddddd;\r\n\r\n  padding: 8px;\n}\ntr:nth-child(even) {\r\n  background-color: #dddddd;\n}\r\n", ""]);
+exports.push([module.i, "\ntable {\n  font-family: arial, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\ntd,\nth {\n  border: 1px solid #dddddd;\n\n  padding: 8px;\n}\n\n\n", ""]);
 
 // exports
 
@@ -884,30 +884,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1039,7 +1015,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("heading", { staticClass: "mb-6" }, [_vm._v("Notification")]),
+      _c("heading", { staticClass: "mb-6" }, [_vm._v("المهام و الاشعارات")]),
       _vm._v(" "),
       _c("div", { staticClass: "flex" }, [
         _c("div", { staticClass: "w-full h-full" }, [
@@ -1072,7 +1048,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("\n              مهامي\n            ")]
+                    [_vm._v("\n            مهامي\n          ")]
                   )
                 ]
               ),
@@ -1099,7 +1075,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("\n              اضافة مهام\n            ")]
+                    [_vm._v("\n            اضافة مهام\n          ")]
                   )
                 ]
               ),
@@ -1126,7 +1102,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("\n              مهام الموظفين\n            ")]
+                    [_vm._v("\n            مهام الموظفين\n          ")]
                   )
                 ]
               )
@@ -1165,76 +1141,74 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "flex w-full h-full" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: Notification.note,
-                                expression: "Notification.note"
-                              }
-                            ],
-                            staticClass: "w-full h-full",
-                            attrs: { type: "text", id: "fname" },
-                            domProps: { value: Notification.note },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  Notification,
-                                  "note",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
                           _c(
-                            "svg",
+                            "label",
                             {
+                              staticClass:
+                                "mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white",
+                              attrs: { for: "search" }
+                            },
+                            [_vm._v("Search")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "relative w-full" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: Notification.note,
+                                  expression: "Notification.note"
+                                }
+                              ],
+                              staticClass:
+                                "block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
                               attrs: {
-                                fill: "#000000",
-                                height: "12px",
-                                width: "12px",
-                                version: "1.1",
-                                id: "Layer_1",
-                                xmlns: "http://www.w3.org/2000/svg",
-                                "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                                viewBox: "0 0 300.003 300.003",
-                                "xml:space": "preserve"
+                                type: "text",
+                                id: "fname",
+                                required: ""
                               },
+                              domProps: { value: Notification.note },
                               on: {
-                                click: function($event) {
-                                  return _vm.AddNote(
-                                    Notification.id,
-                                    Notification.note
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    Notification,
+                                    "note",
+                                    $event.target.value
                                   )
                                 }
                               }
-                            },
-                            [
-                              _c("g", [
-                                _c("g", [
-                                  _c("path", {
-                                    attrs: {
-                                      d:
-                                        "M150,0C67.159,0,0.001,67.159,0.001,150c0,82.838,67.157,150.003,149.997,150.003S300.002,232.838,300.002,150\n\t\t\tC300.002,67.159,232.839,0,150,0z M213.281,166.501h-48.27v50.469c-0.003,8.463-6.863,15.323-15.328,15.323\n\t\t\tc-8.468,0-15.328-6.86-15.328-15.328v-50.464H87.37c-8.466-0.003-15.323-6.863-15.328-15.328c0-8.463,6.863-15.326,15.328-15.328\n\t\t\tl46.984,0.003V91.057c0-8.466,6.863-15.328,15.326-15.328c8.468,0,15.331,6.863,15.328,15.328l0.003,44.787l48.265,0.005\n\t\t\tc8.466-0.005,15.331,6.86,15.328,15.328C228.607,159.643,221.742,166.501,213.281,166.501z"
-                                    }
-                                  })
-                                ])
-                              ])
-                            ]
-                          )
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "text-white absolute left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                                attrs: { type: "submit" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.AddNote(
+                                      Notification.id,
+                                      Notification.note
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v("اضافة")]
+                            )
+                          ])
                         ]),
                         _vm._v(" "),
                         Notification.Notifications.date
                           ? _c("td", [
                               _vm._v(
-                                "\n                " +
+                                "\n              " +
                                   _vm._s(Notification.Notifications.date) +
-                                  "\n              "
+                                  "\n            "
                               )
                             ])
                           : _c("td", [_vm._v("no Time")]),
@@ -1257,7 +1231,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                  complet\n                "
+                                    "\n                مكتمل\n              "
                                   )
                                 ]
                               )
@@ -1277,11 +1251,7 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [
-                                  _vm._v(
-                                    "\n                  do\n                "
-                                  )
-                                ]
+                                [_vm._v("\n                تم\n              ")]
                               )
                             ])
                       ]
@@ -1364,9 +1334,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                  " +
+                                "\n                " +
                                   _vm._s(user.name) +
-                                  "\n                "
+                                  "\n              "
                               )
                             ]
                           )
@@ -1448,7 +1418,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("\n                save\n              ")]
+                      [_vm._v("\n              save\n            ")]
                     )
                   ])
                 ]
@@ -1517,9 +1487,9 @@ var render = function() {
                         { key: user.id, domProps: { value: user.id } },
                         [
                           _vm._v(
-                            "\n                " +
+                            "\n              " +
                               _vm._s(user.name) +
-                              "\n              "
+                              "\n            "
                           )
                         ]
                       )
@@ -1554,24 +1524,18 @@ var render = function() {
                         Notification.Notifications.date
                           ? _c("td", [
                               _vm._v(
-                                "\n                " +
+                                "\n              " +
                                   _vm._s(Notification.Notifications.date) +
-                                  "\n              "
+                                  "\n            "
                               )
                             ])
                           : _c("td", [_vm._v("no Time")]),
                         _vm._v(" "),
                         Notification.done
                           ? _c("td", [
-                              _vm._v(
-                                "\n                complet\n              "
-                              )
+                              _vm._v("\n              مكتمل\n            ")
                             ])
-                          : _c("td", [
-                              _vm._v(
-                                "\n                not complet\n              "
-                              )
-                            ])
+                          : _c("td", [_vm._v("\n            تم\n            ")])
                       ]
                     )
                   })
@@ -1596,54 +1560,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحضات")]),
       _vm._v(" "),
-      _c("th", { staticStyle: { width: "20%" } }, [_vm._v("الوقت")]),
+      _c("th", { staticStyle: { width: "20%" } }, [_vm._v("التاريخ")]),
       _vm._v(" "),
       _c("th", [_vm._v("تم")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/3" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        },
-        [_vm._v("\n                المستخدم\n              ")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/3" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        },
-        [_vm._v("\n                التاريج\n              ")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/3" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        },
-        [_vm._v("\n                المهمة\n              ")]
-      )
     ])
   },
   function() {
@@ -1665,12 +1584,57 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/3" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+        },
+        [_vm._v("\n              التاريج\n            ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/3" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+        },
+        [_vm._v("\n              المهمة\n            ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/3" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+        },
+        [_vm._v("\n            المستخدم\n          ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("tr", [
       _c("th", { staticStyle: { width: "40%" } }, [_vm._v("المهمة")]),
       _vm._v(" "),
       _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحضات")]),
       _vm._v(" "),
-      _c("th", { staticStyle: { width: "20%" } }, [_vm._v("الوقت")]),
+      _c("th", { staticStyle: { width: "20%" } }, [_vm._v("التاريخ")]),
       _vm._v(" "),
       _c("th", [_vm._v("تم")])
     ])

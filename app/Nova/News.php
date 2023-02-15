@@ -102,7 +102,7 @@ class News extends Resource
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
             Boolean::make(__('is posted'), 'status')->rules('required'),
             Text::make(__('TITLE'), 'title')->rules('required'),
-            Textarea::make(__('description'), 'description')->rules('required'),
+            Textarea::make(__('Sub_text'), 'description')->rules('required'),
             Select::make(__('SECTOR'), 'sector')
                 ->options(function () {
                     $sectors = Sector::all();

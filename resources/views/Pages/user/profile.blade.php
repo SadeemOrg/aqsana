@@ -1,6 +1,7 @@
 @extends('layout.app', ['hasHeader' => false, 'hasFooter' => false, 'left_SideBar' => false])
 @section('content')
     @php
+    // dd("dd");
         $newDate = date('Y-m-d', strtotime($user['birth_date']));
         $StatWorknewDate = date('Y-m-d', strtotime($user['start_work_date']));
     @endphp
@@ -39,7 +40,7 @@
                             الشخصية</a>
                         <a href="#" target="_self" data-tab="tab-2"
                             class="tabs border-transparent text-[#101426] hover:text-[#349A37] hover:border-[1px] hover:border-b-[#349A37] w-1/2 sm:w-1/3 py-4 px-1 text-center sm:text-right border-b-2 font-FlatBold text-sm sm:text-[16px]">ساعات
-                            العمل</a>
+                            عملي</a>
                         <a href="#" target="_self" data-tab="tab-3"
                             class="tabs border-transparent text-[#101426] hover:text-[#349A37] hover:border-[1px] hover:border-b-[#349A37] w-1/2 sm:w-1/3 py-4 px-1 text-center sm:text-right border-b-2 font-FlatBold text-sm sm:text-[16px]">ساعات
                             عمل الموظفين</a>
@@ -174,8 +175,7 @@
                                 </div>
                             </div>
                             <div class="">
-                                <label for="city" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> البلد
-                                </label>
+                                <label for="city" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> البلدة  </label>
                                 <div class="mt-1">
                                     <input type="text" name="city" placeholder="الرجاء ادخال المدينة"
                                         value="{{ $user['city'] ? $user['city'] : '' }}"
@@ -273,11 +273,14 @@
                                 <label for="password" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> كلمة المرور
                                     الحالية
                                 </label>
+
                                 <div class="mt-1">
-                                    <input type="password" name="password" placeholder="كلمة المرور الحالية"
-                                        autocomplete="off"
+                                    <input type="password" id="myInput" name="password" placeholder="كلمة المرور الحالية"
+                                        autocomplete="off" value="10203040"
                                         class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-                                </div>
+                                        <input type="checkbox" onclick="myFunction()">Show Password
+
+                                    </div>
                                 @if ($errors->has('password'))
                                     <span class="text-red-700 ">{{ $errors->first('password') }}</span>
                                 @endif
@@ -349,3 +352,14 @@
 @endif
 @endsection
 
+<script>
+    function myFunction() {
+      var x = document.getElementById("myInput");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+
+    </script>
