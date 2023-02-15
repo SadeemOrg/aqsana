@@ -36,7 +36,9 @@ class volunteersHower extends Resource
      * @var string
      */
     public static $title = 'name';
-
+    public static function groupOrder() {
+        return 6 ;
+    }
     /**
      * The columns that should be searched.
      *

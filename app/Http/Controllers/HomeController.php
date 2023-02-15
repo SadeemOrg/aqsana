@@ -548,7 +548,7 @@ class HomeController extends Controller
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
-                    $PaymentType = "كاش";
+                    $PaymentType = "نقدي ";
                     break;
                 case 2:
                     $PaymentType = "شك";
@@ -613,7 +613,7 @@ class HomeController extends Controller
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
-                    $PaymentType = "كاش";
+                    $PaymentType = "نقدي ";
                     break;
                 case 2:
                     $PaymentType = "شك";
@@ -679,7 +679,7 @@ class HomeController extends Controller
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
-                    $PaymentType = "كاش";
+                    $PaymentType = "نقدي ";
                     break;
                 case 2:
                     $PaymentType = "شك";
@@ -763,7 +763,7 @@ class HomeController extends Controller
             if ($Transaction->lang == 1) {
                 switch ($Transaction->Payment_type) {
                     case 1:
-                        $PaymentType = "كاش";
+                        $PaymentType = "نقدي ";
                         break;
                     case 2:
                         $PaymentType = "شك";
@@ -826,7 +826,7 @@ class HomeController extends Controller
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
-                    $PaymentType = "كاش";
+                    $PaymentType = "نقدي ";
                     break;
                 case 2:
                     $PaymentType = "شك";

@@ -66,10 +66,16 @@
                     @if (count(\Laravel\Nova\Nova::globallySearchableResources(request())) > 0)
                         <global-search class="searchItem" dusk="global-search-component"></global-search>
                     @endif
+
                     <div class="ml-auto h-9 flex items-center dropdown-right">
                         <img class="rounded-full w-16 h-12 lg:hidden block mr-8 imgSideBar" src="/{{ $img }}" alt="">
                         <img class="rounded-full w-24 h-20 mr-3 lg:block hidden" src="/{{ $imgRight }}" alt="">
                     </div>
+
+                    <dropdown class=" h-9 flex items-center dropdown-right">
+
+                        @include('nova::partials.Notification')
+                    </dropdown>
                     <dropdown class=" h-9 flex items-center dropdown-right">
 
                         @include('nova::partials.user')

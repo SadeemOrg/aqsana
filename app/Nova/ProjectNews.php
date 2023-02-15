@@ -77,13 +77,13 @@ class ProjectNews extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            ActionButton::make(__('POST NEWS'))
-            ->action((new PostProjectNews) ->confirmText('Are you sure you want to read  this Massage?')
-            ->confirmButtonText(__('post'))
-            ->cancelButtonText(__('Dont post')), $this->id) ->readonly(function () {
-                return $this->report_status === '1';
-            })->text(__('post'))->showLoadingAnimation()
-            ->loadingColor('#fff') ->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+            // ActionButton::make(__('POST NEWS'))
+            // ->action((new PostProjectNews) ->confirmText('Are you sure you want to read  this Massage?')
+            // ->confirmButtonText(__('post'))
+            // ->cancelButtonText(__('Dont post')), $this->id) ->readonly(function () {
+            //     return $this->report_status === '1';
+            // })->text(__('post'))->showLoadingAnimation()
+            // ->loadingColor('#fff') ->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
 
             Select::make(__("project type"), "project_type")->options([
@@ -156,7 +156,7 @@ class ProjectNews extends Resource
     public function cards(Request $request)
     {
         return [
-            new FilterCard(new PostProjectFilters()),
+            // new FilterCard(new PostProjectFسilters()),
             new FilterCard(new ProjectTypeFilters()),
         ];
     }
