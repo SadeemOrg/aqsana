@@ -287,7 +287,8 @@ class HomeController extends Controller
     }
     public function SendMessage(Request $request)
     {
-        $TelephoneDirectory = TelephoneDirectory::where('type', '9')->get();
+
+        $TelephoneDirectory = TelephoneDirectory::where('type', $request->type)->get();
 
 
         $basic  = new \Nexmo\Client\Credentials\Basic('89302929', 'EcfCP1BjWhrTWJNZ');

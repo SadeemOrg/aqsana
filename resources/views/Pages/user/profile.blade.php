@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                             <div class="">
-                                <label for="city" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> البلدة  </label>
+                                <label for="city" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> البلد  </label>
                                 <div class="mt-1">
                                     <input type="text" name="city" placeholder="الرجاء ادخال المدينة"
                                         value="{{ $user['city'] ? $user['city'] : '' }}"

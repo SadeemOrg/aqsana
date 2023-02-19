@@ -22,6 +22,7 @@ class Sms extends Resource
      *
      * @var string
      */
+
     public static function label()
     {
         return __('Sms');
@@ -32,6 +33,7 @@ class Sms extends Resource
         }
     public static function availableForNavigation(Request $request)
     {
+        return false;
         if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("sms",  $request->user()->userrole()) )){
             return true;
         }

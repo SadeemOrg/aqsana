@@ -45,7 +45,7 @@ class User extends Resource
     public static $title = 'name';
     public static function label()
     {
-        return __('delegate');
+        return __('Creat delegate');
     }
     public static function group()
     {

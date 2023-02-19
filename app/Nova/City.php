@@ -149,7 +149,7 @@ class City extends Resource
                 BelongsTo::make(__('Qawafil_admin'), 'QawafilAdmin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                hasMany::make('User', 'User'),
+                // hasMany::make('User', 'User'),
             ];
         }
         return [

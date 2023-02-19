@@ -1,4 +1,4 @@
-<dropdown-trigger class="h-9 flex items-center">
+<dropdown-trigger class="h-9 flex items-center" style="appearance: none;">
 
 
     <strong class="relative inline-flex items-center rounded  border-gray-200 px-2.5 py-1.5 text-xs font-medium">

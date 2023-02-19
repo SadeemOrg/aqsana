@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Acme\Smssend\Smssend;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
@@ -24,7 +25,7 @@ class TelephoneDirectory extends Resource
     public static $title = 'name';
     public static function label()
     {
-        return __('TelephoneDirectory');
+        return __('SMS');
     }
     public static function group()
     {
@@ -102,7 +103,9 @@ class TelephoneDirectory extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new Smssend()
+        ];
     }
 
     /**
