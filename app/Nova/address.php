@@ -68,11 +68,11 @@ class address extends Resource
                 '1' => __('bus'),
                 '2' => __('Alhisalat'),
                 '3' => __('Project'),
-                '4' => __('addrese buss'),
+
             ])->displayUsingLabels()->rules('required'),
             Text::make(__('name address'), "name_address")->rules('required'),
             Text::make(__("description address"), "description")->rules('required'),
-            Text::make(__("phone number"), "phone_number_address")->rules('required'),
+            Text::make(__("phone number"), "phone_number_address"),
 
             // GoogleMaps::make(__('current_location'), 'current_location')
                 // ->zoom(8),

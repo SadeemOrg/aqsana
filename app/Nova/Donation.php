@@ -254,14 +254,14 @@ class Donation extends Resource
 
             // BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class),
 
-            ActionButton::make(__('Delet'))
-            ->action((new DeleteBill)->confirmText(__('Are you sure you want to Delet  this?'))
-                ->confirmButtonText(__('Delet'))
-                ->cancelButtonText(__('Dont Delet')), $this->id)
-            ->text(__('Delet'))->showLoadingAnimation() ->readonly(function () {
+            ActionButton::make(__('delete'))
+            ->action((new DeleteBill)->confirmText(__('Are you sure you want to delete  this?'))
+                ->confirmButtonText(__('delete'))
+                ->cancelButtonText(__('Dont delete')), $this->id)
+            ->text(__('delete'))->showLoadingAnimation() ->readonly(function () {
                 return $this->is_delete > 0;
-            })
-            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+            })->buttonColor('#FF0000')->svg('_Delete2')
+            ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
             Date::make(__('date'), 'transaction_date')->rules('required')->hideFromIndex(),
 
