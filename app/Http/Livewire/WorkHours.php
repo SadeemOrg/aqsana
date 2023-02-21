@@ -194,7 +194,7 @@ class WorkHours extends Component
                     $startTime = Carbon::parse($yesterdayWorkHours->end_time);
                     $finishTime = Carbon::parse($yesterdayWorkHours->start_time);
                     $totalDuration = $finishTime->diff($startTime)->format('%H:%I:%S');
-                    dd( $totalDuration);
+                    // dd( $totalDuration);
                     // $yesterdayWorkHours->save();
 
 
