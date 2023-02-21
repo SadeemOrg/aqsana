@@ -9,12 +9,10 @@ class WorkHours extends Model
 {
     use HasFactory;
     protected $fillable = [
-'user_id','day','date','start_time','end_time',
-'departure'
-
+    'user_id','day','date','start_time','end_time',
+    'departure','on_work'
     ];
     protected $casts = [
-
         'date'=>'date',
         'departure' => 'json',
     ];

@@ -12,7 +12,7 @@
                 <div dir="ltr" class="relative text-right">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                     </div>
-                 من
+                    من
                     <input type="date" wire:model="FromDate"
                         class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
                         placeholder="من">
@@ -33,7 +33,7 @@
                 <div class="-mt-2">
                     <button type="submit"
                         class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
-                    بحث
+                        بحث
                     </button>
                 </div>
             </div>
@@ -56,11 +56,11 @@
             </div>
         </div>
     @else
-        <div wire:click="stop" class=" mt-8 flex flex-row items-center justify-center">
+        <div class=" mt-8 flex flex-row items-center justify-center">
             <div wire:poll.1000ms class="w-60 h-60 rounded-[50%] bg-[#4F37FD] relative ">
                 <p class="absolute bottom-24 left-[25%] text-white text-3xl"> {{ $this->realTime }} </p>
-                <svg class=" absolute bottom-5 left-[45%] " width="34" height="54" viewBox="0 0 34 54"
-                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg wire:click="stop" class=" absolute bottom-5 left-[45%] " width="34" height="54"
+                    viewBox="0 0 34 54" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M6.42842 0C3.18431 0 0.555664 2.62982 0.555664 5.87276V48.1272C0.555664 51.3725 3.18431 54 6.42842 54C9.67253 54 12.3012 51.3714 12.3012 48.1272V5.87276C12.3012 2.62865 9.67371 0 6.42842 0Z"
                         fill="white" />
@@ -82,9 +82,10 @@
 
                     <div
                         class=" relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl sm:p-6">
-                        <button wire:click="closeModel">
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <button>
+                            <svg wire:click="closeModel" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
@@ -95,56 +96,39 @@
                                 <!--First One -->
                                 <div class="mt-2 selectdiv">
 
-                                    <select name="offer_id" id="parent_id" data-dependent="details"
-                                        wire:model="ModelSelct" wire:click="changeEvent($event.target.value)"
-                                        class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:border-[#349A37]">
-                                        <option value="0">
-                                            اختر
-                                        </option>
-                                        <option value="1">
-                                            انهاء دوام
-                                        </option>
-                                        <option value="2">
-                                            مغادرة
-                                        </option>
-
-
-
-
-                                    </select>
 
 
                                 </div>
-                                @if ($showTable == 2)
-                                    <div class="mt-2 selectdiv">
-                                        <select wire:model="Timeleave"
-                                            class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
-                                            <option selected value="">الوقت</option>
-                                            @foreach ($TimeDpartures as $TimeDparture)
-                                                <option value={{ $TimeDparture->attributes->time_departure }}>
-                                                    {{ $TimeDparture->attributes->title_departure }}
-                                                </option>
-                                            @endforeach
 
-                                        </select>
-                                    </div>
-                                    <div class="mt-2 selectdiv">
-                                        <select wire:model="leaveGoal" wire:click="changeEvent2($event.target.value)"
-                                            class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
-                                            <option selected value="">الرجاء
-                                                ادخال سبب المغادرة</option>
-                                            @foreach ($Reasons_to_stop as $Reasons)
-                                                <option value={{ $Reasons->attributes->Reasons_to_stop }}>
-                                                    {{ $Reasons->attributes->Reasons_to_stop }}
-                                                </option>
-                                            @endforeach
-                                            <option value="اخرى">
-                                                اخرى
+                                <div class="mt-2 selectdiv">
+                                    <select wire:model="Timeleave"
+                                        class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
+                                        <option selected value="">الوقت</option>
+                                        @foreach ($TimeDpartures as $TimeDparture)
+                                            <option value={{ $TimeDparture->attributes->time_departure }}>
+                                                {{ $TimeDparture->attributes->title_departure }}
                                             </option>
-                                        </select>
-                                    </div>
+                                        @endforeach
 
-                                @endif
+                                    </select>
+                                </div>
+                                <div class="mt-2 selectdiv">
+                                    <select wire:model="leaveGoal" wire:click="changeEvent2($event.target.value)"
+                                        class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
+                                        <option selected value="">الرجاء
+                                            ادخال سبب المغادرة</option>
+                                        @foreach ($Reasons_to_stop as $Reasons)
+                                            <option value={{ $Reasons->attributes->Reasons_to_stop }}>
+                                                {{ $Reasons->attributes->Reasons_to_stop }}
+                                            </option>
+                                        @endforeach
+                                        <option value="اخرى">
+                                            اخرى
+                                        </option>
+                                    </select>
+                                </div>
+
+
                                 @if ($showTable2 == 'اخرى' && $showTable == 2)
                                     <div class="ml-1  pt-6 px-8 lg:px-0 ">
                                         <textarea wire:model="leaveGoalTextarea" rows="4" name="message" placeholder="سبب المغادرة"
@@ -206,26 +190,29 @@
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             @php
-                            use Carbon\Carbon;
-
-                        @endphp
-                            @foreach ($WorkHourssearch as $WorkHoursearch)
-                            @php
-                                      $newTimeShape = date_format($WorkHoursearch->date, 'd/m/Y');
+                                use Carbon\Carbon;
 
                             @endphp
+                            @foreach ($WorkHourssearch as $WorkHoursearch)
+                                @php
+                                    $newTimeShape = date_format($WorkHoursearch->date, 'd/m/Y');
+
+                                @endphp
                                 <tr>
 
                                     <td
                                         class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
-                                        {{ $WorkHoursearch->day}}</td>
-                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">  {{  $newTimeShape}}</td>
+                                        {{ $WorkHoursearch->day }}</td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]"> {{ $newTimeShape }}
+                                    </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
 
-                                        {{ $WorkHoursearch->start_time}}
+                                        {{ $WorkHoursearch->start_time }}
                                     </td>
-                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">{{ $WorkHoursearch->end_time}}</td>
-                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">{{ $WorkHoursearch->day_hours}}
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                        {{ $WorkHoursearch->end_time }}</td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
+                                        {{ $WorkHoursearch->day_hours }}
                                     </td>
                                 </tr>
                             @endforeach
