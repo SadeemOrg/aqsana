@@ -14,17 +14,96 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('app.css', 'vendor/nova') }}">
-<style>
-    .tryThis{
-    justify-content: space-between;
-    }
-    .searchItem{
-        margin-right: 5%;
-    }
-    .imgSideBar{
-        margin-left: 4%;
-    }
-</style>
+    <style>
+        .tryThis {
+            justify-content: space-between;
+        }
+
+        .searchItem {
+            margin-right: 5%;
+        }
+
+        .imgSideBar {
+            margin-left: 4%;
+        }
+    </style>
+    <style>
+        .room-sort {
+            --tw-bg-opacity: 1;
+            background-color: rgb(21 128 61 / var(--tw-bg-opacity));
+            margin: 0;
+            padding: 0;
+            text-align: right;
+        }
+
+        .room-sort-menu ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        span.sort {
+            /* margin-right: 30px; */
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .sort-mobile {
+            display: none;
+        }
+
+        /* .room-sort-menu>li {
+            display: inline-block;
+            color: #fff;
+        } */
+
+        .room-sort-menu>li>a {
+            display: inline-block;
+            /* padding: 16px 30px; */
+            margin: 0;
+            font-size: 0.8em;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .room-sort-menu>li>a:hover,
+        .room-sort-menu>li>a:focus {}
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropMenu {
+            position: ;
+            display: none;
+            top: 46px;
+            left: 0px;
+            border: 1px solid color;
+            width: 109px;
+            background: rgb(21 128 61 / var(--tw-bg-opacity));
+            font-size: 0.8em;
+            z-index: 1;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .room-sort-menu li:last-of-type ul.dropMenu {
+            /* width: 166px; */
+        }
+
+        .dropMenu li a {
+            display: block;
+            padding: 7px 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .dropMenu li a:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(21 128 61 / var(--tw-bg-opacity));
+        }
+    </style>
     <!-- Tool Styles -->
     @foreach (\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
         @if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://']))
@@ -61,15 +140,18 @@
             </div>
             <!-- Content -->
             <div class="content">
-                <div class="tryThis flex items-center justify-between relative shadow h-header bg-white z-20 px-view  lg:h-24">
+                <div
+                    class="tryThis flex items-center justify-between relative shadow h-header bg-white z-20 px-view  lg:h-24">
                     <img class="rounded-full w-24 h-20 lg:block hidden mr-3" src="/{{ $img }}" alt="">
                     @if (count(\Laravel\Nova\Nova::globallySearchableResources(request())) > 0)
                         <global-search class="searchItem" dusk="global-search-component"></global-search>
                     @endif
 
                     <div class="ml-auto h-9 flex items-center dropdown-right">
-                        <img class="rounded-full w-16 h-12 lg:hidden block mr-8 imgSideBar" src="/{{ $img }}" alt="">
-                        <img class="rounded-full w-24 h-20 mr-3 lg:block hidden" src="/{{ $imgRight }}" alt="">
+                        <img class="rounded-full w-16 h-12 lg:hidden block mr-8 imgSideBar" src="/{{ $img }}"
+                            alt="">
+                        <img class="rounded-full w-24 h-20 mr-3 lg:block hidden" src="/{{ $imgRight }}"
+                            alt="">
                     </div>
 
                     <dropdown class=" h-9 flex items-center dropdown-right">
@@ -117,6 +199,49 @@
     <!-- Start Nova -->
     <script>
         Nova.liftOff()
+    </script>
+    <script>
+        (function() {
+
+            var dropBtns = document.querySelectorAll('.dropdown');
+
+            function closeOpenItems() {
+                openMenus = document.querySelectorAll('.dropMenu');
+                openMenus.forEach(function(menus) {
+                    menus.classList.remove('show');
+                });
+            }
+
+            dropBtns.forEach(function(btn) {
+
+                btn.addEventListener('click', function(e) {
+                    var
+                        dropContent = btn.querySelector('.dropMenu'),
+                        shouldOpen = !dropContent.classList.contains('show');
+                    e.preventDefault();
+
+                    // First close all open items.
+                    closeOpenItems();
+                    // Check if the clicked item should be opened. It is already closed at this point so no further action is required if it should be closed.
+                    if (shouldOpen) {
+                        // Open the clicked item.
+                        dropContent.classList.add('show');
+                    }
+                    e.stopPropagation();
+                });
+
+
+            });
+
+            //   close menus when clicking outside of them
+            window.addEventListener('click', function(event) {
+                if (event.target != dropBtns) {
+                    // Moved the code here to its own function.
+                    closeOpenItems();
+                }
+            });
+
+        })();
     </script>
 </body>
 

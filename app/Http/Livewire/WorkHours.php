@@ -34,6 +34,7 @@ class WorkHours extends Component
     public $showTable2;
     public $Timeleave;
     public $leaveGoalTextarea;
+    public $Timetimetime;
     public function changeEvent($value)
     {
         $this->showTable  = $value;
@@ -59,11 +60,11 @@ class WorkHours extends Component
         } else {
             $current = Carbon::now();
 
-            $array=$WorkHours->departure;
-            $array[sizeof($array) - 1]['return_time']=$current->toDateTimeString();
+            $array = $WorkHours->departure;
+            $array[sizeof($array) - 1]['return_time'] = $current->toDateTimeString();
 
             $WorkHours->fake_time = Carbon::now();
-            $WorkHours->departure= $array;
+            $WorkHours->departure = $array;
             $WorkHours->on_work = 1;
             $WorkHours->save();
         }
@@ -84,44 +85,44 @@ class WorkHours extends Component
         $user = Auth::user();
         $WorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::today())->first();
         // dd($this->ModelSelct);
-            // dd("de");
-            if ($WorkHours->departure == null) {
-                $schedule = array();
-                $pus = array(
-                    "Type" => ($this->leaveGoal == "اخرى") ? $this->leaveGoalTextarea : $this->leaveGoal,
-                    "required_time" => $this->Timeleave,
-                    "time_out" => Carbon::now()->toDateTimeString(),
-                    "return_time" =>  null,
-                );
+        // dd("de");
+        if ($WorkHours->departure == null) {
+            $schedule = array();
+            $pus = array(
+                "Type" => ($this->leaveGoal == "اخرى") ? $this->leaveGoalTextarea : $this->leaveGoal,
+                "required_time" => $this->Timeleave,
+                "time_out" => Carbon::now()->toDateTimeString(),
+                "return_time" =>  null,
+            );
 
-                array_push($schedule, $pus);
-                $WorkHours->departure = $schedule;
-                $WorkHours->day_hours = $this->realTime;
-                $WorkHours->on_work = 0;
-                $WorkHours->fake_time = null;
-                $WorkHours->save();
-            } else {
-                $pus = array(
-                    "Type" => ($this->leaveGoal == "اخرى") ? $this->leaveGoalTextarea : $this->leaveGoal,
-                    "required_time" => $this->Timeleave,
-                    "time_out" => Carbon::now()->toDateTimeString(),
-                    "return_time" =>  null,
-                );
+            array_push($schedule, $pus);
+            $WorkHours->departure = $schedule;
+            $WorkHours->day_hours = $this->realTime;
+            $WorkHours->on_work = 0;
+            $WorkHours->fake_time = null;
+            $WorkHours->save();
+        } else {
+            $pus = array(
+                "Type" => ($this->leaveGoal == "اخرى") ? $this->leaveGoalTextarea : $this->leaveGoal,
+                "required_time" => $this->Timeleave,
+                "time_out" => Carbon::now()->toDateTimeString(),
+                "return_time" =>  null,
+            );
 
-                $new =  $WorkHours->departure;
-                array_push($new, $pus);
+            $new =  $WorkHours->departure;
+            array_push($new, $pus);
 
-                $WorkHours->departure = $new;
-                $WorkHours->day_hours = $this->realTime;
-                $WorkHours->on_work = 0;
-                $WorkHours->fake_time = null;
-                $WorkHours->save();
-            }
+            $WorkHours->departure = $new;
+            $WorkHours->day_hours = $this->realTime;
+            $WorkHours->on_work = 0;
+            $WorkHours->fake_time = null;
+            $WorkHours->save();
+        }
 
 
-            $this->showModel = false;
-            // Auth::logout();
-            // return redirect('/Admin');
+        $this->showModel = false;
+        // Auth::logout();
+        // return redirect('/Admin');
 
     }
     public function sershWorkHours()
@@ -187,27 +188,37 @@ class WorkHours extends Component
                 }
             } else {
                 $yesterdayWorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::yesterday())->first();
-                if($yesterdayWorkHours->end_time ==null)
-                {
-                    $yesterdayWorkHours->end_time ="23:59:59";
-                    $yesterdayWorkHours->start_time;
-                    $startTime = Carbon::parse($yesterdayWorkHours->end_time);
-                    $finishTime = Carbon::parse($yesterdayWorkHours->start_time);
-                    $totalDuration = $finishTime->diff($startTime)->format('%H:%I:%S');
-                    // dd( $totalDuration);
-                    // $yesterdayWorkHours->save();
+                if ($yesterdayWorkHours != null) {
+                    if ($yesterdayWorkHours->end_time == null) {
+                        $yesterdayWorkHours->end_time = "23:59:59";
+                        $yesterdayWorkHours->start_time;
+                        $startTime = Carbon::parse($yesterdayWorkHours->end_time);
+                        $finishTime = Carbon::parse($yesterdayWorkHours->start_time);
+                        $totalDuration = $finishTime->diff($startTime)->format('%H:%I:%S');
+                        $yesterdayWorkHours->day_hours = $totalDuration;
+                        // $yesterdayWorkHours->save();
+                        // dd(Carbon::now()->minute );
+                        $this->Hours = Carbon::now()->hour;
+                        $this->minutes = Carbon::now()->minute;
+                        $this->Seconds = Carbon::now()->second;
 
-
-
-
+                        ModelsWorkHours::create([
+                            'user_id' => Auth::id(),
+                            'day' => Carbon::now()->locale('ar')->dayName,
+                            'date' => Carbon::now()->toDateTimeString(),
+                            'start_time' => "00:00:00",
+                            'on_work' => 1,
+                        ]);
+                    } else {
+                        $this->Hours = 0;
+                        $this->minutes = 0;
+                        $this->Seconds = 0;
+                    }
                 }
-                $this->Hours = 0;
-                $this->minutes = 0;
-                $this->Seconds = 0;
             }
 
-            $Timetimetime = "2014-12-12 0:00:00";
-            $this->enterDate = Carbon::createFromFormat('Y-m-d  H:i:s',  $Timetimetime);
+            $this->Timetimetime = "2014-12-12 0:00:00";
+            $this->enterDate = Carbon::createFromFormat('Y-m-d  H:i:s',  $this->Timetimetime);
             $this->enterDate =  $this->enterDate->addHour($this->Hours);
             $this->enterDate =  $this->enterDate->addMinute($this->minutes);
             $this->enterDate =  $this->enterDate->addSecond($this->Seconds);
