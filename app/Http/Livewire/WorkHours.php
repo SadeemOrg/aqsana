@@ -57,35 +57,40 @@ class WorkHours extends Component
                 'on_work' => 1,
             ]);
         } else {
+            $current = Carbon::now();
+
+            $array=$WorkHours->departure;
+            $array[sizeof($array) - 1]['return_time']=$current->toDateTimeString();
 
             $WorkHours->fake_time = Carbon::now();
+            $WorkHours->departure= $array;
             $WorkHours->on_work = 1;
             $WorkHours->save();
         }
+    }
+    public function EndWork()
+    {
+        $user = Auth::user();
+        $WorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::today())->first();
+
+        $WorkHours->day_hours = $this->realTime;
+        $WorkHours->end_time = Carbon::now();
+        $WorkHours->on_work = 0;
+        $WorkHours->fake_time = null;
+        $WorkHours->save();
     }
     public function ModelForm()
     {
         $user = Auth::user();
         $WorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::today())->first();
-        if ($this->ModelSelct == 1) {
-
-
-            $WorkHours->day_hours = $this->realTime;
-            $WorkHours->end_time = Carbon::now();
-            $WorkHours->on_work = 0;
-            $WorkHours->fake_time = null;
-            $WorkHours->save();
-            Auth::logout();
-            return redirect('/Admin');
-        }
-        if ($this->ModelSelct == 2) {
-            // dd($this->Timeleave,$this->leaveGoal,$this->leaveGoalTextarea);
+        // dd($this->ModelSelct);
+            // dd("de");
             if ($WorkHours->departure == null) {
                 $schedule = array();
                 $pus = array(
                     "Type" => ($this->leaveGoal == "اخرى") ? $this->leaveGoalTextarea : $this->leaveGoal,
-                    "required_time" =>$this->Timeleave ,
-                    "time_out" => Carbon::now(),
+                    "required_time" => $this->Timeleave,
+                    "time_out" => Carbon::now()->toDateTimeString(),
                     "return_time" =>  null,
                 );
 
@@ -98,8 +103,8 @@ class WorkHours extends Component
             } else {
                 $pus = array(
                     "Type" => ($this->leaveGoal == "اخرى") ? $this->leaveGoalTextarea : $this->leaveGoal,
-                    "required_time" =>$this->Timeleave ,
-                    "time_out" => Carbon::now(),
+                    "required_time" => $this->Timeleave,
+                    "time_out" => Carbon::now()->toDateTimeString(),
                     "return_time" =>  null,
                 );
 
@@ -114,10 +119,10 @@ class WorkHours extends Component
             }
 
 
+            $this->showModel = false;
+            // Auth::logout();
+            // return redirect('/Admin');
 
-            Auth::logout();
-            return redirect('/Admin');
-        }
     }
     public function sershWorkHours()
     {
@@ -141,6 +146,7 @@ class WorkHours extends Component
 
     public function render()
     {
+
         if ($this->hide == 1) {
             $user = Auth::user();
             $WorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::today())->first();
@@ -180,10 +186,26 @@ class WorkHours extends Component
                     // dd($this->Hours);
                 }
             } else {
+                $yesterdayWorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::yesterday())->first();
+                if($yesterdayWorkHours->end_time ==null)
+                {
+                    $yesterdayWorkHours->end_time ="23:59:59";
+                    $yesterdayWorkHours->start_time;
+                    $startTime = Carbon::parse($yesterdayWorkHours->end_time);
+                    $finishTime = Carbon::parse($yesterdayWorkHours->start_time);
+                    $totalDuration = $finishTime->diff($startTime)->format('%H:%I:%S');
+                    dd( $totalDuration);
+                    // $yesterdayWorkHours->save();
+
+
+
+
+                }
                 $this->Hours = 0;
                 $this->minutes = 0;
                 $this->Seconds = 0;
             }
+
             $Timetimetime = "2014-12-12 0:00:00";
             $this->enterDate = Carbon::createFromFormat('Y-m-d  H:i:s',  $Timetimetime);
             $this->enterDate =  $this->enterDate->addHour($this->Hours);
@@ -204,8 +226,6 @@ class WorkHours extends Component
             $to = date('2022-12-31');
 
             $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$newDateTime, $currentDateTime])->get();
-
-
         }
         $this->Reasons_to_stop = nova_get_setting('Reasons_to_stop', 'Reasons_to_stop');
         $this->Reasons_to_stop = json_decode($this->Reasons_to_stop);

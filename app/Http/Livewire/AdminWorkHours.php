@@ -4,7 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use App\Models\WorkHours;
+use Carbon\Carbon;
 use Livewire\Component;
+
 class AdminWorkHours extends Component
 {
     public $users;
@@ -13,19 +15,138 @@ class AdminWorkHours extends Component
     public $Name;
     public $WorkHourssearch;
     public $sumWorkHourssearch;
-
+    public $showEditModel = false;
+    public $showAddModel = false;
+    public $showNoteModels = false;
+    public $ModelId=0;
+    public $EditWorkHours;
+    public $date;
+    public $start_time;
+    public $end_time;
+    public $day_hours;
+    public $userId;
+    public $Notes;
+    public $notedate = [];
     public function sershWorkHours()
     {
         $from = date($this->FromDate);
-        $to = date( $this->ToDate);
+        $to = date($this->ToDate);
 
-        $this->WorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id",$this->Name)->get();
+        $this->WorkHourssearch =    WorkHours::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->get();
+        $string = '000000';
+        $date = Carbon::parse($string);
+        // dd($date);
+        // $date1->add($date2->diff($date1));
+        foreach ($this->WorkHourssearch as $key => $value) {
+            if ($value->day_hours != null) {
+                $time2 = Carbon::parse($value->day_hours);
+                $hours = $time2->hour;
+                $minutes = $time2->minute;
+                $seconds = $time2->second;
 
-    $this->sumWorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id",$this->Name)->sum('day_hours');
+                $date->addSeconds($seconds)->addMinutes($minutes)->addHours($hours);
+            }
+        }
+        $formatted = $date->format('H:i:s');
+        $this->sumWorkHourssearch = $formatted;
+        // dd($this->WorkHourssearch,   $this->sumWorkHourssearch);
+        // $this->sumWorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->sum('day_hours');
+        // dd();
+    }
+    public function showEditModels($id)
+    {
+        $this->EditWorkHours =    WorkHours::find($id);
+        $this->date=$this->EditWorkHours->date;
+        $this->start_time= $this->EditWorkHours->start_time;
+        $this->end_time= $this->EditWorkHours->end_time;
+        $this->day_hours= $this->EditWorkHours->day_hours;
+        $this->ModelId=$id;
+        $this->showEditModel = true;
+    }
+
+    public function closeEditModel()
+    {
+
+        $this->showEditModel = false;
+    }
+    public function EditDay()
+    {
+
+        // dd($this->date);
+      $EditWorkHours =    WorkHours::find($this->ModelId);
+       $EditWorkHours->date=$this->date;
+       $EditWorkHours->start_time=$this->start_time;
+       $EditWorkHours->end_time=$this->end_time;
+       $EditWorkHours->day_hours=$this->day_hours;
+       $EditWorkHours->update();
+        // dd($this->ModelId);
+        $this->showEditModel = true;
+    }
+    public function showAddModels()
+    {
+        // $this->EditWorkHours =    WorkHours::find($id);
+        // $this->date=$this->EditWorkHours->date;
+        // $this->start_time= $this->EditWorkHours->start_time;
+        // $this->end_time= $this->EditWorkHours->end_time;
+        // $this->day_hours= $this->EditWorkHours->day_hours;
+        // $this->ModelId=$id;
+        $this->showAddModel = true;
+    }
+    public function closeAddModel()
+    {
+
+        $this->showAddModel = false;
+    }
+    public function AddDay()
+    {
+
+        $EditWorkHours= new  WorkHours();
+        $EditWorkHours->user_id=$this->ModelId;
+        $EditWorkHours->date=$this->date;
+        $EditWorkHours->day="السب";
+        $EditWorkHours->start_time=$this->start_time;
+        $EditWorkHours->end_time=$this->end_time;
+        $EditWorkHours->day_hours=$this->day_hours;
+        $EditWorkHours->save();
+        $this->showAddModel = false;
+    }
+    public function showNoteModels($id)
+    {
+
+        $EditWorkHours =    WorkHours::find($id);
+        $this->Notes=$EditWorkHours->departure;
+        $this->notedate=$EditWorkHours->departure;
+        $this->ModelId=$id;
+        // dd( $this->Notes);
+        // $this->date=$this->EditWorkHours->date;
+        // $this->start_time= $this->EditWorkHours->start_time;
+        // $this->end_time= $this->EditWorkHours->end_time;
+        // $this->day_hours= $this->EditWorkHours->day_hours;
+        // $this->ModelId=$id;
+        $this->showNoteModels = true;
+    }
+    public function closeNoteModels()
+    {
+
+        $this->showNoteModels = false;
+    }
+    public function EditNote()
+    {
+        $EditWorkHours =    WorkHours::find($this->ModelId);
+
+        $EditWorkHours->departure=$this->notedate;
+        $EditWorkHours->update();
+        $this->showNoteModels = false;
+        // dd($this->notedate);
+    }
+    public function Delete($id)
+    {
+        WorkHours::destroy($id);
+
     }
     public function render()
     {
-        $this->users= User::all();
+        $this->users = User::all();
         return view('livewire.admin-work-hours');
     }
 }
