@@ -80,7 +80,8 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-
-     alpha/css/bootstrap.css" rel="stylesheet">
+     alpha/css/bootstrap.css"
+        rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -249,6 +250,46 @@
                 $(".selectdiv").show();
             }
         });
+
+        function handelFocusAdminDateFrom() {
+            $('#hidePlaceHolderDateAdminFrom').attr('type', 'date');
+            $(".svgFoucusAdminFrom").css('display', 'none');
+        }
+
+        function handelFocusAdminDateTo() {
+            $('#hidePlaceHolderDateAdminTo').attr('type', 'date');
+            $(".svgFoucusAdminTo").css('display', 'none');
+        }
+
+        function handelInputtimeFrom() {
+            $('.foucsTimeStart').attr('type', 'time');
+        }
+
+        function handelInputtimeTo() {
+            $('.foucsTimeEnd').attr('type', 'time');
+        }
+
+        function handelFocusDatePopup() {
+            $('.hidePlaceHolderDatePopUp').attr('type', 'date');
+        }
+
+        function handelEditNotesInputtimeFrom() {
+            $('.foucsEditTimeStart').attr('type', 'time');
+        }
+
+        function handelInputEditNotestimeTo() {
+            $('.foucsEditTimeEnd').attr('type', 'time');
+        }
+
+        function handelFocusWorkHourFrom() {
+            $('#hidePlaceHolderDateWorkHourFrom').attr('type', 'date');
+            $(".svgFoucusWorkHourFrom").css('display', 'none');
+        }
+
+        function handelFocusWorkerHourTo() {
+            $('#hidePlaceHolderDateWorkHourTo').attr('type', 'date');
+            $(".svgFoucusWorkHourTo").css('display', 'none');
+        }
 
         // ajax for Dropdown Search
 
@@ -994,7 +1035,7 @@
             var $Mail = $('input[name="Mail"]').val();
             var $id = $('input[name="id"]').val();
 
-            console.log("hello",$Mail,$id);
+            console.log("hello", $Mail, $id);
             $.ajax({
                 type: "get",
                 url: "/SendMail",
