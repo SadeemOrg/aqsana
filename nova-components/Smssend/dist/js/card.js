@@ -270,11 +270,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      Message: ""
+      Message: "",
+      selectval: []
     };
   },
 
@@ -282,11 +298,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     send: function send() {
-      alert(this.Message);
+
       axios.post("/SendMessage", {
+        type: this.selectval,
         Message: this.Message
       }).then(function (response) {
-        alert('Message Send ');
+        alert("Message Send ");
       });
     }
   }
@@ -315,13 +332,70 @@ var render = function() {
       [
         _c("div", { staticClass: "mb-6 p-12" }, [
           _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.selectval,
+                  expression: "selectval"
+                }
+              ],
+              staticClass:
+                "w-full form-control form-input form-input-bordered mb-4",
+              attrs: { name: "LeaveTypde" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.selectval = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "1" } }, [
+                _vm._v("متبرعين سجب ثابت ")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "2" } }, [
+                _vm._v(" متبرعين لمرة واحدة")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "3" } }, [_vm._v("مندوبين ")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "4" } }, [_vm._v("متطوعين ")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "5" } }, [
+                _vm._v("جهات اتصال عامة ")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "6" } }, [_vm._v(" مرشدين")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "7" } }, [_vm._v(" منح")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "8" } }, [_vm._v("شركات")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "9" } }, [_vm._v(" Sms")])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
             "label",
             {
               staticClass:
                 "block mb-2 text-xl font-medium text-gray-900 dark:text-white",
               attrs: { for: "default-input" }
             },
-            [_vm._v("ادخل نص الرسالة\n        ")]
+            [_vm._v("ادخل نص الرسالة\n      ")]
           ),
           _vm._v(" "),
           _c("input", {
