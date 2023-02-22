@@ -209,11 +209,12 @@ class WorkHours extends Component
                             'start_time' => "00:00:00",
                             'on_work' => 1,
                         ]);
-                    } else {
-                        $this->Hours = 0;
-                        $this->minutes = 0;
-                        $this->Seconds = 0;
                     }
+                }
+                else {
+                    $this->Hours = 0;
+                    $this->minutes = 0;
+                    $this->Seconds = 0;
                 }
             }
 

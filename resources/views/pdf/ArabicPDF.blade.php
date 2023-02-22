@@ -166,7 +166,7 @@
             </tbody>
             </tr>
         </table>
-    @elseif($PaymentType == 'كاش')
+    @elseif($PaymentType == 'نقدي')
         <table dir="rtl" class="blueTable">
             <thead>
                 <tr>
