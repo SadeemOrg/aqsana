@@ -94,7 +94,7 @@
 
         .dropMenu li a {
             display: block;
-            padding: 7px 20px;
+            padding: 7px ;
             color: #fff;
             text-decoration: none;
         }

@@ -2,7 +2,7 @@
     use Carbon\Carbon;
     use App\Models\User;
 @endphp
-<div wire:poll.1000ms class="flex ">
+<div  class="flex ">
 
     <div x-data="{ dropdownOpen: false }" class="relative ">
 
