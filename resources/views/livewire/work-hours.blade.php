@@ -2,46 +2,54 @@
 
 
     <!--Perosonal Information -->
-    <div class="flex sm:flex-row flex-col gap-y-4 sm:gap-y-0 items-center justify-between mt-8">
-        <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات عملي</p>
-        <form wire:submit.prevent="sershWorkHours">
-            <div class="flex flex-row items-center  gap-x-2 ">
+    <form class="Wraper" wire:submit.prevent="searchWorkHours">
+        <div
+            class="flex sm:flex-row flex-col gap-y-4 lg:gap-y-0 items-start lg:flex-nowrap flex-wrap justify-center md:justify-between mt-8">
+            <p class="font-FlatBold w-full text-xl sm:text-[22px] text-center  lg:mt-0 xl:text-right">ساعات عملي</p>
+            <div class=" flex flex-row items-center flex-wrap justify-center md:flex-nowrap md:gap-y-0 gap-y-2 w-full gap-x-2 ">
                 <!--Date Picker -->
-
-
-                <div dir="ltr" class="relative text-right">
-                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <div dir="ltr" class=" relative w-[90%] sm:w-[40%] md:w-[207px] h-12">
+                    <div
+                        class="svgFoucusWorkHourFrom absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                clip-rule="evenodd"></path>
+                        </svg>
                     </div>
-                    من
-                    <input type="date" wire:model="FromDate"
-                        class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
-                        placeholder="من">
+                    <input id="hidePlaceHolderDateWorkHourFrom" type="text"
+                        class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
+                        placeholder=" من تاريخ" type="text" onfocus="handelFocusWorkHourFrom()">
                 </div>
-                <div dir="ltr" class="relative text-right">
-                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <!--to Date  -->
+                <div dir="ltr" class="relative w-[90%] sm:w-[40%] md:w-[207px] h-12">
+                    <div
+                        class="svgFoucusWorkHourTo absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
+                        <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                clip-rule="evenodd"></path>
+                        </svg>
                     </div>
-                    الى
-
-                    <input type="date" wire:model="ToDate"
-                        class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
-                        placeholder="من">
+                    <input id="hidePlaceHolderDateWorkHourTo" type="text"
+                        class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
+                        placeholder=" الى تاريخ" onfocus="handelFocusWorkerHourTo()">
                 </div>
-
-
-
                 <!--end Picker -->
-                <div class="-mt-2">
+                <div class="w-full flex justify-center md:w-auto h-12">
                     <button type="submit"
-                        class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                        class="connectUs w-[90%] md:w-36 duration-200 text-center px-5 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
                         بحث
                     </button>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
     <!--End Perosonal Information -->
     <!--Start Timer -->
-    @if ($hide)
+    {{-- @if ($hide)
         <div wire:click="StartTimerWorkHours" class="mt-8 flex flex-row items-center justify-center">
             <div wire:poll.1000ms class="w-60 h-60 rounded-[50%] bg-[#4F37FD] relative ">
                 @if ($this->realTime)
@@ -70,7 +78,37 @@
                 </svg>
             </div>
         </div>
-    @endif
+    @endif --}}
+
+
+    <div class="flex flex-row items-start justify-center gap-x-4 my-10 md:my-20 flex-wrap gap-y-4 md:gap-y-0 md:flex-nowrap">
+        <div class="max-w-[90%] sm:max-w-[65%] md:max-w-[300px] cursor-pointer w-full flex items-center justify-center h-12 rounded-[30px] md:rounded-none md:h-28 bg-[#349A37]">
+            <p class="text-white text-2xl">0:0:0</p>
+        </div>
+       <div class="cursor-pointer min-w-[163px]  mb-12">
+        <svg class="h-16 md:h-[114px] " width="163" height="114" viewBox="0 0 163 114" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <rect width="163" height="114" rx="6" fill="#349A37" />
+            <g clip-path="url(#clip0_59_1521)">
+                <path
+                    d="M98.4 34H61.6C59.0654 34 57 36.0654 57 38.6V75.4C57 77.9346 59.0654 80 61.6 80H98.4C100.935 80 103 77.9346 103 75.4V38.6C103 36.0654 100.935 34 98.4 34Z"
+                    fill="white" />
+            </g>
+            <defs>
+                <clipPath id="clip0_59_1521">
+                    <rect width="46" height="46" fill="white" transform="translate(57 34)" />
+                </clipPath>
+            </defs>
+        </svg>
+    </div>
+<div class="cursor-pointer min-w-[163px]  mb-12">
+        <svg  class="h-16 md:h-[114px]" width="163" height="114" viewBox="0 0 163 114" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <rect width="163" height="114" rx="6" fill="#349A37" />
+            <path d="M64 80V34L102.927 57.0011L64 80Z" fill="white" />
+        </svg>
+    </div>
+    </div>
 
     <!--start reason popup Timer -->
     @if ($this->showModel == true)
@@ -161,13 +199,12 @@
 
 
     <div class="px-4 sm:px-6 lg:px-8 mt-8">
-        <div class="mt-8 flex flex-col">
+        <div class="mt-8 flow-root">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                    <table class="min-w-full divide-y divide-gray-300">
+                    <table class="min-w-full divide-y divide-gray-300 border-2">
                         <thead>
                             <tr>
-
                                 <th scope="col"
                                     class="py-3.5 pl-4 pr-3 text-right text-sm font-semibold text-[#349A37] ">
                                     اليوم</th>
@@ -191,12 +228,12 @@
                         <tbody class="divide-y divide-gray-200">
                             @php
                                 use Carbon\Carbon;
-
+                                
                             @endphp
                             @foreach ($WorkHourssearch as $WorkHoursearch)
                                 @php
                                     $newTimeShape = date_format($WorkHoursearch->date, 'd/m/Y');
-
+                                    
                                 @endphp
                                 <tr>
 
