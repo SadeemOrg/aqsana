@@ -146,7 +146,8 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            @elseif($PaymentType == 'كاش')
+                            @elseif($PaymentType == 'نقدي')
+
                                 <table class="min-w-full divide-y md:divide-gray-200 divide-black">
                                     <thead class="bg-[#349A37]">
                                         <tr class="">
