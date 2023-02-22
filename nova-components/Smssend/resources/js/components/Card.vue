@@ -2,6 +2,11 @@
   <card class="flex flex-col">
     <form @submit.prevent="onSubmit" method="get">
       <div class="mb-6 p-12">
+        <label
+          for="default-input"
+          class="block mb-2 text-xl font-medium text-gray-900 dark:text-white"
+          >اختر الفئة
+        </label>
         <select
           class="w-full form-control form-input form-input-bordered mb-4 "
           name="LeaveTypde"
