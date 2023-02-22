@@ -83,11 +83,68 @@ svg path, svg circle {transition: .2s;}
 
 
 
+.input-field{
+  height: calc(1.5em + 1rem + 2px);
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+  display: block;
+  width: 40%;
+  font-weight: 400;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 2px solid black;
+
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: none;
+  background-repeat:  no-repeat;
+  width: 25px;
+  height: 25px;
+  border-width: thin
+}
+.Wraper input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  background-image: url( "https://cdn.discordapp.com/attachments/938405759996276806/1077572091714482176/Vector_1.png" );
+
+  left: 5%;
+  display: flex;
+  height: 16px;
+}
+.Wraper2 input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  background-image: url( "https://cdn.discordapp.com/attachments/938405759996276806/1077572091714482176/Vector_1.png" );
+
+  left: 8%;
+  display: flex;
+  height: 16px;
+}
+input::-webkit-datetime-edit-fields-wrapper {
+  position: relative;
+  right: 8%;
+}
+input::-webkit-datetime-edit {
+  position: relative;
+  left: 10%;
+}
 
 
+.selectwhorkHour{
+  background-position: left .5rem center;
+  
+}
 
-
-
+#inputy_d{
+  box-shadow: 2px 2px 5px black;
+  width: 20%;
+  margin-left: 0px;
+  margin-right: auto;
+}
 
 
 

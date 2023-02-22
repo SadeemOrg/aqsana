@@ -27,12 +27,12 @@ class AdminWorkHours extends Component
     public $userId;
     public $Notes;
     public $notedate = [];
-    public function sershWorkHours()
+
+    public function searchWorkHours()
     {
         $from = date($this->FromDate);
         $to = date($this->ToDate);
-
-        $this->WorkHourssearch =    WorkHours::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->get();
+        $this->WorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->get();
         $string = '000000';
         $date = Carbon::parse($string);
         // dd($date);
