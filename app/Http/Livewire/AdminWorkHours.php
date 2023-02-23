@@ -18,7 +18,7 @@ class AdminWorkHours extends Component
     public $showEditModel = false;
     public $showAddModel = false;
     public $showNoteModels = false;
-    public $ModelId=0;
+    public $ModelId = 0;
     public $EditWorkHours;
     public $date;
     public $start_time;
@@ -32,7 +32,9 @@ class AdminWorkHours extends Component
     {
         $from = date($this->FromDate);
         $to = date($this->ToDate);
+        // dd( $from,$to,$this->Name);
         $this->WorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->get();
+        //   dd($this->WorkHourssearch );
         $string = '000000';
         $date = Carbon::parse($string);
         // dd($date);
@@ -56,11 +58,11 @@ class AdminWorkHours extends Component
     public function showEditModels($id)
     {
         $this->EditWorkHours =    WorkHours::find($id);
-        $this->date=$this->EditWorkHours->date;
-        $this->start_time= $this->EditWorkHours->start_time;
-        $this->end_time= $this->EditWorkHours->end_time;
-        $this->day_hours= $this->EditWorkHours->day_hours;
-        $this->ModelId=$id;
+        $this->date = $this->EditWorkHours->date;
+        $this->start_time = $this->EditWorkHours->start_time;
+        $this->end_time = $this->EditWorkHours->end_time;
+        $this->day_hours = $this->EditWorkHours->day_hours;
+        $this->ModelId = $id;
         $this->showEditModel = true;
     }
 
@@ -73,14 +75,15 @@ class AdminWorkHours extends Component
     {
 
         // dd($this->date);
-      $EditWorkHours =    WorkHours::find($this->ModelId);
-       $EditWorkHours->date=$this->date;
-       $EditWorkHours->start_time=$this->start_time;
-       $EditWorkHours->end_time=$this->end_time;
-       $EditWorkHours->day_hours=$this->day_hours;
-       $EditWorkHours->update();
+        $EditWorkHours =    WorkHours::find($this->ModelId);
+        $EditWorkHours->date = $this->date;
+        $EditWorkHours->start_time = $this->start_time;
+        $EditWorkHours->end_time = $this->end_time;
+        $EditWorkHours->day_hours = $this->day_hours;
+        $EditWorkHours->update();
         // dd($this->ModelId);
-        $this->showEditModel = true;
+        $this->showEditModel = false;
+        $this->searchWorkHours();
     }
     public function showAddModels()
     {
@@ -99,14 +102,14 @@ class AdminWorkHours extends Component
     }
     public function AddDay()
     {
-
-        $EditWorkHours= new  WorkHours();
-        $EditWorkHours->user_id=$this->ModelId;
-        $EditWorkHours->date=$this->date;
-        $EditWorkHours->day="السب";
-        $EditWorkHours->start_time=$this->start_time;
-        $EditWorkHours->end_time=$this->end_time;
-        $EditWorkHours->day_hours=$this->day_hours;
+        // dd($this->start_time);
+        $EditWorkHours = new  WorkHours();
+        $EditWorkHours->user_id = $this->ModelId;
+        $EditWorkHours->date = $this->date;
+        $EditWorkHours->day = "السب";
+        $EditWorkHours->start_time = $this->start_time;
+        $EditWorkHours->end_time = $this->end_time;
+        $EditWorkHours->day_hours = $this->day_hours;
         $EditWorkHours->save();
         $this->showAddModel = false;
     }
@@ -114,9 +117,9 @@ class AdminWorkHours extends Component
     {
 
         $EditWorkHours =    WorkHours::find($id);
-        $this->Notes=$EditWorkHours->departure;
-        $this->notedate=$EditWorkHours->departure;
-        $this->ModelId=$id;
+        $this->Notes = $EditWorkHours->departure;
+        $this->notedate = $EditWorkHours->departure;
+        $this->ModelId = $id;
         // dd( $this->Notes);
         // $this->date=$this->EditWorkHours->date;
         // $this->start_time= $this->EditWorkHours->start_time;
@@ -134,15 +137,24 @@ class AdminWorkHours extends Component
     {
         $EditWorkHours =    WorkHours::find($this->ModelId);
 
-        $EditWorkHours->departure=$this->notedate;
+        $EditWorkHours->departure = $this->notedate;
         $EditWorkHours->update();
         $this->showNoteModels = false;
-        // dd($this->notedate);
+    }
+    public function DeleteNote($id)
+    {
+        // dd($id);
+        $EditWorkHours =    WorkHours::find($this->ModelId);
+        unset($this->notedate[$id]);
+        $EditWorkHours->departure = $this->notedate;
+
+        $EditWorkHours->update();
+        $this->showNoteModels = false;
     }
     public function Delete($id)
     {
         WorkHours::destroy($id);
-
+        $this->searchWorkHours();
     }
     public function render()
     {
