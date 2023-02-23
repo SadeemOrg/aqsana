@@ -45,7 +45,7 @@ class WorkHours extends Component
     }
     public function StartTimerWorkHours()
     {
-
+        $this->render();
         $this->hide = 0;
         $user = Auth::user();
         $WorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::today())->first();
@@ -74,10 +74,14 @@ class WorkHours extends Component
     }
     public function EndWork()
     {
+        $this->hide = 1;
         $this->render();
+
+
         $user = Auth::user();
         $WorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::today())->first();
         if ($WorkHours != null) {
+            // dd($this->realTime);
             $WorkHours->day_hours = $this->realTime;
             $WorkHours->end_time = Carbon::now();
             $WorkHours->on_work = 0;
@@ -91,6 +95,7 @@ class WorkHours extends Component
     public function ModelForm()
     {
         // dd("dd");
+        $this->hide =1;
         $this->render();
 
         $user = Auth::user();
@@ -108,6 +113,7 @@ class WorkHours extends Component
 
             array_push($schedule, $pus);
             $WorkHours->departure = $schedule;
+
             $WorkHours->day_hours = $this->realTime;
             $WorkHours->on_work = 0;
             $WorkHours->fake_time = null;
@@ -173,13 +179,14 @@ class WorkHours extends Component
                         $days = $startDate->diffInDays($endDate);
                         $this->Hours = $startDate->copy()->addDays($days)->diffInHours($endDate);
                         $this->minutes = $startDate->copy()->addDays($days)->addHours($this->Hours)->diffInMinutes($endDate);
-                        $this->Seconds = $startDate->copy()->addDays($days)->addHours($this->Hours)->addMinute($this->minutes)->diffInMinutes($endDate);
+                        $this->Seconds = $startDate->copy()->addDays($days)->addHours($this->Hours)->addMinute($this->minutes)->diffInSeconds($endDate);
                         $oldttime = Carbon::parse($WorkHours->day_hours);
                         // dd($oldttime->minute, $this->minutes);
                         $this->Hours += $oldttime->hour;
                         $this->minutes += $oldttime->minute;
                         $this->Seconds += $oldttime->second;
                     } else {
+                        // dd("dd");
                         $starttime = Carbon::parse($WorkHours->start_time);
                         $finishTime = Carbon::now();
                         $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
@@ -187,7 +194,8 @@ class WorkHours extends Component
                         $days = $startDate->diffInDays($endDate);
                         $this->Hours = $startDate->copy()->addDays($days)->diffInHours($endDate);
                         $this->minutes = $startDate->copy()->addDays($days)->addHours($this->Hours)->diffInMinutes($endDate);
-                        $this->Seconds = $startDate->copy()->addDays($days)->addHours($this->Hours)->addMinute($this->minutes)->diffInMinutes($endDate);
+                        $this->Seconds = $startDate->copy()->addDays($days)->addHours($this->Hours)->addMinute($this->minutes)->diffInSeconds($endDate);
+
                     }
                 } else {
 
@@ -234,6 +242,7 @@ class WorkHours extends Component
             $this->enterDate =  $this->enterDate->addMinute($this->minutes);
             $this->enterDate =  $this->enterDate->addSecond($this->Seconds);
             $this->realTime =  $this->enterDate->format('H:i:s');
+            // dd(  $this->realTime s);
         }
 
 
