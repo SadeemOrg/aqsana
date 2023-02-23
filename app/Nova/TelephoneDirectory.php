@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Acme\MultiselectField\Multiselect;
 use Acme\Smssend\Smssend;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
@@ -68,7 +69,7 @@ class TelephoneDirectory extends Resource
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
-            Select::make(__('type'), 'type')->options([
+                Multiselect::make(__('type'), 'type')->options([
                 1 => __('متبرعين سجب ثابت'),
                 2 => __('متبرعين لمرة واحدة '),
                 3 => __('مندوبين'),
@@ -80,12 +81,12 @@ class TelephoneDirectory extends Resource
                 9 => __('Sms'),
 
 
-            ])->displayUsingLabels()->rules('required'),
+            ])->rules('required'),
 
             Text::make(__('phone_number'),'phone_number'),
             Text::make(__('city'),'city'),
             Text::make(__('note'),'note'),
-            Text::make(__('job'),'job'),
+            Text::make(__('job'),'jop'),
             Text::make(__('id_number'),'id_number'),
 
 

@@ -104,7 +104,8 @@
                 </defs>
             </svg>
         </div>
-        <div id="start_timer" wire:click="StartTimerWorkHours"    class="cursor-pointer min-w-[163px]  mb-12">
+        @if ($hide)
+        <div id="start_timer" onclick="start()"  wire:click="StartTimerWorkHours"    class="cursor-pointer min-w-[163px]  mb-12">
 
             <svg class="h-16 md:h-[114px]" width="163" height="114" viewBox="0 0 163 114" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -112,12 +113,22 @@
                 <path d="M64 80V34L102.927 57.0011L64 80Z" fill="white" />
             </svg>
         </div>
+            @else
+
         <div  id="stop_timer"  wire:click="stop" class="cursor-pointer min-w-[163px]  mb-12">
             <svg width="163" height="114" viewBox="0 0 163 114" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="163" height="114" rx="6" fill="#349A37" />
+                <path
+                    d="M72.0027 34C69.2392 34 67 36.2402 67 39.0027V74.9973C67 77.7618 69.2392 80 72.0027 80C74.7662 80 77.0054 77.7608 77.0054 74.9973V39.0027C77.0054 36.2392 74.7672 34 72.0027 34Z"
+                    fill="white" />
+                <path
+                    d="M90.0125 34C87.249 34 85.0098 36.2402 85.0098 39.0027V74.9973C85.0098 77.7608 87.249 80 90.0125 80C92.776 80 95.0152 77.7608 95.0152 74.9973V39.0027C95.0152 36.2402 92.776 34 90.0125 34Z"
+                    fill="white" />
             </svg>
 
         </div>
+        @endif
+
     </div>
 
     <!--start reason popup Timer -->
@@ -312,13 +323,8 @@
     if (hide == 0) {
 
         start();
-        document.getElementById("start_timer").style.display = "none";
-
-
-
-
     } else {
-        document.getElementById("stop_timer").style.display = "none";
+
         document.getElementById("timer").innerHTML = regExTimeArr[1] + ":" + regExTimeArr[2] + ":" + regExTimeArr[3];
 
 
@@ -326,10 +332,9 @@
     }
 
     function start() {
-        document.getElementById("start_timer").style.display = "none";
-        timerVar = setInterval(countTimer, 1000);
 
-        document.getElementById("stop_timer").style.display = "block";
+     timerVar = setInterval(countTimer, 1000);
+
 
     }
 
@@ -343,6 +348,7 @@
     }
 
     function countTimer() {
+
         ++totalSeconds;
         var hour = Math.floor(totalSeconds / 3600);
         var minute = Math.floor((totalSeconds - hour * 3600) / 60);
