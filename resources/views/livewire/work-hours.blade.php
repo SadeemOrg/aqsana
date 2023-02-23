@@ -189,7 +189,7 @@
                                 </div>
 
 
-                                @if ($showTable2 == 'اخرى' && $showTable == 2)
+                                @if ($showTable2 == 'اخرى' && $this->showModel == true)
                                     <div class="ml-1  pt-6 px-8 lg:px-0 ">
                                         <textarea wire:model="leaveGoalTextarea" rows="4" name="message" placeholder="سبب المغادرة"
                                             class="w-full  inline-flex items-center text-right  justify-center border-[#349A37] border  rounded-[10px] focus:ring-[#349A37] focus:border-[#349A37] sm:text-sm p-4"></textarea>
