@@ -118,7 +118,6 @@ Route::get('/landingPage', function (){
 //     return view('Pages.Try');
 // });
 
-Route::get('Admin/try', [HomeController::class, 'userprofileTry'])->name('userprofileTry');
 
 
 
@@ -130,6 +129,7 @@ Route::get('sendhtmlemail','HomeController@html_email');
 Route::get('sendattachmentemail','HomeController@attachment_email');
 
 
+Route::get('Admin/try', [HomeController::class, 'userprofileTry'])->name('userprofileTry');
 Route::get('Admin/userprofile', [HomeController::class, 'userprofile'])->name('userprofile');
 
 
@@ -145,6 +145,10 @@ Route::post('/AddNoteNotifications', [NotificationController::class, 'AddNoteNot
 
 
 Route::post('user/update', [HomeController::class, "updateuser"])->name('updateuser');
+Route::post('/user/update/personaldata', [HomeController::class, "updatepersonaldata"])->name('updatepersonaldata');
+Route::post('/user/update/bankdata', [HomeController::class, "updatebankdata"])->name('updatebankdata');
+Route::post('/user/update/password', [HomeController::class, "updatepassword"])->name('updatepassword');
+
 Route::get("/WorkHours", [HomeController::class, "WorkHours"])->name('WorkHours');
 Route::get("/WorkHoursUser", [HomeController::class, "WorkHoursUser"])->name('WorkHoursUser');
 Route::get("/StartTimerWorkHours", [HomeController::class, "StartTimerWorkHours"])->name('StartTimerWorkHours');
