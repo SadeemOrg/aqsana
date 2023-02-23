@@ -77,13 +77,15 @@ class WorkHours extends Component
         $this->render();
         $user = Auth::user();
         $WorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::today())->first();
+        if ($WorkHours != null) {
+            $WorkHours->day_hours = $this->realTime;
+            $WorkHours->end_time = Carbon::now();
+            $WorkHours->on_work = 0;
+            $WorkHours->fake_time = null;
+            $WorkHours->save();
+        }
 
-        $WorkHours->day_hours = $this->realTime;
-        $WorkHours->end_time = Carbon::now();
-        $WorkHours->on_work = 0;
-        $WorkHours->fake_time = null;
-        $WorkHours->save();
-         Auth::logout();
+        Auth::logout();
         return redirect('/Admin');
     }
     public function ModelForm()
@@ -132,7 +134,6 @@ class WorkHours extends Component
         $this->showModel = false;
         Auth::logout();
         return redirect('/Admin');
-
     }
     public function searchWorkHours()
     {
@@ -226,7 +227,7 @@ class WorkHours extends Component
                     $this->Seconds = 0;
                 }
             }
-        //  dd($this->minutes);
+            //  dd($this->minutes);
             $this->Timetimetime = "2014-12-12 0:00:00";
             $this->enterDate = Carbon::createFromFormat('Y-m-d  H:i:s',  $this->Timetimetime);
             $this->enterDate =  $this->enterDate->addHour($this->Hours);
