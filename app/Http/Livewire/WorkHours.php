@@ -83,6 +83,8 @@ class WorkHours extends Component
         $WorkHours->on_work = 0;
         $WorkHours->fake_time = null;
         $WorkHours->save();
+         Auth::logout();
+        return redirect('/Admin');
     }
     public function ModelForm()
     {
@@ -128,8 +130,8 @@ class WorkHours extends Component
 
 
         $this->showModel = false;
-        // Auth::logout();
-        // return redirect('/Admin');
+        Auth::logout();
+        return redirect('/Admin');
 
     }
     public function searchWorkHours()
