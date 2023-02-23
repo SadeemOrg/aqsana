@@ -6,7 +6,8 @@
         <div
             class="flex sm:flex-row flex-col gap-y-4 lg:gap-y-0 items-start lg:flex-nowrap flex-wrap justify-center md:justify-between mt-8">
             <p class="font-FlatBold w-full text-xl sm:text-[22px] text-center  lg:mt-0 xl:text-right">ساعات عملي</p>
-            <div class=" flex flex-row items-center flex-wrap justify-center md:flex-nowrap md:gap-y-0 gap-y-2 w-full gap-x-2 ">
+            <div
+                class=" flex flex-row items-center flex-wrap justify-center md:flex-nowrap md:gap-y-0 gap-y-2 w-full gap-x-2 ">
                 <!--Date Picker -->
                 <div dir="ltr" class=" relative w-[90%] sm:w-[40%] md:w-[207px] h-12">
                     <div
@@ -18,7 +19,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input id="hidePlaceHolderDateWorkHourFrom" type="text"
+                    <input wire:model="FromDate" id="hidePlaceHolderDateWorkHourFrom" type="text"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onfocus="handelFocusWorkHourFrom()">
                 </div>
@@ -33,7 +34,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input id="hidePlaceHolderDateWorkHourTo" type="text"
+                    <input wire:model="ToDate" id="hidePlaceHolderDateWorkHourTo" type="text"
                         class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusWorkerHourTo()">
                 </div>
@@ -81,33 +82,42 @@
     @endif --}}
 
 
-    <div class="flex flex-row items-start justify-center gap-x-4 my-10 md:my-20 flex-wrap gap-y-4 md:gap-y-0 md:flex-nowrap">
-        <div class="max-w-[90%] sm:max-w-[65%] md:max-w-[300px] cursor-pointer w-full flex items-center justify-center h-12 rounded-[30px] md:rounded-none md:h-28 bg-[#349A37]">
-            <p class="text-white text-2xl">0:0:0</p>
+    <div
+        class="flex flex-row items-start justify-center gap-x-4 my-10 md:my-20 flex-wrap gap-y-4 md:gap-y-0 md:flex-nowrap">
+        <div
+            class="max-w-[90%] sm:max-w-[65%] md:max-w-[300px] cursor-pointer w-full flex items-center justify-center h-12 rounded-[30px] md:rounded-none md:h-28 bg-[#349A37]">
+            <p id="timer" class="text-white text-2xl"></p>
         </div>
-       <div class="cursor-pointer min-w-[163px]  mb-12">
-        <svg class="h-16 md:h-[114px] " width="163" height="114" viewBox="0 0 163 114" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <rect width="163" height="114" rx="6" fill="#349A37" />
-            <g clip-path="url(#clip0_59_1521)">
-                <path
-                    d="M98.4 34H61.6C59.0654 34 57 36.0654 57 38.6V75.4C57 77.9346 59.0654 80 61.6 80H98.4C100.935 80 103 77.9346 103 75.4V38.6C103 36.0654 100.935 34 98.4 34Z"
-                    fill="white" />
-            </g>
-            <defs>
-                <clipPath id="clip0_59_1521">
-                    <rect width="46" height="46" fill="white" transform="translate(57 34)" />
-                </clipPath>
-            </defs>
-        </svg>
-    </div>
-<div class="cursor-pointer min-w-[163px]  mb-12">
-        <svg  class="h-16 md:h-[114px]" width="163" height="114" viewBox="0 0 163 114" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <rect width="163" height="114" rx="6" fill="#349A37" />
-            <path d="M64 80V34L102.927 57.0011L64 80Z" fill="white" />
-        </svg>
-    </div>
+        <div class="cursor-pointer min-w-[163px]  mb-12">
+            <svg wire:click="EndWork" class="h-16 md:h-[114px] " width="163" height="114" viewBox="0 0 163 114" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <rect width="163" height="114" rx="6" fill="#349A37" />
+                <g clip-path="url(#clip0_59_1521)">
+                    <path
+                        d="M98.4 34H61.6C59.0654 34 57 36.0654 57 38.6V75.4C57 77.9346 59.0654 80 61.6 80H98.4C100.935 80 103 77.9346 103 75.4V38.6C103 36.0654 100.935 34 98.4 34Z"
+                        fill="white" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_59_1521">
+                        <rect width="46" height="46" fill="white" transform="translate(57 34)" />
+                    </clipPath>
+                </defs>
+            </svg>
+        </div>
+        <div id="start_timer" wire:click="StartTimerWorkHours"    class="cursor-pointer min-w-[163px]  mb-12">
+
+            <svg class="h-16 md:h-[114px]" width="163" height="114" viewBox="0 0 163 114" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <rect width="163" height="114" rx="6" fill="#349A37" />
+                <path d="M64 80V34L102.927 57.0011L64 80Z" fill="white" />
+            </svg>
+        </div>
+        <div  id="stop_timer"  wire:click="stop" class="cursor-pointer min-w-[163px]  mb-12">
+            <svg width="163" height="114" viewBox="0 0 163 114" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="163" height="114" rx="6" fill="#349A37" />
+            </svg>
+
+        </div>
     </div>
 
     <!--start reason popup Timer -->
@@ -228,12 +238,12 @@
                         <tbody class="divide-y divide-gray-200">
                             @php
                                 use Carbon\Carbon;
-                                
+
                             @endphp
                             @foreach ($WorkHourssearch as $WorkHoursearch)
                                 @php
                                     $newTimeShape = date_format($WorkHoursearch->date, 'd/m/Y');
-                                    
+
                                 @endphp
                                 <tr>
 
@@ -277,3 +287,73 @@
 
 
 </div>
+<script>
+    var sites = {!! json_encode($this->realTime) !!};
+    var hide = {!! json_encode($this->hide) !!};
+
+    let regExTime = /([0-9]?[0-9]):([0-9][0-9]):([0-9][0-9])/;
+    let regExTimeArr = regExTime.exec(
+        sites); // ["01:12:33", "01", "12", "33", index: 0, input: "01:12:33", groups: undefined]
+    let timeHr = regExTimeArr[1] * 3600;
+    let timeMin = regExTimeArr[2] * 60;
+    let timeSec = regExTimeArr[3] * 1;
+    let times = timeHr + timeMin + timeSec;
+    console.log("dddddddddddddddd");
+    console.log("timeHr", regExTimeArr[1], timeHr);
+    console.log("timeMin", regExTimeArr[2], timeMin);
+    console.log("timeSec", regExTimeArr[3], timeSec);
+    console.log("times", times);
+    // alert(regExTimeArr[1] )
+    // var target = new Date("1970-01-01T" + sites);
+    // alert(target)
+
+    var totalSeconds = times;
+    var timerVar;
+    if (hide == 0) {
+
+        start();
+        document.getElementById("start_timer").style.display = "none";
+
+
+
+
+    } else {
+        document.getElementById("stop_timer").style.display = "none";
+        document.getElementById("timer").innerHTML = regExTimeArr[1] + ":" + regExTimeArr[2] + ":" + regExTimeArr[3];
+
+
+
+    }
+
+    function start() {
+        document.getElementById("start_timer").style.display = "none";
+        timerVar = setInterval(countTimer, 1000);
+
+        document.getElementById("stop_timer").style.display = "block";
+
+    }
+
+    function myStopFunction() {
+
+        clearInterval(timerVar);
+        document.getElementById("stop_timer").style.display = "none";
+        document.getElementById("start_timer").style.display = "block";
+
+
+    }
+
+    function countTimer() {
+        ++totalSeconds;
+        var hour = Math.floor(totalSeconds / 3600);
+        var minute = Math.floor((totalSeconds - hour * 3600) / 60);
+        var seconds = totalSeconds - (hour * 3600 + minute * 60);
+        if (hour < 10)
+            hour = "0" + hour;
+        if (minute < 10)
+            minute = "0" + minute;
+        if (seconds < 10)
+            seconds = "0" + seconds;
+        document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
+
+    }
+</script>

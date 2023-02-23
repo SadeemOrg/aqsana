@@ -24,7 +24,8 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input id="hidePlaceHolderDateAdminFrom" type="text" data-val-required="Mandatory field" data-val="true"
+
+                    <input wire:model="FromDate" id="hidePlaceHolderDateAdminFrom" type="text" data-val-required="Mandatory field" data-val="true"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
                         onfocus="handelFocusAdminDateFrom()">
@@ -39,7 +40,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input id="hidePlaceHolderDateAdminTo" type="text"
+                    <input  wire:model="ToDate" id="hidePlaceHolderDateAdminTo" type="text"
                         class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusAdminDateTo()">
                 </div>
@@ -337,22 +338,22 @@
                             <div class="flex flex-row items-center justify-between">
                                 <div class="mt-2 selectdiv w-72">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
-                                        {{-- wire:model="start_time"  --}}
+                                        wire:model="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                                 <div class="mt-2 selectdiv">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
-                                        {{-- wire:model="end_time" --}}
+                                        wire:model="end_time"
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                             </div>
                             <div class="mt-2 selectdiv">
-                                <input type="text"
+                                <input type="text" wire:model="date"
                                     class="hidePlaceHolderDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusDatePopup()">
                             </div>
                             <div class="mt-2 selectdiv">
-                                <input type="text"
+                                <input type="text" wire:model="day_hours"
                                     class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="عدد ساعات العمل">
                             </div>
@@ -400,17 +401,17 @@
                             @foreach ($Notes as $key => $Note)
                                 <div class="border-[#349A37] py-2 border-b-2">
                                     <div class="mt-2 selectdiv">
-                                        <input {{-- wire:model="notedate.{{ $key }}.Type" --}} type="text" placeholder="سبب المغادرة"
+                                        <input wire:model="notedate.{{ $key }}.Type" type="text" placeholder="سبب المغادرة"
                                             class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-full w-full  p-2.5 placeholder-[#349A37] ">
                                     </div>
                                     <div class="flex flex-row items-center justify-between">
                                         <div class="mt-2 selectdiv w-72">
-                                            <input type="text" placeholder="ساعة البدء"
+                                            <input wire:model="notedate.{{ $key }}.time_out" type="text" placeholder="ساعة البدء"
                                                 onfocus="handelEditNotesInputtimeFrom()"
                                                 class="foucsEditTimeStart h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                         </div>
                                         <div class="mt-2 selectdiv">
-                                            <input type="text" onfocus="handelInputEditNotestimeTo()"
+                                            <input wire:model="notedate.{{ $key }}.return_time" type="text" onfocus="handelInputEditNotestimeTo()"
                                                 placeholder="ساعة الانتهاء"
                                                 class="foucsEditTimeEnd h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                         </div>
@@ -442,7 +443,7 @@
                                             </button>
                                         </div>
                                         <div class="basis-1/2">
-                                            <button type="submit"
+                                            <div wire:click="DeleteNote({{ $key }})"
                                                 class="connectUs duration-200 w-full px-5 lg:px-10 py-3 mt-2 text-[13px] text-center border-[1px] border-[#E92F30] font-FlatBold rounded-[30px] text-[#E92F30] bg-transparent hover:bg-[#101426] hover:text-white ">
                                                 <div class="flex flex-row items-center gap-x-2">
                                                     <svg width="18" height="20" viewBox="0 0 35 34"
@@ -465,7 +466,7 @@
 
                                                     حذف
                                                 </div>
-                                            </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
