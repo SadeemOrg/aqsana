@@ -112,10 +112,13 @@ Route::get('/landingPage', function (){
     return view('almowahde.landingPage');
 });
 
-Route::get('/payPal', function (){
 
-    return view('almowahde.PayPal');
-});
+// Route::get('/try', function (){
+
+//     return view('Pages.Try');
+// });
+
+Route::get('Admin/try', [HomeController::class, 'userprofileTry'])->name('userprofileTry');
 
 
 

@@ -132,7 +132,13 @@ input::-webkit-datetime-edit {
   position: relative;
   left: 10%;
 }
-
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Add some styling */
+  background-image: none;
+}
 
 .selectwhorkHour{
   background-position: left .5rem center;
