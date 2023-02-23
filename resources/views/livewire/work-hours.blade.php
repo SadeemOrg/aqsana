@@ -302,7 +302,7 @@
 <script>
     var sites = {!! json_encode($this->realTime) !!};
     var hide = {!! json_encode($this->hide) !!};
-
+// alert(sites)
     let regExTime = /([0-9]?[0-9]):([0-9][0-9]):([0-9][0-9])/;
     let regExTimeArr = regExTime.exec(
         sites); // ["01:12:33", "01", "12", "33", index: 0, input: "01:12:33", groups: undefined]

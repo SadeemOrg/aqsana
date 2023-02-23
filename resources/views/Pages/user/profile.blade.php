@@ -27,6 +27,7 @@
                 <button onclick="location.href='/Admin'"
                     class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">الذهاب
                     الى المنظومة</button>
+
             </div>
 
         </div>
