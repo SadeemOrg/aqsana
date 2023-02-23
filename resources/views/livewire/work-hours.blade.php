@@ -4,7 +4,7 @@
     <!--Perosonal Information -->
     <form class="Wraper" wire:submit.prevent="searchWorkHours">
         <div
-            class="flex sm:flex-row flex-col gap-y-4 lg:gap-y-0 items-start lg:flex-nowrap flex-wrap justify-center md:justify-between mt-8">
+            class="flex sm:flex-row flex-col gap-y-4 lg:gap-y-0 items-start lg:flex-nowrap flex-wrap justify-center md:justify-between mt-16">
             <p class="font-FlatBold w-full text-xl sm:text-[22px] text-center  lg:mt-0 xl:text-right">ساعات عملي</p>
             <div
                 class=" flex flex-row items-center flex-wrap justify-center md:flex-nowrap md:gap-y-0 gap-y-2 w-full gap-x-2 ">

@@ -169,8 +169,11 @@
                                     بالجمعية
                                 </label>
                                 <div class="mt-1">
-                                    <input type="date" value={{ $StatWorknewDate }} name="start_work_date"
-                                        placeholder="الرجاء ادخال تاريخ الميلاد" {{-- value="{{ $user['start_work_date'] ? $StatWorknewDate : '' }}" --}}
+                                    <input type="date" 
+                                    value={{ $StatWorknewDate }}
+                                     name="start_work_date"
+                                        placeholder="الرجاء ادخال تاريخ الميلاد"
+                                         value="{{ $user['start_work_date'] ? $StatWorknewDate : '' }}"
                                         class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 text-right">
                                 </div>
                             </div>

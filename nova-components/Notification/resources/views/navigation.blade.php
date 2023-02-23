@@ -1,61 +1,19 @@
-<router-link tag="h3" :to="{name: 'notification'}" class="cursor-pointer flex items-center font-normal dim text-white mb-6 text-base no-underline">
-    <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg class="sidebar-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 611.999 611.999" style="enable-background:new 0 0 611.999 611.999;" xml:space="preserve">
-<g>
-	<g>
-		<g>
-			<path d="M570.107,500.254c-65.037-29.371-67.511-155.441-67.559-158.622v-84.578c0-81.402-49.742-151.399-120.427-181.203
-				C381.969,34,347.883,0,306.001,0c-41.883,0-75.968,34.002-76.121,75.849c-70.682,29.804-120.425,99.801-120.425,181.203v84.578
-				c-0.046,3.181-2.522,129.251-67.561,158.622c-7.409,3.347-11.481,11.412-9.768,19.36c1.711,7.949,8.74,13.626,16.871,13.626
-				h164.88c3.38,18.594,12.172,35.892,25.619,49.903c17.86,18.608,41.479,28.856,66.502,28.856
-				c25.025,0,48.644-10.248,66.502-28.856c13.449-14.012,22.241-31.311,25.619-49.903h164.88c8.131,0,15.159-5.676,16.872-13.626
-				C581.586,511.664,577.516,503.6,570.107,500.254z M484.434,439.859c6.837,20.728,16.518,41.544,30.246,58.866H97.32
-				c13.726-17.32,23.407-38.135,30.244-58.866H484.434z M306.001,34.515c18.945,0,34.963,12.73,39.975,30.082
-				c-12.912-2.678-26.282-4.09-39.975-4.09s-27.063,1.411-39.975,4.09C271.039,47.246,287.057,34.515,306.001,34.515z
-				 M143.97,341.736v-84.685c0-89.343,72.686-162.029,162.031-162.029s162.031,72.686,162.031,162.029v84.826
-				c0.023,2.596,0.427,29.879,7.303,63.465H136.663C143.543,371.724,143.949,344.393,143.97,341.736z M306.001,577.485
-				c-26.341,0-49.33-18.992-56.709-44.246h113.416C355.329,558.493,332.344,577.485,306.001,577.485z"/>
-			<path d="M306.001,119.235c-74.25,0-134.657,60.405-134.657,134.654c0,9.531,7.727,17.258,17.258,17.258
-				c9.531,0,17.258-7.727,17.258-17.258c0-55.217,44.923-100.139,100.142-100.139c9.531,0,17.258-7.727,17.258-17.258
-				C323.259,126.96,315.532,119.235,306.001,119.235z"/>
-		</g>
-	</g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-</svg>
+<router-link tag="h3" :to="{ name: 'notification' }"
+    class="cursor-pointer  flex items-center font-normal dim text-white mb-6 text-base no-underline">
+    <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+    <svg class="ml-2.5" width="18" height="20" style="margin-left: 10px" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <rect width="18" height="20" fill="url(#pattern0)"/>
+        <defs>
+        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+        <use xlink:href="#image0_64_1511" transform="matrix(0.0222222 0 0 0.02 -0.0555556 0)"/>
+        </pattern>
+        <image id="image0_64_1511" width="50" height="50" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE8ElEQVR4nNVaa2gdRRSe+ogvfLb4qFHqCyz4zyL+ULRWLPSHWsVfClKpD3ziH3+pgVJBwT+CVKrB9N4zm+iKKBqT3HNu3OyczbXBS5UmrVVU6gtpU8W0Un+keuXszt6EPExidu7d+8HAZXfmfDN7HjPnzFXKESAI2jXyexrNUWlA5n0Ph65RrQQIgnYg85smrk1v8mxXuXKpahVo0YRMHPljmbg0TdybLMi8q1oFWsyJuDb96/cMhJclWuE/VKtAI/8aTzoI2mcuRN6pvMP3/ZOLpfA2QHPQ+kVv7C+Jz3ySmJs5qMvR+o6O2kkqbwiC4BSN0WNA5peZDj5vQ/7JI35Exqo8oGcwukqT+bIemdCMaeLtgNGdQMYD4sOazCGNpgCl6A4gfgGQ90z15z3FUnhFUxcByDemYRbIfOVhtKlWq61Y3FizQZMZTbRjjnjl8AbVDBQHKlcnXzueyK6dH1XPXKqMriA4HdB02mh2WLSrGu3UmszndhGF5TiuaFATv23NbKShQUCX+Alr4/vlqy5X3mt9fadp5H3xYsr8qGoE5Itp4u+FVEJtVnITn2EJFt82RCsehhutTe/NWjYQ7xXZHvHtWcueg8y8as3q+cxlo3nR+sorWcuei6xiNXJr1rJ1OVpvZUdZy55NhuZnIevGaLWTHIbihfyYtezZZGiOC1kW0Wom/ErlDOvwx5XzM1Viw5OuOAB5Ujhkr3LFoTqj6Gy7CR51xQHIx5LQXjrLFYcqloYvtFneIVccgDweh+AgWOVyIdfZI/g+VxwazQHhKODQWlccSo7h1rTQFYcmHrQOv8EVh5JzkCXpdMWh7QFSo3nY5a7+hvWRp11xaDLP2vzmdeXQEePMDsrRza44PDS32E2x6oSgu/zZRYDmHwmPvj/W5oRE2SM98Z+azN8SJTMnAORnbMT6IHPhs7k+tOb1VKaCZZeVnDzxj/Au5RhQ4s1pmM80NwHih9KkpxHlm53V6qn15A3NlizLPRNJwhPdrxoEKJkHbIScWHZRwh+oXFCvQSH3L7bUkwVqtdoKIB5Ia18yl/8lqEB8uS22iaDvnJ595oEXBKuE22pmVOrHS8/L0RxJHa6ZdxqQJFv764U8DDcuaqCHfF+aE4g5FWhkpWoyCjSycpqZTcocFxwkaaZd/bY8Vcw7pAyFZps1sx8WHJCalDcwfK3KGQo4tNZqZXzBzpr4LWtWXxcwWqdyggJG64D4G3sOe3PBAV4vn1+vktvcQ+4xevqDNarB6OkP1gg3INPU3YoZlTkuOjcH4pfTjXDaraxc5AwC8Q5dNs8B8YNylSBfyyvx9R7xldK6guBiIYO+3eekMuW3PIvf2X4yJh6L0SaRpROZOxKOmZdGZkLmJHNb8hfpCoLzAMOtgOadNJduZAPk8YQ73OoTnauyPMp7xDfJ+UcTvyT+JH8EADSfxrdW9jZXI/8FxL8D8YkpbfIJeSbv0koMkPlCxooM65vbRbZwCJdqFjTycDzpEm+er0+RwnvtYodVXgG2JiUmOV8fOTNZszmm8gptTeu/HFJs3XWRb9nQxLvjHKJs7p63D/I9NrepqLyiiPxkesM7V5QRk5ON1vZ5XOUVvj/WNpW/mAPi9LJ/SIs1UV8EVyULVHlGN0arp/8hYNbeQFyF/vAS1Qrw/bE2ufkVP5DoFEcz5GExJ1ea+BdxZzpCmYyw4QAAAABJRU5ErkJggg=="/>
+        </defs>
+        </svg>
+        
 
     <span class="sidebar-label">
-        Notification
+        الاشعارات
     </span>
 </router-link>

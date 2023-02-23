@@ -291,6 +291,36 @@
             $(".svgFoucusWorkHourTo").css('display', 'none');
         }
 
+        $(".TabsSidee .tabsAlphaA").click(function(){
+            $(".tabs-Side-container .tab-A").css("display","block")
+         console.log(' $(".tabs-Side-container .tab-A").siblings()', $(".tabs-Side-container .tab-A").siblings())
+            $(".tabs-Side-container .tab-B").css("display","none")
+            $(".tabs-Side-container .tab-C").css("display","none")
+
+
+        })
+        $(".TabsSidee .tabsAlphaB").click(function(){
+            $(".tabs-Side-container .tab-A").css("display","none")
+            $(".tabs-Side-container .tab-B").css("display","block")
+            $(".tabs-Side-container .tab-C").css("display","none")
+
+
+        })
+        $(".TabsSidee .tabsAlphaC").click(function(){
+            $(".tabs-Side-container .tab-A").css("display","none")
+            $(".tabs-Side-container .tab-B").css("display","none")
+            $(".tabs-Side-container .tab-C").css("display","block")
+
+
+        })
+        function myFunction() {
+      var x = document.getElementById("myInput");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
         // ajax for Dropdown Search
 
         $('#bookType').change(function() {

@@ -165,7 +165,16 @@ class HomeController extends Controller
     public function userprofile()
     {
         $user = Auth::user();
-        return view('Pages.user.profile', compact('user'));
+        // dd($user);
+
+        return view('Pages.Try', compact('user'));
+    }
+    public function userprofileTry()
+    {
+        // dd("dd");
+        $user = Auth::user();
+        // dd($user);
+        return view('Pages.Try', compact('user'));
     }
     public function updateuser(Request $request)
     {

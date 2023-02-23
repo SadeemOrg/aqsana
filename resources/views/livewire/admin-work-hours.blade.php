@@ -1,14 +1,14 @@
 <div>
     <form wire:submit.prevent="searchWorkHours">
         <div
-            class="flex sm:flex-row flex-col gap-y-4 lg:gap-y-0 items-start lg:flex-nowrap flex-wrap justify-between mt-8">
+            class="flex sm:flex-row flex-col gap-y-4 lg:gap-y-0 items-start lg:flex-nowrap flex-wrap justify-between mb-8 mt-12">
             <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات عمل
                 الموظفين</p>
             <div class="Wraper flex flex-row items-center flex-wrap md:flex-nowrap md:gap-y-0 gap-y-2 gap-x-2 ">
                 <div class="mt-1 h-12 w-[90%] sm:w-[40%] md:w-[207px]">
                     <select pla wire:model="Name" name="name"
                         class="selectwhorkHour block w-full  text-[#349A37]  border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] ">
-                        <option value="0" disabled class="text-black"> اسم الموظف </option>
+                        <option value="0"  class="text-black"> اسم الموظف </option>
                         @foreach ($users as $user)
                             <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
                         @endforeach

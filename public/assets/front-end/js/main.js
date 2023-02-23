@@ -31,7 +31,7 @@ jQuery(document).ready(function(){
     $('.tabs-btn .tab-btn').click(function() {
       $(this).addClass('active').siblings().removeClass('active');
       $('.tabs-container .tab').hide()
-      console.log('aaaaaa',$(this).data('tab'));
+      // console.log('aaaaaa',$(this).data('tab'));
       $( '.' + $(this).data('tab')).fadeIn()
     })
     //End text accodrion text + Start tabs system
@@ -42,7 +42,12 @@ jQuery(document).ready(function(){
       $(this).addClass('activeTabs').siblings().removeClass('activeTabs');
       $('.tabs-container .tab').hide()
       $( '.' + $(this).data('tab')).fadeIn()
+    })
 
+    $('.tabs-Side .tabsAlpha').click(function(){
+      $(this).addClass('activeTabs').siblings().removeClass('activeTabs');
+      $('.tabs-Side-container .tab').hide()
+      $( '.' + $(this).data('tab')).fadeIn()
     })
     // Start goals in about us page
     $('.goal-title').click(function() {

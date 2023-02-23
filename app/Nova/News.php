@@ -229,7 +229,7 @@ class News extends Resource
                 ])
                 ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
 
-            Image::make(__('master image'), 'image')->disk('public')->prunable()->rules('required'),
+            Image::make(__('master image'), 'image')->disk('public'),
             ArrayImages::make(__('PICTURES'), 'pictures')
                 ->disk('public'),
 

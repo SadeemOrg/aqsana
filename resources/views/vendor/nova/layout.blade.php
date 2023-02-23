@@ -131,7 +131,7 @@
     <div id="nova">
         <div v-cloak class="flex min-h-screen">
             <!-- Sidebar -->
-            <div class="flex-none pt-header min-h-screen w-sidebar bg-green-700 px-6">
+            <div class="flex-none pt-header min-h-screen  bg-green-700 px-6" style="width: 16rem">
 
 
                 @foreach (\Laravel\Nova\Nova::availableTools(request()) as $tool)
@@ -156,7 +156,7 @@
 
                     <dropdown class=" h-9 flex items-center dropdown-right">
 
-                        @include('nova::partials.Notification')
+                        {{-- @include('nova::partials.Notification') --}}
                     </dropdown>
                     <dropdown class=" h-9 flex items-center dropdown-right">
 
