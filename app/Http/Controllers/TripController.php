@@ -22,7 +22,8 @@ class TripController extends BaseController
     {
 
 
-        $trips = Project::where("project_type","2")->get();
+        $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+        ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
 
         $trips->map(function($trip) use ($request){
 
