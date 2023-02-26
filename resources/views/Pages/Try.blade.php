@@ -99,7 +99,7 @@
                     </div>
                     <div class="tabs-container">
                         <!--Form -->
-                        <form method="POST" target="_self" action="{{ '/user/update' }}" enctype="multipart/form-data"
+                        <form method="POST" target="_self" action="{{ '/user/update/personaldata' }}" enctype="multipart/form-data"
                             class="tab tab-1  my-6 mt-8">
                             @csrf
                             <!--Perosonal Information -->
@@ -248,7 +248,8 @@
                             </div>
                         </form>
                         <!--Second Form -->
-                        <form class="tab tab-2 my-6 ">
+                        <form class="tab tab-2 my-6 " method="POST" target="_self" action="{{ '/user/update/bankdata' }}" enctype="multipart/form-data">
+                            @csrf
                             <div
                                 class="  flex flex-row items-center justify-center sm:justify-between gap-x-4 sm:gap-x-0 mt-8  flex-wrap">
                                 <p class="font-FlatBold text-xl sm:text-[22px] text-center lg:mt-8  xl:text-right">البيانات
@@ -309,7 +310,8 @@
                             </div>
                         </form>
                         <!--Last Form -->
-                        <form class="tab tab-3 my-6 ">
+                        <form class="tab tab-3 my-6 "  method="POST" target="_self" action="{{ '/user/update/password' }}" enctype="multipart/form-data">
+                            @csrf
                             <div
                                 class="  flex flex-row items-center justify-center sm:justify-between gap-x-4 sm:gap-x-0 my-8  flex-wrap">
                                 <p class="font-FlatBold text-xl sm:text-[22px] text-center xl:text-right">كلمة

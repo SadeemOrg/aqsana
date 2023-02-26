@@ -170,7 +170,7 @@
                                     بالجمعية
                                 </label>
                                 <div class="mt-1">
-                                    <input type="date" 
+                                    <input type="date"
                                     value={{ $StatWorknewDate }}
                                      name="start_work_date"
                                         placeholder="الرجاء ادخال تاريخ الميلاد"

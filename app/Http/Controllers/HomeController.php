@@ -165,7 +165,7 @@ class HomeController extends Controller
     public function userprofile()
     {
         $user = Auth::user();
-        // dd($user);
+
 
         return view('Pages.Try', compact('user'));
     }
@@ -173,7 +173,7 @@ class HomeController extends Controller
     {
         // dd("dd");
         $user = Auth::user();
-        // dd($user);
+
         return view('Pages.Try', compact('user'));
     }
     public function updateuser(Request $request)
@@ -229,18 +229,132 @@ class HomeController extends Controller
         }
         if ($request->password) {
 
-           if((Hash::check($request->password, $user->password)))
-           {
+            if ((Hash::check($request->password, $user->password))) {
 
-            if($request->new_password==$request->Confirm_password)
+                if ($request->new_password == $request->Confirm_password)
 
-            $user->password = Hash::make($request->new_password);
-           }
+                    $user->password = Hash::make($request->new_password);
+            }
         }
         if ($request->image) {
             $user->photo = $request->image->store('images', 'public');
         }
         // dd($user);
+
+        $user->save();
+
+        return redirect('Admin/userprofile')->with('changes_success', 'success');
+    }
+    public function updatepersonaldata(Request $request)
+    {
+
+        $user = User::findOrFail(Auth::id());
+        $request->validate([
+            'name' => 'required|string|max:255|min:3',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'phone' => 'required|digits_between:10,14',
+
+
+            // 'email'=>['required', new passwordRule]
+        ], [
+            'name.required' => 'الرجاء ادخال اسم',
+            'name.string' => 'الاسم يجب ان يكون احرف فقط',
+            'name.min' => 'الاسم يجب ان يكون على الاقل 3 حروف',
+            'name.max' => 'الاسم لا يجب ان يكون فوق ال 255 حرف',
+            'email.required' => 'الرجاء ادخال ايميل',
+            'email.email' => "يجب ان يكون الايميل صحيح",
+            'email.unique' => 'يجب ان يكون الايميل غير مكرر',
+            'phone.required' => 'ارجاء ادخال رقم الهاتف',
+            'phone.digits_between' => 'الرجاء ادخال رقم الهاتف بشكل صحيح. ',
+        ]);
+        // dd( $request->all());
+
+
+        $user->update([
+            'name' => $request->name,
+            'job' => $request->job,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'birth_date' => $request->birth_date,
+            'id_number' => $request->id_number,
+            'start_work_date' => $request->start_work_date,
+            'city' => $request->city,
+            'martial_status' => $request->martial_status,
+            // 'bank_name' => $request->bank_name,
+            // 'bank_number' => $request->bank_number,
+            // 'bank_branch' => $request->bank_branch,
+            // 'account_number' => $request->account_number,
+
+        ]);
+
+        if ($request->photo) {
+            $user->photo = $request->photo->store('images', 'public');
+        }
+        // if ($request->password) {
+
+        //    if((Hash::check($request->password, $user->password)))
+        //    {
+
+        //     if($request->new_password==$request->Confirm_password)
+
+        //     $user->password = Hash::make($request->new_password);
+        //    }
+        // }
+        if ($request->image) {
+            $user->photo = $request->image->store('images', 'public');
+        }
+        // dd($user);
+
+        $user->save();
+
+        return redirect('Admin/userprofile')->with('changes_success', 'success');
+    }
+    public function updatebankdata(Request $request)
+    {
+
+        $user = User::findOrFail(Auth::id());
+
+        $user->update([
+
+            'bank_name' => $request->bank_name,
+            'bank_number' => $request->bank_number,
+            'bank_branch' => $request->bank_branch,
+            'account_number' => $request->account_number,
+
+        ]);
+
+
+
+        $user->save();
+
+        return redirect('Admin/userprofile')->with('changes_success', 'success');
+    }
+    public function updatepassword(Request $request)
+    {
+
+        $user = User::findOrFail(Auth::id());
+        $request->validate([
+            'password' => [new passwordRule($user->password)],
+            'Confirm_password' => 'same:new_password'
+        ], [
+
+            'Confirm_password.same' => "كلمة السر الجديده غير متطابقة"
+
+        ]);
+        // dd( $request->all());
+
+
+        if ($request->password) {
+
+            if ((Hash::check($request->password, $user->password))) {
+
+                if ($request->new_password == $request->Confirm_password)
+
+                    $user->password = Hash::make($request->new_password);
+            }
+        }
+
+
 
         $user->save();
 
@@ -274,11 +388,11 @@ class HomeController extends Controller
     {
 
         DB::table('budgets')
-        ->updateOrInsert(
-            ['year' => $request->year, 'sector_id' =>  0],
-            ['budget' => $request->budgetsOfyear]
+            ->updateOrInsert(
+                ['year' => $request->year, 'sector_id' =>  0],
+                ['budget' => $request->budgetsOfyear]
 
-        );
+            );
         foreach ($request->Sectors as $key => $value) {
             DB::table('budgets')
                 ->updateOrInsert(
@@ -310,16 +424,10 @@ class HomeController extends Controller
 
         foreach ($TelephoneDirectory as $key => $value) {
 
-        $client->sms()->send(
+            $client->sms()->send(
                 new \Vonage\SMS\Message\SMS($value->phone_number, "Al_Aqsa_Association",  $request->Message)
             );
         }
-
-
-
-
-
-
     }
     public function SectorsBudget(Request $request)
     {
@@ -826,7 +934,7 @@ class HomeController extends Controller
                 }
             }
 
-            Mail::to( $request->Mail)->send(new \App\Mail\BillMail($Transaction, $PaymentType));
+            Mail::to($request->Mail)->send(new \App\Mail\BillMail($Transaction, $PaymentType));
             return response()->json(['success' => 'Added new records.']);
         }
 
@@ -889,8 +997,7 @@ class HomeController extends Controller
             }
         }
 
-        Mail::to( $request->Mail)->send(new \App\Mail\BillMail($Transaction, $PaymentType));
-
+        Mail::to($request->Mail)->send(new \App\Mail\BillMail($Transaction, $PaymentType));
     }
     public function showToastrMessages()
     {
