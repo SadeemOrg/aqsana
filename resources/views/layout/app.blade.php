@@ -334,6 +334,9 @@
         function handelFocusDatePopup() {
             $('.hidePlaceHolderDatePopUp').attr('type', 'date');
         }
+        function handelFocusEditDatePopup() {
+            $('.hidePlaceHolderEditDatePopUp').attr('type', 'date');
+        }
 
         function handelEditNotesInputtimeFrom() {
             $('.foucsEditTimeStart').attr('type', 'time');
@@ -355,7 +358,7 @@
 
         $(".TabsSidee .tabsAlphaA").click(function(){
             $(".tabs-Side-container .tab-A").css("display","block")
-         console.log(' $(".tabs-Side-container .tab-A").siblings()', $(".tabs-Side-container .tab-A").siblings())
+            $(this).addClass('activeTabs').siblings().removeClass('activeTabs');
             $(".tabs-Side-container .tab-B").css("display","none")
             $(".tabs-Side-container .tab-C").css("display","none")
 
@@ -363,15 +366,17 @@
         })
         $(".TabsSidee .tabsAlphaB").click(function(){
             $(".tabs-Side-container .tab-A").css("display","none")
+            $(this).addClass('activeTabs').siblings().removeClass('activeTabs');
             $(".tabs-Side-container .tab-B").css("display","block")
             $(".tabs-Side-container .tab-C").css("display","none")
 
 
         })
         $(".TabsSidee .tabsAlphaC").click(function(){
+            $(".tabs-Side-container .tab-C").css("display","block")
+            $(this).addClass('activeTabs').siblings().removeClass('activeTabs');
             $(".tabs-Side-container .tab-A").css("display","none")
             $(".tabs-Side-container .tab-B").css("display","none")
-            $(".tabs-Side-container .tab-C").css("display","block")
 
 
         })
