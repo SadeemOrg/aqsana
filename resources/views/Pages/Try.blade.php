@@ -24,7 +24,7 @@
             <nav class=" TabsSidee sm:flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2 "
                 aria-label="Tabs" style="height: 115vh" x-show="asideOpen">
                 <a href="#" target="_self"
-                    class=" tabsAlphaA flex items-center  space-x-1 rounded-md px-2 py-3 hover:bg-[#349A37] hover:text-black">
+                    class="activeTabs  tabsAlphaA flex items-center  space-x-1 rounded-md px-2 py-3 hover:bg-[#349A37] hover:text-black">
                     <span class="text-2xl">
                         <svg class="ml-2" width="18" height="18" viewBox="0 0 18 18" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -64,20 +64,6 @@
             </nav>
 
             <!-- main content page -->
-            {{-- <nav class="sm:hidden absolute flex flex-col items-start justify-start" x-show="asideOpen">
-                <a href="#" target="_self"
-                    class=" tabsAlphaA flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-[#349A37] hover:text-black">
-                    <span>البيانات الشخصية</span>
-                </a>
-                <a href="#" target="_self"
-                    class="tabsAlphaB flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-[#349A37] hover:text-black">
-                    <span>ساعات عملي</span>
-                </a>
-                <a href="#" target="_self"
-                    class="tabsAlphaC flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-[#349A37] hover:text-black">
-                    <span>ساعات عمل الموظفين</span>
-                </a>
-            </nav> --}}
             <div class="tabs-Side-container w-full">
                 <div class="container tab tab-A px-8 mx-auto mt-8 max-w-6xl">
                     <div class="flex sm:flex-row flex-col sm:gap-y-0 gap-y-6 items-center justify-between mt-4 xl:mt-8">
