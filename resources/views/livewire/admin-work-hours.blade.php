@@ -8,7 +8,7 @@
                 <div class="mt-1 h-12 w-[90%] sm:w-[40%] md:w-[207px]">
                     <select pla wire:model="Name" name="name"
                         class="selectwhorkHour block w-full  text-[#349A37]  border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] ">
-                        <option value="0"  class="text-black"> اسم الموظف </option>
+                        <option value="0" class="text-black"> اسم الموظف </option>
                         @foreach ($users as $user)
                             <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
                         @endforeach
@@ -16,7 +16,8 @@
                 </div>
                 <!--Date Picker -->
                 <div dir="ltr" class="relative w-[90%] sm:w-[40%] md:w-[207px] h-12">
-                    <div class="svgFoucusAdminFrom absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
+                    <div
+                        class="svgFoucusAdminFrom absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -25,14 +26,16 @@
                         </svg>
                     </div>
 
-                    <input wire:model="FromDate" id="hidePlaceHolderDateAdminFrom" type="text" data-val-required="Mandatory field" data-val="true"
+                    <input wire:model="FromDate" id="hidePlaceHolderDateAdminFrom" type="text"
+                        data-val-required="Mandatory field" data-val="true"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
                         onfocus="handelFocusAdminDateFrom()">
                 </div>
                 <!--to Date  -->
                 <div dir="ltr" class="relative w-[90%] sm:w-[40%] md:w-[207px] h-12">
-                    <div class="svgFoucusAdminTo absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
+                    <div
+                        class="svgFoucusAdminTo absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -40,7 +43,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input  wire:model="ToDate" id="hidePlaceHolderDateAdminTo" type="text"
+                    <input wire:model="ToDate" id="hidePlaceHolderDateAdminTo" type="text"
                         class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusAdminDateTo()">
                 </div>
@@ -233,11 +236,10 @@
         <div class=" popUpTimerReason relative z-10 contactusModel" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-            <div class="fixed inset-0 top-[3%] z-10 overflow-y-auto">
-                <div class="flex flex-col min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-
+            <div class="fixed inset-0 top-[3%] z-10 overflow-y-visible">
+                <div class="flex flex-col min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
                     <div
-                        class=" relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl sm:p-6">
+                        class=" relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-xs sm:max-w-md sm:p-6">
                         <button>
                             <svg wire:click="closeEditModel" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -245,46 +247,36 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-
-
-                        <form wire:submit.prevent="EditDay">
-                            <p class="w-full text-center mt-2 text-[20px] text-[#151630]">اضافة ساعات </p>
+                        <form class="Wraper2" wire:submit.prevent="EditDay">
+                            <p class="w-full text-center mt-2 text-[20px] text-[#151630]">تعديل ساعات العمل </p>
                             <!--First One -->
-                            <div class="mt-2 selectdiv">
-                                @php
-                                    //    dd( $EditWorkHours->date->format('m:d:y') );
-                                @endphp
+                            {{-- <div class="mt-2 selectdiv">
                                 <input wire:model="date" type="text"
                                     class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
                                     value="{{ date_format($EditWorkHours->date, 'd/m/Y') }}">
-
+                            </div> --}}
+                            <div class="mt-2 selectdiv">
+                                <input type="text"
+                                    class="hidePlaceHolderEditDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
+                                    placeholder="تاريخ" onfocus="handelFocusEditDatePopup()">
+                            </div>
+                            <div class="flex flex-row items-center flex-wrap sm:flex-nowrap justify-between">
+                                <div class="mt-2 selectdiv w-72">
+                                    <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
+                                        wire:model="start_time"
+                                        class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
+                                </div>
+                                <div class="mt-2 selectdiv">
+                                    <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
+                                        wire:model="end_time"
+                                        class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
+                                </div>
                             </div>
                             <div class="mt-2 selectdiv">
-
-                                <input type="text" wire:model="start_time"
-                                    class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
-                                    value="{{ $EditWorkHours->start_time }}">
-
-                            </div>
-                            <div class="mt-2 selectdiv">
-
-                                <input type="text" wire:model="end_time"
-                                    class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
-                                    value="{{ $EditWorkHours->end_time }}">
-
-                            </div>
-                            <div class="mt-2 selectdiv">
-
                                 <input type="text" wire:model="day_hours"
-                                    class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
-                                    value="{{ $EditWorkHours->day_hours }}">
-
+                                    class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
+                                    placeholder="عدد ساعات العمل">
                             </div>
-
-
-
-
-
                             <div class="mt-2">
                                 <button type="submit"
                                     class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
@@ -292,9 +284,6 @@
                                 </button>
                             </div>
                         </form>
-
-
-
                         <!--Endsecond Page -->
                     </div>
                 </div>
@@ -309,10 +298,9 @@
             aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
             <div class="fixed inset-0 top-[3%] z-10 overflow-y-visible">
-                <div class="flex flex-col min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-
+                <div class="flex flex-col min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
                     <div
-                        class=" relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-md sm:p-6">
+                        class=" relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-xs sm:max-w-md sm:p-6">
                         <button>
                             <svg wire:click="closeAddModel" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -320,8 +308,6 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-
-
                         <form class="Wraper2" wire:submit.prevent="AddDay">
                             <p class="w-full text-center mt-2 text-[20px] text-[#151630]">اضافة ساعات العمل </p>
                             <!--First One -->
@@ -335,16 +321,16 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex flex-row items-center justify-between">
+                            <div class="flex flex-row items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-72">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
                                         wire:model="start_time"
-                                        class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
+                                        class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                                 <div class="mt-2 selectdiv">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
                                         wire:model="end_time"
-                                        class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
+                                        class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                             </div>
                             <div class="mt-2 selectdiv">
@@ -401,17 +387,19 @@
                             @foreach ($Notes as $key => $Note)
                                 <div class="border-[#349A37] py-2 border-b-2">
                                     <div class="mt-2 selectdiv">
-                                        <input wire:model="notedate.{{ $key }}.Type" type="text" placeholder="سبب المغادرة"
+                                        <input wire:model="notedate.{{ $key }}.Type" type="text"
+                                            placeholder="سبب المغادرة"
                                             class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-full w-full  p-2.5 placeholder-[#349A37] ">
                                     </div>
                                     <div class="flex flex-row items-center justify-between">
                                         <div class="mt-2 selectdiv w-72">
-                                            <input wire:model="notedate.{{ $key }}.time_out" type="text" placeholder="ساعة البدء"
-                                                onfocus="handelEditNotesInputtimeFrom()"
+                                            <input wire:model="notedate.{{ $key }}.time_out" type="text"
+                                                placeholder="ساعة البدء" onfocus="handelEditNotesInputtimeFrom()"
                                                 class="foucsEditTimeStart h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                         </div>
                                         <div class="mt-2 selectdiv">
-                                            <input wire:model="notedate.{{ $key }}.return_time" type="text" onfocus="handelInputEditNotestimeTo()"
+                                            <input wire:model="notedate.{{ $key }}.return_time"
+                                                type="text" onfocus="handelInputEditNotestimeTo()"
                                                 placeholder="ساعة الانتهاء"
                                                 class="foucsEditTimeEnd h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                         </div>

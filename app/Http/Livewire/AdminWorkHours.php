@@ -22,6 +22,8 @@ class AdminWorkHours extends Component
     public $EditWorkHours;
     public $date;
     public $start_time;
+    public $start_time_Edit;
+    public $end_time_Edit;
     public $end_time;
     public $day_hours;
     public $userId;
