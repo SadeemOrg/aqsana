@@ -172,7 +172,69 @@
             </div>
         </div>
     </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/jquery-1.2.6.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyA4a_fkjeIEDYd_avYYZ_XbqwLIhtd6HCQ",
+            authDomain: "alqudsquds-82c73.firebaseapp.com",
+            databaseURL: 'https://project-id.firebaseio.com',
+            projectId: "alqudsquds-82c73",
+            storageBucket: "alqudsquds-82c73.appspot.com",
+            messagingSenderId: "168567225793",
+            appId: "1:168567225793:web:417c87aa992aa0784d4340",
+            measurementId: "G-HH0SH5P3KT"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const messaging = firebase.messaging();
+
+        function startFCM() {
+            messaging
+                .requestPermission()
+                .then(function() {
+                    return messaging.getToken()
+                })
+                .then(function(response) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        url: '{{ route('store.token') }}',
+                        type: 'POST',
+                        data: {
+                            token: response
+                        },
+                        dataType: 'JSON',
+                        success: function(response) {
+                            alert('Token stored.');
+
+                        },
+                        error: function(error) {
+
+                            alert(error);
+                            console.log(error);
+                        },
+                    });
+                }).catch(function(error) {
+                    alert(error);
+                });
+        }
+        messaging.onMessage(function(payload) {
+            const title = payload.notification.title;
+            const options = {
+                body: payload.notification.body,
+                icon: payload.notification.icon,
+            };
+            new Notification(title, options);
+        });
+    </script>
     <script>
         window.config = @json(\Laravel\Nova\Nova::jsonVariables(request()));
     </script>
