@@ -10,8 +10,10 @@
     "require": {
         "php": "^7.3|^8.0",
         "acme/analytics": "*",
+        "acme/bill": "*",
         "acme/multiselect-field": "*",
         "acme/projecs": "*",
+        "acme/smssend": "*",
         "ajhaupt7/image-upload-preview": "^1.0",
         "alaqsa/project": "*",
         "averotech/link": "*",
@@ -61,9 +63,7 @@
         "whitecube/nova-flexible-content": "^0.2.8",
         "whitecube/nova-google-maps": "^0.0.1",
         "yassi/nova-nested-form": "^3.0",
-        "zeyad/notification": "*",
-        "acme/bill": "*",
-        "acme/smssend": "*"
+        "zeyad/notification": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -154,7 +154,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

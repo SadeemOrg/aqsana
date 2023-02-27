@@ -120,6 +120,46 @@ class NotificationController extends Controller
         // dd($date);
         // Auth::user()->notify(new PostNotif());
         Notification::send($userSchema, new TasksNotification($offerData, $date));
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $FcmToken = User::where('id',$userSchema->id)->pluck('device_key')->all();
+        // dd($FcmToken);
+
+        $serverKey = 'AAAAJz9jvcE:APA91bGNRoHzz8sk5aw3EJmqynwyrSMPIxkwbnxdM-rfZelMvZnsosFiEKHjrFMI8bj_jUsG1yM1sg9WgpL0SpvXlOEQYM6cJQEkAQUdv_pA6iQoDA5_2fZuvcuWsIVpwM1DC5a1ymJM';
+
+        $data = [
+            "registration_ids" => $FcmToken,
+            "notification" => [
+                "title" => Auth::user()->name,
+                "body" => $request->Notifications,
+            ]
+        ];
+        $encodedData = json_encode($data);
+
+        $headers = [
+            'Authorization:key=' . $serverKey,
+            'Content-Type: application/json',
+        ];
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        // Disabling SSL Certificate support temporarly
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
+        // Execute post
+        $result = curl_exec($ch);
+        if ($result === FALSE) {
+            die('Curl failed: ' . curl_error($ch));
+        }
+        // Close connection
+        curl_close($ch);
+        // FCM response
+        dd($result);
 
         // $userSchema->notify($userSchema, new TasksNotification($offerData,$date));
         return 'Task completed!';
