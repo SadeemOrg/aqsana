@@ -132,7 +132,7 @@ class ProjectNews extends Resource
                     ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
 
 
-                Image::make(__('IMAGE'), 'report_image')->disk('public')->prunable()->rules('required'),
+                Image::make(__('IMAGE'), 'report_image')->disk('public')->prunable(),
                 ArrayImages::make(__('PICTURES'),  'report_pictures')
                     ->disk('public'),
                 Text::make(__('VIDEO LINK'), 'report_video_link'),
