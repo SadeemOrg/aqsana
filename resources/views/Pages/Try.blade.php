@@ -2,7 +2,10 @@
 @section('content')
     <!-- component -->
     @php
+    use App\Models\user;
         // dd("dd");
+        $isToken=Auth::user()->device_key;
+
         $newDate = date('Y-m-d', strtotime($user['birth_date']));
         $StatWorknewDate = date('Y-m-d', strtotime($user['start_work_date']));
     @endphp
@@ -15,9 +18,15 @@
         <!-- header page -->
         <header class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2">
             <!-- logo -->
-            <div class="flex items-center space-x-2">
+            <div class="flex justify-between items-center space-x-2 w-full">
                 <button type="button" class="text-3xl" @click="asideOpen = !asideOpen"><i class="bx bx-menu"></i></button>
-                {{-- <p>ss</p> --}}
+
+                @if (!$isToken)
+
+
+                <button onclick="startFCM()" class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] px-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">Allow notification
+                </button>
+                @endif
             </div>
         </header>
         <div class="flex">
@@ -74,8 +83,7 @@
                         </div>
                         <div class="flex ">
                             {{-- <livewire:notification /> --}}
-                            <button onclick="startFCM()" class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">Allow notification
-                            </button>
+
                             <button onclick="location.href='/Admin'"
                                 class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">الذهاب
                                 الى المنظومة</button>
