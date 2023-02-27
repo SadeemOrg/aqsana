@@ -6,6 +6,7 @@
         $newDate = date('Y-m-d', strtotime($user['birth_date']));
         $StatWorknewDate = date('Y-m-d', strtotime($user['start_work_date']));
     @endphp
+
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
 
@@ -73,6 +74,8 @@
                         </div>
                         <div class="flex ">
                             {{-- <livewire:notification /> --}}
+                            <button onclick="startFCM()" class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">Allow notification
+                            </button>
                             <button onclick="location.href='/Admin'"
                                 class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">الذهاب
                                 الى المنظومة</button>
