@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationTest;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\WebNotificationController;
 
 // use App\Http\Livewire\Notification;
 
@@ -158,3 +159,12 @@ Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF'])->name('ge
 
 
 Route::get('send-sms-notification', [NotificationController::class, 'sendSmsNotificaition']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/push-notificaiton', [WebNotificationController::class, 'index'])->name('push-notificaiton');
+Route::post('/store-token', [WebNotificationController::class, 'storeToken'])->name('store.token');
+Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification'])->name('send.web-notification');

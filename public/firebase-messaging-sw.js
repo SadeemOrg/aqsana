@@ -1,25 +1,34 @@
-importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js');
-
-// Initialize the Firebase app in the service worker by passing in the
-// messagingSenderId.
+// Give the service worker access to Firebase Messaging.
+// Note that you can only use Firebase Messaging here. Other Firebase libraries
+// are not available in the service worker.importScripts('https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js');
+/*
+Initialize the Firebase app in the service worker by passing in the messagingSenderId.
+*/
 firebase.initializeApp({
-   'messagingSenderId': '16943275285'
+    apiKey: "AIzaSyA4a_fkjeIEDYd_avYYZ_XbqwLIhtd6HCQ",
+    authDomain: "alqudsquds-82c73.firebaseapp.com",
+    databaseURL: 'https://project-id.firebaseio.com',
+    projectId: "alqudsquds-82c73",
+    storageBucket: "alqudsquds-82c73.appspot.com",
+    messagingSenderId: "168567225793",
+    appId: "1:168567225793:web:417c87aa992aa0784d4340",
+    measurementId: "G-HH0SH5P3KT"
 });
 
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
 const messaging = firebase.messaging();
-
-messaging.setBackgroundMessageHandler(function(payload) {
-  console.log('[firebase-messaging-sw.js] Received background message ', payload);
-  // Customize notification here
-  const notificationTitle = 'Background Message Title';
-  const notificationOptions = {
-    body: 'Background Message body.',
-    icon: 'https://images.theconversation.com/files/93616/original/image-20150902-6700-t2axrz.jpg' //your logo here
-  };
-
-  return self.registration.showNotification(notificationTitle,
-      notificationOptions);
+messaging.setBackgroundMessageHandler(function (payload) {
+    console.log("Message received.", payload);
+    const title = "Hello world is awesome";
+    const options = {
+        body: "Your notificaiton message .",
+        icon: "/firebase-logo.png",
+    };
+    return self.registration.showNotification(
+        title,
+        options,
+    );
 });
