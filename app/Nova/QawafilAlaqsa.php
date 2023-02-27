@@ -60,6 +60,7 @@ use Pdmfc\NovaFields\ActionButton;
 
 use Fourstacks\NovaRepeatableFields\Repeater;
 use Laravel\Nova\Fields\HasMany;
+use Mauricewijnia\NovaMapsAddress\MapsAddress;
 
 class QawafilAlaqsa extends Resource
 {
@@ -300,7 +301,10 @@ class QawafilAlaqsa extends Resource
                         Text::make(__("description"), "description"),
                         Text::make(__("phone number"), "phone_number_address")->rules('required'),
 
-                        GoogleMaps::make(__('current_location'), 'current_location'),
+
+                MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
+                ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
+
                         // Select::make(__("Status"), "address_status")->options([
                         //     '1' => __('active'),
                         //     '2' => __('not active'),
