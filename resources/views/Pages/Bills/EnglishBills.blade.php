@@ -28,26 +28,26 @@
                     <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
                 </p>
             </div>
-            <div class="sm:hidden flex flex-col items-center justify-between w-full my-4 gap-y-2 px-4">
-                <div class="flex flex-row flex-wrap items-center w-full justify-between gap-x-6">
-                    <p class=" mt-1 text-[17px] font-noto_Regular text-[#101426]">Association Id :
-                        <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
+            <div class="sm:hidden flex flex-col items-center justify-center w-full mt-8  my-4 gap-y-2 px-16">
+                <div class="flex flex-col items-start w-full justify-center gap-y-2">
+                    <p class=" text-[17px] font-noto_Regular text-[#101426]">Association Id :
+                        <span class="font-FlatBold text-[#101426] md:text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                     </p>
-                    <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">title :
-                        <span class="font-FlatBold text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>
+                    <p class="text-[17px] font-noto_Regular text-[#101426]">title :
+                        <span class="font-FlatBold text-[#101426] md:text-[#6B7280] mx-1 text-sm">{{ $newaddress[0] }}</span>
                     </p>
                 </div>
-                <div class="flex flex-row flex-wrap items-center w-full justify-between gap-x-6 ">
-                    <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">Telephone :
-                        <span dir="ltr" class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
+                <div class="flex flex-col items-start w-full justify-center gap-y-2 ">
+                    <p class="text-[17px] font-noto_Regular text-[#101426]">Telephone :
+                        <span dir="ltr" class="font-FlatBold text-[#101426] md:text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
                     </p>
                     <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">Email :
-                        <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
+                        <span class="font-FlatBold text-[#101426] md:text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
                     </p>
                 </div>
             </div>
         </div>
-        <div class="flex flex-col items-center mt-0">
+        <div class="flex flex-col items-start md:items-center mt-0 px-16 md:px-0">
             <p dir="ltr" class="">{{ $newDate[0] }}</p>
             <p class="font-FlatBold text-[17px] text-[#101426] ">receipt voucher number
                 <span class="text-base">
@@ -60,7 +60,7 @@
                 <p class="font-FlatBold text-[17px] text-[#101426] ">Copy from orginal Bill</p>
             @endif
         </div>
-        <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 max-w-xl mt-4">
+        <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 max-w-xl mt-4 px-16 md:px-0">
             <p class="text-[18px] font-FlatBold text-[#101426]">account owner :</p>
             <span class="font-FlatBold text-[#6B7280]  text-[18px] text-right">
                 @if ($Transaction->Payment_type == 5)
@@ -73,7 +73,7 @@
             </span>
         </div>
         <!-- table -->
-        <div class="px-4 sm:px-6 lg:px-8">
+        <div class="px-16 md:px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
             </div>
             <div class="mt-8 flex flex-col">
@@ -373,12 +373,12 @@
                 طباعة
             </button>
         </div>
-        <div class="relative flex flex-row items-center justify-center w-full -mt-14 ">
-            <img class="w-[280px] h-[240px]"
+        <div class="relative flex flex-row items-center justify-end md:justify-center w-full -mt-14 ">
+            <img class="w-[200px] h-[180px] md:w-[280px] md:h-[240px]"
                 src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png"
                 alt="logo">
             <div class="absolute">
-                <img class="w-36 h-36"
+                <img class="w-28 h-28 md:w-36 md:h-36"
                     src="https://media.discordapp.net/attachments/938405759996276806/1060513822194028595/-removebg-preview.png"
                     alt="ttab">
             </div>
