@@ -879,6 +879,9 @@ video {
 .mt-8{
   margin-top: 2rem;
 }
+.ml-8{
+  margin-left: 2rem;
+}
 .block{
   display: block;
 }
