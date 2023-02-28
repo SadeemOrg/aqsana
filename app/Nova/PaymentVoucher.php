@@ -220,7 +220,7 @@ class PaymentVoucher extends Resource
             Text::make(__('bill_number'), 'bill_number'),
             Text::make(__('description'), 'description'),
 
-            // BelongsTo::make(__('Currenc'), 'Currenc', \App\Nova\Currency::class),
+            BelongsTo::make(__('Currenc'), 'Currenc', \App\Nova\Currency::class),
 
 
 
