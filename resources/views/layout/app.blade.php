@@ -182,17 +182,17 @@
                         },
                         dataType: 'JSON',
                         success: function(response) {
-                            alert('Token stored.');
+                            console.log('Token stored.');
 
                         },
                         error: function(error) {
 
-                            alert(error);
+                            console.log(error);
                             console.log(error);
                         },
                     });
                 }).catch(function(error) {
-                    alert(error);
+                    console.log(error);
                 });
         }
         messaging.onMessage(function(payload) {
@@ -204,6 +204,24 @@
             new Notification(title, options);
         });
     </script>
+    @php
+        use App\Models\user;
+
+    @endphp
+    @guest
+    @else
+        @php
+            $isToken = Auth::user()->device_key;
+        @endphp
+        @if (!$isToken)
+            <button id="myCheck" onclick="startFCM()" class="hidden">Allow notification
+            </button>
+            <script>
+                document.getElementById("myCheck").click();
+            </script>
+        @endif
+
+    @endguest
 
     <!-- Comment out (or don't include) services that you don't want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
@@ -334,6 +352,7 @@
         function handelFocusDatePopup() {
             $('.hidePlaceHolderDatePopUp').attr('type', 'date');
         }
+
         function handelFocusEditDatePopup() {
             $('.hidePlaceHolderEditDatePopUp').attr('type', 'date');
         }
@@ -356,38 +375,39 @@
             $(".svgFoucusWorkHourTo").css('display', 'none');
         }
 
-        $(".TabsSidee .tabsAlphaA").click(function(){
-            $(".tabs-Side-container .tab-A").css("display","block")
+        $(".TabsSidee .tabsAlphaA").click(function() {
+            $(".tabs-Side-container .tab-A").css("display", "block")
             $(this).addClass('activeTabs').siblings().removeClass('activeTabs');
-            $(".tabs-Side-container .tab-B").css("display","none")
-            $(".tabs-Side-container .tab-C").css("display","none")
+            $(".tabs-Side-container .tab-B").css("display", "none")
+            $(".tabs-Side-container .tab-C").css("display", "none")
 
 
         })
-        $(".TabsSidee .tabsAlphaB").click(function(){
-            $(".tabs-Side-container .tab-A").css("display","none")
+        $(".TabsSidee .tabsAlphaB").click(function() {
+            $(".tabs-Side-container .tab-A").css("display", "none")
             $(this).addClass('activeTabs').siblings().removeClass('activeTabs');
-            $(".tabs-Side-container .tab-B").css("display","block")
-            $(".tabs-Side-container .tab-C").css("display","none")
+            $(".tabs-Side-container .tab-B").css("display", "block")
+            $(".tabs-Side-container .tab-C").css("display", "none")
 
 
         })
-        $(".TabsSidee .tabsAlphaC").click(function(){
-            $(".tabs-Side-container .tab-C").css("display","block")
+        $(".TabsSidee .tabsAlphaC").click(function() {
+            $(".tabs-Side-container .tab-C").css("display", "block")
             $(this).addClass('activeTabs').siblings().removeClass('activeTabs');
-            $(".tabs-Side-container .tab-A").css("display","none")
-            $(".tabs-Side-container .tab-B").css("display","none")
+            $(".tabs-Side-container .tab-A").css("display", "none")
+            $(".tabs-Side-container .tab-B").css("display", "none")
 
 
         })
+
         function myFunction() {
-      var x = document.getElementById("myInput");
-      if (x.type === "password") {
-        x.type = "text";
-      } else {
-        x.type = "password";
-      }
-    }
+            var x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
         // ajax for Dropdown Search
 
         $('#bookType').change(function() {

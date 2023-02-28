@@ -2,10 +2,6 @@
 @section('content')
     <!-- component -->
     @php
-    use App\Models\user;
-        // dd("dd");
-        $isToken=Auth::user()->device_key;
-
         $newDate = date('Y-m-d', strtotime($user['birth_date']));
         $StatWorknewDate = date('Y-m-d', strtotime($user['start_work_date']));
     @endphp
@@ -21,12 +17,15 @@
             <div class="flex justify-between items-center space-x-2 w-full">
                 <button type="button" class="text-3xl" @click="asideOpen = !asideOpen"><i class="bx bx-menu"></i></button>
 
-                @if (!$isToken)
+                <a  href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                 {{ __('Logout') }}
+             </a>
 
-
-                <button onclick="startFCM()" class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] px-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">Allow notification
-                </button>
-                @endif
+             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                 @csrf
+             </form>
             </div>
         </header>
         <div class="flex">
@@ -110,8 +109,8 @@
                     </div>
                     <div class="tabs-container">
                         <!--Form -->
-                        <form method="POST" target="_self" action="{{ '/user/update/personaldata' }}" enctype="multipart/form-data"
-                            class="tab tab-1  my-6 mt-8">
+                        <form method="POST" target="_self" action="{{ '/user/update/personaldata' }}"
+                            enctype="multipart/form-data" class="tab tab-1  my-6 mt-8">
                             @csrf
                             <!--Perosonal Information -->
                             <div
@@ -129,8 +128,8 @@
                                 </div>
                             </div>
                             @php
-                            $img = 'storage/' . $user['photo'];
-                       @endphp
+                                $img = 'storage/' . $user['photo'];
+                            @endphp
                             <div class="flex flex-row items-center justify-center mb-12">
                                 <img src="/{{ $img }}" alt=""
                                     class="inline-block h-40 w-40 mt-6 rounded-full" id="chosen"
@@ -258,7 +257,8 @@
                             </div>
                         </form>
                         <!--Second Form -->
-                        <form class="tab tab-2 my-6 " method="POST" target="_self" action="{{ '/user/update/bankdata' }}" enctype="multipart/form-data">
+                        <form class="tab tab-2 my-6 " method="POST" target="_self"
+                            action="{{ '/user/update/bankdata' }}" enctype="multipart/form-data">
                             @csrf
                             <div
                                 class="  flex flex-row items-center justify-center sm:justify-between gap-x-4 sm:gap-x-0 mt-8  flex-wrap">
@@ -320,7 +320,8 @@
                             </div>
                         </form>
                         <!--Last Form -->
-                        <form class="tab tab-3 my-6 "  method="POST" target="_self" action="{{ '/user/update/password' }}" enctype="multipart/form-data">
+                        <form class="tab tab-3 my-6 " method="POST" target="_self"
+                            action="{{ '/user/update/password' }}" enctype="multipart/form-data">
                             @csrf
                             <div
                                 class="  flex flex-row items-center justify-center sm:justify-between gap-x-4 sm:gap-x-0 my-8  flex-wrap">
