@@ -20,6 +20,7 @@ use Alaqsa\Project\Project;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
 use App\Nova\Metrics\InComeTransaction;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
 use MyApp\BillingSchedule\BillingSchedule;
@@ -154,27 +155,27 @@ class PaymentVoucher extends Resource
             //         ->displayUsingLabels(),
             // ])->dependsOn('type', '3')->hideFromDetail()->hideFromIndex(),
 
-            BelongsTo::make('project' , 'project')->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make('project', 'project')->hideWhenCreating()->hideWhenUpdating(),
             Select::make(__('name'), "name")
-            ->options(function () {
-                $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
-                $i = 0;
-                $user_type_admin_array =  array();
-                foreach ($Users as $User) {
+                ->options(function () {
+                    $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
+                    $i = 0;
+                    $user_type_admin_array =  array();
+                    foreach ($Users as $User) {
 
 
-                    $user_type_admin_array += [($User['id']) => ($User['name'])];
-                }
-                $Users =  \App\Models\BusesCompany::all();
-                foreach ($Users as $User) {
+                        $user_type_admin_array += [($User['id']) => ($User['name'])];
+                    }
+                    $Users =  \App\Models\BusesCompany::all();
+                    foreach ($Users as $User) {
 
 
-                    $user_type_admin_array += [($User['id']) => ($User['name'])];
-                }
+                        $user_type_admin_array += [($User['id']) => ($User['name'])];
+                    }
 
-                return $user_type_admin_array;
-            })
-            ->displayUsingLabels()->hideWhenCreating()->hideFromIndex()->hideFromDetail()->readonly(),
+                    return $user_type_admin_array;
+                })
+                ->displayUsingLabels()->hideWhenCreating()->hideFromIndex()->hideFromDetail()->readonly(),
             Select::make(__('name'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
@@ -218,8 +219,8 @@ class PaymentVoucher extends Resource
             Text::make(__('company_number'), 'company_number'),
             Text::make(__('bill_number'), 'bill_number'),
             Text::make(__('description'), 'description'),
-            Text::make(__('transact amount pay'), 'transact_amount')->rules('required'),
-            BelongsTo::make(__('Currenc'), 'Currenc', \App\Nova\Currency::class),
+
+            // BelongsTo::make(__('Currenc'), 'Currenc', \App\Nova\Currency::class),
 
 
 
@@ -231,7 +232,7 @@ class PaymentVoucher extends Resource
                 // '5' => __('Other'),
             ])->displayUsingLabels()->default('1'),
             NovaDependencyContainer::make([
-                Text::make(__('transact amount'), 'transact_amount')->rules('required'),
+                Text::make(__('transact amount pay'), 'transact_amount')->rules('required'),
                 // Select::make(__('Currenc'), "Currency")
                 //     ->options(function () {
                 //         $Alhisalats =  \App\Models\Currency::all();
@@ -243,7 +244,7 @@ class PaymentVoucher extends Resource
                 //         return $user_type_admin_array;
                 //     })
                 //     ->displayUsingLabels(),
-            ])->dependsOn("Payment_type", '1')->hideFromDetail()->hideFromIndex(),
+            ])->dependsOn("Payment_type", '1')->hideFromIndex(),
 
             NovaDependencyContainer::make([
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
@@ -261,7 +262,7 @@ class PaymentVoucher extends Resource
                             })->rules('required'),
 
                     ]),
-            ])->dependsOn("Payment_type", '2')->hideFromDetail()->hideFromIndex(),
+            ])->dependsOn("Payment_type", '2')->hideFromIndex(),
             NovaDependencyContainer::make([
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
@@ -277,7 +278,7 @@ class PaymentVoucher extends Resource
                             })->rules('required'),
 
                     ]),
-            ])->dependsOn("Payment_type", '3')->hideFromDetail()->hideFromIndex(),
+            ])->dependsOn("Payment_type", '3')->hideFromIndex(),
 
             NovaDependencyContainer::make([
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
@@ -296,11 +297,12 @@ class PaymentVoucher extends Resource
                             })->rules('required'),
 
                     ])->rules('required'),
-            ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
+            ])->dependsOn("Payment_type", '4')->hideFromIndex(),
             // Text::make(__('equivalent amount'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
-
-            File::make(__('voucher'), 'voucher')->disk('public')->prunable(),
-            File::make(__('file'), 'file')->disk('public')->prunable(),
+            Files::make('voucher', 'voucher'),
+            Files::make('file', 'file'),
+            // File::make(__('voucher'), 'voucher')->disk('public')->prunable(),
+            // File::make(__('file'), 'file')->disk('public')->prunable(),
 
             // Select::make(__('approval'), 'approval')->options([
             //     1 => 'approval',
@@ -327,6 +329,42 @@ class PaymentVoucher extends Resource
             $str = ltrim($request->name, 'B');
             $model->name = $str;
         }
+
+        if ($request->Payment_type == '1') {
+            $model->Payment_type_details = null;
+            // dd($request->transact_amount);
+            $model->equivelant_amount = $request->transact_amount;
+        } elseif ($request->Payment_type == '2') {
+            $model->transact_amount = 0;
+            $amount = 0;
+            foreach ($request->Payment_type_details as $key => $value) {
+
+                $amount += $value['attributes']['Doubt_value'];
+            }
+
+            $model->equivelant_amount = $amount;
+        } elseif ($request->Payment_type == '3') {
+            $model->transact_amount = 0;
+            $amount = 0;
+            foreach ($request->Payment_type_details as $key => $value) {
+
+                $amount += $value['attributes']['equivelant_amount'];
+            }
+
+            $model->equivelant_amount = $amount;
+
+            #  // $model->equivelant_amount
+        } elseif ($request->Payment_type == '4') {
+            $model->transact_amount = 0;
+            $amount = 0;
+            foreach ($request->Payment_type_details as $key => $value) {
+
+                $amount += $value['attributes']['equivelant_amount'];
+            }
+
+            $model->equivelant_amount = $amount;
+            #  // $model->equivelant_amount
+        }
         // $str = 'T190';
         // $str = ltrim($str, 'T');
         // dd($str);
@@ -337,25 +375,25 @@ class PaymentVoucher extends Resource
     {
 
 
-        $new = DB::table('currencies')->where('id', $request->Currenc)->first();
+        // $new = DB::table('currencies')->where('id', $request->Currenc)->first();
         $id = Auth::id();
         $model->created_by = $id;
         $model->main_type = '2';
         $model->type = '0';
-        $model->equivelant_amount = $new->rate * $request->transact_amount;
+        // $model->equivelant_amount = $new->rate * $request->transact_amount;
     }
     public static function beforeUpdate(Request $request, $model)
     {
         // dump();
 
 
-        $currencies = DB::table('currencies')->where('id', $request->Currenc)->first();
-        $id = Auth::id();
-        $model->update_by = $id;
-        if ($model->Currenc->id == $request->Currenc) {
-            $rate = ((int)$model->equivelant_amount / (int)$model->transact_amount);
-        } else  $rate = $currencies->rate;
-        $model->equivelant_amount = $rate * $request->transact_amount;
+        // $currencies = DB::table('currencies')->where('id', $request->Currenc)->first();
+        // $id = Auth::id();
+        // $model->update_by = $id;
+        // if ($model->Currenc->id == $request->Currenc) {
+        //     $rate = ((int)$model->equivelant_amount / (int)$model->transact_amount);
+        // } else  $rate = $currencies->rate;
+        // $model->equivelant_amount = $rate * $request->transact_amount;
     }
 
 
@@ -381,7 +419,6 @@ class PaymentVoucher extends Resource
                     'name' => $telfone->id,
                     'transaction_type' => '1'
                 ]);
-
         }
     }
 
