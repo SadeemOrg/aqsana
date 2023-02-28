@@ -73,7 +73,7 @@
             </span>
         </div>
         <!-- table -->
-        <div class="px-16 md:px-4 sm:px-6 lg:px-8">
+        <div class="px-4 mx-8 md:mx-0">
             <div class="sm:flex sm:items-center">
             </div>
             <div class="mt-8 flex flex-col">

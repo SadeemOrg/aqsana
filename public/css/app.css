@@ -2784,6 +2784,10 @@ body{
     margin-top: 5rem;
     margin-bottom: 5rem;
   }
+  .md\:mx-8{
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
   .md\:ml-0{
     margin-left: 0px;
   }
@@ -3229,6 +3233,14 @@ body{
   .lg\:px-8{
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+  .lg\:px-4{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .lg\:px-1{
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
   .lg\:pr-0{
     padding-right: 0px;

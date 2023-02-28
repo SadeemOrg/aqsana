@@ -32,7 +32,7 @@
                 </p>
             </div>
             <div class="sm:hidden flex flex-col items-center justify-center w-full mt-8 my-4 gap-y-2 px-16">
-                <div class=" flex flex-col  items-center w-full justify-center gap-y-2 ">
+                <div class="  flex flex-col items-start w-full justify-center gap-y-2 ">
                     <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">אִרגוּן :
                         <span class="font-FlatBold text-[#101426] md:text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                     </p>
@@ -40,7 +40,7 @@
                         <span class="font-FlatBold text-[#101426] md:text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>
                     </p>
                 </div>
-                <div class=" flex flex-col  items-center w-full justify-center gap-y-2 ">
+                <div class="  flex flex-col items-start w-full justify-center gap-y-2 ">
                     <p class=" text-[17px] font-noto_Regular text-[#101426]">טלפון :
                         <span dir="ltr" class="font-FlatBold text-[#101426] md:text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
                     </p>
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-col items-center mt-10">
+        <div class="flex flex-col items-start px-16 md:px-0 md:items-center mt-10">
             <p dir="ltr" class="">{{ $newDate[0] }}</p>
             <p class="font-FlatBold text-[20px] text-[#101426] ">קבלה מספר
                 <span class="text-base">
@@ -64,7 +64,7 @@
             @endif
         </div>
         <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 max-w-xl mt-4">
-            <p class="text-[18px] font-FlatBold text-[#101426]">لحساب :</p>
+            <p class="text-[18px] font-FlatBold text-[#101426] pr-16 md:pr-0">لحساب :</p>
             <span class="font-FlatBold text-[#101426] md:text-[#6B7280]  text-[18px] text-right">
                 @if ($Transaction->Payment_type == 5)
                 קופסת כסף  :
@@ -75,7 +75,7 @@
             </span>
         </div>
         <!-- table -->
-        <div class="px-4 sm:px-6 lg:px-8">
+        <div class="px-4 mx-8 md:mx-0">
             <div class="sm:flex sm:items-center">
             </div>
             <div class="mt-8 flex  flex-col">
@@ -335,7 +335,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row flex-wrap items-center md:justify-between justify-between px-4 mt-4 sm:mx-0 mb-6 ">
+        <div class="flex flex-row flex-wrap items-center md:justify-between justify-between px-16 md:px-4 mt-4 sm:mx-0 mb-6">
             <div>
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">שם המגזר:
                     @if ($Transaction->Sectors != null)
@@ -355,12 +355,12 @@
                 طباعة
             </button>
         </div>
-        <div class="relative flex flex-row items-center justify-end md:justify-center w-full -mt-12 ">
-            <img class="w-[280px] h-[240px]"
+        <div class="relative flex flex-row items-center justify-end md:justify-center ml-8 md:ml-0 w-full px-8 md:px-0 -mt-12">
+            <img class="w-[200px] h-[180px] md:w-[280px] md:h-[240px]"
                 src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png"
                 alt="logo">
             <div class="absolute">
-                <img class="w-36 h-36"
+                <img class="w-28 h-28 md:w-36 md:h-36"
                     src="https://media.discordapp.net/attachments/938405759996276806/1060513822194028595/-removebg-preview.png"
                     alt="ttab">
             </div>
