@@ -156,7 +156,7 @@
 
                     <dropdown class=" h-9 flex items-center dropdown-right">
 
-                        {{-- @include('nova::partials.Notification') --}}
+                        @include('nova::partials.Notification')
                     </dropdown>
                     <dropdown class=" h-9 flex items-center dropdown-right">
 
