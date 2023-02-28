@@ -670,6 +670,36 @@ video {
 .left-\[1\%\]{
   left: 1%;
 }
+.left-\[5\%\]{
+  left: 5%;
+}
+.left-\[15\%\]{
+  left: 15%;
+}
+.left-\[100px\]{
+  left: 100px;
+}
+.left-10{
+  left: 2.5rem;
+}
+.left-24{
+  left: 6rem;
+}
+.left-\[3\#\]{
+  left: 3#;
+}
+.left-\[3\%\]{
+  left: 3%;
+}
+.left-\[-2\%\]{
+  left: -2%;
+}
+.left-\[-5\%\]{
+  left: -5%;
+}
+.left-\[-8\%\]{
+  left: -8%;
+}
 .z-0{
   z-index: 0;
 }
@@ -1511,6 +1541,14 @@ video {
 }
 .gap-y-8{
   row-gap: 2rem;
+}
+.gap-x-12{
+  -moz-column-gap: 3rem;
+       column-gap: 3rem;
+}
+.gap-x-28{
+  -moz-column-gap: 7rem;
+       column-gap: 7rem;
 }
 .space-x-1 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;

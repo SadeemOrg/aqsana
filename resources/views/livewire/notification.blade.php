@@ -23,7 +23,7 @@
         </button>
 
         <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
-        <div x-show="dropdownOpen" class="absolute -right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20"
+        <div x-show="dropdownOpen" class="absolute left-[-8%] mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20"
             style="width:20rem;">
             @if (count($notificationsArray) !== 0)
                 <div class="">

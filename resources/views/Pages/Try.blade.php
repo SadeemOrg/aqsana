@@ -19,8 +19,11 @@
             <!-- logo -->
             <div class="flex justify-between items-center space-x-2 w-full">
                 <button type="button" class="text-3xl" @click="asideOpen = !asideOpen"><i class="bx bx-menu"></i></button>
-                <div class="flex flex-row items-start  -mt-2 justify-start">
-                    <button type="button" class="text-3xl ml-3" @click="leftBarOpen = !leftBarOpen">
+                <div class="flex flex-row items-start gap-x-1  justify-start">
+                  <div @click="leftBarOpen = false" >
+                    <livewire:notification  />
+                </div>
+                    <button type="button" class="text-3xl ml-3 mt-2" @click="leftBarOpen = !leftBarOpen">
                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -60,7 +63,6 @@
                                 d="M22.6994 17.2592H15.638V21.862H22.6994C23.9679 21.862 25 20.83 25 19.5614C25 18.2912 23.9679 17.2592 22.6994 17.2592Z"
                                 fill="#0DAA8C" />
                         </svg>
-
                     </button>
                 </div>
 
@@ -80,7 +82,6 @@
         </header>
         <div class=" absolute left-[1%]  z-50 bg-white p-4 text-white rounded-lg" style="min-height: 20vh ;"
             x-show="leftBarOpen">
-            {{-- <p>ameeeeeeeeeeeeeeeed</p> --}}
            <div class="flex flex-col items-start justify-start">
             <button onclick="location.href='/Admin'"
                 class=" text-black text-sm hover:bg-[#349A37] py-4 rounded-lg px-4 min-w-[180px]">الذهاب
