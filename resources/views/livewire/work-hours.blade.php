@@ -19,7 +19,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model="FromDate" id="hidePlaceHolderDateWorkHourFrom" type="text"
+                    <input wire:model.debounce.50000ms="FromDate" id="hidePlaceHolderDateWorkHourFrom" type="text"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onfocus="handelFocusWorkHourFrom()">
                 </div>
@@ -34,7 +34,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model="ToDate" id="hidePlaceHolderDateWorkHourTo" type="text"
+                    <input wire:model.debounce.50000ms="ToDate" id="hidePlaceHolderDateWorkHourTo" type="text"
                         class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusWorkerHourTo()">
                 </div>
