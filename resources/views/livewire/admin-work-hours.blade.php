@@ -26,7 +26,7 @@
                         </svg>
                     </div>
 
-                    <input wire:model="FromDate" id="hidePlaceHolderDateAdminFrom" type="text"
+                    <input wire:model.debounce.50000ms="FromDate" id="hidePlaceHolderDateAdminFrom" type="text"
                         data-val-required="Mandatory field" data-val="true"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
@@ -43,7 +43,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model="ToDate" id="hidePlaceHolderDateAdminTo" type="text"
+                    <input wire:model.debounce.50000ms="ToDate" id="hidePlaceHolderDateAdminTo" type="text"
                         class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusAdminDateTo()">
                 </div>
@@ -237,7 +237,8 @@
             aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
             <div class="fixed inset-0 top-[3%] z-10 overflow-y-visible">
-                <div class="flex flex-col min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+                <div
+                    class="flex flex-col min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
                     <div
                         class=" relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-xs sm:max-w-md sm:p-6">
                         <button>
@@ -256,19 +257,19 @@
                                     value="{{ date_format($EditWorkHours->date, 'd/m/Y') }}">
                             </div> --}}
                             <div class="mt-2 selectdiv">
-                                <input type="text"
+                                <input type="text" wire:model.debounce.50000ms="date"
                                     class="hidePlaceHolderEditDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusEditDatePopup()">
                             </div>
                             <div class="flex flex-row items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-72">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
-                                        wire:model="start_time"
+                                        wire:model.debounce.50000ms="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                                 <div class="mt-2 selectdiv">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
-                                        wire:model="end_time"
+                                        wire:model.debounce.50000ms="end_time"
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                             </div>
@@ -298,7 +299,8 @@
             aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
             <div class="fixed inset-0 top-[3%] z-10 overflow-y-visible">
-                <div class="flex flex-col min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+                <div
+                    class="flex flex-col min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
                     <div
                         class=" relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-xs sm:max-w-md sm:p-6">
                         <button>
@@ -324,17 +326,17 @@
                             <div class="flex flex-row items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-72">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
-                                        wire:model="start_time"
+                                        wire:model.debounce.50000ms="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                                 <div class="mt-2 selectdiv">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
-                                        wire:model="end_time"
+                                        wire:model.debounce.50000ms="end_time"
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                             </div>
                             <div class="mt-2 selectdiv">
-                                <input type="text" wire:model="date"
+                                <input type="text" wire:model.debounce.50000ms="date"
                                     class="hidePlaceHolderDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusDatePopup()">
                             </div>
@@ -359,126 +361,129 @@
                 </div>
             </div>
         </div>
-</div>
-@endif
-<!--end reason popup Timer -->
 
-<!--start reason popup Timer -->
-@if ($this->showNoteModels == true)
-    <div class=" popUpTimerReason relative z-10 contactusModel" aria-labelledby="modal-title" role="dialog"
-        aria-modal="true">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-        <div class="fixed inset-0 top-[3%] z-10 ">
-            <div class="flex flex-col min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                <div
-                    class=" relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
-                    <button>
-                        <svg wire:click="closeNoteModels" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                    <form wire:submit.prevent="EditNote">
-                        <p class="w-full text-center mt-2 text-[20px] text-[#151630]">تعديل الملحوظة </p>
-                        <!--First One -->
-                        {{-- {{$Notes  }} --}}
-                        @if ($Notes)
-                            @foreach ($Notes as $key => $Note)
-                                <div class="border-[#349A37] py-2 border-b-2">
-                                    <div class="mt-2 selectdiv">
-                                        <input wire:model="notedate.{{ $key }}.Type" type="text"
-                                            placeholder="سبب المغادرة"
-                                            class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-full w-full  p-2.5 placeholder-[#349A37] ">
-                                    </div>
-                                    <div class="flex flex-row items-center justify-between">
-                                        <div class="mt-2 selectdiv w-72">
-                                            <input wire:model="notedate.{{ $key }}.time_out" type="text"
-                                                placeholder="ساعة البدء" onfocus="handelEditNotesInputtimeFrom()"
-                                                class="foucsEditTimeStart h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
-                                        </div>
+    @endif
+    <!--end reason popup Timer -->
+
+    <!--start reason popup Timer -->
+    @if ($this->showNoteModels == true)
+        <div class=" popUpTimerReason relative z-10 contactusModel" aria-labelledby="modal-title" role="dialog"
+            aria-modal="true">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+            <div class="fixed inset-0 top-[3%] z-10 ">
+                <div class="flex flex-col min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                    <div
+                        class=" relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+                        <button>
+                            <svg wire:click="closeNoteModels" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <form wire:submit.prevent="EditNote">
+                            <p class="w-full text-center mt-2 text-[20px] text-[#151630]">تعديل الملحوظة </p>
+                            <!--First One -->
+                            {{-- {{$Notes  }} --}}
+                            @if ($Notes)
+                                @foreach ($Notes as $key => $Note)
+                                    <div class="border-[#349A37] py-2 border-b-2">
                                         <div class="mt-2 selectdiv">
-                                            <input wire:model="notedate.{{ $key }}.return_time"
-                                                type="text" onfocus="handelInputEditNotestimeTo()"
-                                                placeholder="ساعة الانتهاء"
-                                                class="foucsEditTimeEnd h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
+                                            <input wire:model="notedate.{{ $key }}.Type" type="text"
+                                                placeholder="سبب المغادرة"
+                                                class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-full w-full  p-2.5 placeholder-[#349A37] ">
                                         </div>
-                                    </div>
-                                    <div class="flex flex-row items-center justify-start gap-x-2 mt-2">
-                                        <div class="basis-1/2">
-                                            <button type="submit"
-                                                class="connectUs duration-200 w-full text-center px-5 lg:px-10 py-3 mt-2 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
-                                                <div class="flex flex-row items-center gap-x-2">
-                                                    <svg width="18" height="20" viewBox="0 0 35 34"
-                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <g clip-path="url(#clip0_1238_666)">
-                                                            <path
-                                                                d="M21.3028 5.67969L2.69553 24.2883C2.60191 24.3822 2.53432 24.5007 2.50213 24.6281L0.439695 32.9063C0.378002 33.1555 0.451229 33.4205 0.63309 33.6024C0.770693 33.74 0.958187 33.8161 1.14997 33.8161C1.20872 33.8161 1.2688 33.8089 1.32727 33.7941L9.60545 31.7314C9.73447 31.6993 9.85168 31.6319 9.9453 31.5383L28.5541 12.9311L21.3028 5.67969Z"
-                                                                fill="white" />
-                                                            <path
-                                                                d="M33.164 3.14322L31.0928 1.07194C29.7084 -0.312409 27.2957 -0.311068 25.9129 1.07194L23.3757 3.60914L30.6268 10.8603L33.164 8.32305C33.8556 7.63181 34.2364 6.71178 34.2364 5.73327C34.2364 4.75476 33.8556 3.83472 33.164 3.14322Z"
-                                                                fill="white" />
-                                                        </g>
-                                                        <defs>
-                                                            <clipPath id="clip0_1238_666">
-                                                                <rect width="33.8182" height="33.8182" fill="white"
-                                                                    transform="translate(0.418213)" />
-                                                            </clipPath>
-                                                        </defs>
-                                                    </svg>
-                                                    تعديل
-                                                </div>
-                                            </button>
+                                        <div class="flex flex-row items-center justify-between">
+                                            <div class="mt-2 selectdiv w-72">
+                                                <input wire:model.debounce.50000ms="notedate.{{ $key }}.time_out"
+                                                    type="text" placeholder="ساعة البدء"
+                                                    onfocus="handelEditNotesInputtimeFrom()"
+                                                    class="foucsEditTimeStart h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
+                                            </div>
+                                            <div class="mt-2 selectdiv">
+                                                <input wire:model.debounce.50000ms="notedate.{{ $key }}.return_time"
+                                                    type="text" onfocus="handelInputEditNotestimeTo()"
+                                                    placeholder="ساعة الانتهاء"
+                                                    class="foucsEditTimeEnd h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
+                                            </div>
                                         </div>
-                                        <div class="basis-1/2">
-                                            <div wire:click="DeleteNote({{ $key }})"
-                                                class="connectUs duration-200 w-full px-5 lg:px-10 py-3 mt-2 text-[13px] text-center border-[1px] border-[#E92F30] font-FlatBold rounded-[30px] text-[#E92F30] bg-transparent hover:bg-[#101426] hover:text-white ">
-                                                <div class="flex flex-row items-center gap-x-2">
-                                                    <svg width="18" height="20" viewBox="0 0 35 34"
-                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <g clip-path="url(#clip0_1238_671)">
-                                                            <path
-                                                                d="M4.76318 9.90723L6.5181 31.0921C6.64386 32.6199 7.9452 33.8177 9.47877 33.8177H25.6484C27.182 33.8177 28.4833 32.6199 28.6091 31.0921L30.3639 9.90723H4.76318ZM12.6088 29.8547C12.0902 29.8547 11.6538 29.4512 11.6209 28.9258L10.6302 12.9414C10.5963 12.3948 11.0114 11.9246 11.5571 11.8907C12.1231 11.851 12.573 12.2709 12.6078 12.8176L13.5986 28.8019C13.6337 29.368 13.1858 29.8547 12.6088 29.8547ZM18.5543 28.8639C18.5543 29.4115 18.1112 29.8547 17.5636 29.8547C17.0159 29.8547 16.5728 29.4115 16.5728 28.8639V12.8795C16.5728 12.3319 17.0159 11.8888 17.5636 11.8888C18.1112 11.8888 18.5543 12.3319 18.5543 12.8795V28.8639ZM24.4969 12.9415L23.5062 28.9259C23.4736 29.4459 23.0401 29.8794 22.4554 29.8528C21.9097 29.8189 21.4947 29.3486 21.5285 28.802L22.5193 12.8176C22.5532 12.271 23.0321 11.8733 23.5701 11.8907C24.1158 11.9246 24.5308 12.3948 24.4969 12.9415Z"
-                                                                fill="#E92F30" />
-                                                            <path
-                                                                d="M30.4436 3.96307H24.499V2.9723C24.499 1.33331 23.1657 0 21.5267 0H13.6006C11.9616 0 10.6283 1.33331 10.6283 2.9723V3.96307H4.68368C3.58928 3.96307 2.70215 4.8502 2.70215 5.9446C2.70215 7.03887 3.58928 7.92614 4.68368 7.92614C13.7965 7.92614 21.3311 7.92614 30.4436 7.92614C31.538 7.92614 32.4252 7.03887 32.4252 5.9446C32.4252 4.8502 31.538 3.96307 30.4436 3.96307ZM22.5175 3.96307H12.6098V2.9723C12.6098 2.42566 13.0539 1.98153 13.6006 1.98153H21.5267C22.0734 1.98153 22.5175 2.42566 22.5175 2.9723V3.96307Z"
-                                                                fill="#E92F30" />
-                                                        </g>
-                                                        <defs>
-                                                            <clipPath id="clip0_1238_671">
-                                                                <rect width="33.8182" height="33.8182" fill="white"
-                                                                    transform="translate(0.654541)" />
-                                                            </clipPath>
-                                                        </defs>
-                                                    </svg>
+                                        <div class="flex flex-row items-center justify-start gap-x-2 mt-2">
+                                            <div class="basis-1/2">
+                                                <button type="submit"
+                                                    class="connectUs duration-200 w-full text-center px-5 lg:px-10 py-3 mt-2 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                                                    <div class="flex flex-row items-center gap-x-2">
+                                                        <svg width="18" height="20" viewBox="0 0 35 34"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1238_666)">
+                                                                <path
+                                                                    d="M21.3028 5.67969L2.69553 24.2883C2.60191 24.3822 2.53432 24.5007 2.50213 24.6281L0.439695 32.9063C0.378002 33.1555 0.451229 33.4205 0.63309 33.6024C0.770693 33.74 0.958187 33.8161 1.14997 33.8161C1.20872 33.8161 1.2688 33.8089 1.32727 33.7941L9.60545 31.7314C9.73447 31.6993 9.85168 31.6319 9.9453 31.5383L28.5541 12.9311L21.3028 5.67969Z"
+                                                                    fill="white" />
+                                                                <path
+                                                                    d="M33.164 3.14322L31.0928 1.07194C29.7084 -0.312409 27.2957 -0.311068 25.9129 1.07194L23.3757 3.60914L30.6268 10.8603L33.164 8.32305C33.8556 7.63181 34.2364 6.71178 34.2364 5.73327C34.2364 4.75476 33.8556 3.83472 33.164 3.14322Z"
+                                                                    fill="white" />
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1238_666">
+                                                                    <rect width="33.8182" height="33.8182"
+                                                                        fill="white"
+                                                                        transform="translate(0.418213)" />
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        تعديل
+                                                    </div>
+                                                </button>
+                                            </div>
+                                            <div class="basis-1/2">
+                                                <div wire:click="DeleteNote({{ $key }})"
+                                                    class="connectUs duration-200 w-full px-5 lg:px-10 py-3 mt-2 text-[13px] text-center border-[1px] border-[#E92F30] font-FlatBold rounded-[30px] text-[#E92F30] bg-transparent hover:bg-[#101426] hover:text-white ">
+                                                    <div class="flex flex-row items-center gap-x-2">
+                                                        <svg width="18" height="20" viewBox="0 0 35 34"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1238_671)">
+                                                                <path
+                                                                    d="M4.76318 9.90723L6.5181 31.0921C6.64386 32.6199 7.9452 33.8177 9.47877 33.8177H25.6484C27.182 33.8177 28.4833 32.6199 28.6091 31.0921L30.3639 9.90723H4.76318ZM12.6088 29.8547C12.0902 29.8547 11.6538 29.4512 11.6209 28.9258L10.6302 12.9414C10.5963 12.3948 11.0114 11.9246 11.5571 11.8907C12.1231 11.851 12.573 12.2709 12.6078 12.8176L13.5986 28.8019C13.6337 29.368 13.1858 29.8547 12.6088 29.8547ZM18.5543 28.8639C18.5543 29.4115 18.1112 29.8547 17.5636 29.8547C17.0159 29.8547 16.5728 29.4115 16.5728 28.8639V12.8795C16.5728 12.3319 17.0159 11.8888 17.5636 11.8888C18.1112 11.8888 18.5543 12.3319 18.5543 12.8795V28.8639ZM24.4969 12.9415L23.5062 28.9259C23.4736 29.4459 23.0401 29.8794 22.4554 29.8528C21.9097 29.8189 21.4947 29.3486 21.5285 28.802L22.5193 12.8176C22.5532 12.271 23.0321 11.8733 23.5701 11.8907C24.1158 11.9246 24.5308 12.3948 24.4969 12.9415Z"
+                                                                    fill="#E92F30" />
+                                                                <path
+                                                                    d="M30.4436 3.96307H24.499V2.9723C24.499 1.33331 23.1657 0 21.5267 0H13.6006C11.9616 0 10.6283 1.33331 10.6283 2.9723V3.96307H4.68368C3.58928 3.96307 2.70215 4.8502 2.70215 5.9446C2.70215 7.03887 3.58928 7.92614 4.68368 7.92614C13.7965 7.92614 21.3311 7.92614 30.4436 7.92614C31.538 7.92614 32.4252 7.03887 32.4252 5.9446C32.4252 4.8502 31.538 3.96307 30.4436 3.96307ZM22.5175 3.96307H12.6098V2.9723C12.6098 2.42566 13.0539 1.98153 13.6006 1.98153H21.5267C22.0734 1.98153 22.5175 2.42566 22.5175 2.9723V3.96307Z"
+                                                                    fill="#E92F30" />
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1238_671">
+                                                                    <rect width="33.8182" height="33.8182"
+                                                                        fill="white"
+                                                                        transform="translate(0.654541)" />
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
 
-                                                    حذف
+                                                        حذف
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                @endforeach
+                            @else
+                                <div class="flex flex-row items-center justify-center">
+                                    <p class="text-2xl mt-4 text-[#349A37]">لا يوجد اي ملاحظات للتعديل </p>
                                 </div>
-                            @endforeach
-                        @else
-                            <div class="flex flex-row items-center justify-center">
-                                <p class="text-2xl mt-4 text-[#349A37]">لا يوجد اي ملاحظات للتعديل </p>
-                            </div>
-                        @endif
+                            @endif
 
-                    </form>
+                        </form>
 
 
 
-                    <!--Endsecond Page -->
+                        <!--Endsecond Page -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endif
-<!--end reason popup Timer -->
+    @endif
+    <!--end reason popup Timer -->
 
-{{-- @include('Components.User.UserTable', ['tab' => '3']) --}}
-<!--End with Table -->
+    {{-- @include('Components.User.UserTable', ['tab' => '3']) --}}
+    <!--End with Table -->
 
-<!--End Hourly work Time -->
+    <!--End Hourly work Time -->
 </div>
