@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -164,8 +165,11 @@ class HomeController extends Controller
     }
     public function userprofile()
     {
-        $user = Auth::user();
 
+        $user = Auth::user();
+        if ($user == null) {
+            return Redirect::to("/Admin");
+        }
 
         return view('Pages.Try', compact('user'));
     }
