@@ -317,7 +317,7 @@ class PaymentVoucher extends Resource
     }
     public static function beforeSave(Request $request, $model)
     {
-        dd($request->size);
+
         if (strpos($request->name, 'T') !== false) {
             $model->transaction_type = '1';
             $str = ltrim($request->name, 'T');
