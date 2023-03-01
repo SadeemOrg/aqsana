@@ -2,9 +2,8 @@
 @section('content')
     <!-- component -->
     @php
-        use App\Models\user;
-        $isToken = Auth::user()->device_key;
-        
+
+
         $newDate = date('Y-m-d', strtotime($user['birth_date']));
         $StatWorknewDate = date('Y-m-d', strtotime($user['start_work_date']));
     @endphp
@@ -66,17 +65,15 @@
                     </button>
                 </div>
 
-                {{-- @if (!$isToken)
-                <button onclick="startFCM()" class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] px-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">Allow notification
-                </button>
-                @endif
-                <div class="flex ">
-                    <livewire:notification />
+                <a
+                    onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
 
-                    <button onclick="location.href='/Admin'"
-                        class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">الذهاب
-                        الى المنظومة</button>
-                </div> --}}
+                <form target="_self" id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
 
         </header>
@@ -92,8 +89,8 @@
                         <path d="M15.6249 13.5504C15.0488 13.5504 14.5833 14.0171 14.5833 14.592V18.7588C14.5833 19.3327 14.1165 19.8004 13.5415 19.8004H10.4165V4.17539C10.4165 3.2858 9.84984 2.49101 8.99783 2.19518L8.68942 2.092H13.5415C14.1165 2.092 14.5833 2.55968 14.5833 3.13379V6.25879C14.5833 6.83366 15.0488 7.30039 15.6249 7.30039C16.2009 7.30039 16.6664 6.83366 16.6664 6.25879V3.13379C16.6664 1.41088 15.2644 0.00878906 13.5415 0.00878906H2.34373C2.30405 0.00878906 2.27087 0.0265274 2.23234 0.0316772C2.18218 0.0274811 2.1343 0.00878906 2.08338 0.00878906C0.934401 0.00878906 0 0.943008 0 2.092V20.842C0 21.7316 0.566668 22.5264 1.41867 22.8222L7.68749 24.9119C7.89997 24.9775 8.1113 25.0088 8.33332 25.0088C9.48229 25.0088 10.4165 24.0744 10.4165 22.9254V21.8838H13.5415C15.2644 21.8838 16.6664 20.4817 16.6664 18.7588V14.592C16.6664 14.0171 16.2009 13.5504 15.6249 13.5504Z" fill="#F91616"/>
                         <path d="M24.6946 9.68901L20.5279 5.52241C20.2301 5.22448 19.7821 5.13484 19.3926 5.2962C19.0041 5.45775 18.7499 5.83789 18.7499 6.25884V9.38384H14.5833C14.0082 9.38384 13.5415 9.85037 13.5415 10.4254C13.5415 11.0005 14.0082 11.467 14.5833 11.467H18.7499V14.592C18.7499 15.013 19.0041 15.3931 19.3926 15.5547C19.7821 15.716 20.2301 15.6264 20.5279 15.3287L24.6946 11.1619C25.1018 10.7546 25.1018 10.0962 24.6946 9.68901Z" fill="#D81313"/>
                         </svg>
-                        
-                   <p>تسجيل الخروج</p> 
+
+                   <p>تسجيل الخروج</p>
                 </div>
                 </button>
             </div>
@@ -175,6 +172,8 @@
                         <!--Form -->
                         <form method="POST" target="_self" action="{{ '/user/update/personaldata' }}"
                             enctype="multipart/form-data" class="tab tab-1  my-6 mt-8">
+                        <form method="POST" target="_self" action="{{ '/user/update/personaldata' }}"
+                            enctype="multipart/form-data" class="tab tab-1  my-6 mt-8">
                             @csrf
                             <!--Perosonal Information -->
                             <div
@@ -192,8 +191,8 @@
                                 </div>
                             </div>
                             @php
-                                $img = 'storage/' . $user['photo'];
-                            @endphp
+                                    $img = 'storage/' . $user['photo'];
+                                 @endphp
                             <div class="flex flex-row items-center justify-center mb-12">
                                 <img src="/{{ $img }}" alt=""
                                     class="inline-block h-40 w-40 mt-6 rounded-full" id="chosen"
@@ -322,6 +321,7 @@
                         </form>
                         <!--Second Form -->
                         <form class="tab tab-2 my-6 " method="POST" target="_self"
+
                             action="{{ '/user/update/bankdata' }}" enctype="multipart/form-data">
                             @csrf
                             <div
@@ -384,6 +384,8 @@
                             </div>
                         </form>
                         <!--Last Form -->
+                        <form class="tab tab-3 my-6 " method="POST" target="_self"
+                            action="{{ '/user/update/password' }}" enctype="multipart/form-data">
                         <form class="tab tab-3 my-6 " method="POST" target="_self"
                             action="{{ '/user/update/password' }}" enctype="multipart/form-data">
                             @csrf
