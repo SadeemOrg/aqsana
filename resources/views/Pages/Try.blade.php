@@ -3,7 +3,6 @@
     <!-- component -->
     @php
 
-
         $newDate = date('Y-m-d', strtotime($user['birth_date']));
         $StatWorknewDate = date('Y-m-d', strtotime($user['start_work_date']));
     @endphp
@@ -65,15 +64,7 @@
                     </button>
                 </div>
 
-                <a
-                    onclick="event.preventDefault();
-                              document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
 
-                <form target="_self" id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
             </div>
 
         </header>
@@ -172,8 +163,6 @@
                         <!--Form -->
                         <form method="POST" target="_self" action="{{ '/user/update/personaldata' }}"
                             enctype="multipart/form-data" class="tab tab-1  my-6 mt-8">
-                        <form method="POST" target="_self" action="{{ '/user/update/personaldata' }}"
-                            enctype="multipart/form-data" class="tab tab-1  my-6 mt-8">
                             @csrf
                             <!--Perosonal Information -->
                             <div
@@ -191,8 +180,8 @@
                                 </div>
                             </div>
                             @php
-                                    $img = 'storage/' . $user['photo'];
-                                 @endphp
+                                $img = 'storage/' . $user['photo'];
+                            @endphp
                             <div class="flex flex-row items-center justify-center mb-12">
                                 <img src="/{{ $img }}" alt=""
                                     class="inline-block h-40 w-40 mt-6 rounded-full" id="chosen"
@@ -321,7 +310,6 @@
                         </form>
                         <!--Second Form -->
                         <form class="tab tab-2 my-6 " method="POST" target="_self"
-
                             action="{{ '/user/update/bankdata' }}" enctype="multipart/form-data">
                             @csrf
                             <div
@@ -384,8 +372,6 @@
                             </div>
                         </form>
                         <!--Last Form -->
-                        <form class="tab tab-3 my-6 " method="POST" target="_self"
-                            action="{{ '/user/update/password' }}" enctype="multipart/form-data">
                         <form class="tab tab-3 my-6 " method="POST" target="_self"
                             action="{{ '/user/update/password' }}" enctype="multipart/form-data">
                             @csrf
