@@ -2,6 +2,10 @@
 @section('content')
     <!-- component -->
     @php
+    use App\Models\user;
+        // dd("dd");
+        $isToken=Auth::user()->device_key;
+
         $newDate = date('Y-m-d', strtotime($user['birth_date']));
         $StatWorknewDate = date('Y-m-d', strtotime($user['start_work_date']));
     @endphp
@@ -16,6 +20,52 @@
             <!-- logo -->
             <div class="flex justify-between items-center space-x-2 w-full">
                 <button type="button" class="text-3xl" @click="asideOpen = !asideOpen"><i class="bx bx-menu"></i></button>
+                <div class="flex flex-row items-start gap-x-1  justify-start">
+                  <div @click="leftBarOpen = false" >
+                    <livewire:notification  />
+                </div>
+                    <button type="button" class="text-3xl ml-3 mt-2" @click="leftBarOpen = !leftBarOpen">
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M22.6994 3.13806H8.57666C7.3081 3.13806 6.27602 4.17014 6.27602 5.44026C6.27602 6.70881 7.3081 7.74089 8.57666 7.74089H22.6993C23.9679 7.74089 24.9999 6.70881 24.9999 5.44026C25 4.17009 23.9679 3.13806 22.6994 3.13806Z"
+                                fill="#4CC65E" />
+                            <path
+                                d="M2.30146 3.13806C1.03247 3.13806 0 4.17048 0 5.43948C0 6.70847 1.03247 7.74089 2.30146 7.74089C3.57046 7.74089 4.60288 6.70847 4.60288 5.43948C4.60288 4.17048 3.57046 3.13806 2.30146 3.13806Z"
+                                fill="#9BE826" />
+                            <path
+                                d="M2.30146 10.1986C1.03247 10.1986 0 11.231 0 12.5C0 13.769 1.03247 14.8014 2.30146 14.8014C3.57046 14.8014 4.60288 13.769 4.60288 12.5C4.60288 11.231 3.57046 10.1986 2.30146 10.1986Z"
+                                fill="#9BE826" />
+                            <path
+                                d="M2.30146 17.2592C1.03247 17.2592 0 18.2916 0 19.5606C0 20.8296 1.03247 21.862 2.30146 21.862C3.57046 21.862 4.60288 20.8296 4.60288 19.5606C4.60288 18.2916 3.57046 17.2592 2.30146 17.2592Z"
+                                fill="#9BE826" />
+                            <path
+                                d="M4.60288 5.43948C4.60288 4.17048 3.57046 3.13806 2.30147 3.13806V7.74094C3.57046 7.74089 4.60288 6.70847 4.60288 5.43948Z"
+                                fill="#4CC65E" />
+                            <path
+                                d="M4.60288 12.5C4.60288 11.231 3.57046 10.1986 2.30147 10.1986V14.8015C3.57046 14.8014 4.60288 13.769 4.60288 12.5Z"
+                                fill="#4CC65E" />
+                            <path
+                                d="M4.60288 19.5606C4.60288 18.2916 3.57046 17.2592 2.30147 17.2592V21.862C3.57046 21.862 4.60288 20.8296 4.60288 19.5606Z"
+                                fill="#4CC65E" />
+                            <path
+                                d="M22.6994 3.13806H15.638V7.74094H22.6994C23.9679 7.74094 25 6.70886 25 5.44031C25 4.17009 23.9679 3.13806 22.6994 3.13806Z"
+                                fill="#0DAA8C" />
+                            <path
+                                d="M22.6994 10.1986H8.57666C7.3081 10.1986 6.27602 11.2307 6.27602 12.5008C6.27602 13.7694 7.3081 14.8014 8.57666 14.8014H22.6993C23.9679 14.8014 24.9999 13.7694 24.9999 12.5008C25 11.2306 23.9679 10.1986 22.6994 10.1986Z"
+                                fill="#4CC65E" />
+                            <path
+                                d="M22.6994 10.1986H15.638V14.8015H22.6994C23.9679 14.8015 25 13.7694 25 12.5009C25 11.2306 23.9679 10.1986 22.6994 10.1986Z"
+                                fill="#0DAA8C" />
+                            <path
+                                d="M22.6994 17.2592H8.57666C7.3081 17.2592 6.27602 18.2912 6.27602 19.5614C6.27602 20.8299 7.3081 21.862 8.57666 21.862H22.6993C23.9679 21.862 24.9999 20.8299 24.9999 19.5614C25 18.2912 23.9679 17.2592 22.6994 17.2592Z"
+                                fill="#4CC65E" />
+                            <path
+                                d="M22.6994 17.2592H15.638V21.862H22.6994C23.9679 21.862 25 20.83 25 19.5614C25 18.2912 23.9679 17.2592 22.6994 17.2592Z"
+                                fill="#0DAA8C" />
+                        </svg>
+                    </button>
+                </div>
 
                 <a
                     onclick="event.preventDefault();
@@ -27,10 +77,29 @@
                     @csrf
                 </form>
             </div>
+
         </header>
+        <div class=" absolute left-[1%]  z-50 bg-white p-4 text-white rounded-lg" style="min-height: 20vh ;"
+            x-show="leftBarOpen">
+           <div class="flex flex-col items-start justify-start">
+            <button onclick="location.href='/Admin'"
+                class=" text-black text-sm hover:bg-[#349A37] py-4 rounded-lg px-4 min-w-[180px]">الذهاب
+                الى المنظومة</button>
+                <button class=" text-black text-sm hover:bg-[#349A37] py-4 rounded-lg px-4 min-w-[180px]">
+                   <div class="flex flex-row items-center justify-start gap-x-2">
+                    <svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.6249 13.5504C15.0488 13.5504 14.5833 14.0171 14.5833 14.592V18.7588C14.5833 19.3327 14.1165 19.8004 13.5415 19.8004H10.4165V4.17539C10.4165 3.2858 9.84984 2.49101 8.99783 2.19518L8.68942 2.092H13.5415C14.1165 2.092 14.5833 2.55968 14.5833 3.13379V6.25879C14.5833 6.83366 15.0488 7.30039 15.6249 7.30039C16.2009 7.30039 16.6664 6.83366 16.6664 6.25879V3.13379C16.6664 1.41088 15.2644 0.00878906 13.5415 0.00878906H2.34373C2.30405 0.00878906 2.27087 0.0265274 2.23234 0.0316772C2.18218 0.0274811 2.1343 0.00878906 2.08338 0.00878906C0.934401 0.00878906 0 0.943008 0 2.092V20.842C0 21.7316 0.566668 22.5264 1.41867 22.8222L7.68749 24.9119C7.89997 24.9775 8.1113 25.0088 8.33332 25.0088C9.48229 25.0088 10.4165 24.0744 10.4165 22.9254V21.8838H13.5415C15.2644 21.8838 16.6664 20.4817 16.6664 18.7588V14.592C16.6664 14.0171 16.2009 13.5504 15.6249 13.5504Z" fill="#F91616"/>
+                        <path d="M24.6946 9.68901L20.5279 5.52241C20.2301 5.22448 19.7821 5.13484 19.3926 5.2962C19.0041 5.45775 18.7499 5.83789 18.7499 6.25884V9.38384H14.5833C14.0082 9.38384 13.5415 9.85037 13.5415 10.4254C13.5415 11.0005 14.0082 11.467 14.5833 11.467H18.7499V14.592C18.7499 15.013 19.0041 15.3931 19.3926 15.5547C19.7821 15.716 20.2301 15.6264 20.5279 15.3287L24.6946 11.1619C25.1018 10.7546 25.1018 10.0962 24.6946 9.68901Z" fill="#D81313"/>
+                        </svg>
+
+                   <p>تسجيل الخروج</p>
+                </div>
+                </button>
+            </div>
+        </div>
         <div class="flex">
             <!-- aside -->
-            <nav class=" TabsSidee sm:flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2 "
+            <nav class=" TabsSidee z-50 sm:z-0 sm:flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2 "
                 aria-label="Tabs" style="height: 115vh" x-show="asideOpen">
                 <a href="#" target="_self"
                     class="activeTabs  tabsAlphaA flex items-center  space-x-1 rounded-md px-2 py-3 hover:bg-[#349A37] hover:text-black">
@@ -80,13 +149,7 @@
                             <p itemprop="name" class="font-FlatBold text-3xl text-center xl:text-right"> لوحة التحكم</p>
                             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37]  w-28 hidden xl:block"></div>
                         </div>
-                        <div class="flex ">
-                            <livewire:notification />
 
-                            <button onclick="location.href='/Admin'"
-                                class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">الذهاب
-                                الى المنظومة</button>
-                        </div>
                     </div>
 
                     <!--Tabs -->
@@ -111,6 +174,8 @@
                         <!--Form -->
                         <form method="POST" target="_self" action="{{ '/user/update/personaldata' }}"
                             enctype="multipart/form-data" class="tab tab-1  my-6 mt-8">
+                        <form method="POST" target="_self" action="{{ '/user/update/personaldata' }}"
+                            enctype="multipart/form-data" class="tab tab-1  my-6 mt-8">
                             @csrf
                             <!--Perosonal Information -->
                             <div
@@ -128,8 +193,8 @@
                                 </div>
                             </div>
                             @php
-                                $img = 'storage/' . $user['photo'];
-                            @endphp
+                                    $img = 'storage/' . $user['photo'];
+                                 @endphp
                             <div class="flex flex-row items-center justify-center mb-12">
                                 <img src="/{{ $img }}" alt=""
                                     class="inline-block h-40 w-40 mt-6 rounded-full" id="chosen"
@@ -258,6 +323,7 @@
                         </form>
                         <!--Second Form -->
                         <form class="tab tab-2 my-6 " method="POST" target="_self"
+
                             action="{{ '/user/update/bankdata' }}" enctype="multipart/form-data">
                             @csrf
                             <div
@@ -320,6 +386,8 @@
                             </div>
                         </form>
                         <!--Last Form -->
+                        <form class="tab tab-3 my-6 " method="POST" target="_self"
+                            action="{{ '/user/update/password' }}" enctype="multipart/form-data">
                         <form class="tab tab-3 my-6 " method="POST" target="_self"
                             action="{{ '/user/update/password' }}" enctype="multipart/form-data">
                             @csrf
@@ -403,6 +471,7 @@
             Alpine.data("layout", () => ({
                 profileOpen: false,
                 asideOpen: true,
+                leftBarOpen: false,
             }));
         });
     </script>
