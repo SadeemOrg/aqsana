@@ -2,8 +2,6 @@
 @section('content')
     <!-- component -->
     @php
-        use App\Models\user;
-        $isToken = Auth::user()->device_key;
 
         $newDate = date('Y-m-d', strtotime($user['birth_date']));
         $StatWorknewDate = date('Y-m-d', strtotime($user['start_work_date']));
@@ -66,17 +64,7 @@
                     </button>
                 </div>
 
-                {{-- @if (!$isToken)
-                <button onclick="startFCM()" class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] px-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">Allow notification
-                </button>
-                @endif
-                <div class="flex ">
-                    <livewire:notification />
 
-                    <button onclick="location.href='/Admin'"
-                        class=" Ctnbtn rounded-[50px] bg-transparent text-[#349A37] border-[1px] border-[#349A37]  text-base w-[204px] py-4 font-[700] hover:bg-[#349A37] hover:text-white duration-200">الذهاب
-                        الى المنظومة</button>
-                </div> --}}
             </div>
 
         </header>
