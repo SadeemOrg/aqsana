@@ -2,9 +2,7 @@
 @section('content')
     <!-- component -->
     @php
-    use App\Models\user;
-        // dd("dd");
-        $isToken=Auth::user()->device_key;
+
 
         $newDate = date('Y-m-d', strtotime($user['birth_date']));
         $StatWorknewDate = date('Y-m-d', strtotime($user['start_work_date']));
