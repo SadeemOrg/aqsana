@@ -2,7 +2,9 @@
 
 namespace App\Rules;
 
+
 use App\Models\Bus;
+use App\Models\Project;
 use App\Models\TripBooking;
 use Illuminate\Contracts\Validation\Rule;
 
@@ -16,7 +18,7 @@ class CustomRule implements Rule
     public $number;
     public function __construct($number)
     {
-       $this->number=$number;
+        $this->number = $number;
     }
 
     /**
@@ -28,13 +30,41 @@ class CustomRule implements Rule
      */
     public function passes($attribute, $value)
     {
+
+        $IsFull = 1;
+
+        $projext = Project::where('id', $value)->with('bus')->first();
+
+        $buss = $projext->bus;
+
+        foreach ($buss as $key => $bus) {
+            $number_of_people = TripBooking::where([
+                ['bus_id', $bus->id],
+                ['status', '1'],
+            ])->sum('number_of_people');
+            $number_of_people += $this->number;
+            if (($number_of_people  < $bus->number_of_seats)) {
+                $IsFull = 0;
+            }
+            if ($IsFull == 0) {
+
+                return true;
+            }
+            return false;
+        }
+
+
+
+
+
+
         // dd( $this->number , $attribute , $va lue );
         $Buss =  Bus::where('id', $value)->withCount('TripBookings')->first();
         $number_of_people =  TripBooking::where('bus_id', $value)->sum('number_of_people');
         // dd(   $number_of_people);
-        $number_of_people+= $this->number ;
-        if ( ( $number_of_people  < $Buss->number_of_seats)) {
-                   return true;
+        $number_of_people += $this->number;
+        if (($number_of_people  < $Buss->number_of_seats)) {
+            return true;
         }
         return false;
 

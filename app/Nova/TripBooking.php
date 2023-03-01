@@ -3,6 +3,8 @@
 namespace App\Nova;
 
 use App\Models\Bus;
+use App\Models\Project;
+use App\Models\TripBooking as ModelsTripBooking;
 use App\Rules\CustomRule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -11,6 +13,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Validation\ValidationException;
+
 class TripBooking extends Resource
 {
     /**
@@ -35,10 +38,9 @@ class TripBooking extends Resource
     public static $title = 'id';
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("TripBooking",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("TripBooking",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
     /**
      * The columns that should be searched.
@@ -61,10 +63,10 @@ class TripBooking extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make(__('project'), 'Project', \App\Nova\Project::class),
+            BelongsTo::make(__('project'), 'Project', \App\Nova\QawafilAlaqsa::class)->rules(new CustomRule($request->number_of_people)),
             // BelongsTo::make(__('user'), 'Users', \App\Nova\User::class),
             BelongsTo::make(__('bus'), 'Buses', \App\Nova\Bus::class)
-            ->rules(new CustomRule($request->number_of_people)),
+                ->hideWhenCreating()->hideWhenUpdating(),
             // Text::make(__('number phone'), 'number_phone'),
             Text::make(__('number_of_people'), 'number_of_people'),
             Text::make(__('reservation_amount'), 'reservation_amount'),
@@ -76,8 +78,27 @@ class TripBooking extends Resource
 
     public static function beforeSave(Request $request, $model)
     {
+        // dd($request->Project);
+        $projext = Project::where('id', $request->Project)->with('bus')->first();
+        $buss = $projext->bus;
+        $IsFull = 1;
 
-        $model->booking_type = 2 ;
+
+        foreach ($buss as $key => $bus) {
+            if ($IsFull == 1) {
+                $number_of_people =  ModelsTripBooking::where([
+                    ['bus_id', $bus->id],
+                    ['status', '1'],
+                ])->sum('number_of_people');
+                $number_of_people += $request->number_of_people;
+                if (($number_of_people  < $bus->number_of_seats)) {
+                    $model->bus_id = $bus->id;
+                    $IsFull = 0;
+                }
+            }
+        }
+
+        $model->booking_type = 2;
     }
 
     /**
