@@ -29,7 +29,7 @@ class Reports extends Resource
      */
     public static $title = 'name';
     public static function availableForNavigation(Request $request)
-    {
+    {return false;
         if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Reportsparmation",  $request->user()->userrole()) )){
             return true;
         }
