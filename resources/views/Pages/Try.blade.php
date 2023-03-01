@@ -17,15 +17,15 @@
             <div class="flex justify-between items-center space-x-2 w-full">
                 <button type="button" class="text-3xl" @click="asideOpen = !asideOpen"><i class="bx bx-menu"></i></button>
 
-                <a  href="{{ route('logout') }}"
-                onclick="event.preventDefault();
+                <a
+                    onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
-                 {{ __('Logout') }}
-             </a>
+                    {{ __('Logout') }}
+                </a>
 
-             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                 @csrf
-             </form>
+                <form target="_self" id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </header>
         <div class="flex">

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\CPU\Helpers;
 use App\Models\TripBooking;
+use Illuminate\Support\Facades\Redirect;
+
 /**
  * @group  Auth management
  *
@@ -50,7 +52,7 @@ class AuthController extends Controller
             'password' => 'required|string|confirmed',
             'user_role' => 'required|string',
         ]);
-      
+
 
 
 
@@ -121,9 +123,9 @@ class AuthController extends Controller
 
             return response($response, 201);
         }
-        
 
-            
+
+
          if($user == null && $request->has("email")) {
             if($fields['email'] != null && $fields['email'] != ""){
                 $password = Str::random(8);
@@ -136,9 +138,9 @@ class AuthController extends Controller
                     'nick_name' => $fields['name'],
                 ]);
             }
-            
+
         } else {
-            
+
             if($fields['id'] != null && $fields['id'] != ""){
                $password = Str::random(8);
                 $user = User::create([
@@ -147,7 +149,7 @@ class AuthController extends Controller
                 'password' =>  bcrypt($password),
                 'user_role' => "user",
                 'nick_name' => $fields['name'],
-                
+
                 ]);
             }
         }
@@ -218,7 +220,7 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
 
-        
+
         // Check email
         $user = User::where('email', $fields['email'])->first();
 
@@ -247,7 +249,7 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-
+        dd("dd");
         Auth::user()->tokens->each(function ($token, $key) {
             $token->delete();
         });
@@ -255,6 +257,7 @@ class AuthController extends Controller
         return [
             'message' => 'Logged out'
         ];
+        return Redirect::to("/Admin");
     }
 
 
@@ -397,7 +400,7 @@ class AuthController extends Controller
             return response()->json(['errors' => $validator->errors()], 403);
         }
 
-       
+
         DB::table('password_resets')->where('email', 'like', "%{$request['email']}%")->delete();
 
         $customer = User::Where(['email' => $request['email']])->first();
@@ -408,11 +411,11 @@ class AuthController extends Controller
                     'token' => $token,
                     'created_at' => now(),
                 ]);
-               
+
                 Mail::to($customer['email'])->send(new \App\Mail\PasswordResetMail($token));
                 return response()->json(['message' => 'Email sent successfully.'], 200);
-            }  
-        
+            }
+
         return response()->json(['errors' => [
             ['code' => 'not-found', 'message' => 'user not found!']
         ]], 404);
@@ -439,7 +442,7 @@ class AuthController extends Controller
        return response()->json(['errors' => [
         ['code' => 'not-found', 'message' => 'invalid token']
        ]], 404);
-        
+
     }
 
 
@@ -457,24 +460,24 @@ class AuthController extends Controller
             $customer->password = bcrypt($fields['password']);
             $customer->save();
             return response()->json(['message' => 'successfully reset password'], 200);
-        } 
+        }
 
 
        return response()->json(['errors' => [
         ['code' => 'not-found', 'message' => 'not found email']
        ]], 404);
 
-       
-    
+
+
     }
 
 
     public function getInformationUser(Request $request){
-        
+
         $user = User::where("id",Auth()->id())->with("Donations.Project","Volunteer.Project")
         ->with(["TripBooking.Project"=>function($query) use($request){
            $query->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')->get();
-    
+
         }])
         ->withCount('Donations as donations_count')
         ->withCount('Volunteer as volunteer_count')
@@ -483,13 +486,13 @@ class AuthController extends Controller
 
         $trip_booking = json_decode($user)->trip_booking;
         $trip_booking = collect($trip_booking);
-    
+
             $trip_booking->map(function ($trip) use($request){
-         
+
                 // $from_latlng = json_decode($trip->project->tripfrom->current_location)->latlng;
                 // $from_lat = $from_latlng->lat;
                 // $from_lng = $from_latlng->lng;
-        
+
                 // $to_latlng = json_decode($trip->project->tripto->current_location)->latlng;
                 // $to_lat = $to_latlng->lat;
                 // $to_lng = $to_latlng->lng;
@@ -502,9 +505,9 @@ class AuthController extends Controller
                     $from_lat = 180;
                     $from_lng = -180;
                 }
-               
-               
-             
+
+
+
                 if($trip->project->tripto != null) {
                     $to_latlng = ($trip->project->tripto);
                     $to_lat = $to_latlng->latitude;
@@ -513,16 +516,16 @@ class AuthController extends Controller
                     $to_lat = 180;
                     $to_lng = -180;
                 }
-        
-                $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K'); 
+
+                $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K');
                 $trip->project->from_distance = round($from_distance, 2);
-        
-        
-                $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K'); 
+
+
+                $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K');
                 $trip->project->to_distance = round($to_distance, 2);
-        
+
                 $trip_bokking = TripBooking::where('user_id',Auth()->id())->where('project_id',$trip->project->id)->first();
-              
+
                  if($trip_bokking != null) {
                     if($trip_bokking->status == 1){
                         $trip->project->isBooking = 1;
@@ -533,14 +536,14 @@ class AuthController extends Controller
                     $trip->project->isBooking = 0;
                  }
 
-               
-            
+
+
             });
-        
-         
+
+
         $user->custom_trip_booking = $trip_booking;
 
-    
+
 
         $response = [
             'success' => "true",
@@ -552,7 +555,7 @@ class AuthController extends Controller
 
     public function delete()
     {
-        
+
             $user = Auth::user();
             if($user != null) {
                 if($user->user_role == "user") {
@@ -561,22 +564,22 @@ class AuthController extends Controller
                       'success' => "true",
                       'message' => "Success delete user"
                   ];
-                   return response($response, 200); 
+                   return response($response, 200);
                 } else{
                     $response = [
                         'success' => "false",
                         'message' => "Not Auth"
                     ];
-                    return response($response, 401); 
+                    return response($response, 401);
                 }
-              
+
             } else {
                 $response = [
                     'success' => "false",
                     'message' => "Not Auth"
                 ];
-                return response($response, 401); 
+                return response($response, 401);
             }
-        
+
     }
 }
