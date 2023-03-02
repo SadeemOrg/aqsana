@@ -37,36 +37,33 @@ class CustomRule implements Rule
 
         $buss = $projext->bus;
 
+        // dd("dd");
         foreach ($buss as $key => $bus) {
             $number_of_people = TripBooking::where([
                 ['bus_id', $bus->id],
                 ['status', '1'],
             ])->sum('number_of_people');
             $number_of_people += $this->number;
-            if (($number_of_people  < $bus->number_of_seats)) {
-                $IsFull = 0;
-            }
-            if ($IsFull == 0) {
 
+            if (($number_of_people  < $bus->number_of_seats)) {
+                // dd("ss");
                 return true;
             }
+
             return false;
         }
 
 
 
-
-
-
-        // dd( $this->number , $attribute , $va lue );
-        $Buss =  Bus::where('id', $value)->withCount('TripBookings')->first();
-        $number_of_people =  TripBooking::where('bus_id', $value)->sum('number_of_people');
-        // dd(   $number_of_people);
-        $number_of_people += $this->number;
-        if (($number_of_people  < $Buss->number_of_seats)) {
-            return true;
-        }
-        return false;
+        // // dd( $this->number , $attribute , $va lue );
+        // $Buss =  Bus::where('id', $value)->withCount('TripBookings')->first();
+        // $number_of_people =  TripBooking::where('bus_id', $value)->sum('number_of_people');
+        // // dd(   $number_of_people);
+        // $number_of_people += $this->number;
+        // if (($number_of_people  < $Buss->number_of_seats)) {
+        //     return true;
+        // }
+        // return false;
 
         // dd($Buss->trip_bookings_count  < $Buss->number_of_seats);
         // if ( ($Buss->trip_bookings_count  < $Buss->number_of_seats)) {
