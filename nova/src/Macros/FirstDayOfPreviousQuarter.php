@@ -13,7 +13,7 @@ class FirstDayOfPreviousQuarter
      */
     public function firstDayOfPreviousQuarter()
     {
-        return function ($timezone = 'UTC') {
+        return function ($timezone = 'Asia/Gaza') {
             [$year, $month] = [now($timezone)->year, now($timezone)->month];
 
             if (in_array($month, [1, 2, 3])) {
