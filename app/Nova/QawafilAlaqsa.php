@@ -61,6 +61,7 @@ use Pdmfc\NovaFields\ActionButton;
 use Fourstacks\NovaRepeatableFields\Repeater;
 use Laravel\Nova\Fields\HasMany;
 use Mauricewijnia\NovaMapsAddress\MapsAddress;
+use Carbon\Carbon;
 
 class QawafilAlaqsa extends Resource
 {
@@ -94,15 +95,15 @@ class QawafilAlaqsa extends Resource
     {
         return __('QawafilAlaqsa');
     }
-    public static function groupOrder() {
+    public static function groupOrder()
+    {
         return 1;
     }
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("QawafilAlaqsaparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("QawafilAlaqsaparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
     /**
      * Get the fields displayed by the resource.
@@ -143,101 +144,160 @@ class QawafilAlaqsa extends Resource
                 ID::make(__('ID'), 'id')->sortable(),
                 ActionButton::make(__('Action'))
                     ->action(ProjectStartEnd::class, $this->id)
-                    ->text(__('start'))
+                    ->text(__('لم يبدا بعد'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
                     ->canSee(function () {
-                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-                        if ($projects) {
-
-                            if ($projects->status == '0')  return true;
-                        }
+                        $starttime = Carbon::parse($this->start_date);
+                        $finishTime = Carbon::now();
+                        $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
+                        $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
+                        $result = $startDate->gt($endDate);
+                        return  $result;
                     })
                     ->readonly(function () {
-                        return false;
+                        return true;
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
 
                 ActionButton::make(__('Action'))
                     ->action(ProjectStartEnd::class, $this->id)
-                    ->text(__('end'))
+                    ->text(__('فعالة'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
                     ->canSee(function () {
-                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-                        if ($projects) {
+                        $starttime = Carbon::parse($this->start_date);
+                        $finishTime = Carbon::parse($this->end_date);
+                        $now = Carbon::now();
+                        $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
+                        $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
+                        $nowtime = Carbon::createFromFormat('Y-m-d H:i:s', $now);
 
-                            if ($projects->status == '1')  return true;
-                        }
+                        return ($startDate->lt($nowtime) && $nowtime->lt($endDate));
                     })
                     ->readonly(function () {
-                        return false;
+                        return true;
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
                     ->action(ProjectStartEnd::class, $this->id)
-                    ->text(__('Finished'))
+                    ->text(__('اغلاق'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
                     ->canSee(function () {
+                        $starttime = Carbon::parse($this->start_date);
+                        $finishTime = Carbon::parse($this->end_date);
+                        $now = Carbon::now();
+                        $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
+                        $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
+                        $nowtime = Carbon::createFromFormat('Y-m-d H:i:s', $now);
                         $projects = DB::table('project_status')->where('project_id', $this->id)->first();
                         if ($projects) {
+                            if ($projects->status == 3) {
 
-                            if ($projects->status > '1')  return true;
-                        }
-                    })
-                    ->readonly()
-                    ->hideWhenCreating()->hideWhenUpdating(),
-                ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, $this->id)
-                    ->text(__('incomplete'))
-                    ->showLoadingAnimation()
-                    ->loadingColor('#fff')->buttonColor('#787878')
-                    ->canSee(function () {
-                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-                        if (!$projects) {
-                            return true;
-                        }
-                    })
-                    ->readonly()
-                    ->hideWhenCreating()->hideWhenUpdating(),
-
-
-
-
-                ActionButton::make(__('Action'))
-                    ->action(ApprovalRejectProjec::class, $this->id)
-                    ->text(__('acsept'))
-                    ->showLoadingAnimation()
-                    ->loadingColor('#fff')->buttonColor('#21b970')
-                    ->canSee(function () {
-                        $user = Auth::user();
-
-                        if ($user->type() == 'regular_city' || $user->type() == 'regular_area') {
-                            return true;
-                        }
-                    })
-                    ->readonly(function () {
-                        $id = Auth::id();
-                        $user = Auth::user();
-                        if ($user->type() == 'regular_city') {
-                            $citye =   City::where('admin_id', $id)
-                                ->select('id')->first();
-                            $acspet = DB::table('accept_project')
-                                ->where([
-                                    ['project_id', '=', $this->id],
-                                    ['city_id', '=', $citye['id']],
-                                ])
-                                ->first();
-
-                            if ($acspet) {
-
-                                if ($acspet->accepted == "1")   return  true;
-                                else return false;
+                                return false;
                             }
                         }
+
+
+                        return ($endDate->lt($nowtime));
                     })
+
                     ->hideWhenCreating()->hideWhenUpdating(),
+                    ActionButton::make(__('Action'))
+                    ->action(ProjectStartEnd::class, $this->id)
+                    ->text(__('مغلق'))
+                    ->showLoadingAnimation()
+                    ->loadingColor('#fff')->buttonColor('#21b970')
+                    ->readonly()
+                    ->canSee(function () {
+                        $starttime = Carbon::parse($this->start_date);
+                        $finishTime = Carbon::parse($this->end_date);
+                        $now = Carbon::now();
+                        $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
+                        $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
+                        $nowtime = Carbon::createFromFormat('Y-m-d H:i:s', $now);
+                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                        if ($projects) {
+                            if ($projects->status == 3 && ($endDate->lt($nowtime)) ) {
+
+                                return true;
+                            }
+                        }
+
+
+
+                    })
+
+                    ->hideWhenCreating()->hideWhenUpdating(),
+
+                Boolean::make('Active', function () {
+                    $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                    if ($projects) {
+
+                        if ($projects->status == 3) {
+
+                            return true;
+                        } else return false;
+                    } else return false;
+                }),
+                // ActionButton::make(__('Action'))
+                //     ->action(ProjectStartEnd::class, $this->id)
+                //     ->text(__('incomplete'))
+                //     ->showLoadingAnimation()
+                //     ->loadingColor('#fff')->buttonColor('#787878')
+                //     ->canSee(function () {
+                //         $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                //         if (!$projects) {
+                //             return true;
+                //         }
+                //     })
+                //     ->readonly()
+                //     ->hideWhenCreating()->hideWhenUpdating(),
+
+
+
+
+                // ActionButton::make(__('Action'))
+                //     ->action(ApprovalRejectProjec::class, $this->id)
+                //     ->text(__('acsept'))
+                //     ->showLoadingAnimation()
+                //     ->loadingColor('#fff')->buttonColor('#21b970')
+                //     ->canSee(function () {
+                //         $user = Auth::user();
+
+                //         if ($user->type() == 'regular_city' || $user->type() == 'regular_area') {
+                //             return true;
+                //         }
+                //     })
+                //     ->readonly(function () {
+                //         $id = Auth::id();
+                //         $user = Auth::user();
+                //         if ($user->type() == 'regular_city') {
+                //             $citye =   City::where('admin_id', $id)
+                //                 ->select('id')->first();
+                //             $acspet = DB::table('accept_project')
+                //                 ->where([
+                //                     ['project_id', '=', $this->id],
+                //                     ['city_id', '=', $citye['id']],
+                //                 ])
+                //                 ->first();
+
+                //             if ($acspet) {
+
+                //                 if ($acspet->accepted == "1")   return  true;
+                //                 else return false;
+                //             }
+                //         }
+                //     })
+                //     ->hideWhenCreating()->hideWhenUpdating(),
+
+
+
+
+
+
+                //     Text::make(__("QawafilAlaqsa name"), "project_name")->rules('required'),
 
 
 
@@ -302,8 +362,8 @@ class QawafilAlaqsa extends Resource
                         Text::make(__("phone number"), "phone_number_address")->rules('required'),
 
 
-                MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
-                ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
+                        MapsAddress::make(__('Address'), 'current_location')->zoom(10)
+                            ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
 
                         // Select::make(__("Status"), "address_status")->options([
                         //     '1' => __('active'),
@@ -441,7 +501,13 @@ class QawafilAlaqsa extends Resource
 
         $model->trip_to = '1';
     }
-
+    public static function afterCreate(Request $request, $model)
+    {
+        DB::table('project_status')->insert([
+            'project_id' => $model->id,
+            'status' => 2,
+        ]);
+    }
     public static function aftersave(Request $request, $model)
     {
         $id = Auth::id();
@@ -449,6 +515,8 @@ class QawafilAlaqsa extends Resource
 
         $citye =   City::where('admin_id', $id)
             ->select('id')->first();
+
+
         if ($request->Area) {
             $areas = json_decode($request->Area);
             $tokens = [];
@@ -593,7 +661,7 @@ class QawafilAlaqsa extends Resource
 
 
         if (!$request->trip_from) {
-            if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] &&  $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['phone_number_address'] ) {
+            if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] &&  $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['phone_number_address']) {
                 // dd("hf");
                 DB::table('addresses')
                     ->Insert(
@@ -612,7 +680,6 @@ class QawafilAlaqsa extends Resource
                     ->where('id', $model->id)
                     ->update(['trip_from' => $address->id]);
             }
-
         } else   $model->trip_from = $request->trip_from;
     }
     /**

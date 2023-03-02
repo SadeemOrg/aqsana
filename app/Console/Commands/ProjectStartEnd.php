@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Project;
+use App\Models\TripBooking;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -68,6 +69,10 @@ class ProjectStartEnd extends Command
             DB::table('project_status')
             ->where('project_id', $endtproject->id)
             ->update(['status' => 2]);
+            TripBooking::where('email', $endtproject->id)
+            ->update([
+                'status' => '0'
+             ]);
         }
     }
 }
