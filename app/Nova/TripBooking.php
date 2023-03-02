@@ -86,12 +86,15 @@ class TripBooking extends Resource
 
         foreach ($buss as $key => $bus) {
             if ($IsFull == 1) {
+
                 $number_of_people =  ModelsTripBooking::where([
                     ['bus_id', $bus->id],
                     ['status', '1'],
                 ])->sum('number_of_people');
                 $number_of_people += $request->number_of_people;
+
                 if (($number_of_people  < $bus->number_of_seats)) {
+
                     $model->bus_id = $bus->id;
                     $IsFull = 0;
                 }
