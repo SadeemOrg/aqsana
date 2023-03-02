@@ -55,6 +55,7 @@ use Laravel\Nova\Panel;
 use App\Nova\Actions\ChangeRole;
 use App\Nova\Actions\ProjectStartEnd;
 use App\Nova\Metrics\NewQawafilAlaqsa;
+use App\Rules\QawafilAlaqsaDate;
 use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
 
@@ -379,7 +380,7 @@ class QawafilAlaqsa extends Resource
                 ])->readonly(),
 
                 DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required'),
-                DateTime::make(__('QawafilAlaqsa end'), 'end_date'),
+                DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required')->rules(new QawafilAlaqsaDate($request->start_date)),
 
 
 
