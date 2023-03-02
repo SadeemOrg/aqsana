@@ -132,9 +132,9 @@ class NovaServiceProvider extends ServiceProvider
 
             Nova::provideToScript([
                 'appName' => Nova::name() ?? config('app.name', 'Laravel Nova'),
-                'timezone' => config('app.timezone', 'UTC'),
+                'timezone' => config('app.timezone', 'Asia/Gaza'),
                 'translations' => Nova::allTranslations(),
-                'userTimezone' => config('app.timezone', 'UTC'),
+                'userTimezone' => config('app.timezone', 'Asia/Gaza'),
                 // 'userTimezone' => Nova::resolveUserTimezone($event->request),
                 'pagination' => config('nova.pagination', 'links'),
                 'locale' => config('app.locale', 'en'),
