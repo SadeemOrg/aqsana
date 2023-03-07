@@ -73,10 +73,10 @@ class delegate extends Resource
 
             Text::make(__('email'), 'email')
                 ->sortable()
-                ->rules('required', 'email', 'max:254')
+                ->rules( 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
-            Text::make(__('phone_number'), 'phone_number'),
+            Text::make(__('phone_number'), 'phone_number')->rules('required'),
             Multiselect::make(__('Area'), 'Area')
             ->options(function () {
                 $Areas =  \App\Models\Area::all();
