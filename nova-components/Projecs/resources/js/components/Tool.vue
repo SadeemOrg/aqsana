@@ -6,13 +6,7 @@
           class="flex flex-row items-center justify-satrt w-full my-4 gap-x-2"
         >
           <div
-            class="
-              flex flex-row
-              items-center
-              justify-center
-              cursor-pointer
-              w-1/4
-            "
+            class="flex flex-row items-center justify-center cursor-pointer w-1/4"
           >
             <a
               v-on:click="toggleTabs(1)"
@@ -27,13 +21,7 @@
             </a>
           </div>
           <div
-            class="
-              flex flex-row
-              items-center
-              justify-center
-              cursor-pointer
-              w-1/4
-            "
+            class="flex flex-row items-center justify-center cursor-pointer w-1/4"
           >
             <a
               class=""
@@ -49,13 +37,7 @@
             </a>
           </div>
           <div
-            class="
-              flex flex-row
-              items-center
-              justify-center
-              cursor-pointer
-              w-1/4
-            "
+            class="flex flex-row items-center justify-center cursor-pointer w-1/4"
           >
             <a
               class=""
@@ -71,13 +53,7 @@
             </a>
           </div>
           <div
-            class="
-              flex flex-row
-              items-center
-              justify-center
-              cursor-pointer
-              w-1/4
-            "
+            class="flex flex-row items-center justify-center cursor-pointer w-1/4"
           >
             <a
               class="w-full"
@@ -94,17 +70,7 @@
           </div>
         </div>
         <div
-          class="
-            relative
-            flex flex-col
-            min-w-0
-            break-words
-            bg-white
-            w-full
-            mb-6
-            shadow-lg
-            rounded
-          "
+          class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
         >
           <div class="px-4 py-5 flex-auto">
             <div class="tab-content tab-space">
@@ -118,39 +84,13 @@
                 <div class="py-4 w-[95%] bg-slate-700">
                   <div class="md:w-1/3">
                     <label
-                      class="
-                        block
-                        text-black text-base
-                        ml-4
-                        py-2
-                        font-bold
-                        md:text-right
-                        mb-1
-                        md:mb-0
-                        pr-4
-                      "
+                      class="block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
                     >
                       السنة
                     </label>
                   </div>
                   <select
-                    class="
-                      select1
-                      mt-1
-                      block
-                      w-full
-                      rounded-md
-                      border-2 border-balck
-                      px-4
-                      py-2
-                      pl-3
-                      pr-10
-                      text-base
-                      max-w-4xl
-                      mx-auto
-                      focus:border-black focus:outline-none focus:ring-black
-                      sm:text-sm
-                    "
+                    class="select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                     @change="onChange($event)"
                     v-model="year"
                   >
@@ -168,6 +108,27 @@
                   </select>
                 </div>
                 <form @submit.prevent="onSubmit" class="add-form py-4">
+                    <!-- <div
+
+                    class="md:flex md:items-center mb-6"
+                  >
+                    <div class="md:w-1/3">
+                      <label
+                        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64"
+                        for="inline-full-name"
+                      >
+                        {{ Sector.Sector }}
+                      </label>
+                    </div>
+                    <div class="md:w-2/3">
+                      <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                        id="inline-full-name"
+                        type="text"
+                        v-model="Sector.Budget"
+                      />
+                    </div>
+                  </div> -->
                   <div
                     v-for="Sector in Sectors"
                     :key="Sector.Sector"
@@ -176,17 +137,7 @@
                   >
                     <div class="md:w-1/3">
                       <label
-                        class="
-                          block
-                          text-gray-500
-                          font-bold
-                          md:text-right
-                          mb-1
-                          md:mb-0
-                          pr-4
-                          text-lg
-                          w-64
-                        "
+                        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64"
                         for="inline-full-name"
                       >
                         {{ Sector.Sector }}
@@ -194,18 +145,7 @@
                     </div>
                     <div class="md:w-2/3">
                       <input
-                        class="
-                          bg-gray-200
-                          appearance-none
-                          border-2 border-gray-200
-                          rounded
-                          w-full
-                          py-2
-                          px-4
-                          text-gray-700
-                          leading-tight
-                          focus:outline-none focus:bg-white focus:border-black
-                        "
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                         id="inline-full-name"
                         type="text"
                         v-model="Sector.Budget"
@@ -219,17 +159,7 @@
                   >
                     <div class="md:w-2/3">
                       <button
-                        class="
-                          shadow
-                          bg-gray-500
-                          hover:bg-black
-                          focus:shadow-outline focus:outline-none
-                          text-white
-                          font-bold
-                          px-16
-                          py-4
-                          rounded
-                        "
+                        class="shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
                         type="submit"
                         @click="save()"
                       >
@@ -248,35 +178,14 @@
               >
                 <div class="md:w-1/3">
                   <label
-                    class="
-                      block
-                      text-black text-base
-                      ml-4
-                      py-2
-                      font-bold
-                      md:text-right
-                      mb-1
-                      md:mb-0
-                      pr-4
-                    "
+                    class="block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
                   >
                     السنة
                   </label>
                 </div>
                 <div class="md:w-2/3">
                   <input
-                    class="
-                      bg-gray-200
-                      appearance-none
-                      border-2 border-gray-200
-                      rounded
-                      w-full
-                      py-2
-                      px-4
-                      text-gray-700
-                      leading-tight
-                      focus:outline-none focus:bg-white focus:border-black
-                    "
+                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                     id="inline-full-name"
                     type="text"
                     v-model="newyear"
@@ -284,35 +193,14 @@
                 </div>
                 <div class="md:w-1/3">
                   <label
-                    class="
-                      block
-                      text-black text-base
-                      ml-4
-                      py-2
-                      font-bold
-                      md:text-right
-                      mb-1
-                      md:mb-0
-                      pr-4
-                    "
+                    class="block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
                   >
-                     ميزانبة السنة
+                    ميزانبة السنة
                   </label>
                 </div>
                 <div class="md:w-2/3">
                   <input
-                    class="
-                      bg-gray-200
-                      appearance-none
-                      border-2 border-gray-200
-                      rounded
-                      w-full
-                      py-2
-                      px-4
-                      text-gray-700
-                      leading-tight
-                      focus:outline-none focus:bg-white focus:border-black
-                    "
+                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                     id="inline-full-name"
                     type="text"
                     v-model="budgetsOfyear"
@@ -327,17 +215,7 @@
                   >
                     <div class="md:w-1/3">
                       <label
-                        class="
-                          block
-                          text-gray-500
-                          font-bold
-                          md:text-right
-                          mb-1
-                          md:mb-0
-                          pr-4
-                          text-lg
-                          w-64
-                        "
+                        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64"
                         for="inline-full-name"
                       >
                         {{ Sector.Sector }}
@@ -345,18 +223,7 @@
                     </div>
                     <div class="md:w-2/3">
                       <input
-                        class="
-                          bg-gray-200
-                          appearance-none
-                          border-2 border-gray-200
-                          rounded
-                          w-full
-                          py-2
-                          px-4
-                          text-gray-700
-                          leading-tight
-                          focus:outline-none focus:bg-white focus:border-black
-                        "
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                         id="inline-full-name"
                         type="text"
                         v-model="Sector.Budget"
@@ -370,17 +237,7 @@
                   >
                     <div class="md:w-2/3">
                       <button
-                        class="
-                          shadow
-                          bg-gray-500
-                          hover:bg-black
-                          focus:shadow-outline focus:outline-none
-                          text-white
-                          font-bold
-                          px-16
-                          py-4
-                          rounded
-                        "
+                        class="shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
                         type="submit"
                         @click="savenew()"
                       >
@@ -398,21 +255,7 @@
               >
                 <div class="py-4 w-[95%] bg-slate-700">
                   <select
-                    class="
-                      select1
-                      mt-1
-                      block
-                      w-full
-                      rounded-md
-                      border-2 border-balck
-                      px-4
-                      py-2
-                      pl-3
-                      pr-10
-                      text-base
-                      focus:border-black focus:outline-none focus:ring-black
-                      sm:text-sm
-                    "
+                    class="select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                     @change="onChangedelet($event)"
                     selectedyear
                   >
@@ -438,17 +281,7 @@
                   >
                     <div class="md:w-1/3">
                       <label
-                        class="
-                          block
-                          text-gray-500
-                          font-bold
-                          md:text-right
-                          mb-1
-                          md:mb-0
-                          pr-4
-                          text-lg
-                          w-64
-                        "
+                        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64"
                         for="inline-full-name"
                       >
                         {{ Sector.Sector }}
@@ -456,18 +289,7 @@
                     </div>
                     <div class="md:w-2/3">
                       <input
-                        class="
-                          bg-gray-200
-                          appearance-none
-                          border-2 border-gray-200
-                          rounded
-                          w-full
-                          py-2
-                          px-4
-                          text-gray-700
-                          leading-tight
-                          focus:outline-none focus:bg-white focus:border-black
-                        "
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                         id="inline-full-name"
                         type="text"
                         v-model="Sector.Budget"
@@ -486,17 +308,7 @@
                     >
                       <div class="md:w-2/3">
                         <button
-                          class="
-                            shadow
-                            bg-gray-500
-                            hover:bg-black
-                            focus:shadow-outline focus:outline-none
-                            text-white
-                            font-bold
-                            px-16
-                            py-4
-                            rounded
-                          "
+                          class="shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
                           type="submit"
                           @click="delet()"
                         >
@@ -518,21 +330,7 @@
                     <select
                       @change="getSectorstatistics($event)"
                       v-model="selectedItem"
-                      class="
-                        select1
-                        mt-1
-                        block
-                        w-full
-                        rounded-md
-                        border-2 border-balck
-                        px-4
-                        py-2
-                        pl-3
-                        pr-14
-                        text-base
-                        focus:border-black focus:outline-none focus:ring-black
-                        sm:text-sm
-                      "
+                      class="select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-14 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                     >
                       <option selected disabled value="0">
                         Please select one
@@ -558,18 +356,7 @@
                         :value="Sector.Sector"
                       >
                         <a
-                          class="
-                            text-xs
-                            font-bold
-                            uppercase
-                            px-5
-                            py-4
-                            my-2
-                            shadow-lg
-                            rounded
-                            block
-                            leading-normal
-                          "
+                          class="text-xs font-bold uppercase px-5 py-4 my-2 shadow-lg rounded block leading-normal"
                           v-on:click="toggleTabsstatistic(index)"
                           v-bind:class="{
                             'text-green-600 bg-white cursor-pointer':
@@ -583,17 +370,7 @@
                       </div>
                     </div>
                     <div
-                      class="
-                        relative
-                        flex flex-col
-                        min-w-0
-                        break-words
-                        bg-white
-                        w-full
-                        mb-6
-                        shadow-lg
-                        rounded
-                      "
+                      class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
                     >
                       <div class="px-4 py-5 flex-auto">
                         <div class="tab-content tab-space">
@@ -615,22 +392,12 @@
                               <div class="space-y-8 divide-y divide-gray-200">
                                 <div class="pt-8">
                                   <div
-                                    class="
-                                      mt-6
-                                      grid grid-cols-1
-                                      gap-y-6 gap-x-4
-                                      sm:grid-cols-6
-                                    "
+                                    class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
                                   >
                                     <div class="sm:col-span-6">
                                       <label
                                         for="street-address"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >ميزانبة القطاع
                                       </label>
                                       <div class="mt-1">
@@ -641,29 +408,14 @@
                                           id="street-address"
                                           autocomplete="street-address"
                                           :value="Sector.Budget"
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
                                     <div class="sm:col-span-6">
                                       <label
                                         for="street-address"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                       >
                                         مصاريف القطاع
                                       </label>
@@ -675,29 +427,14 @@
                                           id="street-address"
                                           autocomplete="street-address"
                                           :value="Sector.expenses_year"
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
                                     <div class="sm:col-span-6">
                                       <label
                                         for="street-address"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                       >
                                         صافي الانفاق القطاع
                                       </label>
@@ -711,17 +448,7 @@
                                           :value="
                                             Sector.Budget - Sector.expenses_year
                                           "
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
@@ -729,12 +456,7 @@
                                     <div class="sm:col-span-2">
                                       <label
                                         for="city"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >الربع الاول ميزانية
                                       </label>
                                       <div class="mt-1">
@@ -745,29 +467,14 @@
                                           id="city"
                                           autocomplete="address-level2"
                                           :value="Sector.Budget / 4"
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
                                     <div class="sm:col-span-2">
                                       <label
                                         for="region"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >الربع الاول مصاريف</label
                                       >
                                       <div class="mt-1">
@@ -778,29 +485,14 @@
                                           id="region"
                                           autocomplete="address-level1"
                                           :value="Sector.expenses_First"
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
                                     <div class="sm:col-span-2">
                                       <label
                                         for="postal-code"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >الربع الاول صافي الانفاق</label
                                       >
                                       <div class="mt-1">
@@ -814,17 +506,7 @@
                                             Sector.Budget / 4 -
                                             Sector.expenses_First
                                           "
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
@@ -832,12 +514,7 @@
                                     <div class="sm:col-span-2">
                                       <label
                                         for="city"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >الربع الثاني ميزانية
                                       </label>
                                       <div class="mt-1">
@@ -848,29 +525,14 @@
                                           id="city"
                                           autocomplete="address-level2"
                                           :value="Sector.Budget / 4"
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
                                     <div class="sm:col-span-2">
                                       <label
                                         for="region"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >الربع الثاني مصاريف
                                       </label>
                                       <div class="mt-1">
@@ -881,29 +543,14 @@
                                           id="region"
                                           autocomplete="address-level1"
                                           :value="Sector.expenses_Second"
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
                                     <div class="sm:col-span-2">
                                       <label
                                         for="postal-code"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >الربع الثاني صافي الانفاق
                                       </label>
                                       <div class="mt-1">
@@ -917,17 +564,7 @@
                                             Sector.Budget / 4 -
                                             Sector.expenses_Second
                                           "
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
@@ -935,12 +572,7 @@
                                     <div class="sm:col-span-2">
                                       <label
                                         for="city"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >الربع الثالت ميزانية
                                       </label>
                                       <div class="mt-1">
@@ -951,29 +583,14 @@
                                           id="city"
                                           autocomplete="address-level2"
                                           :value="Sector.Budget / 4"
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
                                     <div class="sm:col-span-2">
                                       <label
                                         for="region"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >الربع الثالت مصاريف
                                       </label>
                                       <div class="mt-1">
@@ -984,29 +601,14 @@
                                           id="region"
                                           autocomplete="address-level1"
                                           :value="Sector.expenses_Third"
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
                                     <div class="sm:col-span-2">
                                       <label
                                         for="postal-code"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >الربع الثالت صافي الانفاق
                                       </label>
                                       <div class="mt-1">
@@ -1020,17 +622,7 @@
                                             Sector.Budget / 4 -
                                             Sector.expenses_Third
                                           "
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
@@ -1038,12 +630,7 @@
                                     <div class="sm:col-span-2">
                                       <label
                                         for="city"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >الربع الرابع ميزانية
                                       </label>
                                       <div class="mt-1">
@@ -1054,29 +641,14 @@
                                           id="city"
                                           autocomplete="address-level2"
                                           :value="Sector.Budget / 4"
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
                                     <div class="sm:col-span-2">
                                       <label
                                         for="region"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >الربع الرابع مصاريف
                                       </label>
                                       <div class="mt-1">
@@ -1087,29 +659,14 @@
                                           id="region"
                                           autocomplete="address-level1"
                                           :value="Sector.expenses_fourth"
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
                                     <div class="sm:col-span-2">
                                       <label
                                         for="postal-code"
-                                        class="
-                                          block
-                                          text-sm
-                                          font-medium
-                                          text-gray-700
-                                        "
+                                        class="block text-sm font-medium text-gray-700"
                                         >الربع الرابع صافي الانفاق
                                       </label>
                                       <div class="mt-1">
@@ -1123,17 +680,7 @@
                                             Sector.Budget / 4 -
                                             Sector.expenses_fourth
                                           "
-                                          class="
-                                            p-2
-                                            block
-                                            w-full
-                                            rounded-md
-                                            border border-black
-                                            shadow-sm
-                                            focus:border-indigo-500
-                                            focus:ring-indigo-500
-                                            sm:text-sm
-                                          "
+                                          class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                       </div>
                                     </div>
@@ -1141,63 +688,60 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="flex justify-between"
-                            >
-                            <div>
-                              <pure-vue-chart
-                                :points="[1, 4, 5, 3, 4,1,1,1,1,1,1,1]"
-                                :show-y-axis="true"
-                                :show-x-axis="true"
-                                :width="400"
-                                :height="200"
-                                :show-values="true"
-                                :use-month-labels="true"
-                                :use-points-labels="true"
-                                :months="[
-                                  'Jan',
-                                  'Fev',
-                                  'Mar',
-                                  'Abr',
-                                  'Mai',
-                                  'Jun',
-                                  'Jul',
-                                  'Ago',
-                                  'Set',
-                                  'Out',
-                                  'Nov',
-                                  'Dez',
-                                ]"
-
-                              />
-                              <h1>مدخلات</h1>
+                            <div class="flex justify-between">
+                              <div>
+                                <pure-vue-chart
+                                  :points="[1, 4, 5, 3, 4, 1, 1, 1, 1, 1, 1, 1]"
+                                  :show-y-axis="true"
+                                  :show-x-axis="true"
+                                  :width="400"
+                                  :height="200"
+                                  :show-values="true"
+                                  :use-month-labels="true"
+                                  :use-points-labels="true"
+                                  :months="[
+                                    'Jan',
+                                    'Fev',
+                                    'Mar',
+                                    'Abr',
+                                    'Mai',
+                                    'Jun',
+                                    'Jul',
+                                    'Ago',
+                                    'Set',
+                                    'Out',
+                                    'Nov',
+                                    'Dez',
+                                  ]"
+                                />
+                                <h1>مدخلات</h1>
                               </div>
-                                <div>
-                              <pure-vue-chart
-                                :points="[1, 4, 5, 3, 4,1,1,1,1,1,1,1]"
-                                :show-y-axis="true"
-                                :show-x-axis="true"
-                                :width="400"
-                                :height="200"
-                                :show-values="true"
-                                :use-month-labels="true"
-                                :use-points-labels="true"
-                                :months="[
-                                  'Jan',
-                                  'Fev',
-                                  'Mar',
-                                  'Abr',
-                                  'Mai',
-                                  'Jun',
-                                  'Jul',
-                                  'Ago',
-                                  'Set',
-                                  'Out',
-                                  'Nov',
-                                  'Dez',
-                                ]"
-
-                              />
-                              <h1>مخرجات</h1>
+                              <div>
+                                <pure-vue-chart
+                                  :points="[1, 4, 5, 3, 4, 1, 1, 1, 1, 1, 1, 1]"
+                                  :show-y-axis="true"
+                                  :show-x-axis="true"
+                                  :width="400"
+                                  :height="200"
+                                  :show-values="true"
+                                  :use-month-labels="true"
+                                  :use-points-labels="true"
+                                  :months="[
+                                    'Jan',
+                                    'Fev',
+                                    'Mar',
+                                    'Abr',
+                                    'Mai',
+                                    'Jun',
+                                    'Jul',
+                                    'Ago',
+                                    'Set',
+                                    'Out',
+                                    'Nov',
+                                    'Dez',
+                                  ]"
+                                />
+                                <h1>مخرجات</h1>
                               </div>
                             </div>
                           </div>
@@ -1220,7 +764,7 @@ import PureVueChart from "pure-vue-chart";
 export default {
   data() {
     return {
-      openTab: 2,
+      openTab: 1,
       openTabstatistic: 0,
       selectedItem: "0",
       selectedyear: "0",
@@ -1283,6 +827,7 @@ export default {
         })
         .then((response) => {
           this.Sectors = response.data;
+          console.log("sss", this.Sectors);
         });
     },
     onChangedelet(event) {
@@ -1301,29 +846,64 @@ export default {
       axios.post("/save", {
         year: this.year,
         Sectors: this.Sectors,
-      });
+      }).then(function (response) {
+            toastr.options = {
+              closeButton: true,
+              debug: false,
+              positionClass: "toast-bottom-right",
+              onclick: null,
+              showDuration: "300",
+              hideDuration: "2000",
+              showMethod: "fadeIn",
+              hideMethod: "fadeOut",
+            };
+            toastr.success("  تم حفظ بنجاح");
+          });;
     },
     savenew() {
-        let sum=0;
-        this.newSectors.forEach(element => {
-            sum += parseInt(element['Budget']) ;
-        });
-
-        console.log(sum);
-    // alert(this.budgetsOfyear);
-    if (this.budgetsOfyear == sum) {
-      axios.post("/save", {
-        year: this.newyear,
-        budgetsOfyear: this.budgetsOfyear,
-        Sectors: this.newSectors,
+      let sum = 0;
+      this.newSectors.forEach((element) => {
+        sum += parseInt(element["Budget"]);
       });
 
-      this.getYears();
-    }
-    else{
-    alert("ميزانية السنة لا تطابق مع ميزانية القطاعات");
-    }
+      console.log(sum);
+      // alert(this.budgetsOfyear);
+      if (this.budgetsOfyear > sum) {
+        axios
+          .post("/save", {
+            year: this.newyear,
+            budgetsOfyear: this.budgetsOfyear,
+            Sectors: this.newSectors,
+          })
+          .then(function (response) {
+            toastr.options = {
+              closeButton: true,
+              debug: false,
+              positionClass: "toast-bottom-right",
+              onclick: null,
+              showDuration: "300",
+              hideDuration: "2000",
+              showMethod: "fadeIn",
+              hideMethod: "fadeOut",
+            };
+            toastr.success("  تم انشاء بنجاح");
+          });
 
+        this.getYears();
+      } else {
+        toastr.options = {
+          closeButton: true,
+          debug: false,
+          positionClass: "toast-bottom-right",
+          onclick: null,
+          showDuration: "300",
+          hideDuration: "2000",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut",
+        };
+
+        toastr.error("ميزانية السنة لا تطابق مع ميزانية القطاعات");
+      }
     },
     delet() {
       console.log(this.year);

@@ -391,12 +391,14 @@ class HomeController extends Controller
     public function save(Request $request)
     {
 
+
         DB::table('budgets')
             ->updateOrInsert(
                 ['year' => $request->year, 'sector_id' =>  0],
-                ['budget' => $request->budgetsOfyear]
+                ['budget' => $request->Sectors[0]['Budget']]
 
             );
+
         foreach ($request->Sectors as $key => $value) {
             DB::table('budgets')
                 ->updateOrInsert(
@@ -438,6 +440,17 @@ class HomeController extends Controller
 
         $sector = array();
         $Sectors = Sector::all();
+        $Budgets = Budget::where([
+            ['year', '=', $request->year],
+            ['sector_id', '=', 0],
+        ])->first();
+        $pus = array(
+            "sector_id" => 0,
+            "Sector" =>"ميزانبة السنة",
+            "Budget" => $Budgets->budget
+        );
+        array_push($sector, $pus);
+
         foreach ($Sectors as $key => $Sector) {
             $Budgets = Budget::where([
                 ['year', '=', $request->year],
