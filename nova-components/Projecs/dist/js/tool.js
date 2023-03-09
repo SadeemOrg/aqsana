@@ -1008,468 +1008,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      openTab: 2,
+      openTab: 1,
       openTabstatistic: 0,
       selectedItem: "0",
       selectedyear: "0",
@@ -1523,6 +1067,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         year: event.target.value
       }).then(function (response) {
         _this4.Sectors = response.data;
+        console.log("sss", _this4.Sectors);
       });
     },
     onChangedelet: function onChangedelet(event) {
@@ -1541,26 +1086,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.post("/save", {
         year: this.year,
         Sectors: this.Sectors
-      });
+      }).then(function (response) {
+        toastr.options = {
+          closeButton: true,
+          debug: false,
+          positionClass: "toast-bottom-right",
+          onclick: null,
+          showDuration: "300",
+          hideDuration: "2000",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut"
+        };
+        toastr.success("  تم حفظ بنجاح");
+      });;
     },
     savenew: function savenew() {
       var sum = 0;
       this.newSectors.forEach(function (element) {
-        sum += parseInt(element['Budget']);
+        sum += parseInt(element["Budget"]);
       });
 
       console.log(sum);
       // alert(this.budgetsOfyear);
-      if (this.budgetsOfyear == sum) {
+      if (this.budgetsOfyear > sum) {
         axios.post("/save", {
           year: this.newyear,
           budgetsOfyear: this.budgetsOfyear,
           Sectors: this.newSectors
+        }).then(function (response) {
+          toastr.options = {
+            closeButton: true,
+            debug: false,
+            positionClass: "toast-bottom-right",
+            onclick: null,
+            showDuration: "300",
+            hideDuration: "2000",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut"
+          };
+          toastr.success("  تم انشاء بنجاح");
         });
 
         this.getYears();
       } else {
-        alert("ميزانية السنة لا تطابق مع ميزانية القطاعات");
+        toastr.options = {
+          closeButton: true,
+          debug: false,
+          positionClass: "toast-bottom-right",
+          onclick: null,
+          showDuration: "300",
+          hideDuration: "2000",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut"
+        };
+
+        toastr.error("ميزانية السنة لا تطابق مع ميزانية القطاعات");
       }
     },
     delet: function delet() {
@@ -8385,7 +7965,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "\n            flex flex-row\n            items-center\n            justify-center\n            cursor-pointer\n            w-1/4\n          "
+                  "flex flex-row items-center justify-center cursor-pointer w-1/4"
               },
               [
                 _c(
@@ -8412,7 +7992,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "\n            flex flex-row\n            items-center\n            justify-center\n            cursor-pointer\n            w-1/4\n          "
+                  "flex flex-row items-center justify-center cursor-pointer w-1/4"
               },
               [
                 _c(
@@ -8439,7 +8019,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "\n            flex flex-row\n            items-center\n            justify-center\n            cursor-pointer\n            w-1/4\n          "
+                  "flex flex-row items-center justify-center cursor-pointer w-1/4"
               },
               [
                 _c(
@@ -8466,7 +8046,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "\n            flex flex-row\n            items-center\n            justify-center\n            cursor-pointer\n            w-1/4\n          "
+                  "flex flex-row items-center justify-center cursor-pointer w-1/4"
               },
               [
                 _c(
@@ -8496,7 +8076,7 @@ var render = function() {
           "div",
           {
             staticClass:
-              "\n          relative\n          flex flex-col\n          min-w-0\n          break-words\n          bg-white\n          w-full\n          mb-6\n          shadow-lg\n          rounded\n        "
+              "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
           },
           [
             _c("div", { staticClass: "px-4 py-5 flex-auto" }, [
@@ -8525,7 +8105,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "\n                    select1\n                    mt-1\n                    block\n                    w-full\n                    rounded-md\n                    border-2 border-balck\n                    px-4\n                    py-2\n                    pl-3\n                    pr-10\n                    text-base\n                    max-w-4xl\n                    mx-auto\n                    focus:border-black focus:outline-none focus:ring-black\n                    sm:text-sm\n                  ",
+                            "select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
                           on: {
                             change: [
                               function($event) {
@@ -8607,7 +8187,7 @@ var render = function() {
                                   "label",
                                   {
                                     staticClass:
-                                      "\n                        block\n                        text-gray-500\n                        font-bold\n                        md:text-right\n                        mb-1\n                        md:mb-0\n                        pr-4\n                        text-lg\n                        w-64\n                      ",
+                                      "block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64",
                                     attrs: { for: "inline-full-name" }
                                   },
                                   [
@@ -8631,7 +8211,7 @@ var render = function() {
                                     }
                                   ],
                                   staticClass:
-                                    "\n                        bg-gray-200\n                        appearance-none\n                        border-2 border-gray-200\n                        rounded\n                        w-full\n                        py-2\n                        px-4\n                        text-gray-700\n                        leading-tight\n                        focus:outline-none focus:bg-white focus:border-black\n                      ",
+                                    "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
                                   attrs: {
                                     id: "inline-full-name",
                                     type: "text"
@@ -8668,7 +8248,7 @@ var render = function() {
                                     "button",
                                     {
                                       staticClass:
-                                        "\n                        shadow\n                        bg-gray-500\n                        hover:bg-black\n                        focus:shadow-outline focus:outline-none\n                        text-white\n                        font-bold\n                        px-16\n                        py-4\n                        rounded\n                      ",
+                                        "shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
                                       attrs: { type: "submit" },
                                       on: {
                                         click: function($event) {
@@ -8714,7 +8294,7 @@ var render = function() {
                           }
                         ],
                         staticClass:
-                          "\n                    bg-gray-200\n                    appearance-none\n                    border-2 border-gray-200\n                    rounded\n                    w-full\n                    py-2\n                    px-4\n                    text-gray-700\n                    leading-tight\n                    focus:outline-none focus:bg-white focus:border-black\n                  ",
+                          "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
                         attrs: { id: "inline-full-name", type: "text" },
                         domProps: { value: _vm.newyear },
                         on: {
@@ -8741,7 +8321,7 @@ var render = function() {
                           }
                         ],
                         staticClass:
-                          "\n                    bg-gray-200\n                    appearance-none\n                    border-2 border-gray-200\n                    rounded\n                    w-full\n                    py-2\n                    px-4\n                    text-gray-700\n                    leading-tight\n                    focus:outline-none focus:bg-white focus:border-black\n                  ",
+                          "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
                         attrs: { id: "inline-full-name", type: "text" },
                         domProps: { value: _vm.budgetsOfyear },
                         on: {
@@ -8781,7 +8361,7 @@ var render = function() {
                                   "label",
                                   {
                                     staticClass:
-                                      "\n                        block\n                        text-gray-500\n                        font-bold\n                        md:text-right\n                        mb-1\n                        md:mb-0\n                        pr-4\n                        text-lg\n                        w-64\n                      ",
+                                      "block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64",
                                     attrs: { for: "inline-full-name" }
                                   },
                                   [
@@ -8805,7 +8385,7 @@ var render = function() {
                                     }
                                   ],
                                   staticClass:
-                                    "\n                        bg-gray-200\n                        appearance-none\n                        border-2 border-gray-200\n                        rounded\n                        w-full\n                        py-2\n                        px-4\n                        text-gray-700\n                        leading-tight\n                        focus:outline-none focus:bg-white focus:border-black\n                      ",
+                                    "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
                                   attrs: {
                                     id: "inline-full-name",
                                     type: "text"
@@ -8842,7 +8422,7 @@ var render = function() {
                                     "button",
                                     {
                                       staticClass:
-                                        "\n                        shadow\n                        bg-gray-500\n                        hover:bg-black\n                        focus:shadow-outline focus:outline-none\n                        text-white\n                        font-bold\n                        px-16\n                        py-4\n                        rounded\n                      ",
+                                        "shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
                                       attrs: { type: "submit" },
                                       on: {
                                         click: function($event) {
@@ -8880,7 +8460,7 @@ var render = function() {
                         "select",
                         {
                           staticClass:
-                            "\n                    select1\n                    mt-1\n                    block\n                    w-full\n                    rounded-md\n                    border-2 border-balck\n                    px-4\n                    py-2\n                    pl-3\n                    pr-10\n                    text-base\n                    focus:border-black focus:outline-none focus:ring-black\n                    sm:text-sm\n                  ",
+                            "select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm",
                           attrs: { selectedyear: "" },
                           on: {
                             change: function($event) {
@@ -8948,7 +8528,7 @@ var render = function() {
                                   "label",
                                   {
                                     staticClass:
-                                      "\n                        block\n                        text-gray-500\n                        font-bold\n                        md:text-right\n                        mb-1\n                        md:mb-0\n                        pr-4\n                        text-lg\n                        w-64\n                      ",
+                                      "block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64",
                                     attrs: { for: "inline-full-name" }
                                   },
                                   [
@@ -8972,7 +8552,7 @@ var render = function() {
                                     }
                                   ],
                                   staticClass:
-                                    "\n                        bg-gray-200\n                        appearance-none\n                        border-2 border-gray-200\n                        rounded\n                        w-full\n                        py-2\n                        px-4\n                        text-gray-700\n                        leading-tight\n                        focus:outline-none focus:bg-white focus:border-black\n                      ",
+                                    "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
                                   attrs: {
                                     id: "inline-full-name",
                                     type: "text"
@@ -9016,7 +8596,7 @@ var render = function() {
                                             "button",
                                             {
                                               staticClass:
-                                                "\n                          shadow\n                          bg-gray-500\n                          hover:bg-black\n                          focus:shadow-outline focus:outline-none\n                          text-white\n                          font-bold\n                          px-16\n                          py-4\n                          rounded\n                        ",
+                                                "shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
                                               attrs: { type: "submit" },
                                               on: {
                                                 click: function($event) {
@@ -9066,7 +8646,7 @@ var render = function() {
                               }
                             ],
                             staticClass:
-                              "\n                      select1\n                      mt-1\n                      block\n                      w-full\n                      rounded-md\n                      border-2 border-balck\n                      px-4\n                      py-2\n                      pl-3\n                      pr-14\n                      text-base\n                      focus:border-black focus:outline-none focus:ring-black\n                      sm:text-sm\n                    ",
+                              "select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-14 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm",
                             on: {
                               change: [
                                 function($event) {
@@ -9148,7 +8728,7 @@ var render = function() {
                                   "a",
                                   {
                                     staticClass:
-                                      "\n                          text-xs\n                          font-bold\n                          uppercase\n                          px-5\n                          py-4\n                          my-2\n                          shadow-lg\n                          rounded\n                          block\n                          leading-normal\n                        ",
+                                      "text-xs font-bold uppercase px-5 py-4 my-2 shadow-lg rounded block leading-normal",
                                     class: {
                                       "text-green-600 bg-white cursor-pointer":
                                         _vm.openTabstatistic !== index,
@@ -9179,7 +8759,7 @@ var render = function() {
                           "div",
                           {
                             staticClass:
-                              "\n                      relative\n                      flex flex-col\n                      min-w-0\n                      break-words\n                      bg-white\n                      w-full\n                      mb-6\n                      shadow-lg\n                      rounded\n                    "
+                              "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
                           },
                           [
                             _c("div", { staticClass: "px-4 py-5 flex-auto" }, [
@@ -9240,7 +8820,7 @@ var render = function() {
                                                     "div",
                                                     {
                                                       staticClass:
-                                                        "\n                                    mt-6\n                                    grid grid-cols-1\n                                    gap-y-6 gap-x-4\n                                    sm:grid-cols-6\n                                  "
+                                                        "mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
                                                     },
                                                     [
                                                       _c(
@@ -9254,7 +8834,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for:
                                                                   "street-address"
@@ -9276,7 +8856,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9308,7 +8888,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for:
                                                                   "street-address"
@@ -9330,7 +8910,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9362,7 +8942,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for:
                                                                   "street-address"
@@ -9384,7 +8964,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9417,7 +8997,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for: "city"
                                                               }
@@ -9438,7 +9018,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9469,7 +9049,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for: "region"
                                                               }
@@ -9490,7 +9070,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9521,7 +9101,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for:
                                                                   "postal-code"
@@ -9543,7 +9123,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9577,7 +9157,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for: "city"
                                                               }
@@ -9598,7 +9178,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9629,7 +9209,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for: "region"
                                                               }
@@ -9650,7 +9230,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9681,7 +9261,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for:
                                                                   "postal-code"
@@ -9703,7 +9283,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9737,7 +9317,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for: "city"
                                                               }
@@ -9758,7 +9338,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9789,7 +9369,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for: "region"
                                                               }
@@ -9810,7 +9390,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9841,7 +9421,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for:
                                                                   "postal-code"
@@ -9863,7 +9443,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9897,7 +9477,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for: "city"
                                                               }
@@ -9918,7 +9498,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -9949,7 +9529,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for: "region"
                                                               }
@@ -9970,7 +9550,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -10001,7 +9581,7 @@ var render = function() {
                                                             "label",
                                                             {
                                                               staticClass:
-                                                                "\n                                        block\n                                        text-sm\n                                        font-medium\n                                        text-gray-700\n                                      ",
+                                                                "block text-sm font-medium text-gray-700",
                                                               attrs: {
                                                                 for:
                                                                   "postal-code"
@@ -10023,7 +9603,7 @@ var render = function() {
                                                             [
                                                               _c("input", {
                                                                 staticClass:
-                                                                  "\n                                          p-2\n                                          block\n                                          w-full\n                                          rounded-md\n                                          border border-black\n                                          shadow-sm\n                                          focus:border-indigo-500\n                                          focus:ring-indigo-500\n                                          sm:text-sm\n                                        ",
+                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                                 attrs: {
                                                                   readonly: "",
                                                                   type: "text",
@@ -10185,7 +9765,7 @@ var staticRenderFns = [
         "label",
         {
           staticClass:
-            "\n                      block\n                      text-black text-base\n                      ml-4\n                      py-2\n                      font-bold\n                      md:text-right\n                      mb-1\n                      md:mb-0\n                      pr-4\n                    "
+            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
         },
         [_vm._v("\n                    السنة\n                  ")]
       )
@@ -10200,7 +9780,7 @@ var staticRenderFns = [
         "label",
         {
           staticClass:
-            "\n                    block\n                    text-black text-base\n                    ml-4\n                    py-2\n                    font-bold\n                    md:text-right\n                    mb-1\n                    md:mb-0\n                    pr-4\n                  "
+            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
         },
         [_vm._v("\n                  السنة\n                ")]
       )
@@ -10215,9 +9795,9 @@ var staticRenderFns = [
         "label",
         {
           staticClass:
-            "\n                    block\n                    text-black text-base\n                    ml-4\n                    py-2\n                    font-bold\n                    md:text-right\n                    mb-1\n                    md:mb-0\n                    pr-4\n                  "
+            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
         },
-        [_vm._v("\n                   ميزانبة السنة\n                ")]
+        [_vm._v("\n                  ميزانبة السنة\n                ")]
       )
     ])
   }
