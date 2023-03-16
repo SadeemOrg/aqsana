@@ -214,9 +214,18 @@ class PaymentVoucher extends Resource
             BelongsTo::make(__('reference_id'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
                 return $this->transaction_type === '2';
             }),
+            Text::make(__('company_number'), 'company_number')->hideFromDetail()->hideFromIndex(),
 
-            // Text::make(__('name'), 'name'),
-            Text::make(__('company_number'), 'company_number'),
+            Text::make(__('company_number'), 'company_number',function(){
+                return $this->TelephoneDirectory->name;
+            })->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
+                return $this->transaction_type === '1';
+            }),
+            Text::make(__('company_number'), 'company_number',function(){
+                return $this->BusesCompany->company_id;
+            })->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
+                return $this->transaction_type === '2';
+            }),
             Text::make(__('bill_number'), 'bill_number'),
             Text::make(__('description'), 'description'),
 
