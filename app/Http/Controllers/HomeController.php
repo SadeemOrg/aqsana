@@ -1047,7 +1047,7 @@ class HomeController extends Controller
 
         $partners = nova_get_setting('partner', 'default_value');
         // $partners = json_decode($partnerjson);
-        $sectors = Sector::all();
+        $sectors = Sector::where('is_published',1)->get();
         // $sectors = nova_get_setting('workplace', 'default_value');
         $type = 2;
         // $sectors= json_decode($sectorsjson);
@@ -1061,7 +1061,7 @@ class HomeController extends Controller
         $achievementsjson = nova_get_setting('achievements', 'default_value');
         $achievements = json_decode($achievementsjson);
         $workplace = nova_get_setting('workplace', 'default_value');
-        $sectors = Sector::all();
+        $sectors =  Sector::where('is_published',1)->get();
 
         $type = 2;
         return view('Pages.about-us-page', compact('goals', 'achievements', 'workplace', 'type', 'sectors'));
