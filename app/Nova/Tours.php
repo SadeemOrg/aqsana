@@ -86,8 +86,14 @@ class Tours extends Resource
                 Text::make(__('phone_number'), 'phone_number'),
             ]),
             Text::make(__('guide_name'),'guide_name')->rules('required'),
-            Date::make(__('start Time'), 'start_tour')->pickerDisplayFormat('d.m.Y')->rules('required'),
-            Date::make(__('end Time'), 'end_tour')->pickerDisplayFormat('d.m.Y')->rules('required'),
+            Text::make(__('start Time'), 'start_tour')
+            ->placeholder('##:##')
+            ->rules('date_format:"H:i"')
+            ->help('hh:mm'),
+        Text::make(__('end Time'), 'end_tour')
+            ->placeholder('##:##')
+            ->rules('date_format:"H:i"')
+            ->help('hh:mm'),
             Textarea::make(__('note'),'note'),
         ];
     }

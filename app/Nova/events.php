@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Acme\MultiselectField\Multiselect;
 use App\Models\BookType;
 use App\Models\TelephoneDirectory;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Select;
 use Whitecube\NovaFlexibleContent\Flexible;
+use Laraning\NovaTimeField\TimeField;
 
 class events extends Resource
 {
@@ -27,10 +29,9 @@ class events extends Resource
     public static $model = \App\Models\events::class;
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("eventsparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("eventsparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -53,9 +54,9 @@ class events extends Resource
     {
         return __('Cultural Section');
     }
-    public static $priority = 3 ;
+    public static $priority = 3;
     public static $search = [
-        'id',"name"
+        'id', "name"
     ];
 
     /**
@@ -68,43 +69,52 @@ class events extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('name'),'name')->rules('required'),
-            Textarea::make(__('note'),'note')->rules('required'),
+            Text::make(__('name'), 'name')->rules('required'),
+            Text::make(__('place'), 'place	'),
+
+            Textarea::make(__('note'), 'note'),
             Files::make('Multiple files', 'file'),
-            Text::make(__('Number of encounters'),'number_of_encounters')->rules('required'),
+            Text::make(__('Number of encounters'), 'number_of_encounters')->rules('required'),
             // File::make(__('file'),'file')->disk('public')->deletable(),
             Flexible::make(__('new event'), 'new_event')
 
-            ->hideFromDetail()->hideFromIndex()
-            ->addLayout(__('Add new event'), 'type', [
-                Date::make(__('DATE'), 'events_date')->pickerDisplayFormat('d.m.Y'),
-            ]),
-            Date::make(__('start Time'), 'start_events_date')->pickerDisplayFormat('d.m.Y'),
-            Date::make(__('end Time'), 'end_events_date')->pickerDisplayFormat('d.m.Y'),
-            Text::make(__('Budget'),'Budget')->rules('required'),
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('Add new event'), 'type', [
+                    Date::make(__('DATE'), 'events_date')->pickerDisplayFormat('d.m.Y'),
+                ]),
+            Text::make(__('start Time'), 'start_events_date')
+                ->placeholder('##:##')
+                ->rules('date_format:"H:i"')
+                ->help('hh:mm'),
+            Text::make(__('end Time'), 'end_events_date')
+                ->placeholder('##:##')
+                ->rules('date_format:"H:i"')
+                ->help('hh:mm'),
+
+            Text::make(__('Budget'), 'Budget')->rules('required'),
 
             BelongsTo::make(__('Contacts'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            Select::make(__('Contacts'), "Contacts")
-            ->options(function () {
-                $types =  TelephoneDirectory::where('type', '=', '6')->get();
-                $type_array =  array();
-                foreach ($types as $type) {
-                    $type_array += [$type['id'] => ($type['name'])];
-                }
+            Multiselect::make(__('Contacts'), "Contacts")
+                ->options(function () {
+                    $types =  TelephoneDirectory::where('type', '=', '6')->get();
+                    $type_array =  array();
+                    foreach ($types as $type) {
+                        $type_array += [$type['id'] => ($type['name'])];
+                    }
 
-                return $type_array;
-            })->displayUsingLabels() ->hideFromDetail()->hideFromIndex(),
+                    return $type_array;
+                })->hideFromDetail()->hideFromIndex(),
 
 
 
             Flexible::make(__('Contacts'), 'NewContacts')
-            ->readonly(true)
-            ->hideFromDetail()->hideFromIndex()
-            ->addLayout(__('Add new type'), 'type', [
-                Text::make(__('name'), 'name'),
-                Text::make(__('phone_number'), 'phone_number'),
-            ]),
+                ->readonly(true)
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('Add new type'), 'type', [
+                    Text::make(__('name'), 'name'),
+                    Text::make(__('phone_number'), 'phone_number'),
+                ]),
 
 
         ];
@@ -115,25 +125,21 @@ class events extends Resource
         if (!$request->Contacts) {
 
 
-            if ($request->NewContacts   &&($request->NewContacts[0]['attributes']['name'] || $request->NewContacts[0]['attributes']['phone_number'])) {
+            if ($request->NewContacts   && ($request->NewContacts[0]['attributes']['name'] || $request->NewContacts[0]['attributes']['phone_number'])) {
 
-                $bookt= TelephoneDirectory::create([
+                $bookt = TelephoneDirectory::create([
                     'name' => $request->NewContacts[0]['attributes']['name'],
                     'phone_number' => $request->NewContacts[0]['attributes']['phone_number'],
-                    'type'=>6
+                    'type' => 6
                 ]);
                 // $model->Contacts=$bookt->id;
                 // $BookType =  \App\Models\BookType::orderBy('created_at', 'desc')->first();
 
                 DB::table('events')
-                ->where('id', $model->id)
-                ->update(['Contacts' => $bookt->id]);
-
-
+                    ->where('id', $model->id)
+                    ->update(['Contacts' => $bookt->id]);
             }
         }
-
-
     }
     /**
      * Get the cards available for the request.
