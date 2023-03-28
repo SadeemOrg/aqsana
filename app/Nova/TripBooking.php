@@ -64,7 +64,7 @@ class TripBooking extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make(__('project'), 'Project', \App\Nova\QawafilAlaqsa::class)->rules(new CustomRule($request->number_of_people)),
-            // BelongsTo::make(__('user'), 'Users', \App\Nova\User::class),
+            BelongsTo::make(__('user'), 'Users', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('bus'), 'Buses', \App\Nova\Bus::class)
                 ->hideWhenCreating()->hideWhenUpdating(),
             // Text::make(__('number phone'), 'number_phone'),
