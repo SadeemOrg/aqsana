@@ -25,58 +25,62 @@ class ProjectStartEnd extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
+
         foreach ($models as $model) {
+            DB::table('project_status')->insert([
+                'project_id' => $model->id,
+                'status' => 1,
+            ]);
+
+        //     DB::table('project_status')
+        //         ->where('project_id', $model->id)
+        //         ->update(['status' => DB::raw('status+1'),]);
 
 
-            DB::table('project_status')
-                ->where('project_id', $model->id)
-                ->update(['status' => DB::raw('status+1'),]);
 
+        //     if ($model->project_type == '2') {
+        //         TripBooking::where('project_id', $model->id)
+        //         ->update([
+        //             'status' => '0'
+        //         ]);
 
+        //         $statu   = DB::table('project_status')
+        //             ->where('project_id', $model->id)
+        //             ->first();
+        //         if ($statu->status == '2') {
+        //             $newQafel = $model->replicate();
 
-            if ($model->project_type == '2') {
-                TripBooking::where('project_id', $model->id)
-                ->update([
-                    'status' => '0'
-                ]);
+        //             if ($model->repetition == "1") {
 
-                $statu   = DB::table('project_status')
-                    ->where('project_id', $model->id)
-                    ->first();
-                if ($statu->status == '2') {
-                    $newQafel = $model->replicate();
+        //                 $newQafel->start_date = $newQafel->start_date->addDays('1');
+        //                 $newQafel->end_date = $newQafel->end_date->addDays('1');
+        //             } elseif ($model->repetition == "2") {
 
-                    if ($model->repetition == "1") {
+        //                 $newQafel->start_date = $newQafel->start_date->addDays('7');
+        //                 $newQafel->end_date = $newQafel->end_date->addDays('7');
+        //             } elseif ($model->repetition == "3") {
 
-                        $newQafel->start_date = $newQafel->start_date->addDays('1');
-                        $newQafel->end_date = $newQafel->end_date->addDays('1');
-                    } elseif ($model->repetition == "2") {
+        //                 $newQafel->start_date = $newQafel->start_date->addDays('14');
+        //                 $newQafel->end_date = $newQafel->end_date->addDays('14');
+        //             } elseif ($model->repetition == "4") {
 
-                        $newQafel->start_date = $newQafel->start_date->addDays('7');
-                        $newQafel->end_date = $newQafel->end_date->addDays('7');
-                    } elseif ($model->repetition == "3") {
+        //                 $newQafel->start_date = $newQafel->start_date->addMonth();
+        //                 $newQafel->end_date = $newQafel->end_date->addMonth();
+        //             } elseif ($model->repetition == "5") {
 
-                        $newQafel->start_date = $newQafel->start_date->addDays('14');
-                        $newQafel->end_date = $newQafel->end_date->addDays('14');
-                    } elseif ($model->repetition == "4") {
+        //                 $newQafel->start_date = $newQafel->start_date->addYear();
+        //                 $newQafel->end_date = $newQafel->end_date->addYear();
+        //             }
 
-                        $newQafel->start_date = $newQafel->start_date->addMonth();
-                        $newQafel->end_date = $newQafel->end_date->addMonth();
-                    } elseif ($model->repetition == "5") {
+        //             $newQafel->created_at = Carbon::now();
+        //             $newQafel->save();
+        //             DB::table('project_status')->insert([
+        //                 'project_id' => $newQafel->id,
+        //                 'status' => 2,
+        //             ]);
 
-                        $newQafel->start_date = $newQafel->start_date->addYear();
-                        $newQafel->end_date = $newQafel->end_date->addYear();
-                    }
-
-                    $newQafel->created_at = Carbon::now();
-                    $newQafel->save();
-                    DB::table('project_status')->insert([
-                        'project_id' => $newQafel->id,
-                        'status' => 2,
-                    ]);
-
-                }
-            }
+        //         }
+        //     }
         }
     }
 
