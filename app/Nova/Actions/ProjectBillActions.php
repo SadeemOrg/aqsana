@@ -41,8 +41,6 @@ class ProjectBillActions extends Action
                 'main_type' => '2',
                 'type' => '1',
                 'Currency' => '3',
-                'transact_amount' => $fields->amount,
-                'equivelant_amount' => $fields->amount,
                 'transaction_date' => $date = date('Y-m-d'),
                 'voucher' => $imageName,
 

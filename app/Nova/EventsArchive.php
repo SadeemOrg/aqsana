@@ -4,38 +4,35 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 
-class guide extends Resource
+class EventsArchive extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\TelephoneDirectory::class;
-    public static function label()
-    {
-        return __('guide');
-    }
-    public static function group()
-    {
-        return __('Cultural Section');
-    }
-    public static function availableForNavigation(Request $request)
-    {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("guide",  $request->user()->userrole()) )){
-            return true;
-        }
-       else return false;
-    }
+    public static $model = \App\Models\EventsArchive::class;
+
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
+
+    public static function label()
+    {
+        return __('EventsArchive');
+    }
+    public static function group()
+    {
+        return __('Cultural Section');
+    }
 
     /**
      * The columns that should be searched.
@@ -43,7 +40,7 @@ class guide extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'phone_number'
+        'id',
     ];
 
     /**
@@ -52,34 +49,17 @@ class guide extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public static function indexQuery(NovaRequest $request, $query)
-    {
-        return $query->where('type', '6');
-
-    }
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Text::make(__('name'), 'name')->rules('required'),
 
-            Text::make(__('Name'), 'name')
-                ->sortable()
-                ->rules('required', 'max:255'),
-
-            Text::make(__('email'), 'email')
-                ->sortable()
-                ->rules( 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
-            Text::make(__('phone_number'), 'phone_number')->rules('required', 'max:255'),
-            Text::make(__('city'), 'city'),
-            Text::make(__('Nots'), 'note'),
+            Textarea::make(__('note'), 'note'),
+            Files::make(__('Multiple files'), 'file'),
         ];
     }
-    public static function beforeCreate(Request $request, $model)
-    {
-        $model->type = 6;
-    }
+
     /**
      * Get the cards available for the request.
      *

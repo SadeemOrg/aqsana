@@ -10,6 +10,8 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Whitecube\NovaFlexibleContent\Flexible;
+use Acme\MultiselectField\Multiselect;
+use App\Models\VolunteersProjects;
 
 class volunteersHower extends Resource
 {
@@ -81,7 +83,17 @@ class volunteersHower extends Resource
                         }),
 
                     Text::make(__('num_hower'), 'num_hower'),
-                    Text::make(__('project'), 'project'),
+
+                    Multiselect::make(__('project'), "project")
+                    ->options(function () {
+                        $types =  VolunteersProjects::all();
+                        $type_array =  array();
+                        foreach ($types as $type) {
+                            $type_array += [$type['id'] => ($type['name'])];
+                        }
+
+                        return $type_array;
+                    })->hideFromDetail()->hideFromIndex(),
 
                     Boolean::make(__('done'), 'done'),
                 ]),

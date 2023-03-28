@@ -22,8 +22,8 @@ class Tours extends Model
 
     protected $casts = [
         'date' => 'date',
-        'start_tour' => 'date',
-        'end_tour' => 'date',
+        // 'start_tour' => 'date',
+        // 'end_tour' => 'date',
 
 
     ];

@@ -23,6 +23,7 @@ use Laravel\Nova\Fields\DateTime;
 use Acme\MultiselectField\Multiselect;
 use App\Nova\Actions\DeleteBill;
 use App\Nova\Actions\DepositedInBank;
+use App\Nova\Actions\PrintBill;
 use App\Nova\Actions\ReceiveDonation;
 use App\Nova\Filters\AlhisalatColect;
 use App\Nova\Metrics\DonationInBank;
@@ -31,7 +32,7 @@ use App\Nova\Metrics\DonationNotReceive;
 use AwesomeNova\Cards\FilterCard;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\Boolean;
-
+use NovaButton\Button;
 use function Clue\StreamFilter\fun;
 
 
@@ -104,15 +105,7 @@ class Donation extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            ActionButton::make(__('print'))
-                ->action((new BillPdf)->confirmText(__('Are you sure you want to print  this?'))
-                    ->confirmButtonText(__('print'))
-                    ->cancelButtonText(__('Dont print')), $this->id)
-                     ->readonly(function () {
-                        return $this->is_delete > 0;
-                    })
-                ->text(__('print'))->showLoadingAnimation()
-                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                Button::make(__('print'))->link('/mainbill/' .$this->id)->style('primary'),
 
             Select::make(__("transaction_type"), "transaction_type")->options([
                 '1' => __('handy'),
@@ -263,6 +256,7 @@ class Donation extends Resource
             })->buttonColor('#FF0000')->svg('_Delete2')
             ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
+            Button::make(__('print Pdf'))->link('/generate-pdf/' .$this->id)->style('info'),
             Date::make(__('date'), 'transaction_date')->rules('required')->hideFromIndex(),
 
         ];
@@ -425,6 +419,7 @@ class Donation extends Resource
             new DepositedInBank,
             new BillPdf,
             new DeleteBill,
+           ( new PrintBill)->withoutConfirmation(),
 
         ];
     }
