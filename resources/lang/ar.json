@@ -1,6 +1,11 @@
 {
     "not read": "غير مقروء",
     "Once": "مرة",
+    "VolunteersProjects":"مشاريع التطوع",
+    "EventsArchive":"أرشيف الفعاليات",
+    "Multiple files":"ملفات متعددة",
+    "print Pdf":"طباعة",
+    "project collect":"جمع المشاريع",
     "handy": "يدوية",
     "automatic": "تلقائي",
     "transaction_type": "طريقة الدفع",

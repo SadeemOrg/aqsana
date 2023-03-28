@@ -32,12 +32,13 @@ class ProjectStartEnd extends Action
                 ->where('project_id', $model->id)
                 ->update(['status' => DB::raw('status+1'),]);
 
-            TripBooking::where('project_id', $model->id)
+
+
+            if ($model->project_type == '2') {
+                TripBooking::where('project_id', $model->id)
                 ->update([
                     'status' => '0'
                 ]);
-
-            if ($model->project_type == '2') {
 
                 $statu   = DB::table('project_status')
                     ->where('project_id', $model->id)

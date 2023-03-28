@@ -239,7 +239,7 @@ class Project extends Resource
 
 
            Text::make(__("project name"), "project_name")->rules('required'),
-                Text::make(__("project describe"), "project_describe")->rules('required'),
+                Text::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
 
                 Select::make(__('SECTOR'), 'sector')
                 ->options(function(){
@@ -254,7 +254,7 @@ class Project extends Resource
                     }
 
                     return $Sectors_type_admin_array;
-                }),
+                })->hideFromIndex(),
 
                 BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
                     ->options(Area::all())
@@ -272,22 +272,16 @@ class Project extends Resource
 
 
 
-                DateTime::make(__('projec start'), 'start_date')->rules('required'),
-                DateTime::make(__('projec end'), 'end_date'),
+                DateTime::make(__('projec start'), 'start_date')->rules('required')->hideFromIndex(),
+                DateTime::make(__('projec end'), 'end_date')->hideFromIndex(),
 
 
-                Boolean::make(__('is_bus'), 'is_bus'),
-                Boolean::make(__('is_has_volunteer'), 'is_volunteer'),
-                Boolean::make(__('is_has_Donations'), 'is_donation'),
-
-
-
+                Boolean::make(__('is_bus'), 'is_bus')->hideFromIndex(),
+                Boolean::make(__('is_has_volunteer'), 'is_volunteer')->hideFromIndex(),
+                Boolean::make(__('is_has_Donations'), 'is_donation')->hideFromIndex(),
 
 
 
-
-                BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
             ]))->withToolbar(),
@@ -330,7 +324,7 @@ class Project extends Resource
                     ->optionsLabel('bus_number')
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                         return null;
-                    }),
+                    })->hideFromIndex(),
 
 
                 Flexible::make(__('newbus'), 'newbus')
@@ -468,6 +462,11 @@ class Project extends Resource
 
         }
 
+
+            DB::table('project_status')->insert([
+                'project_id' => $model->id,
+                'status' => 0,
+            ]);
 
         $user = Auth::user();
         $id = Auth::id();

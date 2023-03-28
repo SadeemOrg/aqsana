@@ -32,7 +32,7 @@ class address extends Resource
     }
     public static function group()
     {
-        return __('QawafilAlaqsa');
+        return __('address');
     }
 
     /**

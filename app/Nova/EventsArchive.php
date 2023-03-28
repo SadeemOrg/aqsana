@@ -25,6 +25,15 @@ class EventsArchive extends Resource
      */
     public static $title = 'id';
 
+    public static function label()
+    {
+        return __('EventsArchive');
+    }
+    public static function group()
+    {
+        return __('Cultural Section');
+    }
+
     /**
      * The columns that should be searched.
      *
@@ -47,7 +56,7 @@ class EventsArchive extends Resource
             Text::make(__('name'), 'name')->rules('required'),
 
             Textarea::make(__('note'), 'note'),
-            Files::make('Multiple files', 'file'),
+            Files::make(__('Multiple files'), 'file'),
         ];
     }
 

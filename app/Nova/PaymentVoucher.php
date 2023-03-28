@@ -217,12 +217,18 @@ class PaymentVoucher extends Resource
             Text::make(__('company_number'), 'company_number')->hideFromDetail()->hideFromIndex(),
 
             Text::make(__('company_number'), 'company_number',function(){
-                return $this->TelephoneDirectory->name;
+                if ( $this->TelephoneDirectory) {
+                    return $this->TelephoneDirectory->name;
+                }
+
             })->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
                 return $this->transaction_type === '1';
             }),
             Text::make(__('company_number'), 'company_number',function(){
-                return $this->BusesCompany->company_id;
+                if ($this->BusesCompany) {
+                    return $this->BusesCompany->company_id;
+                }
+
             })->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
                 return $this->transaction_type === '2';
             }),

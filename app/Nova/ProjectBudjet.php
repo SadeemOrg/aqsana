@@ -25,7 +25,7 @@ class ProjectBudjet extends Resource
      */
     public static function label()
     {
-        return __('project');
+        return __('project collect');
     }
     public static function group()
     {
@@ -61,7 +61,7 @@ class ProjectBudjet extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        return false;
+
         $user = Auth::user();
         if ($user->type() == 'admin' || $user->type() == 'financial_user') {
             return true;
@@ -84,7 +84,7 @@ class ProjectBudjet extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make(__('project'), 'project', \App\Nova\Project::class),
+            BelongsTo::make(__('project'), 'project', \App\Nova\Project::class)->hideWhenCreating()->hideWhenUpdating(),
 
             // Text::make(__("project name"), "project_name")->readonly(),
             // BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')->readonly()->hideFromIndex(),
