@@ -26,7 +26,8 @@ class TripController extends BaseController
         ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
 
         $trips->map(function($trip) use ($request){
-            $trip->start_date=$trip->start_date;
+            $trip->start_date=$trip->start_date->tz('Asia/Jerusalem');
+            $trip->start_date=$trip->start_date->tz('Asia/Jerusalem');
             $trip->end_date=$trip->end_date;
             if(($trip->tripfrom) != null) {
 
