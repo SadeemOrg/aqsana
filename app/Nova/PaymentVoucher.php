@@ -216,14 +216,14 @@ class PaymentVoucher extends Resource
             }),
             Text::make(__('company_number'), 'company_number')->hideFromDetail()->hideFromIndex(),
 
-            // Text::make(__('company_number'), 'company_number',function(){
-            //     if ( $this->TelephoneDirectory) {
-            //         return $this->TelephoneDirectory->name;
-            //     }
+            Text::make(__('company_number'), 'company_number',function(){
+                if ( $this->TelephoneDirectory) {
+                    return $this->TelephoneDirectory->name;
+                }
 
-            // })->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
-            //     return $this->transaction_type === '1';
-            // }),
+            })->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
+                return $this->transaction_type === '1';
+            }),
             Text::make(__('company_number'), 'company_number',function(){
                 if ($this->BusesCompany) {
                     return $this->BusesCompany->company_id;
@@ -233,7 +233,7 @@ class PaymentVoucher extends Resource
                 return $this->transaction_type === '2';
             }),
             Text::make(__('bill_number'), 'bill_number'),
-            Text::make(__('description'), 'description'),
+            Text::make(__('description'), 'description')->hideFromIndex(),
 
             BelongsTo::make(__('Currenc'), 'Currenc', \App\Nova\Currency::class),
 
