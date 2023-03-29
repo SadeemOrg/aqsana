@@ -209,10 +209,10 @@ class PaymentVoucher extends Resource
                 ])->hideWhenUpdating(),
 
             BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
-                return $this->transaction_type === '1';
+                return ($this->transaction_type === '1'&&$this->type == '0');
             }),
             BelongsTo::make(__('reference_id'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
-                return $this->transaction_type === '2';
+                return ($this->transaction_type === '2'&&$this->type == '0');
             }),
             Text::make(__('company_number'), 'company_number')->hideFromDetail()->hideFromIndex(),
 
