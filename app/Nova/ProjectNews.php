@@ -8,6 +8,7 @@ use App\Nova\Filters\ProjectTypeFilters;
 use AwesomeNova\Cards\FilterCard;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
@@ -77,6 +78,8 @@ class ProjectNews extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Boolean::make(__('posted For App'), 'report_status')->rules('required'),
+
             // ActionButton::make(__('POST NEWS'))
             // ->action((new PostProjectNews) ->confirmText('Are you sure you want to read  this Massage?')
             // ->confirmButtonText(__('post'))
