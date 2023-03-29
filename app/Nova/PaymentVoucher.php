@@ -102,9 +102,7 @@ class PaymentVoucher extends Resource
                 '2' => __('qawael'),
                 '3' => __('trip'),
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('reference_id'), 'project', \App\Nova\Project::class)->canSee(function () {
-                return $this->type != '0';
-            })->hideWhenUpdating()->hideWhenCreating(),
+
 
 
             // Text::make(__('reference_id'), 'reference_id')->readonly()->hideWhenCreating()->hideWhenUpdating()->canSee(function(){
@@ -207,7 +205,9 @@ class PaymentVoucher extends Resource
                     Text::make(__('name'), "name")->rules('required'),
                     Text::make(__('phone'), "phone")->rules('required'),
                 ])->hideWhenUpdating(),
-
+                BelongsTo::make(__('reference_id'), 'project', \App\Nova\Project::class)->canSee(function () {
+                    return $this->type != '0';
+                })->hideWhenUpdating()->hideWhenCreating(),
             BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
                 return ($this->transaction_type === '1'&&$this->type == '0');
             }),
