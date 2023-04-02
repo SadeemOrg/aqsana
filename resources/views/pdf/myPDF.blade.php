@@ -306,14 +306,14 @@
                 <span style="color: #6B7280;font-size: 16px;">مخرجات عامة</span>
             @endif
         </p>
-        {{-- @if ($TransactionArray['description'] != null)
-            <p style="font-size: 17px;"> Notes :
-                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
-            </p>
-        @endif --}}
+        @if ($TransactionArray['description'] != null)
+        <p dir="ltr" style="font-size: 17px;text-align: left"> notes :
+            <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
+        </p>
+    @endif
     </div>
     <div style="position: relative; max-height: 160px; margin-left: 20%; ">
-        <img src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png" alt="logo">
+        <img style="height:290px;" src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png" alt="logo">
     </div>
     <div style="position: absolute; height: 150px; bottom: 13%; left: 37%;">
         <img src="https://media.discordapp.net/attachments/938405759996276806/1060513822194028595/-removebg-preview.png"
