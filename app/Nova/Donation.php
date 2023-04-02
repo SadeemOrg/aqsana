@@ -123,8 +123,8 @@ class Donation extends Resource
 
             // BelongsTo::make(__('project'), 'project')->hideWhenCreating()->readonly(),
             // Project::make(__('ref_id'), 'ref_id')->hideFromIndex(),
-            BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable(),
-            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable(),
+            BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideFromIndex(),
+            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable()->hideFromIndex(),
 
 
 
@@ -172,7 +172,7 @@ class Donation extends Resource
                     Text::make(__('phone'), "phone"),
                 ]),
 
-            BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating()->hideFromIndex(),
 
             Text::make(__('payment_reason'), "payment_reason")->hideFromIndex(),
 

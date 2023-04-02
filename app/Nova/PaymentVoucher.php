@@ -93,8 +93,8 @@ class PaymentVoucher extends Resource
             //     ->cancelButtonText(__('Dont print')), $this->id)
             // ->text(__('print'))->showLoadingAnimation()
             // ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable(),
-            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable(),
+            BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideFromIndex(),
+            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable()->hideFromIndex(),
 
             Select::make(__("type"), "type")->options([
                 '0' => __('the Payment Voucher'),
@@ -207,13 +207,13 @@ class PaymentVoucher extends Resource
                 ])->hideWhenUpdating(),
                 BelongsTo::make(__('reference_id'), 'project', \App\Nova\Project::class)->canSee(function () {
                     return $this->type != '0';
-                })->hideWhenUpdating()->hideWhenCreating(),
+                })->hideWhenUpdating()->hideWhenCreating()->hideFromIndex(),
             BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
                 return ($this->transaction_type === '1'&&$this->type == '0');
-            }),
+            })->hideFromIndex(),
             BelongsTo::make(__('reference_id'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
                 return ($this->transaction_type === '2'&&$this->type == '0');
-            }),
+            })->hideFromIndex(),
             Text::make(__('company_number'), 'company_number')->hideFromDetail()->hideFromIndex(),
 
             Text::make(__('company_number'), 'company_number',function(){
