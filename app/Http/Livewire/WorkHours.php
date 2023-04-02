@@ -54,11 +54,11 @@ class WorkHours extends Component
                 'user_id' => Auth::id(),
                 'day' => Carbon::now()->locale('ar')->dayName,
                 'date' => Carbon::now()->toDateTimeString(),
-                'start_time' => Carbon::now(),
+                'start_time' => Carbon::now()->addHour(3),
                 'on_work' => 1,
             ]);
         } else {
-            $current = Carbon::now();
+            $current = Carbon::now()->addHour(3);
 
             if ($WorkHours->departure != null) {
                 $array = $WorkHours->departure;
@@ -67,7 +67,7 @@ class WorkHours extends Component
             }
 
 
-            $WorkHours->fake_time = Carbon::now();
+            $WorkHours->fake_time = Carbon::now()->addHour(3);
             $WorkHours->on_work = 1;
             $WorkHours->save();
         }
@@ -83,7 +83,7 @@ class WorkHours extends Component
         if ($WorkHours != null) {
             // dd($this->realTime);
             $WorkHours->day_hours = $this->realTime;
-            $WorkHours->end_time = Carbon::now();
+            $WorkHours->end_time = Carbon::now()->addHour(3);
             $WorkHours->on_work = 0;
             $WorkHours->fake_time = null;
             $WorkHours->save();
@@ -107,7 +107,7 @@ class WorkHours extends Component
             $pus = array(
                 "Type" => ($this->leaveGoal == "اخرى") ? $this->leaveGoalTextarea : $this->leaveGoal,
                 "required_time" => $this->Timeleave,
-                "time_out" => Carbon::now()->toDateTimeString(),
+                "time_out" => Carbon::now()->addHour(3)->toDateTimeString(),
                 "return_time" =>  null,
             );
 
@@ -122,7 +122,7 @@ class WorkHours extends Component
             $pus = array(
                 "Type" => ($this->leaveGoal == "اخرى") ? $this->leaveGoalTextarea : $this->leaveGoal,
                 "required_time" => $this->Timeleave,
-                "time_out" => Carbon::now()->toDateTimeString(),
+                "time_out" => Carbon::now()->addHour(3)->toDateTimeString(),
                 "return_time" =>  null,
             );
 
@@ -173,7 +173,7 @@ class WorkHours extends Component
                     if ($WorkHours->fake_time != null) {
 
                         $starttime = Carbon::parse($WorkHours->fake_time);
-                        $finishTime = Carbon::now();
+                        $finishTime = Carbon::now()->addHour(3);
                         $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
                         $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
                         $days = $startDate->diffInDays($endDate);
@@ -188,7 +188,7 @@ class WorkHours extends Component
                     } else {
                         // dd("dd");
                         $starttime = Carbon::parse($WorkHours->start_time);
-                        $finishTime = Carbon::now();
+                        $finishTime = Carbon::now()->addHour(3);
                         $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
                         $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
                         $days = $startDate->diffInDays($endDate);
@@ -217,9 +217,9 @@ class WorkHours extends Component
                         $yesterdayWorkHours->day_hours = $totalDuration;
                         // $yesterdayWorkHours->save();
                         // dd(Carbon::now()->minute );
-                        $this->Hours = Carbon::now()->hour;
-                        $this->minutes = Carbon::now()->minute;
-                        $this->Seconds = Carbon::now()->second;
+                        $this->Hours = Carbon::now()->addHour(3)->hour;
+                        $this->minutes = Carbon::now()->addHour(3)->minute;
+                        $this->Seconds = Carbon::now()->addHour(3)->second;
 
                         ModelsWorkHours::create([
                             'user_id' => Auth::id(),
@@ -248,8 +248,8 @@ class WorkHours extends Component
 
 
         if ($this->sersh == 0) {
-            $currentDateTime = Carbon::now();
-            $newDateTime = Carbon::now()->subMonth();
+            $currentDateTime = Carbon::now()->addHour(3);
+            $newDateTime = Carbon::now()->addHour(3)->subMonth();
 
             $from = date('2022-01-01');
             $to = date('2022-12-31');
