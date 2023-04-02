@@ -85,7 +85,7 @@ class PDFController extends Controller
             'TransactionArray' => $TransactionArray,
             'PaymentType' =>  $PaymentType
         ];
-        $fileName = 'Invoices details';
+        $fileName = 'Invoices details.pdf';
         $mpdf->autoLangToFont = true;
         $mpdf->autoScriptToLang = true;
         // for Arabic Bills PDF
