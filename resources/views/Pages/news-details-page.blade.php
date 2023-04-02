@@ -9,9 +9,9 @@
         $whatsapp_phone_Link = 'https://wa.me/' . $Final_Correct_whatsapp_phone;
     @endphp
 
-    @if (!empty($news_detail->video_link_cover))
+    @if (!empty($news_detail->video_img_cover))
         @php
-            $imageVideoCover = 'storage/' . $news_detail->video_link_cover;
+            $imageVideoCover = 'storage/' . $news_detail->video_img_cover;
         @endphp
     @else
         @php
@@ -266,7 +266,7 @@
                                     <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full"
                                         src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
                                     <img src="{{ asset('assets/image/play_Svg.svg') }}"
-                                        class="absolute max-w-[46px] top-[2%] right-[45%] " />
+                                        class="absolute max-w-[46px] top-[44%] right-[45%] " />
                                 </a>
                             </div>
                             @foreach ($pictures as $picture)
@@ -283,7 +283,7 @@
                                     <img class=" mx-auto w-full object-cover lg:h-[265px] h-full rounded-[5px]"
                                         src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
                                     <img src="{{ asset('assets/image/play_Svg.svg') }}"
-                                        class="absolute max-w-[46px] top-[2%] right-[45%] " />
+                                        class="absolute max-w-[46px] top-[44%] right-[45%] " />
                                 </a>
                             </div>
                         @elseif (!empty($pictures) && empty($news_detail->video_link))
