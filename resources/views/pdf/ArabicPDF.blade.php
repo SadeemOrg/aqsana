@@ -264,7 +264,7 @@
             </tbody>
 
         </table>
-        @elseif($PaymentType == 'حصالة')
+    @elseif($PaymentType == 'حصالة')
         <table dir="rtl" class="blueTable">
             <thead>
                 <tr>
@@ -276,15 +276,15 @@
             </thead>
             <tbody>
 
-                    @php
-                        // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
-                    @endphp
-                    <tr>
-                        <td> {{ $PaymentType }} {{ $TransactionArray['alhisalat']['number_alhisala'] }}  </td>
-                        <td>{{ $ChickBillDate }}</td>
-                        <td> {{ $TransactionArray['equivelant_amount']}}</td>
+                @php
+                    // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                @endphp
+                <tr>
+                    <td> {{ $PaymentType }} {{ $TransactionArray['alhisalat']['number_alhisala'] }} </td>
+                    <td>{{ $ChickBillDate }}</td>
+                    <td> {{ $TransactionArray['equivelant_amount'] }}</td>
 
-                    </tr>
+                </tr>
 
                 <tr>
 
@@ -297,11 +297,11 @@
             </tbody>
 
         </table>
-        @endif
+    @endif
     <!--End Table -->
 
     <!--Start Sector Name-->
-    <div style="width:full;">
+    <div style="width:full; ">
         <p style="font-size: 17px; text-align: right"> اسم القطاع :
             @if ($TransactionArray['sectors'] != null)
                 <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
@@ -309,14 +309,14 @@
                 <span style="color: #6B7280;font-size: 16px;">مخرجات عامة</span>
             @endif
         </p>
-        {{-- @if ($TransactionArray['description'] != null)
-            <p style="font-size: 17px;"> Notes :
+        @if ($TransactionArray['description'] != null)
+            <p dir="rtl" style="font-size: 17px;text-align: right"> ملاحظات :
                 <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
             </p>
-        @endif --}}
+        @endif
     </div>
     <div style="position: relative; max-height: 160px; margin-left: 20%; ">
-        <img src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png" alt="logo">
+        <img style="height:290px;" src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png" alt="logo">
     </div>
     <div style="position: absolute; height: 150px; bottom: 13%; left: 37%;">
         <img src="https://media.discordapp.net/attachments/938405759996276806/1060513822194028595/-removebg-preview.png"
