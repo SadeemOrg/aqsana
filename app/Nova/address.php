@@ -78,7 +78,7 @@ class address extends Resource
                 // ->zoom(8),
 
                 MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
-                ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
+                ->center(['lat' =>  31.775947, 'lng' => 35.235577]) ->types(['address' ,'establishment'])->mapOptions(['fullscreenControl' => true,'clickableIcons'=>true,'restriction'=>true]),
 
             // Select::make(__("Status"), "status")->options([
             //     '1' => __('active'),
