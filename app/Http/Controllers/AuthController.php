@@ -206,8 +206,9 @@ class AuthController extends Controller
 
         return response($response, 201);
     }
+
     /**
-     *
+     *  @authenticated
      * login User
      *
      * @bodyParam   email    string  required    The email of the  user.      Example:zeyad.hawash@averotec.sa
@@ -471,7 +472,10 @@ class AuthController extends Controller
 
     }
 
-
+   /**
+     * @authenticated
+     *
+    */
     public function getInformationUser(Request $request){
 
         $user = User::where("id",Auth()->id())->with("Donations.Project","Volunteer.Project")

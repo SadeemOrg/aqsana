@@ -29,10 +29,10 @@
 
         <div class="room-sort">
 
-            <ul class="room-sort-menu">
+            <ul style="list-style-type: none" class="room-sort-menu">
                 @foreach ($navigation as $group => $resources)
                     <li class="dropdown">
-                        <a style="line-height: 2.5rem/* 40px */; font-weight: 700; font-size: 18px/* 24px */;"
+                        <a style="line-height: 2.5rem/* 40px */; font-weight: 700; font-size: 16px;"
                         class="dropBtn  mb-4 text-base text-white uppercase tracking-wide cursor-pointer text"  href="#"> {{ $group }} <i class="fa fa-caret-down"
                                 aria-hidden="true"></i></a>
                         <ul class="dropMenu" style="list-style-type:none;">
@@ -45,8 +45,8 @@
                                                 resourceName: '{{ $resource::uriKey() }}'
                                             }
                                         }"
-                                        class="text-white text-justify no-underline dim"
-                                        style="width:160px;font-size: 16px"
+                                        class="text-white text-justify no-underline dim ml-2"
+                                        style="width:160px;font-size: 15px"
                                         dusk="{{ $resource::uriKey() }}-resource-link">
                                         {{ $resource::label() }}
                                     </router-link>
