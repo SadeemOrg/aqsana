@@ -216,6 +216,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+
         $fields = $request->validate([
             'email' => 'required|string',
             'password' => 'required|string'
@@ -232,14 +233,14 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user;
 
         $response = [
             'user' => $user,
-            'token' => $token
+            // 'token' => $token
         ];
 
-        return response($response, 201);
+        return response($user , 201);
     }
     /**
      * logout a user
@@ -250,7 +251,7 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        dd("dd");
+
         Auth::user()->tokens->each(function ($token, $key) {
             $token->delete();
         });
