@@ -233,14 +233,14 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $token = $user;
+        $token = $user->createToken('myapptoken')->plainTextToken;
 
         $response = [
             'user' => $user,
-            // 'token' => $token
+            'token' => $token
         ];
 
-        return response($user , 201);
+        return response($response, 201);
     }
     /**
      * logout a user
