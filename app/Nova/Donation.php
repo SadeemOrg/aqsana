@@ -34,10 +34,16 @@ use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\Boolean;
 use NovaButton\Button;
 use function Clue\StreamFilter\fun;
-
+use Titasgailius\SearchRelations\SearchesRelations;
 
 class Donation extends Resource
 {
+
+    use SearchesRelations;
+
+    public static $searchRelations = [
+        'TelephoneDirectory' => ['id', 'name'],
+    ];
     /**
      * The model the resource corresponds to.
      *
@@ -84,7 +90,7 @@ class Donation extends Resource
      * @var array
      */
     public static $search = [
-        'id', "name"
+        'id', 'name'
     ];
 
     /**
@@ -113,7 +119,7 @@ class Donation extends Resource
                 '3' => __('Alhisalat'),
                 '4' => __('delet bill'),
 
-            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating()->hideFromIndex()   ,
             Select::make(__("transaction_status"), "transaction_status")->options([
                 '1' => __('Not Receive yet'),
                 '2' => __('in a box'),
@@ -159,7 +165,7 @@ class Donation extends Resource
 
                     return $user_type_admin_array;
                 })
-                ->singleSelect()->hideFromDetail()->hideFromIndex(),
+                ->singleSelect(),
 
 
 
@@ -257,7 +263,7 @@ class Donation extends Resource
             ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
             Button::make(__('print Pdf'))->link('/generate-pdf/' .$this->id)->style('info'),
-            Date::make(__('date'), 'transaction_date')->rules('required')->hideFromIndex(),
+            Date::make(__('date'), 'transaction_date')->rules('required'),
 
         ];
     }

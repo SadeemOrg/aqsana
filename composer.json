@@ -59,6 +59,7 @@
         "pishran/nova-rtl-theme": "^1.5",
         "spatie/laravel-medialibrary": "v9.x-dev",
         "techouse/select-auto-complete": "^1.4",
+        "titasgailius/search-relations": "^2.0",
         "vonage/client": "^4.0",
         "waynestate/nova-ckeditor4-field": "^0.7.0",
         "whitecube/nova-flexible-content": "^0.2.8",
