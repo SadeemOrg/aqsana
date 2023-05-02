@@ -96,6 +96,11 @@ class Transaction extends Model implements HasMedia
         return $this->belongsTo('App\Models\BusesCompany','name');
     }
 
+    public function ActionEvents()
+    {
+        return $this->hasMany('App\Models\ActionEvents','actionable_id');
+    }
+
     // public function getCountryName() {
     //     return Currency::where('id', $this->id)->first()->name;
     // }

@@ -32,6 +32,7 @@ use App\Nova\Metrics\DonationNotReceive;
 use AwesomeNova\Cards\FilterCard;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\HasMany;
 use NovaButton\Button;
 use function Clue\StreamFilter\fun;
 use Titasgailius\SearchRelations\SearchesRelations;
@@ -264,6 +265,8 @@ class Donation extends Resource
 
             Button::make(__('print Pdf'))->link('/generate-pdf/' .$this->id)->style('info'),
             Date::make(__('date'), 'transaction_date')->rules('required'),
+
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
         ];
     }
