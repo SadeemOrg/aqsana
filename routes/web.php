@@ -20,6 +20,61 @@ use App\Http\Controllers\WebNotificationController;
 |
 */
 
+
+Route::get('/send', function () {
+
+
+    $SERVER_API_KEY = 'AAAAA_Hl3RU:APA91bG0Fqxoqxi703Ov637hTwDZx99ezBvlcpETyJOyXod65v2Wp9KVM-Bk_uGAYGyBmTpjbcp_RO9B8Y9P_AhM9K1DuB10zEHriHAFRcmrGrSMIQdKg-Scf05TWgN5ugdwnipdY3mv';
+
+    $token_1 = 'd1mhabCqQtKn0F5-YMQL-d:APA91bGvtwf8VUPxb7Tt9b3lsdvhPaV9rZFTgI1mQaJ1RYnJ5urv8hUyhp8ASD6r8XFn4DoxGd7TvplBBVIV-svCjT0XuNzNLkEw-0Z6LsXThDrY1PHr5x88AUDnex-p35fUURGbhie2';
+
+    $data = [
+
+        "registration_ids" => [
+            $token_1
+        ],
+
+        "notification" => [
+
+            "title" => 'Welcome',
+
+            "body" => 'Description',
+
+            "sound"=> "default" // required for sound on ios
+
+        ],
+
+    ];
+
+    $dataString = json_encode($data);
+
+    $headers = [
+
+        'Authorization: key=' . $SERVER_API_KEY,
+
+        'Content-Type: application/json',
+
+    ];
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+
+    curl_setopt($ch, CURLOPT_POST, true);
+
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+    $response = curl_exec($ch);
+
+    dd($response);
+
+});
 Route::post("user", [HomeController::class, "user"])->name('user');
 Route::post("users", [HomeController::class, "users"])->name('users');
 Route::post("UserAdmin", [HomeController::class, "Admin"])->name('Admin');
