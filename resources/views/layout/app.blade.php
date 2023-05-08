@@ -1061,7 +1061,7 @@
             var $phone = $('input[name="phone"]').val();
             var $message = $('#contuctus-message').val();
             $.ajax({
-                 "get",
+                type: "get",
                 url: "/conctus",
                 data: {
                     name: $name,
@@ -1210,3 +1210,4 @@
 
 
 </html>
+
