@@ -149,15 +149,17 @@
     <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script>
     <script>
         var firebaseConfig = {
-            apiKey: "AIzaSyA4a_fkjeIEDYd_avYYZ_XbqwLIhtd6HCQ",
-            authDomain: "alqudsquds-82c73.firebaseapp.com",
+            apiKey: "AIzaSyCUFf82RK4_UHpnJ2EAD1eXgz2tIIBoFaE",
+            authDomain: "alaqsa-association.firebaseapp.com",
             databaseURL: 'https://project-id.firebaseio.com',
-            projectId: "alqudsquds-82c73",
-            storageBucket: "alqudsquds-82c73.appspot.com",
-            messagingSenderId: "168567225793",
-            appId: "1:168567225793:web:417c87aa992aa0784d4340",
-            measurementId: "G-HH0SH5P3KT"
+            projectId: "alaqsa-association",
+            storageBucket: "alaqsa-association.appspot.com",
+            messagingSenderId: "16943275285",
+            appId: "1:16943275285:web:c95070543cf570cb265d1c",
+            measurementId: "G-FHN8R2KH3M"
         };
+
+
 
         firebase.initializeApp(firebaseConfig);
         const messaging = firebase.messaging();
@@ -1059,7 +1061,7 @@
             var $phone = $('input[name="phone"]').val();
             var $message = $('#contuctus-message').val();
             $.ajax({
-                type: "get",
+                 "get",
                 url: "/conctus",
                 data: {
                     name: $name,
@@ -1206,84 +1208,5 @@
     });
 </script>
 
-<script>
-    console.log("owais");
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-        apiKey: "AIzaSyCUFf82RK4_UHpnJ2EAD1eXgz2tIIBoFaE",
-        authDomain: "alaqsa-association.firebaseapp.com",
-        projectId: "alaqsa-association",
-        storageBucket: "alaqsa-association.appspot.com",
-        messagingSenderId: "16943275285",
-        appId: "1:16943275285:web:c95070543cf570cb265d1c",
-        measurementId: "G-FHN8R2KH3M"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const messaging = firebase.messaging();
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register("../firebase-messaging-sw.js")
-            .then(function(registration) {
-                console.log('Registration successful, scope is:', registration.scope);
-            }).catch(function(err) {
-                console.log('Service worker registration failed, error:', err);
-            });
-    }
-    messaging.requestPermission()
-        .then(function() {
-            console.log("Notification permission granted.");
-            // get the token in the form of promise
-            return messaging.getToken()
-        })
-        .then(function(token) {
-            // print the token on the HTML page
-
-            <?php
-            if (\Illuminate\Support\Facades\Auth::user() != null) {
-            ?>
-            $.post({
-                url: '{{ url(' / ') }}api/cm-firebase-token',
-                data: {
-                    fcm_token: token,
-                },
-                dataType: 'json',
-                beforeSend: function() {},
-                success: function(response) {
-                    console.log(response.body);
-                },
-                complete: function() {},
-            });
-            <?php
-            } else {
-            ?>
-            console.log("not Auth")
-            <?php
-            }
-            ?>
-        })
-        .catch(function(err) {
-            console.log("Unable to get permission to notify.", err);
-        });
-    messaging.onMessage(function(payload) {
-        console.log(payload);
-        var notify;
-        notify = new Notification(payload.notification.title, {
-            body: payload.notification.body,
-            icon: payload.notification.icon,
-            tag: "Dummy"
-        });
-        console.log(payload.notification);
-    });
-    jQuery(function($) {
-        var $firstname = $('input[name="firstName"]');
-        var $lastname = $('input[name="lastName"]');
-        var $fullname = $('input[name="donor_name"]');
-        $firstname.add($lastname).keyup(function() {
-            $fullname.val($firstname.val() + ' ' + $lastname.val());
-        });
-    });
-    var height = $(window).height();
-    console.log(height)
-</script>
 
 </html>
