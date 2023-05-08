@@ -112,8 +112,8 @@ class NotificationController extends Controller
     public function sendNotification(Request $request)
     {
 
+
         $userSchema = User::find($request->user);
-        // dd(  $userSchema);
         // dd($request->user);
         $offerData = $request->Notifications;
         $date = $request->date;
@@ -123,8 +123,8 @@ class NotificationController extends Controller
         $url = 'https://fcm.googleapis.com/fcm/send';
         $FcmToken = User::where('id',$userSchema->id)->pluck('device_key')->all();
         // dd($FcmToken);
-
-        $serverKey = 'AAAAJz9jvcE:APA91bGNRoHzz8sk5aw3EJmqynwyrSMPIxkwbnxdM-rfZelMvZnsosFiEKHjrFMI8bj_jUsG1yM1sg9WgpL0SpvXlOEQYM6cJQEkAQUdv_pA6iQoDA5_2fZuvcuWsIVpwM1DC5a1ymJM';
+        $FcmToken='d1mhabCqQtKn0F5-YMQL-d:APA91bGvtwf8VUPxb7Tt9b3lsdvhPaV9rZFTgI1mQaJ1RYnJ5urv8hUyhp8ASD6r8XFn4DoxGd7TvplBBVIV-svCjT0XuNzNLkEw-0Z6LsXThDrY1PHr5x88AUDnex-p35fUURGbhie2';
+        $serverKey = 'AAAAA_Hl3RU:APA91bG0Fqxoqxi703Ov637hTwDZx99ezBvlcpETyJOyXod65v2Wp9KVM-Bk_uGAYGyBmTpjbcp_RO9B8Y9P_AhM9K1DuB10zEHriHAFRcmrGrSMIQdKg-Scf05TWgN5ugdwnipdY3mv';
 
         $data = [
             "registration_ids" => $FcmToken,

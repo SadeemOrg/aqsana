@@ -12,10 +12,9 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\Select;
 use Laraning\NovaTimeField\TimeField;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Acme\MultiselectField\Multiselect;
+use Acme\MultiselectField\Multiselect as Select;
 use App\Nova\Actions\ApprovalRejectProjec;
 use App\Nova\Actions\ProjectStatu;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +25,7 @@ use Laravel\Nova\Fields\hasOne;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use Yassi\NestedForm\NestedForm;
 use Laravel\Nova\Fields\BelongsToMany;
+use Techouse\SelectAutoComplete\SelectAutoComplete ;
 
 use AwesomeNova\Cards\FilterCard;
 use Laravel\Nova\Fields\Textarea;
@@ -88,6 +88,11 @@ class QawafilAlaqsa extends Resource
     public static $search = [
         'id',
     ];
+    public static function createButtonLabel()
+    {
+        return 'انشاء قافلة';
+    }
+
     public static function label()
     {
         return __('Qawafil');
@@ -322,17 +327,16 @@ class QawafilAlaqsa extends Resource
                     '3' => __('fortnightly'),
                     '4' => __('Monthly'),
                     '5' => __('annual'),
-                ])->rules('required'),
+                ])->rules('required')->singleSelect(),
                 Select::make(__('Admin'), 'admin_id')
                     ->options(function () {
-                        $users =  \App\Models\User::all();
-                        $user_type_admin_array =  array();
+                        $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();                        $user_type_admin_array =  array();
                         foreach ($users as $user) {
                             $user_type_admin_array += [$user['id'] => ($user['name'])];
                         }
 
                         return $user_type_admin_array;
-                    }),
+                    })->singleSelect(),
                 BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
@@ -348,7 +352,7 @@ class QawafilAlaqsa extends Resource
                         }
 
                         return $address_type_admin_array;
-                    })->hideFromIndex()->hideFromDetail(),
+                    })->hideFromIndex()->hideFromDetail()->singleSelect(),
                 // ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                 //     return null;
                 // }),
@@ -374,10 +378,11 @@ class QawafilAlaqsa extends Resource
                     ]),
 
 
+                    BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->hideWhenCreating(),
 
                 BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->withMeta([
                     'value' => "1",
-                ])->readonly(),
+                ])->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
 
                 DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required'),
                 DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required')->rules(new QawafilAlaqsaDate($request->start_date)),
@@ -446,7 +451,7 @@ class QawafilAlaqsa extends Resource
                                 }
 
                                 return $user_type_admin_array;
-                            }),
+                            })->singleSelect(),
 
 
                         Text::make(__("Bus Number"), "bus_number"),
@@ -477,7 +482,7 @@ class QawafilAlaqsa extends Resource
                                 }
 
                                 return $user_type_admin_array;
-                            }),
+                            })->singleSelect(),
 
                         Textarea::make(__('tooles'), "text_tools"),
 
@@ -633,12 +638,12 @@ class QawafilAlaqsa extends Resource
                 DB::table('buses')
                     ->insert(
                         [
-                            'name_driver' => $bus['attributes']['name_driver'],
+                            'name_driver' => $bus['attributes']['name_driver']?$bus['attributes']['name_driver']:"",
                             'company_id' => $bus['attributes']['BusesCompany'],
                             'bus_number' => $bus['attributes']['bus_number'],
                             'number_of_seats' => $bus['attributes']['number_person_on_bus'],
                             'seat_price' => $bus['attributes']['seat_price'],
-                            'phone_number_driver' => $bus['attributes']['phone_number'],
+                            'phone_number_driver' => $bus['attributes']['phone_number']?$bus['attributes']['phone_number']:" ",
                             'status' => '1',
                         ]
                     );

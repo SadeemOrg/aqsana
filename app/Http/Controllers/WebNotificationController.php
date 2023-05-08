@@ -27,7 +27,7 @@ class WebNotificationController extends Controller
         $FcmToken = User::where('id','2')->pluck('device_key')->all();
         // dd($FcmToken);
 
-        $serverKey = 'AAAAJz9jvcE:APA91bGNRoHzz8sk5aw3EJmqynwyrSMPIxkwbnxdM-rfZelMvZnsosFiEKHjrFMI8bj_jUsG1yM1sg9WgpL0SpvXlOEQYM6cJQEkAQUdv_pA6iQoDA5_2fZuvcuWsIVpwM1DC5a1ymJM';
+        $serverKey = 'AAAAA_Hl3RU:APA91bG0Fqxoqxi703Ov637hTwDZx99ezBvlcpETyJOyXod65v2Wp9KVM-Bk_uGAYGyBmTpjbcp_RO9B8Y9P_AhM9K1DuB10zEHriHAFRcmrGrSMIQdKg-Scf05TWgN5ugdwnipdY3mv';
 
         $data = [
             "registration_ids" => $FcmToken,
