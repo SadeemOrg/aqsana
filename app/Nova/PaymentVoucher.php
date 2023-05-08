@@ -23,6 +23,7 @@ use App\Nova\Metrics\InComeTransaction;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
+use Laravel\Nova\Fields\HasMany;
 use MyApp\BillingSchedule\BillingSchedule;
 use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -329,6 +330,8 @@ class PaymentVoucher extends Resource
 
 
             Date::make(__('date'), 'transaction_date')->rules('required'),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
 
         ];
     }
