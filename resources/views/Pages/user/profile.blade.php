@@ -32,7 +32,7 @@
 
         </div>
         <!--Tabs -->
-        <div class="mt-12 tabs-Number">
+        {{-- <div class="mt-12 tabs-Number">
             <div class="block">
                 <div class="border-b border-gray-200">
                     <nav class="-mb-px flex" aria-label="Tabs">
@@ -48,7 +48,7 @@
                     </nav>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="tabs-container">
             <!--Form -->
             <form method="POST" target="_self" action="{{ '/user/update' }}" enctype="multipart/form-data"

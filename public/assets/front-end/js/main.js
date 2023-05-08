@@ -39,6 +39,7 @@ jQuery(document).ready(function(){
     // start with Tabs in Profile Page
 
     $('.tabs-Number .tabs').click(function(){
+console.log("hoon");
       $(this).addClass('activeTabs').siblings().removeClass('activeTabs');
       $('.tabs-container .tab').hide()
       $( '.' + $(this).data('tab')).fadeIn()
