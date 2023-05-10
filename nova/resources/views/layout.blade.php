@@ -92,7 +92,7 @@
                         </div>
                                         </a>
 
-                     @if (count(\Laravel\Nova\Nova::globallySearchableResources(request())) > 0)
+                      @if (count(\Laravel\Nova\Nova::globallySearchableResources(request())) > 0)
     <global-search dusk="global-search-component"></global-search>
     @endif
 
@@ -170,6 +170,7 @@
         const firebaseConfig = {
             apiKey: "AIzaSyCUFf82RK4_UHpnJ2EAD1eXgz2tIIBoFaE",
             authDomain: "alaqsa-association.firebaseapp.com",
+            databaseURL: 'https://project-id.firebaseio.com',
             projectId: "alaqsa-association",
             storageBucket: "alaqsa-association.appspot.com",
             messagingSenderId: "16943275285",

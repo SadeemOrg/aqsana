@@ -14,6 +14,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
+use Whitecube\NovaFlexibleContent\Flexible;
 
 class City extends Resource
 {
@@ -100,6 +101,7 @@ class City extends Resource
                 Text::make(__('Name'), 'name')->rules('required'),
                 BelongsTo::make(__('Area'), 'Area', \App\Nova\Area::class),
 
+                BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
                 Multiselect::make(__('admin'), 'admin_id')
                     ->options(function () {
@@ -116,7 +118,7 @@ class City extends Resource
                         return $user_type_admin_array;
                     })
                     ->singleSelect()
-                    ->rules('required'),
+                    ->rules('required')->hideFromDetail()->hideFromIndex(),
                 Multiselect::make(__('Alhisalat_admin'), 'Alhisalat_admin')
                     ->options(function () {
                         $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
@@ -130,8 +132,32 @@ class City extends Resource
                             $user_type_admin_array += [$user['id'] => ($user['name'])];
                         }
                         return $user_type_admin_array;
-                    })->rules('required')->singleSelect(),
-                Multiselect::make(__('Qawafil_admin'), 'Qawafil_admin')
+                    })->rules('required')->singleSelect()->hideFromDetail()->hideFromIndex(),
+                    BelongsTo::make(__('Alhisalat_admin'), 'AlhisalatAdmin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+
+                    Flexible::make(__('Alhisalat_sub_admin'), 'Alhisalat_sub_admin')
+
+                    ->addLayout(__('Alhisalat_sub_admin'), 'Alhisalat_sub_admin', [
+                        Multiselect::make(__('Alhisalat_sub_admin'), 'Alhisalat_sub_admin')
+                        ->options(function () {
+                            $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
+
+                            $user_type_admin_array =  array();
+
+                            foreach ($users as $user) {
+
+
+
+                                $user_type_admin_array += [$user['id'] => ($user['name'])];
+                            }
+                            return $user_type_admin_array;
+                        })->rules('required')->singleSelect(),
+
+                    ]),
+
+                    BelongsTo::make(__('Qawafil_admin'), 'QawafilAdmin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+
+                 Multiselect::make(__('Qawafil_admin'), 'Qawafil_admin')
                     ->options(function () {
                         $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
 
@@ -143,10 +169,26 @@ class City extends Resource
                             $user_type_admin_array += [$user['id'] => ($user['name'])];
                         }
                         return $user_type_admin_array;
-                    })->rules('required')->singleSelect(),
-                BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                BelongsTo::make(__('Alhisalat_admin'), 'AlhisalatAdmin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                BelongsTo::make(__('Qawafil_admin'), 'QawafilAdmin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                    })->rules('required')->singleSelect()->hideFromDetail()->hideFromIndex(),
+                    Flexible::make(__('Qawafil_sub_admin'), 'Qawafil_sub_admin')
+
+                    ->addLayout(__('Qawafil_sub_admin'), 'Qawafil_sub_admin', [
+                        Multiselect::make(__('Qawafil_sub_admin'), 'Qawafil_sub_admin')
+                        ->options(function () {
+                            $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
+
+                            $user_type_admin_array =  array();
+
+                            foreach ($users as $user) {
+
+
+
+                                $user_type_admin_array += [$user['id'] => ($user['name'])];
+                            }
+                            return $user_type_admin_array;
+                        })->rules('required')->singleSelect(),
+
+                    ]),
                 BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 // hasMany::make('User', 'User'),

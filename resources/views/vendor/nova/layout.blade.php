@@ -189,14 +189,14 @@
     <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script>
     <script>
         var firebaseConfig = {
-            apiKey: "AIzaSyA4a_fkjeIEDYd_avYYZ_XbqwLIhtd6HCQ",
-            authDomain: "alqudsquds-82c73.firebaseapp.com",
+            apiKey: "AIzaSyCUFf82RK4_UHpnJ2EAD1eXgz2tIIBoFaE",
+            authDomain: "alaqsa-association.firebaseapp.com",
             databaseURL: 'https://project-id.firebaseio.com',
-            projectId: "alqudsquds-82c73",
-            storageBucket: "alqudsquds-82c73.appspot.com",
-            messagingSenderId: "168567225793",
-            appId: "1:168567225793:web:417c87aa992aa0784d4340",
-            measurementId: "G-HH0SH5P3KT"
+            projectId: "alaqsa-association",
+            storageBucket: "alaqsa-association.appspot.com",
+            messagingSenderId: "16943275285",
+            appId: "1:16943275285:web:c95070543cf570cb265d1c",
+            measurementId: "G-FHN8R2KH3M"
         };
 
         firebase.initializeApp(firebaseConfig);
@@ -244,6 +244,24 @@
             new Notification(title, options);
         });
     </script>
+       @php
+       use App\Models\user;
+
+   @endphp
+      @guest
+      @else
+          @php
+              $isToken = Auth::user()->device_key;
+          @endphp
+          @if (!$isToken)
+              <button id="myCheck" onclick="startFCM()" class="hidden">Allow notification
+              </button>
+              <script>
+                  document.getElementById("myCheck").click();
+              </script>
+          @endif
+
+      @endguest
     <script>
         window.config = @json(\Laravel\Nova\Nova::jsonVariables(request()));
     </script>

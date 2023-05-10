@@ -67,8 +67,9 @@
             <tr>
               <th style="width: 40%;">المهمة</th>
               <th style="width: 40%;">الملاحضات</th>
+              <th style="width: 10%;">المرسل   </th>
 
-              <th style="width: 20%;">التاريخ</th>
+              <th style="width: 10%;">التاريخ</th>
 
               <th>تم</th>
             </tr>
@@ -87,6 +88,7 @@
         <button  @click="AddNote(Notification.id,Notification.note)" type="submit" class="text-white absolute  left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">اضافة</button>
     </div>
               </td>
+              <td >  {{ Notification.sender.name  }}</td>
               <td v-if="Notification.Notifications.date">
                 {{ Notification.Notifications.date }}
               </td>
@@ -287,7 +289,7 @@ export default {
         this.myNotification = response.data;
         console.log("**********************************");
 
-        console.log(this.myNotification[0].Notifications.Notifications);
+        console.log(this.myNotification[0]);
         console.log("**********************************");
 
         // console.log(this.myNotification[0]);
