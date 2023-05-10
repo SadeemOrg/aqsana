@@ -884,6 +884,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -928,7 +930,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this3.myNotification = response.data;
         console.log("**********************************");
 
-        console.log(_this3.myNotification[0].Notifications.Notifications);
+        console.log(_this3.myNotification[0]);
         console.log("**********************************");
 
         // console.log(this.myNotification[0]);
@@ -1201,6 +1203,10 @@ var render = function() {
                               [_vm._v("اضافة")]
                             )
                           ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v("  " + _vm._s(Notification.sender.name))
                         ]),
                         _vm._v(" "),
                         Notification.Notifications.date
@@ -1560,7 +1566,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحضات")]),
       _vm._v(" "),
-      _c("th", { staticStyle: { width: "20%" } }, [_vm._v("التاريخ")]),
+      _c("th", { staticStyle: { width: "10%" } }, [_vm._v("المرسل   ")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { width: "10%" } }, [_vm._v("التاريخ")]),
       _vm._v(" "),
       _c("th", [_vm._v("تم")])
     ])

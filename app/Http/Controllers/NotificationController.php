@@ -42,11 +42,12 @@ class NotificationController extends Controller
         foreach ($Notifications as $key => $value) {
             // echo $value->type;
             // echo $value->id;
-            // dd($value);
 
             $data = json_decode($value->data);
-            $pus = array(
+            $sender = user::find($data->sender_id);
 
+            $pus = array(
+                "sender" => $sender,
                 "id" => $value->id,
                 "Notifications" => $data,
                 "done" => $value->read_at,
@@ -70,15 +71,15 @@ class NotificationController extends Controller
                 // dd($value);
 
                 $data = json_decode($value->data);
-             if($user)
-                $pus = array(
+                if ($user)
+                    $pus = array(
 
-                    "id" => $value->id,
-                    "Notifications" => $data,
-                    "note" => $value->note,
-                    "done" => $value->read_at,
+                        "id" => $value->id,
+                        "Notifications" => $data,
+                        "note" => $value->note,
+                        "done" => $value->read_at,
 
-                );
+                    );
                 array_push($myNotifications, $pus);
             }
         } else {
@@ -91,17 +92,16 @@ class NotificationController extends Controller
 
                 $data = json_decode($value->data);
 
-                if($user->id ==  $data->sender_id)
-                {
-                   $pus = array(
+                if ($user->id ==  $data->sender_id) {
+                    $pus = array(
 
-                       "id" => $value->id,
-                       "Notifications" => $data,
-                       "note" => $value->note,
-                       "done" => $value->read_at,
+                        "id" => $value->id,
+                        "Notifications" => $data,
+                        "note" => $value->note,
+                        "done" => $value->read_at,
 
-                   );
-                   array_push($myNotifications, $pus);
+                    );
+                    array_push($myNotifications, $pus);
                 }
             }
         }
@@ -121,9 +121,8 @@ class NotificationController extends Controller
         // Auth::user()->notify(new PostNotif());
         Notification::send($userSchema, new TasksNotification($offerData, $date));
         $url = 'https://fcm.googleapis.com/fcm/send';
-        $FcmToken = User::where('id',$userSchema->id)->pluck('device_key')->all();
+        $FcmToken = User::where('id', $userSchema->id)->pluck('device_key')->all();
         // dd($FcmToken);
-        $FcmToken='d1mhabCqQtKn0F5-YMQL-d:APA91bGvtwf8VUPxb7Tt9b3lsdvhPaV9rZFTgI1mQaJ1RYnJ5urv8hUyhp8ASD6r8XFn4DoxGd7TvplBBVIV-svCjT0XuNzNLkEw-0Z6LsXThDrY1PHr5x88AUDnex-p35fUURGbhie2';
         $serverKey = 'AAAAA_Hl3RU:APA91bG0Fqxoqxi703Ov637hTwDZx99ezBvlcpETyJOyXod65v2Wp9KVM-Bk_uGAYGyBmTpjbcp_RO9B8Y9P_AhM9K1DuB10zEHriHAFRcmrGrSMIQdKg-Scf05TWgN5ugdwnipdY3mv';
 
         $data = [

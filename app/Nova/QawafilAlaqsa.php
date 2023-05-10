@@ -356,6 +356,7 @@ class QawafilAlaqsa extends Resource
                 // ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                 //     return null;
                 // }),
+
                 Flexible::make(__('newadres'), 'newadresfrom')
                     ->readonly(true)
                     ->limit(1)
@@ -383,7 +384,7 @@ class QawafilAlaqsa extends Resource
                 BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->withMeta([
                     'value' => "1",
                 ])->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
-
+                text::make(__('note'),"note"),
                 DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required'),
                 DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required')->rules(new QawafilAlaqsaDate($request->start_date)),
 
@@ -402,31 +403,31 @@ class QawafilAlaqsa extends Resource
 
             ]))->withToolbar(),
 
-            (new Panel(__('City'), [
+            // (new Panel(__('City'), [
 
-                BelongsToManyField::make(__('City'), "City", '\App\Nova\City')                    // ->options(Area::all())
-                    ->options(function () {
+            //     BelongsToManyField::make(__('City'), "City", '\App\Nova\City')                    // ->options(Area::all())
+            //         ->options(function () {
 
-                        $id = Auth::id();
-                        $Area = \App\Models\Area::where('admin_id', $id)->first();
-                        //    dd( $Area->id);
-                        $Citys =  \App\Models\City::where('area_id', $Area->id)->get();
-                        // $users =  \App\Models\City::where('area_id', $id)->get();
-                        return $Citys;
-                        $user_type_admin_array =  array();
+            //             $id = Auth::id();
+            //             $Area = \App\Models\Area::where('admin_id', $id)->first();
+            //             //    dd( $Area->id);
+            //             $Citys =  \App\Models\City::where('area_id', $Area->id)->get();
+            //             // $users =  \App\Models\City::where('area_id', $id)->get();
+            //             return $Citys;
+            //             $user_type_admin_array =  array();
 
-                        foreach ($Citys as $City) {
-                            // dd($user['id'] ."**" .($user['id']));
-                            $user_type_admin_array += [$City['id'] => ($City['name'])];
-                        }
+            //             foreach ($Citys as $City) {
+            //                 // dd($user['id'] ."**" .($user['id']));
+            //                 $user_type_admin_array += [$City['id'] => ($City['name'])];
+            //             }
 
-                        return $user_type_admin_array;
-                    })->canSee(function ($request) {
-                        $user = Auth::user();
-                        if ($user->type() == 'regular_area') return true;
-                        return false;
-                    })->rules('required', 'max:1'),
-            ])),
+            //             return $user_type_admin_array;
+            //         })->canSee(function ($request) {
+            //             $user = Auth::user();
+            //             if ($user->type() == 'regular_area') return true;
+            //             return false;
+            //         })->rules('required', 'max:1'),
+            // ])),
 
             (new Panel(__('bus'), [
 

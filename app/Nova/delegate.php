@@ -11,8 +11,15 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 use AwesomeNova\Cards\FilterCard;
+use Titasgailius\SearchRelations\SearchesRelations;
+
 class delegate extends Resource
 {
+    use SearchesRelations;
+
+    public static $searchRelations = [
+        'AreaDelegate' => ['id', 'name'],
+    ];
     /**
      * The model the resource corresponds to.
      *
@@ -47,7 +54,7 @@ class delegate extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'phone_number'
+        'id', 'name', 'phone_number','city'
     ];
 
     /**
@@ -93,6 +100,12 @@ class delegate extends Resource
             })->singleSelect()->hideFromIndex()->hideFromDetail(),
             BelongsTo::make(__('Area'), 'AreaDelegate', \App\Nova\Area::class)->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('city'), 'city'),
+            Select::make(__('jop'), 'jop')->options([
+                1 => __('مندوب رئيسي'),
+                2 => __('مندوب حصالات'),
+                3 => __('مندوب قوافل'),
+                4 => __('مساعد مندوب'),
+            ])->displayUsingLabels(),
         ];
     }
     public static function beforeCreate(Request $request, $model)
