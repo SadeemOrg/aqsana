@@ -27,4 +27,9 @@ public function AreaDelegate()
 {
     return $this->belongsTo(Area::class,'Area');
 }
+
+public function citeDelegate()
+{
+    return $this->belongsTo(City::class,'city');
+}
 }
