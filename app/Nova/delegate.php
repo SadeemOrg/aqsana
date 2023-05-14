@@ -99,7 +99,23 @@ class delegate extends Resource
                 return $Area_type_admin_array;
             })->singleSelect()->hideFromIndex()->hideFromDetail(),
             BelongsTo::make(__('Area'), 'AreaDelegate', \App\Nova\Area::class)->hideWhenCreating()->hideWhenUpdating(),
-            Text::make(__('city'), 'city'),
+            Multiselect::make(__('city'), 'city')
+            ->options(function () {
+                $Areas =  \App\Models\City::all();
+
+                $Area_type_admin_array =  array();
+
+                foreach ($Areas as $Area) {
+
+
+                    $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                }
+
+                return $Area_type_admin_array;
+            })->singleSelect()->hideFromIndex()->hideFromDetail(),
+            BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating(),
+
+
             Select::make(__('jop'), 'jop')->options([
                 1 => __('مندوب رئيسي'),
                 2 => __('مندوب حصالات'),
