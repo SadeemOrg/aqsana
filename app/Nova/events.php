@@ -70,7 +70,7 @@ class events extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('name'), 'name')->rules('required'),
-            Text::make(__('place'), 'place	'),
+            Text::make(__('place'), 'place'),
 
             Textarea::make(__('note'), 'note'),
             Files::make(__('Multiple files'), 'file'),
@@ -104,7 +104,8 @@ class events extends Resource
                     }
 
                     return $type_array;
-                })->hideFromDetail()->hideFromIndex(),
+                })->hideFromDetail()->hideFromIndex()   ->singleSelect(),
+
 
 
 
