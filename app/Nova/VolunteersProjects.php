@@ -49,6 +49,16 @@ class VolunteersProjects extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
+
+     public static function availableForNavigation(Request $request)
+     {
+
+         if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("volunteersProjectsparmation",  $request->user()->userrole()) )){
+             return true;
+         }
+        else return false;
+     }
     public function fields(Request $request)
     {
         return [

@@ -28,12 +28,12 @@ class User extends Resource
     public static $model = \App\Models\User::class;
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Userparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Userparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
-    public static function groupOrder() {
+    public static function groupOrder()
+    {
         return 5;
     }
     /**
@@ -41,7 +41,7 @@ class User extends Resource
      *
      * @var string
      */
-    public static $priority = 1 ;
+    public static $priority = 1;
     public static $title = 'name';
     public static function label()
     {
@@ -72,19 +72,19 @@ class User extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             Gravatar::make()->maxWidth(50),
-            Text::make(__('id_number'),'id_number')
-            ->sortable() ->rules('required', 'max:255'),
-            Text::make(__('Name'),'name')
+            Text::make(__('id_number'), 'id_number')
+                ->sortable()->rules('required', 'max:255'),
+            Text::make(__('Name'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make(__('email'),'email')
+            Text::make(__('email'), 'email')
                 ->sortable()
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
-            Password::make(__('Password'),'password')
+            Password::make(__('Password'), 'password')
                 ->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
@@ -95,49 +95,52 @@ class User extends Resource
                 ->textAlign('left'),
             Date::make(__('Birth Date'), 'birth_date'),
             Image::make(__('photo'), 'photo')->disk('public'),
-            Text::make(__('city'),'city')
-            ->sortable()
-            ->rules('required', 'max:255'),
-            BelongsTo::make(__('Role_user'),'Role',\App\Nova\Role::class),
-            Multiselect::make(__('Permations'),'role')
-            ->options(
-                [
-                    "super-admin" => __("Super Admin"),
-                    "Userparmation" => __( "Userparmation"),
-                    "addressparmation" => __( "addressparmation"),
-                    "Alhisalatparmation" => __( "Alhisalatparmation"),
-                    "Areaparmation" => __( "Areaparmation"),
-                    "Bookparmation" => __( "Bookparmation"),
-                    "BusesCompanyparmation" => __( "BusesCompanyparmation"),
-                    "Cityparmation" => __( "Cityparmation"),
-                    "Currencyparmation" => __( "Currencyparmation"),
-                    "Donationparmation" => __( "Donationparmation"),
-                    "eventsparmation" => __( "eventsparmation"),
-                    "FormMassageparmation" => __( "FormMassageparmation"),
-                    "Newsparmation" => __( "Newsparmation"),
-                    "Notificationparmation" => __( "Notificationparmation"),
-                    "PaymentVoucherparmation" => __( "PaymentVoucherparmation"),
-                    "projectparmation" => __( "projectparmation"),
-                    "ProjectNewsparmation" => __( "ProjectNewsparmation"),
-                    "QawafilAlaqsaparmation" => __( "QawafilAlaqsaparmation"),
-                    "receiptVoucherparmation" => __( "receiptVoucherparmation"),
-                    "Reportsparmation" => __( "Reportsparmation"),
-                    "Sectorparmation" => __( "Sectorparmation"),
-                    "TelephoneDirectoryparmation" => __( "TelephoneDirectoryparmation"),
-                    "Volunteerparmation" => __( "Volunteerparmation"),
-                    "budjet" => __( "budjet"),
-                    "FilemanagerTool" => __( "FilemanagerTool"),
-                    "NovaSettings" => __( "Settings"),
-                    "delegatee" => __( "delegatee"),
-                    "Tours" => __( "Tours"),
-                    "TripBooking" => __( "TripBooking"),
-                    "delegatee" => __( "delegatee"),
-                    "guide" => __( "guide"),
-                    "sms" => __( "Sms"),
+            Text::make(__('city'), 'city')
+                ->sortable()
+                ->rules('required', 'max:255'),
+            BelongsTo::make(__('Role_user'), 'Role', \App\Nova\Role::class),
+            Multiselect::make(__('Permations'), 'role')
+                ->options(
+                    [
+                        "super-admin" => __("Super Admin"),
+                        "Userparmation" => __("Userparmation"),
+                        "addressparmation" => __("addressparmation"),
+                        "Alhisalatparmation" => __("Alhisalatparmation"),
+                        "Areaparmation" => __("Areaparmation"),
+                        "Bookparmation" => __("Bookparmation"),
+                        "BusesCompanyparmation" => __("BusesCompanyparmation"),
+                        "Cityparmation" => __("Cityparmation"),
+                        "Currencyparmation" => __("Currencyparmation"),
+                        "Donationparmation" => __("Donationparmation"),
+                        "eventsparmation" => __("eventsparmation"),
+                        "FormMassageparmation" => __("FormMassageparmation"),
+                        "Newsparmation" => __("Newsparmation"),
+                        "Notificationparmation" => __("Notificationparmation"),
+                        "PaymentVoucherparmation" => __("PaymentVoucherparmation"),
+                        "projectparmation" => __("projectparmation"),
+                        "ProjectNewsparmation" => __("ProjectNewsparmation"),
+                        "QawafilAlaqsaparmation" => __("QawafilAlaqsaparmation"),
+                        "receiptVoucherparmation" => __("receiptVoucherparmation"),
+                        "Reportsparmation" => __("Reportsparmation"),
+                        "Sectorparmation" => __("Sectorparmation"),
+                        "TelephoneDirectoryparmation" => __("TelephoneDirectoryparmation"),
+                        "Volunteerparmation" => __("Volunteerparmation"),
+                        "volunteersHowerparmation" => __("volunteersHowerparmation"),
+                        "volunteersProjectsparmation" => __("volunteersProjectsparmation"),
+                        "EventsArchiveparmation" => __("EventsArchiveparmation"),
+                        "budjet" => __("budjet"),
+                        "FilemanagerTool" => __("FilemanagerTool"),
+                        "NovaSettings" => __("Settings"),
+                        "delegatee" => __("delegatee"),
+                        "Tours" => __("Tours"),
+                        "TripBooking" => __("TripBooking"),
+                        "delegatee" => __("delegatee"),
+                        "guide" => __("guide"),
+                        "sms" => __("Sms"),
 
 
-                ]
-            )->saveAsJSON()->rules('required'),
+                    ]
+                )->saveAsJSON()->rules('required'),
             Date::make(__('start_work_date'), 'start_work_date'),
             Select::make(__('martial_status'), 'martial_status')->options([
                 1 => __('single'),
@@ -148,14 +151,14 @@ class User extends Resource
 
 
             ])->displayUsingLabels(),
-            Text::make(__('user_number'),'user_number')
-            ->sortable(),
-            Text::make(__('bank_name'),'bank_name')
-            ->sortable(),
-            Text::make(__('bank_branch'),'bank_branch')
-            ->sortable(),
-            Text::make(__('account_number'),'account_number')
-            ->sortable(),
+            Text::make(__('user_number'), 'user_number')
+                ->sortable(),
+            Text::make(__('bank_name'), 'bank_name')
+                ->sortable(),
+            Text::make(__('bank_branch'), 'bank_branch')
+                ->sortable(),
+            Text::make(__('account_number'), 'account_number')
+                ->sortable(),
             // BelongsTo::make('City'),
 
 
