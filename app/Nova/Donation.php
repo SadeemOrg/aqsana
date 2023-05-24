@@ -131,7 +131,23 @@ class Donation extends Resource
             // BelongsTo::make(__('project'), 'project')->hideWhenCreating()->readonly(),
             // Project::make(__('ref_id'), 'ref_id')->hideFromIndex(),
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideFromIndex(),
-            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable()->hideFromIndex(),
+            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable()->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
+            Multiselect::make(__('project'), "ref_id")
+            ->options(function () {
+                $Users =  \App\Models\project::all();
+
+                $i = 0;
+                $user_type_admin_array =  array();
+                foreach ($Users as $User) {
+
+
+                    $user_type_admin_array += [($User['id']) => ($User['project_name'])];
+                }
+
+                return $user_type_admin_array;
+            })
+            ->singleSelect(),
+
 
 
 
