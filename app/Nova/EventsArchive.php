@@ -49,6 +49,15 @@ class EventsArchive extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
+     public static function availableForNavigation(Request $request)
+     {
+
+         if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("EventsArchiveparmation",  $request->user()->userrole()) )){
+             return true;
+         }
+        else return false;
+     }
     public function fields(Request $request)
     {
         return [
