@@ -61,9 +61,7 @@ class ProjectBudjet extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-
-        $user = Auth::user();
-        if ($user->type() == 'admin' || $user->type() == 'financial_user') {
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("ProjectBudjetparmation",  $request->user()->userrole()))) {
             return true;
         } else return false;
     }

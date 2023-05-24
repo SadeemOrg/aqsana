@@ -48,7 +48,7 @@ class receiptVoucher extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("receiptVoucherparmation",  $request->user()->userrole()))) {
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("CollectAlhisalatparmation",  $request->user()->userrole()))) {
             return true;
         } else return false;
     }
