@@ -75,6 +75,8 @@ class events extends Resource
             Textarea::make(__('note'), 'note'),
             Files::make(__('Multiple files'), 'file'),
             Text::make(__('Number of encounters'), 'number_of_encounters')->rules('required'),
+            Date::make(__('first_event'), 'first_event')->pickerDisplayFormat('d.m.Y'),
+
             // File::make(__('file'),'file')->disk('public')->deletable(),
             Flexible::make(__('new event'), 'new_event')
 
