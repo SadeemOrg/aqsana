@@ -134,7 +134,7 @@ class Donation extends Resource
             BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable()->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
             Multiselect::make(__('project'), "ref_id")
             ->options(function () {
-                $Users =  \App\Models\project::all();
+                $Users =  \App\Models\Project::all();
 
                 $i = 0;
                 $user_type_admin_array =  array();
