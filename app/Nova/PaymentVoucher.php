@@ -97,9 +97,9 @@ class PaymentVoucher extends Resource
             // ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideFromIndex(),
             BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable()->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
-            Multiselect::make(__('project'), "ref_id")
+            Multiselect ::make(__('project'), "ref_id")
             ->options(function () {
-                $Users =  \App\Models\project::all();
+                $Users =  \App\Models\Project::all();
 
                 $i = 0;
                 $user_type_admin_array =  array();
