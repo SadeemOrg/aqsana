@@ -75,11 +75,11 @@ class volunteersHower extends Resource
 
             Text::make(__('email'), 'email')
                 ->sortable()
-                ->rules('required', 'email', 'max:254')
+                ->rules( 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
-            Text::make(__('phone_number'), 'phone_number'),
+            Text::make(__('phone_number'), 'phone_number') ->rules('required'),
             Text::make(__('city'), 'city'),
             Text::make(__('volunteer_from'), 'volunteer_from'),
 
