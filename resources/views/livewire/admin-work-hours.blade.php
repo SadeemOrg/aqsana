@@ -203,20 +203,27 @@
 
                                     <td
                                         class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
-                                        مجموع الساعات
+
 
                                     </td>
 
                                     <td
                                         class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
                                     </td>
-                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]"> </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                        مجموع الايام </td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+
+                                        {{ $sumWorkHourssearch->day  }}
                                     </td>
-                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]"></td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                        مجموع الساعات
+
+                                    </td>
 
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
-                                        {{ $sumWorkHourssearch }}
+
+                                        {{ $sumWorkHourssearch->hour  }}:{{ $sumWorkHourssearch->minute  }}:{{ $sumWorkHourssearch->second  }}
                                     </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]"></td>
 
