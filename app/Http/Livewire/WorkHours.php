@@ -147,7 +147,7 @@ class WorkHours extends Component
         $from = date($this->FromDate);
         $to = date($this->ToDate);
 
-        $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$from, $to])->get();
+        $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$from, $to])->where('user_id', '=', $user->id)->get();
     }
 
     public function stop()
@@ -254,7 +254,8 @@ class WorkHours extends Component
             $from = date('2022-01-01');
             $to = date('2022-12-31');
 
-            $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$newDateTime, $currentDateTime])->get();
+            $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$newDateTime, $currentDateTime])->where('user_id', '=', $user->id)->get();
+            // ModelsWorkHours::whereBetween('date', [$newDateTime, $currentDateTime])->where('user_id', '=', $user->id)->get()->dd();
         }
         $this->Reasons_to_stop = nova_get_setting('Reasons_to_stop', 'Reasons_to_stop');
         $this->Reasons_to_stop = json_decode($this->Reasons_to_stop);
