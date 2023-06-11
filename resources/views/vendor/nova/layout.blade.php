@@ -140,7 +140,7 @@
     <div id="nova">
         <div v-cloak class="flex min-h-screen">
             <!-- Sidebar -->
-            <div class="flex-none pt-header min-h-screen  bg-green-700 px-6" style="width: 16rem">
+            <div class="flex-none pt-header min-h-screen w-sidebar  px-6 bg-green-700">
 
 
                 @foreach (\Laravel\Nova\Nova::availableTools(request()) as $tool)
