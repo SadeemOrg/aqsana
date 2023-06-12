@@ -264,7 +264,7 @@
                                     value="{{ date_format($EditWorkHours->date, 'd/m/Y') }}">
                             </div> --}}
                             <div class="mt-2 selectdiv">
-                                <input type="text" wire:model.debounce.50000ms="date"
+                                <input type="text" wire:model.debounce.50000ms="this.date"
                                     class="hidePlaceHolderEditDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusEditDatePopup()">
                             </div>
