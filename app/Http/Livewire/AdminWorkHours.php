@@ -109,11 +109,11 @@ class AdminWorkHours extends Component
     }
     public function AddDay()
     {
-        // dd($this->start_time);
+
         $EditWorkHours = new  WorkHours();
         $EditWorkHours->user_id = $this->ModelId;
         $EditWorkHours->date = $this->date;
-        $EditWorkHours->day = "السب";
+        $EditWorkHours->day =  Carbon::parse($this->date)->locale('ar')->dayName;
         $EditWorkHours->start_time = $this->start_time;
         $EditWorkHours->end_time = $this->end_time;
         $EditWorkHours->day_hours = $this->day_hours;
