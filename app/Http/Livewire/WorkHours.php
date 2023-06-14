@@ -163,9 +163,9 @@ class WorkHours extends Component
 
     public function render()
     {
-
+        $user = Auth::user();
         if ($this->hide == 1) {
-            $user = Auth::user();
+
             $WorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::today())->first();
             if ($WorkHours != null) {
                 if ($WorkHours->on_work != 0) {
