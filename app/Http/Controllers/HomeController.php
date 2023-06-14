@@ -338,7 +338,7 @@ class HomeController extends Controller
 
         $user = User::findOrFail(Auth::id());
         $request->validate([
-            'password' => [new passwordRule($user->password)],
+            'old_password' => [new passwordRule($user->password)],
             'Confirm_password' => 'same:new_password'
         ], [
 
@@ -348,9 +348,9 @@ class HomeController extends Controller
         // dd( $request->all());
 
 
-        if ($request->password) {
+        if ($request->old_password) {
 
-            if ((Hash::check($request->password, $user->password))) {
+            if ((Hash::check($request->old_password, $user->password))) {
 
                 if ($request->new_password == $request->Confirm_password)
 

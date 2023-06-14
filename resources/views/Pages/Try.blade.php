@@ -405,8 +405,8 @@
                                     </label>
 
                                     <div class="mt-1">
-                                        <input type="password" id="myInput" name="password"
-                                            placeholder="كلمة المرور الحالية" autocomplete="off" value="10203040"
+                                        <input type="password" id="myInput" name="old_password"
+                                            placeholder="كلمة المرور الحالية" autocomplete="off"
                                             class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                                         <div class=" flex fle-row items-center justify-start gap-x-1 mt-2 mr-3">
                                             <input type="checkbox" onclick="myFunction()">
