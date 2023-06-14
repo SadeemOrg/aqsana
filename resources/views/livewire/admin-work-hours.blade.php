@@ -211,9 +211,9 @@
                                         class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
                                     </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                 </td>
+                                        مجموع الايام </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-
+{{ $WorkHourssearch->count() }}
 
                                     </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
