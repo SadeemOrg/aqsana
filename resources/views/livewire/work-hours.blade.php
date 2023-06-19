@@ -275,6 +275,35 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            <tr>
+
+                                <td
+                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
+
+
+                                </td>
+
+                                <td
+                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
+                                </td>
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                    مجموع الايام </td>
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                    {{ $WorkHourssearch->count() }}
+
+                                </td>
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                    مجموع الساعات
+
+                                </td>
+
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
+
+                                    {{ $sumWorkHourssearch->day * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
+                                </td>
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]"></td>
+
+                            </tr>
 
 
                         </tbody>
@@ -302,7 +331,7 @@
 <script>
     var sites = {!! json_encode($this->realTime) !!};
     var hide = {!! json_encode($this->hide) !!};
-// alert(sites)
+    // alert(sites)
     let regExTime = /([0-9]?[0-9]):([0-9][0-9]):([0-9][0-9])/;
     let regExTimeArr = regExTime.exec(
         sites); // ["01:12:33", "01", "12", "33", index: 0, input: "01:12:33", groups: undefined]

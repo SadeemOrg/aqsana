@@ -213,7 +213,7 @@
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
                                         مجموع الايام </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-{{ $WorkHourssearch->count() }}
+                                        {{ $WorkHourssearch->count() }}
 
                                     </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
@@ -223,7 +223,7 @@
 
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
 
-                                        {{ ($sumWorkHourssearch->day*24)+ $sumWorkHourssearch->hour  }}:{{ $sumWorkHourssearch->minute  }}:{{ $sumWorkHourssearch->second  }}
+                                        {{ $sumWorkHourssearch->day * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
                                     </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]"></td>
 
@@ -402,13 +402,15 @@
                                         </div>
                                         <div class="flex flex-row items-center justify-between">
                                             <div class="mt-2 selectdiv w-72">
-                                                <input wire:model.debounce.50000ms="notedate.{{ $key }}.time_out"
+                                                <input
+                                                    wire:model.debounce.50000ms="notedate.{{ $key }}.time_out"
                                                     type="text" placeholder="ساعة البدء"
                                                     onfocus="handelEditNotesInputtimeFrom()"
                                                     class="foucsEditTimeStart h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                             </div>
                                             <div class="mt-2 selectdiv">
-                                                <input wire:model.debounce.50000ms="notedate.{{ $key }}.return_time"
+                                                <input
+                                                    wire:model.debounce.50000ms="notedate.{{ $key }}.return_time"
                                                     type="text" onfocus="handelInputEditNotestimeTo()"
                                                     placeholder="ساعة الانتهاء"
                                                     class="foucsEditTimeEnd h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
