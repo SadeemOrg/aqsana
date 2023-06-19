@@ -209,7 +209,7 @@ class Donation extends Resource
                 '2' => __('shek'),
                 '3' => __('bit'),
                 '4' => __('hawale'),
-                // '5' => __('Other'),
+                '5' => __('pay pal'),
             ])->displayUsingLabels()->default('1'),
             NovaDependencyContainer::make([
                 Text::make(__('transact amount'), 'transact_amount')->rules('required'),
@@ -267,7 +267,9 @@ class Donation extends Resource
 
                     ])->rules('required'),
             ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
-
+            NovaDependencyContainer::make([
+                Text::make(__('transact amount'), 'transact_amount')->rules('required'),
+            ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
             // BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class),
 
             ActionButton::make(__('delete'))
