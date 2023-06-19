@@ -22,7 +22,7 @@ class WorkHours extends Component
     public $tags;
     public $sersh = 0;
     public $WorkHourssearch;
-
+    public $sumWorkHourssearch;
     public $FromDate;
     public $ToDate;
     public $Reasons_to_stop;
@@ -143,11 +143,31 @@ class WorkHours extends Component
     }
     public function searchWorkHours()
     {
+
+        $user = Auth::user();
         $this->sersh = 1;
         $from = date($this->FromDate);
         $to = date($this->ToDate);
 
         $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$from, $to])->where('user_id', '=', $user->id)->get();
+        $string = '00000000000000';
+        $date = Carbon::parse($string);
+        foreach ($this->WorkHourssearch as $key => $value) {
+            if ($value->day_hours != null) {
+                $time2 = Carbon::parse($value->day_hours);
+                $hours = $time2->hour;
+                $minutes = $time2->minute;
+                $seconds = $time2->second;
+
+                $date->addSeconds($seconds)->addMinutes($minutes)->addHours($hours);
+            }
+        }
+
+        $date = Carbon::parse($date);
+        // $now = Carbon::now();
+        // $diff = $date->diffInDays($now);
+
+        $this->sumWorkHourssearch = $date;
     }
 
     public function stop()
