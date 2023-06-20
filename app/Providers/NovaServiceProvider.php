@@ -395,6 +395,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make(__('phone'), 'phone_Connectus'),
                     Text::make(__('whatsapp'), 'whatsapp_Connectus'),
                     Text::make(__('Email'), 'email_Connectus'),
+                    Text::make(__('address'), 'address'),
+
                     Text::make(__('button  text'), 'text_bottom_Connectus'),
                     Text::make(__('button  link'), 'linlk_bottom_Connectus'),
                 ],
