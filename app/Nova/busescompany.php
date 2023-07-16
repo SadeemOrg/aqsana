@@ -70,7 +70,7 @@ class BusesCompany extends Resource
             Number::make(__("number of buses"),"number_of_buses")->step(1.0)->rules('required'),
             Number::make(__("cost"),"cost")->step(1.0)->rules('required'),
             Text::make(__("contact person"),"contact_person")->rules('required'),
-            Number::make(__("company representative"),"phone_number"),
+            Text::make(__("contact person phone"),"phone_number")->rules('required'),
 
             Text::make(__("company id"),"company_id")->rules('required'),
             Text::make(__("bank name"),"bank_name")->rules('required'),
