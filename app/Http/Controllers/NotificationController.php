@@ -166,7 +166,8 @@ class NotificationController extends Controller
 
     public function sendSmsNotificaition()
     {
-        $basic  = new \Nexmo\Client\Credentials\Basic('89302929', 'EcfCP1BjWhrTWJNZ');
+        // dd("dd");
+        $basic  = new \Nexmo\Client\Credentials\Basic('57112870', '5ixeBL0HfF56OxIa');
         $client = new \Nexmo\Client($basic);
 
         // $response = $client->sms()->send(
@@ -174,7 +175,8 @@ class NotificationController extends Controller
         // );
 
         $response = $client->sms()->send(
-            new \Vonage\SMS\Message\SMS("970569465465", "Al_Aqsa_Association", 'alaqsa test maseg')
+
+            new \Vonage\SMS\Message\SMS("972507593658", "Al_Aqsa_Association", 'alaqsa test maseg')
         );
 
 

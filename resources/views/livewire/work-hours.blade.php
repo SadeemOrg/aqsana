@@ -296,11 +296,16 @@
                                     مجموع الساعات
 
                                 </td>
+                                @if ($WorkHourssearch->count() == 0)
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
+                                        00:00:00
+                                    </td>
+                                @else
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
+                                        {{ $sumWorkHourssearch->day * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
+                                    </td>
+                                @endif
 
-                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
-
-                                    {{ $sumWorkHourssearch->day * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
-                                </td>
                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]"></td>
 
                             </tr>
