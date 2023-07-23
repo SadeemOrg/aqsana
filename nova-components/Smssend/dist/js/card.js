@@ -285,6 +285,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -331,6 +337,16 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "mb-6 p-12" }, [
+          _c(
+            "label",
+            {
+              staticClass:
+                "block mb-2 text-xl font-medium text-gray-900 dark:text-white",
+              attrs: { for: "default-input" }
+            },
+            [_vm._v("اختر الفئة\n      ")]
+          ),
+          _vm._v(" "),
           _c(
             "select",
             {
@@ -384,7 +400,9 @@ var render = function() {
               _vm._v(" "),
               _c("option", { attrs: { value: "8" } }, [_vm._v("شركات")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "9" } }, [_vm._v(" Sms")])
+              _c("option", { attrs: { value: "9" } }, [_vm._v(" Sms")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "10" } }, [_vm._v(" Test")])
             ]
           ),
           _vm._v(" "),

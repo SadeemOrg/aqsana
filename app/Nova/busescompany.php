@@ -95,6 +95,7 @@ class BusesCompany extends Resource
             hideWhenUpdating(),
 
             HasMany::make(__('bus'),'Bus', \App\Nova\Bus::class),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
         ];
     }

@@ -10,6 +10,7 @@ use Halimtuhu\ArrayImages\ArrayImages;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Select;
@@ -142,6 +143,7 @@ class ProjectNews extends Resource
                 Image::make(__('video_img_cover'), 'report_video_link_cover')->disk('public')->prunable(),
 
                 Date::make(__('DATE'), 'report_date')->pickerDisplayFormat('d.m.Y')->rules('required'),
+                HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
 
 

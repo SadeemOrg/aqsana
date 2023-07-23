@@ -11,4 +11,6 @@ class Almuahada extends Model
     protected $fillable = [
         'id','name', 'city','phone',
         ];
+
+
 }

@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
@@ -62,7 +63,9 @@ class Notification extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__("Title"),"title"),
-            Textarea::make(__("Message"),"message")->showOnIndex()
+            Textarea::make(__("Message"),"message")->showOnIndex(),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
         ];
     }
 

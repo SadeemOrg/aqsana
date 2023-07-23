@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
+use Laravel\Nova\Fields\HasMany;
 
 class EventsArchive extends Resource
 {
@@ -66,6 +67,8 @@ class EventsArchive extends Resource
 
             Textarea::make(__('note'), 'note'),
             Files::make(__('Multiple files'), 'file'),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
         ];
     }
 

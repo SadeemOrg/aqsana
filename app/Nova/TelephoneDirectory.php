@@ -79,6 +79,7 @@ class TelephoneDirectory extends Resource
                 7 => __('منح'),
                 8 => __('شركات'),
                 9 => __('Sms'),
+                10 => __('Test'),
 
 
             ])->rules('required'),

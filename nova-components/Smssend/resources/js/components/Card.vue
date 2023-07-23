@@ -21,6 +21,7 @@
           <option value="7"> منح</option>
           <option value="8">شركات</option>
           <option value="9"> Sms</option>
+          <option value="10"> Test</option>
         </select>
         <label
           for="default-input"

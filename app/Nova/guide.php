@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
@@ -74,6 +75,8 @@ class guide extends Resource
             Text::make(__('phone_number'), 'phone_number')->rules('required', 'max:255'),
             Text::make(__('city'), 'city'),
             Text::make(__('Nots'), 'note'),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
         ];
     }
     public static function beforeCreate(Request $request, $model)

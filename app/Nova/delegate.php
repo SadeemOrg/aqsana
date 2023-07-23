@@ -11,6 +11,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 use AwesomeNova\Cards\FilterCard;
+use Laravel\Nova\Fields\HasMany;
 use Titasgailius\SearchRelations\SearchesRelations;
 
 class delegate extends Resource
@@ -122,6 +123,8 @@ class delegate extends Resource
                 3 => __('مندوب قوافل'),
                 4 => __('مساعد مندوب'),
             ])->displayUsingLabels(),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
         ];
     }
     public static function beforeCreate(Request $request, $model)

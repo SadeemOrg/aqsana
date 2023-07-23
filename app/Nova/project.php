@@ -606,11 +606,11 @@ class Project extends Resource
             // dd($tojsone );
             // dd($request->newbus);
             foreach ($buss as $bus) {
-                // dd($bus['attributes']);
+
                 DB::table('buses')
                     ->insert(
                         [
-                            'name_driver' => $bus['attributes']['name_driver'],
+                            'name_driver' => $bus['attributes']['name_driver']?$bus['attributes']['name_driver']:"  ",
                             'company_id' => $bus['attributes']['BusesCompany'],
                             'bus_number' => $bus['attributes']['bus_number'],
                             'number_of_seats' => $bus['attributes']['number_person_on_bus'],

@@ -284,7 +284,7 @@ class Donation extends Resource
             Button::make(__('print Pdf'))->link('/generate-pdf/' .$this->id)->style('info'),
             Date::make(__('date'), 'transaction_date')->rules('required'),
 
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class),
 
         ];
     }
