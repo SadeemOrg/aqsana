@@ -238,7 +238,7 @@ class QawafilAlaqsa extends Resource
                     ->hideWhenCreating()->hideWhenUpdating(),
                     ActionButton::make(__('Action'))
                     ->action(ProjectStartEnd::class, $this->id)
-                    ->text(__('..'))
+                    ->text(__('مفتوحة'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
                     ->canSee(function () {
