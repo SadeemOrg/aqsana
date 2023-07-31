@@ -88,17 +88,17 @@
             <!-- Second Page Radio Input -->
             <div class="flex flex-col gap-y-2 items-start justify-start mt-4 mr-[9%] md:mr-0">
                 <div class="flex flex-row items-center mb-5 sm:mb-0">
-                    <input id="visa" name="notification-method" type="radio" value="visa"
+                    {{-- <input id="visa" name="notification-method" type="radio" value="visa"
                         class="paymentMethod focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
                     <label for="visa"
                         class="ml-3 text-md font-medium text-[#201A3C] pr-2 flex flex-row-reverse items-center">
                         <span>فيزا كارد</span>
                         <img src="{{ asset('assets/image/visa_1.svg') }}" class="pl-3 w-[52px]" />
-                    </label>
+                    </label> --}}
                     <!--PayPal -->
                     <input id="payPal" name="notification-method" type="radio" value="payPal"
                         class="paymentMethod focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
-                    
+
                         <label for="payPal"
                         class="ml-3 text-md font-medium text-[#201A3C] pr-2 flex flex-row-reverse items-center">
                         <span>Paypal</span>
