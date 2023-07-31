@@ -94,7 +94,7 @@
 
         .dropMenu li a {
             display: block;
-            padding: 7px ;
+            padding: 7px;
             color: #fff;
             text-decoration: none;
         }
@@ -121,22 +121,30 @@
         <link rel="stylesheet" href="{{ $publicPath }}">
     @endforeach
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-
-    alpha/css/bootstrap.css" rel="stylesheet">
+    alpha/css/bootstrap.css"
+        rel="stylesheet">
 
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-   <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="{{ asset('assets/js/push.min.js') }}"></script>
+    <script>
+        const iconPath = '{{ asset('alaqsa.PNG') }}';
+    </script>
+
 </head>
 @php
     $img = 'storage/' . nova_get_setting('Headerlogo', 'default_value');
     $imgRight = 'storage/' . nova_get_setting('HeaderqawafelLogo', 'default_value');
-
 @endphp
 
+
 <body class="min-w-site bg-40 text-90 font-medium min-h-full">
+
+
     <div id="nova">
         <div v-cloak class="flex min-h-screen">
             <!-- Sidebar -->
@@ -244,24 +252,24 @@
             new Notification(title, options);
         });
     </script>
-       @php
-       use App\Models\user;
+    @php
+        use App\Models\user;
 
-   @endphp
-      @guest
-      @else
-          @php
-              $isToken = Auth::user()->device_key;
-          @endphp
-          @if (!$isToken)
-              <button id="myCheck" onclick="startFCM()" class="hidden">Allow notification
-              </button>
-              <script>
-                  document.getElementById("myCheck").click();
-              </script>
-          @endif
+    @endphp
+    @guest
+    @else
+        @php
+            $isToken = Auth::user()->device_key;
+        @endphp
+        @if (!$isToken)
+            <button id="myCheck" onclick="startFCM()" class="hidden">Allow notification
+            </button>
+            <script>
+                document.getElementById("myCheck").click();
+            </script>
+        @endif
 
-      @endguest
+    @endguest
     <script>
         window.config = @json(\Laravel\Nova\Nova::jsonVariables(request()));
     </script>
@@ -332,6 +340,59 @@
 
         })();
     </script>
+    {{-- <script>
+        function loadlink() {
+            $('#Notification').load('test.php', function() {
+                $(this).unwrap();
+            });
+        }
+
+        // loadlink(); // This will run on page load
+        setInterval(function() {
+            loadlink() // this will run after every 5 seconds
+        }, 10000);
+    </script>
+    <div id="Notification">
+        @php
+            use App\Models\Notification;
+            $notificationsArray = Notification::where('notifiable_id', Auth::id())
+                ->latest()
+                ->take(10)
+                ->orderBy('created_at', 'ASC')
+                ->with('user')
+                ->get();
+
+            $receiveNotification = Notification::where([['notifiable_id', Auth::id()], ['receive', null]])->get();
+
+            Notification::where([['notifiable_id', Auth::id()], ['receive', null]])->update(['receive' => 1]);
+            $receiveNotificationcount = $receiveNotification->count();
+
+        @endphp
+
+        @if (!$receiveNotificationcount == 0)
+
+            @foreach ($receiveNotification as $notification)
+                @php
+                    $notificationsArraycount = $notificationsArray->count();
+                    $dataNotifications = json_decode($notification->data);
+                @endphp
+
+                <script>
+                    var bool = {!! json_encode($dataNotifications->Notifications) !!};
+                    var bonotificationsArraycountol = {!! json_encode($notificationsArraycount) !!};
+                    // toastr.error(bool);
+
+                    // Loading button plugin (removed from BS4)
+
+                    Push.create("Al-Aqsa Association", {
+                        body: bool,
+                        timeout: bonotificationsArraycountol * 5000,
+                        icon: iconPath
+                    });
+                </script>
+            @endforeach
+        @endif
+    </div> --}}
 </body>
 
 </html>

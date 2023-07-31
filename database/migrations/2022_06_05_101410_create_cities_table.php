@@ -24,11 +24,11 @@ class CreateCitiesTable extends Migration
             $table->unsignedBigInteger('Qawafil_admin');
             $table->unsignedBigInteger('Alhisalat_admin');
 
-            $table->foreign('admin_id')->references('id')->on('users')
+            $table->foreign('admin_id')->references('id')->on('telephone_directories')
             ->onDelete('cascade');
-            $table->foreign('created_by')->references('id')->on('users')
+            $table->foreign('created_by')->references('id')->on('telephone_directories')
                 ->onDelete('cascade');
-            $table->foreign('update_by')->references('id')->on('users')
+            $table->foreign('update_by')->references('id')->on('telephone_directories')
                 ->onDelete('cascade');
             $table->foreign('area_id')->references('id')->on('areas')
             ->onDelete('cascade');

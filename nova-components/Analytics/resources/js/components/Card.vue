@@ -16,16 +16,16 @@
           :value="schedule.id"
         >
           <td>{{ schedule.year }}/{{ schedule.month }}</td>
-          <td>{{ schedule.Transactions }}</td>
-          <td>{{ schedule.spendingTransactions }}</td>
-          <td>{{ schedule.Transactions - schedule.spendingTransactions }}</td>
+          <td>{{ schedule.Transactions.toFixed(2) }}</td>
+          <td>{{ schedule.spendingTransactions.toFixed(2) }}</td>
+          <td>{{ (schedule.Transactions - schedule.spendingTransactions).toFixed(2) }}</td>
         </tr>
         <tr
         >
           <td>المجموع</td>
-          <td>{{ totalinput }}</td>
-          <td>{{ totaloutput }}</td>
-          <td>{{ totalinput - totaloutput }}</td>
+          <td>{{ totalinput.toFixed(2) }}</td>
+          <td>{{ totaloutput.toFixed(2) }}</td>
+          <td>{{ (totalinput - totaloutput).toFixed(2) }}</td>
         </tr>
       </table>
     </div>

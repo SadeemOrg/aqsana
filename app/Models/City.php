@@ -10,7 +10,7 @@ class City extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','area_id','name','created_by','update_by','admin_id'
+        'id','area_id','name','created_by','update_by','admin_id','describtion'
     ];
 
     protected $hidden = [
@@ -34,16 +34,16 @@ class City extends Model
     // }
     public function admin()
     {
-        return $this->belongsTo('App\Models\User','admin_id');
+        return $this->belongsTo('App\Models\TelephoneDirectory','admin_id');
     }
 
     public function AlhisalatAdmin()
     {
-        return $this->belongsTo('App\Models\User','Alhisalat_admin');
+        return $this->belongsTo('App\Models\TelephoneDirectory','Alhisalat_admin');
     }
     public function QawafilAdmin()
     {
-        return $this->belongsTo('App\Models\User','Qawafil_admin');
+        return $this->belongsTo('App\Models\TelephoneDirectory','Qawafil_admin');
     }
     public function Area()
     {

@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Nova\Filters\AreaDelegate;
 use Acme\MultiselectField\Multiselect;
+use App\Models\City;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
@@ -11,8 +12,10 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 use AwesomeNova\Cards\FilterCard;
+use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\HasMany;
 use Titasgailius\SearchRelations\SearchesRelations;
+use Whitecube\NovaFlexibleContent\Flexible;
 
 class delegate extends Resource
 {
@@ -84,7 +87,7 @@ class delegate extends Resource
                 ->rules( 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
-            Text::make(__('phone_number'), 'phone_number')->rules('required'),
+            Text::make(__('phone_number'), 'phone_number'),
             Multiselect::make(__('Area'), 'Area')
             ->options(function () {
                 $Areas =  \App\Models\Area::all();
@@ -100,6 +103,7 @@ class delegate extends Resource
                 return $Area_type_admin_array;
             })->singleSelect()->hideFromIndex()->hideFromDetail(),
             BelongsTo::make(__('Area'), 'AreaDelegate', \App\Nova\Area::class)->hideWhenCreating()->hideWhenUpdating(),
+
             Multiselect::make(__('city'), 'city')
             ->options(function () {
                 $Areas =  \App\Models\City::all();
@@ -114,6 +118,7 @@ class delegate extends Resource
 
                 return $Area_type_admin_array;
             })->singleSelect()->hideFromIndex()->hideFromDetail(),
+
             BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
@@ -131,7 +136,29 @@ class delegate extends Resource
     {
         $model->type = 3;
     }
+    public static function afterSave(Request $request, $model)
+    {
+        if (!$request->city ) {
 
+// dd($request->NewContacts[0]['attributes']['admin_id']);
+            if ($request->NewContacts   && ($request->NewContacts[0]['attributes']['name'] || $request->NewContacts[0]['attributes']['admin_id'])) {
+                   $Citys = new  City();
+                   $Citys->name=$request->NewContacts[0]['attributes']['name'];
+                   $Citys->admin_id='1';
+                   $Citys->Qawafil_admin='100';
+                   $Citys->Alhisalat_admin='100';
+                   $Citys->save();
+
+                // $model->Contacts=$bookt->id;
+                // $BookType =  \App\Models\BookType::orderBy('created_at', 'desc')->first();
+
+                DB::table('telephone_directories')
+                    ->where('id', $model->id)
+                    ->update(['city' =>  $Citys->id ]);
+
+            }
+        }
+    }
     /**
      * Get the cards available for the request.
      *

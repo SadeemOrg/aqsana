@@ -394,7 +394,7 @@ class HomeController extends Controller
 
         DB::table('budgets')
             ->updateOrInsert(
-                ['year' => $request->year, 'sector_id' =>  0],
+                ['user_id' => $request->year, 'form_id' =>  0],
                 ['budget' => $request->Sectors[0]['Budget']]
 
             );

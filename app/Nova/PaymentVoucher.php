@@ -3,13 +3,13 @@
 namespace App\Nova;
 
 use Acme\Analytics\Analytics;
-use Acme\MultiselectField\Multiselect;
+use Acme\MultiselectField\Multiselect as Select;
 use App\Nova\Actions\ApprovalRejectTransaction;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\Select;
+
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\BelongsTo;
@@ -83,7 +83,7 @@ class PaymentVoucher extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-        return $query->where('main_type', '2');
+        return $query->where('main_type', '2')->orderBy('transaction_date', 'DESC');
     }
     public function fields(Request $request)
     {
@@ -97,7 +97,7 @@ class PaymentVoucher extends Resource
             // ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideFromIndex(),
             BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable()->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
-            Multiselect ::make(__('project'), "ref_id")
+            Select ::make(__('project'), "ref_id")
             ->options(function () {
                 $Users =  \App\Models\Project::all();
 
@@ -118,7 +118,7 @@ class PaymentVoucher extends Resource
                 '1' => __('project'),
                 '2' => __('qawael'),
                 '3' => __('trip'),
-            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
+            ])->hideWhenCreating()->hideWhenUpdating(),
 
 
 
@@ -190,7 +190,7 @@ class PaymentVoucher extends Resource
 
                     return $user_type_admin_array;
                 })
-                ->displayUsingLabels()->hideWhenCreating()->hideFromIndex()->hideFromDetail()->readonly(),
+               ->hideWhenCreating()->hideFromIndex()->hideFromDetail()->readonly(),
             Select::make(__('name'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
@@ -210,7 +210,7 @@ class PaymentVoucher extends Resource
 
                     return $user_type_admin_array;
                 })
-                ->displayUsingLabels()->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 })->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
 
@@ -262,7 +262,7 @@ class PaymentVoucher extends Resource
                 '3' => __('bit'),
                 '4' => __('hawale'),
                 // '5' => __('Other'),
-            ])->displayUsingLabels()->default('1'),
+            ])->default('1'),
             NovaDependencyContainer::make([
                 Text::make(__('transact amount pay'), 'transact_amount')->rules('required'),
                 // Select::make(__('Currenc'), "Currency")
