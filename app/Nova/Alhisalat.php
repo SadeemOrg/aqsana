@@ -56,7 +56,7 @@ class Alhisalat extends Resource
 
     public static function group()
     {
-        return __('project');
+        return __('Financial management');
     }
 
 
@@ -189,6 +189,7 @@ class Alhisalat extends Resource
                 '3' => 'تم التسليم',
                 '4' => 'تم العد',
             ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
         ];
     }

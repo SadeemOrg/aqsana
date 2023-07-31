@@ -10,6 +10,8 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 class Transaction extends Model implements HasMedia
 {
+
+    use \Awobaz\Compoships\Compoships;
     use InteractsWithMedia;
     use HasFactory;
 
@@ -96,9 +98,13 @@ class Transaction extends Model implements HasMedia
         return $this->belongsTo('App\Models\BusesCompany','name');
     }
 
+    // public function ActionEvents()
+    // {
+    //     return $this->hasMany('App\Models\ActionEvents','actionable_id');
+    // }
     public function ActionEvents()
     {
-        return $this->hasMany('App\Models\ActionEvents','actionable_id');
+        return $this->hasMany(ActionEvents::class,"actionable_id")->where('action_events.target_type', '=', get_class($this));
     }
 
     // public function getCountryName() {

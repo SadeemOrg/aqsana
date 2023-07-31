@@ -236,7 +236,25 @@ class QawafilAlaqsa extends Resource
                     })
 
                     ->hideWhenCreating()->hideWhenUpdating(),
+                    ActionButton::make(__('Action'))
+                    ->action(ProjectStartEnd::class, $this->id)
+                    ->text(__('مفتوحة'))
+                    ->showLoadingAnimation()
+                    ->loadingColor('#fff')->buttonColor('#21b970')
+                    ->canSee(function () {
+                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
 
+                        if ($projects) {
+                            if ($projects->status != 3 && $this->end_date == null) {
+
+                                return true;
+                            }
+                        }
+                    })
+                    ->readonly(function () {
+                        return true;
+                    })
+                    ->hideWhenCreating()->hideWhenUpdating(),
                 Boolean::make('Active', function () {
                     $projects = DB::table('project_status')->where('project_id', $this->id)->first();
                     if ($projects) {

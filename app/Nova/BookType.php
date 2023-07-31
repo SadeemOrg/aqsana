@@ -3,6 +3,8 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -60,6 +62,8 @@ class BookType extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('name'),'name'),
             Text::make(__('describtion'),'describtion'),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
         ];
     }
 

@@ -394,7 +394,7 @@ class HomeController extends Controller
 
         DB::table('budgets')
             ->updateOrInsert(
-                ['year' => $request->year, 'sector_id' =>  0],
+                ['user_id' => $request->year, 'form_id' =>  0],
                 ['budget' => $request->Sectors[0]['Budget']]
 
             );
@@ -420,7 +420,7 @@ class HomeController extends Controller
         $TelephoneDirectory = TelephoneDirectory::whereJsonContains('type', $request->type)->get();
 
 
-        $basic  = new \Nexmo\Client\Credentials\Basic('89302929', 'EcfCP1BjWhrTWJNZ');
+        $basic  = new \Nexmo\Client\Credentials\Basic('4c8fe049', 'ZOP7qC5OANL0GZsD');
         $client = new \Nexmo\Client($basic);
 
         // $response = $client->sms()->send(
@@ -429,11 +429,13 @@ class HomeController extends Controller
 
 
         foreach ($TelephoneDirectory as $key => $value) {
-
-            $client->sms()->send(
-                new \Vonage\SMS\Message\SMS($value->phone_number, "Al_Aqsa_Association",  $request->Message)
+            $response = $client->sms()->send(
+                new \Vonage\SMS\Message\SMS($value->phone_number, "Al_Aqsa_Association",$request->Message)
             );
+            $message = $response->current();
+
         }
+        return "ok";
     }
     public function SectorsBudget(Request $request)
     {

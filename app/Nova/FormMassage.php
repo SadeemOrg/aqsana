@@ -11,6 +11,7 @@ use App\Nova\Actions\ReadMessage;
 use AwesomeNova\Cards\FilterCard;
 use App\Nova\Filters\StateFilter;
 use App\Nova\Filters\ReadMessageFilters;
+use Laravel\Nova\Fields\HasMany;
 use Pdmfc\NovaFields\ActionButton;
 
 class FormMassage extends Resource
@@ -102,6 +103,7 @@ public static function groupOrder() {
             })->text(__('read done'))->readonly() ->buttonColor('#070707')
            ,
 
+           HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
         ];
     }

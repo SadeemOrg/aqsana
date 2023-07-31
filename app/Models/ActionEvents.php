@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActionEvents extends Model
 {
+    use \Awobaz\Compoships\Compoships;
     /**
      * The attributes that aren't mass assignable.
      *

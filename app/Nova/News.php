@@ -27,6 +27,7 @@ use AwesomeNova\Cards\FilterCard;
 use App\Nova\Filters\StateFilter;
 use App\Nova\Filters\PostNewsFilters;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Fields\HasMany;
 
 class News extends Resource
 {
@@ -239,6 +240,7 @@ class News extends Resource
             Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y')->sortable()->rules('required'),
 
 
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
 
 

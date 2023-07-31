@@ -34,7 +34,7 @@ class BusesCompany extends Resource
      */
     public static $title = 'name';
     public static $group = 'Admin';
-    public static $priority = 1;
+    public static $priority = 7;
     public static function label()
     {
         return __('Buses Company');
@@ -42,7 +42,7 @@ class BusesCompany extends Resource
 
     public static function group()
     {
-        return __('QawafilAlaqsa');
+        return __('address');
     }
     /**
      * The columns that should be searched.
@@ -67,16 +67,16 @@ class BusesCompany extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__("Name"),"name") ->rules('required'),
             Text::make(__("Describtion"),"description"),
-            Number::make(__("number of buses"),"number_of_buses")->step(1.0)->rules('required'),
-            Number::make(__("cost"),"cost")->step(1.0)->rules('required'),
-            Text::make(__("contact person"),"contact_person")->rules('required'),
-            Text::make(__("contact person phone"),"phone_number")->rules('required'),
+            Number::make(__("number of buses"),"number_of_buses")->step(1.0),
+            Number::make(__("cost"),"cost")->step(1.0),
+            Text::make(__("contact person"),"contact_person"),
+            Text::make(__("contact person phone"),"phone_number"),
 
-            Text::make(__("company id"),"company_id")->rules('required'),
-            Text::make(__("bank name"),"bank_name")->rules('required'),
-            Text::make(__("bank number"),"bank_number")->rules('required'),
-            Text::make(__("Branch number"),"bank_branch_number")->rules('required'),
-            Text::make(__("account number"),"account_number")->rules('required'),
+            Text::make(__("company id"),"company_id"),
+            Text::make(__("bank name"),"bank_name"),
+            Text::make(__("bank number"),"bank_number"),
+            Text::make(__("Branch number"),"bank_branch_number"),
+            Text::make(__("account number"),"account_number"),
 
 
             Select::make(__("status"),"status")
@@ -95,6 +95,7 @@ class BusesCompany extends Resource
             hideWhenUpdating(),
 
             HasMany::make(__('bus'),'Bus', \App\Nova\Bus::class),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
         ];
     }

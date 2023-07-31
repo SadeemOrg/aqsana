@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -61,6 +62,7 @@ class Donations extends Resource
             Text::make(__('donor_name'), 'donor_name'),
             Text::make(__('amount'), 'amount'),
             Text::make(__('number_of_people'), 'number_of_people'),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
         ];
     }

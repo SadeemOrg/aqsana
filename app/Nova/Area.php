@@ -110,7 +110,9 @@ class Area extends Resource
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
-            HasMany::make(__("City"), "City", \App\Nova\City::class)
+            HasMany::make(__("City"), "City", \App\Nova\City::class),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
         ];
     }
 
