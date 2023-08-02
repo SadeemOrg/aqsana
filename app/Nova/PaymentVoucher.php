@@ -9,6 +9,7 @@ use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Select as singleSelect;
 
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Date;
@@ -256,13 +257,13 @@ class PaymentVoucher extends Resource
 
 
 
-            Select::make(__("Payment_type"), "Payment_type")->options([
+            singleSelect::make(__("Payment_type"), "Payment_type")->options([
                 '1' => __('cash'),
                 '2' => __('shek'),
                 '3' => __('bit'),
                 '4' => __('hawale'),
                 // '5' => __('Other'),
-            ])->default('1')->singleSelect(),
+            ])->default('1'),
             NovaDependencyContainer::make([
                 Text::make(__('transact amount pay'), 'transact_amount')->rules('required'),
                 // Select::make(__('Currenc'), "Currency")
