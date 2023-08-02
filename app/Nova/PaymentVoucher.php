@@ -216,7 +216,7 @@ class PaymentVoucher extends Resource
                 })->hideFromDetail()->hideFromIndex()->hideWhenUpdating()->singleSelect(),
 
             Flexible::make(__('add user'), 'add_user')
-
+            ->readonly(true)
 
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('tooles'), 'Payment_type_details ', [
