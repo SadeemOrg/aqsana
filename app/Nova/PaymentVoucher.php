@@ -118,7 +118,7 @@ class PaymentVoucher extends Resource
                 '1' => __('project'),
                 '2' => __('qawael'),
                 '3' => __('trip'),
-            ])->hideWhenCreating()->hideWhenUpdating(),
+            ])->hideWhenCreating()->hideWhenUpdating()->singleSelect(),
 
 
 
@@ -190,7 +190,7 @@ class PaymentVoucher extends Resource
 
                     return $user_type_admin_array;
                 })
-               ->hideWhenCreating()->hideFromIndex()->hideFromDetail()->readonly(),
+               ->hideWhenCreating()->hideFromIndex()->hideFromDetail()->readonly()->singleSelect(),
             Select::make(__('name'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
@@ -212,10 +212,10 @@ class PaymentVoucher extends Resource
                 })
                 ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
-                })->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
+                })->hideFromDetail()->hideFromIndex()->hideWhenUpdating()->singleSelect(),
 
             Flexible::make(__('add user'), 'add_user')
-                ->readonly(true)
+
 
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('tooles'), 'Payment_type_details ', [
@@ -262,7 +262,7 @@ class PaymentVoucher extends Resource
                 '3' => __('bit'),
                 '4' => __('hawale'),
                 // '5' => __('Other'),
-            ])->default('1'),
+            ])->default('1')->singleSelect(),
             NovaDependencyContainer::make([
                 Text::make(__('transact amount pay'), 'transact_amount')->rules('required'),
                 // Select::make(__('Currenc'), "Currency")
