@@ -1,4 +1,4 @@
-<dropdown-trigger class="h-9 flex items-center" style="appearance: none;">
+<dropdown-trigger class="h-9 flex items-center">
 
 
     <strong class="relative inline-flex items-center rounded  border-gray-200 px-2.5 py-1.5 text-xs font-medium">
@@ -25,7 +25,7 @@
     </strong>
 </dropdown-trigger>
 
-<dropdown-menu slot="menu" width="200" direction="rtl">
+<dropdown-menu slot="menu" width="318" direction="rtl">
     @php
         use Carbon\Carbon;
         $id = Auth::id();
@@ -36,7 +36,7 @@
             ->with('user')
             ->get();
     @endphp
-    <ul class="list-reset">
+    <ul class="list-reset overflow-y-auto p-1">
         @foreach ($notificationsArray as $notificationArray)
             @php
                 $dataNotifications = json_decode($notificationArray->data);
@@ -71,14 +71,26 @@
                     </div>
                 </div>
             </div>
+                
 
             </li>
         @endforeach
         <li>
-            <a href="/Admin/notification" class="block  bg-[#242526]  text-center font-bold ">
-                See all notifications</a>
+            <a href="/Admin/notification" class="btn btn-default btn-primary inline-flex items-center justify-center h-12 relative ml-auto my-3  py-2 w-full text-center">                
+                <span class="">
+                    See all notifications
+                  </span>
+            </a>                
         </li>
     </ul>
+    {{-- <div>
+        <ul>
+            <li>fdfd</li>
+            <li>fdfd</li>
+            <li>fdfd</li>
+            <li>fdfd</li>
+        </ul>
+    </div> --}}
 </dropdown-menu>
 <script>
     var inverval_timer;
