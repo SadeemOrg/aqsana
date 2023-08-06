@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class TripBooking extends Model
+{
+    use HasFactory;
+
+    protected $table = 'trip_booking';
+
+    protected $fillable = [
+        'id','user_id','project_id','booking_type','number_of_people','status','reservation_amount','bus_id'
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+    protected $casts = [
+        'user_role_id' => 'array',
+    ];
+
+
+    public function Project()
+    {
+        return $this->belongsTo('App\Models\Project','project_id','id');
+    }
+
+
+    public function Buses()
+    {
+        return $this->belongsTo('App\Models\Bus','bus_id');
+    }
+
+    public function Users()
+    {
+        return $this->belongsTo('App\Models\User','user_id');
+    }
+    public function ActionEvents()
+    {
+        return $this->hasMany(ActionEvents::class,"actionable_id")->where('action_events.target_type', '=', get_class($this));
+    }
+
+
+
+}

@@ -1,0 +1,50 @@
+{
+  "name": "acme/multiselect-field",
+  "description": "A multiple select field for Laravel Nova.",
+  "keywords": [
+    "laravel",
+    "nova",
+    "multiselect",
+    "select"
+  ],
+  "authors": [
+    {
+      "name": "Tarvo Reinpalu",
+      "email": "tarvoreinpalu@gmail.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Optimist Digital",
+      "email": "info@optimistdigital.com",
+      "role": "Maintainer"
+    }
+  ],
+  "license": "MIT",
+  "require": {
+    "php": ">=7.1.0",
+    "optimistdigital/nova-translations-loader": "^3.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Acme\\MultiselectField\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Acme\\MultiselectField\\FieldServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://nova.laravel.com"
+    }
+  ]
+}

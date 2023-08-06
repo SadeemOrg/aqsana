@@ -1,0 +1,167 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.3|^8.0",
+        "acme/analytics": "*",
+        "acme/bill": "*",
+        "acme/multiselect-field": "*",
+        "acme/projecs": "*",
+        "acme/smssend": "*",
+        "ajhaupt7/image-upload-preview": "^1.0",
+        "alaqsa/project": "*",
+        "averotech/link": "*",
+        "averotech/tree": "*",
+        "awesome-nova/filter-card": "^1.0",
+        "awobaz/compoships": "^2.2",
+        "barryvdh/laravel-dompdf": "^2.0",
+        "benjacho/belongs-to-many-field": "^2.0",
+        "chaseconey/nova-external-image": "^0.3.1",
+        "coderello/laravel-nova-lang": "^1.8",
+        "comodolab/nova-help": "^0.5.0",
+        "ctessier/nova-advanced-image-field": "^1.3",
+        "digital-creative/resource-navigation-tab": "^1.1",
+        "dillingham/nova-button": "^1.0",
+        "ebess/advanced-nova-media-library": "3.8.0",
+        "eminiarts/nova-tabs": "^1.4",
+        "epartment/nova-dependency-container": "^1.3",
+        "ericlagarda/nova-settings-card": "^1.2",
+        "fourstacks/nova-repeatable-fields": "^1.3",
+        "fruitcake/laravel-cors": "^2.0",
+        "ganyicz/nova-callbacks": "^1.1",
+        "gregoriohc/laravel-nova-theme-responsive": "^0.8.1",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "gwd/laravel-nova-flexible-content": "^0.0.1",
+        "halimtuhu/array-images": "^1.1",
+        "infinety-es/nova-filemanager": "^2.8",
+        "kutia-software-company/larafirebase": "^1.3",
+        "laraning/nova-time-field": "^1.2",
+        "laravel/framework": "^8.75",
+        "laravel/nova": "*",
+        "laravel/passport": "^10.4",
+        "laravel/sanctum": "^2.11",
+        "laravel/tinker": "^2.5",
+        "league/omnipay": "^3.2",
+        "livewire/livewire": "^2.10",
+        "manogi/nova-tiptap": "^2.8",
+        "mauricewijnia/nova-maps-address": "^1.3",
+        "mpdf/mpdf": "^8.1",
+        "nexmo/client": "^2.4",
+        "nunomaduro/laravel-desktop-notifier": "^2.6",
+        "optimistdigital/nova-settings": "^3.5",
+        "optimistdigital/nova-tailwind": "^1.1",
+        "pdmfc/nova-action-button": "^0.7.4",
+        "pishran/nova-rtl-theme": "^1.5",
+        "spatie/laravel-medialibrary": "v9.x-dev",
+        "techouse/select-auto-complete": "^1.4",
+        "titasgailius/search-relations": "^2.0",
+        "vonage/client": "^4.0",
+        "waynestate/nova-ckeditor4-field": "^0.7.0",
+        "whitecube/nova-flexible-content": "^0.2.8",
+        "whitecube/nova-google-maps": "^0.0.1",
+        "yassi/nova-nested-form": "^3.0",
+        "zeyad/notification": "*"
+    },
+    "require-dev": {
+        "facade/ignition": "^2.5",
+        "fakerphp/faker": "^1.9.1",
+        "knuckleswtf/scribe": "^3.34",
+        "laravel/sail": "^1.0.1",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^5.10",
+        "phpunit/phpunit": "^9.5.10"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./nova"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/MultiselectField"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/Link"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/Tree"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/Projecs"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/Project"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/Notification"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/Analytics"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/Bill"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/Smssend"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "app/CPU/helpers.php"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
