@@ -103,6 +103,10 @@
             --tw-bg-opacity: 1;
             background-color: rgb(21 128 61 / var(--tw-bg-opacity));
         }
+        .hide-angle svg.ml-2 {display: none}
+        .list-reset {
+            max-height: 400px
+        }
     </style>
     <!-- Tool Styles -->
     @foreach (\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
@@ -171,7 +175,7 @@
                             alt="">
                     </div>
 
-                    <dropdown class=" h-9 flex items-center dropdown-right">
+                    <dropdown class=" h-9 flex items-center dropdown-right mr-3 hide-angle">
 
                         @include('nova::partials.Notification')
                     </dropdown>
