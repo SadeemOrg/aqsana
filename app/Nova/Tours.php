@@ -87,6 +87,7 @@ class Tours extends Resource
                 Text::make(__('phone_number'), 'phone_number'),
             ]),
             Text::make(__('guide_name'),'guide_name')->rules('required'),
+            Text::make(__('guide_number'),'guide_number'),
             Text::make(__('start Time'), 'start_tour')
             ->placeholder('##:##')
             ->rules('date_format:"H:i"')
