@@ -155,7 +155,7 @@
     "author": "الكاتب",
     "cover_photo": "صورة الغلاف",
     "ref_id": "المرجع",
-    "events": "فعاليات",
+    "events": "نشاطات ومشاريع",
     "Contacts": "مرشد",
     "Books": "كتب",
     "Cultural Section": "القسم الثقافي",
@@ -903,5 +903,6 @@
     ":resource Details: :title": ":resource تفاصيل: :title",
     "Header qawafelLogo": "شعار قوافل الاقصى - منظومة",
     "Header Logo Manzomeh": "شعار الاقصى - منظومة",
-    "qawafelLogo": "شعار القوافل -موقع"
+    "qawafelLogo": "شعار القوافل -موقع",
+    "Created At":"أنشئت في"
 }

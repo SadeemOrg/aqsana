@@ -412,6 +412,8 @@ class Project extends Resource
             // HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
             HasMany::make(__('Volunteer'), 'Volunteer', \App\Nova\Volunteer::class),
             belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
             // ->canSee(function ($request) {
 
             //     $user = Auth::user();

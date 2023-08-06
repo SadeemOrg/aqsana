@@ -5,6 +5,7 @@ namespace App\Nova;
 use Acme\MultiselectField\Multiselect;
 use Acme\Smssend\Smssend;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -90,6 +91,7 @@ class TelephoneDirectory extends Resource
             Text::make(__('job'),'jop'),
             Text::make(__('id_number'),'id_number'),
 
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
 
 
