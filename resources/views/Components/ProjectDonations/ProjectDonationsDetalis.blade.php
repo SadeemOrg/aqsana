@@ -61,6 +61,7 @@
             </div>
         @endif
         <!-- Second Page Input -->
+        <!-- To Do Until Transila Work -->
         <div class="secondPage mt-10 sm:mt-20 flex flex-col gap-y-6 hidden w-full">
             <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
                 <input type="text" id="firstName" name="firstName" placeholder=" الاسم الاول" value=""
@@ -70,7 +71,8 @@
             </div>
             <input type="hidden" id="donorName" name="donor_name" value="" placeholder=" الاسم كامل"
                 class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
-            <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
+            <!--Hide this Item until Transila work-->
+            {{-- <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
                 <input type="number" name="telephone" placeholder="رقم الهاتف"
                     class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
                 <input type="number" name="visaid" placeholder="رقم البطاقة"
@@ -84,22 +86,16 @@
                         class="block w-full border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4 text-right"
                         placeholder="MM/YY">
                 </div>
-            </div>
+            </div> --}}
+            <!--end Hide this Item until Transila work-->
             <!-- Second Page Radio Input -->
             <div class="flex flex-col gap-y-2 items-start justify-start mt-4 mr-[9%] md:mr-0">
                 <div class="flex flex-row items-center mb-5 sm:mb-0">
-                    {{-- <input id="visa" name="notification-method" type="radio" value="visa"
-                        class="paymentMethod focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
-                    <label for="visa"
-                        class="ml-3 text-md font-medium text-[#201A3C] pr-2 flex flex-row-reverse items-center">
-                        <span>فيزا كارد</span>
-                        <img src="{{ asset('assets/image/visa_1.svg') }}" class="pl-3 w-[52px]" />
-                    </label> --}}
                     <!--PayPal -->
                     <input id="payPal" name="notification-method" type="radio" value="payPal"
                         class="paymentMethod focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
 
-                        <label for="payPal"
+                    <label for="payPal"
                         class="ml-3 text-md font-medium text-[#201A3C] pr-2 flex flex-row-reverse items-center">
                         <span>Paypal</span>
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48"
@@ -159,14 +155,15 @@
 
 <div class="flex flex-row items-center justify-center md:justify-start gap-x-2">
     {{-- <div class="btn-btn-payPal hidden mt-10" id="btn-paypal-checkout"></div> --}}
-    <div id="paypal-button-container" class="mt-12 btn-btn-payPal"></div>
     <div class="mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5">
+        <div
+            class="secondPage  flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5 hidden">
+            <button id="PreviousPageDonations"
+                class=" rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">الخلف</button>
+        </div>
         <button id="firstPageDonations" type="submit"
-        class="Ctnbtn  rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">متابعة</button>
-    <div
-        class="secondPage  flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5 hidden">
-        <button id="PreviousPageDonations"
-            class=" rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">الخلف</button>
+            class="Ctnbtn  rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">متابعة</button>
+        <div id="paypal-button-container" class="mt-2 btn-btn-payPal"></div>
+
     </div>
-</div>
 </div>
