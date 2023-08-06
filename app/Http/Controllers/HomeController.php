@@ -1191,7 +1191,7 @@ class HomeController extends Controller
 
     public function library()
     {
-        $books = Book::all();
+        $books = Book::where('post', 1)->get();
         $book_type = BookType::all();
         return view('Pages.Library.Library', compact('books', 'book_type'));
     }

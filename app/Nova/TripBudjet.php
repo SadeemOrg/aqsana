@@ -13,6 +13,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Pdmfc\NovaFields\ActionButton;
 use App\Nova\Actions\ProjectBudjetActions;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 
 class TripBudjet extends Resource
 {
@@ -140,6 +141,7 @@ class TripBudjet extends Resource
 
             })->readonly(),
 
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
         ];
     }

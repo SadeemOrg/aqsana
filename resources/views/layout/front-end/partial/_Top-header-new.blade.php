@@ -226,7 +226,7 @@
         <!--End Center Section -->
         <!--Start Header Right Logo -->
         <div class="hidden xl:flex flex-row items-center justify-center basis-1/6 cursor-pointer"
-            onclick="location.href='/Qawafel-Alaqsa'">
+            onclick="location.href='/sector/5'">
             <img class="rounded-[45%] shadow-lg"
              {{-- src="{{ $imgRight }}" --}}
                 src="https://media.discordapp.net/attachments/938405759996276806/1044538836044230676/Group_62187.png"

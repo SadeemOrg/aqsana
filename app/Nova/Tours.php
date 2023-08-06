@@ -6,6 +6,7 @@ use App\Models\TelephoneDirectory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -86,6 +87,7 @@ class Tours extends Resource
                 Text::make(__('phone_number'), 'phone_number'),
             ]),
             Text::make(__('guide_name'),'guide_name')->rules('required'),
+            Text::make(__('guide_number'),'guide_number'),
             Text::make(__('start Time'), 'start_tour')
             ->placeholder('##:##')
             ->rules('date_format:"H:i"')
@@ -95,6 +97,8 @@ class Tours extends Resource
             ->rules('date_format:"H:i"')
             ->help('hh:mm'),
             Textarea::make(__('note'),'note'),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
         ];
     }
     public static function afterSave(Request $request, $model)

@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\Text;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Acme\MultiselectField\Multiselect;
 use App\Models\VolunteersProjects;
+use Laravel\Nova\Fields\HasMany;
 
 class volunteersHower extends Resource
 {
@@ -106,6 +107,8 @@ class volunteersHower extends Resource
 
                     Boolean::make(__('done'), 'done'),
                 ]),
+                HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
         ];
     }
 
