@@ -82,15 +82,7 @@
                   </span>
             </a>                
         </li>
-    </ul>
-    {{-- <div>
-        <ul>
-            <li>fdfd</li>
-            <li>fdfd</li>
-            <li>fdfd</li>
-            <li>fdfd</li>
-        </ul>
-    </div> --}}
+    </ul>    
 </dropdown-menu>
 <script>
     var inverval_timer;
