@@ -839,7 +839,7 @@ export default {
           this.deletSectors = response.data;
           this.selectedItem = "0";
           this.selectedyear = "0";
-          this.year = "0";
+          this.year = event.target.value;
         });
     },
     save() {
@@ -906,7 +906,7 @@ export default {
       }
     },
     delet() {
-      console.log(this.year);
+
       // console.log(this.deletSectors);
       axios.post("/delet", {
         year: this.year,

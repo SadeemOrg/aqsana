@@ -1079,7 +1079,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this5.deletSectors = response.data;
         _this5.selectedItem = "0";
         _this5.selectedyear = "0";
-        _this5.year = "0";
+        _this5.year = event.target.value;
       });
     },
     save: function save() {
@@ -1144,7 +1144,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     delet: function delet() {
-      console.log(this.year);
+
       // console.log(this.deletSectors);
       axios.post("/delet", {
         year: this.year
