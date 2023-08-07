@@ -107,6 +107,11 @@
         .list-reset {
             max-height: 400px
         }
+        @media (max-width: 991px) {
+            div[x-placement="bottom-start"]{transform: none !important}
+        }
+        .h-header .dropdown-trigger svg{min-width: 10px}
+        
     </style>
     <!-- Tool Styles -->
     @foreach (\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
