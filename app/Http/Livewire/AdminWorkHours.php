@@ -35,7 +35,7 @@ class AdminWorkHours extends Component
         $from = date($this->FromDate);
         $to = date($this->ToDate);
         // dd( $from,$to,$this->Name);
-        $this->WorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->get();
+        $this->WorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->orderBy('date', 'ASC')->get();
         //   dd($this->WorkHourssearch );
         $string = '00000000000000';
         $date = Carbon::parse($string);

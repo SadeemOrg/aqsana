@@ -18,6 +18,8 @@
             <div class="flex justify-between items-center space-x-2 w-full">
                 @php
                     $img = 'storage/' . nova_get_setting('Headerlogo', 'default_value');
+                    $imgRight = 'storage/' . nova_get_setting('HeaderqawafelLogo', 'default_value');
+
 
                 @endphp
 
@@ -26,6 +28,8 @@
                     <img class="rounded-full w-24 h-20 lg:block hidden mr-3" src="/{{ $img }}" alt="">
                 </div>
                 <div class="flex flex-row items-start gap-x-1  justify-start">
+                    <img class="rounded-full w-24 h-20 lg:block hidden mr-3" src="/{{ $imgRight }}" alt="">
+
                     <div @click="leftBarOpen = false">
                         <livewire:notification />
                     </div>

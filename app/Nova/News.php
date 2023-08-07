@@ -28,6 +28,7 @@ use App\Nova\Filters\StateFilter;
 use App\Nova\Filters\PostNewsFilters;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Fields\HasMany;
+use Whitecube\NovaFlexibleContent\Flexible;
 
 class News extends Resource
 {
@@ -237,6 +238,12 @@ class News extends Resource
             Text::make(__('VIDEO LINK'), 'video_link'),
             Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
             // Date::make('date', 'new_date'),
+
+            Flexible::make(__('add user'), 'videos')
+                ->addLayout(__('video'), 'video', [
+                    Text::make(__('VIDEO LINK'), 'video_link'),
+                    Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
+                ]),
             Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y')->sortable()->rules('required'),
 
 

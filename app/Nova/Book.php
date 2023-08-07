@@ -88,7 +88,7 @@ class Book extends Resource
                 })->text(__('post'))->showLoadingAnimation()
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('Name'), 'name')->rules('required', 'max:255'),
-            Text::make(__('author'), 'author')->rules('required'),
+            Text::make(__('author'), 'author'),
             Tiptap::make(__('description'), 'description')
             ->buttons([
                 'heading',
@@ -121,7 +121,7 @@ class Book extends Resource
                 '|',
                 'history',
             ])
-            ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
+            ->headingLevels([1, 2, 3, 4, 5, 6]),
             // Textarea::make(__('description'), 'description'),
             BelongsTo::make(__('Book Type'), 'BookType', \App\Nova\BookType::class)->hideWhenCreating()->hideWhenUpdating(),
 
