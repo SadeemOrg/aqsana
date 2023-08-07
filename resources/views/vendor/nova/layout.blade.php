@@ -110,6 +110,7 @@
             div[x-placement="bottom-start"]{transform: none !important}
             html:not([dir="rtl"]) div[dusk$='index-component'] .btn[dusk='create-button']::before{position: relative; left: 19px; top: 3px}
         }
+        table tbody td button {min-width: 125px; font-size: 15px}
     </style>
     <!-- Tool Styles -->
     @foreach (\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
@@ -188,7 +189,7 @@
                     </dropdown>
                 </div>
 
-                <div data-testid="content" class="px-view py-view mx-auto">
+                <div data-testid="content custom-content" class="px-view py-view mx-auto">
                     @yield('content')
 
                     @include('nova::partials.footer')
