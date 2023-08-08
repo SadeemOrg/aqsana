@@ -171,7 +171,7 @@ class Alhisalat extends Resource
 
 
             Flexible::make(__('newadres'), 'newadres')
-                ->readonly(true)
+
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('Add new bus'), 'bus', [
@@ -193,50 +193,83 @@ class Alhisalat extends Resource
 
         ];
     }
-    public static function beforesave(Request $request, $model)
+
+    public static function beforeSave(Request $request, $model)
     {
-        if ($request->address_id != $model->address_id) {
+        $id = Auth::id();
+        if (!$request->address_id) {
+
+        if ($request->newadres) {
+
+            $address = address::create([
+                'name_address' => $request->newadres[0]['attributes']['name_address'],
+                'description' => $request->newadres[0]['attributes']['description'],
+                'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
+                // 'current_location' => $request->newadres[0]['attributes']['current_location'],
+                "number" => "1",
+                'status' => 1,
+                'type' => 2,
+                'created_by' => $id
+            ]);
 
 
-            if ($request->address_id) {
+            $model->number_alhisala =  $address->name_address . " 1";
 
-                // $alhisalats = DB::table('alhisalats')->where('address_id', $request->address_id)->get();
-                $addresses = DB::table('addresses')->where('id', $request->address_id)->first();
-                $countt = $addresses->number + 1;
-                // $addresses->number=$countt;
-                DB::table('addresses')->where('id', $request->address_id)->update(['number' => $countt]);
-
-
-
-                // $model->number_alhisala =  $countt . "  " . $addresses->name_address;
-                $model->number_alhisala =   $addresses->name_address . " " . $countt;
-                $model->address_id = $addresses->id;
-            } else {
-
-                $id = Auth::id();
-                if ($request->newadres) {
-                    $address = address::create([
-                        'name_address' => $request->newadres[0]['attributes']['name_address'],
-                        'description' => $request->newadres[0]['attributes']['description'],
-                        'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
-                        // 'current_location' => $request->newadres[0]['attributes']['current_location'],
-                        "number" => "1",
-                        'status' => 1,
-                        'type' => 2,
-                        'created_by' => $id
-                    ]);
-
-
-                    $model->number_alhisala =  $address->name_address . " 1";
-                    $model->address_id = $address->id;
-                } else  dd();
-
-                // dd($model);
-
-            }
+            $request->merge(['address_id' => $address->id]);
+            // dd($request->all());
         }
-        else dd();
     }
+
+        $request->request->remove('newadres');
+    }
+    // public static function beforesave(Request $request, $model)
+    // {
+
+    //     if ($request->address_id ==$model->address_id) {
+
+
+    //         if ($request->address_id) {
+
+    //             // $alhisalats = DB::table('alhisalats')->where('address_id', $request->address_id)->get();
+    //             $addresses = DB::table('addresses')->where('id', $request->address_id)->first();
+    //             $countt = $addresses->number + 1;
+    //             // $addresses->number=$countt;
+    //             DB::table('addresses')->where('id', $request->address_id)->update(['number' => $countt]);
+
+
+
+    //             // $model->number_alhisala =  $countt . "  " . $addresses->name_address;
+    //             $model->number_alhisala =   $addresses->name_address . " " . $countt;
+    //             $model->address_id = $addresses->id;
+
+    //         } else {
+
+    //             $id = Auth::id();
+    //             if ($request->newadres) {
+    //                 $address = address::create([
+    //                     'name_address' => $request->newadres[0]['attributes']['name_address'],
+    //                     'description' => $request->newadres[0]['attributes']['description'],
+    //                     'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
+    //                     // 'current_location' => $request->newadres[0]['attributes']['current_location'],
+    //                     "number" => "1",
+    //                     'status' => 1,
+    //                     'type' => 2,
+    //                     'created_by' => $id
+    //                 ]);
+
+
+    //                 $model->number_alhisala =  $address->name_address . " 1";
+
+    //                 $request->merge(['address_id' => $address->id]);
+    //             } else  dd();
+
+    //             // dd($model);
+
+    //         }
+    //     }
+
+    //     $request->request->remove('newadres');
+    // }
 
 
     public static function beforeCreate(Request $request, $model)
