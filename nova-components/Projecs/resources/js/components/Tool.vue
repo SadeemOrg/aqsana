@@ -688,9 +688,10 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="flex justify-between">
-                              <div>
+                            <div class="md:flex justify-between mt-5 text-center">
+                              <div class="mb-4 md:mb-0 md:w-1/2">
                                 <pure-vue-chart
+                                  class="chart-custom-style"
                                   :points="[1, 4, 5, 3, 4, 1, 1, 1, 1, 1, 1, 1]"
                                   :show-y-axis="true"
                                   :show-x-axis="true"
@@ -716,8 +717,9 @@
                                 />
                                 <h1>مدخلات</h1>
                               </div>
-                              <div>
+                              <div class="md:w-1/2">
                                 <pure-vue-chart
+                                class="chart-custom-style"
                                   :points="[1, 4, 5, 3, 4, 1, 1, 1, 1, 1, 1, 1]"
                                   :show-y-axis="true"
                                   :show-x-axis="true"
@@ -925,3 +927,9 @@ export default {
   },
 };
 </script>
+<style>
+  /* .chart-custom-style {
+    width:500px !important;
+    height: 300px !important;
+  } */
+</style>
