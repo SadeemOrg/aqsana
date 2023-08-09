@@ -56,64 +56,67 @@
             </a>
           </div>
         </div>
-        <div
-          class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4"
-          v-bind:class="{
-            hidden: openTab !== 1,
-            block: openTab === 1,
-          }"
-        >
-          <table class="text-center">
-            <tr>
-              <th style="width: 40%;">المهمة</th>
-              <th style="width: 40%;">الملاحضات</th>
-              <th style="width: 10%;">المرسل   </th>
+        <div class="overflow-x-auto ">
+          <div
+            class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scoll-x"
+            v-bind:class="{
+              hidden: openTab !== 1,
+              block: openTab === 1,
+            }"
+          >
+          
+            <table class="text-center">
+              <tr>
+                <th style="width: 40%;">المهمة</th>
+                <th style="width: 40%;">الملاحضات</th>
+                <th style="width: 10%;">المرسل   </th>
 
-              <th style="width: 10%;">التاريخ</th>
+                <th style="width: 10%;">التاريخ</th>
 
-              <th>تم</th>
-            </tr>
-            <tr
-              v-for="Notification in myNotification"
-              :key="Notification.id"
-              :value="Notification.id"
-            >
-              <td>{{ Notification.Notifications.Notifications }}</td>
-              <td class="flex w-full h-full">
-                <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-    <div class="relative w-full">
-        <!-- <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-        </div> -->
-        <input type="text"  id="fname" v-model="Notification.note" class="block w-full p-4  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required>
-        <button  @click="AddNote(Notification.id,Notification.note)" type="submit" class="text-white absolute  left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">اضافة</button>
-    </div>
-              </td>
-              <td >  {{ Notification.sender.name  }}</td>
-              <td v-if="Notification.Notifications.date">
-                {{ Notification.Notifications.date }}
-              </td>
-              <td v-else>no Time</td>
+                <th>تم</th>
+              </tr>
+              <tr
+                v-for="Notification in myNotification"
+                :key="Notification.id"
+                :value="Notification.id"
+              >
+                <td>{{ Notification.Notifications.Notifications }}</td>
+                <td class="flex w-full h-full">
+                  <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                  <div class="relative w-full">
+                      <!-- <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      </div> -->
+                      <input type="text"  id="fname" v-model="Notification.note" class="block w-full p-4  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required>
+                      <button  @click="AddNote(Notification.id,Notification.note)" type="submit" class="text-white absolute  left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">اضافة</button>
+                  </div>
+                </td>
+                <td >  {{ Notification.sender.name  }}</td>
+                <td v-if="Notification.Notifications.date">
+                  {{ Notification.Notifications.date }}
+                </td>
+                <td v-else>no Time</td>
 
-              <td v-if="Notification.done">
-                <button
-                  class="shadow bg-gray-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded"
-                  @click="UNCompletNotifications(Notification.id)"
-                  type="submit"
-                >
-                  مكتمل
-                </button>
-              </td>
-              <td v-else>
-                <button
-                  class="shadow bg-green-500 hover:bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded"
-                  type="submit"
-                  @click="CompletNotifications(Notification.id)"
-                >
-                  تم
-                </button>
-              </td>
-            </tr>
-          </table>
+                <td v-if="Notification.done">
+                  <button
+                    class="shadow bg-gray-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded"
+                    @click="UNCompletNotifications(Notification.id)"
+                    type="submit"
+                  >
+                    مكتمل
+                  </button>
+                </td>
+                <td v-else>
+                  <button
+                    class="shadow bg-green-500 hover:bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded"
+                    type="submit"
+                    @click="CompletNotifications(Notification.id)"
+                  >
+                    تم
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
         <div
           class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4"
@@ -382,5 +385,7 @@ th {
   padding: 8px;
 }
 
-
+.for-mobile-scoll-x {
+  min-width: 800px;
+}
 </style>
