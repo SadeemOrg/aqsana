@@ -70,14 +70,19 @@ class City extends Resource
             return $query;
         } elseif ($user->type() == 'regular_area') {
 
-            $area = \App\Models\Area::with('City')->where('admin_id', $id)->first();
-            $areas = $area->toArray();
-            $cites = $areas['city'];
-
+            $areasadmin = \App\Models\Area::with('City')->where('admin_id', $id)->get();
             $stack = array();
-            foreach ($cites as $key => $value) {
-                array_push($stack, $value['name']);
+            foreach ($areasadmin as $key => $area) {
+                $areas = $area->toArray();
+                $cites = $areas['city'];
+
+
+
+                foreach ($cites as $key => $value) {
+                    array_push($stack, $value['name']);
+                }
             }
+// dd( $stack);
             return $query->whereIn('name', $stack);
         } else {
 
@@ -95,7 +100,7 @@ class City extends Resource
     {
         $user = Auth::user();
 
-        if ($user->type() == 'admin') {
+
             return [
                 ID::make(__('ID'), 'id')->sortable(),
                 Text::make(__('Name'), 'name')->rules('required'),
@@ -133,7 +138,7 @@ class City extends Resource
                         }
                         return $user_type_admin_array;
                     })->rules('required')->singleSelect()->hideFromDetail()->hideFromIndex(),
-                    BelongsTo::make(__('Alhisalat_admin'), 'AlhisalatAdmin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                    BelongsTo::make(__('Alhisalat_admin'), 'AlhisalatAdmin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
                     Flexible::make(__('Alhisalat_sub_admin'), 'Alhisalat_sub_admin')
 
@@ -194,7 +199,7 @@ class City extends Resource
                 HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
             ];
-        }
+
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('Name'), 'name'),
@@ -206,8 +211,8 @@ class City extends Resource
 
 
             BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('Alhisalat_admin'), 'Alhisalat_admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('Qawafil_admin'), 'Qawafil_admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            // BelongsTo::make(__('Alhisalat_admin'), 'Alhisalat_admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            // BelongsTo::make(__('Qawafil_admin'), 'Qawafil_admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
