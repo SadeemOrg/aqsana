@@ -1,5 +1,5 @@
 <template>
-  <div v-if="filteredCards.length > 0" class="flex flex-wrap -mx-3">
+  <div v-if="filteredCards.length > 0" class="flex flex-wrap -mx-3 custom-class-tabs">
     <card-wrapper
       v-for="card in filteredCards"
       :card="card"

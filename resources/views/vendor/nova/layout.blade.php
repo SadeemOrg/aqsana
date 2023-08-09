@@ -14,104 +14,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('app.css', 'vendor/nova') }}">
-    <style>
-        .tryThis {
-            justify-content: space-between;
-        }
-
-        .searchItem {
-            margin-right: 5%;
-        }
-
-        .imgSideBar {
-            margin-left: 4%;
-        }
-    </style>
-    <style>
-        .room-sort {
-            --tw-bg-opacity: 1;
-            background-color: rgb(21 128 61 / var(--tw-bg-opacity));
-            margin: 0;
-            padding: 0;
-            text-align: right;
-        }
-
-        .room-sort-menu ul {
-            margin: 0;
-            padding: 0;
-        }
-
-        span.sort {
-            /* margin-right: 30px; */
-            color: #fff;
-            font-weight: 800;
-        }
-
-        .sort-mobile {
-            display: none;
-        }
-
-        /* .room-sort-menu>li {
-            display: inline-block;
-            color: #fff;
-        } */
-
-        .room-sort-menu>li>a {
-            display: inline-block;
-            /* padding: 16px 30px; */
-            margin: 0;
-            font-size: 0.8em;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .room-sort-menu>li>a:hover,
-        .room-sort-menu>li>a:focus {}
-
-        .dropdown {
-            position: relative;
-        }
-
-        .dropMenu {
-            position: ;
-            display: none;
-            top: 46px;
-            left: 0px;
-            border: 1px solid color;
-            width: auto;
-            background: rgb(21 128 61 / var(--tw-bg-opacity));
-            font-size: 0.8em;
-            z-index: 1;
-        }
-
-        .show {
-            display: block;
-        }        
-
-        .dropMenu li a {
-            display: block;
-            padding: 7px;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .dropMenu li a:hover, .dropMenu li a.router-link-active  {
-            /* --tw-bg-opacity: 1; */
-            background-color: #fff;
-            color: #000
-        }
-        .hide-angle svg.ml-2 {display: none}
-        .list-reset {
-            max-height: 400px
-        }
-        
-        .h-header .dropdown-trigger svg{min-width: 10px}        
-        @media (max-width: 991px) {
-            div[x-placement="bottom-start"]{transform: none !important}
-            html:not([dir="rtl"]) div[dusk$='index-component'] .btn[dusk='create-button']::before{position: relative; left: 19px; top: 3px}
-        }
-        table tbody td button {min-width: 125px; font-size: 15px}
-    </style>
+    
     <!-- Tool Styles -->
     @foreach (\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
         @if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://']))
@@ -131,6 +34,117 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-
     alpha/css/bootstrap.css"
         rel="stylesheet">
+
+        <style>
+            .tryThis {
+                justify-content: space-between;
+            }
+    
+            .searchItem {
+                margin-right: 5%;
+            }
+    
+            .imgSideBar {
+                margin-left: 4%;
+            }
+        
+            .room-sort {
+                --tw-bg-opacity: 1;
+                background-color: rgb(21 128 61 / var(--tw-bg-opacity));
+                margin: 0;
+                padding: 0;
+                text-align: right;
+            }
+    
+            .room-sort-menu ul {
+                margin: 0;
+                padding: 0;
+            }
+            /* .room-sort-menu li > a.active {text-decoration: underline} */
+
+            span.sort {
+                /* margin-right: 30px; */
+                color: #fff;
+                font-weight: 800;
+            }
+    
+            .sort-mobile {
+                display: none;
+            }
+    
+            /* .room-sort-menu>li {
+                display: inline-block;
+                color: #fff;
+            } */
+    
+            .room-sort-menu>li>a {
+                display: inline-block;
+                /* padding: 16px 30px; */
+                margin: 0;
+                font-size: 0.8em;
+                color: #fff;
+                text-decoration: none;
+            }
+    
+            .room-sort-menu>li>a:hover,
+            .room-sort-menu>li>a:focus {}
+    
+            .dropdown {
+                position: relative;
+            }
+    
+            .dropMenu {
+                position: ;
+                display: none;
+                top: 46px;
+                left: 0px;
+                border: 1px solid color;
+                width: auto;
+                background: rgb(21 128 61 / var(--tw-bg-opacity));
+                font-size: 0.8em;
+                z-index: 1;
+            }
+    
+            .show {
+                display: block;
+            }        
+    
+            .dropMenu li a {
+                display: block;
+                padding: 7px;
+                color: #fff;
+                text-decoration: none;
+            }
+    
+            .dropMenu li a:hover, .dropMenu li a.router-link-active  {
+                /* --tw-bg-opacity: 1; */
+                background-color: #fff;
+                color: #000
+            }
+            .hide-angle svg.ml-2 {display: none}
+            .list-reset {
+                max-height: 400px
+            }
+            
+            .h-header .dropdown-trigger svg{min-width: 10px}        
+            @media (max-width: 991px) {
+                div[x-placement="bottom-start"]{transform: none !important}
+                html:not([dir="rtl"]) div[dusk$='index-component'] .btn[dusk='create-button']::before,
+                html:not([dir="rtl"]) div[dusk$='index-component'] .btn[dusk='attach-button']::before
+                {position: relative; left: 19px; top: 3px}
+            }
+            table tbody td button {min-width: 125px; font-size: 15px}
+            /* Start custom style in tailwind components */
+            .custom-class-tabs .card {flex-wrap: wrap}
+            .custom-class-tabs .card button {min-width: 200px}
+            .table th {font-size: 15px}
+            .custom_defaultField > div > div {direction: ltr !important}
+            .custom_defaultField {
+                width: 100%
+            }
+            .pl-6 {padding-left: 1.5rem !important}
+            .pr-6 {padding-right: 1.5rem !important}
+        </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -316,6 +330,9 @@
                 $('.w-sidebar').removeClass('sidebar-hidden');
                 $(this).next('.dropMenu').slideToggle();
             });
+
+            // $('.router-link-active').parent().parent().prev('a').addClass('active')
+
         });
 
 
