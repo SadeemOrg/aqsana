@@ -5,7 +5,9 @@ namespace App\Nova;
 use App\Models\TelephoneDirectory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -65,6 +67,9 @@ class Tours extends Resource
             Text::make(__('name'),'name')->rules('required'),
             Date::make(__('DATE'), 'date')->pickerDisplayFormat('d.m.Y')->rules('required'),
             Text::make(__('number_of_people'),'number_of_people')->rules('required'),
+
+            BelongsTo::make(__('Contacts'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
+
             Select::make(__('Contacts'), "Contacts")
             ->options(function () {
                 $types =  TelephoneDirectory::where('type', '=', '6')->get();
@@ -79,13 +84,14 @@ class Tours extends Resource
 
 
             Flexible::make(__('Contacts'), 'NewContacts')
-            ->readonly(true)
+                ->limit(1)
             ->hideFromDetail()->hideFromIndex()
             ->addLayout(__('Add new type'), 'type', [
                 Text::make(__('name'), 'name'),
                 Text::make(__('phone_number'), 'phone_number'),
             ]),
             Text::make(__('guide_name'),'guide_name')->rules('required'),
+            Text::make(__('guide_number'),'guide_number'),
             Text::make(__('start Time'), 'start_tour')
             ->placeholder('##:##')
             ->rules('date_format:"H:i"')
@@ -95,9 +101,12 @@ class Tours extends Resource
             ->rules('date_format:"H:i"')
             ->help('hh:mm'),
             Textarea::make(__('note'),'note'),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
         ];
     }
-    public static function afterSave(Request $request, $model)
+
+    public static function beforeSave(Request $request, $model)
     {
 
         if (!$request->Contacts) {
@@ -112,14 +121,13 @@ class Tours extends Resource
                 ]);
                 // $model->Contacts=$bookt->id;
                 // $BookType =  \App\Models\BookType::orderBy('created_at', 'desc')->first();
+                $request->merge(['Contacts' => $bookt->id]);
 
-                DB::table('events')
-                ->where('id', $model->id)
-                ->update(['Contacts' => $bookt->id]);
 
 
             }
         }
+        $request->request->remove('NewContacts');
     }
     /**
      * Get the cards available for the request.

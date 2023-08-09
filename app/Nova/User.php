@@ -163,6 +163,7 @@ class User extends Resource
 
 
 
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
 
         ];

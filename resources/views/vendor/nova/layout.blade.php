@@ -78,7 +78,7 @@
             top: 46px;
             left: 0px;
             border: 1px solid color;
-            width: 109px;
+            width: auto;
             background: rgb(21 128 61 / var(--tw-bg-opacity));
             font-size: 0.8em;
             z-index: 1;
@@ -86,11 +86,7 @@
 
         .show {
             display: block;
-        }
-
-        .room-sort-menu li:last-of-type ul.dropMenu {
-            /* width: 166px; */
-        }
+        }        
 
         .dropMenu li a {
             display: block;
@@ -99,14 +95,22 @@
             text-decoration: none;
         }
 
-        .dropMenu li a:hover {
-            --tw-bg-opacity: 1;
-            background-color: rgb(21 128 61 / var(--tw-bg-opacity));
+        .dropMenu li a:hover, .dropMenu li a.router-link-active  {
+            /* --tw-bg-opacity: 1; */
+            background-color: #fff;
+            color: #000
         }
         .hide-angle svg.ml-2 {display: none}
         .list-reset {
             max-height: 400px
         }
+        
+        .h-header .dropdown-trigger svg{min-width: 10px}        
+        @media (max-width: 991px) {
+            div[x-placement="bottom-start"]{transform: none !important}
+            html:not([dir="rtl"]) div[dusk$='index-component'] .btn[dusk='create-button']::before{position: relative; left: 19px; top: 3px}
+        }
+        table tbody td button {min-width: 125px; font-size: 15px}
     </style>
     <!-- Tool Styles -->
     @foreach (\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
@@ -185,7 +189,7 @@
                     </dropdown>
                 </div>
 
-                <div data-testid="content" class="px-view py-view mx-auto">
+                <div data-testid="content custom-content" class="px-view py-view mx-auto">
                     @yield('content')
 
                     @include('nova::partials.footer')

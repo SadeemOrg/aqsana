@@ -149,7 +149,7 @@ class WorkHours extends Component
         $from = date($this->FromDate);
         $to = date($this->ToDate);
 
-        $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$from, $to])->where('user_id', '=', $user->id)->get();
+        $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$from, $to])->where('user_id', '=', $user->id)->orderBy('date', 'ASC')->get();
         $string = '00000000000000';
         $date = Carbon::parse($string);
         foreach ($this->WorkHourssearch as $key => $value) {
@@ -274,7 +274,7 @@ class WorkHours extends Component
             $from = date('2022-01-01');
             $to = date('2022-12-31');
 
-            $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$newDateTime, $currentDateTime])->where('user_id', '=', $user->id)->get();
+            $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$newDateTime, $currentDateTime])->where('user_id', '=', $user->id)->orderBy('date', 'ASC')->get();
             $string = '00000000000000';
             $date = Carbon::parse($string);
             foreach ($this->WorkHourssearch as $key => $value) {

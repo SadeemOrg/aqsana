@@ -7,6 +7,8 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\HasMany;
+
 class Role extends Resource
 {
     /**
@@ -59,6 +61,8 @@ class Role extends Resource
             Text::make(__('code_role'),'code_role'),
             Text::make(__('role'),'role'),
             Boolean::make(__("status"),"status"),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
         ];
     }
 

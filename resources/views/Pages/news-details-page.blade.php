@@ -258,6 +258,20 @@
                         </ul>
                     </div>
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
+                        @if (!empty($news_detail->videos))
+                            @foreach (json_decode($news_detail->videos) as $video)
+                                <div class="col-span-1 scalabel-img-box">
+                                    <a href={{ $video->attributes->video_link }}
+                                        class="mediabox rounded-[5px] overflow-hidden relative">
+                                        <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full"
+                                            src="/storage/{{ $video->attributes->video_img_cover }}"
+                                            alt="people_on_Mousq" />
+                                        <img src="{{ asset('assets/image/play_Svg.svg') }}"
+                                            class="absolute max-w-[46px] top-[44%] right-[45%] " />
+                                    </a>
+                                </div>
+                            @endforeach
+                        @endif
                         @if (!empty($pictures) && !empty($news_detail->video_link))
                             <div class="col-span-1 scalabel-img-box">
                                 <a href={{ $news_detail->video_link }}

@@ -512,82 +512,86 @@ class HomeController extends Controller
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
             foreach ($Transactions as $key => $Transaction) {
-                $Projects = Project::where([
-                    ['id', $Transaction->ref_id],
-                    ['sector', $Sector->id]
-                ])->first();
-                if (!empty($Projects)) {
-                    $expenses_year += $Transaction->equivelant_amount;
-                }
+                $expenses_year += $Transaction->equivelant_amount;
+
             }
+            $expenses_year=number_format($expenses_year   , 2, '.', '');
 
             //First Quarter
             $expenses_First = 0;
+            $income_First = 0;
             $date_from = $year . '-1-1';
             $date_to = $year . '-3-31';
             $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
-            foreach ($Transactions as $key => $Transaction) {
-                $Projects = Project::where([
-                    ['id', $Transaction->ref_id],
-                    ['sector', $Sector->id]
-                ])->first();
-                if (!empty($Projects)) {
-                    $expenses_First += $Transaction->equivelant_amount;
-                }
-            }
+            $Transactionsincome = Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->get();
 
+            foreach ($Transactions as $key => $Transaction) {
+                $expenses_First += $Transaction->equivelant_amount;
+            }
+            $expenses_First=number_format($expenses_First   , 2, '.', '');
+            foreach ($Transactionsincome as $key => $Transaction) {
+                $income_First += $Transaction->equivelant_amount;
+            }
+            $income_First=number_format($income_First   , 2, '.', '');
             //Second Quarter
             $expenses_Second = 0;
+            $income_Second = 0;
             $date_from = $year . '-4-1';
             $date_to = $year . '-6-30';
             $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactionsincome = Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->get();
+
             foreach ($Transactions as $key => $Transaction) {
-                $Projects = Project::where([
-                    ['id', $Transaction->ref_id],
-                    ['sector', $Sector->id]
-                ])->first();
-                if (!empty($Projects)) {
-                    $expenses_Second += $Transaction->equivelant_amount;
-                }
+                $expenses_Second += $Transaction->equivelant_amount;
             }
+            $expenses_Second=number_format($expenses_Second   , 2, '.', '');
+            foreach ($Transactionsincome as $key => $Transaction) {
+                $income_Second += $Transaction->equivelant_amount;
+            }
+            $income_Second=number_format($income_Second   , 2, '.', '');
 
             //Third Quarter
             $expenses_Third = 0;
+            $income_Third = 0;
             $date_from = $year . '-7-1';
             $date_to = $year . '-9-30';
             $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactionsincome = Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->get();
+
             foreach ($Transactions as $key => $Transaction) {
-                $Projects = Project::where([
-                    ['id', $Transaction->ref_id],
-                    ['sector', $Sector->id]
-                ])->first();
-                if (!empty($Projects)) {
-                    $expenses_Third += $Transaction->equivelant_amount;
-                }
+                $expenses_Third += $Transaction->equivelant_amount;
             }
+            $expenses_Third=number_format($expenses_Third   , 2, '.', '');
+            foreach ($Transactionsincome as $key => $Transaction) {
+                $income_Third += $Transaction->equivelant_amount;
+            }
+            $income_Third=number_format($income_Third   , 2, '.', '');
 
             //fourth Quarter
             $expenses_fourth = 0;
-            $date_from = $year . '-8-1';
+            $income_fourth= 0;
+            $date_from = $year . '-10-1';
             $date_to = $year . '-12-31';
             $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactionsincome = Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->get();
+
             foreach ($Transactions as $key => $Transaction) {
-                $Projects = Project::where([
-                    ['id', $Transaction->ref_id],
-                    ['sector', $Sector->id]
-                ])->first();
-                if (!empty($Projects)) {
-                    $expenses_fourth += $Transaction->equivelant_amount;
-                }
+                $expenses_fourth += $Transaction->equivelant_amount;
             }
+            $expenses_fourth=number_format($expenses_fourth   , 2, '.', '');
+            foreach ($Transactionsincome as $key => $Transaction) {
+                $income_fourth += $Transaction->equivelant_amount;
+            }
+            $income_fourth=number_format($income_fourth   , 2, '.', '');
+
 
 
             if (!empty($Budgets)) {
@@ -601,6 +605,10 @@ class HomeController extends Controller
                     "expenses_Second" =>  $expenses_Second,
                     "expenses_Third" =>  $expenses_Third,
                     "expenses_fourth" =>  $expenses_fourth,
+                    "income_First" => $income_First,
+                    "income_Second" => $income_Second,
+                    "income_Third" => $income_Third,
+                    "income_fourth" => $income_fourth,
 
 
 
@@ -616,6 +624,10 @@ class HomeController extends Controller
                     "expenses_Second" =>  $expenses_Second,
                     "expenses_Third" =>  $expenses_Third,
                     "expenses_fourth" =>  $expenses_fourth,
+                    "income_First" => $income_First,
+                    "income_Second" => $income_Second,
+                    "income_Third" => $income_Third,
+                    "income_fourth" => $income_fourth,
 
                 );
             }
@@ -1191,7 +1203,7 @@ class HomeController extends Controller
 
     public function library()
     {
-        $books = Book::all();
+        $books = Book::where('post', 1)->get();
         $book_type = BookType::all();
         return view('Pages.Library.Library', compact('books', 'book_type'));
     }

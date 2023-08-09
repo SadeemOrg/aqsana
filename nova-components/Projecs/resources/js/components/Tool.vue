@@ -446,7 +446,7 @@
                                           id="street-address"
                                           autocomplete="street-address"
                                           :value="
-                                            Sector.Budget - Sector.expenses_year
+                                           ( Sector.Budget - Sector.expenses_year).toFixed(2)
                                           "
                                           class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
@@ -503,8 +503,8 @@
                                           id="postal-code"
                                           autocomplete="postal-code"
                                           :value="
-                                            Sector.Budget / 4 -
-                                            Sector.expenses_First
+                                            (Sector.Budget / 4 -
+                                            Sector.expenses_First).toFixed(2)
                                           "
                                           class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
@@ -561,8 +561,8 @@
                                           id="postal-code"
                                           autocomplete="postal-code"
                                           :value="
-                                            Sector.Budget / 4 -
-                                            Sector.expenses_Second
+                                           ( Sector.Budget / 4 -
+                                            Sector.expenses_Second).toFixed(2)
                                           "
                                           class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
@@ -619,8 +619,8 @@
                                           id="postal-code"
                                           autocomplete="postal-code"
                                           :value="
-                                            Sector.Budget / 4 -
-                                            Sector.expenses_Third
+                                           ( Sector.Budget / 4 -
+                                            Sector.expenses_Third).toFixed(2)
                                           "
                                           class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
@@ -688,10 +688,11 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="flex justify-between">
-                              <div>
+                            <div class="md:flex justify-between mt-5 text-center">
+                              <div class="mb-4 md:mb-0 md:w-1/2">
                                 <pure-vue-chart
-                                  :points="[1, 4, 5, 3, 4, 1, 1, 1, 1, 1, 1, 1]"
+                                  class="chart-custom-style"
+                                  :points="[  Sector.expenses_First, Sector.expenses_Second, Sector.expenses_Third, Sector.expenses_fourth]"
                                   :show-y-axis="true"
                                   :show-x-axis="true"
                                   :width="400"
@@ -704,44 +705,31 @@
                                     'Fev',
                                     'Mar',
                                     'Abr',
-                                    'Mai',
-                                    'Jun',
-                                    'Jul',
-                                    'Ago',
-                                    'Set',
-                                    'Out',
-                                    'Nov',
-                                    'Dez',
-                                  ]"
-                                />
-                                <h1>مدخلات</h1>
-                              </div>
-                              <div>
-                                <pure-vue-chart
-                                  :points="[1, 4, 5, 3, 4, 1, 1, 1, 1, 1, 1, 1]"
-                                  :show-y-axis="true"
-                                  :show-x-axis="true"
-                                  :width="400"
-                                  :height="200"
-                                  :show-values="true"
-                                  :use-month-labels="true"
-                                  :use-points-labels="true"
-                                  :months="[
-                                    'Jan',
-                                    'Fev',
-                                    'Mar',
-                                    'Abr',
-                                    'Mai',
-                                    'Jun',
-                                    'Jul',
-                                    'Ago',
-                                    'Set',
-                                    'Out',
-                                    'Nov',
-                                    'Dez',
+
                                   ]"
                                 />
                                 <h1>مخرجات</h1>
+                              </div>
+                              <div class="md:w-1/2">
+                                <pure-vue-chart
+                                class="chart-custom-style"
+                                  :points="[Sector.income_First, Sector.income_Second,  Sector.income_Third,  Sector.income_fourth]"
+                                  :show-y-axis="true"
+                                  :show-x-axis="true"
+                                  :width="400"
+                                  :height="200"
+                                  :show-values="true"
+                                  :use-month-labels="true"
+                                  :use-points-labels="true"
+                                  :months="[
+                                    'Jan',
+                                    'Fev',
+                                    'Mar',
+                                    'Abr',
+
+                                  ]"
+                                />
+                                <h1>مدخلات</h1>
                               </div>
                             </div>
                           </div>
@@ -839,7 +827,7 @@ export default {
           this.deletSectors = response.data;
           this.selectedItem = "0";
           this.selectedyear = "0";
-          this.year = "0";
+          this.year = event.target.value;
         });
     },
     save() {
@@ -906,7 +894,7 @@ export default {
       }
     },
     delet() {
-      console.log(this.year);
+
       // console.log(this.deletSectors);
       axios.post("/delet", {
         year: this.year,
@@ -925,3 +913,9 @@ export default {
   },
 };
 </script>
+<style>
+  /* .chart-custom-style {
+    width:500px !important;
+    height: 300px !important;
+  } */
+</style>

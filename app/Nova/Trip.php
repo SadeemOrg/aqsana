@@ -189,7 +189,7 @@ class Trip extends Resource
                         return null;
                     }),
                 Flexible::make(__('newadres'), 'newadresfrom')
-                    ->readonly(true)
+
                     ->limit(1)
                     ->hideFromDetail()->hideFromIndex()
                     ->addLayout(__('Add new bus'), 'bus', [
@@ -229,7 +229,7 @@ class Trip extends Resource
                         return null;
                     }),
                 Flexible::make(__('newadres'), 'newadresto')
-                    ->readonly(true)
+
                     ->limit(1)
                     ->hideFromDetail()->hideFromIndex()
                     ->addLayout(__('Add new bus'), 'bus', [
@@ -599,8 +599,11 @@ class Trip extends Resource
             HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
             HasMany::make(__('TripBooking'), 'TripBooking', \App\Nova\TripBooking::class),
             belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
         ];
     }
+
     public static function beforeCreate(Request $request, $model)
     {
         $id = Auth::id();
@@ -610,7 +613,6 @@ class Trip extends Resource
         $model->is_bus = '1';
         $model->sector = '0';
     }
-
     public static function afterCreate(Request $request, $model)
     {
         $user = Auth::user();
@@ -639,42 +641,109 @@ class Trip extends Resource
                 );
         }
     }
+    public static function beforeSave(Request $request, $model)
+    {
+        // if (!$request->type) {
+
+
+        //     if ($request->newtype   && ($request->newtype[0]['attributes']['name'] || $request->newtype[0]['attributes']['describtion'])) {
+        //         BookType::create([
+        //             'name' => $request->newtype[0]['attributes']['name'],
+        //             'describtion' => $request->newtype[0]['attributes']['describtion'],
+        //         ]);
+        //         $BookType =  \App\Models\BookType::orderBy('created_at', 'desc')->first();
+
+        //         $request->merge(['type' => $BookType->id]);
+        //     }
+        // }
+        // $request->request->remove('newtype');
+        $id = Auth::id();
+        if (!$request->trip_from) {
+            if ($request->newadresfrom && $request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] && $request->newadresfrom[0]['attributes']['phone_number_address'] && $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['address_status']) {
+
+
+                DB::table('addresses')
+                    ->Insert(
+                        [
+                            'name_address' => $request->newadresfrom[0]['attributes']['name_address'],
+                            'description' => $request->newadresfrom[0]['attributes']['description'],
+                            'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
+                            'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
+                            'status' => $request->newadresfrom[0]['attributes']['address_status'],
+                            'type' => '4',
+                            'created_by' => $id
+                        ]
+                    );
+                $address =  \App\Models\address::where('name_address',  $request->newadresfrom[0]['attributes']['name_address'])->first();
+
+                $request->merge(['trip_from' => $address->id]);
+            }
+        }
+        $request->request->remove('newadresfrom');
+
+        if (!$request->trip_to) {
+            if ($request->newadresto&&$request->newadresto[0]['attributes']['name_address'] && $request->newadresto[0]['attributes']['description'] && $request->newadresto[0]['attributes']['phone_number_address'] && $request->newadresto[0]['attributes']['current_location'] && $request->newadresto[0]['attributes']['address_status']) {
+                //   dd("hf");
+                DB::table('addresses')
+                    ->Insert(
+                        [
+                            'name_address' => $request->newadresto[0]['attributes']['name_address'],
+                            'description' => $request->newadresto[0]['attributes']['description'],
+                            'phone_number_address' => $request->newadresto[0]['attributes']['phone_number_address'],
+                            'current_location' => $request->newadresto[0]['attributes']['current_location'],
+                            'status' => $request->newadresto[0]['attributes']['address_status'],
+                            'type' => '4',
+                            'created_by' => $id
+                        ]
+                    );
+                $address =  \App\Models\address::where('name_address',  $request->newadresto[0]['attributes']['name_address'])->first();
+                // DB::table('projects')
+                //     ->where('id', $model->id)
+                //     ->update(['trip_to' => $address->id]);
+                    $request->merge(['trip_to' => $address->id]);
+
+            }
+        } else   $model->trip_to = $request->trip_to;
+        $request->request->remove('newadresto');
+
+    }
+
     public static function afterSave(Request $request, $model)
     {
 
 
-            if ($request->Area) {
-                $areas = json_decode($request->Area);
-                $tokens = [];
-                foreach ($areas as $key => $area) {
-                    $user = User::where('id', $area->admin_id)->first();
-                    $notification = Notification::where('id', '3')->first();
+        if ($request->Area) {
+            $areas = json_decode($request->Area);
+            $tokens = [];
+            foreach ($areas as $key => $area) {
+                $user = User::where('id', $area->admin_id)->first();
+                $notification = Notification::where('id', '3')->first();
 
-                    if ($user->fcm_token != null && $user->fcm_token != "") {
-                        array_push($tokens, $user->fcm_token);
-                    }
-                }
-                if (!empty($tokens)) {
-
-                    Helpers::send_notification($tokens, $notification);
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
                 }
             }
-            if ($request->City) {
-                $Citys = json_decode($request->City);
-                $tokens = [];
-                foreach ($Citys as $key => $City) {
-                    $user = User::where('id', $City->admin_id)->first();
-                    $notification = Notification::where('id', '3')->first();
+            if (!empty($tokens)) {
 
-                    if ($user->fcm_token != null && $user->fcm_token != "") {
-                        array_push($tokens, $user->fcm_token);
-                    }
-                }
-                if (!empty($tokens)) {
+                Helpers::send_notification($tokens, $notification);
+            }
+        }
+        if ($request->City) {
+            $Citys = json_decode($request->City);
+            $tokens = [];
+            foreach ($Citys as $key => $City) {
+                $user = User::where('id', $City->admin_id)->first();
+                $notification = Notification::where('id', '3')->first();
 
-                    Helpers::send_notification($tokens, $notification);
+                if ($user->fcm_token != null && $user->fcm_token != "") {
+                    array_push($tokens, $user->fcm_token);
                 }
             }
+            if (!empty($tokens)) {
+
+                Helpers::send_notification($tokens, $notification);
+            }
+        }
 
 
         $id = Auth::id();
@@ -777,7 +846,7 @@ class Trip extends Resource
                         );
                     $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
 
-                dd(    DB::table('project_bus')
+                    dd(DB::table('project_bus')
                         ->updateOrInsert(
                             ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
 
@@ -796,49 +865,8 @@ class Trip extends Resource
                     ['status' => '0']
                 );
         }
-        if (!$request->trip_from) {
-            if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] && $request->newadresfrom[0]['attributes']['phone_number_address'] && $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['address_status']) {
 
-                //   dd("hf");
-                DB::table('addresses')
-                    ->Insert(
-                        [
-                            'name_address' => $request->newadresfrom[0]['attributes']['name_address'],
-                            'description' => $request->newadresfrom[0]['attributes']['description'],
-                            'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
-                            'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
-                            'status' => $request->newadresfrom[0]['attributes']['address_status'],
-                            'type' => '4',
-                            'created_by' => $id
-                        ]
-                    );
-                $address =  \App\Models\address::where('name_address',  $request->newadresfrom[0]['attributes']['name_address'])->first();
-                DB::table('projects')
-                    ->where('id', $model->id)
-                    ->update(['trip_from' => $address->id]);
-            }
-        } else   $model->trip_from = $request->trip_from;
-        if (!$request->trip_to) {
-            if ($request->newadresto[0]['attributes']['name_address'] && $request->newadresto[0]['attributes']['description'] && $request->newadresto[0]['attributes']['phone_number_address'] && $request->newadresto[0]['attributes']['current_location'] && $request->newadresto[0]['attributes']['address_status']) {
-                //   dd("hf");
-                DB::table('addresses')
-                    ->Insert(
-                        [
-                            'name_address' => $request->newadresto[0]['attributes']['name_address'],
-                            'description' => $request->newadresto[0]['attributes']['description'],
-                            'phone_number_address' => $request->newadresto[0]['attributes']['phone_number_address'],
-                            'current_location' => $request->newadresto[0]['attributes']['current_location'],
-                            'status' => $request->newadresto[0]['attributes']['address_status'],
-                            'type' => '4',
-                            'created_by' => $id
-                        ]
-                    );
-                $address =  \App\Models\address::where('name_address',  $request->newadresto[0]['attributes']['name_address'])->first();
-                DB::table('projects')
-                    ->where('id', $model->id)
-                    ->update(['trip_to' => $address->id]);
-            }
-        } else   $model->trip_to = $request->trip_to;
+
     }
     /**
      * Get the cards available for the request.

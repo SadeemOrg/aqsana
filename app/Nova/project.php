@@ -90,17 +90,17 @@ class Project extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("projectparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("projectparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
 
     public static $search = [
-        'id','project_name'
+        'id', 'project_name'
     ];
-    public static function groupOrder() {
-        return 7 ;
+    public static function groupOrder()
+    {
+        return 7;
     }
     /**
      * Get the fields displayed by the resource.
@@ -238,23 +238,22 @@ class Project extends Resource
 
 
 
-           Text::make(__("project name"), "project_name")->rules('required'),
+                Text::make(__("project name"), "project_name")->rules('required'),
                 Text::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
 
                 Select::make(__('SECTOR'), 'sector')
-                ->options(function(){
-                    $Sectors =  \App\Models\Sector::all();
-                    $Sectors_type_admin_array =  array();
+                    ->options(function () {
+                        $Sectors =  \App\Models\Sector::all();
+                        $Sectors_type_admin_array =  array();
 
-                    foreach ($Sectors as $Sector) {
+                        foreach ($Sectors as $Sector) {
 
 
                             $Sectors_type_admin_array += [$Sector['id'] => ($Sector['text'])];
+                        }
 
-                    }
-
-                    return $Sectors_type_admin_array;
-                })->hideFromIndex(),
+                        return $Sectors_type_admin_array;
+                    })->hideFromIndex(),
 
                 BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
                     ->options(Area::all())
@@ -328,7 +327,7 @@ class Project extends Resource
 
 
                 Flexible::make(__('newbus'), 'newbus')
-                    ->readonly(true)
+                    ->limit(1)
                     ->hideFromDetail()->hideFromIndex()
                     ->addLayout(__('Add new bus'), 'bus', [
 
@@ -412,6 +411,8 @@ class Project extends Resource
             // HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
             HasMany::make(__('Volunteer'), 'Volunteer', \App\Nova\Volunteer::class),
             belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+
             // ->canSee(function ($request) {
 
             //     $user = Auth::user();
@@ -422,7 +423,49 @@ class Project extends Resource
     }
 
 
+    public static function beforeSave(Request $request, $model)
+    {
+        $id = Auth::id();
+        $citye =   City::where('admin_id', $id)
+            ->select('id')->first();
+dd($request->bus);
+            if ($request->newbus) {
+                $buss = $request->newbus;
 
+                foreach ($buss as $bus) {
+
+                    DB::table('buses')
+                        ->insert(
+                            [
+                                'name_driver' => $bus['attributes']['name_driver'] ? $bus['attributes']['name_driver'] : "  ",
+                                'company_id' => $bus['attributes']['BusesCompany'],
+                                'bus_number' => $bus['attributes']['bus_number'],
+                                'number_of_seats' => $bus['attributes']['number_person_on_bus'],
+                                'seat_price' => $bus['attributes']['seat_price'],
+                                'phone_number_driver' => $bus['attributes']['phone_number'],
+                                // 'admin_id' => $bus['attributes']['adminbus'],
+                                'status' => '1',
+                            ]
+                        );
+                    $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
+                    $user = Auth::user();
+                    if ($user->type() == 'regular_city') {
+                        DB::table('project_bus')
+                            ->updateOrInsert(
+                                ['project_id' => $request->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
+
+                            );
+                    } else {
+                        DB::table('project_bus')
+                            ->updateOrInsert(
+                                ['project_id' => $request->id, 'bus_id' => $bus['id']],
+
+                            );
+                    }
+                }
+            }
+
+    }
 
     public static function beforeCreate(Request $request, $model)
     {
@@ -446,7 +489,6 @@ class Project extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-
         }
         if ($request->City) {
             $Citys = json_decode($request->City);
@@ -459,14 +501,13 @@ class Project extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-
         }
 
 
-            DB::table('project_status')->insert([
-                'project_id' => $model->id,
-                'status' => 0,
-            ]);
+        DB::table('project_status')->insert([
+            'project_id' => $model->id,
+            'status' => 0,
+        ]);
 
         $user = Auth::user();
         $id = Auth::id();
@@ -512,7 +553,6 @@ class Project extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-
         }
         if ($request->City) {
             $Citys = json_decode($request->City);
@@ -525,7 +565,6 @@ class Project extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-
         }
 
         if ($request->Budjet) {
@@ -598,47 +637,6 @@ class Project extends Resource
 
             //     );
         }
-        if ($request->newbus) {
-            $buss = $request->newbus;
-            // $to='{"country":"Israel","countryCode":"il","latlng":{"lat":31.769,"lng":35.2163},"name":"Jerusalem","query":"ontefiore Windmill Sderot Blumfield Jerusalem","type":"city","value":"Jerusalem, Israel"}';
-            // $tojsone =
-            // dd( json_decode($to));
-            // dd($tojsone );
-            // dd($request->newbus);
-            foreach ($buss as $bus) {
-
-                DB::table('buses')
-                    ->insert(
-                        [
-                            'name_driver' => $bus['attributes']['name_driver']?$bus['attributes']['name_driver']:"  ",
-                            'company_id' => $bus['attributes']['BusesCompany'],
-                            'bus_number' => $bus['attributes']['bus_number'],
-                            'number_of_seats' => $bus['attributes']['number_person_on_bus'],
-                            'seat_price' => $bus['attributes']['seat_price'],
-                            'phone_number_driver' => $bus['attributes']['phone_number'],
-                            // 'admin_id' => $bus['attributes']['adminbus'],
-                            'status' => '1',
-                        ]
-                    );
-                $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
-                $user = Auth::user();
-                if ($user->type() == 'regular_city') {
-                    DB::table('project_bus')
-                        ->updateOrInsert(
-                            ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
-
-                        );
-                } else {
-                    DB::table('project_bus')
-                        ->updateOrInsert(
-                            ['project_id' => $model->id, 'bus_id' => $bus['id']],
-
-                        );
-                }
-            }
-        }
-
-
     }
     public static function afterupdate(Request $request, $model)
     {
@@ -653,7 +651,6 @@ class Project extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-
         }
         if ($request->City) {
             $Citys = json_decode($request->City);
@@ -666,7 +663,6 @@ class Project extends Resource
                     array_push($tokens, $user->fcm_token);
                 }
             }
-
         }
     }
 
