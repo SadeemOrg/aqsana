@@ -52137,7 +52137,9 @@ var render = function() {
       "div",
       {
         staticClass: "px-8",
-        class: _vm.field.stacked ? "pt-6 w-full" : "md:py-6 md:w-1/5"
+        class: _vm.field.stacked
+          ? "pt-6 w-full"
+          : "md:py-6 w-1/5 custom-field-style"
       },
       [
         _vm._t("default", function() {
@@ -52166,7 +52168,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "py-6 px-3 md:px-8 custom_defaultField",
+        staticClass: "py-6 md:pt-6 pt-3 px-3 md:px-8 custom_defaultField",
         class: _vm.fieldClasses
       },
       [

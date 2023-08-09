@@ -144,6 +144,23 @@
             }
             .pl-6 {padding-left: 1.5rem !important}
             .pr-6 {padding-right: 1.5rem !important}
+            @media (max-width: 767px) {
+                .custom-field-style {width: 100% !important}
+                .custom-field-style label {padding-top: 1.5rem}
+            }
+            .multiselect {text-align: right !important}
+            .multiselect .multiselect__tags{padding: 8px 8px 0 40px}
+            .w-sidebar {height: 100vh;}
+            .w-sidebar .custom-sidebar {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 13.75rem;
+                overflow: auto;
+                z-index: 99;
+            }
+
         </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -170,12 +187,14 @@
     <div id="nova">
         <div v-cloak class="flex min-h-screen">
             <!-- Sidebar -->
-            <div class="flex-none pt-header min-h-screen w-sidebar  px-6 bg-green-700">
+            <div class="w-sidebar">
+                <div class="flex-none pt-header min-h-screen w-full custom-sidebar px-6 bg-green-700">
 
 
-                @foreach (\Laravel\Nova\Nova::availableTools(request()) as $tool)
-                    {!! $tool->renderNavigation() !!}
-                @endforeach
+                    @foreach (\Laravel\Nova\Nova::availableTools(request()) as $tool)
+                        {!! $tool->renderNavigation() !!}
+                    @endforeach
+                </div>
             </div>
             <!-- Content -->
             <div class="content">
