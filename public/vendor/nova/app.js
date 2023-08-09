@@ -56017,16 +56017,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass:
-        "relative rounded-lg rounded-b-lg bg-30 bg-clip border border-60",
-      class: { "mr-11": _vm.editMode && _vm.deleteRowEnabled }
-    },
-    [_vm._t("default")],
-    2
-  )
+  return _c("div", {
+    staticClass:
+      "relative rounded-lg rounded-b-lg bg-30 bg-clip border border-60",
+    class: { "mr-11": _vm.editMode && _vm.deleteRowEnabled }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
