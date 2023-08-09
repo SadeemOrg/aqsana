@@ -33,10 +33,9 @@ class Book extends Resource
 
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Bookparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Bookparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
     public static function label()
     {
@@ -47,7 +46,8 @@ class Book extends Resource
         return __('Cultural Section');
     }
     public static $priority = 1;
-    public static function groupOrder() {
+    public static function groupOrder()
+    {
         return 8;
     }
 
@@ -90,38 +90,38 @@ class Book extends Resource
             Text::make(__('Name'), 'name')->rules('required', 'max:255'),
             Text::make(__('author'), 'author'),
             Tiptap::make(__('description'), 'description')
-            ->buttons([
-                'heading',
-                '|',
-                'italic',
-                'bold',
-                '|',
-                'link',
-                'code',
-                'strike',
-                'underline',
-                'highlight',
-                '|',
-                'bulletList',
-                'orderedList',
-                'br',
-                'codeBlock',
-                'blockquote',
-                '|',
-                'horizontalRule',
-                'hardBreak',
-                '|',
-                'table',
-                '|',
-                'image',
-                '|',
-                'textAlign',
-                '|',
-                'rtl',
-                '|',
-                'history',
-            ])
-            ->headingLevels([1, 2, 3, 4, 5, 6]),
+                ->buttons([
+                    'heading',
+                    '|',
+                    'italic',
+                    'bold',
+                    '|',
+                    'link',
+                    'code',
+                    'strike',
+                    'underline',
+                    'highlight',
+                    '|',
+                    'bulletList',
+                    'orderedList',
+                    'br',
+                    'codeBlock',
+                    'blockquote',
+                    '|',
+                    'horizontalRule',
+                    'hardBreak',
+                    '|',
+                    'table',
+                    '|',
+                    'image',
+                    '|',
+                    'textAlign',
+                    '|',
+                    'rtl',
+                    '|',
+                    'history',
+                ])
+                ->headingLevels([1, 2, 3, 4, 5, 6]),
             // Textarea::make(__('description'), 'description'),
             BelongsTo::make(__('Book Type'), 'BookType', \App\Nova\BookType::class)->hideWhenCreating()->hideWhenUpdating(),
 
@@ -134,42 +134,39 @@ class Book extends Resource
                     }
 
                     return $type_array;
-                })->displayUsingLabels() ->hideFromDetail()->hideFromIndex(),
+                })->displayUsingLabels()->hideFromDetail()->hideFromIndex(),
             Flexible::make(__('newtype'), 'newtype')
-                ->readonly(true)
+            ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('Add new type'), 'type', [
                     Text::make(__('name'), 'name'),
                     Text::make(__('describtion'), 'describtion'),
-                ]),
+                ])->confirmRemove(),
             Image::make(__('cover_photo'), 'cover_photo')->disk('public')->prunable()->rules('required'),
             File::make(__('file'), 'file')->disk('public')->deletable()->rules('required'),
             HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
         ];
     }
-
-    public static function afterSave(Request $request, $model)
+    public static function beforeSave(Request $request, $model)
     {
-
-
         if (!$request->type) {
 
 
-            if ($request->newtype   &&($request->newtype[0]['attributes']['name'] || $request->newtype[0]['attributes']['describtion'])) {
+            if ($request->newtype   && ($request->newtype[0]['attributes']['name'] || $request->newtype[0]['attributes']['describtion'])) {
                 BookType::create([
                     'name' => $request->newtype[0]['attributes']['name'],
                     'describtion' => $request->newtype[0]['attributes']['describtion'],
                 ]);
                 $BookType =  \App\Models\BookType::orderBy('created_at', 'desc')->first();
 
-                DB::table('books')
-                ->where('id', $model->id)
-                ->update(['type' => $BookType->id]);
-
-
+                $request->merge(['type' => $BookType->id]);
             }
         }
+        $request->request->remove('newtype');
+    }
+    public static function afterSave(Request $request, $model)
+    {
 
 
 

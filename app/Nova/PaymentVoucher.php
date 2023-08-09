@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Image;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Alaqsa\Project\Project;
+use App\Models\Project as ModelsProject;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
 use App\Nova\Metrics\InComeTransaction;
@@ -90,30 +91,35 @@ class PaymentVoucher extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            // ActionButton::make(__('POST NEWS'))
-            // ->action((new BillPdf)->confirmText(__('Are you sure you want to post  this NEWS?'))
-            //     ->confirmButtonText(__('print'))
-            //     ->cancelButtonText(__('Dont print')), $this->id)
-            // ->text(__('print'))->showLoadingAnimation()
-            // ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideFromIndex(),
             BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable()->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
-            Select ::make(__('project'), "ref_id")
-            ->options(function () {
-                $Users =  \App\Models\Project::all();
+            Select::make(__('project'), "ref_id")
+                ->options(function () {
+                    $Users =  \App\Models\Project::all();
 
-                $i = 0;
-                $user_type_admin_array =  array();
-                foreach ($Users as $User) {
+                    $i = 0;
+                    $user_type_admin_array =  array();
+                    foreach ($Users as $User) {
 
 
-                    $user_type_admin_array += [($User['id']) => ($User['project_name'])];
-                }
+                        $user_type_admin_array += [($User['id']) => ($User['project_name'])];
+                    }
 
-                return $user_type_admin_array;
-            })
-            ->singleSelect(),
+                    return $user_type_admin_array;
+                })
+                ->singleSelect(),
 
+
+            Flexible::make(__('new project'), 'newproject')
+                ->limit(1)
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('Add new type'), 'type', [
+                    Text::make(__('project_name'), "project_name")->rules('required'),
+                    Text::make(__('project_describe'), "project_describe")->rules('required'),
+                    DateTime::make(__('projec start'), 'start_date')->rules('required')->hideFromIndex(),
+                    DateTime::make(__('projec end'), 'end_date')->hideFromIndex(),
+                ])->confirmRemove(),
             Select::make(__("type"), "type")->options([
                 '0' => __('the Payment Voucher'),
                 '1' => __('project'),
@@ -123,53 +129,6 @@ class PaymentVoucher extends Resource
 
 
 
-            // Text::make(__('reference_id'), 'reference_id')->readonly()->hideWhenCreating()->hideWhenUpdating()->canSee(function(){
-            //     return $this->type === '0';
-            // }),
-            // NovaDependencyContainer::make([
-            //     Select::make(__('project'), "ref_id")
-            //         ->options(function () {
-            //             $projects =  \App\Models\project::where('project_type', '1')->get();
-            //             $user_type_admin_array =  array();
-            //             foreach ($projects as $project) {
-            //                 $user_type_admin_array += [$project['id'] => ($project['project_name'])];
-            //             }
-
-            //             return $user_type_admin_array;
-            //         })
-            //         ->displayUsingLabels(),
-            // ])->dependsOn('type', '1')->hideFromDetail()->hideFromIndex(),
-            // NovaDependencyContainer::make([
-            //     Select::make(__('QawafilAlaqsa'), "ref_id")
-            //         ->options(function () {
-            //             $projects =  \App\Models\project::where('project_type', '2')->get();
-            //             $user_type_admin_array =  array();
-            //             foreach ($projects as $project) {
-            //                 $user_type_admin_array += [$project['id'] => ($project['project_name'])];
-            //             }
-
-            //             return $user_type_admin_array;
-            //         })
-            //         ->displayUsingLabels(),
-            // ])->dependsOn('type', '2')->hideFromDetail()->hideFromIndex(),
-            // NovaDependencyContainer::make([
-            //     Select::make(__('Trip'), "ref_id")
-            //         ->options(function () {
-            //             $projects =  \App\Models\project::with("City") ->get();
-            //                                     $i=0;
-            //                                     $user_type_admin_array =  array();
-            //                                     foreach ($projects as $project) {
-
-            //                                         foreach ($project['City'] as $projectcite) {
-
-            //                                             $user_type_admin_array += [($project['id']) => ($project['project_name'].'=>'.$projectcite['name'])];
-            //                                         }
-            //                                 }
-
-            //             return $user_type_admin_array;
-            //         })
-            //         ->displayUsingLabels(),
-            // ])->dependsOn('type', '3')->hideFromDetail()->hideFromIndex(),
 
             BelongsTo::make('project', 'project')->hideWhenCreating()->hideWhenUpdating(),
             Select::make(__('name'), "name")
@@ -191,7 +150,7 @@ class PaymentVoucher extends Resource
 
                     return $user_type_admin_array;
                 })
-               ->hideWhenCreating()->hideFromIndex()->hideFromDetail()->readonly()->singleSelect(),
+                ->hideWhenCreating()->hideFromIndex()->hideFromDetail()->readonly()->singleSelect(),
             Select::make(__('name'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
@@ -216,40 +175,42 @@ class PaymentVoucher extends Resource
                 })->hideFromDetail()->hideFromIndex()->hideWhenUpdating()->singleSelect(),
 
             Flexible::make(__('add user'), 'add_user')
-            ->readonly(true)
-
+                ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('tooles'), 'Payment_type_details ', [
                     Text::make(__('name'), "name")->rules('required'),
                     Text::make(__('phone'), "phone")->rules('required'),
                 ])->hideWhenUpdating(),
-                BelongsTo::make(__('reference_id'), 'project', \App\Nova\Project::class)->canSee(function () {
-                    return $this->type != '0';
-                })->hideWhenUpdating()->hideWhenCreating()->hideFromIndex(),
+
+            BelongsTo::make(__('reference_id'), 'project', \App\Nova\Project::class)->canSee(function () {
+                return $this->type != '0';
+            })->hideWhenUpdating()->hideWhenCreating()->hideFromIndex(),
             BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
-                return ($this->transaction_type === '1'&&$this->type == '0');
+                return ($this->transaction_type === '1' && $this->type == '0');
             })->hideFromIndex(),
             BelongsTo::make(__('reference_id'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
-                return ($this->transaction_type === '2'&&$this->type == '0');
+                return ($this->transaction_type === '2' && $this->type == '0');
             })->hideFromIndex(),
+
             Text::make(__('company_number'), 'company_number')->hideFromDetail()->hideFromIndex(),
 
-            Text::make(__('company_number'), 'company_number',function(){
-                if ( $this->TelephoneDirectory) {
+
+            Text::make(__('company_number'), 'company_number', function () {
+                if ($this->TelephoneDirectory) {
                     return $this->TelephoneDirectory->name;
                 }
-
-            })->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
+            })->hideWhenCreating()->hideFromIndex()->hideWhenUpdating()->canSee(function () {
                 return $this->transaction_type === '1';
             }),
-            Text::make(__('company_number'), 'company_number',function(){
+            Text::make(__('company_number'), 'company_number', function () {
                 if ($this->BusesCompany) {
                     return $this->BusesCompany->company_id;
                 }
-
-            })->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
+            })->hideWhenCreating()->hideFromIndex()->hideWhenUpdating()->canSee(function () {
                 return $this->transaction_type === '2';
             }),
+
+
             Text::make(__('bill_number'), 'bill_number'),
             Text::make(__('description'), 'description')->hideFromIndex(),
 
@@ -398,13 +359,38 @@ class PaymentVoucher extends Resource
             }
 
             $model->equivelant_amount = $amount;
-            #  // $model->equivelant_amount
         }
-        // $str = 'T190';
-        // $str = ltrim($str, 'T');
-        // dd($str);
+        if (!$request->name) {
+            // dd($request->add_user);
+            if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
+                $telfone =  new TelephoneDirectory();
 
-        // dd(strpos($request->name, 'T') !== false);
+
+                $telfone->name = $request->add_user[0]['attributes']['name'];
+                $telfone->type = '8';
+                $telfone->phone_number =  $request->add_user[0]['attributes']['phone'];
+            }
+            $request->merge(['name' => $telfone->id]);
+            $request->merge(['transaction_type' => '1']);
+        }
+        $request->request->remove('add_user');
+        if (!$request->ref_id) {
+            // dd($request->add_user);
+            if ($request->newproject[0]['attributes']['project_name'] &&     $request->newproject[0]['attributes']['project_describe'] && $request->newproject[0]['attributes']['start_date'] &&     $request->newproject[0]['attributes']['end_date']) {
+                $Project =  new  ModelsProject();
+
+
+                $Project->project_name = $request->newproject[0]['attributes']['project_name'];
+                $Project->project_describe = $request->newproject[0]['attributes']['project_describe'];
+                $Project->start_date =  $request->newproject[0]['attributes']['start_date'];
+                $Project->end_date =  $request->newproject[0]['attributes']['end_date'];
+                $Project->project_type = '1';
+                $Project->save();
+            }
+            $request->merge(['ref_id' => $Project->id]);
+        }
+        $request->request->remove('newproject');
+
     }
     public static function beforeCreate(Request $request, $model)
     {
@@ -417,45 +403,9 @@ class PaymentVoucher extends Resource
         $model->type = '0';
         // $model->equivelant_amount = $new->rate * $request->transact_amount;
     }
-    public static function beforeUpdate(Request $request, $model)
-    {
-        // dump();
 
 
-        // $currencies = DB::table('currencies')->where('id', $request->Currenc)->first();
-        // $id = Auth::id();
-        // $model->update_by = $id;
-        // if ($model->Currenc->id == $request->Currenc) {
-        //     $rate = ((int)$model->equivelant_amount / (int)$model->transact_amount);
-        // } else  $rate = $currencies->rate;
-        // $model->equivelant_amount = $rate * $request->transact_amount;
-    }
 
-
-    public static function aftersave(Request $request, $model)
-    {
-
-
-        if (!$request->name) {
-            // dd($request->add_user);
-            if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
-                $telfone =  TelephoneDirectory::create(
-                    [
-                        'name' => $request->add_user[0]['attributes']['name'],
-                        'type' => '8',
-                        'phone_number' =>  $request->add_user[0]['attributes']['phone']
-                    ],
-                );
-            }
-            // dd( $telfone);
-            DB::table('transactions')
-                ->where('id', $model->id)
-                ->update([
-                    'name' => $telfone->id,
-                    'transaction_type' => '1'
-                ]);
-        }
-    }
 
 
     /**

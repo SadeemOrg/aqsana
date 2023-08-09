@@ -107,24 +107,24 @@ class events extends Resource
                     }
 
                     return $type_array;
-                })->hideFromDetail()->hideFromIndex()   ->singleSelect(),
+                })->hideFromDetail()->hideFromIndex()->singleSelect(),
 
 
 
 
             Flexible::make(__('Contacts'), 'NewContacts')
-                ->readonly(true)
+                ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('Add new type'), 'type', [
                     Text::make(__('name'), 'name'),
                     Text::make(__('phone_number'), 'phone_number'),
                 ]),
-                HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
 
         ];
     }
-    public static function afterSave(Request $request, $model)
+    public static function beforeSave(Request $request, $model)
     {
 
         if (!$request->Contacts) {
@@ -139,13 +139,12 @@ class events extends Resource
                 ]);
                 // $model->Contacts=$bookt->id;
                 // $BookType =  \App\Models\BookType::orderBy('created_at', 'desc')->first();
-
-                DB::table('events')
-                    ->where('id', $model->id)
-                    ->update(['Contacts' => $bookt->id]);
+                $request->merge(['Contacts' => $bookt->id]);
             }
         }
+        $request->request->remove('NewContacts');
     }
+
     /**
      * Get the cards available for the request.
      *
