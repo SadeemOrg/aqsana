@@ -1,6 +1,6 @@
 <template>
   <field-wrapper :stacked="field.stacked">
-    <div class="px-8" :class="field.stacked ? 'pt-6 w-full' : 'py-6 w-1/5'">
+    <div class="px-8" :class="field.stacked ? 'pt-6 w-full' : 'md:py-6 md:w-1/5'">
       <slot>
         <form-label
           :label-for="field.attribute"
@@ -15,7 +15,7 @@
       </slot>
     </div>
 
-    <div class="py-6 px-8" :class="fieldClasses">
+    <div class="py-6 px-3 md:px-8 custom_defaultField" :class="fieldClasses">
       <slot name="field" />
 
       <help-text
