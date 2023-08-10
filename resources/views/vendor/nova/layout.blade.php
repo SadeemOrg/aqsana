@@ -60,7 +60,7 @@
                 margin: 0;
                 padding: 0;
             }
-            /* .room-sort-menu li > a.active {text-decoration: underline} */
+            .room-sort-menu li > a.active {text-decoration: underline}
 
             span.sort {
                 /* margin-right: 30px; */
@@ -160,6 +160,8 @@
                 overflow: auto;
                 z-index: 99;
             }
+            ul.list-reset li > div {border-color: #bacad6 }
+            .icons[data-v-b3635f2e] {right: auto !important; left: 0;}
 
         </style>
 
@@ -350,7 +352,7 @@
                 $(this).next('.dropMenu').slideToggle();
             });
 
-            // $('.router-link-active').parent().parent().prev('a').addClass('active')
+            $('.router-link-active').parent().parent('.dropMenu').slideDown()
 
         });
 
