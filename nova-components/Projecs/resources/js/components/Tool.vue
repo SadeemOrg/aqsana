@@ -689,13 +689,13 @@
                               </div>
                             </div>
                             <div class="md:flex justify-between mt-5 text-center">
-                              <div class="mb-4 md:mb-0 md:w-1/2">
+                              <div class="mb-6 md:mb-0 md:w-1/2">
                                 <pure-vue-chart
                                   class="chart-custom-style"
                                   :points="[  Sector.expenses_First, Sector.expenses_Second, Sector.expenses_Third, Sector.expenses_fourth]"
                                   :show-y-axis="true"
                                   :show-x-axis="true"
-                                  :width="400"
+                                  :width="chartWidth"
                                   :height="200"
                                   :show-values="true"
                                   :use-month-labels="true"
@@ -716,7 +716,7 @@
                                   :points="[Sector.income_First, Sector.income_Second,  Sector.income_Third,  Sector.income_fourth]"
                                   :show-y-axis="true"
                                   :show-x-axis="true"
-                                  :width="400"
+                                  :width="chartWidth"
                                   :height="200"
                                   :show-values="true"
                                   :use-month-labels="true"
@@ -778,6 +778,7 @@ export default {
         "Dez",
       ],
       projectshow: false,
+      chartWidth: 400
     };
   },
   methods: {
@@ -911,6 +912,23 @@ export default {
   components: {
     PureVueChart,
   },
+  mounted() {
+    
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 1220 && window.innerWidth > 500) {
+        this.chartWidth = 300;
+      } else if(window.innerWidth < 499){
+        this.chartWidth = 250;
+      }
+
+      console.log(this.chartWidth)
+      
+    });
+  }
+
+
+
+
 };
 </script>
 <style>
