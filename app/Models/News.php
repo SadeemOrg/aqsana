@@ -11,7 +11,9 @@ class News extends Model
 {
     use HasFactory;
     protected $observers = [
-        News::class => [NewsObserver::class,ProjectObserver::class],
+        News::class => [NewsObserver::class],
+
+
     ];
     protected $fillable = [
 
