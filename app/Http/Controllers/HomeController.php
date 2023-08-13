@@ -1161,6 +1161,7 @@ class HomeController extends Controller
         $news = DB::table('news')->where([
             ['main_type', 'like', '%' . $main_type->main_type . '%'],
             ['type', '=', $Type->type],
+            ['status','=','1']
         ])->orderBy('new_date', 'desc')->paginate(9);
 
 
