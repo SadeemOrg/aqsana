@@ -20,14 +20,14 @@ class Project extends Model
          'project_type', 'Project_Status', 'start_date', 'end_date',
         'Budjet', 'admin_id', 'approval', 'reason_of_reject'
         ,'Financial_Type','is_has_volunteer','is_has_Donations','areas','cities','approval_Status','trip_from','trip_to',
-        'update_by','created_by','tools','transact_amount'
+        'update_by','created_by','tools','transact_amount','newbus'
 
 
     ];
-
     protected $hidden = [
         'created_at',
         'updated_at',
+        'newbus'
     ];
 
     protected $casts = [

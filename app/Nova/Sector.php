@@ -63,7 +63,7 @@ class Sector extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Boolean::make("is published",'is_published'),
+            Boolean::make(__("is published"),'is_published'),
             Text::make(__('main text'),'text'),
             Text::make(__('sup text'),'sup_text'),
             Image::make(__('Image'),'img')->disk('public')->deletable(),

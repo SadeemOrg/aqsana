@@ -25,7 +25,7 @@ use Laravel\Nova\Fields\hasOne;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use Yassi\NestedForm\NestedForm;
 use Laravel\Nova\Fields\BelongsToMany;
-use Techouse\SelectAutoComplete\SelectAutoComplete ;
+use Techouse\SelectAutoComplete\SelectAutoComplete;
 
 use AwesomeNova\Cards\FilterCard;
 use Laravel\Nova\Fields\Textarea;
@@ -63,6 +63,8 @@ use Fourstacks\NovaRepeatableFields\Repeater;
 use Laravel\Nova\Fields\HasMany;
 use Mauricewijnia\NovaMapsAddress\MapsAddress;
 use Carbon\Carbon;
+
+use function Clue\StreamFilter\fun;
 
 class QawafilAlaqsa extends Resource
 {
@@ -210,7 +212,7 @@ class QawafilAlaqsa extends Resource
                     })
 
                     ->hideWhenCreating()->hideWhenUpdating(),
-                    ActionButton::make(__('Action'))
+                ActionButton::make(__('Action'))
                     ->action(ProjectStartEnd::class, $this->id)
                     ->text(__('مغلق'))
                     ->showLoadingAnimation()
@@ -225,18 +227,15 @@ class QawafilAlaqsa extends Resource
                         $nowtime = Carbon::createFromFormat('Y-m-d H:i:s', $now);
                         $projects = DB::table('project_status')->where('project_id', $this->id)->first();
                         if ($projects) {
-                            if ($projects->status == 3 && ($endDate->lt($nowtime)) ) {
+                            if ($projects->status == 3 && ($endDate->lt($nowtime))) {
 
                                 return true;
                             }
                         }
-
-
-
                     })
 
                     ->hideWhenCreating()->hideWhenUpdating(),
-                    ActionButton::make(__('Action'))
+                ActionButton::make(__('Action'))
                     ->action(ProjectStartEnd::class, $this->id)
                     ->text(__('مفتوحة'))
                     ->showLoadingAnimation()
@@ -255,7 +254,7 @@ class QawafilAlaqsa extends Resource
                         return true;
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
-                Boolean::make('Active', function () {
+                Boolean::make(__('Active'), function () {
                     $projects = DB::table('project_status')->where('project_id', $this->id)->first();
                     if ($projects) {
 
@@ -348,7 +347,8 @@ class QawafilAlaqsa extends Resource
                 ])->rules('required')->singleSelect(),
                 Select::make(__('Admin'), 'admin_id')
                     ->options(function () {
-                        $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();                        $user_type_admin_array =  array();
+                        $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
+                        $user_type_admin_array =  array();
                         foreach ($users as $user) {
                             $user_type_admin_array += [$user['id'] => ($user['name'])];
                         }
@@ -397,12 +397,12 @@ class QawafilAlaqsa extends Resource
                     ]),
 
 
-                    BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->hideWhenCreating(),
+                BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->hideWhenCreating(),
 
                 BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->withMeta([
                     'value' => "1",
                 ])->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
-                text::make(__('note'),"note"),
+                text::make(__('note'), "note"),
                 DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required'),
                 DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required')->rules(new QawafilAlaqsaDate($request->start_date)),
 
@@ -456,7 +456,9 @@ class QawafilAlaqsa extends Resource
                         return null;
                     }),
                 Flexible::make(__('newbus'), 'newbus')
-                    ->readonly(true)
+                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                    $model->$attribute = null;
+                })
 
                     ->hideFromDetail()->hideFromIndex()
                     ->addLayout(__('Add new bus'), 'bus', [
@@ -527,6 +529,7 @@ class QawafilAlaqsa extends Resource
         $model->is_reported = '1';
 
         $model->trip_to = '1';
+        $model->newbus = null;
     }
     public static function afterCreate(Request $request, $model)
     {
@@ -534,6 +537,11 @@ class QawafilAlaqsa extends Resource
             'project_id' => $model->id,
             'status' => 2,
         ]);
+        $model->newbus = null;
+    }
+    public static function beforesave(Request $request, $model)
+    {
+        $request->request->remove('newtype');
     }
     public static function aftersave(Request $request, $model)
     {
@@ -659,12 +667,12 @@ class QawafilAlaqsa extends Resource
                 DB::table('buses')
                     ->insert(
                         [
-                            'name_driver' => $bus['attributes']['name_driver']?$bus['attributes']['name_driver']:"",
+                            'name_driver' => $bus['attributes']['name_driver'] ? $bus['attributes']['name_driver'] : "",
                             'company_id' => $bus['attributes']['BusesCompany'],
                             'bus_number' => $bus['attributes']['bus_number'],
                             'number_of_seats' => $bus['attributes']['number_person_on_bus'],
                             'seat_price' => $bus['attributes']['seat_price'],
-                            'phone_number_driver' => $bus['attributes']['phone_number']?$bus['attributes']['phone_number']:" ",
+                            'phone_number_driver' => $bus['attributes']['phone_number'] ? $bus['attributes']['phone_number'] : " ",
                             'status' => '1',
                         ]
                     );
@@ -708,6 +716,7 @@ class QawafilAlaqsa extends Resource
                     ->update(['trip_from' => $address->id]);
             }
         } else   $model->trip_from = $request->trip_from;
+        $model->newbus = null;
     }
     /**
      * Get the cards available for the request.

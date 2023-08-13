@@ -65,9 +65,9 @@ class ProjectType extends Resource
 
 
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Name","name"),
-            Textarea::make("Description","describtion"),
-            Select::make("Type","type")
+            Text::make(__("Name"),"name"),
+            Textarea::make(__("Description"),"describtion"),
+            Select::make(__("Type"),"type")
             ->options([
                 '1' => 'income',
                 '2' => 'Payments',

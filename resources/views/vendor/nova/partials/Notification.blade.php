@@ -53,7 +53,7 @@
             @endphp
             <li>
                 <div
-                class="flex flex-row items-center justify-start px-4 w-full py-3 border-b border-2 hover:bg-gray-100  @if ($notificationArray->read_at == null) bg-[#f1fff1] @endif ">
+                class="flex flex-row items-center justify-start px-4 w-full py-3 border-b hover:bg-gray-100  @if ($notificationArray->read_at == null) bg-[#f1fff1] @endif ">
                 <div class="basis-1/4">
                     <img class=" h-10 w-10 rounded-full object-cover mx-1" src=/{{ $img }}
                         alt="avatar">
