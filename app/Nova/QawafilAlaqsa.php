@@ -254,7 +254,7 @@ class QawafilAlaqsa extends Resource
                         return true;
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
-                Boolean::make('Active', function () {
+                Boolean::make(__('Active'), function () {
                     $projects = DB::table('project_status')->where('project_id', $this->id)->first();
                     if ($projects) {
 

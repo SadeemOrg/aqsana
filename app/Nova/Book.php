@@ -140,7 +140,7 @@ class Book extends Resource
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('Add new type'), 'type', [
                     Text::make(__('name'), 'name'),
-                    Text::make(__('describtion'), 'describtion'),
+                    Text::make(__(__('Description')), 'describtion'),
                 ])->confirmRemove(),
             Image::make(__('cover_photo'), 'cover_photo')->disk('public')->prunable()->rules('required'),
             File::make(__('file'), 'file')->disk('public')->deletable()->rules('required'),

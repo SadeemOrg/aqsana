@@ -88,7 +88,7 @@ class TelephoneDirectory extends Resource
             Text::make(__('phone_number'),'phone_number'),
             Text::make(__('city'),'city'),
             Text::make(__('note'),'note'),
-            Text::make(__('job'),'jop'),
+            Text::make(__('jop'),'jop'),
             Text::make(__('id_number'),'id_number'),
 
             HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)

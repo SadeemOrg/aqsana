@@ -108,7 +108,7 @@ class PaymentVoucher extends Resource
 
                     return $user_type_admin_array;
                 })
-                ->singleSelect(),
+                ->singleSelect()->hideFromIndex(),
 
 
             Flexible::make(__('new project'), 'newproject')
@@ -130,7 +130,7 @@ class PaymentVoucher extends Resource
 
 
 
-            BelongsTo::make('project', 'project')->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
             Select::make(__('name'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
