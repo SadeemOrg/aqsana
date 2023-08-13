@@ -4,7 +4,7 @@
     $img = 'storage/' . nova_get_setting('logo', 'default_value');
 @endphp
 
-<div dir="ltr" class="sticky top-3/4 z-40 cursor-pointer" onclick="location.href='/sector/5'">
+<div dir="ltr" class="sticky top-3/4 z-40 cursor-pointer hidden_popUp" onclick="location.href='/sector/5'">
     <div class="relative ">
         <img class="hidden md:block absolute"
             src="https://media.discordapp.net/attachments/938405759996276806/1044605280509497354/Group_62191.png"

@@ -25,3 +25,6 @@
 body{
     font-family:'alfont_com_JF-Flat-Bold';
 }
+.hidden_popUp{
+    display: none;
+}
