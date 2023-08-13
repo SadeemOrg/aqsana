@@ -6,8 +6,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\News;
 use App\Models\Notification;
+use App\Models\Project;
 use App\Observers\NewsObserver;
 use App\Observers\NotificationObserver;
+use App\Observers\ProjectObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
     {
 
         News::observe(NewsObserver::class);
+        Project::observe(ProjectObserver::class);
+
         Notification::observe(NotificationObserver::class);
 
         View::composer(['layout.front-end.partial._header','layout.front-end.partial._Top-header-new'],
