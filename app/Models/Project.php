@@ -11,7 +11,11 @@ class Project extends Model
     use HasFactory;
     protected $table = 'projects';
 
+    protected $observers = [
+        Project::class => [ProjectObserver::class],
 
+
+    ];
 
 
     protected $fillable = [
