@@ -1,3 +1,12 @@
+@php
+
+    $Imagemobile = 'storage/' . nova_get_setting('image_mobile_pop_up', 'default_value');
+    $Imageweb = 'storage/' . nova_get_setting('image_web_pop_up', 'default_value');
+    $link = nova_get_setting('link', 'default_value');
+
+    $isactive = nova_get_setting('active', 'default_value');
+
+@endphp
 <!-- Start Pop up Modal-->
 <div dir="rtl" class="CloseHomePopUp relative hiddenModal  z-10" aria-labelledby="modal-title" role="dialog"
     aria-modal="true">
@@ -20,10 +29,13 @@
                 </div>
                 <div class="flex flex-col items-center justify-center my-3 gap-y-3">
                     <div class="flex text-center justify-end gap-y-6">
-                        <a target="_self" class="bg-[#349A37] hover:bg-[#101426] duration-200 py-4 ml-2 text-white text-2xl rounded-[50px] w-[160px] lg:w-[180px] xl:w-[220px] " href="">تبرع الان</a>
+                        <a target="_self"
+                            class="bg-[#349A37] hover:bg-[#101426] duration-200 py-4 ml-2 text-white text-2xl rounded-[50px] w-[160px] lg:w-[180px] xl:w-[220px] "
+                            href="{{ $link }}">تبرع الان</a>
                     </div>
-                    <img class="h-[1000px] hidden sm:flex " src="{{ asset('assets/image/685x1000Aqsa_Descktop.jpg') }}" />
-                    <img class=" sm:hidden flex " src="{{ asset('assets/image/398x631_AqsaMobile.jpg') }}" />
+                    <img class="h-[1000px] hidden sm:flex "
+                        src="/{{  $Imageweb }}" />
+                    <img class=" sm:hidden flex " src="/{{  $Imagemobile }}" />
 
                 </div>
                 <div>
