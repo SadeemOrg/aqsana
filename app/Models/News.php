@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\NewsObserver;
+use App\Observers\ProjectObserver;
+
 class News extends Model
 {
     use HasFactory;
     protected $observers = [
-        News::class => [NewsObserver::class],
+        News::class => [NewsObserver::class,ProjectObserver::class],
     ];
     protected $fillable = [
 
