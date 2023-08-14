@@ -133,7 +133,7 @@ class PaymentVoucher extends Resource
             BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
             Select::make(__('name'), "name")
                 ->options(function () {
-                    $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
+                    $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '8')->get();
                     $i = 0;
                     $user_type_admin_array =  array();
                     foreach ($Users as $User) {
@@ -153,7 +153,7 @@ class PaymentVoucher extends Resource
                 ->hideWhenCreating()->hideFromIndex()->hideFromDetail()->readonly()->singleSelect(),
             Select::make(__('name'), "name")
                 ->options(function () {
-                    $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
+                    $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '8')->get();
                     $i = 0;
                     $user_type_admin_array =  array();
                     foreach ($Users as $User) {

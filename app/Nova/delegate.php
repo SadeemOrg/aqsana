@@ -125,7 +125,7 @@ namespace App\Nova;
                         Text::make(__('name'), 'name'),
                         Multiselect::make(__('admin'), 'admin_id')
                             ->options(function () {
-                                $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
+                                $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
 
                                 $user_type_admin_array =  array();
 

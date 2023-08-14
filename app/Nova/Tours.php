@@ -72,7 +72,7 @@ class Tours extends Resource
 
             Select::make(__('Contacts'), "Contacts")
             ->options(function () {
-                $types =  TelephoneDirectory::where('type', '=', '6')->get();
+                $types =  TelephoneDirectory::whereJsonContains('type',  '6')->get();
                 $type_array =  array();
                 foreach ($types as $type) {
                     $type_array += [$type['id'] => ($type['name'])];

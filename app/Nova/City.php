@@ -110,7 +110,7 @@ class City extends Resource
 
                 Multiselect::make(__('admin'), 'admin_id')
                     ->options(function () {
-                        $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
+                        $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
 
                         $user_type_admin_array =  array();
 
@@ -126,7 +126,7 @@ class City extends Resource
                     ->rules('required')->hideFromDetail()->hideFromIndex(),
                 Multiselect::make(__('Alhisalat_admin'), 'Alhisalat_admin')
                     ->options(function () {
-                        $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
+                        $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
 
                         $user_type_admin_array =  array();
 
@@ -145,7 +145,7 @@ class City extends Resource
                     ->addLayout(__('Alhisalat_sub_admin'), 'Alhisalat_sub_admin', [
                         Multiselect::make(__('Alhisalat_sub_admin'), 'Alhisalat_sub_admin')
                         ->options(function () {
-                            $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
+                            $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
 
                             $user_type_admin_array =  array();
 
@@ -164,7 +164,7 @@ class City extends Resource
 
                  Multiselect::make(__('Qawafil_admin'), 'Qawafil_admin')
                     ->options(function () {
-                        $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
+                        $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
 
                         $user_type_admin_array =  array();
 
@@ -180,7 +180,7 @@ class City extends Resource
                     ->addLayout(__('Qawafil_sub_admin'), 'Qawafil_sub_admin', [
                         Multiselect::make(__('Qawafil_sub_admin'), 'Qawafil_sub_admin')
                         ->options(function () {
-                            $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
+                            $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
 
                             $user_type_admin_array =  array();
 
