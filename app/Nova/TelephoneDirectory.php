@@ -4,12 +4,17 @@ namespace App\Nova;
 
 use Acme\MultiselectField\Multiselect;
 use Acme\Smssend\Smssend;
+use App\Models\SmsType;
+use App\Nova\Filters\UserType;
+use AwesomeNova\Cards\FilterCard;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
+use Whitecube\NovaFlexibleContent\Flexible;
+
 class TelephoneDirectory extends Resource
 {
     /**
@@ -70,20 +75,45 @@ class TelephoneDirectory extends Resource
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
-                Multiselect::make(__('type'), 'type')->options([
-                1 => __('متبرعين سجب ثابت'),
-                2 => __('متبرعين لمرة واحدة '),
-                3 => __('مندوبين'),
-                4 => __('متطوعين'),
-                5 => __('جهات اتصال عامة'),
-                6 => __('مرشدين'),
-                7 => __('منح'),
-                8 => __('شركات'),
-                9 => __('Sms'),
-                10 => __('Test'),
+                Multiselect::make(__('type'), 'type')
+                ->options(function () {
+                    $Areas =  \App\Models\SmsType::all();
+
+                    $Area_type_admin_array =  array();
+
+                    foreach ($Areas as $Area) {
 
 
-            ])->rules('required'),
+                        $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                    }
+
+                    return $Area_type_admin_array;
+                })->saveAsJSON(),
+            //     ->options([
+            //     1 => __('متبرعين سجب ثابت'),
+            //     2 => __('متبرعين لمرة واحدة '),
+            //     3 => __('مندوبين'),
+            //     4 => __('متطوعين'),
+            //     5 => __('جهات اتصال عامة'),
+            //     6 => __('مرشدين'),
+            //     7 => __('منح'),
+            //     8 => __('شركات'),
+            //     9 => __('Sms'),
+            //     10 => __('Test'),
+
+
+            // ])
+
+            Flexible::make(__('newType'), 'newType')
+            ->limit(1)
+            ->hideFromDetail()->hideFromIndex()
+            ->addLayout(__('Add new type'), 'type', [
+                Text::make(__('name'), 'name'),
+                Text::make(__('describtion'), 'describtion'),
+
+            ])->confirmRemove(),
+
+
 
             Text::make(__('phone_number'),'phone_number'),
             Text::make(__('city'),'city'),
@@ -91,12 +121,34 @@ class TelephoneDirectory extends Resource
             Text::make(__('jop'),'jop'),
             Text::make(__('id_number'),'id_number'),
 
+            // HasMany::make(__("SmsType"), "SmsType", \App\Nova\SmsType::class),
+
             HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
 
 
 
         ];
+    }
+    public static function beforeSave(Request $request, $model)
+    {
+        if (!$request->type) {
+
+
+            if ($request->newType   && ($request->newType[0]['attributes']['name'] || $request->newType[0]['attributes']['describtion'])) {
+              $SmsType =  new SmsType();
+
+                $SmsType-> name = $request->newType[0]['attributes']['name'];
+                $SmsType->describtion = $request->newType[0]['attributes']['describtion'];
+                $SmsType->save();
+
+
+                $request->merge(['type' => $SmsType->id]);
+
+
+            }
+        }
+        $request->request->remove('newType');
     }
 
     /**
@@ -108,7 +160,8 @@ class TelephoneDirectory extends Resource
     public function cards(Request $request)
     {
         return [
-            new Smssend()
+            new Smssend(),
+            new FilterCard( new UserType)
         ];
     }
 
@@ -120,7 +173,9 @@ class TelephoneDirectory extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new UserType
+        ];
     }
 
     /**

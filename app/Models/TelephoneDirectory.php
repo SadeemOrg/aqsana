@@ -18,6 +18,7 @@ class TelephoneDirectory extends Model
     // 'hower' => FlexibleCast::class,
     'hower' => 'json',
 
+ 'type' => 'json',
 
 
 ];
@@ -31,6 +32,10 @@ public function AreaDelegate()
 public function citeDelegate()
 {
     return $this->belongsTo(City::class,'city');
+}
+public function SmsType()
+{
+    return $this->hasMany(SmsType::class,"type");
 }
 public function ActionEvents()
 {

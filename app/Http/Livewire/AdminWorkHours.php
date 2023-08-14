@@ -37,7 +37,7 @@ class AdminWorkHours extends Component
         // dd( $from,$to,$this->Name);
         $this->WorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->orderBy('date', 'ASC')->get();
         //   dd($this->WorkHourssearch );
-        $string = '00000000000000';
+        $string = '12000000000000';
         $date = Carbon::parse($string);
         // dd($date);
         // $date1->add($date2->diff($date1));
@@ -51,12 +51,13 @@ class AdminWorkHours extends Component
                 $date->addSeconds($seconds)->addMinutes($minutes)->addHours($hours);
             }
         }
-
+        // dd($date );
         $date = Carbon::parse($date);
         // $now = Carbon::now();
         // $diff = $date->diffInDays($now);
 
         $this->sumWorkHourssearch = $date;
+
         // $formatted = $date->format('H:i:s');
         // dd($this->WorkHourssearch,   $this->sumWorkHourssearch);
         // $this->sumWorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->sum('day_hours');
