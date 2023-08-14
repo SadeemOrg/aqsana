@@ -2,7 +2,7 @@
 
     $Imagemobile = 'storage/' . nova_get_setting('image_mobile_pop_up', 'default_value');
     $Imageweb = 'storage/' . nova_get_setting('image_web_pop_up', 'default_value');
-    $link = nova_get_setting('link', 'default_value');
+    $link = nova_get_setting('link_pop_up', 'default_value');
 
     $isactive = nova_get_setting('active', 'default_value');
 
