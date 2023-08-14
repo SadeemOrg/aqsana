@@ -283,6 +283,12 @@
         });
     </script>
     <script>
+//hide_PopUp_Modal_Home_Close_when Close_Click
+$('.PopUp_Modal_Home_Close').click(function() {
+    $('.CloseHomePopUp').addClass('hidden');
+    $('div').removeClass('hidden_popUp')
+})
+
         // Library Search
         $('#searchLibrary').on('keyup', function() {
             var librarySearchval = $('#searchLibrary').val().toLowerCase();

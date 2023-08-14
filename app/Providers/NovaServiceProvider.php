@@ -81,12 +81,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     __('Navigation Bar'),
                     [
                         Tree::make(__('Items'), 'Items')->fields([
-                            Text::make(__('Name'),'name'),
-                            Link::make(__('Link'),'link')->resources([
+                            Text::make(__('Name'), 'name'),
+                            Link::make(__('Link'), 'link')->resources([
                                 Project::class,
 
                             ]),
-                            Boolean::make(__('external link'),'external_link')
+                            Boolean::make(__('external link'), 'external_link')
                         ])->title('name'),
                         Image::make(__('Logo'), 'logo')->disk('public'),
                         Image::make(__('qawafelLogo'), 'qawafelLogo')->disk('public'),
@@ -97,41 +97,52 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     ]
                 ),
                 Tab::make(
+                    __('pop up modal'),
+                    [
+                        Image::make(__('Image mobile'), 'image_mobile_pop_up')->disk('public'),
+                        Image::make(__('Image web'), 'image_web_pop_up')->disk('public'),
+                        Text::make(__('link'), 'link_pop_up'),
+                        Boolean::make(__('active'), 'active_pop_up')
+
+
+                    ]
+                ),
+                Tab::make(
                     __('Heroo'),
                     [
                         FlexibleContent::make(__('Heroo'), 'Heroo')
-                        ->addLayout(
-                            [
-                                'label' => __('Heroo'),
-                                'name' => 'Heroo',
-                                'fields' => [
-                                    [
-                                        'type' => 'image',
-                                        'name' => 'image',
-                                        'label' => __('Image'),
+                            ->addLayout(
+                                [
+                                    'label' => __('Heroo'),
+                                    'name' => 'Heroo',
+                                    'fields' => [
+                                        [
+                                            'type' => 'image',
+                                            'name' => 'image',
+                                            'label' => __('Image'),
 
-                                        'multiple' => false,
-                                        'required' => true
-                                    ],
+                                            'multiple' => false,
+                                            'required' => true
+                                        ],
 
-                                    [
-                                        'type' => 'text',
-                                        'name' => 'image_alt_Heroo',
-                                        'label' => __('image description'),
-                                        'multiple' => false,
-                                        'required' => false
-                                    ],
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'image_alt_Heroo',
+                                            'label' => __('image description'),
+                                            'multiple' => false,
+                                            'required' => false
+                                        ],
 
-                                    [
-                                        'type' => 'text',
-                                        'name' => 'link',
-                                        'label' => __('button link'),
-                                        'multiple' => false,
-                                        'required' => false
+                                        [
+                                            'type' => 'text',
+                                            'name' => 'link',
+                                            'label' => __('button link'),
+                                            'multiple' => false,
+                                            'required' => false
+                                        ]
                                     ]
                                 ]
-                            ]
-                        ),
+                            ),
                     ]
                 ),
                 Tab::make(
@@ -366,7 +377,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     Text::make(__('image description'), 'image_alt_our_vision_about_us'),
 
                 ], __('Goals') => [
-                    Flexible::make(__('Goals'),'Goals')
+                    Flexible::make(__('Goals'), 'Goals')
                         ->addLayout(__('Goals'), 'wysiwyg', [
                             Text::make(__('title'), 'Goals_section_text'),
                             Text::make(__('sup text'), 'Goals_section_sup_text'),
@@ -420,16 +431,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new Tabs(__('work hours'), [
                 __('Reasons to stop')    => [
                     Flexible::make(__('Reasons to stop'), 'Reasons_to_stop')
-                    ->addLayout(__('Reasons to stop'), 'Reasons_to_stop', [
-                        Text::make(__('title'), 'Reasons_to_stop'),
-                    ])
+                        ->addLayout(__('Reasons to stop'), 'Reasons_to_stop', [
+                            Text::make(__('title'), 'Reasons_to_stop'),
+                        ])
                 ],
                 __('time departure')    => [
                     Flexible::make(__('time departure'), 'time_departure')
-                    ->addLayout(__('time departure'), 'time_departure', [
-                        Text::make(__('title'), 'title_departure'),
-                        Text::make(__('time in minet'), 'time_departure'),
-                    ])
+                        ->addLayout(__('time departure'), 'time_departure', [
+                            Text::make(__('title'), 'title_departure'),
+                            Text::make(__('time in minet'), 'time_departure'),
+                        ])
                 ],
 
             ]),
@@ -474,24 +485,23 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
 
             (new NewProject())
-            ->canSee(function () {
-                $user = Auth::user();
-                if ($user->type() == 'admin') return true;
-                return false;
-            }),
+                ->canSee(function () {
+                    $user = Auth::user();
+                    if ($user->type() == 'admin') return true;
+                    return false;
+                }),
             (new NewQawafilAlaqsa())
-            ->canSee(function () {
-                $user = Auth::user();
-                if ($user->type() == 'admin') return true;
-                return false;
-            }),
+                ->canSee(function () {
+                    $user = Auth::user();
+                    if ($user->type() == 'admin') return true;
+                    return false;
+                }),
             (new NewTrip())
-            ->canSee(function () {
-                $user = Auth::user();
-                if ($user->type() == 'admin') return true;
-                return false;
-
-            }),
+                ->canSee(function () {
+                    $user = Auth::user();
+                    if ($user->type() == 'admin') return true;
+                    return false;
+                }),
             (new   NewAlhisalat())->canSee(function () {
                 $user = Auth::user();
                 if ($user->type() == 'admin') return true;
@@ -538,16 +548,14 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
 
             (new NovaSettings)->canSee(function ($request) {
-                if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("NovaSettings",  $request->user()->userrole()) )){
+                if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("NovaSettings",  $request->user()->userrole()))) {
                     return true;
-                }
-               else return false;
-                }),
-          (  new \Infinety\Filemanager\FilemanagerTool())->canSee(function ($request) {
-            if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("FilemanagerTool",  $request->user()->userrole()) )){
-                return true;
-            }
-           else return false;
+                } else return false;
+            }),
+            (new \Infinety\Filemanager\FilemanagerTool())->canSee(function ($request) {
+                if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("FilemanagerTool",  $request->user()->userrole()))) {
+                    return true;
+                } else return false;
             }),
 
             // ( new NovaSettings)->canSee(function ($request) {
@@ -555,13 +563,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             //     return  ($user->type() == 'website_admin' ) ;
             // }),
             (new projecs)->canSee(function ($request) {
-                if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("budjet",  $request->user()->userrole()) )){
+                if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("budjet",  $request->user()->userrole()))) {
                     return true;
-                }
-               else return false;
-                }),
-                new Notification,
-                 new Bill
+                } else return false;
+            }),
+            new Notification,
+            new Bill
         ];
     }
     /**
