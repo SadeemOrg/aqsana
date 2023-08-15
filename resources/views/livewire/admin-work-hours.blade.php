@@ -227,7 +227,7 @@
                                         </td>
                                     @else
                                         <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
-                                            {{ $sumWorkHourssearch->day * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
+                                            {{ ($sumWorkHourssearch->day-1) * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
                                         </td>
                                     @endif
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]"></td>
@@ -269,7 +269,7 @@
                                     value="{{ date_format($EditWorkHours->date, 'd/m/Y') }}">
                             </div> --}}
                             <div class="mt-2 selectdiv">
-                                <input type="text" wire:model.debounce.50000ms="this.date"
+                                <input type="text" wire:model.debounce.50000ms="date"
                                     class="hidePlaceHolderEditDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusEditDatePopup()">
                             </div>
@@ -286,7 +286,7 @@
                                 </div>
                             </div>
                             <div class="mt-2 selectdiv">
-                                <input type="text" wire:model="day_hours"
+                                <input type="text" wire:model.debounce.50000ms="day_hours"
                                     class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="عدد ساعات العمل">
                             </div>
@@ -326,7 +326,7 @@
                             <p class="w-full text-center mt-2 text-[20px] text-[#151630]">اضافة ساعات العمل </p>
                             <!--First One -->
                             <div class="mt-2 selectdiv ">
-                                <select pla wire:model="ModelId" name="ModelId"
+                                <select  wire:model="ModelId" name="ModelId"
                                     class="h-12 text-[#349A37] w-full text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37] ">
                                     <option class="text-black" value="0" disabled> اسم الموظف </option>
                                     @foreach ($users as $user)
@@ -338,12 +338,12 @@
                             <div class="flex flex-row items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-72">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
-                                        wire:model.debounce.50000ms="start_time"
+                                        wire:model.debounce.500000ms="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                                 <div class="mt-2 selectdiv">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
-                                        wire:model.debounce.50000ms="end_time"
+                                        wire:model.debounce.500000ms="end_time"
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                             </div>
@@ -352,11 +352,14 @@
                                     class="hidePlaceHolderDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusDatePopup()">
                             </div>
-                            <div class="mt-2 selectdiv">
-                                <input type="text" wire:model="day_hours"
-                                    class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
-                                    placeholder="عدد ساعات العمل">
+                            <div class="text-red-600 ">
+                                {{ $this->error }}
                             </div>
+                            {{-- <div class="mt-2 selectdiv">
+                                <input type="text" wire:model="day_hours_off"
+                                    class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
+                                    placeholder="عدد ساعات المغادرة">
+                            </div> --}}
                             <div class="mt-2">
                                 <button type="submit"
                                     class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 mx-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">

@@ -26,8 +26,11 @@ class AdminWorkHours extends Component
     public $end_time_Edit;
     public $end_time;
     public $day_hours;
+    public $day_hours_off;
     public $userId;
     public $Notes;
+    public $error='';
+
     public $notedate = [];
 
     public function searchWorkHours()
@@ -37,7 +40,7 @@ class AdminWorkHours extends Component
         // dd( $from,$to,$this->Name);
         $this->WorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->orderBy('date', 'ASC')->get();
         //   dd($this->WorkHourssearch );
-        $string = '12000000000000';
+        $string = '2001-01-01 00:00:00.0';
         $date = Carbon::parse($string);
         // dd($date);
         // $date1->add($date2->diff($date1));
@@ -66,7 +69,8 @@ class AdminWorkHours extends Component
     public function showEditModels($id)
     {
         $this->EditWorkHours =    WorkHours::find($id);
-        $this->date = $this->EditWorkHours->date;
+
+        $this->date =Carbon::parse($this->EditWorkHours->date)->format('Y-m-d') ;
         $this->start_time = $this->EditWorkHours->start_time;
         $this->end_time = $this->EditWorkHours->end_time;
         $this->day_hours = $this->EditWorkHours->day_hours;
@@ -111,15 +115,36 @@ class AdminWorkHours extends Component
     public function AddDay()
     {
 
+      $olddata=  WorkHours::whereDate('date',$this->date)->first();
+        // dd($olddata ==null);
+        if ($olddata ==null) {
+            $startTime = Carbon::parse($this->start_time);
+            $finishTime = Carbon::parse($this->end_time);
+            $result =  $finishTime->gt($startTime);
+
+            if ($result) {
+
+
         $EditWorkHours = new  WorkHours();
         $EditWorkHours->user_id = $this->ModelId;
         $EditWorkHours->date = $this->date;
         $EditWorkHours->day =  Carbon::parse($this->date)->locale('ar')->dayName;
         $EditWorkHours->start_time = $this->start_time;
         $EditWorkHours->end_time = $this->end_time;
-        $EditWorkHours->day_hours = $this->day_hours;
+
+        $totalDuration = $startTime->diff($finishTime)->format('%H:%I:%S');
+
+        $EditWorkHours->day_hours =  $totalDuration;
         $EditWorkHours->save();
         $this->showAddModel = false;
+            }
+            else {
+                $this->error="ساعات البداية اكبر من ساعة النهاية";
+            }
+    }
+    else {
+        $this->error="هذا اليوم موجود مسبقا";
+    }
     }
     public function showNoteModels($id)
     {
