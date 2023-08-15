@@ -655,6 +655,9 @@ video {
 .top-\[75\%\]{
   top: 75%;
 }
+.top-\[75px\]{
+  top: 75px;
+}
 .top-\[77px\]{
   top: 77px;
 }
@@ -1150,6 +1153,9 @@ video {
 .w-\[150px\]{
   width: 150px;
 }
+.w-\[160px\]{
+  width: 160px;
+}
 .w-\[165px\]{
   width: 165px;
 }
@@ -1206,9 +1212,6 @@ video {
 }
 .w-full{
   width: 100%;
-}
-.w-\[160px\]{
-  width: 160px;
 }
 .min-w-\[150px\]{
   min-width: 150px;
@@ -1778,14 +1781,6 @@ video {
 .bg-white\/30{
   background-color: rgb(255 255 255 / 0.3);
 }
-.bg-blue-800{
-  --tw-bg-opacity: 1;
-  background-color: rgb(30 64 175 / var(--tw-bg-opacity));
-}
-.bg-gray-700{
-  --tw-bg-opacity: 1;
-  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
-}
 .bg-opacity-75{
   --tw-bg-opacity: 0.75;
 }
@@ -1822,6 +1817,10 @@ video {
 .px-1{
   padding-left: 0.25rem;
   padding-right: 0.25rem;
+}
+.px-10{
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 .px-16{
   padding-left: 4rem;
@@ -2010,6 +2009,9 @@ video {
 }
 .pt-9{
   padding-top: 2.25rem;
+}
+.pt-\[75px\]{
+  padding-top: 75px;
 }
 .text-left{
   text-align: left;
@@ -2538,9 +2540,6 @@ body{
   }
   .sm\:top-\[90\%\]{
     top: 90%;
-  }
-  .sm\:z-0{
-    z-index: 0;
   }
   .sm\:-mx-6{
     margin-left: -1.5rem;
@@ -3077,6 +3076,9 @@ body{
   }
 }
 @media (min-width: 1024px){
+  .lg\:static{
+    position: static;
+  }
   .lg\:right-auto{
     right: auto;
   }
@@ -3180,6 +3182,9 @@ body{
   .lg\:w-\[110px\]{
     width: 110px;
   }
+  .lg\:w-\[180px\]{
+    width: 180px;
+  }
   .lg\:w-\[360px\]{
     width: 360px;
   }
@@ -3194,9 +3199,6 @@ body{
   }
   .lg\:w-\[80\%\]{
     width: 80%;
-  }
-  .lg\:w-\[180px\]{
-    width: 180px;
   }
   .lg\:max-w-\[160px\]{
     max-width: 160px;
@@ -3262,6 +3264,9 @@ body{
   }
   .lg\:pr-0{
     padding-right: 0px;
+  }
+  .lg\:pt-0{
+    padding-top: 0px;
   }
   .lg\:pt-28{
     padding-top: 7rem;
@@ -3339,32 +3344,20 @@ body{
   .xl\:h-80{
     height: 20rem;
   }
-  .xl\:h-\[70px\]{
-    height: 70px;
-  }
   .xl\:max-h-\[550px\]{
     max-height: 550px;
   }
   .xl\:w-\[134px\]{
     width: 134px;
   }
+  .xl\:w-\[220px\]{
+    width: 220px;
+  }
   .xl\:w-\[570px\]{
     width: 570px;
   }
   .xl\:w-auto{
     width: auto;
-  }
-  .xl\:w-\[290px\]{
-    width: 290px;
-  }
-  .xl\:w-\[160px\]{
-    width: 160px;
-  }
-  .xl\:w-\[180px\]{
-    width: 180px;
-  }
-  .xl\:w-\[220px\]{
-    width: 220px;
   }
   .xl\:max-w-\[184px\]{
     max-width: 184px;

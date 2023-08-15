@@ -41,7 +41,7 @@
                 <!--end Picker -->
                 <div class="w-full flex justify-center md:w-auto h-12">
                     <button type="submit"
-                        class="connectUs w-[90%] md:w-36 duration-200 text-center px-5 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                        class="connectUs w-auto md:w-36 duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
                         بحث
                     </button>
                 </div>
