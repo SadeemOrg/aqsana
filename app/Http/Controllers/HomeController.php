@@ -410,9 +410,8 @@ class HomeController extends Controller
     }
     public function delet(Request $request)
     {
-        DB::table('budgets')
-            ->where('year', $request->year)
-            ->delete();
+
+        Budget::where('year', $request->year) ->delete();
     }
     public function SendMessage(Request $request)
     {
