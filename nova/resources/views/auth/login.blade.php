@@ -42,19 +42,19 @@
         </div>
 
         <div class="flex mb-6">
-            <label class="flex items-center text-xl font-bold">
+            {{-- <label class="flex items-center text-xl font-bold">
                 <input class="" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
                 <span class="text-base ml-2">{{ __('Remember Me') }}</span>
-            </label>
+            </label> --}}
 
 
-            @if (\Laravel\Nova\Nova::resetsPasswords())
+            {{-- @if (\Laravel\Nova\Nova::resetsPasswords())
                 <div class="ml-auto">
                     <a class="text-primary dim font-bold no-underline" href="{{ route('nova.password.request') }}">
                         {{ __('Forgot Your Password?') }}
                     </a>
                 </div>
-            @endif
+            @endif --}}
         </div>
 
         <button class="w-full btn btn-default btn-primary hover:bg-primary-dark" type="submit">
