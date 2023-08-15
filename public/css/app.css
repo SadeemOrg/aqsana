@@ -655,6 +655,9 @@ video {
 .top-\[75\%\]{
   top: 75%;
 }
+.top-\[75px\]{
+  top: 75px;
+}
 .top-\[77px\]{
   top: 77px;
 }
@@ -663,12 +666,6 @@ video {
 }
 .top-\[96px\]{
   top: 96px;
-}
-.top-20{
-  top: 5rem;
-}
-.top-\[75px\]{
-  top: 75px;
 }
 .z-0{
   z-index: 0;
@@ -976,6 +973,9 @@ video {
 .h-9{
   height: 2.25rem;
 }
+.h-\[1000px\]{
+  height: 1000px;
+}
 .h-\[175px\]{
   height: 175px;
 }
@@ -1153,6 +1153,9 @@ video {
 .w-\[150px\]{
   width: 150px;
 }
+.w-\[160px\]{
+  width: 160px;
+}
 .w-\[165px\]{
   width: 165px;
 }
@@ -1209,9 +1212,6 @@ video {
 }
 .w-full{
   width: 100%;
-}
-.w-20{
-  width: 5rem;
 }
 .min-w-\[150px\]{
   min-width: 150px;
@@ -1818,6 +1818,10 @@ video {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
 }
+.px-10{
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
 .px-16{
   padding-left: 4rem;
   padding-right: 4rem;
@@ -1897,14 +1901,6 @@ video {
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-.px-10{
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-.py-\[75px\]{
-  padding-top: 75px;
-  padding-bottom: 75px;
 }
 .pb-0{
   padding-bottom: 0px;
@@ -2359,6 +2355,9 @@ video {
 body{
     font-family:'alfont_com_JF-Flat-Bold';
 }
+.hidden_popUp{
+    display: none;
+}
 .hover\:cursor-pointer:hover{
   cursor: pointer;
 }
@@ -2541,9 +2540,6 @@ body{
   }
   .sm\:top-\[90\%\]{
     top: 90%;
-  }
-  .sm\:z-0{
-    z-index: 0;
   }
   .sm\:-mx-6{
     margin-left: -1.5rem;
@@ -3186,6 +3182,9 @@ body{
   .lg\:w-\[110px\]{
     width: 110px;
   }
+  .lg\:w-\[180px\]{
+    width: 180px;
+  }
   .lg\:w-\[360px\]{
     width: 360px;
   }
@@ -3263,21 +3262,17 @@ body{
     padding-left: 2rem;
     padding-right: 2rem;
   }
-  .lg\:py-0{
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
   .lg\:pr-0{
     padding-right: 0px;
+  }
+  .lg\:pt-0{
+    padding-top: 0px;
   }
   .lg\:pt-28{
     padding-top: 7rem;
   }
   .lg\:pt-32{
     padding-top: 8rem;
-  }
-  .lg\:pt-0{
-    padding-top: 0px;
   }
   .lg\:text-right{
     text-align: right;
@@ -3354,6 +3349,9 @@ body{
   }
   .xl\:w-\[134px\]{
     width: 134px;
+  }
+  .xl\:w-\[220px\]{
+    width: 220px;
   }
   .xl\:w-\[570px\]{
     width: 570px;
@@ -3440,4 +3438,3 @@ body{
          column-gap: 2rem;
   }
 }
-
