@@ -4,6 +4,9 @@ namespace App\Nova;
 
 use Acme\MultiselectField\Multiselect;
 use App\Models\User;
+use App\Nova\Filters\AreaDelegate;
+use App\Nova\Filters\CityArea;
+use AwesomeNova\Cards\FilterCard;
 use Benjacho\BelongsToManyField\BelongsToManyField;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
@@ -296,7 +299,9 @@ class City extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new FilterCard(new CityArea()),
+        ];
     }
 
     /**
@@ -307,7 +312,9 @@ class City extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new CityArea()
+        ];
     }
 
     /**
