@@ -57,7 +57,10 @@ class City extends Resource
     public static $search = [
         'name',
     ];
-
+    public static function createButtonLabel()
+    {
+        return 'انشاء بلد';
+    }
     /**
      * Get the fields displayed by the resource.
      *

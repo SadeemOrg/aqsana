@@ -45,6 +45,10 @@ class Book extends Resource
     {
         return __('Cultural Section');
     }
+    public static function createButtonLabel()
+    {
+        return 'انشاء مادة';
+    }
     public static $priority = 1;
     public static function groupOrder()
     {

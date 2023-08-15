@@ -44,6 +44,10 @@ class Sector extends Resource
     public static function groupOrder() {
         return 12;
     }
+    public static function createButtonLabel()
+    {
+        return 'انشاء قطاع';
+    }
     /**
      * The columns that should be searched.
      *

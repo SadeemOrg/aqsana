@@ -30,6 +30,10 @@ class TelephoneDirectory extends Resource
      * @var string
      */
     public static $title = 'name';
+    public static function createButtonLabel()
+    {
+        return 'انشاء مستخدم';
+    }
     public static function label()
     {
         return __('SMS');

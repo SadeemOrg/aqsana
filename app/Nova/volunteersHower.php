@@ -56,7 +56,10 @@ class volunteersHower extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-
+    public static function createButtonLabel()
+    {
+        return 'انشاء متطوعين';
+    }
      public static function availableForNavigation(Request $request)
      {
 

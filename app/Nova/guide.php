@@ -20,6 +20,10 @@ class guide extends Resource
     {
         return __('guide');
     }
+    public static function createButtonLabel()
+    {
+        return 'انشاء مرشد';
+    }
     public static function group()
     {
         return __('Cultural Section');

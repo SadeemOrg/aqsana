@@ -38,6 +38,10 @@ class Tours extends Resource
     {
         return __('Cultural Section');
     }
+    public static function createButtonLabel()
+    {
+        return 'انشاء جولة';
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *

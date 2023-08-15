@@ -24,6 +24,11 @@ namespace App\Nova;
         public static $searchRelations = [
             'AreaDelegate' => ['id', 'name'],
         ];
+
+        public static function createButtonLabel()
+        {
+            return 'انشاء مندوب';
+        }
         /**
          * The model the resource corresponds to.
          *

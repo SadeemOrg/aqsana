@@ -87,6 +87,10 @@ class PaymentVoucher extends Resource
 
         return $query->where('main_type', '2')->orderBy('transaction_date', 'DESC');
     }
+    public static function createButtonLabel()
+    {
+        return 'انشاء سند صرف';
+    }
     public function fields(Request $request)
     {
         return [

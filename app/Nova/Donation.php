@@ -61,7 +61,10 @@ class Donation extends Resource
      */
     public static $title = 'id';
 
-
+    public static function createButtonLabel()
+    {
+        return 'انشاء سند قبض';
+    }
     public static function label()
     {
         return __('the receipt Voucher');

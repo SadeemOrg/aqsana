@@ -59,7 +59,10 @@ class Area extends Resource
     public static $search = [
         'id','name'
     ];
-
+    public static function createButtonLabel()
+    {
+        return 'انشاء لواء';
+    }
     /**
      * Get the fields displayed by the resource.
      *
