@@ -13,7 +13,7 @@
     <!-- page -->
     <main class="min-h-screen w-full bg-gray-100 text-gray-700 " x-data="layout">
         <!-- header page -->
-        <header class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2">
+        <header class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2 z-10 lg:static fixed top-0 w-full right-0 left-0">
             <!-- logo -->
             <div class="flex justify-between items-center space-x-2 w-full">
                 @php
@@ -110,7 +110,7 @@
         </form>
         <div class="flex">
             <!-- aside -->
-            <nav class=" TabsSidee z-50 sm:z-0 sm:flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2 "
+            <nav class=" TabsSidee sm:flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2 lg:static fixed z-10 top-[75px]"
                 aria-label="Tabs" style="height: 115vh" x-show="asideOpen">
                 <a href="#" target="_self"
                     class="activeTabs  tabsAlphaA flex items-center  space-x-1 rounded-md px-2 py-3 hover:bg-[#349A37] hover:text-black">
@@ -158,7 +158,7 @@
             </nav>
 
             <!-- main content page -->
-            <div class="tabs-Side-container w-full">
+            <div class="tabs-Side-container w-full pt-[75px] lg:pt-0 pb-20">
                 <div class="container tab tab-A px-8 mx-auto mt-8 max-w-6xl">
                     <div class="flex sm:flex-row flex-col sm:gap-y-0 gap-y-6 items-center justify-between mt-4 xl:mt-8">
                         <div class="relative ">
