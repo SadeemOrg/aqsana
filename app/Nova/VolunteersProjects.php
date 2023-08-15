@@ -43,7 +43,10 @@ class VolunteersProjects extends Resource
     public static $search = [
         'id',
     ];
-
+    public static function createButtonLabel()
+    {
+        return 'انشاء مشروع';
+    }
     /**
      * Get the fields displayed by the resource.
      *

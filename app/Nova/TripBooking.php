@@ -22,6 +22,10 @@ class TripBooking extends Resource
      *
      * @var string
      */
+    public static function createButtonLabel()
+    {
+        return 'انشاء حجز';
+    }
     public static $model = \App\Models\TripBooking::class;
     public static function label()
     {

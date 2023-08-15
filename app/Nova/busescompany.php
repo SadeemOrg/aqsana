@@ -27,6 +27,10 @@ class BusesCompany extends Resource
         }
        else return false;
     }
+    public static function createButtonLabel()
+    {
+        return 'انشاء شركة';
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *

@@ -60,7 +60,10 @@ class address extends Resource
         }
        else return false;
     }
-
+    public static function createButtonLabel()
+    {
+        return 'انشاء عنوان';
+    }
     public function fields(Request $request)
     {
         return [
