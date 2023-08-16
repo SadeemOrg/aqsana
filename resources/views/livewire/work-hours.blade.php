@@ -41,7 +41,7 @@
                 <!--end Picker -->
                 <div class="w-full flex justify-center md:w-auto h-12">
                     <button type="submit"
-                        class="connectUs w-[90%] md:w-36 duration-200 text-center px-5 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                        class="connectUs w-auto md:w-36 duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
                         بحث
                     </button>
                 </div>
@@ -85,11 +85,11 @@
     <div
         class="flex flex-row items-start justify-center gap-x-4 my-10 md:my-20 flex-wrap gap-y-4 md:gap-y-0 md:flex-nowrap">
         <div
-            class="max-w-[90%] sm:max-w-[65%] md:max-w-[300px] cursor-pointer w-full flex items-center justify-center h-12 rounded-[30px] md:rounded-none md:h-28 bg-[#349A37]">
+            class="max-w-[90%] sm:max-w-[65%] md:max-w-[200px] cursor-pointer w-full flex items-center justify-center h-16 rounded-[4px] md:h-16 bg-[#349A37]">
             <p id="timer" class="text-white text-2xl"></p>
-        </div>
-        <div class="cursor-pointer min-w-[163px]  mb-12">
-            <svg wire:click="EndWork" class="h-16 md:h-[114px] " width="163" height="114" viewBox="0 0 163 114"
+        </div>        
+        <div class="cursor-pointer min-w-[100px]  mb-12">
+            <svg wire:click="EndWork" class="h-16 md:h-16 " width="100"  viewBox="0 0 163 114"
                 fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="163" height="114" rx="6" fill="#349A37" />
                 <g clip-path="url(#clip0_59_1521)">
@@ -106,9 +106,9 @@
         </div>
         @if ($hide)
             <div id="start_timer" onclick="start()" wire:click="StartTimerWorkHours"
-                class="cursor-pointer min-w-[163px]  mb-12">
+                class="cursor-pointer min-w-[100px]  mb-12">
 
-                <svg class="h-16 md:h-[114px]" width="163" height="114" viewBox="0 0 163 114" fill="none"
+                <svg class="h-16 md:h-16 " width="100" viewBox="0 0 163 114" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <rect width="163" height="114" rx="6" fill="#349A37" />
                     <path d="M64 80V34L102.927 57.0011L64 80Z" fill="white" />
