@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
 
     <!-- page -->
-    <main class="min-h-screen w-full bg-gray-100 text-gray-700 " x-data="layout">
+    <main class="min-h-screen w-full bg-gray-100 text-gray-700 " x-data="layout">        
         <!-- header page -->
         <header class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2 z-10 lg:static fixed top-0 w-full right-0 left-0">
             <!-- logo -->
@@ -80,6 +80,7 @@
             </div>
 
         </header>
+        <div x-show="leftBarOpen" @click="leftBarOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
         <div class=" absolute left-[1%] lg:top-auto top-[55px] drop-shadow-lg  z-50 bg-white p-4 text-white rounded-lg" style="min-height: 20vh ;"
             x-show="leftBarOpen">
             <div class="flex flex-col items-start justify-start">
@@ -110,7 +111,8 @@
         </form>
         <div class="flex">
             <!-- aside -->
-            <nav class=" TabsSidee sm:flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2 lg:static fixed z-10 top-[75px] h-[100vh] lg:h-auto"
+            <div x-show="asideOpen" @click="asideOpen = false" class="fixed inset-0 h-full w-full z-10 lg:hidden"></div>
+            <nav class=" TabsSidee sm:flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2 lg:static fixed z-10 top-[75px] h-[100vh]"
                 aria-label="Tabs" x-show="asideOpen">
                 <a href="#" target="_self"
                     class="activeTabs  tabsAlphaA flex items-center  space-x-1 rounded-md px-2 py-3 hover:bg-[#349A37] hover:text-black">
@@ -200,7 +202,7 @@
                                 <div class="flex flex-row items-center gap-x-2 ">
                                     <div class="w-[150px] flex items-center justify-center">
                                         <button type="submit"
-                                            class="connectUs w-full text-center duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#4F37FD] hover:bg-[#101426] hover:text-white ">
+                                            class="connectUs w-full text-center duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                                             حفظ
                                         </button>
                                     </div>
@@ -410,7 +412,7 @@
                                 <div class="flex flex-row items-center gap-x-2 ">
                                     <div class="w-[150px] flex items-center justify-center">
                                         <button type="submit"
-                                            class="connectUs w-full text-center duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#4F37FD] hover:bg-[#101426] hover:text-white ">
+                                            class="connectUs w-full text-center duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                                             حفظ
                                         </button>
                                     </div>
@@ -474,7 +476,7 @@
                     <livewire:admin-work-hours />
                 </div>
             </div>
-        </div>
+        </div>    
     </main>
 
     <script>
