@@ -125,6 +125,7 @@
         .exit-button:hover{color: white}
         .TabsSidee a:hover {color: #fff}
         .TabsSidee a:hover svg path {fill: #fff}
+        .timer svg:hover rect {fill: #40b744}        
     </style>
     <!-- Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> -->

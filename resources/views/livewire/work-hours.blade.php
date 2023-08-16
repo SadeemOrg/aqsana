@@ -41,7 +41,7 @@
                 <!--end Picker -->
                 <div class="w-full flex justify-center md:w-auto h-12">
                     <button type="submit"
-                        class="connectUs w-auto md:w-36 duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                        class="connectUs w-auto md:w-36 duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                         بحث
                     </button>
                 </div>
@@ -83,9 +83,9 @@
 
 
     <div
-        class="flex flex-row items-start justify-center gap-x-4 my-10 md:my-20 flex-wrap gap-y-4 md:gap-y-0 md:flex-nowrap">
+        class="timer flex flex-row items-start justify-center gap-x-4 my-10 md:my-20 flex-wrap gap-y-4 md:gap-y-0 md:flex-nowrap">
         <div
-            class="max-w-[90%] sm:max-w-[65%] md:max-w-[200px] cursor-pointer w-full flex items-center justify-center h-16 rounded-[4px] md:h-16 bg-[#349A37]">
+            class="max-w-[90%] sm:max-w-[65%] md:max-w-[200px] w-full flex items-center justify-center h-16 rounded-[4px] md:h-16 bg-[#349A37]">
             <p id="timer" class="text-white text-2xl"></p>
         </div>        
         <div class="cursor-pointer min-w-[100px]  mb-12">
