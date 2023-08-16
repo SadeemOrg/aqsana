@@ -349,7 +349,7 @@
                                 <div class="flex flex-row items-center gap-x-2 ">
                                     <div class="w-[150px] flex items-center justify-center">
                                         <button type="submit"
-                                            class="connectUs w-full text-center duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#4F37FD] hover:bg-[#101426] hover:text-white ">
+                                            class="connectUs w-full text-center duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                                             حفظ
                                         </button>
                                     </div>
