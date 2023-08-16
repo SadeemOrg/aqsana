@@ -64,6 +64,7 @@ class HomeController extends Controller
 
             $date = $date->addMonth();
         }
+        dd($schedule);
         return $schedule;
     }
     public function StartTimerWorkHours(Request $request)
