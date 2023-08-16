@@ -79,7 +79,7 @@ Route::post("user", [HomeController::class, "user"])->name('user');
 Route::post("users", [HomeController::class, "users"])->name('users');
 Route::post("UserAdmin", [HomeController::class, "Admin"])->name('Admin');
 
-Route::post("schedulelast", [HomeController::class, "schedulelast"])->name('schedulelast');
+Route::get("schedulelast", [HomeController::class, "schedulelast"])->name('schedulelast');
 
 
 Route::post("first/", [HomeController::class, "first"])->name('first');
