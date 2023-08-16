@@ -36,7 +36,7 @@ class HomeController extends Controller
     public function schedulelast()
     {
         $year = Carbon::now()->year;
-        $month = Carbon::now()->month;
+        $month = Carbon::now()->addMonth()->month;
 
         $date_from = $year . '-' . $month . '-1';
         $from = date($date_from);
@@ -64,6 +64,7 @@ class HomeController extends Controller
 
             $date = $date->addMonth();
         }
+        // dd($schedule);
         return $schedule;
     }
     public function StartTimerWorkHours(Request $request)
