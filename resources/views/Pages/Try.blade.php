@@ -13,7 +13,7 @@
     <!-- page -->
     <main class="min-h-screen w-full bg-gray-100 text-gray-700 " x-data="layout">
         <!-- header page -->
-        <header class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2">
+        <header class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2 z-10 lg:static fixed top-0 w-full right-0 left-0">
             <!-- logo -->
             <div class="flex justify-between items-center space-x-2 w-full">
                 @php
@@ -80,18 +80,18 @@
             </div>
 
         </header>
-        <div class=" absolute left-[1%]  z-50 bg-white p-4 text-white rounded-lg" style="min-height: 20vh ;"
+        <div class=" absolute left-[1%] lg:top-auto top-[55px] drop-shadow-lg  z-50 bg-white p-4 text-white rounded-lg" style="min-height: 20vh ;"
             x-show="leftBarOpen">
             <div class="flex flex-col items-start justify-start">
                 <button onclick="location.href='/Admin'"
-                    class=" text-black text-sm hover:bg-[#349A37] py-4 rounded-lg px-4 min-w-[180px]">الذهاب
+                    class=" text-black text-sm hover:bg-[#349A37] hover:text-white py-4 rounded-lg px-4 min-w-[180px]">الذهاب
                     الى المنظومة</button>
                 <button onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();"
-                    class=" text-black text-sm hover:bg-[#349A37] py-4 rounded-lg px-4 min-w-[180px]">
-                    <div class="flex flex-row items-center justify-start gap-x-2">
+                    class="exit-button text-black text-sm hover:bg-[#349A37] py-4 rounded-lg px-4 min-w-[180px]">
+                    <div class="flex flex-row items-center justify-start gap-x-2 hover:text-white">
                         <svg width="25" height="26" viewBox="0 0 25 26" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
+                            xmlns="http://www.w3.org/2000/svg" class="exit-svg">
                             <path
                                 d="M15.6249 13.5504C15.0488 13.5504 14.5833 14.0171 14.5833 14.592V18.7588C14.5833 19.3327 14.1165 19.8004 13.5415 19.8004H10.4165V4.17539C10.4165 3.2858 9.84984 2.49101 8.99783 2.19518L8.68942 2.092H13.5415C14.1165 2.092 14.5833 2.55968 14.5833 3.13379V6.25879C14.5833 6.83366 15.0488 7.30039 15.6249 7.30039C16.2009 7.30039 16.6664 6.83366 16.6664 6.25879V3.13379C16.6664 1.41088 15.2644 0.00878906 13.5415 0.00878906H2.34373C2.30405 0.00878906 2.27087 0.0265274 2.23234 0.0316772C2.18218 0.0274811 2.1343 0.00878906 2.08338 0.00878906C0.934401 0.00878906 0 0.943008 0 2.092V20.842C0 21.7316 0.566668 22.5264 1.41867 22.8222L7.68749 24.9119C7.89997 24.9775 8.1113 25.0088 8.33332 25.0088C9.48229 25.0088 10.4165 24.0744 10.4165 22.9254V21.8838H13.5415C15.2644 21.8838 16.6664 20.4817 16.6664 18.7588V14.592C16.6664 14.0171 16.2009 13.5504 15.6249 13.5504Z"
                                 fill="#F91616" />
@@ -110,8 +110,8 @@
         </form>
         <div class="flex">
             <!-- aside -->
-            <nav class=" TabsSidee z-50 sm:z-0 sm:flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2 "
-                aria-label="Tabs" style="height: 115vh" x-show="asideOpen">
+            <nav class=" TabsSidee sm:flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2 lg:static fixed z-10 top-[75px] h-[100vh] lg:h-auto"
+                aria-label="Tabs" x-show="asideOpen">
                 <a href="#" target="_self"
                     class="activeTabs  tabsAlphaA flex items-center  space-x-1 rounded-md px-2 py-3 hover:bg-[#349A37] hover:text-black">
                     <span class="text-2xl">
@@ -158,7 +158,7 @@
             </nav>
 
             <!-- main content page -->
-            <div class="tabs-Side-container w-full">
+            <div class="tabs-Side-container w-full pt-[75px] lg:pt-0 pb-20">
                 <div class="container tab tab-A px-8 mx-auto mt-8 max-w-6xl">
                     <div class="flex sm:flex-row flex-col sm:gap-y-0 gap-y-6 items-center justify-between mt-4 xl:mt-8">
                         <div class="relative ">
@@ -481,7 +481,7 @@
         document.addEventListener("alpine:init", () => {
             Alpine.data("layout", () => ({
                 profileOpen: false,
-                asideOpen: true,
+                asideOpen: screen.width < 991 ? false : true,
                 leftBarOpen: false,
             }));
         });
