@@ -685,8 +685,18 @@ class HomeController extends Controller
         $years = Budget::select('year')->get()->unique('year');
         return  $years;
     }
+    public function DeleteYears()
+    {
+        $years = Budget::onlyTrashed()->select('year')->get()->unique('year');
 
+        return  $years;
+    }
+    public function Recovery(Request $request)
+    {
 
+        Budget::where('year', $request->year)->restore();
+
+    }
     public function originalbillbills($id)
     {
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();

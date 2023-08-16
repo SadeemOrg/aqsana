@@ -90,6 +90,9 @@ Route::post("SectorsBudget", [HomeController::class, "SectorsBudget"])->name('Se
 Route::post("Sectorstatistics", [HomeController::class, "Sectorstatistics"])->name('Sectorstatistics');
 
 Route::post("year", [HomeController::class, "year"])->name('year');
+Route::post("DeleteYears", [HomeController::class, "DeleteYears"])->name('DeleteYears');
+Route::post("Recovery", [HomeController::class, "Recovery"])->name('Recovery');
+
 Route::post("save", [HomeController::class, "save"])->name('save');
 
 

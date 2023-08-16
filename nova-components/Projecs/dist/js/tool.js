@@ -169,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .chart-custom-style {\n  width:500px !important;\n  height: 300px !important;\n} */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .chart-custom-style {\n    width:500px !important;\n    height: 300px !important;\n  } */\n", ""]);
 
 // exports
 
@@ -1204,353 +1204,207 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      openTab: 1,
-      openTabstatistic: 0,
-      selectedItem: "0",
-      selectedyear: "0",
-      year: "0",
-      years: [],
-      Sectors: [],
-      newSectors: [],
-      budjetSector: [],
-      deletSectors: [],
-      points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
-      months: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-      projectshow: false,
-      chartWidth: 400
-    };
-  },
-
-  methods: {
-    toggleTabs: function toggleTabs(tabNumber) {
-      this.openTab = tabNumber;
-    },
-    toggleTabsstatistic: function toggleTabsstatistic(tabNumber) {
-      this.openTabstatistic = tabNumber;
-    },
-    getYears: function getYears() {
-      var _this = this;
-
-      axios.post("/year").then(function (response) {
-        _this.years = response.data;
-      });
-    },
-
-    getSector: function getSector() {
-      var _this2 = this;
-
-      axios.post("/Sectors").then(function (response) {
-        _this2.newSectors = response.data;
-      });
-    },
-    getSectorstatistics: function getSectorstatistics(event) {
-      var _this3 = this;
-
-      axios.post("/Sectorstatistics", {
-        year: event.target.value
-      }).then(function (response) {
-        _this3.budjetSector = response.data;
-      });
-    },
-    onChange: function onChange(event) {
-      var _this4 = this;
-
-      axios.post("/SectorsBudget", {
-        year: event.target.value
-      }).then(function (response) {
-        _this4.Sectors = response.data;
-        console.log("sss", _this4.Sectors);
-      });
-    },
-    onChangedelet: function onChangedelet(event) {
-      var _this5 = this;
-
-      axios.post("/SectorsBudget", {
-        year: event.target.value
-      }).then(function (response) {
-        _this5.deletSectors = response.data;
-        _this5.selectedItem = "0";
-        _this5.selectedyear = "0";
-        _this5.year = event.target.value;
-      });
-    },
-    save: function save() {
-      axios.post("/save", {
-        year: this.year,
-        Sectors: this.Sectors
-      }).then(function (response) {
-        toastr.options = {
-          closeButton: true,
-          debug: false,
-          positionClass: "toast-bottom-right",
-          onclick: null,
-          showDuration: "300",
-          hideDuration: "2000",
-          showMethod: "fadeIn",
-          hideMethod: "fadeOut"
+    data: function data() {
+        return {
+            openTab: 1,
+            openTabstatistic: 0,
+            selectedItem: "0",
+            selectedyear: "0",
+            year: "0",
+            years: [],
+            DeleteYears: [],
+            Sectors: [],
+            newSectors: [],
+            budjetSector: [],
+            deletSectors: [],
+            points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
+            months: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+            projectshow: false,
+            chartWidth: 400
         };
-        toastr.success("  تم حفظ بنجاح");
-      });;
     },
-    savenew: function savenew() {
-      var sum = 0;
-      this.newSectors.forEach(function (element) {
-        sum += parseInt(element["Budget"]);
-      });
 
-      console.log(sum);
-      // alert(this.budgetsOfyear);
-      if (this.budgetsOfyear > sum) {
-        axios.post("/save", {
-          year: this.newyear,
-          budgetsOfyear: this.budgetsOfyear,
-          Sectors: this.newSectors
-        }).then(function (response) {
-          toastr.options = {
-            closeButton: true,
-            debug: false,
-            positionClass: "toast-bottom-right",
-            onclick: null,
-            showDuration: "300",
-            hideDuration: "2000",
-            showMethod: "fadeIn",
-            hideMethod: "fadeOut"
-          };
-          toastr.success("  تم انشاء بنجاح");
-        });
+    methods: {
+        toggleTabs: function toggleTabs(tabNumber) {
+            this.openTab = tabNumber;
+        },
+        toggleTabsstatistic: function toggleTabsstatistic(tabNumber) {
+            this.openTabstatistic = tabNumber;
+        },
+        getYears: function getYears() {
+            var _this = this;
 
+            axios.post("/year").then(function (response) {
+                _this.years = response.data;
+            });
+        },
+        geDeleteYears: function geDeleteYears() {
+            var _this2 = this;
+
+            axios.post("/DeleteYears").then(function (response) {
+                _this2.DeleteYears = response.data;
+                console.log("delet", _this2.DeleteYears);
+            });
+        },
+
+        getSector: function getSector() {
+            var _this3 = this;
+
+            axios.post("/Sectors").then(function (response) {
+                _this3.newSectors = response.data;
+            });
+        },
+        getSectorstatistics: function getSectorstatistics(event) {
+            var _this4 = this;
+
+            axios.post("/Sectorstatistics", {
+                year: event.target.value
+            }).then(function (response) {
+                _this4.budjetSector = response.data;
+            });
+        },
+        onChange: function onChange(event) {
+            var _this5 = this;
+
+            axios.post("/SectorsBudget", {
+                year: event.target.value
+            }).then(function (response) {
+                _this5.Sectors = response.data;
+                console.log("sss", _this5.Sectors);
+            });
+        },
+        onChangedelet: function onChangedelet(event) {
+            var _this6 = this;
+
+            axios.post("/SectorsBudget", {
+                year: event.target.value
+            }).then(function (response) {
+                _this6.deletSectors = response.data;
+                _this6.selectedItem = "0";
+                _this6.selectedyear = "0";
+                _this6.year = event.target.value;
+            });
+        },
+        save: function save() {
+            axios.post("/save", {
+                year: this.year,
+                Sectors: this.Sectors
+            }).then(function (response) {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.success("  تم حفظ بنجاح");
+                this.getYears();
+                this.geDeleteYears();
+            });
+        },
+        Recovery: function Recovery() {
+            // alert(this.DeleteYear);
+            // // console.log("eer",this.DeleteYear);
+            axios.post("/Recovery", {
+                year: this.DeleteYears
+            }).then(function (response) {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.success("  تم حفظ بنجاح");
+                this.getYears();
+                this.geDeleteYears();
+            });
+        },
+        savenew: function savenew() {
+            var sum = 0;
+            this.newSectors.forEach(function (element) {
+                sum += parseInt(element["Budget"]);
+            });
+
+            console.log(sum);
+            // alert(this.budgetsOfyear);
+            if (this.budgetsOfyear > sum) {
+                axios.post("/save", {
+                    year: this.newyear,
+                    budgetsOfyear: this.budgetsOfyear,
+                    Sectors: this.newSectors
+                }).then(function (response) {
+                    toastr.options = {
+                        closeButton: true,
+                        debug: false,
+                        positionClass: "toast-bottom-right",
+                        onclick: null,
+                        showDuration: "300",
+                        hideDuration: "2000",
+                        showMethod: "fadeIn",
+                        hideMethod: "fadeOut"
+                    };
+                    toastr.success("  تم انشاء بنجاح");
+                });
+
+                this.getYears();
+            } else {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+
+                toastr.error("ميزانية السنة لا تطابق مع ميزانية القطاعات");
+            }
+        },
+        delet: function delet() {
+
+            // console.log(this.deletSectors);
+            axios.post("/delet", {
+                year: this.year
+            });
+            this.deletSectors = [];
+            this.getYears();
+        }
+    },
+
+    beforeMount: function beforeMount() {
         this.getYears();
-      } else {
-        toastr.options = {
-          closeButton: true,
-          debug: false,
-          positionClass: "toast-bottom-right",
-          onclick: null,
-          showDuration: "300",
-          hideDuration: "2000",
-          showMethod: "fadeIn",
-          hideMethod: "fadeOut"
-        };
-
-        toastr.error("ميزانية السنة لا تطابق مع ميزانية القطاعات");
-      }
+        this.geDeleteYears();
+        this.getSector();
     },
-    delet: function delet() {
 
-      // console.log(this.deletSectors);
-      axios.post("/delet", {
-        year: this.year
-      });
-      this.deletSectors = [];
-      this.getYears();
+    components: {
+        PureVueChart: __WEBPACK_IMPORTED_MODULE_0_pure_vue_chart___default.a
+    },
+    mounted: function mounted() {
+        var _this7 = this;
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth < 1220 && window.innerWidth > 500) {
+                _this7.chartWidth = 300;
+            } else if (window.innerWidth < 499) {
+                _this7.chartWidth = 250;
+            }
+
+            console.log(_this7.chartWidth);
+        });
     }
-  },
-
-  beforeMount: function beforeMount() {
-    this.getYears();
-    this.getSector();
-  },
-
-  components: {
-    PureVueChart: __WEBPACK_IMPORTED_MODULE_0_pure_vue_chart___default.a
-  },
-  mounted: function mounted() {
-    var _this6 = this;
-
-    window.addEventListener('resize', function () {
-      if (window.innerWidth < 1220 && window.innerWidth > 500) {
-        _this6.chartWidth = 300;
-      } else if (window.innerWidth < 499) {
-        _this6.chartWidth = 250;
-      }
-
-      console.log(_this6.chartWidth);
-    });
-  }
 });
 
 /***/ }),
@@ -8372,7 +8226,11 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n            الميزانيات\n          ")]
+                  [
+                    _vm._v(
+                      "\n                        الميزانيات\n                    "
+                    )
+                  ]
                 )
               ]
             ),
@@ -8399,7 +8257,11 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n            اضافة جدييد\n          ")]
+                  [
+                    _vm._v(
+                      "\n                        اضافة جدييد\n                    "
+                    )
+                  ]
                 )
               ]
             ),
@@ -8426,7 +8288,42 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n            حذف\n          ")]
+                  [
+                    _vm._v(
+                      "\n                        حذف\n                    "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "flex flex-row items-center justify-center cursor-pointer w-1/4"
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    class: {
+                      "text-green-600 bg-white w-full py-4 text-center rounded-md":
+                        _vm.openTab !== 5,
+                      "text-white  bg-green-600 w-full py-4 text-center rounded-md":
+                        _vm.openTab === 5
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.toggleTabs(5)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        المحذوفات\n                    "
+                    )
+                  ]
                 )
               ]
             ),
@@ -8454,7 +8351,11 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n            احصائبات\n          ")]
+                  [
+                    _vm._v(
+                      "\n                        احصائبات\n                    "
+                    )
+                  ]
                 )
               ]
             )
@@ -8524,7 +8425,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                    Please select one\n                  "
+                                "\n                                        Please select one\n                                    "
                               )
                             ]
                           ),
@@ -8538,9 +8439,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                    " +
+                                  "\n                                        " +
                                     _vm._s(year.year) +
-                                    "\n                  "
+                                    "\n                                    "
                                 )
                               ]
                             )
@@ -8581,9 +8482,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                      " +
+                                      "\n                                            " +
                                         _vm._s(Sector.Sector) +
-                                        "\n                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -8647,7 +8548,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                      حفظ\n                    "
+                                        "\n                                            حفظ\n                                        "
                                       )
                                     ]
                                   )
@@ -8755,9 +8656,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                      " +
+                                      "\n                                            " +
                                         _vm._s(Sector.Sector) +
-                                        "\n                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -8821,7 +8722,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                      save\n                    "
+                                        "\n                                            save\n                                        "
                                       )
                                     ]
                                   )
@@ -8865,7 +8766,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                    Please select one\n                  "
+                                "\n                                        Please select one\n                                    "
                               )
                             ]
                           ),
@@ -8879,9 +8780,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                    " +
+                                  "\n                                        " +
                                     _vm._s(year.year) +
-                                    "\n                  "
+                                    "\n                                    "
                                 )
                               ]
                             )
@@ -8922,9 +8823,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                      " +
+                                      "\n                                            " +
                                         _vm._s(Sector.Sector) +
-                                        "\n                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -8995,7 +8896,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\n                        حذف\n                      "
+                                                "\n                                                حذف\n                                            "
                                               )
                                             ]
                                           )
@@ -9003,6 +8904,197 @@ var render = function() {
                                       ]
                                     )
                                   : _vm._e()
+                              ]
+                            )
+                          : _vm._e()
+                      ],
+                      2
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    class: {
+                      hidden: _vm.openTab !== 5,
+                      block: _vm.openTab === 5
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "py-4 w-[95%] bg-slate-700" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.DeleteYear,
+                              expression: "DeleteYear"
+                            }
+                          ],
+                          staticClass:
+                            "select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.DeleteYear = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                              function($event) {
+                                return _vm.onChange($event)
+                              }
+                            ]
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { selected: "", disabled: "", value: "0" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                        Please select one\n                                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.DeleteYears, function(DeleteYear) {
+                            return _c(
+                              "option",
+                              {
+                                key: DeleteYear.year,
+                                domProps: { value: DeleteYear.year }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(DeleteYear.year) +
+                                    "\n                                    "
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        staticClass: "add-form py-4",
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.onSubmit.apply(null, arguments)
+                          }
+                        }
+                      },
+                      [
+                        _vm._l(_vm.Sectors, function(Sector) {
+                          return _c(
+                            "div",
+                            {
+                              key: Sector.Sector,
+                              staticClass: "md:flex md:items-center mb-6",
+                              attrs: { value: Sector.Sector }
+                            },
+                            [
+                              _c("div", { staticClass: "md:w-1/3" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass:
+                                      "block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64",
+                                    attrs: { for: "inline-full-name" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(Sector.Sector) +
+                                        "\n                                        "
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "md:w-2/3" }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: Sector.Budget,
+                                      expression: "Sector.Budget"
+                                    }
+                                  ],
+                                  staticClass:
+                                    "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                                  attrs: {
+                                    id: "inline-full-name",
+                                    type: "text"
+                                  },
+                                  domProps: { value: Sector.Budget },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        Sector,
+                                        "Budget",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _vm.Sectors.length
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "md:flex md:items-center w-11/12 justify-end"
+                              },
+                              [
+                                _c("div", { staticClass: "md:w-2/3" }, [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
+                                      attrs: { type: "submit" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.Recovery()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                            استعادة\n                                        "
+                                      )
+                                    ]
+                                  )
+                                ])
                               ]
                             )
                           : _vm._e()
@@ -9070,7 +9162,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                      Please select one\n                    "
+                                  "\n                                            Please select one\n                                        "
                                 )
                               ]
                             ),
@@ -9084,9 +9176,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                      " +
+                                    "\n                                            " +
                                       _vm._s(year.year) +
-                                      "\n                    "
+                                      "\n                                        "
                                   )
                                 ]
                               )
@@ -9132,9 +9224,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                        " +
+                                      "\n                                                " +
                                         _vm._s(Sector.Sector) +
-                                        "\n                      "
+                                        "\n                                            "
                                     )
                                   ]
                                 )
@@ -9178,7 +9270,7 @@ var render = function() {
                                             { staticClass: "mb-6 mx-4" },
                                             [
                                               _vm._v(
-                                                "\n                              " +
+                                                "\n                                                            " +
                                                   _vm._s(Sector.Sector)
                                               )
                                             ]
@@ -9231,7 +9323,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "ميزانبة القطاع\n                                    "
+                                                                "ميزانبة\n                                                                            القطاع\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -9285,7 +9377,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\n                                      مصاريف القطاع\n                                    "
+                                                                "\n                                                                            مصاريف القطاع\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -9339,7 +9431,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\n                                      صافي الانفاق القطاع\n                                    "
+                                                                "\n                                                                            صافي الانفاق القطاع\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -9394,7 +9486,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "الربع الاول ميزانية\n                                    "
+                                                                "الربع\n                                                                            الاول ميزانية\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -9446,7 +9538,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "الربع الاول مصاريف"
+                                                                "الربع\n                                                                            الاول مصاريف"
                                                               )
                                                             ]
                                                           ),
@@ -9499,7 +9591,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "الربع الاول صافي الانفاق"
+                                                                "الربع\n                                                                            الاول صافي الانفاق"
                                                               )
                                                             ]
                                                           ),
@@ -9555,7 +9647,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "الربع الثاني ميزانية\n                                    "
+                                                                "الربع\n                                                                            الثاني ميزانية\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -9607,7 +9699,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "الربع الثاني مصاريف\n                                    "
+                                                                "الربع\n                                                                            الثاني مصاريف\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -9660,7 +9752,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "الربع الثاني صافي الانفاق\n                                    "
+                                                                "الربع\n                                                                            الثاني صافي الانفاق\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -9716,7 +9808,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "الربع الثالت ميزانية\n                                    "
+                                                                "الربع\n                                                                            الثالت ميزانية\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -9768,7 +9860,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "الربع الثالت مصاريف\n                                    "
+                                                                "الربع\n                                                                            الثالت مصاريف\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -9821,7 +9913,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "الربع الثالت صافي الانفاق\n                                    "
+                                                                "الربع\n                                                                            الثالت صافي الانفاق\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -9877,7 +9969,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "الربع الرابع ميزانية\n                                    "
+                                                                "الربع\n                                                                            الرابع ميزانية\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -9929,7 +10021,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "الربع الرابع مصاريف\n                                    "
+                                                                "الربع\n                                                                            الرابع مصاريف\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -9982,7 +10074,7 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "الربع الرابع صافي الانفاق\n                                    "
+                                                                "الربع\n                                                                            الرابع صافي الانفاق\n                                                                        "
                                                               )
                                                             ]
                                                           ),
@@ -10140,7 +10232,11 @@ var staticRenderFns = [
           staticClass:
             "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
         },
-        [_vm._v("\n                    السنة\n                  ")]
+        [
+          _vm._v(
+            "\n                                        السنة\n                                    "
+          )
+        ]
       )
     ])
   },
@@ -10155,7 +10251,11 @@ var staticRenderFns = [
           staticClass:
             "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
         },
-        [_vm._v("\n                  السنة\n                ")]
+        [
+          _vm._v(
+            "\n                                    السنة\n                                "
+          )
+        ]
       )
     ])
   },
@@ -10170,7 +10270,30 @@ var staticRenderFns = [
           staticClass:
             "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
         },
-        [_vm._v("\n                  ميزانبة السنة\n                ")]
+        [
+          _vm._v(
+            "\n                                    ميزانبة السنة\n                                "
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/3" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+        },
+        [
+          _vm._v(
+            "\n                                        السنة\n                                    "
+          )
+        ]
       )
     ])
   }
