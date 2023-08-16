@@ -50,7 +50,7 @@
                 <!--end Picker -->
                 <div class="w-full md:w-auto h-12">
                     <button type="submit"
-                        class="connectUs w-[90%] md:w-36 duration-200 text-center px-5 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
+                        class="connectUs w-[90%] md:w-36 duration-200 text-center px-5 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                         بحث
                     </button>
                 </div>
@@ -58,7 +58,7 @@
         </div>
     </form>
     <button wire:click="showAddModels"
-        class="connectUs duration-200 w-[90%] sm:w-[40%] md:w-[207px] px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] text-center hover:text-white ">اضافة</button>
+        class="connectUs duration-200 w-[90%] sm:w-[40%] md:w-[207px] px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] text-center hover:text-white ">اضافة</button>
 
     <!--End Perosonal Information -->
     <!--from Date -->
