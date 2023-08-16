@@ -23,7 +23,7 @@
         </button>
 
         <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
-        <div x-show="dropdownOpen" class="absolute left-[-8%] mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20"
+        <div x-show="dropdownOpen" class="absolute left-[-8%] mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20 max-h-[470px] overflow-y-auto"
             style="width:20rem;">
             @if (count($notificationsArray) !== 0)
                 <div class="">
@@ -65,8 +65,11 @@
                     @endforeach
 
                 </div>
-                <a href="/Admin/notification" class="block bg-[#242526] text-white text-center font-bold ">
-                    See all notifications</a>
+                <div class="p-3">
+                    <a href="/Admin/notification" class="block bg-[#349A37] hover:bg-[#40b744] text-white text-center flex items-center justify-center h-10 rounded-lg">
+                        <span>See all notifications</span>    
+                    </a>
+                </div>
             @else
                 <div class="flex flex-row items-center justify-center py-2 min-h-[150px] text-center border-[1px]">
                     <p>
