@@ -386,6 +386,9 @@ class PaymentVoucher extends Resource
         $request->request->remove('add_user');
         if (!$request->ref_id) {
             // dd($request->add_user);
+            if ($request->newproject) {
+                # code...
+
             if ($request->newproject[0]['attributes']['project_name'] &&     $request->newproject[0]['attributes']['project_describe'] && $request->newproject[0]['attributes']['start_date'] &&     $request->newproject[0]['attributes']['end_date']) {
                 $Project =  new  ModelsProject();
 
@@ -398,6 +401,8 @@ class PaymentVoucher extends Resource
                 $Project->save();
             }
             $request->merge(['ref_id' => $Project->id]);
+
+        }
         }
         $request->request->remove('newproject');
 
