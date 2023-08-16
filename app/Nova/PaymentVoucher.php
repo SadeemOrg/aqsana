@@ -366,6 +366,9 @@ class PaymentVoucher extends Resource
         }
         if (!$request->name) {
             // dd($request->add_user);
+            if ($request->add_user) {
+                # code...
+
             if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
                 $telfone =  new TelephoneDirectory();
 
@@ -374,8 +377,11 @@ class PaymentVoucher extends Resource
                 $telfone->type = '8';
                 $telfone->phone_number =  $request->add_user[0]['attributes']['phone'];
             }
+
             $request->merge(['name' => $telfone->id]);
+
             $request->merge(['transaction_type' => '1']);
+        }
         }
         $request->request->remove('add_user');
         if (!$request->ref_id) {
