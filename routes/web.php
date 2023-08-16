@@ -79,7 +79,7 @@ Route::post("user", [HomeController::class, "user"])->name('user');
 Route::post("users", [HomeController::class, "users"])->name('users');
 Route::post("UserAdmin", [HomeController::class, "Admin"])->name('Admin');
 
-Route::get("schedulelast", [HomeController::class, "schedulelast"])->name('schedulelast');
+Route::post("schedulelast", [HomeController::class, "schedulelast"])->name('schedulelast');
 
 
 Route::post("first/", [HomeController::class, "first"])->name('first');
@@ -91,7 +91,7 @@ Route::post("Sectorstatistics", [HomeController::class, "Sectorstatistics"])->na
 
 Route::post("year", [HomeController::class, "year"])->name('year');
 Route::post("DeleteYears", [HomeController::class, "DeleteYears"])->name('DeleteYears');
-Route::post("Recovery", [HomeController::class, "Recovery"])->name('Recovery');
+Route::post("DeleteYears", [HomeController::class, "DeleteYears"])->name('DeleteYears');
 
 Route::post("save", [HomeController::class, "save"])->name('save');
 
