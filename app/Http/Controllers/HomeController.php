@@ -1250,7 +1250,7 @@ class HomeController extends Controller
         $type = $sectorname->text;
         // dd($type);
 
-        $news = News::query()->where('sector', $sector)
+        $news = News::query()->where('sector', $sector)->orderBy('new_date', 'desc')
 
             ->paginate(9);
         // dd($news);
