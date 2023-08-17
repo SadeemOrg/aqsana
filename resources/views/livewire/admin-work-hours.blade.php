@@ -1,11 +1,11 @@
 <div>
     <form wire:submit.prevent="searchWorkHours">
         <div
-            class="flex sm:flex-row flex-col gap-y-4 lg:gap-y-0 items-start lg:flex-nowrap flex-wrap justify-between mb-8 mt-12">
-            <p class="font-FlatBold text-xl sm:text-[22px] text-center mt-8 lg:mt-0 xl:text-right">ساعات عمل
+            class="">
+            <p class="font-FlatBold text-xl sm:text-[22px] mt-8 lg:mt-0">ساعات عمل
                 الموظفين</p>
-            <div class="Wraper flex flex-row items-center flex-wrap md:flex-nowrap md:gap-y-0 gap-y-2 gap-x-2 ">
-                <div class="mt-1 h-12 w-[90%] sm:w-[40%] md:w-[207px]">
+            <div class="grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-4 ">
+                <div class=" h-12">
                     <select pla wire:model="Name" name="name"
                         class="selectwhorkHour block w-full  text-[#349A37]  border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] ">
                         <option value="0" class="text-black"> اسم الموظف </option>
@@ -15,7 +15,7 @@
                     </select>
                 </div>
                 <!--Date Picker -->
-                <div dir="ltr" class="relative w-[90%] sm:w-[40%] md:w-[207px] h-12">
+                <div dir="ltr" class="relative h-12">
                     <div
                         class="svgFoucusAdminFrom absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
@@ -33,7 +33,7 @@
                         onfocus="handelFocusAdminDateFrom()">
                 </div>
                 <!--to Date  -->
-                <div dir="ltr" class="relative w-[90%] sm:w-[40%] md:w-[207px] h-12">
+                <div dir="ltr" class="relative h-12">
                     <div
                         class="svgFoucusAdminTo absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
@@ -48,17 +48,20 @@
                         placeholder=" الى تاريخ" onfocus="handelFocusAdminDateTo()">
                 </div>
                 <!--end Picker -->
-                <div class="w-full md:w-auto h-12">
+                <div class="w-full h-12">
                     <button type="submit"
-                        class="connectUs w-[90%] md:w-36 duration-200 text-center px-5 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
+                        class="connectUs w-full duration-200 text-center px-5 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                         بحث
                     </button>
                 </div>
             </div>
         </div>
     </form>
-    <button wire:click="showAddModels"
-        class="connectUs duration-200 w-[90%] sm:w-[40%] md:w-[207px] px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] text-center hover:text-white ">اضافة</button>
+    <div class="grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-4">
+        <button wire:click="showAddModels"
+        class="connectUs duration-200 w-full px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] text-center hover:text-white ">اضافة</button>
+    </div>
+    
 
     <!--End Perosonal Information -->
     <!--from Date -->
@@ -274,12 +277,12 @@
                                     placeholder="تاريخ" onfocus="handelFocusEditDatePopup()">
                             </div>
                             <div class="flex flex-row items-center flex-wrap sm:flex-nowrap justify-between">
-                                <div class="mt-2 selectdiv w-72">
+                                <div class="mt-2 selectdiv w-1/2">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
                                         wire:model.debounce.50000ms="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
-                                <div class="mt-2 selectdiv">
+                                <div class="mt-2 selectdiv w-1/2">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
                                         wire:model.debounce.50000ms="end_time"
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
@@ -335,16 +338,16 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex flex-row items-center flex-wrap sm:flex-nowrap justify-between">
-                                <div class="mt-2 selectdiv w-72">
+                            <div class="flex flex-row gap-2 items-center flex-wrap sm:flex-nowrap justify-between">
+                                <div class="mt-2 selectdiv w-full sm:w-1/2">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
                                         wire:model.debounce.50000ms="start_time"
-                                        class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
+                                        class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
-                                <div class="mt-2 selectdiv">
+                                <div class="sm:mt-2 selectdiv w-full sm:w-1/2">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
                                         wire:model.debounce.50000ms="end_time"
-                                        class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
+                                        class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                             </div>
                             <div class="mt-2 selectdiv">
