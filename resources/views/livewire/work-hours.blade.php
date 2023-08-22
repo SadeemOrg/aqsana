@@ -39,14 +39,15 @@
                         placeholder=" الى تاريخ" onfocus="handelFocusWorkerHourTo()">
                 </div>
                 <!--end Picker -->
+                <div class=" h-12">
+                    <button type="submit"
+                        class="connectUs w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
+                        بحث
+                    </button>
+                </div>
                 
             </div>
-            <div class="mt-3 h-12">
-                <button type="submit"
-                    class="connectUs w-auto md:w-36 duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
-                    بحث
-                </button>
-            </div>
+            
         </div>
     </form>
     <!--End Perosonal Information -->
@@ -84,12 +85,12 @@
 
 
     <div
-        class="timer flex flex-row items-start gap-x-4 my-10 flex-wrap gap-y-4 md:gap-y-0 md:flex-nowrap">
+        class="timer flex flex-row items-start justify-center sm:justify-start gap-x-4 my-10 flex-wrap gap-y-4 md:gap-y-0 md:flex-nowrap">
         <div
-            class="max-w-[90%] sm:max-w-[65%] md:max-w-[200px] w-full flex items-center justify-center h-16 rounded-[4px] md:h-16 bg-[#349A37]">
+            class="sm:max-w-[65%] md:max-w-[200px] w-full flex items-center justify-center h-16 rounded-[4px] md:h-16 bg-[#349A37]">
             <p id="timer" class="text-white text-2xl"></p>
         </div>        
-        <div class="cursor-pointer min-w-[100px]  mb-12">
+        <div class="cursor-pointer min-w-[100px]  mb-4">
             <svg wire:click="EndWork" class="h-16 md:h-16 " width="100"  viewBox="0 0 163 114"
                 fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="163" height="114" rx="6" fill="#349A37" />
@@ -107,7 +108,7 @@
         </div>
         @if ($hide)
             <div id="start_timer" onclick="start()" wire:click="StartTimerWorkHours"
-                class="cursor-pointer min-w-[100px]  mb-12">
+                class="cursor-pointer min-w-[100px]  mb-4">
 
                 <svg class="h-16 md:h-16 " width="100" viewBox="0 0 163 114" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -116,8 +117,8 @@
                 </svg>
             </div>
         @else
-            <div id="stop_timer" wire:click="stop" class="cursor-pointer min-w-[163px]  mb-12">
-                <svg width="163" height="114" viewBox="0 0 163 114" fill="none"
+            <div id="stop_timer" wire:click="stop" class="cursor-pointer min-w-[100px]  mb-4">
+                <svg class="h-16 md:h-16 " width="100" viewBox="0 0 163 114" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <rect width="163" height="114" rx="6" fill="#349A37" />
                     <path
@@ -139,10 +140,10 @@
             aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
             <div class="fixed inset-0 top-[3%] z-10 overflow-y-auto">
-                <div class="flex flex-col min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="flex flex-col min-h-full justify-center p-4 text-center items-center sm:p-0">
 
                     <div
-                        class=" relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl sm:p-6">
+                        class=" relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-xl sm:p-6">
                         <button>
                             <svg wire:click="closeModel" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -191,7 +192,7 @@
 
 
                                 @if ($showTable2 == 'اخرى' && $this->showModel == true)
-                                    <div class="ml-1  pt-6 px-8 lg:px-0 ">
+                                    <div class="ml-1  pt-6 lg:px-0 ">
                                         <textarea wire:model="leaveGoalTextarea" rows="4" name="message" placeholder="سبب المغادرة"
                                             class="w-full  inline-flex items-center text-right  justify-center border-[#349A37] border  rounded-[10px] focus:ring-[#349A37] focus:border-[#349A37] sm:text-sm p-4"></textarea>
                                     </div>
@@ -259,7 +260,6 @@
 
                                 @endphp
                                 <tr>
-
                                     <td
                                         class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
                                         {{ $WorkHoursearch->day }}</td>
@@ -277,41 +277,21 @@
                                 </tr>
                             @endforeach
                             <tr>
-
-                                <td
-                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
-
-
-                                </td>
-
-                                <td
-                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
-                                </td>
-                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                    مجموع الايام </td>
-                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                    {{ $WorkHourssearch->count() }}
-
-                                </td>
-                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                    مجموع الساعات
-
-                                </td>
-                                @if ($WorkHourssearch->count() == 0)
-                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
-                                        00:00:00
-                                    </td>
-                                @else
-                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
-                                        {{ $sumWorkHourssearch->day * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
-                                    </td>
-                                @endif
-
-                                <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]"></td>
-
+                                <td colspan="2" class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] border-2 border-[#349A37] bg-white">
+                                    <span>مجموع الايام: </span>
+                                    <span>{{ $WorkHourssearch->count() }}</span>
+                                </td>                                
+                                <td colspan="3" class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] border-2 border-[#349A37] bg-white">
+                                    <span> مجموع الساعات: </span>
+                                    @if ($WorkHourssearch->count() == 0)                                        
+                                        <span>00:00:00</span>                                        
+                                    @else
+                                        <span>                                        
+                                            {{ $sumWorkHourssearch->day * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
+                                        </span>                                        
+                                    @endif                                    
+                                </td>                                
                             </tr>
-
-
                         </tbody>
                     </table>
                 </div>
