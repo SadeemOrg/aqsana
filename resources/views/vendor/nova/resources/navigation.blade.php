@@ -63,7 +63,7 @@
 
         </div>
 
-        <script>
+        <script type="application/javascript">
             function thisindex(elm) {
                 var nodes = elm.parentNode.childNodes,
                     node;
