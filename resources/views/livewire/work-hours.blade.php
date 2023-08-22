@@ -4,12 +4,12 @@
     <!--Perosonal Information -->
     <form class="Wraper" wire:submit.prevent="searchWorkHours">
         <div
-            class="flex sm:flex-row flex-col gap-y-4 lg:gap-y-0 items-start lg:flex-nowrap flex-wrap justify-center md:justify-between mt-16">
+            class="">
             <p class="font-FlatBold w-full text-xl sm:text-[22px] text-center  lg:mt-0 xl:text-right">ساعات عملي</p>
             <div
-                class=" flex flex-row items-center flex-wrap justify-center md:flex-nowrap md:gap-y-0 gap-y-2 w-full gap-x-2 ">
+                class=" grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-4">
                 <!--Date Picker -->
-                <div dir="ltr" class=" relative w-[90%] sm:w-[40%] md:w-[207px] h-12">
+                <div dir="ltr" class=" relative h-12">
                     <div
                         class="svgFoucusWorkHourFrom absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
@@ -24,7 +24,7 @@
                         placeholder=" من تاريخ" type="text" onfocus="handelFocusWorkHourFrom()">
                 </div>
                 <!--to Date  -->
-                <div dir="ltr" class="relative w-[90%] sm:w-[40%] md:w-[207px] h-12">
+                <div dir="ltr" class="relative">
                     <div
                         class="svgFoucusWorkHourTo absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
@@ -39,12 +39,13 @@
                         placeholder=" الى تاريخ" onfocus="handelFocusWorkerHourTo()">
                 </div>
                 <!--end Picker -->
-                <div class="w-full flex justify-center md:w-auto h-12">
-                    <button type="submit"
-                        class="connectUs w-auto md:w-36 duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
-                        بحث
-                    </button>
-                </div>
+                
+            </div>
+            <div class="mt-3 h-12">
+                <button type="submit"
+                    class="connectUs w-auto md:w-36 duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
+                    بحث
+                </button>
             </div>
         </div>
     </form>
@@ -83,7 +84,7 @@
 
 
     <div
-        class="timer flex flex-row items-start justify-center gap-x-4 my-10 md:my-20 flex-wrap gap-y-4 md:gap-y-0 md:flex-nowrap">
+        class="timer flex flex-row items-start gap-x-4 my-10 flex-wrap gap-y-4 md:gap-y-0 md:flex-nowrap">
         <div
             class="max-w-[90%] sm:max-w-[65%] md:max-w-[200px] w-full flex items-center justify-center h-16 rounded-[4px] md:h-16 bg-[#349A37]">
             <p id="timer" class="text-white text-2xl"></p>
@@ -223,7 +224,7 @@
     <div class="px-4 sm:px-6 lg:px-8 mt-8">
         <div class="mt-8 flow-root">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                <div class="inline-block min-w-full py-2 align-middle">
                     <table class="min-w-full divide-y divide-gray-300 border-2">
                         <thead>
                             <tr>
