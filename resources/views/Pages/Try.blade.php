@@ -219,14 +219,14 @@
                                     onchange="readURL('chosen', this);" hidden />
                             </div>
                             <div
-                                class="flex flex-row items-start justify-center lg:justify-start  flex-wrap gap-y-4 gap-x-6">
+                                class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 <div class="">
                                     <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الاسم
                                     </label>
                                     <div class="mt-1">
                                         <input type="text" name="name" placeholder=" الاسم"
                                             value="{{ $user['name'] }}"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                            class="block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                     @if ($errors->has('name'))
                                         <span class="text-red-700 ">{{ $errors->first('name') }}</span>
@@ -238,7 +238,7 @@
                                     <div class="mt-1">
                                         <input type="text" name="job" placeholder=" الوظيفة"
                                             value="{{ $user['job'] ? $user['job'] : '' }}"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                            class="block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                 </div>
                                 <div class="">
@@ -248,7 +248,7 @@
                                     <div class="mt-1">
                                         <input type="text" name="email" placeholder=" الاسم"
                                             value="{{ $user['email'] }}"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                            class="block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                     @if ($errors->has('email'))
                                         <span class="text-red-700 ">{{ $errors->first('email') }}</span>
@@ -261,7 +261,7 @@
                                     <div class="mt-1">
                                         <input type="text" name="phone" placeholder=" رقم التلفون"
                                             value="{{ $user['phone'] ? $user['phone'] : '' }}"
-                                            class="block md:min-w-[300px] w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                            class="block w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                     @if ($errors->has('phone'))
                                         <span class="text-danger text-left">{{ $errors->first('phone') }}</span>
@@ -275,7 +275,7 @@
                                     <div class="mt-1">
                                         <input type="text" value={{ $newDate }} name="birth_date"
                                             placeholder="الرجاء ادخال تاريخ الميلاد"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 ">
+                                            class="block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                 </div>
                                 <div class="">
@@ -285,7 +285,7 @@
                                     <div class="mt-1">
                                         <input type="text" name="id_number" placeholder="الرجاء ادخال رقم الهوية"
                                             value="{{ $user['id_number'] ? $user['id_number'] : '' }}"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                            class="block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                 </div>
                                 <div class="">
@@ -298,7 +298,7 @@
                                         <input type="text" {{-- value={{ $StatWorknewDate }}  --}} name="start_work_date"
                                             placeholder="الرجاء ادخال تاريخ الميلاد"
                                             value="{{ $user['start_work_date'] ? $StatWorknewDate : '' }}"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 text-right">
+                                            class="block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 text-right focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                 </div>
                                 <div class="">
@@ -307,7 +307,7 @@
                                     <div class="mt-1">
                                         <input type="text" name="city" placeholder="الرجاء ادخال المدينة"
                                             value="{{ $user['city'] ? $user['city'] : '' }}"
-                                            class="block md:min-w-[300px] w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                            class="block w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                 </div>
                                 <div class="">
@@ -317,7 +317,7 @@
                                     </label>
                                     <div class="mt-1 selectdiv">
                                         <select name="martial_status" id="martial_status"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border pr-4 rounded-[60px] sm:text-sm p-4">
+                                            class="block w-full border-[#8F9BB3] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                             <option @if ($user['martial_status'] == null) selected @endif value="">الرجاء
                                                 ادخال الحالة الاجتماعية</option>
                                             <option @if ($user['martial_status'] == '1') selected @endif value="1">
@@ -356,7 +356,7 @@
                                 </div>
                             </div>
                             <div
-                                class="mt-8 flex flex-row items-center justify-center lg:justify-start  flex-wrap gap-y-4 gap-x-6">
+                                class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 <div class="">
                                     <label for="bank_name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> اسم
                                         البنك
@@ -364,7 +364,7 @@
                                     <div class="mt-1">
                                         <input type="text" name="bank_name" placeholder="الرجاء ادخال اسم البنك"
                                             value="{{ $user['bank_name'] ? $user['bank_name'] : '' }}"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                            class="block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                 </div>
                                 <div class="">
@@ -374,7 +374,7 @@
                                     <div class="mt-1">
                                         <input type="text" name="bank_number" placeholder="الرجاء ادخال رقم البنك"
                                             value="{{ $user['bank_number'] ? $user['bank_number'] : 'الرجاء ادخال رقم البنك' }}"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                            class="block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                 </div>
                                 <div class="">
@@ -384,7 +384,7 @@
                                     <div class="mt-1">
                                         <input type="text" name="bank_branch" placeholder="الرجاء ادخال رقم الفرع"
                                             value="{{ $user['bank_branch'] ? $user['bank_branch'] : 'الرجاء ادخال رقم الفرع' }}"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                            class="block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                 </div>
                                 <div class="">
@@ -395,7 +395,7 @@
                                     <div class="mt-1">
                                         <input type="text" name="account_number" placeholder="الرجاء ادخال رقم الحساب"
                                             value="{{ $user['account_number'] ? $user['account_number'] : '' }}"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                            class="block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                 </div>
                             </div>
@@ -419,7 +419,7 @@
                                 </div>
                             </div>
                             <div
-                                class="mt-4 flex flex-row items-start justify-center lg:justify-start xl:flex-nowrap flex-wrap gap-y-4 gap-x-6">
+                                class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 <div class="">
                                     <label for="password" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> كلمة
                                         المرور
@@ -429,11 +429,7 @@
                                     <div class="mt-1">
                                         <input type="password" id="myInput" name="old_password"
                                             placeholder="كلمة المرور الحالية" autocomplete="off"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
-                                        <div class=" flex fle-row items-center justify-start gap-x-1 mt-2 mr-3">
-                                            <input type="checkbox" onclick="myFunction()">
-                                            <p>Show Password</p>
-                                        </div>
+                                            class="passInput block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">                                        
                                     </div>
                                     @if ($errors->has('password'))
                                         <span class="text-red-700 ">{{ $errors->first('password') }}</span>
@@ -447,7 +443,7 @@
                                     </label>
                                     <div class="mt-1">
                                         <input type="password" name="new_password" placeholder="كلمة المرور الجديدة"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                            class="passInput block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                 </div>
                                 <div class="">
@@ -458,12 +454,18 @@
                                     </label>
                                     <div class="mt-1 ">
                                         <input type="password" name="Confirm_password" placeholder=" تأكيد كلمة المرور"
-                                            class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
+                                            class="passInput block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                     @if ($errors->has('Confirm_password'))
                                         <span
                                             class="text-red-700 mr-4 pt-4">{{ $errors->first('Confirm_password') }}</span>
                                     @endif
+                                </div>
+                                <div class=" flex fle-row items-center justify-start gap-x-1 mt-2 mr-3">
+                                    <label class="cursor-pointer">
+                                        <input type="checkbox" onclick="myFunction()" class="checkbox-pass ml-1 focus:ring-[#349A37] focus:border-[#349A37] text-[#349A37]">
+                                        إظهار كلمة المرور
+                                    </label>
                                 </div>
                             </div>
                         </form>
