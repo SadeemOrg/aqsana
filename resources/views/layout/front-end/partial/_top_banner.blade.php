@@ -31,11 +31,11 @@
                     $id = $lastnew->id;
                     $route_title = str_replace(' ', '-', $lastnew->title);
                 @endphp
-                <div class="p-3 rounded-[5px] common-shadow mb-6 xl:mb-0 hover:cursor-pointer relative"
+                <div class="p-3 rounded-[5px] common-shadow mb-6 xl:mb-0 hover:cursor-pointer relative lg:w-1/2"
                     onclick="location.href='{{ route('getnewDetail', ['title' => $route_title, 'id' => $lastnew->id]) }}'">
                     <div class="relative  bg-[#E4FFE585] rounded-[5px] py-5 px-4">
                         <img itemprop="image" alt="Google" src="{{ asset($img) }}" alt="people_on_Mousq"
-                            class="Iman md:h-[375px] sm:w-[563px] object-fill rounded-[5px]">
+                            class="Iman lg:h-[375px] sm:w-[563px] object-fill rounded-[5px]">
                         <div
                             class="writing sm:block absolute hidden top-[75%] right-6 left-6 max-h-14 text-center overflow-hidden ">
                             <p itemprop="title"
