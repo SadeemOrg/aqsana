@@ -80,10 +80,18 @@ class address extends Resource
 
             // GoogleMaps::make(__('current_location'), 'current_location')
                 // ->zoom(8),
-                Text::make(__('longitude'), "longitude")->hideFromDetail()->hideFromIndex(),
-                Text::make(__('latitude'), "latitude")->hideFromDetail()->hideFromIndex(),
-                Text::make(__('street_name'), "street_name")->hideFromDetail()->hideFromIndex(),
-                Text::make(__('city'), "city")->hideFromDetail()->hideFromIndex(),
+                Text::make(__('longitude'), "longitude",function(){
+                    return $this->current_location['longitude'];
+                })->hideFromDetail()->hideFromIndex(),
+                Text::make(__('latitude'), "latitude",function(){
+                    return $this->current_location['latitude'];
+                })->hideFromDetail()->hideFromIndex(),
+                Text::make(__('street_name'), "street_name",function(){
+                    return $this->current_location['street_name'];
+                })->hideFromDetail()->hideFromIndex(),
+                Text::make(__('city'), "city",function(){
+                    return $this->current_location['city'];
+                })->hideFromDetail()->hideFromIndex(),
 
                 MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
                 ->hideWhenCreating()->readonly()
@@ -99,7 +107,26 @@ class address extends Resource
         ];
     }
 
-    public static function beforeSave(Request $request, $model)
+    public static function beforeUpdate(Request $request, $model)
+    {
+        $address=    \App\Models\address::find($model->id);
+
+        $data =$address->current_location;
+
+
+        $data['street_name'] =($request->street_name != null) ?$request->street_name : $data['street_name'] ;
+        $data['city']  =($request->city != null) ?$request->city : $data['city'] ;
+        $data['latitude']  =(float)($request->latitude != null) ?$request->latitude : $data['latitude'] ;
+        $data['longitude']  =(float)($request->longitude != null) ?$request->longitude : $data['longitude'] ;
+        $data['formatted_address'] =  $data['street_name'].','.   $data['city'] ;
+
+        $request->request->remove('street_name');
+        $request->request->remove('city');
+        $request->request->remove('latitude');
+        $request->request->remove('longitude');
+        $model->current_location=$data;
+    }
+    public static function beforeCreate(Request $request, $model)
     {
 
         $json = \File::get('sample.json');
@@ -115,11 +142,6 @@ class address extends Resource
         $request->request->remove('latitude');
         $request->request->remove('longitude');
         $model->current_location=$data;
-    }
-    public static function beforeCreate(Request $request, $model)
-    {
-
-
 
         $id = Auth::id();
 
