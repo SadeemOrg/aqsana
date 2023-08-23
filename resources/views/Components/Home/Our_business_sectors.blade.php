@@ -4,7 +4,7 @@
         box-shadow: 0px 20px 25px -5px #0000001A;
     }
 </style>
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 xl:mt-24">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
     <div class="flex flex-row flex-wrap gap-y-8 md:gap-y-8 justify-center items-center gap-x-6">
         @if(is_array($partners)==true && !empty($partners))
         @foreach ($partners as $partner)
@@ -17,7 +17,7 @@
         @endforeach
         @endif
     </div>
-    <div class="flex flex-col items-start justify-start mt-24">
+    <div class="flex flex-col items-start justify-start mt-12">
         <div class="relative ">
             @php
             $text_main_workplace = nova_get_setting('text_main_workplace', 'default_value');

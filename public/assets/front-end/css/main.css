@@ -18,11 +18,16 @@ header.sticky-h {
   padding-bottom: 2.5rem;
   padding-top: 1.5rem;
 } */
+
+@media (max-width: 450px) {
+  .hero-image-formobile {height: 180px;}
+}
 .common-shadow {
   box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
   background-color: #fff;
 }
 
+#association-news-slider .owl-dots {margin-top: 0;}
 
 /* Contact section */
 .right-color::after {
@@ -407,7 +412,7 @@ input::-webkit-datetime-edit {
 }
 
 .hamburger.is-active .hamburger__bar:after, .hamburger.is-active .hamburger__bar:before {
-  background: #101426;
+  background: white;
 }
 
 .hamburger {

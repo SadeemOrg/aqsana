@@ -10,7 +10,7 @@
     $Final_Correct_whatsapp_phone = str_replace('-', '', $Correct_whatsapp_phone);
     $whatsapp_phone_Link = 'https://wa.me/' . $Final_Correct_whatsapp_phone;
 @endphp
-<div class="relative mt-24 md:max-h-72 min-h-[294px] overflow-hidden">
+<div class="relative mt-12 md:max-h-72 min-h-[294px] overflow-hidden">
     <div class="absolute inset-0">
         <img class="w-full h-full object-cover" src="{{ asset($img) }}" alt="AlAqsaBanner" />
         <div class="absolute  inset-0 mix-blend-multiply"
