@@ -2875,6 +2875,12 @@ body{
   .md\:h-\[75px\]{
     height: 75px;
   }
+  .md\:h-\[330px\]{
+    height: 330px;
+  }
+  .md\:h-\[310px\]{
+    height: 310px;
+  }
   .md\:max-h-14{
     max-height: 3.5rem;
   }
@@ -2914,6 +2920,9 @@ body{
   .md\:w-full{
     width: 100%;
   }
+  .md\:w-1\/2{
+    width: 50%;
+  }
   .md\:min-w-0{
     min-width: 0px;
   }
@@ -2934,6 +2943,9 @@ body{
   }
   .md\:basis-\[60\%\]{
     flex-basis: 60%;
+  }
+  .md\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .md\:flex-row{
     flex-direction: row;
@@ -3166,6 +3178,12 @@ body{
   .lg\:h-\[680px\]{
     height: 680px;
   }
+  .lg\:h-\[330px\]{
+    height: 330px;
+  }
+  .lg\:h-\[375px\]{
+    height: 375px;
+  }
   .lg\:max-h-52{
     max-height: 13rem;
   }
@@ -3210,6 +3228,9 @@ body{
   }
   .lg\:w-\[80\%\]{
     width: 80%;
+  }
+  .lg\:w-1\/2{
+    width: 50%;
   }
   .lg\:max-w-\[160px\]{
     max-width: 160px;
