@@ -84,7 +84,7 @@
         </li>
     </ul>    
 </dropdown-menu>
-<script>
+<script type="application/javascript">
     var inverval_timer;
 
 //Time in milliseconds [1 second = 1000 milliseconds ]

@@ -125,7 +125,7 @@
         .exit-button:hover{color: white}
         .TabsSidee a:hover {color: #fff}
         .TabsSidee a:hover svg path {fill: #fff}
-        .timer svg:hover rect {fill: #40b744}        
+        .timer svg:hover rect {fill: #40b744}
     </style>
     <!-- Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> -->
@@ -291,7 +291,7 @@
 //hide_PopUp_Modal_Home_Close_when Close_Click
 $('.PopUp_Modal_Home_Close').click(function() {
     $('.CloseHomePopUp').addClass('hidden');
-    $('div').removeClass('hidden_popUp')
+    $('div, footer').removeClass('hidden_popUp')
 })
 
         // Library Search
