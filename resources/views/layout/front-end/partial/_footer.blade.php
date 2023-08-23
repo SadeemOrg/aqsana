@@ -8,7 +8,7 @@ $tiktok_Link = nova_get_setting('tiktok', 'https://www.tiktok.com/@alaqsa.quds')
 @endphp
 
 @if (!isset($hasFooter) || (isset($hasFooter) && $hasFooter))
-<footer class="bg-[#101426] text-white mt-24 hidden_popUp">
+<footer class="bg-[#101426] text-white mt-12 {{Route::is('page.index') ? 'hidden_popUp' : ''}}">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-start">
         @php
         $img = 'storage/'. nova_get_setting('footer_logo', 'default_value');

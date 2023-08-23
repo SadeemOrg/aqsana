@@ -22,8 +22,8 @@
 @endphp
 
 @if ($type == 1)
-    <div itemscope itemtype="http://schema.org/LocalBusiness" class="max-w-7xl mx-auto px-0 lg:px-8 mt-8">
-        <div class="lg:flex flex-col lg:flex-row justify-center py-4 md:gap-y-0 gap-y-4 lg:justify-start  items-center lg:gap-x-10">
+    <div itemscope itemtype="http://schema.org/LocalBusiness" class="max-w-7xl mx-auto px-0 lg:px-8 mt-12">
+        <div class="lg:flex flex-col lg:flex-row justify-center md:gap-y-0 gap-y-4 lg:justify-start  items-center lg:gap-x-10">
             <!--First Component -->
             <div class=" md:h-[432px] basis-1/3 -mx-2 flex flex-col pl-3 pr-6 lg:pr-0 relative bg-[#FCFCFC]">
                 <div class="relative">
@@ -155,8 +155,8 @@
     </div>
     
 @else
-    <div itemscope itemtype="http://schema.org/LocalBusiness" class="max-w-7xl mx-auto px-0 lg:px-8 mt-8">
-        <div class="lg:flex flex-col lg:flex-row justify-center py-4 lg:justify-between  items-center lg:gap-x-10">
+    <div itemscope itemtype="http://schema.org/LocalBusiness" class="max-w-7xl mx-auto px-0 lg:px-8 mt-12">
+        <div class="lg:flex flex-col lg:flex-row justify-center lg:justify-between  items-center lg:gap-x-10">
             <div class="bg-[#E4FFE585] h-[432px] basis-1/2  flex flex-col pl-3 pr-6 lg:pr-0 relative right-color">
                 <p class="text-3xl text-[#101426] pt-10">{{ $contact_main }}</p>
                 <p class="text-[#8F9BB3] text-[14px] pt-8"> {{ $contact_Text_Main }}</p>
@@ -220,7 +220,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-                <div class=" my-4 mr-6 lg:mr-0">
+                <div class=" mt-4 mr-6 lg:mr-0">
                     <button type="submit"
                         class="connectUs duration-200 flex justify-center items-center px-5 lg:px-7 py-3 mt-2 text-[13px] font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
                         ارسال

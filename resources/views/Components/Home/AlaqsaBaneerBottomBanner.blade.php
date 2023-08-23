@@ -16,7 +16,7 @@ $whatsapp_phone_Link = "https://wa.me/".$Final_Correct_whatsapp_phone ;
 $tiktok_Link = nova_get_setting('tiktok', 'https://www.tiktok.com/@alaqsa.quds');
 
 @endphp
-<div class="relative mt-24 md:max-h-72">
+<div class="relative mt-12 md:max-h-72">
     <div class="absolute inset-0">
         <img class="w-full h-full object-cover"  src="{{ asset($imgBanner2) }}"
             alt="AlAqsaBanner">

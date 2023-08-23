@@ -13,7 +13,7 @@
             @include('Components.Home.watch-us')
         </div>
         @include('Components.Home.Our_business_sectors')
-        <div class=" mt-24 overflow-hidden">
+        <div class="overflow-hidden">
             @include('layout.front-end.partial.contact-us')
         </div>
     </div>

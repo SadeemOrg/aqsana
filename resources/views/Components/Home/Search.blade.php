@@ -37,7 +37,7 @@
 </style>
 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 ">
     <div
-        class="absolute z-10 mt-16 sm:mt-10 right-[12%] lg:right-auto -top-48 w-[75%] bg-white rounded-[5px] sm:h-20 flex flex-row justify-start items-center">
+        class="absolute z-10 mt-16 sm:mt-10 right-[12%] lg:right-auto -top-[149px] sm:-top-40 w-[75%] bg-white rounded-[5px] sm:h-20 flex flex-row justify-start items-center">
         <!--search Bar -->
         <div dir="rtl" class=" relative shadow-sm  w-full bg-white border-0 h-full  rounded-md">
             <form class="h-full w-full" target="_self" action="{{ route('pagesearch') }}" method="get">

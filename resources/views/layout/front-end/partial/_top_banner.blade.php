@@ -8,7 +8,7 @@
     @if (is_array($Heros) == true && !empty($Heros))
         @foreach ($Heros as $Hero)
             <div class="relative ">
-                <img itemprop="image" alt="Google" class="h-[270px] sm:h-[350px]  lg:h-[680px]"
+                <img itemprop="image" alt="Google" class="h-[230px] sm:h-[350px] md:h-[440px]  lg:h-[580px] xl:h-[680px] hero-image-formobile"
                     src="{{ URL::asset($Hero['data']['image']) }}" alt="topBanner">
 
                 <button onclick="window.open('{{ $Hero['data']['link'] }}')"
@@ -23,7 +23,7 @@
 
     @include('Components.Home.Search')
 
-    <div class="flex flex-row flex-wrap lg:flex-nowrap mt-16 items-center justify-center xl:justify-start gap-x-5">
+    <div class="flex flex-row flex-wrap lg:flex-nowrap mt-10 items-center justify-center xl:justify-start gap-x-5">
         @if (!empty($lastnews))
             @foreach ($lastnews as $lastnew)
                 @php
