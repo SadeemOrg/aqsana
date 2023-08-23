@@ -116,8 +116,8 @@ class address extends Resource
 
         $data['street_name'] =($request->street_name != null) ?$request->street_name : $data['street_name'] ;
         $data['city']  =($request->city != null) ?$request->city : $data['city'] ;
-        $data['latitude']  =(float)($request->latitude != null) ?$request->latitude : $data['latitude'] ;
-        $data['longitude']  =(float)($request->longitude != null) ?$request->longitude : $data['longitude'] ;
+        $data['latitude']  =($request->latitude != null) ?(float)$request->latitude :(float) $data['latitude'] ;
+        $data['longitude']  =($request->longitude != null) ?(float)$request->longitude : (float)$data['longitude'] ;
         $data['formatted_address'] =  $data['street_name'].','.   $data['city'] ;
 
         $request->request->remove('street_name');
