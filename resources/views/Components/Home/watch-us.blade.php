@@ -148,7 +148,7 @@
     $videohome = nova_get_setting('videohome', 'default_value');
     
 @endphp
-<div class="relative mt-20 xl:mt-20 mb-10 lg:mb-0">
+<div class="relative mt-12 mb-10">
     <p class="font-FlatBold text-xl sm:text-[27px] text-center mt-8 lg:mt-0 xl:text-right">
         شاهد معنا
     </p>

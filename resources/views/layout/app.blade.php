@@ -1112,12 +1112,12 @@ $('.PopUp_Modal_Home_Close').click(function() {
                             "showMethod": "fadeIn",
                             "hideMethod": "fadeOut"
                         };
-                        toastr.error(data.error);
+                        toastr.error(data.error[0]);
                     }
                 },
                 error: function() {
                     console.log("err");
-                    console.log(data.error);
+                    console.log(data.error[0]);
                 }
             })
         })
