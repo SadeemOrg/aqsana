@@ -177,7 +177,7 @@
             <!--Start BottomCenter Section -->
             @if (!isset($hasHeader) || (isset($hasHeader) && $hasHeader))
                 <!--Start NavBar Section -->
-                <div class="nav xl:flex-row justify-between items-center fixed xl:static right-[-43%] top-[96px]  z-10 nav-links ">
+                <div class="nav xl:flex-row justify-between items-center fixed xl:static right-[-200px] w-[200px] xl:w-auto top-[96px]  z-10 nav-links ">
                     <div class="rt-links">
                         <nav>
                             <ul
