@@ -80,8 +80,13 @@ class address extends Resource
 
             // GoogleMaps::make(__('current_location'), 'current_location')
                 // ->zoom(8),
+                Text::make(__('longitude'), "longitude"),
+                Text::make(__('latitude'), "latitude"),
+                Text::make(__('street_name'), "street_name"),
+                Text::make(__('city'), "city"),
 
                 MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
+                ->hideWhenCreating()
                 ->center(['lat' =>  31.775947, 'lng' => 35.235577]) ->types(['address' ,'establishment'])->mapOptions(['fullscreenControl' => true,'clickableIcons'=>true,'restriction'=>true]),
 
             // Select::make(__("Status"), "status")->options([
@@ -93,10 +98,31 @@ class address extends Resource
 
         ];
     }
+
+    public static function beforeSave(Request $request, $model)
+    {
+
+        $json = \File::get('sample.json');
+        $data = json_decode($json);
+        $data->street_name =$request->street_name;
+        $data->city =$request->city;
+        $data->latitude =(float)$request->latitude;
+        $data->longitude =(float)$request->longitude;
+        $data->formatted_address=$request->street_name.','.$request->city;
+
+        $request->request->remove('street_name');
+        $request->request->remove('city');
+        $request->request->remove('latitude');
+        $request->request->remove('longitude');
+        $model->current_location=$data;
+    }
     public static function beforeCreate(Request $request, $model)
     {
-        // dd($request->current_location);
+
+
+
         $id = Auth::id();
+
         $model->created_by = $id;
         $model->status = 1;
 
