@@ -921,5 +921,8 @@
     "Header qawafelLogo": "شعار قوافل الاقصى - منظومة",
     "Header Logo Manzomeh": "شعار الاقصى - منظومة",
     "qawafelLogo": "شعار القوافل -موقع",
-    "Created At":"أنشئت في"
+    "Created At":"أنشئت في",
+    "longitude":"خط الطول",
+    "latitude":"خط العرض",
+    "street_name":"اسم الشارع"
 }

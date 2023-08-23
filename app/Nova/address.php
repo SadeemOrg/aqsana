@@ -80,13 +80,13 @@ class address extends Resource
 
             // GoogleMaps::make(__('current_location'), 'current_location')
                 // ->zoom(8),
-                Text::make(__('longitude'), "longitude"),
-                Text::make(__('latitude'), "latitude"),
-                Text::make(__('street_name'), "street_name"),
-                Text::make(__('city'), "city"),
+                Text::make(__('longitude'), "longitude")->hideFromDetail()->hideFromIndex(),
+                Text::make(__('latitude'), "latitude")->hideFromDetail()->hideFromIndex(),
+                Text::make(__('street_name'), "street_name")->hideFromDetail()->hideFromIndex(),
+                Text::make(__('city'), "city")->hideFromDetail()->hideFromIndex(),
 
                 MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
-                ->hideWhenCreating()
+                ->hideWhenCreating()->readonly()
                 ->center(['lat' =>  31.775947, 'lng' => 35.235577]) ->types(['address' ,'establishment'])->mapOptions(['fullscreenControl' => true,'clickableIcons'=>true,'restriction'=>true]),
 
             // Select::make(__("Status"), "status")->options([
