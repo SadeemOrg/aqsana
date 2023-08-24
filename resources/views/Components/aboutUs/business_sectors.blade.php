@@ -5,7 +5,7 @@
             // dd($workplace[0]['data']["main_img_workplace"]);
             @endphp
 
-<div itemscope itemtype="https://schema.org/LocalBusiness" class="max-w-7xl mx-auto px-4 mt-16 lg:mt-32 sm:px-6 lg:px-8">
+<div itemscope itemtype="https://schema.org/LocalBusiness" class="max-w-7xl mx-auto px-4 mt-12 sm:px-6 lg:px-8">
     <div class="relative mt-4 xl:mt-8">
         <p itemprop="name" class="font-FlatBold text-3xl text-center xl:text-right">
             {{ $text_main_workplace }}
@@ -13,7 +13,7 @@
         <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-9 hidden xl:block"></div>
     </div>
     <p itemprop="description"
-        class="text-[#101426] font-noto_Regular text-base md:text-lg text-justify lg:text-right pt-9 max-w-3xl">
+        class="text-[#101426] font-noto_Regular text-base md:text-lg text-justify lg:text-right pt-9 max-w-3xl mb-5">
         {{ $sub_text_workplace }}
     </p>
     <!-- first card -->
@@ -21,7 +21,7 @@
 
         @foreach ($sectors as $sector)
             <div itemscope itemtype="https://schema.org/LocalBusiness"
-                class="flex flex-col pt-16 lg:gap-y-28 gap-y-12 mb-12 lg:mb-32">
+                class="flex flex-col pt-10 lg:gap-y-28 gap-y-12 mb-10">
                 <div class=" shaddow px-6 rounded-[16px]">
                     <div class="flow-root rounded-lg bg-[#FFFFFF]  pb-8 ">
                         <div class="-mt-6">
