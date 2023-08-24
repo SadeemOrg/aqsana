@@ -2,7 +2,7 @@
 
 <div class="bg-[#F2FFF285] py-8 mt-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="relative xl:mt-8 mb-7 lg:mb-0">
+        <div class="relative mb-7 lg:mb-0">
             <p class="font-FlatBold text-3xl text-center xl:text-right"> المكتبة </p>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
@@ -40,7 +40,7 @@
                 للعرض
             </p>
         @endif
-        <div class="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-8 gap-y-6 text-center lg:text-right">
+        <div class="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-8 gap-y-6 text-center lg:text-right mt-10">
             <!--first card -->
             @if (!empty($books))
                 @foreach ($books as $book)
@@ -48,7 +48,7 @@
                         $img = 'storage/' . $book['cover_photo'];
                     @endphp
                     <div onclick="location.href='{{ route('libraryDetail', ['id' => $book->id]) }}'"
-                        class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block iphone13:flex sm:inline-block lg:flex flex-col items-center justify-start rounded-[5px]">
+                        class="p-3 bg-white Card_shadow relative inline-block iphone13:flex sm:inline-block lg:flex flex-col items-center justify-start rounded-[5px]">
                         <div class="absolute leftline"></div>
                         <div class="bg-[#E4FFE585] rounded-[5px] py-3 px-4 max-h-[432px] h-full w-full">
                             <div class="">

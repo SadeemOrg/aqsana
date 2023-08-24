@@ -43,7 +43,7 @@ $whatsapp_phone_Link = "https://wa.me/".$Final_Correct_whatsapp_phone ;
 
 <div class="bg-[#F2FFF285] py-8 mt-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="relative xl:mt-8 mb-7 lg:mb-0">
+        <div class="relative mb-5">
             <p class="font-FlatBold text-3xl text-center xl:text-right"> التبرع للمشاريع </p>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
@@ -60,7 +60,7 @@ $whatsapp_phone_Link = "https://wa.me/".$Final_Correct_whatsapp_phone ;
             @php
             $img = 'storage/'.$Project->report_image;
             @endphp
-            <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative inline-block iphone13:flex sm:inline-block lg:flex flex-col items-center justify-start rounded-[5px]">
+            <div class="p-3 bg-white Card_shadow mt-4 relative inline-block iphone13:flex sm:inline-block lg:flex flex-col items-center justify-start rounded-[5px]">
                 <div class="absolute leftline"></div>
                 <div class="bg-[#E4FFE585] rounded-[5px] py-3 px-4 h-full">
                     <div class="">
