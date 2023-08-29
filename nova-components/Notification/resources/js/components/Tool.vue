@@ -107,7 +107,7 @@
                 </td>
                 <td v-else>
                   <button
-                    class="shadow bg-green-500 hover:bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded"
+                    class="shadow bg-green-500 hover:bg-green-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded"
                     type="submit"
                     @click="CompletNotifications(Notification.id)"
                   >
@@ -126,46 +126,48 @@
           }"
         >
           <form @submit.prevent="onSubmit" class="add-form py-4">
-            <div class="md:w-1/3">
-              <label
-                class="block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
+              <div>
+                <label
+                class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
               >
                 المستخدم
               </label>
-            </div>
-            <div class="md:w-2/3">
               <select
-                class="select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+                class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                 v-model="selected"
-              >
-                <option selected disabled value="0">Please select one</option>
-
-                <option
-                  v-for="user in users"
-                  :key="user.id"
-                  v-bind:value="{ id: user.id }"
                 >
-                  {{ user.name }}
-                </option>
-              </select>
+                  <option selected disabled value="0">Please select one</option>
+
+                  <option
+                    v-for="user in users"
+                    :key="user.id"
+                    v-bind:value="{ id: user.id }"
+                  >
+                    {{ user.name }}
+                  </option>
+                </select>
+
+              </div>
+              <div>
+                <label
+                class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
+                >
+                  التاريج
+                </label>
+                <div>
+                  <input
+                    type="date"
+                    v-model="date"
+                    class=" appearance-none border border-gray-200 rounded w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                  />
+                </div>
+              </div>
             </div>
+            
             <div class="md:w-1/3">
               <label
-                class="block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              >
-                التاريج
-              </label>
-            </div>
-            <div class="md:w-2/3">
-              <input
-                type="date"
-                v-model="date"
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-              />
-            </div>
-            <div class="md:w-1/3">
-              <label
-                class="block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
               >
                 المهمة
               </label>
@@ -174,7 +176,7 @@
               <textarea
                 rows="6"
                 cols="50"
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                 v-model="Notifications"
                 id="inline-full-name"
                 type="text"
@@ -182,11 +184,11 @@
             </div>
             <div class="md:w-2/3">
               <button
-                class="shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
+                class="shadow bg-green-600 hover:bg-green-500 mt-4 focus:shadow-outline focus:outline-none text-white font-medium px-16 py-4 rounded"
                 type="submit"
                 @click="sendNotifications()"
               >
-                save
+                حفظ
               </button>
             </div>
           </form>
@@ -200,15 +202,15 @@
         >
           <div class="md:w-1/3">
             <label
-              class="block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
             >
               المستخدم
             </label>
           </div>
-          <div class="md:w-2/3">
+          <div class="md:w-2/3 mb-8">
             <select
               @change="AdminNotifications($event)"
-              class="select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+              class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
               v-model="selectedAdmin"
             >
               <option selected disabled value="0">Please select one</option>

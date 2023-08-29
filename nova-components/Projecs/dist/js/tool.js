@@ -169,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .chart-custom-style {\n  width:500px !important;\n  height: 300px !important;\n} */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .chart-custom-style {\n  width:500px !important;\n  height: 300px !important;\n} */\n", ""]);
 
 // exports
 
@@ -634,11 +634,6 @@ module.exports = function normalizeComponent (
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_pure_vue_chart__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_pure_vue_chart___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_pure_vue_chart__);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8347,14 +8342,14 @@ var render = function() {
           "div",
           {
             staticClass:
-              "flex flex-row items-center justify-satrt w-full my-4 gap-x-2"
+              "flex flex-row flex-wrap sm:flex-nowrap items-center justify-satrt w-full my-4 gap-x-2"
           },
           [
             _c(
               "div",
               {
                 staticClass:
-                  "flex flex-row items-center justify-center cursor-pointer w-1/4"
+                  "flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3"
               },
               [
                 _c(
@@ -8381,7 +8376,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "flex flex-row items-center justify-center cursor-pointer w-1/4"
+                  "flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3"
               },
               [
                 _c(
@@ -8408,7 +8403,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "flex flex-row items-center justify-center cursor-pointer w-1/4"
+                  "flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3"
               },
               [
                 _c(
@@ -8435,7 +8430,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "flex flex-row items-center justify-center cursor-pointer w-1/4"
+                  "flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3"
               },
               [
                 _c(
@@ -8494,7 +8489,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+                            "select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
                           on: {
                             change: [
                               function($event) {
@@ -8562,74 +8557,76 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._l(_vm.Sectors, function(Sector) {
-                          return _c(
-                            "div",
-                            {
-                              key: Sector.Sector,
-                              staticClass: "md:flex md:items-center mb-6",
-                              attrs: { value: Sector.Sector }
-                            },
-                            [
-                              _c("div", { staticClass: "md:w-1/3" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass:
-                                      "block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64",
-                                    attrs: { for: "inline-full-name" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                      " +
-                                        _vm._s(Sector.Sector) +
-                                        "\n                    "
-                                    )
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "md:w-2/3" }, [
-                                _c("input", {
-                                  directives: [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4"
+                          },
+                          _vm._l(_vm.Sectors, function(Sector, index) {
+                            return _c(
+                              "div",
+                              {
+                                key: Sector.Sector,
+                                attrs: { value: Sector.Sector }
+                              },
+                              [
+                                _c("div", { staticClass: "mb-3" }, [
+                                  _c(
+                                    "label",
                                     {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: Sector.Budget,
-                                      expression: "Sector.Budget"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
-                                  attrs: {
-                                    id: "inline-full-name",
-                                    type: "text"
-                                  },
-                                  domProps: { value: Sector.Budget },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        Sector,
-                                        "Budget",
-                                        $event.target.value
+                                      staticClass:
+                                        "block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64",
+                                      attrs: { for: index }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(Sector.Sector) +
+                                          "\n                      "
                                       )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: Sector.Budget,
+                                        expression: "Sector.Budget"
+                                      }
+                                    ],
+                                    staticClass:
+                                      " appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                                    attrs: { id: index, type: "text" },
+                                    domProps: { value: Sector.Budget },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          Sector,
+                                          "Budget",
+                                          $event.target.value
+                                        )
+                                      }
                                     }
-                                  }
-                                })
-                              ])
-                            ]
-                          )
-                        }),
+                                  })
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        ),
                         _vm._v(" "),
                         _vm.Sectors.length
                           ? _c(
                               "div",
                               {
                                 staticClass:
-                                  "md:flex md:items-center w-11/12 justify-end"
+                                  "md:flex md:items-center w-full justify-end"
                               },
                               [
                                 _c("div", { staticClass: "md:w-2/3" }, [
@@ -8637,7 +8634,7 @@ var render = function() {
                                     "button",
                                     {
                                       staticClass:
-                                        "shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
+                                        "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
                                       attrs: { type: "submit" },
                                       on: {
                                         click: function($event) {
@@ -8655,8 +8652,7 @@ var render = function() {
                               ]
                             )
                           : _vm._e()
-                      ],
-                      2
+                      ]
                     )
                   ]
                 ),
@@ -8670,59 +8666,90 @@ var render = function() {
                     }
                   },
                   [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "md:w-2/3" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.newyear,
-                            expression: "newyear"
-                          }
-                        ],
+                    _c(
+                      "div",
+                      {
                         staticClass:
-                          "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
-                        attrs: { id: "inline-full-name", type: "text" },
-                        domProps: { value: _vm.newyear },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                          "grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4"
+                      },
+                      [
+                        _c("div", [
+                          _c(
+                            "label",
+                            {
+                              staticClass:
+                                "block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
+                            },
+                            [
+                              _vm._v(
+                                "\n                    السنة\n                  "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.newyear,
+                                expression: "newyear"
+                              }
+                            ],
+                            staticClass:
+                              "appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                            attrs: { id: "inline-full-name", type: "text" },
+                            domProps: { value: _vm.newyear },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.newyear = $event.target.value
+                              }
                             }
-                            _vm.newyear = $event.target.value
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(2),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "md:w-2/3" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.budgetsOfyear,
-                            expression: "budgetsOfyear"
-                          }
-                        ],
-                        staticClass:
-                          "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
-                        attrs: { id: "inline-full-name", type: "text" },
-                        domProps: { value: _vm.budgetsOfyear },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c(
+                            "label",
+                            {
+                              staticClass:
+                                "block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
+                            },
+                            [
+                              _vm._v(
+                                "\n                    ميزانية السنة\n                  "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.budgetsOfyear,
+                                expression: "budgetsOfyear"
+                              }
+                            ],
+                            staticClass:
+                              "appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                            attrs: { id: "inline-full-name", type: "text" },
+                            domProps: { value: _vm.budgetsOfyear },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.budgetsOfyear = $event.target.value
+                              }
                             }
-                            _vm.budgetsOfyear = $event.target.value
-                          }
-                        }
-                      })
-                    ]),
+                          })
+                        ])
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "form",
@@ -8736,74 +8763,77 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._l(_vm.newSectors, function(Sector) {
-                          return _c(
-                            "div",
-                            {
-                              key: Sector.Sector,
-                              staticClass: "md:flex md:items-center mb-6",
-                              attrs: { value: Sector.Sector }
-                            },
-                            [
-                              _c("div", { staticClass: "md:w-1/3" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass:
-                                      "block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64",
-                                    attrs: { for: "inline-full-name" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                      " +
-                                        _vm._s(Sector.Sector) +
-                                        "\n                    "
-                                    )
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "md:w-2/3" }, [
-                                _c("input", {
-                                  directives: [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4"
+                          },
+                          _vm._l(_vm.newSectors, function(Sector, index) {
+                            return _c(
+                              "div",
+                              {
+                                key: Sector.Sector,
+                                staticClass: " mb-3",
+                                attrs: { value: Sector.Sector }
+                              },
+                              [
+                                _c("div", {}, [
+                                  _c(
+                                    "label",
                                     {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: Sector.Budget,
-                                      expression: "Sector.Budget"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
-                                  attrs: {
-                                    id: "inline-full-name",
-                                    type: "text"
-                                  },
-                                  domProps: { value: Sector.Budget },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        Sector,
-                                        "Budget",
-                                        $event.target.value
+                                      staticClass:
+                                        "block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64",
+                                      attrs: { for: index }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(Sector.Sector) +
+                                          "\n                      "
                                       )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: Sector.Budget,
+                                        expression: "Sector.Budget"
+                                      }
+                                    ],
+                                    staticClass:
+                                      " appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                                    attrs: { id: index, type: "text" },
+                                    domProps: { value: Sector.Budget },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          Sector,
+                                          "Budget",
+                                          $event.target.value
+                                        )
+                                      }
                                     }
-                                  }
-                                })
-                              ])
-                            ]
-                          )
-                        }),
+                                  })
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        ),
                         _vm._v(" "),
                         _vm.newSectors.length
                           ? _c(
                               "div",
                               {
                                 staticClass:
-                                  "md:flex md:items-center w-11/12 justify-end"
+                                  "md:flex md:items-center w-full justify-end"
                               },
                               [
                                 _c("div", { staticClass: "md:w-2/3" }, [
@@ -8811,7 +8841,7 @@ var render = function() {
                                     "button",
                                     {
                                       staticClass:
-                                        "shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
+                                        "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
                                       attrs: { type: "submit" },
                                       on: {
                                         click: function($event) {
@@ -8821,7 +8851,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                      save\n                    "
+                                        "\n                      حفظ\n                    "
                                       )
                                     ]
                                   )
@@ -8829,8 +8859,7 @@ var render = function() {
                               ]
                             )
                           : _vm._e()
-                      ],
-                      2
+                      ]
                     )
                   ]
                 ),
@@ -8849,7 +8878,7 @@ var render = function() {
                         "select",
                         {
                           staticClass:
-                            "select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+                            "select1 mt-1 block w-full rounded-md border-2 border-gray-200 px-4 py-2 pl-3 pr-10 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm",
                           attrs: { selectedyear: "" },
                           on: {
                             change: function($event) {
@@ -8903,67 +8932,73 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._l(_vm.deletSectors, function(Sector) {
-                          return _c(
-                            "div",
-                            {
-                              key: Sector.Sector,
-                              staticClass: "md:flex md:items-center mb-6",
-                              attrs: { value: Sector.Sector }
-                            },
-                            [
-                              _c("div", { staticClass: "md:w-1/3" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass:
-                                      "block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64",
-                                    attrs: { for: "inline-full-name" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                      " +
-                                        _vm._s(Sector.Sector) +
-                                        "\n                    "
-                                    )
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "md:w-2/3" }, [
-                                _c("input", {
-                                  directives: [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                          },
+                          _vm._l(_vm.deletSectors, function(Sector) {
+                            return _c(
+                              "div",
+                              {
+                                key: Sector.Sector,
+                                staticClass: "mb-3",
+                                attrs: { value: Sector.Sector }
+                              },
+                              [
+                                _c("div", [
+                                  _c(
+                                    "label",
                                     {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: Sector.Budget,
-                                      expression: "Sector.Budget"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
-                                  attrs: {
-                                    id: "inline-full-name",
-                                    type: "text"
-                                  },
-                                  domProps: { value: Sector.Budget },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        Sector,
-                                        "Budget",
-                                        $event.target.value
+                                      staticClass:
+                                        "block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64",
+                                      attrs: { for: "inline-full-name" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(Sector.Sector) +
+                                          "\n                      "
                                       )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: Sector.Budget,
+                                        expression: "Sector.Budget"
+                                      }
+                                    ],
+                                    staticClass:
+                                      " appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                                    attrs: {
+                                      id: "inline-full-name",
+                                      type: "text"
+                                    },
+                                    domProps: { value: Sector.Budget },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          Sector,
+                                          "Budget",
+                                          $event.target.value
+                                        )
+                                      }
                                     }
-                                  }
-                                })
-                              ])
-                            ]
-                          )
-                        }),
+                                  })
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        ),
                         _vm._v(" "),
                         _vm.deletSectors.length
                           ? _c(
@@ -8977,7 +9012,7 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass:
-                                          "md:flex md:items-center w-11/12 justify-end"
+                                          "md:flex md:items-center w-full justify-end"
                                       },
                                       [
                                         _c("div", { staticClass: "md:w-2/3" }, [
@@ -8985,7 +9020,7 @@ var render = function() {
                                             "button",
                                             {
                                               staticClass:
-                                                "shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
+                                                "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
                                               attrs: { type: "submit" },
                                               on: {
                                                 click: function($event) {
@@ -9006,8 +9041,7 @@ var render = function() {
                               ]
                             )
                           : _vm._e()
-                      ],
-                      2
+                      ]
                     )
                   ]
                 ),
@@ -9035,7 +9069,7 @@ var render = function() {
                               }
                             ],
                             staticClass:
-                              "select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-14 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+                              "select1 mt-1 block w-full rounded-md border-2 border-gray-200 px-4 py-2 pl-3 pr-14 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm",
                             on: {
                               change: [
                                 function($event) {
@@ -9201,827 +9235,800 @@ var render = function() {
                                                 "space-y-8 divide-y divide-gray-200"
                                             },
                                             [
-                                              _c(
-                                                "div",
-                                                { staticClass: "pt-8" },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-6"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
+                                              _c("div", [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for:
+                                                                "street-address"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "ميزانبة القطاع\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for:
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name:
+                                                                  "street-address",
+                                                                id:
+                                                                  "street-address",
+                                                                autocomplete:
                                                                   "street-address"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.Budget
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "ميزانبة القطاع\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for:
+                                                                "street-address"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                      مصاريف القطاع\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name:
-                                                                    "street-address",
-                                                                  id:
-                                                                    "street-address",
-                                                                  autocomplete:
-                                                                    "street-address"
-                                                                },
-                                                                domProps: {
-                                                                  value:
-                                                                    Sector.Budget
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-6"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for:
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name:
+                                                                  "street-address",
+                                                                id:
+                                                                  "street-address",
+                                                                autocomplete:
                                                                   "street-address"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.expenses_year
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "\n                                      مصاريف القطاع\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for:
+                                                                "street-address"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                      صافي الانفاق القطاع\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name:
-                                                                    "street-address",
-                                                                  id:
-                                                                    "street-address",
-                                                                  autocomplete:
-                                                                    "street-address"
-                                                                },
-                                                                domProps: {
-                                                                  value:
-                                                                    Sector.expenses_year
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-6"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for:
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name:
+                                                                  "street-address",
+                                                                id:
+                                                                  "street-address",
+                                                                autocomplete:
                                                                   "street-address"
+                                                              },
+                                                              domProps: {
+                                                                value: (
+                                                                  Sector.Budget -
+                                                                  Sector.expenses_year
+                                                                ).toFixed(2)
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "\n                                      صافي الانفاق القطاع\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for: "city"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "الربع الاول ميزانية\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name:
-                                                                    "street-address",
-                                                                  id:
-                                                                    "street-address",
-                                                                  autocomplete:
-                                                                    "street-address"
-                                                                },
-                                                                domProps: {
-                                                                  value: (
-                                                                    Sector.Budget -
-                                                                    Sector.expenses_year
-                                                                  ).toFixed(2)
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-2"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for: "city"
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name: "city",
+                                                                id: "city",
+                                                                autocomplete:
+                                                                  "address-level2"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.Budget /
+                                                                  4
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "الربع الاول ميزانية\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for: "region"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "الربع الاول مصاريف"
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name: "city",
-                                                                  id: "city",
-                                                                  autocomplete:
-                                                                    "address-level2"
-                                                                },
-                                                                domProps: {
-                                                                  value:
-                                                                    Sector.Budget /
-                                                                    4
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-2"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for: "region"
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name: "region",
+                                                                id: "region",
+                                                                autocomplete:
+                                                                  "address-level1"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.expenses_First
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "الربع الاول مصاريف"
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for: "postal-code"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "الربع الاول صافي الانفاق"
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name:
-                                                                    "region",
-                                                                  id: "region",
-                                                                  autocomplete:
-                                                                    "address-level1"
-                                                                },
-                                                                domProps: {
-                                                                  value:
-                                                                    Sector.expenses_First
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-2"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for:
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name:
+                                                                  "postal-code",
+                                                                id:
+                                                                  "postal-code",
+                                                                autocomplete:
                                                                   "postal-code"
+                                                              },
+                                                              domProps: {
+                                                                value: (
+                                                                  Sector.Budget /
+                                                                    4 -
+                                                                  Sector.expenses_First
+                                                                ).toFixed(2)
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "الربع الاول صافي الانفاق"
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for: "city"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "الربع الثاني ميزانية\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name:
-                                                                    "postal-code",
-                                                                  id:
-                                                                    "postal-code",
-                                                                  autocomplete:
-                                                                    "postal-code"
-                                                                },
-                                                                domProps: {
-                                                                  value: (
-                                                                    Sector.Budget /
-                                                                      4 -
-                                                                    Sector.expenses_First
-                                                                  ).toFixed(2)
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-2"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for: "city"
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name: "city",
+                                                                id: "city",
+                                                                autocomplete:
+                                                                  "address-level2"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.Budget /
+                                                                  4
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "الربع الثاني ميزانية\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for: "region"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "الربع الثاني مصاريف\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name: "city",
-                                                                  id: "city",
-                                                                  autocomplete:
-                                                                    "address-level2"
-                                                                },
-                                                                domProps: {
-                                                                  value:
-                                                                    Sector.Budget /
-                                                                    4
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-2"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for: "region"
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name: "region",
+                                                                id: "region",
+                                                                autocomplete:
+                                                                  "address-level1"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.expenses_Second
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "الربع الثاني مصاريف\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for: "postal-code"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "الربع الثاني صافي الانفاق\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name:
-                                                                    "region",
-                                                                  id: "region",
-                                                                  autocomplete:
-                                                                    "address-level1"
-                                                                },
-                                                                domProps: {
-                                                                  value:
-                                                                    Sector.expenses_Second
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-2"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for:
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name:
+                                                                  "postal-code",
+                                                                id:
+                                                                  "postal-code",
+                                                                autocomplete:
                                                                   "postal-code"
+                                                              },
+                                                              domProps: {
+                                                                value: (
+                                                                  Sector.Budget /
+                                                                    4 -
+                                                                  Sector.expenses_Second
+                                                                ).toFixed(2)
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "الربع الثاني صافي الانفاق\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for: "city"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "الربع الثالت ميزانية\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name:
-                                                                    "postal-code",
-                                                                  id:
-                                                                    "postal-code",
-                                                                  autocomplete:
-                                                                    "postal-code"
-                                                                },
-                                                                domProps: {
-                                                                  value: (
-                                                                    Sector.Budget /
-                                                                      4 -
-                                                                    Sector.expenses_Second
-                                                                  ).toFixed(2)
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-2"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for: "city"
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name: "city",
+                                                                id: "city",
+                                                                autocomplete:
+                                                                  "address-level2"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.Budget /
+                                                                  4
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "الربع الثالت ميزانية\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for: "region"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "الربع الثالت مصاريف\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name: "city",
-                                                                  id: "city",
-                                                                  autocomplete:
-                                                                    "address-level2"
-                                                                },
-                                                                domProps: {
-                                                                  value:
-                                                                    Sector.Budget /
-                                                                    4
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-2"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for: "region"
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name: "region",
+                                                                id: "region",
+                                                                autocomplete:
+                                                                  "address-level1"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.expenses_Third
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "الربع الثالت مصاريف\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for: "postal-code"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "الربع الثالت صافي الانفاق\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name:
-                                                                    "region",
-                                                                  id: "region",
-                                                                  autocomplete:
-                                                                    "address-level1"
-                                                                },
-                                                                domProps: {
-                                                                  value:
-                                                                    Sector.expenses_Third
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-2"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for:
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name:
+                                                                  "postal-code",
+                                                                id:
+                                                                  "postal-code",
+                                                                autocomplete:
                                                                   "postal-code"
+                                                              },
+                                                              domProps: {
+                                                                value: (
+                                                                  Sector.Budget /
+                                                                    4 -
+                                                                  Sector.expenses_Third
+                                                                ).toFixed(2)
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "الربع الثالت صافي الانفاق\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for: "city"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "الربع الرابع ميزانية\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name:
-                                                                    "postal-code",
-                                                                  id:
-                                                                    "postal-code",
-                                                                  autocomplete:
-                                                                    "postal-code"
-                                                                },
-                                                                domProps: {
-                                                                  value: (
-                                                                    Sector.Budget /
-                                                                      4 -
-                                                                    Sector.expenses_Third
-                                                                  ).toFixed(2)
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-2"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for: "city"
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name: "city",
+                                                                id: "city",
+                                                                autocomplete:
+                                                                  "address-level2"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.Budget /
+                                                                  4
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "الربع الرابع ميزانية\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for: "region"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "الربع الرابع مصاريف\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name: "city",
-                                                                  id: "city",
-                                                                  autocomplete:
-                                                                    "address-level2"
-                                                                },
-                                                                domProps: {
-                                                                  value:
-                                                                    Sector.Budget /
-                                                                    4
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-2"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for: "region"
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name: "region",
+                                                                id: "region",
+                                                                autocomplete:
+                                                                  "address-level1"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.expenses_fourth
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "الربع الرابع مصاريف\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for: "postal-code"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "الربع الرابع صافي الانفاق\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
                                                               staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name:
-                                                                    "region",
-                                                                  id: "region",
-                                                                  autocomplete:
-                                                                    "address-level1"
-                                                                },
-                                                                domProps: {
-                                                                  value:
-                                                                    Sector.expenses_fourth
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "sm:col-span-2"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "label",
-                                                            {
-                                                              staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
                                                               attrs: {
-                                                                for:
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name:
+                                                                  "postal-code",
+                                                                id:
+                                                                  "postal-code",
+                                                                autocomplete:
                                                                   "postal-code"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.Budget /
+                                                                    4 -
+                                                                  Sector.expenses_fourth
                                                               }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "الربع الرابع صافي الانفاق\n                                    "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "mt-1"
-                                                            },
-                                                            [
-                                                              _c("input", {
-                                                                staticClass:
-                                                                  "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                                                attrs: {
-                                                                  readonly: "",
-                                                                  type: "text",
-                                                                  name:
-                                                                    "postal-code",
-                                                                  id:
-                                                                    "postal-code",
-                                                                  autocomplete:
-                                                                    "postal-code"
-                                                                },
-                                                                domProps: {
-                                                                  value:
-                                                                    Sector.Budget /
-                                                                      4 -
-                                                                    Sector.expenses_fourth
-                                                                }
-                                                              })
-                                                            ]
-                                                          )
-                                                        ]
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              )
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ])
                                             ]
                                           )
                                         ]
@@ -10031,7 +10038,7 @@ var render = function() {
                                         "div",
                                         {
                                           staticClass:
-                                            "md:flex justify-between mt-5 text-center"
+                                            "md:flex justify-between mt-5 text-center mt-10"
                                         },
                                         [
                                           _c(
@@ -10067,7 +10074,11 @@ var render = function() {
                                                 }
                                               }),
                                               _vm._v(" "),
-                                              _c("h1", [_vm._v("مخرجات")])
+                                              _c(
+                                                "h3",
+                                                { staticClass: "mt-3" },
+                                                [_vm._v("مخرجات")]
+                                              )
                                             ],
                                             1
                                           ),
@@ -10102,7 +10113,11 @@ var render = function() {
                                                 }
                                               }),
                                               _vm._v(" "),
-                                              _c("h1", [_vm._v("مدخلات")])
+                                              _c(
+                                                "h3",
+                                                { staticClass: "mt-3" },
+                                                [_vm._v("مدخلات")]
+                                              )
                                             ],
                                             1
                                           )
@@ -10138,39 +10153,9 @@ var staticRenderFns = [
         "label",
         {
           staticClass:
-            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+            "block text-black text-base ml-4 py-2 font-medium md:text-right mb-1 md:mb-0"
         },
         [_vm._v("\n                    السنة\n                  ")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/3" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        },
-        [_vm._v("\n                  السنة\n                ")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/3" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        },
-        [_vm._v("\n                  ميزانبة السنة\n                ")]
       )
     ])
   }
