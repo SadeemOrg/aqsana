@@ -3,10 +3,10 @@
     <div class="flex">
       <div class="w-full">
         <div
-          class="flex flex-row items-center justify-satrt w-full my-4 gap-x-2"
+          class="flex flex-row flex-wrap sm:flex-nowrap items-center justify-satrt w-full my-4 gap-x-2"
         >
           <div
-            class="flex flex-row items-center justify-center cursor-pointer w-1/4"
+            class="flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3"
           >
             <a
               v-on:click="toggleTabs(1)"
@@ -21,7 +21,7 @@
             </a>
           </div>
           <div
-            class="flex flex-row items-center justify-center cursor-pointer w-1/4"
+            class="flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3"
           >
             <a
               class=""
@@ -37,7 +37,7 @@
             </a>
           </div>
           <div
-            class="flex flex-row items-center justify-center cursor-pointer w-1/4"
+            class="flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3"
           >
             <a
               class=""
@@ -53,7 +53,7 @@
             </a>
           </div>
           <div
-            class="flex flex-row items-center justify-center cursor-pointer w-1/4"
+            class="flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3"
           >
             <a
               class="w-full"
@@ -84,13 +84,13 @@
                 <div class="py-4 w-[95%] bg-slate-700">
                   <div class="md:w-1/3">
                     <label
-                      class="block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                      class="block text-black text-base ml-4 py-2 font-medium md:text-right mb-1 md:mb-0"
                     >
                       السنة
                     </label>
                   </div>
                   <select
-                    class="select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+                    class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                     @change="onChange($event)"
                     v-model="year"
                   >
@@ -129,37 +129,37 @@
                       />
                     </div>
                   </div> -->
-                  <div
-                    v-for="Sector in Sectors"
-                    :key="Sector.Sector"
-                    :value="Sector.Sector"
-                    class="md:flex md:items-center mb-6"
-                  >
-                    <div class="md:w-1/3">
-                      <label
-                        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64"
-                        for="inline-full-name"
-                      >
-                        {{ Sector.Sector }}
-                      </label>
-                    </div>
-                    <div class="md:w-2/3">
-                      <input
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                        id="inline-full-name"
-                        type="text"
-                        v-model="Sector.Budget"
-                      />
+                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4">
+                    <div
+                      v-for="(Sector, index) in Sectors"
+                      :key="Sector.Sector"
+                      :value="Sector.Sector"
+                      class=""
+                    >
+                      <div class="mb-3">
+                        <label
+                          class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64"
+                          :for="index"
+                        >
+                          {{ Sector.Sector }}
+                        </label>
+                        <input
+                          class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                          :id="index"
+                          type="text"
+                          v-model="Sector.Budget"
+                        />
+                      </div>
+                      
                     </div>
                   </div>
-
                   <div
                     v-if="Sectors.length"
-                    class="md:flex md:items-center w-11/12 justify-end"
+                    class="md:flex md:items-center w-full justify-end"
                   >
                     <div class="md:w-2/3">
                       <button
-                        class="shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
+                        class="shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
                         type="submit"
                         @click="save()"
                       >
@@ -176,72 +176,66 @@
                   block: openTab === 2,
                 }"
               >
-                <div class="md:w-1/3">
-                  <label
-                    class="block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                  >
-                    السنة
-                  </label>
-                </div>
-                <div class="md:w-2/3">
-                  <input
-                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                    id="inline-full-name"
-                    type="text"
-                    v-model="newyear"
-                  />
-                </div>
-                <div class="md:w-1/3">
-                  <label
-                    class="block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                  >
-                    ميزانبة السنة
-                  </label>
-                </div>
-                <div class="md:w-2/3">
-                  <input
-                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                    id="inline-full-name"
-                    type="text"
-                    v-model="budgetsOfyear"
-                  />
-                </div>
-                <form @submit.prevent="onSubmit" class="add-form py-4">
-                  <div
-                    v-for="Sector in newSectors"
-                    :key="Sector.Sector"
-                    :value="Sector.Sector"
-                    class="md:flex md:items-center mb-6"
-                  >
-                    <div class="md:w-1/3">
-                      <label
-                        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64"
-                        for="inline-full-name"
-                      >
-                        {{ Sector.Sector }}
-                      </label>
-                    </div>
-                    <div class="md:w-2/3">
-                      <input
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                        id="inline-full-name"
-                        type="text"
-                        v-model="Sector.Budget"
-                      />
-                    </div>
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
+                  <div>
+                    <label class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0">
+                      السنة
+                    </label>
+                    <input
+                      class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                      id="inline-full-name"
+                      type="text"
+                      v-model="newyear"
+                    />
                   </div>
-
+                  <div>
+                    <label class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0" >
+                      ميزانية السنة
+                    </label>
+                    <input
+                      class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                      id="inline-full-name"
+                      type="text"
+                      v-model="budgetsOfyear"
+                    />
+                  </div>
+                </div>
+                
+                <form @submit.prevent="onSubmit" class="add-form py-4">
+                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4">
+                    <div
+                      v-for="(Sector, index) in newSectors"
+                      :key="Sector.Sector"
+                      :value="Sector.Sector"
+                      class=" mb-3"
+                    >                      
+                      <div class="">
+                        <label
+                          class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64"
+                          :for="index"
+                        >
+                          {{ Sector.Sector }}
+                        </label>
+                        <input
+                          class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                          :id="index"
+                          type="text"
+                          v-model="Sector.Budget"
+                        />
+                      </div>
+                    </div>
+                  </div>                  
                   <div
                     v-if="newSectors.length"
-                    class="md:flex md:items-center w-11/12 justify-end"
+                    class="md:flex md:items-center w-full justify-end"
                   >
                     <div class="md:w-2/3">
                       <button
-                        class="shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
+                        class="shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
                         type="submit"
                         @click="savenew()"
                       >
-                        save
+                        حفظ
                       </button>
                     </div>
                   </div>
@@ -255,7 +249,7 @@
               >
                 <div class="py-4 w-[95%] bg-slate-700">
                   <select
-                    class="select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+                    class="select1 mt-1 block w-full rounded-md border-2 border-gray-200 px-4 py-2 pl-3 pr-10 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                     @change="onChangedelet($event)"
                     selectedyear
                   >
@@ -273,30 +267,31 @@
                   </select>
                 </div>
                 <form @submit.prevent="onSubmit" class="add-form py-4">
-                  <div
-                    v-for="Sector in deletSectors"
-                    :key="Sector.Sector"
-                    :value="Sector.Sector"
-                    class="md:flex md:items-center mb-6"
-                  >
-                    <div class="md:w-1/3">
-                      <label
-                        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64"
-                        for="inline-full-name"
-                      >
-                        {{ Sector.Sector }}
-                      </label>
-                    </div>
-                    <div class="md:w-2/3">
-                      <input
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                        id="inline-full-name"
-                        type="text"
-                        v-model="Sector.Budget"
-                      />
+                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  
+                    <div
+                      v-for="Sector in deletSectors"
+                      :key="Sector.Sector"
+                      :value="Sector.Sector"
+                      class="mb-3"
+                    >
+                      
+                      <div>
+                        <label
+                          class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64"
+                          for="inline-full-name"
+                        >
+                          {{ Sector.Sector }}
+                        </label>
+                        <input
+                          class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                          id="inline-full-name"
+                          type="text"
+                          v-model="Sector.Budget"
+                        />
+                      </div>
                     </div>
                   </div>
-
                   <div
                     v-if="deletSectors.length"
                     class="md:flex md:items-center"
@@ -304,11 +299,11 @@
                     <div class="md:w-1/3"></div>
                     <div
                       v-if="deletSectors.length"
-                      class="md:flex md:items-center w-11/12 justify-end"
+                      class="md:flex md:items-center w-full justify-end"
                     >
                       <div class="md:w-2/3">
                         <button
-                          class="shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
+                          class="shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
                           type="submit"
                           @click="delet()"
                         >
@@ -330,7 +325,7 @@
                     <select
                       @change="getSectorstatistics($event)"
                       v-model="selectedItem"
-                      class="select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-14 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+                      class="select1 mt-1 block w-full rounded-md border-2 border-gray-200 px-4 py-2 pl-3 pr-14 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                     >
                       <option selected disabled value="0">
                         Please select one
@@ -390,11 +385,11 @@
                             </p>
                             <div class="space-y-8 divide-y divide-gray-200">
                               <div class="space-y-8 divide-y divide-gray-200">
-                                <div class="pt-8">
+                                <div>
                                   <div
                                     class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
                                   >
-                                    <div class="sm:col-span-6">
+                                    <div class="sm:col-span-2">
                                       <label
                                         for="street-address"
                                         class="block text-sm font-medium text-gray-700"
@@ -412,7 +407,7 @@
                                         />
                                       </div>
                                     </div>
-                                    <div class="sm:col-span-6">
+                                    <div class="sm:col-span-2">
                                       <label
                                         for="street-address"
                                         class="block text-sm font-medium text-gray-700"
@@ -431,7 +426,7 @@
                                         />
                                       </div>
                                     </div>
-                                    <div class="sm:col-span-6">
+                                    <div class="sm:col-span-2">
                                       <label
                                         for="street-address"
                                         class="block text-sm font-medium text-gray-700"
@@ -688,7 +683,7 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="md:flex justify-between mt-5 text-center">
+                            <div class="md:flex justify-between mt-5 text-center mt-10">
                               <div class="mb-6 md:mb-0 md:w-1/2">
                                 <pure-vue-chart
                                   class="chart-custom-style"
@@ -708,7 +703,7 @@
 
                                   ]"
                                 />
-                                <h1>مخرجات</h1>
+                                <h3 class="mt-3">مخرجات</h3>
                               </div>
                               <div class="md:w-1/2">
                                 <pure-vue-chart
@@ -729,7 +724,7 @@
 
                                   ]"
                                 />
-                                <h1>مدخلات</h1>
+                                <h3 class="mt-3">مدخلات</h3>
                               </div>
                             </div>
                           </div>
