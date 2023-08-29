@@ -4,13 +4,13 @@
     }
 </style>
 
-<div  class="max-w-7xl mx-auto px-4 mt-12 md:mt-24 sm:px-6 lg:px-8">
-    <div class="relative mt-0 xl:mt-8">
+<div  class="max-w-7xl mx-auto px-4 mt-12 sm:px-6 lg:px-8">
+    <div class="relative mt-0">
         <p class="font-FlatBold text-3xl text-center xl:text-right"> اهدافنا </p>
         <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-7 hidden xl:block">
         </div>
     </div>
-    <div class="pt-6 md:pt-16 grid grid-cols-1 lg:grid-cols-2 gap-y-3 md:gap-y-6 gap-x-6">
+    <div class="pt-4 md:pt-14 grid grid-cols-1 lg:grid-cols-2 gap-y-3 md:gap-y-6 gap-x-6">
         <!--First section -->
         @if(!empty($goals))
         @foreach ($goals as $goal)

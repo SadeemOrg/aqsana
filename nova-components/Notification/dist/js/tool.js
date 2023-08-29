@@ -889,6 +889,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1251,7 +1253,7 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass:
-                                      "shadow bg-green-500 hover:bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded",
+                                      "shadow bg-green-500 hover:bg-green-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded",
                                     attrs: { type: "submit" },
                                     on: {
                                       click: function($event) {
@@ -1301,94 +1303,124 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "md:w-2/3" }, [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.selected,
-                            expression: "selected"
-                          }
-                        ],
-                        staticClass:
-                          "select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.selected = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4"
+                    },
+                    [
+                      _c("div", [
                         _c(
-                          "option",
-                          { attrs: { selected: "", disabled: "", value: "0" } },
-                          [_vm._v("Please select one")]
+                          "label",
+                          {
+                            staticClass:
+                              "block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
+                          },
+                          [_vm._v("\n              المستخدم\n            ")]
                         ),
                         _vm._v(" "),
-                        _vm._l(_vm.users, function(user) {
-                          return _c(
-                            "option",
-                            {
-                              key: user.id,
-                              domProps: { value: { id: user.id } }
-                            },
-                            [
-                              _vm._v(
-                                "\n                " +
-                                  _vm._s(user.name) +
-                                  "\n              "
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.selected,
+                                expression: "selected"
+                              }
+                            ],
+                            staticClass:
+                              "select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.selected = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: {
+                                  selected: "",
+                                  disabled: "",
+                                  value: "0"
+                                }
+                              },
+                              [_vm._v("Please select one")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.users, function(user) {
+                              return _c(
+                                "option",
+                                {
+                                  key: user.id,
+                                  domProps: { value: { id: user.id } }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                  " +
+                                      _vm._s(user.name) +
+                                      "\n                "
+                                  )
+                                ]
                               )
-                            ]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  ]),
+                            })
+                          ],
+                          2
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
+                          },
+                          [_vm._v("\n                التاريج\n              ")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.date,
+                                expression: "date"
+                              }
+                            ],
+                            staticClass:
+                              "appearance-none border border-gray-200 rounded w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                            attrs: { type: "date" },
+                            domProps: { value: _vm.date },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.date = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "md:w-2/3" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.date,
-                          expression: "date"
-                        }
-                      ],
-                      staticClass:
-                        "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
-                      attrs: { type: "date" },
-                      domProps: { value: _vm.date },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.date = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(3),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c("div", { staticClass: "md:w-2/3" }, [
                     _c("textarea", {
@@ -1401,7 +1433,7 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                        "appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
                       attrs: {
                         rows: "6",
                         cols: "50",
@@ -1425,7 +1457,7 @@ var render = function() {
                       "button",
                       {
                         staticClass:
-                          "shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
+                          "shadow bg-green-600 hover:bg-green-500 mt-4 focus:shadow-outline focus:outline-none text-white font-medium px-16 py-4 rounded",
                         attrs: { type: "submit" },
                         on: {
                           click: function($event) {
@@ -1433,7 +1465,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("\n              save\n            ")]
+                      [_vm._v("\n              حفظ\n            ")]
                     )
                   ])
                 ]
@@ -1452,9 +1484,9 @@ var render = function() {
               }
             },
             [
-              _vm._m(4),
+              _vm._m(2),
               _vm._v(" "),
-              _c("div", { staticClass: "md:w-2/3" }, [
+              _c("div", { staticClass: "md:w-2/3 mb-8" }, [
                 _c(
                   "select",
                   {
@@ -1467,7 +1499,7 @@ var render = function() {
                       }
                     ],
                     staticClass:
-                      "select1 mt-1 block w-full rounded-md border-2 border-balck px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+                      "select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
                     on: {
                       change: [
                         function($event) {
@@ -1518,7 +1550,7 @@ var render = function() {
                 "table",
                 { staticClass: "text-center" },
                 [
-                  _vm._m(5),
+                  _vm._m(3),
                   _vm._v(" "),
                   _vm._l(_vm.allNotifications, function(Notification) {
                     return _c(
@@ -1591,37 +1623,7 @@ var staticRenderFns = [
         "label",
         {
           staticClass:
-            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        },
-        [_vm._v("\n              المستخدم\n            ")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/3" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        },
-        [_vm._v("\n              التاريج\n            ")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/3" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+            "block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
         },
         [_vm._v("\n              المهمة\n            ")]
       )
@@ -1636,7 +1638,7 @@ var staticRenderFns = [
         "label",
         {
           staticClass:
-            "block text-black text-base ml-4 py-2 font-bold md:text-right mb-1 md:mb-0 pr-4"
+            "block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
         },
         [_vm._v("\n            المستخدم\n          ")]
       )

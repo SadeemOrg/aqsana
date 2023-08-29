@@ -8,7 +8,7 @@
     <div  class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div itemscope itemtype="https://schema.org/Organization" class="flex flex-row flex-wrap xl:flex-nowrap items-center justify-start sm:justify-center xl:items-start xl:justify-between gap-y-6 xl:gap-y-0 gap-x-7">
             <div itemscope itemtype="https://schema.org/Organization" class="flex flex-col  xl:basis-3/5 justify-center items-center xl:items-start">
-                <div class="relative mt-4 xl:mt-8">
+                <div class="relative xl:mt-8">
                     <p itemprop="name" class="font-FlatBold text-3xl text-center xl:text-right"> {{ $aboutUs_main }}</p>
                     <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-7 hidden xl:block"></div>
                 </div>
