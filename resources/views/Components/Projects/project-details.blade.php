@@ -42,7 +42,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
 @endphp
 @endif
 
-<div class=" py-16 pb-20 lg:mt-10">
+<div class=" my-16">
     <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
         <div class="relative ">
             <p class="font-FlatBold text-xl sm:text-3xl max-w-6xl text-center mt-8 lg:mt-0 xl:text-right">
@@ -52,7 +52,7 @@ $imageVideoCover = "https://c.ndtvimg.com/2022-04/e0ei6018_jerusalem-al-aqsa-mos
             </p>
             <div class="absolute border-b-[4px] pt-2 border-b-[#349A37] w-10 hidden xl:block"></div>
         </div>
-        <div class="p-3 bg-white Card_shadow mt-4 lg:mt-16 relative flex flex-col items-center justify-center w-full">
+        <div class="p-3 bg-white Card_shadow mt-12 relative flex flex-col items-center justify-center w-full">
             <div class="absolute leftline1"></div>
             <div class="max-w-6xl bg-[#E4FFE585] rounded-[5px] py-3 px-4 w-full text-center">
                 {{-- <div class="w-full flex items-center justify-center mt-4">
