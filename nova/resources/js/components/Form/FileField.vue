@@ -27,11 +27,11 @@
               p-4
             "
           >
-            <span class="truncate mr-3"> {{ field.value }} </span>
+            <span class="truncate ml-auto"> {{ field.value }} </span>
 
             <DeleteButton
               :dusk="field.attribute + '-internal-delete-link'"
-              class="ml-auto"
+              class=""
               v-if="shouldShowRemoveButton"
               @click="confirmRemoval"
             />
