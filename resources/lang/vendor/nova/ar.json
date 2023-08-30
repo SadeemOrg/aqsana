@@ -416,5 +416,17 @@
     "Customize": "تخصيص",
     "Update :resource: :title": "تحديث :resource: :title",
     "Update attached :resource: :title": "تحديث المرفق :resource: :title",
-    ":resource Details: :title": ":resource تفاصيل: :title"
+    ":resource Details: :title": ":resource تفاصيل: :title",
+    "Filemanager": "مدير الملفات",
+    "Create folder": "إنشاء مجلد",
+    "Home": "الرئيسية",
+    "Upload": "رفع",
+    "Write a folder name": "اكتب اسم المجلد",
+    "Type": "النوع",
+    "Name": "الاسم",
+    "Size": "الحجم",
+    "Last Modification": "اخر تعديل",
+    "Options": "الخيارات",
+    "Rename file": "إعادة تسمية الملف",
+    "Rename": "إعادة التسمية "
 }

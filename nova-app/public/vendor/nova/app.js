@@ -52273,13 +52273,12 @@ var render = function() {
                             "flex item-center relative border border-lg border-50 overflow-hidden p-4"
                         },
                         [
-                          _c("span", { staticClass: "truncate mr-3" }, [
+                          _c("span", { staticClass: "truncate ml-auto" }, [
                             _vm._v(" " + _vm._s(_vm.field.value) + " ")
                           ]),
                           _vm._v(" "),
                           _vm.shouldShowRemoveButton
                             ? _c("DeleteButton", {
-                                staticClass: "ml-auto",
                                 attrs: {
                                   dusk:
                                     _vm.field.attribute +
