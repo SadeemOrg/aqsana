@@ -14,7 +14,7 @@ class ProjectObserver
      */
     public function created(Project $project)
     {
-        Project::where('id', $project->id)->update(['newbus' => '[]']);
+        // Project::where('id', $project->id)->update(['newbus' => '[]']);
     }
 
     /**
@@ -25,7 +25,7 @@ class ProjectObserver
      */
     public function updated(Project $project)
     {
-        Project::where('id', $project->id)->update(['newbus' => '[]']);
+        // Project::where('id', $project->id)->update(['newbus' => '[]']);
 
     }
 

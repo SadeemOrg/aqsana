@@ -239,7 +239,7 @@ class Project extends Resource
 
 
                 Text::make(__("project name"), "project_name")->rules('required'),
-                Text::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
+                Textarea::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
 
                 Select::make(__('SECTOR'), 'sector')
                     ->options(function () {
@@ -428,7 +428,7 @@ class Project extends Resource
         $id = Auth::id();
         $citye =   City::where('admin_id', $id)
             ->select('id')->first();
-dd($request->bus);
+
             if ($request->newbus) {
                 $buss = $request->newbus;
 
@@ -464,6 +464,7 @@ dd($request->bus);
                     }
                 }
             }
+            $request->request->remove('newbus');
 
     }
 
