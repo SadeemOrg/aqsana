@@ -286,11 +286,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -341,7 +336,7 @@ var render = function() {
             "label",
             {
               staticClass:
-                "block mb-2 text-xl font-medium text-gray-900 dark:text-white",
+                "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
               attrs: { for: "default-input" }
             },
             [_vm._v("اختر الفئة\n      ")]
@@ -410,13 +405,13 @@ var render = function() {
             "label",
             {
               staticClass:
-                "block mb-2 text-xl font-medium text-gray-900 dark:text-white",
+                "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
               attrs: { for: "default-input" }
             },
             [_vm._v("ادخل نص الرسالة\n      ")]
           ),
           _vm._v(" "),
-          _c("input", {
+          _c("textarea", {
             directives: [
               {
                 name: "model",
@@ -426,8 +421,8 @@ var render = function() {
               }
             ],
             staticClass:
-              "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-            attrs: { type: "text", id: "default-input" },
+              "appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+            attrs: { id: "default-input", name: "", cols: "30", rows: "10" },
             domProps: { value: _vm.Message },
             on: {
               input: function($event) {
@@ -447,7 +442,7 @@ var render = function() {
                 "button",
                 {
                   staticClass:
-                    "shadow bg-gray-500 hover:bg-black focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
+                    "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
                   attrs: { type: "submit" },
                   on: { click: _vm.send }
                 },

@@ -162,6 +162,13 @@
             }
             ul.list-reset li > div {border-color: #bacad6 }
             .icons[data-v-b3635f2e] {right: auto !important; left: 0;}
+            
+            #filemanager-manager .btn-primary:not([disabled]):not(.btn-disabled), .btn-primary:not([disabled]):not(.btn-disabled) {background-color: #16a34a; font-weight: 500}
+            #filemanager-manager .btn-primary:not([disabled]):not(.btn-disabled):hover, .btn-primary:not([disabled]):not(.btn-disabled):hover {background-color: #22c55e}
+            #filemanager-manager .btn-default:not([disabled]):not(.btn-disabled):focus, #filemanager-manager .btn-default:not([disabled]):not(.btn-disabled):active
+            {
+                -webkit-box-shadow: 0 0 0 3px #22c55e
+            }
 
         </style>
 
