@@ -115,7 +115,9 @@ class AdminWorkHours extends Component
     public function AddDay()
     {
 
-      $olddata=  WorkHours::whereDate('date',$this->date)->first();
+
+      $olddata=  WorkHours::whereDate('date',$this->date)->where('id',$this->ModelId)->first();
+
         // dd($olddata ==null);
         if ($olddata ==null) {
             $startTime = Carbon::parse($this->start_time);
