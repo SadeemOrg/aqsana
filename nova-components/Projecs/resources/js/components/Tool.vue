@@ -696,10 +696,10 @@
                                     :use-month-labels="true"
                                     :use-points-labels="true"
                                     :months="[
-                                      'Jan',
-                                      'Fev',
-                                      'Mar',
-                                      'Abr',
+                                      'ربع اول',
+                                      'ربع تاني',
+                                      'ربع تالت',
+                                      'ربع رابع',
 
                                     ]"
                                   />
@@ -717,10 +717,10 @@
                                     :use-month-labels="true"
                                     :use-points-labels="true"
                                     :months="[
-                                      'Jan',
-                                      'Fev',
-                                      'Mar',
-                                      'Abr',
+                                      'ربع اول',
+                                      'ربع تاني',
+                                      'ربع تالت',
+                                      'ربع رابع',
 
                                     ]"
                                   />
