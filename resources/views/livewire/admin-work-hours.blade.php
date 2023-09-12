@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="searchWorkHours">
+    <form class="Wraper" wire:submit.prevent="searchWorkHours">
         <div
             class="">
             <p class="font-FlatBold text-xl sm:text-[22px] mt-8 lg:mt-0">ساعات عمل
