@@ -52273,13 +52273,12 @@ var render = function() {
                             "flex item-center relative border border-lg border-50 overflow-hidden p-4"
                         },
                         [
-                          _c("span", { staticClass: "truncate mr-3" }, [
+                          _c("span", { staticClass: "truncate ml-auto" }, [
                             _vm._v(" " + _vm._s(_vm.field.value) + " ")
                           ]),
                           _vm._v(" "),
                           _vm.shouldShowRemoveButton
                             ? _c("DeleteButton", {
-                                staticClass: "ml-auto",
                                 attrs: {
                                   dusk:
                                     _vm.field.attribute +
@@ -56017,11 +56016,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {
-    staticClass:
-      "relative rounded-lg rounded-b-lg bg-30 bg-clip border border-60",
-    class: { "mr-11": _vm.editMode && _vm.deleteRowEnabled }
-  })
+  return _c(
+    "div",
+    {
+      staticClass:
+        "relative rounded-lg rounded-b-lg bg-30 bg-clip border border-60",
+      class: { "mr-11": _vm.editMode && _vm.deleteRowEnabled }
+    },
+    [_vm._t("default")],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
