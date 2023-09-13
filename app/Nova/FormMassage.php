@@ -73,6 +73,23 @@ public static function groupOrder() {
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
+            ActionButton::make(__('ReadMessage'))
+            ->action((new ReadMessage) ->confirmText(__('Are you sure you want to read this Message?'))
+            ->confirmButtonText('Read')
+           , $this->id) ->canSee(function () {
+                return $this->is_read === '0';
+            })
+            ->text(__('Read'))->showLoadingAnimation()
+            ->loadingColor('#fff') ->svg('VueComponentName'),
+
+            ActionButton::make(__('ReadMessage'))
+
+
+            ->canSee(function () {
+                return $this->is_read === '1';
+            })->text(__('read done'))->readonly() ->buttonColor('#070707')
+           ,
             Text::make(__('Name'),'name')->readonly(),
             Text::make(__('phone'),'phone')->readonly(),
             Text::make(__('message'),'message')->readonly(),
@@ -86,23 +103,9 @@ public static function groupOrder() {
 
 
 
-            ActionButton::make(__('ReadMessage'))
-            ->action((new ReadMessage) ->confirmText(__('Are you sure you want to read this Message?'))
-            ->confirmButtonText('Read')
-           , $this->id) ->canSee(function () {
-                return $this->is_read === '0';
-            })
-            ->text(__('Read'))->showLoadingAnimation()
-            ->loadingColor('#fff') ->svg('VueComponentName'),
 
 
-            ActionButton::make(__('ReadMessage'))
 
-
-            ->canSee(function () {
-                return $this->is_read === '1';
-            })->text(__('read done'))->readonly() ->buttonColor('#070707')
-           ,
            DateTime::make(__('Created At'),'created_at'),
 
            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)

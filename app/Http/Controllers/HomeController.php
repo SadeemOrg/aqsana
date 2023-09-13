@@ -410,9 +410,8 @@ class HomeController extends Controller
     }
     public function delet(Request $request)
     {
-        DB::table('budgets')
-            ->where('year', $request->year)
-            ->delete();
+
+        Budget::where('year', $request->year) ->delete();
     }
     public function SendMessage(Request $request)
     {
@@ -686,8 +685,18 @@ class HomeController extends Controller
         $years = Budget::select('year')->get()->unique('year');
         return  $years;
     }
+    public function DeleteYears()
+    {
+        $years = Budget::onlyTrashed()->select('year')->get()->unique('year');
 
+        return  $years;
+    }
+    public function Recovery(Request $request)
+    {
 
+        Budget::where('year', $request->year)->restore();
+
+    }
     public function originalbillbills($id)
     {
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
@@ -1241,7 +1250,7 @@ class HomeController extends Controller
         $type = $sectorname->text;
         // dd($type);
 
-        $news = News::query()->where('sector', $sector)
+        $news = News::query()->where('sector', $sector)->orderBy('new_date', 'desc')
 
             ->paginate(9);
         // dd($news);

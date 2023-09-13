@@ -14,6 +14,10 @@ class ReadMessage extends Action
 {
     use InteractsWithQueue, Queueable;
 
+    public  function name()
+    {
+        return __('ReadMessage');
+    }
     /**
      * Perform the action on the given models.
      *

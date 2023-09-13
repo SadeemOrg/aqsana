@@ -24,6 +24,11 @@ namespace App\Nova;
         public static $searchRelations = [
             'AreaDelegate' => ['id', 'name'],
         ];
+
+        public static function createButtonLabel()
+        {
+            return 'انشاء مندوب';
+        }
         /**
          * The model the resource corresponds to.
          *
@@ -69,7 +74,7 @@ namespace App\Nova;
 
         public static function indexQuery(NovaRequest $request, $query)
         {
-            return $query->where('type', '3');
+            return $query->whereJsonContains('type', '3');
         }
         public function fields(Request $request)
         {
@@ -125,7 +130,7 @@ namespace App\Nova;
                         Text::make(__('name'), 'name'),
                         Multiselect::make(__('admin'), 'admin_id')
                             ->options(function () {
-                                $users =  \App\Models\TelephoneDirectory::where('type', '=', '3')->get();
+                                $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
 
                                 $user_type_admin_array =  array();
 

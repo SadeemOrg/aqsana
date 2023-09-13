@@ -38,7 +38,10 @@ class News extends Resource
      * @var string
      */
     public static $model = \App\Models\News::class;
-
+    public static function createButtonLabel()
+    {
+        return 'انشاء خبر';
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *

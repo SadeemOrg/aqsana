@@ -66,6 +66,10 @@ class Alhisalat extends Resource
             return true;
         } else return false;
     }
+    public static function createButtonLabel()
+    {
+        return 'انشاء حصالة';
+    }
     public static $model = \App\Models\Alhisalat::class;
     /**
      * The single value that should be used to represent the resource when being displayed.

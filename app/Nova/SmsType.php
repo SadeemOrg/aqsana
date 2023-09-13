@@ -3,58 +3,41 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\File;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Image;
-use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Sector extends Resource
+class SmsType extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Sector::class;
-    public static function availableForNavigation(Request $request)
-    {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Sectorparmation",  $request->user()->userrole()) )){
-            return true;
-        }
-       else return false;
-    }
+
+     public static function availableForNavigation(Request $request)
+     {
+         return false;
+         if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("sms",  $request->user()->userrole()) )){
+             return true;
+         }
+        else return false;
+     }
+    public static $model = \App\Models\SmsType::class;
+
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'text';
+    public static $title = 'id';
 
-    public static function label()
-    {
-        return __('sectors');
-    }
-    public static function group()
-    {
-        return __('else');
-    }
-    public static function groupOrder() {
-        return 12;
-    }
-    public static function createButtonLabel()
-    {
-        return 'انشاء قطاع';
-    }
     /**
      * The columns that should be searched.
      *
      * @var array
      */
     public static $search = [
-        'id','text'
+        'id',
     ];
 
     /**
@@ -67,12 +50,6 @@ class Sector extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Boolean::make(__("is published"),'is_published'),
-            Text::make(__('main text'),'text'),
-            Text::make(__('sup text'),'sup_text'),
-            Image::make(__('Image'),'img')->disk('public')->deletable(),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
-
         ];
     }
 

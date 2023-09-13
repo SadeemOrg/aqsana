@@ -155,6 +155,10 @@
     "Active":"نشيط",
     "ActionEvents":"الأحداث",
     "jop":"وظيفة",
+    "newType":"نوع جديد",
+    "pop up modal":"بوب اب",
+    "Image mobile":"صورة الهاتف المحمول",
+    "Image web":"صورة كبيرة",
     "explain":"شرح",
     "Description":"وصف",
     "Nots":"ملاحظة",
@@ -917,5 +921,8 @@
     "Header qawafelLogo": "شعار قوافل الاقصى - منظومة",
     "Header Logo Manzomeh": "شعار الاقصى - منظومة",
     "qawafelLogo": "شعار القوافل -موقع",
-    "Created At":"أنشئت في"
+    "Created At":"أنشئت في",
+    "longitude":"خط الطول",
+    "latitude":"خط العرض",
+    "street_name":"اسم الشارع"
 }

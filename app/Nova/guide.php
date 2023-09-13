@@ -20,6 +20,10 @@ class guide extends Resource
     {
         return __('guide');
     }
+    public static function createButtonLabel()
+    {
+        return 'انشاء مرشد';
+    }
     public static function group()
     {
         return __('Cultural Section');
@@ -55,7 +59,7 @@ class guide extends Resource
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
-        return $query->where('type', '6');
+        return $query->whereJsonContains('type', '6');
 
     }
     public function fields(Request $request)

@@ -146,7 +146,7 @@
 
 @php
     $videohome = nova_get_setting('videohome', 'default_value');
-    
+
 @endphp
 <div class="relative mt-12 mb-10">
     <p class="font-FlatBold text-xl sm:text-[27px] text-center mt-8 lg:mt-0 xl:text-right">
@@ -160,7 +160,7 @@
 <div class="owl-carousel owl-theme owl-loaded dots-style" id="association-news-slider-5">
 
     @if (is_array($videohome) == true && !empty($videohome))
-        @foreach ($videohome as $video)
+        @foreach (array_reverse($videohome) as $video)
             @php
                 $img = $video['data']['cover'];
             @endphp
@@ -176,7 +176,7 @@
                                 class="absolute max-w-[46px] top-[40%] md:top-[48%] left-[46%]" /></a>
                     </div>
                     <p class="block sm:hidden w-full text-center absolute font-FlatBold -bottom-8 overflow-y-hidden max-h-7">
-            
+
                         {{ $video['data']['Title']?$video['data']['Title']:"منظومة الاقصى" }}  </p>
                     <div
                         class="writing sm:flex justify-center absolute hidden bottom-[3%] right-6 left-6 h-[80px] text-center w-[95%]  ">

@@ -38,6 +38,10 @@ class Tours extends Resource
     {
         return __('Cultural Section');
     }
+    public static function createButtonLabel()
+    {
+        return 'انشاء جولة';
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
@@ -72,7 +76,7 @@ class Tours extends Resource
 
             Select::make(__('Contacts'), "Contacts")
             ->options(function () {
-                $types =  TelephoneDirectory::where('type', '=', '6')->get();
+                $types =  TelephoneDirectory::whereJsonContains('type',  '6')->get();
                 $type_array =  array();
                 foreach ($types as $type) {
                     $type_array += [$type['id'] => ($type['name'])];

@@ -59,7 +59,10 @@ class User extends Resource
     public static $search = [
         'id', 'name', 'email',
     ];
-
+    public static function createButtonLabel()
+    {
+        return 'انشاء مستخدم';
+    }
     /**
      * Get the fields displayed by the resource.
      *

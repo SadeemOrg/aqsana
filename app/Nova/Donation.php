@@ -61,7 +61,10 @@ class Donation extends Resource
      */
     public static $title = 'id';
 
-
+    public static function createButtonLabel()
+    {
+        return 'انشاء سند قبض';
+    }
     public static function label()
     {
         return __('the receipt Voucher');
@@ -170,7 +173,7 @@ class Donation extends Resource
 
             Multiselect::make(__('name'), "name")
                 ->options(function () {
-                    $Users =  \App\Models\TelephoneDirectory::where('type', '2')->get();
+                    $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '2')->get();
 
                     $i = 0;
                     $user_type_admin_array =  array();

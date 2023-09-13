@@ -8,12 +8,15 @@ use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Transaction extends Model implements HasMedia
 {
 
     use \Awobaz\Compoships\Compoships;
     use InteractsWithMedia;
     use HasFactory;
+    use  SoftDeletes;
 
     protected $fillable = [
         'id','main_type','type','description', 'ref_id','transact_amount',
@@ -37,6 +40,7 @@ class Transaction extends Model implements HasMedia
     protected $dates = [
         'transaction_date' => 'date',
         'Date' => 'date',
+        'deleted_at'
     ];
 
     public function registerMediaConversions(Media $media = null): void

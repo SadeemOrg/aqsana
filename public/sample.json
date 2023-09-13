@@ -1,0 +1,10 @@
+{"street_name":"",
+"street_number":null,
+"postal_code":null,
+"city":"",
+"country":null,
+"formatted_address":"",
+"latitude":32.2244006,
+"longitude":35.2470566,
+"address_components":[{"long_name":"","short_name":"","types":["route"]},{"long_name":"","short_name":"","types":["locality","political"]}]
+}

@@ -87,6 +87,10 @@ class PaymentVoucher extends Resource
 
         return $query->where('main_type', '2')->orderBy('transaction_date', 'DESC');
     }
+    public static function createButtonLabel()
+    {
+        return 'انشاء سند صرف';
+    }
     public function fields(Request $request)
     {
         return [
@@ -133,7 +137,7 @@ class PaymentVoucher extends Resource
             BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
             Select::make(__('name'), "name")
                 ->options(function () {
-                    $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
+                    $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '8')->get();
                     $i = 0;
                     $user_type_admin_array =  array();
                     foreach ($Users as $User) {
@@ -153,7 +157,7 @@ class PaymentVoucher extends Resource
                 ->hideWhenCreating()->hideFromIndex()->hideFromDetail()->readonly()->singleSelect(),
             Select::make(__('name'), "name")
                 ->options(function () {
-                    $Users =  \App\Models\TelephoneDirectory::where('type', '8')->get();
+                    $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '8')->get();
                     $i = 0;
                     $user_type_admin_array =  array();
                     foreach ($Users as $User) {
@@ -362,6 +366,9 @@ class PaymentVoucher extends Resource
         }
         if (!$request->name) {
             // dd($request->add_user);
+            if ($request->add_user) {
+                # code...
+
             if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
                 $telfone =  new TelephoneDirectory();
 
@@ -370,12 +377,18 @@ class PaymentVoucher extends Resource
                 $telfone->type = '8';
                 $telfone->phone_number =  $request->add_user[0]['attributes']['phone'];
             }
+
             $request->merge(['name' => $telfone->id]);
+
             $request->merge(['transaction_type' => '1']);
+        }
         }
         $request->request->remove('add_user');
         if (!$request->ref_id) {
             // dd($request->add_user);
+            if ($request->newproject) {
+                # code...
+
             if ($request->newproject[0]['attributes']['project_name'] &&     $request->newproject[0]['attributes']['project_describe'] && $request->newproject[0]['attributes']['start_date'] &&     $request->newproject[0]['attributes']['end_date']) {
                 $Project =  new  ModelsProject();
 
@@ -388,6 +401,8 @@ class PaymentVoucher extends Resource
                 $Project->save();
             }
             $request->merge(['ref_id' => $Project->id]);
+
+        }
         }
         $request->request->remove('newproject');
 

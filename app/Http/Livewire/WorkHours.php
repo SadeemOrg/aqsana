@@ -229,6 +229,7 @@ class WorkHours extends Component
                 $yesterdayWorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::yesterday())->first();
                 if ($yesterdayWorkHours != null) {
                     if ($yesterdayWorkHours->end_time == null) {
+                        $this->hide = 0;
                         $yesterdayWorkHours->end_time = "23:59:59";
                         $yesterdayWorkHours->start_time;
                         $startTime = Carbon::parse($yesterdayWorkHours->end_time);
@@ -254,6 +255,7 @@ class WorkHours extends Component
                     $this->minutes = 0;
                     $this->Seconds = 0;
                 }
+
             }
             //  dd($this->minutes);
             $this->Timetimetime = "2014-12-12 0:00:00";
