@@ -758,20 +758,7 @@
         budjetSector: [],
         deletSectors: [],
         points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
-        months: [
-          "Jan",
-          "Fev",
-          "Mar",
-          "Abr",
-          "Mai",
-          "Jun",
-          "Jul",
-          "Ago",
-          "Set",
-          "Out",
-          "Nov",
-          "Dez",
-        ],
+
         projectshow: false,
         chartWidth: 400
       };

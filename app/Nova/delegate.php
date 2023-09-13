@@ -74,7 +74,7 @@ namespace App\Nova;
 
         public static function indexQuery(NovaRequest $request, $query)
         {
-            return $query->where('type', '3');
+            return $query->whereJsonContains('type', '3');
         }
         public function fields(Request $request)
         {

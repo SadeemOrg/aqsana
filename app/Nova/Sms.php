@@ -63,7 +63,7 @@ class Sms extends Resource
 
      public static function indexQuery(NovaRequest $request, $query)
      {
-         return $query->where('type', '9');
+         return $query->whereJsonContains('type', '9');
 
      }
     public function fields(Request $request)
