@@ -56,7 +56,7 @@ class Grant extends Resource
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
-        return $query->where('type', '7');
+        return $query->whereJsonContains('type', '7');
 
     }
     public function fields(Request $request)
