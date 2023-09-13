@@ -130,15 +130,20 @@
     <!-- Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> -->
     <!-- Datepicker -->
-    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />    
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ rand(0, 99) }}">
+    <!-- timepicker -->
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">    
+    <link rel="stylesheet" href="{{ asset('assets/front-end/css/mdtimepicker.min.css') }}?v={{ rand(0, 99) }}">
+
     <link rel="stylesheet" href="{{ asset('assets/front-end/css/main.css') }}?v={{ rand(0, 99) }}">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
     @livewireStyles
+    
 
 </head>
 
-<body class="" dir="rtl">
+<body class="" dir="rtl">    
     @include('layout.front-end.partial._Top-header-new')
     {{-- @include('layout.front-end.partial._header') --}}
     @include('layout.front-end.partial._left-sidebar')
@@ -258,7 +263,10 @@
         integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>   
+    
+    
+
     <script>
         function readURL(elementId, input) {
             if (input.files && input.files[0]) {
@@ -1219,6 +1227,7 @@ $('.PopUp_Modal_Home_Close').click(function() {
     <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
     <script src="{{ asset('assets/front-end/js/main.js') }}"></script>
     @livewireScripts
+    @stack('custom-scripts')
 </body>
 <!-- <script src="{{ mix('/js/app.js') }}"></script> -->
 

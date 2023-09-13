@@ -58,8 +58,9 @@
         </div>
     </form>
     <div class="grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-4">
-        <button wire:click="showAddModels"
-        class="connectUs duration-200 w-full px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] text-center hover:text-white ">اضافة</button>
+        {{-- <button wire:click="showAddModels"
+        class="connectUs duration-200 w-full px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] text-center hover:text-white ">اضافة</button> --}}
+        <button class="time-btn-modal connectUs duration-200 w-full px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] text-center hover:text-white ">اضافة</button>
     </div>
 
 
@@ -300,7 +301,7 @@
                                 </button>
                             </div>
                         </form>
-                        <!--Endsecond Page -->
+                        <!--Endsecond Page -->                        
                     </div>
                 </div>
             </div>
@@ -309,8 +310,8 @@
     <!--end reason popup Timer -->
 
     <!--start reason popup Timer -->
-    @if ($this->showAddModel == true)
-        <div class=" popUpTimerReason relative z-10 contactusModel" aria-labelledby="modal-title" role="dialog"
+    {{-- @if ($this->showAddModel == true) --}}
+        <div class=" popUpTimerReason relative z-10 contactusModel hidden hide-show-modal" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
             <div class="fixed inset-0 top-[3%] z-10 overflow-y-visible">
@@ -329,7 +330,15 @@
                             <p class="w-full text-center mt-2 text-[20px] text-[#151630]">اضافة ساعات العمل </p>
                             <!--First One -->
                             <div class="mt-2 selectdiv ">
-                                <select  wire:model="ModelId" name="ModelId"
+                                {{-- <select  wire:model="ModelId" name="ModelId"
+                                    class="h-12 text-[#349A37] w-full text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37] ">
+                                    <option class="text-black" value="0" disabled> اسم الموظف </option>
+                                    @foreach ($users as $user)
+                                        <option class="text-[#349A37] " value="{{ $user['id'] }}">
+                                            {{ $user['name'] }}</option>
+                                    @endforeach
+                                </select> --}}
+                                <select name="ModelId"
                                     class="h-12 text-[#349A37] w-full text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37] ">
                                     <option class="text-black" value="0" disabled> اسم الموظف </option>
                                     @foreach ($users as $user)
@@ -340,16 +349,16 @@
                             </div>
                             <div class="flex flex-row gap-2 items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-full sm:w-1/2">
-                                    <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
+                                    <input id="timepickerStart" type="text" placeholder="ساعة البدء"
                                         wire:model.debounce.50000ms="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                                 <div class="sm:mt-2 selectdiv w-full sm:w-1/2">
-                                    <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
+                                    <input id="timepickerEnd" type="text" placeholder="ساعة الانتهاء"
                                         wire:model.debounce.50000ms="end_time"
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
-                            </div>
+                            </div>                            
                             <div class="mt-2 selectdiv">
                                 <input type="text" wire:model.debounce.50000ms="date"
                                     class="hidePlaceHolderDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
@@ -380,7 +389,7 @@
             </div>
         </div>
 
-    @endif
+    {{-- @endif --}}
     <!--end reason popup Timer -->
 
     <!--start reason popup Timer -->
@@ -507,3 +516,21 @@
 
     <!--End Hourly work Time -->
 </div>
+
+@push('custom-scripts')
+<!-- timepicker js -->
+<script src="{{ asset('assets/front-end/js/mdtimepicker.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#timepickerStart').mdtimepicker(); //Initializes the time picker
+        $('#timepickerEnd').mdtimepicker(); //Initializes the time picker
+    });
+</script> 
+<script>
+    $( document ).ready(function() {
+        $('.time-btn-modal').click(function() {
+            $('.hide-show-modal').show()
+        })
+    });
+</script>
+@endpush
