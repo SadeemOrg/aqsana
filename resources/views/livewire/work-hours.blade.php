@@ -51,12 +51,12 @@
 
         </div>
     </form>
-    <div class=" h-12">
+    {{-- <div class=" h-12">
         <div wire:click="exportWorkHours"
             class="connectUs w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
         تصدير كملف exsel
         </div>
-    </div>
+    </div> --}}
     <!--End Perosonal Information -->
     <!--Start Timer -->
     {{-- @if ($hide)
