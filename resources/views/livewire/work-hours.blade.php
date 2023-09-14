@@ -41,15 +41,22 @@
                 <!--end Picker -->
                 <div class=" h-12">
                     <button type="submit"
-                        class="connectUs w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
+                        class="connectUs w-full duration-200 text-center px-1div0 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                         بحث
                     </button>
                 </div>
-                
+
+
             </div>
-            
+
         </div>
     </form>
+    {{-- <div class=" h-12">
+        <div wire:click="exportWorkHours"
+            class="connectUs w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
+        تصدير كملف exsel
+        </div>
+    </div> --}}
     <!--End Perosonal Information -->
     <!--Start Timer -->
     {{-- @if ($hide)
@@ -89,7 +96,7 @@
         <div
             class="sm:max-w-[65%] md:max-w-[200px] w-full flex items-center justify-center h-16 rounded-[4px] md:h-16 bg-[#349A37]">
             <p id="timer" class="text-white text-2xl"></p>
-        </div>        
+        </div>
         <div class="cursor-pointer min-w-[100px]  mb-4">
             <svg wire:click="EndWork" class="h-16 md:h-16 " width="100"  viewBox="0 0 163 114"
                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -280,17 +287,17 @@
                                 <td colspan="2" class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] border-2 border-[#349A37] bg-white">
                                     <span>مجموع الايام: </span>
                                     <span>{{ $WorkHourssearch->count() }}</span>
-                                </td>                                
+                                </td>
                                 <td colspan="3" class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] border-2 border-[#349A37] bg-white">
                                     <span> مجموع الساعات: </span>
-                                    @if ($WorkHourssearch->count() == 0)                                        
-                                        <span>00:00:00</span>                                        
+                                    @if ($WorkHourssearch->count() == 0)
+                                        <span>00:00:00</span>
                                     @else
-                                        <span>                                        
+                                        <span>
                                             {{ $sumWorkHourssearch->day * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
-                                        </span>                                        
-                                    @endif                                    
-                                </td>                                
+                                        </span>
+                                    @endif
+                                </td>
                             </tr>
                         </tbody>
                     </table>
