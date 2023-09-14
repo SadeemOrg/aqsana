@@ -686,46 +686,28 @@
                               <div class="md:flex justify-between mt-5 text-center mt-10">
                                 <div class="mb-6 md:mb-0 md:w-1/2">
                                   <pure-vue-chart
-                                    class="chart-custom-style"
-                                    :points="[  Sector.expenses_First, Sector.expenses_Second, Sector.expenses_Third, Sector.expenses_fourth]"
+                                    class="chart-custom-style"                                    
+                                    :points="[{label: 'الربع الاول', value: Sector.expenses_First}, {label: 'الربع الثاني', value: Sector.expenses_Second}, {label: 'الربع الثالث', value: Sector.expenses_Third}, {label: 'الربع الرابع', value: Sector.expenses_fourth}]"
                                     :show-y-axis="true"
                                     :show-x-axis="true"
                                     :width="chartWidth"
                                     :height="200"
-                                    :show-values="true"
-                                    :use-month-labels="true"
-                                    :use-points-labels="true"
-                                    :months="[
-                                      'ربع اول',
-                                      'ربع تاني',
-                                      'ربع تالت',
-                                      'ربع رابع',
-
-                                    ]"
+                                    :show-values="true"                                    
                                   />
                                   <h3 class="mt-3">مخرجات</h3>
                                 </div>
                                 <div class="md:w-1/2">
                                   <pure-vue-chart
                                   class="chart-custom-style"
-                                    :points="[Sector.income_First, Sector.income_Second,  Sector.income_Third,  Sector.income_fourth]"
+                                    :points="[{label: 'الربع الاول', value: Sector.income_First}, {label: 'الربع الثاني', value: Sector.income_Second}, {label: 'الربع الثالث', value: Sector.income_Third}, {label: 'الربع الرابع', value: Sector.income_fourth}]"
                                     :show-y-axis="true"
                                     :show-x-axis="true"
                                     :width="chartWidth"
                                     :height="200"
-                                    :show-values="true"
-                                    :use-month-labels="true"
-                                    :use-points-labels="true"
-                                    :months="[
-                                      'ربع اول',
-                                      'ربع تاني',
-                                      'ربع تالت',
-                                      'ربع رابع',
-
-                                    ]"
+                                    :show-values="true"                                    
                                   />
                                   <h3 class="mt-3">مدخلات</h3>
-                                </div>
+                                </div>                               
                               </div>
                             </div>
                           </div>

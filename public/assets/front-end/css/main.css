@@ -549,3 +549,12 @@ ul.lateral-social-list li.whats-app svg:hover path:first-child {
 ul.lateral-social-list li.whats-app svg:hover path:not(:first-child) {
   fill: #fff;
 }
+
+/* Start custom style timepicker */
+.mdtimepicker {direction: ltr;}
+.mdtp__wrapper[data-theme='blue'] .mdtp__clock .mdtp__am.active, .mdtp__wrapper[data-theme='blue'] .mdtp__clock .mdtp__pm.active,
+.mdtp__wrapper[data-theme='blue'] .mdtp__time_holder, .mdtp__wrapper[data-theme='blue'] .mdtp__digit.active:before,
+.mdtp__wrapper[data-theme='blue'] .mdtp__clock .mdtp__clock_dot
+{background-color: #349A37 }
+.mdtp__wrapper[data-theme='blue'] .mdtp__digit.active span, .mdtp__wrapper[data-theme='blue'] .mdtp__clock .mdtp__digit:not(.digit--disabled) span:hover
+{background-color: #349A37 !important}
