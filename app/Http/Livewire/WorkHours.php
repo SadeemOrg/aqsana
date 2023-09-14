@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\ExportUsers;
 use App\Models\User;
 use App\Models\WorkHours as ModelsWorkHours;
 use Livewire\Component;
 use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class WorkHours extends Component
 {
@@ -95,7 +97,7 @@ class WorkHours extends Component
     public function ModelForm()
     {
         // dd("dd");
-        $this->hide =1;
+        $this->hide = 1;
         $this->render();
 
         $user = Auth::user();
@@ -169,7 +171,35 @@ class WorkHours extends Component
 
         $this->sumWorkHourssearch = $date;
     }
+    public function exportWorkHours()
+    {
+        $user = Auth::id();
 
+         return Excel::download(new ExportUsers($user,$this->FromDate,$this->ToDate), 'users.csv');
+        $this->sersh = 1;
+        $from = date($this->FromDate);
+        $to = date($this->ToDate);
+
+        $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$from, $to])->where('user_id', '=', $user->id)->orderBy('date', 'ASC')->get();
+        $string = '00000000000000';
+        $date = Carbon::parse($string);
+        foreach ($this->WorkHourssearch as $key => $value) {
+            if ($value->day_hours != null) {
+                $time2 = Carbon::parse($value->day_hours);
+                $hours = $time2->hour;
+                $minutes = $time2->minute;
+                $seconds = $time2->second;
+
+                $date->addSeconds($seconds)->addMinutes($minutes)->addHours($hours);
+            }
+        }
+
+        $date = Carbon::parse($date);
+        // $now = Carbon::now();
+        // $diff = $date->diffInDays($now);
+
+        $this->sumWorkHourssearch = $date;
+    }
     public function stop()
     {
         // $this->hide = 2;
@@ -215,7 +245,6 @@ class WorkHours extends Component
                         $this->Hours = $startDate->copy()->addDays($days)->diffInHours($endDate);
                         $this->minutes = $startDate->copy()->addDays($days)->addHours($this->Hours)->diffInMinutes($endDate);
                         $this->Seconds = $startDate->copy()->addDays($days)->addHours($this->Hours)->addMinute($this->minutes)->diffInSeconds($endDate);
-
                     }
                 } else {
 
@@ -255,7 +284,6 @@ class WorkHours extends Component
                     $this->minutes = 0;
                     $this->Seconds = 0;
                 }
-
             }
             //  dd($this->minutes);
             $this->Timetimetime = "2014-12-12 0:00:00";

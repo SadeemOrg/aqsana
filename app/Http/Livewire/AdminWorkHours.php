@@ -114,7 +114,7 @@ class AdminWorkHours extends Component
     }
     public function AddDay()
     {
-
+dd($this->start_time,$this->end_time,$this->ModelId,$this->date);
 
       $olddata=  WorkHours::whereDate('date',$this->date)->where('id',$this->ModelId)->first();
 

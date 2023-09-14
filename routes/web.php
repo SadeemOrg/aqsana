@@ -6,6 +6,7 @@ use App\Http\Controllers\NotificationTest;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\WebNotificationController;
+use Illuminate\Support\Facades\Auth;
 
 // use App\Http\Livewire\Notification;
 
@@ -20,7 +21,10 @@ use App\Http\Controllers\WebNotificationController;
 |
 */
 
-
+Route::controller(ExportExcelController::class)->group(function(){
+    Route::get('indexexpo', 'index');
+    Route::get('export/excel', 'exportExcelFile')->name('export.excel');
+});
 Route::get('/send', function () {
 
 
