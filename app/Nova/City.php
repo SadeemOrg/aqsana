@@ -88,7 +88,6 @@ class City extends Resource
                     array_push($stack, $value['name']);
                 }
             }
-// dd( $stack);
             return $query->whereIn('name', $stack);
         } else {
 
