@@ -22,6 +22,7 @@ use Alaqsa\Project\Project;
 use App\Models\Project as ModelsProject;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
+use App\Nova\Actions\ExportPaymentVoucher;
 use App\Nova\Metrics\InComeTransaction;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 use Laravel\Nova\Fields\DateTime;
@@ -319,8 +320,9 @@ class PaymentVoucher extends Resource
     }
     public static function beforeSave(Request $request, $model)
     {
-
+dd(strpos($request->name, 'T'));
         if (strpos($request->name, 'T') !== false) {
+
             $model->transaction_type = '1';
             $str = ltrim($request->name, 'T');
             $model->name = $str;
@@ -470,7 +472,9 @@ class PaymentVoucher extends Resource
     {
         return [
             new ApprovalRejectTransaction,
-            new BillPdf
+            new BillPdf,
+            (new ExportPaymentVoucher)->standalone(),
+
         ];
     }
 }

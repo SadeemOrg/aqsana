@@ -2,16 +2,19 @@
 
 namespace App\Exports;
 
-use App\Models\User;
+use App\Models\Transaction;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class ExportUsers implements FromCollection
+class ExportDonations implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return User::all();
+        return Transaction::where([
+            ['main_type', 1],
+            ['type', 2]
+        ])->get();
     }
 }

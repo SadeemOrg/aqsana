@@ -2,16 +2,16 @@
 
 namespace App\Exports;
 
-use App\Models\User;
+use App\Models\BusesCompany;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class ExportUsers implements FromCollection
+class ExportBusesCompany implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return User::all();
+        return BusesCompany::all();
     }
 }
