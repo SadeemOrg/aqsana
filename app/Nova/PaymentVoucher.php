@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Image;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Alaqsa\Project\Project;
+use App\Models\BusesCompany;
 use App\Models\Project as ModelsProject;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
@@ -96,6 +97,7 @@ class PaymentVoucher extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            // Text::make(__('name'), "name")->rules('required'),
 
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideFromIndex(),
             BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable()->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
@@ -187,13 +189,13 @@ class PaymentVoucher extends Resource
                     Text::make(__('phone'), "phone")->rules('required'),
                 ])->hideWhenUpdating(),
 
-            BelongsTo::make(__('reference_id'), 'project', \App\Nova\Project::class)->canSee(function () {
+            BelongsTo::make(__('1reference_id'), 'project', \App\Nova\Project::class)->canSee(function () {
                 return $this->type != '0';
             })->hideWhenUpdating()->hideWhenCreating()->hideFromIndex(),
-            BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
+            BelongsTo::make(__('2reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
                 return ($this->transaction_type === '1' && $this->type == '0');
             })->hideFromIndex(),
-            BelongsTo::make(__('reference_id'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
+            BelongsTo::make(__('3reference_id'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
                 return ($this->transaction_type === '2' && $this->type == '0');
             })->hideFromIndex(),
 
@@ -320,7 +322,7 @@ class PaymentVoucher extends Resource
     }
     public static function beforeSave(Request $request, $model)
     {
-dd(strpos($request->name, 'T'));
+
         if (strpos($request->name, 'T') !== false) {
 
             $model->transaction_type = '1';
@@ -330,6 +332,9 @@ dd(strpos($request->name, 'T'));
             $model->transaction_type = '2';
             $str = ltrim($request->name, 'B');
             $model->name = $str;
+        }else
+        {
+            $model->transaction_type = '1';
         }
 
         if ($request->Payment_type == '1') {
@@ -378,9 +383,17 @@ dd(strpos($request->name, 'T'));
                 $telfone->name = $request->add_user[0]['attributes']['name'];
                 $telfone->type = '8';
                 $telfone->phone_number =  $request->add_user[0]['attributes']['phone'];
-            }
+                $telfone->save();
 
-            $request->merge(['name' => $telfone->id]);
+
+                $busescompanies= new  BusesCompany();
+                $busescompanies->name = $request->add_user[0]['attributes']['name'];
+                $busescompanies->phone_number =  $request->add_user[0]['attributes']['phone'];
+                $busescompanies->save();
+            }
+            $model->name=$telfone->id;
+            // $request->merge(['name' => ]);
+
 
             $request->merge(['transaction_type' => '1']);
         }
