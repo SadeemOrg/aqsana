@@ -23,6 +23,7 @@ use Laravel\Nova\Fields\DateTime;
 use Acme\MultiselectField\Multiselect;
 use App\Nova\Actions\DeleteBill;
 use App\Nova\Actions\DepositedInBank;
+use App\Nova\Actions\ExportDonations;
 use App\Nova\Actions\PrintBill;
 use App\Nova\Actions\ReceiveDonation;
 use App\Nova\Filters\AlhisalatColect;
@@ -450,6 +451,7 @@ class Donation extends Resource
             new BillPdf,
             new DeleteBill,
            ( new PrintBill)->withoutConfirmation(),
+           (new ExportDonations)->standalone(),
 
         ];
     }

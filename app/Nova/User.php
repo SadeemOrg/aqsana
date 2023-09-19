@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Illuminate\Support\Facades\DB;
 use App\Models\Area;
+use App\Nova\Actions\ExportUsers;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Image;
 
@@ -213,6 +214,9 @@ class User extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+
+            (new ExportUsers)->standalone(),
+        ];
     }
 }

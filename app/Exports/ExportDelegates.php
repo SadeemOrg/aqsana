@@ -2,16 +2,16 @@
 
 namespace App\Exports;
 
-use App\Models\User;
+use App\Models\TelephoneDirectory;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class ExportUsers implements FromCollection
+class ExportDelegates implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return User::all();
+        return TelephoneDirectory::whereJsonContains('type', '3')->get();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Exports\ExportUsers;
+use App\Exports\ExportWorkHours;
 use App\Models\User;
 use App\Models\WorkHours as ModelsWorkHours;
 use Livewire\Component;
@@ -175,30 +176,8 @@ class WorkHours extends Component
     {
         $user = Auth::id();
 
-         return Excel::download(new ExportUsers($user,$this->FromDate,$this->ToDate), 'users.csv');
-        $this->sersh = 1;
-        $from = date($this->FromDate);
-        $to = date($this->ToDate);
+         return Excel::download(new ExportWorkHours($user,$this->FromDate,$this->ToDate), 'users.csv');
 
-        $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$from, $to])->where('user_id', '=', $user->id)->orderBy('date', 'ASC')->get();
-        $string = '00000000000000';
-        $date = Carbon::parse($string);
-        foreach ($this->WorkHourssearch as $key => $value) {
-            if ($value->day_hours != null) {
-                $time2 = Carbon::parse($value->day_hours);
-                $hours = $time2->hour;
-                $minutes = $time2->minute;
-                $seconds = $time2->second;
-
-                $date->addSeconds($seconds)->addMinutes($minutes)->addHours($hours);
-            }
-        }
-
-        $date = Carbon::parse($date);
-        // $now = Carbon::now();
-        // $diff = $date->diffInDays($now);
-
-        $this->sumWorkHourssearch = $date;
     }
     public function stop()
     {

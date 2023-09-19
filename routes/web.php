@@ -23,8 +23,23 @@ use Illuminate\Support\Facades\Auth;
 
 Route::controller(ExportExcelController::class)->group(function(){
     Route::get('indexexpo', 'index');
-    Route::get('export/excel', 'exportExcelFile')->name('export.excel');
+    Route::get('export/excel', 'ExportDelegates')->name('export.excel');
+    Route::get('export/ExportWorkHours', 'ExportWorkHours')->name('export.ExportWorkHours');
+    Route::get('export/ExportDonations', 'ExportDonations')->name('export.ExportDonations');
+    Route::get('export/ExportPaymentVoucher', 'ExportPaymentVoucher')->name('export.ExportPaymentVoucher');
+    Route::get('export/ExportDelegates', 'ExportDelegates')->name('export.ExportDelegates');
+    Route::get('export/ExportAlhisalat', 'ExportAlhisalat')->name('export.ExportAlhisalat');
+    Route::get('export/ExportUsers', 'ExportUsers')->name('export.ExportUsers');
+    Route::get('export/ExportAreas', 'ExportAreas')->name('export.ExportAreas');
+      Route::get('export/ExportCites', 'ExportCites')->name('export.ExportCites');
+      Route::get('export/ExportAddress', 'ExportAddress')->name('export.ExportAddress');
+      Route::get('export/ExportBusesCompany', 'ExportBusesCompany')->name('export.ExportBusesCompany');
+
+
+
 });
+
+
 Route::get('/send', function () {
 
 

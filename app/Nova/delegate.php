@@ -5,7 +5,8 @@ namespace App\Nova;
     use App\Nova\Filters\AreaDelegate;
     use Acme\MultiselectField\Multiselect;
     use App\Models\City;
-    use Illuminate\Http\Request;
+use App\Nova\Actions\ExportDelegates;
+use Illuminate\Http\Request;
     use Laravel\Nova\Fields\BelongsTo;
     use Laravel\Nova\Fields\ID;
     use Laravel\Nova\Http\Requests\NovaRequest;
@@ -19,6 +20,7 @@ namespace App\Nova;
 
     class delegate extends Resource
     {
+
         use SearchesRelations;
 
         public static $searchRelations = [
@@ -249,6 +251,8 @@ namespace App\Nova;
          */
         public function actions(Request $request)
         {
-            return [];
+            return [
+                (new ExportDelegates)->standalone(),
+            ];
         }
     }

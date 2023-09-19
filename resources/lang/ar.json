@@ -924,5 +924,6 @@
     "Created At":"أنشئت في",
     "longitude":"خط الطول",
     "latitude":"خط العرض",
-    "street_name":"اسم الشارع"
+    "street_name":"اسم الشارع",
+    "Export To Exsel":"تصدير إلى Excel"
 }
