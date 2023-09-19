@@ -13,6 +13,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ExportDonations extends Action
 {
+
+    public  function name()
+    {
+        return __('Export To Exsel');
+    }
     use InteractsWithQueue, Queueable;
 
     /**
@@ -24,7 +29,10 @@ class ExportDonations extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return   Action::download(url('export/ExportDonations'), 'aaa.cvs');
+
+        return   Action::download(url('export/ExportDonations'), 'aaa.xlsx');
+
+
     }
 
     /**

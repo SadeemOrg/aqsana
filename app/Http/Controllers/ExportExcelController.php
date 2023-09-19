@@ -15,6 +15,7 @@ use App\Exports\ExportUsers;
 use App\Exports\ExportWorkHours;
 use Maatwebsite\Excel\Facades\Excel;
 
+
 class ExportExcelController extends Controller
 {
      public function index()
@@ -24,16 +25,17 @@ class ExportExcelController extends Controller
 
     public function exportExcelFile(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         return Excel::download(new ExportWorkHours(1,11,1), 'users.csv');
     }
     public function ExportWorkHours(Request $request)
     {
-        dd($request->all());
+
         return Excel::download(new ExportWorkHours(1,11,1), 'users.csv');
     }
     public function ExportDonations()
     {
+
         return Excel::download(new ExportDonations, 'dd.csv');
     }
     public function ExportPaymentVoucher()
