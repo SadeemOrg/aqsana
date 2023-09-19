@@ -36,7 +36,7 @@ class ExportExcelController extends Controller
     public function ExportDonations()
     {
 
-        return Excel::download(new ExportDonations, 'dd.csv');
+        return Excel::download(new ExportDonations, 'dd.xlsx');
     }
     public function ExportPaymentVoucher()
     {

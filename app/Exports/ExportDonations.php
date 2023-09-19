@@ -11,7 +11,7 @@ class   ExportDonations implements FromCollection , WithHeadings
 
     public function headings(): array
     {
-        return ['الاسم', 'البريد الإلكتروني'];
+        return ['العنوان1', 'العنوان2'];
     }
     /**
     * @return \Illuminate\Support\Collection
@@ -19,10 +19,7 @@ class   ExportDonations implements FromCollection , WithHeadings
     public function collection()
     {
         // Replace this with your data retrieval logic
-        return collect([
-            ['الاسم', 'البريد الإلكتروني'],
-            ['عبد الله', 'abdullah@example.com'],
-            ['مريم', 'maryam@example.com'],
-        ]);
+        return Transaction::query()->select('id', 'payment_reason')->get();
+
     }
 }
