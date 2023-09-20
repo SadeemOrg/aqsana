@@ -176,7 +176,7 @@ class WorkHours extends Component
     {
         $user = Auth::id();
 
-         return Excel::download(new ExportWorkHours($user,$this->FromDate,$this->ToDate), 'users.csv');
+         return Excel::download(new ExportWorkHours($user,$this->FromDate,$this->ToDate), 'users.xlsx');
 
     }
     public function stop()
@@ -237,26 +237,18 @@ class WorkHours extends Component
                 $yesterdayWorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::yesterday())->first();
                 if ($yesterdayWorkHours != null) {
                     if ($yesterdayWorkHours->end_time == null) {
-                        $this->hide = 0;
+                        // $this->hide = 0;
                         $yesterdayWorkHours->end_time = "23:59:59";
                         $yesterdayWorkHours->start_time;
                         $startTime = Carbon::parse($yesterdayWorkHours->end_time);
                         $finishTime = Carbon::parse($yesterdayWorkHours->start_time);
                         $totalDuration = $finishTime->diff($startTime)->format('%H:%I:%S');
                         $yesterdayWorkHours->day_hours = $totalDuration;
-                        // $yesterdayWorkHours->save();
+                        $yesterdayWorkHours->save();
                         // dd(Carbon::now()->minute );
-                        $this->Hours = Carbon::now()->addHour(3)->hour;
-                        $this->minutes = Carbon::now()->addHour(3)->minute;
-                        $this->Seconds = Carbon::now()->addHour(3)->second;
 
-                        ModelsWorkHours::create([
-                            'user_id' => Auth::id(),
-                            'day' => Carbon::now()->locale('ar')->dayName,
-                            'date' => Carbon::now()->toDateTimeString(),
-                            'start_time' => "00:00:00",
-                            'on_work' => 1,
-                        ]);
+
+
                     }
                 } else {
                     $this->Hours = 0;
@@ -264,7 +256,7 @@ class WorkHours extends Component
                     $this->Seconds = 0;
                 }
             }
-            //  dd($this->minutes);
+
             $this->Timetimetime = "2014-12-12 0:00:00";
             $this->enterDate = Carbon::createFromFormat('Y-m-d  H:i:s',  $this->Timetimetime);
             $this->enterDate =  $this->enterDate->addHour($this->Hours);
