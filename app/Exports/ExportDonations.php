@@ -18,8 +18,10 @@ class   ExportDonations implements FromCollection , WithHeadings
     */
     public function collection()
     {
+
         // Replace this with your data retrieval logic
-        return Transaction::query()->select('id', 'payment_reason')->get();
+        return Transaction::find('1081');
+        // query()->select('id', 'payment_reason')->get();
 
     }
 }
