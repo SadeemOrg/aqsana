@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExportExcelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationTest;
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post("submit-form", [ExportExcelController::class, "submit"])->name('submit-form');
 
 Route::controller(ExportExcelController::class)->group(function () {
     Route::get('indexexpo', 'index');
