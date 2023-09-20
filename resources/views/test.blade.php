@@ -9,15 +9,19 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
-	<h3>How To Export Excel File In Laravel 9 - Techsolutionstuff</h3>
-	<form action="#" method="POST" name="importform"
-	  enctype="multipart/form-data">
-		@csrf
-		<div class="form-group">
-			<a class="btn btn-info" href="{{ route('export.excel') }}">Export Excel File</a>
-		</div>
-	</form>
+<form method="POST" action="{{ route('submit-form') }}">
+    @csrf <!-- This generates a CSRF token to protect against cross-site request forgery -->
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" class="form-control">
+    </div>
+    <!-- Add more form fields as needed -->
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 </div>
 </body>
 </html>
