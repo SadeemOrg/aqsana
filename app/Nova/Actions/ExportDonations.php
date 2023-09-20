@@ -30,7 +30,7 @@ class ExportDonations extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
 
-        return   Action::download(url('export/ExportDonations'), 'aaa.xlsx');
+        return   Action::download(url('export/ExportDonations'), 'aaa.cvs');
 
 
     }
