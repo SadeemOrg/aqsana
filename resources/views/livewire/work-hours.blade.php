@@ -51,6 +51,12 @@
 
         </div>
     </form>
+    <form method="POST" action="{{ route('submit-form') }}">
+        @csrf <!-- This generates a CSRF token to protect against cross-site request forgery -->
+
+        <!-- Add more form fields as needed -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
     <div class=" h-12">
         <div wire:click="exportWorkHours"
             class="connectUs w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
