@@ -71,27 +71,27 @@
                     </div>
                 </div>
             </div>
-                
+
 
             </li>
         @endforeach
         <li>
-            <a href="/Admin/notification" class="btn btn-default btn-primary inline-flex items-center justify-center h-12 relative ml-auto my-3  py-2 w-full text-center">                
+            <a href="/Admin/notification" class="btn btn-default btn-primary inline-flex items-center justify-center h-12 relative ml-auto my-3  py-2 w-full text-center">
                 <span class="">
                     See all notifications
                   </span>
-            </a>                
+            </a>
         </li>
-    </ul>    
+    </ul>
 </dropdown-menu>
 <script type="application/javascript">
     var inverval_timer;
 
 //Time in milliseconds [1 second = 1000 milliseconds ]
-inverval_timer = setInterval(function() {
-    var user = '{{ auth()->user()->name }}';
-    console.log(user);
-}, 5000);
+// inverval_timer = setInterval(function() {
+//     var user = '{{ auth()->user()->name }}';
+//     console.log(user);
+// }, 5000);
 
 //IF you want to stop above timer
 
