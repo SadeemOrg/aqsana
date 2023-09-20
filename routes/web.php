@@ -6,6 +6,7 @@ use App\Http\Controllers\NotificationTest;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\WebNotificationController;
+use Illuminate\Support\Facades\Auth;
 
 // use App\Http\Livewire\Notification;
 
@@ -19,6 +20,21 @@ use App\Http\Controllers\WebNotificationController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::controller(ExportExcelController::class)->group(function () {
+    Route::get('indexexpo', 'index');
+    Route::get('export/excel', 'ExportDonations')->name('export.excel');
+    Route::get('export/ExportWorkHours', 'ExportWorkHours')->name('export.ExportWorkHours');
+    Route::get('export/ExportDonations', 'ExportDonations')->name('export.ExportDonations');
+    Route::get('export/ExportPaymentVoucher', 'ExportPaymentVoucher')->name('export.ExportPaymentVoucher');
+    Route::get('export/ExportDelegates', 'ExportDelegates')->name('export.ExportDelegates');
+    Route::get('export/ExportAlhisalat', 'ExportAlhisalat')->name('export.ExportAlhisalat');
+    Route::get('export/ExportUsers', 'ExportUsers')->name('export.ExportUsers');
+    Route::get('export/ExportAreas', 'ExportAreas')->name('export.ExportAreas');
+    Route::get('export/ExportCites', 'ExportCites')->name('export.ExportCites');
+    Route::get('export/ExportAddress', 'ExportAddress')->name('export.ExportAddress');
+    Route::get('export/ExportBusesCompany', 'ExportBusesCompany')->name('export.ExportBusesCompany');
+});
 
 
 Route::get('/send', function () {
@@ -40,7 +56,7 @@ Route::get('/send', function () {
 
             "body" => 'Description',
 
-            "sound"=> "default" // required for sound on ios
+            "sound" => "default" // required for sound on ios
 
         ],
 
@@ -73,7 +89,6 @@ Route::get('/send', function () {
     $response = curl_exec($ch);
 
     dd($response);
-
 });
 Route::post("user", [HomeController::class, "user"])->name('user');
 Route::post("users", [HomeController::class, "users"])->name('users');
@@ -101,7 +116,7 @@ Route::post("SendMessage", [HomeController::class, "SendMessage"])->name('SendMe
 Route::post("SectorsPill/", [HomeController::class, "SectorsPill"])->name('SectorsPill');
 
 
-Route::get("/cars",[HomeController::class,'index']);
+Route::get("/cars", [HomeController::class, 'index']);
 
 Route::get("toastr-notification", [HomeController::class, "showToastrMessages"]);
 
@@ -130,9 +145,9 @@ Route::get('/donation/{id}', [HomeController::class, 'donation'])->name('donatio
 Route::get('/sector/{id}', [HomeController::class, 'sector'])->name('sector');
 Route::get('/Qawafel-Alaqsa', [HomeController::class, 'qawafel'])->name('qawafel');
 
-Route::get('/contact-us',[HomeController::class,'contactus']);
+Route::get('/contact-us', [HomeController::class, 'contactus']);
 
-Route::get('/contact-us/donation',[HomeController::class,'contactusDonation']);
+Route::get('/contact-us/donation', [HomeController::class, 'contactusDonation']);
 
 Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch');
 
@@ -146,7 +161,7 @@ Route::get('/project', [HomeController::class, 'project'])->name('project');
 Route::get('/project/{id}', [HomeController::class, 'getprojectDetail'])->name('getprojectDetail');
 Route::get('/projectapi/{id}', [HomeController::class, 'getprojectDetailapi'])->name('getprojectDetailapi');
 
-Route::get('/testNotfiy', function (){
+Route::get('/testNotfiy', function () {
     return view('Pages.testNotfiy');
 });
 
@@ -166,7 +181,7 @@ Route::post('/SendMail', [HomeController::class, 'SendMail'])->name('SendMail');
 // Route::get('bill', [HomeController::class, 'billsPdf']);
 
 
-Route::get('/landingPage', function (){
+Route::get('/landingPage', function () {
 
     return view('almowahde.landingPage');
 });
@@ -180,12 +195,12 @@ Route::get('/landingPage', function (){
 
 
 
-Route::get('/SendNotificationTest',[NotificationTest::class,'sendNotfiy'])->name('sendNotfiy');
+Route::get('/SendNotificationTest', [NotificationTest::class, 'sendNotfiy'])->name('sendNotfiy');
 
 
-Route::get('sendbasicemail','HomeController@basic_email');
-Route::get('sendhtmlemail','HomeController@html_email');
-Route::get('sendattachmentemail','HomeController@attachment_email');
+Route::get('sendbasicemail', 'HomeController@basic_email');
+Route::get('sendhtmlemail', 'HomeController@html_email');
+Route::get('sendattachmentemail', 'HomeController@attachment_email');
 
 
 Route::get('Admin/try', [HomeController::class, 'userprofileTry'])->name('userprofileTry');

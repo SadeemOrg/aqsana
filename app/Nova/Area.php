@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Acme\MultiselectField\Multiselect;
+use App\Nova\Actions\ExportAreas;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -174,6 +175,8 @@ class Area extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new ExportAreas)->standalone(),
+        ];
     }
 }

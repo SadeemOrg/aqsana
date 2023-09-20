@@ -22,6 +22,7 @@ use App\Nova\Actions\AlhisalatColect;
 use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
 use App\Nova\Actions\AlhisalatSurrender;
+use App\Nova\Actions\ExportAlhisalat;
 use App\Nova\Filters\AlhisalatStatusFilters;
 use App\Nova\Metrics\NewAlhisalat;
 use AwesomeNova\Cards\FilterCard;
@@ -355,6 +356,7 @@ class Alhisalat extends Resource
             //     }
             // ),
             (new AlhisalatSurrender),
+            (new ExportAlhisalat)->standalone(),
         ];
     }
     public function tools(Request $request)

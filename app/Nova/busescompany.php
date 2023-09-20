@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\ExportBusesCompany;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -159,6 +160,9 @@ class BusesCompany extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new ExportBusesCompany)->standalone(),
+
+        ];
     }
 }

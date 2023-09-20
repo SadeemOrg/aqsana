@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Acme\MultiselectField\Multiselect;
 use App\Models\User;
+use App\Nova\Actions\ExportCites;
 use App\Nova\Filters\AreaDelegate;
 use App\Nova\Filters\CityArea;
 use AwesomeNova\Cards\FilterCard;
@@ -88,7 +89,6 @@ class City extends Resource
                     array_push($stack, $value['name']);
                 }
             }
-// dd( $stack);
             return $query->whereIn('name', $stack);
         } else {
 
@@ -339,6 +339,8 @@ class City extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new ExportCites)->standalone(),
+        ];
     }
 }
