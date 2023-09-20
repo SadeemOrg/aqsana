@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationTest;
@@ -22,9 +21,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::post("submit-form", [ExportExcelController::class, "submit"])->name('submit-form');
-
 Route::controller(ExportExcelController::class)->group(function () {
+    Route::post('submit-form', 'submit')->name('submit-form');
     Route::get('indexexpo', 'index');
     Route::get('export/excel', 'ExportDonations')->name('export.excel');
     Route::get('export/ExportWorkHours', 'ExportWorkHours')->name('export.ExportWorkHours');
