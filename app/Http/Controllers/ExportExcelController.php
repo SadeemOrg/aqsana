@@ -18,6 +18,18 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ExportExcelController extends Controller
 {
+
+
+
+    public function submit(Request $request)
+    {
+          return Excel::download(new ExportDonations, 'dd.csv');
+
+        dd("dd");
+       return view('test');
+    }
+
+
      public function index()
     {
        return view('test');
