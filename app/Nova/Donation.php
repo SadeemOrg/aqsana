@@ -37,6 +37,7 @@ use Laravel\Nova\Fields\HasMany;
 use NovaButton\Button;
 use function Clue\StreamFilter\fun;
 use Titasgailius\SearchRelations\SearchesRelations;
+use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 
 class Donation extends Resource
 {
@@ -452,7 +453,7 @@ class Donation extends Resource
             new DeleteBill,
            ( new PrintBill)->withoutConfirmation(),
            (new ExportDonations)->standalone(),
-
+           (new DownloadExcel)->standalone(),
         ];
     }
 }
