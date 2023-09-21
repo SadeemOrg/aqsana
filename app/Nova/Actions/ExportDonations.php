@@ -29,6 +29,8 @@ class ExportDonations extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
+        return Action::redirect('/export/ExportDonations');
+        return Excel::download(new ExportsExportDonations, 'test.csv');
 
         return   Action::download(url('export/ExportDonations'), 'aaa.cvs');
 
