@@ -4,9 +4,12 @@
 <head>
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body>
+    <a href="/export/excel">rrt</a>
     <button id="downloadExcel">Download Excel</button>
     <button onclick="downloadExcel()" id="btn-download-payroll" class="btn btn-dark-success btn-md"
         style="transform: translateY(50%); top: 50%; font-size: 13px;"><i aria-hidden="true" class="fa fa-cog mr-10"></i>
@@ -14,13 +17,17 @@
     </button>
     <script>
         function downloadExcel() {
-
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             $.ajax({
                 xhrFields: {
                     responseType: 'blob',
                 },
-                type: 'get',
-                url: '/export/excel',
+                type: 'post ',
+                url: 'submit-form',
 
                 success: function(result, status, xhr) {
 
