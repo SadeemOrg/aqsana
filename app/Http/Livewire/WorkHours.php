@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\ExportDonations;
 use App\Exports\ExportUsers;
 use App\Exports\ExportWorkHours;
 use App\Models\User;
@@ -188,6 +189,12 @@ class WorkHours extends Component
     {
 
         $this->showModel = false;
+    }
+    public function doSomething()
+    {
+        return Excel::download(new ExportDonations, 'dd.csv');
+
+        // $this->post->addLikeBy(auth()->user());
     }
 
     public function render()

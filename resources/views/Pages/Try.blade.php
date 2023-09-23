@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
 
     <!-- page -->
-    <main class="min-h-screen w-full bg-gray-100 text-gray-700 " x-data="layout">        
+    <main class="min-h-screen w-full bg-gray-100 text-gray-700 " x-data="layout">
         <!-- header page -->
-        <header class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2 z-10 lg:static fixed top-0 w-full right-0 left-0">
+        <header
+            class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2 z-10 lg:static fixed top-0 w-full right-0 left-0">
             <!-- logo -->
             <div class="flex justify-between items-center space-x-2 w-full">
                 @php
                     $img = 'storage/' . nova_get_setting('Headerlogo', 'default_value');
                     $imgRight = 'storage/' . nova_get_setting('HeaderqawafelLogo', 'default_value');
-
 
                 @endphp
 
@@ -81,8 +81,8 @@
 
         </header>
         <div x-show="leftBarOpen" @click="leftBarOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
-        <div class=" absolute left-[1%] lg:top-auto top-[55px] drop-shadow-lg  z-50 bg-white p-4 text-white rounded-lg" style="min-height: 20vh ;"
-            x-show="leftBarOpen">
+        <div class=" absolute left-[1%] lg:top-auto top-[55px] drop-shadow-lg  z-50 bg-white p-4 text-white rounded-lg"
+            style="min-height: 20vh ;" x-show="leftBarOpen">
             <div class="flex flex-col items-start justify-start">
                 <button onclick="location.href='/Admin'"
                     class=" text-black text-sm hover:bg-[#349A37] hover:text-white py-4 rounded-lg px-4 min-w-[180px]">الذهاب
@@ -218,8 +218,7 @@
                                 <input type="file" name="image" id="user_image_uploader"
                                     onchange="readURL('chosen', this);" hidden />
                             </div>
-                            <div
-                                class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 <div class="">
                                     <label for="name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> الاسم
                                     </label>
@@ -355,8 +354,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 <div class="">
                                     <label for="bank_name" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> اسم
                                         البنك
@@ -418,8 +416,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 <div class="">
                                     <label for="password" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> كلمة
                                         المرور
@@ -429,7 +426,7 @@
                                     <div class="mt-1">
                                         <input type="password" id="myInput" name="old_password"
                                             placeholder="كلمة المرور الحالية" autocomplete="off"
-                                            class="passInput block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">                                        
+                                            class="passInput block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                     @if ($errors->has('password'))
                                         <span class="text-red-700 ">{{ $errors->first('password') }}</span>
@@ -463,7 +460,8 @@
                                 </div>
                                 <div class=" flex fle-row items-center justify-start gap-x-1 mt-2 mr-3">
                                     <label class="cursor-pointer">
-                                        <input type="checkbox" onclick="myFunction()" class="checkbox-pass ml-1 focus:ring-[#349A37] focus:border-[#349A37] text-[#349A37]">
+                                        <input type="checkbox" onclick="myFunction()"
+                                            class="checkbox-pass ml-1 focus:ring-[#349A37] focus:border-[#349A37] text-[#349A37]">
                                         إظهار كلمة المرور
                                     </label>
                                 </div>
@@ -473,12 +471,18 @@
                 </div>
                 <div class="container tab tab-B px-8 mx-auto mt-8 max-w-6xl hidden">
                     <livewire:work-hours />
+                    <script>
+                        var button = document.getElementById('clickButton');
+                        setInterval(function() {
+                            button.click();
+                        }, 1000);
+                    </script>
                 </div>
                 <div class="container tab tab-C px-8 mx-auto mt-8 max-w-6xl hidden">
                     <livewire:admin-work-hours />
                 </div>
             </div>
-        </div>    
+        </div>
     </main>
 
     <script>

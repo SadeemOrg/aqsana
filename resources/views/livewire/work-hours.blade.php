@@ -1,4 +1,5 @@
 <div>
+    <button id='clickButton' wire:click="doSomething">Click Me</button>
 
 
     <!--Perosonal Information -->
