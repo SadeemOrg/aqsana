@@ -30,6 +30,8 @@ class ExportDonations extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
+        return Action::openInNewTab('/Admin/userprofile');
+
         return Action::download(route('export.excel'), 'myfile.ods');
         return Action::download(Storage::url('export/ExportDonations'), 'risk_consequence_template.xlsx');
         $file = 'vessels.xlsx';
