@@ -13,6 +13,7 @@ use App\Exports\ExportPaymentVoucher;
 use Illuminate\Http\Request;
 use App\Exports\ExportUsers;
 use App\Exports\ExportWorkHours;
+use App\Models\Sector;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -22,6 +23,7 @@ class ExportExcelController extends Controller
 
     public function index()
     {
+        dd();
         $key = 'Donationsw';
        return view('export',compact('key'));
     }
