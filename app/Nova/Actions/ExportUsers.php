@@ -22,7 +22,7 @@ class ExportUsers extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return Action::openInNewTab('export/ExportUsers');
+        return Action::openInNewTab('/export/ExportUsers');
 
     }
 

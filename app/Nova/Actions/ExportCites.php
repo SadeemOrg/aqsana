@@ -22,7 +22,7 @@ class ExportCites extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return Action::openInNewTab('export/ExportCites');
+        return Action::openInNewTab('/export/ExportCites');
 
     }
 

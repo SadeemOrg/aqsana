@@ -22,7 +22,7 @@ class ExportBusesCompany extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return Action::openInNewTab('export/ExportBusesCompany');
+        return Action::openInNewTab('/export/ExportBusesCompany');
 
     }
 

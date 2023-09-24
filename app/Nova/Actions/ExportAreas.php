@@ -22,7 +22,7 @@ class ExportAreas extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return Action::openInNewTab('export/ExportAreas');
+        return Action::openInNewTab('/export/ExportAreas');
 
     }
 
