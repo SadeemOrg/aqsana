@@ -22,7 +22,7 @@ class ExportDelegates extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return Action::openInNewTab('export/ExportDelegates');
+        return Action::openInNewTab('/export/ExportDelegates');
     }
 
     /**
