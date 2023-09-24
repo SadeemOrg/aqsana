@@ -22,7 +22,7 @@ class ExportUsers extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return   Action::download(url('export/ExportUsers'), 'aaa.cvs');
+        return Action::openInNewTab('export/ExportUsers');
 
     }
 

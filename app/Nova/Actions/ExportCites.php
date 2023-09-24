@@ -22,7 +22,7 @@ class ExportCites extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return   Action::download(url('export/ExportCites'), 'aaa.cvs');
+        return Action::openInNewTab('export/ExportCites');
 
     }
 

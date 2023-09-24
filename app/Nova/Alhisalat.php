@@ -356,7 +356,8 @@ class Alhisalat extends Resource
             //     }
             // ),
             (new AlhisalatSurrender),
-            (new ExportAlhisalat)->standalone(),
+            (new ExportAlhisalat)->standalone()->withoutConfirmation(),
+
         ];
     }
     public function tools(Request $request)

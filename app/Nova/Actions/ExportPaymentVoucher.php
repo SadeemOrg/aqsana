@@ -22,8 +22,7 @@ class ExportPaymentVoucher extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return   Action::download(url('export/ExportPaymentVoucher'), 'aaa.cvs');
-
+        return Action::openInNewTab('/export/ExportPaymentVoucher');
     }
 
     /**

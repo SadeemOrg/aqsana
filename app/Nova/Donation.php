@@ -452,8 +452,7 @@ class Donation extends Resource
             new BillPdf,
             new DeleteBill,
            ( new PrintBill)->withoutConfirmation(),
-           (new ExportDonations)->standalone(),
-           (new DownloadExcel)->standalone(),
+           (new ExportDonations)->standalone()->withoutConfirmation(),
         ];
     }
 }

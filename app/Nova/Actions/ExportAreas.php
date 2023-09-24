@@ -22,7 +22,7 @@ class ExportAreas extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return   Action::download(url('export/ExportAreas'), 'aaa.cvs');
+        return Action::openInNewTab('export/ExportAreas');
 
     }
 

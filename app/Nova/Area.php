@@ -176,7 +176,8 @@ class Area extends Resource
     public function actions(Request $request)
     {
         return [
-            (new ExportAreas)->standalone(),
+            (new ExportAreas)->standalone()->withoutConfirmation(),
+
         ];
     }
 }

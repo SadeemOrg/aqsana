@@ -486,7 +486,8 @@ class PaymentVoucher extends Resource
         return [
             new ApprovalRejectTransaction,
             new BillPdf,
-            (new ExportPaymentVoucher)->standalone(),
+            (new ExportPaymentVoucher)->standalone()->withoutConfirmation(),
+
 
         ];
     }

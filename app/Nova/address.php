@@ -193,7 +193,7 @@ class address extends Resource
     public function actions(Request $request)
     {
         return [
-            (new ExportAddress)->standalone(),
+            (new ExportAddress)->standalone()->withoutConfirmation(),
 
         ];
     }

@@ -340,7 +340,8 @@ class City extends Resource
     public function actions(Request $request)
     {
         return [
-            (new ExportCites)->standalone(),
+            (new ExportCites)->standalone()->withoutConfirmation(),
+
         ];
     }
 }

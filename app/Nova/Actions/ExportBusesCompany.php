@@ -22,7 +22,7 @@ class ExportBusesCompany extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return   Action::download(url('export/ExportBusesCompany'), 'aaa.cvs');
+        return Action::openInNewTab('export/ExportBusesCompany');
 
     }
 

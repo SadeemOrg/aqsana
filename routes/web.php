@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\ExportDonations;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationTest;
@@ -7,6 +8,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\WebNotificationController;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 // use App\Http\Livewire\Notification;
 
@@ -20,7 +22,10 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/reports/show-orders', function(){
+    // dd("dd");
+    return Excel::download(new ExportDonations, 'test.csv');
+});
 Route::controller(ExportExcelController::class)->group(function () {
     Route::post('submit-form', 'submit')->name('submit-form');
     Route::get('indexexpo', 'index');
