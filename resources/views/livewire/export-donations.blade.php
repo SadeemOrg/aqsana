@@ -2,7 +2,7 @@
     @if ($this->key=='Donations')
 
 
-    <button id='clickButton' wire:click="Donations"  hiddenhidden>Click Me</button>
+    <button id='clickButton' wire:click="Donations"  hidden>Click Me</button>
    @elseif ($this->key=='PaymentVoucher')
    <button id='clickButton' wire:click="PaymentVoucher" hidden>Click Me</button>
    @elseif ($this->key=='Address')
@@ -33,7 +33,7 @@
         }
 
         function funtion2() {
-            setTimeout(function(){  window.close(); }, 2000);
+            // setTimeout(function(){  window.close(); }, 2000);
 
 
         }

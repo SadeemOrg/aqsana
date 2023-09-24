@@ -95,7 +95,7 @@ class address extends Resource
                 })->hideFromDetail()->hideFromIndex(),
 
                 MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
-                ->hideWhenCreating()->readonly()
+                ->hideWhenCreating()
                 ->center(['lat' =>  31.775947, 'lng' => 35.235577]) ->types(['address' ,'establishment'])->mapOptions(['fullscreenControl' => true,'clickableIcons'=>true,'restriction'=>true]),
 
             // Select::make(__("Status"), "status")->options([

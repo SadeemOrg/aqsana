@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\ExportAdminWorkHours;
 use App\Models\User;
 use App\Models\WorkHours;
 use Carbon\Carbon;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminWorkHours extends Component
 {
+
     public $users;
     public $FromDate;
     public $ToDate;
@@ -29,8 +32,8 @@ class AdminWorkHours extends Component
     public $day_hours_off;
     public $userId;
     public $Notes;
-    public $error='';
-
+    public $error = '';
+    public $exportWorkHoursErorr = '';
     public $notedate = [];
 
     public function searchWorkHours()
@@ -70,7 +73,7 @@ class AdminWorkHours extends Component
     {
         $this->EditWorkHours =    WorkHours::find($id);
 
-        $this->date =Carbon::parse($this->EditWorkHours->date)->format('Y-m-d') ;
+        $this->date = Carbon::parse($this->EditWorkHours->date)->format('Y-m-d');
         $this->start_time = $this->EditWorkHours->start_time;
         $this->end_time = $this->EditWorkHours->end_time;
         $this->day_hours = $this->EditWorkHours->day_hours;
@@ -116,10 +119,10 @@ class AdminWorkHours extends Component
     {
 
 
-      $olddata=  WorkHours::whereDate('date',$this->date)->where('id',$this->ModelId)->first();
+        $olddata =  WorkHours::whereDate('date', $this->date)->where('id', $this->ModelId)->first();
 
         // dd($olddata ==null);
-        if ($olddata ==null) {
+        if ($olddata == null) {
             $startTime = Carbon::parse($this->start_time);
             $finishTime = Carbon::parse($this->end_time);
             $result =  $finishTime->gt($startTime);
@@ -127,26 +130,24 @@ class AdminWorkHours extends Component
             if ($result) {
 
 
-        $EditWorkHours = new  WorkHours();
-        $EditWorkHours->user_id = $this->ModelId;
-        $EditWorkHours->date = $this->date;
-        $EditWorkHours->day =  Carbon::parse($this->date)->locale('ar')->dayName;
-        $EditWorkHours->start_time = $this->start_time;
-        $EditWorkHours->end_time = $this->end_time;
+                $EditWorkHours = new  WorkHours();
+                $EditWorkHours->user_id = $this->ModelId;
+                $EditWorkHours->date = $this->date;
+                $EditWorkHours->day =  Carbon::parse($this->date)->locale('ar')->dayName;
+                $EditWorkHours->start_time = $this->start_time;
+                $EditWorkHours->end_time = $this->end_time;
 
-        $totalDuration = $startTime->diff($finishTime)->format('%H:%I:%S');
+                $totalDuration = $startTime->diff($finishTime)->format('%H:%I:%S');
 
-        $EditWorkHours->day_hours =  $totalDuration;
-        $EditWorkHours->save();
-        $this->showAddModel = false;
+                $EditWorkHours->day_hours =  $totalDuration;
+                $EditWorkHours->save();
+                $this->showAddModel = false;
+            } else {
+                $this->error = "ساعات البداية اكبر من ساعة النهاية";
             }
-            else {
-                $this->error="ساعات البداية اكبر من ساعة النهاية";
-            }
-    }
-    else {
-        $this->error="هذا اليوم موجود مسبقا";
-    }
+        } else {
+            $this->error = "هذا اليوم موجود مسبقا";
+        }
     }
     public function showNoteModels($id)
     {
@@ -191,6 +192,26 @@ class AdminWorkHours extends Component
         WorkHours::destroy($id);
         $this->searchWorkHours();
     }
+
+    public function exportWorkHours()
+    {
+        $this->exportWorkHoursErorr ="";
+        if ($this->Name == null) {
+            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr ."يجب اختيار الاسم ".'<br>';
+        }
+        if ($this->FromDate == null) {
+            $this->exportWorkHoursErorr =  $this->exportWorkHoursErorr . "يجب اختيار تاريخ البدء ".'<br>';
+        }
+        if ($this->ToDate == null) {
+            $this->exportWorkHoursErorr =$this->exportWorkHoursErorr . "يجب اختيار تاريخ النهاية".'<br>';
+        }
+
+        if ($this->FromDate != null && $this->ToDate != null && $this->Name != null) {
+            return Excel::download(new ExportAdminWorkHours($this->Name, $this->FromDate, $this->ToDate), 'users.xlsx');
+            $this->exportWorkHoursErorr ="";
+        }
+    }
+
     public function render()
     {
         $this->users = User::all();
