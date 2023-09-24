@@ -39,6 +39,7 @@ class WorkHours extends Component
     public $Timeleave;
     public $leaveGoalTextarea;
     public $Timetimetime;
+    public $exportWorkHoursErorr = '';
     public function changeEvent($value)
     {
         $this->showTable  = $value;
@@ -176,9 +177,12 @@ class WorkHours extends Component
     public function exportWorkHours()
     {
         $user = Auth::id();
-
-         return Excel::download(new ExportWorkHours($user,$this->FromDate,$this->ToDate), 'users.xlsx');
-
+        if ($this->FromDate == null || $this->ToDate == null) {
+            $this->exportWorkHoursErorr = "يجب اختيار تاريخ البدء و نهاية";
+        } else {
+            $this->exportWorkHoursErorr = "";
+            return Excel::download(new ExportWorkHours($user, $this->FromDate, $this->ToDate), 'users.xlsx');
+        }
     }
     public function stop()
     {
