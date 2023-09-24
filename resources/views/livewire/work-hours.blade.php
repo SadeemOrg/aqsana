@@ -36,6 +36,7 @@
                         class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusWorkerHourTo()">
                 </div>
+
                 <!--end Picker -->
                 <div class=" h-12 flex gap-x-4">
                     <button type="button"
@@ -47,6 +48,7 @@
                         <span class="mr-2">تصدير CSV</span>
                     </button>
                 </div>
+                <span class="text-red-700">{{ $this->exportWorkHoursErorr }}</span>
                 {{-- <div class=" h-12">
 
                 </div> --}}
