@@ -216,7 +216,8 @@ class User extends Resource
     {
         return [
 
-            (new ExportUsers)->standalone(),
+            (new ExportUsers)->standalone()->withoutConfirmation(),
+
         ];
     }
 }

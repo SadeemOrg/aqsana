@@ -10,6 +10,7 @@ class ExportAlhisalat implements FromCollection
     /**
     * @return \Illuminate\Support\Collection
     */
+
     public function collection()
     {
         return Alhisalat::all();

@@ -20,6 +20,11 @@ class ExportExcelController extends Controller
 {
 
 
+    public function index()
+    {
+        $key = 'Donationsw';
+       return view('export',compact('key'));
+    }
 
     public function submit(Request $request)
     {
@@ -30,14 +35,9 @@ class ExportExcelController extends Controller
     }
 
 
-     public function index()
-    {
-       return view('test');
-    }
-
     public function exportExcelFile(Request $request)
     {
-        // dd($request->all());
+
         return Excel::download(new ExportWorkHours(1,11,1), 'users.csv');
     }
     public function ExportWorkHours(Request $request)
@@ -45,41 +45,58 @@ class ExportExcelController extends Controller
 
         return Excel::download(new ExportWorkHours(1,11,1), 'users.csv');
     }
+
+    //
+
+
+
+
     public function ExportDonations()
     {
 
-        return Excel::download(new ExportDonations, 'dd.csv');
+        $key = 'Donations';
+        return view('export',compact('key'));
     }
     public function ExportPaymentVoucher()
     {
-        return Excel::download(new ExportPaymentVoucher, 'rr.csv');
+        $key = 'PaymentVoucher';
+        return view('export',compact('key'));
     }
     public function  ExportDelegates()
     {
-        return Excel::download(new  ExportDelegates, 'rr.csv');
+        $key = 'Delegates';
+        return view('export',compact('key'));
     }
     public function  ExportAlhisalat()
     {
-        return Excel::download(new  ExportAlhisalat, 'rr.csv');
+        $key = 'Alhisalat';
+        return view('export',compact('key'));
+
     }
     public function  ExportUsers()
     {
-        return Excel::download(new  ExportUsers, 'rr.csv');
+          $key = 'Users';
+        return view('export',compact('key'));
+
     }
     public function  ExportAreas()
     {
-        return Excel::download(new  ExportAreas, 'rr.csv');
+        $key = 'Area';
+        return view('export',compact('key'));
     }
     public function  ExportCites()
     {
-        return Excel::download(new  ExportCites, 'rr.csv');
+        $key = 'Cites';
+        return view('export',compact('key'));
     }
     public function  ExportAddress()
     {
-        return Excel::download(new  ExportAddress, 'rr.csv');
+        $key = 'Address';
+        return view('export',compact('key'));
     }
     public function  ExportBusesCompany()
     {
-        return Excel::download(new  ExportBusesCompany, 'rr.csv');
+        $key = 'BusesCompany';
+        return view('export',compact('key'));
     }
 }

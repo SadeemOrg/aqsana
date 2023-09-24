@@ -252,7 +252,8 @@ use Illuminate\Http\Request;
         public function actions(Request $request)
         {
             return [
-                (new ExportDelegates)->standalone(),
+                (new ExportDelegates)->standalone()->withoutConfirmation(),
+
             ];
         }
     }

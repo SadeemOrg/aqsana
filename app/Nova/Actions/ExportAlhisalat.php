@@ -22,7 +22,7 @@ class ExportAlhisalat extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return   Action::download(url('export/ExportAlhisalat'), 'aaa.cvs');
+        return Action::openInNewTab('/export/ExportAlhisalat');
 
     }
 

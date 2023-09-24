@@ -161,7 +161,8 @@ class BusesCompany extends Resource
     public function actions(Request $request)
     {
         return [
-            (new ExportBusesCompany)->standalone(),
+            (new ExportBusesCompany)->standalone()->withoutConfirmation(),
+
 
         ];
     }

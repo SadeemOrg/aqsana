@@ -30,19 +30,8 @@ class ExportDonations extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return Action::openInNewTab('/Admin/userprofile');
+        return Action::openInNewTab('/export/ExportDonations');
 
-        return Action::download(route('export.excel'), 'myfile.ods');
-        return Action::download(Storage::url('export/ExportDonations'), 'risk_consequence_template.xlsx');
-        $file = 'vessels.xlsx';
-        Excel::store(new ExportsExportDonations, $file);
-        return Action::download(storage_path('app/'.$file), $file);
-
-        // Action::download('/export/ExportDonations');
-        return Action::redirect('/export/ExportDonations');
-        return Excel::download(new ExportsExportDonations, 'test.csv');
-
-        return   Action::download(url('export/ExportDonations'), 'aaa.cvs');
 
 
     }
