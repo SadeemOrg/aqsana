@@ -48,15 +48,15 @@ class ExportDonations extends Component
     }
     public function Users()
     {
-        return Excel::download(new  ExportUsers, 'rr.csv');
+        return Excel::download(new  ExportUsers, 'Users.csv');
     }
     public function Cites()
     {
-        return Excel::download(new  ExportCites, 'rr.csv');
+        return Excel::download(new  ExportCites, 'Cites.csv');
     }
     public function BusesCompany()
     {
-        return Excel::download(new  ExportBusesCompany, 'rr.csv');
+        return Excel::download(new  ExportBusesCompany, 'Company.csv');
     }
     public function render()
     {
