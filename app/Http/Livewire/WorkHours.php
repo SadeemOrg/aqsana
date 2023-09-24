@@ -190,12 +190,7 @@ class WorkHours extends Component
 
         $this->showModel = false;
     }
-    public function doSomething()
-    {
-        return Excel::download(new ExportDonations, 'dd.csv');
 
-        // $this->post->addLikeBy(auth()->user());
-    }
 
     public function render()
     {
