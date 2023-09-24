@@ -471,12 +471,7 @@
                 </div>
                 <div class="container tab tab-B px-8 mx-auto mt-8 max-w-6xl hidden">
                     <livewire:work-hours />
-                    <script>
-                        var button = document.getElementById('clickButton');
-                        setInterval(function() {
-                            button.click();
-                        }, 1000);
-                    </script>
+
                 </div>
                 <div class="container tab tab-C px-8 mx-auto mt-8 max-w-6xl hidden">
                     <livewire:admin-work-hours />

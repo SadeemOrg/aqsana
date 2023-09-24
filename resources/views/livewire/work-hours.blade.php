@@ -1,7 +1,4 @@
 <div>
-    <button id='clickButton' wire:click="doSomething">Click Me</button>
-
-
     <!--Perosonal Information -->
     <form class="Wraper" wire:submit.prevent="searchWorkHours">
         <div
