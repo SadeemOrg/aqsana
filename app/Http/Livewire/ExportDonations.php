@@ -17,13 +17,20 @@ use Maatwebsite\Excel\Facades\Excel;
 class ExportDonations extends Component
 {
     public $key;
-    public function mount($key)
+    public $ref;
+    public $name;
+    public $from;
+    public $to;
+    public function mount($key, $ref)
     {
         $this->key = $key;
+        $this->ref = $ref;
+
     }
     public function Donations()
     {
-        return Excel::download(new ExportsExportDonations, 'Donations.csv');
+
+        return Excel::download(new ExportsExportDonations($this->ref, $this->name ,$this->from ,$this->to), 'Donations.csv');
     }
 
     public function PaymentVoucher()
