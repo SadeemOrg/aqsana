@@ -53,11 +53,16 @@ class ExportExcelController extends Controller
 
 
 
-    public function ExportDonations()
+    public function ExportDonations(Request $request)
     {
 
+        $ref= ($request->ref != null) ? $request->ref : 'null';
+        $name= ($request->name != null) ? $request->name : 'null';
+        $from= ($request->from != null) ? $request->from : 'null';
+        $to= ($request->to != null) ? $request->to : 'null';
+
         $key = 'Donations';
-        return view('export',compact('key'));
+        return view('export',compact('key','ref','name','from','to'));
     }
     public function ExportPaymentVoucher()
     {
