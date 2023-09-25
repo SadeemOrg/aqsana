@@ -117,7 +117,7 @@ class Donation extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-                Button::make(__('print'))->link('/mainbill/' .$this->id)->style('primary'),
+            Button::make(__('print'))->link('/mainbill/' . $this->id)->style('primary'),
 
             Select::make(__("transaction_type"), "transaction_type")->options([
                 '1' => __('handy'),
@@ -125,7 +125,7 @@ class Donation extends Resource
                 '3' => __('Alhisalat'),
                 '4' => __('delet bill'),
 
-            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating()->hideFromIndex()   ,
+            ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating()->hideFromIndex(),
             Select::make(__("transaction_status"), "transaction_status")->options([
                 '1' => __('Not Receive yet'),
                 '2' => __('in a box'),
@@ -138,40 +138,34 @@ class Donation extends Resource
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideFromIndex(),
             BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable()->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
             Multiselect::make(__('project'), "ref_id")
-            ->options(function () {
-                $Users =  \App\Models\Project::all();
+                ->options(function () {
+                    $Users =  \App\Models\Project::all();
 
-                $i = 0;
-                $user_type_admin_array =  array();
-                foreach ($Users as $User) {
+                    $i = 0;
+                    $user_type_admin_array =  array();
+                    foreach ($Users as $User) {
 
 
-                    $user_type_admin_array += [($User['id']) => ($User['project_name'])];
-                }
+                        $user_type_admin_array += [($User['id']) => ($User['project_name'])];
+                    }
 
-                return $user_type_admin_array;
-            })
-            ->singleSelect(),
+                    return $user_type_admin_array;
+                })
+                ->singleSelect(),
 
 
 
 
             Boolean::make(__('Receive Done'), 'ReceiveDonation', function () {
                 return ($this->transaction_status > 1) ? true : false;
-            })
-
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+            })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 }),
             Text::make(__('description'), 'description')->hideFromIndex(),
 
-            // ->canSee(function () {
-            //     return ($this->transaction_status  < 3) ? true : false;
-            // }),
 
 
             Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
-
 
             Multiselect::make(__('name'), "name")
                 ->options(function () {
@@ -200,10 +194,8 @@ class Donation extends Resource
                     Text::make(__('phone'), "phone"),
                 ]),
 
-            BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating()->hideFromIndex(),
-
+            BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('payment_reason'), "payment_reason")->hideFromIndex(),
-
             Select::make(__("billing language"), "lang")->options([
                 '1' => __('ar'),
                 '2' => __('en'),
@@ -219,7 +211,6 @@ class Donation extends Resource
             NovaDependencyContainer::make([
                 Text::make(__('transact amount'), 'transact_amount')->rules('required'),
             ])->dependsOn("Payment_type", '1')->hideFromDetail()->hideFromIndex(),
-
             NovaDependencyContainer::make([
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
@@ -253,7 +244,6 @@ class Donation extends Resource
 
                     ]),
             ])->dependsOn("Payment_type", '3')->hideFromDetail()->hideFromIndex(),
-
             NovaDependencyContainer::make([
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
@@ -276,19 +266,17 @@ class Donation extends Resource
                 Text::make(__('transact amount'), 'transact_amount')->rules('required'),
             ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
             // BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class),
-
             ActionButton::make(__('delete'))
-            ->action((new DeleteBill)->confirmText(__('Are you sure you want to delete  this?'))
-                ->confirmButtonText(__('delete'))
-                ->cancelButtonText(__('Dont delete')), $this->id)
-            ->text(__('delete'))->showLoadingAnimation() ->readonly(function () {
-                return $this->is_delete > 0;
-            })->buttonColor('#FF0000')->svg('_Delete2')
-            ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
+                ->action((new DeleteBill)->confirmText(__('Are you sure you want to delete  this?'))
+                    ->confirmButtonText(__('delete'))
+                    ->cancelButtonText(__('Dont delete')), $this->id)
+                ->text(__('delete'))->showLoadingAnimation()->readonly(function () {
+                    return $this->is_delete > 0;
+                })->buttonColor('#FF0000')->svg('_Delete2')
+                ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
-            Button::make(__('print Pdf'))->link('/generate-pdf/' .$this->id)->style('info'),
+            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info'),
             Date::make(__('date'), 'transaction_date')->rules('required'),
-
             HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class),
 
         ];
@@ -300,7 +288,7 @@ class Donation extends Resource
     // }
     public static function redirectAfterCreate(NovaRequest $request, $resource)
     {
-        return '/bill?location='. $resource->id.'&type=1';
+        return '/bill?location=' . $resource->id . '&type=1';
     }
     // public static function afterCreate(Request $request, $model)
     // {
@@ -380,7 +368,7 @@ class Donation extends Resource
     {
 
         if (!$request->name && $request->add_user) {
-            if ($request->add_user[0]['attributes']['name'] ) {
+            if ($request->add_user[0]['attributes']['name']) {
                 $telfone =  TelephoneDirectory::create(
                     [
                         'name' => $request->add_user[0]['attributes']['name'],
@@ -451,8 +439,8 @@ class Donation extends Resource
             new DepositedInBank,
             new BillPdf,
             new DeleteBill,
-           ( new PrintBill)->withoutConfirmation(),
-           (new ExportDonations)->standalone(),
+            (new PrintBill)->withoutConfirmation(),
+            (new ExportDonations)->standalone(),
         ];
     }
 }
