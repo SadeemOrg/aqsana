@@ -74,8 +74,8 @@ class AdminWorkHours extends Component
         $this->EditWorkHours =    WorkHours::find($id);
 
         $this->date = Carbon::parse($this->EditWorkHours->date)->format('Y-m-d');
-        $this->start_time = $this->EditWorkHours->start_time;
-        $this->end_time = $this->EditWorkHours->end_time;
+        $this->start_time = Carbon::parse($this->EditWorkHours->start_time)->format('H:i');
+        $this->end_time = Carbon::parse($this->EditWorkHours->end_time)->format('H:i');
         $this->day_hours = $this->EditWorkHours->day_hours;
         $this->ModelId = $id;
         $this->showEditModel = true;
@@ -90,11 +90,13 @@ class AdminWorkHours extends Component
     {
 
         // dd($this->date);
+        $startTime = Carbon::parse($this->start_time);
+        $finishTime = Carbon::parse($this->end_time);
         $EditWorkHours =    WorkHours::find($this->ModelId);
         $EditWorkHours->date = $this->date;
         $EditWorkHours->start_time = $this->start_time;
         $EditWorkHours->end_time = $this->end_time;
-        $EditWorkHours->day_hours = $this->day_hours;
+        $EditWorkHours->day_hours = $startTime->diff($finishTime)->format('%H:%I:%S');
         $EditWorkHours->update();
         // dd($this->ModelId);
         $this->showEditModel = false;
