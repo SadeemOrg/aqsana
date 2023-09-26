@@ -21,7 +21,7 @@ class   ExportDonations implements FromCollection, WithHeadings
     }
     public function headings(): array
     {
-        return ['id', 'قطاع',  'قيمة التبرغ', 'اسم', 'رقم الشركة', 'رقم الفاتوره', 'سبب التبرع', 'تاريخ الصفقة', 'مشروع'];
+        return ['id', 'قطاع',  'قيمة التبرغ', 'اسم', 'رقم الشركة', 'رقم الفاتوره', 'سبب التبرع', ' ', 'مشروع','تاريخ الصفقة'];
     }
     /**
      * @return \Illuminate\Support\Collection
@@ -84,6 +84,11 @@ class   ExportDonations implements FromCollection, WithHeadings
                 // dd($Transaction->name,$name,TelephoneDirectory::find($Transaction->name)->name);
                 $Transaction->ref_id = $ref;
             }
+          $day=  (Carbon::parse($Transaction->transaction_date)->day);
+          $month = (Carbon::parse($Transaction->transaction_date)->month);
+          $year =   (Carbon::parse($Transaction->transaction_date)->year);
+          $Transaction->transaction_date= null;
+          $Transaction->day= $year.'/'.$month.'/'.$day;
         }
 
         return $Transactions;
