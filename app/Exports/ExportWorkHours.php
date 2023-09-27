@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\User;
 use App\Models\WorkHours;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -37,7 +38,32 @@ class ExportWorkHours implements FromCollection , WithHeadings
         $from = date($this->startdate);
         $to = date($this->finishdate);
 
-        return WorkHours::whereBetween('date', [$from, $to])->where('user_id', '=', $this->id)
+        $string = '2001-01-01 00:00:00.0';
+        $date = Carbon::parse($string);
+       $WorkHours= WorkHours::whereBetween('date', [$from, $to])->where('user_id', '=', $this->id)
         ->select('day', 'date', 'start_time','end_time','day_hours')->orderBy('date', 'ASC')->get();
+        foreach ($WorkHours as $key => $value) {
+            if ($value->day_hours != null) {
+                $time2 = Carbon::parse($value->day_hours);
+                $hours = $time2->hour;
+                $minutes = $time2->minute;
+                $seconds = $time2->second;
+
+                $date->addSeconds($seconds)->addMinutes($minutes)->addHours($hours);
+            }
+        }
+        $date = Carbon::parse($date);
+          $sumWorkHourssearch = $date;
+        $endHour=  ($sumWorkHourssearch->day-1) * 24 + $sumWorkHourssearch->hour.':'.$sumWorkHourssearch->minute .':'.$sumWorkHourssearch->second ;
+
+        $additionalRows = [
+            ['Column1', 'Column2', 'Column3'],
+            ['','مجموع الساعات',  $endHour],
+            // Add more rows as needed
+        ];
+        $mergedQuery = $WorkHours->union($additionalRows);
+
+        return $mergedQuery;
+
     }
 }
