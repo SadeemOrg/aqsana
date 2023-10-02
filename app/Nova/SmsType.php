@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class SmsType extends Resource
@@ -13,10 +14,17 @@ class SmsType extends Resource
      *
      * @var string
      */
-
+    public static function label()
+    {
+        return __('SMS انواع');
+    }
+    public static function group()
+    {
+        return __('address');
+    }
      public static function availableForNavigation(Request $request)
      {
-         return false;
+
          if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("sms",  $request->user()->userrole()) )){
              return true;
          }
@@ -50,6 +58,9 @@ class SmsType extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Text::make(__('name'),'name')->rules('required'),
+            Text::make(__('describtion'),'describtion'),
+
         ];
     }
 

@@ -76,7 +76,7 @@ class TelephoneDirectory extends Resource
 
             Text::make(__('email'),'email')
                 ->sortable()
-                ->rules('required', 'email', 'max:254')
+                ->rules('email', 'max:254')
                 ->creationRules('unique:users,email'),
                 Multiselect::make(__('type'), 'type')
                 ->options(function () {
