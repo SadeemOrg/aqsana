@@ -22,6 +22,8 @@ use Maatwebsite\Excel\Facades\Excel;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::get('/reports/show-orders', function(){
     // dd("dd");
     return Excel::download(new ExportDonations, 'test.csv');
@@ -170,6 +172,11 @@ Route::get('/projectapi/{id}', [HomeController::class, 'getprojectDetailapi'])->
 Route::get('/testNotfiy', function () {
     return view('Pages.testNotfiy');
 });
+
+
+Route::get('/privacy-policy',function(){
+    return View('Pages.privacy-policy');
+    });
 
 // Library
 Route::get('/library', [HomeController::class, 'library'])->name('library');
