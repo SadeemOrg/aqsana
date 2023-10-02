@@ -93,6 +93,7 @@ class TelephoneDirectory extends Resource
 
                     return $Area_type_admin_array;
                 })->saveAsJSON(),
+                // Text::make(__('type'),'type'),
             //     ->options([
             //     1 => __('متبرعين سجب ثابت'),
             //     2 => __('متبرعين لمرة واحدة '),
@@ -138,7 +139,7 @@ class TelephoneDirectory extends Resource
     {
         if (!$request->type) {
 
-
+            // dd("dd");
             if ($request->newType   && ($request->newType[0]['attributes']['name'] || $request->newType[0]['attributes']['describtion'])) {
               $SmsType =  new SmsType();
 
@@ -146,13 +147,15 @@ class TelephoneDirectory extends Resource
                 $SmsType->describtion = $request->newType[0]['attributes']['describtion'];
                 $SmsType->save();
 
-
-                $request->merge(['type' => $SmsType->id]);
-
+                // $request->type=$SmsType->id;
+                $request->merge(['type' => "[".$SmsType->id."]"]);
+                //   dd( $request->type);
 
             }
         }
+
         $request->request->remove('newType');
+        // dd($request->all());
     }
 
     /**
