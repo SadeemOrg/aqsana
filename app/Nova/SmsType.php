@@ -45,7 +45,7 @@ class SmsType extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id','name'
     ];
 
     /**
@@ -59,7 +59,7 @@ class SmsType extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('name'),'name')->rules('required'),
-            Text::make(__('describtion'),'describtion'),
+            Text::make(__('Describtion'),'describtion'),
 
         ];
     }
