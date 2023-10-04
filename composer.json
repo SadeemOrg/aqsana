@@ -16,6 +16,7 @@
         "acme/smssend": "*",
         "ajhaupt7/image-upload-preview": "^1.0",
         "alaqsa/project": "*",
+        "anaseqal/nova-import": "^0.0.6",
         "averotech/link": "*",
         "averotech/tree": "*",
         "awesome-nova/filter-card": "^1.0",

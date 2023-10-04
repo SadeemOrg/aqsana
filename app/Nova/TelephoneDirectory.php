@@ -45,10 +45,9 @@ class TelephoneDirectory extends Resource
 
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("TelephoneDirectoryparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("TelephoneDirectoryparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
     /**
      * The columns that should be searched.
@@ -56,7 +55,7 @@ class TelephoneDirectory extends Resource
      * @var array
      */
     public static $search = [
-        'id','name','phone_number','email'
+        'id', 'name', 'phone_number', 'email'
     ];
 
     /**
@@ -70,13 +69,13 @@ class TelephoneDirectory extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make(__('Name'),'name')
+            Text::make(__('Name'), 'name')
                 ->sortable()
-                ->rules('required', 'max:255'),
+                ->rules('unique:telephone_directories', 'required', 'max:255'),
 
-            Text::make(__('email'),'email')
-                ->sortable(),
-                Multiselect::make(__('type'), 'type')
+            Text::make(__('email'), 'email')
+                ->sortable()->rules('unique:telephone_directories'),
+            Multiselect::make(__('type'), 'type')
                 ->options(function () {
                     $Areas =  \App\Models\SmsType::all();
 
@@ -90,7 +89,7 @@ class TelephoneDirectory extends Resource
 
                     return $Area_type_admin_array;
                 })->saveAsJSON(),
-                // Text::make(__('type'),'type'),
+            // Text::make(__('type'),'type'),
             //     ->options([
             //     1 => __('متبرعين سجب ثابت'),
             //     2 => __('متبرعين لمرة واحدة '),
@@ -107,21 +106,21 @@ class TelephoneDirectory extends Resource
             // ])
 
             Flexible::make(__('newType'), 'newType')
-            ->limit(1)
-            ->hideFromDetail()->hideFromIndex()
-            ->addLayout(__('Add new type'), 'type', [
-                Text::make(__('name'), 'name'),
-                Text::make(__('describtion'), 'describtion'),
+                ->limit(1)
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('Add new type'), 'type', [
+                    Text::make(__('name'), 'name'),
+                    Text::make(__('describtion'), 'describtion'),
 
-            ])->confirmRemove(),
+                ])->confirmRemove(),
 
 
 
-            Text::make(__('phone_number'),'phone_number'),
-            Text::make(__('city'),'city'),
-            Text::make(__('note'),'note'),
-            Text::make(__('jop'),'jop'),
-            Text::make(__('id_number'),'id_number'),
+            Text::make(__('phone_number'), 'phone_number')->rules('unique:telephone_directories'),
+            Text::make(__('city'), 'city'),
+            Text::make(__('note'), 'note'),
+            Text::make(__('jop'), 'jop'),
+            Text::make(__('id_number'), 'id_number'),
 
             // HasMany::make(__("SmsType"), "SmsType", \App\Nova\SmsType::class),
 
@@ -138,14 +137,14 @@ class TelephoneDirectory extends Resource
 
             // dd("dd");
             if ($request->newType   && ($request->newType[0]['attributes']['name'] || $request->newType[0]['attributes']['describtion'])) {
-              $SmsType =  new SmsType();
+                $SmsType =  new SmsType();
 
-                $SmsType-> name = $request->newType[0]['attributes']['name'];
+                $SmsType->name = $request->newType[0]['attributes']['name'];
                 $SmsType->describtion = $request->newType[0]['attributes']['describtion'];
                 $SmsType->save();
 
                 // $request->type=$SmsType->id;
-                $request->merge(['type' => "[".$SmsType->id."]"]);
+                $request->merge(['type' => "[" . $SmsType->id . "]"]);
                 //   dd( $request->type);
 
             }
@@ -165,7 +164,7 @@ class TelephoneDirectory extends Resource
     {
         return [
             new Smssend(),
-            new FilterCard( new UserType)
+            new FilterCard(new UserType)
         ];
     }
 
@@ -201,6 +200,9 @@ class TelephoneDirectory extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+
+        return [
+           ( new Actions\ImportTelephoneDirectory)->standalone(),
+    ];
     }
 }
