@@ -17,7 +17,7 @@ class TelephoneDirectory extends Model
    protected $casts = [
     // 'hower' => FlexibleCast::class,
     'hower' => 'json',
-
+    'birth_date' => 'date',
  'type' => 'json',
 
 
