@@ -137,7 +137,7 @@ class TelephoneDirectory extends Resource
 
             HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class),
 
-            Date::make(__('birth_date'), 'birth_date')->pickerDisplayFormat('d.m.Y')->sortable()->rules('required'),
+            Date::make(__('birth_date'), 'birth_date')->pickerDisplayFormat('d.m.Y')->sortable(),
 
 
 
@@ -147,7 +147,7 @@ class TelephoneDirectory extends Resource
     {
         if (!$request->type) {
 
-            // dd("dd");
+
             if ($request->newType   && ($request->newType[0]['attributes']['name'] || $request->newType[0]['attributes']['describtion'])) {
                 $SmsType =  new SmsType();
 
