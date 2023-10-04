@@ -77,7 +77,7 @@ class TelephoneDirectory extends Resource
                 ->creationRules('unique:telephone_directories', 'required', 'max:255'),
 
             Text::make(__('email'), 'email')
-                ->sortable()->creationRules('unique:telephone_directories'),
+                ->sortable(),
             Multiselect::make(__('type'), 'type')
                 ->options(function () {
                     $Areas =  \App\Models\SmsType::all();
