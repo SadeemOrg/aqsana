@@ -8,15 +8,18 @@ use App\Models\SmsType;
 use App\Nova\Filters\UserType;
 use AwesomeNova\Cards\FilterCard;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Whitecube\NovaFlexibleContent\Flexible;
+use Ncus\InlineIndex\InlineIndex;
 
 class TelephoneDirectory extends Resource
 {
+
     /**
      * The model the resource corresponds to.
      *
@@ -114,18 +117,27 @@ class TelephoneDirectory extends Resource
 
                 ])->confirmRemove(),
 
+                InlineIndex::make(__('phone_number'), 'phone_number')
+                ->options([
+                    'event' => 'blur',
+                    'type' => 'text',
+                ])->sortable(),
+                InlineIndex::make(__('city'), 'city')
+                ->options([
+                    'event' => 'blur',
+                    'type' => 'text',
+                ])->sortable(),
+            // Text::make(__('phone_number'), 'phone_number')->rules('unique:telephone_directories'),
 
-
-            Text::make(__('phone_number'), 'phone_number')->rules('unique:telephone_directories'),
-            Text::make(__('city'), 'city'),
             Text::make(__('note'), 'note'),
             Text::make(__('jop'), 'jop'),
             Text::make(__('id_number'), 'id_number'),
 
             // HasMany::make(__("SmsType"), "SmsType", \App\Nova\SmsType::class),
 
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class),
 
+            Date::make(__('birth_date'), 'birth_date')->pickerDisplayFormat('d.m.Y')->sortable()->rules('required'),
 
 
 
