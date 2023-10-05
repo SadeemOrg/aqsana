@@ -15,7 +15,7 @@ class Grant extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\TelephoneDirectory::class;
+    public static $model = \App\Models\user::class;
     public static function label()
     {
         return __('Grant');

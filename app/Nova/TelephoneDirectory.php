@@ -133,7 +133,6 @@ class TelephoneDirectory extends Resource
             Text::make(__('jop'), 'jop'),
             Text::make(__('id_number'), 'id_number'),
 
-            // HasMany::make(__("SmsType"), "SmsType", \App\Nova\SmsType::class),
 
             HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class),
 
