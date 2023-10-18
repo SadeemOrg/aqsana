@@ -15,6 +15,7 @@ use Laravel\Nova\Fields\Date;
 use Laraning\NovaTimeField\TimeField;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Acme\MultiselectField\Multiselect as Select;
+use Acme\MultiselectField\Multiselect;
 use App\Nova\Actions\ApprovalRejectProjec;
 use App\Nova\Actions\ProjectStatu;
 use Illuminate\Support\Facades\Auth;
@@ -264,66 +265,6 @@ class QawafilAlaqsa extends Resource
                         } else return false;
                     } else return false;
                 }),
-                // ActionButton::make(__('Action'))
-                //     ->action(ProjectStartEnd::class, $this->id)
-                //     ->text(__('incomplete'))
-                //     ->showLoadingAnimation()
-                //     ->loadingColor('#fff')->buttonColor('#787878')
-                //     ->canSee(function () {
-                //         $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-                //         if (!$projects) {
-                //             return true;
-                //         }
-                //     })
-                //     ->readonly()
-                //     ->hideWhenCreating()->hideWhenUpdating(),
-
-
-
-
-                // ActionButton::make(__('Action'))
-                //     ->action(ApprovalRejectProjec::class, $this->id)
-                //     ->text(__('acsept'))
-                //     ->showLoadingAnimation()
-                //     ->loadingColor('#fff')->buttonColor('#21b970')
-                //     ->canSee(function () {
-                //         $user = Auth::user();
-
-                //         if ($user->type() == 'regular_city' || $user->type() == 'regular_area') {
-                //             return true;
-                //         }
-                //     })
-                //     ->readonly(function () {
-                //         $id = Auth::id();
-                //         $user = Auth::user();
-                //         if ($user->type() == 'regular_city') {
-                //             $citye =   City::where('admin_id', $id)
-                //                 ->select('id')->first();
-                //             $acspet = DB::table('accept_project')
-                //                 ->where([
-                //                     ['project_id', '=', $this->id],
-                //                     ['city_id', '=', $citye['id']],
-                //                 ])
-                //                 ->first();
-
-                //             if ($acspet) {
-
-                //                 if ($acspet->accepted == "1")   return  true;
-                //                 else return false;
-                //             }
-                //         }
-                //     })
-                //     ->hideWhenCreating()->hideWhenUpdating(),
-
-
-
-
-
-
-                //     Text::make(__("QawafilAlaqsa name"), "project_name")->rules('required'),
-
-
-
 
                 Text::make(__("QawafilAlaqsa name"), "project_name")->rules('required'),
                 Text::make(__("QawafilAlaqsa describe"), "project_describe")->rules('required'),
@@ -336,6 +277,20 @@ class QawafilAlaqsa extends Resource
                         if ($user->type() == 'admin') return true;
                         return false;
                     })->rules('required', 'max:1'),
+                Multiselect::make(__('city'), 'city')
+                    ->options(function () {
+                        $Areas =  \App\Models\City::all();
+
+                        $Area_type_admin_array =  array();
+
+                        foreach ($Areas as $Area) {
+
+
+                            $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                        }
+
+                        return $Area_type_admin_array;
+                    })->singleSelect(),
 
                 Select::make(__("Repetition"), "repetition")->options([
                     '0' => __('Once'),
@@ -345,7 +300,16 @@ class QawafilAlaqsa extends Resource
                     '4' => __('Monthly'),
                     '5' => __('annual'),
                 ])->rules('required')->singleSelect(),
-                Select::make(__('Admin'), 'admin_id')
+
+                // Text::make(__("tty"), "project_name",function(){
+                //     $city= City::find($this->city);
+
+                //     // dd($city);
+                //     return ($city) ? "" : $city->id;
+                // })->hideWhenCreating()->hideWhenUpdating(),
+
+
+                Select::make(__('delegatee'), 'admin_id')
                     ->options(function () {
                         $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
                         $user_type_admin_array =  array();
@@ -456,9 +420,9 @@ class QawafilAlaqsa extends Resource
                         return null;
                     }),
                 Flexible::make(__('newbus'), 'newbus')
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    $model->$attribute = null;
-                })
+                    ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                        $model->$attribute = null;
+                    })
 
                     ->hideFromDetail()->hideFromIndex()
                     ->addLayout(__('Add new bus'), 'bus', [
