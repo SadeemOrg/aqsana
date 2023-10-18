@@ -347,7 +347,7 @@ class QawafilAlaqsa extends Resource
                 ])->rules('required')->singleSelect(),
                 Select::make(__('Admin'), 'admin_id')
                     ->options(function () {
-                        $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '8')->get();
+                        $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
                         $user_type_admin_array =  array();
                         foreach ($users as $user) {
                             $user_type_admin_array += [$user['id'] => ($user['name'])];
