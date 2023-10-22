@@ -116,16 +116,16 @@ class City extends Resource
 
                 Multiselect::make(__('admin city'), 'admin_id')
                     ->options(function () {
-                        $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
+                        $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
 
                         $user_type_admin_array =  array();
 
                         foreach ($users as $user) {
 
 
-                            $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
-                        }
 
+                            $user_type_admin_array += [$user['id'] => ($user['name'])];
+                        }
                         return $user_type_admin_array;
                     })
                     ->singleSelect()
