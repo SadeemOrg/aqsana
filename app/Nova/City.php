@@ -114,18 +114,18 @@ class City extends Resource
 
                 BelongsTo::make(__('admin city'), 'admin', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
-                Multiselect::make(__('admin'), 'admin_id')
+                Multiselect::make(__('admin city'), 'admin_id')
                     ->options(function () {
-                        $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+                        $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
 
                         $user_type_admin_array =  array();
 
                         foreach ($users as $user) {
 
 
-
-                            $user_type_admin_array += [$user['id'] => ($user['name'])];
+                            $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
                         }
+
                         return $user_type_admin_array;
                     })
                     ->singleSelect()
