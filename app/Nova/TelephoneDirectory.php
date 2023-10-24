@@ -8,6 +8,7 @@ use App\Models\SmsType;
 use App\Nova\Filters\UserType;
 use AwesomeNova\Cards\FilterCard;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
@@ -122,11 +123,13 @@ class TelephoneDirectory extends Resource
                     'event' => 'blur',
                     'type' => 'text',
                 ])->sortable(),
-                InlineIndex::make(__('city'), 'city')
-                ->options([
-                    'event' => 'blur',
-                    'type' => 'text',
-                ])->sortable(),
+                // InlineIndex::make(__('city'), 'city')
+                // ->options([
+                //     'event' => 'blur',
+                //     'type' => 'text',
+                // ])->sortable(),
+                BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->nullable(),
+
             // Text::make(__('phone_number'), 'phone_number')->rules('unique:telephone_directories'),
 
             Text::make(__('note'), 'note'),
