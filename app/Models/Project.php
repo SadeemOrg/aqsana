@@ -130,12 +130,12 @@ class Project extends Model
 
     public function tripto()
     {
-        return $this->belongsTo('App\Models\address','trip_to');
+        return $this->belongsTo('App\Models\address','trip_to')->where('type', '1');
     }
 
     public function tripfrom()
     {
-        return $this->belongsTo('App\Models\address','trip_from');
+        return $this->belongsTo('App\Models\address','trip_from')->where('type', '1');
     }
 
 
