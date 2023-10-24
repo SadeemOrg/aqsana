@@ -76,7 +76,7 @@ class address extends Resource
 
             ])->displayUsingLabels()->rules('required'),
             Text::make(__('name address'), "name_address")->rules('required'),
-            Text::make(__("description address"), "description")->rules('required'),
+            Text::make(__("description address"), "description"),
             Text::make(__("phone number"), "phone_number_address"),
 
             // GoogleMaps::make(__('current_location'), 'current_location')
@@ -93,6 +93,8 @@ class address extends Resource
                 Text::make(__('city'), "city",function(){
                     return   ($this->current_location) ? $this->current_location['city'] : "" ;
                 })->hideFromDetail()->hideFromIndex(),
+                // BelongsTo::make(__('city'), 'city', \App\Nova\City::class)->nullable(),
+
 
                 MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
                 ->hideWhenCreating()
