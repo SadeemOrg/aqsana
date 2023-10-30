@@ -59,7 +59,7 @@ class WorkHours extends Component
                 'user_id' => Auth::id(),
                 'day' => Carbon::now()->locale('ar')->dayName,
                 'date' => Carbon::now()->toDateTimeString(),
-                'start_time' => Carbon::now()->addHour(3),
+                'start_time' => Carbon::now()->addHour(2),
                 'on_work' => 1,
             ]);
         } else {
