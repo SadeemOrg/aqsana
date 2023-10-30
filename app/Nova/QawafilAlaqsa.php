@@ -122,6 +122,9 @@ class QawafilAlaqsa extends Resource
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
+
+
+
         $user = Auth::user();
         $id = Auth::id();
         if ($user->type() == 'admin') {
@@ -133,9 +136,7 @@ class QawafilAlaqsa extends Resource
             $projects = DB::table('project_area')->where('area_id', $Area->id)->get();
         } elseif ($user->type() == 'regular_city' && $user->City) {
 
-            $citye =   City::where('admin_id', $id)
-                ->select('id')->first();
-            dd($citye);
+
             $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
         } else   $projects = DB::table('project_city')->get();
 
@@ -494,12 +495,23 @@ class QawafilAlaqsa extends Resource
 
         $model->trip_to = '1';
         $model->newbus = null;
+
+
     }
     public static function afterCreate(Request $request, $model)
     {
         DB::table('project_status')->insert([
             'project_id' => $model->id,
             'status' => 2,
+        ]);
+
+        $id = Auth::id();
+        $Area = \App\Models\Area::where('admin_id', $id)->first();
+
+
+        DB::table('project_area')->insert([
+            'project_id' => $model->id,
+            'area_id' => $Area->id,
         ]);
         $model->newbus = null;
     }
