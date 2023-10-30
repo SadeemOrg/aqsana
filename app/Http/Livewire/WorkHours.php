@@ -54,12 +54,15 @@ class WorkHours extends Component
         $this->hide = 0;
         $user = Auth::user();
         $WorkHours = ModelsWorkHours::where('user_id', '=', $user->id)->whereDate('date', Carbon::today())->first();
+        // dd(nova_get_setting('summer_time', '0'));
+        $addTime= (nova_get_setting('summer_time', '0')) ? 3 : 2 ;
+        dd( $addTime);
         if ($WorkHours == null) {
             ModelsWorkHours::create([
                 'user_id' => Auth::id(),
                 'day' => Carbon::now()->locale('ar')->dayName,
                 'date' => Carbon::now()->toDateTimeString(),
-                'start_time' => Carbon::now()->addHour(2),
+                'start_time' => Carbon::now()->addHour($addTime),
                 'on_work' => 1,
             ]);
         } else {

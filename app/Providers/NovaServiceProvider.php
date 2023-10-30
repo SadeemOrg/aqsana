@@ -442,6 +442,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Text::make(__('time in minet'), 'time_departure'),
                         ])
                 ],
+                __('Summer time')    => [
+                    Boolean::make(__('Summer time'), 'summer_time'),
+
+                ],
 
             ]),
         ]);
