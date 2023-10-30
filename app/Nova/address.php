@@ -80,24 +80,10 @@ class address extends Resource
             Text::make(__("phone number"), "phone_number_address"),
 
             // GoogleMaps::make(__('current_location'), 'current_location')
-                // ->zoom(8),
-                Text::make(__('longitude'), "longitude",function(){
-                    return   ($this->current_location) ? $this->current_location['longitude'] : "" ;
-                })->hideFromDetail()->hideFromIndex(),
-                Text::make(__('latitude'), "latitude",function(){
-                    return   ($this->current_location) ? $this->current_location['latitude'] : "" ;
-                })->hideFromDetail()->hideFromIndex(),
-                Text::make(__('street_name'), "street_name",function(){
-                    return   ($this->current_location) ? $this->current_location['street_name'] : "" ;
-                })->hideFromDetail()->hideFromIndex(),
-                Text::make(__('city'), "city",function(){
-                    return   ($this->current_location) ? $this->current_location['city'] : "" ;
-                })->hideFromDetail()->hideFromIndex(),
-                // BelongsTo::make(__('city'), 'city', \App\Nova\City::class)->nullable(),
-
+            //     ->zoom(8),
 
                 MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
-                ->hideWhenCreating()
+
                 ->center(['lat' =>  31.775947, 'lng' => 35.235577]) ->types(['address' ,'establishment'])->mapOptions(['fullscreenControl' => true,'clickableIcons'=>true,'restriction'=>true]),
 
             // Select::make(__("Status"), "status")->options([
