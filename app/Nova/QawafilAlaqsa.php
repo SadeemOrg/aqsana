@@ -321,6 +321,25 @@ class QawafilAlaqsa extends Resource
 
                         return $user_type_admin_array;
                     })->singleSelect(),
+                    Flexible::make(__('Qawafil_sub_admin'), 'Qawafil_sub_admin')
+
+                    ->addLayout(__('Qawafil_sub_admin'), 'Qawafil_sub_admin', [
+                        Multiselect::make(__('Qawafil_sub_admin'), 'Qawafil_sub_admin')
+                        ->options(function () {
+                            $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+
+                            $user_type_admin_array =  array();
+
+                            foreach ($users as $user) {
+
+
+
+                                $user_type_admin_array += [$user['id'] => ($user['name'])];
+                            }
+                            return $user_type_admin_array;
+                        })->rules('required')->singleSelect(),
+
+                    ]),
                 BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
