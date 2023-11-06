@@ -55,6 +55,7 @@ use Gwd\FlexibleContent\FlexibleContent;
 use Laravel\Nova\Panel;
 use App\Nova\Actions\ChangeRole;
 use App\Nova\Actions\ProjectStartEnd;
+use App\Nova\Filters\ProjectArea;
 use App\Nova\Metrics\NewQawafilAlaqsa;
 use App\Rules\QawafilAlaqsaDate;
 use Laravel\Nova\Fields\Markdown;
@@ -320,6 +321,25 @@ class QawafilAlaqsa extends Resource
 
                         return $user_type_admin_array;
                     })->singleSelect(),
+                    Flexible::make(__('Qawafil_sub_admin'), 'Qawafil_sub_admin')
+
+                    ->addLayout(__('Qawafil_sub_admin'), 'Qawafil_sub_admin', [
+                        Multiselect::make(__('Qawafil_sub_admin'), 'Qawafil_sub_admin')
+                        ->options(function () {
+                            $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+
+                            $user_type_admin_array =  array();
+
+                            foreach ($users as $user) {
+
+
+
+                                $user_type_admin_array += [$user['id'] => ($user['name'])];
+                            }
+                            return $user_type_admin_array;
+                        })->rules('required')->singleSelect(),
+
+                    ]),
                 BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
@@ -703,7 +723,9 @@ class QawafilAlaqsa extends Resource
     public function cards(Request $request)
     {
         return [
-            new NewQawafilAlaqsa()
+            new NewQawafilAlaqsa(),
+            new FilterCard(new ProjectArea()),
+
         ];
     }
 
@@ -715,7 +737,9 @@ class QawafilAlaqsa extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new ProjectArea,
+        ];
     }
 
     /**

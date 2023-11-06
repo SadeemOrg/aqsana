@@ -128,7 +128,22 @@ class TelephoneDirectory extends Resource
                 //     'event' => 'blur',
                 //     'type' => 'text',
                 // ])->sortable(),
-                BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->nullable(),
+
+                Multiselect::make(__('city'), 'city')
+                    ->options(function () {
+                        $Areas =  \App\Models\City::all();
+
+                        $Area_type_admin_array =  array();
+
+                        foreach ($Areas as $Area) {
+
+
+                            $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                        }
+
+                        return $Area_type_admin_array;
+                    })->singleSelect()->hideFromIndex()->hideFromDetail(),
+                BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating()->nullable(),
 
             // Text::make(__('phone_number'), 'phone_number')->rules('unique:telephone_directories'),
 
