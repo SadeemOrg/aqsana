@@ -27,8 +27,10 @@
           for="default-input"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >ادخل نص الرسالة
-        </label>        
-        <textarea id="default-input" v-model="Message" name="" cols="30" rows="10" class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"></textarea>
+        </label>
+        <span>Add a comment</span> <em class="text-light">(up to a 140 characters)</em>
+        <textarea  v-on:keyup="countdown" v-model="message" placeholder="" id="default-input"  name="" cols="30" rows="10" class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"></textarea>
+        <p class='text-right text-small' v-bind:class="{'text-danger': hasError }">{{remainingCount}}</p>
         <div class="flex flex-row items-center justify-end mt-4">
           <button
             type="submit"
@@ -49,6 +51,10 @@ export default {
     return {
       Message: "",
       selectval:[],
+      maxCount: 140,
+    remainingCount: 140,
+    message: '',
+    hasError: false
     };
   },
   props: [
@@ -72,6 +78,10 @@ export default {
           alert("Message Send ");
         });
     },
+    countdown: function() {
+      this.remainingCount = this.maxCount - this.message.length;
+      this.hasError = this.remainingCount < 0;
+    }
   },
 };
 </script>

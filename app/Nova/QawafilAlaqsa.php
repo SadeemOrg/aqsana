@@ -55,6 +55,7 @@ use Gwd\FlexibleContent\FlexibleContent;
 use Laravel\Nova\Panel;
 use App\Nova\Actions\ChangeRole;
 use App\Nova\Actions\ProjectStartEnd;
+use App\Nova\Filters\ProjectArea;
 use App\Nova\Metrics\NewQawafilAlaqsa;
 use App\Rules\QawafilAlaqsaDate;
 use Laravel\Nova\Fields\Markdown;
@@ -703,7 +704,9 @@ class QawafilAlaqsa extends Resource
     public function cards(Request $request)
     {
         return [
-            new NewQawafilAlaqsa()
+            new NewQawafilAlaqsa(),
+            new FilterCard(new ProjectArea()),
+
         ];
     }
 
@@ -715,7 +718,9 @@ class QawafilAlaqsa extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new ProjectArea,
+        ];
     }
 
     /**

@@ -286,12 +286,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       Message: "",
-      selectval: []
+      selectval: [],
+      maxCount: 140,
+      remainingCount: 140,
+      message: '',
+      hasError: false
     };
   },
 
@@ -306,6 +312,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (response) {
         alert("Message Send ");
       });
+    },
+
+    countdown: function countdown() {
+      this.remainingCount = this.maxCount - this.message.length;
+      this.hasError = this.remainingCount < 0;
     }
   }
 });
@@ -411,28 +422,50 @@ var render = function() {
             [_vm._v("ادخل نص الرسالة\n      ")]
           ),
           _vm._v(" "),
+          _c("span", [_vm._v("Add a comment")]),
+          _vm._v(" "),
+          _c("em", { staticClass: "text-light" }, [
+            _vm._v("(up to a 140 characters)")
+          ]),
+          _vm._v(" "),
           _c("textarea", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.Message,
-                expression: "Message"
+                value: _vm.message,
+                expression: "message"
               }
             ],
             staticClass:
               "appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
-            attrs: { id: "default-input", name: "", cols: "30", rows: "10" },
-            domProps: { value: _vm.Message },
+            attrs: {
+              placeholder: "",
+              id: "default-input",
+              name: "",
+              cols: "30",
+              rows: "10"
+            },
+            domProps: { value: _vm.message },
             on: {
+              keyup: _vm.countdown,
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.Message = $event.target.value
+                _vm.message = $event.target.value
               }
             }
           }),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              staticClass: "text-right text-small",
+              class: { "text-danger": _vm.hasError }
+            },
+            [_vm._v(_vm._s(_vm.remainingCount))]
+          ),
           _vm._v(" "),
           _c(
             "div",
