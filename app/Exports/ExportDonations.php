@@ -74,8 +74,9 @@ class   ExportDonations implements FromCollection, WithHeadings
 
             if ($Transaction->name != null) {
 
-                $name = TelephoneDirectory::find($Transaction->name)->name;
+                $name = TelephoneDirectory::find($Transaction->name);
                 // dd($Transaction->name,$name,TelephoneDirectory::find($Transaction->name)->name);
+                $name = (isset($name)) ? $name->name : "" ;
                 $Transaction->name = $name;
             }
             if ($Transaction->ref_id != null) {
