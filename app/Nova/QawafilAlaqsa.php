@@ -528,11 +528,13 @@ class QawafilAlaqsa extends Resource
         $id = Auth::id();
         $Area = \App\Models\Area::where('admin_id', $id)->first();
 
+if(isset($Area)){
+    DB::table('project_area')->insert([
+        'project_id' => $model->id,
+        'area_id' => $Area->id,
+    ]);
+}
 
-        DB::table('project_area')->insert([
-            'project_id' => $model->id,
-            'area_id' => $Area->id,
-        ]);
         $model->newbus = null;
     }
     public static function beforesave(Request $request, $model)
