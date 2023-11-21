@@ -26,6 +26,7 @@ class DonationNotReceive extends Value
         return $this->sum($request, Transaction::where([
             ['transaction_status', 1],
             ['main_type', 1],
+            ['is_delete', 0],
         ]), 'equivelant_amount');
     }
 

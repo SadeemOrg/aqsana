@@ -321,23 +321,23 @@ class QawafilAlaqsa extends Resource
 
                         return $user_type_admin_array;
                     })->singleSelect(),
-                    Flexible::make(__('Qawafil_sub_admin'), 'Qawafil_sub_admin')
+                Flexible::make(__('Qawafil_sub_admin'), 'Qawafil_sub_admin')
 
                     ->addLayout(__('Qawafil_sub_admin'), 'Qawafil_sub_admin', [
                         Multiselect::make(__('Qawafil_sub_admin'), 'Qawafil_sub_admin')
-                        ->options(function () {
-                            $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+                            ->options(function () {
+                                $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
 
-                            $user_type_admin_array =  array();
+                                $user_type_admin_array =  array();
 
-                            foreach ($users as $user) {
+                                foreach ($users as $user) {
 
 
 
-                                $user_type_admin_array += [$user['id'] => ($user['name'])];
-                            }
-                            return $user_type_admin_array;
-                        })->rules('required')->singleSelect(),
+                                    $user_type_admin_array += [$user['id'] => ($user['name'])];
+                                }
+                                return $user_type_admin_array;
+                            })->rules('required')->singleSelect(),
 
                     ]),
                 BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -515,8 +515,6 @@ class QawafilAlaqsa extends Resource
 
         $model->trip_to = '1';
         $model->newbus = null;
-
-
     }
     public static function afterCreate(Request $request, $model)
     {
@@ -528,12 +526,12 @@ class QawafilAlaqsa extends Resource
         $id = Auth::id();
         $Area = \App\Models\Area::where('admin_id', $id)->first();
 
-if(isset($Area)){
-    DB::table('project_area')->insert([
-        'project_id' => $model->id,
-        'area_id' => $Area->id,
-    ]);
-}
+        if (isset($Area)) {
+            DB::table('project_area')->insert([
+                'project_id' => $model->id,
+                'area_id' => $Area->id,
+            ]);
+        }
 
         $model->newbus = null;
     }

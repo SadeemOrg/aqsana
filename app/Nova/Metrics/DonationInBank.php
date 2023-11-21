@@ -25,6 +25,7 @@ class DonationInBank extends Value
         return $this->sum($request, Transaction::where([
             ['transaction_status', 3],
             ['main_type', 1],
+            ['is_delete', 0],
         ]), 'equivelant_amount');
     }
 
