@@ -10365,7 +10365,7 @@ var render = function() {
                                                                 value:
                                                                   Sector.Budget /
                                                                     4 +
-                                                                  Sector.income_fourth -
+                                                                  Sector.income_First -
                                                                   Sector.expenses_fourth
                                                               }
                                                             })
