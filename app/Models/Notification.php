@@ -20,7 +20,8 @@ class Notification extends Model
     ];
     protected $casts = [
 
-        'id' => 'string'
+        'id' => 'string',
+        'data'=>"array"
     ];
     public function user()
     {

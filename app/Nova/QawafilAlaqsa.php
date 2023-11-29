@@ -384,9 +384,29 @@ class QawafilAlaqsa extends Resource
 
                 BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->hideWhenCreating(),
 
-                BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->withMeta([
-                    'value' => "1",
-                ])->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
+                // BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->withMeta([
+                //     'value' => "1",
+                // ])->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
+
+                Select::make(__('trip to'), 'tripto')
+                ->options(function () {
+                    $id = Auth::id();
+                    $addresss =  \App\Models\address::where('type', '1')->get();
+                    $address_type_admin_array =  array();
+
+                    foreach ($addresss as $address) {
+
+                        if ($address->Area == null || $this->admin_id == $address['id']) {
+                            $address_type_admin_array += [$address['id'] => ($address['name_address'])];
+                        }
+                    }
+
+                    return $address_type_admin_array;
+                })
+                ->withMeta([
+                        'value' => "1",
+                    ])
+                ->hideFromIndex()->hideFromDetail()->singleSelect(),
                 text::make(__('note'), "note"),
                 DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required'),
                 DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required')->rules(new QawafilAlaqsaDate($request->start_date)),

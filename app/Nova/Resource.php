@@ -9,7 +9,18 @@ use Ganyicz\NovaCallbacks\HasCallbacks;
 abstract class Resource extends NovaResource
 {
     use HasCallbacks;
+
+
+
     public static $perPageOptions = [10,25,50,100];
+
+
+    public static function redirectAfterCreate(NovaRequest $request, $resource)
+    {
+        $resourceName = static::uriKey();
+
+        return '/resources/' . $resourceName;
+    }
     /**
      * Build an "index" query for the given resource.
      *

@@ -29,12 +29,12 @@
                 <div class="">
                     @foreach ($notificationsArray as $notification)
                         @php
-                            $dataNotifications = json_decode($notification->data);
+                            $dataNotifications = $notification->data;
                             // $newTimeShape = Carbon::createFromFormat('m/d/Y', $notification->created_at)->diffForHumans();
                             $newTimeShape = date_format($notification->created_at, 'm/d/Y');
                             $result = Carbon::createFromFormat('m/d/Y', $newTimeShape)->diffForHumans();
                             // $img='/storage/'. $notification->user->photo;
-                               $user= user::find($dataNotifications->sender_id);
+                               $user= user::find($dataNotifications['sender_id']);
                                 // dd($user->photo);
                                 $img = 'storage/' . $user->photo;
                                 $name=$user->name;
@@ -54,7 +54,7 @@
                                         {{ $name }} ارسل لك إشعار جديد
                                     </p>
                                     <p class=" text-sm mx-2 font-bold text-black">
-                                        {{ $dataNotifications->Notifications }}
+                                        {{ $dataNotifications['Notifications'] }}
                                     </p>
                                     <div class="w-full flex flex-row items-center justify-end">
                                         <p class="font-Flatnormal text-xs text-center">{{ $result}}</p>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="p-3">
                     <a href="/Admin/notification" class="block bg-[#349A37] hover:bg-[#40b744] text-white text-center flex items-center justify-center h-10 rounded-lg">
-                        <span>See all notifications</span>    
+                        <span>See all notifications</span>
                     </a>
                 </div>
             @else
@@ -89,11 +89,11 @@
         @foreach ($receiveNotification as $notification)
             @php
                 $notificationsArraycount = $notificationsArray->count();
-                $dataNotifications = json_decode($notification->data);
+                $dataNotifications = $notification->data;
             @endphp
 
             <script>
-                var bool = {!! json_encode($dataNotifications->Notifications) !!};
+                var bool = {!! json_encode($dataNotifications['Notifications']) !!};
                 var bonotificationsArraycountol = {!! json_encode($notificationsArraycount) !!};
                 // toastr.error(bool);
 

@@ -12,15 +12,19 @@ class TasksNotification extends Notification
     use Queueable;
     private $offerData;
     private $date;
+    private $userSchema;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($offerData , $date)
+    public function __construct($offerData , $date,$userSchema)
     {
         $this->offerData = $offerData;
         $this->date = $date;
+        $this->userSchema = $userSchema;
+
     }
 
     /**
@@ -43,10 +47,18 @@ class TasksNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
-    }
+                    ->line('Hello'."  ". $this->userSchema->name)
+                    // ->line()
+                    ->line('A new task has been created:')
+                    ->line('by'  ."  ".  Auth::user()->name )
+                    ->line('Description :'."  ". $this->offerData)
+                    ->line('date :'."  ".$this->date)
+                    ->line('Thank you')
+                    ->line('alaqsa');
+
+
+
+                }
 
     /**
      * Get the array representation of the notification.

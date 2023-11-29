@@ -23,6 +23,9 @@ use Illuminate\Http\Request;
 
         use SearchesRelations;
 
+
+
+
         public static $searchRelations = [
             'AreaDelegate' => ['id', 'name'],
         ];
@@ -155,6 +158,9 @@ use Illuminate\Http\Request;
 
             ];
         }
+
+
+
         public static function beforeSave(Request $request, $model)
         {
             if (!$request->city) {

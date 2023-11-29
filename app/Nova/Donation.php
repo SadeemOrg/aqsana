@@ -207,6 +207,7 @@ class Donation extends Resource
                 '3' => __('bit'),
                 '4' => __('hawale'),
                 '5' => __('pay pal'),
+                '6' => __('حصالة'),
             ])->displayUsingLabels()->default('1'),
             NovaDependencyContainer::make([
                 Text::make(__('transact amount'), 'transact_amount')->rules('required'),

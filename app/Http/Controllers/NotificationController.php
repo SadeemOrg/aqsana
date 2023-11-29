@@ -38,13 +38,17 @@ class NotificationController extends Controller
 
         $user = Auth::user();
         $Notifications = \App\Models\Notification::where('notifiable_id', $user->id)->get();
+        $Notifications =  $Notifications->sortByDesc(function ($item) {
+            // Access the field within the JSON column
+            return data_get($item->data, 'date');
+        });
+
         $myNotifications = array();
         foreach ($Notifications as $key => $value) {
-            // echo $value->type;
-            // echo $value->id;
 
-            $data = json_decode($value->data);
-            $sender = user::find($data->sender_id);
+
+            $data = $value->data;
+            $sender = user::find($data['sender_id']);
 
             $pus = array(
                 "sender" => $sender,
@@ -65,12 +69,16 @@ class NotificationController extends Controller
 
         if ((in_array('super-admin',   $user->userrole()))) {
             $Notifications = \App\Models\Notification::where('notifiable_id', $request->user)->get();
+            $Notifications =  $Notifications->sortByDesc(function ($item) {
+                // Access the field within the JSON column
+                return data_get($item->data, 'date');
+            });
             foreach ($Notifications as $key => $value) {
                 // echo $value->type;
                 // echo $value->id;
                 // dd($value);
 
-                $data = json_decode($value->data);
+                $data = $value->data;
                 if ($user)
                     $pus = array(
 
@@ -84,15 +92,18 @@ class NotificationController extends Controller
             }
         } else {
             $Notifications = \App\Models\Notification::where('notifiable_id', $request->user)->get();
-
+            $Notifications =  $Notifications->sortByDesc(function ($item) {
+                // Access the field within the JSON column
+                return data_get($item->data, 'date');
+            });
             foreach ($Notifications as $key => $value) {
                 // echo $value->type;
                 // echo $value->id;
                 // dd($value);
 
-                $data = json_decode($value->data);
+                $data = $value->data;
 
-                if ($user->id ==  $data->sender_id) {
+                if ($user->id ==  $data['sender_id']) {
                     $pus = array(
 
                         "id" => $value->id,
@@ -113,13 +124,13 @@ class NotificationController extends Controller
     {
 
 
+        // dd($request->all());
         $userSchema = User::find($request->user);
-        // dd($request->user);
         $offerData = $request->Notifications;
         $date = $request->date;
         // dd($date);
         // Auth::user()->notify(new PostNotif());
-        Notification::send($userSchema, new TasksNotification($offerData, $date));
+        Notification::send($userSchema, new TasksNotification($offerData, $date,$userSchema));
         $url = 'https://fcm.googleapis.com/fcm/send';
         $FcmToken = User::where('id', $userSchema->id)->pluck('device_key')->all();
         // dd($FcmToken);

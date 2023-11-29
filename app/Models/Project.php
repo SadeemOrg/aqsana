@@ -135,7 +135,8 @@ class Project extends Model
 
     public function tripfrom()
     {
-        return $this->belongsTo('App\Models\address','trip_from')->where('type', '1');
+        return $this->belongsTo('App\Models\address','trip_from')->where('type', '1')->where($address->Area , '1');
+
     }
 
 

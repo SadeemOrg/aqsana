@@ -394,8 +394,8 @@ class HomeController extends Controller
 
         DB::table('budgets')
             ->updateOrInsert(
-                ['user_id' => $request->year, 'form_id' =>  0],
-                ['budget' => $request->Sectors[0]['Budget']]
+                ['year' => $request->year, 'sector_id' =>  0],
+                ['budget' => $request->budgetsOfyear]
 
             );
 
@@ -505,16 +505,23 @@ class HomeController extends Controller
             $year = $request->year;
             //years
             $expenses_year = 0;
+            $income_year = 0;
             $date_from = $year . '-1-1';
             $date_to = $year . '-12-31';
             $from = date($date_from);
             $to = date($date_to);
-            $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactions = Transaction::where('main_type', '2')->where('sector',$Sector->id)->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactionsincome = Transaction::where('main_type', '1')->where('sector',$Sector->id)->whereBetween('transaction_date', [$from, $to])->get();
+
             foreach ($Transactions as $key => $Transaction) {
                 $expenses_year += $Transaction->equivelant_amount;
 
             }
             $expenses_year=number_format($expenses_year   , 2, '.', '');
+            foreach ($Transactionsincome as $key => $Transaction) {
+                $income_year += $Transaction->equivelant_amount;
+            }
+            $income_year=number_format($income_year   , 2, '.', '');
 
             //First Quarter
             $expenses_First = 0;
@@ -523,8 +530,8 @@ class HomeController extends Controller
             $date_to = $year . '-3-31';
             $from = date($date_from);
             $to = date($date_to);
-            $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
-            $Transactionsincome = Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactions = Transaction::where('main_type', '2')->where('sector',$Sector->id)->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactionsincome = Transaction::where('main_type', '1')->where('sector',$Sector->id)->whereBetween('transaction_date', [$from, $to])->get();
 
             foreach ($Transactions as $key => $Transaction) {
                 $expenses_First += $Transaction->equivelant_amount;
@@ -541,8 +548,8 @@ class HomeController extends Controller
             $date_to = $year . '-6-30';
             $from = date($date_from);
             $to = date($date_to);
-            $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
-            $Transactionsincome = Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactions = Transaction::where('main_type', '2')->where('sector',$Sector->id)->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactionsincome = Transaction::where('main_type', '1')->where('sector',$Sector->id)->whereBetween('transaction_date', [$from, $to])->get();
 
             foreach ($Transactions as $key => $Transaction) {
                 $expenses_Second += $Transaction->equivelant_amount;
@@ -560,8 +567,8 @@ class HomeController extends Controller
             $date_to = $year . '-9-30';
             $from = date($date_from);
             $to = date($date_to);
-            $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
-            $Transactionsincome = Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactions = Transaction::where('main_type', '2')->where('sector',$Sector->id)->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactionsincome = Transaction::where('main_type', '1')->where('sector',$Sector->id)->whereBetween('transaction_date', [$from, $to])->get();
 
             foreach ($Transactions as $key => $Transaction) {
                 $expenses_Third += $Transaction->equivelant_amount;
@@ -579,8 +586,8 @@ class HomeController extends Controller
             $date_to = $year . '-12-31';
             $from = date($date_from);
             $to = date($date_to);
-            $Transactions = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->get();
-            $Transactionsincome = Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactions = Transaction::where('main_type', '2')->where('sector',$Sector->id)->whereBetween('transaction_date', [$from, $to])->get();
+            $Transactionsincome = Transaction::where('main_type', '1')->where('sector',$Sector->id)->whereBetween('transaction_date', [$from, $to])->get();
 
             foreach ($Transactions as $key => $Transaction) {
                 $expenses_fourth += $Transaction->equivelant_amount;
@@ -598,16 +605,17 @@ class HomeController extends Controller
                 $pus = array(
                     "sector_id" => $Sector->id,
                     "Sector" => $Sector->text,
-                    "Budget" => $Budgets->budget,
-                    "expenses_year" =>  $expenses_year,
-                    "expenses_First" => $expenses_First,
-                    "expenses_Second" =>  $expenses_Second,
-                    "expenses_Third" =>  $expenses_Third,
-                    "expenses_fourth" =>  $expenses_fourth,
-                    "income_First" => $income_First,
-                    "income_Second" => $income_Second,
-                    "income_Third" => $income_Third,
-                    "income_fourth" => $income_fourth,
+                    "Budget" => (int) $Budgets->budget,
+                    "expenses_year" => (int) $expenses_year,
+                    "expenses_First" => (int)$expenses_First,
+                    "expenses_Second" =>(int)  $expenses_Second,
+                    "expenses_Third" =>(int)  $expenses_Third,
+                    "expenses_fourth" => (int) $expenses_fourth,
+                    "income_year"=>(int) $income_year,
+                    "income_First" =>(int) $income_First,
+                    "income_Second" =>(int) $income_Second,
+                    "income_Third" => (int)$income_Third,
+                    "income_fourth" =>(int)$income_fourth,
 
 
 
@@ -618,15 +626,18 @@ class HomeController extends Controller
                     "sector_id" => $Sector->id,
                     "Sector" => $Sector->text,
                     "Budget" => '0',
-                    "expenses_year" =>  $expenses_year,
-                    "expenses_First" => $expenses_First,
-                    "expenses_Second" =>  $expenses_Second,
-                    "expenses_Third" =>  $expenses_Third,
-                    "expenses_fourth" =>  $expenses_fourth,
-                    "income_First" => $income_First,
-                    "income_Second" => $income_Second,
-                    "income_Third" => $income_Third,
-                    "income_fourth" => $income_fourth,
+
+                    "expenses_year" => (int) $expenses_year,
+                    "expenses_First" => (int)$expenses_First,
+                    "expenses_Second" =>(int) $expenses_Second,
+                    "expenses_Third" => (int) $expenses_Third,
+                    "expenses_fourth" => (int) $expenses_fourth,
+
+                    "income_year"=>(int)$income_year,
+                    "income_First" =>(int)$income_First,
+                    "income_Second" => (int)$income_Second,
+                    "income_Third" =>(int) $income_Third,
+                    "income_fourth" => (int)$income_fourth,
 
                 );
             }

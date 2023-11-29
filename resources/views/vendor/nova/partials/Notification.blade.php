@@ -39,12 +39,12 @@
     <ul class="list-reset overflow-y-auto p-1">
         @foreach ($notificationsArray as $notificationArray)
             @php
-                $dataNotifications = json_decode($notificationArray->data);
+                $dataNotifications = ($notificationArray->data);
                 // $newTimeShape = Carbon::createFromFormat('m/d/Y', $notification->created_at)->diffForHumans();
                 $newTimeShape = date_format($notificationArray->created_at, 'm/d/Y');
                 $result = Carbon::createFromFormat('m/d/Y', $newTimeShape)->diffForHumans();
                 // $img='/storage/'. $notification->user->photo;
-                $user = App\Models\user::find($dataNotifications->sender_id);
+                $user = App\Models\user::find($dataNotifications['sender_id']);
                 // dd($user->photo);
                 $img = 'storage/' . $user->photo;
                 $name = $user->name;
@@ -64,7 +64,7 @@
                         {{ $name }} ارسل لك إشعار جديد
                     </p>
                     <p class=" text-sm mx-2 font-bold text-black">
-                        {{ $dataNotifications->Notifications }}
+                        {{ $dataNotifications['Notifications'] }}
                     </p>
                     <div class="w-full flex flex-row items-center justify-end">
                         <p class="font-Flatnormal text-xs text-center">{{ $result}}</p>

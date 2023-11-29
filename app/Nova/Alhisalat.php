@@ -19,6 +19,7 @@ use App\Models\User;
 use App\Models\Income;
 use App\Models\Notification;
 use App\Nova\Actions\AlhisalatColect;
+use App\Nova\Actions\AlhisalatDelete;
 use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
 use App\Nova\Actions\AlhisalatSurrender;
@@ -148,6 +149,43 @@ class Alhisalat extends Resource
                     return $this->status  >= '3';
                 })->readonly()->text(__('sent done'))->showLoadingAnimation()
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
+
+                ActionButton::make(__('colect'))
+                ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
+                    ->confirmButtonText(__('colect '))
+                    ->cancelButtonText(__('sent done')), $this->id)
+                ->canSee(function () {
+                    return $this->status == '0';
+                })->readonly()->text(__('لا يمكن الجمع '))->showLoadingAnimation()->buttonColor('#3374FF')
+                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
+
+
+
+            ActionButton::make(__('حصالة مفقودة'))
+            ->action((new AlhisalatDelete)
+            ->confirmText(__('Are you sure you want to colect  this Alhisalat?'))
+                ->confirmButtonText(__('حصالة مفقودة'))
+                ->cancelButtonText(__('الغاء')), $this->id)
+                ->canSee(function () {
+                    return $this->status != '0';
+                })->readonly(function(){
+                    return $this->status  >= '3';
+                })
+           ->text(__('حصالة مفقودة'))->showLoadingAnimation()
+            ->loadingColor('#FF3333')->buttonColor('#FF3333')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
+            ActionButton::make(__('colect'))
+                ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
+                    ->confirmButtonText(__('colect '))
+                    ->cancelButtonText(__('sent done')), $this->id)
+                ->canSee(function () {
+                    return $this->status == '0';
+                })->readonly()->text(__('delete done'))->showLoadingAnimation()->buttonColor('#3374FF')
+                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+
+
 
             Multiselect::make(__('saved addresss'), 'address_id')
                 ->options(function () {
@@ -318,6 +356,8 @@ class Alhisalat extends Resource
             //     }
             // ),
             (new AlhisalatSurrender),
+            (new AlhisalatDelete),
+
         ];
     }
     public function tools(Request $request)
