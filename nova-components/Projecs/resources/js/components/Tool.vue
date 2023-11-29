@@ -387,7 +387,7 @@
                                 <div class="space-y-8 divide-y divide-gray-200">
                                   <div>
                                     <div
-                                      class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
+                                      class="mt-6 grid grid-cols-2 gap-y-6 gap-x-4 sm:grid-cols-8"
                                     >
                                       <div class="sm:col-span-2">
                                         <label
@@ -426,6 +426,25 @@
                                           />
                                         </div>
                                       </div>
+                                       <div class="sm:col-span-2">
+                                        <label
+                                          for="street-address"
+                                          class="block text-sm font-medium text-gray-700"
+                                        >
+                                          مدخلات القطاع
+                                        </label>
+                                        <div class="mt-1">
+                                          <input
+                                            readonly
+                                            type="text"
+                                            name="street-address"
+                                            id="street-address"
+                                            autocomplete="street-address"
+                                            :value="Sector.income_year"
+                                            class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                          />
+                                        </div>
+                                      </div>
                                       <div class="sm:col-span-2">
                                         <label
                                           for="street-address"
@@ -441,12 +460,13 @@
                                             id="street-address"
                                             autocomplete="street-address"
                                             :value="
-                                             ( Sector.Budget - Sector.expenses_year).toFixed(2)
+                                             ( Sector.Budget + Sector.income_year - Sector.expenses_year).toFixed(2)
                                             "
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
                                       </div>
+
                                       <!--First Quarter -->
                                       <div class="sm:col-span-2">
                                         <label
@@ -486,6 +506,25 @@
                                       </div>
                                       <div class="sm:col-span-2">
                                         <label
+                                          for="street-address"
+                                          class="block text-sm font-medium text-gray-700"
+                                        >
+                                          مدخلات الربع الاول
+                                     </label>
+                                        <div class="mt-1">
+                                          <input
+                                            readonly
+                                            type="text"
+                                            name="street-address"
+                                            id="street-address"
+                                            autocomplete="street-address"
+                                            :value="Sector.income_First"
+                                            class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                          />
+                                        </div>
+                                      </div>
+                                      <div class="sm:col-span-2">
+                                        <label
                                           for="postal-code"
                                           class="block text-sm font-medium text-gray-700"
                                           >الربع الاول صافي الانفاق</label
@@ -498,8 +537,7 @@
                                             id="postal-code"
                                             autocomplete="postal-code"
                                             :value="
-                                              (Sector.Budget / 4 -
-                                              Sector.expenses_First).toFixed(2)
+                                              ((Sector.Budget / 4 ) +Sector.income_First -  Sector.expenses_First).toFixed(2)
                                             "
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
@@ -544,6 +582,25 @@
                                       </div>
                                       <div class="sm:col-span-2">
                                         <label
+                                          for="street-address"
+                                          class="block text-sm font-medium text-gray-700"
+                                        >
+                                          مدخلات الربع الثاني
+                                     </label>
+                                        <div class="mt-1">
+                                          <input
+                                            readonly
+                                            type="text"
+                                            name="street-address"
+                                            id="street-address"
+                                            autocomplete="street-address"
+                                            :value="Sector.income_Second"
+                                            class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                          />
+                                        </div>
+                                      </div>
+                                      <div class="sm:col-span-2">
+                                        <label
                                           for="postal-code"
                                           class="block text-sm font-medium text-gray-700"
                                           >الربع الثاني صافي الانفاق
@@ -556,7 +613,7 @@
                                             id="postal-code"
                                             autocomplete="postal-code"
                                             :value="
-                                             ( Sector.Budget / 4 -
+                                             ((Sector.Budget / 4 ) +Sector.income_Second -
                                               Sector.expenses_Second).toFixed(2)
                                             "
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -602,6 +659,25 @@
                                       </div>
                                       <div class="sm:col-span-2">
                                         <label
+                                          for="street-address"
+                                          class="block text-sm font-medium text-gray-700"
+                                        >
+                                          مدخلات الربع الثالت
+                                     </label>
+                                        <div class="mt-1">
+                                          <input
+                                            readonly
+                                            type="text"
+                                            name="street-address"
+                                            id="street-address"
+                                            autocomplete="street-address"
+                                            :value="Sector.income_Third"
+                                            class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                          />
+                                        </div>
+                                      </div>
+                                      <div class="sm:col-span-2">
+                                        <label
                                           for="postal-code"
                                           class="block text-sm font-medium text-gray-700"
                                           >الربع الثالت صافي الانفاق
@@ -614,7 +690,7 @@
                                             id="postal-code"
                                             autocomplete="postal-code"
                                             :value="
-                                             ( Sector.Budget / 4 -
+                                             ( (Sector.Budget / 4 ) +Sector.income_Third-
                                               Sector.expenses_Third).toFixed(2)
                                             "
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -660,6 +736,25 @@
                                       </div>
                                       <div class="sm:col-span-2">
                                         <label
+                                          for="street-address"
+                                          class="block text-sm font-medium text-gray-700"
+                                        >
+                                          مدخلات الربع الرابع
+                                     </label>
+                                        <div class="mt-1">
+                                          <input
+                                            readonly
+                                            type="text"
+                                            name="street-address"
+                                            id="street-address"
+                                            autocomplete="street-address"
+                                            :value="Sector.income_fourth"
+                                            class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                          />
+                                        </div>
+                                      </div>
+                                      <div class="sm:col-span-2">
+                                        <label
                                           for="postal-code"
                                           class="block text-sm font-medium text-gray-700"
                                           >الربع الرابع صافي الانفاق
@@ -672,8 +767,8 @@
                                             id="postal-code"
                                             autocomplete="postal-code"
                                             :value="
-                                              Sector.Budget / 4 -
-                                              Sector.expenses_fourth
+                                           (  (Sector.Budget / 4 ) +Sector.income_fourth -
+                                              Sector.expenses_fourth)
                                             "
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
@@ -686,13 +781,13 @@
                               <div class="md:flex justify-between mt-5 text-center mt-10">
                                 <div class="mb-6 md:mb-0 md:w-1/2">
                                   <pure-vue-chart
-                                    class="chart-custom-style"                                    
+                                    class="chart-custom-style"
                                     :points="[{label: 'الربع الاول', value: Sector.expenses_First}, {label: 'الربع الثاني', value: Sector.expenses_Second}, {label: 'الربع الثالث', value: Sector.expenses_Third}, {label: 'الربع الرابع', value: Sector.expenses_fourth}]"
                                     :show-y-axis="true"
                                     :show-x-axis="true"
                                     :width="chartWidth"
                                     :height="200"
-                                    :show-values="true"                                    
+                                    :show-values="true"
                                   />
                                   <h3 class="mt-3">مخرجات</h3>
                                 </div>
@@ -704,10 +799,10 @@
                                     :show-x-axis="true"
                                     :width="chartWidth"
                                     :height="200"
-                                    :show-values="true"                                    
+                                    :show-values="true"
                                   />
                                   <h3 class="mt-3">مدخلات</h3>
-                                </div>                               
+                                </div>
                               </div>
                             </div>
                           </div>

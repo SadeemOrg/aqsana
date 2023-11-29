@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Acme\MultiselectField\Multiselect;
 use App\Nova\Actions\ExportAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,12 +70,26 @@ class address extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Select::make(__("type"), "type")->options([
-                '1' => __('bus'),
-                '2' => __('Alhisalat'),
-                '3' => __('Project'),
 
-            ])->displayUsingLabels()->rules('required'),
+            Multiselect::make(__('type'), 'type')
+                ->options(function () {
+                    $AddressTypes =  \App\Models\AddressType::where('active', '1')->get();
+                    $address_type_admin_array =  array();
+
+                    foreach ($AddressTypes as $AddressType) {
+
+                            $address_type_admin_array += [$AddressType['id'] => ($AddressType['name'])];
+
+                    }
+
+                    return $address_type_admin_array;
+                })->singleSelect()->hideFromIndex()->hideFromDetail(),
+            // Select::make(__("type"), "type")->options([
+            //     '1' => __('bus'),
+            //     '2' => __('Alhisalat'),
+            //     '3' => __('Project'),
+
+            // ])->displayUsingLabels()->rules('required'),
             Text::make(__('name address'), "name_address")->rules('required'),
             Text::make(__("description address"), "description"),
             Text::make(__("phone number"), "phone_number_address"),
