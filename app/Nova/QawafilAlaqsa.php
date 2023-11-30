@@ -382,13 +382,13 @@ class QawafilAlaqsa extends Resource
                     ]),
 
 
-                BelongsTo::make(__('trip to'), 'trip_to', \App\Nova\address::class)->hideWhenCreating(),
+                BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->hideWhenCreating(),
 
                 // BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->withMeta([
                 //     'value' => "1",
                 // ])->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
 
-                Select::make(__('trip to'), 'tripto')
+                Select::make(__('trip to'), 'trip_to')
                 ->options(function () {
                     $id = Auth::id();
                     $addresss =  \App\Models\address::where('type', '1')->get();
