@@ -382,7 +382,7 @@ class QawafilAlaqsa extends Resource
                     ]),
 
 
-                BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->hideWhenCreating(),
+                BelongsTo::make(__('trip to'), 'trip_to', \App\Nova\address::class)->hideWhenCreating(),
 
                 // BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->withMeta([
                 //     'value' => "1",
