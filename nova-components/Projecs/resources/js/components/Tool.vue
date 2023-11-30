@@ -387,7 +387,7 @@
                                 <div class="space-y-8 divide-y divide-gray-200">
                                   <div>
                                     <div
-                                      class="mt-6 grid grid-cols-2 gap-y-6 gap-x-4 sm:grid-cols-8"
+                                      class="mt-6 grid grid-cols-2 gap-y-6 gap-x-4 sm:grid-cols-6"
                                     >
                                       <div class="sm:col-span-2">
                                         <label
@@ -505,7 +505,7 @@
                                           />
                                         </div>
                                       </div>
-                                      <div class="sm:col-span-2">
+                                      <!-- <div class="sm:col-span-2">
                                         <label
                                           for="street-address"
                                           class="block text-sm font-medium text-gray-700"
@@ -523,7 +523,7 @@
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
-                                      </div>
+                                      </div> -->
                                       <div class="sm:col-span-2">
                                         <label
                                           for="postal-code"
@@ -538,12 +538,13 @@
                                             id="postal-code"
                                             autocomplete="postal-code"
                                             :value="
-                                              ((Sector.Budget / 4 ) +Sector.income_First -  Sector.expenses_First).toFixed(2)
+                                              ((Sector.Budget / 4 ) -  Sector.expenses_First).toFixed(2)
                                             "
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
                                       </div>
+                                      <!-- +Sector.income_First  -->
                                       <!--Second Quarter -->
                                       <div class="sm:col-span-2">
                                         <label
