@@ -99,15 +99,15 @@ class TripController extends BaseController
             $trip_bokking = TripBooking::where('user_id',Auth()->id())->first();
             if($trip_bokking != null) {
                 $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-                ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->where('id',$trip_bokking->project_id)->get();
+                ->orderBy('created_at', 'desc')->where('id',$trip_bokking->project_id)->get();
             } else {
                 $trips = Project::where("project_type","2")->orWhere("project_type","3")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-                ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
+                ->orderBy('created_at', 'desc')->get();
             }
 
         } else{
             $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-            ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
+            ->orderBy('created_at', 'desc')->get();
         }
 
 
