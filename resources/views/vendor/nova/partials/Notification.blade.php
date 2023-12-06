@@ -46,8 +46,17 @@
                 // $img='/storage/'. $notification->user->photo;
                 $user = App\Models\user::find($dataNotifications['sender_id']);
                 // dd($user->photo);
-                $img = 'storage/' . $user->photo;
-                $name = $user->name;
+                if (isset($user->photo)) {
+                                $img = 'storage/' . $user->photo;
+                            } else {
+                                $img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVztexIh8wNm6hDjIwvVAQ73mfzMuWB6yqdviYpcyqQ&s';
+                            }
+
+                            if (isset($user->name)) {
+                                $name = $user->name;
+                            } else {
+                                $name = '--';
+                            }
                 // dd($img);
                 // $img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVztexIh8wNm6hDjIwvVAQ73mfzMuWB6yqdviYpcyqQ&s';
             @endphp
