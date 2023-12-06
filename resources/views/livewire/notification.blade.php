@@ -2,7 +2,7 @@
     use Carbon\Carbon;
     use App\Models\User;
 @endphp
-<div  class="flex " wire:poll>
+<div class="flex " wire:poll>
 
     <div x-data="{ dropdownOpen: false }" class="relative ">
 
@@ -23,7 +23,8 @@
         </button>
 
         <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
-        <div x-show="dropdownOpen" class="absolute left-[-8%] mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20 max-h-[470px] overflow-y-auto"
+        <div x-show="dropdownOpen"
+            class="absolute left-[-8%] mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20 max-h-[470px] overflow-y-auto"
             style="width:20rem;">
             @if (count($notificationsArray) !== 0)
                 <div class="">
@@ -34,12 +35,20 @@
                             $newTimeShape = date_format($notification->created_at, 'm/d/Y');
                             $result = Carbon::createFromFormat('m/d/Y', $newTimeShape)->diffForHumans();
                             // $img='/storage/'. $notification->user->photo;
-                               $user= user::find($dataNotifications['sender_id']);
-                                // dd($user->photo);
+                            $user = user::find($dataNotifications['sender_id']);
+
+                            if (isset($user->photo)) {
                                 $img = 'storage/' . $user->photo;
-                                $name=$user->name;
-                                // dd($img);
-                            // $img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVztexIh8wNm6hDjIwvVAQ73mfzMuWB6yqdviYpcyqQ&s';
+                            } else {
+                                $img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVztexIh8wNm6hDjIwvVAQ73mfzMuWB6yqdviYpcyqQ&s';
+                            }
+
+                            if (isset($user->name)) {
+                                $name = $user->name;
+                            } else {
+                                $name = '--';
+                            }
+                            // dd($img);
                         @endphp
                         <a href="">
                             <div
@@ -57,7 +66,7 @@
                                         {{ $dataNotifications['Notifications'] }}
                                     </p>
                                     <div class="w-full flex flex-row items-center justify-end">
-                                        <p class="font-Flatnormal text-xs text-center">{{ $result}}</p>
+                                        <p class="font-Flatnormal text-xs text-center">{{ $result }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +75,8 @@
 
                 </div>
                 <div class="p-3">
-                    <a href="/Admin/notification" class="block bg-[#349A37] hover:bg-[#40b744] text-white text-center flex items-center justify-center h-10 rounded-lg">
+                    <a href="/Admin/notification"
+                        class="block bg-[#349A37] hover:bg-[#40b744] text-white text-center flex items-center justify-center h-10 rounded-lg">
                         <span>See all notifications</span>
                     </a>
                 </div>

@@ -29,27 +29,13 @@ class DeleteBill extends Action
                 'is_delete' => '1',
             ]);
 
-
-        DB::table('transactions')
-        ->Insert(
-
-            [
-                'main_type' => '1',
-                'type' => '2',
-                'ref_id' =>$model->id,
-                'Currency' => '3',
-                'transact_amount' =>  -$model->transact_amount,
-                'equivelant_amount' => -$model->transact_amount,
-                'transaction_type' => $model->transaction_type,
-                'transaction_status' =>$model->transaction_status,
-                "Payment_type"=>'5',
-                "lang"=>1,
-                'transaction_date' => $fields->transaction_date,
-                "is_delete"=>2,
-                'description'=>"حذف سند رقم ". $model->id
-
-                ]
-            );
+            $new_data = $model->replicate();
+            $new_data-> transact_amount =  -$model->transact_amount;
+            $new_data->equivelant_amount = -$model->transact_amount;
+            $new_data->transaction_date = $fields->transaction_date;
+            $new_data->is_delete=2;
+            $new_data->description="حذف سند رقم ". $model->id;
+            $new_data->save();
         }
 
     }
