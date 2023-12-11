@@ -64,7 +64,7 @@
               block: openTab === 1,
             }"
           >
-          
+
             <table class="text-center">
               <tr>
                 <th style="width: 40%;">المهمة</th>
@@ -74,6 +74,8 @@
                 <th style="width: 10%;">التاريخ</th>
 
                 <th>تم</th>
+                <th>حذف</th>
+
               </tr>
               <tr
                 v-for="Notification in myNotification"
@@ -114,6 +116,14 @@
                     تم
                   </button>
                 </td>
+                <th>  <button
+                    class="shadow bg-red-500 hover:bg-red-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded"
+                    type="submit"
+                    @click="DeleteNotifications(Notification.id)"
+                  >
+                    حذف
+                  </button></th>
+
               </tr>
             </table>
           </div>
@@ -164,7 +174,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="md:w-1/3">
               <label
                 class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
@@ -344,6 +354,12 @@ export default {
     },
     CompletNotifications: function ($event) {
       axios.post("/CompletNotifications", {
+        Notificationsid: $event,
+      });
+      this.myNotifications();
+    },
+    DeleteNotifications: function ($event) {
+      axios.post("/DeleteNotifications", {
         Notificationsid: $event,
       });
       this.myNotifications();

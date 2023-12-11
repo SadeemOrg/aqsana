@@ -69,8 +69,8 @@ class ProjectType extends Resource
             Textarea::make(__("Description"),"describtion"),
             Select::make(__("Type"),"type")
             ->options([
-                '1' => 'income',
-                '2' => 'Payments',
+                '1' => __('InComeTransaction'),
+                '2' => __('OutComeTransaction'),
 
 
                 ])->displayUsingLabels(),

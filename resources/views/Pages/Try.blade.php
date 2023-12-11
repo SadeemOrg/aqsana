@@ -300,13 +300,29 @@
                                             class="block w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 text-right focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                 </div>
+
+                                @php
+                                    use App\Models\City;
+                                    $cities=City::all();
+
+                                @endphp
                                 <div class="">
-                                    <label for="city" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> البلد
+                                    <label for="city" class="block text-sm mr-4 text-[#349A37] font-FlatBold">
+                                        البلد
                                     </label>
-                                    <div class="mt-1">
-                                        <input type="text" name="city" placeholder="الرجاء ادخال المدينة"
-                                            value="{{ $user['city'] ? $user['city'] : '' }}"
-                                            class="block w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
+                                    <div class="mt-1 selectdiv">
+                                        <select name="city" id="city"
+                                            class="block w-full border-[#8F9BB3] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
+                                            <option @if ($user['city'] == null) selected @endif value="">الرجاء
+                                                ادخال الحالة البلد</option>
+
+                                                 @foreach ($cities as  $city)
+                                                 <option @if ($user['city'] ==  $city->id ) selected @endif value="{{ $city->id }}">
+                                                    {{$city->name }}</option>
+                                                 @endforeach
+
+
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="">

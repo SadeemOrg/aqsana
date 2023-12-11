@@ -99,10 +99,25 @@ class User extends Resource
                 ->textAlign('left'),
             Date::make(__('Birth Date'), 'birth_date'),
             Image::make(__('photo'), 'photo')->disk('public'),
-            Text::make(__('city'), 'city')
-                ->sortable()
-                ->rules('required', 'max:255'),
+            Multiselect::make(__('city'), 'city')
+            ->options(function () {
+                $Areas =  \App\Models\City::all();
+
+                $Area_type_admin_array =  array();
+
+                foreach ($Areas as $Area) {
+
+
+                    $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                }
+
+                return $Area_type_admin_array;
+            })->singleSelect()->hideFromIndex()->hideFromDetail(),
+        BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating()->nullable(),
+
             BelongsTo::make(__('Role_user'), 'Role', \App\Nova\Role::class),
+            Text::make(__('job'), 'job')
+            ->sortable(),
             Multiselect::make(__('Permations'), 'role')
                 ->options(
                     [
@@ -145,6 +160,7 @@ class User extends Resource
 
                     ]
                 )->saveAsJSON()->rules('required'),
+
             Date::make(__('start_work_date'), 'start_work_date'),
             Select::make(__('martial_status'), 'martial_status')->options([
                 1 => __('single'),

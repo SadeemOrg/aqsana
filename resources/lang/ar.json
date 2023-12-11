@@ -257,6 +257,7 @@
     "NewAlhisalat": "الحصالات الجديدة",
     "DonationsSum": "مجموع التبرعات",
     "InComeTransaction": "المدخلات ",
+
     "OutComeTransaction": "المخرجات",
     "NewQawafilAlaqsa": "قوافل جديدة",
     "NewTrip": "رحلة جديدة",
@@ -446,7 +447,7 @@
     "Finish": "إنهاء",
     "completed": "مكتملة",
     "collected": "تم الجمع الحصالة ",
-    "AlhisalatStatuscompleted": "مكتملة",
+    "AlhisalatStatuscompleted": "جمع",
     "AlhisalatStatusfinsh": "جمع الحصالة",
     "privacy terms": "سياسة الخصوصية",
     "Cancellation Policy": "سياسة الإلغاء",

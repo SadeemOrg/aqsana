@@ -28,30 +28,17 @@ class AlhisalatStatuscompleted extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        // dd("qqq");
+
+        $array = $models->pluck('number_alhisala')->toArray();
+        $stringResult = implode(', ', $array);
+
+
         foreach ($models as $model) {
             $model->update([
                 'status' => '4',
 
             ]);
 
-            DB::table('transactions')
-            ->Insert(
-
-                [
-                    'main_type' => '1',
-                    'type' => '2',
-                    'ref_id' =>$model->id,
-                    'Currency' => '3',
-                    'transact_amount' => $fields->amount,
-                    'equivelant_amount' =>$fields->amount,
-                    'transaction_type' => "3",
-                    'transaction_status' =>"2",
-                    "Payment_type"=>'6',
-                    "lang"=>1,
-                    'transaction_date' => $date = date('Y-m-d'),
-                    ]
-                );
 
 
             //     if ($fields->new_alhasele) {
@@ -68,6 +55,24 @@ class AlhisalatStatuscompleted extends Action
 
 
         }
+        DB::table('transactions')
+        ->Insert(
+
+            [
+                'main_type' => '1',
+                'type' => '2',
+                'Currency' => '3',
+                'transact_amount' => $fields->amount,
+                'equivelant_amount' =>$fields->amount,
+                'transaction_type' => "3",
+                'transaction_status' =>"2",
+                "Payment_type"=>'6',
+                'description'=>"حصلات رقم"." : ".$stringResult,
+                "lang"=>1,
+                'transaction_date' => $date = date('Y-m-d'),
+                ]
+            );
+
         return action::message('the done');
     }
 

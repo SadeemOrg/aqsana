@@ -24,6 +24,11 @@ class NotificationController extends Controller
     {
         \App\Models\Notification::where('id', $request->Notificationsid)->update(['read_at' => Carbon::now()]);
     }
+    public function DeleteNotifications(Request $request)
+    {
+
+        \App\Models\Notification::where('id', $request->Notificationsid)->delete();
+    }
     public function AddNoteNotifications(Request $request)
     {
         \App\Models\Notification::where('id', $request->Notificationsid)->update(['note' => $request->NotificationsNote]);

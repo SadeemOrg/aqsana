@@ -62,6 +62,8 @@ class ProjectBudjet extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
+        return false;
+
         if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("ProjectBudjetparmation",  $request->user()->userrole()))) {
             return true;
         } else return false;

@@ -169,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\ntable {\r\n  font-family: arial, sans-serif;\r\n  border-collapse: collapse;\r\n  width: 100%;\n}\ntd,\r\nth {\r\n  border: 1px solid #dddddd;\r\n\r\n  padding: 8px;\n}\n.for-mobile-scoll-x {\r\n  min-width: 800px;\n}\r\n", ""]);
+exports.push([module.i, "\ntable {\n  font-family: arial, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\ntd,\nth {\n  border: 1px solid #dddddd;\n\n  padding: 8px;\n}\n.for-mobile-scoll-x {\n  min-width: 800px;\n}\n", ""]);
 
 // exports
 
@@ -891,6 +891,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -985,6 +995,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     CompletNotifications: function CompletNotifications($event) {
       axios.post("/CompletNotifications", {
+        Notificationsid: $event
+      });
+      this.myNotifications();
+    },
+    DeleteNotifications: function DeleteNotifications($event) {
+      axios.post("/DeleteNotifications", {
         Notificationsid: $event
       });
       this.myNotifications();
@@ -1269,7 +1285,30 @@ var render = function() {
                                     )
                                   ]
                                 )
-                              ])
+                              ]),
+                          _vm._v(" "),
+                          _c("th", [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "shadow bg-red-500 hover:bg-red-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded",
+                                attrs: { type: "submit" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.DeleteNotifications(
+                                      Notification.id
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                  حذف\n                "
+                                )
+                              ]
+                            )
+                          ])
                         ]
                       )
                     })
@@ -1611,7 +1650,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", { staticStyle: { width: "10%" } }, [_vm._v("التاريخ")]),
       _vm._v(" "),
-      _c("th", [_vm._v("تم")])
+      _c("th", [_vm._v("تم")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("حذف")])
     ])
   },
   function() {
