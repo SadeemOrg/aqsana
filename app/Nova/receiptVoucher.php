@@ -222,7 +222,7 @@ class receiptVoucher extends Resource
     public function actions(Request $request)
     {
         return [
-            new BillPdf,
+            // new BillPdf,
             new AlhisalatStatuscompleted
         ];
     }

@@ -387,7 +387,7 @@
                                 <div class="space-y-8 divide-y divide-gray-200">
                                   <div>
                                     <div
-                                      class="mt-6 grid grid-cols-2 gap-y-6 gap-x-4 sm:grid-cols-6"
+                                      class="mt-6 grid grid-cols-2 gap-y-6 gap-x-4 sm:grid-cols-8"
                                     >
                                       <div class="sm:col-span-2">
                                         <label
@@ -421,12 +421,13 @@
                                             name="street-address"
                                             id="street-address"
                                             autocomplete="street-address"
-                                            :value="Sector.expenses_year"
+                                            :value=" Sector.expenses_year+':::'+((Sector.expenses_year/(Sector.Budget ))*100).toFixed(2)+'%'"
+
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
                                       </div>
-                                       <!-- <div class="sm:col-span-2">
+                                       <div class="sm:col-span-2">
                                         <label
                                           for="street-address"
                                           class="block text-sm font-medium text-gray-700"
@@ -440,11 +441,12 @@
                                             name="street-address"
                                             id="street-address"
                                             autocomplete="street-address"
-                                            :value="Sector.income_year"
+                                            :value=" Sector.income_year+':::'+((Sector.income_year/(Sector.Budget ))*100).toFixed(2)+'%'"
+
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
-                                      </div> -->
+                                      </div>
                                       <div class="sm:col-span-2">
                                         <label
                                           for="street-address"
@@ -460,11 +462,10 @@
                                             id="street-address"
                                             autocomplete="street-address"
                                             :value="
-                                             ( Sector.Budget  - Sector.expenses_year).toFixed(2)
+                                             (  Sector.income_year - Sector.expenses_year).toFixed(2)
                                             "
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
-                                          <!--  + Sector.income_year-->
                                         </div>
                                       </div>
 
@@ -500,12 +501,12 @@
                                             name="region"
                                             id="region"
                                             autocomplete="address-level1"
-                                            :value="Sector.expenses_First"
+                                            :value=" Sector.expenses_First+':::'+((Sector.expenses_First/(Sector.Budget / 4))*100).toFixed(2)+'%'"
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
                                       </div>
-                                      <!-- <div class="sm:col-span-2">
+                                      <div class="sm:col-span-2">
                                         <label
                                           for="street-address"
                                           class="block text-sm font-medium text-gray-700"
@@ -519,11 +520,12 @@
                                             name="street-address"
                                             id="street-address"
                                             autocomplete="street-address"
-                                            :value="Sector.income_First"
+                                            :value=" Sector.income_First+':::'+((Sector.income_First/(Sector.Budget / 4))*100).toFixed(2)+'%'"
+
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
-                                      </div> -->
+                                      </div>
                                       <div class="sm:col-span-2">
                                         <label
                                           for="postal-code"
@@ -538,13 +540,12 @@
                                             id="postal-code"
                                             autocomplete="postal-code"
                                             :value="
-                                              ((Sector.Budget / 4 ) -  Sector.expenses_First).toFixed(2)
+                                              (Sector.income_First -  Sector.expenses_First).toFixed(2)
                                             "
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
                                       </div>
-                                      <!-- +Sector.income_First  -->
                                       <!--Second Quarter -->
                                       <div class="sm:col-span-2">
                                         <label
@@ -577,12 +578,13 @@
                                             name="region"
                                             id="region"
                                             autocomplete="address-level1"
-                                            :value="Sector.expenses_Second"
+                                            :value=" Sector.expenses_Second+':::'+((Sector.expenses_Second/(Sector.Budget / 4))*100).toFixed(2)+'%'"
+
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
                                       </div>
-                                      <!-- <div class="sm:col-span-2">
+                                      <div class="sm:col-span-2">
                                         <label
                                           for="street-address"
                                           class="block text-sm font-medium text-gray-700"
@@ -596,11 +598,12 @@
                                             name="street-address"
                                             id="street-address"
                                             autocomplete="street-address"
-                                            :value="Sector.income_Second"
+                                            :value=" Sector.income_Second+':::'+((Sector.income_Second/(Sector.Budget / 4))*100).toFixed(2)+'%'"
+
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
-                                      </div> -->
+                                      </div>
                                       <div class="sm:col-span-2">
                                         <label
                                           for="postal-code"
@@ -615,12 +618,11 @@
                                             id="postal-code"
                                             autocomplete="postal-code"
                                             :value="
-                                             ((Sector.Budget / 4 )  -
+                                             (Sector.income_Second -
                                               Sector.expenses_Second).toFixed(2)
                                             "
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
-                                            <!-- +Sector.income_Second -->
                                         </div>
                                       </div>
                                       <!--Third quarter  -->
@@ -655,12 +657,13 @@
                                             name="region"
                                             id="region"
                                             autocomplete="address-level1"
-                                            :value="Sector.expenses_Third"
+                                            :value=" Sector.expenses_Third+':::'+((Sector.expenses_Third/(Sector.Budget / 4))*100).toFixed(2)+'%'"
+
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
                                       </div>
-                                      <!-- <div class="sm:col-span-2">
+                                      <div class="sm:col-span-2">
                                         <label
                                           for="street-address"
                                           class="block text-sm font-medium text-gray-700"
@@ -674,11 +677,12 @@
                                             name="street-address"
                                             id="street-address"
                                             autocomplete="street-address"
-                                            :value="Sector.income_Third"
+                                        :value=" Sector.income_Third+':::'+((Sector.income_Third/(Sector.Budget / 4))*100).toFixed(2)+'%'"
+
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
-                                      </div> -->
+                                      </div>
                                       <div class="sm:col-span-2">
                                         <label
                                           for="postal-code"
@@ -693,14 +697,13 @@
                                             id="postal-code"
                                             autocomplete="postal-code"
                                             :value="
-                                             ( (Sector.Budget / 4 ) -
+                                             ( Sector.income_Third-
                                               Sector.expenses_Third).toFixed(2)
                                             "
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
                                       </div>
-                                        <!-- +Sector.income_Third -->
                                       <!-- The fourth quarter  -->
                                       <div class="sm:col-span-2">
                                         <label
@@ -733,12 +736,14 @@
                                             name="region"
                                             id="region"
                                             autocomplete="address-level1"
-                                            :value="Sector.expenses_fourth"
+
+                                            :value=" Sector.expenses_fourth+':::'+((Sector.expenses_fourth/(Sector.Budget / 4))*100).toFixed(2)+'%'"
+
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
                                       </div>
-                                      <!-- <div class="sm:col-span-2">
+                                      <div class="sm:col-span-2">
                                         <label
                                           for="street-address"
                                           class="block text-sm font-medium text-gray-700"
@@ -752,11 +757,12 @@
                                             name="street-address"
                                             id="street-address"
                                             autocomplete="street-address"
-                                            :value="Sector.income_fourth"
+                                            :value=" Sector.income_fourth+':::'+((Sector.income_fourth/(Sector.Budget / 4))*100).toFixed(2)+'%'"
+
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
-                                      </div> -->
+                                      </div>
                                       <div class="sm:col-span-2">
                                         <label
                                           for="postal-code"
@@ -771,14 +777,13 @@
                                             id="postal-code"
                                             autocomplete="postal-code"
                                             :value="
-                                             (Sector.Budget / 4 )  -
+                                             +Sector.income_First -
                                               Sector.expenses_fourth
                                             "
                                             class="p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                           />
                                         </div>
                                       </div>
-                                        <!-- +Sector.income_First -->
                                     </div>
                                   </div>
                                 </div>

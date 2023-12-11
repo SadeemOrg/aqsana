@@ -252,6 +252,7 @@ class HomeController extends Controller
     public function updatepersonaldata(Request $request)
     {
 
+
         $user = User::findOrFail(Auth::id());
         $request->validate([
             'name' => 'required|string|max:255|min:3',

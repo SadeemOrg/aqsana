@@ -169,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .chart-custom-style {\n  width:500px !important;\n  height: 300px !important;\n} */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .chart-custom-style {\n  width:500px !important;\n  height: 300px !important;\n} */\n", ""]);
 
 // exports
 
@@ -634,6 +634,11 @@ module.exports = function normalizeComponent (
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_pure_vue_chart__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_pure_vue_chart___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_pure_vue_chart__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9322,7 +9327,7 @@ var render = function() {
                                                   "div",
                                                   {
                                                     staticClass:
-                                                      "mt-6 grid grid-cols-2 gap-y-6 gap-x-4 sm:grid-cols-6"
+                                                      "mt-6 grid grid-cols-2 gap-y-6 gap-x-4 sm:grid-cols-8"
                                                   },
                                                   [
                                                     _c(
@@ -9423,7 +9428,74 @@ var render = function() {
                                                               },
                                                               domProps: {
                                                                 value:
-                                                                  Sector.expenses_year
+                                                                  Sector.expenses_year +
+                                                                  ":::" +
+                                                                  (
+                                                                    (Sector.expenses_year /
+                                                                      Sector.Budget) *
+                                                                    100
+                                                                  ).toFixed(2) +
+                                                                  "%"
+                                                              }
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for:
+                                                                "street-address"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                      مدخلات القطاع\n                                    "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
+                                                              staticClass:
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
+                                                              attrs: {
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name:
+                                                                  "street-address",
+                                                                id:
+                                                                  "street-address",
+                                                                autocomplete:
+                                                                  "street-address"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.income_year +
+                                                                  ":::" +
+                                                                  (
+                                                                    (Sector.income_year /
+                                                                      Sector.Budget) *
+                                                                    100
+                                                                  ).toFixed(2) +
+                                                                  "%"
                                                               }
                                                             })
                                                           ]
@@ -9476,7 +9548,7 @@ var render = function() {
                                                               },
                                                               domProps: {
                                                                 value: (
-                                                                  Sector.Budget -
+                                                                  Sector.income_year -
                                                                   Sector.expenses_year
                                                                 ).toFixed(2)
                                                               }
@@ -9579,7 +9651,76 @@ var render = function() {
                                                               },
                                                               domProps: {
                                                                 value:
-                                                                  Sector.expenses_First
+                                                                  Sector.expenses_First +
+                                                                  ":::" +
+                                                                  (
+                                                                    (Sector.expenses_First /
+                                                                      (Sector.Budget /
+                                                                        4)) *
+                                                                    100
+                                                                  ).toFixed(2) +
+                                                                  "%"
+                                                              }
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for:
+                                                                "street-address"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                      مدخلات الربع الاول\n                                 "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
+                                                              staticClass:
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
+                                                              attrs: {
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name:
+                                                                  "street-address",
+                                                                id:
+                                                                  "street-address",
+                                                                autocomplete:
+                                                                  "street-address"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.income_First +
+                                                                  ":::" +
+                                                                  (
+                                                                    (Sector.income_First /
+                                                                      (Sector.Budget /
+                                                                        4)) *
+                                                                    100
+                                                                  ).toFixed(2) +
+                                                                  "%"
                                                               }
                                                             })
                                                           ]
@@ -9631,8 +9772,7 @@ var render = function() {
                                                               },
                                                               domProps: {
                                                                 value: (
-                                                                  Sector.Budget /
-                                                                    4 -
+                                                                  Sector.income_First -
                                                                   Sector.expenses_First
                                                                 ).toFixed(2)
                                                               }
@@ -9735,7 +9875,76 @@ var render = function() {
                                                               },
                                                               domProps: {
                                                                 value:
-                                                                  Sector.expenses_Second
+                                                                  Sector.expenses_Second +
+                                                                  ":::" +
+                                                                  (
+                                                                    (Sector.expenses_Second /
+                                                                      (Sector.Budget /
+                                                                        4)) *
+                                                                    100
+                                                                  ).toFixed(2) +
+                                                                  "%"
+                                                              }
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for:
+                                                                "street-address"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                      مدخلات الربع الثاني\n                                 "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
+                                                              staticClass:
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
+                                                              attrs: {
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name:
+                                                                  "street-address",
+                                                                id:
+                                                                  "street-address",
+                                                                autocomplete:
+                                                                  "street-address"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.income_Second +
+                                                                  ":::" +
+                                                                  (
+                                                                    (Sector.income_Second /
+                                                                      (Sector.Budget /
+                                                                        4)) *
+                                                                    100
+                                                                  ).toFixed(2) +
+                                                                  "%"
                                                               }
                                                             })
                                                           ]
@@ -9787,8 +9996,7 @@ var render = function() {
                                                               },
                                                               domProps: {
                                                                 value: (
-                                                                  Sector.Budget /
-                                                                    4 -
+                                                                  Sector.income_Second -
                                                                   Sector.expenses_Second
                                                                 ).toFixed(2)
                                                               }
@@ -9891,7 +10099,76 @@ var render = function() {
                                                               },
                                                               domProps: {
                                                                 value:
-                                                                  Sector.expenses_Third
+                                                                  Sector.expenses_Third +
+                                                                  ":::" +
+                                                                  (
+                                                                    (Sector.expenses_Third /
+                                                                      (Sector.Budget /
+                                                                        4)) *
+                                                                    100
+                                                                  ).toFixed(2) +
+                                                                  "%"
+                                                              }
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for:
+                                                                "street-address"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                      مدخلات الربع الثالت\n                                 "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
+                                                              staticClass:
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
+                                                              attrs: {
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name:
+                                                                  "street-address",
+                                                                id:
+                                                                  "street-address",
+                                                                autocomplete:
+                                                                  "street-address"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.income_Third +
+                                                                  ":::" +
+                                                                  (
+                                                                    (Sector.income_Third /
+                                                                      (Sector.Budget /
+                                                                        4)) *
+                                                                    100
+                                                                  ).toFixed(2) +
+                                                                  "%"
                                                               }
                                                             })
                                                           ]
@@ -9943,8 +10220,7 @@ var render = function() {
                                                               },
                                                               domProps: {
                                                                 value: (
-                                                                  Sector.Budget /
-                                                                    4 -
+                                                                  Sector.income_Third -
                                                                   Sector.expenses_Third
                                                                 ).toFixed(2)
                                                               }
@@ -10047,7 +10323,76 @@ var render = function() {
                                                               },
                                                               domProps: {
                                                                 value:
-                                                                  Sector.expenses_fourth
+                                                                  Sector.expenses_fourth +
+                                                                  ":::" +
+                                                                  (
+                                                                    (Sector.expenses_fourth /
+                                                                      (Sector.Budget /
+                                                                        4)) *
+                                                                    100
+                                                                  ).toFixed(2) +
+                                                                  "%"
+                                                              }
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "sm:col-span-2"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            staticClass:
+                                                              "block text-sm font-medium text-gray-700",
+                                                            attrs: {
+                                                              for:
+                                                                "street-address"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                      مدخلات الربع الرابع\n                                 "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-1"
+                                                          },
+                                                          [
+                                                            _c("input", {
+                                                              staticClass:
+                                                                "p-2 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
+                                                              attrs: {
+                                                                readonly: "",
+                                                                type: "text",
+                                                                name:
+                                                                  "street-address",
+                                                                id:
+                                                                  "street-address",
+                                                                autocomplete:
+                                                                  "street-address"
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  Sector.income_fourth +
+                                                                  ":::" +
+                                                                  (
+                                                                    (Sector.income_fourth /
+                                                                      (Sector.Budget /
+                                                                        4)) *
+                                                                    100
+                                                                  ).toFixed(2) +
+                                                                  "%"
                                                               }
                                                             })
                                                           ]
@@ -10099,8 +10444,7 @@ var render = function() {
                                                               },
                                                               domProps: {
                                                                 value:
-                                                                  Sector.Budget /
-                                                                    4 -
+                                                                  +Sector.income_First -
                                                                   Sector.expenses_fourth
                                                               }
                                                             })

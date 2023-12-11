@@ -124,5 +124,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(ActionEvents::class,"actionable_id")->where('action_events.target_type', '=', get_class($this));
     }
+    public function citeDelegate()
+    {
+        return $this->belongsTo(City::class, 'city');
+    }
 
 }
