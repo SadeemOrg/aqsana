@@ -51,10 +51,6 @@
                                             id="inline-full-name" type="text" v-model="budgetsOfyear" />
                                     </div>
                                 </div>
-                                <form @submit.prevent="onSubmit" class="add-form py-4">
-                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4">
-                                        <div v-for="(Sector, index) in newSectors" :key="Sector.Sector"
-                                            :value="Sector.Sector" class=" mb-3">
                                             <div class="">
                                                 <label
                                                     class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64"
