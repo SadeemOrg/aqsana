@@ -78,6 +78,11 @@ export default {
           alert("Message Send ");
         });
     },
+    getType: function () {
+        axios.post("/getType").then((response) => {
+          this.newSectors = response.data;
+        });
+      },
     countdown: function() {
       this.remainingCount = this.maxCount - this.message.length;
       this.hasError = this.remainingCount < 0;

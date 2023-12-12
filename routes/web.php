@@ -22,6 +22,9 @@ use Maatwebsite\Excel\Facades\Excel;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/export', 'ExportController@export')->name('export');
+Route::get('/delete-all-data', 'ExportController@deleteAllData')->name('delete.all.data');
+
 Route::get('/reports/show-orders', function(){
     // dd("dd");
     return Excel::download(new ExportDonations, 'test.csv');
@@ -105,6 +108,8 @@ Route::post("schedulelast", [HomeController::class, "schedulelast"])->name('sche
 
 Route::post("first/", [HomeController::class, "first"])->name('first');
 Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');
+Route::post("getType", [HomeController::class, "getType"])->name('getType');
+
 Route::post("delet/", [HomeController::class, "delet"])->name('delet');
 
 Route::post("SectorsBudget", [HomeController::class, "SectorsBudget"])->name('SectorsBudget');
