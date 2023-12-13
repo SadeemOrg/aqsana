@@ -269,17 +269,58 @@
                                                         </p>
                                                         <div class="space-y-8 divide-y divide-gray-200">
                                                             <div class="space-y-8 divide-y divide-gray-200">
-                                                                <div class="flex flex-col items-center justify-start">
-                                                                    <div class="flex flex-row items-center justify-start">
-                                                                        <div style="min-width: 350px;min-height: 150px;"
-                                                                            class="flex flex-col items-center justify-center border-2 border-green-300 ">
-                                                                            <h1>{{ Sector.Budget }}₪</h1>
-                                                                            <h1 for="street-address"
-                                                                                class="block text-sm font-medium text-gray-700">
-                                                                                ميزانبة القطاع </h1>
+                                                                <div class="flex flex-col items-start justify-start">
+                                                                    <ul>
+                                                                    <li >
+                                                                        <div class="flex flex-row items-center justify-start gap-x-2">
+                                                                            <h1 style="min-width: 210px;" for="street-address" class="block text-gray-700 "> ميزانية القطاع </h1>
+                                                                            <div class="budget_box flex flex-col items-center justify-center ">
+                                                                                <h1 class="pt-2">{{ Sector.Budget}}₪</h1>
+                                                                            </div>
                                                                         </div>
-                                                                        <div style="min-width: 350px; min-height: 150px;"
-                                                                            class="flex flex-col items-center justify-center border-2 border-green-300">
+                                                                    </li>
+                                                                    <li class="mt-4">
+                                                                        <div class="flex flex-row items-center justify-start gap-x-2">
+                                                                            <h1 style="min-width: 210px;" for="street-address" class="block text-gray-700"> مصاريف القطاع </h1>
+                                                                            <div class="budget_box flex flex-col items-center justify-center ">
+                                                                                <div class="flex flex-col items-center justify-center"
+                                                                                style="width: 100%;">
+                                                                                <div style="width: 85%;" class="flex flex-row-reverse items-center justify-between">
+                                                                                    <h3 class="font-FlatBold">{{ Sector.expenses_year }}₪</h3>
+                                                                                    <h3 class="font-FlatBold">{{Sector.Budget==0 ? 0 : ((Sector.expenses_year / (Sector.Budget)) * 100).toFixed(2) + '%' }}</h3>
+                                                                                </div>
+                                                                                <progress dir="ltr" style="width: 90%;"
+                                                                                    :value="calculateProgress(Sector,'Budget')" max="100"></progress>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="mt-6">
+                                                                        <div class="flex flex-row items-center justify-start gap-x-2">
+                                                                            <h1 style="min-width: 210px;" for="street-address" class="block text-gray-700"> مصاريف القطاع </h1>
+                                                                            <div class="budget_box flex flex-col items-center justify-center ">
+                                                                                <div class="flex flex-col items-center justify-center"
+                                                                                style="width: 100%;">
+                                                                                <div style="width: 85%;" class="flex flex-row-reverse items-center justify-between">
+                                                                                    <h3 class="font-FlatBold">{{ Sector.income_year }}₪</h3>
+                                                                                    <h3 class="font-FlatBold">{{Sector.Budget==0 ? 0 : ((Sector.income_year / (Sector.Budget)) * 100).toFixed(2) + '%' }}</h3>
+                                                                                </div>
+                                                                                <progress dir="ltr" style="width: 90%;"
+                                                                                :value="calculateProgress(Sector,'income')" max="100"></progress>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    </ul>
+                                                                    <!-- <div class="flex flex-row items-center justify-start mt-4">
+                                                                        <div class="budget_box flex flex-col items-center justify-center ">
+                                                                            <h1 for="street-address"
+                                                                                class="block text-gray-700">
+                                                                                ميزانبة القطاع </h1>
+                                                                            <h1>{{ Sector.Budget}}₪</h1>
+                                                                        </div>
+                                                                        <div
+                                                                            class="budget_box flex flex-col items-center justify-center mx-3">
                                                                             <div class="flex items-center justify-center "
                                                                                 style="min-height: 110px;">
                                                                                 <h1
@@ -287,14 +328,53 @@
                                                                                     مصاريف القطاع
                                                                                 </h1>
                                                                             </div>
-                                                                            <div class="flex flex-row items-center justify-center"
+                                                                            <div class="flex flex-col items-center justify-center"
                                                                                 style="width: 100%;">
+                                                                                <div style="width: 85%;" class="flex flex-row-reverse items-center justify-between">
+                                                                                    <p>{{ Sector.expenses_year }}₪</p>
+                                                                                    <p>{{Sector.Budget==0 ? 0 : ((Sector.expenses_year / (Sector.Budget)) * 100).toFixed(2) + '%' }}</p>
+                                                                                </div>
                                                                                 <progress dir="ltr" style="width: 90%;"
-                                                                                    value="99" max="100"></progress>
+                                                                                    :value="calculateProgress(Sector,'Budget')" max="100"></progress>
                                                                             </div>
                                                                         </div>
-
-
+                                                                        <div
+                                                                            class="budget_box flex flex-col items-center justify-center ">
+                                                                            <div class="flex items-center justify-center "
+                                                                                style="min-height: 110px;">
+                                                                                <h1
+                                                                                    class="block font-FlatBold text-gray-700">
+                                                                                    مدخلات القطاع
+                                                                                </h1>
+                                                                            </div>
+                                                                            <div class="flex flex-col items-center justify-center"
+                                                                                style="width: 100%;">
+                                                                                <div style="width: 85%;" class="flex flex-row-reverse items-center justify-between">
+                                                                                    <p>{{ Sector.income_year }}₪</p>
+                                                                                    <p>{{Sector.Budget==0 ? 0 : ((Sector.income_year  / (Sector.Budget)) * 100).toFixed(2) + '%' }}</p>
+                                                                                </div>
+                                                                                <progress dir="ltr" style="width: 90%;"
+                                                                                    :value="calculateProgress(Sector,'income')" max="100"></progress>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> -->
+                                                                    <div class="flex flex-row items-center justify-center my-6">
+                                                                        <!-- <div style="min-width: 350px; min-height: 150px;"
+                                                                            class="flex flex-col items-center justify-center border-2 border-green-300">
+                                                                            <div class="flex items-center justify-center "
+                                                                                style="min-height: 110px;">
+                                                                                <h1
+                                                                                    class="block font-FlatBold text-gray-700">
+                                                                                    صافي الانفاق القطاع
+                                                                                </h1>
+                                                                            </div>
+                                                                            <div class="flex flex-col items-center justify-center"
+                                                                                style="width: 100%;">
+                                                                                <div style="width: 85%;" class="flex flex-row-reverse items-center justify-between">
+                                                                                    <p>{{ (Sector.income_year - Sector.expenses_year).toFixed(2) }}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div> -->
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -369,6 +449,16 @@ export default {
                 this.newSectors = response.data;
             });
         },
+        calculateProgress(Sector,type){
+            switch (type) {
+                case 'Budget':
+                    return Sector.Budget === 0 ? 0 : (Sector.expenses_year / Sector.Budget) * 100;
+                case 'income':
+                    return Sector.Budget === 0 ? 0 : (Sector.income_year / Sector.Budget) * 100;
+                default:
+                    return 0;
+
+        }},
         getSectorstatistics(event) {
             axios
                 .post("/Sectorstatistics", {
@@ -521,5 +611,14 @@ progress::-webkit-progress-bar {
     background-color: #ddd;
     border-radius: 5px;
 }
+.budget_box{
+    min-width: 250px;
+    min-height: 70px;
+    border: 2px solid;
+    border-radius: 10px;
+    border-color: #dfe1e0;
+    z-index: 10;
+    background-color: #F2E9AE;
 
+}
 </style>

@@ -928,6 +928,86 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -971,6 +1051,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post("/Sectors").then(function (response) {
                 _this2.newSectors = response.data;
             });
+        },
+        calculateProgress: function calculateProgress(Sector, type) {
+            switch (type) {
+                case 'Budget':
+                    return Sector.Budget === 0 ? 0 : Sector.expenses_year / Sector.Budget * 100;
+                case 'income':
+                    return Sector.Budget === 0 ? 0 : Sector.income_year / Sector.Budget * 100;
+                default:
+                    return 0;
+
+            }
         },
         getSectorstatistics: function getSectorstatistics(event) {
             var _this3 = this;
@@ -7922,7 +8013,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\nprogress[data-v-68ff5483] {\r\n    width: 95%;\r\n    /* Adjust the width as needed */\r\n    height: 10px;\r\n    -webkit-appearance: none;\r\n       -moz-appearance: none;\r\n            appearance: none;\r\n    border-radius: 5px;\r\n    background: #ddd;\n}\nprogress[data-v-68ff5483]::-webkit-progress-value {\r\n    background-color: #34ca96;\r\n    /* Adjust to match the overall border-radius */\r\n    border-radius: 5px;\n}\nprogress[data-v-68ff5483]::-webkit-progress-bar {\r\n    background-color: #ddd;\r\n    border-radius: 5px;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\nprogress[data-v-68ff5483] {\n    width: 95%;\n    /* Adjust the width as needed */\n    height: 10px;\n    -webkit-appearance: none;\n       -moz-appearance: none;\n            appearance: none;\n    border-radius: 5px;\n    background: #ddd;\n}\nprogress[data-v-68ff5483]::-webkit-progress-value {\n    background-color: #34ca96;\n    /* Adjust to match the overall border-radius */\n    border-radius: 5px;\n}\nprogress[data-v-68ff5483]::-webkit-progress-bar {\n    background-color: #ddd;\n    border-radius: 5px;\n}\n.budget_box[data-v-68ff5483]{\n    min-width: 250px;\n    min-height: 70px;\n    border: 2px solid;\n    border-radius: 10px;\n    border-color: #dfe1e0;\n    z-index: 10;\n    background-color: #F2E9AE;\n}\n", ""]);
 
 // exports
 
@@ -8855,42 +8946,27 @@ var render = function() {
                                                 "div",
                                                 {
                                                   staticClass:
-                                                    "flex flex-col items-center justify-start"
+                                                    "flex flex-col items-start justify-start"
                                                 },
                                                 [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "flex flex-row items-center justify-start"
-                                                    },
-                                                    [
+                                                  _c("ul", [
+                                                    _c("li", [
                                                       _c(
                                                         "div",
                                                         {
                                                           staticClass:
-                                                            "flex flex-col items-center justify-center border-2 border-green-300 ",
-                                                          staticStyle: {
-                                                            "min-width":
-                                                              "350px",
-                                                            "min-height":
-                                                              "150px"
-                                                          }
+                                                            "flex flex-row items-center justify-start gap-x-2"
                                                         },
                                                         [
-                                                          _c("h1", [
-                                                            _vm._v(
-                                                              _vm._s(
-                                                                Sector.Budget
-                                                              ) + "₪"
-                                                            )
-                                                          ]),
-                                                          _vm._v(" "),
                                                           _c(
                                                             "h1",
                                                             {
                                                               staticClass:
-                                                                "block text-sm font-medium text-gray-700",
+                                                                "block text-gray-700 ",
+                                                              staticStyle: {
+                                                                "min-width":
+                                                                  "210px"
+                                                              },
                                                               attrs: {
                                                                 for:
                                                                   "street-address"
@@ -8898,16 +8974,315 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\n                                                                            ميزانبة القطاع "
+                                                                " ميزانية القطاع "
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "budget_box flex flex-col items-center justify-center "
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "h1",
+                                                                {
+                                                                  staticClass:
+                                                                    "pt-2"
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      Sector.Budget
+                                                                    ) + "₪"
+                                                                  )
+                                                                ]
                                                               )
                                                             ]
                                                           )
                                                         ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _vm._m(1, true)
-                                                    ]
-                                                  )
+                                                      )
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "li",
+                                                      { staticClass: "mt-4" },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "flex flex-row items-center justify-start gap-x-2"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "h1",
+                                                              {
+                                                                staticClass:
+                                                                  "block text-gray-700",
+                                                                staticStyle: {
+                                                                  "min-width":
+                                                                    "210px"
+                                                                },
+                                                                attrs: {
+                                                                  for:
+                                                                    "street-address"
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  " مصاريف القطاع "
+                                                                )
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "budget_box flex flex-col items-center justify-center "
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "flex flex-col items-center justify-center",
+                                                                    staticStyle: {
+                                                                      width:
+                                                                        "100%"
+                                                                    }
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "div",
+                                                                      {
+                                                                        staticClass:
+                                                                          "flex flex-row-reverse items-center justify-between",
+                                                                        staticStyle: {
+                                                                          width:
+                                                                            "85%"
+                                                                        }
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "h3",
+                                                                          {
+                                                                            staticClass:
+                                                                              "font-FlatBold"
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              _vm._s(
+                                                                                Sector.expenses_year
+                                                                              ) +
+                                                                                "₪"
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "h3",
+                                                                          {
+                                                                            staticClass:
+                                                                              "font-FlatBold"
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              _vm._s(
+                                                                                Sector.Budget ==
+                                                                                  0
+                                                                                  ? 0
+                                                                                  : (
+                                                                                      (Sector.expenses_year /
+                                                                                        Sector.Budget) *
+                                                                                      100
+                                                                                    ).toFixed(
+                                                                                      2
+                                                                                    ) +
+                                                                                      "%"
+                                                                              )
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ]
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "progress",
+                                                                      {
+                                                                        staticStyle: {
+                                                                          width:
+                                                                            "90%"
+                                                                        },
+                                                                        attrs: {
+                                                                          dir:
+                                                                            "ltr",
+                                                                          max:
+                                                                            "100"
+                                                                        },
+                                                                        domProps: {
+                                                                          value: _vm.calculateProgress(
+                                                                            Sector,
+                                                                            "Budget"
+                                                                          )
+                                                                        }
+                                                                      }
+                                                                    )
+                                                                  ]
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "li",
+                                                      { staticClass: "mt-6" },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "flex flex-row items-center justify-start gap-x-2"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "h1",
+                                                              {
+                                                                staticClass:
+                                                                  "block text-gray-700",
+                                                                staticStyle: {
+                                                                  "min-width":
+                                                                    "210px"
+                                                                },
+                                                                attrs: {
+                                                                  for:
+                                                                    "street-address"
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  " مصاريف القطاع "
+                                                                )
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "budget_box flex flex-col items-center justify-center "
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "flex flex-col items-center justify-center",
+                                                                    staticStyle: {
+                                                                      width:
+                                                                        "100%"
+                                                                    }
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "div",
+                                                                      {
+                                                                        staticClass:
+                                                                          "flex flex-row-reverse items-center justify-between",
+                                                                        staticStyle: {
+                                                                          width:
+                                                                            "85%"
+                                                                        }
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "h3",
+                                                                          {
+                                                                            staticClass:
+                                                                              "font-FlatBold"
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              _vm._s(
+                                                                                Sector.income_year
+                                                                              ) +
+                                                                                "₪"
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "h3",
+                                                                          {
+                                                                            staticClass:
+                                                                              "font-FlatBold"
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              _vm._s(
+                                                                                Sector.Budget ==
+                                                                                  0
+                                                                                  ? 0
+                                                                                  : (
+                                                                                      (Sector.income_year /
+                                                                                        Sector.Budget) *
+                                                                                      100
+                                                                                    ).toFixed(
+                                                                                      2
+                                                                                    ) +
+                                                                                      "%"
+                                                                              )
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ]
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "progress",
+                                                                      {
+                                                                        staticStyle: {
+                                                                          width:
+                                                                            "90%"
+                                                                        },
+                                                                        attrs: {
+                                                                          dir:
+                                                                            "ltr",
+                                                                          max:
+                                                                            "100"
+                                                                        },
+                                                                        domProps: {
+                                                                          value: _vm.calculateProgress(
+                                                                            Sector,
+                                                                            "income"
+                                                                          )
+                                                                        }
+                                                                      }
+                                                                    )
+                                                                  ]
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("div", {
+                                                    staticClass:
+                                                      "flex flex-row items-center justify-center my-6"
+                                                  })
                                                 ]
                                               )
                                             ]
@@ -9057,49 +9432,6 @@ var staticRenderFns = [
         ]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "flex flex-col items-center justify-center border-2 border-green-300",
-        staticStyle: { "min-width": "350px", "min-height": "150px" }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "flex items-center justify-center ",
-            staticStyle: { "min-height": "110px" }
-          },
-          [
-            _c("h1", { staticClass: "block font-FlatBold text-gray-700" }, [
-              _vm._v(
-                "\n                                                                                مصاريف القطاع\n                                                                            "
-              )
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "flex flex-row items-center justify-center",
-            staticStyle: { width: "100%" }
-          },
-          [
-            _c("progress", {
-              staticStyle: { width: "90%" },
-              attrs: { dir: "ltr", value: "99", max: "100" }
-            })
-          ]
-        )
-      ]
-    )
   }
 ]
 render._withStripped = true
