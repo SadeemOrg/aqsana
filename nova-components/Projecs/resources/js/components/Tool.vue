@@ -2,129 +2,29 @@
     <div>
         <div class="flex">
             <div class="w-full">
-                <div class="flex flex-row flex-wrap sm:flex-nowrap items-center justify-satrt w-full my-4 gap-x-2">
-                    <div class="flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3">
-                        <a v-on:click="toggleTabs(1)" v-bind:class="{
-                            'text-green-600 bg-white w-full py-4 text-center rounded-md':
-                                openTab !== 1,
-                            'text-white  bg-green-600 w-full py-4 text-center rounded-md':
-                                openTab === 1,
-                        }">
-                            الميزانيات
-                        </a>
-                    </div>
-                    <div class="flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3">
-                        <a class="" v-on:click="toggleTabs(2)" v-bind:class="{
-                            'text-green-600 bg-white w-full py-4 text-center rounded-md':
-                                openTab !== 2,
-                            'text-white  bg-green-600 w-full py-4 text-center rounded-md':
-                                openTab === 2,
-                        }">
-                            اضافة جدييد
-                        </a>
-                    </div>
-                    <div class="flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3">
-                        <a class="" v-on:click="toggleTabs(3)" v-bind:class="{
-                            'text-green-600 bg-white w-full py-4 text-center rounded-md':
-                                openTab !== 3,
-                            'text-white  bg-green-600 w-full py-4 text-center rounded-md':
-                                openTab === 3,
-                        }">
-                            حذف
-                        </a>
-                    </div>
-                    <div class="flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3">
-                        <a class="w-full" v-on:click="toggleTabs(4)" v-bind:class="{
-                            'text-green-600 bg-white w-full py-4 text-center rounded-md':
-                                openTab !== 4,
-                            'text-white  bg-green-600 w-full py-4 text-center rounded-md':
-                                openTab === 4,
-                        }">
-                            احصائبات
-                        </a>
+                <div class="w-full">
+                    <div class="flex flex-row flex-wrap sm:flex-nowrap items-center justify-satrt w-full my-4 gap-x-2">
+                        <div v-for="tab in tabs" :key="tab.index"
+                            class="flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3">
+                            <a v-on:click="toggleTabs(tab.index)" v-bind:class="{
+                                'text-green-600 bg-white w-full py-4 text-center rounded-md': openTab !== tab.index,
+                                'text-white  bg-green-600 w-full py-4 text-center rounded-md': openTab === tab.index,
+                            }">
+                                {{ tab.name }}
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
                     <div class="px-4 py-5 flex-auto">
                         <div class="tab-content tab-space">
-                            <!-- first from -->
-                            <div v-bind:class="{
-                                hidden: openTab !== 1,
-                                block: openTab === 1,
-                            }">
-                                <div class="py-4 w-[95%] bg-slate-700">
-                                    <div class="md:w-1/3">
-                                        <label
-                                            class="block text-black text-base ml-4 py-2 font-medium md:text-right mb-1 md:mb-0">
-                                            السنة
-                                        </label>
-                                    </div>
-                                    <select
-                                        class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
-                                        @change="onChange($event)" v-model="year">
-                                        <option selected disabled value="0">
-                                            Please select one
-                                        </option>
-
-                                        <option v-for="year in years" :key="year.year" :value="year.year">
-                                            {{ year.year }}
-                                        </option>
-                                    </select>
-                                </div>
-                                <form @submit.prevent="onSubmit" class="add-form py-4">
-                                    <!-- <div
-
-                      class="md:flex md:items-center mb-6"
-                    >
-                      <div class="md:w-1/3">
-                        <label
-                          class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 text-lg w-64"
-                          for="inline-full-name"
-                        >
-                          {{ Sector.Sector }}
-                        </label>
-                      </div>
-                      <div class="md:w-2/3">
-                        <input
-                          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                          id="inline-full-name"
-                          type="text"
-                          v-model="Sector.Budget"
-                        />
-                      </div>
-                    </div> -->
-                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4">
-                                        <div v-for="(Sector, index) in Sectors" :key="Sector.Sector" :value="Sector.Sector"
-                                            class="">
-                                            <div class="mb-3">
-                                                <label
-                                                    class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64"
-                                                    :for="index">
-                                                    {{ Sector.Sector }}
-                                                </label>
-                                                <input
-                                                    class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                                                    :id="index" type="text" v-model="Sector.Budget" />
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div v-if="Sectors.length" class="md:flex md:items-center w-full justify-end">
-                                        <div class="md:w-2/3">
-                                            <button
-                                                class="shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
-                                                type="submit" @click="save()">
-                                                حفظ
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+                            <!-- first form -->
+                            <div :class="{ hidden: openTab !== 1, block: openTab === 1 }">
+                                <Budgets :years="years" :year="year" />
                             </div>
-
-                            <div v-bind:class="{
-                                hidden: openTab !== 2,
-                                block: openTab === 2,
-                            }">
+                            <!-- second form -->
+                            <div :class="{ hidden: openTab !== 2, block: openTab === 2 }">
+                                <!-- ... (your form content) -->
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
                                     <div>
                                         <label
@@ -145,7 +45,6 @@
                                             id="inline-full-name" type="text" v-model="budgetsOfyear" />
                                     </div>
                                 </div>
-
                                 <form @submit.prevent="onSubmit" class="add-form py-4">
                                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4">
                                         <div v-for="(Sector, index) in newSectors" :key="Sector.Sector"
@@ -173,65 +72,20 @@
                                     </div>
                                 </form>
                             </div>
-                            <div v-bind:class="{
-                                hidden: openTab !== 3,
-                                block: openTab === 3,
-                            }">
-                                <div class="py-4 w-[95%] bg-slate-700">
-                                    <select
-                                        class="select1 mt-1 block w-full rounded-md border-2 border-gray-200 px-4 py-2 pl-3 pr-10 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm"
-                                        @change="onChangedelet($event)" selectedyear>
-                                        <option selected disabled value="0">
-                                            Please select one
-                                        </option>
-
-                                        <option v-for="year in years" :key="year.year" :value="year.year">
-                                            {{ year.year }}
-                                        </option>
-                                    </select>
-                                </div>
-                                <form @submit.prevent="onSubmit" class="add-form py-4">
-                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-
-                                        <div v-for="Sector in deletSectors" :key="Sector.Sector" :value="Sector.Sector"
-                                            class="mb-3">
-
-                                            <div>
-                                                <label
-                                                    class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64"
-                                                    for="inline-full-name">
-                                                    {{ Sector.Sector }}
-                                                </label>
-                                                <input
-                                                    class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                                                    id="inline-full-name" type="text" v-model="Sector.Budget" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div v-if="deletSectors.length" class="md:flex md:items-center">
-                                        <div class="md:w-1/3"></div>
-                                        <div v-if="deletSectors.length" class="md:flex md:items-center w-full justify-end">
-                                            <div class="md:w-2/3">
-                                                <button
-                                                    class="shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
-                                                    type="submit" @click="delet()">
-                                                    حذف
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                            <!-- third form -->
+                            <div :class="{ hidden: openTab !== 3, block: openTab === 3 }">
+                                <!-- ... (your form content) -->
+                                <DeleteBudget :years="years" />
                             </div>
-                            <div v-bind:class="{
-                                hidden: openTab !== 4,
-                                block: openTab === 4,
-                            }">
+                            <!-- fourth form -->
+                            <div :class="{ hidden: openTab !== 4, block: openTab === 4 }">
+                                <!-- ... (your form content) -->
                                 <div class="flex flex-col w-full">
                                     <div class="py-4 w-3/6 bg-slate-700">
                                         <select @change="getSectorstatistics($event)" v-model="selectedItem"
-                                            class="select1 mt-1 block w-full rounded-md border-2 border-gray-200 px-4 py-2 pl-3 pr-14 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm">
+                                            class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm">
                                             <option selected disabled value="0">
-                                                Please select one
+                                               الرجاء اختيار عام
                                             </option>
                                             <option class="" v-for="year in years" :key="year.year" :value="year.year">
                                                 {{ year.year }}
@@ -256,145 +110,16 @@
                                         </div>
                                         <div
                                             class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-                                            <div class="px-4 py-5 flex-auto">
+                                            <div v-if="budjetSector.length>0" class="px-4 py-5 flex-auto">
                                                 <div class="tab-content tab-space">
                                                     <div v-for="(Sector, index) in budjetSector" :key="Sector.Sector"
                                                         :value="Sector.Sector" v-bind:class="{
                                                             hidden: openTabstatistic !== index,
                                                             block: openTabstatistic === index,
                                                         }">
-                                                        <p>
-                                                            <heading class="mb-6 mx-4">
-                                                                {{ Sector.Sector }}</heading>
-                                                        </p>
-                                                        <div class="space-y-8 divide-y divide-gray-200">
-                                                            <div class="space-y-8 divide-y divide-gray-200">
-                                                                <div class="flex flex-col items-start justify-start">
-                                                                    <ul>
-                                                                    <li >
-                                                                        <div class="flex flex-row items-center justify-start gap-x-2">
-                                                                            <h1 style="min-width: 210px;" for="street-address" class="block text-gray-700 "> ميزانية القطاع </h1>
-                                                                            <div class="budget_box flex flex-col items-center justify-center ">
-                                                                                <h1 class="pt-2">{{ Sector.Budget}}₪</h1>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="mt-4">
-                                                                        <div class="flex flex-row items-center justify-start gap-x-2">
-                                                                            <h1 style="min-width: 210px;" for="street-address" class="block text-gray-700"> مصاريف القطاع </h1>
-                                                                            <div class="budget_box flex flex-col items-center justify-center ">
-                                                                                <div class="flex flex-col items-center justify-center"
-                                                                                style="width: 100%;">
-                                                                                <div style="width: 85%;" class="flex flex-row-reverse items-center justify-between">
-                                                                                    <h3 class="font-FlatBold">{{ Sector.expenses_year }}₪</h3>
-                                                                                    <h3 class="font-FlatBold">{{Sector.Budget==0 ? 0 : ((Sector.expenses_year / (Sector.Budget)) * 100).toFixed(2) + '%' }}</h3>
-                                                                                </div>
-                                                                                <progress dir="ltr" style="width: 90%;"
-                                                                                    :value="calculateProgress(Sector,'Budget')" max="100"></progress>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="mt-6">
-                                                                        <div class="flex flex-row items-center justify-start gap-x-2">
-                                                                            <h1 style="min-width: 210px;" for="street-address" class="block text-gray-700"> مصاريف القطاع </h1>
-                                                                            <div class="budget_box flex flex-col items-center justify-center ">
-                                                                                <div class="flex flex-col items-center justify-center"
-                                                                                style="width: 100%;">
-                                                                                <div style="width: 85%;" class="flex flex-row-reverse items-center justify-between">
-                                                                                    <h3 class="font-FlatBold">{{ Sector.income_year }}₪</h3>
-                                                                                    <h3 class="font-FlatBold">{{Sector.Budget==0 ? 0 : ((Sector.income_year / (Sector.Budget)) * 100).toFixed(2) + '%' }}</h3>
-                                                                                </div>
-                                                                                <progress dir="ltr" style="width: 90%;"
-                                                                                :value="calculateProgress(Sector,'income')" max="100"></progress>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                    </ul>
-                                                                    <!-- <div class="flex flex-row items-center justify-start mt-4">
-                                                                        <div class="budget_box flex flex-col items-center justify-center ">
-                                                                            <h1 for="street-address"
-                                                                                class="block text-gray-700">
-                                                                                ميزانبة القطاع </h1>
-                                                                            <h1>{{ Sector.Budget}}₪</h1>
-                                                                        </div>
-                                                                        <div
-                                                                            class="budget_box flex flex-col items-center justify-center mx-3">
-                                                                            <div class="flex items-center justify-center "
-                                                                                style="min-height: 110px;">
-                                                                                <h1
-                                                                                    class="block font-FlatBold text-gray-700">
-                                                                                    مصاريف القطاع
-                                                                                </h1>
-                                                                            </div>
-                                                                            <div class="flex flex-col items-center justify-center"
-                                                                                style="width: 100%;">
-                                                                                <div style="width: 85%;" class="flex flex-row-reverse items-center justify-between">
-                                                                                    <p>{{ Sector.expenses_year }}₪</p>
-                                                                                    <p>{{Sector.Budget==0 ? 0 : ((Sector.expenses_year / (Sector.Budget)) * 100).toFixed(2) + '%' }}</p>
-                                                                                </div>
-                                                                                <progress dir="ltr" style="width: 90%;"
-                                                                                    :value="calculateProgress(Sector,'Budget')" max="100"></progress>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div
-                                                                            class="budget_box flex flex-col items-center justify-center ">
-                                                                            <div class="flex items-center justify-center "
-                                                                                style="min-height: 110px;">
-                                                                                <h1
-                                                                                    class="block font-FlatBold text-gray-700">
-                                                                                    مدخلات القطاع
-                                                                                </h1>
-                                                                            </div>
-                                                                            <div class="flex flex-col items-center justify-center"
-                                                                                style="width: 100%;">
-                                                                                <div style="width: 85%;" class="flex flex-row-reverse items-center justify-between">
-                                                                                    <p>{{ Sector.income_year }}₪</p>
-                                                                                    <p>{{Sector.Budget==0 ? 0 : ((Sector.income_year  / (Sector.Budget)) * 100).toFixed(2) + '%' }}</p>
-                                                                                </div>
-                                                                                <progress dir="ltr" style="width: 90%;"
-                                                                                    :value="calculateProgress(Sector,'income')" max="100"></progress>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div> -->
-                                                                    <div class="flex flex-row items-center justify-center my-6">
-                                                                        <!-- <div style="min-width: 350px; min-height: 150px;"
-                                                                            class="flex flex-col items-center justify-center border-2 border-green-300">
-                                                                            <div class="flex items-center justify-center "
-                                                                                style="min-height: 110px;">
-                                                                                <h1
-                                                                                    class="block font-FlatBold text-gray-700">
-                                                                                    صافي الانفاق القطاع
-                                                                                </h1>
-                                                                            </div>
-                                                                            <div class="flex flex-col items-center justify-center"
-                                                                                style="width: 100%;">
-                                                                                <div style="width: 85%;" class="flex flex-row-reverse items-center justify-between">
-                                                                                    <p>{{ (Sector.income_year - Sector.expenses_year).toFixed(2) }}</p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div> -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="md:flex justify-between mt-5 text-center mt-10">
-                                                            <div class="mb-6 md:mb-0 md:w-1/2">
-                                                                <pure-vue-chart class="chart-custom-style"
-                                                                    :points="[{ label: 'الربع الاول', value: Sector.expenses_First }, { label: 'الربع الثاني', value: Sector.expenses_Second }, { label: 'الربع الثالث', value: Sector.expenses_Third }, { label: 'الربع الرابع', value: Sector.expenses_fourth }]"
-                                                                    :show-y-axis="true" :show-x-axis="true"
-                                                                    :width="chartWidth" :height="200" :show-values="true" />
-                                                                <h3 class="mt-3">مخرجات</h3>
-                                                            </div>
-                                                            <div class="md:w-1/2">
-                                                                <pure-vue-chart class="chart-custom-style"
-                                                                    :points="[{ label: 'الربع الاول', value: Sector.income_First }, { label: 'الربع الثاني', value: Sector.income_Second }, { label: 'الربع الثالث', value: Sector.income_Third }, { label: 'الربع الرابع', value: Sector.income_fourth }]"
-                                                                    :show-y-axis="true" :show-x-axis="true"
-                                                                    :width="chartWidth" :height="200" :show-values="true" />
-                                                                <h3 class="mt-3">مدخلات</h3>
-                                                            </div>
-                                                        </div>
+                                                        <h1 class="mb-6 mx-4 font-FlatBold text-2xl"> {{ Sector.Sector }}
+                                                        </h1>
+                                                        <TotalSector :Sector="Sector" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -412,6 +137,11 @@
 
 <script>
 import PureVueChart from "pure-vue-chart";
+import TotalSector from "./TotalSector.vue";
+import Budgets from './budgets.vue';
+import CreateBudget from './CreateBudget.vue';
+import DeleteBudget from './DeleteBudget.vue';
+
 export default {
     data() {
         return {
@@ -426,7 +156,12 @@ export default {
             budjetSector: [],
             deletSectors: [],
             points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
-
+            tabs: [
+                { index: 1, name: 'الميزانيات' },
+                { index: 2, name: 'اضافة جديد' },
+                { index: 3, name: 'حذف' },
+                { index: 4, name: 'احصائيات' },
+            ],
             projectshow: false,
             chartWidth: 400
         };
@@ -449,16 +184,17 @@ export default {
                 this.newSectors = response.data;
             });
         },
-        calculateProgress(Sector,type){
-            switch (type) {
-                case 'Budget':
-                    return Sector.Budget === 0 ? 0 : (Sector.expenses_year / Sector.Budget) * 100;
-                case 'income':
-                    return Sector.Budget === 0 ? 0 : (Sector.income_year / Sector.Budget) * 100;
-                default:
-                    return 0;
+        // calculateProgress(Sector, type) {
+        //     switch (type) {
+        //         case 'Budget':
+        //             return Sector.Budget === 0 ? 0 : (Sector.expenses_year / Sector.Budget) * 100;
+        //         case 'income':
+        //             return Sector.Budget === 0 ? 0 : (Sector.income_year / Sector.Budget) * 100;
+        //         default:
+        //             return 0;
 
-        }},
+        //     }
+        // },
         getSectorstatistics(event) {
             axios
                 .post("/Sectorstatistics", {
@@ -469,28 +205,27 @@ export default {
                 });
         },
 
-        onChange(event) {
-            axios
-                .post("/SectorsBudget", {
-                    year: event.target.value,
-                })
-                .then((response) => {
-                    this.Sectors = response.data;
-                    console.log("sss", this.Sectors);
-                });
-        },
-        onChangedelet(event) {
-            axios
-                .post("/SectorsBudget", {
-                    year: event.target.value,
-                })
-                .then((response) => {
-                    this.deletSectors = response.data;
-                    this.selectedItem = "0";
-                    this.selectedyear = "0";
-                    this.year = event.target.value;
-                });
-        },
+        // onChange(event) {
+        //     axios
+        //         .post("/SectorsBudget", {
+        //             year: event.target.value,
+        //         })
+        //         .then((response) => {
+        //             this.Sectors = response.data;
+        //         });
+        // },
+        // onChangedelet(event) {
+        //     axios
+        //         .post("/SectorsBudget", {
+        //             year: event.target.value,
+        //         })
+        //         .then((response) => {
+        //             this.deletSectors = response.data;
+        //             this.selectedItem = "0";
+        //             this.selectedyear = "0";
+        //             this.year = event.target.value;
+        //         });
+        // },
         save() {
             axios.post("/save", {
                 year: this.year,
@@ -554,15 +289,13 @@ export default {
                 toastr.error("ميزانية السنة لا تطابق مع ميزانية القطاعات");
             }
         },
-        delet() {
-
-            // console.log(this.deletSectors);
-            axios.post("/delet", {
-                year: this.year,
-            });
-            this.deletSectors = [];
-            this.getYears();
-        },
+        // delete() {
+        //     axios.post("/delet", {
+        //         year: this.year,
+        //     });
+        //     this.deletSectors = [];
+        //     this.getYears();
+        // },
     },
 
     beforeMount() {
@@ -570,7 +303,7 @@ export default {
         this.getSector();
     },
     components: {
-        PureVueChart,
+        PureVueChart, TotalSector, Budgets, CreateBudget, DeleteBudget
     },
     mounted() {
 
@@ -591,34 +324,4 @@ export default {
 
 };
 </script>
-<style scoped>
-progress {
-    width: 95%;
-    /* Adjust the width as needed */
-    height: 10px;
-    appearance: none;
-    border-radius: 5px;
-    background: #ddd;
-}
 
-progress::-webkit-progress-value {
-    background-color: #34ca96;
-    /* Adjust to match the overall border-radius */
-    border-radius: 5px;
-}
-
-progress::-webkit-progress-bar {
-    background-color: #ddd;
-    border-radius: 5px;
-}
-.budget_box{
-    min-width: 250px;
-    min-height: 70px;
-    border: 2px solid;
-    border-radius: 10px;
-    border-color: #dfe1e0;
-    z-index: 10;
-    background-color: #F2E9AE;
-
-}
-</style>
