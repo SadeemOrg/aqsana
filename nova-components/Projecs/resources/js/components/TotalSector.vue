@@ -1,7 +1,12 @@
 <template>
     <div class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-8 divide-y divide-gray-200">
-            <div class="flex flex-row mt-10 items-center justify-between pb-8">
+            <div class="w-full">
+                <BudgetInfo :budget="parseInt(Sector.Budget)" :divisor="1" label="ميزانية القطاع"
+                    expensesLabel="مصاريف القطاع " :expensesValue="Sector.expenses_year" incomeLabel="مدخلات القطاع"
+                    :incomeValue="Sector.income_year" net_amount_label="صافي انفاق القطاع" />
+            </div>
+            <!-- <div class="flex flex-row mt-10 items-center justify-between pb-8">
                 <div class="flex flex-col items-start justify-start">
                     <ul>
                         <li>
@@ -60,7 +65,7 @@
                         </div>
                     </li>
                 </ul>
-            </div>
+            </div> -->
             <div>
                 <div style="background-color: #eef1f4;" class="w-full py-4">
                     <div style="width: 95%;"
@@ -83,7 +88,7 @@
                         expensesLabel="مصاريف الربع الاول" :expensesValue="Sector.expenses_First"
                         incomeLabel="مدخلات الربع الاول" :incomeValue="Sector.income_First"
                         net_amount_label="صافي انفاق الربع الاول" />
-                <!-- <div class="flex flex-col items-start justify-start">
+                    <!-- <div class="flex flex-col items-start justify-start">
                         <ul>
                             <li>
                                 <div class="flex flex-row items-center justify-start gap-x-2">
@@ -149,7 +154,13 @@
                     </ul> -->
                 </div>
                 <!-- second quarter -->
-                <div class="flex flex-row mt-10 items-center justify-betwee pt-4"
+                <div class="w-full" :class="{ hidden: openTab !== 2, flex: openTab === 2 }">
+                    <BudgetInfo :budget="parseInt(Sector.Budget)" :divisor="4" label="ميزانية الربع الثاني"
+                        expensesLabel="مصاريف الربع الثاني" :expensesValue="Sector.expenses_Second"
+                        incomeLabel="مدخلات الربع الثاني" :incomeValue="Sector.income_Second"
+                        net_amount_label="صافي انفاق الربع الثاني" />
+                </div>
+                <!-- <div class="flex flex-row mt-10 items-center justify-betwee pt-4"
                     :class="{ hidden: openTab !== 2, flex: openTab === 2 }">
                     <div class="flex flex-col items-start justify-start">
                         <ul>
@@ -215,9 +226,15 @@
                             </div>
                         </li>
                     </ul>
-                </div>
+                </div> -->
                 <!-- third quarter -->
-                <div class="flex flex-row mt-10 items-center justify-betwee pt-4"
+                <div class="w-full" :class="{ hidden: openTab !== 3, flex: openTab === 3 }">
+                    <BudgetInfo :budget="parseInt(Sector.Budget)" :divisor="4" label="ميزانية الربع الثالث"
+                        expensesLabel="مصاريف الربع الثالث" :expensesValue="Sector.expenses_Third"
+                        incomeLabel="مدخلات الربع الثالث" :incomeValue="Sector.income_Third"
+                        net_amount_label="صافي انفاق الربع الثالث" />
+                </div>
+                <!-- <div class="flex flex-row mt-10 items-center justify-betwee pt-4"
                     :class="{ hidden: openTab !== 3, flex: openTab === 3 }">
                     <div class="flex flex-col items-start justify-start">
                         <ul>
@@ -283,9 +300,15 @@
                             </div>
                         </li>
                     </ul>
-                </div>
+                </div> -->
                 <!-- Fourth quarter -->
-                <div class="flex flex-row mt-10 items-center justify-betwee pt-4"
+                <div class="w-full" :class="{ hidden: openTab !== 4, flex: openTab === 4 }">
+                    <BudgetInfo :budget="parseInt(Sector.Budget)" :divisor="4" label="ميزانية الربع الرابع"
+                        expensesLabel="مصاريف الربع الرابع" :expensesValue="Sector.expenses_fourth"
+                        incomeLabel="مدخلات الربع الرابع" :incomeValue="Sector.income_fourth"
+                        net_amount_label="صافي انفاق الربع الرابع" />
+                </div>
+                <!-- <div class="flex flex-row mt-10 items-center justify-betwee pt-4"
                     :class="{ hidden: openTab !== 4, flex: openTab === 4 }">
                     <div class="flex flex-col items-start justify-start">
                         <ul>
@@ -351,7 +374,7 @@
                             </div>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -407,35 +430,4 @@ export default {
     },
 }
 </script>
-<style scoped>
-progress {
-    width: 95%;
-    /* Adjust the width as needed */
-    height: 10px;
-    appearance: none;
-    border-radius: 5px;
-    background: #ddd;
-}
 
-progress::-webkit-progress-value {
-    background-color: #34ca96;
-    /* Adjust to match the overall border-radius */
-    border-radius: 5px;
-}
-
-progress::-webkit-progress-bar {
-    background-color: #ddd;
-    border-radius: 5px;
-}
-
-.budget_box {
-    min-width: 250px;
-    min-height: 70px;
-    border: 2px solid;
-    border-radius: 10px;
-    border-color: #dfe1e0;
-    z-index: 10;
-    background-color: #F2E9AE;
-
-}
-</style>

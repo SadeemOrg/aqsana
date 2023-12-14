@@ -1,19 +1,19 @@
 <template>
-    <div class="flex flex-row mt-10 items-center justify-betwee pt-4">
+    <div class="flex lg:flex-row flex-col lg:gap-y-0 gap-y-8 mt-10 items-center justify-betwee pt-4 w-full">
         <div class="flex flex-col items-start justify-start">
             <ul>
                 <li>
-                    <div class="flex flex-row items-center justify-start gap-x-2">
-                        <h1 style="min-width: 245px;" for="street-address"  class="block text-gray-700 ">{{
+                    <div class="flex lg:flex-row flex-col items-center justify-start gap-y-4 lg:gap-y-0 lg:gap-x-2 ">
+                        <h1 style="min-width: 245px;" for="street-address" class="block text-gray-700 ">{{
                             label }} </h1>
                         <div class="budget_box flex flex-col items-center justify-center gap-x-1 ">
-                            <h2 class="pt-2">{{ budget/divisor }}₪</h2>
+                            <h2 class="pt-2">{{ budget / divisor }}₪</h2>
                         </div>
                     </div>
                 </li>
                 <li class="mt-10">
-                    <div class="flex flex-row items-center justify-start gap-x-2">
-                        <h1 style="min-width: 245px;"  class="block text-gray-700"> {{
+                    <div class="flex lg:flex-row flex-col items-center justify-start gap-y-4 lg:gap-y-0 lg:gap-x-2">
+                        <h1 style="min-width: 245px;" class="block text-gray-700"> {{
                             expensesLabel }}</h1>
                         <div class="budget_box flex flex-col items-center justify-center ">
                             <div class="flex flex-col items-center justify-center" style="width: 100%;">
@@ -29,8 +29,8 @@
                     </div>
                 </li>
                 <li class="mt-10">
-                    <div class="flex flex-row items-center justify-start gap-x-2">
-                        <h1 style="min-width: 245px;"  class="block text-gray-700"> {{
+                    <div class="flex lg:flex-row flex-col items-center justify-start  gap-y-4 lg:gap-y-0 lg:gap-x-2">
+                        <h1 style="min-width: 245px;" class="block text-gray-700"> {{
                             incomeLabel }} </h1>
                         <div class="budget_box flex flex-col items-center justify-center ">
                             <div class="flex flex-col items-center justify-center" style="width: 100%;">
@@ -49,10 +49,12 @@
         </div>
         <ul>
             <li class="">
-                <div class="flex flex-row items-center justify-start gap-x-2">
-                    <h1 style="min-width: 210px;" for="street-address" class="block text-gray-700 "> {{ net_amount_label }} </h1>
+                <div class="flex lg:flex-row flex-col items-center justify-start gap-y-4 lg:gap-y-0 lg:gap-x-2">
+                    <h1 style="min-width: 210px;" for="street-address" class="block text-gray-700 "> {{ net_amount_label }}
+                    </h1>
                     <div class="budget_box flex flex-col items-center justify-center ">
-                        <h1 class="pt-2">{{ (incomeValue - expensesValue).toFixed(2) }}₪</h1>
+                        <h1 :class="{ 'text-red-500': (incomeValue - expensesValue) < 0 }" class="pt-2">{{ (incomeValue -
+                            expensesValue).toFixed(2) }}₪</h1>
                     </div>
                 </div>
             </li>
@@ -66,24 +68,12 @@ export default {
         divisor: Number,
         label: String,
         expensesLabel: String,
-        // value: Number,
         expensesValue: Number,
         incomeValue: Number,
         incomeLabel: String,
         net_amount_label: String,
 
 
-    },
-    computed: {
-        // labelId() {
-        //     return `label-${this._uid}`;
-        // },
-        // expensesId() {
-        //     return `expenses-${this._uid}`;
-        // },
-        // incomesId() {
-        //     return `incomes-${this._uid}`;
-        // },
     },
     methods: {
         calculateProgress(type) {
@@ -123,13 +113,21 @@ progress::-webkit-progress-bar {
 
 .budget_box {
     min-width: 250px;
+    max-width: 250px;
     min-height: 70px;
     border: 2px solid;
     border-radius: 10px;
     border-color: #dfe1e0;
     z-index: 10;
     background-color: #F2E9AE;
+}
 
+/* Media query for screens less than or equal to 150px */
+@media (max-width: 550px) {
+    .budget_box {
+        min-width: 200px;
+        max-width: 200px;
+    }
 }
 </style>
 
