@@ -19,6 +19,7 @@ use App\Models\News;
 use App\Models\newsType;
 use App\Models\Project;
 use App\Models\Sector;
+use App\Models\SmsType;
 use App\Models\TelephoneDirectory;
 use App\Models\Transaction;
 use App\Models\User;
@@ -651,6 +652,29 @@ class HomeController extends Controller
 
         $sector = array();
         $Sectors = Sector::all();
+        foreach ($Sectors as $key => $Sector) {
+
+
+
+
+
+            $pus = array(
+                "sector_id" => $Sector->id,
+                "Sector" => $Sector->text,
+                "Budget" => '0'
+            );
+
+
+            array_push($sector, $pus);
+        }
+        // dd($sector);
+        return $sector;
+    }
+    public function getType(Request $request)
+    {
+
+        $sector = array();
+        $Sectors = SmsType::all();
         foreach ($Sectors as $key => $Sector) {
 
 
