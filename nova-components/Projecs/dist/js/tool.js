@@ -10036,7 +10036,7 @@ var render = function() {
                                               "h1",
                                               {
                                                 staticClass:
-                                                  "my-5 mx-4 font-extrabold text-3xl"
+                                                  "my-5 mx-4 font-extrabold text-gray-700 text-3xl"
                                               },
                                               [
                                                 _vm._v(

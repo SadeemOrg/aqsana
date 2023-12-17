@@ -127,7 +127,7 @@
                                                             hidden: openTabstatistic !== index,
                                                             block: openTabstatistic === index,
                                                         }">
-                                                        <h1 class="my-5 mx-4 font-extrabold text-3xl"> {{ Sector.Sector }}
+                                                        <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl"> {{ Sector.Sector }}
                                                         </h1>
                                                         <TotalSector :Sector="Sector" />
                                                     </div>
