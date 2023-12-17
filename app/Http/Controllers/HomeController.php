@@ -524,7 +524,7 @@ class HomeController extends Controller
         $income_allyear=Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->sum('equivelant_amount');
 
         $sector = array(
-            "Budgets"=>$Budgets->budget,
+            "Budgets"=>(int) $Budgets->budget,
             "expenses_year" => (int) $expenses_allyear,
             "income_year" => (int)$income_allyear,
 
