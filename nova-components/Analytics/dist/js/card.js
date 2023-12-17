@@ -720,7 +720,7 @@ var render = function() {
   return _c("card", [
     _c("div", { staticClass: "px-3 py-3" }, [
       _c("h1", { staticClass: "text-center text-3xl text-80 font-light" }, [
-        _vm._v("جدول فواتير")
+        _vm._v("جدول فواتير :")
       ]),
       _vm._v(" "),
       _c(
