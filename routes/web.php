@@ -9,6 +9,8 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\WebNotificationController;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Artisan;
+
 
 // use App\Http\Livewire\Notification;
 
@@ -22,10 +24,43 @@ use Maatwebsite\Excel\Facades\Excel;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/export', 'ExportController@export')->name('export');
-Route::get('/delete-all-data', 'ExportController@deleteAllData')->name('delete.all.data');
+// Route::get('/export', 'ExportController@export')->name('export');
+// Route::get('/delete-all-data', 'ExportController@deleteAllData')->name('delete.all.data');
 
-Route::get('/reports/show-orders', function(){
+
+// Route::get('/backup-database2', function () {
+//     dd("dd");
+//     // Artisan::call('backup:run --only-db');
+
+// });
+// Route::get('/backup-database', function () {
+//     Artisan::call('db:backup', ['--force' => true ]);
+
+// dd("dd");
+//     // dd("dd");
+//     // Replace 'your-database-name' with the actual name of your database
+//     $databaseName = config('database.connections.mysql.database');
+//     // Replace 'backup-file-name.sql' with the desired backup file name
+//     $backupFileName = 'backup-' . date('Y-m-d_H-i-s') . '.sql';
+
+//     // Generate the mysqldump command
+//     $command = "mysqldump -u " . config('database.connections.mysql.username') .
+//     " -p" . config('database.connections.mysql.password') .
+//     " " . $databaseName . " > " . storage_path('app/backups/') . $backupFileName;
+
+//     // dd($command );
+//     // Execute the command
+//     Artisan::call('migrate', ['--force' => true ]);
+
+//     // Artisan::call('migrate'); // Ensure migrations are up to date
+//     // Artisan::call('db:seed'); // Optionally, you can seed the database before backup
+//     exec($command);
+
+//     // Provide the download link to the user
+//     return response()->download(storage_path('app/backups/' . $backupFileName))->deleteFileAfterSend(true);
+// });
+
+Route::get('/reports/show-orders', function () {
     // dd("dd");
     return Excel::download(new ExportDonations, 'test.csv');
 });
@@ -103,7 +138,7 @@ Route::post("user", [HomeController::class, "user"])->name('user');
 Route::post("users", [HomeController::class, "users"])->name('users');
 Route::post("UserAdmin", [HomeController::class, "Admin"])->name('Admin');
 
-Route::post("schedulelast", [HomeController::class, "schedulelast"])->name('schedulelast');
+Route::get("schedulelast", [HomeController::class, "schedulelast"])->name('schedulelast');
 
 
 Route::post("first/", [HomeController::class, "first"])->name('first');
@@ -113,7 +148,8 @@ Route::post("getType", [HomeController::class, "getType"])->name('getType');
 Route::post("delet/", [HomeController::class, "delet"])->name('delet');
 
 Route::post("SectorsBudget", [HomeController::class, "SectorsBudget"])->name('SectorsBudget');
-Route::post("Sectorstatistics", [HomeController::class, "Sectorstatistics"])->name('Sectorstatistics');
+Route::get("Sectorstatistics", [HomeController::class, "Sectorstatistics"])->name('Sectorstatistics');
+Route::get("total-sector-budget", [HomeController::class, "SectorYearstatistics"])->name('SectorYearstatistics');
 
 Route::post("year", [HomeController::class, "year"])->name('year');
 Route::post("DeleteYears", [HomeController::class, "DeleteYears"])->name('DeleteYears');
@@ -177,9 +213,9 @@ Route::get('/testNotfiy', function () {
 });
 
 
-Route::get('/privacy-policy',function(){
+Route::get('/privacy-policy', function () {
     return View('Pages.privacy-policy');
-    });
+});
 
 // Library
 Route::get('/library', [HomeController::class, 'library'])->name('library');

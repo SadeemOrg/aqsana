@@ -1,7 +1,7 @@
 <template>
   <card>
     <div class="px-3 py-3">
-      <h1 class="text-center text-3xl text-80 font-light">جدول فواتير</h1>
+      <h1 class="text-center text-3xl text-80 font-light">جدول فواتير :</h1>
       <table class="text-center w-full">
         <tr>
           <th style="width: 25%">تاريخ</th>
