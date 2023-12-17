@@ -508,6 +508,11 @@ class HomeController extends Controller
     }
     public function SectorYearstatistics(Request $request)
     {
+        $Budgets = Budget::where([
+            ['year', '=', $request->year],
+            ['sector_id', '=', '0'],
+        ])->first();
+
         $year = $request->year;
         $date_from = $year . '-1-1';
         $date_to = $year . '-12-31';
@@ -519,6 +524,7 @@ class HomeController extends Controller
         $income_allyear=Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->sum('equivelant_amount');
 
         $sector = array(
+            "Budgets"=>$Budgets->budget,
             "expenses_year" => (int) $expenses_allyear,
             "income_year" => (int)$income_allyear,
 
