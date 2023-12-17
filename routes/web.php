@@ -211,6 +211,11 @@ Route::get('/testNotfiy', function () {
     return view('Pages.testNotfiy');
 });
 
+
+Route::get('/privacy-policy',function(){
+    return View('Pages.privacy-policy');
+    });
+
 // Library
 Route::get('/library', [HomeController::class, 'library'])->name('library');
 Route::get('/librarydetail/{id}', [HomeController::class, 'libraryDetail'])->name('libraryDetail');
