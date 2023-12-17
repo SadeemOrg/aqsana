@@ -506,6 +506,28 @@ class HomeController extends Controller
         $type = 1;
         return view('Pages.contact-page', compact('type'));
     }
+    public function SectorYearstatistics(Request $request)
+    {
+        $year = $request->year;
+        $date_from = $year . '-1-1';
+        $date_to = $year . '-12-31';
+        $from = date($date_from);
+        $to = date($date_to);
+
+        $sector = array();
+        $expenses_allyear=Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->sum('equivelant_amount');
+        $income_allyear=Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->sum('equivelant_amount');
+
+        $sector = array(
+            "expenses_year" => (int) $expenses_allyear,
+            "income_year" => (int)$income_allyear,
+
+
+        );
+        return $sector;
+
+
+    }
     public function Sectorstatistics(Request $request)
     {
 

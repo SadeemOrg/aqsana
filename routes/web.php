@@ -60,7 +60,7 @@ use Illuminate\Support\Facades\Artisan;
 //     return response()->download(storage_path('app/backups/' . $backupFileName))->deleteFileAfterSend(true);
 // });
 
-Route::get('/reports/show-orders', function(){
+Route::get('/reports/show-orders', function () {
     // dd("dd");
     return Excel::download(new ExportDonations, 'test.csv');
 });
@@ -148,7 +148,8 @@ Route::post("getType", [HomeController::class, "getType"])->name('getType');
 Route::post("delet/", [HomeController::class, "delet"])->name('delet');
 
 Route::post("SectorsBudget", [HomeController::class, "SectorsBudget"])->name('SectorsBudget');
-Route::post("Sectorstatistics", [HomeController::class, "Sectorstatistics"])->name('Sectorstatistics');
+Route::get("Sectorstatistics", [HomeController::class, "Sectorstatistics"])->name('Sectorstatistics');
+Route::get("total-sector-budget", [HomeController::class, "SectorYearstatistics"])->name('SectorYearstatistics');
 
 Route::post("year", [HomeController::class, "year"])->name('year');
 Route::post("DeleteYears", [HomeController::class, "DeleteYears"])->name('DeleteYears');
@@ -212,9 +213,9 @@ Route::get('/testNotfiy', function () {
 });
 
 
-Route::get('/privacy-policy',function(){
+Route::get('/privacy-policy', function () {
     return View('Pages.privacy-policy');
-    });
+});
 
 // Library
 Route::get('/library', [HomeController::class, 'library'])->name('library');
