@@ -85,12 +85,22 @@
                                         <select @change="getSectorstatistics($event)" v-model="selectedItem"
                                             class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm">
                                             <option selected disabled value="0">
-                                               الرجاء اختيار عام
+                                                الرجاء اختيار عام
                                             </option>
                                             <option class="" v-for="year in years" :key="year.year" :value="year.year">
                                                 {{ year.year }}
                                             </option>
                                         </select>
+                                    </div>
+                                    <div v-if="isTotalSectorYearlyNotEmpty" class="w-full mb-12">
+                                        <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl">الميزانية العامه لسنه {{ selectedyear }}</h1>
+                                        <BudgetInfo :budget="parsedBudget" :divisor="1"
+                                            label="مجمل الميزانية للعام "
+                                            expensesLabel="مجمل المصاريف للعام "
+                                            :expensesValue="totalSectorYearly.expenses_year"
+                                            incomeLabel="مجمل المدخلات للعام"
+                                            :incomeValue="totalSectorYearly.income_year"
+                                            net_amount_label="صافي الانفاق الكلي" />
                                     </div>
                                     <div class="w-full">
                                         <div class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
@@ -110,14 +120,14 @@
                                         </div>
                                         <div
                                             class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-                                            <div v-if="budjetSector.length>0" class="px-4 py-5 flex-auto">
+                                            <div v-if="budjetSector.length > 0" class="px-4 py-5 flex-auto">
                                                 <div class="tab-content tab-space">
                                                     <div v-for="(Sector, index) in budjetSector" :key="Sector.Sector"
                                                         :value="Sector.Sector" v-bind:class="{
                                                             hidden: openTabstatistic !== index,
                                                             block: openTabstatistic === index,
                                                         }">
-                                                        <h1 class="mb-6 mx-4 font-FlatBold text-2xl"> {{ Sector.Sector }}
+                                                        <h1 class="my-5 mx-4 font-extrabold text-3xl"> {{ Sector.Sector }}
                                                         </h1>
                                                         <TotalSector :Sector="Sector" />
                                                     </div>
@@ -141,19 +151,24 @@ import TotalSector from "./TotalSector.vue";
 import Budgets from './budgets.vue';
 import CreateBudget from './CreateBudget.vue';
 import DeleteBudget from './DeleteBudget.vue';
+import BudgetInfo from "./BudgetInfo.vue";
 
 export default {
+    components: {
+        PureVueChart, TotalSector, Budgets, CreateBudget, DeleteBudget, BudgetInfo
+    },
     data() {
         return {
             openTab: 1,
             openTabstatistic: 0,
             selectedItem: "0",
-            selectedyear: "0",
+            selectedyear: 0,
             year: "0",
             years: [],
             Sectors: [],
             newSectors: [],
             budjetSector: [],
+            totalSectorYearly: {},
             deletSectors: [],
             points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
             tabs: [
@@ -165,6 +180,20 @@ export default {
             projectshow: false,
             chartWidth: 400
         };
+    },
+    beforeMount() {
+        this.getYears();
+        this.getSector();
+    },
+    mounted() {
+        window.addEventListener('resize', () => {
+            if (window.innerWidth < 1220 && window.innerWidth > 500) {
+                this.chartWidth = 300;
+            } else if (window.innerWidth < 499) {
+                this.chartWidth = 250;
+            }
+            console.log(this.chartWidth)
+        });
     },
     methods: {
         toggleTabs: function (tabNumber) {
@@ -184,48 +213,27 @@ export default {
                 this.newSectors = response.data;
             });
         },
-        // calculateProgress(Sector, type) {
-        //     switch (type) {
-        //         case 'Budget':
-        //             return Sector.Budget === 0 ? 0 : (Sector.expenses_year / Sector.Budget) * 100;
-        //         case 'income':
-        //             return Sector.Budget === 0 ? 0 : (Sector.income_year / Sector.Budget) * 100;
-        //         default:
-        //             return 0;
+        async getSectorstatistics(event) {
+            this.selectedyear = event.target.value
+            try {
+                // Use Promise.all to run both requests concurrently
+                const [totalSectorResponse, budjetSectorResponse] = await Promise.all([
+                    axios.post('/total-sector-budget', {
+                        year: event.target.value,
+                    }),
+                    axios.post("/Sectorstatistics", {
+                        year: event.target.value,
+                    }),
+                ]);
 
-        //     }
-        // },
-        getSectorstatistics(event) {
-            axios
-                .post("/Sectorstatistics", {
-                    year: event.target.value,
-                })
-                .then((response) => {
-                    this.budjetSector = response.data;
-                });
+                // Handle the responses
+                this.totalSectorYearly = totalSectorResponse.data;
+                this.budjetSector = budjetSectorResponse.data;
+                console.log({ totalSectorYearly })
+            } catch (error) {
+                console.error('Error making POST request:', error);
+            }
         },
-
-        // onChange(event) {
-        //     axios
-        //         .post("/SectorsBudget", {
-        //             year: event.target.value,
-        //         })
-        //         .then((response) => {
-        //             this.Sectors = response.data;
-        //         });
-        // },
-        // onChangedelet(event) {
-        //     axios
-        //         .post("/SectorsBudget", {
-        //             year: event.target.value,
-        //         })
-        //         .then((response) => {
-        //             this.deletSectors = response.data;
-        //             this.selectedItem = "0";
-        //             this.selectedyear = "0";
-        //             this.year = event.target.value;
-        //         });
-        // },
         save() {
             axios.post("/save", {
                 year: this.year,
@@ -249,8 +257,6 @@ export default {
             this.newSectors.forEach((element) => {
                 sum += parseInt(element["Budget"]);
             });
-
-            console.log(sum);
             // alert(this.budgetsOfyear);
             if (this.budgetsOfyear > sum) {
                 axios
@@ -289,39 +295,16 @@ export default {
                 toastr.error("ميزانية السنة لا تطابق مع ميزانية القطاعات");
             }
         },
-        // delete() {
-        //     axios.post("/delet", {
-        //         year: this.year,
-        //     });
-        //     this.deletSectors = [];
-        //     this.getYears();
-        // },
     },
-
-    beforeMount() {
-        this.getYears();
-        this.getSector();
+    computed: {
+        isTotalSectorYearlyNotEmpty() {
+            return Object.keys(this.totalSectorYearly).length > 0;
+        },
+        parsedBudget() {
+            const parsedValue = parseInt(this.totalSectorYearly.Budgets);
+            return isNaN(parsedValue) ? 0 : parsedValue;
+        },
     },
-    components: {
-        PureVueChart, TotalSector, Budgets, CreateBudget, DeleteBudget
-    },
-    mounted() {
-
-        window.addEventListener('resize', () => {
-            if (window.innerWidth < 1220 && window.innerWidth > 500) {
-                this.chartWidth = 300;
-            } else if (window.innerWidth < 499) {
-                this.chartWidth = 250;
-            }
-
-            console.log(this.chartWidth)
-
-        });
-    }
-
-
-
-
 };
 </script>
 

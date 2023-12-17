@@ -148,8 +148,8 @@ Route::post("getType", [HomeController::class, "getType"])->name('getType');
 Route::post("delet/", [HomeController::class, "delet"])->name('delet');
 
 Route::post("SectorsBudget", [HomeController::class, "SectorsBudget"])->name('SectorsBudget');
-Route::get("Sectorstatistics", [HomeController::class, "Sectorstatistics"])->name('Sectorstatistics');
-Route::get("total-sector-budget", [HomeController::class, "SectorYearstatistics"])->name('SectorYearstatistics');
+Route::post("Sectorstatistics", [HomeController::class, "Sectorstatistics"])->name('Sectorstatistics');
+Route::post("total-sector-budget", [HomeController::class, "SectorYearstatistics"])->name('SectorYearstatistics');
 
 Route::post("year", [HomeController::class, "year"])->name('year');
 Route::post("DeleteYears", [HomeController::class, "DeleteYears"])->name('DeleteYears');
