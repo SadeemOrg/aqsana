@@ -110,158 +110,180 @@ class Project extends Resource
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
-        $user = Auth::user();
-        $id = Auth::id();
-        if ($user->type() == 'admin') {
+        // $user = Auth::user();
+        // $id = Auth::id();
+        // if ($user->type() == 'admin') {
 
-            return $query->where('project_type', '1');
-        } elseif ($user->type() == 'regular_area') {
+        //     return $query->where('project_type', '1');
+        // } elseif ($user->type() == 'regular_area') {
 
-            $Area = \App\Models\Area::where('admin_id', $id)->first();
-            $projects = DB::table('project_area')->where('area_id', $Area->id)->get();
-        } elseif ($user->type() == 'regular_city') {
-            $citye =   City::where('admin_id', $id)
-                ->select('id')->first();
-            $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
-        } else   $projects = DB::table('project_city')->get();
+        //     $Area = \App\Models\Area::where('admin_id', $id)->first();
+        //     $projects = DB::table('project_area')->where('area_id', $Area->id)->get();
+        // } elseif ($user->type() == 'regular_city') {
+        //     $citye =   City::where('admin_id', $id)
+        //         ->select('id')->first();
+        //     $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
+        // } else   $projects = DB::table('project_city')->get();
 
 
-        $stack = array();
-        foreach ($projects as $key => $value) {
-            array_push($stack, $value->project_id);
-        }
-        return $query->whereIn('id', $stack)->where('project_type', '1');
+        // $stack = array();
+        // foreach ($projects as $key => $value) {
+        //     array_push($stack, $value->project_id);
+        // }
+        return $query->where('project_type', '1');
     }
     public function fields(Request $request)
     {
         return [
-            (new Panel(__('main'), [
-                ID::make(__('ID'), 'id')->sortable(),
-                ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, $this->id)
-                    ->text(__('start'))
-                    ->showLoadingAnimation()
-                    ->loadingColor('#fff')->buttonColor('#21b970')
-                    ->canSee(function () {
-                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-                        if ($projects) {
-
-                            if ($projects->status == '0')  return true;
-                        }
-                    })
-                    ->readonly(function () {
-                        return false;
-                    })
-                    ->hideWhenCreating()->hideWhenUpdating(),
-
-                ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, $this->id)
-                    ->text(__('end'))
-                    ->showLoadingAnimation()
-                    ->loadingColor('#fff')->buttonColor('#21b970')
-                    ->canSee(function () {
-                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-                        if ($projects) {
-
-                            if ($projects->status == '1')  return true;
-                        }
-                    })
-                    ->readonly(function () {
-                        return false;
-                    })
-                    ->hideWhenCreating()->hideWhenUpdating(),
-                ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, $this->id)
-                    ->text(__('Finished'))
-                    ->showLoadingAnimation()
-                    ->loadingColor('#fff')->buttonColor('#21b970')
-                    ->canSee(function () {
-                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-                        if ($projects) {
-
-                            if ($projects->status > '1')  return true;
-                        }
-                    })
-                    ->readonly()
-                    ->hideWhenCreating()->hideWhenUpdating(),
-                ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, $this->id)
-                    ->text(__('incomplete'))
-                    ->showLoadingAnimation()
-                    ->loadingColor('#fff')->buttonColor('#787878')
-                    ->canSee(function () {
-                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-                        if (!$projects) {
-                            return true;
-                        }
-                    })
-                    ->readonly()
-                    ->hideWhenCreating()->hideWhenUpdating(),
-
-
-
-
-                ActionButton::make(__('Action'))
-                    ->action(ApprovalRejectProjec::class, $this->id)
-                    ->text(__('acsept'))
-                    ->showLoadingAnimation()
-                    ->loadingColor('#fff')->buttonColor('#21b970')
-                    ->canSee(function () {
-                        $user = Auth::user();
-
-                        if ($user->type() == 'regular_city' || $user->type() == 'regular_area') {
-                            return true;
-                        }
-                    })
-                    ->readonly(function () {
-                        $id = Auth::id();
-                        $user = Auth::user();
-                        if ($user->type() == 'regular_city') {
-                            $citye =   City::where('admin_id', $id)
-                                ->select('id')->first();
-                            $acspet = DB::table('accept_project')
-                                ->where([
-                                    ['project_id', '=', $this->id],
-                                    ['city_id', '=', $citye['id']],
-                                ])
-                                ->first();
+            ID::make(__('ID'), 'id')->sortable(),
+            Text::make(__("project name"), "project_name")->rules('required'),
+            Textarea::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
+            // Text::make(__("sector"), "sector")->rules('required'),
+            Multiselect::make(__('Sector'), "sector")
+            ->options(function () {
+                $Users =  \App\Models\Sector::all();
+
+                $i = 0;
+                $user_type_admin_array =  array();
+                foreach ($Users as $User) {
+
+
+                    $user_type_admin_array += [($User['id']) => ($User['text'])];
+                }
+
+                return $user_type_admin_array;
+            })
+            ->singleSelect()->hideFromIndex(),
+            BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideWhenCreating()->hideWhenUpdating(),
+
+
+            // (new Panel(__('main'), [
+            //     ID::make(__('ID'), 'id')->sortable(),
+            //     ActionButton::make(__('Action'))
+            //         ->action(ProjectStartEnd::class, $this->id)
+            //         ->text(__('start'))
+            //         ->showLoadingAnimation()
+            //         ->loadingColor('#fff')->buttonColor('#21b970')
+            //         ->canSee(function () {
+            //             $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+            //             if ($projects) {
+
+            //                 if ($projects->status == '0')  return true;
+            //             }
+            //         })
+            //         ->readonly(function () {
+            //             return false;
+            //         })
+            //         ->hideWhenCreating()->hideWhenUpdating(),
+
+            //     ActionButton::make(__('Action'))
+            //         ->action(ProjectStartEnd::class, $this->id)
+            //         ->text(__('end'))
+            //         ->showLoadingAnimation()
+            //         ->loadingColor('#fff')->buttonColor('#21b970')
+            //         ->canSee(function () {
+            //             $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+            //             if ($projects) {
+
+            //                 if ($projects->status == '1')  return true;
+            //             }
+            //         })
+            //         ->readonly(function () {
+            //             return false;
+            //         })
+            //         ->hideWhenCreating()->hideWhenUpdating(),
+            //     ActionButton::make(__('Action'))
+            //         ->action(ProjectStartEnd::class, $this->id)
+            //         ->text(__('Finished'))
+            //         ->showLoadingAnimation()
+            //         ->loadingColor('#fff')->buttonColor('#21b970')
+            //         ->canSee(function () {
+            //             $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+            //             if ($projects) {
+
+            //                 if ($projects->status > '1')  return true;
+            //             }
+            //         })
+            //         ->readonly()
+            //         ->hideWhenCreating()->hideWhenUpdating(),
+            //     ActionButton::make(__('Action'))
+            //         ->action(ProjectStartEnd::class, $this->id)
+            //         ->text(__('incomplete'))
+            //         ->showLoadingAnimation()
+            //         ->loadingColor('#fff')->buttonColor('#787878')
+            //         ->canSee(function () {
+            //             $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+            //             if (!$projects) {
+            //                 return true;
+            //             }
+            //         })
+            //         ->readonly()
+            //         ->hideWhenCreating()->hideWhenUpdating(),
+
+
+
+
+            //     ActionButton::make(__('Action'))
+            //         ->action(ApprovalRejectProjec::class, $this->id)
+            //         ->text(__('acsept'))
+            //         ->showLoadingAnimation()
+            //         ->loadingColor('#fff')->buttonColor('#21b970')
+            //         ->canSee(function () {
+            //             $user = Auth::user();
+
+            //             if ($user->type() == 'regular_city' || $user->type() == 'regular_area') {
+            //                 return true;
+            //             }
+            //         })
+            //         ->readonly(function () {
+            //             $id = Auth::id();
+            //             $user = Auth::user();
+            //             if ($user->type() == 'regular_city') {
+            //                 $citye =   City::where('admin_id', $id)
+            //                     ->select('id')->first();
+            //                 $acspet = DB::table('accept_project')
+            //                     ->where([
+            //                         ['project_id', '=', $this->id],
+            //                         ['city_id', '=', $citye['id']],
+            //                     ])
+            //                     ->first();
 
-                            if ($acspet) {
+            //                 if ($acspet) {
 
-                                if ($acspet->accepted == "1")   return  true;
-                                else return false;
-                            }
-                        }
-                    })
-                    ->hideWhenCreating()->hideWhenUpdating(),
+            //                     if ($acspet->accepted == "1")   return  true;
+            //                     else return false;
+            //                 }
+            //             }
+            //         })
+            //         ->hideWhenCreating()->hideWhenUpdating(),
 
 
 
 
-                Text::make(__("project name"), "project_name")->rules('required'),
-                Textarea::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
+            //     Text::make(__("project name"), "project_name")->rules('required'),
+            //     Textarea::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
 
-                Select::make(__('SECTOR'), 'sector')
-                    ->options(function () {
-                        $Sectors =  \App\Models\Sector::all();
-                        $Sectors_type_admin_array =  array();
+            //     Select::make(__('SECTOR'), 'sector')
+            //         ->options(function () {
+            //             $Sectors =  \App\Models\Sector::all();
+            //             $Sectors_type_admin_array =  array();
 
-                        foreach ($Sectors as $Sector) {
+            //             foreach ($Sectors as $Sector) {
 
 
-                            $Sectors_type_admin_array += [$Sector['id'] => ($Sector['text'])];
-                        }
+            //                 $Sectors_type_admin_array += [$Sector['id'] => ($Sector['text'])];
+            //             }
 
-                        return $Sectors_type_admin_array;
-                    })->hideFromIndex(),
+            //             return $Sectors_type_admin_array;
+            //         })->hideFromIndex(),
 
-                BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
-                    ->options(Area::all())
-                    ->optionsLabel('name')->canSee(function ($request) {
-                        $user = Auth::user();
-                        if ($user->type() == 'admin') return true;
-                        return false;
-                    }),
+            //     BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
+            //         ->options(Area::all())
+            //         ->optionsLabel('name')->canSee(function ($request) {
+            //             $user = Auth::user();
+            //             if ($user->type() == 'admin') return true;
+            //             return false;
+            //         }),
 
 
 
@@ -271,140 +293,140 @@ class Project extends Resource
 
 
 
-                DateTime::make(__('projec start'), 'start_date')->rules('required')->hideFromIndex(),
-                DateTime::make(__('projec end'), 'end_date')->hideFromIndex(),
+            //     DateTime::make(__('projec start'), 'start_date')->rules('required')->hideFromIndex(),
+            //     DateTime::make(__('projec end'), 'end_date')->hideFromIndex(),
 
 
-                Boolean::make(__('is_bus'), 'is_bus')->hideFromIndex(),
-                Boolean::make(__('is_has_volunteer'), 'is_volunteer')->hideFromIndex(),
-                Boolean::make(__('is_has_Donations'), 'is_donation')->hideFromIndex(),
+            //     Boolean::make(__('is_bus'), 'is_bus')->hideFromIndex(),
+            //     Boolean::make(__('is_has_volunteer'), 'is_volunteer')->hideFromIndex(),
+            //     Boolean::make(__('is_has_Donations'), 'is_donation')->hideFromIndex(),
 
 
 
 
 
-            ]))->withToolbar(),
+            // ]))->withToolbar(),
 
-            (new Panel(__('City'), [
-                BelongsToManyField::make(__('City'), "City", '\App\Nova\City')
-                    // ->options(Area::all())
-                    ->options(function () {
+            // (new Panel(__('City'), [
+            //     BelongsToManyField::make(__('City'), "City", '\App\Nova\City')
+            //         // ->options(Area::all())
+            //         ->options(function () {
 
-                        $id = Auth::id();
-                        $Area = \App\Models\Area::where('admin_id', $id)->first();
-                        //    dd( $Area->id);
-                        $Citys =  \App\Models\City::where('area_id', $Area->id)->get();
-                        // $users =  \App\Models\City::where('area_id', $id)->get();
-                        return $Citys;
-                        $user_type_admin_array =  array();
+            //             $id = Auth::id();
+            //             $Area = \App\Models\Area::where('admin_id', $id)->first();
+            //             //    dd( $Area->id);
+            //             $Citys =  \App\Models\City::where('area_id', $Area->id)->get();
+            //             // $users =  \App\Models\City::where('area_id', $id)->get();
+            //             return $Citys;
+            //             $user_type_admin_array =  array();
 
-                        foreach ($Citys as $City) {
-                            // dd($user['id'] ."**" .($user['id']));
-                            $user_type_admin_array += [$City['id'] => ($City['name'])];
-                        }
+            //             foreach ($Citys as $City) {
+            //                 // dd($user['id'] ."**" .($user['id']));
+            //                 $user_type_admin_array += [$City['id'] => ($City['name'])];
+            //             }
 
-                        return $user_type_admin_array;
-                    })->canSee(function ($request) {
-                        $user = Auth::user();
-                        if ($user->type() == 'regular_area') return true;
-                        return false;
-                    }),
-            ])),
+            //             return $user_type_admin_array;
+            //         })->canSee(function ($request) {
+            //             $user = Auth::user();
+            //             if ($user->type() == 'regular_area') return true;
+            //             return false;
+            //         }),
+            // ])),
 
-            (new Panel(__('bus'), [
+            // (new Panel(__('bus'), [
 
 
 
 
 
-                BelongsToManyField::make(__('bus'), 'bus', 'App\Nova\bus')
-                    // ->options(Bus::all())
-                    ->options(Bus::all())
-                    ->optionsLabel('bus_number')
-                    ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                        return null;
-                    })->hideFromIndex(),
+            //     BelongsToManyField::make(__('bus'), 'bus', 'App\Nova\bus')
+            //         // ->options(Bus::all())
+            //         ->options(Bus::all())
+            //         ->optionsLabel('bus_number')
+            //         ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+            //             return null;
+            //         })->hideFromIndex(),
 
 
-                Flexible::make(__('newbus'), 'newbus')
-                    ->limit(1)
-                    ->hideFromDetail()->hideFromIndex()
-                    ->addLayout(__('Add new bus'), 'bus', [
+            //     Flexible::make(__('newbus'), 'newbus')
+            //         ->limit(1)
+            //         ->hideFromDetail()->hideFromIndex()
+            //         ->addLayout(__('Add new bus'), 'bus', [
 
-                        Select::make(__('BusesCompany'), 'BusesCompany')
-                            ->options(function () {
-                                $users =  \App\Models\BusesCompany::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name'])];
-                                }
+            //             Select::make(__('BusesCompany'), 'BusesCompany')
+            //                 ->options(function () {
+            //                     $users =  \App\Models\BusesCompany::all();
+            //                     $user_type_admin_array =  array();
+            //                     foreach ($users as $user) {
+            //                         $user_type_admin_array += [$user['id'] => ($user['name'])];
+            //                     }
 
-                                return $user_type_admin_array;
-                            }),
+            //                     return $user_type_admin_array;
+            //                 }),
 
 
-                        Text::make(__("Bus Number"), "bus_number"),
+            //             Text::make(__("Bus Number"), "bus_number"),
 
-                        Number::make(__("Number person on bus"), "number_person_on_bus")->step(1.0),
+            //             Number::make(__("Number person on bus"), "number_person_on_bus")->step(1.0),
 
-                        Number::make(__("seat price"), "seat_price")->step(1.0),
+            //             Number::make(__("seat price"), "seat_price")->step(1.0),
 
-                        Select::make(__('travel from'), 'from')
-                            ->options(function () {
-                                $users =  \App\Models\address::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name_address'])];
-                                }
+            //             Select::make(__('travel from'), 'from')
+            //                 ->options(function () {
+            //                     $users =  \App\Models\address::all();
+            //                     $user_type_admin_array =  array();
+            //                     foreach ($users as $user) {
+            //                         $user_type_admin_array += [$user['id'] => ($user['name_address'])];
+            //                     }
 
-                                return $user_type_admin_array;
-                            }),
+            //                     return $user_type_admin_array;
+            //                 }),
 
 
-                        Select::make(__('travel to'), 'to')
-                            ->options(function () {
-                                $users =  \App\Models\address::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name_address'])];
-                                }
+            //             Select::make(__('travel to'), 'to')
+            //                 ->options(function () {
+            //                     $users =  \App\Models\address::all();
+            //                     $user_type_admin_array =  array();
+            //                     foreach ($users as $user) {
+            //                         $user_type_admin_array += [$user['id'] => ($user['name_address'])];
+            //                     }
 
-                                return $user_type_admin_array;
-                            }),
+            //                     return $user_type_admin_array;
+            //                 }),
 
 
-                        Text::make(__("Name Driver"), "name_driver"),
-                        Text::make(__("phone_number"), "phone_number"),
+            //             Text::make(__("Name Driver"), "name_driver"),
+            //             Text::make(__("phone_number"), "phone_number"),
 
-                    ])
+            //         ])
 
 
 
 
 
-            ])),
-            (new Panel(__('tooles'), [
+            // ])),
+            // (new Panel(__('tooles'), [
 
-                Flexible::make(__('tooles'), 'tools')
+            //     Flexible::make(__('tooles'), 'tools')
 
-                    ->addLayout(__('tooles'), 'toole', [
-                        Select::make(__('user'), 'user_tools')
-                            ->options(function () {
-                                $users =  \App\Models\User::all();
-                                $user_type_admin_array =  array();
-                                foreach ($users as $user) {
-                                    $user_type_admin_array += [$user['id'] => ($user['name'])];
-                                }
+            //         ->addLayout(__('tooles'), 'toole', [
+            //             Select::make(__('user'), 'user_tools')
+            //                 ->options(function () {
+            //                     $users =  \App\Models\User::all();
+            //                     $user_type_admin_array =  array();
+            //                     foreach ($users as $user) {
+            //                         $user_type_admin_array += [$user['id'] => ($user['name'])];
+            //                     }
 
-                                return $user_type_admin_array;
-                            }),
+            //                     return $user_type_admin_array;
+            //                 }),
 
-                        Textarea::make(__('tooles'), "text_tools"),
+            //             Textarea::make(__('tooles'), "text_tools"),
 
-                    ]),
+            //         ]),
 
 
-            ])),
+            // ])),
 
 
 
@@ -423,249 +445,253 @@ class Project extends Resource
     }
 
 
-    public static function beforeSave(Request $request, $model)
-    {
-        $id = Auth::id();
-        $citye =   City::where('admin_id', $id)
-            ->select('id')->first();
-
-            if ($request->newbus) {
-                $buss = $request->newbus;
-
-                foreach ($buss as $bus) {
-
-                    DB::table('buses')
-                        ->insert(
-                            [
-                                'name_driver' => $bus['attributes']['name_driver'] ? $bus['attributes']['name_driver'] : "  ",
-                                'company_id' => $bus['attributes']['BusesCompany'],
-                                'bus_number' => $bus['attributes']['bus_number'],
-                                'number_of_seats' => $bus['attributes']['number_person_on_bus'],
-                                'seat_price' => $bus['attributes']['seat_price'],
-                                'phone_number_driver' => $bus['attributes']['phone_number'],
-                                // 'admin_id' => $bus['attributes']['adminbus'],
-                                'status' => '1',
-                            ]
-                        );
-                    $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
-                    $user = Auth::user();
-                    if ($user->type() == 'regular_city') {
-                        DB::table('project_bus')
-                            ->updateOrInsert(
-                                ['project_id' => $request->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
-
-                            );
-                    } else {
-                        DB::table('project_bus')
-                            ->updateOrInsert(
-                                ['project_id' => $request->id, 'bus_id' => $bus['id']],
-
-                            );
-                    }
-                }
-            }
-            $request->request->remove('newbus');
-
-    }
-
     public static function beforeCreate(Request $request, $model)
     {
         $id = Auth::id();
         $model->created_by = $id;
         $model->project_type = '1';
         $model->is_reported = '1';
+        $model->start_date = '2023-01-01 12:00:00';
+
     }
 
-    public static function afterCreate(Request $request, $model)
-    {
 
-        if ($request->Area) {
-            $areas = json_decode($request->Area);
-            $tokens = [];
-            foreach ($areas as $key => $area) {
-                $user = User::where('id', $area->admin_id)->first();
-                $notification = Notification::where('id', '1')->first();
+    // public static function beforeSave(Request $request, $model)
+    // {
+    //     $id = Auth::id();
+    //     $citye =   City::where('admin_id', $id)
+    //         ->select('id')->first();
 
-                if ($user->fcm_token != null && $user->fcm_token != "") {
-                    array_push($tokens, $user->fcm_token);
-                }
-            }
-        }
-        if ($request->City) {
-            $Citys = json_decode($request->City);
-            $tokens = [];
-            foreach ($Citys as $key => $City) {
-                $user = User::where('id', $City->admin_id)->first();
-                $notification = Notification::where('id', '1')->first();
+    //         if ($request->newbus) {
+    //             $buss = $request->newbus;
 
-                if ($user->fcm_token != null && $user->fcm_token != "") {
-                    array_push($tokens, $user->fcm_token);
-                }
-            }
-        }
+    //             foreach ($buss as $bus) {
 
+    //                 DB::table('buses')
+    //                     ->insert(
+    //                         [
+    //                             'name_driver' => $bus['attributes']['name_driver'] ? $bus['attributes']['name_driver'] : "  ",
+    //                             'company_id' => $bus['attributes']['BusesCompany'],
+    //                             'bus_number' => $bus['attributes']['bus_number'],
+    //                             'number_of_seats' => $bus['attributes']['number_person_on_bus'],
+    //                             'seat_price' => $bus['attributes']['seat_price'],
+    //                             'phone_number_driver' => $bus['attributes']['phone_number'],
+    //                             // 'admin_id' => $bus['attributes']['adminbus'],
+    //                             'status' => '1',
+    //                         ]
+    //                     );
+    //                 $bus =  \App\Models\Bus::where('bus_number', $bus['attributes']['bus_number'],)->first();
+    //                 $user = Auth::user();
+    //                 if ($user->type() == 'regular_city') {
+    //                     DB::table('project_bus')
+    //                         ->updateOrInsert(
+    //                             ['project_id' => $request->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
 
-        DB::table('project_status')->insert([
-            'project_id' => $model->id,
-            'status' => 0,
-        ]);
+    //                         );
+    //                 } else {
+    //                     DB::table('project_bus')
+    //                         ->updateOrInsert(
+    //                             ['project_id' => $request->id, 'bus_id' => $bus['id']],
 
-        $user = Auth::user();
-        $id = Auth::id();
-        $citye =   City::where('admin_id', $id)
-            ->first();
-        if ($user->type() == 'regular_area') {
-            $Area = \App\Models\Area::where('admin_id', $id)->first();
-            DB::table('project_area')
-                ->updateOrInsert(
-                    ['project_id' => $model->id, 'area_id' =>  $Area['id']],
+    //                         );
+    //                 }
+    //             }
+    //         }
+    //         $request->request->remove('newbus');
 
-                );
-        }
-        if ($user->type() == 'regular_city') {
-            // dd($citye);
-            DB::table('project_area')
-                ->updateOrInsert(
-                    ['project_id' => $model->id, 'area_id' =>  $citye['area_id']],
-
-                );
-            DB::table('project_city')
-                ->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' =>  $citye['id']],
-
-                );
-        }
-    }
-    public static function aftersave(Request $request, $model)
-    {
-        $id = Auth::id();
-        $model->update_by = $id;
-
-        $citye =   City::where('admin_id', $id)
-            ->select('id')->first();
-        if ($request->Area) {
-            $areas = json_decode($request->Area);
-            $tokens = [];
-            foreach ($areas as $key => $area) {
-                $user = User::where('id', $area->admin_id)->first();
-                $notification = Notification::where('id', '2')->first();
-
-                if ($user->fcm_token != null && $user->fcm_token != "") {
-                    array_push($tokens, $user->fcm_token);
-                }
-            }
-        }
-        if ($request->City) {
-            $Citys = json_decode($request->City);
-            $tokens = [];
-            foreach ($Citys as $key => $City) {
-                $user = User::where('id', $City->admin_id)->first();
-                $notification = Notification::where('id', '2')->first();
-
-                if ($user->fcm_token != null && $user->fcm_token != "") {
-                    array_push($tokens, $user->fcm_token);
-                }
-            }
-        }
-
-        if ($request->Budjet) {
-
-            DB::table('transactions')
-                ->updateOrInsert(
-                    ['ref_id' => $model->id, 'ref_cite_id' => $citye['id']],
-                    [
-                        'main_type' => '2',
-                        'type' => '2',
-                        'Currency' => '3',
-                        'transact_amount' => $request->Budjet,
-                        'equivelant_amount' => $request->Budjet,
-                        'transaction_date' => $date = date('Y-m-d'),
-
-                    ]
-                );
-        }
-        if ($request->Toole) {
-
-            DB::table('project_toole')
-                ->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' => $citye['id']],
-                    ['tools' => $request->Toole]
-                );
-        }
-        if ($request->bus) {
-
-            $buss = json_decode($request->bus);
-
-            $stack = array();
-            foreach ($buss as $key => $value) {
-                array_push($stack, $value->id);
-            }
+    // }
 
 
-            $busss = DB::table('project_bus')->where(
-                ['project_id' => $model->id]
-            )->get();
-            $busstack = array();
-            foreach ($busss as $key => $value) {
-                array_push($busstack, $value->bus_id);
-            }
-            $result = array_intersect($stack, $busstack);
+    // public static function afterCreate(Request $request, $model)
+    // {
 
-            $deleted = DB::table('project_bus')->where(['project_id' => $model->id])
-                ->whereNotIn('bus_id', $result)
-                ->delete();
+    //     if ($request->Area) {
+    //         $areas = json_decode($request->Area);
+    //         $tokens = [];
+    //         foreach ($areas as $key => $area) {
+    //             $user = User::where('id', $area->admin_id)->first();
+    //             $notification = Notification::where('id', '1')->first();
 
-            // dd(gettype($buss));
-            // $bus_id=$buss[0]->id;
+    //             if ($user->fcm_token != null && $user->fcm_token != "") {
+    //                 array_push($tokens, $user->fcm_token);
+    //             }
+    //         }
+    //     }
+    //     if ($request->City) {
+    //         $Citys = json_decode($request->City);
+    //         $tokens = [];
+    //         foreach ($Citys as $key => $City) {
+    //             $user = User::where('id', $City->admin_id)->first();
+    //             $notification = Notification::where('id', '1')->first();
+
+    //             if ($user->fcm_token != null && $user->fcm_token != "") {
+    //                 array_push($tokens, $user->fcm_token);
+    //             }
+    //         }
+    //     }
 
 
-            foreach ($buss as $key => $user) {
+    //     DB::table('project_status')->insert([
+    //         'project_id' => $model->id,
+    //         'status' => 0,
+    //     ]);
+
+    //     $user = Auth::user();
+    //     $id = Auth::id();
+    //     $citye =   City::where('admin_id', $id)
+    //         ->first();
+    //     if ($user->type() == 'regular_area') {
+    //         $Area = \App\Models\Area::where('admin_id', $id)->first();
+    //         DB::table('project_area')
+    //             ->updateOrInsert(
+    //                 ['project_id' => $model->id, 'area_id' =>  $Area['id']],
+
+    //             );
+    //     }
+    //     if ($user->type() == 'regular_city') {
+    //         // dd($citye);
+    //         DB::table('project_area')
+    //             ->updateOrInsert(
+    //                 ['project_id' => $model->id, 'area_id' =>  $citye['area_id']],
+
+    //             );
+    //         DB::table('project_city')
+    //             ->updateOrInsert(
+    //                 ['project_id' => $model->id, 'city_id' =>  $citye['id']],
+
+    //             );
+    //     }
+    // }
+    // public static function aftersave(Request $request, $model)
+    // {
+    //     $id = Auth::id();
+    //     $model->update_by = $id;
+
+    //     $citye =   City::where('admin_id', $id)
+    //         ->select('id')->first();
+    //     if ($request->Area) {
+    //         $areas = json_decode($request->Area);
+    //         $tokens = [];
+    //         foreach ($areas as $key => $area) {
+    //             $user = User::where('id', $area->admin_id)->first();
+    //             $notification = Notification::where('id', '2')->first();
+
+    //             if ($user->fcm_token != null && $user->fcm_token != "") {
+    //                 array_push($tokens, $user->fcm_token);
+    //             }
+    //         }
+    //     }
+    //     if ($request->City) {
+    //         $Citys = json_decode($request->City);
+    //         $tokens = [];
+    //         foreach ($Citys as $key => $City) {
+    //             $user = User::where('id', $City->admin_id)->first();
+    //             $notification = Notification::where('id', '2')->first();
+
+    //             if ($user->fcm_token != null && $user->fcm_token != "") {
+    //                 array_push($tokens, $user->fcm_token);
+    //             }
+    //         }
+    //     }
+
+    //     if ($request->Budjet) {
+
+    //         DB::table('transactions')
+    //             ->updateOrInsert(
+    //                 ['ref_id' => $model->id, 'ref_cite_id' => $citye['id']],
+    //                 [
+    //                     'main_type' => '2',
+    //                     'type' => '2',
+    //                     'Currency' => '3',
+    //                     'transact_amount' => $request->Budjet,
+    //                     'equivelant_amount' => $request->Budjet,
+    //                     'transaction_date' => $date = date('Y-m-d'),
+
+    //                 ]
+    //             );
+    //     }
+    //     if ($request->Toole) {
+
+    //         DB::table('project_toole')
+    //             ->updateOrInsert(
+    //                 ['project_id' => $model->id, 'city_id' => $citye['id']],
+    //                 ['tools' => $request->Toole]
+    //             );
+    //     }
+    //     if ($request->bus) {
+
+    //         $buss = json_decode($request->bus);
+
+    //         $stack = array();
+    //         foreach ($buss as $key => $value) {
+    //             array_push($stack, $value->id);
+    //         }
 
 
-                DB::table('project_bus')
-                    ->updateOrInsert(
-                        ['project_id' => $model->id, 'bus_id' => $user->id],
+    //         $busss = DB::table('project_bus')->where(
+    //             ['project_id' => $model->id]
+    //         )->get();
+    //         $busstack = array();
+    //         foreach ($busss as $key => $value) {
+    //             array_push($busstack, $value->bus_id);
+    //         }
+    //         $result = array_intersect($stack, $busstack);
 
-                    );
-            }
-            // dd($buss );
-            // $request->bus = json_encode($buss);
-            // dd( $request->bus);
+    //         $deleted = DB::table('project_bus')->where(['project_id' => $model->id])
+    //             ->whereNotIn('bus_id', $result)
+    //             ->delete();
 
-            // DB::table('project_bus')
-            //     ->updateOrInsert(
-            //         ['project_id' => $model->id, 'city_id' => $citye['id'],'bus_id' => $bus_id],
+    //         // dd(gettype($buss));
+    //         // $bus_id=$buss[0]->id;
 
-            //     );
-        }
-    }
-    public static function afterupdate(Request $request, $model)
-    {
-        if ($request->Area) {
-            $areas = json_decode($request->Area);
-            $tokens = [];
-            foreach ($areas as $key => $area) {
-                $user = User::where('id', $area->admin_id)->first();
-                $notification = Notification::where('id', '1')->first();
 
-                if ($user->fcm_token != null && $user->fcm_token != "") {
-                    array_push($tokens, $user->fcm_token);
-                }
-            }
-        }
-        if ($request->City) {
-            $Citys = json_decode($request->City);
-            $tokens = [];
-            foreach ($Citys as $key => $City) {
-                $user = User::where('id', $City->admin_id)->first();
-                $notification = Notification::where('id', '1')->first();
+    //         foreach ($buss as $key => $user) {
 
-                if ($user->fcm_token != null && $user->fcm_token != "") {
-                    array_push($tokens, $user->fcm_token);
-                }
-            }
-        }
-    }
+
+    //             DB::table('project_bus')
+    //                 ->updateOrInsert(
+    //                     ['project_id' => $model->id, 'bus_id' => $user->id],
+
+    //                 );
+    //         }
+    //         // dd($buss );
+    //         // $request->bus = json_encode($buss);
+    //         // dd( $request->bus);
+
+    //         // DB::table('project_bus')
+    //         //     ->updateOrInsert(
+    //         //         ['project_id' => $model->id, 'city_id' => $citye['id'],'bus_id' => $bus_id],
+
+    //         //     );
+    //     }
+    // }
+    // public static function afterupdate(Request $request, $model)
+    // {
+    //     if ($request->Area) {
+    //         $areas = json_decode($request->Area);
+    //         $tokens = [];
+    //         foreach ($areas as $key => $area) {
+    //             $user = User::where('id', $area->admin_id)->first();
+    //             $notification = Notification::where('id', '1')->first();
+
+    //             if ($user->fcm_token != null && $user->fcm_token != "") {
+    //                 array_push($tokens, $user->fcm_token);
+    //             }
+    //         }
+    //     }
+    //     if ($request->City) {
+    //         $Citys = json_decode($request->City);
+    //         $tokens = [];
+    //         foreach ($Citys as $key => $City) {
+    //             $user = User::where('id', $City->admin_id)->first();
+    //             $notification = Notification::where('id', '1')->first();
+
+    //             if ($user->fcm_token != null && $user->fcm_token != "") {
+    //                 array_push($tokens, $user->fcm_token);
+    //             }
+    //         }
+    //     }
+    // }
 
     /**
      * Get the cards available for the request.

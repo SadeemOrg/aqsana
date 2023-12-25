@@ -27,6 +27,7 @@ class ProjectType extends Resource
      */
     public static function availableForNavigation(Request $request)
     {
+        return false;
         if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("projectparmation",  $request->user()->userrole()) )){
             return true;
         }
