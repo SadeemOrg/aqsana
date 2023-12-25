@@ -33,6 +33,10 @@ class Report extends Resource
      * @var string
      */
     public static $title = 'id';
+    public static function label()
+    {
+        return __('Report');
+    }
     public static function group()
     {
         return __('Financial management');
