@@ -12,6 +12,11 @@ class Projecs extends Tool
      *
      * @return void
      */
+
+     public static function group()
+     {
+         return __('Financial management');
+     }
     public function boot()
     {
         Nova::script('projecs', __DIR__.'/../dist/js/tool.js');

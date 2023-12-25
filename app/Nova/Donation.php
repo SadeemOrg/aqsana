@@ -21,6 +21,7 @@ use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Laravel\Nova\Fields\DateTime;
 use Acme\MultiselectField\Multiselect;
+use App\Models\Sector;
 use App\Nova\Actions\DeleteBill;
 use App\Nova\Actions\DepositedInBank;
 use App\Nova\Actions\ExportDonations;
@@ -38,6 +39,8 @@ use NovaButton\Button;
 use function Clue\StreamFilter\fun;
 use Titasgailius\SearchRelations\SearchesRelations;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
+use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
+
 
 class Donation extends Resource
 {
@@ -135,32 +138,25 @@ class Donation extends Resource
 
             // BelongsTo::make(__('project'), 'project')->hideWhenCreating()->readonly(),
             // Project::make(__('ref_id'), 'ref_id')->hideFromIndex(),
-            BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideFromIndex(),
-            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable()->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
-            Multiselect::make(__('project'), "ref_id")
-                ->options(function () {
-                    $Users =  \App\Models\Project::all();
-
-                    $i = 0;
-                    $user_type_admin_array =  array();
-                    foreach ($Users as $User) {
 
 
-                        $user_type_admin_array += [($User['id']) => ($User['project_name'])];
-                    }
-
-                    return $user_type_admin_array;
+            NovaBelongsToDepend::make('Sectors')
+                ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
+                ->options(Sector::all()),
+            NovaBelongsToDepend::make('project')
+                ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
+                ->optionsResolve(function ($Sector) {
+                    // Reduce the amount of unnecessary data sent
+                    return  $Sector->projects()->get(['id','project_name']);
                 })
-                ->singleSelect(),
-
-
-
+                ->dependsOn('Sectors') ->hideFromIndex()->hideFromDetail(),
+            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
 
             Boolean::make(__('Receive Done'), 'ReceiveDonation', function () {
                 return ($this->transaction_status > 1) ? true : false;
             })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    return null;
-                }),
+                return null;
+            }),
             Text::make(__('description'), 'description')->hideFromIndex(),
 
 

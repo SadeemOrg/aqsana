@@ -24,7 +24,7 @@ class Project extends Model
          'project_type', 'Project_Status', 'start_date', 'end_date',
         'Budjet', 'admin_id', 'approval', 'reason_of_reject'
         ,'Financial_Type','is_has_volunteer','is_has_Donations','areas','cities','approval_Status','trip_from','trip_to',
-        'update_by','created_by','tools','transact_amount','newbus'
+        'update_by','created_by','tools','transact_amount','newbus','test'
 
 
     ];
@@ -144,7 +144,10 @@ class Project extends Model
     {
       return $this->distance = "0";
     }
-
+    public function Sectors()
+    {
+        return $this->belongsTo('App\Models\Sector','sector');
+    }
     public function ActionEvents()
     {
         return $this->hasMany(ActionEvents::class,"actionable_id")->where('action_events.target_type', '=', get_class($this));
