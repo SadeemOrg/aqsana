@@ -78,6 +78,8 @@ Route::controller(ExportExcelController::class)->group(function () {
     Route::get('export/ExportCites', 'ExportCites')->name('export.ExportCites');
     Route::get('export/ExportAddress', 'ExportAddress')->name('export.ExportAddress');
     Route::get('export/ExportBusesCompany', 'ExportBusesCompany')->name('export.ExportBusesCompany');
+    Route::get('export/ExportReport', 'ExportReport')->name('export.ExportReport');
+
 });
 
 
