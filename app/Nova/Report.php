@@ -97,7 +97,7 @@ class Report extends Resource
 
             Text::make(__("Out Come"), "out_come")->calculate('sum', __('Total Count')),
 
-            Text::make(__("Net In Come"), "Net_in_come")->calculate('sum', __('Total Count')),
+            Text::make(__("Net"), "Net_in_come")->calculate('sum', __('Total Count')),
 
 
             RowBackground::make(__("Net In Come"), "Net_in_come", function ($model) {

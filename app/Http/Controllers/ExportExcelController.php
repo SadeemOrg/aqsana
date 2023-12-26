@@ -23,7 +23,7 @@ class ExportExcelController extends Controller
 
     public function index()
     {
-        dd();
+        dd("ww");
         $key = 'Donationsw';
        return view('export',compact('key'));
     }
@@ -77,46 +77,81 @@ class ExportExcelController extends Controller
         $key = 'Report';
         return view('export',compact('key','ref','name','from','to'));
     }
-    public function ExportPaymentVoucher()
+    public function ExportPaymentVoucher(Request $request)
     {
+
+        $ref= ($request->ref != null) ? $request->ref : 'null';
+        $name= ($request->name != null) ? $request->name : 'null';
+        $from= ($request->from != null) ? $request->from : 'null';
+        $to= ($request->to != null) ? $request->to : 'null';
         $key = 'PaymentVoucher';
-        return view('export',compact('key'));
+
+        return view('export',compact('key','ref','name','from','to'));
     }
-    public function  ExportDelegates()
+    public function  ExportDelegates(Request $request)
     {
+        $ref= ($request->ref != null) ? $request->ref : 'null';
+        $name= ($request->name != null) ? $request->name : 'null';
+        $from= ($request->from != null) ? $request->from : 'null';
+        $to= ($request->to != null) ? $request->to : 'null';
+
         $key = 'Delegates';
-        return view('export',compact('key'));
+        return view('export',compact('key','ref','name','from','to'));
     }
-    public function  ExportAlhisalat()
+    public function  ExportAlhisalat(Request $request)
     {
+        $ref= ($request->ref != null) ? $request->ref : 'null';
+        $name= ($request->name != null) ? $request->name : 'null';
+        $from= ($request->from != null) ? $request->from : 'null';
+        $to= ($request->to != null) ? $request->to : 'null';
         $key = 'Alhisalat';
-        return view('export',compact('key'));
+        return view('export',compact('key','ref','name','from','to'));
 
     }
-    public function  ExportUsers()
+    public function  ExportUsers(Request $request)
     {
+        $ref= ($request->ref != null) ? $request->ref : 'null';
+        $name= ($request->name != null) ? $request->name : 'null';
+        $from= ($request->from != null) ? $request->from : 'null';
+        $to= ($request->to != null) ? $request->to : 'null';
           $key = 'Users';
-        return view('export',compact('key'));
+          return view('export',compact('key','ref','name','from','to'));
 
     }
-    public function  ExportAreas()
+    public function  ExportAreas(Request $request)
     {
+        $ref= ($request->ref != null) ? $request->ref : 'null';
+        $name= ($request->name != null) ? $request->name : 'null';
+        $from= ($request->from != null) ? $request->from : 'null';
+        $to= ($request->to != null) ? $request->to : 'null';
         $key = 'Area';
-        return view('export',compact('key'));
+        return view('export',compact('key','ref','name','from','to'));
     }
-    public function  ExportCites()
+    public function  ExportCites(Request $request)
     {
+        $ref= ($request->ref != null) ? $request->ref : 'null';
+        $name= ($request->name != null) ? $request->name : 'null';
+        $from= ($request->from != null) ? $request->from : 'null';
+        $to= ($request->to != null) ? $request->to : 'null';
         $key = 'Cites';
-        return view('export',compact('key'));
+        return view('export',compact('key','ref','name','from','to'));
     }
-    public function  ExportAddress()
+    public function  ExportAddress(Request $request)
     {
+        $ref= ($request->ref != null) ? $request->ref : 'null';
+        $name= ($request->name != null) ? $request->name : 'null';
+        $from= ($request->from != null) ? $request->from : 'null';
+        $to= ($request->to != null) ? $request->to : 'null';
         $key = 'Address';
-        return view('export',compact('key'));
+        return view('export',compact('key','ref','name','from','to'));
     }
-    public function  ExportBusesCompany()
+    public function  ExportBusesCompany(Request $request)
     {
+        $ref= ($request->ref != null) ? $request->ref : 'null';
+        $name= ($request->name != null) ? $request->name : 'null';
+        $from= ($request->from != null) ? $request->from : 'null';
+        $to= ($request->to != null) ? $request->to : 'null';
         $key = 'BusesCompany';
-        return view('export',compact('key'));
+        return view('export',compact('key','ref','name','from','to'));
     }
 }
