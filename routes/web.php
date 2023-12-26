@@ -1,6 +1,7 @@
 <?php
 
 use App\Exports\ExportDonations;
+use App\Http\Controllers\ExportExcelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationTest;
