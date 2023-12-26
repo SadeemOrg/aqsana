@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Models\Project;
 use App\Models\Transaction;
+use App\Nova\Actions\ExportReport;
 use App\Nova\Filters\DateRange;
 use App\Nova\Filters\ProjectSectors;
 use App\Nova\Metrics\NetProject;
@@ -33,6 +34,10 @@ class Report extends Resource
      * @var string
      */
     public static $title = 'id';
+    public static function label()
+    {
+        return __('Report');
+    }
     public static function group()
     {
         return __('Financial management');
@@ -151,6 +156,8 @@ class Report extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new ExportReport())->standalone(),
+        ];
     }
 }

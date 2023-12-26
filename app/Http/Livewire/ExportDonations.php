@@ -10,6 +10,7 @@ use App\Exports\ExportCites;
 use App\Exports\ExportDelegates;
 use App\Exports\ExportDonations as ExportsExportDonations;
 use App\Exports\ExportPaymentVoucher;
+use App\Exports\ExportsReport;
 use App\Exports\ExportUsers;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
@@ -32,7 +33,11 @@ class ExportDonations extends Component
 
         return Excel::download(new ExportsExportDonations($this->ref, $this->name ,$this->from ,$this->to), 'Donations.csv');
     }
+    public function Report()
+    {
 
+        return Excel::download(new ExportsReport($this->from ,$this->to), 'Donations.csv');
+    }
     public function PaymentVoucher()
     {
         return Excel::download(new ExportPaymentVoucher, 'PaymentVoucher.csv');
@@ -67,9 +72,6 @@ class ExportDonations extends Component
     }
     public function render()
     {
-        // dd($this->key);
-
-
         return view('livewire.export-donations');
     }
 }

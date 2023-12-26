@@ -10,9 +10,7 @@
 
 </head>
 <body>
-@php
-    // dd($name);
-@endphp
+
 {{-- /    <livewire:export-donations :key="$key"/> --}}
     @livewire('export-donations', ['key' => $key,'ref' => $ref,'name'=>$name,'from'=>$from,'to'=>$to])
 
