@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "64robots/nova-date-filter": "^0.3.2",
         "acme/analytics": "*",
         "acme/bill": "*",
         "acme/multiselect-field": "*",
