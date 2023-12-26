@@ -67,7 +67,7 @@ class ExportExcelController extends Controller
 
     public function ExportReport(Request $request)
     {
-        dd("dd");
+
 
         $ref= ($request->ref != null) ? $request->ref : 'null';
         $name= ($request->name != null) ? $request->name : 'null';
