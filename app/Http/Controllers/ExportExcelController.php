@@ -68,9 +68,14 @@ class ExportExcelController extends Controller
     public function ExportReport(Request $request)
     {
 
-
+        $array = [];
+        $data = $request->all();
+        // dd($data );
+        foreach ($data as $key => $value) {
+            array_push($array, $value);
+        }
+        $name=$array;
         $ref= ($request->ref != null) ? $request->ref : 'null';
-        $name= ($request->name != null) ? $request->name : 'null';
         $from= ($request->from != null) ? $request->from : 'null';
         $to= ($request->to != null) ? $request->to : 'null';
 

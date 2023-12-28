@@ -12,16 +12,16 @@ class ExportsReport implements FromCollection , WithHeadings
 {
 
 
-    public function __construct(string $from, string $to)
+    public function __construct(array $name)
     {
 
-        $this->from = $from;
-        $this->to = $to;
+        $this->name = $name;
+
     }
 
     public function headings(): array
     {
-        return ['id', 'الاسم',  'تاريخ البدء', 'تاريخ الانتهاء', 'مدخولات', 'مخروجات', 'صافي'];
+        return ['رقم', 'الاسم',  'تاريخ البدء', 'تاريخ الانتهاء', 'مدخولات', 'مخروجات', 'صافي'];
     }
 
     /**
@@ -30,12 +30,9 @@ class ExportsReport implements FromCollection , WithHeadings
 
     public function collection()
     {
-        $from = (( $this->from !='null') ?  $this->from : '2001-01-01 00:00:00.0' );
-        $this->to=( $this->to !='null') ?  $this->to :  Carbon::now();
-        $startdate = date($this->from);
-        $finishdate = date($this->to);
-        $Projects = Project::whereBetween('start_date', [$startdate, $finishdate])
-        ->whereBetween('end_date', [$startdate, $finishdate])
+
+
+        $Projects = Project::whereIn('id', $this->name)
         ->select('id', 'project_name', 'start_date', 'end_date', 'in_come', 'out_come', 'Net_in_come')
         ->get();
 

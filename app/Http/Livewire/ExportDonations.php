@@ -35,8 +35,8 @@ class ExportDonations extends Component
     }
     public function Report()
     {
-
-        return Excel::download(new ExportsReport($this->from ,$this->to), 'Donations.csv');
+        // dd( $this->name);
+        return Excel::download(new ExportsReport($this->name), 'Donations.csv');
     }
     public function PaymentVoucher()
     {
