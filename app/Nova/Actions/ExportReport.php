@@ -12,6 +12,10 @@ use Laravel\Nova\Fields\Date;
 
 class ExportReport extends Action
 {
+    public  function name()
+    {
+        return __('Export Excel');
+    }
     use InteractsWithQueue, Queueable;
 
     /**
@@ -23,7 +27,15 @@ class ExportReport extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return Action::openInNewTab('/export/ExportReport?from=' . $fields->from . '&&to=' . $fields->to);
+
+        // ?name=AASAS&email=qqq%40jjf.f&phone=Q&password=ASASA
+        $string = '?';
+        foreach ($models as $key => $value) {
+
+            $string .= 'reselt' . $key . '=' . $value->id . '&&';
+        }
+        // dd('/export-form/' .$string);
+        return Action::openInNewTab('/export/ExportReport'. $string);
 
     }
 

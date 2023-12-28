@@ -2,15 +2,16 @@
 
 namespace App\Nova\Filters;
 
-use App\Models\Sector;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
 
-class ProjectSectors extends Filter
+class ReportAdmin extends Filter
 {
+
     public  function name()
     {
-        return __('Sector');
+        return __('Project Officer');
     }
     /**
      * The filter's component.
@@ -18,8 +19,6 @@ class ProjectSectors extends Filter
      * @var string
      */
     public $component = 'searchable-select-filter';
-
-    // public $component = 'select-filter';
 
     /**
      * Apply the filter to the given query.
@@ -31,10 +30,7 @@ class ProjectSectors extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        if($value=="non" )
-        { return $query;}
-// dd($query->where('area_id',$value)->get());
-        return $query->where('sector',$value);
+        return $query->where('Created_By',$value);
     }
 
     /**
@@ -45,10 +41,10 @@ class ProjectSectors extends Filter
      */
     public function options(Request $request)
     {
-        $Sectors = Sector::all();
+        $Areas = User::all();
         $foo = array();
-        foreach ($Sectors as $Sector)
-            $foo[$Sector->text] = $Sector->id;
+        foreach ($Areas as $Area)
+        $foo[$Area->name]=$Area->id;
         return $foo;
     }
 }

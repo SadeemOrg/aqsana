@@ -65,6 +65,7 @@
         "optimistdigital/nova-settings": "^3.5",
         "optimistdigital/nova-tailwind": "^1.1",
         "orlyapps/nova-belongsto-depend": "^3.0",
+        "outl1ne/nova-detached-filters": "^1.1.0",
         "pdmfc/nova-action-button": "^0.7.4",
         "pishran/nova-rtl-theme": "^1.5",
         "pos-lifestyle/laravel-nova-date-range-filter": "^1.3",

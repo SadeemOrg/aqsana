@@ -138,6 +138,8 @@ class Project extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__("project name"), "project_name")->rules('required'),
             Textarea::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
+                            DateTime::make(__('projec start'), 'start_date')->rules('required')->hideFromIndex(),
+
             // Text::make(__("sector"), "sector")->rules('required'),
             Multiselect::make(__('Sector'), "sector")
             ->options(function () {
@@ -451,7 +453,7 @@ class Project extends Resource
         $model->created_by = $id;
         $model->project_type = '1';
         $model->is_reported = '1';
-        $model->start_date = '2023-01-01 12:00:00';
+        // $model->start_date = '2023-01-01 12:00:00';
 
     }
 

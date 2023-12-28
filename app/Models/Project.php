@@ -76,7 +76,7 @@ class Project extends Model
 
     public function Transaction()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Transaction::class,'ref_id','id');
     }
 
     public function Area()
