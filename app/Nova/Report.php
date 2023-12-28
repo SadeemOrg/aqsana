@@ -93,11 +93,11 @@ class Report extends Resource
             Text::make(__("project name"), "project_name")->rules('required'),
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideWhenCreating()->hideWhenUpdating(),
 
-            Text::make(__("receipt Voucher"), "in_come")->calculate('sum', __('Total Count')),
+            Text::make(__("receipt Voucher"), "in_come")->calculate('sum', __('Total Count'))->sortable(),
 
-            Text::make(__("Out Come"), "out_come")->calculate('sum', __('Total Count')),
+            Text::make(__("Out Come"), "out_come")->calculate('sum', __('Total Count'))->sortable(),
 
-            Text::make(__("Net"), "Net_in_come")->calculate('sum', __('Total Count')),
+            Text::make(__("Net"), "Net_in_come")->calculate('sum', __('Total Count'))->sortable(),
 
 
             RowBackground::make(__("Net In Come"), "Net_in_come", function ($model) {
