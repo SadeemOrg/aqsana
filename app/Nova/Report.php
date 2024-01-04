@@ -10,6 +10,7 @@ use App\Nova\Filters\CreatedBy;
 use App\Nova\Filters\DateRange;
 use App\Nova\Filters\ProjectSectors;
 use App\Nova\Filters\ReportAdmin;
+use App\Nova\Filters\ReportCreated;
 use App\Nova\Metrics\NetProject;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -97,11 +98,15 @@ class Report extends Resource
             Text::make(__("project name"), "project_name")->rules('required'),
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideWhenCreating()->hideWhenUpdating(),
             DateTime::make(__('projec start'), 'start_date')->rules('required'),
-            BelongsTo::make(__('Project Officer'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            // BelongsTo::make(__('Project Officer'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('admin'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
+
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+
             HasMany::make(__('the receipt Voucher'), 'Transaction', \App\Nova\Donation::class)->hideWhenCreating()->hideWhenUpdating(),
             HasMany::make(__('the Payment Voucher'), 'Transaction', \App\Nova\PaymentVoucher::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            Text::make(__("receipt Voucher"), "in_come")->calculate('sum', __('Total Count'))->sortable(),
+            Text::make(__("In Come"), "in_come")->calculate('sum', __('Total Count'))->sortable(),
 
             Text::make(__("Out Come"), "out_come")->calculate('sum', __('Total Count'))->sortable(),
 
@@ -113,6 +118,7 @@ class Report extends Resource
                     return new RowBackgroundData("#ff0000", "#ffffff");
                 }
             })->onlyOnIndex(),
+
         ];
     }
 
@@ -141,7 +147,10 @@ class Report extends Resource
         return [
             new ReportAdmin(),
             new ProjectSectors(),
+            new ReportCreated(),
+
             new DateRangeFilter(__("start"),"start_date"),
+
 
 
             // ...
@@ -150,6 +159,8 @@ class Report extends Resource
     public function filters(Request $request)
     {
         return $this->myFilters();
+
+
     }
 
     /**

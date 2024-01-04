@@ -31,16 +31,22 @@
                                             class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0">
                                             السنة
                                         </label>
-                                        <input
+                                        <select
                                             class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                                            id="inline-full-name" type="text" v-model="newyear" />
+                                            id="yearSelect" name="year" v-model="selectedYear">
+                                            <!-- Using a standard JavaScript for loop -->
+                                            <option v-for="index in addYears.length" :key="index" :value="years[index]">
+                                                {{ addYears[index] }}
+                                            </option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label
                                             class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0">
                                             ميزانية السنة
                                         </label>
-                                        <input
+
+                                        <input v-on:keyup="countdown"
                                             class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                                             id="inline-full-name" type="text" v-model="budgetsOfyear" />
                                     </div>
@@ -55,7 +61,7 @@
                                                     :for="index">
                                                     {{ Sector.Sector }}
                                                 </label>
-                                                <input
+                                                <input  v-on:keyup="countdown"
                                                     class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                                                     :id="index" type="text" v-model="Sector.Budget" />
                                             </div>
@@ -71,6 +77,8 @@
                                         </div>
                                     </div>
                                 </form>
+                                <p class='text-right text-small' v-bind:class="{'text-danger': hasError }">Sum: {{remainingCount}}</p>
+
                             </div>
                             <!-- third form -->
                             <div :class="{ hidden: openTab !== 3, block: openTab === 3 }">
@@ -93,13 +101,12 @@
                                         </select>
                                     </div>
                                     <div v-if="isTotalSectorYearlyNotEmpty" class="w-full mb-12">
-                                        <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl">الميزانية العامه لسنه {{ selectedyear }}</h1>
-                                        <BudgetInfo :budget="parsedBudget" :divisor="1"
-                                            label="مجمل الميزانية للعام "
+                                        <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl">الميزانية العامه لسنه {{
+                                            selectedyear }}</h1>
+                                        <BudgetInfo :budget="parsedBudget" :divisor="1" label="مجمل الميزانية للعام "
                                             expensesLabel="مجمل المصاريف للعام "
                                             :expensesValue="totalSectorYearly.expenses_year"
-                                            incomeLabel="مجمل المدخلات للعام"
-                                            :incomeValue="totalSectorYearly.income_year"
+                                            incomeLabel="مجمل المدخلات للعام" :incomeValue="totalSectorYearly.income_year"
                                             net_amount_label="صافي الانفاق الكلي" />
                                     </div>
                                     <div class="w-full">
@@ -127,7 +134,8 @@
                                                             hidden: openTabstatistic !== index,
                                                             block: openTabstatistic === index,
                                                         }">
-                                                        <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl"> {{ Sector.Sector }}
+                                                        <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl"> {{
+                                                            Sector.Sector }}
                                                         </h1>
                                                         <TotalSector :Sector="Sector" />
                                                     </div>
@@ -165,11 +173,14 @@ export default {
             selectedyear: 0,
             year: "0",
             years: [],
+            addYears: [],
             Sectors: [],
             newSectors: [],
             budjetSector: [],
             totalSectorYearly: {},
             deletSectors: [],
+            hasError: false,
+
             points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
             tabs: [
                 { index: 1, name: 'الميزانيات' },
@@ -178,7 +189,8 @@ export default {
                 { index: 4, name: 'احصائيات' },
             ],
             projectshow: false,
-            chartWidth: 400
+            chartWidth: 400,
+            remainingCount: 0,
         };
     },
     beforeMount() {
@@ -186,6 +198,14 @@ export default {
         this.getSector();
     },
     mounted() {
+
+        const startYear = 2022;
+        const endYear = 2050;
+
+        for (let year = startYear; year <= endYear; year++) {
+            this.addYears.push(year);
+        }
+        console.log("addYears", this.addYears);
         window.addEventListener('resize', () => {
             if (window.innerWidth < 1220 && window.innerWidth > 500) {
                 this.chartWidth = 300;
@@ -196,6 +216,14 @@ export default {
         });
     },
     methods: {
+        countdown: function () {
+            this.remainingCount =0;
+            this.newSectors.forEach((element) => {
+                this.remainingCount += parseInt(element["Budget"]);
+            });
+            this.hasError = (this.budgetsOfyear  < this.remainingCount);
+
+        },
         toggleTabs: function (tabNumber) {
             this.openTab = tabNumber;
         },
@@ -252,6 +280,14 @@ export default {
                 toastr.success("  تم حفظ بنجاح");
             });;
         },
+        sum() {
+            let sum = 0;
+            return this.newSectors.forEach((element) => {
+                sum += parseInt(element["Budget"]);
+            });
+            return sum;
+        },
+
         savenew() {
             let sum = 0;
             this.newSectors.forEach((element) => {
