@@ -33,9 +33,9 @@
                                         </label>
                                         <select
                                             class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                                            id="yearSelect" name="year" v-model="selectedYear">
+                                            id="yearSelect" name="year" v-model="newyear">
                                             <!-- Using a standard JavaScript for loop -->
-                                            <option v-for="index in addYears.length" :key="index" :value="years[index]">
+                                            <option v-for="index in addYears.length" :key="index" :value="addYears[index]">
                                                 {{ addYears[index] }}
                                             </option>
                                         </select>

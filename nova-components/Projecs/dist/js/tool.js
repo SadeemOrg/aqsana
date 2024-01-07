@@ -9776,6 +9776,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        save: function save() {
+            axios.post("/save", {
+                year: this.year,
+                Sectors: this.Sectors
+            }).then(function (response) {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.success("  تم حفظ بنجاح");
+            });;
+        },
         onChange: function onChange(event) {
             var _this = this;
 
@@ -10464,8 +10482,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.selectedYear,
-                                  expression: "selectedYear"
+                                  value: _vm.newyear,
+                                  expression: "newyear"
                                 }
                               ],
                               staticClass:
@@ -10482,7 +10500,7 @@ var render = function() {
                                         "_value" in o ? o._value : o.value
                                       return val
                                     })
-                                  _vm.selectedYear = $event.target.multiple
+                                  _vm.newyear = $event.target.multiple
                                     ? $$selectedVal
                                     : $$selectedVal[0]
                                 }
@@ -10493,7 +10511,7 @@ var render = function() {
                                 "option",
                                 {
                                   key: index,
-                                  domProps: { value: _vm.years[index] }
+                                  domProps: { value: _vm.addYears[index] }
                                 },
                                 [
                                   _vm._v(
