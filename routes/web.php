@@ -147,6 +147,12 @@ Route::post("first/", [HomeController::class, "first"])->name('first');
 Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');
 Route::post("getType", [HomeController::class, "getType"])->name('getType');
 
+
+
+Route::post("get-sectors/", [HomeController::class, "getSectors"])->name('get-sectors');
+Route::post("get-project/", [HomeController::class, "getProject"])->name('get-project');
+
+
 Route::post("delet/", [HomeController::class, "delet"])->name('delet');
 
 Route::post("SectorsBudget", [HomeController::class, "SectorsBudget"])->name('SectorsBudget');

@@ -13,6 +13,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Date;
 use Acme\MultiselectField\Multiselect as Select;
 use Acme\MultiselectField\Multiselect;
+use Acme\ProjectPicker\ProjectPicker;
+use Acme\SectorPicker\SectorPicker;
 use Laraning\NovaTimeField\TimeField;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use App\Nova\Actions\ApprovalRejectProjec;
@@ -31,7 +33,7 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Image;
 use Halimtuhu\ArrayImages\ArrayImages;
 use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
-
+use Alaqsa\Project\Project as ProjectProject;
 use Laravel\Nova\Fields\BelongsTo;
 use Manogi\Tiptap\Tiptap;
 use Waynestate\Nova\CKEditor;
@@ -136,65 +138,57 @@ class Project extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
+            SectorPicker::make(__('ref_id'), 'ref_id', function () {
+                $keyValueArray = ['key1' => $this->sector, 'key2' => $this->start_date];
+
+                return $keyValueArray;
+            })->hideFromDetail()->hideFromIndex(),
+
+            DateTime::make(__('projec start'), 'start_date')->rules('required')->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->hideWhenCreating()->hideWhenUpdating(),
+
+
             Text::make(__("project name"), "project_name")->rules('required'),
             Textarea::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
-                            DateTime::make(__('projec start'), 'start_date')->rules('required')->hideFromIndex(),
-
-            // Text::make(__("sector"), "sector")->rules('required'),
-            Multiselect::make(__('Sector'), "sector")
-            ->options(function () {
-                $Users =  \App\Models\Sector::all();
-
-                $i = 0;
-                $user_type_admin_array =  array();
-                foreach ($Users as $User) {
-
-
-                    $user_type_admin_array += [($User['id']) => ($User['text'])];
-                }
-
-                return $user_type_admin_array;
-            })
-            ->singleSelect()->hideFromIndex()->rules('required'),
-            BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideWhenCreating()->hideWhenUpdating(),
             Multiselect::make(__('Area'), 'area')
-            ->options(function () {
-                $Areas =  \App\Models\Area::all();
+                ->options(function () {
+                    $Areas =  \App\Models\Area::all();
 
-                $Area_type_admin_array =  array();
+                    $Area_type_admin_array =  array();
 
-                foreach ($Areas as $Area) {
+                    foreach ($Areas as $Area) {
 
 
-                    $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
-                }
+                        $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                    }
 
-                return $Area_type_admin_array;
-            })->singleSelect(),
+                    return $Area_type_admin_array;
+                })->singleSelect(),
             Multiselect::make(__('city'), 'city')
-            ->options(function () {
-                $Areas =  \App\Models\City::all();
+                ->options(function () {
+                    $Areas =  \App\Models\City::all();
 
-                $Area_type_admin_array =  array();
+                    $Area_type_admin_array =  array();
 
-                foreach ($Areas as $Area) {
+                    foreach ($Areas as $Area) {
 
 
-                    $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
-                }
+                        $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                    }
 
-                return $Area_type_admin_array;
-            })->singleSelect(),
+                    return $Area_type_admin_array;
+                })->singleSelect(),
             Select::make(__('Admin'), 'admin_id')
-            ->options(function () {
-                $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
-                $user_type_admin_array =  array();
-                foreach ($users as $user) {
-                    $user_type_admin_array += [$user['id'] => ($user['name'])];
-                }
+                ->options(function () {
+                    $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+                    $user_type_admin_array =  array();
+                    foreach ($users as $user) {
+                        $user_type_admin_array += [$user['id'] => ($user['name'])];
+                    }
 
-                return $user_type_admin_array;
-            })->singleSelect()->hideFromDetail()->hideFromIndex(),
+                    return $user_type_admin_array;
+                })->singleSelect()->hideFromDetail()->hideFromIndex(),
 
             BelongsTo::make(__('admin'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
@@ -202,7 +196,7 @@ class Project extends Resource
             belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
             HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class),
 
-             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
         ];
     }
@@ -210,14 +204,18 @@ class Project extends Resource
 
     public static function beforeCreate(Request $request, $model)
     {
+
         $id = Auth::id();
         $model->created_by = $id;
         $model->project_type = '1';
         $model->is_reported = '1';
-        // $model->start_date = '2023-01-01 12:00:00';
-
     }
-
+    public static function beforeSave(Request $request, $model)
+    {
+        $model->start_date = json_decode($request->ref_id)->key1;
+        $model->sector = json_decode($request->ref_id)->key2;
+        $request->request->remove('ref_id');
+    }
 
     // public static function beforeSave(Request $request, $model)
     // {

@@ -60,12 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 139);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 1:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -174,36 +173,33 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-
-/***/ 139:
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(140);
-module.exports = __webpack_require__(161);
+__webpack_require__(2);
+module.exports = __webpack_require__(13);
 
 
 /***/ }),
-
-/***/ 140:
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 Nova.booting(function (Vue, router, store) {
-  Vue.component('index-project', __webpack_require__(141));
-  Vue.component('detail-project', __webpack_require__(144));
-  Vue.component('form-project', __webpack_require__(147));
+  Vue.component('index-project-picker', __webpack_require__(3));
+  Vue.component('detail-project-picker', __webpack_require__(6));
+  Vue.component('form-project-picker', __webpack_require__(9));
 });
 
 /***/ }),
-
-/***/ 141:
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(142)
+var __vue_script__ = __webpack_require__(4)
 /* template */
-var __vue_template__ = __webpack_require__(143)
+var __vue_template__ = __webpack_require__(5)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -242,8 +238,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-
-/***/ 142:
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -258,8 +253,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-
-/***/ 143:
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -279,16 +273,15 @@ if (false) {
 }
 
 /***/ }),
-
-/***/ 144:
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(145)
+var __vue_script__ = __webpack_require__(7)
 /* template */
-var __vue_template__ = __webpack_require__(146)
+var __vue_template__ = __webpack_require__(8)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -327,8 +320,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-
-/***/ 145:
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -343,8 +335,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-
-/***/ 146:
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -364,16 +355,15 @@ if (false) {
 }
 
 /***/ }),
-
-/***/ 147:
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(148)
+var __vue_script__ = __webpack_require__(10)
 /* template */
-var __vue_template__ = __webpack_require__(160)
+var __vue_template__ = __webpack_require__(12)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -412,48 +402,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-
-/***/ 148:
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -481,7 +436,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             projectshow: false,
             items: [],
-            Sectors: []
+            Sectors: [],
+            selectedDate: null,
+            value2: null
         };
     },
 
@@ -495,60 +452,65 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * Set the initial, internal value for the field.
          */
         setInitialValue: function setInitialValue() {
-            this.value = this.field.value || "";
+            if (this.field.value['key2'] === null) {
+                this.field.value['key2'] = '2024-01-01';
+            }
+            var dateObject = new Date(this.field.value['key2']);
+            // Format the Date object to the desired string
+            this.selectedDate = dateObject.toISOString().split('T')[0] || '2024-01-1';
+            this.onChange22(this.selectedDate);
         },
         onChange: function onChange(event) {
             var _this = this;
 
-            axios.post("/first", {
-                project_id: event.target.value
+            var selectedYear = new Date(event.target.value).getFullYear();
+            axios.post("/get-project", {
+                Year: selectedYear
             }).then(function (response) {
-                _this.items = response.data;
+                _this.Sectors = response.data;
             });
-            if (event.target.value != 0) {
+
+            if (this.Sectors.value != 0) {
+                this.projectshow = true;
+            } else {
+                this.projectshow = false;
+            }
+        },
+        onChange22: function onChange22(event) {
+            var _this2 = this;
+
+            var selectedYear = new Date(event).getFullYear();
+            axios.post("/get-project", {
+                Year: selectedYear
+            }).then(function (response) {
+                _this2.Sectors = response.data;
+                _this2.value2 = _this2.field.value['key1'] || "";
+            });
+            if (this.Sectors.value != 0) {
                 this.projectshow = true;
             } else {
                 this.projectshow = false;
             }
         },
 
-        Sectors: function Sectors() {
-            // console.log("dddjdskk");
-            // alert("dd");
-            //    alert("dd");
-            // axios.post("/Sectors").then(response => {
-            //     this.Sectors = response.data;
-            // });
-        },
-
-        getUnits: function getUnits() {
-            var _this2 = this;
-
-            // alert("ss");
-            axios.post("/SectorsPill").then(function (response) {
-                _this2.Sectors = response.data;
-                console.log("ddd", _this2.Sectors);
-            });
-        },
 
         /**
          * Fill the given FormData object with the field's internal value.
          */
         fill: function fill(formData) {
-            formData.append(this.field.attribute, this.value || "");
+            var data = {
+                key1: this.selectedDate,
+                key2: this.value2
+            };
+            formData.append(this.field.attribute, JSON.stringify(data) || '');
         }
     },
-    // created() {
-    //     this.Sectors();
-    // },
-    beforeMount: function beforeMount() {
-        this.getUnits();
-    }
+
+    beforeMount: function beforeMount() {}
 });
 
 /***/ }),
-
-/***/ 149:
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -26882,8 +26844,7 @@ if (hadRuntime) {
 });
 
 /***/ }),
-
-/***/ 160:
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -26901,62 +26862,28 @@ var render = function() {
     },
     [
       _c("template", { slot: "field" }, [
-        _c("p", [_vm._v("القطاع")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.key,
-                expression: "key"
-              }
-            ],
-            staticClass:
-              "w-full form-control form-input form-input-bordered mt-4",
-            attrs: { name: "LeaveType" },
-            on: {
-              change: [
-                function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.key = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                },
-                function($event) {
-                  return _vm.onChange($event)
-                }
-              ]
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.selectedDate,
+              expression: "selectedDate"
             }
-          },
-          [
-            _c("option", { domProps: { value: 0 } }, [
-              _vm._v("\n                مخرجات عامة")
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.Sectors, function(item) {
-              return _c(
-                "option",
-                { key: item.sector_id, domProps: { value: item.sector_id } },
-                [_vm._v("\n                " + _vm._s(item.Sector))]
-              )
-            })
           ],
-          2
-        ),
-        _vm._v(" "),
-        _vm.projectshow
-          ? _c("p", { staticClass: "mt-4" }, [_vm._v("المشروع")])
-          : _vm._e(),
+          staticClass: "w-full form-control form-input form-input-bordered",
+          attrs: { type: "date" },
+          domProps: { value: _vm.selectedDate },
+          on: {
+            change: _vm.onChange,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.selectedDate = $event.target.value
+            }
+          }
+        }),
         _vm._v(" "),
         _vm.projectshow
           ? _c(
@@ -26966,13 +26893,13 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.value,
-                    expression: "value"
+                    value: _vm.value2,
+                    expression: "value2"
                   }
                 ],
                 staticClass:
                   "w-full form-control form-input form-input-bordered mt-4",
-                attrs: { id: _vm.field.name, name: "LeaveTypde" },
+                attrs: { name: "LeaveType" },
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -26983,16 +26910,16 @@ var render = function() {
                         var val = "_value" in o ? o._value : o.value
                         return val
                       })
-                    _vm.value = $event.target.multiple
+                    _vm.value2 = $event.target.multiple
                       ? $$selectedVal
                       : $$selectedVal[0]
                   }
                 }
               },
-              _vm._l(_vm.items, function(item) {
+              _vm._l(_vm.Sectors, function(item) {
                 return _c(
                   "option",
-                  { key: item.project_type, domProps: { value: item.id } },
+                  { key: item.id, domProps: { value: item.id } },
                   [_vm._v("\n                " + _vm._s(item.project_name))]
                 )
               }),
@@ -27015,12 +26942,10 @@ if (false) {
 }
 
 /***/ }),
-
-/***/ 161:
+/* 13 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ })
-
-/******/ });
+/******/ ]);
