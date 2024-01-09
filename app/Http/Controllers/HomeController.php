@@ -408,12 +408,12 @@ class HomeController extends Controller
     {
         // dd($request->all());
 
-        // DB::table('budgets')
-        //     ->updateOrInsert(
-        //         ['year' => $request->year, 'sector_id' =>  0],
-        //         ['budget' => $request->budgetsOfyear]
+        DB::table('budgets')
+            ->updateOrInsert(
+                ['year' => $request->year, 'sector_id' =>  0],
+                ['budget' => $request->budgetsOfyear]
 
-        //     );
+            );
 
         foreach ($request->Sectors as $key => $value) {
             DB::table('budgets')
