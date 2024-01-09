@@ -98,7 +98,10 @@ class Project extends Model
     {
         return $this->belongsTo(TripBooking::class,'id','project_id');
     }
-
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\TelephoneDirectory','admin_id');
+    }
     public function Bus()
     {
         $id = Auth::id();

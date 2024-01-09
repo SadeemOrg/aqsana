@@ -1,6 +1,14 @@
 {
   "Actions": "Actions",
   "Details": "Details",
+  "Sectors": "قطاعات",
+
+  "Oops! No elements found. Consider changing the search query.": "",
+  "List is empty": "",
+  "Select": "",
+  "Press enter to select": "",
+  "Selected": "",
+  "Press enter to remove": "",
   "If you did not request a password reset, no further action is required.": "If you did not request a password reset, no further action is required.",
   "Reset Password": "Reset Password",
   "Sorry! You are not authorized to perform this action.": "Sorry! You are not authorized to perform this action.",

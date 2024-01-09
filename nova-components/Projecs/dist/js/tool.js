@@ -463,6 +463,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -483,15 +491,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             selectedyear: 0,
             year: "0",
             years: [],
+            addYears: [],
             Sectors: [],
             newSectors: [],
             budjetSector: [],
             totalSectorYearly: {},
             deletSectors: [],
+            hasError: false,
+
             points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
             tabs: [{ index: 1, name: 'الميزانيات' }, { index: 2, name: 'اضافة جديد' }, { index: 3, name: 'حذف' }, { index: 4, name: 'احصائيات' }],
             projectshow: false,
-            chartWidth: 400
+            chartWidth: 400,
+            remainingCount: 0
         };
     },
     beforeMount: function beforeMount() {
@@ -501,6 +513,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     mounted: function mounted() {
         var _this = this;
 
+        var startYear = 2022;
+        var endYear = 2050;
+
+        for (var year = startYear; year <= endYear; year++) {
+            this.addYears.push(year);
+        }
+        console.log("addYears", this.addYears);
         window.addEventListener('resize', function () {
             if (window.innerWidth < 1220 && window.innerWidth > 500) {
                 _this.chartWidth = 300;
@@ -512,6 +531,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
 
     methods: {
+        countdown: function countdown() {
+            var _this2 = this;
+
+            this.remainingCount = 0;
+            this.newSectors.forEach(function (element) {
+                _this2.remainingCount += parseInt(element["Budget"]);
+            });
+            this.hasError = this.budgetsOfyear < this.remainingCount;
+        },
         toggleTabs: function toggleTabs(tabNumber) {
             this.openTab = tabNumber;
         },
@@ -519,18 +547,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.openTabstatistic = tabNumber;
         },
         getYears: function getYears() {
-            var _this2 = this;
+            var _this3 = this;
 
             axios.post("/year").then(function (response) {
-                _this2.years = response.data;
+                _this3.years = response.data;
             });
         },
 
         getSector: function getSector() {
-            var _this3 = this;
+            var _this4 = this;
 
             axios.post("/Sectors").then(function (response) {
-                _this3.newSectors = response.data;
+                _this4.newSectors = response.data;
             });
         },
         getSectorstatistics: function () {
@@ -601,6 +629,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 };
                 toastr.success("  تم حفظ بنجاح");
             });;
+        },
+        sum: function sum() {
+            var sum = 0;
+            return this.newSectors.forEach(function (element) {
+                sum += parseInt(element["Budget"]);
+            });
+            return sum;
         },
         savenew: function savenew() {
             var sum = 0;
@@ -9741,6 +9776,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        save: function save() {
+            axios.post("/save", {
+                year: this.year,
+                Sectors: this.Sectors
+            }).then(function (response) {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.success("  تم حفظ بنجاح");
+            });;
+        },
         onChange: function onChange(event) {
             var _this = this;
 
@@ -10422,28 +10475,55 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.newyear,
-                                expression: "newyear"
-                              }
-                            ],
-                            staticClass:
-                              "appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
-                            attrs: { id: "inline-full-name", type: "text" },
-                            domProps: { value: _vm.newyear },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.newyear,
+                                  expression: "newyear"
                                 }
-                                _vm.newyear = $event.target.value
+                              ],
+                              staticClass:
+                                "appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                              attrs: { id: "yearSelect", name: "year" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.newyear = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
                               }
-                            }
-                          })
+                            },
+                            _vm._l(_vm.addYears.length, function(index) {
+                              return _c(
+                                "option",
+                                {
+                                  key: index,
+                                  domProps: { value: _vm.addYears[index] }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(_vm.addYears[index]) +
+                                      "\n                                        "
+                                  )
+                                ]
+                              )
+                            }),
+                            0
+                          )
                         ]),
                         _vm._v(" "),
                         _c("div", [
@@ -10474,6 +10554,7 @@ var render = function() {
                             attrs: { id: "inline-full-name", type: "text" },
                             domProps: { value: _vm.budgetsOfyear },
                             on: {
+                              keyup: _vm.countdown,
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
@@ -10544,6 +10625,7 @@ var render = function() {
                                     attrs: { id: index, type: "text" },
                                     domProps: { value: Sector.Budget },
                                     on: {
+                                      keyup: _vm.countdown,
                                       input: function($event) {
                                         if ($event.target.composing) {
                                           return
@@ -10595,6 +10677,15 @@ var render = function() {
                             )
                           : _vm._e()
                       ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        staticClass: "text-right text-small",
+                        class: { "text-danger": _vm.hasError }
+                      },
+                      [_vm._v("Sum: " + _vm._s(_vm.remainingCount))]
                     )
                   ]
                 ),

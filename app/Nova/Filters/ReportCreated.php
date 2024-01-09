@@ -6,12 +6,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
 
-class ReportAdmin extends Filter
+class ReportCreated extends Filter
 {
 
     public  function name()
     {
-        return __('Project Officer');
+        return __('Report Created');
     }
     /**
      * The filter's component.
@@ -30,7 +30,7 @@ class ReportAdmin extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('admin_id',$value);
+        return $query->where('Created_By',$value);
     }
 
     /**

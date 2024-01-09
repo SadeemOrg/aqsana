@@ -406,14 +406,14 @@ class HomeController extends Controller
     }
     public function save(Request $request)
     {
+        // dd($request->all());
 
+        // DB::table('budgets')
+        //     ->updateOrInsert(
+        //         ['year' => $request->year, 'sector_id' =>  0],
+        //         ['budget' => $request->budgetsOfyear]
 
-        DB::table('budgets')
-            ->updateOrInsert(
-                ['year' => $request->year, 'sector_id' =>  0],
-                ['budget' => $request->budgetsOfyear]
-
-            );
+        //     );
 
         foreach ($request->Sectors as $key => $value) {
             DB::table('budgets')
@@ -538,7 +538,13 @@ class HomeController extends Controller
     {
 
         $sector = array();
-        $Sectors = Sector::all();
+        $sectoryear = $request->year; // Replace with the actual year you want to filter
+
+        $Sectors = Sector::whereHas('budget', function ($query) use ($sectoryear) {
+            $query->where('year', '=', $sectoryear)
+            ->where('budget', '>', 0);
+        })->get();
+
         foreach ($Sectors as $key => $Sector) {
             $Budgets = Budget::where([
                 ['year', '=', $request->year],

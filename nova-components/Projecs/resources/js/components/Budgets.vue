@@ -54,6 +54,24 @@ export default {
         };
     },
     methods: {
+        save() {
+            axios.post("/save", {
+                year: this.year,
+                Sectors: this.Sectors,
+            }).then(function (response) {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                };
+                toastr.success("  تم حفظ بنجاح");
+            });;
+        },
         onChange(event) {
             axios
                 .post("/SectorsBudget", {

@@ -136,14 +136,15 @@ class Donation extends Resource
 
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
 
-            // BelongsTo::make(__('project'), 'project')->hideWhenCreating()->readonly(),
-            // Project::make(__('ref_id'), 'ref_id')->hideFromIndex(),
+            NovaBelongsToDepend::make(__('Sectors'),'Sectors', \App\Nova\Sector::class)
+                    ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
+                ->options( Sector::whereHas('budget', function ($query) {
+                    $query->where('year', '=', 2024);
+                })->get()
 
+                ),
+            NovaBelongsToDepend::make(__('project'),'project', \App\Nova\project::class)
 
-            NovaBelongsToDepend::make('Sectors')
-                ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
-                ->options(Sector::all()),
-            NovaBelongsToDepend::make('project')
                 ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
                 ->optionsResolve(function ($Sector) {
                     // Reduce the amount of unnecessary data sent

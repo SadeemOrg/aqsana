@@ -11,10 +11,10 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\Select;
+use Acme\MultiselectField\Multiselect as Select;
+use Acme\MultiselectField\Multiselect;
 use Laraning\NovaTimeField\TimeField;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Acme\MultiselectField\Multiselect;
 use App\Nova\Actions\ApprovalRejectProjec;
 use App\Nova\Actions\ProjectStatu;
 use Illuminate\Support\Facades\Auth;
@@ -155,294 +155,55 @@ class Project extends Resource
 
                 return $user_type_admin_array;
             })
-            ->singleSelect()->hideFromIndex(),
+            ->singleSelect()->hideFromIndex()->rules('required'),
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideWhenCreating()->hideWhenUpdating(),
+            Multiselect::make(__('Area'), 'area')
+            ->options(function () {
+                $Areas =  \App\Models\Area::all();
 
+                $Area_type_admin_array =  array();
 
-            // (new Panel(__('main'), [
-            //     ID::make(__('ID'), 'id')->sortable(),
-            //     ActionButton::make(__('Action'))
-            //         ->action(ProjectStartEnd::class, $this->id)
-            //         ->text(__('start'))
-            //         ->showLoadingAnimation()
-            //         ->loadingColor('#fff')->buttonColor('#21b970')
-            //         ->canSee(function () {
-            //             $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-            //             if ($projects) {
+                foreach ($Areas as $Area) {
 
-            //                 if ($projects->status == '0')  return true;
-            //             }
-            //         })
-            //         ->readonly(function () {
-            //             return false;
-            //         })
-            //         ->hideWhenCreating()->hideWhenUpdating(),
 
-            //     ActionButton::make(__('Action'))
-            //         ->action(ProjectStartEnd::class, $this->id)
-            //         ->text(__('end'))
-            //         ->showLoadingAnimation()
-            //         ->loadingColor('#fff')->buttonColor('#21b970')
-            //         ->canSee(function () {
-            //             $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-            //             if ($projects) {
+                    $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                }
 
-            //                 if ($projects->status == '1')  return true;
-            //             }
-            //         })
-            //         ->readonly(function () {
-            //             return false;
-            //         })
-            //         ->hideWhenCreating()->hideWhenUpdating(),
-            //     ActionButton::make(__('Action'))
-            //         ->action(ProjectStartEnd::class, $this->id)
-            //         ->text(__('Finished'))
-            //         ->showLoadingAnimation()
-            //         ->loadingColor('#fff')->buttonColor('#21b970')
-            //         ->canSee(function () {
-            //             $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-            //             if ($projects) {
+                return $Area_type_admin_array;
+            })->singleSelect(),
+            Multiselect::make(__('city'), 'city')
+            ->options(function () {
+                $Areas =  \App\Models\City::all();
 
-            //                 if ($projects->status > '1')  return true;
-            //             }
-            //         })
-            //         ->readonly()
-            //         ->hideWhenCreating()->hideWhenUpdating(),
-            //     ActionButton::make(__('Action'))
-            //         ->action(ProjectStartEnd::class, $this->id)
-            //         ->text(__('incomplete'))
-            //         ->showLoadingAnimation()
-            //         ->loadingColor('#fff')->buttonColor('#787878')
-            //         ->canSee(function () {
-            //             $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-            //             if (!$projects) {
-            //                 return true;
-            //             }
-            //         })
-            //         ->readonly()
-            //         ->hideWhenCreating()->hideWhenUpdating(),
+                $Area_type_admin_array =  array();
 
+                foreach ($Areas as $Area) {
 
 
+                    $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                }
 
-            //     ActionButton::make(__('Action'))
-            //         ->action(ApprovalRejectProjec::class, $this->id)
-            //         ->text(__('acsept'))
-            //         ->showLoadingAnimation()
-            //         ->loadingColor('#fff')->buttonColor('#21b970')
-            //         ->canSee(function () {
-            //             $user = Auth::user();
+                return $Area_type_admin_array;
+            })->singleSelect(),
+            Select::make(__('Admin'), 'admin_id')
+            ->options(function () {
+                $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+                $user_type_admin_array =  array();
+                foreach ($users as $user) {
+                    $user_type_admin_array += [$user['id'] => ($user['name'])];
+                }
 
-            //             if ($user->type() == 'regular_city' || $user->type() == 'regular_area') {
-            //                 return true;
-            //             }
-            //         })
-            //         ->readonly(function () {
-            //             $id = Auth::id();
-            //             $user = Auth::user();
-            //             if ($user->type() == 'regular_city') {
-            //                 $citye =   City::where('admin_id', $id)
-            //                     ->select('id')->first();
-            //                 $acspet = DB::table('accept_project')
-            //                     ->where([
-            //                         ['project_id', '=', $this->id],
-            //                         ['city_id', '=', $citye['id']],
-            //                     ])
-            //                     ->first();
+                return $user_type_admin_array;
+            })->singleSelect()->hideFromDetail()->hideFromIndex(),
 
-            //                 if ($acspet) {
+            BelongsTo::make(__('admin'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            //                     if ($acspet->accepted == "1")   return  true;
-            //                     else return false;
-            //                 }
-            //             }
-            //         })
-            //         ->hideWhenCreating()->hideWhenUpdating(),
-
-
-
-
-            //     Text::make(__("project name"), "project_name")->rules('required'),
-            //     Textarea::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
-
-            //     Select::make(__('SECTOR'), 'sector')
-            //         ->options(function () {
-            //             $Sectors =  \App\Models\Sector::all();
-            //             $Sectors_type_admin_array =  array();
-
-            //             foreach ($Sectors as $Sector) {
-
-
-            //                 $Sectors_type_admin_array += [$Sector['id'] => ($Sector['text'])];
-            //             }
-
-            //             return $Sectors_type_admin_array;
-            //         })->hideFromIndex(),
-
-            //     BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
-            //         ->options(Area::all())
-            //         ->optionsLabel('name')->canSee(function ($request) {
-            //             $user = Auth::user();
-            //             if ($user->type() == 'admin') return true;
-            //             return false;
-            //         }),
-
-
-
-
-
-
-
-
-
-            //     DateTime::make(__('projec start'), 'start_date')->rules('required')->hideFromIndex(),
-            //     DateTime::make(__('projec end'), 'end_date')->hideFromIndex(),
-
-
-            //     Boolean::make(__('is_bus'), 'is_bus')->hideFromIndex(),
-            //     Boolean::make(__('is_has_volunteer'), 'is_volunteer')->hideFromIndex(),
-            //     Boolean::make(__('is_has_Donations'), 'is_donation')->hideFromIndex(),
-
-
-
-
-
-            // ]))->withToolbar(),
-
-            // (new Panel(__('City'), [
-            //     BelongsToManyField::make(__('City'), "City", '\App\Nova\City')
-            //         // ->options(Area::all())
-            //         ->options(function () {
-
-            //             $id = Auth::id();
-            //             $Area = \App\Models\Area::where('admin_id', $id)->first();
-            //             //    dd( $Area->id);
-            //             $Citys =  \App\Models\City::where('area_id', $Area->id)->get();
-            //             // $users =  \App\Models\City::where('area_id', $id)->get();
-            //             return $Citys;
-            //             $user_type_admin_array =  array();
-
-            //             foreach ($Citys as $City) {
-            //                 // dd($user['id'] ."**" .($user['id']));
-            //                 $user_type_admin_array += [$City['id'] => ($City['name'])];
-            //             }
-
-            //             return $user_type_admin_array;
-            //         })->canSee(function ($request) {
-            //             $user = Auth::user();
-            //             if ($user->type() == 'regular_area') return true;
-            //             return false;
-            //         }),
-            // ])),
-
-            // (new Panel(__('bus'), [
-
-
-
-
-
-            //     BelongsToManyField::make(__('bus'), 'bus', 'App\Nova\bus')
-            //         // ->options(Bus::all())
-            //         ->options(Bus::all())
-            //         ->optionsLabel('bus_number')
-            //         ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-            //             return null;
-            //         })->hideFromIndex(),
-
-
-            //     Flexible::make(__('newbus'), 'newbus')
-            //         ->limit(1)
-            //         ->hideFromDetail()->hideFromIndex()
-            //         ->addLayout(__('Add new bus'), 'bus', [
-
-            //             Select::make(__('BusesCompany'), 'BusesCompany')
-            //                 ->options(function () {
-            //                     $users =  \App\Models\BusesCompany::all();
-            //                     $user_type_admin_array =  array();
-            //                     foreach ($users as $user) {
-            //                         $user_type_admin_array += [$user['id'] => ($user['name'])];
-            //                     }
-
-            //                     return $user_type_admin_array;
-            //                 }),
-
-
-            //             Text::make(__("Bus Number"), "bus_number"),
-
-            //             Number::make(__("Number person on bus"), "number_person_on_bus")->step(1.0),
-
-            //             Number::make(__("seat price"), "seat_price")->step(1.0),
-
-            //             Select::make(__('travel from'), 'from')
-            //                 ->options(function () {
-            //                     $users =  \App\Models\address::all();
-            //                     $user_type_admin_array =  array();
-            //                     foreach ($users as $user) {
-            //                         $user_type_admin_array += [$user['id'] => ($user['name_address'])];
-            //                     }
-
-            //                     return $user_type_admin_array;
-            //                 }),
-
-
-            //             Select::make(__('travel to'), 'to')
-            //                 ->options(function () {
-            //                     $users =  \App\Models\address::all();
-            //                     $user_type_admin_array =  array();
-            //                     foreach ($users as $user) {
-            //                         $user_type_admin_array += [$user['id'] => ($user['name_address'])];
-            //                     }
-
-            //                     return $user_type_admin_array;
-            //                 }),
-
-
-            //             Text::make(__("Name Driver"), "name_driver"),
-            //             Text::make(__("phone_number"), "phone_number"),
-
-            //         ])
-
-
-
-
-
-            // ])),
-            // (new Panel(__('tooles'), [
-
-            //     Flexible::make(__('tooles'), 'tools')
-
-            //         ->addLayout(__('tooles'), 'toole', [
-            //             Select::make(__('user'), 'user_tools')
-            //                 ->options(function () {
-            //                     $users =  \App\Models\User::all();
-            //                     $user_type_admin_array =  array();
-            //                     foreach ($users as $user) {
-            //                         $user_type_admin_array += [$user['id'] => ($user['name'])];
-            //                     }
-
-            //                     return $user_type_admin_array;
-            //                 }),
-
-            //             Textarea::make(__('tooles'), "text_tools"),
-
-            //         ]),
-
-
-            // ])),
-
-
-
-            // HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
             HasMany::make(__('Volunteer'), 'Volunteer', \App\Nova\Volunteer::class),
             belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class),
 
-            // ->canSee(function ($request) {
+             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            //     $user = Auth::user();
-            //     if ($user->type() == 'regular_city') return true;
-            //     return false;
-            // }),
         ];
     }
 
