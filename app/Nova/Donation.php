@@ -139,7 +139,8 @@ class Donation extends Resource
             NovaBelongsToDepend::make(__('Sectors'),'Sectors', \App\Nova\Sector::class)
                     ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
                 ->options( Sector::whereHas('budget', function ($query) {
-                    $query->where('year', '=', 2024);
+                    $query->where('year', '=', 2024)
+                    ->where('budget', '>', 0);
                 })->get()
 
                 ),

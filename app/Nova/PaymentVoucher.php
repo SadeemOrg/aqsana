@@ -21,6 +21,7 @@ use Epartment\NovaDependencyContainer\HasDependencies;
 use Alaqsa\Project\Project;
 use App\Models\BusesCompany;
 use App\Models\Project as ModelsProject;
+use App\Models\Sector;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
 use App\Nova\Actions\ExportPaymentVoucher;
@@ -30,6 +31,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\HasMany;
 use MyApp\BillingSchedule\BillingSchedule;
+use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 
@@ -99,9 +101,23 @@ class PaymentVoucher extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             // Text::make(__('name'), "name")->rules('required'),
 
-            BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideFromIndex(),
-            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->nullable()->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
-            Select::make(__('project'), "ref_id")
+
+            NovaBelongsToDepend::make(__('Sectors'),'Sectors', \App\Nova\Sector::class)
+                    ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
+                ->options( Sector::whereHas('budget', function ($query) {
+                    $query->where('year', '=', 2024)
+                    ->where('budget', '>', 0);
+                })->get()
+
+                ),
+            NovaBelongsToDepend::make(__('project'),'project', \App\Nova\project::class)
+
+                ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
+                ->optionsResolve(function ($Sector) {
+                    // Reduce the amount of unnecessary data sent
+                    return  $Sector->projects()->get(['id','project_name']);
+                })
+                ->dependsOn('Sectors') ->hideFromIndex()->hideFromDetail(), Select::make(__('project'), "ref_id")
                 ->options(function () {
                     $Users =  \App\Models\Project::all();
 
