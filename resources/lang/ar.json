@@ -71,6 +71,8 @@
     "projectparmation": "مسؤول مشاريع",
     "ProjectNewsparmation": "مسؤول اخبار المشاريع",
     "QawafilAlaqsaparmation": "مسؤول القوافل",
+    "AppUserparmation": "مسؤول مستخدمين التطبيق",
+
     "receiptVoucherparmation": "مسؤول سندات صرف",
     "CollectAlhisalatparmation": "مسؤل جمع الحصالات",
     "Reportsparmation": "مسؤول الرسائل",
@@ -302,6 +304,7 @@
     "is_reported": "نشر كخبر",
     "read": "مقروء",
     "QawafilAlaqsa": "قوافل الاقصى",
+    "AppUser":"مستخدمين التطبيق",
     "Upload Image": "رفع صورة",
     "all": "الكل",
     "Alhisalat": "الحصالات",
