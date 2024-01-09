@@ -139,6 +139,7 @@ class User extends Resource
                         "projectparmation" => __("projectparmation"),
                         "ProjectNewsparmation" => __("ProjectNewsparmation"),
                         "QawafilAlaqsaparmation" => __("QawafilAlaqsaparmation"),
+                        "AppUserparmation" => __("AppUserparmation"),
                         "receiptVoucherparmation" => __("receiptVoucherparmation"),
                         "Reportsparmation" => __("Reportsparmation"),
                         "Sectorparmation" => __("Sectorparmation"),
