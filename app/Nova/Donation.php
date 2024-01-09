@@ -21,6 +21,8 @@ use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Laravel\Nova\Fields\DateTime;
 use Acme\MultiselectField\Multiselect;
+use Acme\ProjectPicker\ProjectPicker;
+use App\Models\Project as ModelsProject;
 use App\Models\Sector;
 use App\Nova\Actions\DeleteBill;
 use App\Nova\Actions\DepositedInBank;
@@ -120,7 +122,21 @@ class Donation extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
+
             Button::make(__('print'))->link('/mainbill/' . $this->id)->style('primary'),
+            ProjectPicker::make(__('ref_id'),'ref_id',function(){
+                $keyValueArray = ['key1' => $this->ref_id, 'key2' => $this->transaction_date];
+
+                return $keyValueArray ;
+            })->hideFromDetail()->hideFromIndex(),
+
+
+            Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
+
+
+            // ProjectPicker::make(__('ref_id'),'ref_id')->hideWhenUpdating(),
 
             Select::make(__("transaction_type"), "transaction_type")->options([
                 '1' => __('handy'),
@@ -136,34 +152,32 @@ class Donation extends Resource
 
             ])->displayUsingLabels()->hideWhenCreating()->hideWhenUpdating(),
 
-            NovaBelongsToDepend::make(__('Sectors'),'Sectors', \App\Nova\Sector::class)
-                    ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
-                ->options( Sector::whereHas('budget', function ($query) {
-                    $query->where('year', '=', 2024)
-                    ->where('budget', '>', 0);
-                })->get()
 
-                ),
-            NovaBelongsToDepend::make(__('project'),'project', \App\Nova\project::class)
 
-                ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
-                ->optionsResolve(function ($Sector) {
-                    // Reduce the amount of unnecessary data sent
-                    return  $Sector->projects()->get(['id','project_name']);
-                })
-                ->dependsOn('Sectors') ->hideFromIndex()->hideFromDetail(),
-            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
+            // NovaBelongsToDepend::make(__('Sectors'),'Sectors', \App\Nova\Sector::class)
+            //         ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
+            //     ->options( Sector::whereHas('budget', function ($query) {
+            //         $query->where('year', '=', 2024)
+            //         ->where('budget', '>', 0);
+            //     })->get()
 
+            //     ),
+            // NovaBelongsToDepend::make(__('project'),'project', \App\Nova\project::class)
+
+            //     ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
+            //     ->optionsResolve(function ($Sector) {
+            //         // Reduce the amount of unnecessary data sent
+            //         return  $Sector->projects()->get(['id','project_name']);
+            //     })
+            //     ->dependsOn('Sectors') ->hideFromIndex()->hideFromDetail(),
+            // BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
             Boolean::make(__('Receive Done'), 'ReceiveDonation', function () {
                 return ($this->transaction_status > 1) ? true : false;
             })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                 return null;
             }),
             Text::make(__('description'), 'description')->hideFromIndex(),
-
-
-
-            Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
+        Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
             Multiselect::make(__('name'), "name")
                 ->options(function () {
@@ -264,7 +278,6 @@ class Donation extends Resource
             NovaDependencyContainer::make([
                 Text::make(__('transact amount'), 'transact_amount')->rules('required'),
             ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
-            // BelongsTo::make(__('reference_id'), 'Alhisalat', \App\Nova\Alhisalat::class),
             ActionButton::make(__('delete'))
                 ->action((new DeleteBill)->confirmText(__('Are you sure you want to delete  this?'))
                     ->confirmButtonText(__('delete'))
@@ -275,7 +288,6 @@ class Donation extends Resource
                 ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
             Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info'),
-            Date::make(__('date'), 'transaction_date')->rules('required'),
             HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class),
 
         ];
@@ -314,6 +326,11 @@ class Donation extends Resource
     }
     public static function beforesave(Request $request, $model)
     {
+
+        $model->transaction_date = json_decode( $request->ref_id)->key1;
+        $model->ref_id = json_decode( $request->ref_id)->key2;
+        $model->sector=ModelsProject::where('id',json_decode( $request->ref_id)->key2)->first()->sector;
+        $request->request->remove('ref_id');
 
 
 

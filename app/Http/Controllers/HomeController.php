@@ -693,6 +693,31 @@ class HomeController extends Controller
         }
         return $sector;
     }
+
+
+    public function getSectors(Request $request)
+    {
+
+        $Sectors=  Sector::whereHas('budget', function ($query) use($request) {
+            $query->where('year', '=', $request->Year)
+            ->where('budget', '>', 0);
+        })->get();
+         return $Sectors;
+
+    }
+    public function getProject(Request $request)
+    {
+
+        $Sectors=  Sector::whereHas('budget', function ($query) use($request) {
+            $query->where('year', '=', $request->Year)
+            ->where('budget', '>', 0);
+        })->pluck('id')->toArray();
+
+        $projects=project::whereIn('sector', $Sectors)    ->whereYear('created_at', '=', 2024)   ->get();
+        // dd($projects);
+         return $projects;
+
+    }
     public function Sectors(Request $request)
     {
 
