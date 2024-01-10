@@ -77,7 +77,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <p class='text-right text-small' v-bind:class="{'text-danger': hasError }">Sum: {{remainingCount}}</p>
+                                <p class='text-right text-small' v-bind:class="{'text-danger': hasError }">المتبقي: {{remainingCount}}</p>
 
                             </div>
                             <!-- third form -->
@@ -218,10 +218,12 @@ export default {
     methods: {
         countdown: function () {
             this.remainingCount =0;
+            let sumBud=0;
             this.newSectors.forEach((element) => {
-                this.remainingCount += parseInt(element["Budget"]);
+                sumBud += parseInt(element["Budget"]);
             });
-            this.hasError = (this.budgetsOfyear  < this.remainingCount);
+            this.remainingCount =this.budgetsOfyear -sumBud;
+            this.hasError = (this.budgetsOfyear  < sumBud);
 
         },
         toggleTabs: function (tabNumber) {

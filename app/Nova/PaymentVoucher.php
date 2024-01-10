@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Acme\Analytics\Analytics;
 use Acme\MultiselectField\Multiselect as Select;
+use Acme\ProjectPicker\ProjectPicker;
 use App\Nova\Actions\ApprovalRejectTransaction;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
@@ -102,36 +103,15 @@ class PaymentVoucher extends Resource
             // Text::make(__('name'), "name")->rules('required'),
 
 
-            NovaBelongsToDepend::make(__('Sectors'),'Sectors', \App\Nova\Sector::class)
-                    ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
-                ->options( Sector::whereHas('budget', function ($query) {
-                    $query->where('year', '=', 2024)
-                    ->where('budget', '>', 0);
-                })->get()
+            ProjectPicker::make(__('project'),'ref_id',function(){
+                $keyValueArray = ['key1' => $this->ref_id, 'key2' => $this->transaction_date];
 
-                ),
-            NovaBelongsToDepend::make(__('project'),'project', \App\Nova\project::class)
-
-                ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
-                ->optionsResolve(function ($Sector) {
-                    // Reduce the amount of unnecessary data sent
-                    return  $Sector->projects()->get(['id','project_name']);
-                })
-                ->dependsOn('Sectors') ->hideFromIndex()->hideFromDetail(), Select::make(__('project'), "ref_id")
-                ->options(function () {
-                    $Users =  \App\Models\Project::all();
-
-                    $i = 0;
-                    $user_type_admin_array =  array();
-                    foreach ($Users as $User) {
+                return $keyValueArray ;
+            })->hideFromDetail()->hideFromIndex(),
 
 
-                        $user_type_admin_array += [($User['id']) => ($User['project_name'])];
-                    }
-
-                    return $user_type_admin_array;
-                })
-                ->singleSelect()->hideFromIndex(),
+            Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
             Flexible::make(__('new project'), 'newproject')
@@ -153,7 +133,6 @@ class PaymentVoucher extends Resource
 
 
 
-            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
             Select::make(__('name'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '8')->get();
@@ -330,7 +309,6 @@ class PaymentVoucher extends Resource
 
 
 
-            Date::make(__('date'), 'transaction_date')->rules('required'),
             HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
 
@@ -338,6 +316,11 @@ class PaymentVoucher extends Resource
     }
     public static function beforeSave(Request $request, $model)
     {
+
+        $model->transaction_date = json_decode( $request->ref_id)->key1;
+        $model->ref_id = json_decode( $request->ref_id)->key2;
+        $model->sector=ModelsProject::where('id',json_decode( $request->ref_id)->key2)->first()->sector;
+        $request->request->remove('ref_id');
 
         if (strpos($request->name, 'T') !== false) {
 
