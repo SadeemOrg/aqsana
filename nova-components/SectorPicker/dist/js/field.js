@@ -429,9 +429,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -458,6 +455,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.field.value['key2'] === null) {
                 this.field.value['key2'] = '2024-01-01';
             }
+
             var dateObject = new Date(this.field.value['key2']);
             // Format the Date object to the desired string
             this.selectedDate = dateObject.toISOString().split('T')[0] || '2024-01-1';
@@ -472,15 +470,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 Year: selectedYear
             }).then(function (response) {
                 _this.Sectors = response.data;
-
-                console.log(_this.Sectors);
             });
 
-            if (this.Sectors.value != 0) {
-                this.projectshow = true;
-            } else {
-                this.projectshow = false;
-            }
+            // if (this.Sectors.value != 0) {
+            //     this.projectshow = true;
+            // }
+            // else {
+            //     this.projectshow = false;
+            // }
+
         },
         onChange22: function onChange22(event) {
             var _this2 = this;
@@ -491,16 +489,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 _this2.Sectors = response.data;
 
-                _this2.value2 = _this2.field.value['key1'] || "";
-
-                console.log(_this2.Sectors);
+                _this2.value2 = _this2.field.value['key1'] || "22";
             });
 
-            if (this.Sectors.value != 0) {
-                this.projectshow = true;
-            } else {
-                this.projectshow = false;
-            }
+            // if (!this.Sectors || Object.keys(this.Sectors).length === 0) {
+            //     this.projectshow = false;
+            // }
+            // else {
+            //     this.projectshow = true;
+
+            // }
+
         },
 
 
@@ -26897,47 +26896,45 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _vm.projectshow
-          ? _c(
-              "select",
+        _c(
+          "select",
+          {
+            directives: [
               {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.value2,
-                    expression: "value2"
-                  }
-                ],
-                staticClass:
-                  "w-full form-control form-input form-input-bordered mt-4",
-                attrs: { name: "LeaveType" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.value2 = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              _vm._l(_vm.Sectors, function(item) {
-                return _c(
-                  "option",
-                  { key: item.id, domProps: { value: item.id } },
-                  [_vm._v("\n            " + _vm._s(item.text))]
-                )
-              }),
-              0
+                name: "model",
+                rawName: "v-model",
+                value: _vm.value2,
+                expression: "value2"
+              }
+            ],
+            staticClass:
+              "w-full form-control form-input form-input-bordered mt-4",
+            attrs: { name: "LeaveType" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.value2 = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          _vm._l(_vm.Sectors, function(item) {
+            return _c(
+              "option",
+              { key: item.id, domProps: { value: item.id } },
+              [_vm._v("\n                " + _vm._s(item.text))]
             )
-          : _vm._e()
+          }),
+          0
+        )
       ])
     ],
     2

@@ -4,7 +4,7 @@
 
             <input type="date" v-model="selectedDate" @change="onChange"
                 class="w-full form-control form-input form-input-bordered" />
-            <select v-if="projectshow" class="w-full form-control form-input form-input-bordered mt-4" name="LeaveType"
+            <select  class="w-full form-control form-input form-input-bordered mt-4" name="LeaveType"
                 v-model="value2">
                 <option v-for="item in Sectors" :key="item.id" :value="item.id">
                     {{ item.project_name }}</option>
