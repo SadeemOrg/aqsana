@@ -532,13 +532,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
     methods: {
         countdown: function countdown() {
-            var _this2 = this;
-
             this.remainingCount = 0;
+            var sumBud = 0;
             this.newSectors.forEach(function (element) {
-                _this2.remainingCount += parseInt(element["Budget"]);
+                sumBud += parseInt(element["Budget"]);
             });
-            this.hasError = this.budgetsOfyear < this.remainingCount;
+            this.remainingCount = this.budgetsOfyear - sumBud;
+            this.hasError = this.budgetsOfyear < sumBud;
         },
         toggleTabs: function toggleTabs(tabNumber) {
             this.openTab = tabNumber;
@@ -547,18 +547,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.openTabstatistic = tabNumber;
         },
         getYears: function getYears() {
-            var _this3 = this;
+            var _this2 = this;
 
             axios.post("/year").then(function (response) {
-                _this3.years = response.data;
+                _this2.years = response.data;
             });
         },
 
         getSector: function getSector() {
-            var _this4 = this;
+            var _this3 = this;
 
             axios.post("/Sectors").then(function (response) {
-                _this4.newSectors = response.data;
+                _this3.newSectors = response.data;
             });
         },
         getSectorstatistics: function () {
@@ -10685,7 +10685,7 @@ var render = function() {
                         staticClass: "text-right text-small",
                         class: { "text-danger": _vm.hasError }
                       },
-                      [_vm._v("Sum: " + _vm._s(_vm.remainingCount))]
+                      [_vm._v("المتبقي: " + _vm._s(_vm.remainingCount))]
                     )
                   ]
                 ),

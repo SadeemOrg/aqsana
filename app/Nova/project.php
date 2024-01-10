@@ -139,7 +139,7 @@ class Project extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            SectorPicker::make(__('ref_id'), 'ref_id', function () {
+            SectorPicker::make(__('Sector'), 'ref_id', function () {
                 $keyValueArray = ['key1' => $this->sector, 'key2' => $this->start_date];
 
                 return $keyValueArray;

@@ -125,7 +125,7 @@ class Donation extends Resource
 
 
             Button::make(__('print'))->link('/mainbill/' . $this->id)->style('primary'),
-            ProjectPicker::make(__('ref_id'),'ref_id',function(){
+            ProjectPicker::make(__('project'),'ref_id',function(){
                 $keyValueArray = ['key1' => $this->ref_id, 'key2' => $this->transaction_date];
 
                 return $keyValueArray ;
