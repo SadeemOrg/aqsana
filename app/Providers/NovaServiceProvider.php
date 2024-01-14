@@ -449,6 +449,18 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             ]),
         ]);
+        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
+            new Tabs(__('vacations'), [
+                __('Reasons to Vacations')    => [
+                    Flexible::make(__('Reasons to Vacations'), 'Reasons_to_vacations')
+                        ->addLayout(__('Reasons to Vacations'), 'Reasons_to_vacations', [
+                            Text::make(__('title'), 'Reasons_to_vacations'),
+                        ])
+                ],
+
+
+            ]),
+        ]);
     }
 
     /**

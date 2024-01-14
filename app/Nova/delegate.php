@@ -46,7 +46,7 @@ use Illuminate\Http\Request;
         }
         public static function group()
         {
-            return __('QawafilAlaqsa');
+            return __('Public Administration');
         }
         public static function availableForNavigation(Request $request)
         {

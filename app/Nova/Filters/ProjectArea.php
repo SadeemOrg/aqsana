@@ -14,7 +14,7 @@ class ProjectArea extends Filter
      *
      * @var string
      */
-    public $component = 'select-filter';
+    public $component = 'searchable-select-filter';
     public function name()
     {
         return __('ProjectArea');

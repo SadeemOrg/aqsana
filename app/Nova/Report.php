@@ -10,6 +10,8 @@ use App\Nova\Filters\CreatedBy;
 use App\Nova\Filters\DateRange;
 use App\Nova\Filters\ProjectSectors;
 use App\Nova\Filters\ReportAdmin;
+use App\Nova\Filters\ReportArea;
+use App\Nova\Filters\Reportcity;
 use App\Nova\Filters\ReportCreated;
 use App\Nova\Metrics\NetProject;
 use Illuminate\Http\Request;
@@ -148,7 +150,8 @@ class Report extends Resource
             new ReportAdmin(),
             new ProjectSectors(),
             new ReportCreated(),
-
+            new ReportArea(),
+            new Reportcity(),
             new DateRangeFilter(__("start"),"start_date"),
 
 

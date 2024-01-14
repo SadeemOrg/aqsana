@@ -26,6 +26,8 @@ use App\Models\Sector;
 use App\Models\TelephoneDirectory;
 use App\Nova\Actions\BillPdf;
 use App\Nova\Actions\ExportPaymentVoucher;
+use App\Nova\Filters\Transactionproject;
+use App\Nova\Filters\TransactionSectors;
 use App\Nova\Metrics\InComeTransaction;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 use Laravel\Nova\Fields\DateTime;
@@ -460,7 +462,10 @@ class PaymentVoucher extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new Transactionproject(),
+            new TransactionSectors(),
+        ];
     }
 
     /**

@@ -15,6 +15,7 @@ abstract class Tool
      *
      * @return void
      */
+
     public function __construct()
     {
         //

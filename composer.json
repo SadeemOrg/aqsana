@@ -14,6 +14,8 @@
         "acme/bill": "*",
         "acme/multiselect-field": "*",
         "acme/projecs": "*",
+        "acme/project-picker": "*",
+        "acme/sector-picker": "*",
         "acme/smssend": "*",
         "ajhaupt7/image-upload-preview": "^1.0",
         "alaqsa/project": "*",
@@ -29,6 +31,7 @@
         "coderello/laravel-nova-lang": "^1.8",
         "comodolab/nova-help": "^0.5.0",
         "ctessier/nova-advanced-image-field": "^1.3",
+        "digital-creative/collapsible-resource-manager": "v1.4.2",
         "digital-creative/resource-navigation-tab": "^1.1",
         "dillingham/nova-button": "^1.0",
         "ebess/advanced-nova-media-library": "3.8.0",
@@ -78,9 +81,7 @@
         "waynestate/nova-ckeditor4-field": "^0.7.0",
         "whitecube/nova-flexible-content": "^0.2.8",
         "yassi/nova-nested-form": "^3.0",
-        "zeyad/notification": "*",
-        "acme/sector-picker": "*",
-        "acme/project-picker": "*"
+        "zeyad/notification": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -53,13 +53,18 @@ use Gwd\FlexibleContent\FlexibleContent;
 use Laravel\Nova\Panel;
 use App\Nova\Actions\ChangeRole;
 use App\Nova\Actions\ProjectStartEnd;
+use App\Nova\Filters\ProjectSectors;
+use App\Nova\Filters\ReportAdmin;
+use App\Nova\Filters\ReportArea;
+use App\Nova\Filters\Reportcity;
+use App\Nova\Filters\ReportCreated;
 use Carbon\Carbon;
 use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
 
 use Fourstacks\NovaRepeatableFields\Repeater;
 use Laravel\Nova\Fields\HasMany;
-
+use PosLifestyle\DateRangeFilter\DateRangeFilter;
 
 class Project extends Resource
 {
@@ -473,7 +478,18 @@ class Project extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new ReportAdmin(),
+            new ProjectSectors(),
+            new ReportCreated(),
+            new ReportArea(),
+            new Reportcity(),
+
+
+            new DateRangeFilter(__("start"),"start_date"),
+
+
+        ];
     }
 
     /**

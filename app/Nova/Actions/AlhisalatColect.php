@@ -52,7 +52,6 @@ class AlhisalatColect extends Action
                     $new_data->created_at = now();
                     $new_data->save();
 
-                    return Action::redirect('/Admin/resources/alhisalats/' . $new_data->id );
 
             }
         }

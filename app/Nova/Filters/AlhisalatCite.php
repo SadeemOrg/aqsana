@@ -2,9 +2,11 @@
 
 namespace App\Nova\Filters;
 
+use App\Models\City;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
-class PostNewsFilters extends Filter
+
+class AlhisalatCite extends Filter
 {
     /**
      * The filter's component.
@@ -12,7 +14,10 @@ class PostNewsFilters extends Filter
      * @var string
      */
     public $component = 'searchable-select-filter';
-
+    public function name()
+    {
+        return __('المدينة');
+    }
     /**
      * Apply the filter to the given query.
      *
@@ -23,9 +28,13 @@ class PostNewsFilters extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        if($value=="non" )
-        { return $query;}
-        return $query->where('status',$value);
+        // return $query;
+
+        return $query->whereHas('address', function ($query) use ($value) {
+            $query->whereHas('City', function ($query) use ($value) {
+                $query->where('id', $value); // Adjust the column name as needed
+            });
+        });
     }
 
     /**
@@ -36,11 +45,11 @@ class PostNewsFilters extends Filter
      */
     public function options(Request $request)
     {
-        return [
-            __('all') => 'non',
-            __('post') => '1',
-            __('not post') => '0',
-
-        ];
+        $Areas = City::all();
+        $foo = array();
+        $foo['All']='non';
+        foreach ($Areas as $Area)
+        $foo[$Area->name]=$Area->id;
+        return $foo;
     }
 }

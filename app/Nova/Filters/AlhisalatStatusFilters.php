@@ -12,7 +12,7 @@ class AlhisalatStatusFilters extends Filter
      *
      * @var string
      */
-    public $component = 'select-filter';
+    public $component = 'searchable-select-filter';
 
     /**
      * Apply the filter to the given query.
@@ -22,6 +22,10 @@ class AlhisalatStatusFilters extends Filter
      * @param  mixed  $value
      * @return \Illuminate\Database\Eloquent\Builder
      */
+    public function name()
+    {
+        return __('الحالة');
+    }
     public function apply(Request $request, $query, $value)
     {
         if($value=="non" )

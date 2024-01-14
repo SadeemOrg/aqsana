@@ -30,6 +30,8 @@ use App\Nova\Actions\ExportDonations;
 use App\Nova\Actions\PrintBill;
 use App\Nova\Actions\ReceiveDonation;
 use App\Nova\Filters\AlhisalatColect;
+use App\Nova\Filters\Transactionproject;
+use App\Nova\Filters\TransactionSectors;
 use App\Nova\Metrics\DonationInBank;
 use App\Nova\Metrics\DonationInBox;
 use App\Nova\Metrics\DonationNotReceive;
@@ -115,7 +117,9 @@ class Donation extends Resource
 
         return $query->where([
             ['main_type', 1],
-            ['type', 2]
+            ['type', 2],
+            ['is_delete', '<>', '2'],
+
         ]);
     }
     public function fields(Request $request)
@@ -280,9 +284,9 @@ class Donation extends Resource
             ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
             ActionButton::make(__('delete'))
                 ->action((new DeleteBill)->confirmText(__('Are you sure you want to delete  this?'))
-                    ->confirmButtonText(__('delete'))
-                    ->cancelButtonText(__('Dont delete')), $this->id)
-                ->text(__('delete'))->showLoadingAnimation()->readonly(function () {
+                    ->confirmButtonText(__('compensation'))
+                    ->cancelButtonText(__('cancellation')), $this->id)
+                ->text(__('compensation'))->showLoadingAnimation()->readonly(function () {
                     return $this->is_delete > 0;
                 })->buttonColor('#FF0000')->svg('_Delete2')
                 ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
@@ -428,6 +432,8 @@ class Donation extends Resource
     {
         return [
             new AlhisalatColect(),
+            new Transactionproject(),
+            new TransactionSectors(),
         ];
     }
 

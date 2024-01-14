@@ -29,6 +29,15 @@ class address extends Model
         return $this->hasMany(ActionEvents::class,"actionable_id")->where('action_events.target_type', '=', get_class($this));
     }
 
+    public function Area()
+    {
+        return $this->belongsTo(Area::class);
+    }
+    public function City()
+    {
+        return $this->belongsTo(City::class,'city_id');
+    }
+
     // public function create()
     // {
     //     return $this->belongsTo('App\Models\User','created_by');

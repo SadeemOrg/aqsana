@@ -15,6 +15,7 @@ use Laravel\Nova\Fields\HasMany;
 
 class BusesCompany extends Resource
 {
+
     /**
      * The model the resource corresponds to.
      *
@@ -47,7 +48,7 @@ class BusesCompany extends Resource
 
     public static function group()
     {
-        return __('address');
+        return __('Public Administration');
     }
     /**
      * The columns that should be searched.

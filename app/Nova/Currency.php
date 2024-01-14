@@ -31,7 +31,7 @@ class Currency extends Resource
     }
     public static function group()
     {
-        return __('else');
+        return __('Public Administration');
     }
     public static function availableForNavigation(Request $request)
     {

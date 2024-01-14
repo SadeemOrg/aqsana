@@ -17,7 +17,7 @@ use App\Models\Area;
 use App\Nova\Actions\ExportUsers;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Image;
-
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class User extends Resource
 {
@@ -46,11 +46,11 @@ class User extends Resource
     public static $title = 'name';
     public static function label()
     {
-        return __('Creat delegate');
+        return __('Administrative users');
     }
     public static function group()
     {
-        return __('address');
+        return __('Public Administration');
     }
     /**
      * The columns that should be searched.
@@ -70,6 +70,15 @@ class User extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+
+        $query->where(function ($query) {
+            $query->whereNull('app_user')
+                  ->orWhere('app_user', '<>', '1');
+        });
+    }
     public function fields(Request $request)
     {
         return [
