@@ -9,6 +9,8 @@ use App\Models\vacation;
 use App\Models\WorkHours;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Redirect;
+use Laravel\Nova\Actions\Action;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -68,6 +70,7 @@ class Report extends Component
 
 
             $workHours = WorkHours::where("user_id", $this->Name)
+                ->whereBetween('date', [$from, $to])
                 ->orderBy('date', 'ASC')
                 ->get();
 
@@ -87,6 +90,7 @@ class Report extends Component
 
 
             $vacations = Vacation::where("user_id", $this->Name)
+                ->whereBetween('date', [$from, $to])
                 ->orderBy('date', 'ASC')
                 ->get();
 
@@ -117,7 +121,6 @@ class Report extends Component
             // Convert the sorted collection to an array
             $this->sortedArray = $sortedCollection->values()->toArray();
         }
-
     }
     public function showEditModels($id)
     {
@@ -258,8 +261,14 @@ class Report extends Component
         }
 
         if ($this->FromDate != null && $this->ToDate != null && $this->Name != null) {
-            dd("Ok");
+            // generate-pdf-hours?id=1&FromDate=1/1/2024&ToDate=12/2/2024
+            $pdfUrl = '/generate-pdf-hours?id=' . $this->Name . '&FromDate=' . $this->FromDate . '&ToDate=' . $this->ToDate;
+
+            // Redirect to a placeholder page
+            $redirectUrl = '/placeholder-page';
+            return Redirect::away($pdfUrl)->with(['pdfUrl' => $pdfUrl]);
         }
+
     }
 
     public function render()
