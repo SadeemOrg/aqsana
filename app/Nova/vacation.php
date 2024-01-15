@@ -37,6 +37,10 @@ class vacation extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public static function availableForNavigation(Request $request)
+    {
+        return false;
+    }
     public function fields(Request $request)
     {
         return [

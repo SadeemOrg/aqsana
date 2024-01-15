@@ -117,6 +117,7 @@ class Report extends Component
             // Convert the sorted collection to an array
             $this->sortedArray = $sortedCollection->values()->toArray();
         }
+
     }
     public function showEditModels($id)
     {
@@ -257,8 +258,7 @@ class Report extends Component
         }
 
         if ($this->FromDate != null && $this->ToDate != null && $this->Name != null) {
-            return Excel::download(new ExportAdminWorkHours($this->Name, $this->FromDate, $this->ToDate), 'users.xlsx');
-            $this->exportWorkHoursErorr = "";
+            dd("Ok");
         }
     }
 
