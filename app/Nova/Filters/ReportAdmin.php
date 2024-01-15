@@ -41,10 +41,13 @@ class ReportAdmin extends Filter
      */
     public function options(Request $request)
     {
-        $Areas = User::all();
-        $foo = array();
-        foreach ($Areas as $Area)
-        $foo[$Area->name]=$Area->id;
-        return $foo;
+        $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+        $user_type_admin_array =  array();
+        foreach ($users as $user) {
+            $user_type_admin_array += [$user['name'] => ($user['id'])];
+        }
+
+        return $user_type_admin_array;
+
     }
 }

@@ -23,6 +23,8 @@ use App\Nova\Actions\AlhisalatDelete;
 use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
 use App\Nova\Actions\AlhisalatSurrender;
+use App\Nova\Filters\AlhisalatArea;
+use App\Nova\Filters\AlhisalatCite;
 use App\Nova\Filters\AlhisalatStatusFilters;
 use App\Nova\Metrics\NewAlhisalat;
 use AwesomeNova\Cards\FilterCard;
@@ -57,7 +59,7 @@ class Alhisalat extends Resource
 
     public static function group()
     {
-        return __('Financial management');
+        return __('project');
     }
 
 
@@ -315,7 +317,9 @@ class Alhisalat extends Resource
     public function filters(Request $request)
     {
         return [
-            new AlhisalatStatusFilters()
+            new AlhisalatStatusFilters(),
+            new AlhisalatArea(),
+            new AlhisalatCite()
         ];
     }
 
@@ -341,21 +345,16 @@ class Alhisalat extends Resource
         return [
 
             (new AlhisalatColect),
-            //     ->canSee(function ($request) {
-            //         $model = $request->findModelQuery()->first();
-            //         if ($request->status == '1' ) {
-            //             return true;
-            //         }
-            //     }
-            // ),
-            (new AlhisalatStatuscompleted),
+
+            (new  AlhisalatSurrender),
+
+            // (new AlhisalatStatuscompleted),
             //     ->canSee(function () {
             //         if ($this->status == '2' ) {
             //             return true;
             //         }
             //     }
             // ),
-            (new AlhisalatSurrender),
             (new AlhisalatDelete),
 
         ];

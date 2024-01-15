@@ -29,7 +29,7 @@ class Area extends Resource
     }
     public static function group()
     {
-        return __('address');
+        return __('Public Administration');
     }
     public static function availableForNavigation(Request $request)
     {

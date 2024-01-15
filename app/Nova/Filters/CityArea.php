@@ -13,7 +13,7 @@ class CityArea extends Filter
      *
      * @var string
      */
-    public $component = 'select-filter';
+    public $component = 'searchable-select-filter';
 
     /**
      * Apply the filter to the given query.

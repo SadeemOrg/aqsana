@@ -3,59 +3,73 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\File;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Sector extends Resource
+class IndemnityBond extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Sector::class;
-    public static function availableForNavigation(Request $request)
+    public static $model = \App\Models\Transaction::class;
+
+    public static function label()
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Sectorparmation",  $request->user()->userrole()) )){
-            return true;
-        }
-       else return false;
+        return __('سند تعويض-זיכוי');
+    }
+    public static function group()
+    {
+        return __('Financial management');
     }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'text';
+    public static $title = 'id';
 
-    public static function label()
-    {
-        return __('sectors');
-    }
-    public static function group()
-    {
-        return __('Public Administration');
-    }
-    public static function groupOrder() {
-        return 12;
-    }
-    public static function createButtonLabel()
-    {
-        return 'انشاء قطاع';
-    }
     /**
      * The columns that should be searched.
      *
      * @var array
      */
     public static $search = [
-        'id','text'
+        'id',
     ];
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("PaymentVoucherparmation",  $request->user()->userrole()))) {
+            return true;
+        } else return false;
+    }
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+
+        return $query->where('is_delete', '2')->orderBy('transaction_date', 'DESC');
+    }
+
+    public static function authorizedToCreate(Request $request)
+    {
+        return false;
+    }
+    public function authorizedToDelete(Request $request)
+    {
+        return false;
+    }
+    public function authorizedToUpdate(Request $request)
+    {
+return false;
+    }
+    public function authorizedToReplicate(Request $request)
+    {
+        return false;
+    }
 
     /**
      * Get the fields displayed by the resource.
@@ -67,11 +81,13 @@ class Sector extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Boolean::make(__("is published"),'is_published'),
-            Text::make(__('main text'),'text'),
-            Text::make(__('sup text'),'sup_text'),
-            Image::make(__('Image'),'img')->disk('public')->deletable(),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
+            Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
+
+            Text::make(__('description'), 'description'),
+            Text::make(__('return money'), 'payment_reason'),
+
 
         ];
     }

@@ -22,6 +22,10 @@ class AlhisalatDelete extends Action
      * @param  \Illuminate\Support\Collection  $models
      * @return mixed
      */
+    public  function name()
+    {
+        return __('حصالة مفقوده');
+    }
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $model) {
@@ -44,7 +48,7 @@ class AlhisalatDelete extends Action
                 $new_data->created_at = now();
                 $new_data->save();
 
-                return Action::redirect('/Admin/resources/alhisalats/' . $new_data->id );
+                // return Action::redirect('/Admin/resources/alhisalats/' . $new_data->id );
 
         }
         }

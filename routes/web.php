@@ -291,6 +291,7 @@ Route::get("/StartTimerWorkHours", [HomeController::class, "StartTimerWorkHours"
 
 Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF'])->name('generate-pdf');
 
+Route::get('generate-pdf-hours', [PDFController::class, 'generatePDFHours'])->name('generate-pdf-hours');
 
 Route::get('send-sms-notification', [NotificationController::class, 'sendSmsNotificaition']);
 

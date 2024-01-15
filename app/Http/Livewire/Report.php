@@ -2,14 +2,19 @@
 
 namespace App\Http\Livewire;
 
+
 use App\Exports\ExportAdminWorkHours;
 use App\Models\User;
+use App\Models\vacation;
 use App\Models\WorkHours;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Redirect;
+use Laravel\Nova\Actions\Action;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 
-class AdminWorkHours extends Component
+class Report extends Component
 {
 
     public $users;
@@ -17,6 +22,7 @@ class AdminWorkHours extends Component
     public $ToDate;
     public $Name;
     public $WorkHourssearch;
+    public $vacationssearch;
     public $sumWorkHourssearch;
     public $showEditModel = false;
     public $showAddModel = false;
@@ -35,39 +41,86 @@ class AdminWorkHours extends Component
     public $error = '';
     public $exportWorkHoursErorr = '';
     public $notedate = [];
+    public $sortedArray = [];
+    public $sumWorkHours;
+    public $sumVacation;
+
+
 
     public function searchWorkHours()
     {
-        $from = date($this->FromDate);
-        $to = date($this->ToDate);
-        // dd( $from,$to,$this->Name);
-        $this->WorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->orderBy('date', 'ASC')->get();
-        //   dd($this->WorkHourssearch );
-        $string = '2001-01-01 00:00:00.0';
-        $date = Carbon::parse($string);
-        // dd($date);
-        // $date1->add($date2->diff($date1));
-        foreach ($this->WorkHourssearch as $key => $value) {
-            if ($value->day_hours != null) {
-                $time2 = Carbon::parse($value->day_hours);
-                $hours = $time2->hour;
-                $minutes = $time2->minute;
-                $seconds = $time2->second;
-
-                $date->addSeconds($seconds)->addMinutes($minutes)->addHours($hours);
-            }
+        $this->exportWorkHoursErorr = "";
+        if ($this->Name == null) {
+            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار الاسم " . '<br>';
         }
-        // dd($date );
-        $date = Carbon::parse($date);
-        // $now = Carbon::now();
-        // $diff = $date->diffInDays($now);
+        if ($this->FromDate == null) {
+            $this->exportWorkHoursErorr =  $this->exportWorkHoursErorr . "يجب اختيار تاريخ البدء " . '<br>';
+        }
+        if ($this->ToDate == null) {
+            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار تاريخ النهاية" . '<br>';
+        }
 
-        $this->sumWorkHourssearch = $date;
+        if ($this->FromDate != null && $this->ToDate != null && $this->Name != null) {
 
-        // $formatted = $date->format('H:i:s');
-        // dd($this->WorkHourssearch,   $this->sumWorkHourssearch);
-        // $this->sumWorkHourssearch = WorkHours::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->sum('day_hours');
-        // dd();
+
+            $from = date($this->FromDate);
+            $to = date($this->ToDate);
+            $tableNameWorkHours = 'work_hours'; // replace with your actual table name
+            $tableNameVacations = 'vacations'; // replace with your actual table name
+
+
+            $workHours = WorkHours::where("user_id", $this->Name)
+                ->whereBetween('date', [$from, $to])
+                ->orderBy('date', 'ASC')
+                ->get();
+
+            $this->sumWorkHours = $workHours->count();
+            $workHours = $workHours->toArray();
+
+
+            // Add the table name to each column in the workHours array
+            $workHours = array_map(function ($item) use ($tableNameWorkHours) {
+                return array_combine(
+                    array_map(function ($key) use ($tableNameWorkHours) {
+                        return  $key;
+                    }, array_keys($item)),
+                    $item
+                ) + ['table' => $tableNameWorkHours];
+            }, $workHours);
+
+
+            $vacations = Vacation::where("user_id", $this->Name)
+                ->whereBetween('date', [$from, $to])
+                ->orderBy('date', 'ASC')
+                ->get();
+
+            $this->sumVacation = $vacations->count();
+            $vacations = $vacations->toArray();
+
+
+            // Add the table name to each column in the vacations array
+            $vacations = array_map(function ($item) use ($tableNameVacations) {
+                return array_combine(
+                    array_map(function ($key) use ($tableNameVacations) {
+                        return  $key;
+                    }, array_keys($item)),
+                    $item
+                ) + ['table' => $tableNameVacations];
+            }, $vacations);
+
+
+            // Merge the two arrays
+            $mergedArray = array_merge($workHours, $vacations);
+
+            // Create a new collection from the merged array
+            $mergedCollection = new Collection($mergedArray);
+
+            // Sort the merged collection by the 'date' field
+            $sortedCollection = $mergedCollection->sortBy('date');
+
+            // Convert the sorted collection to an array
+            $this->sortedArray = $sortedCollection->values()->toArray();
+        }
     }
     public function showEditModels($id)
     {
@@ -130,7 +183,6 @@ class AdminWorkHours extends Component
             $result =  $finishTime->gt($startTime);
 
             if ($result) {
-
 
                 $EditWorkHours = new  WorkHours();
                 $EditWorkHours->user_id = $this->ModelId;
@@ -197,26 +249,32 @@ class AdminWorkHours extends Component
 
     public function exportWorkHours()
     {
-        $this->exportWorkHoursErorr ="";
+        $this->exportWorkHoursErorr = "";
         if ($this->Name == null) {
-            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr ."يجب اختيار الاسم ".'<br>';
+            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار الاسم " . '<br>';
         }
         if ($this->FromDate == null) {
-            $this->exportWorkHoursErorr =  $this->exportWorkHoursErorr . "يجب اختيار تاريخ البدء ".'<br>';
+            $this->exportWorkHoursErorr =  $this->exportWorkHoursErorr . "يجب اختيار تاريخ البدء " . '<br>';
         }
         if ($this->ToDate == null) {
-            $this->exportWorkHoursErorr =$this->exportWorkHoursErorr . "يجب اختيار تاريخ النهاية".'<br>';
+            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار تاريخ النهاية" . '<br>';
         }
 
         if ($this->FromDate != null && $this->ToDate != null && $this->Name != null) {
-       //     return Excel::download(new ExportAdminWorkHours($this->Name, $this->FromDate, $this->ToDate), 'users.xlsx');
-            $this->exportWorkHoursErorr ="";
+            // generate-pdf-hours?id=1&FromDate=1/1/2024&ToDate=12/2/2024
+            $pdfUrl = '/generate-pdf-hours?id=' . $this->Name . '&FromDate=' . $this->FromDate . '&ToDate=' . $this->ToDate;
+
+            // Redirect to a placeholder page
+            $redirectUrl = '/placeholder-page';
+            return Redirect::away($pdfUrl)->with(['pdfUrl' => $pdfUrl]);
         }
+
     }
 
     public function render()
     {
+
         $this->users = User::all();
-        return view('livewire.admin-work-hours');
+        return view('livewire.report');
     }
 }

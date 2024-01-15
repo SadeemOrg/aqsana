@@ -23,6 +23,10 @@ class AlhisalatSurrender extends Action
      * @param  \Illuminate\Support\Collection  $models
      * @return mixed
      */
+    public  function name()
+    {
+        return __('AlhisalatSurrender');
+    }
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $model) {

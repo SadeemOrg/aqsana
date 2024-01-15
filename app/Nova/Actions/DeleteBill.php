@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\Text;
 
 class DeleteBill extends Action
 {
@@ -22,6 +23,10 @@ class DeleteBill extends Action
      * @param  \Illuminate\Support\Collection  $models
      * @return mixed
      */
+    public function name()
+    {
+        return __('حذف');
+    }
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $model) {
@@ -33,6 +38,8 @@ class DeleteBill extends Action
             $new_data-> transact_amount =  -$model->transact_amount;
             $new_data->equivelant_amount = -$model->transact_amount;
             $new_data->transaction_date = $fields->transaction_date;
+            $new_data->payment_reason = $fields->return_money;
+
             $new_data->is_delete=2;
             $new_data->description="حذف سند رقم ". $model->id;
             $new_data->save();
@@ -53,6 +60,7 @@ class DeleteBill extends Action
     {
         return [
             Date::make(__("transaction_date"), "transaction_date"),
+            Text::make(__("return money"), "return_money"),
         ];
     }
 }

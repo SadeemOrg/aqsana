@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Acme\MultiselectField\Multiselect;
+use App\Models\Area;
 use App\Nova\Actions\ExportAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use Mauricewijnia\NovaMapsAddress\MapsAddress;
+use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
+
 class address extends Resource
 {
     /**
@@ -84,6 +87,8 @@ class address extends Resource
 
                     return $address_type_admin_array;
                 })->singleSelect()->hideFromIndex()->hideFromDetail(),
+
+
             // Select::make(__("type"), "type")->options([
             //     '1' => __('bus'),
             //     '2' => __('Alhisalat'),
@@ -93,6 +98,31 @@ class address extends Resource
             Text::make(__('name address'), "name_address")->rules('required'),
             Text::make(__("description address"), "description"),
             Text::make(__("phone number"), "phone_number_address"),
+
+
+            NovaBelongsToDepend::make(__('Area'),'Area', \App\Nova\Area::class)
+            ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
+        ->options( Area::all()),
+
+    NovaBelongsToDepend::make(__('City'),'City', \App\Nova\City::class)
+
+        ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
+        ->optionsResolve(function ($Area) {
+            return  $Area->City()->get(['id','name']);
+        })
+        ->dependsOn('Area') ->hideFromIndex()->hideFromDetail(),
+
+        Multiselect::make(__('delegatee'), 'admin_id')
+        ->options(function () {
+            $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+            $user_type_admin_array =  array();
+            foreach ($users as $user) {
+                $user_type_admin_array += [$user['id'] => ($user['name'])];
+            }
+
+            return $user_type_admin_array;
+        })->singleSelect(),
+
 
             // GoogleMaps::make(__('current_location'), 'current_location')
             //     ->zoom(8),
@@ -118,17 +148,17 @@ class address extends Resource
         $data =$address->current_location;
 
 
-        $data['street_name'] =($request->street_name != null) ?$request->street_name : $data['street_name'] ;
-        $data['city']  =($request->city != null) ?$request->city : $data['city'] ;
-        $data['latitude']  =($request->latitude != null) ?(float)$request->latitude :(float) $data['latitude'] ;
-        $data['longitude']  =($request->longitude != null) ?(float)$request->longitude : (float)$data['longitude'] ;
-        $data['formatted_address'] =  $data['street_name'].','.   $data['city'] ;
+        // $data['street_name'] =($request->street_name != null) ?$request->street_name : $data['street_name'] ;
+        // $data['city']  =($request->city != null) ?$request->city : $data['city'] ;
+        // $data['latitude']  =($request->latitude != null) ?(float)$request->latitude :(float) $data['latitude'] ;
+        // $data['longitude']  =($request->longitude != null) ?(float)$request->longitude : (float)$data['longitude'] ;
+        // $data['formatted_address'] =  $data['street_name'].','.   $data['city'] ;
 
-        $request->request->remove('street_name');
-        $request->request->remove('city');
-        $request->request->remove('latitude');
-        $request->request->remove('longitude');
-        $model->current_location=$data;
+        // $request->request->remove('street_name');
+        // $request->request->remove('city');
+        // $request->request->remove('latitude');
+        // $request->request->remove('longitude');
+        // $model->current_location=$data;
     }
     public static function beforeCreate(Request $request, $model)
     {
