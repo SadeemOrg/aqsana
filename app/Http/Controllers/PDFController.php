@@ -183,10 +183,6 @@ class PDFController extends Controller
             // Convert the sorted collection to an array
             $sortedArray = $sortedCollection->values()->toArray();
 
-        // $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
-        // $TransactionArray = @json_decode(json_encode($Transaction), true);
-
-
         $mpdf = new \Mpdf\Mpdf([
             'margin_left' => 10,
             'margin_right' => 10,
@@ -202,7 +198,6 @@ class PDFController extends Controller
             'totalTime'=>$date,
 
         ];
-        // dd( $data );
         $fileName = 'Invoices details.pdf';
         $mpdf->autoLangToFont = true;
         $mpdf->autoScriptToLang = true;
