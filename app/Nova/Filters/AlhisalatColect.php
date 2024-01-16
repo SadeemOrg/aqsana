@@ -42,7 +42,7 @@ class AlhisalatColect extends Filter
     public function options(Request $request)
     {
         return [
-            __('all') => 'non',
+            __('الكل') => 'non',
             __('Not Receive yet') => 1,
             __('in a box') => 2,
             __('in the bank') => 3,

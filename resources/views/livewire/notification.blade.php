@@ -77,7 +77,7 @@
                 <div class="p-3">
                     <a href="/Admin/notification"
                         class="block bg-[#349A37] hover:bg-[#40b744] text-white text-center flex items-center justify-center h-10 rounded-lg">
-                        <span>See all notifications</span>
+                        <span>روية جميع الاشغارات</span>
                     </a>
                 </div>
             @else

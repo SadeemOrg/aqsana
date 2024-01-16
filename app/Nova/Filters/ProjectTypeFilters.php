@@ -37,7 +37,7 @@ class  ProjectTypeFilters extends Filter
     public function options(Request $request)
     {
         return [
-            __('all') => 'non',
+            __('الكل') => 'non',
             __('project') => '1',
             __('QawafilAlaqsa') => '2',
             __('Trip') => '3',

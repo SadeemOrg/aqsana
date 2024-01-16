@@ -125,7 +125,7 @@ class User extends Resource
         BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating()->nullable(),
 
             BelongsTo::make(__('Role_user'), 'Role', \App\Nova\Role::class),
-            Text::make(__('job'), 'job')
+            Text::make(__('jop'), 'job')
             ->sortable(),
             Multiselect::make(__('Permations'), 'role')
                 ->options(

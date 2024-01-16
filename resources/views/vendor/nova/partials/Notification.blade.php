@@ -87,8 +87,7 @@
         <li>
             <a href="/Admin/notification" class="btn btn-default btn-primary inline-flex items-center justify-center h-12 relative ml-auto my-3  py-2 w-full text-center">
                 <span class="">
-                    See all notifications
-                  </span>
+                    روية جميع الاشغارات                  </span>
             </a>
         </li>
     </ul>

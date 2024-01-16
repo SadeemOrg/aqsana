@@ -43,7 +43,7 @@ class AlhisalatStatusFilters extends Filter
     {
 
             return [
-                __('all') => 'non',
+                __('الكل') => 'non',
                 __('تم  الوضع ') => '1',
                 __('تم جمع ') => '2',
                 __('تم التسليم') => '3',

@@ -38,7 +38,7 @@ class ReadMessageFilters extends Filter
     public function options(Request $request)
     {
         return [
-            __('all') => 'non',
+            __('الكل') => 'non',
             __('read')   => '1',
             __('not read') => '0',
         ];
