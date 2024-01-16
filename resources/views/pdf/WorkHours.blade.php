@@ -78,9 +78,9 @@
             <span>1</span>
         </p>
         <div dir="rtl" style="align-items: right;">
-            <p style="font-size: 18px; font-weight: bold;color:#101426">اسم الموظف : <span
+            <p style="font-size: 16px; font-weight: bold;color:#101426">اسم الموظف : <span
                     style="font-size: 16px;">{{ $user }}</span></p>
-            <p style="font-size: 18px; font-weight: bold;color:#101426">عدد الساعات الشهرية :
+            <p style="font-size: 16px; font-weight: bold;color:#101426">عدد الساعات الشهرية :
                 <span style="font-size: 16px;">100</span>
             </p>
         </div>
@@ -134,28 +134,15 @@
             </tbody>
             </table>
             
-
+            <div dir="rtl" style="align-items: right;padding-top:24px;">
+                <p style="font-size: 16px; font-weight: bold;color:#101426">عدد ايام الاجازات: <span
+                        style="font-size: 16px;">10</span></p>
+                        <p style="font-size: 16px; font-weight: bold;color:#101426">عدد ايام الاجازات المرضية: <span
+                            style="font-size: 16px;">10</span></p>
+            </div>
 
         </div>
     </body>
 
     </html>
 
-
-
-    {{-- <div dir="rtl" >
-    <p style="font-size: 18px; font-weight: bold; text-decoration: underline;">تقرير ساعات العمل لشهر:
-        <span>1</span>
-    </p>
-    <div style="display: inline-block;">
-        <p style="font-size: 16px; font-weight: bold; text-decoration: underline;">اسم المؤسسة:
-            <span>جمعية الاقصى</span>
-        </p>
-        <p style="font-size: 16px; font-weight: bold; text-decoration: underline;">عدد الساعات الشهرية:
-            <span>100</span>
-        </p>
-        <p  style="position:absolute;top:0; font-size: 16px; font-weight: bold; text-decoration: underline;">المسمى الوظيفي:
-            <span>مبرمج</span>
-        </p>
-    </div>
-</div> --}}
