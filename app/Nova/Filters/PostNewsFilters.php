@@ -37,7 +37,7 @@ class PostNewsFilters extends Filter
     public function options(Request $request)
     {
         return [
-            __('all') => 'non',
+            __('الكل') => 'non',
             __('post') => '1',
             __('not post') => '0',
 

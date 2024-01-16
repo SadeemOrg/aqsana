@@ -56,6 +56,11 @@ use Laravel\Nova\Panel;
 use App\Nova\Actions\ChangeRole;
 use App\Nova\Actions\ProjectStartEnd;
 use App\Nova\Filters\ProjectArea;
+use App\Nova\Filters\ProjectSectors;
+use App\Nova\Filters\ReportAdmin;
+use App\Nova\Filters\ReportArea;
+use App\Nova\Filters\Reportcity;
+use App\Nova\Filters\ReportCreated;
 use App\Nova\Metrics\NewQawafilAlaqsa;
 use App\Rules\QawafilAlaqsaDate;
 use Laravel\Nova\Fields\Markdown;
@@ -303,13 +308,6 @@ class QawafilAlaqsa extends Resource
                     '5' => __('annual'),
                 ])->rules('required')->singleSelect(),
 
-                // Text::make(__("tty"), "project_name",function(){
-                //     $city= City::find($this->city);
-
-                //     // dd($city);
-                //     return ($city) ? "" : $city->id;
-                // })->hideWhenCreating()->hideWhenUpdating(),
-
 
                 Select::make(__('delegatee'), 'admin_id')
                     ->options(function () {
@@ -426,31 +424,7 @@ class QawafilAlaqsa extends Resource
 
             ]))->withToolbar(),
 
-            // (new Panel(__('City'), [
 
-            //     BelongsToManyField::make(__('City'), "City", '\App\Nova\City')                    // ->options(Area::all())
-            //         ->options(function () {
-
-            //             $id = Auth::id();
-            //             $Area = \App\Models\Area::where('admin_id', $id)->first();
-            //             //    dd( $Area->id);
-            //             $Citys =  \App\Models\City::where('area_id', $Area->id)->get();
-            //             // $users =  \App\Models\City::where('area_id', $id)->get();
-            //             return $Citys;
-            //             $user_type_admin_array =  array();
-
-            //             foreach ($Citys as $City) {
-            //                 // dd($user['id'] ."**" .($user['id']));
-            //                 $user_type_admin_array += [$City['id'] => ($City['name'])];
-            //             }
-
-            //             return $user_type_admin_array;
-            //         })->canSee(function ($request) {
-            //             $user = Auth::user();
-            //             if ($user->type() == 'regular_area') return true;
-            //             return false;
-            //         })->rules('required', 'max:1'),
-            // ])),
 
             (new Panel(__('bus'), [
 
@@ -758,7 +732,10 @@ class QawafilAlaqsa extends Resource
     public function filters(Request $request)
     {
         return [
-            new ProjectArea,
+              new ReportAdmin(),
+            new ReportCreated(),
+            new ReportArea(),
+            new Reportcity(),
         ];
     }
 

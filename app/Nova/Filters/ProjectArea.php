@@ -54,7 +54,7 @@ class ProjectArea extends Filter
     {
         $Areas = Area::all();
         $foo = array();
-        $foo['All']='non';
+        $foo['الكل']='non';
         foreach ($Areas as $Area)
         $foo[$Area->name]=$Area->id;
         return $foo;

@@ -6,6 +6,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use App\Models\vacation;
 use App\Models\WorkHours;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use PDF;
@@ -125,6 +126,22 @@ class PDFController extends Controller
             ->get();
             $sumWorkHours = $workHours->count();
             $workHours = $workHours->toArray();
+            $string = '2001-01-01 00:00:00.0';
+            $date = Carbon::parse($string);
+            foreach ($workHours as $key => $value) {
+                if ($value['day_hours'] != null) {
+                    // dd($value);
+                    $time2 = Carbon::parse($value['day_hours']);
+                    $hours = $time2->hour;
+                    $minutes = $time2->minute;
+                    $seconds = $time2->second;
+
+                    $date->addSeconds($seconds)->addMinutes($minutes)->addHours($hours);
+                }
+            }
+            // dd($date );
+            $date = Carbon::parse($date);
+
 
                // Add the table name to each column in the workHours array
                $workHours = array_map(function ($item) use ($tableNameWorkHours) {
@@ -166,10 +183,6 @@ class PDFController extends Controller
             // Convert the sorted collection to an array
             $sortedArray = $sortedCollection->values()->toArray();
 
-        // $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
-        // $TransactionArray = @json_decode(json_encode($Transaction), true);
-
-
         $mpdf = new \Mpdf\Mpdf([
             'margin_left' => 10,
             'margin_right' => 10,
@@ -181,10 +194,10 @@ class PDFController extends Controller
             'data' => $sortedArray,
             'user' =>User::find( $request->id)->name,
             'sumVacation'=>$sumVacation,
-            'workHours'=>$workHours,
+            'sumWorkHours'=>$sumWorkHours,
+            'totalTime'=>$date,
 
         ];
-        // dd( $data );
         $fileName = 'Invoices details.pdf';
         $mpdf->autoLangToFont = true;
         $mpdf->autoScriptToLang = true;

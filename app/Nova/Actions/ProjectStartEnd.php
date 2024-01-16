@@ -15,7 +15,10 @@ use Laravel\Nova\Fields\ActionFields;
 class ProjectStartEnd extends Action
 {
     use InteractsWithQueue, Queueable;
-
+    public  function name()
+    {
+        return __('المشروع');
+    }
     /**
      * Perform the action on the given models.
      *
@@ -23,6 +26,7 @@ class ProjectStartEnd extends Action
      * @param  \Illuminate\Support\Collection  $models
      * @return mixed
      */
+
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $model) {
