@@ -74,9 +74,11 @@
     @php
     @endphp
     <div dir="rtl">
-        <p style="font-size: 18px; font-weight: bold; text-decoration: underline;margin-top: 10px; margin-bottom: 20px;">تقرير ساعات العمل :
-        </p>
         <p style="font-size: 18px; font-weight: bold; text-decoration: underline;margin-top: 10px; margin-bottom: 20px;">
+            تقرير ساعات العمل :
+        </p>
+        <p
+            style="font-size: 18px; font-weight: bold; text-decoration: underline;margin-top: 10px; margin-bottom: 20px;">
             اسم الموظف : {{ $user }}
         </p>
 
@@ -84,7 +86,6 @@
 
 
         <table dir="rtl" style="width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 20px;">
-
             <tr>
                 <td style="font-size: 16px; font-weight: bold; color:#101426;">عدد ايام الاجازات: {{ $sumVacation }}
                 </td>
@@ -106,9 +107,6 @@
 
             </tr>
         </table>
-
-
-
         <table dir="rtl" class="blueTable">
             <thead>
                 <tr>
@@ -127,10 +125,10 @@
                     @endphp
                     <tr style="{{ $day['table'] === 'vacations' ? 'background-color: #ff3333;' : '' }}">
                         @unless ($day['table'] === 'vacations')
-                            <td>{{ $carbonDate->toDateString() }}</td>
+                            <td style="width: 150px; ">{{ $carbonDate->toDateString() }}</td>
                             <td>{{ $day['day'] }}</td>
                         @else
-                            <td style="color:white;">{{ $carbonDate->toDateString() }}</td>
+                            <td style="color:white;width: 150px; ">{{ $carbonDate->toDateString() }}</td>
                             <td style="color:white;">{{ $day['day'] }}</td>
                         @endunless
 
@@ -158,7 +156,6 @@
                                         $dateString = $departure['return_time'];
                                         $dateTime = new DateTime($dateString);
                                         $return_time = $dateTime->format('h:i:s');
-
                                     @endphp
                                     <td> السبب : {{ $departure['Type'] }} <br> الوقت المتوقع :
                                         {{ $departure['required_time'] }}<br> ساعة الخروج : {{ $time_out }}<br> ساعة
@@ -166,8 +163,6 @@
                                 @endforeach
                                 {{-- @dd($day['departure']); --}}
 
-
-                                <td> </td>
                             @else
                                 <td> -</td>
                             @endif
