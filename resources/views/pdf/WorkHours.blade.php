@@ -74,8 +74,7 @@
     @php
     @endphp
     <div dir="rtl">
-        <p style="font-size: 18px; font-weight: bold; text-decoration: underline;">تقرير ساعات العمل لشهر:
-            <span>1</span>
+        <p style="font-size: 18px; font-weight: bold; text-decoration: underline;">تقرير ساعات العمل :
         </p>
         <div dir="rtl" style="align-items: right;">
             <p style="font-size: 16px; font-weight: bold;color:#101426">اسم الموظف : <span
