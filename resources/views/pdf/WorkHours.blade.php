@@ -74,15 +74,40 @@
     @php
     @endphp
     <div dir="rtl">
-        <p style="font-size: 18px; font-weight: bold; text-decoration: underline;">تقرير ساعات العمل :
+        <p style="font-size: 18px; font-weight: bold; text-decoration: underline;margin-top: 10px; margin-bottom: 20px;">تقرير ساعات العمل :
         </p>
-        <div dir="rtl" style="align-items: right;">
-            <p style="font-size: 16px; font-weight: bold;color:#101426">اسم الموظف : <span
-                    style="font-size: 16px;">{{ $user }}</span></p>
-            <p style="font-size: 16px; font-weight: bold;color:#101426">عدد الساعات الشهرية :
-                <span style="font-size: 16px;">100</span>
-            </p>
-        </div>
+        <p style="font-size: 18px; font-weight: bold; text-decoration: underline;margin-top: 10px; margin-bottom: 20px;">
+            اسم الموظف : {{ $user }}
+        </p>
+
+
+
+
+        <table dir="rtl" style="width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 20px;">
+
+            <tr>
+                <td style="font-size: 16px; font-weight: bold; color:#101426;">عدد ايام الاجازات: {{ $sumVacation }}
+                </td>
+                <td style="font-size: 16px;">
+                    @php
+                        $dateString = $totalTime;
+                        $dateTime = new DateTime($dateString);
+                        $totalTime = $dateTime->format('h:i:s');
+                    @endphp
+                    <p style="font-size: 16px; font-weight: bold;color:#101426">عدد الساعات :
+                        <span style="font-size: 16px;">{{ $totalTime }}</span>
+                    </p>
+                </td>
+                <td style="font-size: 16px;">
+
+                    <p style="font-size: 16px; font-weight: bold;color:#101426"> عدد ايام الدوام: <span
+                            style="font-size: 16px;">{{ $sumWorkHours }}</span></p>
+                </td>
+
+            </tr>
+        </table>
+
+
 
         <table dir="rtl" class="blueTable">
             <thead>
@@ -108,7 +133,7 @@
                             <td style="color:white;">{{ $carbonDate->toDateString() }}</td>
                             <td style="color:white;">{{ $day['day'] }}</td>
                         @endunless
-            
+
                         @unless ($day['table'] === 'vacations')
                             <td>{{ $day['start_time'] }}</td>
                             <td>{{ $day['end_time'] }}</td>
@@ -116,32 +141,50 @@
                             <td style="color:white;"> - </td>
                             <td style="color:white;"> - </td>
                         @endunless
-            
+
                         @unless ($day['table'] === 'vacations')
                             <td>{{ $day['day_hours'] }}</td>
                         @else
                             <td style="color:white;"> - </td>
                         @endunless
-            
+
                         @unless ($day['table'] === 'vacations')
-                            <td>-</td>
+                            @if ($day['departure'] != null)
+                                @foreach ($day['departure'] as $departure)
+                                    @php
+                                        $dateString = $departure['time_out'];
+                                        $dateTime = new DateTime($dateString);
+                                        $time_out = $dateTime->format('h:i:s');
+                                        $dateString = $departure['return_time'];
+                                        $dateTime = new DateTime($dateString);
+                                        $return_time = $dateTime->format('h:i:s');
+
+                                    @endphp
+                                    <td> السبب : {{ $departure['Type'] }} <br> الوقت المتوقع :
+                                        {{ $departure['required_time'] }}<br> ساعة الخروج : {{ $time_out }}<br> ساعة
+                                        العودة : {{ $return_time }} </td>
+                                @endforeach
+                                {{-- @dd($day['departure']); --}}
+
+
+                                <td> </td>
+                            @else
+                                <td> -</td>
+                            @endif
                         @else
                             <td style="color:white;">{{ $day['type'] }}</td>
                         @endunless
                     </tr>
                 @endforeach
             </tbody>
-            </table>
-            
-            <div dir="rtl" style="align-items: right;padding-top:24px;">
-                <p style="font-size: 16px; font-weight: bold;color:#101426">عدد ايام الاجازات: <span
-                        style="font-size: 16px;">10</span></p>
-                        <p style="font-size: 16px; font-weight: bold;color:#101426">عدد ايام الاجازات المرضية: <span
-                            style="font-size: 16px;">10</span></p>
-            </div>
+        </table>
+
+        <div dir="rtl" style="align-items: right;padding-top:24px;">
+
 
         </div>
-    </body>
 
-    </html>
+    </div>
+</body>
 
+</html>
