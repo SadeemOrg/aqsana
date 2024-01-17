@@ -90,26 +90,44 @@ class Vacations extends Component
     public function AddDay()
     {
 
-        $oldData =  vacation::where('date', $this->date)->where('id', $this->ModelId)->first();
+        $this->exportWorkHoursErorr = "";
+        if ($this->userId == null) {
+            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار الاسم " . '<br>';
+        }
+        // if ($this->FromDate == null) {
+        //     $this->exportWorkHoursErorr =  $this->exportWorkHoursErorr . "يجب اختيار تاريخ البدء " . '<br>';
+        // }
+        if ($this->date == null) {
+            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار تاريخ " . '<br>';
+        }
+        if ($this->type == null) {
+            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار السبب " . '<br>';
+        }
 
 
-        if ($oldData == null) {
+        if ($this->type != null && $this->date != null && $this->userId != null) {
+            $oldData =  vacation::where('date', $this->date)->where('id', $this->ModelId)->first();
 
 
-            $vacation = new vacation();
-            $vacation->user_id = $this->userId;
-            $vacation->date = $this->date;
-            $vacation->day = Carbon::parse($this->date)->locale('ar')->dayName;
-            $vacation->type =  str_replace('_', ' ', $this->type);
-            $vacation->note = $this->note;
-            $vacation->created_by = Auth::id();
-            $vacation->save();
-            $this->showAddModel = false;
-        } else {
-            // $this->error = "هذا اليوم موجود مسبقا";
+            if ($oldData == null) {
+
+
+                $vacation = new vacation();
+                $vacation->user_id = $this->userId;
+                $vacation->date = $this->date;
+                $vacation->day = Carbon::parse($this->date)->locale('ar')->dayName;
+                $vacation->type =  str_replace('_', ' ', $this->type);
+                $vacation->note = $this->note;
+                $vacation->created_by = Auth::id();
+                $vacation->save();
+                $this->showAddModel = false;
+
+                $this->searchVacation();
+            } else {
+                // $this->error = "هذا اليوم موجود مسبقا";
+            }
         }
     }
-
     public function render()
     {
         $this->users = User::all();

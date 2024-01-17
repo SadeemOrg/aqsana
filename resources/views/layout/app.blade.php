@@ -356,10 +356,26 @@ $('.PopUp_Modal_Home_Close').click(function() {
             $('#hidePlaceHolderDateAdminFrom').attr('type', 'date');
             $(".svgFoucusAdminFrom").css('display', 'none');
         }
+        function handelFocusVicationDateFrom (){
+            $('#hidePlaceHolderDateAdminVicationFrom').attr('type', 'date');
+            $(".svgFoucusAdminVicationFrom").css('display', 'none');
+        }
+        function handelFocusAdminReportDateFrom (){
+            $('#hidePlaceHolderDateReportAdminFrom').attr('type', 'date');
+            $(".svgFoucusReportAdminFrom").css('display', 'none');
+        }
 
         function handelFocusAdminDateTo() {
             $('#hidePlaceHolderDateAdminTo').attr('type', 'date');
             $(".svgFoucusAdminTo").css('display', 'none');
+        }
+        function handelFocusVicationDateTo(){
+            $('#hidePlaceHolderDateVicationAdminTo').attr('type', 'date');
+            $(".svgFoucusVicationAdminTo").css('display', 'none');
+        }
+        function handelFocusAdminReportDateTo() {
+            $('#hidePlaceHolderDateReportAdminTo').attr('type', 'date');
+            $(".svgFoucusReportAdminTo").css('display', 'none');
         }
 
         function handelInputtimeFrom() {

@@ -152,7 +152,7 @@ class Report extends Resource
             new ReportCreated(),
             new ReportArea(),
             new Reportcity(),
-            new DateRangeFilter(__("start"),"start_date"),
+            // new DateRangeFilter(__("start"),"start_date"),
 
 
 
@@ -187,7 +187,7 @@ class Report extends Resource
     {
         return [
             // new ExportReport(),
-            new ExportReport(),
+            (new ExportReport())->standalone(),
 
             // new DownloadExcel,
         ];

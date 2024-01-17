@@ -16,7 +16,7 @@
                 <!--Date Picker -->
                 <div dir="ltr" class="relative h-12">
                     <div
-                        class="svgFoucusAdminFrom absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
+                        class="svgFoucusReportAdminFrom absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -25,16 +25,16 @@
                         </svg>
                     </div>
 
-                    <input wire:model.debounce.50000ms="FromDate" id="hidePlaceHolderDateAdminFrom" type="text"
+                    <input wire:model.debounce.50000ms="FromDate" id="hidePlaceHolderDateReportAdminFrom" type="text"
                         data-val-required="Mandatory field" data-val="true"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
-                        onfocus="handelFocusAdminDateFrom()">
+                        onfocus="handelFocusAdminReportDateFrom()">
                 </div>
                 <!--to Date  -->
                 <div dir="ltr" class="relative h-12">
                     <div
-                        class="svgFoucusAdminTo absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
+                        class="svgFoucusReportAdminTo absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -42,9 +42,9 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.debounce.50000ms="ToDate" id="hidePlaceHolderDateAdminTo" type="text"
+                    <input wire:model.debounce.50000ms="ToDate" id="hidePlaceHolderDateReportAdminTo" type="text"
                         class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
-                        placeholder=" الى تاريخ" onfocus="handelFocusAdminDateTo()">
+                        placeholder=" الى تاريخ" onfocus="handelFocusAdminReportDateTo()">
                 </div>
                 <!--end Picker -->
                 <div class="flex w-full h-12">
