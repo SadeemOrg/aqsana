@@ -20,6 +20,11 @@ class ExportPaymentVoucher extends Action
      * @param  \Illuminate\Support\Collection  $models
      * @return mixed
      */
+    public  function name()
+    {
+        return __('ExportReport');
+    }
+
     public function handle(ActionFields $fields, Collection $models)
     {
         return Action::openInNewTab('/export/ExportPaymentVoucher');
