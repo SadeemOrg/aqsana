@@ -122,6 +122,7 @@ class PDFController extends Controller
 
 
         $workHours = WorkHours::where("user_id", $request->id)
+        ->whereBetween('date', [$from, $to])
             ->orderBy('date', 'ASC')
             ->get();
             $sumWorkHours = $workHours->count();
@@ -155,6 +156,7 @@ class PDFController extends Controller
 
 
             $vacations = vacation::where("user_id", $request->id)
+            ->whereBetween('date', [$from, $to])
                 ->orderBy('date', 'ASC')
                 ->get();
 
