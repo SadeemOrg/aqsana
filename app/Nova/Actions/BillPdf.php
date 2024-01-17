@@ -20,6 +20,10 @@ class BillPdf extends Action
      * @param  \Illuminate\Support\Collection  $models
      * @return mixed
      */
+    public  function name()
+    {
+        return __('طباعة');
+    }
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $model) {

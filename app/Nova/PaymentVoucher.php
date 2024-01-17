@@ -488,7 +488,7 @@ class PaymentVoucher extends Resource
     public function actions(Request $request)
     {
         return [
-            new ApprovalRejectTransaction,
+            // new ApprovalRejectTransaction,
             new BillPdf,
             (new ExportPaymentVoucher)->standalone()->withoutConfirmation(),
 
