@@ -340,6 +340,8 @@
                                     class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="عدد ساعات المغادرة">
                             </div> --}}
+                            <p class="text-red-500">{!! $this->exportWorkHoursErorr !!}</p>
+
                             <div class="mt-2">
                                 <button type="submit"
                                     class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 mx-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
