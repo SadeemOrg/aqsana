@@ -713,7 +713,7 @@ class HomeController extends Controller
             ->where('budget', '>', 0);
         })->pluck('id')->toArray();
 
-        $projects=project::whereIn('sector', $Sectors)    ->whereYear('created_at', '=', 2024)   ->get();
+        $projects=project::whereIn('sector', $Sectors)    ->whereYear('created_at', '=', $request->Year)   ->get();
         // dd($projects);
          return $projects;
 
