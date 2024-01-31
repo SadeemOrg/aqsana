@@ -46,7 +46,7 @@ class ProjectStartEnd extends Action
                 $statu   = DB::table('project_status')
                     ->where('project_id', $model->id)
                     ->first();
-                if ($statu->status == '2') {
+
                     $newQafel = $model->replicate();
 
                     if ($model->repetition == "1") {
@@ -78,7 +78,7 @@ class ProjectStartEnd extends Action
                         'status' => 2,
                     ]);
 
-                }
+
             }
         }
     }
