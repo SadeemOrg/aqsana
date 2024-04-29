@@ -209,7 +209,7 @@ class AdminWorkHours extends Component
         }
 
         if ($this->FromDate != null && $this->ToDate != null && $this->Name != null) {
-       //     return Excel::download(new ExportAdminWorkHours($this->Name, $this->FromDate, $this->ToDate), 'users.xlsx');
+           return Excel::download(new ExportAdminWorkHours($this->Name, $this->FromDate, $this->ToDate), 'users.xlsx');
             $this->exportWorkHoursErorr ="";
         }
     }
