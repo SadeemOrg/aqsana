@@ -229,7 +229,7 @@
             onclick="location.href='/sector/5'">
             <img class="rounded-[45%] shadow-lg"
              {{-- src="{{ $imgRight }}" --}}
-                src="https://media.discordapp.net/attachments/938405759996276806/1044538836044230676/Group_62187.png"
+             src="{{ asset('assets/image/QawafelLogo.png') }}"
                 alt="logoQawafel">
         </div>
         <div class="xl:hidden flex justify-center basis-[20%] items-center cursor-pointer">
