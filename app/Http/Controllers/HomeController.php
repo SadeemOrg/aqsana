@@ -462,7 +462,7 @@ class HomeController extends Controller
         ])->first();
         $pus = array(
             "sector_id" => 0,
-            "Sector" => "ميزانبة السنة",
+            "Sector" => "ميزانية السنة",
             "Budget" => $Budgets->budget
         );
         array_push($sector, $pus);

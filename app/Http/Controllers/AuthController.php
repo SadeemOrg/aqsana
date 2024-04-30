@@ -61,6 +61,8 @@ class AuthController extends Controller
             'email' => $fields['email'],
             'password' => bcrypt($fields['password']),
             'user_role' => $fields['user_role'],
+            'app_user' => 1,
+
         ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;
@@ -136,6 +138,7 @@ class AuthController extends Controller
                     'social_media_id' => $request->get("social_media_id"),
                     'user_role' => "user",
                     'nick_name' => $fields['name'],
+                    'app_user' => 1,
                 ]);
             }
 
@@ -149,6 +152,7 @@ class AuthController extends Controller
                 'password' =>  bcrypt($password),
                 'user_role' => "user",
                 'nick_name' => $fields['name'],
+                'app_user' => 1,
 
                 ]);
             }
