@@ -17,6 +17,8 @@
    <button id='clickButton' wire:click="Cites" hidden>Click Me</button>
    @elseif ($this->key=='BusesCompany')
    <button id='clickButton' wire:click="BusesCompany" hidden>Click Me</button>
+   @elseif ($this->key=='Delegates')
+   <button id='clickButton' wire:click="Delegates" hidden>Click Me</button>
 
    @elseif ($this->key=='Report')
    <button id='clickButton' wire:click="Report" hidden>Click Me</button>

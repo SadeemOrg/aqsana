@@ -6,9 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\NewsObserver;
 use App\Observers\ProjectObserver;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class News extends Model
+class News extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     use HasFactory;
     protected $observers = [
         News::class => [NewsObserver::class]
@@ -41,5 +46,17 @@ class News extends Model
     {
         return $this->hasMany(ActionEvents::class,"actionable_id")->where('action_events.target_type', '=', get_class($this));
     }
+    public function registerMediaConversions(Media $media = null): void
+{
+    $this->addMediaConversion('thumb')
+        ->width(130)
+        ->height(130);
+}
+
+public function registerMediaCollections(): void
+{
+    $this->addMediaCollection('main')->singleFile();
+    $this->addMediaCollection('my_multi_collection');
+}
 
 }

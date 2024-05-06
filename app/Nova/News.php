@@ -26,6 +26,8 @@ use App\Nova\Actions\PostNews;
 use AwesomeNova\Cards\FilterCard;
 use App\Nova\Filters\StateFilter;
 use App\Nova\Filters\PostNewsFilters;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Fields\HasMany;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -57,12 +59,12 @@ class News extends Resource
     }
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Newsparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Newsparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
-    public static function groupOrder() {
+    public static function groupOrder()
+    {
         return 2;
     }
     public static $title = 'title';
@@ -74,7 +76,7 @@ class News extends Resource
      * @var array
      */
     public static $search = [
-        'id','title'
+        'id', 'title'
     ];
 
     /**
@@ -101,7 +103,7 @@ class News extends Resource
                 ->action((new PostNews)->confirmText(__('Are you sure you want to post  this NEWS?'))
                     ->confirmButtonText(__('post'))
                     ->cancelButtonText(__('Dont post')), $this->id)
-                    ->readonly(function () {
+                ->readonly(function () {
                     return $this->status === '1';
                 })->text(__('post'))->showLoadingAnimation()
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
@@ -112,11 +114,10 @@ class News extends Resource
                 ->options(function () {
                     $sectors = Sector::all();
                     $user_type_admin_array =  array();
-                        foreach ($sectors as $sector) {
-                            $user_type_admin_array += [$sector['id'] => ($sector['text'] )];
-                        }
-                        return  $user_type_admin_array;
-
+                    foreach ($sectors as $sector) {
+                        $user_type_admin_array += [$sector['id'] => ($sector['text'])];
+                    }
+                    return  $user_type_admin_array;
                 })->displayUsingLabels(),
 
             Select::make(__('have multi category'), "mult", function () {
@@ -235,6 +236,12 @@ class News extends Resource
                 ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
 
             Image::make(__('master image'), 'image')->disk('public'),
+            Images::make('Image 1', 'img1')
+                ->withResponsiveImages()
+                ->withResponsiveImages()
+                ->singleImageRules('dimensions:max_width=100')
+                ->showStatistics()->mustCrop(),
+
             ArrayImages::make(__('PICTURES'), 'pictures')
                 ->disk('public'),
 

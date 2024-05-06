@@ -69,18 +69,16 @@ class ExportExcelController extends Controller
     {
 
         $array = [];
-        $data = $request->all();
-        // dd($data );
-        foreach ($data as $key => $value) {
-            array_push($array, $value);
-        }
-        $name=$array;
+
+        $name=$request->reselt;
+
         $ref= ($request->ref != null) ? $request->ref : 'null';
         $from= ($request->from != null) ? $request->from : 'null';
         $to= ($request->to != null) ? $request->to : 'null';
 
 
         $key = 'Report';
+
         return view('export',compact('key','ref','name','from','to'));
     }
     public function ExportPaymentVoucher(Request $request)

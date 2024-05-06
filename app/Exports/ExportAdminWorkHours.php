@@ -56,11 +56,11 @@ class ExportAdminWorkHours implements FromCollection, WithHeadings
         $endHour =  ($sumWorkHourssearch->day - 1) * 24 + $sumWorkHourssearch->hour . ':' . $sumWorkHourssearch->minute . ':' . $sumWorkHourssearch->second;
 
         $additionalRows = [
-            ['Column1', 'Column2', 'Column3'],
+            ['', 'مجموع الايام',  $WorkHours->count()],
+
             ['', 'مجموع الساعات',  $endHour],
-            // Add more rows as needed
         ];
-        $mergedQuery = $WorkHours->union($additionalRows);
+        $mergedQuery = $WorkHours->concat($additionalRows);
 
 // dd($additionalRows,$mergedQuery);
         return $mergedQuery;

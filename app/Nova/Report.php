@@ -80,7 +80,12 @@ class Report extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         foreach ($query->get() as $q) {
-            $in_come = Transaction::where('main_type', '1')->where('ref_id', $q->id)->sum('equivelant_amount');
+            $in_come = Transaction::where([
+                ['main_type', '=', 1],
+                ['type', '=', 2],
+                ['is_delete', '<>', '2'],
+            ])->where('ref_id', $q->id)->sum('equivelant_amount');
+
             $out_come = Transaction::where('main_type', '2')->where('ref_id', $q->id)->sum('equivelant_amount');
             $Net_in_come = $in_come - $out_come;
             Project::where('id', $q->id)->update(['out_come' => $out_come, 'in_come' => $in_come, 'Net_in_come' => $Net_in_come]);
@@ -152,8 +157,8 @@ class Report extends Resource
             new ReportCreated(),
             new ReportArea(),
             new Reportcity(),
-            // new DateRangeFilter(__("start"),"start_date"),
 
+            new DateRangeFilter(__("start"),"start_date"),
 
 
             // ...
@@ -186,10 +191,7 @@ class Report extends Resource
     public function actions(Request $request)
     {
         return [
-            // new ExportReport(),
-            (new ExportReport())->standalone(),
-
-            // new DownloadExcel,
+            (new ExportReport())->onlyOnDetail(),
         ];
     }
 }

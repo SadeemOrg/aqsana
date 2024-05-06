@@ -28,13 +28,14 @@ class ExportReport extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
 
-        // ?name=AASAS&email=qqq%40jjf.f&phone=Q&password=ASASA
-        $string = '?';
-        foreach ($models as $key => $value) {
+        if ($fields-> from==null ||$fields->to ==null) {
+            return Action::danger('الرجاء اختيار التاريخ');
 
-            $string .= 'reselt' . $key . '=' . $value->id . '&&';
         }
-        // dd('/export-form/' .$string);
+
+        $string = '?reselt=' . $models[0]->id.'&from='.$fields-> from.'&to='.$fields->to;
+
+
         return Action::openInNewTab('/export/ExportReport'. $string);
 
     }
@@ -47,8 +48,8 @@ class ExportReport extends Action
     public function fields()
     {
         return [
-            Date::make(__('from'), 'from'),
-            Date::make(__('to'), 'to'),
+            Date::make(__('from'), 'from')->required(),
+            Date::make(__('to'), 'to')->required(),
 
         ];
     }
