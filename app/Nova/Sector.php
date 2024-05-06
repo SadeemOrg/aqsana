@@ -32,6 +32,7 @@ class Sector extends Resource
      * @var string
      */
     public static $title = 'text';
+    public static $priority = 19;
 
     public static function label()
     {

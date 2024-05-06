@@ -46,6 +46,7 @@ class Notification extends Component
                 ['notifiable_id', $id],
                 ['receive', null],
 
+
             ])->get();
             $this->receiveNotificationcount = $this->receiveNotification->count();
 
@@ -66,21 +67,21 @@ class Notification extends Component
      */
     public function alertSuccess()
     {
-        $this->dd++;
-        // $this->count++;
+        // $this->dd++;
+        $this->count++;
 
-        // $id = Auth::id();
-        // $receiveNotification =  ModelsNotification::where([
-        //     ['notifiable_id', $id],
-        //     ['receive', null],
+        $id = Auth::id();
+        $receiveNotification =  ModelsNotification::where([
+            ['notifiable_id', $id],
+            ['receive', null],
 
-        // ])->get();
+        ])->get();
 
 
-        // ModelsNotification::where([
-        //     ['notifiable_id', $id],
-        //     ['receive', null],
-        // ])->update(['receive' => 1]);
+        ModelsNotification::where([
+            ['notifiable_id', $id],
+            ['receive', null],
+        ])->update(['receive' => 1]);
     }
 
     /**

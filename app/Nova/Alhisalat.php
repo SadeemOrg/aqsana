@@ -59,7 +59,7 @@ class Alhisalat extends Resource
 
     public static function group()
     {
-        return __('project');
+        return __('Financial management');
     }
 
 

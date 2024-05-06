@@ -1,4 +1,5 @@
 @php
+
     use Carbon\Carbon;
     use App\Models\User;
 @endphp
@@ -40,7 +41,8 @@
                             if (isset($user->photo)) {
                                 $img = 'storage/' . $user->photo;
                             } else {
-                                $img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVztexIh8wNm6hDjIwvVAQ73mfzMuWB6yqdviYpcyqQ&s';
+                                $img =
+                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVztexIh8wNm6hDjIwvVAQ73mfzMuWB6yqdviYpcyqQ&s';
                             }
 
                             if (isset($user->name)) {
@@ -50,7 +52,7 @@
                             }
                             // dd($img);
                         @endphp
-                        <a href="">
+                        <a href="/Admin/notification">
                             <div
                                 class="flex flex-row items-center justify-start px-4 w-full py-3 border-b border-2 hover:bg-gray-100  @if ($notification->read_at == null) bg-[#f1fff1] @endif ">
                                 <div class="basis-1/4">
@@ -103,15 +105,11 @@
             @endphp
 
             <script>
+                var notificationsArraycount = {!! json_encode($notificationsArraycount) !!};
                 var bool = {!! json_encode($dataNotifications['Notifications']) !!};
-                var bonotificationsArraycountol = {!! json_encode($notificationsArraycount) !!};
-                // toastr.error(bool);
-
-                // Loading button plugin (removed from BS4)
-
                 Push.create("Al-Aqsa Association", {
                     body: bool,
-                    timeout: bonotificationsArraycountol * 5000,
+                    timeout: notificationsArraycount * 5000,
                     icon: iconPath
                 });
             </script>

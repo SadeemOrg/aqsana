@@ -81,7 +81,7 @@ class Project extends Resource
      * @var string
      */
     public static $title = 'project_name';
-    public static $priority = 1;
+    public static $priority = 20;
     /**
      * The columns that should be searched.
      *
@@ -93,7 +93,7 @@ class Project extends Resource
     }
     public static function group()
     {
-        return __('project');
+        return __('Public Administration');
     }
     public static function availableForNavigation(Request $request)
     {

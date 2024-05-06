@@ -10,7 +10,7 @@ use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Fields\Select;
 
-class ExportDelegates extends Action
+class ExportJobDelegate extends Action
 {
     use InteractsWithQueue, Queueable;
 
@@ -23,7 +23,8 @@ class ExportDelegates extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return Action::openInNewTab('/export/ExportDelegates?name='.$fields-> jop);
+        return Action::openInNewTab('/export/ExportJobDelegate');
+
     }
 
     /**

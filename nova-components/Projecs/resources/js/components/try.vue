@@ -1,7 +1,7 @@
 <template>
     <div class="mt-6 grid grid-cols-2 gap-y-6 gap-x-4 sm:grid-cols-8">
         <div class="sm:col-span-2">
-            <label for="street-address" class="block text-sm font-medium text-gray-700">ميزانبة القطاع </label>
+            <label for="street-address" class="block text-sm font-medium text-gray-700">ميزانية القطاع </label>
             <div class="mt-1">
                 <input readonly type="text" name="street-address" id="street-address" autocomplete="street-address"
                     :value="Sector.Budget"
