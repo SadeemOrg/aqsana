@@ -39,7 +39,7 @@
 
                 <!--end Picker -->
                 <div class=" h-12 flex gap-x-4">
-                    <button type="button"
+                    <button type="button" wire:click="searchWorkHours"
                         class="connectUs w-full duration-200 text-center px-1div0 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                         بحث
                     </button>
