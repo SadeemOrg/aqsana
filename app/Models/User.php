@@ -40,7 +40,8 @@ class User extends Authenticatable
         'bank_branch',
         'account_number',
         'bank_number',
-        'device_key'
+        'device_key',
+        'app_user'
 
 
     ];

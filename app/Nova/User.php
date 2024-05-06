@@ -198,6 +198,10 @@ class User extends Resource
 
         ];
     }
+    public static function beforeSave(Request $request, $model)
+    {
+        $model->app_user = 0;
+    }
 
     /**
      * Get the cards available for the request.
