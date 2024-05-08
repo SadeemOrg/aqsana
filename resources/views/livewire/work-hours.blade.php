@@ -295,8 +295,9 @@
                                         <span>00:00:00</span>
                                     @else
                                         <span>
-                                            {{ $sumWorkHourssearch->day * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
+                                            {{ ($sumWorkHourssearch->day-1) * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
                                         </span>
+
                                     @endif
                                 </td>
                             </tr>
