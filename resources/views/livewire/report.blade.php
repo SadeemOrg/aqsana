@@ -7,7 +7,7 @@
                 <div class=" h-12">
                     <select pla wire:model="Name" name="name"
                         class="selectwhorkHour block w-full  text-[#349A37]  border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] ">
-                        <option value="0" class="text-black"> اسم الموظف </option>
+                        <option value=null class="text-black" disabled> اسم الموظف </option>
                         @foreach ($users as $user)
                             <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
                         @endforeach
@@ -16,7 +16,7 @@
                 <!--Date Picker -->
                 <div dir="ltr" class="relative h-12">
                     <div
-                        class="svgFoucusReportAdminFrom absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
+                        class="svgFoucusReportAdminFrom absolute inset-y-0 left-0 top-3 hidden mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -34,7 +34,7 @@
                 <!--to Date  -->
                 <div dir="ltr" class="relative h-12">
                     <div
-                        class="svgFoucusReportAdminTo absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
+                        class="svgFoucusReportAdminTo absolute inset-y-0 left-0 top-3 hidden mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
