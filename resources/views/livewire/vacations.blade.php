@@ -6,7 +6,7 @@
             </p>
             <div class="grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-4 ">
                 <div class=" h-12">
-                    <select pla wire:model="Name" name="name"
+                    <select pla wire:model.defer="Name" name="name"
                         class="selectwhorkHour block w-full  text-[#349A37]  border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] ">
                         <option value="0" class="text-black"> اسم الموظف </option>
                         @foreach ($users as $user)
@@ -25,7 +25,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.debounce.50000ms="FromDate" id="hidePlaceHolderDateAdminVicationFrom"
+                    <input wire:model.defer="FromDate" id="hidePlaceHolderDateAdminVicationFrom"
                         type="text" data-val-required="Mandatory field" data-val="true"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
@@ -42,7 +42,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.debounce.50000ms="ToDate" id="hidePlaceHolderDateVicationAdminTo" type="text"
+                    <input wire:model.defer="ToDate" id="hidePlaceHolderDateVicationAdminTo" type="text"
                         class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusVicationDateTo()">
                 </div>
@@ -230,13 +230,13 @@
                             <!--First One -->
 
                             <div class="mt-2 selectdiv">
-                                <input type="text" wire:model.debounce.50000ms="editDate"
+                                <input type="text" wire:model.defer="editDate"
                                     class="hidePlaceHolderEditDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusEditDatePopup()">
                             </div>
 
                             <div class="mt-2 selectdiv">
-                                <select wire:model.debounce.50000000000ms="editType"
+                                <select wire:model.defer="editType"
                                     class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     <option selected value="">الرجاء
                                         ادخال سبب المغادرة</option>
@@ -254,7 +254,7 @@
 
                             </div>
                             <div class="mt-2 selectdiv">
-                                <input type="text" wire:model="editNote"
+                                <input type="text" wire:model.defer="editNote"
                                     class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]">
                             </div>
                             <div class="mt-2">
@@ -293,7 +293,7 @@
                             <p class="w-full text-center mt-2 text-[20px] text-[#151630]">اضافة اجازة </p>
                             <!--First One -->
                             <div class="mt-2 selectdiv ">
-                                <select pla wire:model.debounce.50000000000ms="userId" name="userId"
+                                <select pla wire:model.defer="userId" name="userId"
                                     class="h-12 text-[#349A37] w-[100%] text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37] ">
                                     <option class="text-black" value=null disabled> اسم الموظف </option>
                                     @foreach ($users as $user)
@@ -307,7 +307,7 @@
                             </div>
 
                             <div class="mt-2 selectdiv">
-                                <select wire:model.debounce.50000000000ms="type"
+                                <select wire:model.defer="type"
                                     class="h-12 text-[#349A37] w-[100%] text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37]">
                                     <option selected value=null disabled>الرجاء
                                         ادخال سبب المغادرة</option>
@@ -326,7 +326,7 @@
                                 </div>
                             </div>
                             <div class="mt-2 selectdiv">
-                                <input type="text" wire:model="note" placeholder="ملاحظة"
+                                <input type="text" wire:model.defer="note" placeholder="ملاحظة"
                                     class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[100%] pl-10 p-2.5 placeholder-[#349A37]">
                             </div>
                             <div class="mt-2 selectdiv relative">
@@ -339,7 +339,7 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input type="text" wire:model.debounce.50000000000ms ="date"
+                                <input type="text" wire:model.defer ="date"
                                     id="hidePlaceHolderDatePopUp"
                                     class=" border-[#349A37] text-[#349A37] text-sm text-right
                                     rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[97%] pl-10 p-2.5
