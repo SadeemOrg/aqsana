@@ -17,7 +17,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.debounce.50000ms="FromDate" id="hidePlaceHolderDateWorkHourFrom" type="text"
+                    <input wire:model.defer="FromDate" id="hidePlaceHolderDateWorkHourFrom" type="text"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onfocus="handelFocusWorkHourFrom()">
                 </div>
@@ -32,7 +32,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.debounce.50000ms="ToDate" id="hidePlaceHolderDateWorkHourTo" type="text"
+                    <input wire:model.defer="ToDate" id="hidePlaceHolderDateWorkHourTo" type="text"
                         class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusWorkerHourTo()">
                 </div>
@@ -136,7 +136,7 @@
                                 </div>
 
                                 <div class="mt-2 selectdiv">
-                                    <select wire:model="Timeleave"
+                                    <select wire:model.defer="Timeleave"
                                         class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                         <option selected value="">الوقت</option>
                                         @foreach ($TimeDpartures as $TimeDparture)
@@ -148,7 +148,7 @@
                                     </select>
                                 </div>
                                 <div class="mt-2 selectdiv">
-                                    <select wire:model="leaveGoal" wire:click="changeEvent2($event.target.value)"
+                                    <select wire:model.defer="leaveGoal" wire:click="changeEvent2($event.target.value)"
                                         class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                         <option selected value="">الرجاء
                                             ادخال سبب المغادرة</option>
@@ -166,7 +166,7 @@
 
                                 @if ($showTable2 == 'اخرى' && $this->showModel == true)
                                     <div class="ml-1  pt-6 lg:px-0 ">
-                                        <textarea wire:model="leaveGoalTextarea" rows="4" name="message" placeholder="سبب المغادرة"
+                                        <textarea wire:model.defer="leaveGoalTextarea" rows="4" name="message" placeholder="سبب المغادرة"
                                             class="w-full  inline-flex items-center text-right  justify-center border-[#349A37] border  rounded-[10px] focus:ring-[#349A37] focus:border-[#349A37] sm:text-sm p-4"></textarea>
                                     </div>
                                 @endif

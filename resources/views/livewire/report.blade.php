@@ -5,7 +5,7 @@
                 الموظفين</p>
             <div class="grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-4 ">
                 <div class=" h-12">
-                    <select pla wire:model="Name" name="name"
+                    <select pla wire:model.defer="Name" name="name"
                         class="selectwhorkHour block w-full  text-[#349A37]  border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] ">
                         <option value=null class="text-black" disabled> اسم الموظف </option>
                         @foreach ($users as $user)
@@ -25,7 +25,7 @@
                         </svg>
                     </div>
 
-                    <input wire:model.debounce.50000ms="FromDate" id="hidePlaceHolderDateReportAdminFrom" type="text"
+                    <input wire:model.defer="FromDate" id="hidePlaceHolderDateReportAdminFrom" type="text"
                         data-val-required="Mandatory field" data-val="true"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
@@ -42,7 +42,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.debounce.50000ms="ToDate" id="hidePlaceHolderDateReportAdminTo" type="text"
+                    <input wire:model.defer="ToDate" id="hidePlaceHolderDateReportAdminTo" type="text"
                         class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusAdminReportDateTo()">
                 </div>

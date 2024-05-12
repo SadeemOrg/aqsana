@@ -5,7 +5,7 @@
                 الموظفين</p>
             <div class="grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-4 ">
                 <div class=" h-12">
-                    <select pla wire:model="Name" name="name"
+                    <select pla wire:model.defer="Name" name="name"
                         class="selectwhorkHour block w-full  text-[#349A37]  border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] ">
                         <option value="0" class="text-black"> اسم الموظف </option>
                         @foreach ($users as $user)
@@ -24,7 +24,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.debounce.50000ms="FromDate" id="hidePlaceHolderDateAdminFrom" type="text"
+                    <input wire:model.defer="FromDate" id="hidePlaceHolderDateAdminFrom" type="text"
                         data-val-required="Mandatory field" data-val="true"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
@@ -41,7 +41,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.debounce.50000ms="ToDate" id="hidePlaceHolderDateAdminTo" type="text"
+                    <input wire:model.defer="ToDate" id="hidePlaceHolderDateAdminTo" type="text"
                         class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusAdminDateTo()">
                 </div>
@@ -285,19 +285,19 @@
                             <p class="w-full text-center mt-2 text-[20px] text-[#151630]">تعديل ساعات العمل </p>
                             <!--First One -->
                             <div class="mt-2 selectdiv">
-                                <input type="text" wire:model.debounce.50000ms="date"
+                                <input type="text" wire:model.defer="date"
                                     class="hidePlaceHolderEditDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusEditDatePopup()">
                             </div>
                             <div class="flex flex-row items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-1/2">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
-                                        wire:model.debounce.50000ms="start_time"
+                                        wire:model.defer="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                                 <div class="mt-2 selectdiv w-1/2">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
-                                        wire:model.debounce.50000ms="end_time"
+                                        wire:model.defer="end_time"
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                             </div>
@@ -338,7 +338,7 @@
                             <p class="w-full text-center mt-2 text-[20px] text-[#151630]">اضافة ساعات العمل </p>
                             <!--First One -->
                             <div class="mt-2 selectdiv ">
-                                <select wire:model.debounce.500000ms="ModelId" name="ModelId"
+                                <select wire:model.defer="ModelId" name="ModelId"
                                     class="h-12 text-[#349A37] w-full text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37] ">
                                     <option class="text-black" value="0" disabled> اسم الموظف </option>
                                     @foreach ($users as $user)
@@ -350,19 +350,19 @@
                             <div class="flex flex-row gap-2 items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-full sm:w-1/2">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
-                                        wire:model.debounce.50000ms="start_time"
+                                        wire:model.defer="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                                 <div class="sm:mt-2 selectdiv w-full sm:w-1/2">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
-                                        wire:model.debounce.50000ms="end_time"
+                                        wire:model.defer="end_time"
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                             </div>
 
 
                             <div class="mt-2 selectdiv relative">
-                                <input type="text" id="hidePlaceHolderDatePopUp" wire:model.debounce.50000ms="date"
+                                <input type="text" id="hidePlaceHolderDatePopUp" wire:model.defer="date"
                                     class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[98%] p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusDatePopup()">
                                     <div
@@ -422,21 +422,21 @@
                                 @foreach ($Notes as $key => $Note)
                                     <div class="border-[#349A37] py-2 border-b-2">
                                         <div class="mt-2 selectdiv">
-                                            <input wire:model="notedate.{{ $key }}.Type" type="text"
+                                            <input wire:model.defer="notedate.{{ $key }}.Type" type="text"
                                                 placeholder="سبب المغادرة"
                                                 class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-full w-full  p-2.5 placeholder-[#349A37] ">
                                         </div>
                                         <div class="flex flex-row items-center justify-between">
                                             <div class="mt-2 selectdiv w-72">
                                                 <input
-                                                    wire:model.debounce.50000ms="notedate.{{ $key }}.time_out"
+                                                    wire:model.defer="notedate.{{ $key }}.time_out"
                                                     type="text" placeholder="ساعة البدء"
                                                     onfocus="handelEditNotesInputtimeFrom()"
                                                     class="foucsEditTimeStart h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                             </div>
                                             <div class="mt-2 selectdiv">
                                                 <input
-                                                    wire:model.debounce.50000ms="notedate.{{ $key }}.return_time"
+                                                    wire:model.defer="notedate.{{ $key }}.return_time"
                                                     type="text" onfocus="handelInputEditNotestimeTo()"
                                                     placeholder="ساعة الانتهاء"
                                                     class="foucsEditTimeEnd h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
