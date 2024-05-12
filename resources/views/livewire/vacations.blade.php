@@ -294,7 +294,7 @@
                             <!--First One -->
                             <div class="mt-2 selectdiv ">
                                 <select pla wire:model.debounce.50000000000ms="userId" name="userId"
-                                    class="h-12 text-[#349A37] w-[100%] text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37] ">
+                                    class="h-12 text-[#349A37] w-full text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37] ">
                                     <option class="text-black" value=null disabled> اسم الموظف </option>
                                     @foreach ($users as $user)
                                         <option class="text-[#349A37] " value="{{ $user['id'] }}">
@@ -308,7 +308,7 @@
 
                             <div class="mt-2 selectdiv">
                                 <select wire:model.debounce.50000000000ms="type"
-                                    class="h-12 text-[#349A37] w-[100%] text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37]">
+                                    class="h-12 text-[#349A37] w-full text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37]">
                                     <option selected value=null disabled>الرجاء
                                         ادخال سبب المغادرة</option>
                                     @foreach ($Reasons_to_vacations as $Reasons)
@@ -327,7 +327,7 @@
                             </div>
                             <div class="mt-2 selectdiv">
                                 <input type="text" wire:model="note" placeholder="ملاحظة"
-                                    class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[100%] pl-10 p-2.5 placeholder-[#349A37]">
+                                    class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]">
                             </div>
                             <div class="mt-2 selectdiv relative">
                                 <div
