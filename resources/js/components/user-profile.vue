@@ -1,5 +1,5 @@
 <template>
-        <h1 class="text-2xl font-bold text-gray-700 bg-black">Vue 3 helo</h1>
+        <h1 class="text-2xl font-bold text-gray-700 bg-black ">Vue 3 helllllllo</h1>
 
 </template>
 

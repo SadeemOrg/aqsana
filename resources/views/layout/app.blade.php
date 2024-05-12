@@ -12,6 +12,8 @@
     <link rel="alternate" media="only screen and (max-width: 640px)" href="{{ nova_get_setting('Site_link', '') }}">
     <link rel="amphtml" href="{{ nova_get_setting('Site_link', '') }}">
     <base href="{{ nova_get_setting('Site_link', '') }}" target="_blank">
+        <!-- Scripts  to use Vue Component you should open it with defer--> 
+        {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.4/dist/flowbite.min.css" />
     <link rel="canonical" href="https://aqsana.org/" />
@@ -77,7 +79,8 @@
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/alpine.min.js" defer></script>
+
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-
      alpha/css/bootstrap.css"
@@ -92,7 +95,8 @@
 
     <!-- firebase integration end -->
 
-    <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
+  <!-- Styles -->
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
         @layer base {
             @font-face {
@@ -121,11 +125,26 @@
                 font-family: 'Rpt-Bold' !important
             }
         }
-        .exit-button:hover .exit-svg path {fill: white}
-        .exit-button:hover{color: white}
-        .TabsSidee a:hover {color: #fff}
-        .TabsSidee a:hover svg path {fill: #fff}
-        .timer svg:hover rect {fill: #40b744}
+
+        .exit-button:hover .exit-svg path {
+            fill: white
+        }
+
+        .exit-button:hover {
+            color: white
+        }
+
+        .TabsSidee a:hover {
+            color: #fff
+        }
+
+        .TabsSidee a:hover svg path {
+            fill: #fff
+        }
+
+        .timer svg:hover rect {
+            fill: #40b744
+        }
     </style>
     <!-- Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> -->
@@ -145,9 +164,8 @@
 
 <body class="" dir="rtl">
     @include('layout.front-end.partial._Top-header-new')
-    {{-- @include('layout.front-end.partial._header') --}}
     @include('layout.front-end.partial._left-sidebar')
-    <div class="mt-4">
+    <div class="mt-4" id="app">
         @yield('content')
     </div>
     @include('layout.front-end.partial._footer')
@@ -254,9 +272,9 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{{ asset('js/app.js') }}?v={{ rand(0, 99) }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"
@@ -296,11 +314,11 @@
         });
     </script>
     <script>
-//hide_PopUp_Modal_Home_Close_when Close_Click
-$('.PopUp_Modal_Home_Close').click(function() {
-    $('.CloseHomePopUp').addClass('hidden');
-    $('div, footer').removeClass('hidden_popUp')
-})
+        //hide_PopUp_Modal_Home_Close_when Close_Click
+        $('.PopUp_Modal_Home_Close').click(function() {
+            $('.CloseHomePopUp').addClass('hidden');
+            $('div, footer').removeClass('hidden_popUp')
+        })
 
         // Library Search
         $('#searchLibrary').on('keyup', function() {
@@ -354,25 +372,29 @@ $('.PopUp_Modal_Home_Close').click(function() {
 
         function handelFocusAdminDateFrom() {
             $('#hidePlaceHolderDateAdminFrom').attr('type', 'date');
-            $(".svgFoucusAdminFrom").css('display', 'none');
+            $(".svgFoucusAdminFrom").css('display', 'block');
         }
-        function handelFocusVicationDateFrom (){
+
+        function handelFocusVicationDateFrom() {
             $('#hidePlaceHolderDateAdminVicationFrom').attr('type', 'date');
-            $(".svgFoucusAdminVicationFrom").css('display', 'none');
+            $(".svgFoucusAdminVicationFrom").css('display', 'flex');
         }
-        function handelFocusAdminReportDateFrom (){
+
+        function handelFocusAdminReportDateFrom() {
             $('#hidePlaceHolderDateReportAdminFrom').attr('type', 'date');
             $(".svgFoucusReportAdminFrom").css('display', 'none');
         }
 
         function handelFocusAdminDateTo() {
             $('#hidePlaceHolderDateAdminTo').attr('type', 'date');
-            $(".svgFoucusAdminTo").css('display', 'none');
+            $(".svgFoucusAdminTo").css('display', 'block');
         }
-        function handelFocusVicationDateTo(){
+
+        function handelFocusVicationDateTo() {
             $('#hidePlaceHolderDateVicationAdminTo').attr('type', 'date');
-            $(".svgFoucusVicationAdminTo").css('display', 'none');
+            $(".svgFoucusVicationAdminTo").css('display', 'block');
         }
+
         function handelFocusAdminReportDateTo() {
             $('#hidePlaceHolderDateReportAdminTo').attr('type', 'date');
             $(".svgFoucusReportAdminTo").css('display', 'none');
@@ -386,8 +408,9 @@ $('.PopUp_Modal_Home_Close').click(function() {
             $('.foucsTimeEnd').attr('type', 'time');
         }
 
-        function handelFocusDatePopup() {
-            $('.hidePlaceHolderDatePopUp').attr('type', 'date');
+        function handelFocusDateVacationPopup() {
+            $('#hidePlaceHolderDatePopUp').attr('type', 'date');
+            $(".svgFoucusWorkHourVacations").css('display', 'block');
         }
 
         function handelFocusEditDatePopup() {
@@ -404,12 +427,12 @@ $('.PopUp_Modal_Home_Close').click(function() {
 
         function handelFocusWorkHourFrom() {
             $('#hidePlaceHolderDateWorkHourFrom').attr('type', 'date');
-            $(".svgFoucusWorkHourFrom").css('display', 'none');
+            $(".svgFoucusWorkHourFrom").css('display', 'block');
         }
 
         function handelFocusWorkerHourTo() {
             $('#hidePlaceHolderDateWorkHourTo').attr('type', 'date');
-            $(".svgFoucusWorkHourTo").css('display', 'none');
+            $(".svgFoucusWorkHourTo").css('display', 'block');
         }
 
         $(".TabsSidee .tabsAlphaA").click(function() {
@@ -442,7 +465,7 @@ $('.PopUp_Modal_Home_Close').click(function() {
 
 
         })
-         $(".TabsSidee .tabsAlphad").click(function() {
+        $(".TabsSidee .tabsAlphad").click(function() {
             $(".tabs-Side-container .tab-d").css("display", "block")
             $(this).addClass('activeTabs').siblings().removeClass('activeTabs');
             $(".tabs-Side-container .tab-A").css("display", "none")
@@ -467,22 +490,12 @@ $('.PopUp_Modal_Home_Close').click(function() {
 
         })
 
-
-        // function myFunction() {
-        //     var x = document.getElementById("myInput");
-        //     if (x.type === "password") {
-        //         x.type = "text";
-        //     } else {
-        //         x.type = "password";
-        //     }
-        // }
-        $('.checkbox-pass').on('click', function(){
-            var passInput=$(".passInput");
-            if(passInput.attr('type')==='password')
-            {
-                passInput.attr('type','text');
-            }else{
-                passInput.attr('type','password');
+        $('.checkbox-pass').on('click', function() {
+            var passInput = $(".passInput");
+            if (passInput.attr('type') === 'password') {
+                passInput.attr('type', 'text');
+            } else {
+                passInput.attr('type', 'password');
             }
         })
         // ajax for Dropdown Search
@@ -724,7 +737,6 @@ $('.PopUp_Modal_Home_Close').click(function() {
 
 
         function printpage() {
-            console.log("Asd")
             //Get the print button and put it into a variable
             var printButton = document.getElementById("printpagebutton");
             //Set the print button visibility to 'hidden'
@@ -960,13 +972,6 @@ $('.PopUp_Modal_Home_Close').click(function() {
                             onAuthorize: (data, actions) => {
                                 return actions.payment.execute().then(function() {});
                             },
-                            // onApprove: function(data, actions) {
-                            //     return actions.order.capture().then(function(details) {
-                            //         alert('Transaction completed by ' + details.payer
-                            //             .name.given_name + '!');
-                            //     });
-                            // },
-                            // Finalize the transaction after payer approval
                             onApprove: (data, actions) => {
                                 return actions.order.capture().then(function(orderData) {
                                     // Successful capture! For dev/demo purposes:
@@ -974,11 +979,6 @@ $('.PopUp_Modal_Home_Close').click(function() {
                                         .stringify(orderData, null, 2));
                                     const transaction = orderData.purchase_units[0]
                                         .payments.captures[0];
-                                    // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-                                    // When ready to go live, remove the alert and show a success message within this page. For example:
-                                    // const element = document.getElementById('paypal-button-container');
-                                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                                    // Or go to another URL:  actions.redirect('thank_you.html');
                                     $(".thirdPage").css("display", "flex");
                                     $(".secondPage").css("display", "none");
                                     $(".Ctnbtn").css("display", "none");
@@ -1286,4 +1286,3 @@ $('.PopUp_Modal_Home_Close').click(function() {
 
 
 </html>
-

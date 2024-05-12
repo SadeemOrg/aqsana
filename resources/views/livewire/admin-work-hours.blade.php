@@ -1,7 +1,6 @@
 <div>
     <form class="Wraper" wire:submit.prevent="searchWorkHours">
-        <div
-            class="">
+        <div class="">
             <p class="font-FlatBold text-xl sm:text-[22px] mt-8 lg:mt-0">ساعات عمل
                 الموظفين</p>
             <div class="grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-4 ">
@@ -17,7 +16,7 @@
                 <!--Date Picker -->
                 <div dir="ltr" class="relative h-12">
                     <div
-                        class="svgFoucusAdminFrom absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
+                        class="svgFoucusAdminFrom absolute inset-y-0 hidden left-0 top-3 mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -25,7 +24,6 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-
                     <input wire:model.debounce.50000ms="FromDate" id="hidePlaceHolderDateAdminFrom" type="text"
                         data-val-required="Mandatory field" data-val="true"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
@@ -35,7 +33,7 @@
                 <!--to Date  -->
                 <div dir="ltr" class="relative h-12">
                     <div
-                        class="svgFoucusAdminTo absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
+                        class="svgFoucusAdminTo absolute inset-y-0 left-0 top-3 hidden  mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -53,8 +51,21 @@
                         class="mx-2 connectUs w-full duration-200 text-center px-5 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                         بحث
                     </button>
-                    <button wire:click="exportWorkHours" class="connectUs flex items-center justify-center w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
-                        <svg class="min-w-[20px] min-h-[20px]" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="20px" height="20px"><g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M28.875,0c-0.01953,0.00781 -0.04297,0.01953 -0.0625,0.03125l-28,5.3125c-0.47656,0.08984 -0.82031,0.51172 -0.8125,1v37.3125c-0.00781,0.48828 0.33594,0.91016 0.8125,1l28,5.3125c0.28906,0.05469 0.58984,-0.01953 0.82031,-0.20703c0.22656,-0.1875 0.36328,-0.46484 0.36719,-0.76172v-5h17c1.09375,0 2,-0.90625 2,-2v-34c0,-1.09375 -0.90625,-2 -2,-2h-17v-5c0.00391,-0.28906 -0.12109,-0.5625 -0.33594,-0.75391c-0.21484,-0.19141 -0.50391,-0.28125 -0.78906,-0.24609zM28,2.1875v4.34375c-0.13281,0.27734 -0.13281,0.59766 0,0.875v35.40625c-0.02734,0.13281 -0.02734,0.27344 0,0.40625v4.59375l-26,-4.96875v-35.6875zM30,8h17v34h-17v-5h4v-2h-4v-6h4v-2h-4v-5h4v-2h-4v-5h4v-2h-4zM36,13v2h8v-2zM6.6875,15.6875l5.46875,9.34375l-5.96875,9.34375h5l3.25,-6.03125c0.22656,-0.58203 0.375,-1.02734 0.4375,-1.3125h0.03125c0.12891,0.60938 0.25391,1.02344 0.375,1.25l3.25,6.09375h4.96875l-5.75,-9.4375l5.59375,-9.25h-4.6875l-2.96875,5.53125c-0.28516,0.72266 -0.48828,1.29297 -0.59375,1.65625h-0.03125c-0.16406,-0.60937 -0.35156,-1.15234 -0.5625,-1.59375l-2.6875,-5.59375zM36,20v2h8v-2zM36,27v2h8v-2zM36,35v2h8v-2z"/></g></g></svg>
+                    <button wire:click="exportWorkHours"
+                        class="connectUs flex items-center justify-center w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
+                        <svg class="min-w-[20px] min-h-[20px]" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="20px"
+                            height="20px">
+                            <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                                style="mix-blend-mode: normal">
+                                <g transform="scale(5.12,5.12)">
+                                    <path
+                                        d="M28.875,0c-0.01953,0.00781 -0.04297,0.01953 -0.0625,0.03125l-28,5.3125c-0.47656,0.08984 -0.82031,0.51172 -0.8125,1v37.3125c-0.00781,0.48828 0.33594,0.91016 0.8125,1l28,5.3125c0.28906,0.05469 0.58984,-0.01953 0.82031,-0.20703c0.22656,-0.1875 0.36328,-0.46484 0.36719,-0.76172v-5h17c1.09375,0 2,-0.90625 2,-2v-34c0,-1.09375 -0.90625,-2 -2,-2h-17v-5c0.00391,-0.28906 -0.12109,-0.5625 -0.33594,-0.75391c-0.21484,-0.19141 -0.50391,-0.28125 -0.78906,-0.24609zM28,2.1875v4.34375c-0.13281,0.27734 -0.13281,0.59766 0,0.875v35.40625c-0.02734,0.13281 -0.02734,0.27344 0,0.40625v4.59375l-26,-4.96875v-35.6875zM30,8h17v34h-17v-5h4v-2h-4v-6h4v-2h-4v-5h4v-2h-4v-5h4v-2h-4zM36,13v2h8v-2zM6.6875,15.6875l5.46875,9.34375l-5.96875,9.34375h5l3.25,-6.03125c0.22656,-0.58203 0.375,-1.02734 0.4375,-1.3125h0.03125c0.12891,0.60938 0.25391,1.02344 0.375,1.25l3.25,6.09375h4.96875l-5.75,-9.4375l5.59375,-9.25h-4.6875l-2.96875,5.53125c-0.28516,0.72266 -0.48828,1.29297 -0.59375,1.65625h-0.03125c-0.16406,-0.60937 -0.35156,-1.15234 -0.5625,-1.59375l-2.6875,-5.59375zM36,20v2h8v-2zM36,27v2h8v-2zM36,35v2h8v-2z" />
+                                </g>
+                            </g>
+                        </svg>
                         <span class="mr-2">تصدير xl</span>
                     </button>
                 </div>
@@ -66,7 +77,7 @@
 
     <div class="grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-4">
         <button wire:click="showAddModels"
-        class="connectUs duration-200 w-full px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] text-center hover:text-white ">اضافة</button>
+            class="connectUs duration-200 w-full px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] text-center hover:text-white ">اضافة</button>
     </div>
 
 
@@ -237,7 +248,7 @@
                                         </td>
                                     @else
                                         <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
-                                            {{ ($sumWorkHourssearch->day-1) * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
+                                            {{ ($sumWorkHourssearch->day - 1) * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
                                         </td>
                                     @endif
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]"></td>
@@ -273,11 +284,6 @@
                         <form class="Wraper2" wire:submit.prevent="EditDay">
                             <p class="w-full text-center mt-2 text-[20px] text-[#151630]">تعديل ساعات العمل </p>
                             <!--First One -->
-                            {{-- <div class="mt-2 selectdiv">
-                                <input wire:model="date" type="text"
-                                    class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-[150px] w-full  p-2.5 placeholder-[#349A37] "
-                                    value="{{ date_format($EditWorkHours->date, 'd/m/Y') }}">
-                            </div> --}}
                             <div class="mt-2 selectdiv">
                                 <input type="text" wire:model.debounce.50000ms="date"
                                     class="hidePlaceHolderEditDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
@@ -332,7 +338,7 @@
                             <p class="w-full text-center mt-2 text-[20px] text-[#151630]">اضافة ساعات العمل </p>
                             <!--First One -->
                             <div class="mt-2 selectdiv ">
-                                <select  wire:model.debounce.500000ms="ModelId" name="ModelId"
+                                <select wire:model.debounce.500000ms="ModelId" name="ModelId"
                                     class="h-12 text-[#349A37] w-full text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37] ">
                                     <option class="text-black" value="0" disabled> اسم الموظف </option>
                                     @foreach ($users as $user)
@@ -353,19 +359,25 @@
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
                                 </div>
                             </div>
-                            <div class="mt-2 selectdiv">
-                                <input type="text" wire:model.debounce.50000ms="date"
-                                    class="hidePlaceHolderDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
+
+
+                            <div class="mt-2 selectdiv relative">
+                                <input type="text" id="hidePlaceHolderDatePopUp" wire:model.debounce.50000ms="date"
+                                    class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[98%] p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusDatePopup()">
+                                    <div
+                                    class="svgFoucusDatePopUp absolute hidden inset-y-0 left-5 top-3 mb-1 items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
                             </div>
                             <div class="text-red-600 ">
                                 {{ $this->error }}
                             </div>
-                            {{-- <div class="mt-2 selectdiv">
-                                <input type="text" wire:model="day_hours_off"
-                                    class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
-                                    placeholder="عدد ساعات المغادرة">
-                            </div> --}}
                             <div class="mt-2">
                                 <button type="submit"
                                     class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 mx-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
@@ -494,19 +506,10 @@
                             @endif
 
                         </form>
-
-
-
                         <!--Endsecond Page -->
                     </div>
                 </div>
             </div>
         </div>
     @endif
-    <!--end reason popup Timer -->
-
-    {{-- @include('Components.User.UserTable', ['tab' => '3']) --}}
-    <!--End with Table -->
-
-    <!--End Hourly work Time -->
 </div>

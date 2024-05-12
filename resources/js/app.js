@@ -1,18 +1,10 @@
-// import { createApp } from "vue";
+import { createApp } from 'vue';
+import UserProfile from './components/user-profile.vue';
 
-// import App from "./App.vue";
+const app = createApp({});
 
-// createApp(App).mount("#app");
+// Register your Vue components here
+app.component('user-profile', UserProfile);
 
-// require("./bootstrap");
-
-// Require Vue
-// window.Vue = require('vue').default;
-
-// // Register Vue Components
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-// // Initialize Vue
-// const app = new Vue({
-//     el: '#app',
-// });
+// Mount the Vue app to the #app element
+app.mount('#app');

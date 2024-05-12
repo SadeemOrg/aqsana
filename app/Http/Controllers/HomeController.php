@@ -185,15 +185,7 @@ class HomeController extends Controller
         if ($user == null) {
             return Redirect::to("/Admin");
         }
-
-        return view('Pages.Try', compact('user'));
-    }
-    public function userprofileTry()
-    {
-        // dd("dd");
-        $user = Auth::user();
-
-        return view('Pages.Try', compact('user'));
+        return view('Pages.userProfileN.userProfilePage', compact('user'));
     }
     public function updateuser(Request $request)
     {

@@ -12,6 +12,9 @@ class Vacations extends Component
 {
     public $users;
     public $exportWorkHoursErorr = '';
+    public $exportWorkHoursErorrUser = '';
+    public $exportWorkHoursErorrDate = '';
+    public $exportWorkHoursErorrType = '';
     public $FromDate;
     public $ToDate;
     public $Name;
@@ -91,17 +94,20 @@ class Vacations extends Component
     {
 
         $this->exportWorkHoursErorr = "";
-        if ($this->userId == null) {
-            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار الاسم " . '<br>';
+        $this->exportWorkHoursErorrUser= "";
+        $this->exportWorkHoursErorrDate = "";
+        $this->exportWorkHoursErorrType = "";
+
+        // dd($this->userId);
+        if ($this->userId == null ||$this->userId =="null")  {
+            $this->exportWorkHoursErorrUser = "يجب اختيار الاسم " ;
         }
-        // if ($this->FromDate == null) {
-        //     $this->exportWorkHoursErorr =  $this->exportWorkHoursErorr . "يجب اختيار تاريخ البدء " . '<br>';
-        // }
+       
         if ($this->date == null) {
-            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار تاريخ " . '<br>';
+            $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ " ;
         }
         if ($this->type == null) {
-            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار السبب " . '<br>';
+            $this->exportWorkHoursErorrType =  "يجب اختيار السبب " ;
         }
 
 

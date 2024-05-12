@@ -263,7 +263,6 @@ Route::get('sendhtmlemail', 'HomeController@html_email');
 Route::get('sendattachmentemail', 'HomeController@attachment_email');
 
 
-Route::get('Admin/try', [HomeController::class, 'userprofileTry'])->name('userprofileTry');
 Route::get('Admin/userprofile', [HomeController::class, 'userprofile'])->name('userprofile');
 
 

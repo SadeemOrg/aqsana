@@ -9,7 +9,7 @@
                 <!--Date Picker -->
                 <div dir="ltr" class=" relative h-12">
                     <div
-                        class="svgFoucusWorkHourFrom absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
+                        class="svgFoucusWorkHourFrom absolute hidden inset-y-0 left-0 top-3 mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -24,7 +24,7 @@
                 <!--to Date  -->
                 <div dir="ltr" class="relative">
                     <div
-                        class="svgFoucusWorkHourTo absolute inset-y-0 left-0 flex mb-1 items-center pl-3 pointer-events-none">
+                        class="svgFoucusWorkHourTo absolute hidden inset-y-0 left-0 top-3     mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -57,41 +57,6 @@
 
         </div>
     </form>
-
-    <!--End Perosonal Information -->
-    <!--Start Timer -->
-    {{-- @if ($hide)
-        <div wire:click="StartTimerWorkHours" class="mt-8 flex flex-row items-center justify-center">
-            <div wire:poll.1000ms class="w-60 h-60 rounded-[50%] bg-[#4F37FD] relative ">
-                @if ($this->realTime)
-                    <p class="absolute bottom-24 left-[25%] text-white text-3xl"> {{ $this->realTime }}</p>
-                @else
-                    <p class="absolute bottom-24 left-[25%] text-white text-3xl"> 00:00:00</p>
-                @endif
-                <svg class="absolute bottom-5 left-[45%] " width="46" height="54" viewBox="0 0 46 54"
-                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.151367 54V0L45.8482 27.0013L0.151367 54Z" fill="white" />
-                </svg>
-            </div>
-        </div>
-    @else
-        <div class=" mt-8 flex flex-row items-center justify-center">
-            <div wire:poll.1000ms class="w-60 h-60 rounded-[50%] bg-[#4F37FD] relative ">
-                <p class="absolute bottom-24 left-[25%] text-white text-3xl"> {{ $this->realTime }} </p>
-                <svg wire:click="stop" class=" absolute bottom-5 left-[45%] " width="34" height="54"
-                    viewBox="0 0 34 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M6.42842 0C3.18431 0 0.555664 2.62982 0.555664 5.87276V48.1272C0.555664 51.3725 3.18431 54 6.42842 54C9.67253 54 12.3012 51.3714 12.3012 48.1272V5.87276C12.3012 2.62865 9.67371 0 6.42842 0Z"
-                        fill="white" />
-                    <path
-                        d="M27.57 0C24.3259 0 21.6973 2.62982 21.6973 5.87276V48.1272C21.6973 51.3714 24.3259 54 27.57 54C30.8141 54 33.4428 51.3714 33.4428 48.1272V5.87276C33.4428 2.62982 30.8141 0 27.57 0Z"
-                        fill="white" />
-                </svg>
-            </div>
-        </div>
-    @endif --}}
-
-
     <div
         class="timer flex flex-row items-start justify-center sm:justify-start gap-x-4 my-10 flex-wrap gap-y-4 md:gap-y-0 md:flex-nowrap">
         <div
@@ -334,14 +299,6 @@
     let timeMin = regExTimeArr[2] * 60;
     let timeSec = regExTimeArr[3] * 1;
     let times = timeHr + timeMin + timeSec;
-    console.log("dddddddddddddddd");
-    console.log("timeHr", regExTimeArr[1], timeHr);
-    console.log("timeMin", regExTimeArr[2], timeMin);
-    console.log("timeSec", regExTimeArr[3], timeSec);
-    console.log("times", times);
-    // alert(regExTimeArr[1] )
-    // var target = new Date("1970-01-01T" + sites);
-    // alert(target)
 
     var totalSeconds = times;
     var timerVar;
