@@ -382,7 +382,7 @@
 
         function handelFocusAdminReportDateFrom() {
             $('#hidePlaceHolderDateReportAdminFrom').attr('type', 'date');
-            $(".svgFoucusReportAdminFrom").css('display', 'none');
+            $(".svgFoucusReportAdminFrom").css('display', 'block');
         }
 
         function handelFocusAdminDateTo() {
@@ -397,7 +397,7 @@
 
         function handelFocusAdminReportDateTo() {
             $('#hidePlaceHolderDateReportAdminTo').attr('type', 'date');
-            $(".svgFoucusReportAdminTo").css('display', 'none');
+            $(".svgFoucusReportAdminTo").css('display', 'block');
         }
 
         function handelInputtimeFrom() {
