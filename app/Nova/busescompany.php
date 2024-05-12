@@ -78,7 +78,7 @@ class BusesCompany extends Resource
             Text::make(__("contact person"),"contact_person"),
             Text::make(__("contact person phone"),"phone_number"),
 
-            Text::make(__("company id"),"company_id"),
+            // Text::make(__("company id"),"company_id"),
             Text::make(__("bank name"),"bank_name"),
             Text::make(__("bank number"),"bank_number"),
             Text::make(__("Branch number"),"bank_branch_number"),

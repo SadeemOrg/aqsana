@@ -240,7 +240,7 @@
                                 </label>
                                 <div class="mt-1">
                                     <input type="text" name="bank_number" placeholder="الرجاء ادخال رقم البنك"
-                                        value="{{ $user['bank_number'] ? $user['bank_number'] : 'الرجاء ادخال رقم البنك' }}"
+                                        value="{{ $user['bank_number'] ? $user['bank_number'] : '' }}"
                                         class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                                 </div>
                             </div>
@@ -250,7 +250,7 @@
                                 </label>
                                 <div class="mt-1">
                                     <input type="text" name="bank_branch" placeholder="الرجاء ادخال رقم الفرع"
-                                        value="{{ $user['bank_branch'] ? $user['bank_branch'] : 'الرجاء ادخال رقم الفرع' }}"
+                                        value="{{ $user['bank_branch'] ? $user['bank_branch'] : '' }}"
                                         class="block md:min-w-[300px] w-full border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4">
                                 </div>
                             </div>

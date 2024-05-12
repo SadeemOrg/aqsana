@@ -157,7 +157,7 @@ class WorkHours extends Component
         $to = date($this->ToDate);
 
         $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$from, $to])->where('user_id', '=', $user->id)->orderBy('date', 'ASC')->get();
-        $string = '00000000000000';
+        $string = '2001-01-01 00:00:00.0';
         $date = Carbon::parse($string);
         foreach ($this->WorkHourssearch as $key => $value) {
             if ($value->day_hours != null) {
@@ -286,7 +286,7 @@ class WorkHours extends Component
             $to = date('2022-12-31');
 
             $this->WorkHourssearch = ModelsWorkHours::whereBetween('date', [$newDateTime, $currentDateTime])->where('user_id', '=', $user->id)->orderBy('date', 'ASC')->get();
-            $string = '00000000000000';
+            $string = '2001-01-01 00:00:00.0';
             $date = Carbon::parse($string);
             foreach ($this->WorkHourssearch as $key => $value) {
                 if ($value->day_hours != null) {
@@ -304,6 +304,7 @@ class WorkHours extends Component
             // $diff = $date->diffInDays($now);
 
             $this->sumWorkHourssearch = $date;
+            // dd($this->sumWorkHourssearch );
             // ModelsWorkHours::whereBetween('date', [$newDateTime, $currentDateTime])->where('user_id', '=', $user->id)->get()->dd();
         }
         $this->Reasons_to_stop = nova_get_setting('Reasons_to_stop', 'Reasons_to_stop');

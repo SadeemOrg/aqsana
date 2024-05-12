@@ -14,6 +14,11 @@ class ExportDelegates extends Action
 {
     use InteractsWithQueue, Queueable;
 
+
+    public  function name()
+    {
+        return __('تصدير');
+    }
     /**
      * Perform the action on the given models.
      *
