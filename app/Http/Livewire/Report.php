@@ -44,20 +44,25 @@ class Report extends Component
     public $sortedArray = [];
     public $sumWorkHours;
     public $sumVacation;
-
-
+    public $exportWorkHoursErorrUser = '';
+    public $exportWorkHoursErorrDate = '';
+    public $exportWorkHoursErorrType = '';
 
     public function searchWorkHours()
     {
-        $this->exportWorkHoursErorr = "";
-        if ($this->Name == null) {
-            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار الاسم " . '<br>';
+        $this->exportWorkHoursErorrUser= "";
+        $this->exportWorkHoursErorrDate = "";
+        $this->exportWorkHoursErorrType = "";
+
+        if ($this->Name == null ||$this->Name =="null")  {
+            $this->exportWorkHoursErorrUser = "يجب اختيار الاسم " ;
         }
+
         if ($this->FromDate == null) {
-            $this->exportWorkHoursErorr =  $this->exportWorkHoursErorr . "يجب اختيار تاريخ البدء " . '<br>';
+            $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء " ;
         }
         if ($this->ToDate == null) {
-            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار تاريخ النهاية" . '<br>';
+            $this->exportWorkHoursErorrType =  "يجب اختيار تاريخ النهاية " ;
         }
 
         if ($this->FromDate != null && $this->ToDate != null && $this->Name != null) {
