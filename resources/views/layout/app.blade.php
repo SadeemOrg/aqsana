@@ -407,10 +407,15 @@
         function handelInputtimeTo() {
             $('.foucsTimeEnd').attr('type', 'time');
         }
-
+        
+        
         function handelFocusDateVacationPopup() {
             $('#hidePlaceHolderDatePopUp').attr('type', 'date');
             $(".svgFoucusWorkHourVacations").css('display', 'block');
+        }
+        function handelFocusDatePopup (){
+            $('#hidePlaceHolderDatePopUp').attr('type', 'date');
+            $(".svgFoucusDatePopUp").css('display', 'block'); 
         }
 
         function handelFocusEditDatePopup() {
