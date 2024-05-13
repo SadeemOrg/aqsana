@@ -12,6 +12,8 @@
                             <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
                         @endforeach
                     </select>
+                    <span class="text-red-500"> {!! $this->exportWorkHoursErorrUser !!}</span>
+
                 </div>
                 <!--Date Picker -->
                 <div dir="ltr" class="relative h-12">
@@ -29,6 +31,8 @@
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
                         onfocus="handelFocusAdminDateFrom()">
+                    <span class="text-red-500"> {!! $this->exportWorkHoursErorrDate !!}</span>
+
                 </div>
                 <!--to Date  -->
                 <div dir="ltr" class="relative h-12">
@@ -44,6 +48,8 @@
                     <input wire:model.defer="ToDate" id="hidePlaceHolderDateAdminTo" type="text"
                         class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusAdminDateTo()">
+                    <span class="text-red-500"> {!! $this->exportWorkHoursErorrType !!}</span>
+
                 </div>
                 <!--end Picker -->
                 <div class="flex w-full h-12">
@@ -70,7 +76,6 @@
                     </button>
                 </div>
             </div>
-            <span class="text-red-500"> {!! $this->exportWorkHoursErorr !!}</span>
 
         </div>
     </form>
@@ -346,18 +351,24 @@
                                             {{ $user['name'] }}</option>
                                     @endforeach
                                 </select>
+                                <span class="text-red-500"> {!! $this->ModelIdErorrUser !!}</span>
+
                             </div>
                             <div class="flex flex-row gap-2 items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-full sm:w-1/2">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
                                         wire:model.defer="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
+                                    <span class="text-red-500"> {!! $this->startTimeErorr !!}</span>
+
                                 </div>
                                 <div class="sm:mt-2 selectdiv w-full sm:w-1/2">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
                                         wire:model.defer="end_time"
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
+                                    <span class="text-red-500"> {!! $this->endTimeWorkHoursErorr !!}</span>
                                 </div>
+
                             </div>
 
 
@@ -365,7 +376,7 @@
                                 <input type="text" id="hidePlaceHolderDatePopUp" wire:model.defer="date"
                                     class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[98%] p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusDatePopup()">
-                                    <div
+                                <div
                                     class="svgFoucusDatePopUp absolute hidden inset-y-0 left-5 top-3 mb-1 items-center pl-3 pointer-events-none">
                                     <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor"
                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -374,10 +385,10 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
+                                <span class="text-red-500"> {!! $this->dateErorrUser !!}</span>
+
                             </div>
-                            <div class="text-red-600 ">
-                                {{ $this->error }}
-                            </div>
+
                             <div class="mt-2">
                                 <button type="submit"
                                     class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 mx-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
@@ -422,21 +433,19 @@
                                 @foreach ($Notes as $key => $Note)
                                     <div class="border-[#349A37] py-2 border-b-2">
                                         <div class="mt-2 selectdiv">
-                                            <input wire:model.defer="notedate.{{ $key }}.Type" type="text"
-                                                placeholder="سبب المغادرة"
+                                            <input wire:model.defer="notedate.{{ $key }}.Type"
+                                                type="text" placeholder="سبب المغادرة"
                                                 class="bg-transparent border border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] block max-w-full w-full  p-2.5 placeholder-[#349A37] ">
                                         </div>
                                         <div class="flex flex-row items-center justify-between">
                                             <div class="mt-2 selectdiv w-72">
-                                                <input
-                                                    wire:model.defer="notedate.{{ $key }}.time_out"
+                                                <input wire:model.defer="notedate.{{ $key }}.time_out"
                                                     type="text" placeholder="ساعة البدء"
                                                     onfocus="handelEditNotesInputtimeFrom()"
                                                     class="foucsEditTimeStart h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                             </div>
                                             <div class="mt-2 selectdiv">
-                                                <input
-                                                    wire:model.defer="notedate.{{ $key }}.return_time"
+                                                <input wire:model.defer="notedate.{{ $key }}.return_time"
                                                     type="text" onfocus="handelInputEditNotestimeTo()"
                                                     placeholder="ساعة الانتهاء"
                                                     class="foucsEditTimeEnd h-12 bg-transparent border border-[#349A37] w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">

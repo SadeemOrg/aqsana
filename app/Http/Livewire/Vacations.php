@@ -32,13 +32,30 @@ class Vacations extends Component
     public $ModelId;
     public $userId;
     public $Reasons_to_vacations;
-
-
-
+    public $exportWorkHoursErorrUserModel = '';
+    public $exportWorkHoursErorrDateModel = '';
+    public $exportWorkHoursErorrTypeModel = '';
 
 
     public function searchVacation()
     {
+
+        $this->exportWorkHoursErorrUser= "";
+        $this->exportWorkHoursErorrDate = "";
+        $this->exportWorkHoursErorrType = "";
+
+        // dd($this->userId);
+        if ($this->Name == null ||$this->Name =="null")  {
+            $this->exportWorkHoursErorrUser = "يجب اختيار الاسم " ;
+        }
+
+        if ($this->FromDate == null) {
+            $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء " ;
+        }
+        if ($this->ToDate == null) {
+            $this->exportWorkHoursErorrType =  "يجب اختيار تاريخ النهاية " ;
+        }
+
         $from = date($this->FromDate);
         $to = date($this->ToDate);
         $this->vacations = vacation::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->orderBy('date', 'ASC')->get();
@@ -94,20 +111,20 @@ class Vacations extends Component
     {
 
         $this->exportWorkHoursErorr = "";
-        $this->exportWorkHoursErorrUser= "";
-        $this->exportWorkHoursErorrDate = "";
-        $this->exportWorkHoursErorrType = "";
+        $this->exportWorkHoursErorrUserModel= "";
+        $this->exportWorkHoursErorrDateModel = "";
+        $this->exportWorkHoursErorrTypeModel     = "";
 
         // dd($this->userId);
         if ($this->userId == null ||$this->userId =="null")  {
-            $this->exportWorkHoursErorrUser = "يجب اختيار الاسم " ;
+            $this->exportWorkHoursErorrUserModel = "يجب اختيار الاسم " ;
         }
-       
+
         if ($this->date == null) {
-            $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ " ;
+            $this->exportWorkHoursErorrDateModel =  "يجب اختيار تاريخ " ;
         }
         if ($this->type == null) {
-            $this->exportWorkHoursErorrType =  "يجب اختيار السبب " ;
+            $this->exportWorkHoursErorrTypeModel     =  "يجب اختيار السبب " ;
         }
 
 
