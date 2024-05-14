@@ -48,6 +48,36 @@ class Report extends Component
     public $exportWorkHoursErorrDate = '';
     public $exportWorkHoursErorrType = '';
 
+
+    public function onChange($type)
+    {
+
+
+        switch ($type) {
+            case "name":
+                $this->exportWorkHoursErorrUser = '';
+                if ($this->Name == null || $this->Name == "null") {
+                    $this->exportWorkHoursErorrUser = "يجب اختيار الاسم";
+                }
+                break;
+            case "FromDate":
+                $this->exportWorkHoursErorrDate = '';
+                // dd("dffd");
+                if ($this->FromDate == null || $this->FromDate == "null") {
+                    $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء " ;
+                }
+                break;
+
+            case "ToDate":
+                $this->exportWorkHoursErorrType = '';
+                if ($this->ToDate  == null || $this->ToDate == "null") {
+                    $this->exportWorkHoursErorrType =  "يجب اختيار تاريخ النهاية";
+                }
+                break;
+            default:
+                break;
+        }
+    }
     public function searchWorkHours()
     {
         $this->exportWorkHoursErorrUser= "";
@@ -215,12 +245,7 @@ class Report extends Component
         $this->Notes = $EditWorkHours->departure;
         $this->notedate = $EditWorkHours->departure;
         $this->ModelId = $id;
-        // dd( $this->Notes);
-        // $this->date=$this->EditWorkHours->date;
-        // $this->start_time= $this->EditWorkHours->start_time;
-        // $this->end_time= $this->EditWorkHours->end_time;
-        // $this->day_hours= $this->EditWorkHours->day_hours;
-        // $this->ModelId=$id;
+
         $this->showNoteModels = true;
     }
     public function closeNoteModels()
@@ -238,7 +263,6 @@ class Report extends Component
     }
     public function DeleteNote($id)
     {
-        // dd($id);
         $EditWorkHours =    WorkHours::find($this->ModelId);
         unset($this->notedate[$id]);
         $EditWorkHours->departure = $this->notedate;
