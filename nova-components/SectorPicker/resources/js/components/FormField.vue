@@ -4,14 +4,15 @@
 
             <input type="date" v-model="selectedDate" @change="onChange"
                 class="w-full form-control form-input form-input-bordered" />
-
+                <div class="flex gap-x-8 items-center ">
+                <p class="pt-3 min-w-24"> اسم قطاع </p>
             <select   class="w-full form-control form-input form-input-bordered mt-4" name="LeaveType"
                 v-model="value2">
                 <option v-for="item in Sectors" :key="item.id" :value="item.id">
                     {{ item.text }}</option>
 
             </select>
-
+                </div>
 
         </template>
     </default-field>

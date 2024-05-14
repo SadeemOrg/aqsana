@@ -239,7 +239,7 @@ class AdminWorkHours extends Component
     }
     public function showEditModels($id)
     {
-        $this->dateErorrUser = "";
+           $this->dateErorrUser = "";
         $this->startTimeErorr = "";
         $this->endTimeWorkHoursErorr = "";
         $this->EditWorkHours =    WorkHours::find($id);
@@ -332,7 +332,7 @@ class AdminWorkHours extends Component
 
             $olddata =  WorkHours::whereDate('date', $this->date)->where('id', $this->ModelId)->first();
 
-            // dd($olddata ==null);
+            dd($olddata, $this->date,$this->ModelId);
             if ($olddata == null) {
                 $startTime = Carbon::parse($this->start_time);
                 $finishTime = Carbon::parse($this->end_time);
