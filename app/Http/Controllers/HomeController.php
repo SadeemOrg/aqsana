@@ -446,6 +446,7 @@ class HomeController extends Controller
     }
     public function SectorsBudget(Request $request)
     {
+        dd($request->all());
 
         $sector = array();
         $Sectors = Sector::all();
@@ -706,7 +707,7 @@ class HomeController extends Controller
             ->where('budget', '>', 0);
         })->pluck('id')->toArray();
 
-        $projects=project::whereIn('sector', $Sectors)    ->whereYear('created_at', '=', $request->Year)   ->get();
+        $projects=project::whereIn('sector', $Sectors)    ->whereYear('start_date', '=', $request->Year)   ->get();
         // dd($projects);
          return $projects;
 
