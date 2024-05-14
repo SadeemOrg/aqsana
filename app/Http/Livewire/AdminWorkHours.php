@@ -330,9 +330,8 @@ class AdminWorkHours extends Component
 
         if ($this->stop == 0) {
 
-            $olddata =  WorkHours::whereDate('date', $this->date)->where('id', $this->ModelId)->first();
+            $olddata =  WorkHours::whereDate('date', $this->date)->where('user_id', $this->ModelId)->first();
 
-            dd($olddata, $this->date,$this->ModelId);
             if ($olddata == null) {
                 $startTime = Carbon::parse($this->start_time);
                 $finishTime = Carbon::parse($this->end_time);
