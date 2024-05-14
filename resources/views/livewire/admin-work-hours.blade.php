@@ -271,7 +271,6 @@
         </div>
     </div>
 
-    <!--start reason popup Timer -->
     @if ($this->showEditModel == true)
         <div class=" popUpTimerReason relative z-10 contactusModel" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
@@ -322,9 +321,7 @@
             </div>
         </div>
     @endif
-    <!--end reason popup Timer -->
 
-    <!--start reason popup Timer -->
     @if ($this->showAddModel == true)
         <div class=" popUpTimerReason relative z-10 contactusModel" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
@@ -345,7 +342,7 @@
                             <p class="w-full text-center mt-2 text-[20px] text-[#151630]">اضافة ساعات العمل </p>
                             <!--First One -->
                             <div class="mt-2 selectdiv ">
-                                <select wire:model.defer="ModelId" name="ModelId"
+                                <select wire:model.defer="ModelId" name="ModelId" wire:change='addModeOnChange("ModelId")'
                                     class="h-12 text-[#349A37] w-full text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37] ">
                                     <option class="text-black" value="0" disabled> اسم الموظف </option>
                                     @foreach ($users as $user)
@@ -360,7 +357,7 @@
                             <div class="flex flex-row gap-2 items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-full sm:w-1/2">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
-                                        wire:model.defer="start_time"
+                                        wire:model.defer="start_time" wire:change='addModeOnChange("start_time")'
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
                                     <div class="text-red-600 text-sm px-2 text-right">
                                         {!! $this->startTimeErorr !!}
@@ -368,16 +365,17 @@
                                 </div>
                                 <div class="sm:mt-2 selectdiv w-full sm:w-1/2">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
-                                        wire:model.defer="end_time"
+                                        wire:model.defer="end_time" wire:change='addModeOnChange("end_time")'
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
 
                                     <div class="text-red-600 text-sm px-2 text-right">
                                         {!! $this->endTimeWorkHoursErorr !!}
+                                        {{ $this->error }}
                                     </div>
                                 </div>
                             </div>
                             <div class="mt-2 selectdiv relative">
-                                <input type="text" id="hidePlaceHolderDatePopUp" wire:model.defer="date"
+                                <input type="text" id="hidePlaceHolderDatePopUp" wire:model.defer="date" wire:change='addModeOnChange("date")'
                                     class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[98%] p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusDatePopup()">
                                 <div
@@ -412,9 +410,7 @@
         </div>
 
     @endif
-    <!--end reason popup Timer -->
 
-    <!--start reason popup Timer -->
     @if ($this->showNoteModels == true)
         <div class=" popUpTimerReason relative z-10 contactusModel" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
