@@ -46,6 +46,98 @@ class AdminWorkHours extends Component
     public $ModelIdErorrUser = '';
     public $notedate = [];
     public $stop = 0;
+    protected $rules = [
+        'FromDate' => 'required',
+    ];
+    public function onChange($type)
+    {
+
+
+        switch ($type) {
+            case "name":
+                $this->exportWorkHoursErorrUser = '';
+                if ($this->Name == null || $this->Name == "null") {
+                    $this->exportWorkHoursErorrUser = "يجب اختيار الاسم";
+                }
+                break;
+            case "FromDate":
+                $this->exportWorkHoursErorrDate = '';
+                // dd("dffd");
+                if ($this->FromDate == null || $this->FromDate == "null") {
+                    $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء";
+                }
+                break;
+
+            case "ToDate":
+                $this->exportWorkHoursErorrType = '';
+                if ($this->ToDate  == null || $this->ToDate == "null") {
+                    $this->exportWorkHoursErorrType =  "يجب اختيار تاريخ النهاية";
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    public function addModeOnChange($type)
+    {
+
+        switch ($type) {
+            case "ModelId":
+                $this->ModelIdErorrUser = "";
+
+                if ($this->ModelId == null || $this->ModelId == "null") {
+                    $this->ModelIdErorrUser = "يجب اختيار الاسم ";
+                    $this->stop = 1;
+                }
+                break;
+            case "date":
+                $this->dateErorrUser = "";
+
+                if ($this->date == null || $this->date == "null") {
+                    $this->dateErorrUser = "يجب اختيار التاريخ ";
+                    $this->stop = 1;
+                }
+                break;
+            case "start_time":
+                $this->startTimeErorr = "";
+                $this->error = '';
+
+                if ($this->start_time == null || $this->start_time == "null") {
+                    $this->startTimeErorr =  "يجب اختيار ساعة البدء ";
+                    $this->stop = 1;
+                }
+                if ($this->start_time && $this->end_time) {
+                    $startTime = Carbon::parse($this->start_time);
+                    $finishTime = Carbon::parse($this->end_time);
+                    $result =  $finishTime->gt($startTime);
+
+                    if (!$result) {
+                        $this->error = "ساعات البداية اكبر من ساعة النهاية";
+                    }
+                }
+                break;
+            case "end_time":
+                $this->endTimeWorkHoursErorr = "";
+                $this->error = '';
+                if ($this->end_time == null || $this->end_time == "null") {
+                    $this->endTimeWorkHoursErorr =  "يجب اختيار ساعة النهاية ";
+                    $this->stop = 1;
+                }
+
+                if ($this->start_time && $this->end_time) {
+                    $startTime = Carbon::parse($this->start_time);
+                    $finishTime = Carbon::parse($this->end_time);
+                    $result =  $finishTime->gt($startTime);
+
+                    if (!$result) {
+                        $this->error = "ساعات البداية اكبر من ساعة النهاية";
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
 
     public function searchWorkHours()
@@ -136,8 +228,7 @@ class AdminWorkHours extends Component
         $this->dateErorrUser = "";
         $this->startTimeErorr = "";
         $this->endTimeWorkHoursErorr = "";
-        $this->stop =0;
-        // dd($this->userI
+        $this->stop = 0;
         if ($this->ModelId == null) {
             $this->ModelIdErorrUser = "يجب اختيار الاسم ";
             $this->stop = 1;
@@ -180,9 +271,12 @@ class AdminWorkHours extends Component
 
                     $EditWorkHours->day_hours =  $totalDuration;
                     $EditWorkHours->save();
+                    $this->start_time = '';
+                    $this->end_time = '';
+                    $this->date = '';
                     $this->showAddModel = false;
                 } else {
-                    $this->error = "ساعات البداية اكبر من ساعة النهاية";
+                    $this->dateErorrUser = "ساعات البداية اكبر من ساعة النهاية";
                 }
             } else {
                 $this->error = "هذا اليوم موجود مسبقا";
@@ -235,15 +329,20 @@ class AdminWorkHours extends Component
 
     public function exportWorkHours()
     {
-        $this->exportWorkHoursErorr = "";
-        if ($this->Name == null) {
-            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار الاسم " . '<br>';
+        $this->exportWorkHoursErorrUser = "";
+        $this->exportWorkHoursErorrDate = "";
+        $this->exportWorkHoursErorrType = "";
+
+        // dd($this->userId);
+        if ($this->Name == null || $this->Name == "null") {
+            $this->exportWorkHoursErorrUser = "يجب اختيار الاسم ";
         }
+
         if ($this->FromDate == null) {
-            $this->exportWorkHoursErorr =  $this->exportWorkHoursErorr . "يجب اختيار تاريخ البدء " . '<br>';
+            $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء ";
         }
         if ($this->ToDate == null) {
-            $this->exportWorkHoursErorr = $this->exportWorkHoursErorr . "يجب اختيار تاريخ النهاية" . '<br>';
+            $this->exportWorkHoursErorrType =  "يجب اختيار تاريخ النهاية ";
         }
 
         if ($this->FromDate != null && $this->ToDate != null && $this->Name != null) {
