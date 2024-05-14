@@ -20,6 +20,8 @@
                     <input wire:model.defer="FromDate" id="hidePlaceHolderDateWorkHourFrom" type="text"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onfocus="handelFocusWorkHourFrom()">
+                        <span class="text-red-700">{{ $this->exportWorkHoursErorrFromDate }}</span>
+
                 </div>
                 <!--to Date  -->
                 <div dir="ltr" class="relative">
@@ -35,6 +37,8 @@
                     <input wire:model.defer="ToDate" id="hidePlaceHolderDateWorkHourTo" type="text"
                         class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusWorkerHourTo()">
+                        <span class="text-red-700">{{ $this->exportWorkHoursErorrToDate }}</span>
+
                 </div>
 
                 <!--end Picker -->
@@ -48,10 +52,7 @@
                         <span class="mr-2">تصدير xl</span>
                     </button>
                 </div>
-                <span class="text-red-700">{{ $this->exportWorkHoursErorr }}</span>
-                {{-- <div class=" h-12">
 
-                </div> --}}
 
             </div>
 
