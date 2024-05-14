@@ -398,14 +398,13 @@ class HomeController extends Controller
     }
     public function save(Request $request)
     {
-        // dd($request->budgetsOfyear);
 
-        // DB::table('budgets')
-        //     ->updateOrInsert(
-        //         ['year' => $request->year, 'sector_id' =>  0],
-        //         ['budget' => $request->budgetsOfyear]
+        DB::table('budgets')
+            ->updateOrInsert(
+                ['year' => $request->year, 'sector_id' =>  0],
+                ['budget' => $request->budgetsOfyear]
 
-        //     );
+            );
 
         foreach ($request->Sectors as $key => $value) {
             // dd($value);
@@ -446,7 +445,6 @@ class HomeController extends Controller
     }
     public function SectorsBudget(Request $request)
     {
-        dd($request->all());
 
         $sector = array();
         $Sectors = Sector::all();
