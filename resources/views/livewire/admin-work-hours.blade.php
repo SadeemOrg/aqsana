@@ -76,6 +76,7 @@
                     </button>
                 </div>
             </div>
+            <span class="text-red-500 text-right text-base"> {!! $this->exportWorkHoursErorr !!}</span>
 
         </div>
     </form>
