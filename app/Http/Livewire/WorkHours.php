@@ -40,7 +40,9 @@ class WorkHours extends Component
     public $leaveGoalTextarea;
     public $Timetimetime;
     public $exportWorkHoursErorr = '';
-    public $addTime ;
+    public $addTime;
+    public $exportWorkHoursErorrFromDate='';
+    public $exportWorkHoursErorrToDate='';
 
     public function changeEvent($value)
     {
@@ -179,9 +181,17 @@ class WorkHours extends Component
     public function exportWorkHours()
     {
         $user = Auth::id();
-        if ($this->FromDate == null || $this->ToDate == null) {
-            $this->exportWorkHoursErorr = "يجب اختيار تاريخ البدء و نهاية";
-        } else {
+        $this->exportWorkHoursErorrFromDate='';
+        $this->exportWorkHoursErorrToDate='';
+
+        if ($this->FromDate == null) {
+            $this->exportWorkHoursErorrFromDate = "يجب اختيار تاريخ البدء ";
+        }
+        if ($this->ToDate == null) {
+            $this->exportWorkHoursErorrToDate = "يجب اختيار تاريخ  نهاية";
+        }
+        if (!($this->FromDate == null || $this->ToDate == null)) {
+
             $this->exportWorkHoursErorr = "";
             return Excel::download(new ExportWorkHours($user, $this->FromDate, $this->ToDate), 'users.xlsx');
         }
@@ -200,7 +210,7 @@ class WorkHours extends Component
 
     public function render()
     {
-        $this->addTime= (nova_get_setting('summer_time', '0')) ? 3 : 2 ;
+        $this->addTime = (nova_get_setting('summer_time', '0')) ? 3 : 2;
 
         $user = Auth::user();
         if ($this->hide == 1) {
@@ -280,7 +290,11 @@ class WorkHours extends Component
 
         if ($this->sersh == 0) {
             $currentDateTime = Carbon::now()->addHour($this->addTime);
-            $newDateTime = Carbon::now()->addHour($this->addTime)->subMonth();
+            $newDateTime = Carbon::now()->addHour($this->addTime)->startOfMonth();
+            $this->FromDate = Carbon::now()->startOfMonth()->format('Y-m-d');
+            $this->ToDate = Carbon::now()->addHour($this->addTime)->format('Y-m-d');
+
+
 
             $from = date('2022-01-01');
             $to = date('2022-12-31');

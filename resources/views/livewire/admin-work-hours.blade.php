@@ -86,8 +86,6 @@
     </div>
 
 
-    <!--End Perosonal Information -->
-    <!--from Date -->
     @if ($this->FromDate && $this->ToDate)
         <div class="mt-8 flex flex-row items-center justify-start gap-x-3">
             <p class="text-[#8A8B9F] text-sm ">من تاريخ : {{ $this->FromDate }}</p>
