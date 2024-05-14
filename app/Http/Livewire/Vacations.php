@@ -36,7 +36,35 @@ class Vacations extends Component
     public $exportWorkHoursErorrDateModel = '';
     public $exportWorkHoursErorrTypeModel = '';
 
+    public function onChange($type)
+    {
 
+
+        switch ($type) {
+            case "name":
+                $this->exportWorkHoursErorrUser = '';
+                if ($this->Name == null || $this->Name == "null") {
+                    $this->exportWorkHoursErorrUser = "يجب اختيار الاسم";
+                }
+                break;
+            case "FromDate":
+                $this->exportWorkHoursErorrDate = '';
+                // dd("dffd");
+                if ($this->FromDate == null || $this->FromDate == "null") {
+                    $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء " ;
+                }
+                break;
+
+            case "ToDate":
+                $this->exportWorkHoursErorrType = '';
+                if ($this->ToDate  == null || $this->ToDate == "null") {
+                    $this->exportWorkHoursErorrType =  "يجب اختيار تاريخ النهاية";
+                }
+                break;
+            default:
+                break;
+        }
+    }
     public function searchVacation()
     {
 

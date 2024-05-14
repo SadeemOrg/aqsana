@@ -27,14 +27,15 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.defer="FromDate"  wire:change='onChange("FromDate")' id="hidePlaceHolderDateAdminFrom" type="text"
-                        data-val-required="Mandatory field" data-val="true"
+                    <input wire:model.defer="FromDate" wire:change='onChange("FromDate")'
+                        id="hidePlaceHolderDateAdminFrom" type="text" data-val-required="Mandatory field"
+                        data-val="true"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
-                        onfocus="handelFocusAdminDateFrom()" @focus="clearError">
-                        <div class="text-red-600 text-sm px-2 text-right">
-                            {{ $this->exportWorkHoursErorrDate }}
-                        </div>
+                        onfocus="handelFocusAdminDateFrom()">
+                    <div class="text-red-600 text-sm px-2 text-right">
+                        {{ $this->exportWorkHoursErorrDate }}
+                    </div>
                 </div>
                 <!--to Date  -->
                 <div dir="ltr" class="relative h-12">
@@ -47,12 +48,13 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.defer="ToDate"  wire:change='onChange("ToDate")' id="hidePlaceHolderDateAdminTo" type="text"
+                    <input wire:model.defer="ToDate" wire:change='onChange("ToDate")' id="hidePlaceHolderDateAdminTo"
+                        type="text"
                         class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusAdminDateTo()">
-                        <div class="text-red-600 text-sm px-2 text-right">
-                            {{ $this->exportWorkHoursErorrType }}
-                        </div>
+                    <div class="text-red-600 text-sm px-2 text-right">
+                        {{ $this->exportWorkHoursErorrType }}
+                    </div>
                 </div>
                 <!--end Picker -->
                 <div class="flex w-full h-12">
@@ -294,17 +296,28 @@
                                 <input type="text" wire:model.defer="date"
                                     class="hidePlaceHolderEditDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusEditDatePopup()">
+                                <div class="text-red-600 text-sm px-2 text-right">
+                                    {!! $this->dateErorrUser !!}
+                                </div>
+
                             </div>
                             <div class="flex flex-row items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-1/2">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
                                         wire:model.defer="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
+
+                                    <div class="text-red-600 text-sm px-2 text-right">
+                                        {!! $this->startTimeErorr !!}
+                                    </div>
                                 </div>
                                 <div class="mt-2 selectdiv w-1/2">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
                                         wire:model.defer="end_time"
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
+                                    <div class="text-red-600 text-sm px-2 text-right">
+                                        {!! $this->endTimeWorkHoursErorr !!}
+                                    </div>
                                 </div>
                             </div>
 
@@ -342,7 +355,8 @@
                             <p class="w-full text-center mt-2 text-[20px] text-[#151630]">اضافة ساعات العمل </p>
                             <!--First One -->
                             <div class="mt-2 selectdiv ">
-                                <select wire:model.defer="ModelId" name="ModelId" wire:change='addModeOnChange("ModelId")'
+                                <select wire:model.defer="ModelId" name="ModelId"
+                                    wire:change='addModeOnChange("ModelId")'
                                     class="h-12 text-[#349A37] w-full text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37] ">
                                     <option class="text-black" value="0" disabled> اسم الموظف </option>
                                     @foreach ($users as $user)
@@ -375,7 +389,8 @@
                                 </div>
                             </div>
                             <div class="mt-2 selectdiv relative">
-                                <input type="text" id="hidePlaceHolderDatePopUp" wire:model.defer="date" wire:change='addModeOnChange("date")'
+                                <input type="text" id="hidePlaceHolderDatePopUp" wire:model.defer="date"
+                                    wire:change='addModeOnChange("date")'
                                     class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[98%] p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusDatePopup()">
                                 <div
