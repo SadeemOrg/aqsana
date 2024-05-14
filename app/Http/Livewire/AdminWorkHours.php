@@ -62,20 +62,19 @@ class AdminWorkHours extends Component
                 break;
             case "FromDate":
                 $this->exportWorkHoursErorrDate = '';
-
+                // dd("dffd");
                 if ($this->FromDate == null || $this->FromDate == "null") {
                     $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء";
                 }
+                break;
+
             case "ToDate":
                 $this->exportWorkHoursErorrType = '';
-
                 if ($this->ToDate  == null || $this->ToDate == "null") {
                     $this->exportWorkHoursErorrType =  "يجب اختيار تاريخ النهاية";
                 }
                 break;
-                // Add more cases if needed
             default:
-                // Default case if type is not recognized
                 break;
         }
     }
@@ -101,7 +100,7 @@ class AdminWorkHours extends Component
                 break;
             case "start_time":
                 $this->startTimeErorr = "";
-                $this->error ='';
+                $this->error = '';
 
                 if ($this->start_time == null || $this->start_time == "null") {
                     $this->startTimeErorr =  "يجب اختيار ساعة البدء ";
@@ -114,13 +113,12 @@ class AdminWorkHours extends Component
 
                     if (!$result) {
                         $this->error = "ساعات البداية اكبر من ساعة النهاية";
-
                     }
                 }
                 break;
             case "end_time":
                 $this->endTimeWorkHoursErorr = "";
-                $this->error ='';
+                $this->error = '';
                 if ($this->end_time == null || $this->end_time == "null") {
                     $this->endTimeWorkHoursErorr =  "يجب اختيار ساعة النهاية ";
                     $this->stop = 1;
@@ -133,7 +131,6 @@ class AdminWorkHours extends Component
 
                     if (!$result) {
                         $this->error = "ساعات البداية اكبر من ساعة النهاية";
-
                     }
                 }
                 break;
@@ -274,9 +271,9 @@ class AdminWorkHours extends Component
 
                     $EditWorkHours->day_hours =  $totalDuration;
                     $EditWorkHours->save();
-                    $this->start_time='';
-                    $this->end_time='';
-                    $this->date='';
+                    $this->start_time = '';
+                    $this->end_time = '';
+                    $this->date = '';
                     $this->showAddModel = false;
                 } else {
                     $this->dateErorrUser = "ساعات البداية اكبر من ساعة النهاية";
