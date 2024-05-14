@@ -12,8 +12,9 @@
                             <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
                         @endforeach
                     </select>
-                    <span class="text-red-500"> {!! $this->exportWorkHoursErorrUser !!}</span>
-
+                    <div class="text-red-600 text-sm px-2 text-right">
+                        {{ $this->exportWorkHoursErorrUser }}
+                    </div>
                 </div>
                 <!--Date Picker -->
                 <div dir="ltr" class="relative h-12">
@@ -31,8 +32,9 @@
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
                         onfocus="handelFocusAdminDateFrom()">
-                    <span class="text-red-500"> {!! $this->exportWorkHoursErorrDate !!}</span>
-
+                        <div class="text-red-600 text-sm px-2 text-right">
+                            {{ $this->exportWorkHoursErorrDate }}
+                        </div>
                 </div>
                 <!--to Date  -->
                 <div dir="ltr" class="relative h-12">
@@ -48,8 +50,9 @@
                     <input wire:model.defer="ToDate" id="hidePlaceHolderDateAdminTo" type="text"
                         class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusAdminDateTo()">
-                    <span class="text-red-500"> {!! $this->exportWorkHoursErorrType !!}</span>
-
+                        <div class="text-red-600 text-sm px-2 text-right">
+                            {{ $this->exportWorkHoursErorrType }}
+                        </div>
                 </div>
                 <!--end Picker -->
                 <div class="flex w-full h-12">
