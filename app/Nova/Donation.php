@@ -138,7 +138,9 @@ class Donation extends Resource
 
 
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('المشروع'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
+
+            BelongsTo::make(__('الشركة'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
             // ProjectPicker::make(__('ref_id'),'ref_id')->hideWhenUpdating(),
@@ -159,23 +161,6 @@ class Donation extends Resource
 
 
 
-            // NovaBelongsToDepend::make(__('Sectors'),'Sectors', \App\Nova\Sector::class)
-            //         ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
-            //     ->options( Sector::whereHas('budget', function ($query) {
-            //         $query->where('year', '=', 2024)
-            //         ->where('budget', '>', 0);
-            //     })->get()
-
-            //     ),
-            // NovaBelongsToDepend::make(__('project'),'project', \App\Nova\project::class)
-
-            //     ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
-            //     ->optionsResolve(function ($Sector) {
-            //         // Reduce the amount of unnecessary data sent
-            //         return  $Sector->projects()->get(['id','project_name']);
-            //     })
-            //     ->dependsOn('Sectors') ->hideFromIndex()->hideFromDetail(),
-            // BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
             Boolean::make(__('Receive Done'), 'ReceiveDonation', function () {
                 return ($this->transaction_status > 1) ? true : false;
             })->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
@@ -184,7 +169,7 @@ class Donation extends Resource
             Text::make(__('description'), 'description')->hideFromIndex(),
         Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
-            Multiselect::make(__('name'), "name")
+            Multiselect::make(__('اسم الشركة'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '2')->get();
 
@@ -202,7 +187,7 @@ class Donation extends Resource
 
 
 
-            Flexible::make(__('add user'), 'add_user')
+            Flexible::make(__('اضافة شركة جديدة'), 'add_user')
                 ->readonly(true)
 
                 ->hideFromDetail()->hideFromIndex()
