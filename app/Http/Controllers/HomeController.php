@@ -399,12 +399,15 @@ class HomeController extends Controller
     public function save(Request $request)
     {
 
-        DB::table('budgets')
-            ->updateOrInsert(
-                ['year' => $request->year, 'sector_id' =>  0],
-                ['budget' => $request->budgetsOfyear]
+        if ($request->budgetsOfyear) {
+            DB::table('budgets')
+                ->updateOrInsert(
+                    ['year' => $request->year, 'sector_id' =>  0],
+                    ['budget' => $request->budgetsOfyear]
 
-            );
+                );
+        }
+
 
         foreach ($request->Sectors as $key => $value) {
             // dd($value);
@@ -512,19 +515,17 @@ class HomeController extends Controller
         $to = date($date_to);
 
         $sector = array();
-        $expenses_allyear=Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->sum('equivelant_amount');
-        $income_allyear=Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->sum('equivelant_amount');
+        $expenses_allyear = Transaction::where('main_type', '2')->whereBetween('transaction_date', [$from, $to])->sum('equivelant_amount');
+        $income_allyear = Transaction::where('main_type', '1')->whereBetween('transaction_date', [$from, $to])->sum('equivelant_amount');
 
         $sector = array(
-            "Budgets"=>(int) $Budgets->budget,
+            "Budgets" => (int) $Budgets->budget,
             "expenses_year" => (int) $expenses_allyear,
             "income_year" => (int)$income_allyear,
 
 
         );
         return $sector;
-
-
     }
     public function Sectorstatistics(Request $request)
     {
@@ -534,7 +535,7 @@ class HomeController extends Controller
 
         $Sectors = Sector::whereHas('budget', function ($query) use ($sectoryear) {
             $query->where('year', '=', $sectoryear)
-            ->where('budget', '>', 0);
+                ->where('budget', '>', 0);
         })->get();
 
         foreach ($Sectors as $key => $Sector) {
@@ -690,25 +691,23 @@ class HomeController extends Controller
     public function getSectors(Request $request)
     {
 
-        $Sectors=  Sector::whereHas('budget', function ($query) use($request) {
+        $Sectors =  Sector::whereHas('budget', function ($query) use ($request) {
             $query->where('year', '=', $request->Year)
-            ->where('budget', '>', 0);
+                ->where('budget', '>', 0);
         })->get();
-         return $Sectors;
-
+        return $Sectors;
     }
     public function getProject(Request $request)
     {
 
-        $Sectors=  Sector::whereHas('budget', function ($query) use($request) {
+        $Sectors =  Sector::whereHas('budget', function ($query) use ($request) {
             $query->where('year', '=', $request->Year)
-            ->where('budget', '>', 0);
+                ->where('budget', '>', 0);
         })->pluck('id')->toArray();
 
-        $projects=project::whereIn('sector', $Sectors)    ->whereYear('start_date', '=', $request->Year)   ->get();
+        $projects = project::whereIn('sector', $Sectors)->whereYear('start_date', '=', $request->Year)->get();
         // dd($projects);
-         return $projects;
-
+        return $projects;
     }
     public function Sectors(Request $request)
     {
