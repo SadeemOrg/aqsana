@@ -76,6 +76,7 @@
                     </button>
                 </div>
             </div>
+            <span class="text-red-500 text-right text-base"> {!! $this->exportWorkHoursErorr !!}</span>
 
         </div>
     </form>
@@ -349,27 +350,29 @@
                                             {{ $user['name'] }}</option>
                                     @endforeach
                                 </select>
-                                <span class="text-red-500"> {!! $this->ModelIdErorrUser !!}</span>
-
+                                <div class="text-red-600 text-sm px-2 text-right">
+                                    {!! $this->ModelIdErorrUser !!}
+                                </div>
                             </div>
                             <div class="flex flex-row gap-2 items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-full sm:w-1/2">
                                     <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
                                         wire:model.defer="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
-                                    <span class="text-red-500"> {!! $this->startTimeErorr !!}</span>
-
+                                    <div class="text-red-600 text-sm px-2 text-right">
+                                        {!! $this->startTimeErorr !!}
+                                    </div>
                                 </div>
                                 <div class="sm:mt-2 selectdiv w-full sm:w-1/2">
                                     <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
                                         wire:model.defer="end_time"
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
-                                    <span class="text-red-500"> {!! $this->endTimeWorkHoursErorr !!}</span>
+
+                                    <div class="text-red-600 text-sm px-2 text-right">
+                                        {!! $this->endTimeWorkHoursErorr !!}
+                                    </div>
                                 </div>
-
                             </div>
-
-
                             <div class="mt-2 selectdiv relative">
                                 <input type="text" id="hidePlaceHolderDatePopUp" wire:model.defer="date"
                                     class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[98%] p-2.5 placeholder-[#349A37]"
@@ -383,8 +386,9 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <span class="text-red-500"> {!! $this->dateErorrUser !!}</span>
-
+                                <div class="text-red-600 text-sm px-2 text-right">
+                                    {!! $this->dateErorrUser !!}
+                                </div>
                             </div>
 
                             <div class="mt-2">

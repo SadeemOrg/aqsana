@@ -417,6 +417,11 @@
             $('#hidePlaceHolderDatePopUp').attr('type', 'date');
             $(".svgFoucusDatePopUp").css('display', 'block'); 
         }
+        function handelFocusBirthday(){
+            $('#hidePlaceHolderBirthday').attr('type', 'date');    
+            $(".svgFoucusBirthday").css('display', 'block'); 
+
+        }
 
         function handelFocusEditDatePopup() {
             $('.hidePlaceHolderEditDatePopUp').attr('type', 'date');

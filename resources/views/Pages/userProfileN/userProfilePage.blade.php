@@ -289,10 +289,9 @@
                                             class="block w-full  border-[#8F9BB3] border rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                     </div>
                                     @if ($errors->has('phone'))
-                                        <span class="text-danger text-left">{{ $errors->first('phone') }}</span>
+                                        <span class="text-red-600 text-[12px] mr-2 text-left">{{ $errors->first('phone') }}</span>
                                     @endif
                                 </div>
-
                                 <div class="">
                                     <label for="birth_date" class="block text-sm mr-4 text-[#349A37] font-FlatBold"> تاريخ
                                         الميلاد
