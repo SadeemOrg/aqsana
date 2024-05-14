@@ -12,8 +12,8 @@
     <link rel="alternate" media="only screen and (max-width: 640px)" href="{{ nova_get_setting('Site_link', '') }}">
     <link rel="amphtml" href="{{ nova_get_setting('Site_link', '') }}">
     <base href="{{ nova_get_setting('Site_link', '') }}" target="_blank">
-        <!-- Scripts  to use Vue Component you should open it with defer--> 
-        {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    <!-- Scripts  to use Vue Component you should open it with defer-->
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.4/dist/flowbite.min.css" />
     <link rel="canonical" href="https://aqsana.org/" />
@@ -95,8 +95,8 @@
 
     <!-- firebase integration end -->
 
-  <!-- Styles -->
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
         @layer base {
             @font-face {
@@ -407,19 +407,21 @@
         function handelInputtimeTo() {
             $('.foucsTimeEnd').attr('type', 'time');
         }
-        
-        
+
+
         function handelFocusDateVacationPopup() {
             $('#hidePlaceHolderDatePopUp').attr('type', 'date');
             $(".svgFoucusWorkHourVacations").css('display', 'block');
         }
-        function handelFocusDatePopup (){
+
+        function handelFocusDatePopup() {
             $('#hidePlaceHolderDatePopUp').attr('type', 'date');
-            $(".svgFoucusDatePopUp").css('display', 'block'); 
+            $(".svgFoucusDatePopUp").css('display', 'block');
         }
-        function handelFocusBirthday(){
-            $('#hidePlaceHolderBirthday').attr('type', 'date');    
-            $(".svgFoucusBirthday").css('display', 'block'); 
+
+        function handelFocusBirthday() {
+            $('#hidePlaceHolderBirthday').attr('type', 'date');
+            $(".svgFoucusBirthday").css('display', 'block');
 
         }
 
@@ -434,7 +436,6 @@
         function handelInputEditNotestimeTo() {
             $('.foucsEditTimeEnd').attr('type', 'time');
         }
-
         function handelFocusWorkHourFrom() {
             $('#hidePlaceHolderDateWorkHourFrom').attr('type', 'date');
             $(".svgFoucusWorkHourFrom").css('display', 'block');

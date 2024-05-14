@@ -31,7 +31,7 @@
                         data-val-required="Mandatory field" data-val="true"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
-                        onfocus="handelFocusAdminDateFrom()">
+                        onfocus="handelFocusAdminDateFrom()" @focus="clearError">
                         <div class="text-red-600 text-sm px-2 text-right">
                             {{ $this->exportWorkHoursErorrDate }}
                         </div>
