@@ -429,6 +429,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -26896,45 +26897,49 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.value2,
-                expression: "value2"
+        _c("div", { staticClass: "flex gap-x-8 items-center" }, [
+          _c("p", { staticClass: "pt-3 min-w-24" }, [_vm._v(" اسم قطاع ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.value2,
+                  expression: "value2"
+                }
+              ],
+              staticClass:
+                "w-full form-control form-input form-input-bordered mt-4",
+              attrs: { name: "LeaveType" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.value2 = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
               }
-            ],
-            staticClass:
-              "w-full form-control form-input form-input-bordered mt-4",
-            attrs: { name: "LeaveType" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.value2 = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          _vm._l(_vm.Sectors, function(item) {
-            return _c(
-              "option",
-              { key: item.id, domProps: { value: item.id } },
-              [_vm._v("\n                " + _vm._s(item.text))]
-            )
-          }),
-          0
-        )
+            },
+            _vm._l(_vm.Sectors, function(item) {
+              return _c(
+                "option",
+                { key: item.id, domProps: { value: item.id } },
+                [_vm._v("\n                " + _vm._s(item.text))]
+              )
+            }),
+            0
+          )
+        ])
       ])
     ],
     2

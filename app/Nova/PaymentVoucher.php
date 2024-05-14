@@ -105,7 +105,7 @@ class PaymentVoucher extends Resource
             // Text::make(__('name'), "name")->rules('required'),
 
 
-            ProjectPicker::make(__('project'),'ref_id',function(){
+            ProjectPicker::make(__('تاريخ  السند'),'ref_id',function(){
                 $keyValueArray = ['key1' => $this->ref_id, 'key2' => $this->transaction_date];
 
                 return $keyValueArray ;
@@ -113,18 +113,11 @@ class PaymentVoucher extends Resource
 
 
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('المشروع'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
+
+            BelongsTo::make(__('الشركة'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
-            Flexible::make(__('new project'), 'newproject')
-                ->limit(1)
-                ->hideFromDetail()->hideFromIndex()
-                ->addLayout(__('Add new type'), 'type', [
-                    Text::make(__('project_name'), "project_name")->rules('required'),
-                    Text::make(__('project_describe'), "project_describe")->rules('required'),
-                    DateTime::make(__('projec start'), 'start_date')->rules('required')->hideFromIndex(),
-                    DateTime::make(__('projec end'), 'end_date')->hideFromIndex(),
-                ])->confirmRemove(),
             Select::make(__("type"), "type")->options([
                 '0' => __('the Payment Voucher'),
                 '1' => __('project'),
@@ -135,7 +128,7 @@ class PaymentVoucher extends Resource
 
 
 
-            Select::make(__('name'), "name")
+            Select::make(__(' اسم الشركة'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '8')->get();
                     $i = 0;
@@ -155,7 +148,7 @@ class PaymentVoucher extends Resource
                     return $user_type_admin_array;
                 })
                 ->hideWhenCreating()->hideFromIndex()->hideFromDetail()->readonly()->singleSelect(),
-            Select::make(__('name'), "name")
+            Select::make(__(' اختر  الشركة'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '8')->get();
                     $i = 0;
@@ -178,7 +171,7 @@ class PaymentVoucher extends Resource
                     return null;
                 })->hideFromDetail()->hideFromIndex()->hideWhenUpdating()->singleSelect(),
 
-            Flexible::make(__('add user'), 'add_user')
+            Flexible::make(__('اضافة شركة جديدة'), 'add_user')
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('tooles'), 'Payment_type_details ', [
@@ -196,23 +189,8 @@ class PaymentVoucher extends Resource
                 return ($this->transaction_type === '2' && $this->type == '0');
             })->hideFromIndex(),
 
-            Text::make(__('company_number'), 'company_number')->hideFromDetail()->hideFromIndex(),
 
 
-            Text::make(__('company_number'), 'company_number', function () {
-                if ($this->TelephoneDirectory) {
-                    return $this->TelephoneDirectory->name;
-                }
-            })->hideWhenCreating()->hideFromIndex()->hideWhenUpdating()->canSee(function () {
-                return $this->transaction_type === '1';
-            }),
-            Text::make(__('company_number'), 'company_number', function () {
-                if ($this->BusesCompany) {
-                    return $this->BusesCompany->company_id;
-                }
-            })->hideWhenCreating()->hideFromIndex()->hideWhenUpdating()->canSee(function () {
-                return $this->transaction_type === '2';
-            }),
 
 
             Text::make(__('bill_number'), 'bill_number'),
