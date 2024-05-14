@@ -419,7 +419,7 @@ class HomeController extends Controller
     public function delet(Request $request)
     {
 
-        Budget::where('year', $request->year)->delete();
+        Budget::where('year', $request->year)->forceDelete();
     }
     public function SendMessage(Request $request)
     {
