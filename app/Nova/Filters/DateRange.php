@@ -15,7 +15,7 @@ class DateRange extends DateFilter
      *
      * @var string
      */
-    public $component = 'searchable-select-filter';
+    // public $component = 'searchable-select-filter';
 
     /**
      * Apply the filter to the given query.
