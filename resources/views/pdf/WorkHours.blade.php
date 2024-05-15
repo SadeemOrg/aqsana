@@ -91,12 +91,14 @@
                 </td>
                 <td style="font-size: 16px;">
                     @php
-                        $dateString = $totalTime;
-                        $dateTime = new DateTime($dateString);
-                        $totalTime = $dateTime->format('h:i:s');
+                        // dd($totalTime);
+                        // $totalTime = new DateTime($totalTime, new DateTimeZone('UTC'));
+
                     @endphp
                     <p style="font-size: 16px; font-weight: bold;color:#101426">عدد الساعات :
-                        <span style="font-size: 16px;">{{ $totalTime }}</span>
+                        <span style="font-size: 16px;">
+                            {{ ($totalTime->day-1) * 24 + $totalTime->hour }}:{{ $totalTime->minute }}:{{ $totalTime->second }}
+                        </span>
                     </p>
                 </td>
                 <td style="font-size: 16px;">
@@ -162,7 +164,6 @@
                                         العودة : {{ $return_time }} </td>
                                 @endforeach
                                 {{-- @dd($day['departure']); --}}
-
                             @else
                                 <td> -</td>
                             @endif
