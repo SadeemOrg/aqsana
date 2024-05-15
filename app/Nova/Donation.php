@@ -140,7 +140,7 @@ class Donation extends Resource
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('المشروع'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            BelongsTo::make(__('الشركة'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating(),
+            // BelongsTo::make(__('الشركة'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
             // ProjectPicker::make(__('ref_id'),'ref_id')->hideWhenUpdating(),
