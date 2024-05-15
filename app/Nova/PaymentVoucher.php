@@ -370,7 +370,7 @@ class PaymentVoucher extends Resource
                 $busescompanies->phone_number =  $request->add_user[0]['attributes']['phone'];
                 $busescompanies->save();
             }
-            $model->name=$telfone->id;
+            $model->name=$busescompanies->id;
             // $request->merge(['name' => ]);
 
 
