@@ -158,7 +158,6 @@ class Report extends Resource
             new ReportArea(),
             new Reportcity(),
 
-            new DateRangeFilter(__("start"),"start_date"),
 
 
             // ...
@@ -166,8 +165,18 @@ class Report extends Resource
     }
     public function filters(Request $request)
     {
-        return $this->myFilters();
+        return [
+            new ReportAdmin(),
+            new ProjectSectors(),
+            new ReportCreated(),
+            new ReportArea(),
+            new Reportcity(),
 
+            new DateRangeFilter(__("start"),"start_date"),
+
+
+            // ...
+        ];
 
     }
 

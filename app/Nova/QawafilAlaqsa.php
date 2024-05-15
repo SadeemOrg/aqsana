@@ -358,26 +358,26 @@ class QawafilAlaqsa extends Resource
                 //     return null;
                 // }),
 
-                Flexible::make(__('newadres'), 'newadresfrom')
-                    ->readonly(true)
-                    ->limit(1)
-                    ->hideFromDetail()->hideFromIndex()
-                    ->addLayout(__('Add new bus'), 'bus', [
+                // Flexible::make(__('newadres'), 'newadresfrom')
+                //     ->readonly(true)
+                //     ->limit(1)
+                //     ->hideFromDetail()->hideFromIndex()
+                //     ->addLayout(__('Add new bus'), 'bus', [
 
-                        Text::make(__('Name'), "name_address"),
-                        Text::make(__("description"), "description"),
-                        Text::make(__("phone number"), "phone_number_address")->rules('required'),
+                //         Text::make(__('Name'), "name_address"),
+                //         Text::make(__("description"), "description"),
+                //         Text::make(__("phone number"), "phone_number_address")->rules('required'),
 
 
-                        MapsAddress::make(__('Address'), 'current_location')->zoom(10)
-                            ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
+                //         MapsAddress::make(__('Address'), 'current_location')->zoom(10)
+                //             ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
 
-                        // Select::make(__("Status"), "address_status")->options([
-                        //     '1' => __('active'),
-                        //     '2' => __('not active'),
-                        // ]),
+                //         // Select::make(__("Status"), "address_status")->options([
+                //         //     '1' => __('active'),
+                //         //     '2' => __('not active'),
+                //         // ]),
 
-                    ]),
+                //     ]),
 
 
                 BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->hideWhenCreating(),
