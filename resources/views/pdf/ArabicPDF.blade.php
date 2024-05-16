@@ -316,11 +316,10 @@
         @endif
     </div>
     <div style="position: relative; max-height: 160px; margin-left: 20%; ">
-        <img style="height:290px;" src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png" alt="logo">
+        <img style="height:290px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
     </div>
     <div style="position: absolute; height: 150px; bottom: 13%; left: 37%;">
-        <img src="https://media.discordapp.net/attachments/938405759996276806/1060513822194028595/-removebg-preview.png"
-            alt="ttab">
+        <img src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
     </div>
     <!--End Sector Name-->
 
