@@ -166,7 +166,7 @@ class PaymentVoucher extends Resource
                     }
 
                     return $user_type_admin_array;
-                })->rules('required')
+                })
                 ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 })->hideFromDetail()->hideFromIndex()->hideWhenUpdating()->singleSelect(),
