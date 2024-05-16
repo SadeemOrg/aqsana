@@ -116,7 +116,7 @@
         <span style="color: #6B7280;font-size: 16px;">
             @if ($TransactionArray['Payment_type'] == 5)
             ספק בבנק:
-            {{ $TransactionArray['alhisalat']['number_alhisala'] }}
+                            {{ $TransactionArray['description'] }}
         @else
             {{ $TransactionArray['telephone_directory']['name'] }}
         @endif

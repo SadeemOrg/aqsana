@@ -116,8 +116,7 @@
         <span style="color: #6B7280;font-size: 16px;">
             @if ($TransactionArray['Payment_type'] == 5)
                 حصالة رقم:
-
-                {{ $TransactionArray['alhisalat']['number_alhisala'] }}
+                {{ $TransactionArray['description'] }}
             @else
                 {{ $TransactionArray['telephone_directory']['name'] }}
             @endif
@@ -280,7 +279,8 @@
                     // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
                 @endphp
                 <tr>
-                    <td> {{ $PaymentType }} {{ $TransactionArray['alhisalat']['number_alhisala'] }} </td>
+                    <td> {{ $PaymentType }}   {{ $TransactionArray['description'] }}</td>
+
                     <td>{{ $ChickBillDate }}</td>
                     <td> {{ $TransactionArray['equivelant_amount'] }}</td>
 

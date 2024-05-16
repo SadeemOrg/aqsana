@@ -117,7 +117,7 @@
             @if ($TransactionArray['Payment_type'] == 5)
                 moneybox :
 
-                {{ $TransactionArray['alhisalat']['number_alhisala'] }}
+                                {{ $TransactionArray['description'] }}
             @else
                 {{ $TransactionArray['telephone_directory']['name'] }}
             @endif

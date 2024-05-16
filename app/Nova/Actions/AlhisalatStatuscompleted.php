@@ -66,7 +66,7 @@ class AlhisalatStatuscompleted extends Action
                 'equivelant_amount' =>$fields->amount,
                 'transaction_type' => "3",
                 'transaction_status' =>"2",
-                "Payment_type"=>'6',
+                "Payment_type"=>'5',
                 'description'=>"حصلات رقم"." : ".$stringResult,
                 "lang"=>1,
                 'transaction_date' => $date = date('Y-m-d'),

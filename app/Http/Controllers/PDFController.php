@@ -23,7 +23,7 @@ class PDFController extends Controller
     {
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
         $TransactionArray = @json_decode(json_encode($Transaction), true);
-
+        // dd();
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
@@ -41,6 +41,7 @@ class PDFController extends Controller
                 case 5:
                     $PaymentType = "حصالة";
                     break;
+
             }
         } else if ($Transaction->lang == 2) {
             switch ($Transaction->Payment_type) {
@@ -85,7 +86,6 @@ class PDFController extends Controller
             'margin-top' => 0,
             'autoArabic' => true
         ]);
-
         $data = [
             'TransactionArray' => $TransactionArray,
             'PaymentType' =>  $PaymentType
@@ -99,10 +99,8 @@ class PDFController extends Controller
             // for English Bills PDF
         } else if ($data['TransactionArray']['lang'] == 2) {
             $html = \view('pdf.myPDF', $data);
-        }
-        else if($data['TransactionArray']['lang'] == 3){
+        } else if ($data['TransactionArray']['lang'] == 3) {
             $html = \view('pdf.HebrowPDF', $data);
-
         }
 
 
@@ -111,7 +109,7 @@ class PDFController extends Controller
         $mpdf->Output($fileName, 'I');
     }
 
-    public function generatePDFHours(Request $request )
+    public function generatePDFHours(Request $request)
     {
 
         $from = date($request->FromDate);
@@ -122,68 +120,68 @@ class PDFController extends Controller
 
 
         $workHours = WorkHours::where("user_id", $request->id)
-        ->whereBetween('date', [$from, $to])
+            ->whereBetween('date', [$from, $to])
             ->orderBy('date', 'ASC')
             ->get();
-            $sumWorkHours = $workHours->count();
-            $workHours = $workHours->toArray();
-            $string = '2001-01-01 00:00:00.0';
-            $date = Carbon::parse($string);
-            foreach ($workHours as $key => $value) {
-                if ($value['day_hours'] != null) {
-                    // dd($value);
-                    $time2 = Carbon::parse($value['day_hours']);
-                    $hours = $time2->hour;
-                    $minutes = $time2->minute;
-                    $seconds = $time2->second;
+        $sumWorkHours = $workHours->count();
+        $workHours = $workHours->toArray();
+        $string = '2001-01-01 00:00:00.0';
+        $date = Carbon::parse($string);
+        foreach ($workHours as $key => $value) {
+            if ($value['day_hours'] != null) {
+                // dd($value);
+                $time2 = Carbon::parse($value['day_hours']);
+                $hours = $time2->hour;
+                $minutes = $time2->minute;
+                $seconds = $time2->second;
 
-                    $date->addSeconds($seconds)->addMinutes($minutes)->addHours($hours);
-                }
+                $date->addSeconds($seconds)->addMinutes($minutes)->addHours($hours);
             }
-            // dd($date );
-            $date = Carbon::parse($date);
+        }
+        // dd($date );
+        $date = Carbon::parse($date);
 
 
-               // Add the table name to each column in the workHours array
-               $workHours = array_map(function ($item) use ($tableNameWorkHours) {
-                return array_combine(
-                    array_map(function ($key) use ($tableNameWorkHours) {
-                        return  $key;
-                    }, array_keys($item)),
-                    $item
-                ) + ['table' => $tableNameWorkHours];
-            }, $workHours);
+        // Add the table name to each column in the workHours array
+        $workHours = array_map(function ($item) use ($tableNameWorkHours) {
+            return array_combine(
+                array_map(function ($key) use ($tableNameWorkHours) {
+                    return  $key;
+                }, array_keys($item)),
+                $item
+            ) + ['table' => $tableNameWorkHours];
+        }, $workHours);
 
 
-            $vacations = vacation::where("user_id", $request->id)
+        $vacations = vacation::where("user_id", $request->id)
             ->whereBetween('date', [$from, $to])
-                ->orderBy('date', 'ASC')
-                ->get();
+            ->orderBy('date', 'ASC')
+            ->get();
 
 
-            $sumVacation = $vacations->count();
-            $vacations = $vacations->toArray();
+        $sumVacation = $vacations->count();
+        $vacations = $vacations->toArray();
 
-               // Add the table name to each column in the vacations array
-               $vacations = array_map(function ($item) use ($tableNameVacations) {
-                return array_combine(
-                    array_map(function ($key) use ($tableNameVacations) {
-                        return  $key;
-                    }, array_keys($item)),
-                    $item
-                ) + ['table' => $tableNameVacations];
-            }, $vacations);
+        // Add the table name to each column in the vacations array
+        $vacations = array_map(function ($item) use ($tableNameVacations) {
+            return array_combine(
+                array_map(function ($key) use ($tableNameVacations) {
+                    return  $key;
+                }, array_keys($item)),
+                $item
+            ) + ['table' => $tableNameVacations];
+        }, $vacations);
 
-            $mergedArray = array_merge($workHours, $vacations);
+        $mergedArray = array_merge($workHours, $vacations);
 
-            // Create a new collection from the merged array
-            $mergedCollection = new Collection($mergedArray);
+        // Create a new collection from the merged array
+        $mergedCollection = new Collection($mergedArray);
 
-            // Sort the merged collection by the 'date' field
-            $sortedCollection = $mergedCollection->sortBy('date');
+        // Sort the merged collection by the 'date' field
+        $sortedCollection = $mergedCollection->sortBy('date');
 
-            // Convert the sorted collection to an array
-            $sortedArray = $sortedCollection->values()->toArray();
+        // Convert the sorted collection to an array
+        $sortedArray = $sortedCollection->values()->toArray();
 
         $mpdf = new \Mpdf\Mpdf([
             'margin_left' => 10,
@@ -194,10 +192,10 @@ class PDFController extends Controller
 
         $data = [
             'data' => $sortedArray,
-            'user' =>User::find( $request->id)->name,
-            'sumVacation'=>$sumVacation,
-            'sumWorkHours'=>$sumWorkHours,
-            'totalTime'=>$date,
+            'user' => User::find($request->id)->name,
+            'sumVacation' => $sumVacation,
+            'sumWorkHours' => $sumWorkHours,
+            'totalTime' => $date,
 
         ];
         $fileName = 'Invoices details.pdf';
