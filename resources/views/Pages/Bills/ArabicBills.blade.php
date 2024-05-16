@@ -376,11 +376,11 @@
         </div>
         <div class="relative flex flex-row items-center justify-end md:justify-center ml-8 md:ml-0 w-full px-8 md:px-0 -mt-12">
             <img class="w-[200px] h-[180px] md:w-[280px] md:h-[240px]"
-                src="https://cdn.discordapp.com/attachments/938405759996276806/1060512666013138975/-dc.png"
+            src="{{ asset('assets/image/-dc.png') }}"
                 alt="logo">
             <div class="absolute">
                 <img class="w-28 h-28 md:w-36 md:h-36"
-                    src="https://media.discordapp.net/attachments/938405759996276806/1060513822194028595/-removebg-preview.png"
+                    src="{{ asset('assets/image/-removebg-preview.png') }}"
                     alt="ttab">
             </div>
         </div>
