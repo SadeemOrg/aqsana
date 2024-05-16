@@ -182,7 +182,7 @@ class Donation extends Resource
                     }
 
                     return $user_type_admin_array;
-                })
+                })->rules('required')
                 ->singleSelect(),
 
 
