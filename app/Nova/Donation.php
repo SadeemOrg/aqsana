@@ -24,12 +24,14 @@ use Acme\MultiselectField\Multiselect;
 use Acme\ProjectPicker\ProjectPicker;
 use App\Models\Project as ModelsProject;
 use App\Models\Sector;
+use App\Models\Transaction;
 use App\Nova\Actions\DeleteBill;
 use App\Nova\Actions\DepositedInBank;
 use App\Nova\Actions\ExportDonations;
 use App\Nova\Actions\PrintBill;
 use App\Nova\Actions\ReceiveDonation;
 use App\Nova\Filters\AlhisalatColect;
+use App\Nova\Filters\PaymentType;
 use App\Nova\Filters\Transactionproject;
 use App\Nova\Filters\TransactionSectors;
 use App\Nova\Metrics\DonationInBank;
@@ -126,8 +128,8 @@ class Donation extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
 
+            Text::make(__('bill_number'), 'bill_number')->hideWhenCreating()->hideWhenUpdating(),
 
             Button::make(__('print'))->link('/mainbill/' . $this->id)->style('primary'),
             ProjectPicker::make(__('تاريخ  السند '),'ref_id',function(){
@@ -196,14 +198,17 @@ class Donation extends Resource
                     Text::make(__('phone'), "phone"),
                 ]),
 
-            BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class) ,
+            BelongsTo::make(__('company'), 'company', \App\Nova\BusesCompany::class),
+
             Text::make(__('payment_reason'), "payment_reason")->hideFromIndex(),
             Select::make(__("billing language"), "lang")->options([
                 '1' => __('ar'),
                 '2' => __('en'),
                 '3' => __('hr'),
             ])->displayUsingLabels()->rules('required'),
-            Select::make(__("Payment_type"), "Payment_type")->options([
+            Select::make(__("Payment_type"), "Payment_type")->options(
+                [
                 '1' => __('cash'),
                 '2' => __('shek'),
                 '3' => __('bit'),
@@ -307,6 +312,19 @@ class Donation extends Resource
         $model->transaction_type = '1';
         $model->main_type = '1';
         $model->type = '2';
+
+        $largestBillNumber = Transaction::where([
+            ['main_type', 1],
+            ['type', 2],
+            ['is_delete', '<>', '2'],
+        ])
+        ->orderBy('bill_number', 'desc')
+        ->value('bill_number');
+        if (is_null($largestBillNumber)) {
+            $largestBillNumber = 999;
+        }
+        $model->bill_number = $largestBillNumber+1;
+
         // dd($request->ReceiveDonation );
         if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
         else  $model->transaction_status = '1';
@@ -420,6 +438,7 @@ class Donation extends Resource
             new AlhisalatColect(),
             new Transactionproject(),
             new TransactionSectors(),
+            new PaymentType ()
         ];
     }
 

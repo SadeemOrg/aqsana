@@ -29,7 +29,11 @@ class Reportcity extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('city',$value);
+        if($value=="non" )
+        { return $query;}
+        $City =City::where('name',$value)->first();
+
+        return $query->where('city', $City->id);
 
     }
 
@@ -45,7 +49,7 @@ class Reportcity extends Filter
         $foo = array();
         $foo['الكل']='non';
         foreach ($Areas as $Area)
-        $foo[$Area->name]=$Area->id;
+        $foo[$Area->name]=$Area->name;
         return $foo;
     }
 }

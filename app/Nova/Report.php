@@ -13,6 +13,7 @@ use App\Nova\Filters\ReportAdmin;
 use App\Nova\Filters\ReportArea;
 use App\Nova\Filters\Reportcity;
 use App\Nova\Filters\ReportCreated;
+use App\Nova\Filters\ReportName;
 use App\Nova\Metrics\NetProject;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -101,12 +102,16 @@ class Report extends Resource
     {
         return [
 
-            ID::make(__('ID'), 'id')->calculate('count', __('Total Count')),
+            ID::make(__('ID'), 'id')->calculate('count', __('Total Count'), function ($model) {
+                    return new RowBackgroundData("#000000", "#ffffff");
+
+            })->onlyOnIndex(),
+
             Text::make(__("project name"), "project_name")->rules('required'),
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideWhenCreating()->hideWhenUpdating(),
             DateTime::make(__('projec start'), 'start_date')->rules('required'),
             // BelongsTo::make(__('Project Officer'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('admin'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
+            // BelongsTo::make(__('admin'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
@@ -138,31 +143,18 @@ class Report extends Resource
     public function cards(Request $request)
     {
         return [
-            new NovaDetachedFilters($this->myFilters()),
-
+            (new NovaDetachedFilters([
+                (new ReportCreated())->withMeta(['width' => 'w-1/3']),
+                (new ProjectSectors())->withMeta(['width' => 'w-1/3']),
+                (new ReportArea())->withMeta(['width' => 'w-1/3']),
+                (new Reportcity())->withMeta(['width' => 'w-1/3']),
+                (new ReportName())->withMeta(['width' => 'w-1/3']),
+                (new DateRangeFilter(__("start"), "start_date"))->withMeta(['width' => 'w-1/3']),
+            ]))->width('full'),
         ];
     }
 
-    /**
-     * Get the filters available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    protected function myFilters()
-    {
-        return [
-            new ReportAdmin(),
-            new ProjectSectors(),
-            new ReportCreated(),
-            new ReportArea(),
-            new Reportcity(),
 
-
-
-            // ...
-        ];
-    }
     public function filters(Request $request)
     {
         return [
@@ -171,13 +163,12 @@ class Report extends Resource
             new ReportCreated(),
             new ReportArea(),
             new Reportcity(),
+            new ReportName(),
+            new DateRangeFilter(__("start"), "start_date"),
 
-            new DateRangeFilter(__("start"),"start_date"),
 
 
-            // ...
         ];
-
     }
 
     /**
@@ -200,7 +191,7 @@ class Report extends Resource
     public function actions(Request $request)
     {
         return [
-            (new ExportReport())->onlyOnDetail(),
+            (new ExportReport()),
         ];
     }
 }

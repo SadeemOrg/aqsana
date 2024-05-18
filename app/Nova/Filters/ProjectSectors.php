@@ -33,8 +33,9 @@ class ProjectSectors extends Filter
     {
         if($value=="non" )
         { return $query;}
-// dd($query->where('area_id',$value)->get());
-        return $query->where('sector',$value);
+        $Sector =Sector::where('text',$value)->first();
+
+        return $query->where('sector',$Sector->id);
     }
 
     /**
@@ -48,7 +49,7 @@ class ProjectSectors extends Filter
         $Sectors = Sector::all();
         $foo = array();
         foreach ($Sectors as $Sector)
-            $foo[$Sector->text] = $Sector->id;
+          $foo[$Sector->text] = $Sector->text;
         return $foo;
     }
 }

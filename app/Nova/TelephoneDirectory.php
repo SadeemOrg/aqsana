@@ -26,6 +26,8 @@ class TelephoneDirectory extends Resource
      *
      * @var string
      */
+    public static $title = 'name';
+
     public static $model = \App\Models\TelephoneDirectory::class;
 
     /**
@@ -33,7 +35,6 @@ class TelephoneDirectory extends Resource
      *
      * @var string
      */
-    public static $title = 'name';
     public static function createButtonLabel()
     {
         return 'انشاء مستخدم';
@@ -73,7 +74,7 @@ class TelephoneDirectory extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make(__('Name'), 'name')
+            Text::make(__('name'), 'name')
                 ->sortable()
                 ->creationRules('unique:telephone_directories', 'required', 'max:255'),
 

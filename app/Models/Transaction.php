@@ -101,6 +101,10 @@ class Transaction extends Model implements HasMedia
     {
         return $this->belongsTo('App\Models\BusesCompany','name');
     }
+    public function company()
+    {
+        return $this->belongsTo(BusesCompany::class,'name');
+    }
 
 
     public function ActionEvents()

@@ -269,7 +269,12 @@ Route::get('Admin/userprofile', [HomeController::class, 'userprofile'])->name('u
 Route::get('/send-notification', [NotificationController::class, 'sendOfferNotification']);
 Route::post('/sendNotification', [NotificationController::class, 'sendNotification'])->name('sendNotification');
 Route::post('/myNotification', [NotificationController::class, 'myNotification'])->name('myNotification');
+Route::post('/myAlert', [NotificationController::class, 'myAlert'])->name('myAlert');
+
 Route::post('/AdminNotifications', [NotificationController::class, 'AdminNotifications'])->name('AdminNotifications');
+
+Route::post('/receivedNotifications', [NotificationController::class, 'receivedNotifications'])->name('receivedNotifications');
+Route::post('/WorkOnNotifications', [NotificationController::class, 'WorkOnNotifications'])->name('WorkOnNotifications');
 
 Route::post('/CompletNotifications', [NotificationController::class, 'CompletNotifications'])->name('CompletNotifications');
 Route::post('/UNCompletNotifications', [NotificationController::class, 'UNCompletNotifications'])->name('UNCompletNotifications');

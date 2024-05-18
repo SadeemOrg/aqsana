@@ -2,24 +2,21 @@
 
 namespace App\Nova\Filters;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
 
-class ReportCreated extends Filter
+class PaymentType extends Filter
 {
-
-    public  function name()
-    {
-        return __('Report Created');
-    }
     /**
      * The filter's component.
      *
      * @var string
      */
     public $component = 'searchable-select-filter';
-
+    public function name()
+    {
+        return __('طريقة الدفع');
+    }
     /**
      * Apply the filter to the given query.
      *
@@ -30,8 +27,7 @@ class ReportCreated extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-       $user =User::where('name',$value)->first();
-        return $query->where('Created_By',$user->id);
+        return $query->where('Payment_type',$value);
     }
 
     /**
@@ -42,10 +38,14 @@ class ReportCreated extends Filter
      */
     public function options(Request $request)
     {
-        $Areas = User::all();
-        $foo = array();
-        foreach ($Areas as $Area)
-        $foo[$Area->name]=$Area->name;
-        return $foo;
+        return [
+
+            __('cash') => '1',
+            __('shek') => '2',
+            __('bit') => '3',
+            __('hawale') => '4',
+            __('pay pal') => '5',
+            __('حصالة') => '6'
+        ];
     }
 }

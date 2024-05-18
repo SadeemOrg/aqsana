@@ -471,6 +471,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -498,6 +502,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             totalSectorYearly: {},
             deletSectors: [],
             hasError: false,
+            budgetsOfyear: 0,
 
             points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
             tabs: [{ index: 1, name: 'الميزانيات' }, { index: 2, name: 'اضافة جديد' }, { index: 3, name: 'حذف' }, { index: 4, name: 'احصائيات' }],
@@ -9764,23 +9769,67 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['years', 'year'],
+    props: ["years", "year"],
     data: function data() {
         return {
             openTab: 1,
             openTabstatistic: 0,
-            Sectors: []
+            Sectors: [],
+            totalSectorYear: 0,
+            totalSectorsYear: 0,
+            remainingCount: 0,
+            hasError: false
+
         };
     },
 
+    // beforeMount() {
+    // },
     methods: {
         save: function save() {
-            axios.post("/save", {
-                year: this.year,
-                Sectors: this.Sectors
-            }).then(function (response) {
+            var _this = this;
+
+            this.Sectors.forEach(function (sector) {
+                if (sector.sector_id === 0) {
+                    _this.totalSectorYear = parseInt(sector.Budget);
+                }
+            });
+            this.Sectors.forEach(function (sector) {
+                // Check if the sector_id is equal to 0
+                if (sector.sector_id != 0) {
+                    if (sector.Budget) {
+
+                        _this.totalSectorsYear += parseInt(sector.Budget); // Assuming Budget is a string and needs to be parsed as an integer
+                    }
+                }
+            });
+            if (this.totalSectorsYear < this.totalSectorYear) {
+                axios.post("/save", {
+                    year: this.year,
+                    Sectors: this.Sectors
+                }).then(function (response) {
+                    toastr.options = {
+                        closeButton: true,
+                        debug: false,
+                        positionClass: "toast-bottom-right",
+                        onclick: null,
+                        showDuration: "300",
+                        hideDuration: "2000",
+                        showMethod: "fadeIn",
+                        hideMethod: "fadeOut"
+                    };
+                    toastr.success("  تم حفظ بنجاح");
+                });
+            } else {
                 toastr.options = {
                     closeButton: true,
                     debug: false,
@@ -9791,16 +9840,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     showMethod: "fadeIn",
                     hideMethod: "fadeOut"
                 };
-                toastr.success("  تم حفظ بنجاح");
-            });;
+
+                toastr.error("ميزانية السنة لا تطابق مع ميزانية القطاعات");
+            }
+        },
+
+        countdown: function countdown() {
+            var _this2 = this;
+
+            this.totalSectorsYear = 0;
+            this.totalSectorYear = 0;
+            this.Sectors.forEach(function (sector) {
+                if (sector.sector_id === 0) {
+                    _this2.totalSectorYear = parseInt(sector.Budget);
+                }
+            });
+            this.Sectors.forEach(function (sector) {
+                // Check if the sector_id is equal to 0
+                if (sector.sector_id != 0) {
+                    if (sector.Budget) {
+
+                        _this2.totalSectorsYear += parseInt(sector.Budget); // Assuming Budget is a string and needs to be parsed as an integer
+                    }
+                }
+            });
+            this.remainingCount = this.totalSectorYear - this.totalSectorsYear; //
+            this.hasError = this.totalSectorsYear > this.totalSectorYear;
         },
         onChange: function onChange(event) {
-            var _this = this;
+            var _this3 = this;
 
             axios.post("/SectorsBudget", {
                 year: event.target.value
             }).then(function (response) {
-                _this.Sectors = response.data;
+                _this3.Sectors = response.data;
+                _this3.countdown();
             });
         }
     }
@@ -9891,55 +9965,81 @@ var render = function() {
             staticClass:
               "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4"
           },
-          _vm._l(_vm.Sectors, function(Sector, index) {
-            return _c(
-              "div",
-              { key: Sector.Sector, attrs: { value: Sector.Sector } },
-              [
-                _c("div", { staticClass: "mb-3" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass:
-                        "block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64",
-                      attrs: { for: index }
-                    },
-                    [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(Sector.Sector) +
-                          "\n                    "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
+          [
+            _vm._l(_vm.Sectors, function(Sector, index) {
+              return _c(
+                "div",
+                { key: Sector.Sector, attrs: { value: Sector.Sector } },
+                [
+                  _c("div", { staticClass: "mb-3" }, [
+                    _c(
+                      "label",
                       {
-                        name: "model",
-                        rawName: "v-model",
-                        value: Sector.Budget,
-                        expression: "Sector.Budget"
-                      }
-                    ],
-                    staticClass:
-                      " appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
-                    attrs: { id: index, type: "text" },
-                    domProps: { value: Sector.Budget },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                        staticClass:
+                          "block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64",
+                        attrs: { for: index }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(Sector.Sector) +
+                            "\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: Sector.Budget,
+                          expression: "Sector.Budget"
                         }
-                        _vm.$set(Sector, "Budget", $event.target.value)
+                      ],
+                      staticClass:
+                        " appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                      attrs: { id: index, type: "text" },
+                      domProps: { value: Sector.Budget },
+                      on: {
+                        keyup: _vm.countdown,
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(Sector, "Budget", $event.target.value)
+                        }
                       }
-                    }
-                  })
-                ])
-              ]
-            )
-          }),
-          0
+                    })
+                  ])
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _vm.Sectors.length
+              ? _c(
+                  "div",
+                  { staticClass: "md:flex md:items-center w-full justify-end" },
+                  [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "text-right text-small",
+                        class: { "text-danger": _vm.hasError }
+                      },
+                      [
+                        _vm._v(
+                          "Sum: " +
+                            _vm._s(_vm.remainingCount) +
+                            "\n            "
+                        )
+                      ]
+                    )
+                  ]
+                )
+              : _vm._e()
+          ],
+          2
         ),
         _vm._v(" "),
         _vm.Sectors.length
@@ -10685,259 +10785,247 @@ var render = function() {
                         staticClass: "text-right text-small",
                         class: { "text-danger": _vm.hasError }
                       },
-                      [_vm._v("المتبقي: " + _vm._s(_vm.remainingCount))]
+                      [_vm._v("Sum: " + _vm._s(_vm.remainingCount))]
                     )
                   ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    class: {
-                      hidden: _vm.openTab !== 3,
-                      block: _vm.openTab === 3
-                    }
-                  },
-                  [_c("DeleteBudget", { attrs: { years: _vm.years } })],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    class: {
-                      hidden: _vm.openTab !== 4,
-                      block: _vm.openTab === 4
-                    }
-                  },
-                  [
-                    _c("div", { staticClass: "flex flex-col w-full" }, [
-                      _c("div", { staticClass: "py-4 w-3/6 bg-slate-700" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.selectedItem,
-                                expression: "selectedItem"
-                              }
-                            ],
-                            staticClass:
-                              "select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
-                            on: {
-                              change: [
-                                function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.selectedItem = $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                },
-                                function($event) {
-                                  return _vm.getSectorstatistics($event)
-                                }
-                              ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  class: { hidden: _vm.openTab !== 3, block: _vm.openTab === 3 }
+                },
+                [_c("DeleteBudget", { attrs: { years: _vm.years } })],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  class: { hidden: _vm.openTab !== 4, block: _vm.openTab === 4 }
+                },
+                [
+                  _c("div", { staticClass: "flex flex-col w-full" }, [
+                    _c("div", { staticClass: "py-4 w-3/6 bg-slate-700" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selectedItem,
+                              expression: "selectedItem"
                             }
-                          },
-                          [
-                            _c(
+                          ],
+                          staticClass:
+                            "select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.selectedItem = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                              function($event) {
+                                return _vm.getSectorstatistics($event)
+                              }
+                            ]
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { selected: "", disabled: "", value: "0" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                        الرجاء اختيار عام\n                                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.years, function(year) {
+                            return _c(
                               "option",
                               {
-                                attrs: {
-                                  selected: "",
-                                  disabled: "",
-                                  value: "0"
-                                }
+                                key: year.year,
+                                domProps: { value: year.year }
                               },
                               [
                                 _vm._v(
-                                  "\n                                            الرجاء اختيار عام\n                                        "
+                                  "\n                                        " +
+                                    _vm._s(year.year) +
+                                    "\n                                    "
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm.isTotalSectorYearlyNotEmpty
+                      ? _c(
+                          "div",
+                          { staticClass: "w-full mb-12" },
+                          [
+                            _c(
+                              "h1",
+                              {
+                                staticClass:
+                                  "my-5 mx-4 font-extrabold text-gray-700 text-3xl"
+                              },
+                              [
+                                _vm._v(
+                                  "الميزانية العامه لسنه " +
+                                    _vm._s(_vm.selectedyear)
                                 )
                               ]
                             ),
                             _vm._v(" "),
-                            _vm._l(_vm.years, function(year) {
-                              return _c(
-                                "option",
+                            _c("BudgetInfo", {
+                              attrs: {
+                                budget: _vm.parsedBudget,
+                                divisor: 1,
+                                label: "مجمل الميزانية للعام ",
+                                expensesLabel: "مجمل المصاريف للعام ",
+                                expensesValue:
+                                  _vm.totalSectorYearly.expenses_year,
+                                incomeLabel: "مجمل المدخلات للعام",
+                                incomeValue: _vm.totalSectorYearly.income_year,
+                                net_amount_label: "صافي الانفاق الكلي"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-full" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
+                        },
+                        _vm._l(_vm.budjetSector, function(Sector, index) {
+                          return _c(
+                            "div",
+                            {
+                              key: Sector.Sector,
+                              staticClass:
+                                "-mb-px mr-2 last:mr-0 flex-auto text-center",
+                              attrs: { value: Sector.Sector }
+                            },
+                            [
+                              _c(
+                                "a",
                                 {
-                                  key: year.year,
-                                  domProps: { value: year.year }
+                                  staticClass:
+                                    "text-xs font-bold uppercase px-5 py-4 my-2 shadow-lg rounded block leading-normal",
+                                  class: {
+                                    "text-green-600 bg-white cursor-pointer":
+                                      _vm.openTabstatistic !== index,
+                                    "text-white bg-green-600 cursor-pointer":
+                                      _vm.openTabstatistic === index
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.toggleTabsstatistic(index)
+                                    }
+                                  }
                                 },
                                 [
                                   _vm._v(
                                     "\n                                            " +
-                                      _vm._s(year.year) +
+                                      _vm._s(Sector.Sector) +
                                       "\n                                        "
                                   )
                                 ]
                               )
-                            })
-                          ],
-                          2
-                        )
-                      ]),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
                       _vm._v(" "),
-                      _vm.isTotalSectorYearlyNotEmpty
-                        ? _c(
-                            "div",
-                            { staticClass: "w-full mb-12" },
-                            [
-                              _c(
-                                "h1",
-                                {
-                                  staticClass:
-                                    "my-5 mx-4 font-extrabold text-gray-700 text-3xl"
-                                },
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
+                        },
+                        [
+                          _vm.budjetSector.length > 0
+                            ? _c(
+                                "div",
+                                { staticClass: "px-4 py-5 flex-auto" },
                                 [
-                                  _vm._v(
-                                    "الميزانية العامه لسنه " +
-                                      _vm._s(_vm.selectedyear)
+                                  _c(
+                                    "div",
+                                    { staticClass: "tab-content tab-space" },
+                                    _vm._l(_vm.budjetSector, function(
+                                      Sector,
+                                      index
+                                    ) {
+                                      return _c(
+                                        "div",
+                                        {
+                                          key: Sector.Sector,
+                                          class: {
+                                            hidden:
+                                              _vm.openTabstatistic !== index,
+                                            block:
+                                              _vm.openTabstatistic === index
+                                          },
+                                          attrs: { value: Sector.Sector }
+                                        },
+                                        [
+                                          _c(
+                                            "h1",
+                                            {
+                                              staticClass:
+                                                "my-5 mx-4 font-extrabold text-gray-700 text-3xl"
+                                            },
+                                            [
+                                              _vm._v(
+                                                " " +
+                                                  _vm._s(Sector.Sector) +
+                                                  "\n                                                "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("TotalSector", {
+                                            attrs: { Sector: Sector }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    }),
+                                    0
                                   )
                                 ]
-                              ),
-                              _vm._v(" "),
-                              _c("BudgetInfo", {
-                                attrs: {
-                                  budget: _vm.parsedBudget,
-                                  divisor: 1,
-                                  label: "مجمل الميزانية للعام ",
-                                  expensesLabel: "مجمل المصاريف للعام ",
-                                  expensesValue:
-                                    _vm.totalSectorYearly.expenses_year,
-                                  incomeLabel: "مجمل المدخلات للعام",
-                                  incomeValue:
-                                    _vm.totalSectorYearly.income_year,
-                                  net_amount_label: "صافي الانفاق الكلي"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "w-full" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
-                          },
-                          _vm._l(_vm.budjetSector, function(Sector, index) {
-                            return _c(
-                              "div",
-                              {
-                                key: Sector.Sector,
-                                staticClass:
-                                  "-mb-px mr-2 last:mr-0 flex-auto text-center",
-                                attrs: { value: Sector.Sector }
-                              },
-                              [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass:
-                                      "text-xs font-bold uppercase px-5 py-4 my-2 shadow-lg rounded block leading-normal",
-                                    class: {
-                                      "text-green-600 bg-white cursor-pointer":
-                                        _vm.openTabstatistic !== index,
-                                      "text-white bg-green-600 cursor-pointer":
-                                        _vm.openTabstatistic === index
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.toggleTabsstatistic(index)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                                " +
-                                        _vm._s(Sector.Sector) +
-                                        "\n                                            "
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          }),
-                          0
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
-                          },
-                          [
-                            _vm.budjetSector.length > 0
-                              ? _c(
-                                  "div",
-                                  { staticClass: "px-4 py-5 flex-auto" },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "tab-content tab-space" },
-                                      _vm._l(_vm.budjetSector, function(
-                                        Sector,
-                                        index
-                                      ) {
-                                        return _c(
-                                          "div",
-                                          {
-                                            key: Sector.Sector,
-                                            class: {
-                                              hidden:
-                                                _vm.openTabstatistic !== index,
-                                              block:
-                                                _vm.openTabstatistic === index
-                                            },
-                                            attrs: { value: Sector.Sector }
-                                          },
-                                          [
-                                            _c(
-                                              "h1",
-                                              {
-                                                staticClass:
-                                                  "my-5 mx-4 font-extrabold text-gray-700 text-3xl"
-                                              },
-                                              [
-                                                _vm._v(
-                                                  " " +
-                                                    _vm._s(Sector.Sector) +
-                                                    "\n                                                    "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c("TotalSector", {
-                                              attrs: { Sector: Sector }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      }),
-                                      0
-                                    )
-                                  ]
-                                )
-                              : _vm._e()
-                          ]
-                        )
-                      ])
+                              )
+                            : _vm._e()
+                        ]
+                      )
                     ])
-                  ]
-                )
-              ])
+                  ])
+                ]
+              )
             ])
           ]
         )

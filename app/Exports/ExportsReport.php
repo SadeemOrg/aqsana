@@ -21,7 +21,7 @@ class ExportsReport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ['رقم', 'نوع السند', 'الاسم',  'المشروع', 'القيمة'];
+        return ['المشروع','رقم', 'نوع السند', 'الاسم',  'المشروع', 'القيمة'];
     }
 
     /**
@@ -30,23 +30,28 @@ class ExportsReport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        $Projects = Project::find($this->name);
-        // dd($this->from !='null');
-        $from = (($this->from != 'null') ?  $this->from : '2001-01-01 00:00:00.0');
-        $this->to = ($this->to != 'null') ?  $this->to :  Carbon::now();
-        $startdate = date($this->from);
-        $finishdate = date($this->to);
-        if ($Projects) {
-            $filteredTransactionsSet1 = $Projects->Transaction()->where([
+        $Projects = Project::wherein('id',json_decode($this->name))->get();
+        $mergedQuery = collect(); // Initialize as an empty collection
+
+       foreach ($Projects as $key => $Project) {
+        $additionalRows = [
+
+            ['', '  الاسم المشروع ',  $Project->project_name],
+        ];
+        $mergedQuery = $mergedQuery->concat($additionalRows);
+
+
+
+            $filteredTransactionsSet1 = $Project->Transaction()->where([
                 ['main_type', '=', 1],
                 ['type', '=', 2],
                 ['is_delete', '<>', '2'],
-            ])->whereBetween('transaction_date', [$startdate, $finishdate])->get();
+            ])->get();
             $totalAmountMainType1 = $filteredTransactionsSet1->sum('equivelant_amount');
 
-            $filteredTransactionsSet2 = $Projects->Transaction()->where([
+            $filteredTransactionsSet2 = $Project->Transaction()->where([
                 ['main_type', '=', 2],
-            ])->whereBetween('transaction_date', [$startdate, $finishdate])->get();
+            ])->get();
             $totalAmountMainType2 = $filteredTransactionsSet2->sum('equivelant_amount');
 
             $mergedTransactions = $filteredTransactionsSet1->merge($filteredTransactionsSet2);
@@ -61,12 +66,12 @@ class ExportsReport implements FromCollection, WithHeadings
                 return $transaction;
             });
 
-            $selectedTransactions = $mergedTransactions->map(function ($transaction) {
+            $selectedTransactions = $mergedTransactions->map(function ($transaction,$Project) {
                 return [
-                    'id' => $transaction->id,
+                    'bill' =>  $transaction->bill_number,
                     'type' =>  $transaction->type,
                     'name' => $transaction->TelephoneDirectory?->name,
-                    'project_name' => $transaction->Project?->project_name, // Access project name via the relationship
+                    'project_name' => $transaction->Project?->project_name,
                     'transact_amount' => $transaction->equivelant_amount,
 
                 ];
@@ -77,11 +82,12 @@ class ExportsReport implements FromCollection, WithHeadings
 
                 ['', 'مجموع ',  $totalAmountMainType1 - $totalAmountMainType2],
             ];
-            $mergedQuery = $selectedTransactions->concat($additionalRows);
+            $mergedQuery = $mergedQuery->concat($selectedTransactions)->concat($additionalRows);
 
-            return $mergedQuery;
-        } else {
-            // Handle case where project with given ID doesn't exist
-        }
+
+       }
+       return $mergedQuery;
+
+
     }
 }

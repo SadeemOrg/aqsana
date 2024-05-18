@@ -21,14 +21,21 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4">
                 <div v-for="(Sector, index) in Sectors" :key="Sector.Sector" :value="Sector.Sector" class="">
                     <div class="mb-3">
-                        <label class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64" :for="index">
+                        <label class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64"
+                            :for="index">
                             {{ Sector.Sector }}
                         </label>
-                        <input
+                        <input v-on:keyup="countdown"
                             class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                             :id="index" type="text" v-model="Sector.Budget" />
                     </div>
                 </div>
+                <div v-if="Sectors.length" class="md:flex md:items-center w-full justify-end">
+                    <p class='text-right text-small' v-bind:class="{ 'text-danger': hasError }">Sum: {{ remainingCount }}
+                </p>
+                </div>
+
+
             </div>
             <div v-if="Sectors.length" class="md:flex md:items-center w-full justify-end">
                 <div class="md:w-2/3">
@@ -45,20 +52,58 @@
 
 <script>
 export default {
-    props: ['years','year'],
+    props: ["years", "year"],
     data() {
         return {
             openTab: 1,
             openTabstatistic: 0,
             Sectors: [],
+            totalSectorYear: 0,
+            totalSectorsYear: 0,
+            remainingCount: 0,
+            hasError: false,
+
+
         };
     },
+    // beforeMount() {
+    // },
     methods: {
         save() {
-            axios.post("/save", {
-                year: this.year,
-                Sectors: this.Sectors,
-            }).then(function (response) {
+            this.Sectors.forEach(sector => {
+                if (sector.sector_id === 0) {
+                    this.totalSectorYear = parseInt(sector.Budget);
+                }
+            });
+            this.Sectors.forEach(sector => {
+                // Check if the sector_id is equal to 0
+                if (sector.sector_id != 0) {
+                    if (sector.Budget) {
+
+                        this.totalSectorsYear += parseInt(sector.Budget); // Assuming Budget is a string and needs to be parsed as an integer
+                    }
+                }
+            });
+            if (this.totalSectorsYear < this.totalSectorYear) {
+                axios
+                    .post("/save", {
+                        year: this.year,
+                        Sectors: this.Sectors
+                    })
+                    .then(function (response) {
+                        toastr.options = {
+                            closeButton: true,
+                            debug: false,
+                            positionClass: "toast-bottom-right",
+                            onclick: null,
+                            showDuration: "300",
+                            hideDuration: "2000",
+                            showMethod: "fadeIn",
+                            hideMethod: "fadeOut"
+                        };
+                        toastr.success("  تم حفظ بنجاح");
+                    });
+            } else {
                 toastr.options = {
                     closeButton: true,
                     debug: false,
@@ -67,20 +112,43 @@ export default {
                     showDuration: "300",
                     hideDuration: "2000",
                     showMethod: "fadeIn",
-                    hideMethod: "fadeOut",
+                    hideMethod: "fadeOut"
                 };
-                toastr.success("  تم حفظ بنجاح");
-            });;
+
+                toastr.error("ميزانية السنة لا تطابق مع ميزانية القطاعات");
+            }
+        },
+        countdown: function () {
+            this.totalSectorsYear = 0;
+            this.totalSectorYear = 0;
+            this.Sectors.forEach(sector => {
+                if (sector.sector_id === 0) {
+                    this.totalSectorYear = parseInt(sector.Budget);
+                }
+            });
+            this.Sectors.forEach(sector => {
+                // Check if the sector_id is equal to 0
+                if (sector.sector_id != 0) {
+                    if (sector.Budget) {
+
+                        this.totalSectorsYear += parseInt(sector.Budget); // Assuming Budget is a string and needs to be parsed as an integer
+                    }
+                }
+            });
+            this.remainingCount = this.totalSectorYear - this.totalSectorsYear;//
+            this.hasError = (this.totalSectorsYear > this.totalSectorYear);
+
         },
         onChange(event) {
             axios
                 .post("/SectorsBudget", {
-                    year: event.target.value,
+                    year: event.target.value
                 })
-                .then((response) => {
+                .then(response => {
                     this.Sectors = response.data;
+                    this.countdown();
                 });
-        },
-    },
-}
+        }
+    }
+};
 </script>

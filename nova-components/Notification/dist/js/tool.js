@@ -169,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\ntable {\n  font-family: arial, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\ntd,\nth {\n  border: 1px solid #dddddd;\n\n  padding: 8px;\n}\n.for-mobile-scoll-x {\n  min-width: 800px;\n}\n", ""]);
+exports.push([module.i, "\ntable {\n    font-family: arial, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\ntd,\nth {\n    border: 1px solid #dddddd;\n\n    padding: 8px;\n}\n.for-mobile-scoll-x {\n    min-width: 800px;\n}\n", ""]);
 
 // exports
 
@@ -901,130 +901,135 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      users: [],
-      myNotification: [],
-      openTab: 1,
-      Admin: 1,
-      myNotificationT: [],
-      allNotifications: []
-    };
-  },
+    data: function data() {
+        return {
+            users: [],
+            myNotification: [],
+            myAlertNotification: [],
 
-  methods: {
-    getusers: function getusers() {
-      var _this = this;
-
-      axios.post("/users").then(function (response) {
-        _this.users = response.data;
-        // console.log("user admin", this.users);
-      });
-    },
-    UserAdmin: function UserAdmin() {
-      var _this2 = this;
-
-      axios.post("/UserAdmin").then(function (response) {
-        console.log("start");
-        console.log(_this2.Admin);
-        _this2.Admin = response.data;
-
-        console.log("user admin");
-        console.log(_this2.Admin);
-        console.log("finsh");
-      });
-    },
-    myNotifications: function myNotifications() {
-      var _this3 = this;
-
-      // alert("dbnf");
-      console.log("dkdehfj");
-      axios.post("/myNotification").then(function (response) {
-        _this3.myNotification = response.data;
-        console.log("**********************************");
-
-        console.log(_this3.myNotification[0]);
-        console.log("**********************************");
-
-        // console.log(this.myNotification[0]);
-        // console.log(( this.myNotification[0].Notifications.Notifications));
-        //   console.log(( this.myNotification[0].done));
-        //             console.log(( this.myNotification[0].id));
-
-        // this.myNotificationT = JSON.parse( this.myNotification[0].data);
-        // console.log( this.myNotificationT);
-        // console.log( this.myNotificationT['Notifications']);
-        // console.log( this.myNotificationT['Notifications'].body);
-
-        console.log("dkdehfj");
-      });
-    },
-    sendNotifications: function sendNotifications() {
-      axios.post("/sendNotification", {
-        Notifications: this.Notifications,
-        date: this.date,
-        user: this.selected.id
-      });
-      this.myNotifications();
-      this.Notifications = [];
-      this.selected.id = 0;
-      alert("send done");
-    },
-    AdminNotifications: function AdminNotifications(event) {
-      var _this4 = this;
-
-      // alert(event.target.value);
-      axios.post("/AdminNotifications", {
-        user: event.target.value
-      }).then(function (response) {
-        _this4.allNotifications = response.data;
-      });
-      console.log(this.allNotifications);
+            openTab: 1,
+            Admin: 1,
+            myNotificationT: [],
+            allNotifications: []
+        };
     },
 
-    toggleTabs: function toggleTabs(tabNumber) {
-      this.openTab = tabNumber;
-    },
-    UNCompletNotifications: function UNCompletNotifications($event) {
-      axios.post("/UNCompletNotifications", {
-        Notificationsid: $event
-      });
-      this.myNotifications();
-    },
-    CompletNotifications: function CompletNotifications($event) {
-      axios.post("/CompletNotifications", {
-        Notificationsid: $event
-      });
-      this.myNotifications();
-    },
-    DeleteNotifications: function DeleteNotifications($event) {
-      axios.post("/DeleteNotifications", {
-        Notificationsid: $event
-      });
-      this.myNotifications();
-    },
-    AddNote: function AddNote($event, $note) {
-      // alert($note);
-      if ($note) {
-        axios.post("/AddNoteNotifications", {
-          Notificationsid: $event,
-          NotificationsNote: $note
+    methods: {
+        getusers: function getusers() {
+            var _this = this;
 
-        }).then(function (response) {
-          alert("done");
-        });
+            axios.post("/users").then(function (response) {
+                _this.users = response.data;
+                // console.log("user admin", this.users);
+            });
+        },
+        UserAdmin: function UserAdmin() {
+            var _this2 = this;
+
+            axios.post("/UserAdmin").then(function (response) {
+                console.log("start");
+                console.log(_this2.Admin);
+                _this2.Admin = response.data;
+
+                console.log("user admin");
+                console.log(_this2.Admin);
+                console.log("finsh");
+            });
+        },
+        myNotifications: function myNotifications() {
+            var _this3 = this;
+
+            axios.post("/myNotification").then(function (response) {
+                _this3.myNotification = response.data;
+            });
+        },
+        myAlert: function myAlert() {
+            var _this4 = this;
+
+            axios.post("/myAlert").then(function (response) {
+                _this4.myAlertNotification = response.data;
+            });
+        },
+        sendNotifications: function sendNotifications() {
+            axios.post("/sendNotification", {
+                Notifications: this.Notifications,
+                date: this.date,
+                user: this.selected.id
+            });
+            this.myNotifications();
+            this.Notifications = [];
+            this.selected.id = 0;
+            alert("send done");
+        },
+        AdminNotifications: function AdminNotifications(event) {
+            var _this5 = this;
+
+            // alert(event.target.value);
+            axios.post("/AdminNotifications", {
+                user: event.target.value
+            }).then(function (response) {
+                _this5.allNotifications = response.data;
+            });
+            console.log(this.allNotifications);
+        },
+
+        toggleTabs: function toggleTabs(tabNumber) {
+            this.openTab = tabNumber;
+        },
+        UNCompletNotifications: function UNCompletNotifications($event) {
+            axios.post("/UNCompletNotifications", {
+                Notificationsid: $event
+            });
+            this.myNotifications();
+        },
+        receivedNotifications: function receivedNotifications($event, $type) {
+            axios.post("/receivedNotifications", {
+                Notificationsid: $event
+            });
+            this.myNotifications();
+        },
+        WorkOnNotifications: function WorkOnNotifications($event, $type) {
+            axios.post("/WorkOnNotifications", {
+                Notificationsid: $event
+            });
+            this.myNotifications();
+        },
+        CompletNotifications: function CompletNotifications($event, $type) {
+            axios.post("/CompletNotifications", {
+                Notificationsid: $event
+            });
+            this.myNotifications();
+        },
+        DeleteNotifications: function DeleteNotifications($event) {
+            axios.post("/DeleteNotifications", {
+                Notificationsid: $event
+            });
+            this.myNotifications();
+        },
+        AddNote: function AddNote($event, $note) {
+            // alert($note);
+            if ($note) {
+                axios.post("/AddNoteNotifications", {
+                    Notificationsid: $event,
+                    NotificationsNote: $note
+
+                }).then(function (response) {
+                    alert("done");
+                });
+                this.myNotifications();
+            }
+        }
+    },
+
+    beforeMount: function beforeMount() {
+        this.getusers();
         this.myNotifications();
-      }
+        this.UserAdmin();
+        this.myAlert();
     }
-  },
-
-  beforeMount: function beforeMount() {
-    this.getusers();
-    this.myNotifications();
-    this.UserAdmin();
-  }
 });
 
 /***/ }),
@@ -1071,7 +1076,11 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("\n            مهامي\n          ")]
+                    [
+                      _vm._v(
+                        "\n                        مهامي\n                    "
+                      )
+                    ]
                   )
                 ]
               ),
@@ -1098,7 +1107,42 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("\n            اضافة مهام\n          ")]
+                    [
+                      _vm._v(
+                        "\n                        اضافة مهام\n                    "
+                      )
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex flex-row items-center justify-center cursor-pointer w-1/2"
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      class: {
+                        "text-green-600 bg-white w-full py-4 text-center rounded-md":
+                          _vm.openTab !== 4,
+                        "text-white  bg-green-600 w-full py-4 text-center rounded-md":
+                          _vm.openTab === 4
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.toggleTabs(4)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        الاشعارات\n                    "
+                      )
+                    ]
                   )
                 ]
               ),
@@ -1125,7 +1169,11 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("\n            مهام الموظفين\n          ")]
+                    [
+                      _vm._v(
+                        "\n                        مهام الموظفين\n                    "
+                      )
+                    ]
                   )
                 ]
               )
@@ -1228,30 +1276,30 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("td", [
-                            _vm._v("  " + _vm._s(Notification.sender.name))
+                            _vm._v(" " + _vm._s(Notification.sender.name))
                           ]),
                           _vm._v(" "),
                           Notification.Notifications.date
                             ? _c("td", [
                                 _vm._v(
-                                  "\n                " +
+                                  "\n                                " +
                                     _vm._s(Notification.Notifications.date) +
-                                    "\n              "
+                                    "\n                            "
                                 )
                               ])
                             : _c("td", [_vm._v("no Time")]),
                           _vm._v(" "),
-                          Notification.done
+                          Notification.status == 1
                             ? _c("td", [
                                 _c(
                                   "button",
                                   {
                                     staticClass:
-                                      "shadow bg-gray-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded",
+                                      "shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded",
                                     attrs: { type: "submit" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.UNCompletNotifications(
+                                        return _vm.receivedNotifications(
                                           Notification.id
                                         )
                                       }
@@ -1259,17 +1307,41 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                  مكتمل\n                "
+                                      "\n                                    استلام المهمة\n                                "
                                     )
                                   ]
                                 )
                               ])
-                            : _c("td", [
+                            : Notification.status == 2
+                            ? _c("td", [
                                 _c(
                                   "button",
                                   {
                                     staticClass:
-                                      "shadow bg-green-500 hover:bg-green-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded",
+                                      "shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded",
+                                    attrs: { type: "submit" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.WorkOnNotifications(
+                                          Notification.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    جاري العمل على المهمة\n                                "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : Notification.status == 3
+                            ? _c("td", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded",
                                     attrs: { type: "submit" },
                                     on: {
                                       click: function($event) {
@@ -1281,9 +1353,14 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                  تم\n                "
+                                      "\n                                    مكتمل\n                                "
                                     )
                                   ]
+                                )
+                              ])
+                            : _c("td", [
+                                _vm._v(
+                                  "\n                                المهمة انجزت\n                            "
                                 )
                               ]),
                           _vm._v(" "),
@@ -1304,7 +1381,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                  حذف\n                "
+                                  "\n                                    حذف\n                                "
                                 )
                               ]
                             )
@@ -1355,7 +1432,11 @@ var render = function() {
                             staticClass:
                               "block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
                           },
-                          [_vm._v("\n              المستخدم\n            ")]
+                          [
+                            _vm._v(
+                              "\n                                المستخدم\n                            "
+                            )
+                          ]
                         ),
                         _vm._v(" "),
                         _c(
@@ -1409,9 +1490,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                  " +
+                                    "\n                                    " +
                                       _vm._s(user.name) +
-                                      "\n                "
+                                      "\n                                "
                                   )
                                 ]
                               )
@@ -1428,7 +1509,11 @@ var render = function() {
                             staticClass:
                               "block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
                           },
-                          [_vm._v("\n                التاريج\n              ")]
+                          [
+                            _vm._v(
+                              "\n                                التاريج\n                            "
+                            )
+                          ]
                         ),
                         _vm._v(" "),
                         _c("div", [
@@ -1504,7 +1589,11 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("\n              حفظ\n            ")]
+                      [
+                        _vm._v(
+                          "\n                            حفظ\n                        "
+                        )
+                      ]
                     )
                   ])
                 ]
@@ -1573,9 +1662,9 @@ var render = function() {
                         { key: user.id, domProps: { value: user.id } },
                         [
                           _vm._v(
-                            "\n              " +
+                            "\n                            " +
                               _vm._s(user.name) +
-                              "\n            "
+                              "\n                        "
                           )
                         ]
                       )
@@ -1610,18 +1699,24 @@ var render = function() {
                         Notification.Notifications.date
                           ? _c("td", [
                               _vm._v(
-                                "\n              " +
+                                "\n                            " +
                                   _vm._s(Notification.Notifications.date) +
-                                  "\n            "
+                                  "\n                        "
                               )
                             ])
                           : _c("td", [_vm._v("no Time")]),
                         _vm._v(" "),
                         Notification.done
                           ? _c("td", [
-                              _vm._v("\n              مكتمل\n            ")
+                              _vm._v(
+                                "\n                            مكتمل\n                        "
+                              )
                             ])
-                          : _c("td", [_vm._v("\n            تم\n            ")])
+                          : _c("td", [
+                              _vm._v(
+                                "\n                            تم\n                        "
+                              )
+                            ])
                       ]
                     )
                   })
@@ -1629,7 +1724,107 @@ var render = function() {
                 2
               )
             ]
-          )
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "overflow-x-auto" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scoll-x",
+                class: {
+                  hidden: _vm.openTab !== 4,
+                  block: _vm.openTab === 4
+                }
+              },
+              [
+                _c(
+                  "table",
+                  { staticClass: "text-center" },
+                  [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _vm._l(_vm.myAlertNotification, function(Notification) {
+                      return _c(
+                        "tr",
+                        {
+                          key: Notification.id,
+                          attrs: { value: Notification.id }
+                        },
+                        [
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(Notification.Notifications.Notifications)
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "flex w-full h-full" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass:
+                                  "mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white",
+                                attrs: { for: "search" }
+                              },
+                              [_vm._v("Search")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "relative w-full" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: Notification.note,
+                                    expression: "Notification.note"
+                                  }
+                                ],
+                                staticClass:
+                                  "block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                                attrs: {
+                                  type: "text",
+                                  id: "fname",
+                                  required: ""
+                                },
+                                domProps: { value: Notification.note },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      Notification,
+                                      "note",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(" " + _vm._s(Notification.sender.name))
+                          ]),
+                          _vm._v(" "),
+                          Notification.Notifications.date
+                            ? _c("td", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(Notification.Notifications.date) +
+                                    "\n                            "
+                                )
+                              ])
+                            : _c("td", [_vm._v("no Time")])
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]
+            )
+          ])
         ])
       ])
     ],
@@ -1646,7 +1841,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحضات")]),
       _vm._v(" "),
-      _c("th", { staticStyle: { width: "10%" } }, [_vm._v("المرسل   ")]),
+      _c("th", { staticStyle: { width: "10%" } }, [_vm._v("المرسل ")]),
       _vm._v(" "),
       _c("th", { staticStyle: { width: "10%" } }, [_vm._v("التاريخ")]),
       _vm._v(" "),
@@ -1666,7 +1861,11 @@ var staticRenderFns = [
           staticClass:
             "block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
         },
-        [_vm._v("\n              المهمة\n            ")]
+        [
+          _vm._v(
+            "\n                            المهمة\n                        "
+          )
+        ]
       )
     ])
   },
@@ -1681,7 +1880,7 @@ var staticRenderFns = [
           staticClass:
             "block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0"
         },
-        [_vm._v("\n            المستخدم\n          ")]
+        [_vm._v("\n                        المستخدم\n                    ")]
       )
     ])
   },
@@ -1697,6 +1896,20 @@ var staticRenderFns = [
       _c("th", { staticStyle: { width: "20%" } }, [_vm._v("التاريخ")]),
       _vm._v(" "),
       _c("th", [_vm._v("تم")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticStyle: { width: "40%" } }, [_vm._v("المهمة")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحضات")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { width: "10%" } }, [_vm._v("المرسل ")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { width: "10%" } }, [_vm._v("التاريخ")])
     ])
   }
 ]

@@ -184,16 +184,18 @@ class Project extends Resource
 
                     return $Area_type_admin_array;
                 })->singleSelect(),
-            Select::make(__('Admin'), 'admin_id')
-                ->options(function () {
-                    $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
-                    $user_type_admin_array =  array();
-                    foreach ($users as $user) {
-                        $user_type_admin_array += [$user['id'] => ($user['name'])];
-                    }
+                //     Select::make(__('Admin'), 'admin_id')
+                // ->options(function () {
+                //     $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+                //     $user_type_admin_array =  array();
+                //     foreach ($users as $user) {
+                //         $user_type_admin_array += [$user['id'] => ($user['name'])];
+                //     }
 
-                    return $user_type_admin_array;
-                })->singleSelect()->hideFromDetail()->hideFromIndex(),
+                //     return $user_type_admin_array;
+                // })->singleSelect()->hideFromDetail()->hideFromIndex(),
+
+
 
             BelongsTo::make(__('admin'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
