@@ -65,7 +65,7 @@
             <span class="font-FlatBold text-[#6B7280]  text-[18px] text-right">
                 @if ($Transaction->Payment_type == 5)
                 moneybox :
-                {{ $Transaction->Alhisalat->number_alhisala }}
+                {{ $Transaction->description }}
             @else
                 {{ $Transaction->TelephoneDirectory->name }}
             @endif
@@ -321,7 +321,7 @@
                                         <tr>
                                             <td
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
-                                                {{ $PaymentType }} : {{ $Transaction->Alhisalat->number_alhisala }} </td>
+                                                {{ $PaymentType }} : {{ $Transaction->description }} </td>
                                             <td
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-FlatBold text-gray-900 sm:pl-6">
                                                 @php
