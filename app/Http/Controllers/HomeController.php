@@ -423,7 +423,6 @@ class HomeController extends Controller
 
         // Check if the project already exists
         $existingProject = Project::where('project_name', $projectName)->first();
-        dd($existingProject);
 
         if (!$existingProject) {
             // If the project does not exist, create a new one
