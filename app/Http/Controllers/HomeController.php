@@ -406,11 +406,11 @@ class HomeController extends Controller
                     ['budget' => $request->budgetsOfyear]
 
                 );
+
         }
 
 
         foreach ($request->Sectors as $key => $value) {
-            // dd($value);
             DB::table('budgets')
                 ->updateOrInsert(
                     ['year' => $request->year, 'sector_id' =>  $value['sector_id']],
@@ -418,17 +418,25 @@ class HomeController extends Controller
 
                 );
         }
-        $year = $request->year;
-        $firstDayOfYear = Carbon::createFromDate($year, 1, 1)->startOfDay();
-        // dd(  );
-        $Project = new Project();
-        $Project->project_type = 1;
-        $Project->project_name = 'حصلات ' . $request->year;
-        $Project->project_describe = 'حصلات' . $request->year;
-        $Project->sector = 11;
-        $Project->start_date = $firstDayOfYear;
 
-        $Project->save();
+        $projectName = 'حصلات ' . $request->year;
+
+        // Check if the project already exists
+        $existingProject = Project::where('project_name', $projectName)->first();
+        dd($existingProject);
+
+        if (!$existingProject) {
+            // If the project does not exist, create a new one
+            $Project = new Project();
+            $Project->project_type = 1;
+            $Project->project_name = $projectName;
+            $Project->project_describe = 'حصلات' . $request->year;
+            $Project->sector = 11;
+            $Project->start_date = $request->start_date;
+
+            $Project->save();
+        }
+
     }
     public function delet(Request $request)
     {
