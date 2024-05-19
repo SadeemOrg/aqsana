@@ -54,7 +54,7 @@
             <p dir="ltr" class="">{{ $newDate[0] }}</p>
             <p class="font-FlatBold text-[20px] text-[#101426] ">קבלה מספר
                 <span class="text-base">
-                    F-1000{{ $Transaction->id }}
+                    F-{{ $Transaction->bill_number }}
                 </span>
             </p>
             @if ($original == 1)

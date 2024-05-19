@@ -810,7 +810,7 @@ class HomeController extends Controller
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
         // dd(  $Transaction ->Alhisalat);
 
-        // dd($Transaction);
+        dd($Transaction->Payment_type);
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
@@ -866,7 +866,6 @@ class HomeController extends Controller
                     break;
             }
         }
-        // dd($PaymentType);
         $original = 1;
 
         return view('Pages.Bills.Bills', compact('Transaction', 'original', 'PaymentType'));
@@ -959,6 +958,9 @@ class HomeController extends Controller
                 case 5:
                     $PaymentType = "حصالة";
                     break;
+                    case 6:
+                        $PaymentType = "حصالة";
+                        break;
             }
         } else if ($Transaction->lang == 2) {
             switch ($Transaction->Payment_type) {
@@ -977,6 +979,9 @@ class HomeController extends Controller
                 case 5:
                     $PaymentType = "moneybox";
                     break;
+                    case 6:
+                        $PaymentType = "moneybox";
+                        break;
             }
         } else if ($Transaction->lang == 3) {
             switch ($Transaction->Payment_type) {
@@ -995,6 +1000,9 @@ class HomeController extends Controller
                 case 5:
                     $PaymentType = "קופסת כסף";
                     break;
+                    case 6:
+                        $PaymentType = "קופסת כסף";
+                        break;
             }
         }
         $original = 0;
@@ -1004,6 +1012,7 @@ class HomeController extends Controller
 
         // dd("Email is Sent.");
         $type = '1';
+        $id=$Transaction->bill_number;
         return view('Pages.Bills.mainBill', compact('id', 'type'));
     }
     public function SendMail(Request $request)

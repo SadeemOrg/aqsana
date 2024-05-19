@@ -119,11 +119,9 @@ class Report extends Resource
             Text::make(__("Out Come"), "out_come")->calculate('sum', __('Total Count'))->sortable(),
 
             Text::make(__("Net"), "Net_in_come")->calculate('sum', __('Total Count'))->sortable(),
-
-
             RowBackground::make(__("Net In Come"), "Net_in_come", function ($model) {
                 if ($this->Net_in_come < 0) {
-                    return new RowBackgroundData("#ff0000", "#ffffff");
+                    return new RowBackgroundData("#ff9999", "#000000");
                 }
             })->onlyOnIndex(),
 
