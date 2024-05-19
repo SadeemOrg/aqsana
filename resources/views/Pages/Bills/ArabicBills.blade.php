@@ -70,7 +70,7 @@
 
                 @if ($Transaction->Payment_type == 5)
                     حصالة رقم:
-                    {{ $Transaction->Alhisalat->number_alhisala }}
+                    {{ $Transaction->description }}
                 @else
                     {{ $Transaction->TelephoneDirectory->name }}
                 @endif
@@ -322,7 +322,7 @@
                                         <tr>
                                             <td
                                                 class="whitespace-nowrap px-3 py-4  font-FlatBold text-base text-black md:text-black-900">
-                                                {{ $Transaction->Alhisalat->number_alhisala }}
+                                                {{ $Transaction->description }}
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-base text-black md:text-black-900">
                                                 @php

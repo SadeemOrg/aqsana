@@ -27,15 +27,7 @@ class ExportReport extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-
-        if ($fields-> from==null ||$fields->to ==null) {
-            return Action::danger('الرجاء اختيار التاريخ');
-
-        }
-
-        $string = '?reselt=' . $models[0]->id.'&from='.$fields-> from.'&to='.$fields->to;
-
-
+        $string = '?reselt=' .$models->pluck('id');
         return Action::openInNewTab('/export/ExportReport'. $string);
 
     }
@@ -48,8 +40,8 @@ class ExportReport extends Action
     public function fields()
     {
         return [
-            Date::make(__('from'), 'from')->required(),
-            Date::make(__('to'), 'to')->required(),
+        //     Date::make(__('from'), 'from')->required(),
+        //     Date::make(__('to'), 'to')->required(),
 
         ];
     }

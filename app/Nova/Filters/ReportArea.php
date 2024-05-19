@@ -29,7 +29,12 @@ class ReportArea extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('area',$value);
+
+        if($value=="non" )
+        { return $query;}
+        $Area =Area::where('name',$value)->first();
+
+        return $query->where('area',$Area->id);
 
     }
 
@@ -45,7 +50,7 @@ class ReportArea extends Filter
         $foo = array();
         $foo['الكل']='non';
         foreach ($Areas as $Area)
-        $foo[$Area->name]=$Area->id;
+        $foo[$Area->name]=$Area->name;
         return $foo;
     }
 }

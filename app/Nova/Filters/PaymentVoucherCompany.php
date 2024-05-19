@@ -2,17 +2,11 @@
 
 namespace App\Nova\Filters;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
 
-class ReportCreated extends Filter
+class PaymentVoucherCompany extends Filter
 {
-
-    public  function name()
-    {
-        return __('Report Created');
-    }
     /**
      * The filter's component.
      *
@@ -30,8 +24,7 @@ class ReportCreated extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-       $user =User::where('name',$value)->first();
-        return $query->where('Created_By',$user->id);
+        return $query->where('name',$value);
     }
 
     /**
@@ -42,10 +35,22 @@ class ReportCreated extends Filter
      */
     public function options(Request $request)
     {
-        $Areas = User::all();
+
+
+
+        $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '8')->get();
         $foo = array();
-        foreach ($Areas as $Area)
-        $foo[$Area->name]=$Area->name;
+        $user_type_admin_array =  array();
+        foreach ($Users as $User) {
+            $foo[$User['name']]=$User['id'];
+
+        }
+        $Users =  \App\Models\BusesCompany::all();
+        foreach ($Users as $User) {
+
+
+            $foo[$User['name']]=$User['id'];
+        }
         return $foo;
     }
 }

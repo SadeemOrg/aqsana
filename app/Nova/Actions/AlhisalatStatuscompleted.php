@@ -2,6 +2,8 @@
 
 namespace App\Nova\Actions;
 
+use App\Models\Project;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -29,6 +31,10 @@ class AlhisalatStatuscompleted extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
 
+        $currentYear = Carbon::now()->year;
+        $Project = Project::where('project_name', 'حصلات ' . $currentYear)->first();
+
+
         $array = $models->pluck('number_alhisala')->toArray();
         $stringResult = implode(', ', $array);
 
@@ -38,38 +44,24 @@ class AlhisalatStatuscompleted extends Action
                 'status' => '4',
 
             ]);
-
-
-
-            //     if ($fields->new_alhasele) {
-            //     $new_data = $model->replicate();
-            //     $new_data->status ='1';
-            //     $new_data->number_alhisala ='1';
-            //     $new_data->created_by ='1';
-            //     $new_data->created_at = now();
-            //     $new_data->save();
-
-            //     return Action::redirect('/Admin/resources/alhisalat-amounts/' . $new_data->id . '/edit');
-            // }
-
-
-
         }
         DB::table('transactions')
-        ->Insert(
+            ->Insert(
 
-            [
-                'main_type' => '1',
-                'type' => '2',
-                'Currency' => '3',
-                'transact_amount' => $fields->amount,
-                'equivelant_amount' =>$fields->amount,
-                'transaction_type' => "3",
-                'transaction_status' =>"2",
-                "Payment_type"=>'5',
-                'description'=>"حصلات رقم"." : ".$stringResult,
-                "lang"=>1,
-                'transaction_date' => $date = date('Y-m-d'),
+                [
+                    'main_type' => '1',
+                    'type' => '2',
+                    'Currency' => '3',
+                    'transact_amount' => $fields->amount,
+                    'equivelant_amount' => $fields->amount,
+                    'transaction_type' => "3",
+                    'transaction_status' => "2",
+                    "Payment_type" => '5',
+                    'description' => "حصلات رقم" . " : " . $stringResult,
+                    "lang" => 1,
+                    'transaction_date' => $date = date('Y-m-d'),
+                    'sector' => 11,
+                    'ref_id' => $Project->id
                 ]
             );
 

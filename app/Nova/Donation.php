@@ -24,12 +24,14 @@ use Acme\MultiselectField\Multiselect;
 use Acme\ProjectPicker\ProjectPicker;
 use App\Models\Project as ModelsProject;
 use App\Models\Sector;
+use App\Models\Transaction;
 use App\Nova\Actions\DeleteBill;
 use App\Nova\Actions\DepositedInBank;
 use App\Nova\Actions\ExportDonations;
 use App\Nova\Actions\PrintBill;
 use App\Nova\Actions\ReceiveDonation;
 use App\Nova\Filters\AlhisalatColect;
+use App\Nova\Filters\PaymentType;
 use App\Nova\Filters\Transactionproject;
 use App\Nova\Filters\TransactionSectors;
 use App\Nova\Metrics\DonationInBank;
@@ -103,7 +105,7 @@ class Donation extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name','transaction_date','equivelant_amount'
+        'id', 'name', 'transaction_date', 'equivelant_amount'
 
     ];
 
@@ -126,25 +128,19 @@ class Donation extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
 
+            Text::make(__('bill_number'), 'bill_number')->hideWhenCreating()->hideWhenUpdating(),
 
             Button::make(__('print'))->link('/mainbill/' . $this->id)->style('primary'),
-            ProjectPicker::make(__('تاريخ  السند '),'ref_id',function(){
+            ProjectPicker::make(__('تاريخ  السند '), 'ref_id', function () {
                 $keyValueArray = ['key1' => $this->ref_id, 'key2' => $this->transaction_date];
 
-                return $keyValueArray ;
+                return $keyValueArray;
             })->hideFromDetail()->hideFromIndex(),
 
 
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('المشروع'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
-
-            // BelongsTo::make(__('الشركة'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating(),
-
-
-            // ProjectPicker::make(__('ref_id'),'ref_id')->hideWhenUpdating(),
-
             Select::make(__("transaction_type"), "transaction_type")->options([
                 '1' => __('handy'),
                 '2' => __('automatic'),
@@ -167,12 +163,11 @@ class Donation extends Resource
                 return null;
             }),
             Text::make(__('description'), 'description')->hideFromIndex(),
-        Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
-
+            Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('الشركة'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
             Multiselect::make(__('اسم الشركة'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '2')->get();
-
                     $i = 0;
                     $user_type_admin_array =  array();
                     foreach ($Users as $User) {
@@ -183,7 +178,7 @@ class Donation extends Resource
 
                     return $user_type_admin_array;
                 })
-                ->singleSelect(),
+                ->singleSelect()->hideFromDetail()->hideFromIndex(),
 
 
 
@@ -196,21 +191,30 @@ class Donation extends Resource
                     Text::make(__('phone'), "phone"),
                 ]),
 
-            BelongsTo::make(__('reference_id'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
+
             Text::make(__('payment_reason'), "payment_reason")->hideFromIndex(),
             Select::make(__("billing language"), "lang")->options([
                 '1' => __('ar'),
                 '2' => __('en'),
                 '3' => __('hr'),
             ])->displayUsingLabels()->rules('required'),
-            Select::make(__("Payment_type"), "Payment_type")->options([
-                '1' => __('cash'),
-                '2' => __('shek'),
-                '3' => __('bit'),
-                '4' => __('hawale'),
-                '5' => __('pay pal'),
-                '6' => __('حصالة'),
-            ])->displayUsingLabels()->default('1'),
+            Select::make(__("Payment_type"), "Payment_type")->options(
+                [
+                    '1' => __('cash'),
+                    '2' => __('shek'),
+                    '3' => __('bit'),
+                    '4' => __('hawale'),
+                ]
+            )->displayUsingLabels()->default('1')->hideFromDetail()->hideFromIndex(),
+            Select::make(__("Payment_type"), "Payment_type")->options(
+                [
+                    '1' => __('cash'),
+                    '2' => __('shek'),
+                    '3' => __('bit'),
+                    '4' => __('hawale'),
+                    '5' => __('حصالة'),
+                ]
+            )->displayUsingLabels()->default('1')->hideWhenCreating()->hideWhenUpdating(),
             NovaDependencyContainer::make([
                 Text::make(__('transact amount'), 'transact_amount')->rules('required'),
             ])->dependsOn("Payment_type", '1')->hideFromDetail()->hideFromIndex(),
@@ -301,25 +305,37 @@ class Donation extends Resource
 
 
 
-        // $new = DB::table('currencies')->where('id', $request->Currency)->first();
         $id = Auth::id();
         $model->created_by = $id;
         $model->transaction_type = '1';
         $model->main_type = '1';
         $model->type = '2';
+
+        $largestBillNumber = Transaction::where([
+            ['main_type', 1],
+            ['type', 2],
+            ['is_delete', '<>', '2'],
+        ])
+            ->orderBy('bill_number', 'desc')
+            ->value('bill_number');
+        if (is_null($largestBillNumber)) {
+            $largestBillNumber = 999;
+        }
+        $model->bill_number = $largestBillNumber + 1;
+
         // dd($request->ReceiveDonation );
         if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
         else  $model->transaction_status = '1';
 
 
-        // $model->equivelant_amount = $new->rate * $request->transact_amount;
+
     }
     public static function beforesave(Request $request, $model)
     {
 
-        $model->transaction_date = json_decode( $request->ref_id)->key1;
-        $model->ref_id = json_decode( $request->ref_id)->key2;
-        $model->sector=ModelsProject::where('id',json_decode( $request->ref_id)->key2)->first()->sector;
+        $model->transaction_date = json_decode($request->ref_id)->key1;
+        $model->ref_id = json_decode($request->ref_id)->key2;
+        $model->sector = ModelsProject::where('id', json_decode($request->ref_id)->key2)->first()->sector;
         $request->request->remove('ref_id');
 
 
@@ -359,20 +375,19 @@ class Donation extends Resource
             }
 
             $model->equivelant_amount = $amount;
-            #  // $model->equivelant_amount
+
         }
 
-        // $currencies = DB::table('currencies')->where('id', $request->Currency)->first();
-        // $id = Auth::id();
-        // $model->update_by = $id;
-        // if ($model->Currenc->id == $request->Currenc) {
-        //     $rate = ((int)$model->equivelant_amount / (int)$model->transact_amount);
-        // } else  $rate = $currencies->rate;
-        // $model->equivelant_amount = $rate * $request->transact_amount;
+
     }
     public static function aftersave(Request $request, $model)
     {
+        if (!$request->name && !$request->add_user) {
+            DB::table('transactions')
+            ->where('id', $model->id)
+            ->update(['name' => 192 ]);
 
+        }
         if (!$request->name && $request->add_user) {
             if ($request->add_user[0]['attributes']['name']) {
                 $telfone =  TelephoneDirectory::create(
@@ -388,7 +403,6 @@ class Donation extends Resource
                 ->where('id', $model->id)
                 ->update(['name' => $telfone->id]);
         }
-        // return Action::openInNewTab("/mainbill/". $model->id);
     }
 
     /**
@@ -420,6 +434,7 @@ class Donation extends Resource
             new AlhisalatColect(),
             new Transactionproject(),
             new TransactionSectors(),
+            new PaymentType()
         ];
     }
 

@@ -10,7 +10,7 @@ class Notification extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title','message','sender_id'
+        'title','message','sender_id','notification_type','status'
     ];
 
     protected $hidden = [

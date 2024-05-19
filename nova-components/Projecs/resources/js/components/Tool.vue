@@ -7,9 +7,9 @@
                         <div v-for="tab in tabs" :key="tab.index"
                             class="flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3">
                             <a v-on:click="toggleTabs(tab.index)" v-bind:class="{
-                                'text-green-600 bg-white w-full py-4 text-center rounded-md': openTab !== tab.index,
-                                'text-white  bg-green-600 w-full py-4 text-center rounded-md': openTab === tab.index,
-                            }">
+                            'text-green-600 bg-white w-full py-4 text-center rounded-md': openTab !== tab.index,
+                            'text-white  bg-green-600 w-full py-4 text-center rounded-md': openTab === tab.index,
+                        }">
                                 {{ tab.name }}
                             </a>
                         </div>
@@ -51,6 +51,10 @@
                                             id="inline-full-name" type="text" v-model="budgetsOfyear" />
                                     </div>
                                 </div>
+                                <form @submit.prevent="onSubmit" class="add-form py-4">
+                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4">
+                                        <div v-for="(Sector, index) in newSectors" :key="Sector.Sector"
+                                            :value="Sector.Sector" class=" mb-3">
                                             <div class="">
                                                 <label
                                                     class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64"
@@ -73,68 +77,72 @@
                                         </div>
                                     </div>
                                 </form>
-                                <p class='text-right text-small' v-bind:class="{'text-danger': hasError }">المتبقي: {{remainingCount}}</p>
+                                <p class='text-right text-small' v-bind:class="{'text-danger': hasError }">Sum: {{remainingCount}}</p>
 
                             </div>
-                            <!-- third form -->
-                            <div :class="{ hidden: openTab !== 3, block: openTab === 3 }">
-                                <!-- ... (your form content) -->
-                                <DeleteBudget :years="years" />
-                            </div>
-                            <!-- fourth form -->
-                            <div :class="{ hidden: openTab !== 4, block: openTab === 4 }">
-                                <!-- ... (your form content) -->
-                                <div class="flex flex-col w-full">
-                                    <div class="py-4 w-3/6 bg-slate-700">
-                                        <select @change="getSectorstatistics($event)" v-model="selectedItem"
-                                            class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm">
-                                            <option selected disabled value="0">
-                                                الرجاء اختيار عام
-                                            </option>
-                                            <option class="" v-for="year in years" :key="year.year" :value="year.year">
-                                                {{ year.year }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div v-if="isTotalSectorYearlyNotEmpty" class="w-full mb-12">
-                                        <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl">الميزانية العامه لسنه {{
-                                            selectedyear }}</h1>
-                                        <BudgetInfo :budget="parsedBudget" :divisor="1" label="مجمل الميزانية للعام "
-                                            expensesLabel="مجمل المصاريف للعام "
-                                            :expensesValue="totalSectorYearly.expenses_year"
-                                            incomeLabel="مجمل المدخلات للعام" :incomeValue="totalSectorYearly.income_year"
-                                            net_amount_label="صافي الانفاق الكلي" />
-                                    </div>
-                                    <div class="w-full">
-                                        <div class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
-                                            <div class="-mb-px mr-2 last:mr-0 flex-auto text-center"
-                                                v-for="(Sector, index) in budjetSector" :key="Sector.Sector"
-                                                :value="Sector.Sector">
-                                                <a class="text-xs font-bold uppercase px-5 py-4 my-2 shadow-lg rounded block leading-normal"
-                                                    v-on:click="toggleTabsstatistic(index)" v-bind:class="{
-                                                        'text-green-600 bg-white cursor-pointer':
-                                                            openTabstatistic !== index,
-                                                        'text-white bg-green-600 cursor-pointer':
-                                                            openTabstatistic === index,
-                                                    }">
-                                                    {{ Sector.Sector }}
-                                                </a>
-                                            </div>
+
+
+
+
+                        </div>
+                        <!-- third form -->
+                        <div :class="{ hidden: openTab !== 3, block: openTab === 3 }">
+                            <!-- ... (your form content) -->
+                            <DeleteBudget :years="years" />
+                        </div>
+                        <!-- fourth form -->
+                        <div :class="{ hidden: openTab !== 4, block: openTab === 4 }">
+                            <!-- ... (your form content) -->
+                            <div class="flex flex-col w-full">
+                                <div class="py-4 w-3/6 bg-slate-700">
+                                    <select @change="getSectorstatistics($event)" v-model="selectedItem"
+                                        class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm">
+                                        <option selected disabled value="0">
+                                            الرجاء اختيار عام
+                                        </option>
+                                        <option class="" v-for="year in years" :key="year.year" :value="year.year">
+                                            {{ year.year }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div v-if="isTotalSectorYearlyNotEmpty" class="w-full mb-12">
+                                    <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl">الميزانية العامه لسنه {{
+                            selectedyear }}</h1>
+                                    <BudgetInfo :budget="parsedBudget" :divisor="1" label="مجمل الميزانية للعام "
+                                        expensesLabel="مجمل المصاريف للعام "
+                                        :expensesValue="totalSectorYearly.expenses_year"
+                                        incomeLabel="مجمل المدخلات للعام" :incomeValue="totalSectorYearly.income_year"
+                                        net_amount_label="صافي الانفاق الكلي" />
+                                </div>
+                                <div class="w-full">
+                                    <div class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+                                        <div class="-mb-px mr-2 last:mr-0 flex-auto text-center"
+                                            v-for="(Sector, index) in budjetSector" :key="Sector.Sector"
+                                            :value="Sector.Sector">
+                                            <a class="text-xs font-bold uppercase px-5 py-4 my-2 shadow-lg rounded block leading-normal"
+                                                v-on:click="toggleTabsstatistic(index)" v-bind:class="{
+                            'text-green-600 bg-white cursor-pointer':
+                                openTabstatistic !== index,
+                            'text-white bg-green-600 cursor-pointer':
+                                openTabstatistic === index,
+                        }">
+                                                {{ Sector.Sector }}
+                                            </a>
                                         </div>
-                                        <div
-                                            class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-                                            <div v-if="budjetSector.length > 0" class="px-4 py-5 flex-auto">
-                                                <div class="tab-content tab-space">
-                                                    <div v-for="(Sector, index) in budjetSector" :key="Sector.Sector"
-                                                        :value="Sector.Sector" v-bind:class="{
-                                                            hidden: openTabstatistic !== index,
-                                                            block: openTabstatistic === index,
-                                                        }">
-                                                        <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl"> {{
-                                                            Sector.Sector }}
-                                                        </h1>
-                                                        <TotalSector :Sector="Sector" />
-                                                    </div>
+                                    </div>
+                                    <div
+                                        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                                        <div v-if="budjetSector.length > 0" class="px-4 py-5 flex-auto">
+                                            <div class="tab-content tab-space">
+                                                <div v-for="(Sector, index) in budjetSector" :key="Sector.Sector"
+                                                    :value="Sector.Sector" v-bind:class="{
+                            hidden: openTabstatistic !== index,
+                            block: openTabstatistic === index,
+                        }">
+                                                    <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl"> {{
+                            Sector.Sector }}
+                                                    </h1>
+                                                    <TotalSector :Sector="Sector" />
                                                 </div>
                                             </div>
                                         </div>
@@ -176,6 +184,7 @@ export default {
             totalSectorYearly: {},
             deletSectors: [],
             hasError: false,
+            budgetsOfyear: 0,
 
             points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
             tabs: [
@@ -213,13 +222,13 @@ export default {
     },
     methods: {
         countdown: function () {
-            this.remainingCount =0;
-            let sumBud=0;
+            this.remainingCount = 0;
+            let sumBud = 0;
             this.newSectors.forEach((element) => {
                 sumBud += parseInt(element["Budget"]);
             });
-            this.remainingCount =this.budgetsOfyear -sumBud;
-            this.hasError = (this.budgetsOfyear  < sumBud);
+            this.remainingCount = this.budgetsOfyear - sumBud;
+            this.hasError = (this.budgetsOfyear < sumBud);
 
         },
         toggleTabs: function (tabNumber) {
@@ -341,4 +350,3 @@ export default {
     },
 };
 </script>
-

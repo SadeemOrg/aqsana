@@ -2,22 +2,21 @@
 
 namespace App\Nova\Filters;
 
-use App\Models\User;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
 
-class ReportCreated extends Filter
+class ReportName extends Filter
 {
-
-    public  function name()
-    {
-        return __('Report Created');
-    }
     /**
      * The filter's component.
      *
      * @var string
      */
+    public  function name()
+    {
+        return __('اسم المشروع');
+    }
     public $component = 'searchable-select-filter';
 
     /**
@@ -30,8 +29,12 @@ class ReportCreated extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-       $user =User::where('name',$value)->first();
-        return $query->where('Created_By',$user->id);
+
+        if($value=="non" )
+        { return $query;}
+
+
+        return $query->where('project_name', $value);
     }
 
     /**
@@ -42,10 +45,11 @@ class ReportCreated extends Filter
      */
     public function options(Request $request)
     {
-        $Areas = User::all();
+        $Projects= Project::all();
         $foo = array();
-        foreach ($Areas as $Area)
-        $foo[$Area->name]=$Area->name;
+        $foo['الكل']='non';
+        foreach ($Projects as $Project)
+        $foo[$Project->project_name]=$Project->project_name;
         return $foo;
     }
 }

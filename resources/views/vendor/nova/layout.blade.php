@@ -16,7 +16,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('app.css', 'vendor/nova') }}">
-    
+
     <!-- Tool Styles -->
     @foreach (\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
         @if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://']))
@@ -39,15 +39,15 @@
             .tryThis {
                 justify-content: space-between;
             }
-    
+
             .searchItem {
                 margin-right: 5%;
             }
-    
+
             .imgSideBar {
                 margin-left: 4%;
             }
-        
+
             .room-sort {
                 --tw-bg-opacity: 1;
                 background-color: rgb(21 128 61 / var(--tw-bg-opacity));
@@ -55,7 +55,7 @@
                 padding: 0;
                 text-align: right;
             }
-    
+
             .room-sort-menu ul {
                 margin: 0;
                 padding: 0;
@@ -67,16 +67,16 @@
                 color: #fff;
                 font-weight: 800;
             }
-    
+
             .sort-mobile {
                 display: none;
             }
-    
+
             /* .room-sort-menu>li {
                 display: inline-block;
                 color: #fff;
             } */
-    
+
             .room-sort-menu>li>a {
                 display: inline-block;
                 /* padding: 16px 30px; */
@@ -85,14 +85,14 @@
                 color: #fff;
                 text-decoration: none;
             }
-    
+
             .room-sort-menu>li>a:hover,
             .room-sort-menu>li>a:focus {}
-    
+
             .dropdown {
                 position: relative;
             }
-    
+
             .dropMenu {
                 position: ;
                 display: none;
@@ -104,18 +104,18 @@
                 font-size: 0.8em;
                 z-index: 1;
             }
-    
+
             .show {
                 display: block;
-            }        
-    
+            }
+
             .dropMenu li a {
                 display: block;
                 padding: 7px;
                 color: #fff;
                 text-decoration: none;
             }
-    
+
             .dropMenu li a:hover, .dropMenu li a.router-link-active  {
                 /* --tw-bg-opacity: 1; */
                 background-color: #fff;
@@ -125,8 +125,8 @@
             .list-reset {
                 max-height: 400px
             }
-            
-            .h-header .dropdown-trigger svg{min-width: 10px}        
+
+            .h-header .dropdown-trigger svg{min-width: 10px}
             @media (max-width: 991px) {
                 div[x-placement="bottom-start"]{transform: none !important}
                 html:not([dir="rtl"]) div[dusk$='index-component'] .btn[dusk='create-button']::before,
@@ -162,7 +162,7 @@
             }
             ul.list-reset li > div {border-color: #bacad6 }
             .icons[data-v-b3635f2e] {right: auto !important; left: 0;}
-            
+
             #filemanager-manager .btn-primary:not([disabled]):not(.btn-disabled), .btn-primary:not([disabled]):not(.btn-disabled) {background-color: #16a34a; font-weight: 500}
             #filemanager-manager .btn-primary:not([disabled]):not(.btn-disabled):hover, .btn-primary:not([disabled]):not(.btn-disabled):hover {background-color: #22c55e}
             #filemanager-manager .btn-default:not([disabled]):not(.btn-disabled):focus, #filemanager-manager .btn-default:not([disabled]):not(.btn-disabled):active
@@ -171,8 +171,12 @@
             }
 
         </style>
+<style>
+    .reset-button {
+        margin-top: 10px;
+    }
+  </style>
 
-    
     <script>
         const iconPath = '{{ asset('alaqsa.PNG') }}';
     </script>
@@ -237,7 +241,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ asset('assets/js/push.min.js') }}"></script>

@@ -117,26 +117,7 @@ class Project extends Resource
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
-        // $user = Auth::user();
-        // $id = Auth::id();
-        // if ($user->type() == 'admin') {
 
-        //     return $query->where('project_type', '1');
-        // } elseif ($user->type() == 'regular_area') {
-
-        //     $Area = \App\Models\Area::where('admin_id', $id)->first();
-        //     $projects = DB::table('project_area')->where('area_id', $Area->id)->get();
-        // } elseif ($user->type() == 'regular_city') {
-        //     $citye =   City::where('admin_id', $id)
-        //         ->select('id')->first();
-        //     $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
-        // } else   $projects = DB::table('project_city')->get();
-
-
-        // $stack = array();
-        // foreach ($projects as $key => $value) {
-        //     array_push($stack, $value->project_id);
-        // }
         return $query->where('project_type', '1');
     }
     public function fields(Request $request)
@@ -184,16 +165,18 @@ class Project extends Resource
 
                     return $Area_type_admin_array;
                 })->singleSelect(),
-            Select::make(__('Admin'), 'admin_id')
-                ->options(function () {
-                    $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
-                    $user_type_admin_array =  array();
-                    foreach ($users as $user) {
-                        $user_type_admin_array += [$user['id'] => ($user['name'])];
-                    }
+                //     Select::make(__('Admin'), 'admin_id')
+                // ->options(function () {
+                //     $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+                //     $user_type_admin_array =  array();
+                //     foreach ($users as $user) {
+                //         $user_type_admin_array += [$user['id'] => ($user['name'])];
+                //     }
 
-                    return $user_type_admin_array;
-                })->singleSelect()->hideFromDetail()->hideFromIndex(),
+                //     return $user_type_admin_array;
+                // })->singleSelect()->hideFromDetail()->hideFromIndex(),
+
+
 
             BelongsTo::make(__('admin'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 

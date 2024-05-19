@@ -14,6 +14,7 @@
         "laravel-mix": "^1.0"
     },
     "dependencies": {
+        "bootbox": "^6.0.0",
         "pure-vue-chart": "^0.4.0",
         "vue": "^2.5.0"
     }
