@@ -811,7 +811,6 @@ class HomeController extends Controller
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
         // dd(  $Transaction ->Alhisalat);
 
-        dd($Transaction->Payment_type);
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
@@ -1013,8 +1012,8 @@ class HomeController extends Controller
 
         // dd("Email is Sent.");
         $type = '1';
-        $id=$Transaction->bill_number;
-        return view('Pages.Bills.mainBill', compact('id', 'type'));
+        $bill_number=$Transaction->bill_number;
+        return view('Pages.Bills.mainBill', compact('id', 'type','bill_number'));
     }
     public function SendMail(Request $request)
     {
