@@ -102,10 +102,6 @@ class Report extends Resource
     {
         return [
 
-            ID::make(__('ID'), 'id')->calculate('count', __('Total Count'), function ($model) {
-                    return new RowBackgroundData("#000000", "#ffffff");
-
-            })->onlyOnIndex(),
 
             Text::make(__("project name"), "project_name")->rules('required'),
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideWhenCreating()->hideWhenUpdating(),

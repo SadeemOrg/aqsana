@@ -21,7 +21,7 @@ class ExportsReport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ['المشروع','رقم', 'نوع السند', 'الاسم',  'المشروع', 'القيمة'];
+        return ['رقم', 'نوع السند', 'الاسم',  'المشروع', 'القيمة'];
     }
 
     /**
@@ -34,11 +34,7 @@ class ExportsReport implements FromCollection, WithHeadings
         $mergedQuery = collect(); // Initialize as an empty collection
 
        foreach ($Projects as $key => $Project) {
-        $additionalRows = [
 
-            ['', '  الاسم المشروع ',  $Project->project_name],
-        ];
-        $mergedQuery = $mergedQuery->concat($additionalRows);
 
 
 
@@ -80,7 +76,9 @@ class ExportsReport implements FromCollection, WithHeadings
 
             $additionalRows = [
 
-                ['', 'مجموع ',  $totalAmountMainType1 - $totalAmountMainType2],
+                ['', 'المجموع ',  $totalAmountMainType1 - $totalAmountMainType2],
+                ['', '** ',  '**','**'],
+                ['', '** ',  '**','**'],
             ];
             $mergedQuery = $mergedQuery->concat($selectedTransactions)->concat($additionalRows);
 
@@ -90,4 +88,5 @@ class ExportsReport implements FromCollection, WithHeadings
 
 
     }
+
 }

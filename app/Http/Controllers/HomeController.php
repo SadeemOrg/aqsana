@@ -418,6 +418,17 @@ class HomeController extends Controller
 
                 );
         }
+        $year = $request->year;
+        $firstDayOfYear = Carbon::createFromDate($year, 1, 1)->startOfDay();
+        // dd(  );
+        $Project = new Project();
+        $Project->project_type = 1;
+        $Project->project_name = 'حصلات ' . $request->year;
+        $Project->project_describe = 'حصلات' . $request->year;
+        $Project->sector = 11;
+        $Project->start_date = $firstDayOfYear;
+
+        $Project->save();
     }
     public function delet(Request $request)
     {
