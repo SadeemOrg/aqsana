@@ -34,16 +34,16 @@
           </div>
         </div>
 
-        <a :href="`/originalbill/${id}`"
+        <!-- <a :href="`/originalbill/${id}`"
           class="secContainer flex flex-col justify-center cursor-pointer items-center  md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3">
           <img src="/assets/image/pdf.png" class="w-8 h-8 " alt="">
           <h3 class="font-FlatBold text-center text-lg lg:text-xl">نسخة أصلية</h3>
-        </a>
-        <a :href="`/bill/${id}`"
+        </a> -->
+        <!-- <a :href="`/bill/${id}`"
           class="secContainer flex flex-col justify-center cursor-pointer items-center  md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3">
           <img src="/assets/image/pdf.png" class="w-8 h-8 " alt="">
           <h3 class="font-FlatBold text-center text-lg lg:text-xl">نسخة عن الأصلية</h3>
-        </a>
+        </a> -->
         <a :href="`https://api.whatsapp.com/send?text=${baseUrl}/generate-pdf/${id}`"
           class="whatsappContainer flex flex-col justify-center items-center  pl-2 basis-1/5 min-h-[145px] cursor-pointer  gap-y-3">
           <img src="/assets/image/whatsappbill.png" class="w-8 h-8 " alt="">
