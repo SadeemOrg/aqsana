@@ -104,7 +104,7 @@
         <p style="font-size: 16px;color:#101426">{{ $ChickBillDate }}</p>
         <p style="font-size:16px; color:#101426 ">receipt voucher number
             <span>
-                F-1000{{ $TransactionArray['id'] }}
+                F-{{ $TransactionArray['bill_number'] }}
             </span>
         </p>
         <p style="font-size:16px; color:#101426; ">copy of orginal Bill</p>

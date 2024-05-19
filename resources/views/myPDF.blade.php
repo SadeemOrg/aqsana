@@ -85,25 +85,6 @@
                     </p>
                 </div>
             </div>
-            {{-- <div class="flex flex-col items-center mt-10">
-                <p dir="ltr" class="">{{ $newDate[0] }}</p>
-                <p class="font-FlatBold text-[17px] text-[#101426] ">سند قبض رقم
-                    <span class="text-base">
-                        F-1000{{ $Transaction->id }}
-                    </span>
-                </p>
-                @if ($original == 1)
-                    <p class="font-FlatBold text-[17px] text-[#101426] "> النسخة ألاصلية</p>
-                @else
-                    <p class="font-FlatBold text-[17px] text-[#101426] ">نسحة عن النسخة ألاصلية</p>
-                @endif
-            </div>
-            <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 max-w-xl mt-4">
-                <p class="text-[18px] font-FlatBold text-[#101426]">لحساب :</p>
-                <span class="font-FlatBold text-[#6B7280]  text-[18px] text-right">
-                    {{ $Transaction->TelephoneDirectory->name }}
-                </span>
-            </div> --}}
         @endif
     </div>
 </body>

@@ -172,9 +172,13 @@
 
         </style>
 <style>
-    .reset-button {
-        margin-top: 10px;
-    }
+   .reset-button {
+    margin-top: 1px;
+    margin-right: 3px;
+    padding: 2px
+    display: flex;
+    justify-content: flex-start;
+}
   </style>
 
     <script>

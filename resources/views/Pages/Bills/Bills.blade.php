@@ -4,7 +4,7 @@
 @include('Pages.Bills.ArabicBills')
 @elseif($Transaction->lang == 2)
 @include('Pages.Bills.EnglishBills')
-@else 
+@else
 @include('Pages.Bills.HebrowBills')
 @endif
 @endsection
