@@ -407,6 +407,17 @@ class HomeController extends Controller
 
                 );
 
+                $year = $request->year;
+                $firstDayOfYear = Carbon::createFromDate($year, 1, 1)->startOfDay();
+
+                $Project = new Project();
+                $Project->project_type = 1;
+                $Project->project_name = 'حصلات ' . $request->year;
+                $Project->project_describe = 'حصلات' . $request->year;
+                $Project->sector = 11;
+                $Project->start_date = $firstDayOfYear;
+
+                $Project->save();
         }
 
 
@@ -417,23 +428,6 @@ class HomeController extends Controller
                     ['budget' => $value['Budget']]
 
                 );
-        }
-
-        $projectName = 'حصلات ' . $request->year;
-
-        // Check if the project already exists
-        $existingProject = Project::where('project_name', $projectName)->first();
-
-        if (!$existingProject) {
-            // If the project does not exist, create a new one
-            $Project = new Project();
-            $Project->project_type = 1;
-            $Project->project_name = $projectName;
-            $Project->project_describe = 'حصلات' . $request->year;
-            $Project->sector = 11;
-            $Project->start_date = $request->start_date;
-
-            $Project->save();
         }
 
     }
