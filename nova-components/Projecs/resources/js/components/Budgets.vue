@@ -30,12 +30,11 @@
                             :id="index" type="text" v-model="Sector.Budget" />
                     </div>
                 </div>
-                <div v-if="Sectors.length" class="md:flex md:items-center w-full justify-end">
-                    <p class='text-right text-small' v-bind:class="{ 'text-danger': hasError }">Sum: {{ remainingCount }}
+            </div>
+            <div v-if="Sectors.length" class="md:flex md:items-center w-full justify-start py-4">
+                <p class='text-right text-small' v-bind:class="{ 'text-danger': hasError }">Sum: {{ remainingCount
+                    }}
                 </p>
-                </div>
-
-
             </div>
             <div v-if="Sectors.length" class="md:flex md:items-center w-full justify-end">
                 <div class="md:w-2/3">
