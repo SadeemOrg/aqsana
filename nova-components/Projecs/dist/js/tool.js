@@ -540,7 +540,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.remainingCount = 0;
             var sumBud = 0;
             this.newSectors.forEach(function (element) {
-                sumBud += parseInt(element["Budget"]);
+                if (element["Budget"]) {
+
+                    sumBud += parseInt(element["Budget"]);
+                }
             });
             this.remainingCount = this.budgetsOfyear - sumBud;
             this.hasError = this.budgetsOfyear < sumBud;
