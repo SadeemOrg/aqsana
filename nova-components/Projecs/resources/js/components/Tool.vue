@@ -225,7 +225,10 @@ export default {
             this.remainingCount = 0;
             let sumBud = 0;
             this.newSectors.forEach((element) => {
+                if (element["Budget"]) {
+
                 sumBud += parseInt(element["Budget"]);
+                }
             });
             this.remainingCount = this.budgetsOfyear - sumBud;
             this.hasError = (this.budgetsOfyear < sumBud);
