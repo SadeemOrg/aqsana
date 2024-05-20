@@ -35,7 +35,8 @@
                                             class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                                             id="yearSelect" name="year" v-model="newyear">
                                             <!-- Using a standard JavaScript for loop -->
-                                            <option v-for="index in addYears.length" :key="index" :value="addYears[index]">
+                                            <option v-for="index in addYears.length" :key="index"
+                                                :value="addYears[index]">
                                                 {{ addYears[index] }}
                                             </option>
                                         </select>
@@ -61,7 +62,7 @@
                                                     :for="index">
                                                     {{ Sector.Sector }}
                                                 </label>
-                                                <input  v-on:keyup="countdown"
+                                                <input v-on:keyup="countdown"
                                                     class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                                                     :id="index" type="text" v-model="Sector.Budget" />
                                             </div>
@@ -77,7 +78,8 @@
                                         </div>
                                     </div>
                                 </form>
-                                <p class='text-right text-small' v-bind:class="{'text-danger': hasError }">Sum: {{remainingCount}}</p>
+                                <p class='text-right text-small' v-bind:class="{ 'text-danger': hasError }">Sum:
+                                    {{ remainingCount }}</p>
 
                             </div>
 
@@ -227,7 +229,7 @@ export default {
             this.newSectors.forEach((element) => {
                 if (element["Budget"]) {
 
-                sumBud += parseInt(element["Budget"]);
+                    sumBud += parseInt(element["Budget"]);
                 }
             });
             this.remainingCount = this.budgetsOfyear - sumBud;

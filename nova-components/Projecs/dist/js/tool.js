@@ -475,6 +475,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
 
 
 
@@ -9778,7 +9780,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ["years", "year"],
@@ -9968,82 +9969,80 @@ var render = function() {
             staticClass:
               "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4"
           },
-          [
-            _vm._l(_vm.Sectors, function(Sector, index) {
-              return _c(
-                "div",
-                { key: Sector.Sector, attrs: { value: Sector.Sector } },
-                [
-                  _c("div", { staticClass: "mb-3" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass:
-                          "block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64",
-                        attrs: { for: index }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(Sector.Sector) +
-                            "\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: Sector.Budget,
-                          expression: "Sector.Budget"
-                        }
-                      ],
+          _vm._l(_vm.Sectors, function(Sector, index) {
+            return _c(
+              "div",
+              { key: Sector.Sector, attrs: { value: Sector.Sector } },
+              [
+                _c("div", { staticClass: "mb-3" }, [
+                  _c(
+                    "label",
+                    {
                       staticClass:
-                        " appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
-                      attrs: { id: index, type: "text" },
-                      domProps: { value: Sector.Budget },
-                      on: {
-                        keyup: _vm.countdown,
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(Sector, "Budget", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]
-              )
-            }),
-            _vm._v(" "),
-            _vm.Sectors.length
-              ? _c(
-                  "div",
-                  { staticClass: "md:flex md:items-center w-full justify-end" },
-                  [
-                    _c(
-                      "p",
+                        "block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64",
+                      attrs: { for: index }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(Sector.Sector) +
+                          "\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
                       {
-                        staticClass: "text-right text-small",
-                        class: { "text-danger": _vm.hasError }
-                      },
-                      [
-                        _vm._v(
-                          "Sum: " +
-                            _vm._s(_vm.remainingCount) +
-                            "\n            "
-                        )
-                      ]
+                        name: "model",
+                        rawName: "v-model",
+                        value: Sector.Budget,
+                        expression: "Sector.Budget"
+                      }
+                    ],
+                    staticClass:
+                      " appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                    attrs: { id: index, type: "text" },
+                    domProps: { value: Sector.Budget },
+                    on: {
+                      keyup: _vm.countdown,
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(Sector, "Budget", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]
+            )
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _vm.Sectors.length
+          ? _c(
+              "div",
+              {
+                staticClass: "md:flex md:items-center w-full justify-start py-4"
+              },
+              [
+                _c(
+                  "p",
+                  {
+                    staticClass: "text-right text-small",
+                    class: { "text-danger": _vm.hasError }
+                  },
+                  [
+                    _vm._v(
+                      "Sum: " + _vm._s(_vm.remainingCount) + "\n            "
                     )
                   ]
                 )
-              : _vm._e()
-          ],
-          2
-        ),
+              ]
+            )
+          : _vm._e(),
         _vm._v(" "),
         _vm.Sectors.length
           ? _c(
@@ -10788,7 +10787,12 @@ var render = function() {
                         staticClass: "text-right text-small",
                         class: { "text-danger": _vm.hasError }
                       },
-                      [_vm._v("Sum: " + _vm._s(_vm.remainingCount))]
+                      [
+                        _vm._v(
+                          "Sum:\n                                " +
+                            _vm._s(_vm.remainingCount)
+                        )
+                      ]
                     )
                   ]
                 )
