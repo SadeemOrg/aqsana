@@ -3,6 +3,7 @@
 namespace App\Nova\Actions;
 
 use App\Models\Project;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -45,6 +46,16 @@ class AlhisalatStatuscompleted extends Action
 
             ]);
         }
+        $largestBillNumber = Transaction::where([
+            ['main_type', 1],
+            ['type', 2],
+            ['is_delete', '<>', '2'],
+        ])
+            ->orderBy('bill_number', 'desc')
+            ->value('bill_number');
+        if (is_null($largestBillNumber)) {
+            $largestBillNumber = 999;
+        }
         DB::table('transactions')
             ->Insert(
 
@@ -61,7 +72,8 @@ class AlhisalatStatuscompleted extends Action
                     "lang" => 1,
                     'transaction_date' => $date = date('Y-m-d'),
                     'sector' => 11,
-                    'ref_id' => $Project->id
+                    'ref_id' => $Project->id,
+                    'bill_number'=>$largestBillNumber + 1,
                 ]
             );
 
