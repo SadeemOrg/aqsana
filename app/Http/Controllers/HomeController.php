@@ -702,11 +702,11 @@ class HomeController extends Controller
 
     public function getSectors(Request $request)
     {
-
-        $Sectors =  Sector::whereHas('budget', function ($query) use ($request) {
+        $Sectors = Sector::whereHas('budget', function ($query) use ($request) {
             $query->where('year', '=', $request->Year)
-                ->where('budget', '>', 0);
-        })->get();
+                  ->where('budget', '>', 0);
+        })->orWhereIn('id', [7, 11])->get();
+
         return $Sectors;
     }
     public function getProject(Request $request)
