@@ -112,7 +112,7 @@
                                         expensesLabel="مجمل المصاريف للعام "
                                         :expensesValue="totalSectorYearly.expenses_year"
                                         incomeLabel="مجمل المدخلات للعام" :incomeValue="totalSectorYearly.income_year"
-                                        net_amount_label="صافي الانفاق الكلي" />
+                                        net_amount_label="صافي الربح والخساره " />
                                 </div>
                                 <div class="w-full">
                                     <div class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
