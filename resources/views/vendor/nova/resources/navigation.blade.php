@@ -59,19 +59,19 @@
                                 </li>
                             @endforeach
                             @if ($group == 'الادارة المالية')
-                            <router-link
-                            :to="{ name: 'projecs' }"
-                            class="text-white text-justify no-underline dim ml-2" style="font-size: 15px"
-                            dusk="{{ $resource::uriKey() }}-resource-link">
-                            {{ __('budget') }}
-                        </router-link>
-                        @elseif ($group == 'موقع الجمعية')
-                        <router-link
-                        :to="{ name: 'nova-settings' }"
-                        class="text-white text-justify no-underline dim ml-2" style="font-size: 15px"
-                        dusk="{{ $resource::uriKey() }}-resource-link">
-                        {{ __('إعدادات الموقع') }}
-                    </router-link>
+                                <li>
+                                    <router-link :to="{ name: 'projecs' }"
+                                        class="text-white text-justify no-underline dim ml-2 "
+                                        style="font-size: 15px" dusk="{{ $resource::uriKey() }}-resource-link">
+                                        {{ __('budget') }}
+                                    </router-link>
+                                </li>
+                            @elseif ($group == 'موقع الجمعية')
+                                <router-link :to="{ name: 'nova-settings' }"
+                                    class="text-white text-justify no-underline dim ml-2" style="font-size: 15px"
+                                    dusk="{{ $resource::uriKey() }}-resource-link">
+                                    {{ __('إعدادات الموقع') }}
+                                </router-link>
                             @endif
                         </ul>
                     </li>
