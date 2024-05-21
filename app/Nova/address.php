@@ -127,15 +127,15 @@ class address extends Resource
             // GoogleMaps::make(__('current_location'), 'current_location')
             //     ->zoom(8),
 
-                // MapsAddress::make(__('Address'), 'current_location') ->zoom(10)
+                MapsAddress::make(__('Address'), 'current_location') ->zoom(10),
 
                 // ->center(['lat' =>  31.775947, 'lng' => 35.235577]) ->types(['address' ,'establishment'])->mapOptions(['fullscreenControl' => true,'clickableIcons'=>true,'restriction'=>true]),
 
-                Text::make(__('longitude'), "longitude")->hideFromDetail()->hideFromIndex(),
-                Text::make(__('latitude'), "latitude")->hideFromDetail()->hideFromIndex(),
-                Text::make(__('street_name'), "street_name")->hideFromDetail()->hideFromIndex(),
-                Text::make(__('city'), "city")->hideFromDetail()->hideFromIndex(),
-            // Select::make(__("Status"), "status")->options([
+            //     Text::make(__('longitude'), "longitude")->hideFromDetail()->hideFromIndex(),
+            //     Text::make(__('latitude'), "latitude")->hideFromDetail()->hideFromIndex(),
+            //     Text::make(__('street_name'), "street_name")->hideFromDetail()->hideFromIndex(),
+            //     Text::make(__('city'), "city")->hideFromDetail()->hideFromIndex(),
+            // // Select::make(__("Status"), "status")->options([
             //     '1' => __('active'),
             //     '2' => __('not active'),
             // ])->displayUsingLabels(),
@@ -147,23 +147,23 @@ class address extends Resource
 
     public static function beforeUpdate(Request $request, $model)
     {
-        $address=    \App\Models\address::find($model->id);
+        // $address=    \App\Models\address::find($model->id);
 
-        $data =$address->current_location;
+        // $data =$address->current_location;
 
-        $json = \File::get('sample.json');
-        $data = json_decode($json);
-        $data['street_name'] =($request->street_name != null) ?$request->street_name : $data['street_name'] ;
-        $data['city']  =($request->city != null) ?$request->city : $data['city'] ;
-        $data['latitude']  =($request->latitude != null) ?(float)$request->latitude :(float) $data['latitude'] ;
-        $data['longitude']  =($request->longitude != null) ?(float)$request->longitude : (float)$data['longitude'] ;
-        $data['formatted_address'] =  $data['street_name'].','.   $data['city'] ;
+        // $json = \File::get('sample.json');
+        // $data = json_decode($json);
+        // $data['street_name'] =($request->street_name != null) ?$request->street_name : $data['street_name'] ;
+        // $data['city']  =($request->city != null) ?$request->city : $data['city'] ;
+        // $data['latitude']  =($request->latitude != null) ?(float)$request->latitude :(float) $data['latitude'] ;
+        // $data['longitude']  =($request->longitude != null) ?(float)$request->longitude : (float)$data['longitude'] ;
+        // $data['formatted_address'] =  $data['street_name'].','.   $data['city'] ;
 
-        $request->request->remove('street_name');
-        $request->request->remove('city');
-        $request->request->remove('latitude');
-        $request->request->remove('longitude');
-        $model->current_location=$data;
+        // $request->request->remove('street_name');
+        // $request->request->remove('city');
+        // $request->request->remove('latitude');
+        // $request->request->remove('longitude');
+        // $model->current_location=$data;
     }
     public static function beforeCreate(Request $request, $model)
     {
