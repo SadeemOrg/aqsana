@@ -127,8 +127,8 @@ class address extends Resource
             // GoogleMaps::make(__('current_location'), 'current_location')
             //     ->zoom(8),
 
-                MapsAddress::make(__('Address'), 'current_location'),
-                //  ->zoom(10)->center(['lat' =>  31.775947, 'lng' => 35.235577]) ->types(['address' ,'establishment'])->mapOptions(['fullscreenControl' => true,'clickableIcons'=>true,'restriction'=>true]),
+                MapsAddress::make(__('Address'), 'current_location') ->zoom(10)->center(['lat' =>  31.775947, 'lng' => 35.235577]),
+                //  ->types(['address' ,'establishment'])->mapOptions(['fullscreenControl' => true,'clickableIcons'=>true,'restriction'=>true]),
 
             //     Text::make(__('longitude'), "longitude")->hideFromDetail()->hideFromIndex(),
             //     Text::make(__('latitude'), "latitude")->hideFromDetail()->hideFromIndex(),
