@@ -125,9 +125,10 @@ class address extends Resource
 
 
             // GoogleMaps::make(__('current_location'), 'current_location')
-            //     ->zoom(8),
+            //     ->zoom(8),31.77624246761854, 35.236198620223036
 
-                MapsAddress::make(__('Address'), 'current_location') ->zoom(10)->center(['lat' =>  31.775947, 'lng' => 35.235577]),
+                MapsAddress::make(__('Address'), 'current_location')
+                ->types(['address' ]) ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036]),
                 //  ->types(['address' ,'establishment'])->mapOptions(['fullscreenControl' => true,'clickableIcons'=>true,'restriction'=>true]),
 
             //     Text::make(__('longitude'), "longitude")->hideFromDetail()->hideFromIndex(),
