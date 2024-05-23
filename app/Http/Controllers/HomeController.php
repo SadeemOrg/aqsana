@@ -417,7 +417,7 @@ class HomeController extends Controller
                 $Project->sector = 11;
                 $Project->start_date = $firstDayOfYear;
 
-                $Project->save();
+            $Project->save();
         }
 
 
@@ -429,7 +429,6 @@ class HomeController extends Controller
 
                 );
         }
-
     }
     public function delet(Request $request)
     {
@@ -442,22 +441,42 @@ class HomeController extends Controller
         $TelephoneDirectory = TelephoneDirectory::whereJsonContains('type', $request->type)->get();
 
 
-        $basic  = new \Nexmo\Client\Credentials\Basic('4c8fe049', 'ZOP7qC5OANL0GZsD');
-        $client = new \Nexmo\Client($basic);
+        $basic  = new \Vonage\Client\Credentials\Basic("9b410b2c", "rdwDOC34rww0SLT1");
+        $client = new \Vonage\Client($basic);
 
+        $response = $client->sms()->send(
+            new \Vonage\SMS\Message\SMS("972599043747", 'ameed', 'A text message sent using the Nexmo SMS API')
+        );
+
+        $message = $response->current();
+
+        if ($message->getStatus() == 0) {
+            echo "The message was sent successfully\n";
+        } else {
+            echo "The message failed with status: " . $message->getStatus()."\n";
+        }
         // $response = $client->sms()->send(
         //     new \Vonage\SMS\Message\SMS("972506940095", "Al-Aqsa-Association", 'Al-Aqsa-Association SMS API')
         // );
 
 
-        foreach ($TelephoneDirectory as $key => $value) {
-            $response = $client->sms()->send(
-                new \Vonage\SMS\Message\SMS($value->phone_number, "Al_Aqsa_Association", $request->Message)
-            );
-            $message = $response->current();
-        }
+        // foreach ($TelephoneDirectory as $key => $value) {
+        //     $response = $client->sms()->send(
+        //         new \Vonage\SMS\Message\SMS("972599043747", 'BRAND_NAME', 'A text message sent using the Nexmo SMS API')
+
+        //         // new \Vonage\SMS\Message\SMS('0569465465', "Al_Aqsa_Association", $request->Message)
+        //     );
+        //     $message = $response->current();
+        // }
         return "ok";
     }
+    // public function SendMessage(Request $request)
+    // {
+    //         //     $TelephoneDirectory = TelephoneDirectory::whereJsonContains('type', $request->type)->get();
+
+    //     dd($request->type, $request->all());
+
+    // }
     public function SectorsBudget(Request $request)
     {
 
@@ -704,7 +723,7 @@ class HomeController extends Controller
     {
         $Sectors = Sector::whereHas('budget', function ($query) use ($request) {
             $query->where('year', '=', $request->Year)
-                  ->where('budget', '>', 0);
+                ->where('budget', '>', 0);
         })->orWhereIn('id', [7, 11])->get();
 
         return $Sectors;
@@ -958,9 +977,9 @@ class HomeController extends Controller
                 case 5:
                     $PaymentType = "حصالة";
                     break;
-                    case 6:
-                        $PaymentType = "حصالة";
-                        break;
+                case 6:
+                    $PaymentType = "حصالة";
+                    break;
             }
         } else if ($Transaction->lang == 2) {
             switch ($Transaction->Payment_type) {
@@ -979,9 +998,9 @@ class HomeController extends Controller
                 case 5:
                     $PaymentType = "moneybox";
                     break;
-                    case 6:
-                        $PaymentType = "moneybox";
-                        break;
+                case 6:
+                    $PaymentType = "moneybox";
+                    break;
             }
         } else if ($Transaction->lang == 3) {
             switch ($Transaction->Payment_type) {
@@ -1000,9 +1019,9 @@ class HomeController extends Controller
                 case 5:
                     $PaymentType = "קופסת כסף";
                     break;
-                    case 6:
-                        $PaymentType = "קופסת כסף";
-                        break;
+                case 6:
+                    $PaymentType = "קופסת כסף";
+                    break;
             }
         }
         $original = 0;
@@ -1012,8 +1031,8 @@ class HomeController extends Controller
 
         // dd("Email is Sent.");
         $type = '1';
-        $bill_number=$Transaction->bill_number;
-        return view('Pages.Bills.mainBill', compact('id', 'type','bill_number'));
+        $bill_number = $Transaction->bill_number;
+        return view('Pages.Bills.mainBill', compact('id', 'type', 'bill_number'));
     }
     public function SendMail(Request $request)
     {
