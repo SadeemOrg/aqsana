@@ -29,7 +29,7 @@
           >ادخل نص الرسالة
         </label>
         <span>Add a comment</span> <em class="text-light">(up to a 140 characters)</em>
-        <textarea  v-on:keyup="countdown" v-model="message" placeholder="" id="default-input"  name="" cols="30" rows="10" class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"></textarea>
+        <textarea  v-on:keyup="countdown" v-model="Message" placeholder="" id="default-input"  name="" cols="30" rows="10" class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"></textarea>
         <p class='text-right text-small' v-bind:class="{'text-danger': hasError }">{{remainingCount}}</p>
         <div class="flex flex-row items-center justify-end mt-4">
           <button
@@ -68,7 +68,7 @@ export default {
 
   methods: {
       send() {
-
+        alert(this.Message);
       axios
         .post("/SendMessage", {
           type: this.selectval,

@@ -305,7 +305,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     send: function send() {
-
+      alert(this.Message);
       axios.post("/SendMessage", {
         type: this.selectval,
         Message: this.Message
@@ -314,6 +314,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
 
+    getType: function getType() {
+      var _this = this;
+
+      axios.post("/getType").then(function (response) {
+        _this.newSectors = response.data;
+      });
+    },
     countdown: function countdown() {
       this.remainingCount = this.maxCount - this.message.length;
       this.hasError = this.remainingCount < 0;
@@ -433,8 +440,8 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.message,
-                expression: "message"
+                value: _vm.Message,
+                expression: "Message"
               }
             ],
             staticClass:
@@ -446,14 +453,14 @@ var render = function() {
               cols: "30",
               rows: "10"
             },
-            domProps: { value: _vm.message },
+            domProps: { value: _vm.Message },
             on: {
               keyup: _vm.countdown,
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.message = $event.target.value
+                _vm.Message = $event.target.value
               }
             }
           }),
