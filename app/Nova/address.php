@@ -5,6 +5,7 @@ namespace App\Nova;
 use Acme\MultiselectField\Multiselect;
 use App\Models\Area;
 use App\Nova\Actions\ExportAddress;
+use devops\MapAddress\MapAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Fields\BelongsTo;
@@ -60,10 +61,9 @@ class address extends Resource
 
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("addressparmation",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("addressparmation",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
     public static function createButtonLabel()
     {
@@ -81,8 +81,7 @@ class address extends Resource
 
                     foreach ($AddressTypes as $AddressType) {
 
-                            $address_type_admin_array += [$AddressType['id'] => ($AddressType['name'])];
-
+                        $address_type_admin_array += [$AddressType['id'] => ($AddressType['name'])];
                     }
 
                     return $address_type_admin_array;
@@ -100,36 +99,38 @@ class address extends Resource
             Text::make(__("phone number"), "phone_number_address"),
 
 
-            NovaBelongsToDepend::make(__('Area'),'Area', \App\Nova\Area::class)
-            ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
-        ->options( Area::all()),
+            NovaBelongsToDepend::make(__('Area'), 'Area', \App\Nova\Area::class)
+                ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
+                ->options(Area::all()),
 
-    NovaBelongsToDepend::make(__('City'),'City', \App\Nova\City::class)
+            NovaBelongsToDepend::make(__('City'), 'City', \App\Nova\City::class)
 
-        ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
-        ->optionsResolve(function ($Area) {
-            return  $Area->City()->get(['id','name']);
-        })
-        ->dependsOn('Area') ->hideFromIndex()->hideFromDetail(),
+                ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
+                ->optionsResolve(function ($Area) {
+                    return  $Area->City()->get(['id', 'name']);
+                })
+                ->dependsOn('Area')->hideFromIndex()->hideFromDetail(),
 
-        Multiselect::make(__('delegatee'), 'admin_id')
-        ->options(function () {
-            $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
-            $user_type_admin_array =  array();
-            foreach ($users as $user) {
-                $user_type_admin_array += [$user['id'] => ($user['name'])];
-            }
+            Multiselect::make(__('delegatee'), 'admin_id')
+                ->options(function () {
+                    $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+                    $user_type_admin_array =  array();
+                    foreach ($users as $user) {
+                        $user_type_admin_array += [$user['id'] => ($user['name'])];
+                    }
 
-            return $user_type_admin_array;
-        })->singleSelect(),
+                    return $user_type_admin_array;
+                })->singleSelect(),
 
 
             // GoogleMaps::make(__('current_location'), 'current_location')
-            //     ->zoom(8),31.77624246761854, 35.236198620223036
+            //     ->zoom(8),
+            // MapAddress::make('address'),
 
-                MapsAddress::make(__('Address'), 'current_location')
-                ->types(['address' ]) ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036]),
-                //  ->types(['address' ,'establishment'])->mapOptions(['fullscreenControl' => true,'clickableIcons'=>true,'restriction'=>true]),
+            MapsAddress::make(__('Address'), 'current_location')
+                ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036])
+                ->types(['establishment']),
+            //  ->mapOptions(['fullscreenControl' => true,'clickableIcons'=>true,'restriction'=>true]),
 
             //     Text::make(__('longitude'), "longitude")->hideFromDetail()->hideFromIndex(),
             //     Text::make(__('latitude'), "latitude")->hideFromDetail()->hideFromIndex(),
@@ -170,23 +171,22 @@ class address extends Resource
 
         $json = \File::get('sample.json');
         $data = json_decode($json);
-        $data->street_name =$request->street_name;
-        $data->city =$request->city;
-        $data->latitude =(float)$request->latitude;
-        $data->longitude =(float)$request->longitude;
-        $data->formatted_address=$request->street_name.','.$request->city;
+        $data->street_name = $request->street_name;
+        $data->city = $request->city;
+        $data->latitude = (float)$request->latitude;
+        $data->longitude = (float)$request->longitude;
+        $data->formatted_address = $request->street_name . ',' . $request->city;
 
         $request->request->remove('street_name');
         $request->request->remove('city');
         $request->request->remove('latitude');
         $request->request->remove('longitude');
-        $model->current_location=$data;
+        $model->current_location = $data;
 
         $id = Auth::id();
 
         $model->created_by = $id;
         $model->status = 1;
-
     }
 
     /**
