@@ -221,23 +221,25 @@ class AuthController extends Controller
     {
 
         $fields = $request->validate([
-            'email' => 'required|string',
+            'email' => 'string',
+            'phone' => 'string',
             'password' => 'required|string'
         ]);
-
-
-        if (filter_var($fields['email'], FILTER_VALIDATE_EMAIL)) {
+        if (empty($fields['email']) && empty($fields['phone'])) {
+            return response([
+                'message' => 'Bad creds'
+            ], 401);
+        }
+        if (!empty($fields['email'])) {
             $user = User::where('email', $fields['email'])->first();
         } else {
-            $user = User::where('phone', $fields['email'])->first();
+            $user = User::where('phone', $fields['phone'])->first();
         }
-
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
                 'message' => 'Bad creds'
             ], 401);
         }
-
         $token = $user->createToken('myapptoken')->plainTextToken;
 
         $response = [
