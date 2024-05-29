@@ -26,6 +26,7 @@ class TripController extends BaseController
         $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
         ->orderBy('created_at', 'desc')    ->where('start_date', '>', Carbon::today())
         ->latest('id')->take(5)->get();
+
         $trips->map(function($trip) use ($request){
             $trip->start_date=$trip->start_date;
             $trip->start_date=$trip->start_date;
@@ -227,7 +228,8 @@ class TripController extends BaseController
         if(($trip->tripfrom) != null) {
 
             $tripfrom = json_decode($trip->tripfrom)->current_location;
-            $trip_to_value = $tripfrom->formatted_address;
+
+            $trip_to_value = $tripfrom?->formatted_address;
 
 
             if(stripos($trip_to_value,$request->get("search")) !== false){
