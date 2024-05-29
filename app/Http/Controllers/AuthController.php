@@ -128,8 +128,8 @@ class AuthController extends Controller
 
 
 
-         if($user == null && $request->has("email")) {
-            if($fields['email'] != null && $fields['email'] != ""){
+        if ($user == null && $request->has("email")) {
+            if ($fields['email'] != null && $fields['email'] != "") {
                 $password = Str::random(8);
                 $user = User::create([
                     'name' => $fields['name'],
@@ -141,18 +141,17 @@ class AuthController extends Controller
                     'app_user' => 1,
                 ]);
             }
-
         } else {
 
-            if($fields['id'] != null && $fields['id'] != ""){
-               $password = Str::random(8);
+            if ($fields['id'] != null && $fields['id'] != "") {
+                $password = Str::random(8);
                 $user = User::create([
-                'name' => $fields['name'],
-                'social_media_id' => $fields['social_media_id'],
-                'password' =>  bcrypt($password),
-                'user_role' => "user",
-                'nick_name' => $fields['name'],
-                'app_user' => 1,
+                    'name' => $fields['name'],
+                    'social_media_id' => $fields['social_media_id'],
+                    'password' =>  bcrypt($password),
+                    'user_role' => "user",
+                    'nick_name' => $fields['name'],
+                    'app_user' => 1,
 
                 ]);
             }
@@ -227,10 +226,12 @@ class AuthController extends Controller
         ]);
 
 
-        // Check email
-        $user = User::where('email', $fields['email'])->first();
+        if (filter_var($fields['email'], FILTER_VALIDATE_EMAIL)) {
+            $user = User::where('email', $fields['email'])->first();
+        } else {
+            $user = User::where('phone', $fields['email'])->first();
+        }
 
-        // Check password
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
                 'message' => 'Bad creds'
@@ -271,7 +272,7 @@ class AuthController extends Controller
     /**
      * Update in the user by update profile .
      * @authenticated
-  * @bodyParam   name    string  required    The name of the  user.      Example: zeyad
+     * @bodyParam   name    string  required    The name of the  user.      Example: zeyad
      * @bodyParam   email    string  required    The email of the  user.      Example:zeyad.hawash@averotec.sa
      * @bodyParam   user_role    string  required    The role of the  user.      Example: admin
      * @bodyParam   city_id    string      The  birth_date of the  user.   Example:1
@@ -410,17 +411,17 @@ class AuthController extends Controller
         DB::table('password_resets')->where('email', 'like', "%{$request['email']}%")->delete();
 
         $customer = User::Where(['email' => $request['email']])->first();
-            if (isset($customer)) {
-                $token = rand(1000, 9999);
-                DB::table('password_resets')->insert([
-                    'email' => $customer['email'],
-                    'token' => $token,
-                    'created_at' => now(),
-                ]);
+        if (isset($customer)) {
+            $token = rand(1000, 9999);
+            DB::table('password_resets')->insert([
+                'email' => $customer['email'],
+                'token' => $token,
+                'created_at' => now(),
+            ]);
 
-                Mail::to($customer['email'])->send(new \App\Mail\PasswordResetMail($token));
-                return response()->json(['message' => 'Email sent successfully.'], 200);
-            }
+            Mail::to($customer['email'])->send(new \App\Mail\PasswordResetMail($token));
+            return response()->json(['message' => 'Email sent successfully.'], 200);
+        }
 
         return response()->json(['errors' => [
             ['code' => 'not-found', 'message' => 'user not found!']
@@ -438,17 +439,16 @@ class AuthController extends Controller
             return response()->json(['errors' => $validator->errors()], 403);
         }
 
-       $check_token_reset_password = DB::table('password_resets')->where('email', 'like', "%{$request['email']}%")->where('token',$request['token'])->first();
+        $check_token_reset_password = DB::table('password_resets')->where('email', 'like', "%{$request['email']}%")->where('token', $request['token'])->first();
 
-       if($check_token_reset_password != null) {
-        DB::table('password_resets')->where('email', 'like', "%{$request['email']}%")->where('token',$request['token'])->delete();
+        if ($check_token_reset_password != null) {
+            DB::table('password_resets')->where('email', 'like', "%{$request['email']}%")->where('token', $request['token'])->delete();
 
-        return response()->json(['message' => 'successfully token reset password'], 200);
-       }
-       return response()->json(['errors' => [
-        ['code' => 'not-found', 'message' => 'invalid token']
-       ]], 404);
-
+            return response()->json(['message' => 'successfully token reset password'], 200);
+        }
+        return response()->json(['errors' => [
+            ['code' => 'not-found', 'message' => 'invalid token']
+        ]], 404);
     }
 
 
@@ -460,94 +460,88 @@ class AuthController extends Controller
 
         ]);
 
-        $customer = User::Where('email' , $fields['email'])->first();
+        $customer = User::Where('email', $fields['email'])->first();
 
-        if($customer != null) {
+        if ($customer != null) {
             $customer->password = bcrypt($fields['password']);
             $customer->save();
             return response()->json(['message' => 'successfully reset password'], 200);
         }
 
 
-       return response()->json(['errors' => [
-        ['code' => 'not-found', 'message' => 'not found email']
-       ]], 404);
-
-
-
+        return response()->json(['errors' => [
+            ['code' => 'not-found', 'message' => 'not found email']
+        ]], 404);
     }
 
-   /**
+    /**
      * @authenticated
      *
-    */
-    public function getInformationUser(Request $request){
+     */
+    public function getInformationUser(Request $request)
+    {
 
-        $user = User::where("id",Auth()->id())->with("Donations.Project","Volunteer.Project")
-        ->with(["TripBooking.Project"=>function($query) use($request){
-           $query->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')->get();
-
-        }])
-        ->withCount('Donations as donations_count')
-        ->withCount('Volunteer as volunteer_count')
-        ->withCount('TripBooking as trip_booking_count')
-        ->first();
+        $user = User::where("id", Auth()->id())->with("Donations.Project", "Volunteer.Project")
+            ->with(["TripBooking.Project" => function ($query) use ($request) {
+                $query->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')->get();
+            }])
+            ->withCount('Donations as donations_count')
+            ->withCount('Volunteer as volunteer_count')
+            ->withCount('TripBooking as trip_booking_count')
+            ->first();
 
         $trip_booking = json_decode($user)->trip_booking;
         $trip_booking = collect($trip_booking);
 
-            $trip_booking->map(function ($trip) use($request){
+        $trip_booking->map(function ($trip) use ($request) {
 
-                // $from_latlng = json_decode($trip->project->tripfrom->current_location)->latlng;
-                // $from_lat = $from_latlng->lat;
-                // $from_lng = $from_latlng->lng;
+            // $from_latlng = json_decode($trip->project->tripfrom->current_location)->latlng;
+            // $from_lat = $from_latlng->lat;
+            // $from_lng = $from_latlng->lng;
 
-                // $to_latlng = json_decode($trip->project->tripto->current_location)->latlng;
-                // $to_lat = $to_latlng->lat;
-                // $to_lng = $to_latlng->lng;
+            // $to_latlng = json_decode($trip->project->tripto->current_location)->latlng;
+            // $to_lat = $to_latlng->lat;
+            // $to_lng = $to_latlng->lng;
 
-                if(($trip->project->tripfrom) != null) {
-                    $from_latlng = ($trip->project->tripfrom);
-                    $from_lat = $from_latlng->latitude;
-                    $from_lng = $from_latlng->longitude;
+            if (($trip->project->tripfrom) != null) {
+                $from_latlng = ($trip->project->tripfrom);
+                $from_lat = $from_latlng->latitude;
+                $from_lng = $from_latlng->longitude;
+            } else {
+                $from_lat = 180;
+                $from_lng = -180;
+            }
+
+
+
+            if ($trip->project->tripto != null) {
+                $to_latlng = ($trip->project->tripto);
+                $to_lat = $to_latlng->latitude;
+                $to_lng = $to_latlng->longitude;
+            } else {
+                $to_lat = 180;
+                $to_lng = -180;
+            }
+
+            $from_distance = Helpers::distance($request->lat, $request->lng, $from_lat, $from_lng, 'K');
+            $trip->project->from_distance = round($from_distance, 2);
+
+
+            $to_distance = Helpers::distance($request->lat, $request->lng, $to_lat, $to_lng, 'K');
+            $trip->project->to_distance = round($to_distance, 2);
+
+            $trip_bokking = TripBooking::where('user_id', Auth()->id())->where('project_id', $trip->project->id)->first();
+
+            if ($trip_bokking != null) {
+                if ($trip_bokking->status == 1) {
+                    $trip->project->isBooking = 1;
                 } else {
-                    $from_lat = 180;
-                    $from_lng = -180;
-                }
-
-
-
-                if($trip->project->tripto != null) {
-                    $to_latlng = ($trip->project->tripto);
-                    $to_lat = $to_latlng->latitude;
-                    $to_lng = $to_latlng->longitude;
-                } else {
-                    $to_lat = 180;
-                    $to_lng = -180;
-                }
-
-                $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K');
-                $trip->project->from_distance = round($from_distance, 2);
-
-
-                $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K');
-                $trip->project->to_distance = round($to_distance, 2);
-
-                $trip_bokking = TripBooking::where('user_id',Auth()->id())->where('project_id',$trip->project->id)->first();
-
-                 if($trip_bokking != null) {
-                    if($trip_bokking->status == 1){
-                        $trip->project->isBooking = 1;
-                    } else {
-                        $trip->project->isBooking = 0;
-                    }
-                 } else{
                     $trip->project->isBooking = 0;
-                 }
-
-
-
-            });
+                }
+            } else {
+                $trip->project->isBooking = 0;
+            }
+        });
 
 
         $user->custom_trip_booking = $trip_booking;
@@ -559,29 +553,20 @@ class AuthController extends Controller
             'user' => $user
         ];
         return response($response, 200);
-
     }
 
     public function delete()
     {
 
-            $user = Auth::user();
-            if($user != null) {
-                if($user->user_role == "user") {
-                    $user_delete =  User::where("id",$user->id)->delete();
-                    $response = [
-                      'success' => "true",
-                      'message' => "Success delete user"
-                  ];
-                   return response($response, 200);
-                } else{
-                    $response = [
-                        'success' => "false",
-                        'message' => "Not Auth"
-                    ];
-                    return response($response, 401);
-                }
-
+        $user = Auth::user();
+        if ($user != null) {
+            if ($user->user_role == "user") {
+                $user_delete =  User::where("id", $user->id)->delete();
+                $response = [
+                    'success' => "true",
+                    'message' => "Success delete user"
+                ];
+                return response($response, 200);
             } else {
                 $response = [
                     'success' => "false",
@@ -589,6 +574,12 @@ class AuthController extends Controller
                 ];
                 return response($response, 401);
             }
-
+        } else {
+            $response = [
+                'success' => "false",
+                'message' => "Not Auth"
+            ];
+            return response($response, 401);
+        }
     }
 }
