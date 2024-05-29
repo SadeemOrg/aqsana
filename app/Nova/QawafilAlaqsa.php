@@ -347,9 +347,8 @@ class QawafilAlaqsa extends Resource
 
                         foreach ($addresss as $address) {
 
-                            if ($address->Area == null || $this->admin_id == $address['id']) {
                                 $address_type_admin_array += [$address['id'] => ($address['name_address'])];
-                            }
+
                         }
 
                         return $address_type_admin_array;
@@ -394,9 +393,8 @@ class QawafilAlaqsa extends Resource
 
                     foreach ($addresss as $address) {
 
-                        if ($address->Area == null || $this->admin_id == $address['id']) {
                             $address_type_admin_array += [$address['id'] => ($address['name_address'])];
-                        }
+
                     }
 
                     return $address_type_admin_array;

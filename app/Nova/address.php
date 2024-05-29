@@ -95,7 +95,7 @@ class address extends Resource
 
             // ])->displayUsingLabels()->rules('required'),
             Text::make(__('name address'), "name_address")->rules('required'),
-            Text::make(__("description address"), "description"),
+            Text::make(__("description address"), "description")->rules('required'),
             Text::make(__("phone number"), "phone_number_address"),
 
 
