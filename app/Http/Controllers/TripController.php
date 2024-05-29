@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\CPU\Helpers;
 use App\Models\QawafilAlaqsa;
 use App\Models\TripBooking;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,8 +24,8 @@ class TripController extends BaseController
 
 
         $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-        ->orderBy('created_at', 'desc')->latest('id')->take(5)->get();
-
+        ->orderBy('created_at', 'desc')    ->where('start_date', '>', Carbon::today())
+        ->latest('id')->take(5)->get();
         $trips->map(function($trip) use ($request){
             $trip->start_date=$trip->start_date;
             $trip->start_date=$trip->start_date;
