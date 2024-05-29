@@ -30,10 +30,8 @@ class QawafilAlaqsaDate implements Rule
     {
         $starttime = Carbon::parse($this->Date);
         $finishTime = Carbon::parse($value);
-
         $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
         $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
-//   dd($startDate->lt($endDate));
 
         return ($startDate->lt($endDate));
     }
