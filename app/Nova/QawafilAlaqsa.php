@@ -262,16 +262,16 @@ class QawafilAlaqsa extends Resource
                         return true;
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
-                Boolean::make(__('Active'), function () {
-                    $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-                    if ($projects) {
+                // Boolean::make(__('Active'), function () {
+                //     $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                //     if ($projects) {
 
-                        if ($projects->status == 3) {
+                //         if ($projects->status == 3) {
 
-                            return true;
-                        } else return false;
-                    } else return false;
-                }),
+                //             return true;
+                //         } else return false;
+                //     } else return false;
+                // }),
 
                 Text::make(__("QawafilAlaqsa name"), "project_name")->rules('required'),
                 Text::make(__("QawafilAlaqsa describe"), "project_describe")->rules('required'),
@@ -300,7 +300,7 @@ class QawafilAlaqsa extends Resource
                     })->singleSelect(),
 
                 Select::make(__("Repetition"), "repetition")->options([
-                    '0' => __('Once'),
+                    '6' => __('Once'),
                     '1' => __('daily'),
                     '2' => __('weekly'),
                     '3' => __('fortnightly'),
