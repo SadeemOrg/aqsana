@@ -26,8 +26,9 @@ class TripController extends BaseController
         $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
         ->orderBy('created_at', 'desc')    ->where('start_date', '>', Carbon::now('UTC'))
         ->latest('id')->take(5)->get();
+
         $trips->transform(function ($trip) {
-            $trip->start_date = Carbon::parse($trip->start_date)->setTimezone('Asia/Jerusalem');
+            $trip->start_date = Carbon::parse($trip->start_date)->setTimezone('Asia/Jerusalem')->format('Y-m-d\TH:i:s.u\Z');
             return $trip;
         });
 
