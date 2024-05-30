@@ -22,74 +22,70 @@ class TripController extends BaseController
     public function index(Request $request)
     {
 
-
-        $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-        ->orderBy('created_at', 'desc')    ->where('start_date', '>', Carbon::now('Asia/Jerusalem'))
+        dd($request->lat,$request->lng);
 
 
-        ->latest('id')->take(5)->get();
+        $trips = Project::where("id", 251)->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+            ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())
 
-        $trips->map(function($trip) use ($request){
-            $trip->start_date=$trip->start_date;
-            $trip->start_date=$trip->start_date;
-            $trip->end_date=$trip->end_date;
-            if(($trip->tripfrom) != null) {
+
+            ->latest('id')->take(5)->get();
+
+        $trips->map(function ($trip) use ($request) {
+            $trip->start_date = $trip->start_date;
+            $trip->start_date = $trip->start_date;
+            $trip->end_date = $trip->end_date;
+            if (($trip->tripfrom) != null) {
 
                 $from_latlng = ($trip->tripfrom);
-                $from_lat = $from_latlng->latitude;
-                $from_lng = $from_latlng->longitude;
 
-        } else {
-            $from_lat = 180;
-            $from_lng = -180;
-        }
+                $from_lat = $from_latlng->current_location['latitude'];
+                $from_lng =$from_latlng->current_location['longitude'];// $from_latlng->longitude;
+            } else {
+                $from_lat = 180;
+                $from_lng = -180;
+            }
 
 
-        if(($trip->tripto) != null) {
+            if (($trip->tripto) != null) {
                 $to_latlng = ($trip->tripto);
-                $to_lat = $to_latlng->latitude;
-                $to_lng = $to_latlng->longitude;
+                $to_lat = $to_latlng->current_location['latitude'];
+                $to_lng = $to_latlng->current_location['longitude'];
+            } else {
+                $to_lat = 180;
+                $to_lng = -180;
+            }
 
-        } else {
-            $to_lat = 180;
-            $to_lng = -180;
-        }
+            $from_distance = Helpers::distance('32.2219209766463', '35.24776077804188', $from_lat, $from_lng, 'K');
+            $trip->from_distance = round($from_distance, 2);
 
+            $to_distance = Helpers::distance('32.2219209766463', '35.24776077804188', $to_lat, $to_lng, 'K');
+            $trip->to_distance = round($to_distance, 2);
 
-        $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K');
-        $trip->from_distance = round($from_distance, 2);
+            if (Auth()->id() != null) {
+                $trip_bokking = TripBooking::where('user_id', Auth()->id())->where('project_id', $trip->id)->first();
 
-
-        $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K');
-        $trip->to_distance = round($to_distance, 2);
-
-
-        if(Auth()->id() != null) {
-         $trip_bokking = TripBooking::where('user_id',Auth()->id())->where('project_id',$trip->id)->first();
-
-         if($trip_bokking != null) {
-            if($trip_bokking->status == 1){
-                $trip->isBooking = 1;
+                if ($trip_bokking != null) {
+                    if ($trip_bokking->status == 1) {
+                        $trip->isBooking = 1;
+                    } else {
+                        $trip->isBooking = 0;
+                    }
+                } else {
+                    $trip->isBooking = 0;
+                }
             } else {
                 $trip->isBooking = 0;
             }
-         } else{
-            $trip->isBooking = 0;
-         }
-        } else {
-            $trip->isBooking = 0;
-        }
-
         });
 
         $trips = $trips->skip($request->get("skip"));
         $trips = $trips->sortBy('from_distance');
         $trips = $trips->values()->all();
 
-// dd($trips);
+        // dd($trips);
 
         return $this->sendResponse($trips, 'Success get Trips');
-
     }
 
 
@@ -98,91 +94,27 @@ class TripController extends BaseController
 
 
 
-        if(Auth()->id() != null){
+        if (Auth()->id() != null) {
 
-            $trip_bokking = TripBooking::where('user_id',Auth()->id())->first();
-            if($trip_bokking != null) {
-                $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-                ->orderBy('created_at', 'desc')->where('id',$trip_bokking->project_id)->get();
+            $trip_bokking = TripBooking::where('user_id', Auth()->id())->first();
+            if ($trip_bokking != null) {
+                $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+                    ->orderBy('created_at', 'desc')->where('id', $trip_bokking->project_id)->get();
             } else {
-                $trips = Project::where("project_type","2")->orWhere("project_type","3")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
+                $trips = Project::where("project_type", "2")->orWhere("project_type", "3")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+                    ->orderBy('created_at', 'desc')->get();
+            }
+        } else {
+            $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
                 ->orderBy('created_at', 'desc')->get();
-            }
-
-        } else{
-            $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-            ->orderBy('created_at', 'desc')->get();
         }
 
 
 
-        $trips->map(function($trip) use ($request){
+        $trips->map(function ($trip) use ($request) {
 
 
-          if(($trip->tripfrom) != null) {
-                $from_latlng = ($trip->tripfrom);
-                $from_lat = $from_latlng->latitude;
-                $from_lng = $from_latlng->longitude;
-        } else {
-            $from_lat = 180;
-            $from_lng = -180;
-        }
-
-
-        if(($trip->tripto) != null) {
-            $to_latlng = ($trip->tripto);
-            $to_lat = $to_latlng->latitude;
-            $to_lng = $to_latlng->longitude;
-        } else {
-            $to_lat = 180;
-            $to_lng = -180;
-        }
-
-
-        $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K');
-        $trip->from_distance = round($from_distance, 2);
-
-
-        $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K');
-        $trip->to_distance = round($to_distance, 2);
-
-
-        if(Auth()->id() != null) {
-            $trip_bokking = TripBooking::where('user_id',Auth()->id())->where('project_id',$trip->id)->first();
-
-            if($trip_bokking != null) {
-                if($trip_bokking->status == 1){
-                    $trip->isBooking = 1;
-                } else {
-                    $trip->isBooking = 0;
-                }
-            } else{
-               $trip->isBooking = 0;
-            }
-           } else {
-               $trip->isBooking = 0;
-           }
-        });
-
-        $trip = $trips->sortBy('from_distance')->first();
-
-
-        return $this->sendResponse($trip, 'Success get Trips');
-
-    }
-
-
-    public function search_trip(Request $request)
-    {
-
-
-        $trips = Project::where("project_type","2")->orWhere("project_type","3")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-        ->whereDate('end_date' ,'>=',date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
-
-        $search_trip = collect();
-        $trips->map(function($trip) use ($request,$search_trip){
-
-            if(($trip->tripfrom) != null) {
+            if (($trip->tripfrom) != null) {
                 $from_latlng = ($trip->tripfrom);
                 $from_lat = $from_latlng->latitude;
                 $from_lng = $from_latlng->longitude;
@@ -192,7 +124,7 @@ class TripController extends BaseController
             }
 
 
-            if(($trip->tripto) != null) {
+            if (($trip->tripto) != null) {
                 $to_latlng = ($trip->tripto);
                 $to_lat = $to_latlng->latitude;
                 $to_lng = $to_latlng->longitude;
@@ -202,85 +134,138 @@ class TripController extends BaseController
             }
 
 
-        $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K');
-        $trip->from_distance = round($from_distance, 2);
+            $from_distance = Helpers::distance($request->lat, $request->lng, $from_lat, $from_lng, 'K');
+            $trip->from_distance = round($from_distance, 2);
 
 
-        $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K');
-        $trip->to_distance = round($to_distance, 2);
+            $to_distance = Helpers::distance($request->lat, $request->lng, $to_lat, $to_lng, 'K');
+            $trip->to_distance = round($to_distance, 2);
 
 
-        if(Auth()->id() != null) {
-         $trip_bokking = TripBooking::where('user_id',Auth()->id())->where('project_id',$trip->id)->first();
+            if (Auth()->id() != null) {
+                $trip_bokking = TripBooking::where('user_id', Auth()->id())->where('project_id', $trip->id)->first();
 
-         if($trip_bokking != null) {
-            if($trip_bokking->status == 1){
-                $trip->isBooking = 1;
+                if ($trip_bokking != null) {
+                    if ($trip_bokking->status == 1) {
+                        $trip->isBooking = 1;
+                    } else {
+                        $trip->isBooking = 0;
+                    }
+                } else {
+                    $trip->isBooking = 0;
+                }
+            } else {
+                $trip->isBooking = 0;
+            }
+        });
+
+        $trip = $trips->sortBy('from_distance')->first();
+
+
+        return $this->sendResponse($trip, 'Success get Trips');
+    }
+
+
+    public function search_trip(Request $request)
+    {
+
+
+        $trips = Project::where("project_type", "2")->orWhere("project_type", "3")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+            ->whereDate('end_date', '>=', date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
+
+        $search_trip = collect();
+        $trips->map(function ($trip) use ($request, $search_trip) {
+
+            if (($trip->tripfrom) != null) {
+                $from_latlng = ($trip->tripfrom);
+                $from_lat = $from_latlng->latitude;
+                $from_lng = $from_latlng->longitude;
+            } else {
+                $from_lat = 180;
+                $from_lng = -180;
+            }
+
+
+            if (($trip->tripto) != null) {
+                $to_latlng = ($trip->tripto);
+                $to_lat = $to_latlng->latitude;
+                $to_lng = $to_latlng->longitude;
+            } else {
+                $to_lat = 180;
+                $to_lng = -180;
+            }
+
+
+            $from_distance = Helpers::distance($request->lat, $request->lng, $from_lat, $from_lng, 'K');
+            $trip->from_distance = round($from_distance, 2);
+
+
+            $to_distance = Helpers::distance($request->lat, $request->lng, $to_lat, $to_lng, 'K');
+            $trip->to_distance = round($to_distance, 2);
+
+
+            if (Auth()->id() != null) {
+                $trip_bokking = TripBooking::where('user_id', Auth()->id())->where('project_id', $trip->id)->first();
+
+                if ($trip_bokking != null) {
+                    if ($trip_bokking->status == 1) {
+                        $trip->isBooking = 1;
+                    } else {
+                        $trip->isBooking = 0;
+                    }
+                } else {
+                    $trip->isBooking = 0;
+                }
             } else {
                 $trip->isBooking = 0;
             }
 
-         } else{
-            $trip->isBooking = 0;
-         }
-        } else {
-            $trip->isBooking = 0;
-        }
+            if (($trip->tripfrom) != null) {
 
-        if(($trip->tripfrom) != null) {
+                $tripfrom = json_decode($trip->tripfrom)->current_location;
 
-            $tripfrom = json_decode($trip->tripfrom)->current_location;
-
-            $trip_to_value = $tripfrom->formatted_address;
+                $trip_to_value = $tripfrom->formatted_address;
 
 
-            if(stripos($trip_to_value,$request->get("search")) !== false){
-            $search_trip->push($trip);
+                if (stripos($trip_to_value, $request->get("search")) !== false) {
+                    $search_trip->push($trip);
+                }
             }
-
-
-        }
-
-
         });
 
 
         return $this->sendResponse($search_trip, 'Success get Trips');
-
     }
 
     public function auto_compleate_search_trip(Request $request)
     {
 
 
-        $trips = Project::where("project_type","2")->orWhere("project_type","3")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-        ->orderBy('created_at', 'desc')->get();
+        $trips = Project::where("project_type", "2")->orWhere("project_type", "3")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+            ->orderBy('created_at', 'desc')->get();
 
         $search_trip = collect();
-        $trips->map(function($trip) use ($request,$search_trip){
+        $trips->map(function ($trip) use ($request, $search_trip) {
 
-        if($trip->tripto != null) {
-            $tripfrom = $trip->tripfrom->current_location;
-            dump($tripfrom);
-            // $trip_to_value = $tripfrom?->formatted_address;
+            if ($trip->tripto != null) {
+                $tripfrom = $trip->tripfrom->current_location;
+                dump($tripfrom);
+                // $trip_to_value = $tripfrom?->formatted_address;
 
-            // if(stripos($trip_to_value,$request->get("search")) !== false){
+                // if(stripos($trip_to_value,$request->get("search")) !== false){
 
-            //     if($search_trip->search($tripfrom->formatted_address) === false) {
-            //         $search_trip->push($tripfrom?->formatted_address);
-            //     }
+                //     if($search_trip->search($tripfrom->formatted_address) === false) {
+                //         $search_trip->push($tripfrom?->formatted_address);
+                //     }
 
-            // }
-        }
-
-
+                // }
+            }
         });
 
 
 
 
         return $this->sendResponse($search_trip, 'Success get Trips');
-
     }
 
 
