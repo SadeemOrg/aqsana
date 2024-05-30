@@ -352,7 +352,7 @@ class QawafilAlaqsa extends Resource
                         }
 
                         return $address_type_admin_array;
-                    })->hideFromIndex()->hideFromDetail()->singleSelect(),
+                    })->hideFromIndex()->hideFromDetail()->singleSelect()->rules('required'),
                 // ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                 //     return null;
                 // }),
@@ -405,7 +405,7 @@ class QawafilAlaqsa extends Resource
                 ->hideFromIndex()->hideFromDetail()->singleSelect(),
                 text::make(__('note'), "note"),
                 DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required'),
-                DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required')->rules(new QawafilAlaqsaDate($request->start_date)),
+                DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required',new QawafilAlaqsaDate($request->start_date)),
 
 
 
@@ -683,28 +683,28 @@ class QawafilAlaqsa extends Resource
         }
 
 
-        if (!$request->trip_from) {
-            if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] &&  $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['phone_number_address']) {
-                // dd("hf");
-                DB::table('addresses')
-                    ->Insert(
-                        [
-                            'name_address' => $request->newadresfrom[0]['attributes']['name_address'],
-                            'description' => $request->newadresfrom[0]['attributes']['description'],
-                            'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
-                            'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
-                            'status' => '1',
-                            'type' => '4',
-                            'created_by' => $id
-                        ]
-                    );
-                $address =  \App\Models\address::where('name_address',  $request->newadresfrom[0]['attributes']['name_address'])->first();
-                DB::table('projects')
-                    ->where('id', $model->id)
-                    ->update(['trip_from' => $address->id]);
-            }
-        } else   $model->trip_from = $request->trip_from;
-        $model->newbus = null;
+        // if (!$request->trip_from) {
+        //     if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] &&  $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['phone_number_address']) {
+        //         // dd("hf");
+        //         DB::table('addresses')
+        //             ->Insert(
+        //                 [
+        //                     'name_address' => $request->newadresfrom[0]['attributes']['name_address'],
+        //                     'description' => $request->newadresfrom[0]['attributes']['description'],
+        //                     'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
+        //                     'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
+        //                     'status' => '1',
+        //                     'type' => '4',
+        //                     'created_by' => $id
+        //                 ]
+        //             );
+        //         $address =  \App\Models\address::where('name_address',  $request->newadresfrom[0]['attributes']['name_address'])->first();
+        //         DB::table('projects')
+        //             ->where('id', $model->id)
+        //             ->update(['trip_from' => $address->id]);
+        //     }
+        // } else   $model->trip_from = $request->trip_from;
+        // $model->newbus = null;
     }
     /**
      * Get the cards available for the request.
