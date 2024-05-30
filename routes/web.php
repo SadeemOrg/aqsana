@@ -3,10 +3,12 @@
 use App\Exports\ExportDonations;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MessagingController;
 use App\Http\Controllers\NotificationTest;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\WebNotificationController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Artisan;
@@ -24,6 +26,11 @@ use Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/Carbon', function () {
+    dd( Carbon::now());
+});
+Route::post('/send-message', [MessagingController::class, 'sendMessage']);
 
 
 
