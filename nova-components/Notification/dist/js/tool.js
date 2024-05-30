@@ -902,6 +902,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -1690,7 +1707,9 @@ var render = function() {
                       [
                         _c("td", [
                           _vm._v(
-                            _vm._s(Notification.Notifications.Notifications)
+                            _vm._s(Notification.Notifications.Notifications) +
+                              " == " +
+                              _vm._s(Notification.status)
                           )
                         ]),
                         _vm._v(" "),
@@ -1705,6 +1724,30 @@ var render = function() {
                               )
                             ])
                           : _c("td", [_vm._v("no Time")]),
+                        _vm._v(" "),
+                        Notification.status == 1
+                          ? _c("td", [
+                              _vm._v(
+                                "\n                            استلام المهمة\n\n                        "
+                              )
+                            ])
+                          : Notification.status == 2
+                          ? _c("td", [
+                              _vm._v(
+                                "\n                            جاري العمل على المهمة\n\n                        "
+                              )
+                            ])
+                          : Notification.status == 3
+                          ? _c("td", [
+                              _vm._v(
+                                "\n                            مكتمل\n\n                        "
+                              )
+                            ])
+                          : _c("td", [
+                              _vm._v(
+                                "\n                            المهمة انجزت\n                        "
+                              )
+                            ]),
                         _vm._v(" "),
                         Notification.done
                           ? _c("td", [
@@ -1893,7 +1936,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحضات")]),
       _vm._v(" "),
-      _c("th", { staticStyle: { width: "20%" } }, [_vm._v("التاريخ")]),
+      _c("th", { staticStyle: { width: "10%" } }, [_vm._v("التاريخ")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { width: "10%" } }, [_vm._v("الحالة")]),
       _vm._v(" "),
       _c("th", [_vm._v("تم")])
     ])

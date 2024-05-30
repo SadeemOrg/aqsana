@@ -305,7 +305,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     send: function send() {
-      alert(this.Message);
       axios.post("/SendMessage", {
         type: this.selectval,
         Message: this.Message

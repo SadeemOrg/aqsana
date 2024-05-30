@@ -198,6 +198,9 @@ class NotificationController extends Controller
                         "Notifications" => $data,
                         "note" => $value->note,
                         "done" => $value->read_at,
+                        "status" => $value->status,
+
+
 
                     );
                 array_push($myNotifications, $pus);
