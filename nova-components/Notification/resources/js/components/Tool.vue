@@ -199,13 +199,14 @@
                         <tr>
                             <th style="width: 40%;">المهمة</th>
                             <th style="width: 40%;">الملاحضات</th>
+                            <th style="width: 10%;">التاريخ</th>
 
-                            <th style="width: 20%;">التاريخ</th>
+                            <th style="width: 10%;">الحالة</th>
 
                             <th>تم</th>
                         </tr>
                         <tr v-for="Notification in allNotifications" :key="Notification.id" :value="Notification.id">
-                            <td>{{ Notification.Notifications.Notifications }}</td>
+                            <td>{{ Notification.Notifications.Notifications }} == {{ Notification.status }}</td>
                             <td>{{ Notification.note }}</td>
 
                             <td v-if="Notification.Notifications.date">
@@ -213,6 +214,22 @@
                             </td>
                             <td v-else>no Time</td>
 
+                            <td v-if="Notification.status == 1">
+                                استلام المهمة
+
+                            </td>
+                            <td v-else-if="Notification.status == 2">
+                                جاري العمل على المهمة
+
+                            </td>
+
+                            <td v-else-if="Notification.status == 3">
+                                مكتمل
+
+                            </td>
+                            <td v-else>
+                                المهمة انجزت
+                            </td>
                             <td v-if="Notification.done">
                                 مكتمل
                             </td>
