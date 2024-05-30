@@ -22,7 +22,6 @@ class TripController extends BaseController
     public function index(Request $request)
     {
 
-        dd($request->lat,$request->lng);
 
 
         $trips = Project::where("id", 251)->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
