@@ -38,8 +38,8 @@ class TripController extends BaseController
 
                 $from_latlng = ($trip->tripfrom);
 
-                $from_lat = $from_latlng->current_location['latitude'];
-                $from_lng =$from_latlng->current_location['longitude'];// $from_latlng->longitude;
+                $from_lat = $from_latlng?->current_location['latitude'];
+                $from_lng =$from_latlng?->current_location['longitude'];// $from_latlng->longitude;
             } else {
                 $from_lat = 180;
                 $from_lng = -180;
@@ -48,8 +48,8 @@ class TripController extends BaseController
 
             if (($trip->tripto) != null) {
                 $to_latlng = ($trip->tripto);
-                $to_lat = $to_latlng->current_location['latitude'];
-                $to_lng = $to_latlng->current_location['longitude'];
+                $to_lat = $to_latlng?->current_location['latitude'];
+                $to_lng = $to_latlng?->current_location['longitude'];
             } else {
                 $to_lat = 180;
                 $to_lng = -180;
