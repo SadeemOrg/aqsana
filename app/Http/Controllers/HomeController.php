@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
@@ -407,15 +408,15 @@ class HomeController extends Controller
 
                 );
 
-                $year = $request->year;
-                $firstDayOfYear = Carbon::createFromDate($year, 1, 1)->startOfDay();
+            $year = $request->year;
+            $firstDayOfYear = Carbon::createFromDate($year, 1, 1)->startOfDay();
 
-                $Project = new Project();
-                $Project->project_type = 1;
-                $Project->project_name = 'حصلات ' . $request->year;
-                $Project->project_describe = 'حصلات' . $request->year;
-                $Project->sector = 11;
-                $Project->start_date = $firstDayOfYear;
+            $Project = new Project();
+            $Project->project_type = 1;
+            $Project->project_name = 'حصلات ' . $request->year;
+            $Project->project_describe = 'حصلات' . $request->year;
+            $Project->sector = 11;
+            $Project->start_date = $firstDayOfYear;
 
             $Project->save();
         }
@@ -440,43 +441,21 @@ class HomeController extends Controller
 
         $TelephoneDirectory = TelephoneDirectory::whereJsonContains('type', $request->type)->get();
 
+        foreach ($TelephoneDirectory as $key => $value) {
 
-        $basic  = new \Vonage\Client\Credentials\Basic("9b410b2c", "rdwDOC34rww0SLT1");
-        $client = new \Vonage\Client($basic);
-
-        $response = $client->sms()->send(
-            new \Vonage\SMS\Message\SMS("972599043747", 'ameed', 'A text message sent using the Nexmo SMS API')
-        );
-
-        $message = $response->current();
-
-        if ($message->getStatus() == 0) {
-            echo "The message was sent successfully\n";
-        } else {
-            echo "The message failed with status: " . $message->getStatus()."\n";
+             Http::get('https://la.cellactpro.com/http_req.asp', [
+                'FROM' => 'ppAksa',
+                'USER' => 'ppAksa',
+                'PASSWORD' => 'UKFV6Sx7',
+                'APP' => 'LA',
+                'CMD' => 'sendtextmt',
+                'CONTENT' => $request->Message,
+                'SENDER' => '0506940095',
+                'TO' => $value->phone_number,
+            ]);
         }
-        // $response = $client->sms()->send(
-        //     new \Vonage\SMS\Message\SMS("972506940095", "Al-Aqsa-Association", 'Al-Aqsa-Association SMS API')
-        // );
-
-
-        // foreach ($TelephoneDirectory as $key => $value) {
-        //     $response = $client->sms()->send(
-        //         new \Vonage\SMS\Message\SMS("972599043747", 'BRAND_NAME', 'A text message sent using the Nexmo SMS API')
-
-        //         // new \Vonage\SMS\Message\SMS('0569465465', "Al_Aqsa_Association", $request->Message)
-        //     );
-        //     $message = $response->current();
-        // }
-        return "ok";
     }
-    // public function SendMessage(Request $request)
-    // {
-    //         //     $TelephoneDirectory = TelephoneDirectory::whereJsonContains('type', $request->type)->get();
 
-    //     dd($request->type, $request->all());
-
-    // }
     public function SectorsBudget(Request $request)
     {
 
