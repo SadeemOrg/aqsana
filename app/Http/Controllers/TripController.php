@@ -24,8 +24,9 @@ class TripController extends BaseController
 
 
         $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-        ->orderBy('created_at', 'desc')    ->where('start_date', '>', Carbon::today())
+        ->orderBy('created_at', 'desc')    ->where('start_date', '>', Carbon::now())
         ->latest('id')->take(5)->get();
+
 
         $trips->map(function($trip) use ($request){
             $trip->start_date=$trip->start_date;
@@ -229,7 +230,7 @@ class TripController extends BaseController
 
             $tripfrom = json_decode($trip->tripfrom)->current_location;
 
-            $trip_to_value = $tripfrom?->formatted_address;
+            $trip_to_value = $tripfrom->formatted_address;
 
 
             if(stripos($trip_to_value,$request->get("search")) !== false){
@@ -258,16 +259,17 @@ class TripController extends BaseController
         $trips->map(function($trip) use ($request,$search_trip){
 
         if($trip->tripto != null) {
-            $tripfrom = json_decode($trip->tripfrom)->current_location;
-            $trip_to_value = $tripfrom->formatted_address;
+            $tripfrom = $trip->tripfrom->current_location;
+            dump($tripfrom);
+            // $trip_to_value = $tripfrom?->formatted_address;
 
-            if(stripos($trip_to_value,$request->get("search")) !== false){
+            // if(stripos($trip_to_value,$request->get("search")) !== false){
 
-                if($search_trip->search($tripfrom->formatted_address) === false) {
-                    $search_trip->push($tripfrom->formatted_address);
-                }
+            //     if($search_trip->search($tripfrom->formatted_address) === false) {
+            //         $search_trip->push($tripfrom?->formatted_address);
+            //     }
 
-            }
+            // }
         }
 
 
