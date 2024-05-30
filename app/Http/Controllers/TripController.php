@@ -26,11 +26,12 @@ class TripController extends BaseController
 
         $trips = Project::where("id", 251)->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
             ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())
-
-
             ->latest('id')->take(5)->get();
 
         $trips->map(function ($trip) use ($request) {
+            $trip->tripToLocation=$trip->tripto->name_address;
+
+            $trip->tripFromLocation=$trip->tripfrom->name_address;
             $trip->start_date = $trip->start_date;
             $trip->start_date = $trip->start_date;
             $trip->end_date = $trip->end_date;
@@ -43,7 +44,6 @@ class TripController extends BaseController
                 $from_lat = 180;
                 $from_lng = -180;
             }
-
             if (($trip->tripto) != null && isset($trip->tripto->current_location)) {
                 $to_latlng = $trip->tripto;
                 $to_lat = isset($to_latlng->current_location['latitude']) ? $to_latlng->current_location['latitude'] : 180;
@@ -76,12 +76,10 @@ class TripController extends BaseController
                 $trip->isBooking = 0;
             }
         });
-
         $trips = $trips->skip($request->get("skip"));
         $trips = $trips->sortBy('from_distance');
         $trips = $trips->values()->all();
 
-        // dd($trips);
 
         return $this->sendResponse($trips, 'Success get Trips');
     }
