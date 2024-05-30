@@ -34,22 +34,20 @@ class TripController extends BaseController
             $trip->start_date = $trip->start_date;
             $trip->start_date = $trip->start_date;
             $trip->end_date = $trip->end_date;
-            if (($trip->tripfrom) != null) {
 
-                $from_latlng = ($trip->tripfrom);
-
-                $from_lat = $from_latlng->current_location['latitude'];
-                $from_lng =$from_latlng->current_location['longitude'];// $from_latlng->longitude;
+            if (($trip->tripfrom) != null && isset($trip->tripfrom->current_location)) {
+                $from_latlng = $trip->tripfrom;
+                $from_lat = isset($from_latlng->current_location['latitude']) ? $from_latlng->current_location['latitude'] : 180;
+                $from_lng = isset($from_latlng->current_location['longitude']) ? $from_latlng->current_location['longitude'] : -180;
             } else {
                 $from_lat = 180;
                 $from_lng = -180;
             }
 
-
-            if (($trip->tripto) != null) {
-                $to_latlng = ($trip->tripto);
-                $to_lat = $to_latlng->current_location['latitude'];
-                $to_lng = $to_latlng->current_location['longitude'];
+            if (($trip->tripto) != null && isset($trip->tripto->current_location)) {
+                $to_latlng = $trip->tripto;
+                $to_lat = isset($to_latlng->current_location['latitude']) ? $to_latlng->current_location['latitude'] : 180;
+                $to_lng = isset($to_latlng->current_location['longitude']) ? $to_latlng->current_location['longitude'] : -180;
             } else {
                 $to_lat = 180;
                 $to_lng = -180;
