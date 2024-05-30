@@ -19,7 +19,7 @@ class MessagingController extends Controller
             'PASSWORD' => 'UKFV6Sx7',
             'APP' => 'LA',
             'CMD' => 'sendtextmt',
-            'CONTENT' => 'hi from aqsa',
+            'CONTENT' => 'hi',
             'SENDER' => '00972506940095',
             'TO' => '00972522212777'
         ];
@@ -38,7 +38,7 @@ class MessagingController extends Controller
             'PASSWORD' => 'UKFV6Sx7',
             'APP' => 'LA',
             'CMD' => 'sendtextmt',
-            'CONTENT' => 'Test',
+            'CONTENT' => 'hi from aqsa',
             'SENDER' => '0506940095',
             'TO' => '0522212777',
         ]);
