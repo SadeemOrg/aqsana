@@ -24,7 +24,9 @@ class TripController extends BaseController
 
 
         $trips = Project::where("project_type","2")->with('TripCity.City','BusTrip.travelto','BusTrip.travelfrom','tripfrom','tripto')
-        ->orderBy('created_at', 'desc')    ->where('start_date', '>', Carbon::now())
+        ->orderBy('created_at', 'desc')    ->where('start_date', '>', Carbon::now('Asia/Jerusalem'))
+
+
         ->latest('id')->take(5)->get();
 
         $trips->map(function($trip) use ($request){
