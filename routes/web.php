@@ -30,7 +30,11 @@ use Illuminate\Support\Facades\Artisan;
 Route::get('/Carbon', function () {
     dd( Carbon::now());
 });
+Route::get('/sms', function () {
+   return view('sms');
+});
 Route::post('/send-message', [MessagingController::class, 'sendMessage']);
+Route::post('/send-text', [MessagingController::class, 'sendText'])->name('send.text');
 
 
 
