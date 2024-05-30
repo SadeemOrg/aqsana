@@ -55,10 +55,11 @@ class TripController extends BaseController
                 $to_lng = -180;
             }
 
-            $from_distance = Helpers::distance('32.2219209766463', '35.24776077804188', $from_lat, $from_lng, 'K');
+            $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K');
             $trip->from_distance = round($from_distance, 2);
 
-            $to_distance = Helpers::distance('32.2219209766463', '35.24776077804188', $to_lat, $to_lng, 'K');
+
+            $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K');
             $trip->to_distance = round($to_distance, 2);
 
             if (Auth()->id() != null) {
