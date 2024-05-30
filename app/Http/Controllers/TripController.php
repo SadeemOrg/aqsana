@@ -24,13 +24,12 @@ class TripController extends BaseController
 
 
 
-        $trips = Project::where("id", 251)->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+        $trips = Project::where("project_type","2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
             ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())
             ->latest('id')->take(5)->get();
 
         $trips->map(function ($trip) use ($request) {
             $trip->tripToLocation=$trip->tripto->name_address;
-
             $trip->tripFromLocation=$trip->tripfrom->name_address;
             $trip->start_date = $trip->start_date;
             $trip->start_date = $trip->start_date;
@@ -108,35 +107,35 @@ class TripController extends BaseController
 
 
         $trips->map(function ($trip) use ($request) {
+            $trip->tripToLocation=$trip->tripto->name_address;
+            $trip->tripFromLocation=$trip->tripfrom->name_address;
+            $trip->start_date = $trip->start_date;
+            $trip->start_date = $trip->start_date;
+            $trip->end_date = $trip->end_date;
 
-
-            if (($trip->tripfrom) != null) {
-                $from_latlng = ($trip->tripfrom);
-                $from_lat = $from_latlng->latitude;
-                $from_lng = $from_latlng->longitude;
+            if (($trip->tripfrom) != null && isset($trip->tripfrom->current_location)) {
+                $from_latlng = $trip->tripfrom;
+                $from_lat = isset($from_latlng->current_location['latitude']) ? $from_latlng->current_location['latitude'] : 180;
+                $from_lng = isset($from_latlng->current_location['longitude']) ? $from_latlng->current_location['longitude'] : -180;
             } else {
                 $from_lat = 180;
                 $from_lng = -180;
             }
-
-
-            if (($trip->tripto) != null) {
-                $to_latlng = ($trip->tripto);
-                $to_lat = $to_latlng->latitude;
-                $to_lng = $to_latlng->longitude;
+            if (($trip->tripto) != null && isset($trip->tripto->current_location)) {
+                $to_latlng = $trip->tripto;
+                $to_lat = isset($to_latlng->current_location['latitude']) ? $to_latlng->current_location['latitude'] : 180;
+                $to_lng = isset($to_latlng->current_location['longitude']) ? $to_latlng->current_location['longitude'] : -180;
             } else {
                 $to_lat = 180;
                 $to_lng = -180;
             }
 
-
-            $from_distance = Helpers::distance($request->lat, $request->lng, $from_lat, $from_lng, 'K');
+            $from_distance = Helpers::distance($request->lat,$request->lng,$from_lat,$from_lng,'K');
             $trip->from_distance = round($from_distance, 2);
 
 
-            $to_distance = Helpers::distance($request->lat, $request->lng, $to_lat, $to_lng, 'K');
+            $to_distance = Helpers::distance($request->lat,$request->lng,$to_lat,$to_lng,'K');
             $trip->to_distance = round($to_distance, 2);
-
 
             if (Auth()->id() != null) {
                 $trip_bokking = TripBooking::where('user_id', Auth()->id())->where('project_id', $trip->id)->first();
