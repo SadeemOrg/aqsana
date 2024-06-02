@@ -127,6 +127,7 @@ Route::get('/delete-all-data', 'ExportController@deleteAllData')->name('delete.a
 Route::post("first/", [HomeController::class, "first"])->name('first');
 Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');
 Route::post("getType", [HomeController::class, "getType"])->name('getType');
+Route::get("getType", [HomeController::class, "getType"])->name('getType');
 
 
 
