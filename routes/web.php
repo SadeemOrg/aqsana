@@ -146,6 +146,7 @@ Route::post("DeleteYears", [HomeController::class, "DeleteYears"])->name('Delete
 
 Route::post("save", [HomeController::class, "save"])->name('save');
 
+Route::get("SendMessageSms", [HomeController::class, "SendMessage"])->name('SendMessage');
 
 Route::post("SendMessage", [HomeController::class, "SendMessage"])->name('SendMessage');
 
