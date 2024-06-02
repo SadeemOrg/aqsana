@@ -438,26 +438,29 @@ class HomeController extends Controller
     }
     public function SendMessage(Request $request)
     {
-        $TelephoneDirectory = TelephoneDirectory::whereJsonContains('type', $request->type)->get();
+        $TelephoneDirectory = TelephoneDirectory::query();
 
-        foreach ($TelephoneDirectory as $key => $value) {
-            dump($value->phone_number);
-            Http::get('https://la.cellactpro.com/http_req.asp', [
-                'FROM' => 'ppAksa',
-                'USER' => 'ppAksa',
-                'PASSWORD' => 'UKFV6Sx7',
-                'APP' => 'LA',
-                'CMD' => 'sendtextmt',
-                'CONTENT' => $request->Message,
-                'SENDER' => '0506940095',
-                'TO' => $value->phone_number,
-            ]);
-            // if (!empty($value->phone_number)) {
-            //     $isIsraeliNumber = preg_match('/^05\d{8}$/', $value->phone_number);
-            //     if ($isIsraeliNumber) {
-
-            //     }
-            // }
+        $TelephoneDirectory->where(function ($query) use ($request) {
+            foreach ($request->type as $type) {
+                $query->orWhereJsonContains('type', $type);
+            }
+        });
+        $results = $TelephoneDirectory->get();
+        foreach ($results as $key => $value) {
+            $phoneNumber = $value->phone_number;
+            if (preg_match('/^\d{10}$/', $phoneNumber)) {
+                dump($value->id, $phoneNumber);
+                Http::get('https://la.cellactpro.com/http_req.asp', [
+                    'FROM' => 'ppAksa',
+                    'USER' => 'ppAksa',
+                    'PASSWORD' => 'UKFV6Sx7',
+                    'APP' => 'LA',
+                    'CMD' => 'sendtextmt',
+                    'CONTENT' => $request->Message,
+                    'SENDER' => '0506940095',
+                    'TO' => $value->phone_number,
+                ]);
+            }
         }
     }
 
@@ -753,8 +756,6 @@ class HomeController extends Controller
         $TypeArray = array();
         $Types = SmsType::all();
         foreach ($Types as $key => $Type) {
-
-
 
 
             $pus = array(

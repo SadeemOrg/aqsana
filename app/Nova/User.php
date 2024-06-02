@@ -124,7 +124,7 @@ class User extends Resource
             })->singleSelect()->hideFromIndex()->hideFromDetail(),
         BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating()->nullable(),
 
-            BelongsTo::make(__('Role_user'), 'Role', \App\Nova\Role::class),
+            //  BelongsTo::make(__('Role_user'), 'Role', \App\Nova\Role::class),
             Text::make(__('jop'), 'job')
             ->sortable(),
             Multiselect::make(__('Permations'), 'role')
@@ -166,6 +166,10 @@ class User extends Resource
                         "delegatee" => __("delegatee"),
                         "guide" => __("guide"),
                         "sms" => __("Sms"),
+                        "Reportparmation" => __("Reportparmation"),
+                        "addressTypesparmation" => __("addressTypesparmation"),
+
+
 
 
                     ]
@@ -200,6 +204,7 @@ class User extends Resource
     }
     public static function beforeSave(Request $request, $model)
     {
+        $model->user_role=1;
         $model->app_user = 0;
     }
 

@@ -46,6 +46,13 @@ class Report extends Resource
      *
      * @var string
      */
+
+     public static function availableForNavigation(Request $request)
+     {
+         if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Reportparmation",  $request->user()->userrole()))) {
+             return true;
+         } else return false;
+     }
     public static $title = 'id';
     public static function label()
     {
