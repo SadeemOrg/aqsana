@@ -32,6 +32,13 @@ class AddressType extends Resource
      *
      * @var string
      */
+
+     public static function availableForNavigation(Request $request)
+     {
+         if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("addressTypesparmation",  $request->user()->userrole()))) {
+             return true;
+         } else return false;
+     }
     public static $title = 'id';
 
     /**

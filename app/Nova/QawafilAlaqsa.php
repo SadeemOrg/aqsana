@@ -128,30 +128,14 @@ class QawafilAlaqsa extends Resource
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
-
-
-
-        $user = Auth::user();
-        $id = Auth::id();
-        if ($user->type() == 'admin') {
-
+        // dd( Auth::id(),$query->where('project_type', '2')->where('created_by', Auth::id())->get());
+        if ((in_array("super-admin",  $request->user()->userrole())) ) {
             return $query->where('project_type', '2');
-        } elseif ($user->type() == 'regular_area') {
 
-            $Area = \App\Models\Area::where('admin_id', $id)->first();
-            $projects = DB::table('project_area')->where('area_id', $Area->id)->get();
-        } elseif ($user->type() == 'regular_city' && $user->City) {
-
-
-            $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
-        } else   $projects = DB::table('project_city')->get();
-
-
-        $stack = array();
-        foreach ($projects as $key => $value) {
-            array_push($stack, $value->project_id);
         }
-        return $query->whereIn('id', $stack)->where('project_type', '2');
+        else  return $query->where('project_type', '2')->where('created_by', Auth::id());
+
+
     }
     public function fields(Request $request)
     {
@@ -262,16 +246,7 @@ class QawafilAlaqsa extends Resource
                         return true;
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
-                // Boolean::make(__('Active'), function () {
-                //     $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-                //     if ($projects) {
 
-                //         if ($projects->status == 3) {
-
-                //             return true;
-                //         } else return false;
-                //     } else return false;
-                // }),
 
                 Text::make(__("QawafilAlaqsa name"), "project_name")->rules('required'),
                 Text::make(__("QawafilAlaqsa describe"), "project_describe")->rules('required'),
@@ -715,7 +690,7 @@ class QawafilAlaqsa extends Resource
     public function cards(Request $request)
     {
         return [
-            new NewQawafilAlaqsa(),
+            // new NewQawafilAlaqsa(),
             new FilterCard(new ProjectArea()),
 
         ];
