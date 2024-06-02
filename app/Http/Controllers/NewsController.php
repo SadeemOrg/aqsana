@@ -23,8 +23,8 @@ class NewsController extends BaseController
      */
     public function index()
     {
+        $news = News::orderBy('created_at', 'desc')->paginate(10); // Assuming 10 items per page
 
-        $news = News::orderBy('created_at', 'desc')->get();
         foreach ($news as $item) {
             $news_pictures = [];
             $pictures = json_decode($item->pictures, true);
@@ -33,14 +33,13 @@ class NewsController extends BaseController
                     $news_pictures[] = $picture['url'];
                 }
                 $item->news_pictures = $news_pictures;
-            }else
-            {
-                $item->news_pictures =[];
+            } else {
+                $item->news_pictures = [];
             }
         }
-                return $this->sendResponse($news, 'Success get projects');
 
 
+        return $this->sendResponse($news, 'Success get projects');
     }
 
 
@@ -58,7 +57,4 @@ class NewsController extends BaseController
         }
         return $this->sendResponse($new, 'News retireved Successfully!');
     }
-
-
-
 }
