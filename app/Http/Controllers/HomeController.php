@@ -441,6 +441,7 @@ class HomeController extends Controller
         $TelephoneDirectory = TelephoneDirectory::whereJsonContains('type', $request->type)->get();
 
         foreach ($TelephoneDirectory as $key => $value) {
+            dump( $value->phone_number);
             Http::get('https://la.cellactpro.com/http_req.asp', [
                 'FROM' => 'ppAksa',
                 'USER' => 'ppAksa',
