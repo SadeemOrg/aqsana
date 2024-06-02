@@ -408,7 +408,7 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 403);
         }
-
+        return $request['email'];
 
         DB::table('password_resets')->where('email', 'like', "%{$request['email']}%")->delete();
 
