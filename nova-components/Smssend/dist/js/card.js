@@ -280,51 +280,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      Message: "",
-      selectval: [],
-      maxCount: 140,
-      remainingCount: 140,
-      message: '',
-      hasError: false
-    };
-  },
-
-  props: ["card"],
-
-  methods: {
-    send: function send() {
-      axios.post("/SendMessage", {
-        type: this.selectval,
-        Message: this.Message
-      }).then(function (response) {
-        alert("Message Send ");
-      });
+    data: function data() {
+        return {
+            Message: "",
+            selectval: [],
+            maxCount: 140,
+            remainingCount: 140,
+            message: '',
+            hasError: false
+        };
     },
 
-    getType: function getType() {
-      var _this = this;
+    props: ["card"],
 
-      axios.post("/getType").then(function (response) {
-        _this.newSectors = response.data;
-      });
-    },
-    countdown: function countdown() {
-      this.remainingCount = this.maxCount - this.message.length;
-      this.hasError = this.remainingCount < 0;
+    methods: {
+        send: function send() {
+            axios.get('/SendMessageSms', {
+                params: {
+                    type: this.selectval,
+                    Message: this.Message
+                }
+            }).then(function (response) {
+                alert('Message Sent');
+            }).catch(function (error) {
+                console.error('Error sending message:', error);
+                alert('Failed to send message');
+            });
+        },
+
+        getType: function getType() {
+            var _this = this;
+
+            axios.post("/getType").then(function (response) {
+                _this.newSectors = response.data;
+            });
+        },
+        countdown: function countdown() {
+            this.remainingCount = this.maxCount - this.message.length;
+            this.hasError = this.remainingCount < 0;
+        }
     }
-  }
 });
 
 /***/ }),
@@ -356,7 +353,7 @@ var render = function() {
                 "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
               attrs: { for: "default-input" }
             },
-            [_vm._v("اختر الفئة\n      ")]
+            [_vm._v("اختر\n                الفئة\n            ")]
           ),
           _vm._v(" "),
           _c(
@@ -425,7 +422,7 @@ var render = function() {
                 "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
               attrs: { for: "default-input" }
             },
-            [_vm._v("ادخل نص الرسالة\n      ")]
+            [_vm._v("ادخل نص\n                الرسالة\n            ")]
           ),
           _vm._v(" "),
           _c("span", [_vm._v("Add a comment")]),
@@ -485,7 +482,7 @@ var render = function() {
                   attrs: { type: "submit" },
                   on: { click: _vm.send }
                 },
-                [_vm._v("\n          ارسال\n        ")]
+                [_vm._v("\n                    ارسال\n                ")]
               )
             ]
           )
