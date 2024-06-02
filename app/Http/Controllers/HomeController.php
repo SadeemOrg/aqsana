@@ -441,22 +441,22 @@ class HomeController extends Controller
         $TelephoneDirectory = TelephoneDirectory::whereJsonContains('type', $request->type)->get();
 
         foreach ($TelephoneDirectory as $key => $value) {
-            if (!empty($value->phone_number)) {
-                $isIsraeliNumber = preg_match('/^05\d{8}$/', $value->phone_number);
-                dump($isIsraeliNumber);
-                if ($isIsraeliNumber) {
-                    Http::get('https://la.cellactpro.com/http_req.asp', [
-                        'FROM' => 'ppAksa',
-                        'USER' => 'ppAksa',
-                        'PASSWORD' => 'UKFV6Sx7',
-                        'APP' => 'LA',
-                        'CMD' => 'sendtextmt',
-                        'CONTENT' => $request->Message,
-                        'SENDER' => '0506940095',
-                        'TO' => $value->phone_number,
-                    ]);
-                }
-            }
+            Http::get('https://la.cellactpro.com/http_req.asp', [
+                'FROM' => 'ppAksa',
+                'USER' => 'ppAksa',
+                'PASSWORD' => 'UKFV6Sx7',
+                'APP' => 'LA',
+                'CMD' => 'sendtextmt',
+                'CONTENT' => $request->Message,
+                'SENDER' => '0506940095',
+                'TO' => $value->phone_number,
+            ]);
+            // if (!empty($value->phone_number)) {
+            //     $isIsraeliNumber = preg_match('/^05\d{8}$/', $value->phone_number);
+            //     if ($isIsraeliNumber) {
+
+            //     }
+            // }
         }
     }
 
