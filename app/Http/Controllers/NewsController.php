@@ -24,9 +24,21 @@ class NewsController extends BaseController
     public function index()
     {
 
-
-        $news =   News::orderBy('created_at', 'desc')->paginate(15);
-        return $this->sendResponse($news, 'Success get projects');
+        $news = News::orderBy('created_at', 'desc')->get();
+        foreach ($news as $item) {
+            $news_pictures = [];
+            $pictures = json_decode($item->pictures, true);
+            if (is_array($pictures)) {
+                foreach ($pictures as $picture) {
+                    $news_pictures[] = $picture['url'];
+                }
+                $item->news_pictures = $news_pictures;
+            }else
+            {
+                $item->news_pictures =[];
+            }
+        }
+                return $this->sendResponse($news, 'Success get projects');
 
 
     }

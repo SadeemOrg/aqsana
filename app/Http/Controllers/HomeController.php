@@ -441,7 +441,7 @@ class HomeController extends Controller
         $TelephoneDirectory = TelephoneDirectory::whereJsonContains('type', $request->type)->get();
 
         foreach ($TelephoneDirectory as $key => $value) {
-            dump( $value->phone_number);
+            dump($value->phone_number);
             Http::get('https://la.cellactpro.com/http_req.asp', [
                 'FROM' => 'ppAksa',
                 'USER' => 'ppAksa',
@@ -750,25 +750,22 @@ class HomeController extends Controller
     public function getType(Request $request)
     {
 
-        $sector = array();
-        $Sectors = SmsType::all();
-        foreach ($Sectors as $key => $Sector) {
-
+        $TypeArray = array();
+        $Types = SmsType::all();
+        foreach ($Types as $key => $Type) {
 
 
 
 
             $pus = array(
-                "sector_id" => $Sector->id,
-                "Sector" => $Sector->text,
-                "Budget" => '0'
+                "id" => $Type->id,
+                "name" => $Type->name,
             );
 
 
-            array_push($sector, $pus);
+            array_push($TypeArray, $pus);
         }
-        // dd($sector);
-        return $sector;
+        return $TypeArray;
     }
 
     public function SectorsPill(Request $request)
