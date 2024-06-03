@@ -40,9 +40,8 @@
             height: 100% !important;
             padding: 0 !important;
             margin: 0 !important;
-            background-color: white;
-            font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
             background-color: #f3f4f6;
+            font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
         }
         .container {
             max-width: 600px;
@@ -53,11 +52,20 @@
         .logo {
             text-align: center;
             padding: 36px 0;
-
         }
         .logo img {
             width: 100px;
             height: auto;
+        }
+        .content {
+            border: 2px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 46px 24px;
+            border-radius: 10px;
+            background-color: white;
         }
         .content h1 {
             font-size: 32px;
@@ -70,7 +78,6 @@
             font-size: 16px;
             line-height: 24px;
             margin: 8px 0;
-            /* border: 2px solid #e9ecef; */
         }
         .button-container {
             text-align: center;
@@ -89,20 +96,22 @@
     </style>
 </head>
 <body>
-
+    <div style="display: none; font-size: 1px; color: #e9ecef; line-height: 1px; max-height: 0; max-width: 0; opacity: 0; overflow: hidden;">
+        A preheader is the short summary text that follows the subject line when an email is viewed in the inbox.
+    </div>
     <div class="container">
         <div class="logo">
             <a href="https://aqsana.org" target="_blank">
                 <img src="{{ asset('assets/image/QawafelLogo.png') }}" alt="Logo">
             </a>
         </div>
-        <div class="content" style="border: 2px solid #e9ecef;display: flex; flex-direction: column; align-items: center;justify-content: center; padding: 46px 0px; border-radius: 10px;background-color: white">
+        <div class="content">
             <h1>إعادة تعيين كلمة المرور</h1>
             <div class="button-container">
                 <a href="https://aqsana.org/app/password/reset/{{ $token }}" target="_blank" class="button">إعادة تعيين كلمة المرور</a>
             </div>
-            <p>إذا لم تطلب إعادة تعيين كلمة المرور، يمكنك تجاهل هذا البريد الإلكتروني بأمان</p>
-            <p>إذا لم يعمل الزر، انسخ الرابط التالي والصقه في متصفحك</p>
+            <p>إذا لم تطلب إعادة تعيين كلمة المرور، يمكنك تجاهل هذا البريد الإلكتروني بأمان.</p>
+            <p>إذا لم يعمل الزر، انسخ الرابط التالي والصقه في متصفحك:</p>
             <p><a href="https://aqsana.org/app/password/reset/{{ $token }}" target="_blank">https://aqsana.org/app/password/reset/{{ $token }}</a></p>
         </div>
     </div>
