@@ -483,7 +483,7 @@ class AuthController extends Controller
     public function getInformationUser(Request $request)
     {
 
-        $user = User::where("id", Auth()->id())->with("Donations.Project", "Volunteer.Project")
+        $user = User::where("id", 63)->with("Donations.Project", "Volunteer.Project")
             ->with(["TripBooking.Project" => function ($query) use ($request) {
                 $query->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')->get();
             }])
@@ -491,39 +491,18 @@ class AuthController extends Controller
             ->withCount('Volunteer as volunteer_count')
             ->withCount('TripBooking as trip_booking_count')
             ->first();
-
         $trip_booking = json_decode($user)->trip_booking;
         $trip_booking = collect($trip_booking);
 
         $trip_booking->map(function ($trip) use ($request) {
 
-            // $from_latlng = json_decode($trip->project->tripfrom->current_location)->latlng;
-            // $from_lat = $from_latlng->lat;
-            // $from_lng = $from_latlng->lng;
+            $from_lat = $trip->project->tripfrom->current_location->latitude;
+            $from_lng = $trip->project->tripfrom->current_location->longitude;
 
-            // $to_latlng = json_decode($trip->project->tripto->current_location)->latlng;
-            // $to_lat = $to_latlng->lat;
-            // $to_lng = $to_latlng->lng;
-
-            if (($trip->project->tripfrom) != null) {
-                $from_latlng = ($trip->project->tripfrom);
-                $from_lat = $from_latlng->latitude;
-                $from_lng = $from_latlng->longitude;
-            } else {
-                $from_lat = 180;
-                $from_lng = -180;
-            }
+            $to_lat = $trip->project->tripto->current_location->latitude;
+            $to_lng = $trip->project->tripto->current_location->longitude;
 
 
-
-            if ($trip->project->tripto != null) {
-                $to_latlng = ($trip->project->tripto);
-                $to_lat = $to_latlng->latitude;
-                $to_lng = $to_latlng->longitude;
-            } else {
-                $to_lat = 180;
-                $to_lng = -180;
-            }
 
             $from_distance = Helpers::distance($request->lat, $request->lng, $from_lat, $from_lng, 'K');
             $trip->project->from_distance = round($from_distance, 2);
