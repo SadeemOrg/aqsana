@@ -20,13 +20,9 @@
                 src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(https://fonts.gstatic.com/s/sourcesanspro/v10/toadOcfmlt9b38dHJxOBGFkQc6VGVFSmCnC_l7QZG60.woff) format('woff');
             }
         }
-        body, table, td, a {
+        body, a {
             -ms-text-size-adjust: 100%;
             -webkit-text-size-adjust: 100%;
-        }
-        table, td {
-            mso-table-rspace: 0pt;
-            mso-table-lspace: 0pt;
         }
         img {
             -ms-interpolation-mode: bicubic;
@@ -39,30 +35,48 @@
             color: inherit !important;
             text-decoration: none !important;
         }
-        div[style*="margin: 16px 0;"] {
-            margin: 0 !important;
-        }
         body {
             width: 100% !important;
             height: 100% !important;
             padding: 0 !important;
             margin: 0 !important;
+            background-color: white;
+            font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+            background-color: #f3f4f6;
         }
-        table {
-            border-collapse: collapse !important;
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 24px;
+            border-top: 3px solid #d4dadf;
         }
-        a {
-            color: #1a82e2;
+        .logo {
+            text-align: center;
+            padding: 36px 0;
+
         }
-        img {
+        .logo img {
+            width: 100px;
             height: auto;
-            line-height: 100%;
-            text-decoration: none;
-            border: 0;
-            outline: none;
+        }
+        .content h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 48px;
+            margin: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 24px;
+            margin: 8px 0;
+            /* border: 2px solid #e9ecef; */
+        }
+        .button-container {
+            text-align: center;
+            padding: 12px 0;
         }
         .button {
-            font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
             font-size: 16px;
             font-weight: 700;
             color: #ffffff;
@@ -74,64 +88,23 @@
         }
     </style>
 </head>
-<body style="background-color: #e9ecef;">
-    <div style="display: none; font-size: 1px; color: #e9ecef; line-height: 1px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; max-height: 0; max-width: 0; opacity: 0; overflow: hidden;">
-        A preheader is the short summary text that follows the subject line when an email is viewed in the inbox.
+<body>
+
+    <div class="container">
+        <div class="logo">
+            <a href="https://aqsana.org" target="_blank">
+                <img src="{{ asset('assets/image/QawafelLogo.png') }}" alt="Logo">
+            </a>
+        </div>
+        <div class="content" style="border: 2px solid #e9ecef;display: flex; flex-direction: column; align-items: center;justify-content: center; padding: 46px 0px; border-radius: 10px;background-color: white">
+            <h1>إعادة تعيين كلمة المرور</h1>
+            <div class="button-container">
+                <a href="https://aqsana.org/app/password/reset/{{ $token }}" target="_blank" class="button">إعادة تعيين كلمة المرور</a>
+            </div>
+            <p>إذا لم تطلب إعادة تعيين كلمة المرور، يمكنك تجاهل هذا البريد الإلكتروني بأمان</p>
+            <p>إذا لم يعمل الزر، انسخ الرابط التالي والصقه في متصفحك</p>
+            <p><a href="https://aqsana.org/app/password/reset/{{ $token }}" target="_blank">https://aqsana.org/app/password/reset/{{ $token }}</a></p>
+        </div>
     </div>
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-            <td align="center" bgcolor="#e9ecef">
-                <table border="0" cellpadding="0" cellspacing="0" width="600">
-                    <tr>
-                        <td align="center" valign="top" style="padding: 36px 24px;">
-                            <a href="https://aqsana.org" target="_blank" style="display: inline-block;">
-                                <img src="storage/{{ nova_get_setting('main_logo', 'default_value') }}" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td align="center" bgcolor="#e9ecef">
-                <table border="0" cellpadding="0" cellspacing="0" width="600">
-                    <tr>
-                        <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
-                            <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">إعادة تعيين كلمة المرور</h1>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td align="center" bgcolor="#e9ecef">
-                <table border="0" cellpadding="0" cellspacing="0" width="600">
-                    <tr>
-                        <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                            <p style="margin: 0;">لقد تلقيت هذا البريد الإلكتروني لأننا تلقينا طلبًا لإعادة تعيين كلمة المرور لحسابك.</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left" bgcolor="#ffffff">
-                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                <tr>
-                                    <td align="center" bgcolor="#ffffff" style="padding: 12px;">
-                                        <a href="https://aqsana.org/app/password/reset/{{ $token }}" target="_blank" class="button">إعادة تعيين كلمة المرور</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <tr>
-
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-
-        </tr>
-    </table>
 </body>
 </html>
