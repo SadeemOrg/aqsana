@@ -244,16 +244,15 @@ class TripController extends BaseController
 
             if ($trip->tripto != null) {
                 $tripfrom = $trip->tripfrom->current_location;
-                dump($tripfrom);
-                // $trip_to_value = $tripfrom?->formatted_address;
+                $trip_to_value = $tripfrom?->formatted_address;
 
-                // if(stripos($trip_to_value,$request->get("search")) !== false){
+                if(stripos($trip_to_value,$request->get("search")) !== false){
 
-                //     if($search_trip->search($tripfrom->formatted_address) === false) {
-                //         $search_trip->push($tripfrom?->formatted_address);
-                //     }
+                    if($search_trip->search($tripfrom->formatted_address) === false) {
+                        $search_trip->push($tripfrom?->formatted_address);
+                    }
 
-                // }
+                }
             }
         });
 
