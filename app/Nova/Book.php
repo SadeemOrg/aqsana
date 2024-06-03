@@ -147,7 +147,7 @@ class Book extends Resource
                     Text::make(__(__('Description')), 'describtion'),
                 ])->confirmRemove(),
             Image::make(__('cover_photo'), 'cover_photo')->disk('public')->prunable()->creationRules('required'),
-            File::make(__('file'), 'file')->disk('public')->deletable()->rules('required'),
+            File::make(__('file'), 'file')->disk('public')->deletable()->creationRules('required'),
             HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
         ];
