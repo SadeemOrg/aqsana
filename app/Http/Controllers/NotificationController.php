@@ -180,7 +180,8 @@ class NotificationController extends Controller
         $myNotifications = array();
 
         if ((in_array('super-admin',   $user->userrole()))) {
-            $Notifications = \App\Models\Notification::where('notifiable_id', $request->user)->get();
+
+            $Notifications = \App\Models\Notification::where([['notifiable_id',  $request->user], ['notification_type', 1]])->get();
             $Notifications =  $Notifications->sortByDesc(function ($item) {
                 // Access the field within the JSON column
                 return data_get($item->data, 'date');

@@ -1708,8 +1708,7 @@ var render = function() {
                         _c("td", [
                           _vm._v(
                             _vm._s(Notification.Notifications.Notifications) +
-                              " == " +
-                              _vm._s(Notification.status)
+                              " "
                           )
                         ]),
                         _vm._v(" "),
