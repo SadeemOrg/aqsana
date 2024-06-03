@@ -241,16 +241,18 @@ class TripController extends BaseController
             ->get();
 
         $search_trip = collect();
-        $filteredTrips = $trips->filter(function ($trip) use ($request) {
+        $filteredTrips = $trips->filter(function ($trip) use ($request,$search_trip) {
             if ($trip->tripto != null) {
                 $trip_to_value = $trip->tripfrom?->name_address;
                 if (stripos($trip_to_value, $request->get("search")) !== false) {
+                    $search_trip->push($trip_to_value);
+
                     return true;
                 }
             }
             return false;
         });
-        $search_trip= $filteredTrips;
+        // $search_trip= $filteredTrips;
 
 
         return $this->sendResponse($search_trip, 'Success get Trips');
