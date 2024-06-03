@@ -1,6 +1,8 @@
 <?php
 
 use App\Exports\ExportDonations;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessagingController;
@@ -26,6 +28,9 @@ use Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/app/password/reset/{token}', [ForgotPasswordController::class, 'showForm']);
+Route::post('/app/password/reset', [ForgotPasswordController::class, 'update'])->name('password.update.new');
+
 
 Route::get('/Carbon', function () {
     dd( Carbon::now());

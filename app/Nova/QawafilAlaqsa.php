@@ -129,13 +129,9 @@ class QawafilAlaqsa extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         // dd( Auth::id(),$query->where('project_type', '2')->where('created_by', Auth::id())->get());
-        if ((in_array("super-admin",  $request->user()->userrole())) ) {
+        if ((in_array("super-admin",  $request->user()->userrole()))) {
             return $query->where('project_type', '2');
-
-        }
-        else  return $query->where('project_type', '2')->where('created_by', Auth::id());
-
-
+        } else  return $query->where('project_type', '2')->where('city', $request->user()->city);
     }
     public function fields(Request $request)
     {
@@ -252,13 +248,13 @@ class QawafilAlaqsa extends Resource
                 Text::make(__("QawafilAlaqsa describe"), "project_describe")->rules('required'),
 
 
-                BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
-                    ->options(Area::all())
-                    ->optionsLabel('name')->canSee(function ($request) {
-                        $user = Auth::user();
-                        if ($user->type() == 'admin') return true;
-                        return false;
-                    })->rules('required', 'max:1'),
+                // BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
+                //     ->options(Area::all())
+                //     ->optionsLabel('name')->canSee(function ($request) {
+                //         $user = Auth::user();
+                //         if ($user->type() == 'admin') return true;
+                //         return false;
+                //     })->rules('required', 'max:1'),
                 Multiselect::make(__('city'), 'city')
                     ->options(function () {
                         $Areas =  \App\Models\City::all();
@@ -272,7 +268,29 @@ class QawafilAlaqsa extends Resource
                         }
 
                         return $Area_type_admin_array;
-                    })->singleSelect(),
+                    })->singleSelect()->canSee(function ($request) {
+                        $user = Auth::user();
+                        if (in_array("super-admin",  $user->userrole()))  return true;
+                        return false;
+                    }),
+                    Multiselect::make(__('city'), 'city')
+                    ->options(function () {
+                        $Areas =  \App\Models\City::all();
+
+                        $Area_type_admin_array =  array();
+
+                        foreach ($Areas as $Area) {
+
+
+                            $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                        }
+
+                        return $Area_type_admin_array;
+                    })->hideWhenCreating()->hideWhenUpdating()->singleSelect()->canSee(function ($request) {
+                        $user = Auth::user();
+                        if (!in_array("super-admin",  $user->userrole()))  return true;
+                        return false;
+                    }),
 
                 Select::make(__("Repetition"), "repetition")->options([
                     '6' => __('Once'),
@@ -322,8 +340,7 @@ class QawafilAlaqsa extends Resource
 
                         foreach ($addresss as $address) {
 
-                                $address_type_admin_array += [$address['id'] => ($address['name_address'])];
-
+                            $address_type_admin_array += [$address['id'] => ($address['name_address'])];
                         }
 
                         return $address_type_admin_array;
@@ -361,26 +378,25 @@ class QawafilAlaqsa extends Resource
                 // ])->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
 
                 Select::make(__('trip to'), 'trip_to')
-                ->options(function () {
-                    $id = Auth::id();
-                    $addresss =  \App\Models\address::where('type', '1')->get();
-                    $address_type_admin_array =  array();
+                    ->options(function () {
+                        $id = Auth::id();
+                        $addresss =  \App\Models\address::where('type', '1')->get();
+                        $address_type_admin_array =  array();
 
-                    foreach ($addresss as $address) {
+                        foreach ($addresss as $address) {
 
                             $address_type_admin_array += [$address['id'] => ($address['name_address'])];
+                        }
 
-                    }
-
-                    return $address_type_admin_array;
-                })
-                ->withMeta([
+                        return $address_type_admin_array;
+                    })
+                    ->withMeta([
                         'value' => "1",
                     ])
-                ->hideFromIndex()->hideFromDetail()->singleSelect(),
+                    ->hideFromIndex()->hideFromDetail()->singleSelect(),
                 text::make(__('note'), "note"),
                 DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required'),
-                DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required',new QawafilAlaqsaDate($request->start_date)),
+                DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required', new QawafilAlaqsaDate($request->start_date)),
 
 
 
@@ -504,6 +520,12 @@ class QawafilAlaqsa extends Resource
     }
     public static function beforesave(Request $request, $model)
     {
+        $user = Auth::user();
+        if (! in_array("super-admin",  $user->userrole())) {
+            $model->city=$user->city;
+
+        }
+
         $request->request->remove('newtype');
     }
     public static function aftersave(Request $request, $model)
@@ -705,7 +727,7 @@ class QawafilAlaqsa extends Resource
     public function filters(Request $request)
     {
         return [
-              new ReportAdmin(),
+            new ReportAdmin(),
             new ReportCreated(),
             new ReportArea(),
             new Reportcity(),

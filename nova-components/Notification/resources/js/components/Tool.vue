@@ -206,7 +206,7 @@
                             <th>تم</th>
                         </tr>
                         <tr v-for="Notification in allNotifications" :key="Notification.id" :value="Notification.id">
-                            <td>{{ Notification.Notifications.Notifications }} == {{ Notification.status }}</td>
+                            <td>{{ Notification.Notifications.Notifications }} </td>
                             <td>{{ Notification.note }}</td>
 
                             <td v-if="Notification.Notifications.date">
