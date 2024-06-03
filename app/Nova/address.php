@@ -85,7 +85,7 @@ class address extends Resource
                     }
 
                     return $address_type_admin_array;
-                })->singleSelect()->hideFromIndex()->hideFromDetail(),
+                })->singleSelect()->hideFromIndex()->hideFromDetail()->rules('required'),
 
 
             // Select::make(__("type"), "type")->options([

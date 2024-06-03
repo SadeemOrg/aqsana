@@ -486,7 +486,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function gate()
     {
         Gate::define('viewNova', function ($user) {
-            return true;
+            if ($user->app_user!=1) {
+                return true;
+            }
         });
     }
     /**
