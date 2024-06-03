@@ -29,6 +29,7 @@ class TripController extends BaseController
             ->latest('id')->take(5)->get();
 
         $trips->map(function ($trip) use ($request) {
+
             $trip->tripToLocation = $trip->tripto->name_address;
             $trip->tripFromLocation = $trip->tripfrom->name_address;
             $trip->start_date = $trip->start_date;
@@ -170,6 +171,12 @@ class TripController extends BaseController
 
         $search_trip = collect();
         $trips->map(function ($trip) use ($request, $search_trip) {
+
+            $trip->tripToLocation = $trip->tripto->name_address;
+            $trip->tripFromLocation = $trip->tripfrom->name_address;
+            $trip->start_date = $trip->start_date;
+            $trip->start_date = $trip->start_date;
+            $trip->end_date = $trip->end_date;
 
             if (($trip->tripfrom) != null) {
                 $from_latlng = ($trip->tripfrom);
