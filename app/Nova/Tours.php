@@ -25,10 +25,9 @@ class Tours extends Resource
     public static $model = \App\Models\Tours::class;
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()) )||(in_array("Tours",  $request->user()->userrole()) )){
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Tours",  $request->user()->userrole()))) {
             return true;
-        }
-       else return false;
+        } else return false;
     }
     public static function label()
     {
@@ -68,43 +67,43 @@ class Tours extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('name'),'name')->rules('required'),
+            Text::make(__('name'), 'name')->rules('required'),
             Date::make(__('DATE'), 'date')->pickerDisplayFormat('d.m.Y')->rules('required'),
-            Text::make(__('number_of_people'),'number_of_people')->rules('required'),
+            Text::make(__('number_of_people'), 'number_of_people')->rules('required'),
 
             BelongsTo::make(__('Contacts'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
             Select::make(__('Contacts'), "Contacts")
-            ->options(function () {
-                $types =  TelephoneDirectory::whereJsonContains('type',  '6')->get();
-                $type_array =  array();
-                foreach ($types as $type) {
-                    $type_array += [$type['id'] => ($type['name'])];
-                }
+                ->options(function () {
+                    $types =  TelephoneDirectory::whereJsonContains('type',  '6')->get();
+                    $type_array =  array();
+                    foreach ($types as $type) {
+                        $type_array += [$type['id'] => ($type['name'])];
+                    }
 
-                return $type_array;
-            })->displayUsingLabels() ->hideFromDetail()->hideFromIndex(),
+                    return $type_array;
+                })->displayUsingLabels()->hideFromDetail()->hideFromIndex(),
 
 
 
             Flexible::make(__('Contacts'), 'NewContacts')
                 ->limit(1)
-            ->hideFromDetail()->hideFromIndex()
-            ->addLayout(__('Add new type'), 'type', [
-                Text::make(__('name'), 'name'),
-                Text::make(__('phone_number'), 'phone_number'),
-            ]),
-            Text::make(__('guide_name'),'guide_name')->rules('required'),
-            Text::make(__('guide_number'),'guide_number'),
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('Add new type'), 'type', [
+                    Text::make(__('name'), 'name'),
+                    Text::make(__('phone_number'), 'phone_number'),
+                ]),
+            Text::make(__('guide_name'), 'guide_name')->rules('required'),
+            Text::make(__('guide_number'), 'guide_number'),
             Text::make(__('start Time'), 'start_tour')
-            ->placeholder('##:##')
-            ->rules('date_format:"H:i"')
-            ->help('hh:mm'),
-        Text::make(__('end Time'), 'end_tour')
-            ->placeholder('##:##')
-            ->rules('date_format:"H:i"')
-            ->help('hh:mm'),
-            Textarea::make(__('note'),'note'),
+                ->placeholder('##:##')
+                ->creationRules('date_format:"H:i"')
+                ->help('hh:mm'),
+            Text::make(__('end Time'), 'end_tour')
+                ->placeholder('##:##')
+                ->creationRules('date_format:"H:i"')
+                ->help('hh:mm'),
+            Textarea::make(__('note'), 'note'),
             HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
 
         ];
@@ -116,19 +115,16 @@ class Tours extends Resource
         if (!$request->Contacts) {
 
 
-            if ($request->NewContacts   &&($request->NewContacts[0]['attributes']['name'] || $request->NewContacts[0]['attributes']['phone_number'])) {
+            if ($request->NewContacts   && ($request->NewContacts[0]['attributes']['name'] || $request->NewContacts[0]['attributes']['phone_number'])) {
 
-                $bookt= TelephoneDirectory::create([
+                $bookt = TelephoneDirectory::create([
                     'name' => $request->NewContacts[0]['attributes']['name'],
                     'phone_number' => $request->NewContacts[0]['attributes']['phone_number'],
-                    'type'=>6
+                    'type' => 6
                 ]);
                 // $model->Contacts=$bookt->id;
                 // $BookType =  \App\Models\BookType::orderBy('created_at', 'desc')->first();
                 $request->merge(['Contacts' => $bookt->id]);
-
-
-
             }
         }
         $request->request->remove('NewContacts');
