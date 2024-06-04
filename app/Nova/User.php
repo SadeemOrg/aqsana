@@ -123,6 +123,7 @@ class User extends Resource
                 return $Area_type_admin_array;
             })->singleSelect()->hideFromIndex()->hideFromDetail(),
         BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating()->nullable(),
+             BelongsTo::make(__('Role_user'), 'Role', \App\Nova\Role::class),
 
             Text::make(__('jop'), 'job')
             ->sortable(),
