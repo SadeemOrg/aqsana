@@ -104,7 +104,7 @@ class Area extends Resource
                     foreach ($users as $user) {
 
 
-                        $user_type_admin_array += [$user['id'] => ($user['name'] . " (" . $user['user_role'] . ")")];
+                        $user_type_admin_array += [$user['id'] => $user['name']];
                     }
 
                     return $user_type_admin_array;
