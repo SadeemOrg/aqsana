@@ -47,36 +47,47 @@ class ProjectStartEnd extends Action
                     ->where('project_id', $model->id)
                     ->first();
 
-                    $newQafel = $model->replicate();
-
-                    if ($model->repetition == "1") {
-
-                        $newQafel->start_date = $newQafel->start_date->addDays('1');
-                        $newQafel->end_date = $newQafel->end_date->addDays('1');
-                    } elseif ($model->repetition == "2") {
-
-                        $newQafel->start_date = $newQafel->start_date->addDays('7');
-                        $newQafel->end_date = $newQafel->end_date->addDays('7');
-                    } elseif ($model->repetition == "3") {
-
-                        $newQafel->start_date = $newQafel->start_date->addDays('14');
-                        $newQafel->end_date = $newQafel->end_date->addDays('14');
-                    } elseif ($model->repetition == "4") {
-
-                        $newQafel->start_date = $newQafel->start_date->addMonth();
-                        $newQafel->end_date = $newQafel->end_date->addMonth();
-                    } elseif ($model->repetition == "5") {
-
-                        $newQafel->start_date = $newQafel->start_date->addYear();
-                        $newQafel->end_date = $newQafel->end_date->addYear();
+                    switch ($model->repetition) {
+                        case "1":
+                            $newQafel = $model->replicate();
+                            $newQafel->start_date->addDays(1);
+                            $newQafel->end_date->addDays(1);
+                            break;
+                        case "2":
+                            $newQafel = $model->replicate();
+                            $newQafel->start_date->addDays(7);
+                            $newQafel->end_date->addDays(7);
+                            break;
+                        case "3":
+                            $newQafel = $model->replicate();
+                            $newQafel->start_date->addDays(14);
+                            $newQafel->end_date->addDays(14);
+                            break;
+                        case "4":
+                            $newQafel = $model->replicate();
+                            $newQafel->start_date->addMonth();
+                            $newQafel->end_date->addMonth();
+                            break;
+                        case "5":
+                            $newQafel = $model->replicate();
+                            $newQafel->start_date->addYear();
+                            $newQafel->end_date->addYear();
+                            break;
+                        default:
+                            // Handle unexpected repetition values
+                            break;
                     }
 
-                    $newQafel->created_at = Carbon::now();
-                    $newQafel->save();
-                    DB::table('project_status')->insert([
-                        'project_id' => $newQafel->id,
-                        'status' => 2,
-                    ]);
+                    if (isset($newQafel)) {
+                        $newQafel->created_at = Carbon::now();
+                        $newQafel->save();
+                        DB::table('project_status')->insert([
+                            'project_id' => $newQafel->id,
+                            'status' => 2,
+                        ]);
+                    }
+
+
 
 
             }
