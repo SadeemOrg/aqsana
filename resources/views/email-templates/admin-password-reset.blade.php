@@ -22,7 +22,7 @@
     <div style="max-width: 600px; margin: 0 auto; border-top: 3px solid #d4dadf;">
         <div style="text-align: center; padding: 36px 0;">
             <a href="https://aqsana.org" target="_blank">
-                <img src="https://example.com/assets/image/QawafelLogo.png" alt="Logo" style="width: 100px; height: auto;">
+                <img src="{{ asset('assets/image/QawafelLogo.png') }}" alt="Logo" style="width: 100px; height: auto;">
             </a>
         </div>
         <div style="border: 2px solid #e9ecef; border-radius: 10px; background-color: white; padding: 46px 24px; text-align: center;">
