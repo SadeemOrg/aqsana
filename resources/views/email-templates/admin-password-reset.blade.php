@@ -23,7 +23,6 @@
             </div>
             <p style="font-size: 16px; line-height: 24px; margin: 8px 0;">إذا لم تطلب إعادة تعيين كلمة المرور، يمكنك تجاهل هذا البريد الإلكتروني بأمان.</p>
             <p style="font-size: 16px; line-height: 24px; margin: 8px 0;">إذا لم يعمل الزر، انسخ الرابط التالي والصقه في متصفحك:</p>
-            <p style="font-size: 16px; line-height: 24px; margin: 8px 0;"><a href="https://aqsana.org/app/password/reset/{{ $token }}" target="_blank">https://aqsana.org/app/password/reset/{{ $token }}</a></p>
         </div>
     </div>
 </body>
