@@ -4,30 +4,78 @@
 
         <div class="flex">
             <div class="w-full h-full">
-                <div class="flex flex-row items-center justify-start w-full my-4 gap-x-2">
-                    <div class="flex flex-row items-center justify-center cursor-pointer w-1/2">
-                        <a v-on:click="toggleTabs(1)" v-bind:class="{ 'text-green-600 bg-white w-full py-4 text-center rounded-md': openTab !== 1, 'text-white bg-green-600 w-full py-4 text-center rounded-md': openTab === 1 }">
+                <div
+                    class="flex flex-row items-center justify-start w-full my-4 gap-x-2"
+                >
+                    <div
+                        class="flex flex-row items-center justify-center cursor-pointer w-1/2"
+                    >
+                        <a
+                            v-on:click="toggleTabs(1)"
+                            v-bind:class="{
+                                'text-green-600 bg-white w-full py-4 text-center rounded-md':
+                                    openTab !== 1,
+                                'text-white bg-green-600 w-full py-4 text-center rounded-md':
+                                    openTab === 1
+                            }"
+                        >
                             مهامي
                         </a>
                     </div>
-                    <div class="flex flex-row items-center justify-center cursor-pointer w-1/2">
-                        <a v-on:click="toggleTabs(2)" v-bind:class="{ 'text-green-600 bg-white w-full py-4 text-center rounded-md': openTab !== 2, 'text-white bg-green-600 w-full py-4 text-center rounded-md': openTab === 2 }">
+                    <div
+                        class="flex flex-row items-center justify-center cursor-pointer w-1/2"
+                    >
+                        <a
+                            v-on:click="toggleTabs(2)"
+                            v-bind:class="{
+                                'text-green-600 bg-white w-full py-4 text-center rounded-md':
+                                    openTab !== 2,
+                                'text-white bg-green-600 w-full py-4 text-center rounded-md':
+                                    openTab === 2
+                            }"
+                        >
                             إضافة مهام
                         </a>
                     </div>
-                    <div class="flex flex-row items-center justify-center cursor-pointer w-1/2">
-                        <a v-on:click="toggleTabs(4)" v-bind:class="{ 'text-green-600 bg-white w-full py-4 text-center rounded-md': openTab !== 4, 'text-white bg-green-600 w-full py-4 text-center rounded-md': openTab === 4 }">
+                    <div
+                        class="flex flex-row items-center justify-center cursor-pointer w-1/2"
+                    >
+                        <a
+                            v-on:click="toggleTabs(4)"
+                            v-bind:class="{
+                                'text-green-600 bg-white w-full py-4 text-center rounded-md':
+                                    openTab !== 4,
+                                'text-white bg-green-600 w-full py-4 text-center rounded-md':
+                                    openTab === 4
+                            }"
+                        >
                             الإشعارات
                         </a>
                     </div>
-                    <div class="flex flex-row items-center justify-center cursor-pointer w-1/2">
-                        <a v-on:click="toggleTabs(3)" v-bind:class="{ 'text-green-600 bg-white w-full py-4 text-center rounded-md': openTab !== 3, 'text-white bg-green-600 w-full py-4 text-center rounded-md': openTab === 3 }">
+                    <div
+                        class="flex flex-row items-center justify-center cursor-pointer w-1/2"
+                    >
+                        <a
+                            v-on:click="toggleTabs(3)"
+                            v-bind:class="{
+                                'text-green-600 bg-white w-full py-4 text-center rounded-md':
+                                    openTab !== 3,
+                                'text-white bg-green-600 w-full py-4 text-center rounded-md':
+                                    openTab === 3
+                            }"
+                        >
                             مهام الموظفين
                         </a>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scroll-x" v-bind:class="{ hidden: openTab !== 1, block: openTab === 1 }">
+                    <div
+                        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scroll-x"
+                        v-bind:class="{
+                            hidden: openTab !== 1,
+                            block: openTab === 1
+                        }"
+                    >
                         <table class="text-center w-full">
                             <tr>
                                 <th style="width: 40%;">المهمة</th>
@@ -37,30 +85,96 @@
                                 <th>تم</th>
                                 <th>حذف</th>
                             </tr>
-                            <tr v-for="Notification in myNotification" :key="Notification.id">
-                                <td>{{ Notification.Notifications.Notifications }}</td>
+                            <tr
+                                v-for="Notification in myNotification"
+                                :key="Notification.id"
+                            >
+                                <td>
+                                    {{
+                                        Notification.Notifications.Notifications
+                                    }}
+                                </td>
                                 <td class="flex w-full h-full">
-                                    <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">البحث</label>
+                                    <label
+                                        for="search"
+                                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+                                        >البحث</label
+                                    >
                                     <div class="relative w-full">
-                                        <input type="text" id="fname" v-model="Notification.note" class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
-                                        <button @click="AddNote(Notification.id, Notification.note)" type="submit" class="text-white absolute left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">إضافة</button>
+                                        <input
+                                            type="text"
+                                            id="fname"
+                                            v-model="Notification.note"
+                                            class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            required
+                                        />
+                                        <button
+                                            @click="
+                                                AddNote(
+                                                    Notification.id,
+                                                    Notification.note
+                                                )
+                                            "
+                                            type="submit"
+                                            class="text-white absolute left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        >
+                                            إضافة
+                                        </button>
                                     </div>
                                 </td>
                                 <td>{{ Notification.sender.name }}</td>
-                                <td v-if="Notification.Notifications.date">{{ Notification.Notifications.date }}</td>
+                                <td v-if="Notification.Notifications.date">
+                                    {{ Notification.Notifications.date }}
+                                </td>
                                 <td v-else>بدون تاريخ</td>
                                 <td v-if="Notification.status == 1">
-                                    <button class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold w-48 py-4  rounded" @click="receivedNotifications(Notification.id)" type="submit">استلام المهمة</button>
+                                    <button
+                                        class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold w-48 py-4  rounded"
+                                        @click="
+                                            receivedNotifications(
+                                                Notification.id
+                                            )
+                                        "
+                                        type="submit"
+                                    >
+                                        استلام المهمة
+                                    </button>
                                 </td>
                                 <td v-else-if="Notification.status == 2">
-                                    <button class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold w-48 py-4 rounded" @click="WorkOnNotifications(Notification.id)" type="submit">جاري العمل على المهمة</button>
+                                    <button
+                                        class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold w-48 py-4 rounded"
+                                        @click="
+                                            WorkOnNotifications(Notification.id)
+                                        "
+                                        type="submit"
+                                    >
+                                        جاري العمل على المهمة
+                                    </button>
                                 </td>
                                 <td v-else-if="Notification.status == 3">
-                                    <button class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold w-48 py-4  rounded" @click="CompletNotifications(Notification.id)" type="submit">مكتمل</button>
+                                    <button
+                                        class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold w-48 py-4  rounded"
+                                        @click="
+                                            CompletNotifications(
+                                                Notification.id
+                                            )
+                                        "
+                                        type="submit"
+                                    >
+                                        مكتمل
+                                    </button>
                                 </td>
-                                <td  v-else>انتهت المهمة</td>
+                                <td v-else>انتهت المهمة</td>
                                 <th>
-                                    <button class="shadow bg-red-500 hover:bg-red-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded" type="submit" @click="deleteNotifications(Notification.id)">حذف</button>
+                                    <button
+                                        class="shadow bg-red-500 hover:bg-red-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded"
+                                        type="submit"
+                                        @click="
+                                            deleteNotifications(Notification.id)
+                                        "
+                                    >
+                                        حذف
+                                    </button>
                                 </th>
                             </tr>
                         </table>
@@ -73,7 +187,10 @@
                         block: openTab === 2
                     }"
                 >
-                    <form @submit.prevent="onSubmit" class="add-form py-4">
+                    <form
+                        @submit.prevent="sendNotifications"
+                        class="add-form py-4"
+                    >
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
                             <div>
                                 <label
@@ -135,7 +252,6 @@
                             <button
                                 class="shadow bg-green-600 hover:bg-green-500 mt-4 focus:shadow-outline focus:outline-none text-white font-medium px-16 py-4 rounded"
                                 type="submit"
-                                @click="sendNotifications()"
                             >
                                 حفظ
                             </button>
@@ -162,9 +278,9 @@
                             class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                             v-model="selectedAdmin"
                         >
-                            <option selected disabled value="0"
-                                >Please select one</option
-                            >
+                            <!-- <option selected disabled 
+                                >الرجاء اختيار المستخدم</option
+                            > -->
 
                             <option
                                 v-for="user in users"
@@ -277,7 +393,10 @@
             </div>
         </div>
         <div v-if="openDeleteModal">
-            <delete-modal @handel-close-delete-modal="handelCloseDeleteModal" @handel-delete-notification="handelDeleteNotifications"></delete-modal>
+            <delete-modal
+                @handel-close-delete-modal="handelCloseDeleteModal"
+                @handel-delete-notification="handelDeleteNotifications"
+            ></delete-modal>
         </div>
     </div>
 </template>
@@ -294,14 +413,13 @@ export default {
             allNotifications: [],
             openDeleteModal: false,
             openTab: 1,
-            selected: { id: 0 },
+            selected: null,
             date: "",
             Notifications: "",
-            selectedAdmin:"",
+            selectedAdmin: ""
         };
-
     },
-    methods:{
+    methods: {
         getusers: function() {
             axios.post("/users").then(response => {
                 this.users = response.data;
@@ -329,18 +447,54 @@ export default {
                 this.myAlertNotification = response.data;
             });
         },
-        sendNotifications() {
-            axios.post("/sendNotification", {
-                Notifications: this.Notifications,
-                date: this.date,
-                user: this.selected.id
-            });
-            this.myNotifications();
-            this.Notifications = [];
-            this.selected.id = 0;
-            alert("send done");
-        },
+        async sendNotifications() {
+            try {
+                const res = await axios.post("/sendNotification", {
+                    Notifications: this.Notifications,
+                    date: this.date,
+                    user: this.selected ? this.selected.id : null
+                });
 
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.success("تم انشاء المهمة بنجاح");
+                this.Notifications = [];
+                this.selected.id = null;
+            } catch (err) {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+
+                if (err.response && err.response.data&& err.response.data.data) {
+                    const errors = err.response.data.data;
+                    console.log("🚀 ~ sendNotifications ~ errors:")
+                    for (const key in errors) {
+                        if (errors.hasOwnProperty(key)) {
+                            toastr.error(errors[key]);
+                        }
+                    }
+                } else {
+                    toastr.error("حدث خطأ غير معروف");
+                }
+            }
+
+            this.myNotifications();
+        },
         AdminNotifications(event) {
             // alert(event.target.value);
             axios
@@ -414,10 +568,10 @@ export default {
         this.getusers();
         this.myNotifications();
         this.UserAdmin();
-        this.myAlert();    }
+        this.myAlert();
+    }
 };
 </script>
-
 
 <style>
 table {
