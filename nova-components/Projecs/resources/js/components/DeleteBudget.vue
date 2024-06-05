@@ -69,7 +69,6 @@ export default {
                     this.year = event.target.value;
                 });
         },
-
         deleteSector() {
             axios.post("/delet", {
                 year: this.year,
@@ -81,4 +80,3 @@ export default {
     },
 }
 </script>
-
