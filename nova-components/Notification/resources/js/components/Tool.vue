@@ -523,11 +523,28 @@ export default {
             });
             this.myNotifications();
         },
-        receivedNotifications: function($event, $type) {
-            axios.post("/receivedNotifications", {
-                Notificationsid: $event
-            });
-            this.myNotifications();
+        receivedNotifications: async function($event, $type) {
+            try {
+                await axios.post("/receivedNotifications", {
+                    Notificationsid: $event
+                });
+                this.myNotifications();
+            } catch (error) {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.error(
+                    "An error occurred while processing received notification"
+                );
+                console.error(error);
+            }
         },
         WorkOnNotifications: async function($event, $type) {
             try {
