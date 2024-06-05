@@ -492,7 +492,6 @@ export default {
                     err.response.data.data
                 ) {
                     const errors = err.response.data.data;
-                    console.log("🚀 ~ sendNotifications ~ errors:");
                     for (const key in errors) {
                         if (errors.hasOwnProperty(key)) {
                             toastr.error(errors[key]);
@@ -530,11 +529,26 @@ export default {
             });
             this.myNotifications();
         },
-        WorkOnNotifications: function($event, $type) {
-            axios.post("/WorkOnNotifications", {
-                Notificationsid: $event
-            });
-            this.myNotifications();
+        WorkOnNotifications: async function($event, $type) {
+            try {
+                await axios.post("/WorkOnNotifications", {
+                    Notificationsid: $event
+                });
+                this.myNotifications();
+            } catch (error) {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.error("An error occurred while working on notification");
+                console.error(error);
+            }
         },
         CompletNotifications: function($event, $type) {
             axios.post("/CompletNotifications", {
@@ -588,7 +602,6 @@ export default {
             this.selectedNotificationId = id;
             // this.handelDeleteNotifications();
         },
-
         handelCloseDeleteModal() {
             this.openDeleteModal = false;
         },
@@ -599,7 +612,7 @@ export default {
                         Notificationsid: $event,
                         NotificationsNote: $note
                     });
-                    if (response.status==200) {
+                    if (response.status == 200) {
                         toastr.options = {
                             closeButton: true,
                             debug: false,
