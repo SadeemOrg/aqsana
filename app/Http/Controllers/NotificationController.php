@@ -275,17 +275,12 @@ class NotificationController extends Controller
         // Disabling SSL Certificate support temporarly
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
-        // Execute post
         $result = curl_exec($ch);
         if ($result === FALSE) {
             die('Curl failed: ' . curl_error($ch));
         }
-        // Close connection
         curl_close($ch);
-        // FCM response
-        dd($result);
 
-        // $userSchema->notify($userSchema, new TasksNotification($offerData,$date));
         return 'Task completed!';
     }
 
