@@ -918,130 +918,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1051,13 +927,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             users: [],
             myNotification: [],
             myAlertNotification: [],
-
-            openTab: 1,
-            Admin: 1,
-            myNotificationT: [],
             allNotifications: [],
             openDeleteModal: false,
-            selectedNotificationId: null
+            openTab: 1,
+            selected: { id: 0 },
+            date: "",
+            Notifications: "",
+            selectedAdmin: ""
         };
     },
 
@@ -1176,7 +1052,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         }
     },
-
     beforeMount: function beforeMount() {
         this.getusers();
         this.myNotifications();
@@ -1196,7 +1071,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("heading", { staticClass: "mb-6" }, [_vm._v("المهام و الاشعارات")]),
+      _c("heading", { staticClass: "mb-6" }, [_vm._v("المهام و الإشعارات")]),
       _vm._v(" "),
       _c("div", { staticClass: "flex" }, [
         _c("div", { staticClass: "w-full h-full" }, [
@@ -1204,7 +1079,7 @@ var render = function() {
             "div",
             {
               staticClass:
-                "flex flex-row items-center justify-satrt w-full my-4 gap-x-2"
+                "flex flex-row items-center justify-start w-full my-4 gap-x-2"
             },
             [
               _c(
@@ -1220,7 +1095,7 @@ var render = function() {
                       class: {
                         "text-green-600 bg-white w-full py-4 text-center rounded-md":
                           _vm.openTab !== 1,
-                        "text-white  bg-green-600 w-full py-4 text-center rounded-md":
+                        "text-white bg-green-600 w-full py-4 text-center rounded-md":
                           _vm.openTab === 1
                       },
                       on: {
@@ -1251,7 +1126,7 @@ var render = function() {
                       class: {
                         "text-green-600 bg-white w-full py-4 text-center rounded-md":
                           _vm.openTab !== 2,
-                        "text-white  bg-green-600 w-full py-4 text-center rounded-md":
+                        "text-white bg-green-600 w-full py-4 text-center rounded-md":
                           _vm.openTab === 2
                       },
                       on: {
@@ -1262,7 +1137,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        اضافة مهام\n                    "
+                        "\n                        إضافة مهام\n                    "
                       )
                     ]
                   )
@@ -1282,7 +1157,7 @@ var render = function() {
                       class: {
                         "text-green-600 bg-white w-full py-4 text-center rounded-md":
                           _vm.openTab !== 4,
-                        "text-white  bg-green-600 w-full py-4 text-center rounded-md":
+                        "text-white bg-green-600 w-full py-4 text-center rounded-md":
                           _vm.openTab === 4
                       },
                       on: {
@@ -1293,7 +1168,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        الاشعارات\n                    "
+                        "\n                        الإشعارات\n                    "
                       )
                     ]
                   )
@@ -1313,7 +1188,7 @@ var render = function() {
                       class: {
                         "text-green-600 bg-white w-full py-4 text-center rounded-md":
                           _vm.openTab !== 3,
-                        "text-white  bg-green-600 w-full py-4 text-center rounded-md":
+                        "text-white bg-green-600 w-full py-4 text-center rounded-md":
                           _vm.openTab === 3
                       },
                       on: {
@@ -1338,215 +1213,173 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scoll-x",
-                class: {
-                  hidden: _vm.openTab !== 1,
-                  block: _vm.openTab === 1
-                }
+                  "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scroll-x",
+                class: { hidden: _vm.openTab !== 1, block: _vm.openTab === 1 }
               },
               [
                 _c(
                   "table",
-                  { staticClass: "text-center" },
+                  { staticClass: "text-center w-full" },
                   [
                     _vm._m(0),
                     _vm._v(" "),
                     _vm._l(_vm.myNotification, function(Notification) {
-                      return _c(
-                        "tr",
-                        {
-                          key: Notification.id,
-                          attrs: { value: Notification.id }
-                        },
-                        [
-                          _c("td", [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(
-                                  Notification.Notifications.Notifications
-                                ) +
-                                "\n                            "
-                            )
-                          ]),
+                      return _c("tr", { key: Notification.id }, [
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(Notification.Notifications.Notifications)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "flex w-full h-full" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass:
+                                "mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white",
+                              attrs: { for: "search" }
+                            },
+                            [_vm._v("البحث")]
+                          ),
                           _vm._v(" "),
-                          _c("td", { staticClass: "flex w-full h-full" }, [
-                            _c(
-                              "label",
-                              {
-                                staticClass:
-                                  "mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white",
-                                attrs: { for: "search" }
-                              },
-                              [_vm._v("Search")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "relative w-full" }, [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: Notification.note,
-                                    expression: "Notification.note"
-                                  }
-                                ],
-                                staticClass:
-                                  "block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-                                attrs: {
-                                  type: "text",
-                                  id: "fname",
-                                  required: ""
-                                },
-                                domProps: { value: Notification.note },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      Notification,
-                                      "note",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "button",
+                          _c("div", { staticClass: "relative w-full" }, [
+                            _c("input", {
+                              directives: [
                                 {
-                                  staticClass:
-                                    "text-white absolute left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
-                                  attrs: { type: "submit" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.AddNote(
-                                        Notification.id,
-                                        Notification.note
-                                      )
-                                    }
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: Notification.note,
+                                  expression: "Notification.note"
+                                }
+                              ],
+                              staticClass:
+                                "block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                              attrs: {
+                                type: "text",
+                                id: "fname",
+                                required: ""
+                              },
+                              domProps: { value: Notification.note },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
                                   }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        اضافة\n                                    "
+                                  _vm.$set(
+                                    Notification,
+                                    "note",
+                                    $event.target.value
                                   )
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(Notification.sender.name))]),
-                          _vm._v(" "),
-                          Notification.Notifications.date
-                            ? _c("td", [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(Notification.Notifications.date) +
-                                    "\n                            "
-                                )
-                              ])
-                            : _c("td", [_vm._v("no Time")]),
-                          _vm._v(" "),
-                          Notification.status == 1
-                            ? _c("td", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded",
-                                    attrs: { type: "submit" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.receivedNotifications(
-                                          Notification.id
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                    استلام المهمة\n                                "
-                                    )
-                                  ]
-                                )
-                              ])
-                            : Notification.status == 2
-                            ? _c("td", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded",
-                                    attrs: { type: "submit" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.WorkOnNotifications(
-                                          Notification.id
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                    جاري العمل على المهمة\n                                "
-                                    )
-                                  ]
-                                )
-                              ])
-                            : Notification.status == 3
-                            ? _c("td", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded",
-                                    attrs: { type: "submit" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.CompletNotifications(
-                                          Notification.id
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                    مكتمل\n                                "
-                                    )
-                                  ]
-                                )
-                              ])
-                            : _c("td", [
-                                _vm._v(
-                                  "\n                                المهمة انجزت\n                            "
-                                )
-                              ]),
-                          _vm._v(" "),
-                          _c("th", [
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
                             _c(
                               "button",
                               {
                                 staticClass:
-                                  "shadow bg-red-500 hover:bg-red-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded",
+                                  "text-white absolute left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
                                 attrs: { type: "submit" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.deleteNotifications(
-                                      Notification.id
+                                    return _vm.AddNote(
+                                      Notification.id,
+                                      Notification.note
                                     )
                                   }
                                 }
                               },
-                              [
-                                _vm._v(
-                                  "\n                                    حذف\n                                "
-                                )
-                              ]
+                              [_vm._v("إضافة")]
                             )
                           ])
-                        ]
-                      )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(Notification.sender.name))]),
+                        _vm._v(" "),
+                        Notification.Notifications.date
+                          ? _c("td", [
+                              _vm._v(_vm._s(Notification.Notifications.date))
+                            ])
+                          : _c("td", [_vm._v("بدون تاريخ")]),
+                        _vm._v(" "),
+                        Notification.status == 1
+                          ? _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded",
+                                  attrs: { type: "submit" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.receivedNotifications(
+                                        Notification.id
+                                      )
+                                    }
+                                  }
+                                },
+                                [_vm._v("استلام المهمة")]
+                              )
+                            ])
+                          : Notification.status == 2
+                          ? _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded",
+                                  attrs: { type: "submit" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.WorkOnNotifications(
+                                        Notification.id
+                                      )
+                                    }
+                                  }
+                                },
+                                [_vm._v("جاري العمل على المهمة")]
+                              )
+                            ])
+                          : Notification.status == 3
+                          ? _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded",
+                                  attrs: { type: "submit" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.CompletNotifications(
+                                        Notification.id
+                                      )
+                                    }
+                                  }
+                                },
+                                [_vm._v("مكتمل")]
+                              )
+                            ])
+                          : _c("td", [_vm._v("انتهت المهمة")]),
+                        _vm._v(" "),
+                        _c("th", [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "shadow bg-red-500 hover:bg-red-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded",
+                              attrs: { type: "submit" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteNotifications(
+                                    Notification.id
+                                  )
+                                }
+                              }
+                            },
+                            [_vm._v("حذف")]
+                          )
+                        ])
+                      ])
                     })
                   ],
                   2
@@ -2041,7 +1874,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", { staticStyle: { width: "40%" } }, [_vm._v("المهمة")]),
       _vm._v(" "),
-      _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحضات")]),
+      _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحظات")]),
       _vm._v(" "),
       _c("th", { staticStyle: { width: "10%" } }, [_vm._v("المرسل")]),
       _vm._v(" "),
