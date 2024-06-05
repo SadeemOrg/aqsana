@@ -632,7 +632,8 @@ module.exports = function normalizeComponent (
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-throw new Error("Cannot find module \"./delete-notification.vue\"");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__delete_notification_vue__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__delete_notification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__delete_notification_vue__);
 //
 //
 //
@@ -2130,6 +2131,283 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(8)
+/* script */
+var __vue_script__ = __webpack_require__(18)
+/* template */
+var __vue_template__ = __webpack_require__(19)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/delete-notification.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-aa68655c", Component.options)
+  } else {
+    hotAPI.reload("data-v-aa68655c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    setup: function setup() {},
+
+    methods: {
+        closeModal: function closeModal() {
+            this.$emit('handel-close-delete-modal');
+        },
+        handelDeleteNotification: function handelDeleteNotification() {
+            this.$emit('handel-delete-notification');
+        }
+    }
+});
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "relative z-10",
+      attrs: {
+        "aria-labelledby": "modal-title",
+        role: "dialog",
+        "aria-modal": "true"
+      }
+    },
+    [
+      _c("div", {
+        staticClass:
+          "fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "fixed inset-0 z-10 w-screen overflow-y-auto" },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 max-w-sm sm:p-6"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "absolute right-0 top-0 hidden pr-4 pt-4 sm:block"
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
+                          attrs: { type: "button" },
+                          on: { click: _vm.closeModal }
+                        },
+                        [
+                          _c("span", { staticClass: "sr-only" }, [
+                            _vm._v("Close")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "h-6 w-6 mx-5",
+                              attrs: {
+                                fill: "none",
+                                viewBox: "0 0 24 24",
+                                "stroke-width": "1.5",
+                                stroke: "currentColor",
+                                "aria-hidden": "true"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  "stroke-linecap": "round",
+                                  "stroke-linejoin": "round",
+                                  d: "M6 18L18 6M6 6l12 12"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "mt-5 sm:mt-4 sm:flex sm:flex-row items-center justify-center gap-x-4"
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto",
+                          attrs: { type: "button" },
+                          on: { click: _vm.handelDeleteNotification }
+                        },
+                        [_vm._v("حذف")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto",
+                          attrs: { type: "button" },
+                          on: { click: _vm.closeModal }
+                        },
+                        [_vm._v("الغاء")]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "sm:flex sm:items-start" }, [
+      _c(
+        "div",
+        { staticClass: "mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left" },
+        [
+          _c(
+            "h3",
+            {
+              staticClass: "text-base font-semibold leading-6 text-gray-900",
+              attrs: { id: "modal-title" }
+            },
+            [_vm._v("حذف الاشعار")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "mt-2" }, [
+            _c("p", { staticClass: "text-sm text-gray-500" }, [
+              _vm._v(
+                "هل أنت متأكد من أنك تريد حذف الإشعار؟ لا يمكن استعادة الإشعار بعد حذفه."
+              )
+            ])
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-aa68655c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
