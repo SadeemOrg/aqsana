@@ -956,5 +956,6 @@
     "latitude": "خط العرض",
     "street_name": "اسم الشارع",
     "Export To Exsel": "تصدير إلى Excel",
-    "user not found!":"لم يتم العثور على المستخدم!"
+    "user not found!":"لم يتم العثور على المستخدم!",
+    "notifications":"إشعارات"
 }
