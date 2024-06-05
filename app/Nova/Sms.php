@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Acme\Smssend\Smssend;
 use Illuminate\Http\Request;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -76,7 +77,7 @@ class Sms extends Resource
                 ->rules('required', 'max:255'),
                 Text::make(__('phone_number'),'phone_number')->rules('required'),
                 Text::make(__('city'),'city')->rules('required'),
-                HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+                HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }

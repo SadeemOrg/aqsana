@@ -7,6 +7,7 @@ use App\Models\BookType;
 use App\Nova\Actions\PostBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\File;
@@ -148,7 +149,7 @@ class Book extends Resource
                 ])->confirmRemove(),
             Image::make(__('cover_photo'), 'cover_photo')->disk('public')->prunable()->creationRules('required'),
             File::make(__('file'), 'file')->disk('public')->deletable()->creationRules('required'),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }

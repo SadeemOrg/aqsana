@@ -244,22 +244,15 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ asset('assets/js/push.min.js') }}"></script>
 
 
 
 
-    {{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> --}}
 
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
-    {{-- <script language="JavaScript" type="text/javascript" src="/js/jquery-1.2.6.min.js"></script> --}}
-    {{-- <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script> --}}
-    {{-- <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script> --}}
-    <script>
+   <script>
         var firebaseConfig = {
             apiKey: "AIzaSyCUFf82RK4_UHpnJ2EAD1eXgz2tIIBoFaE",
             authDomain: "alaqsa-association.firebaseapp.com",

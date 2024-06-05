@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
 
 class Currency extends Resource
@@ -65,7 +66,7 @@ class Currency extends Resource
             Text::make(__('Name'),'name'),
             Text::make(__('code'),'code'),
             Number::make(__('rate'),'rate')->step(0.01),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }

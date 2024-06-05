@@ -29,6 +29,7 @@ use App\Nova\Filters\PostNewsFilters;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
 use Whitecube\NovaFlexibleContent\Flexible;
 
@@ -257,7 +258,8 @@ class News extends Resource
             Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y')->sortable()->rules('required'),
 
 
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
+
 
 
 

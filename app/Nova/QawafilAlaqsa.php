@@ -70,6 +70,7 @@ use Fourstacks\NovaRepeatableFields\Repeater;
 use Laravel\Nova\Fields\HasMany;
 use Mauricewijnia\NovaMapsAddress\MapsAddress;
 use Carbon\Carbon;
+use Laravel\Nova\Actions\ActionResource;
 
 use function Clue\StreamFilter\fun;
 
@@ -484,7 +485,7 @@ class QawafilAlaqsa extends Resource
             // HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
             HasMany::make(__('TripBooking'), 'TripBooking', \App\Nova\TripBooking::class),
             belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }
