@@ -437,10 +437,16 @@ export default {
                 console.log("finsh");
             });
         },
-        myNotifications: function() {
-            axios.post("/myNotification").then(response => {
+        async myNotifications() {
+            try {
+                const response = await axios.post("/myNotification");
                 this.myNotification = response.data;
-            });
+            } catch (error) {
+                console.error(
+                    "An error occurred while fetching notifications:",
+                    error
+                );
+            }
         },
         myAlert: function() {
             axios.post("/myAlert").then(response => {
@@ -480,9 +486,13 @@ export default {
                     hideMethod: "fadeOut"
                 };
 
-                if (err.response && err.response.data&& err.response.data.data) {
+                if (
+                    err.response &&
+                    err.response.data &&
+                    err.response.data.data
+                ) {
                     const errors = err.response.data.data;
-                    console.log("🚀 ~ sendNotifications ~ errors:")
+                    console.log("🚀 ~ sendNotifications ~ errors:");
                     for (const key in errors) {
                         if (errors.hasOwnProperty(key)) {
                             toastr.error(errors[key]);
@@ -492,7 +502,6 @@ export default {
                     toastr.error("حدث خطأ غير معروف");
                 }
             }
-
             this.myNotifications();
         },
         AdminNotifications(event) {
@@ -533,34 +542,93 @@ export default {
             });
             this.myNotifications();
         },
-        handelDeleteNotifications() {
-            axios.post("/DeleteNotifications", {
-                Notificationsid: this.selectedNotificationId
-            });
-            this.openDeleteModal = false;
-            this.myNotifications();
+        async handelDeleteNotifications() {
+            try {
+                const response = await axios.post("/DeleteNotifications", {
+                    Notificationsid: this.selectedNotificationId
+                });
+                if (response.status == 200) {
+                    toastr.options = {
+                        closeButton: true,
+                        debug: false,
+                        positionClass: "toast-bottom-right",
+                        onclick: null,
+                        showDuration: "300",
+                        hideDuration: "2000",
+                        showMethod: "fadeIn",
+                        hideMethod: "fadeOut"
+                    };
+                    toastr.success("لقد تم حذف المهمه بنجاح");
+                } else {
+                    toastr.error("Failed to delete notification");
+                }
+
+                this.openDeleteModal = false;
+                this.myNotifications();
+            } catch (error) {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+
+                toastr.error(
+                    "An error occurred while deleting the notification"
+                );
+                console.error(error);
+            }
         },
         deleteNotifications(id) {
             this.openDeleteModal = true;
             this.selectedNotificationId = id;
-            handelDeleteNotifications();
+            // this.handelDeleteNotifications();
         },
 
         handelCloseDeleteModal() {
             this.openDeleteModal = false;
         },
-        AddNote: function($event, $note) {
-            // alert($note);
+        AddNote: async function($event, $note) {
             if ($note) {
-                axios
-                    .post("/AddNoteNotifications", {
+                try {
+                    const response = await axios.post("/AddNoteNotifications", {
                         Notificationsid: $event,
                         NotificationsNote: $note
-                    })
-                    .then(response => {
-                        alert("done");
                     });
-                this.myNotifications();
+                    if (response.status==200) {
+                        toastr.options = {
+                            closeButton: true,
+                            debug: false,
+                            positionClass: "toast-bottom-right",
+                            onclick: null,
+                            showDuration: "300",
+                            hideDuration: "2000",
+                            showMethod: "fadeIn",
+                            hideMethod: "fadeOut"
+                        };
+                        toastr.success("تم اضافة ملاحظه بنجاح");
+                    } else {
+                        toastr.error("فشل في اضافة ملاحظة");
+                    }
+                    this.myNotifications();
+                } catch (error) {
+                    toastr.options = {
+                        closeButton: true,
+                        debug: false,
+                        positionClass: "toast-bottom-right",
+                        onclick: null,
+                        showDuration: "300",
+                        hideDuration: "2000",
+                        showMethod: "fadeIn",
+                        hideMethod: "fadeOut"
+                    };
+                    toastr.error("An error occurred while adding note");
+                    console.error(error);
+                }
             }
         }
     },
