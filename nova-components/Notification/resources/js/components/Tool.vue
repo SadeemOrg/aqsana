@@ -517,11 +517,28 @@ export default {
         toggleTabs: function(tabNumber) {
             this.openTab = tabNumber;
         },
-        UNCompletNotifications: function($event) {
-            axios.post("/UNCompletNotifications", {
-                Notificationsid: $event
-            });
-            this.myNotifications();
+        UNCompletNotifications: async function($event) {
+            try {
+                await axios.post("/UNCompletNotifications", {
+                    Notificationsid: $event
+                });
+                this.myNotifications();
+            } catch (error) {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.error(
+                    "An error occurred while uncompleting notification"
+                );
+                console.error(error);
+            }
         },
         receivedNotifications: async function($event, $type) {
             try {
@@ -567,11 +584,26 @@ export default {
                 console.error(error);
             }
         },
-        CompletNotifications: function($event, $type) {
-            axios.post("/CompletNotifications", {
-                Notificationsid: $event
-            });
-            this.myNotifications();
+        CompletNotifications: async function($event, $type) {
+            try {
+                await axios.post("/CompletNotifications", {
+                    Notificationsid: $event
+                });
+                this.myNotifications();
+            } catch (error) {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.error("An error occurred while completing notification");
+                console.error(error);
+            }
         },
         async handelDeleteNotifications() {
             try {
@@ -617,7 +649,6 @@ export default {
         deleteNotifications(id) {
             this.openDeleteModal = true;
             this.selectedNotificationId = id;
-            // this.handelDeleteNotifications();
         },
         handelCloseDeleteModal() {
             this.openDeleteModal = false;
