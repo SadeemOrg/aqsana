@@ -50,15 +50,15 @@
                                 <td v-if="Notification.Notifications.date">{{ Notification.Notifications.date }}</td>
                                 <td v-else>بدون تاريخ</td>
                                 <td v-if="Notification.status == 1">
-                                    <button class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded" @click="receivedNotifications(Notification.id)" type="submit">استلام المهمة</button>
+                                    <button class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold w-48 py-4  rounded" @click="receivedNotifications(Notification.id)" type="submit">استلام المهمة</button>
                                 </td>
                                 <td v-else-if="Notification.status == 2">
-                                    <button class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded" @click="WorkOnNotifications(Notification.id)" type="submit">جاري العمل على المهمة</button>
+                                    <button class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold w-48 py-4 rounded" @click="WorkOnNotifications(Notification.id)" type="submit">جاري العمل على المهمة</button>
                                 </td>
                                 <td v-else-if="Notification.status == 3">
-                                    <button class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded" @click="CompletNotifications(Notification.id)" type="submit">مكتمل</button>
+                                    <button class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold w-48 py-4  rounded" @click="CompletNotifications(Notification.id)" type="submit">مكتمل</button>
                                 </td>
-                                <td v-else>انتهت المهمة</td>
+                                <td  v-else>انتهت المهمة</td>
                                 <th>
                                     <button class="shadow bg-red-500 hover:bg-red-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded" type="submit" @click="deleteNotifications(Notification.id)">حذف</button>
                                 </th>
@@ -386,9 +386,9 @@ export default {
             this.openDeleteModal = false;
             this.myNotifications();
         },
-        deleteNotifications (id) {
+        deleteNotifications(id) {
             this.openDeleteModal = true;
-            this.selectedNotificationId=id;
+            this.selectedNotificationId = id;
             handelDeleteNotifications();
         },
 
