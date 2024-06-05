@@ -9,7 +9,7 @@
                         <a v-on:click="toggleTabs(1)" v-bind:class="{
                             'text-green-600 bg-white w-full py-4 text-center rounded-md':
                                 openTab !== 1,
-                            'text-white  bg-green-600 w-full py-4 text-center rounded-md':
+                            'text-white bg-green-600 w-full py-4 text-center rounded-md':
                                 openTab === 1,
                         }">
                             مهامي
@@ -19,7 +19,7 @@
                         <a class="" v-on:click="toggleTabs(2)" v-bind:class="{
                             'text-green-600 bg-white w-full py-4 text-center rounded-md':
                                 openTab !== 2,
-                            'text-white  bg-green-600 w-full py-4 text-center rounded-md':
+                            'text-white bg-green-600 w-full py-4 text-center rounded-md':
                                 openTab === 2,
                         }">
                             اضافة مهام
@@ -29,7 +29,7 @@
                         <a class="" v-on:click="toggleTabs(4)" v-bind:class="{
                             'text-green-600 bg-white w-full py-4 text-center rounded-md':
                                 openTab !== 4,
-                            'text-white  bg-green-600 w-full py-4 text-center rounded-md':
+                            'text-white bg-green-600 w-full py-4 text-center rounded-md':
                                 openTab === 4,
                         }">
                             الاشعارات
@@ -39,14 +39,14 @@
                         <a class="" v-on:click="toggleTabs(3)" v-bind:class="{
                             'text-green-600 bg-white w-full py-4 text-center rounded-md':
                                 openTab !== 3,
-                            'text-white  bg-green-600 w-full py-4 text-center rounded-md':
+                            'text-white bg-green-600 w-full py-4 text-center rounded-md':
                                 openTab === 3,
                         }">
                             مهام الموظفين
                         </a>
                     </div>
                 </div>
-                <div class="overflow-x-auto ">
+                <div class="overflow-x-auto">
                     <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scoll-x"
                         v-bind:class="{
                             hidden: openTab !== 1,
@@ -57,13 +57,10 @@
                             <tr>
                                 <th style="width: 40%;">المهمة</th>
                                 <th style="width: 40%;">الملاحضات</th>
-                                <th style="width: 10%;">المرسل </th>
-
+                                <th style="width: 10%;">المرسل</th>
                                 <th style="width: 10%;">التاريخ</th>
-
                                 <th>تم</th>
                                 <th>حذف</th>
-
                             </tr>
                             <tr v-for="Notification in myNotification" :key="Notification.id" :value="Notification.id">
                                 <td>{{ Notification.Notifications.Notifications }}</td>
@@ -71,21 +68,18 @@
                                     <label for="search"
                                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                                     <div class="relative w-full">
-                                        <!-- <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      </div> -->
                                         <input type="text" id="fname" v-model="Notification.note"
-                                            class="block w-full p-4  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required>
                                         <button @click="AddNote(Notification.id, Notification.note)" type="submit"
-                                            class="text-white absolute  left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">اضافة</button>
+                                            class="text-white absolute left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">اضافة</button>
                                     </div>
                                 </td>
-                                <td> {{ Notification.sender.name }}</td>
+                                <td>{{ Notification.sender.name }}</td>
                                 <td v-if="Notification.Notifications.date">
                                     {{ Notification.Notifications.date }}
                                 </td>
-                                <td v-else>no Time</td>
-
+                                <td v-else>لا يوجد وقت</td>
                                 <td v-if="Notification.status == 1">
                                     <button
                                         class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded"
@@ -100,7 +94,6 @@
                                         جاري العمل على المهمة
                                     </button>
                                 </td>
-
                                 <td v-else-if="Notification.status == 3">
                                     <button
                                         class="shadow bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-2 rounded"
@@ -109,14 +102,15 @@
                                     </button>
                                 </td>
                                 <td v-else>
-                                    المهمة انجزت
+                                    المهمة انتهت
                                 </td>
-                                <th> <button
+                                <th>
+                                    <button
                                         class="shadow bg-red-500 hover:bg-red-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded"
                                         type="submit" @click="DeleteNotifications(Notification.id)">
                                         حذف
-                                    </button></th>
-
+                                    </button>
+                                </th>
                             </tr>
                         </table>
                     </div>
@@ -126,7 +120,7 @@
                             hidden: openTab !== 2,
                             block: openTab === 2,
                         }">
-                    <form @submit.prevent="onSubmit" class="add-form py-4">
+                    <form @submit.prevent="sendNotifications" class="add-form py-4">
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
                             <div>
                                 <label class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0">
@@ -135,25 +129,22 @@
                                 <select
                                     class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                                     v-model="selected">
-                                    <option selected disabled value="0">Please select one</option>
-
+                                    <option selected disabled value="0">الرجاء اختيار واحد</option>
                                     <option v-for="user in users" :key="user.id" v-bind:value="{ id: user.id }">
                                         {{ user.name }}
                                     </option>
                                 </select>
-
                             </div>
                             <div>
                                 <label class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0">
-                                    التاريج
+                                    التاريخ
                                 </label>
                                 <div>
                                     <input type="date" v-model="date"
-                                        class=" appearance-none border border-gray-200 rounded w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black" />
+                                        class="appearance-none border border-gray-200 rounded w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black" />
                                 </div>
                             </div>
                         </div>
-
                         <div class="md:w-1/3">
                             <label class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0">
                                 المهمة
@@ -161,23 +152,19 @@
                         </div>
                         <div class="md:w-2/3">
                             <textarea rows="6" cols="50"
-                                class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                                v-model="Notifications" id="inline-full-name" type="text" />
+                                class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                                v-model="Notifications" id="inline-full-name" type="text"></textarea>
                         </div>
                         <div class="md:w-2/3">
                             <button
-                                class="shadow bg-green-600 hover:bg-green-500 mt-4 focus:shadow-outline focus:outline-none text-white font-medium px-16 py-4 rounded"
-                                type="submit" @click="sendNotifications()">
+                                class="shadow bg-green-600 hover:bg-green-500 mt-4 focus:shadow-outline focus:outline-none text-white font-medium px-16 py-4 rounded">
                                 حفظ
                             </button>
                         </div>
                     </form>
                 </div>
                 <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4"
-                    v-bind:class="{
-                            hidden: openTab !== 3,
-                            block: openTab === 3,
-                        }">
+                    v-bind:class="{ hidden: openTab !== 3, block: openTab === 3 }">
                     <div class="md:w-1/3">
                         <label class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0">
                             المستخدم
@@ -187,8 +174,7 @@
                         <select @change="AdminNotifications($event)"
                             class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                             v-model="selectedAdmin">
-                            <option selected disabled value="0">Please select one</option>
-
+                            <option selected disabled value="0">الرجاء اختيار واحد</option>
                             <option v-for="user in users" :key="user.id" :value="user.id">
                                 {{ user.name }}
                             </option>
@@ -200,32 +186,24 @@
                             <th style="width: 40%;">المهمة</th>
                             <th style="width: 40%;">الملاحضات</th>
                             <th style="width: 10%;">التاريخ</th>
-
                             <th style="width: 10%;">الحالة</th>
-
                             <th>تم</th>
                         </tr>
                         <tr v-for="Notification in allNotifications" :key="Notification.id" :value="Notification.id">
-                            <td>{{ Notification.Notifications.Notifications }} </td>
+                            <td>{{ Notification.Notifications.Notifications }}</td>
                             <td>{{ Notification.note }}</td>
-
                             <td v-if="Notification.Notifications.date">
                                 {{ Notification.Notifications.date }}
                             </td>
-                            <td v-else>no Time</td>
-
+                            <td v-else>لا يوجد وقت</td>
                             <td v-if="Notification.status == 1">
                                 استلام المهمة
-
                             </td>
                             <td v-else-if="Notification.status == 2">
                                 جاري العمل على المهمة
-
                             </td>
-
                             <td v-else-if="Notification.status == 3">
                                 مكتمل
-
                             </td>
                             <td v-else>
                                 المهمة انجزت
@@ -239,22 +217,15 @@
                         </tr>
                     </table>
                 </div>
-                <div class="overflow-x-auto ">
+                <div class="overflow-x-auto">
                     <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scoll-x"
-                        v-bind:class="{
-                            hidden: openTab !== 4,
-                            block: openTab === 4,
-                        }">
-
+                        v-bind:class="{ hidden: openTab !== 4, block: openTab === 4 }">
                         <table class="text-center">
                             <tr>
                                 <th style="width: 40%;">المهمة</th>
                                 <th style="width: 40%;">الملاحضات</th>
-                                <th style="width: 10%;">المرسل </th>
-
+                                <th style="width: 10%;">المرسل</th>
                                 <th style="width: 10%;">التاريخ</th>
-
-
                             </tr>
                             <tr v-for="Notification in myAlertNotification" :key="Notification.id"
                                 :value="Notification.id">
@@ -263,27 +234,31 @@
                                     <label for="search"
                                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                                     <div class="relative w-full">
-                                        <!-- <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      </div> -->
                                         <input type="text" id="fname" v-model="Notification.note"
-                                            class="block w-full p-4  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required>
                                     </div>
                                 </td>
-                                <td> {{ Notification.sender.name }}</td>
+                                <td>{{ Notification.sender.name }}</td>
                                 <td v-if="Notification.Notifications.date">
                                     {{ Notification.Notifications.date }}
                                 </td>
-                                <td v-else>no Time</td>
-
+                                <td v-else>لا يوجد وقت</td>
                             </tr>
                         </table>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
 </template>
+
+
+<style>
+/* Your styles here */
+</style>
 
 <script>
 export default {
@@ -292,11 +267,13 @@ export default {
             users: [],
             myNotification: [],
             myAlertNotification: [],
+            allNotifications: [],
 
             openTab: 1,
-            Admin: 1,
-            myNotificationT: [],
-            allNotifications: [],
+            selected: { id: 0 },
+            date: "",
+            Notifications: "",
+            selectedAdmin:"",
         };
     },
     methods: {

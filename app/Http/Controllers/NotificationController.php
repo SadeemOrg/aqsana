@@ -8,9 +8,10 @@ use App\Notifications\TasksNotification;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-class NotificationController extends Controller
+class NotificationController extends BaseController
 {
     public function __construct()
     {
@@ -239,11 +240,26 @@ class NotificationController extends Controller
     public function sendNotification(Request $request)
     {
 
+        $validator = Validator::make($request->all(), [
+            'user' => 'required',
+            'Notifications' => 'required',
+            'date' => 'required',
+        ], [
+            'user.required' => ' المستخدم مطلوب.',
+            'Notifications.required' => 'الاشعار مطلوب.',
+            'date.required' => ' التاريخ مطلوب.',
+        ]);
+
+
+        if ($validator->fails()) {
+            return $this->sendError('Validate Error', $validator->errors());
+        }
+
+
         $userSchema = User::find($request->user);
         $offerData = $request->Notifications;
         $date = $request->date;
-        // dd($date);
-        // Auth::user()->notify(new PostNotif());
+
         Notification::send($userSchema, new TasksNotification($offerData, $date, $userSchema));
         $url = 'https://fcm.googleapis.com/fcm/send';
         $FcmToken = User::where('id', $userSchema->id)->pluck('device_key')->all();
