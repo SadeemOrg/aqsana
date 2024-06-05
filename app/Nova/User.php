@@ -15,6 +15,7 @@ use Laravel\Nova\Fields\HasMany;
 use Illuminate\Support\Facades\DB;
 use App\Models\Area;
 use App\Nova\Actions\ExportUsers;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -197,7 +198,7 @@ class User extends Resource
 
 
 
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
 
         ];

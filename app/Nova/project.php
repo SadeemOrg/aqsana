@@ -63,6 +63,7 @@ use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
 
 use Fourstacks\NovaRepeatableFields\Repeater;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
 use PosLifestyle\DateRangeFilter\DateRangeFilter;
 
@@ -182,7 +183,7 @@ class Project extends Resource
 
             HasMany::make(__('Volunteer'), 'Volunteer', \App\Nova\Volunteer::class),
             belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class),
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
 
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 

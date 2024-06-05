@@ -15,6 +15,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Actions\ActionResource;
 use Whitecube\NovaFlexibleContent\Flexible;
 
 class Bus extends Resource
@@ -159,7 +160,7 @@ class Bus extends Resource
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
 HasMany::make('TripBookings'),
-HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }

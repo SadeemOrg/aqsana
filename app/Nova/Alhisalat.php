@@ -36,7 +36,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Laravel\Nova\Actions\ActionResource;
 use Pdmfc\NovaFields\ActionButton;
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -229,7 +229,7 @@ class Alhisalat extends Resource
                 '3' => 'تم التسليم',
                 '4' => 'تم العد',
             ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }

@@ -39,6 +39,7 @@ use App\Nova\Metrics\DonationInBox;
 use App\Nova\Metrics\DonationNotReceive;
 use AwesomeNova\Cards\FilterCard;
 use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use NovaButton\Button;
@@ -282,7 +283,7 @@ class Donation extends Resource
                 ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
             Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info'),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class),
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
 
         ];
     }

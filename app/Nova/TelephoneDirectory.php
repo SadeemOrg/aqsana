@@ -8,6 +8,7 @@ use App\Models\SmsType;
 use App\Nova\Filters\UserType;
 use AwesomeNova\Cards\FilterCard;
 use Illuminate\Http\Request;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\HasMany;
@@ -153,7 +154,7 @@ class TelephoneDirectory extends Resource
             Text::make(__('id_number'), 'id_number'),
 
 
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class),
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
 
             Date::make(__('birth_date'), 'birth_date')->pickerDisplayFormat('d.m.Y')->sortable(),
 

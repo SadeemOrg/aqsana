@@ -12,7 +12,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Area extends Resource
@@ -115,7 +115,7 @@ class Area extends Resource
 
 
             HasMany::make(__("City"), "City", \App\Nova\City::class),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }

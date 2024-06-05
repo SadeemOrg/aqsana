@@ -31,6 +31,7 @@ use App\Nova\Filters\Transactionproject;
 use App\Nova\Filters\TransactionSectors;
 use App\Nova\Metrics\InComeTransaction;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\HasMany;
@@ -239,7 +240,7 @@ class PaymentVoucher extends Resource
             Files::make(__('voucher'), 'voucher'),
             Files::make(__('file'), 'file'),
 
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
 
         ];

@@ -8,6 +8,7 @@ use App\Nova\Actions\ExportAddress;
 use devops\MapAddress\MapAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
@@ -87,13 +88,6 @@ class address extends Resource
                     return $address_type_admin_array;
                 })->singleSelect()->hideFromIndex()->hideFromDetail()->rules('required'),
 
-
-            // Select::make(__("type"), "type")->options([
-            //     '1' => __('bus'),
-            //     '2' => __('Alhisalat'),
-            //     '3' => __('Project'),
-
-            // ])->displayUsingLabels()->rules('required'),
             Text::make(__('name address'), "name_address")->rules('required'),
             Text::make(__("description address"), "description")->rules('required'),
             Text::make(__("phone number"), "phone_number_address"),
@@ -122,69 +116,18 @@ class address extends Resource
                     return $user_type_admin_array;
                 })->singleSelect(),
 
-
-            // GoogleMaps::make(__('current_location'), 'current_location')
-            //     ->zoom(8),
-            // MapAddress::make('address'),
-
             MapsAddress::make(__('Address'), 'current_location')
                 ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036])
                 ->types(['establishment']),
-            //  ->mapOptions(['fullscreenControl' => true,'clickableIcons'=>true,'restriction'=>true]),
-
-            //     Text::make(__('longitude'), "longitude")->hideFromDetail()->hideFromIndex(),
-            //     Text::make(__('latitude'), "latitude")->hideFromDetail()->hideFromIndex(),
-            //     Text::make(__('street_name'), "street_name")->hideFromDetail()->hideFromIndex(),
-            //     Text::make(__('city'), "city")->hideFromDetail()->hideFromIndex(),
-            // // Select::make(__("Status"), "status")->options([
-            //     '1' => __('active'),
-            //     '2' => __('not active'),
-            // ])->displayUsingLabels(),
-            // BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }
 
-    public static function beforeUpdate(Request $request, $model)
-    {
-        // $address=    \App\Models\address::find($model->id);
 
-        // $data =$address->current_location;
-
-        // $json = \File::get('sample.json');
-        // $data = json_decode($json);
-        // $data['street_name'] =($request->street_name != null) ?$request->street_name : $data['street_name'] ;
-        // $data['city']  =($request->city != null) ?$request->city : $data['city'] ;
-        // $data['latitude']  =($request->latitude != null) ?(float)$request->latitude :(float) $data['latitude'] ;
-        // $data['longitude']  =($request->longitude != null) ?(float)$request->longitude : (float)$data['longitude'] ;
-        // $data['formatted_address'] =  $data['street_name'].','.   $data['city'] ;
-
-        // $request->request->remove('street_name');
-        // $request->request->remove('city');
-        // $request->request->remove('latitude');
-        // $request->request->remove('longitude');
-        // $model->current_location=$data;
-    }
     public static function beforeCreate(Request $request, $model)
     {
-
-        $json = \File::get('sample.json');
-        $data = json_decode($json);
-        $data->street_name = $request->street_name;
-        $data->city = $request->city;
-        $data->latitude = (float)$request->latitude;
-        $data->longitude = (float)$request->longitude;
-        $data->formatted_address = $request->street_name . ',' . $request->city;
-
-        $request->request->remove('street_name');
-        $request->request->remove('city');
-        $request->request->remove('latitude');
-        $request->request->remove('longitude');
-        $model->current_location = $data;
-
         $id = Auth::id();
-
         $model->created_by = $id;
         $model->status = 1;
     }

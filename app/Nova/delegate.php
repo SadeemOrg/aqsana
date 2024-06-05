@@ -15,6 +15,7 @@ use Laravel\Nova\Fields\Text;
 use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 use AwesomeNova\Cards\FilterCard;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
 use Titasgailius\SearchRelations\SearchesRelations;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -155,7 +156,7 @@ class delegate extends Resource
                 3 => __('مندوب قوافل'),
                 4 => __('مساعد مندوب'),
             ])->displayUsingLabels(),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }
