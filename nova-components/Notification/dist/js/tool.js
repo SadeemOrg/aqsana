@@ -91,7 +91,6 @@ var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(3)
-  __webpack_require__(15)
 }
 var normalizeComponent = __webpack_require__(8)
 /* script */
@@ -170,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Your styles here */\n", ""]);
+exports.push([module.i, "\ntable {\n    font-family: arial, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\ntd,\nth {\n    border: 1px solid #dddddd;\n\n    padding: 8px;\n}\n.for-mobile-scoll-x {\n    min-width: 800px;\n}\n", ""]);
 
 // exports
 
@@ -633,6 +632,153 @@ module.exports = function normalizeComponent (
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+throw new Error("Cannot find module \"./delete-notification.vue\"");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -896,19 +1042,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: { DeleteModal: __WEBPACK_IMPORTED_MODULE_0__delete_notification_vue___default.a },
     data: function data() {
         return {
             users: [],
             myNotification: [],
             myAlertNotification: [],
-            allNotifications: [],
 
             openTab: 1,
-            selected: { id: 0 },
-            date: "",
-            Notifications: "",
-            selectedAdmin: ""
+            Admin: 1,
+            myNotificationT: [],
+            allNotifications: [],
+            openDeleteModal: false,
+            selectedNotificationId: null
         };
     },
 
@@ -998,19 +1146,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             this.myNotifications();
         },
-        DeleteNotifications: function DeleteNotifications($event) {
+        handelDeleteNotifications: function handelDeleteNotifications() {
             axios.post("/DeleteNotifications", {
-                Notificationsid: $event
+                Notificationsid: this.selectedNotificationId
             });
+            this.openDeleteModal = false;
             this.myNotifications();
         },
+        deleteNotifications: function deleteNotifications(id) {
+            this.openDeleteModal = true;
+            this.selectedNotificationId = id;
+            handelDeleteNotifications();
+        },
+        handelCloseDeleteModal: function handelCloseDeleteModal() {
+            this.openDeleteModal = false;
+        },
+
         AddNote: function AddNote($event, $note) {
             // alert($note);
             if ($note) {
                 axios.post("/AddNoteNotifications", {
                     Notificationsid: $event,
                     NotificationsNote: $note
-
                 }).then(function (response) {
                     alert("done");
                 });
@@ -1062,7 +1219,7 @@ var render = function() {
                       class: {
                         "text-green-600 bg-white w-full py-4 text-center rounded-md":
                           _vm.openTab !== 1,
-                        "text-white bg-green-600 w-full py-4 text-center rounded-md":
+                        "text-white  bg-green-600 w-full py-4 text-center rounded-md":
                           _vm.openTab === 1
                       },
                       on: {
@@ -1093,7 +1250,7 @@ var render = function() {
                       class: {
                         "text-green-600 bg-white w-full py-4 text-center rounded-md":
                           _vm.openTab !== 2,
-                        "text-white bg-green-600 w-full py-4 text-center rounded-md":
+                        "text-white  bg-green-600 w-full py-4 text-center rounded-md":
                           _vm.openTab === 2
                       },
                       on: {
@@ -1124,7 +1281,7 @@ var render = function() {
                       class: {
                         "text-green-600 bg-white w-full py-4 text-center rounded-md":
                           _vm.openTab !== 4,
-                        "text-white bg-green-600 w-full py-4 text-center rounded-md":
+                        "text-white  bg-green-600 w-full py-4 text-center rounded-md":
                           _vm.openTab === 4
                       },
                       on: {
@@ -1155,7 +1312,7 @@ var render = function() {
                       class: {
                         "text-green-600 bg-white w-full py-4 text-center rounded-md":
                           _vm.openTab !== 3,
-                        "text-white bg-green-600 w-full py-4 text-center rounded-md":
+                        "text-white  bg-green-600 w-full py-4 text-center rounded-md":
                           _vm.openTab === 3
                       },
                       on: {
@@ -1203,7 +1360,11 @@ var render = function() {
                         [
                           _c("td", [
                             _vm._v(
-                              _vm._s(Notification.Notifications.Notifications)
+                              "\n                                " +
+                                _vm._s(
+                                  Notification.Notifications.Notifications
+                                ) +
+                                "\n                            "
                             )
                           ]),
                           _vm._v(" "),
@@ -1265,7 +1426,11 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [_vm._v("اضافة")]
+                                [
+                                  _vm._v(
+                                    "\n                                        اضافة\n                                    "
+                                  )
+                                ]
                               )
                             ])
                           ]),
@@ -1280,7 +1445,7 @@ var render = function() {
                                     "\n                            "
                                 )
                               ])
-                            : _c("td", [_vm._v("لا يوجد وقت")]),
+                            : _c("td", [_vm._v("no Time")]),
                           _vm._v(" "),
                           Notification.status == 1
                             ? _c("td", [
@@ -1353,7 +1518,7 @@ var render = function() {
                               ])
                             : _c("td", [
                                 _vm._v(
-                                  "\n                                المهمة انتهت\n                            "
+                                  "\n                                المهمة انجزت\n                            "
                                 )
                               ]),
                           _vm._v(" "),
@@ -1366,7 +1531,7 @@ var render = function() {
                                 attrs: { type: "submit" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.DeleteNotifications(
+                                    return _vm.deleteNotifications(
                                       Notification.id
                                     )
                                   }
@@ -1407,7 +1572,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.sendNotifications.apply(null, arguments)
+                      return _vm.onSubmit.apply(null, arguments)
                     }
                   }
                 },
@@ -1471,7 +1636,7 @@ var render = function() {
                                   value: "0"
                                 }
                               },
-                              [_vm._v("الرجاء اختيار واحد")]
+                              [_vm._v("Please select one")]
                             ),
                             _vm._v(" "),
                             _vm._l(_vm.users, function(user) {
@@ -1504,7 +1669,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                التاريخ\n                            "
+                              "\n                                التاريج\n                            "
                             )
                           ]
                         ),
@@ -1569,7 +1734,26 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _vm._m(2)
+                  _c("div", { staticClass: "md:w-2/3" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "shadow bg-green-600 hover:bg-green-500 mt-4 focus:shadow-outline focus:outline-none text-white font-medium px-16 py-4 rounded",
+                        attrs: { type: "submit" },
+                        on: {
+                          click: function($event) {
+                            return _vm.sendNotifications()
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            حفظ\n                        "
+                        )
+                      ]
+                    )
+                  ])
                 ]
               )
             ]
@@ -1580,10 +1764,13 @@ var render = function() {
             {
               staticClass:
                 "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4",
-              class: { hidden: _vm.openTab !== 3, block: _vm.openTab === 3 }
+              class: {
+                hidden: _vm.openTab !== 3,
+                block: _vm.openTab === 3
+              }
             },
             [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "md:w-2/3 mb-8" }, [
                 _c(
@@ -1624,7 +1811,7 @@ var render = function() {
                     _c(
                       "option",
                       { attrs: { selected: "", disabled: "", value: "0" } },
-                      [_vm._v("الرجاء اختيار واحد")]
+                      [_vm._v("Please select one")]
                     ),
                     _vm._v(" "),
                     _vm._l(_vm.users, function(user) {
@@ -1649,7 +1836,7 @@ var render = function() {
                 "table",
                 { staticClass: "text-center" },
                 [
-                  _vm._m(4),
+                  _vm._m(3),
                   _vm._v(" "),
                   _vm._l(_vm.allNotifications, function(Notification) {
                     return _c(
@@ -1661,7 +1848,9 @@ var render = function() {
                       [
                         _c("td", [
                           _vm._v(
-                            _vm._s(Notification.Notifications.Notifications)
+                            "\n                            " +
+                              _vm._s(Notification.Notifications.Notifications) +
+                              "\n                        "
                           )
                         ]),
                         _vm._v(" "),
@@ -1675,7 +1864,7 @@ var render = function() {
                                   "\n                        "
                               )
                             ])
-                          : _c("td", [_vm._v("لا يوجد وقت")]),
+                          : _c("td", [_vm._v("no Time")]),
                         _vm._v(" "),
                         Notification.status == 1
                           ? _c("td", [
@@ -1727,14 +1916,17 @@ var render = function() {
               {
                 staticClass:
                   "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scoll-x",
-                class: { hidden: _vm.openTab !== 4, block: _vm.openTab === 4 }
+                class: {
+                  hidden: _vm.openTab !== 4,
+                  block: _vm.openTab === 4
+                }
               },
               [
                 _c(
                   "table",
                   { staticClass: "text-center" },
                   [
-                    _vm._m(5),
+                    _vm._m(4),
                     _vm._v(" "),
                     _vm._l(_vm.myAlertNotification, function(Notification) {
                       return _c(
@@ -1746,7 +1938,11 @@ var render = function() {
                         [
                           _c("td", [
                             _vm._v(
-                              _vm._s(Notification.Notifications.Notifications)
+                              "\n                                " +
+                                _vm._s(
+                                  Notification.Notifications.Notifications
+                                ) +
+                                "\n                            "
                             )
                           ]),
                           _vm._v(" "),
@@ -1805,7 +2001,7 @@ var render = function() {
                                     "\n                            "
                                 )
                               ])
-                            : _c("td", [_vm._v("لا يوجد وقت")])
+                            : _c("td", [_vm._v("no Time")])
                         ]
                       )
                     })
@@ -1816,7 +2012,22 @@ var render = function() {
             )
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _vm.openDeleteModal
+        ? _c(
+            "div",
+            [
+              _c("delete-modal", {
+                on: {
+                  "handel-close-delete-modal": _vm.handelCloseDeleteModal,
+                  "handel-delete-notification": _vm.handelDeleteNotifications
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e()
     ],
     1
   )
@@ -1856,21 +2067,6 @@ var staticRenderFns = [
             "\n                            المهمة\n                        "
           )
         ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-2/3" }, [
-      _c(
-        "button",
-        {
-          staticClass:
-            "shadow bg-green-600 hover:bg-green-500 mt-4 focus:shadow-outline focus:outline-none text-white font-medium px-16 py-4 rounded"
-        },
-        [_vm._v("\n                            حفظ\n                        ")]
       )
     ])
   },
@@ -1934,49 +2130,6 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(16);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(6)("6c975c06", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./Tool.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./Tool.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(5)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\ntable {\n    font-family: arial, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\ntd,\nth {\n    border: 1px solid #dddddd;\n\n    padding: 8px;\n}\n.for-mobile-scoll-x {\n    min-width: 800px;\n}\n", ""]);
-
-// exports
-
 
 /***/ })
 /******/ ]);
