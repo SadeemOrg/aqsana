@@ -112,6 +112,8 @@ class NotificationController extends BaseController
     public function AddNoteNotifications(Request $request)
     {
         $Notification =  \App\Models\Notification::where('id', $request->Notificationsid)->update(['note' => $request->NotificationsNote]);
+        return $this->sendResponse([], 'done');
+
     }
 
     public function UNCompletNotifications(Request $request)
