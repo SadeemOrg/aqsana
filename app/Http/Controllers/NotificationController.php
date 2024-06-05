@@ -105,6 +105,8 @@ class NotificationController extends BaseController
         $new_data->status = 5;
         $new_data->save();
         \App\Models\Notification::where('id', $request->Notificationsid)->delete();
+        return $this->sendResponse([], 'done');
+
 
     }
     public function AddNoteNotifications(Request $request)
