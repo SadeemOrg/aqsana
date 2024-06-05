@@ -1,30 +1,35 @@
 <template>
     <div>
+        <!-- Tabs Navigation -->
         <div class="flex">
             <div class="w-full">
                 <div class="w-full">
-                    <div class="flex flex-row flex-wrap sm:flex-nowrap items-center justify-satrt w-full my-4 gap-x-2">
+                    <div class="flex flex-row flex-wrap sm:flex-nowrap items-center justify-start w-full my-4 gap-x-2">
                         <div v-for="tab in tabs" :key="tab.index"
                             class="flex flex-row items-center justify-center cursor-pointer w-1/4 mb-3">
-                            <a v-on:click="toggleTabs(tab.index)" v-bind:class="{
+                            <a @click="toggleTabs(tab.index)" :class="{
                             'text-green-600 bg-white w-full py-4 text-center rounded-md': openTab !== tab.index,
-                            'text-white  bg-green-600 w-full py-4 text-center rounded-md': openTab === tab.index,
+                            'text-white bg-green-600 w-full py-4 text-center rounded-md': openTab === tab.index,
                         }">
                                 {{ tab.name }}
                             </a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Tab Content -->
                 <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
                     <div class="px-4 py-5 flex-auto">
                         <div class="tab-content tab-space">
-                            <!-- first form -->
+
+                            <!-- Budgets Tab -->
                             <div :class="{ hidden: openTab !== 1, block: openTab === 1 }">
                                 <Budgets :years="years" :year="year" />
                             </div>
-                            <!-- second form -->
+
+                            <!-- Add New Budget Tab -->
                             <div :class="{ hidden: openTab !== 2, block: openTab === 2 }">
-                                <!-- ... (your form content) -->
+                                <!-- Form Fields for Adding New Budget -->
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
                                     <div>
                                         <label
@@ -46,16 +51,17 @@
                                             class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0">
                                             ميزانية السنة
                                         </label>
-
                                         <input v-on:keyup="countdown"
                                             class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                                             id="inline-full-name" type="text" v-model="budgetsOfyear" />
                                     </div>
                                 </div>
-                                <form @submit.prevent="onSubmit" class="add-form py-4">
+
+                                <!-- Add New Budget Form -->
+                                <form @submit.prevent="savenew" class="add-form py-4">
                                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4">
                                         <div v-for="(Sector, index) in newSectors" :key="Sector.Sector"
-                                            :value="Sector.Sector" class=" mb-3">
+                                            :value="Sector.Sector" class="mb-3">
                                             <div class="">
                                                 <label
                                                     class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64"
@@ -63,7 +69,7 @@
                                                     {{ Sector.Sector }}
                                                 </label>
                                                 <input v-on:keyup="countdown"
-                                                    class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                                                    class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                                                     :id="index" type="text" v-model="Sector.Budget" />
                                             </div>
                                         </div>
@@ -72,85 +78,79 @@
                                         <div class="md:w-2/3">
                                             <button
                                                 class="shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
-                                                type="submit" @click="savenew()">
+                                                type="submit">
                                                 حفظ
                                             </button>
                                         </div>
                                     </div>
                                 </form>
-                                <p class='text-right text-small' v-bind:class="{ 'text-danger': hasError }">Sum:
-                                    {{ remainingCount }}</p>
+                                <p class='text-right text-small' :class="{ 'text-danger': hasError }">Sum: {{
+                            remainingCount }}</p>
 
                             </div>
 
+                            <!-- Delete Budget Tab -->
+                            <div :class="{ hidden: openTab !== 3, block: openTab === 3 }">
+                                <DeleteBudget :years="years" />
+                            </div>
 
-
-
-                        </div>
-                        <!-- third form -->
-                        <div :class="{ hidden: openTab !== 3, block: openTab === 3 }">
-                            <!-- ... (your form content) -->
-                            <DeleteBudget :years="years" />
-                        </div>
-                        <!-- fourth form -->
-                        <div :class="{ hidden: openTab !== 4, block: openTab === 4 }">
-                            <!-- ... (your form content) -->
-                            <div class="flex flex-col w-full">
-                                <div class="py-4 w-3/6 bg-slate-700">
-                                    <select @change="getSectorstatistics($event)" v-model="selectedItem"
-                                        class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm">
-                                        <option selected disabled value="0">
-                                            الرجاء اختيار عام
-                                        </option>
-                                        <option class="" v-for="year in years" :key="year.year" :value="year.year">
-                                            {{ year.year }}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div v-if="isTotalSectorYearlyNotEmpty" class="w-full mb-12">
-                                    <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl">الميزانية العامه لسنه {{
-                            selectedyear }}</h1>
-                                    <BudgetInfo :budget="parsedBudget" :divisor="1" label="مجمل الميزانية للعام "
-                                        expensesLabel="مجمل المصاريف للعام "
-                                        :expensesValue="totalSectorYearly.expenses_year"
-                                        incomeLabel="مجمل المدخلات للعام" :incomeValue="totalSectorYearly.income_year"
-                                        net_amount_label="صافي الربح والخساره " />
-                                </div>
-                                <div class="w-full">
-                                    <div class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
-                                        <div class="-mb-px mr-2 last:mr-0 flex-auto text-center"
-                                            v-for="(Sector, index) in budjetSector" :key="Sector.Sector"
-                                            :value="Sector.Sector">
-                                            <a class="text-xs font-bold uppercase px-5 py-4 my-2 shadow-lg rounded block leading-normal"
-                                                v-on:click="toggleTabsstatistic(index)" v-bind:class="{
-                            'text-green-600 bg-white cursor-pointer':
-                                openTabstatistic !== index,
-                            'text-white bg-green-600 cursor-pointer':
-                                openTabstatistic === index,
-                        }">
-                                                {{ Sector.Sector }}
-                                            </a>
-                                        </div>
+                            <!-- Statistics Tab -->
+                            <div :class="{ hidden: openTab !== 4, block: openTab === 4 }">
+                                <div class="flex flex-col w-full">
+                                    <!-- Year Selection -->
+                                    <div class="py-4 w-3/6 bg-slate-700">
+                                        <select @change="getSectorstatistics($event)" v-model="selectedItem"
+                                            class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm">
+                                            <option selected disabled value="0">Select Year</option>
+                                            <option v-for="year in years" :key="year.year" :value="year.year">{{
+                            year.year }}</option>
+                                        </select>
                                     </div>
-                                    <div
-                                        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-                                        <div v-if="budjetSector.length > 0" class="px-4 py-5 flex-auto">
-                                            <div class="tab-content tab-space">
-                                                <div v-for="(Sector, index) in budjetSector" :key="Sector.Sector"
-                                                    :value="Sector.Sector" v-bind:class="{
+                                    <!-- Budget Information -->
+                                    <div v-if="isTotalSectorYearlyNotEmpty" class="w-full mb-12">
+                                        <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl">Total Yearly Budget
+                                            for {{ selectedyear }}</h1>
+                                        <BudgetInfo :budget="parsedBudget" :divisor="1"
+                                            label="Total Budget for the Year"
+                                            expensesLabel="Total Expenses for the Year"
+                                            :expensesValue="totalSectorYearly.expenses_year"
+                                            incomeLabel="Total Income for the Year"
+                                            :incomeValue="totalSectorYearly.income_year"
+                                            net_amount_label="Net Profit/Loss" />
+                                    </div>
+                                    <!-- Sector Statistics -->
+                                    <div class="w-full">
+                                        <div class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+                                            <div class="-mb-px mr-2 last:mr-0 flex-auto text-center"
+                                                v-for="(Sector, index) in budjetSector" :key="Sector.Sector"
+                                                :value="Sector.Sector">
+                                                <a class="text-xs font-bold uppercase px-5 py-4 my-2 shadow-lg rounded block leading-normal"
+                                                    @click="toggleTabsstatistic(index)" :class="{
+                            'text-green-600 bg-white cursor-pointer': openTabstatistic !== index,
+                            'text-white bg-green-600 cursor-pointer': openTabstatistic === index,
+                        }">{{ Sector.Sector }}</a>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                                            <div v-if="budjetSector.length > 0" class="px-4 py-5 flex-auto">
+                                                <div class="tab-content tab-space">
+                                                    <div v-for="(Sector, index) in budjetSector" :key="Sector.Sector"
+                                                        :value="Sector.Sector" :class="{
                             hidden: openTabstatistic !== index,
                             block: openTabstatistic === index,
                         }">
-                                                    <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl"> {{
-                            Sector.Sector }}
-                                                    </h1>
-                                                    <TotalSector :Sector="Sector" />
+                                                        <h1 class="my-5 mx-4 font-extrabold text-gray-700 text-3xl">{{
+                                                            Sector.Sector }}</h1>
+                                                        <TotalSector :Sector="Sector" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -163,14 +163,11 @@
 import PureVueChart from "pure-vue-chart";
 import TotalSector from "./TotalSector.vue";
 import Budgets from './budgets.vue';
-import CreateBudget from './CreateBudget.vue';
 import DeleteBudget from './DeleteBudget.vue';
 import BudgetInfo from "./BudgetInfo.vue";
 
 export default {
-    components: {
-        PureVueChart, TotalSector, Budgets, CreateBudget, DeleteBudget, BudgetInfo
-    },
+    components: { PureVueChart, TotalSector, Budgets, DeleteBudget, BudgetInfo },
     data() {
         return {
             openTab: 1,
@@ -187,7 +184,7 @@ export default {
             deletSectors: [],
             hasError: false,
             budgetsOfyear: 0,
-
+            newyear: null,
             points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
             tabs: [
                 { index: 1, name: 'الميزانيات' },
@@ -205,128 +202,84 @@ export default {
         this.getSector();
     },
     mounted() {
-
         const startYear = 2022;
         const endYear = 2050;
-
         for (let year = startYear; year <= endYear; year++) {
             this.addYears.push(year);
         }
-        console.log("addYears", this.addYears);
         window.addEventListener('resize', () => {
             if (window.innerWidth < 1220 && window.innerWidth > 500) {
                 this.chartWidth = 300;
             } else if (window.innerWidth < 499) {
                 this.chartWidth = 250;
             }
-            console.log(this.chartWidth)
         });
     },
     methods: {
-        countdown: function () {
+        countdown() {
             this.remainingCount = 0;
             let sumBud = 0;
             this.newSectors.forEach((element) => {
                 if (element["Budget"]) {
-
                     sumBud += parseInt(element["Budget"]);
                 }
             });
             this.remainingCount = this.budgetsOfyear - sumBud;
             this.hasError = (this.budgetsOfyear < sumBud);
-
         },
-        toggleTabs: function (tabNumber) {
+        toggleTabs(tabNumber) {
             this.openTab = tabNumber;
         },
-        toggleTabsstatistic: function (tabNumber) {
+        toggleTabsstatistic(tabNumber) {
             this.openTabstatistic = tabNumber;
         },
-        getYears: function () {
+        getYears() {
             axios.post("/year").then((response) => {
                 this.years = response.data;
             });
         },
-
-        getSector: function () {
+        getSector() {
             axios.post("/Sectors").then((response) => {
                 this.newSectors = response.data;
             });
         },
         async getSectorstatistics(event) {
-            this.selectedyear = event.target.value
+            this.selectedyear = event.target.value;
             try {
-                // Use Promise.all to run both requests concurrently
                 const [totalSectorResponse, budjetSectorResponse] = await Promise.all([
-                    axios.post('/total-sector-budget', {
-                        year: event.target.value,
-                    }),
-                    axios.post("/Sectorstatistics", {
-                        year: event.target.value,
-                    }),
+                    axios.post('/total-sector-budget', { year: event.target.value }),
+                    axios.post("/Sectorstatistics", { year: event.target.value }),
                 ]);
-
-                // Handle the responses
                 this.totalSectorYearly = totalSectorResponse.data;
                 this.budjetSector = budjetSectorResponse.data;
-                console.log({ totalSectorYearly })
             } catch (error) {
                 console.error('Error making POST request:', error);
             }
         },
         save() {
-            axios.post("/save", {
-                year: this.year,
-                Sectors: this.Sectors,
-            }).then(function (response) {
-                toastr.options = {
-                    closeButton: true,
-                    debug: false,
-                    positionClass: "toast-bottom-right",
-                    onclick: null,
-                    showDuration: "300",
-                    hideDuration: "2000",
-                    showMethod: "fadeIn",
-                    hideMethod: "fadeOut",
-                };
-                toastr.success("  تم حفظ بنجاح");
-            });;
-        },
-        sum() {
-            let sum = 0;
-            return this.newSectors.forEach((element) => {
-                sum += parseInt(element["Budget"]);
+            axios.post("/save", { year: this.year, Sectors: this.Sectors }).then(function (response) {
+                // Success Message
             });
-            return sum;
         },
-
         savenew() {
             let sum = 0;
             this.newSectors.forEach((element) => {
                 sum += parseInt(element["Budget"]);
             });
-            // alert(this.budgetsOfyear);
             if (this.budgetsOfyear > sum) {
-                axios
-                    .post("/save", {
-                        year: this.newyear,
-                        budgetsOfyear: this.budgetsOfyear,
-                        Sectors: this.newSectors,
-                    })
-                    .then(function (response) {
-                        toastr.options = {
-                            closeButton: true,
-                            debug: false,
-                            positionClass: "toast-bottom-right",
-                            onclick: null,
-                            showDuration: "300",
-                            hideDuration: "2000",
-                            showMethod: "fadeIn",
-                            hideMethod: "fadeOut",
-                        };
-                        toastr.success("  تم انشاء بنجاح");
-                    });
-
+                axios.post("/save", { year: this.newyear, budgetsOfyear: this.budgetsOfyear, Sectors: this.newSectors }).then(function (response) {
+                    toastr.options = {
+                        closeButton: true,
+                        debug: false,
+                        positionClass: "toast-bottom-right",
+                        onclick: null,
+                        showDuration: "300",
+                        hideDuration: "2000",
+                        showMethod: "fadeIn",
+                        hideMethod: "fadeOut",
+                    };
+                    toastr.success("  تم انشاء بنجاح");
+                });
                 this.getYears();
             } else {
                 toastr.options = {
