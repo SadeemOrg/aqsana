@@ -1084,29 +1084,61 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 console.log("finsh");
             });
         },
-        myNotifications: function myNotifications() {
-            var _this3 = this;
-
-            axios.post("/myNotification").then(function (response) {
-                _this3.myNotification = response.data;
-            });
-        },
-        myAlert: function myAlert() {
-            var _this4 = this;
-
-            axios.post("/myAlert").then(function (response) {
-                _this4.myAlertNotification = response.data;
-            });
-        },
-        sendNotifications: function () {
+        myNotifications: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var res, errors, key;
+                var response;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
                                 _context.prev = 0;
                                 _context.next = 3;
+                                return axios.post("/myNotification");
+
+                            case 3:
+                                response = _context.sent;
+
+                                this.myNotification = response.data;
+                                _context.next = 10;
+                                break;
+
+                            case 7:
+                                _context.prev = 7;
+                                _context.t0 = _context["catch"](0);
+
+                                console.error("An error occurred while fetching notifications:", _context.t0);
+
+                            case 10:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this, [[0, 7]]);
+            }));
+
+            function myNotifications() {
+                return _ref.apply(this, arguments);
+            }
+
+            return myNotifications;
+        }(),
+
+        myAlert: function myAlert() {
+            var _this3 = this;
+
+            axios.post("/myAlert").then(function (response) {
+                _this3.myAlertNotification = response.data;
+            });
+        },
+        sendNotifications: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                var res, errors, key;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _context2.prev = 0;
+                                _context2.next = 3;
                                 return axios.post("/sendNotification", {
                                     Notifications: this.Notifications,
                                     date: this.date,
@@ -1114,7 +1146,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 });
 
                             case 3:
-                                res = _context.sent;
+                                res = _context2.sent;
 
 
                                 toastr.options = {
@@ -1130,12 +1162,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 toastr.success("تم انشاء المهمة بنجاح");
                                 this.Notifications = [];
                                 this.selected.id = null;
-                                _context.next = 14;
+                                _context2.next = 14;
                                 break;
 
                             case 10:
-                                _context.prev = 10;
-                                _context.t0 = _context["catch"](0);
+                                _context2.prev = 10;
+                                _context2.t0 = _context2["catch"](0);
 
                                 toastr.options = {
                                     closeButton: true,
@@ -1148,8 +1180,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     hideMethod: "fadeOut"
                                 };
 
-                                if (_context.t0.response && _context.t0.response.data && _context.t0.response.data.data) {
-                                    errors = _context.t0.response.data.data;
+                                if (_context2.t0.response && _context2.t0.response.data && _context2.t0.response.data.data) {
+                                    errors = _context2.t0.response.data.data;
 
                                     console.log("🚀 ~ sendNotifications ~ errors:");
                                     for (key in errors) {
@@ -1162,31 +1194,30 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 }
 
                             case 14:
-
                                 this.myNotifications();
 
                             case 15:
                             case "end":
-                                return _context.stop();
+                                return _context2.stop();
                         }
                     }
-                }, _callee, this, [[0, 10]]);
+                }, _callee2, this, [[0, 10]]);
             }));
 
             function sendNotifications() {
-                return _ref.apply(this, arguments);
+                return _ref2.apply(this, arguments);
             }
 
             return sendNotifications;
         }(),
         AdminNotifications: function AdminNotifications(event) {
-            var _this5 = this;
+            var _this4 = this;
 
             // alert(event.target.value);
             axios.post("/AdminNotifications", {
                 user: event.target.value
             }).then(function (response) {
-                _this5.allNotifications = response.data;
+                _this4.allNotifications = response.data;
             });
             console.log(this.allNotifications);
         },
@@ -1218,34 +1249,156 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             });
             this.myNotifications();
         },
-        handelDeleteNotifications: function handelDeleteNotifications() {
-            axios.post("/DeleteNotifications", {
-                Notificationsid: this.selectedNotificationId
-            });
-            this.openDeleteModal = false;
-            this.myNotifications();
-        },
+        handelDeleteNotifications: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+                var response;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.prev = 0;
+                                _context3.next = 3;
+                                return axios.post("/DeleteNotifications", {
+                                    Notificationsid: this.selectedNotificationId
+                                });
+
+                            case 3:
+                                response = _context3.sent;
+
+                                if (response.status == 200) {
+                                    toastr.options = {
+                                        closeButton: true,
+                                        debug: false,
+                                        positionClass: "toast-bottom-right",
+                                        onclick: null,
+                                        showDuration: "300",
+                                        hideDuration: "2000",
+                                        showMethod: "fadeIn",
+                                        hideMethod: "fadeOut"
+                                    };
+                                    toastr.success("لقد تم حذف المهمه بنجاح");
+                                } else {
+                                    toastr.error("Failed to delete notification");
+                                }
+
+                                this.openDeleteModal = false;
+                                this.myNotifications();
+                                _context3.next = 14;
+                                break;
+
+                            case 9:
+                                _context3.prev = 9;
+                                _context3.t0 = _context3["catch"](0);
+
+                                toastr.options = {
+                                    closeButton: true,
+                                    debug: false,
+                                    positionClass: "toast-bottom-right",
+                                    onclick: null,
+                                    showDuration: "300",
+                                    hideDuration: "2000",
+                                    showMethod: "fadeIn",
+                                    hideMethod: "fadeOut"
+                                };
+
+                                toastr.error("An error occurred while deleting the notification");
+                                console.error(_context3.t0);
+
+                            case 14:
+                            case "end":
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this, [[0, 9]]);
+            }));
+
+            function handelDeleteNotifications() {
+                return _ref3.apply(this, arguments);
+            }
+
+            return handelDeleteNotifications;
+        }(),
         deleteNotifications: function deleteNotifications(id) {
             this.openDeleteModal = true;
             this.selectedNotificationId = id;
-            handelDeleteNotifications();
+            // this.handelDeleteNotifications();
         },
         handelCloseDeleteModal: function handelCloseDeleteModal() {
             this.openDeleteModal = false;
         },
 
-        AddNote: function AddNote($event, $note) {
-            // alert($note);
-            if ($note) {
-                axios.post("/AddNoteNotifications", {
-                    Notificationsid: $event,
-                    NotificationsNote: $note
-                }).then(function (response) {
-                    alert("done");
-                });
-                this.myNotifications();
+        AddNote: function () {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4($event, $note) {
+                var response;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                    while (1) {
+                        switch (_context4.prev = _context4.next) {
+                            case 0:
+                                if (!$note) {
+                                    _context4.next = 14;
+                                    break;
+                                }
+
+                                _context4.prev = 1;
+                                _context4.next = 4;
+                                return axios.post("/AddNoteNotifications", {
+                                    Notificationsid: $event,
+                                    NotificationsNote: $note
+                                });
+
+                            case 4:
+                                response = _context4.sent;
+
+                                if (response.status == 200) {
+                                    toastr.options = {
+                                        closeButton: true,
+                                        debug: false,
+                                        positionClass: "toast-bottom-right",
+                                        onclick: null,
+                                        showDuration: "300",
+                                        hideDuration: "2000",
+                                        showMethod: "fadeIn",
+                                        hideMethod: "fadeOut"
+                                    };
+                                    toastr.success("تم اضافة ملاحظه بنجاح");
+                                } else {
+                                    toastr.error("فشل في اضافة ملاحظة");
+                                }
+                                this.myNotifications();
+                                _context4.next = 14;
+                                break;
+
+                            case 9:
+                                _context4.prev = 9;
+                                _context4.t0 = _context4["catch"](1);
+
+                                toastr.options = {
+                                    closeButton: true,
+                                    debug: false,
+                                    positionClass: "toast-bottom-right",
+                                    onclick: null,
+                                    showDuration: "300",
+                                    hideDuration: "2000",
+                                    showMethod: "fadeIn",
+                                    hideMethod: "fadeOut"
+                                };
+                                toastr.error("An error occurred while adding note");
+                                console.error(_context4.t0);
+
+                            case 14:
+                            case "end":
+                                return _context4.stop();
+                        }
+                    }
+                }, _callee4, this, [[1, 9]]);
+            }));
+
+            function AddNote(_x, _x2) {
+                return _ref4.apply(this, arguments);
             }
-        }
+
+            return AddNote;
+        }()
     },
     beforeMount: function beforeMount() {
         this.getusers();
