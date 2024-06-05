@@ -1183,7 +1183,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 if (_context2.t0.response && _context2.t0.response.data && _context2.t0.response.data.data) {
                                     errors = _context2.t0.response.data.data;
 
-                                    console.log("🚀 ~ sendNotifications ~ errors:");
                                     for (key in errors) {
                                         if (errors.hasOwnProperty(key)) {
                                             toastr.error(errors[key]);
@@ -1237,12 +1236,54 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             });
             this.myNotifications();
         },
-        WorkOnNotifications: function WorkOnNotifications($event, $type) {
-            axios.post("/WorkOnNotifications", {
-                Notificationsid: $event
-            });
-            this.myNotifications();
-        },
+        WorkOnNotifications: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3($event, $type) {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.prev = 0;
+                                _context3.next = 3;
+                                return axios.post("/WorkOnNotifications", {
+                                    Notificationsid: $event
+                                });
+
+                            case 3:
+                                this.myNotifications();
+                                _context3.next = 11;
+                                break;
+
+                            case 6:
+                                _context3.prev = 6;
+                                _context3.t0 = _context3["catch"](0);
+
+                                toastr.options = {
+                                    closeButton: true,
+                                    debug: false,
+                                    positionClass: "toast-bottom-right",
+                                    onclick: null,
+                                    showDuration: "300",
+                                    hideDuration: "2000",
+                                    showMethod: "fadeIn",
+                                    hideMethod: "fadeOut"
+                                };
+                                toastr.error("An error occurred while working on notification");
+                                console.error(_context3.t0);
+
+                            case 11:
+                            case "end":
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this, [[0, 6]]);
+            }));
+
+            function WorkOnNotifications(_x, _x2) {
+                return _ref3.apply(this, arguments);
+            }
+
+            return WorkOnNotifications;
+        }(),
         CompletNotifications: function CompletNotifications($event, $type) {
             axios.post("/CompletNotifications", {
                 Notificationsid: $event
@@ -1250,20 +1291,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.myNotifications();
         },
         handelDeleteNotifications: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
                 var response;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
                     while (1) {
-                        switch (_context3.prev = _context3.next) {
+                        switch (_context4.prev = _context4.next) {
                             case 0:
-                                _context3.prev = 0;
-                                _context3.next = 3;
+                                _context4.prev = 0;
+                                _context4.next = 3;
                                 return axios.post("/DeleteNotifications", {
                                     Notificationsid: this.selectedNotificationId
                                 });
 
                             case 3:
-                                response = _context3.sent;
+                                response = _context4.sent;
 
                                 if (response.status == 200) {
                                     toastr.options = {
@@ -1283,12 +1324,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                                 this.openDeleteModal = false;
                                 this.myNotifications();
-                                _context3.next = 14;
+                                _context4.next = 14;
                                 break;
 
                             case 9:
-                                _context3.prev = 9;
-                                _context3.t0 = _context3["catch"](0);
+                                _context4.prev = 9;
+                                _context4.t0 = _context4["catch"](0);
 
                                 toastr.options = {
                                     closeButton: true,
@@ -1302,18 +1343,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 };
 
                                 toastr.error("An error occurred while deleting the notification");
-                                console.error(_context3.t0);
+                                console.error(_context4.t0);
 
                             case 14:
                             case "end":
-                                return _context3.stop();
+                                return _context4.stop();
                         }
                     }
-                }, _callee3, this, [[0, 9]]);
+                }, _callee4, this, [[0, 9]]);
             }));
 
             function handelDeleteNotifications() {
-                return _ref3.apply(this, arguments);
+                return _ref4.apply(this, arguments);
             }
 
             return handelDeleteNotifications;
@@ -1328,26 +1369,26 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         },
 
         AddNote: function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4($event, $note) {
+            var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5($event, $note) {
                 var response;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
                     while (1) {
-                        switch (_context4.prev = _context4.next) {
+                        switch (_context5.prev = _context5.next) {
                             case 0:
                                 if (!$note) {
-                                    _context4.next = 14;
+                                    _context5.next = 14;
                                     break;
                                 }
 
-                                _context4.prev = 1;
-                                _context4.next = 4;
+                                _context5.prev = 1;
+                                _context5.next = 4;
                                 return axios.post("/AddNoteNotifications", {
                                     Notificationsid: $event,
                                     NotificationsNote: $note
                                 });
 
                             case 4:
-                                response = _context4.sent;
+                                response = _context5.sent;
 
                                 if (response.status == 200) {
                                     toastr.options = {
@@ -1365,12 +1406,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     toastr.error("فشل في اضافة ملاحظة");
                                 }
                                 this.myNotifications();
-                                _context4.next = 14;
+                                _context5.next = 14;
                                 break;
 
                             case 9:
-                                _context4.prev = 9;
-                                _context4.t0 = _context4["catch"](1);
+                                _context5.prev = 9;
+                                _context5.t0 = _context5["catch"](1);
 
                                 toastr.options = {
                                     closeButton: true,
@@ -1383,18 +1424,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     hideMethod: "fadeOut"
                                 };
                                 toastr.error("An error occurred while adding note");
-                                console.error(_context4.t0);
+                                console.error(_context5.t0);
 
                             case 14:
                             case "end":
-                                return _context4.stop();
+                                return _context5.stop();
                         }
                     }
-                }, _callee4, this, [[1, 9]]);
+                }, _callee5, this, [[1, 9]]);
             }));
 
-            function AddNote(_x, _x2) {
-                return _ref4.apply(this, arguments);
+            function AddNote(_x3, _x4) {
+                return _ref5.apply(this, arguments);
             }
 
             return AddNote;
