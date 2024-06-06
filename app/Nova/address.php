@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Acme\MultiselectField\Multiselect;
 use App\Models\Area;
+use App\Models\City;
 use App\Nova\Actions\ExportAddress;
 use devops\MapAddress\MapAddress;
 use Illuminate\Http\Request;
@@ -93,18 +94,21 @@ class address extends Resource
             Text::make(__("phone number"), "phone_number_address"),
 
 
-            NovaBelongsToDepend::make(__('Area'), 'Area', \App\Nova\Area::class)
-                ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
-                ->options(Area::all()),
 
-            NovaBelongsToDepend::make(__('City'), 'City', \App\Nova\City::class)
+            Multiselect::make(__('city'), 'city_id')
+                ->options(function () {
+                    $Areas =  \App\Models\City::all();
 
-                ->placeholder('Optional Placeholder') // Add this just if you want to customize the placeholder
-                ->optionsResolve(function ($Area) {
-                    return  $Area->City()->get(['id', 'name']);
-                })
-                ->dependsOn('Area')->hideFromIndex()->hideFromDetail(),
+                    $Area_type_admin_array =  array();
 
+                    foreach ($Areas as $Area) {
+
+
+                        $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                    }
+
+                    return $Area_type_admin_array;
+                })->singleSelect()->rules('required')->hideFromIndex()->hideFromDetail(),
             Multiselect::make(__('delegatee'), 'admin_id')
                 ->options(function () {
                     $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
@@ -130,6 +134,8 @@ class address extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->status = 1;
+        $model->area_id = Area::find(City::find($request->city_id)->area_id)->id;
+        // $request->request->remove('city');
     }
 
     /**
