@@ -13,7 +13,10 @@ class PaymentVoucherCompany extends Filter
      * @var string
      */
     public $component = 'searchable-select-filter';
-
+    public function name()
+    {
+        return __('الشركة');
+    }
     /**
      * Apply the filter to the given query.
      *
