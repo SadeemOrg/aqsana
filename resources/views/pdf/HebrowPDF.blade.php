@@ -102,9 +102,10 @@
     <!--Start Second Paragraph-->
     <div style="text-align: center">
         <p style="font-size: 16px;color:#101426">{{ $ChickBillDate }}</p>
-        <p style="font-size:16px; color:#101426 ">קבלה מספר
+        <p style="font-size:16px; color:#101426 ">
+            F-{{ $TransactionArray['bill_number'] }}
             <span>
-                F-{{ $TransactionArray['bill_number'] }}
+                קבלה מספר
             </span>
         </p>
         <p style="font-size:16px; color:#101426; ">קבלה מקורית </p>
