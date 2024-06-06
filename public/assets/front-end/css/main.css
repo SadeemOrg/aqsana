@@ -167,7 +167,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .Wraper input[type="date"]::-webkit-calendar-picker-indicator {
   position: absolute;
-  background-image: url("https://cdn.discordapp.com/attachments/938405759996276806/1077572091714482176/Vector_1.png");
+  background-image: url("https://cdn.discordapp.com/attachments/938405759996276806/1077572091714482176/Vector_1.png?ex=66630136&is=6661afb6&hm=46c4d0b038908d979b4c52f58e70a8378d82d91c62c1e5b8fc5c241bbfa13279&");
 
   left: 5%;
   display: flex;
@@ -176,7 +176,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .Wraper2 input[type="date"]::-webkit-calendar-picker-indicator {
   position: absolute;
-  background-image: url("https://cdn.discordapp.com/attachments/938405759996276806/1077572091714482176/Vector_1.png");
+  background-image: url("https://cdn.discordapp.com/attachments/938405759996276806/1077572091714482176/Vector_1.png?ex=66630136&is=6661afb6&hm=46c4d0b038908d979b4c52f58e70a8378d82d91c62c1e5b8fc5c241bbfa13279&");
 
   left: 8%;
   display: flex;
