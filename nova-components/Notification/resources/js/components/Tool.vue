@@ -82,7 +82,7 @@
                                 <th style="width: 40%;">الملاحظات</th>
                                 <th style="width: 10%;">المرسل</th>
                                 <th style="width: 10%;">التاريخ</th>
-                                <th>تم</th>
+                                <th>حالة المهمه</th>
                                 <th>حذف</th>
                             </tr>
                             <tr
