@@ -61,16 +61,18 @@ use App\Nova\Filters\ReportAdmin;
 use App\Nova\Filters\ReportArea;
 use App\Nova\Filters\Reportcity;
 use App\Nova\Filters\ReportCreated;
+use App\Nova\Filters\ReportName;
 use App\Nova\Metrics\NewQawafilAlaqsa;
 use App\Rules\QawafilAlaqsaDate;
 use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
-
 use Fourstacks\NovaRepeatableFields\Repeater;
 use Laravel\Nova\Fields\HasMany;
 use Mauricewijnia\NovaMapsAddress\MapsAddress;
 use Carbon\Carbon;
 use Laravel\Nova\Actions\ActionResource;
+use OptimistDigital\NovaDetachedFilters\NovaDetachedFilters;
+use PosLifestyle\DateRangeFilter\DateRangeFilter;
 
 use function Clue\StreamFilter\fun;
 
@@ -129,7 +131,6 @@ class QawafilAlaqsa extends Resource
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
-        // dd( Auth::id(),$query->where('project_type', '2')->where('created_by', Auth::id())->get());
         if ((in_array("super-admin",  $request->user()->userrole()))) {
             return $query->where('project_type', '2');
         } else  return $query->where('project_type', '2')->where('city', $request->user()->city);
@@ -140,7 +141,7 @@ class QawafilAlaqsa extends Resource
             (new Panel(__('main'), [
                 ID::make(__('ID'), 'id')->sortable(),
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, $this->id)
+                    ->action(ProjectStartEnd::class, [ $this->id])
                     ->text(__('لم يبدا بعد'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -158,7 +159,7 @@ class QawafilAlaqsa extends Resource
                     ->hideWhenCreating()->hideWhenUpdating(),
 
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, $this->id)
+                    ->action(ProjectStartEnd::class, [ $this->id])
                     ->text(__('فعالة'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -177,7 +178,7 @@ class QawafilAlaqsa extends Resource
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, $this->id)
+                    ->action(ProjectStartEnd::class, [ $this->id])
                     ->text(__('اغلاق'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -202,7 +203,7 @@ class QawafilAlaqsa extends Resource
 
                     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, $this->id)
+                    ->action(ProjectStartEnd::class, [ $this->id])
                     ->text(__('مغلق'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -225,7 +226,7 @@ class QawafilAlaqsa extends Resource
 
                     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, $this->id)
+                    ->action(ProjectStartEnd::class, [ $this->id])
                     ->text(__('مفتوحة'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -248,51 +249,6 @@ class QawafilAlaqsa extends Resource
                 Text::make(__("QawafilAlaqsa name"), "project_name")->rules('required'),
                 Text::make(__("QawafilAlaqsa describe"), "project_describe")->rules('required'),
 
-
-                // BelongsToManyField::make(__('Area'), "Area", '\App\Nova\Area')
-                //     ->options(Area::all())
-                //     ->optionsLabel('name')->canSee(function ($request) {
-                //         $user = Auth::user();
-                //         if ($user->type() == 'admin') return true;
-                //         return false;
-                //     })->rules('required', 'max:1'),
-                Multiselect::make(__('city'), 'city')
-                    ->options(function () {
-                        $Areas =  \App\Models\City::all();
-
-                        $Area_type_admin_array =  array();
-
-                        foreach ($Areas as $Area) {
-
-
-                            $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
-                        }
-
-                        return $Area_type_admin_array;
-                    })->singleSelect()->canSee(function ($request) {
-                        $user = Auth::user();
-                        if (in_array("super-admin",  $user->userrole()))  return true;
-                        return false;
-                    }),
-                    Multiselect::make(__('city'), 'city')
-                    ->options(function () {
-                        $Areas =  \App\Models\City::all();
-
-                        $Area_type_admin_array =  array();
-
-                        foreach ($Areas as $Area) {
-
-
-                            $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
-                        }
-
-                        return $Area_type_admin_array;
-                    })->hideWhenCreating()->hideWhenUpdating()->singleSelect()->canSee(function ($request) {
-                        $user = Auth::user();
-                        if (!in_array("super-admin",  $user->userrole()))  return true;
-                        return false;
-                    }),
-
                 Select::make(__("Repetition"), "repetition")->options([
                     '6' => __('Once'),
                     '1' => __('daily'),
@@ -313,25 +269,7 @@ class QawafilAlaqsa extends Resource
 
                         return $user_type_admin_array;
                     })->singleSelect(),
-                Flexible::make(__('Qawafil_sub_admin'), 'Qawafil_sub_admin')
-
-                    ->addLayout(__('Qawafil_sub_admin'), 'Qawafil_sub_admin', [
-                        Multiselect::make(__('Qawafil_sub_admin'), 'Qawafil_sub_admin')
-                            ->options(function () {
-                                $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
-
-                                $user_type_admin_array =  array();
-
-                                foreach ($users as $user) {
-
-
-
-                                    $user_type_admin_array += [$user['id'] => ($user['name'])];
-                                }
-                                return $user_type_admin_array;
-                            })->rules('required')->singleSelect(),
-
-                    ]),
+                BelongsTo::make(__('city'), 'CityProject', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
@@ -346,37 +284,9 @@ class QawafilAlaqsa extends Resource
 
                         return $address_type_admin_array;
                     })->hideFromIndex()->hideFromDetail()->singleSelect()->rules('required'),
-                // ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                //     return null;
-                // }),
-
-                // Flexible::make(__('newadres'), 'newadresfrom')
-                //     ->readonly(true)
-                //     ->limit(1)
-                //     ->hideFromDetail()->hideFromIndex()
-                //     ->addLayout(__('Add new bus'), 'bus', [
-
-                //         Text::make(__('Name'), "name_address"),
-                //         Text::make(__("description"), "description"),
-                //         Text::make(__("phone number"), "phone_number_address")->rules('required'),
-
-
-                //         MapsAddress::make(__('Address'), 'current_location')->zoom(10)
-                //             ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
-
-                //         // Select::make(__("Status"), "address_status")->options([
-                //         //     '1' => __('active'),
-                //         //     '2' => __('not active'),
-                //         // ]),
-
-                //     ]),
-
 
                 BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
-                // BelongsTo::make(__('trip to'), 'tripto', \App\Nova\address::class)->withMeta([
-                //     'value' => "1",
-                // ])->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
 
                 Select::make(__('trip to'), 'trip_to')
                     ->options(function () {
@@ -521,11 +431,13 @@ class QawafilAlaqsa extends Resource
     }
     public static function beforesave(Request $request, $model)
     {
-        $user = Auth::user();
-        if (! in_array("super-admin",  $user->userrole())) {
-            $model->city=$user->city;
+        address::find($request->trip_from);
+        $model->city = address::find($request->trip_from)->city_id;
+        $model->area = address::find($request->trip_from)->area_id;
 
-        }
+
+
+
 
         $request->request->remove('newtype');
     }
@@ -679,30 +591,6 @@ class QawafilAlaqsa extends Resource
                 }
             }
         }
-
-
-        // if (!$request->trip_from) {
-        //     if ($request->newadresfrom[0]['attributes']['name_address'] && $request->newadresfrom[0]['attributes']['description'] &&  $request->newadresfrom[0]['attributes']['current_location'] && $request->newadresfrom[0]['attributes']['phone_number_address']) {
-        //         // dd("hf");
-        //         DB::table('addresses')
-        //             ->Insert(
-        //                 [
-        //                     'name_address' => $request->newadresfrom[0]['attributes']['name_address'],
-        //                     'description' => $request->newadresfrom[0]['attributes']['description'],
-        //                     'current_location' => $request->newadresfrom[0]['attributes']['current_location'],
-        //                     'phone_number_address' => $request->newadresfrom[0]['attributes']['phone_number_address'],
-        //                     'status' => '1',
-        //                     'type' => '4',
-        //                     'created_by' => $id
-        //                 ]
-        //             );
-        //         $address =  \App\Models\address::where('name_address',  $request->newadresfrom[0]['attributes']['name_address'])->first();
-        //         DB::table('projects')
-        //             ->where('id', $model->id)
-        //             ->update(['trip_from' => $address->id]);
-        //     }
-        // } else   $model->trip_from = $request->trip_from;
-        // $model->newbus = null;
     }
     /**
      * Get the cards available for the request.
@@ -713,9 +601,11 @@ class QawafilAlaqsa extends Resource
     public function cards(Request $request)
     {
         return [
-            // new NewQawafilAlaqsa(),
-            new FilterCard(new ProjectArea()),
-
+            (new NovaDetachedFilters([
+                (new ReportCreated())->withMeta(['width' => 'w-1/3']),
+                (new ReportArea())->withMeta(['width' => 'w-1/3']),
+                (new Reportcity())->withMeta(['width' => 'w-1/3']),
+            ]))->width('full'),
         ];
     }
 
@@ -728,10 +618,11 @@ class QawafilAlaqsa extends Resource
     public function filters(Request $request)
     {
         return [
-            new ReportAdmin(),
             new ReportCreated(),
             new ReportArea(),
             new Reportcity(),
+
+
         ];
     }
 
