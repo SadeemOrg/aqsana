@@ -138,20 +138,8 @@ class Project extends Resource
 
             Text::make(__("project name"), "project_name")->rules('required'),
             Textarea::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
-            Multiselect::make(__('Area'), 'area')
-                ->options(function () {
-                    $Areas =  \App\Models\Area::all();
+            BelongsTo::make(__('city'), 'CityProject', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating(),
 
-                    $Area_type_admin_array =  array();
-
-                    foreach ($Areas as $Area) {
-
-
-                        $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
-                    }
-
-                    return $Area_type_admin_array;
-                })->singleSelect(),
             Multiselect::make(__('city'), 'city')
                 ->options(function () {
                     $Areas =  \App\Models\City::all();
@@ -165,19 +153,7 @@ class Project extends Resource
                     }
 
                     return $Area_type_admin_array;
-                })->singleSelect(),
-                //     Select::make(__('Admin'), 'admin_id')
-                // ->options(function () {
-                //     $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
-                //     $user_type_admin_array =  array();
-                //     foreach ($users as $user) {
-                //         $user_type_admin_array += [$user['id'] => ($user['name'])];
-                //     }
-
-                //     return $user_type_admin_array;
-                // })->singleSelect()->hideFromDetail()->hideFromIndex(),
-
-
+                })->singleSelect()->rules('required')->hideFromIndex()->hideFromDetail(),
 
             BelongsTo::make(__('admin'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
@@ -204,6 +180,9 @@ class Project extends Resource
         $model->start_date = json_decode($request->ref_id)->key1;
         $model->sector = json_decode($request->ref_id)->key2;
         $request->request->remove('ref_id');
+        $model->area = Area::find(City::find($request->city)->area_id)->id;
+
+
     }
 
     // public static function beforeSave(Request $request, $model)
