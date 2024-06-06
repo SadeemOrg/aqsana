@@ -304,10 +304,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TotalSector_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__TotalSector_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__budgets_vue__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__budgets_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__budgets_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DeleteBudget_vue__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DeleteBudget_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__DeleteBudget_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__BudgetInfo_vue__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__BudgetInfo_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__BudgetInfo_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__CreateBudget_vue__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__CreateBudget_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__CreateBudget_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DeleteBudget_vue__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DeleteBudget_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__DeleteBudget_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__BudgetInfo_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__BudgetInfo_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__BudgetInfo_vue__);
 
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -482,8 +484,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: { PureVueChart: __WEBPACK_IMPORTED_MODULE_1_pure_vue_chart___default.a, TotalSector: __WEBPACK_IMPORTED_MODULE_2__TotalSector_vue___default.a, Budgets: __WEBPACK_IMPORTED_MODULE_3__budgets_vue___default.a, DeleteBudget: __WEBPACK_IMPORTED_MODULE_4__DeleteBudget_vue___default.a, BudgetInfo: __WEBPACK_IMPORTED_MODULE_5__BudgetInfo_vue___default.a },
+    components: {
+        PureVueChart: __WEBPACK_IMPORTED_MODULE_1_pure_vue_chart___default.a, TotalSector: __WEBPACK_IMPORTED_MODULE_2__TotalSector_vue___default.a, Budgets: __WEBPACK_IMPORTED_MODULE_3__budgets_vue___default.a, CreateBudget: __WEBPACK_IMPORTED_MODULE_4__CreateBudget_vue___default.a, DeleteBudget: __WEBPACK_IMPORTED_MODULE_5__DeleteBudget_vue___default.a, BudgetInfo: __WEBPACK_IMPORTED_MODULE_6__BudgetInfo_vue___default.a
+    },
     data: function data() {
         return {
             openTab: 1,
@@ -500,7 +505,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             deletSectors: [],
             hasError: false,
             budgetsOfyear: 0,
-            newyear: null,
+
             points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
             tabs: [{ index: 1, name: 'الميزانيات' }, { index: 2, name: 'اضافة جديد' }, { index: 3, name: 'حذف' }, { index: 4, name: 'احصائيات' }],
             projectshow: false,
@@ -517,15 +522,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
         var startYear = 2022;
         var endYear = 2050;
+
         for (var year = startYear; year <= endYear; year++) {
             this.addYears.push(year);
         }
+        console.log("addYears", this.addYears);
         window.addEventListener('resize', function () {
             if (window.innerWidth < 1220 && window.innerWidth > 500) {
                 _this.chartWidth = 300;
             } else if (window.innerWidth < 499) {
                 _this.chartWidth = 250;
             }
+            console.log(_this.chartWidth);
         });
     },
 
@@ -535,6 +543,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var sumBud = 0;
             this.newSectors.forEach(function (element) {
                 if (element["Budget"]) {
+
                     sumBud += parseInt(element["Budget"]);
                 }
             });
@@ -554,6 +563,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 _this2.years = response.data;
             });
         },
+
         getSector: function getSector() {
             var _this3 = this;
 
@@ -572,7 +582,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 this.selectedyear = event.target.value;
                                 _context.prev = 1;
                                 _context.next = 4;
-                                return Promise.all([axios.post('/total-sector-budget', { year: event.target.value }), axios.post("/Sectorstatistics", { year: event.target.value })]);
+                                return Promise.all([axios.post('/total-sector-budget', {
+                                    year: event.target.value
+                                }), axios.post("/Sectorstatistics", {
+                                    year: event.target.value
+                                })]);
 
                             case 4:
                                 _ref2 = _context.sent;
@@ -580,23 +594,26 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 totalSectorResponse = _ref3[0];
                                 budjetSectorResponse = _ref3[1];
 
+
+                                // Handle the responses
                                 this.totalSectorYearly = totalSectorResponse.data;
                                 this.budjetSector = budjetSectorResponse.data;
-                                _context.next = 15;
+                                console.log({ totalSectorYearly: totalSectorYearly });
+                                _context.next = 16;
                                 break;
 
-                            case 12:
-                                _context.prev = 12;
+                            case 13:
+                                _context.prev = 13;
                                 _context.t0 = _context["catch"](1);
 
                                 console.error('Error making POST request:', _context.t0);
 
-                            case 15:
+                            case 16:
                             case "end":
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[1, 12]]);
+                }, _callee, this, [[1, 13]]);
             }));
 
             function getSectorstatistics(_x) {
@@ -606,17 +623,42 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return getSectorstatistics;
         }(),
         save: function save() {
-            axios.post("/save", { year: this.year, Sectors: this.Sectors }).then(function (response) {
-                // Success Message
+            axios.post("/save", {
+                year: this.year,
+                Sectors: this.Sectors
+            }).then(function (response) {
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.success("  تم حفظ بنجاح");
+            });;
+        },
+        sum: function sum() {
+            var sum = 0;
+            return this.newSectors.forEach(function (element) {
+                sum += parseInt(element["Budget"]);
             });
+            return sum;
         },
         savenew: function savenew() {
             var sum = 0;
             this.newSectors.forEach(function (element) {
                 sum += parseInt(element["Budget"]);
             });
+            // alert(this.budgetsOfyear);
             if (this.budgetsOfyear > sum) {
-                axios.post("/save", { year: this.newyear, budgetsOfyear: this.budgetsOfyear, Sectors: this.newSectors }).then(function (response) {
+                axios.post("/save", {
+                    year: this.newyear,
+                    budgetsOfyear: this.budgetsOfyear,
+                    Sectors: this.newSectors
+                }).then(function (response) {
                     toastr.options = {
                         closeButton: true,
                         debug: false,
@@ -629,6 +671,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     };
                     toastr.success("  تم انشاء بنجاح");
                 });
+
                 this.getYears();
             } else {
                 toastr.options = {
@@ -10056,8 +10099,73 @@ if (false) {
 }
 
 /***/ }),
-/* 23 */,
-/* 24 */,
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(24)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/CreateBudget.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a30b2a68", Component.options)
+  } else {
+    hotAPI.reload("data-v-a30b2a68", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_vm._v("xxx")])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-a30b2a68", module.exports)
+  }
+}
+
+/***/ }),
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10373,7 +10481,7 @@ var render = function() {
             "div",
             {
               staticClass:
-                "flex flex-row flex-wrap sm:flex-nowrap items-center justify-start w-full my-4 gap-x-2"
+                "flex flex-row flex-wrap sm:flex-nowrap items-center justify-satrt w-full my-4 gap-x-2"
             },
             _vm._l(_vm.tabs, function(tab) {
               return _c(
@@ -10390,7 +10498,7 @@ var render = function() {
                       class: {
                         "text-green-600 bg-white w-full py-4 text-center rounded-md":
                           _vm.openTab !== tab.index,
-                        "text-white bg-green-600 w-full py-4 text-center rounded-md":
+                        "text-white  bg-green-600 w-full py-4 text-center rounded-md":
                           _vm.openTab === tab.index
                       },
                       on: {
@@ -10568,7 +10676,7 @@ var render = function() {
                         on: {
                           submit: function($event) {
                             $event.preventDefault()
-                            return _vm.savenew.apply(null, arguments)
+                            return _vm.onSubmit.apply(null, arguments)
                           }
                         }
                       },
@@ -10584,7 +10692,7 @@ var render = function() {
                               "div",
                               {
                                 key: Sector.Sector,
-                                staticClass: "mb-3",
+                                staticClass: " mb-3",
                                 attrs: { value: Sector.Sector }
                               },
                               [
@@ -10615,7 +10723,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass:
-                                      "appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                                      " appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
                                     attrs: { id: index, type: "text" },
                                     domProps: { value: Sector.Budget },
                                     on: {
@@ -10646,7 +10754,28 @@ var render = function() {
                                 staticClass:
                                   "md:flex md:items-center w-full justify-end"
                               },
-                              [_vm._m(0)]
+                              [
+                                _c("div", { staticClass: "md:w-2/3" }, [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
+                                      attrs: { type: "submit" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.savenew()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                            حفظ\n                                        "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
                             )
                           : _vm._e()
                       ]
@@ -10658,237 +10787,252 @@ var render = function() {
                         staticClass: "text-right text-small",
                         class: { "text-danger": _vm.hasError }
                       },
-                      [_vm._v("Sum: " + _vm._s(_vm.remainingCount))]
+                      [
+                        _vm._v(
+                          "Sum:\n                                " +
+                            _vm._s(_vm.remainingCount)
+                        )
+                      ]
                     )
                   ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    class: {
-                      hidden: _vm.openTab !== 3,
-                      block: _vm.openTab === 3
-                    }
-                  },
-                  [_c("DeleteBudget", { attrs: { years: _vm.years } })],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    class: {
-                      hidden: _vm.openTab !== 4,
-                      block: _vm.openTab === 4
-                    }
-                  },
-                  [
-                    _c("div", { staticClass: "flex flex-col w-full" }, [
-                      _c("div", { staticClass: "py-4 w-3/6 bg-slate-700" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.selectedItem,
-                                expression: "selectedItem"
-                              }
-                            ],
-                            staticClass:
-                              "select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
-                            on: {
-                              change: [
-                                function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.selectedItem = $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                },
-                                function($event) {
-                                  return _vm.getSectorstatistics($event)
-                                }
-                              ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  class: { hidden: _vm.openTab !== 3, block: _vm.openTab === 3 }
+                },
+                [_c("DeleteBudget", { attrs: { years: _vm.years } })],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  class: { hidden: _vm.openTab !== 4, block: _vm.openTab === 4 }
+                },
+                [
+                  _c("div", { staticClass: "flex flex-col w-full" }, [
+                    _c("div", { staticClass: "py-4 w-3/6 bg-slate-700" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selectedItem,
+                              expression: "selectedItem"
                             }
-                          },
-                          [
-                            _c(
+                          ],
+                          staticClass:
+                            "select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.selectedItem = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                              function($event) {
+                                return _vm.getSectorstatistics($event)
+                              }
+                            ]
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { selected: "", disabled: "", value: "0" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                        الرجاء اختيار عام\n                                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.years, function(year) {
+                            return _c(
                               "option",
                               {
-                                attrs: {
-                                  selected: "",
-                                  disabled: "",
-                                  value: "0"
-                                }
-                              },
-                              [_vm._v("Select Year")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.years, function(year) {
-                              return _c(
-                                "option",
-                                {
-                                  key: year.year,
-                                  domProps: { value: year.year }
-                                },
-                                [_vm._v(_vm._s(year.year))]
-                              )
-                            })
-                          ],
-                          2
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm.isTotalSectorYearlyNotEmpty
-                        ? _c(
-                            "div",
-                            { staticClass: "w-full mb-12" },
-                            [
-                              _c(
-                                "h1",
-                                {
-                                  staticClass:
-                                    "my-5 mx-4 font-extrabold text-gray-700 text-3xl"
-                                },
-                                [
-                                  _vm._v(
-                                    "Total Yearly Budget\n                                        for " +
-                                      _vm._s(_vm.selectedyear)
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("BudgetInfo", {
-                                attrs: {
-                                  budget: _vm.parsedBudget,
-                                  divisor: 1,
-                                  label: "Total Budget for the Year",
-                                  expensesLabel: "Total Expenses for the Year",
-                                  expensesValue:
-                                    _vm.totalSectorYearly.expenses_year,
-                                  incomeLabel: "Total Income for the Year",
-                                  incomeValue:
-                                    _vm.totalSectorYearly.income_year,
-                                  net_amount_label: "Net Profit/Loss"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "w-full" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
-                          },
-                          _vm._l(_vm.budjetSector, function(Sector, index) {
-                            return _c(
-                              "div",
-                              {
-                                key: Sector.Sector,
-                                staticClass:
-                                  "-mb-px mr-2 last:mr-0 flex-auto text-center",
-                                attrs: { value: Sector.Sector }
+                                key: year.year,
+                                domProps: { value: year.year }
                               },
                               [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass:
-                                      "text-xs font-bold uppercase px-5 py-4 my-2 shadow-lg rounded block leading-normal",
-                                    class: {
-                                      "text-green-600 bg-white cursor-pointer":
-                                        _vm.openTabstatistic !== index,
-                                      "text-white bg-green-600 cursor-pointer":
-                                        _vm.openTabstatistic === index
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.toggleTabsstatistic(index)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(Sector.Sector))]
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(year.year) +
+                                    "\n                                    "
                                 )
                               ]
                             )
-                          }),
-                          0
-                        ),
-                        _vm._v(" "),
-                        _c(
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm.isTotalSectorYearlyNotEmpty
+                      ? _c(
                           "div",
-                          {
-                            staticClass:
-                              "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
-                          },
+                          { staticClass: "w-full mb-12" },
                           [
-                            _vm.budjetSector.length > 0
-                              ? _c(
-                                  "div",
-                                  { staticClass: "px-4 py-5 flex-auto" },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "tab-content tab-space" },
-                                      _vm._l(_vm.budjetSector, function(
-                                        Sector,
-                                        index
-                                      ) {
-                                        return _c(
-                                          "div",
-                                          {
-                                            key: Sector.Sector,
-                                            class: {
-                                              hidden:
-                                                _vm.openTabstatistic !== index,
-                                              block:
-                                                _vm.openTabstatistic === index
-                                            },
-                                            attrs: { value: Sector.Sector }
-                                          },
-                                          [
-                                            _c(
-                                              "h1",
-                                              {
-                                                staticClass:
-                                                  "my-5 mx-4 font-extrabold text-gray-700 text-3xl"
-                                              },
-                                              [_vm._v(_vm._s(Sector.Sector))]
-                                            ),
-                                            _vm._v(" "),
-                                            _c("TotalSector", {
-                                              attrs: { Sector: Sector }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      }),
-                                      0
-                                    )
-                                  ]
+                            _c(
+                              "h1",
+                              {
+                                staticClass:
+                                  "my-5 mx-4 font-extrabold text-gray-700 text-3xl"
+                              },
+                              [
+                                _vm._v(
+                                  "الميزانية العامه لسنه " +
+                                    _vm._s(_vm.selectedyear)
                                 )
-                              : _vm._e()
-                          ]
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("BudgetInfo", {
+                              attrs: {
+                                budget: _vm.parsedBudget,
+                                divisor: 1,
+                                label: "مجمل الميزانية للعام ",
+                                expensesLabel: "مجمل المصاريف للعام ",
+                                expensesValue:
+                                  _vm.totalSectorYearly.expenses_year,
+                                incomeLabel: "مجمل المدخلات للعام",
+                                incomeValue: _vm.totalSectorYearly.income_year,
+                                net_amount_label: "صافي الربح والخساره "
+                              }
+                            })
+                          ],
+                          1
                         )
-                      ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-full" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
+                        },
+                        _vm._l(_vm.budjetSector, function(Sector, index) {
+                          return _c(
+                            "div",
+                            {
+                              key: Sector.Sector,
+                              staticClass:
+                                "-mb-px mr-2 last:mr-0 flex-auto text-center",
+                              attrs: { value: Sector.Sector }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "text-xs font-bold uppercase px-5 py-4 my-2 shadow-lg rounded block leading-normal",
+                                  class: {
+                                    "text-green-600 bg-white cursor-pointer":
+                                      _vm.openTabstatistic !== index,
+                                    "text-white bg-green-600 cursor-pointer":
+                                      _vm.openTabstatistic === index
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.toggleTabsstatistic(index)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(Sector.Sector) +
+                                      "\n                                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
+                        },
+                        [
+                          _vm.budjetSector.length > 0
+                            ? _c(
+                                "div",
+                                { staticClass: "px-4 py-5 flex-auto" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "tab-content tab-space" },
+                                    _vm._l(_vm.budjetSector, function(
+                                      Sector,
+                                      index
+                                    ) {
+                                      return _c(
+                                        "div",
+                                        {
+                                          key: Sector.Sector,
+                                          class: {
+                                            hidden:
+                                              _vm.openTabstatistic !== index,
+                                            block:
+                                              _vm.openTabstatistic === index
+                                          },
+                                          attrs: { value: Sector.Sector }
+                                        },
+                                        [
+                                          _c(
+                                            "h1",
+                                            {
+                                              staticClass:
+                                                "my-5 mx-4 font-extrabold text-gray-700 text-3xl"
+                                            },
+                                            [
+                                              _vm._v(
+                                                " " +
+                                                  _vm._s(Sector.Sector) +
+                                                  "\n                                                "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("TotalSector", {
+                                            attrs: { Sector: Sector }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    }),
+                                    0
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ]
+                      )
                     ])
-                  ]
-                )
-              ])
+                  ])
+                ]
+              )
             ])
           ]
         )
@@ -10896,28 +11040,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-2/3" }, [
-      _c(
-        "button",
-        {
-          staticClass:
-            "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
-          attrs: { type: "submit" }
-        },
-        [
-          _vm._v(
-            "\n                                            حفظ\n                                        "
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
