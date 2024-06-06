@@ -121,7 +121,7 @@ class PaymentVoucher extends Resource
             }),
             Text::make(__('Sector name'),'Sectors',function(){
                 return $this->project?->Sectors?->text;
-            }),
+            })->hideWhenCreating()->hideWhenUpdating(),
 
             Select::make(__(' اختر  الشركة'), "name")
                 ->options(function () {
