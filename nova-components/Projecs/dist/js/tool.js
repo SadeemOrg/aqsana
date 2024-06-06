@@ -302,8 +302,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_pure_vue_chart___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_pure_vue_chart__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TotalSector_vue__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TotalSector_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__TotalSector_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__budgets_vue__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__budgets_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__budgets_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Budgets_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Budgets_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Budgets_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__CreateBudget_vue__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__CreateBudget_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__CreateBudget_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DeleteBudget_vue__ = __webpack_require__(25);
@@ -477,6 +477,122 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -487,7 +603,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        PureVueChart: __WEBPACK_IMPORTED_MODULE_1_pure_vue_chart___default.a, TotalSector: __WEBPACK_IMPORTED_MODULE_2__TotalSector_vue___default.a, Budgets: __WEBPACK_IMPORTED_MODULE_3__budgets_vue___default.a, CreateBudget: __WEBPACK_IMPORTED_MODULE_4__CreateBudget_vue___default.a, DeleteBudget: __WEBPACK_IMPORTED_MODULE_5__DeleteBudget_vue___default.a, BudgetInfo: __WEBPACK_IMPORTED_MODULE_6__BudgetInfo_vue___default.a
+        PureVueChart: __WEBPACK_IMPORTED_MODULE_1_pure_vue_chart___default.a,
+        TotalSector: __WEBPACK_IMPORTED_MODULE_2__TotalSector_vue___default.a,
+        Budgets: __WEBPACK_IMPORTED_MODULE_3__Budgets_vue___default.a,
+        CreateBudget: __WEBPACK_IMPORTED_MODULE_4__CreateBudget_vue___default.a,
+        DeleteBudget: __WEBPACK_IMPORTED_MODULE_5__DeleteBudget_vue___default.a,
+        BudgetInfo: __WEBPACK_IMPORTED_MODULE_6__BudgetInfo_vue___default.a
     },
     data: function data() {
         return {
@@ -505,9 +626,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             deletSectors: [],
             hasError: false,
             budgetsOfyear: 0,
+            newyear: null,
 
             points: [1, 4, 5, 3, 60, 4, 5, 3, 60, 4, 5],
-            tabs: [{ index: 1, name: 'الميزانيات' }, { index: 2, name: 'اضافة جديد' }, { index: 3, name: 'حذف' }, { index: 4, name: 'احصائيات' }],
+            tabs: [{ index: 1, name: "الميزانيات" }, { index: 2, name: "اضافة جديد" }, { index: 3, name: "حذف" }, { index: 4, name: "احصائيات" }],
             projectshow: false,
             chartWidth: 400,
             remainingCount: 0
@@ -526,8 +648,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         for (var year = startYear; year <= endYear; year++) {
             this.addYears.push(year);
         }
-        console.log("addYears", this.addYears);
-        window.addEventListener('resize', function () {
+        window.addEventListener("resize", function () {
             if (window.innerWidth < 1220 && window.innerWidth > 500) {
                 _this.chartWidth = 300;
             } else if (window.innerWidth < 499) {
@@ -543,7 +664,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var sumBud = 0;
             this.newSectors.forEach(function (element) {
                 if (element["Budget"]) {
-
                     sumBud += parseInt(element["Budget"]);
                 }
             });
@@ -556,90 +676,133 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         toggleTabsstatistic: function toggleTabsstatistic(tabNumber) {
             this.openTabstatistic = tabNumber;
         },
-        getYears: function getYears() {
-            var _this2 = this;
-
-            axios.post("/year").then(function (response) {
-                _this2.years = response.data;
-            });
-        },
-
-        getSector: function getSector() {
-            var _this3 = this;
-
-            axios.post("/Sectors").then(function (response) {
-                _this3.newSectors = response.data;
-            });
-        },
-        getSectorstatistics: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(event) {
-                var _ref2, _ref3, totalSectorResponse, budjetSectorResponse;
-
+        getYears: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var response;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
+                                _context.prev = 0;
+                                _context.next = 3;
+                                return axios.post("/year");
+
+                            case 3:
+                                response = _context.sent;
+
+                                this.years = response.data;
+                                _context.next = 10;
+                                break;
+
+                            case 7:
+                                _context.prev = 7;
+                                _context.t0 = _context["catch"](0);
+
+                                console.error(_context.t0);
+
+                            case 10:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this, [[0, 7]]);
+            }));
+
+            function getYears() {
+                return _ref.apply(this, arguments);
+            }
+
+            return getYears;
+        }(),
+        getSector: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                var response;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _context2.prev = 0;
+                                _context2.next = 3;
+                                return axios.post("/Sectors");
+
+                            case 3:
+                                response = _context2.sent;
+
+                                this.newSectors = response.data;
+                                _context2.next = 10;
+                                break;
+
+                            case 7:
+                                _context2.prev = 7;
+                                _context2.t0 = _context2["catch"](0);
+
+                                console.error(_context2.t0);
+
+                            case 10:
+                            case "end":
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this, [[0, 7]]);
+            }));
+
+            function getSector() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return getSector;
+        }(),
+        getSectorstatistics: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(event) {
+                var _ref4, _ref5, totalSectorResponse, budjetSectorResponse;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
                                 this.selectedyear = event.target.value;
-                                _context.prev = 1;
-                                _context.next = 4;
-                                return Promise.all([axios.post('/total-sector-budget', {
+                                _context3.prev = 1;
+                                _context3.next = 4;
+                                return Promise.all([axios.post("/total-sector-budget", {
                                     year: event.target.value
                                 }), axios.post("/Sectorstatistics", {
                                     year: event.target.value
                                 })]);
 
                             case 4:
-                                _ref2 = _context.sent;
-                                _ref3 = _slicedToArray(_ref2, 2);
-                                totalSectorResponse = _ref3[0];
-                                budjetSectorResponse = _ref3[1];
+                                _ref4 = _context3.sent;
+                                _ref5 = _slicedToArray(_ref4, 2);
+                                totalSectorResponse = _ref5[0];
+                                budjetSectorResponse = _ref5[1];
 
 
                                 // Handle the responses
                                 this.totalSectorYearly = totalSectorResponse.data;
                                 this.budjetSector = budjetSectorResponse.data;
                                 console.log({ totalSectorYearly: totalSectorYearly });
-                                _context.next = 16;
+                                _context3.next = 16;
                                 break;
 
                             case 13:
-                                _context.prev = 13;
-                                _context.t0 = _context["catch"](1);
+                                _context3.prev = 13;
+                                _context3.t0 = _context3["catch"](1);
 
-                                console.error('Error making POST request:', _context.t0);
+                                console.error("Error making POST request:", _context3.t0);
 
                             case 16:
                             case "end":
-                                return _context.stop();
+                                return _context3.stop();
                         }
                     }
-                }, _callee, this, [[1, 13]]);
+                }, _callee3, this, [[1, 13]]);
             }));
 
             function getSectorstatistics(_x) {
-                return _ref.apply(this, arguments);
+                return _ref3.apply(this, arguments);
             }
 
             return getSectorstatistics;
         }(),
-        save: function save() {
-            axios.post("/save", {
-                year: this.year,
-                Sectors: this.Sectors
-            }).then(function (response) {
-                toastr.options = {
-                    closeButton: true,
-                    debug: false,
-                    positionClass: "toast-bottom-right",
-                    onclick: null,
-                    showDuration: "300",
-                    hideDuration: "2000",
-                    showMethod: "fadeIn",
-                    hideMethod: "fadeOut"
-                };
-                toastr.success("  تم حفظ بنجاح");
-            });;
-        },
         sum: function sum() {
             var sum = 0;
             return this.newSectors.forEach(function (element) {
@@ -647,47 +810,99 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             });
             return sum;
         },
-        savenew: function savenew() {
-            var sum = 0;
-            this.newSectors.forEach(function (element) {
-                sum += parseInt(element["Budget"]);
-            });
-            // alert(this.budgetsOfyear);
-            if (this.budgetsOfyear > sum) {
-                axios.post("/save", {
-                    year: this.newyear,
-                    budgetsOfyear: this.budgetsOfyear,
-                    Sectors: this.newSectors
-                }).then(function (response) {
-                    toastr.options = {
-                        closeButton: true,
-                        debug: false,
-                        positionClass: "toast-bottom-right",
-                        onclick: null,
-                        showDuration: "300",
-                        hideDuration: "2000",
-                        showMethod: "fadeIn",
-                        hideMethod: "fadeOut"
-                    };
-                    toastr.success("  تم انشاء بنجاح");
-                });
+        savenew: function () {
+            var _ref6 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
+                var sum, response;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                    while (1) {
+                        switch (_context4.prev = _context4.next) {
+                            case 0:
+                                sum = 0;
 
-                this.getYears();
-            } else {
-                toastr.options = {
-                    closeButton: true,
-                    debug: false,
-                    positionClass: "toast-bottom-right",
-                    onclick: null,
-                    showDuration: "300",
-                    hideDuration: "2000",
-                    showMethod: "fadeIn",
-                    hideMethod: "fadeOut"
-                };
+                                this.newSectors.forEach(function (element) {
+                                    sum += parseInt(element["Budget"]);
+                                });
 
-                toastr.error("ميزانية السنة لا تطابق مع ميزانية القطاعات");
+                                if (!(this.budgetsOfyear >= sum)) {
+                                    _context4.next = 19;
+                                    break;
+                                }
+
+                                _context4.prev = 3;
+                                _context4.next = 6;
+                                return axios.post("/save", {
+                                    year: this.newyear,
+                                    budgetsOfyear: this.budgetsOfyear,
+                                    Sectors: this.newSectors
+                                });
+
+                            case 6:
+                                response = _context4.sent;
+
+                                toastr.options = {
+                                    closeButton: true,
+                                    debug: false,
+                                    positionClass: "toast-bottom-right",
+                                    onclick: null,
+                                    showDuration: "300",
+                                    hideDuration: "2000",
+                                    showMethod: "fadeIn",
+                                    hideMethod: "fadeOut"
+                                };
+                                toastr.success("تم انشاء ميزانية السنة بنجاح");
+                                this.getYears();
+                                _context4.next = 17;
+                                break;
+
+                            case 12:
+                                _context4.prev = 12;
+                                _context4.t0 = _context4["catch"](3);
+
+                                toastr.options = {
+                                    closeButton: true,
+                                    debug: false,
+                                    positionClass: "toast-bottom-right",
+                                    onclick: null,
+                                    showDuration: "300",
+                                    hideDuration: "2000",
+                                    showMethod: "fadeIn",
+                                    hideMethod: "fadeOut"
+                                };
+                                toastr.error("حدث خطأ أثناء الحفظ");
+                                console.error(_context4.t0);
+
+                            case 17:
+                                _context4.next = 21;
+                                break;
+
+                            case 19:
+                                toastr.options = {
+                                    closeButton: true,
+                                    debug: false,
+                                    positionClass: "toast-bottom-right",
+                                    onclick: null,
+                                    showDuration: "300",
+                                    hideDuration: "2000",
+                                    showMethod: "fadeIn",
+                                    hideMethod: "fadeOut"
+                                };
+
+                                toastr.error("ميزانية السنة لا تطابق ميزانية القطاعات");
+
+                            case 21:
+                            case "end":
+                                return _context4.stop();
+                        }
+                    }
+                }, _callee4, this, [[3, 12]]);
+            }));
+
+            function savenew() {
+                return _ref6.apply(this, arguments);
             }
-        }
+
+            return savenew;
+        }()
     },
     computed: {
         isTotalSectorYearlyNotEmpty: function isTotalSectorYearlyNotEmpty() {
@@ -9677,428 +9892,9 @@ if (false) {
 }
 
 /***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(21)
-/* template */
-var __vue_template__ = __webpack_require__(22)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/budgets.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7ac92453", Component.options)
-  } else {
-    hotAPI.reload("data-v-7ac92453", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ["years", "year"],
-    data: function data() {
-        return {
-            openTab: 1,
-            openTabstatistic: 0,
-            Sectors: [],
-            totalSectorYear: 0,
-            totalSectorsYear: 0,
-            remainingCount: 0,
-            hasError: false
-
-        };
-    },
-
-    // beforeMount() {
-    // },
-    methods: {
-        save: function save() {
-            var _this = this;
-
-            this.Sectors.forEach(function (sector) {
-                if (sector.sector_id === 0) {
-                    _this.totalSectorYear = parseInt(sector.Budget);
-                }
-            });
-            this.Sectors.forEach(function (sector) {
-                // Check if the sector_id is equal to 0
-                if (sector.sector_id != 0) {
-                    if (sector.Budget) {
-
-                        _this.totalSectorsYear += parseInt(sector.Budget); // Assuming Budget is a string and needs to be parsed as an integer
-                    }
-                }
-            });
-            if (this.totalSectorsYear < this.totalSectorYear) {
-                axios.post("/save", {
-                    year: this.year,
-                    Sectors: this.Sectors
-                }).then(function (response) {
-                    toastr.options = {
-                        closeButton: true,
-                        debug: false,
-                        positionClass: "toast-bottom-right",
-                        onclick: null,
-                        showDuration: "300",
-                        hideDuration: "2000",
-                        showMethod: "fadeIn",
-                        hideMethod: "fadeOut"
-                    };
-                    toastr.success("  تم حفظ بنجاح");
-                });
-            } else {
-                toastr.options = {
-                    closeButton: true,
-                    debug: false,
-                    positionClass: "toast-bottom-right",
-                    onclick: null,
-                    showDuration: "300",
-                    hideDuration: "2000",
-                    showMethod: "fadeIn",
-                    hideMethod: "fadeOut"
-                };
-
-                toastr.error("ميزانية السنة لا تطابق مع ميزانية القطاعات");
-            }
-        },
-
-        countdown: function countdown() {
-            var _this2 = this;
-
-            this.totalSectorsYear = 0;
-            this.totalSectorYear = 0;
-            this.Sectors.forEach(function (sector) {
-                if (sector.sector_id === 0) {
-                    _this2.totalSectorYear = parseInt(sector.Budget);
-                }
-            });
-            this.Sectors.forEach(function (sector) {
-                // Check if the sector_id is equal to 0
-                if (sector.sector_id != 0) {
-                    if (sector.Budget) {
-
-                        _this2.totalSectorsYear += parseInt(sector.Budget); // Assuming Budget is a string and needs to be parsed as an integer
-                    }
-                }
-            });
-            this.remainingCount = this.totalSectorYear - this.totalSectorsYear; //
-            this.hasError = this.totalSectorsYear > this.totalSectorYear;
-        },
-        onChange: function onChange(event) {
-            var _this3 = this;
-
-            axios.post("/SectorsBudget", {
-                year: event.target.value
-            }).then(function (response) {
-                _this3.Sectors = response.data;
-                _this3.countdown();
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "py-4 w-[95%] bg-slate-700" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.year,
-              expression: "year"
-            }
-          ],
-          staticClass:
-            "select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
-          on: {
-            change: [
-              function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.year = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
-              function($event) {
-                return _vm.onChange($event)
-              }
-            ]
-          }
-        },
-        [
-          _c("option", { attrs: { selected: "", disabled: "", value: "0" } }, [
-            _vm._v("\n                الرجاء اختيار السنة\n            ")
-          ]),
-          _vm._v(" "),
-          _vm._l(_vm.years, function(year) {
-            return _c(
-              "option",
-              { key: year.year, domProps: { value: year.year } },
-              [
-                _vm._v(
-                  "\n                " + _vm._s(year.year) + "\n            "
-                )
-              ]
-            )
-          })
-        ],
-        2
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        staticClass: "add-form py-4",
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.onSubmit.apply(null, arguments)
-          }
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4"
-          },
-          _vm._l(_vm.Sectors, function(Sector, index) {
-            return _c(
-              "div",
-              { key: Sector.Sector, attrs: { value: Sector.Sector } },
-              [
-                _c("div", { staticClass: "mb-3" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass:
-                        "block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64",
-                      attrs: { for: index }
-                    },
-                    [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(Sector.Sector) +
-                          "\n                    "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: Sector.Budget,
-                        expression: "Sector.Budget"
-                      }
-                    ],
-                    staticClass:
-                      " appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
-                    attrs: { id: index, type: "text" },
-                    domProps: { value: Sector.Budget },
-                    on: {
-                      keyup: _vm.countdown,
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(Sector, "Budget", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]
-            )
-          }),
-          0
-        ),
-        _vm._v(" "),
-        _vm.Sectors.length
-          ? _c(
-              "div",
-              {
-                staticClass: "md:flex md:items-center w-full justify-start py-4"
-              },
-              [
-                _c(
-                  "p",
-                  {
-                    staticClass: "text-right text-small",
-                    class: { "text-danger": _vm.hasError }
-                  },
-                  [
-                    _vm._v(
-                      "Sum: " + _vm._s(_vm.remainingCount) + "\n            "
-                    )
-                  ]
-                )
-              ]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.Sectors.length
-          ? _c(
-              "div",
-              { staticClass: "md:flex md:items-center w-full justify-end" },
-              [
-                _c("div", { staticClass: "md:w-2/3" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.save()
-                        }
-                      }
-                    },
-                    [_vm._v("\n                    حفظ\n                ")]
-                  )
-                ])
-              ]
-            )
-          : _vm._e()
-      ]
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/3" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-black text-base ml-4 py-2 font-medium md:text-right mb-1 md:mb-0"
-        },
-        [_vm._v("\n                السنة\n            ")]
-      )
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7ac92453", module.exports)
-  }
-}
-
-/***/ }),
+/* 20 */,
+/* 21 */,
+/* 22 */,
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10218,6 +10014,38 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__delete_modal_sector_vue__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__delete_modal_sector_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__delete_modal_sector_vue__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -10266,36 +10094,169 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['years'],
+    props: ["years"],
+    components: { deleteModalSector: __WEBPACK_IMPORTED_MODULE_1__delete_modal_sector_vue___default.a },
     data: function data() {
         return {
             selectedItem: "0",
             selectedyear: "0",
             year: "0",
-            deletSectors: []
+            deletSectors: [],
+            showModalSector: false
         };
     },
 
     methods: {
-        onChangedelet: function onChangedelet(event) {
-            var _this = this;
+        onChangedelet: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(event) {
+                var response;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                _context.prev = 0;
+                                _context.next = 3;
+                                return axios.post("/SectorsBudget", {
+                                    year: event.target.value
+                                });
 
-            axios.post("/SectorsBudget", {
-                year: event.target.value
-            }).then(function (response) {
-                _this.deletSectors = response.data;
-                _this.selectedItem = "0";
-                _this.selectedyear = "0";
-                _this.year = event.target.value;
-            });
-        },
-        deleteSector: function deleteSector() {
-            axios.post("/delet", {
-                year: this.year
-            });
-            this.deletSectors = [];
-            this.getYears();
+                            case 3:
+                                response = _context.sent;
+
+                                this.deletSectors = response.data;
+                                this.selectedItem = "0";
+                                this.selectedyear = "0";
+                                this.year = event.target.value;
+                                _context.next = 13;
+                                break;
+
+                            case 10:
+                                _context.prev = 10;
+                                _context.t0 = _context["catch"](0);
+
+                                console.error(_context.t0);
+
+                            case 13:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this, [[0, 10]]);
+            }));
+
+            function onChangedelet(_x) {
+                return _ref.apply(this, arguments);
+            }
+
+            return onChangedelet;
+        }(),
+        deleteSector: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                this.showModalSector = true;
+
+                            case 1:
+                            case "end":
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function deleteSector() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return deleteSector;
+        }(),
+
+        getYears: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+                var response;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.prev = 0;
+                                _context3.next = 3;
+                                return axios.post("/year");
+
+                            case 3:
+                                response = _context3.sent;
+
+                                this.years = response.data;
+                                _context3.next = 10;
+                                break;
+
+                            case 7:
+                                _context3.prev = 7;
+                                _context3.t0 = _context3["catch"](0);
+
+                                console.error(_context3.t0);
+
+                            case 10:
+                            case "end":
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this, [[0, 7]]);
+            }));
+
+            function getYears() {
+                return _ref3.apply(this, arguments);
+            }
+
+            return getYears;
+        }(),
+        handeDeleteSector: function () {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                    while (1) {
+                        switch (_context4.prev = _context4.next) {
+                            case 0:
+                                _context4.prev = 0;
+                                _context4.next = 3;
+                                return axios.post("/delet", {
+                                    year: this.year
+                                });
+
+                            case 3:
+                                this.deletSectors = [];
+                                _context4.next = 6;
+                                return this.getYears();
+
+                            case 6:
+                                this.showModalSector = false;
+                                _context4.next = 12;
+                                break;
+
+                            case 9:
+                                _context4.prev = 9;
+                                _context4.t0 = _context4["catch"](0);
+
+                                console.error(_context4.t0);
+
+                            case 12:
+                            case "end":
+                                return _context4.stop();
+                        }
+                    }
+                }, _callee4, this, [[0, 9]]);
+            }));
+
+            function handeDeleteSector() {
+                return _ref4.apply(this, arguments);
+            }
+
+            return handeDeleteSector;
+        }(),
+        handelCloseSectorModal: function handelCloseSectorModal() {
+            this.showModalSector = false;
         }
     }
 });
@@ -10350,7 +10311,7 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.onSubmit.apply(null, arguments)
+            return _vm.deleteSector.apply(null, arguments)
           }
         }
       },
@@ -10425,37 +10386,48 @@ var render = function() {
                     {
                       staticClass: "md:flex md:items-center w-full justify-end"
                     },
-                    [
-                      _c("div", { staticClass: "md:w-2/3" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
-                            attrs: { type: "submit" },
-                            on: {
-                              click: function($event) {
-                                return _vm.deleteSector()
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                        حذف\n                    "
-                            )
-                          ]
-                        )
-                      ])
-                    ]
+                    [_vm._m(0)]
                   )
                 : _vm._e()
             ])
           : _vm._e()
       ]
-    )
+    ),
+    _vm._v(" "),
+    _vm.showModalSector
+      ? _c(
+          "div",
+          [
+            _c("delete-modal-sector", {
+              on: {
+                "handel-close-delete-sector-modal": _vm.handelCloseSectorModal,
+                "handel-delete-sector": _vm.handeDeleteSector
+              }
+            })
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-2/3" }, [
+      _c(
+        "button",
+        {
+          staticClass:
+            "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("\n                        حذف\n                    ")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -10676,7 +10648,7 @@ var render = function() {
                         on: {
                           submit: function($event) {
                             $event.preventDefault()
-                            return _vm.onSubmit.apply(null, arguments)
+                            return _vm.savenew.apply(null, arguments)
                           }
                         }
                       },
@@ -10754,28 +10726,7 @@ var render = function() {
                                 staticClass:
                                   "md:flex md:items-center w-full justify-end"
                               },
-                              [
-                                _c("div", { staticClass: "md:w-2/3" }, [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass:
-                                        "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
-                                      attrs: { type: "submit" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.savenew()
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                            حفظ\n                                        "
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ]
+                              [_vm._m(0)]
                             )
                           : _vm._e()
                       ]
@@ -10789,8 +10740,9 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "Sum:\n                                " +
-                            _vm._s(_vm.remainingCount)
+                          "\n                                Sum: " +
+                            _vm._s(_vm.remainingCount) +
+                            "\n                            "
                         )
                       ]
                     )
@@ -10801,7 +10753,10 @@ var render = function() {
               _c(
                 "div",
                 {
-                  class: { hidden: _vm.openTab !== 3, block: _vm.openTab === 3 }
+                  class: {
+                    hidden: _vm.openTab !== 3,
+                    block: _vm.openTab === 3
+                  }
                 },
                 [_c("DeleteBudget", { attrs: { years: _vm.years } })],
                 1
@@ -10810,7 +10765,10 @@ var render = function() {
               _c(
                 "div",
                 {
-                  class: { hidden: _vm.openTab !== 4, block: _vm.openTab === 4 }
+                  class: {
+                    hidden: _vm.openTab !== 4,
+                    block: _vm.openTab === 4
+                  }
                 },
                 [
                   _c("div", { staticClass: "flex flex-col w-full" }, [
@@ -10896,8 +10854,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "الميزانية العامه لسنه " +
-                                    _vm._s(_vm.selectedyear)
+                                  "\n                                    الميزانية العامه لسنه " +
+                                    _vm._s(_vm.selectedyear) +
+                                    "\n                                "
                                 )
                               ]
                             ),
@@ -11008,7 +10967,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                " " +
+                                                "\n                                                    " +
                                                   _vm._s(Sector.Sector) +
                                                   "\n                                                "
                                               )
@@ -11040,7 +10999,28 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-2/3" }, [
+      _c(
+        "button",
+        {
+          staticClass:
+            "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
+          attrs: { type: "submit" }
+        },
+        [
+          _vm._v(
+            "\n                                            حفظ\n                                        "
+          )
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -11055,6 +11035,820 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(34)
+/* template */
+var __vue_template__ = __webpack_require__(35)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Budgets.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-439a679a", Component.options)
+  } else {
+    hotAPI.reload("data-v-439a679a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ["years", "year"],
+    data: function data() {
+        return {
+            openTab: 1,
+            openTabstatistic: 0,
+            Sectors: [],
+            totalSectorYear: 0,
+            sumSectorsPerYear: 0,
+            remainingCount: 0,
+            hasError: false
+        };
+    },
+
+    methods: {
+        save: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var _this = this;
+
+                var response;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                this.sumSectorsPerYear = 0;
+                                this.totalSectorYear = 0;
+                                this.Sectors.forEach(function (sector) {
+                                    if (sector.sector_id === 0) {
+                                        _this.totalSectorYear = parseInt(sector.Budget);
+                                    }
+                                });
+                                this.Sectors.forEach(function (sector) {
+                                    if (sector.sector_id != 0) {
+                                        if (sector.Budget) {
+                                            _this.sumSectorsPerYear += parseInt(sector.Budget);
+                                        }
+                                    }
+                                });
+
+                                if (!(this.sumSectorsPerYear <= this.totalSectorYear)) {
+                                    _context.next = 20;
+                                    break;
+                                }
+
+                                _context.prev = 5;
+                                _context.next = 8;
+                                return axios.post("/save", {
+                                    year: this.year,
+                                    Sectors: this.Sectors
+                                });
+
+                            case 8:
+                                response = _context.sent;
+
+                                toastr.options = {
+                                    closeButton: true,
+                                    debug: false,
+                                    positionClass: "toast-bottom-right",
+                                    onclick: null,
+                                    showDuration: "300",
+                                    hideDuration: "2000",
+                                    showMethod: "fadeIn",
+                                    hideMethod: "fadeOut"
+                                };
+                                toastr.success("تم حفظ الميزانية بنجاح");
+                                _context.next = 18;
+                                break;
+
+                            case 13:
+                                _context.prev = 13;
+                                _context.t0 = _context["catch"](5);
+
+                                toastr.options = {
+                                    closeButton: true,
+                                    debug: false,
+                                    positionClass: "toast-bottom-right",
+                                    onclick: null,
+                                    showDuration: "300",
+                                    hideDuration: "2000",
+                                    showMethod: "fadeIn",
+                                    hideMethod: "fadeOut"
+                                };
+                                toastr.error("خطأ في الحفظ");
+                                console.error(_context.t0);
+
+                            case 18:
+                                _context.next = 22;
+                                break;
+
+                            case 20:
+                                toastr.options = {
+                                    closeButton: true,
+                                    debug: false,
+                                    positionClass: "toast-bottom-right",
+                                    onclick: null,
+                                    showDuration: "300",
+                                    hideDuration: "2000",
+                                    showMethod: "fadeIn",
+                                    hideMethod: "fadeOut"
+                                };
+                                toastr.error("ميزانية السنة لا تطابق ميزانية القطاعات");
+
+                            case 22:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this, [[5, 13]]);
+            }));
+
+            function save() {
+                return _ref.apply(this, arguments);
+            }
+
+            return save;
+        }(),
+
+        countdown: function countdown() {
+            var _this2 = this;
+
+            this.sumSectorsPerYear = 0;
+            this.totalSectorYear = 0;
+            this.Sectors.forEach(function (sector) {
+                if (sector.sector_id === 0) {
+                    _this2.totalSectorYear = parseInt(sector.Budget);
+                }
+            });
+            this.Sectors.forEach(function (sector) {
+                if (sector.sector_id != 0) {
+                    if (sector.Budget) {
+                        _this2.sumSectorsPerYear += parseInt(sector.Budget);
+                    }
+                }
+            });
+            this.remainingCount = this.totalSectorYear - this.sumSectorsPerYear;
+            this.hasError = this.sumSectorsPerYear > this.totalSectorYear;
+        },
+        onChange: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(event) {
+                var response;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _context2.prev = 0;
+                                _context2.next = 3;
+                                return axios.post("/SectorsBudget", {
+                                    year: event.target.value
+                                });
+
+                            case 3:
+                                response = _context2.sent;
+
+                                this.Sectors = response.data;
+                                this.countdown();
+                                _context2.next = 11;
+                                break;
+
+                            case 8:
+                                _context2.prev = 8;
+                                _context2.t0 = _context2["catch"](0);
+
+                                // Handle error if needed
+                                console.error(_context2.t0);
+
+                            case 11:
+                            case "end":
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this, [[0, 8]]);
+            }));
+
+            function onChange(_x) {
+                return _ref2.apply(this, arguments);
+            }
+
+            return onChange;
+        }()
+    }
+});
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "py-4 w-[95%] bg-slate-700" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.year,
+              expression: "year"
+            }
+          ],
+          staticClass:
+            "select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+          on: {
+            change: [
+              function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.year = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+              function($event) {
+                return _vm.onChange($event)
+              }
+            ]
+          }
+        },
+        [
+          _c("option", { attrs: { selected: "", disabled: "", value: "0" } }, [
+            _vm._v("\n                الرجاء اختيار السنة\n            ")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.years, function(year) {
+            return _c(
+              "option",
+              { key: year.year, domProps: { value: year.year } },
+              [
+                _vm._v(
+                  "\n                " + _vm._s(year.year) + "\n            "
+                )
+              ]
+            )
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        staticClass: "add-form py-4",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.save.apply(null, arguments)
+          }
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4"
+          },
+          _vm._l(_vm.Sectors, function(Sector, index) {
+            return _c(
+              "div",
+              { key: Sector.Sector, attrs: { value: Sector.Sector } },
+              [
+                _c("div", { staticClass: "mb-3" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass:
+                        "block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64",
+                      attrs: { for: index }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(Sector.Sector) +
+                          "\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: Sector.Budget,
+                        expression: "Sector.Budget"
+                      }
+                    ],
+                    staticClass:
+                      " appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                    attrs: { id: index, type: "text" },
+                    domProps: { value: Sector.Budget },
+                    on: {
+                      keyup: _vm.countdown,
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(Sector, "Budget", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]
+            )
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _vm.Sectors.length
+          ? _c(
+              "div",
+              {
+                staticClass: "md:flex md:items-center w-full justify-start py-4"
+              },
+              [
+                _c(
+                  "p",
+                  {
+                    staticClass: "text-right text-small",
+                    class: { "text-danger": _vm.hasError }
+                  },
+                  [
+                    _vm._v(
+                      "\n                Sum: " +
+                        _vm._s(_vm.remainingCount) +
+                        "\n            "
+                    )
+                  ]
+                )
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.Sectors.length
+          ? _c(
+              "div",
+              { staticClass: "md:flex md:items-center w-full justify-end" },
+              [_vm._m(1)]
+            )
+          : _vm._e()
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/3" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "block text-black text-base ml-4 py-2 font-medium md:text-right mb-1 md:mb-0"
+        },
+        [_vm._v("\n                السنة\n            ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-2/3" }, [
+      _c(
+        "button",
+        {
+          staticClass:
+            "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("\n                    حفظ\n                ")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-439a679a", module.exports)
+  }
+}
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(37)
+/* template */
+var __vue_template__ = __webpack_require__(38)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/delete-modal-sector.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-75a6d96d", Component.options)
+  } else {
+    hotAPI.reload("data-v-75a6d96d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    setup: function setup() {},
+
+    methods: {
+        closeModal: function closeModal() {
+            this.$emit('handel-close-delete-sector-modal');
+        },
+        handelDeleteSector: function handelDeleteSector() {
+            this.$emit('handel-delete-sector');
+        }
+    }
+});
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "relative z-10",
+      attrs: {
+        "aria-labelledby": "modal-title",
+        role: "dialog",
+        "aria-modal": "true"
+      }
+    },
+    [
+      _c("div", {
+        staticClass:
+          "fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "fixed inset-0 z-10 w-screen overflow-y-auto" },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 max-w-sm sm:p-6"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "absolute right-0 top-0 hidden pr-4 pt-4 sm:block"
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
+                          attrs: { type: "button" },
+                          on: { click: _vm.closeModal }
+                        },
+                        [
+                          _c("span", { staticClass: "sr-only" }, [
+                            _vm._v("Close")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "h-6 w-6 mx-5",
+                              attrs: {
+                                fill: "none",
+                                viewBox: "0 0 24 24",
+                                "stroke-width": "1.5",
+                                stroke: "currentColor",
+                                "aria-hidden": "true"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  "stroke-linecap": "round",
+                                  "stroke-linejoin": "round",
+                                  d: "M6 18L18 6M6 6l12 12"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "mt-5 sm:mt-4 sm:flex sm:flex-row items-center justify-center gap-x-4"
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto",
+                          attrs: { type: "button" },
+                          on: { click: _vm.handelDeleteSector }
+                        },
+                        [_vm._v("حذف")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            " inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto",
+                          attrs: { type: "button" },
+                          on: { click: _vm.closeModal }
+                        },
+                        [_vm._v("الغاء")]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "sm:flex sm:items-start" }, [
+      _c(
+        "div",
+        { staticClass: "mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left" },
+        [
+          _c(
+            "h3",
+            {
+              staticClass: "text-base font-semibold leading-6 text-gray-900",
+              attrs: { id: "modal-title" }
+            },
+            [_vm._v("حذف السنة")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "mt-2" }, [
+            _c("p", { staticClass: "text-sm text-gray-500" }, [
+              _vm._v(
+                "هل أنت متأكد من أنك تريد حذف السنة، لا يمكن استعادة السنه بعد حذفها."
+              )
+            ])
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-75a6d96d", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
