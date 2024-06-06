@@ -11,7 +11,7 @@
     <!--English Bills -->
     <div dir="ltr" class="max-w-7xl  mx-auto sm:px-6 lg:px-8 px-8" id="printJS-table">
         <img class="sm:h-[250px] w-[90%] mt-1.5"
-            src="https://media.discordapp.net/attachments/938405759996276806/1060518737767309342/iuktui.png?width=1440&height=302"
+            src="{{ asset('/assets/image/iuktui.png') }}"
             alt="alaqsa Logo">
         <div class="flex sm:flex-row flex-col-reverse items-center justify-between relative">
             <div class="basis-1/2 hidden sm:flex flex-col  items-start">

@@ -81,7 +81,7 @@
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
         <img style="height: 220px; "
-            src="https://media.discordapp.net/attachments/938405759996276806/1060518737767309342/iuktui.png?width=1440&height=302"
+            src="{{ asset('/assets/image/iuktui.png') }}"
             alt="alaqsa Logo">
     </div>
     <!--End Top Image -->
