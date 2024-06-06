@@ -8969,7 +8969,7 @@ var content = __webpack_require__(13);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(15)("f0e9bda2", content, false, {});
+var update = __webpack_require__(15)("e95d3ac8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -8993,7 +8993,7 @@ exports = module.exports = __webpack_require__(14)(false);
 
 
 // module
-exports.push([module.i, "\nprogress[data-v-e775ee84] {\n    width: 95%;\n    /* Adjust the width as needed */\n    height: 10px;\n    -webkit-appearance: none;\n       -moz-appearance: none;\n            appearance: none;\n    border-radius: 5px;\n    background: #ddd;\n}\nprogress[data-v-e775ee84]::-webkit-progress-value {\n    background-color: #34ca96;\n    /* Adjust to match the overall border-radius */\n    border-radius: 5px;\n}\nprogress[data-v-e775ee84]::-webkit-progress-bar {\n    background-color: #ddd;\n    border-radius: 5px;\n}\n.budget_box[data-v-e775ee84] {\n    min-width: 250px;\n    max-width: 250px;\n    min-height: 70px;\n    border: 2px solid;\n    border-radius: 10px;\n    border-color: #dfe1e0;\n    z-index: 10;\n    background-color: #F2E9AE;\n}\n\n/* Media query for screens less than or equal to 150px */\n@media (max-width: 550px) {\n.budget_box[data-v-e775ee84] {\n        min-width: 200px;\n        max-width: 200px;\n}\n}\n", ""]);
+exports.push([module.i, "\nprogress[data-v-e775ee84] {\r\n    width: 95%;\r\n    /* Adjust the width as needed */\r\n    height: 10px;\r\n    -webkit-appearance: none;\r\n       -moz-appearance: none;\r\n            appearance: none;\r\n    border-radius: 5px;\r\n    background: #ddd;\n}\nprogress[data-v-e775ee84]::-webkit-progress-value {\r\n    background-color: #34ca96;\r\n    /* Adjust to match the overall border-radius */\r\n    border-radius: 5px;\n}\nprogress[data-v-e775ee84]::-webkit-progress-bar {\r\n    background-color: #ddd;\r\n    border-radius: 5px;\n}\n.budget_box[data-v-e775ee84] {\r\n    min-width: 250px;\r\n    max-width: 250px;\r\n    min-height: 70px;\r\n    border: 2px solid;\r\n    border-radius: 10px;\r\n    border-color: #dfe1e0;\r\n    z-index: 10;\r\n    background-color: #F2E9AE;\n}\r\n\r\n/* Media query for screens less than or equal to 150px */\n@media (max-width: 550px) {\n.budget_box[data-v-e775ee84] {\r\n        min-width: 200px;\r\n        max-width: 200px;\n}\n}\r\n", ""]);
 
 // exports
 
