@@ -120,7 +120,7 @@ class PaymentVoucher extends Resource
                 return ($this->transaction_type === '2' && $this->type == '0');
             }),
             Text::make(__('Sector name'),'Sectors',function(){
-                return $this->project?->Sectors->text;
+                return $this->project?->Sectors?->text;
             }),
 
             Select::make(__(' اختر  الشركة'), "name")
