@@ -501,105 +501,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -630,7 +531,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             Sectors: [],
             newSectors: [],
             budjetSector: [],
-            totalSectorYearly: {},
+            totalSectorYearly: {
+                expenses_year: null,
+                income_year: null
+            },
             deletSectors: [],
             hasError: false,
             budgetsOfyear: 0,
@@ -788,22 +692,21 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 // Handle the responses
                                 this.totalSectorYearly = totalSectorResponse.data;
                                 this.budjetSector = budjetSectorResponse.data;
-                                console.log({ totalSectorYearly: totalSectorYearly });
-                                _context3.next = 16;
+                                _context3.next = 15;
                                 break;
 
-                            case 13:
-                                _context3.prev = 13;
+                            case 12:
+                                _context3.prev = 12;
                                 _context3.t0 = _context3["catch"](1);
 
                                 console.error("Error making POST request:", _context3.t0);
 
-                            case 16:
+                            case 15:
                             case "end":
                                 return _context3.stop();
                         }
                     }
-                }, _callee3, this, [[1, 13]]);
+                }, _callee3, this, [[1, 12]]);
             }));
 
             function getSectorstatistics(_x) {

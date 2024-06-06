@@ -3449,7 +3449,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", { staticStyle: { width: "10%" } }, [_vm._v("التاريخ")]),
       _vm._v(" "),
-      _c("th", [_vm._v("تم")]),
+      _c("th", [_vm._v("حالة المهمه")]),
       _vm._v(" "),
       _c("th", [_vm._v("حذف")])
     ])
