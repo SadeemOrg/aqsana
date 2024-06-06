@@ -111,6 +111,7 @@ class HomeController extends Controller
             $date_to = $year . '-' . $month . '-31';
             $from = date($date_from);
             $to = date($date_to);
+            dump("from",$from);
             $Transactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type", '1')->where('is_delete', '0')->get();
             $spendingTransactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type", '2')->where('is_delete', '0')->get();
 
