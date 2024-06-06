@@ -13,7 +13,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 -mt-14 px-2" id="printJS-table">
         <div class="flex flex-row items-center justify-center mx-8 mt-12">
             <img class="sm:h-[170px] w-[90%]"
-                src="https://media.discordapp.net/attachments/938405759996276806/1060518737767309342/iuktui.png?width=1440&height=302"
+            src="{{ asset('/assets/image/iuktui.png') }}"
                 alt="alaqsa Logo">
         </div>
         <div class="flex sm:flex-row flex-col-reverse items-center justify-between ">
