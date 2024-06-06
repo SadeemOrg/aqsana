@@ -38,6 +38,7 @@ use Laravel\Nova\Fields\HasMany;
 use MyApp\BillingSchedule\BillingSchedule;
 use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 use Pdmfc\NovaFields\ActionButton;
+use PosLifestyle\DateRangeFilter\DateRangeFilter;
 use Whitecube\NovaFlexibleContent\Flexible;
 
 class PaymentVoucher extends Resource
@@ -118,17 +119,9 @@ class PaymentVoucher extends Resource
             BelongsTo::make(__('الشركة'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
                 return ($this->transaction_type === '2' && $this->type == '0');
             }),
-
-
-            Select::make(__("type"), "type")->options([
-                '0' => __('the Payment Voucher'),
-                '1' => __('project'),
-                '2' => __('qawael'),
-                '3' => __('trip'),
-            ])->hideWhenCreating()->hideWhenUpdating()->singleSelect(),
-
-
-
+            Text::make(__('Sector name'),'Sectors',function(){
+                return $this->project?->Sectors->text;
+            }),
 
             Select::make(__(' اختر  الشركة'), "name")
                 ->options(function () {
@@ -179,7 +172,7 @@ class PaymentVoucher extends Resource
                 '3' => __('bit'),
                 '4' => __('hawale'),
                 // '5' => __('Other'),
-            ])->default('1'),
+            ])->default('1')->displayUsingLabels(),
             NovaDependencyContainer::make([
                 Text::make(__('transact amount pay'), 'transact_amount')->rules('required'),
 
@@ -390,6 +383,8 @@ class PaymentVoucher extends Resource
             new Transactionproject(),
             new TransactionSectors(),
             new PaymentVoucherCompany(),
+            new DateRangeFilter(__("transaction_date"), "transaction_date"),
+
         ];
     }
 
