@@ -137,7 +137,7 @@ class Donation extends Resource
                 $keyValueArray = ['key1' => $this->ref_id, 'key2' => $this->transaction_date];
 
                 return $keyValueArray;
-            })->hideFromDetail()->hideFromIndex(),
+            })->hideFromDetail()->hideFromIndex()->rules('required')->sortable(),
 
 
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
