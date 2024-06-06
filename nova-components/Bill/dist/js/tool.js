@@ -809,9 +809,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   send: function send(event) {
     axios.get("/SendMail", {
-      Mail: this.mail,
-      id: this.id
-    });
+        params: {
+          Mail: this.mail,
+          id: this.id
+        }
+      })
   },
   sendToAlaqsa: function sendToAlaqsa() {
     axios.post("/SendMail", {
