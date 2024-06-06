@@ -83,9 +83,9 @@ class Project extends Model
     {
         return $this->belongsToMany(Area::class,'project_area')->withTimestamps();
     }
-    public function City()
+    public function CityProject()
     {
-        return $this->belongsToMany(City::class,'project_city')->withTimestamps();
+        return $this->belongsTo(City::class, 'city');
     }
 
 

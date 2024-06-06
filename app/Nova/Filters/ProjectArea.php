@@ -52,11 +52,15 @@ class ProjectArea extends Filter
      */
     public function options(Request $request)
     {
-        $Areas = Area::all();
-        $foo = array();
-        $foo['الكل']='non';
-        foreach ($Areas as $Area)
-        $foo[$Area->name]=$Area->id;
-        return $foo;
+        // $Areas = Area::all();
+        // $foo = array();
+        // $foo['الكل']='non';
+        // foreach ($Areas as $Area)
+        // $foo[$Area->name]=$Area->id;
+        // return $foo;
+        return [
+            'Administrator' => 'admin',
+            'Editor' => 'editor',
+        ];
     }
 }
