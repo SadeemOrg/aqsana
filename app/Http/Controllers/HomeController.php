@@ -82,6 +82,53 @@ class HomeController extends Controller
 
         return $schedule;
     }
+    public function schedulelastTest()
+    {
+
+        // $test = Transaction::where([
+        //     ['transaction_status', 3],
+        //     ['main_type', 1],
+        //     ['is_delete', 0],
+        // ])->sum('equivelant_amount');
+        // $Transactions = Transaction::where("main_type", '1')->where('is_delete', '0')->sum('equivelant_amount');
+
+
+        // dd($test,$Transactions);
+
+
+        $year = Carbon::now()->year;
+        $month = Carbon::now()->month;
+
+        $date_from = $year . '-' . $month . '-1';
+        $from = date($date_from);
+
+        $date = Carbon::parse($from)->subYear();
+        $schedule = array();
+        for ($i = 0; $i < 12; $i++) {
+            $year = $date->year;
+            $month = $date->month;
+            $date_from = $year . '-' . $month . '-1';
+            $date_to = $year . '-' . $month . '-31';
+            $from = date($date_from);
+            $to = date($date_to);
+            $Transactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type", '1')->where('is_delete', '0')->get();
+            $spendingTransactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type", '2')->where('is_delete', '0')->get();
+
+
+            $pus = array(
+                "month" => $month,
+                "year" =>  $year,
+                "spendingTransactions" => $spendingTransactions,
+                "Transactions" =>   $Transactions
+            );
+
+            array_push($schedule, $pus);
+
+            $date = $date->addMonth();
+        }
+        dd($schedule);
+        return $schedule;
+    }
     public function StartTimerWorkHours(Request $request)
     {
 
