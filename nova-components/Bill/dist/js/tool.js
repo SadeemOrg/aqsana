@@ -808,7 +808,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     window.location.href = "http://siwei.me";
   },
   send: function send(event) {
-    axios.post("/SendMail", {
+    axios.get("/SendMail", {
       Mail: this.mail,
       id: this.id
     });
