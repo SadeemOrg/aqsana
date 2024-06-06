@@ -18,6 +18,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Select;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Laraning\NovaTimeField\TimeField;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
 
 class events extends Resource
@@ -119,7 +120,7 @@ class events extends Resource
                     Text::make(__('name'), 'name'),
                     Text::make(__('phone_number'), 'phone_number'),
                 ]),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
 
         ];

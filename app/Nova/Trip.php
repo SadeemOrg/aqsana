@@ -53,6 +53,7 @@ use Laravel\Nova\Fields\Markdown;
 use Pdmfc\NovaFields\ActionButton;
 
 use Fourstacks\NovaRepeatableFields\Repeater;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
 
 class Trip extends Resource
@@ -599,7 +600,7 @@ class Trip extends Resource
             HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
             HasMany::make(__('TripBooking'), 'TripBooking', \App\Nova\TripBooking::class),
             belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }

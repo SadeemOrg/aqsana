@@ -17,6 +17,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Actions\ActionResource;
 use Techouse\SelectAutoComplete\SelectAutoComplete as Select;
 use Whitecube\NovaFlexibleContent\Flexible;
 
@@ -202,7 +203,7 @@ class City extends Resource
                     ]),
                 BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+                HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
             ];
 
@@ -223,7 +224,7 @@ class City extends Resource
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             // hasMany::make('User','User'),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }

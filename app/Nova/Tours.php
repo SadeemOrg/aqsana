@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Models\TelephoneDirectory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\HasMany;
@@ -104,7 +105,7 @@ class Tours extends Resource
                 ->creationRules('date_format:"H:i"')
                 ->help('hh:mm'),
             Textarea::make(__('note'), 'note'),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }

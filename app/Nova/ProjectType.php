@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -75,7 +76,7 @@ class ProjectType extends Resource
 
 
                 ])->displayUsingLabels(),
-                HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+                HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }

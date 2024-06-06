@@ -23,6 +23,7 @@ use Laravel\Nova\Fields\Image;
 use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Acme\MultiselectField\Multiselect;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
 
 class receiptVoucher extends Resource
@@ -125,7 +126,7 @@ class receiptVoucher extends Resource
             ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
 
 
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
 
 

@@ -17,6 +17,7 @@ use Laravel\Nova\Fields\Number;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Epartment\NovaDependencyContainer\ActionHasDependencies;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
 
 class Transaction extends Resource
@@ -100,7 +101,7 @@ class Transaction extends Resource
 
             Date::make('date', 'transaction_date'),
 
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
 
 

@@ -13,6 +13,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Validation\ValidationException;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
 
 class TripBooking extends Resource
@@ -77,7 +78,7 @@ class TripBooking extends Resource
             Text::make(__('reservation_amount'), 'reservation_amount'),
 
 
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\HasMany;
@@ -72,7 +73,7 @@ class Sector extends Resource
             Text::make(__('main text'),'text'),
             Text::make(__('sup text'),'sup_text'),
             Image::make(__('Image'),'img')->disk('public')->deletable(),
-            HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }

@@ -11,6 +11,7 @@ use App\Nova\Actions\ReadMessage;
 use AwesomeNova\Cards\FilterCard;
 use App\Nova\Filters\StateFilter;
 use App\Nova\Filters\ReadMessageFilters;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Pdmfc\NovaFields\ActionButton;
@@ -108,7 +109,7 @@ public static function groupOrder() {
 
            DateTime::make(__('Created At'),'created_at'),
 
-           HasMany::make(__("ActionEvents"), "ActionEvents", \App\Nova\ActionEvents::class)
+           HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }
