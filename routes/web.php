@@ -224,7 +224,6 @@ Route::get('originalbill/{id}', [HomeController::class, 'originalbillbills'])->n
 Route::get('bill/{id}', [HomeController::class, 'bills'])->name('bill');
 Route::get('/mainbill/{id}', [HomeController::class, 'mainbill'])->name('mainbill');
 Route::get('/SendMail', [HomeController::class, 'SendMail'])->name('SendMail');
-Route::post('/SendMail', [HomeController::class, 'SendMail'])->name('SendMail');
 
 // Route::get('bill', [HomeController::class, 'billsPdf']);
 
