@@ -47,7 +47,7 @@ use function Clue\StreamFilter\fun;
 use Titasgailius\SearchRelations\SearchesRelations;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
-
+use PosLifestyle\DateRangeFilter\DateRangeFilter;
 
 class Donation extends Resource
 {
@@ -435,7 +435,9 @@ class Donation extends Resource
             new AlhisalatColect(),
             new Transactionproject(),
             new TransactionSectors(),
-            new PaymentType()
+            new PaymentType(),
+            new DateRangeFilter(__("transaction_date"), "transaction_date"),
+
         ];
     }
 
