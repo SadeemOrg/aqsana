@@ -123,7 +123,7 @@ Route::post("user", [HomeController::class, "user"])->name('user');
 Route::post("users", [HomeController::class, "users"])->name('users');
 Route::post("UserAdmin", [HomeController::class, "Admin"])->name('Admin');
 
-Route::get("schedulelast", [HomeController::class, "schedulelast"])->name('schedulelast');
+Route::post("schedulelast", [HomeController::class, "schedulelast"])->name('schedulelast');
 
 Route::get('/export', 'ExportController@export')->name('export');
 Route::get('/delete-all-data', 'ExportController@deleteAllData')->name('delete.all.data');
