@@ -34,6 +34,14 @@ use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
+    private   function getDaysInMonth($year, $month) {
+        // Create a Carbon date object for the first day of the given month and year
+        $date = Carbon::createFromDate($year, $month, 1);
+
+        // Use Carbon's daysInMonth property to get the number of days in the month
+        return $date->daysInMonth;
+    }
+
 
     public function schedulelast()
     {
@@ -53,7 +61,7 @@ class HomeController extends Controller
             $year = $date->year;
             $month = $date->month;
             $date_from = $year . '-' . $month . '-1';
-            $date_to = $year . '-' . $month . '-31';
+            $date_to = $year . '-' . $month . '-'.$this->getDaysInMonth($year, $month);
             $from = date($date_from);
             $to = date($date_to);
 
@@ -92,7 +100,7 @@ class HomeController extends Controller
             $year = $date->year;
             $month = $date->month;
             $date_from = $year . '-' . $month . '-1';
-            $date_to = $year . '-' . $month . '-30';
+            $date_to = $year . '-' . $month . '-'.$this->getDaysInMonth($year, $month);
             $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where("main_type", '1')->where('is_delete', '0')->get();
