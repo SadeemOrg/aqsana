@@ -29,7 +29,9 @@ class Transactionproject extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('ref_id',$value);
+
+        $Project= Project::where('project_name',$value)->first();
+        return $query->where('ref_id',$Project->id);
     }
 
     /**
@@ -43,7 +45,7 @@ class Transactionproject extends Filter
         $Projects = Project::all();
         $foo = array();
         foreach ($Projects as $Projec)
-            $foo[$Projec->project_name] = $Projec->id;
+            $foo[$Projec->project_name] = $Projec->project_name;
         return $foo;
     }
 }

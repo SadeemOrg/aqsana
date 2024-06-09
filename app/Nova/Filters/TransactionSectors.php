@@ -29,7 +29,10 @@ class TransactionSectors extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('sector',$value);
+
+
+        $Sector =Sector::where('text',$value)->first();
+        return $query->where('sector',$Sector->id);
     }
 
     /**
@@ -43,7 +46,7 @@ class TransactionSectors extends Filter
         $Sectors = Sector::all();
         $foo = array();
         foreach ($Sectors as $Sector)
-            $foo[$Sector->text] = $Sector->id;
+          $foo[$Sector->text] = $Sector->text;
         return $foo;
     }
 }

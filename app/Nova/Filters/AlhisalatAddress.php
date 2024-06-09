@@ -2,21 +2,24 @@
 
 namespace App\Nova\Filters;
 
-use App\Models\City;
+use App\Models\address;
+use App\Models\TelephoneDirectory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
 
-class Reportcity extends Filter
+class AlhisalatAddress extends Filter
 {
+
+    public  function name()
+    {
+        return __('العنوان');
+    }
     /**
      * The filter's component.
      *
      * @var string
      */
-    public  function name()
-    {
-        return __('مدينة');
-    }
     public $component = 'searchable-select-filter';
 
     /**
@@ -29,12 +32,8 @@ class Reportcity extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        if($value=="الكل" )
-        { return $query;}
-        $City =City::where('name',$value)->first();
-
-        return $query->where('city', $City->id);
-
+        $address = address::where('name_address', $value)->where('type', '2')->first();
+        return $query->where('address_id', $address->id);
     }
 
     /**
@@ -45,11 +44,12 @@ class Reportcity extends Filter
      */
     public function options(Request $request)
     {
-        $Areas = City::all();
-        $foo = array();
-        $foo['الكل']='الكل';
-        foreach ($Areas as $Area)
-        $foo[$Area->name]=$Area->name;
-        return $foo;
+        $addresses =  address::where('type', '2')->get();
+        $address_type_array =  array();
+        foreach ($addresses as $address) {
+            $address_type_array += [$address['name_address'] => ($address['name_address'])];
+        }
+
+        return $address_type_array;
     }
 }

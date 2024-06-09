@@ -64,6 +64,7 @@ class HomeController extends Controller
             $date_to = $year . '-' . $month . '-31';
             $from = date($date_from);
             $to = date($date_to);
+
             $Transactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type", '1')->where('is_delete', '0')->sum('equivelant_amount');
             $spendingTransactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type", '2')->where('is_delete', '0')->sum('equivelant_amount');
 
@@ -112,7 +113,7 @@ class HomeController extends Controller
             $from = date($date_from);
             $to = date($date_to);
             dump("from",$from);
-            $Transactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type", '1')->where('is_delete', '0')->get();
+            $Transactions = Transaction::where("main_type", '1')->where('is_delete', '0')->get();
             $spendingTransactions = Transaction::whereBetween('transaction_date', [$from, $to])->where("main_type", '2')->where('is_delete', '0')->get();
 
 
@@ -458,15 +459,19 @@ class HomeController extends Controller
 
             $year = $request->year;
             $firstDayOfYear = Carbon::createFromDate($year, 1, 1)->startOfDay();
+            $existingProjects = Project::where('project_name', 'حصلات ' . $request->year)->get();
+            if ($existingProjects->isEmpty()) {
+                $project = new Project();
+                $project->project_type = 1;
+                $project->project_name = 'حصلات ' . $request->year;
+                $project->project_describe = 'حصلات ' . $request->year;
+                $project->sector = 11;
+                $project->start_date = $firstDayOfYear;
 
-            $Project = new Project();
-            $Project->project_type = 1;
-            $Project->project_name = 'حصلات ' . $request->year;
-            $Project->project_describe = 'حصلات' . $request->year;
-            $Project->sector = 11;
-            $Project->start_date = $firstDayOfYear;
+                $project->save();
+            }
 
-            $Project->save();
+
         }
 
 
@@ -602,7 +607,7 @@ class HomeController extends Controller
         $Sectors = Sector::whereHas('budget', function ($query) use ($sectoryear) {
             $query->where('year', '=', $sectoryear)
                 ->where('budget', '>', 0);
-        })->get();
+        })->orWhereIn('id', [7, 11])->get();
 
         foreach ($Sectors as $key => $Sector) {
             $Budgets = Budget::where([

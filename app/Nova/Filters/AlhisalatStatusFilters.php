@@ -28,9 +28,22 @@ class AlhisalatStatusFilters extends Filter
     }
     public function apply(Request $request, $query, $value)
     {
-        if($value=="non" )
-        { return $query;}
-        return $query->where('status',$value);
+        if ($value == "الكل") {
+            return $query;
+        }
+        switch ($value) {
+            case __('الكل'):
+                return $query;
+            case __('تم  الوضع '):
+                return $query->where('status', '=', 1);
+            case __('تم جمع '):
+                return $query->where('status', '=', 2);
+            case  __('تم التسليم'):
+                return $query->where('status', '=', 3);
+            case __('تم العد'):
+                return $query->where('status', '=', 4);
+            default:
+        }
     }
 
     /**
@@ -42,12 +55,12 @@ class AlhisalatStatusFilters extends Filter
     public function options(Request $request)
     {
 
-            return [
-                __('الكل') => 'non',
-                __('تم  الوضع ') => '1',
-                __('تم جمع ') => '2',
-                __('تم التسليم') => '3',
-                __('تم العد') => '4',
+        return [
+            __('الكل') => 'الكل',
+            __('تم  الوضع ') => __('تم  الوضع '),
+            __('تم جمع ') => __('تم جمع '),
+            __('تم التسليم') => __('تم التسليم'),
+            __('تم العد') => __('تم العد'),
 
 
 
