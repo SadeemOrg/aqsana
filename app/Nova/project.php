@@ -154,7 +154,6 @@ class Project extends Resource
                     return $Area_type_admin_array;
                 })->singleSelect()->rules('required')->hideFromIndex()->hideFromDetail(),
 
-            BelongsTo::make(__('admin'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
             HasMany::make(__('Volunteer'), 'Volunteer', \App\Nova\Volunteer::class),
             belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
