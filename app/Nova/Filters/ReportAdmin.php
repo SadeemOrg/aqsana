@@ -2,6 +2,7 @@
 
 namespace App\Nova\Filters;
 
+use App\Models\TelephoneDirectory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
@@ -11,7 +12,7 @@ class ReportAdmin extends Filter
 
     public  function name()
     {
-        return __('Project Officer');
+        return __('مندوب');
     }
     /**
      * The filter's component.
@@ -30,7 +31,9 @@ class ReportAdmin extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('admin_id',$value);
+        $user =TelephoneDirectory::where('name',$value)->first();
+
+        return $query->where('admin_id',$user->id);
     }
 
     /**
@@ -41,10 +44,10 @@ class ReportAdmin extends Filter
      */
     public function options(Request $request)
     {
-        $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+        $users =  TelephoneDirectory::whereJsonContains('type',  '3')->get();
         $user_type_admin_array =  array();
         foreach ($users as $user) {
-            $user_type_admin_array += [$user['name'] => ($user['id'])];
+            $user_type_admin_array += [$user['name'] => ($user['name'])];
         }
 
         return $user_type_admin_array;

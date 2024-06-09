@@ -179,6 +179,10 @@
     display: flex;
     justify-content: flex-start;
 }
+.search-input-trigger {
+    position: relative; /* or any other positioning you want */
+    /* Add other styles as needed */
+}
   </style>
 
     <script>

@@ -30,7 +30,7 @@ class ReportArea extends Filter
     public function apply(Request $request, $query, $value)
     {
 
-        if($value=="non" )
+        if($value=="الكل" )
         { return $query;}
         $Area =Area::where('name',$value)->first();
 
@@ -48,7 +48,7 @@ class ReportArea extends Filter
     {
         $Areas = Area::all();
         $foo = array();
-        $foo['الكل']='non';
+        $foo['الكل']='الكل';
         foreach ($Areas as $Area)
         $foo[$Area->name]=$Area->name;
         return $foo;

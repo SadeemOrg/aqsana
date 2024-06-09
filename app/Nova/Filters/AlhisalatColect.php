@@ -28,9 +28,17 @@ class AlhisalatColect extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        if($value=="non" )
-        { return $query;}
-        return $query->where('transaction_status','=',$value);
+        switch ($value) {
+            case __('الكل'):
+                return $query;
+            case __('Not Receive yet'):
+                return $query->where('transaction_status', '=', 1);
+            case __('in a box'):
+                return $query->where('transaction_status', '=',2);
+            case __('in the bank'):
+                return $query->where('transaction_status', '=', 3);
+            default:
+        }
     }
 
     /**
@@ -42,10 +50,10 @@ class AlhisalatColect extends Filter
     public function options(Request $request)
     {
         return [
-            __('الكل') => 'non',
-            __('Not Receive yet') => 1,
-            __('in a box') => 2,
-            __('in the bank') => 3,
+            __('الكل') => __('الكل'),
+            __('Not Receive yet') => __('Not Receive yet'),
+            __('in a box') =>  __('in a box'),
+            __('in the bank') =>  __('in the bank'),
 
         ];
     }

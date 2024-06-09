@@ -27,7 +27,26 @@ class PaymentType extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('Payment_type',$value);
+        switch($value) {
+            case __('cash'):
+                return $query->where('Payment_type',1);
+                break;
+            case __('shek'):
+                return $query->where('Payment_type',2);
+                break;
+            case __('bit'):
+                return $query->where('Payment_type',3);
+                break;
+            case __('hawale'):
+                return $query->where('Payment_type',4);
+                break;
+            case __('حصالة'):
+                return $query->where('Payment_type',5);
+                break;
+            default:
+                return __('Unknown payment method');
+        }
+
     }
 
     /**
@@ -40,12 +59,12 @@ class PaymentType extends Filter
     {
         return [
 
-            __('cash') => '1',
-            __('shek') => '2',
-            __('bit') => '3',
-            __('hawale') => '4',
-            __('pay pal') => '5',
-            __('حصالة') => '6'
+            __('cash') => __('cash'),
+            __('shek') =>  __('shek') ,
+            __('bit') => __('bit'),
+            __('hawale') => __('hawale'),
+            __('pay pal') => __('pay pal'),
+            __('حصالة') =>  __('حصالة')
         ];
     }
 }

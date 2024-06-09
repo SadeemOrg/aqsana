@@ -32,7 +32,9 @@ class AlhisalatCite extends Filter
 
         return $query->whereHas('address', function ($query) use ($value) {
             $query->whereHas('City', function ($query) use ($value) {
-                $query->where('id', $value); // Adjust the column name as needed
+                $City =City::where('name',$value)->first();
+
+                $query->where('id', $City->id); // Adjust the column name as needed
             });
         });
     }
@@ -49,7 +51,7 @@ class AlhisalatCite extends Filter
         $foo = array();
         $foo['الكل']='non';
         foreach ($Areas as $Area)
-        $foo[$Area->name]=$Area->id;
+        $foo[$Area->name]=$Area->name;
         return $foo;
     }
 }
