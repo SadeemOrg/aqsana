@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 import { useRoute } from "vue-router";
 
 export default {
@@ -94,11 +96,35 @@ export default {
 
       window.location.href = "http://siwei.me";
     },
-    send(event) {
-      axios.post("/SendMail", {
-        Mail: this.mail,
-        id: this.id,
-      });
+    async send(event) {
+      toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      };
+
+      try {
+        await axios.post("/SendMail", {
+          Mail: this.mail,
+          id: this.id,
+        });
+        toastr.success('تم إرسال البريد الإلكتروني بنجاح');
+      } catch (error) {
+        toastr.error('حدث خطأ أثناء إرسال البريد الإلكتروني');
+        console.error(error);
+      }
     },
     sendToAlaqsa() {
       axios.post("/SendMail", {
