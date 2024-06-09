@@ -29,7 +29,8 @@ export default {
             projectshow: false,
             items: [],
             Sectors: [],
-            value2:null
+            value2:null,
+            selectedDate:null,
         };
     },
 

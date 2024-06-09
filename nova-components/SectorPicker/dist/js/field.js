@@ -440,7 +440,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             projectshow: false,
             items: [],
             Sectors: [],
-            value2: null
+            value2: null,
+            selectedDate: null
         };
     },
 
