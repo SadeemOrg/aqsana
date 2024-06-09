@@ -232,7 +232,18 @@ class QawafilAlaqsa extends Resource
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
                         $id = Auth::id();
-                        $addresss =  \App\Models\address::where('type', '1')->get();
+
+                        $user = Auth::user();
+                        $userRoles = $user->userrole();
+                        if (in_array("super-admin", $userRoles)) {
+                            $addresss =  \App\Models\address::where('type', '1')->get();
+                        } else {
+                            $city =   City::where('admin_id', $id)
+                                ->select('id')->first();
+                            $addresss =  \App\Models\address::where('type', '1')->where('city_id', $city->id)->get();
+                        }
+
+
                         $address_type_admin_array =  array();
 
                         foreach ($addresss as $address) {
