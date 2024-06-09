@@ -509,7 +509,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
         PureVueChart: __WEBPACK_IMPORTED_MODULE_1_pure_vue_chart___default.a,
@@ -576,7 +575,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var sumBud = 0;
             this.newSectors.forEach(function (element) {
                 if (element["Budget"]) {
-
                     sumBud += parseInt(element["Budget"]);
                 }
             });
@@ -11361,7 +11359,7 @@ var render = function() {
                         on: {
                           submit: function($event) {
                             $event.preventDefault()
-                            return _vm.onSubmit.apply(null, arguments)
+                            return _vm.savenew.apply(null, arguments)
                           }
                         }
                       },
@@ -11439,28 +11437,7 @@ var render = function() {
                                 staticClass:
                                   "md:flex md:items-center w-full justify-end"
                               },
-                              [
-                                _c("div", { staticClass: "md:w-2/3" }, [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass:
-                                        "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
-                                      attrs: { type: "submit" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.savenew()
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                            حفظ\n                                        "
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ]
+                              [_vm._m(0)]
                             )
                           : _vm._e()
                       ]
@@ -11733,7 +11710,28 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-2/3" }, [
+      _c(
+        "button",
+        {
+          staticClass:
+            "shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded",
+          attrs: { type: "submit" }
+        },
+        [
+          _vm._v(
+            "\n                                            حفظ\n                                        "
+          )
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
