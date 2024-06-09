@@ -41,7 +41,9 @@
         "build-sector-picker": "cd nova-components/SectorPicker && npm run dev",
         "build-sector-picker-prod": "cd nova-components/SectorPicker && npm run prod",
         "build-project-picker": "cd nova-components/ProjectPicker && npm run dev",
-        "build-project-picker-prod": "cd nova-components/ProjectPicker && npm run prod"
+        "build-project-picker-prod": "cd nova-components/ProjectPicker && npm run prod",
+        "build-number-field": "cd nova-components/NumberField && npm run dev",
+        "build-number-field-prod": "cd nova-components/NumberField && npm run prod"
     },
     "devDependencies": {
         "@popperjs/core": "^2.10.2",

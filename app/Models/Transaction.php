@@ -97,14 +97,12 @@ class Transaction extends Model implements HasMedia
     {
         return $this->belongsTo('App\Models\TelephoneDirectory','name');
     }
-    public function BusesCompany()
-    {
-        return $this->belongsTo('App\Models\BusesCompany','name');
-    }
+
     public function company()
     {
-        return $this->belongsTo(BusesCompany::class,'name');
+        return $this->belongsTo(BusesCompany::class, 'name');
     }
+
 
 
     public function ActionEvents()

@@ -1,105 +1,60 @@
 <?php
 
+
 namespace App\Nova;
 
-use App\Models\Area;
-
-
-use App\Models\City;
-use Laravel\Nova\Actions\Action;
+use App\Models\{
+    City,
+    Address,
+    Bus,
+};
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Date;
-use Laraning\NovaTimeField\TimeField;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use Acme\MultiselectField\Multiselect as Select;
-use Acme\MultiselectField\Multiselect;
-use App\Nova\Actions\ApprovalRejectProjec;
-use App\Nova\Actions\ProjectStatu;
-use Illuminate\Support\Facades\Auth;
-use App\Nova\Filters\Projectapproval;
-use App\Models\ProjectType;
-use Illuminate\Support\Facades\DB;
-use Laravel\Nova\Fields\hasOne;
-use Whitecube\NovaGoogleMaps\GoogleMaps;
-use Yassi\NestedForm\NestedForm;
-use Laravel\Nova\Fields\BelongsToMany;
-use Techouse\SelectAutoComplete\SelectAutoComplete;
-
-use AwesomeNova\Cards\FilterCard;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\Image;
-use Halimtuhu\ArrayImages\ArrayImages;
-use Ajhaupt7\ImageUploadPreview\ImageUploadPreview;
-// use App\Console\Commands\ProjectStartEnd;
-// use App\CPU\Helpers;
-use App\Models\address;
-use Laravel\Nova\Fields\BelongsTo;
-use Manogi\Tiptap\Tiptap;
-use Waynestate\Nova\CKEditor;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
-use Epartment\NovaDependencyContainer\NovaDependencyContainer;
-use App\Models\Bus;
-use App\Models\BusesCompany;
-use App\Models\Notification;
-use App\Models\User;
-use App\Nova\Actions\AddBus;
-use Benjacho\BelongsToManyField\BelongsToManyField;
-
-use Whitecube\NovaFlexibleContent\Flexible;
-use Gwd\FlexibleContent\FlexibleContent;
-
-use Laravel\Nova\Panel;
-use App\Nova\Actions\ChangeRole;
-use App\Nova\Actions\ProjectStartEnd;
-use App\Nova\Filters\ProjectArea;
-use App\Nova\Filters\ProjectSectors;
-use App\Nova\Filters\ReportAdmin;
-use App\Nova\Filters\ReportArea;
-use App\Nova\Filters\Reportcity;
-use App\Nova\Filters\ReportCreated;
-use App\Nova\Filters\ReportName;
-use App\Nova\Metrics\NewQawafilAlaqsa;
-use App\Rules\QawafilAlaqsaDate;
-use Laravel\Nova\Fields\Markdown;
-use Pdmfc\NovaFields\ActionButton;
-use Fourstacks\NovaRepeatableFields\Repeater;
-use Laravel\Nova\Fields\HasMany;
-use Mauricewijnia\NovaMapsAddress\MapsAddress;
+use Illuminate\Support\Facades\{
+    Auth,
+    DB
+};
 use Carbon\Carbon;
+use Laravel\Nova\{
+    Fields\ID,
+    Fields\Number,
+    Fields\Text,
+    Fields\Textarea,
+    Fields\Boolean,
+    Fields\DateTime,
+    Fields\BelongsTo,
+    Fields\BelongsToMany,
+    Fields\HasMany,
+    Panel,
+    Http\Requests\NovaRequest,
+    Resource
+};
 use Laravel\Nova\Actions\ActionResource;
+use Acme\MultiselectField\Multiselect as Select;
+use Benjacho\BelongsToManyField\BelongsToManyField;
+use Whitecube\NovaFlexibleContent\Flexible;
 use OptimistDigital\NovaDetachedFilters\NovaDetachedFilters;
 use PosLifestyle\DateRangeFilter\DateRangeFilter;
-
-use function Clue\StreamFilter\fun;
+use Pdmfc\NovaFields\ActionButton;
+use App\Nova\Actions\{
+    ApprovalRejectProjec,
+    ProjectStartEnd
+};
+use App\Nova\Filters\{
+    ReportAdmin,
+    ReportArea,
+    Reportcity,
+    ReportCreated,
+    ReportTripFrom
+};
+use App\Rules\QawafilAlaqsaDate;
 
 class QawafilAlaqsa extends Resource
 {
-    /**
-     * The model the resource corresponds to.
-     *
-     * @var string
-     */
     public static $model = \App\Models\Project::class;
     public static $priority = 2;
-    /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
     public static $title = 'project_name';
+    public static $search = ['id', 'project_name', 'project_describe'];
 
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
-    public static $search = [
-        'id',
-    ];
     public static function createButtonLabel()
     {
         return 'انشاء قافلة';
@@ -109,39 +64,42 @@ class QawafilAlaqsa extends Resource
     {
         return __('Qawafil');
     }
+
     public static function group()
     {
         return __('QawafilAlaqsa');
     }
+
     public static function groupOrder()
     {
         return 1;
     }
+
     public static function availableForNavigation(Request $request)
     {
-        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("QawafilAlaqsaparmation",  $request->user()->userrole()))) {
-            return true;
-        } else return false;
+        $userRoles = $request->user()->userrole();
+        return in_array("super-admin", $userRoles) || in_array("QawafilAlaqsaparmation", $userRoles);
     }
-    /**
-     * Get the fields displayed by the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
+
     public static function indexQuery(NovaRequest $request, $query)
     {
-        if ((in_array("super-admin",  $request->user()->userrole()))) {
-            return $query->where('project_type', '2');
-        } else  return $query->where('project_type', '2')->where('city', $request->user()->city);
+        $userRoles = $request->user()->userrole();
+        $query = $query->where('project_type', '2');
+
+        if (!in_array("super-admin", $userRoles)) {
+            $query = $query->where('city', $request->user()->city);
+        }
+
+        return $query;
     }
+
     public function fields(Request $request)
     {
         return [
             (new Panel(__('main'), [
                 ID::make(__('ID'), 'id')->sortable(),
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, [ $this->id])
+                    ->action(ProjectStartEnd::class, [$this->id])
                     ->text(__('لم يبدا بعد'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -159,7 +117,7 @@ class QawafilAlaqsa extends Resource
                     ->hideWhenCreating()->hideWhenUpdating(),
 
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, [ $this->id])
+                    ->action(ProjectStartEnd::class, [$this->id])
                     ->text(__('فعالة'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -178,7 +136,7 @@ class QawafilAlaqsa extends Resource
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, [ $this->id])
+                    ->action(ProjectStartEnd::class, [$this->id])
                     ->text(__('اغلاق'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -203,7 +161,7 @@ class QawafilAlaqsa extends Resource
 
                     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, [ $this->id])
+                    ->action(ProjectStartEnd::class, [$this->id])
                     ->text(__('مغلق'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -226,7 +184,7 @@ class QawafilAlaqsa extends Resource
 
                     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, [ $this->id])
+                    ->action(ProjectStartEnd::class, [$this->id])
                     ->text(__('مفتوحة'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -311,7 +269,7 @@ class QawafilAlaqsa extends Resource
 
 
 
-                Boolean::make(__('is_has_Donations'), 'is_donation'),
+                Boolean::make(__('is_has_Donations'), 'is_donation')->hideFromIndex(),
 
 
 
@@ -319,7 +277,7 @@ class QawafilAlaqsa extends Resource
 
 
                 BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-                BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+                BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating()->hideFromIndex(),
 
 
             ]))->withToolbar(),
@@ -333,7 +291,7 @@ class QawafilAlaqsa extends Resource
                     ->optionsLabel('bus_number')
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                         return null;
-                    }),
+                    })->hideFromIndex(),
                 Flexible::make(__('newbus'), 'newbus')
                     ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                         $model->$attribute = null;
@@ -351,12 +309,12 @@ class QawafilAlaqsa extends Resource
                                 }
 
                                 return $user_type_admin_array;
-                            })->singleSelect(),
+                            })->singleSelect()->rules('required'),
 
 
-                        Text::make(__("Bus Number"), "bus_number"),
+                        Text::make(__("Bus Number"), "bus_number")->rules('required'),
 
-                        Number::make(__("Number person on bus"), "number_person_on_bus")->step(1.0),
+                        Number::make(__("Number person on bus"), "number_person_on_bus")->rules('required'),
 
                         Number::make(__("seat price"), "seat_price")->step(1.0),
                         Text::make(__("Name Driver"), "name_driver"),
@@ -392,12 +350,18 @@ class QawafilAlaqsa extends Resource
             ])),
 
 
-            // HasMany::make(__('Donations'), 'Donations', \App\Nova\Donations::class),
             HasMany::make(__('TripBooking'), 'TripBooking', \App\Nova\TripBooking::class),
             belongsToMany::make(__('Bus'), 'Bus', \App\Nova\Bus::class),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
+    }
+    protected static function afterValidation(NovaRequest $request, $validator)
+    {
+
+        if (!($request->bus != '[]' || $request->newbus)) {
+            $validator->errors()->add('bus', 'يجب اضافة باصات');
+        }
     }
     public static function beforeCreate(Request $request, $model)
     {
@@ -434,11 +398,6 @@ class QawafilAlaqsa extends Resource
         address::find($request->trip_from);
         $model->city = address::find($request->trip_from)->city_id;
         $model->area = address::find($request->trip_from)->area_id;
-
-
-
-
-
         $request->request->remove('newtype');
     }
     public static function aftersave(Request $request, $model)
@@ -450,63 +409,8 @@ class QawafilAlaqsa extends Resource
             ->select('id')->first();
 
 
-        if ($request->Area) {
-            $areas = json_decode($request->Area);
-            $tokens = [];
-            foreach ($areas as $key => $area) {
-                $user = User::where('id', $area->admin_id)->first();
-                $notification = Notification::where('id', '2')->first();
 
-                if ($user->fcm_token != null && $user->fcm_token != "") {
-                    array_push($tokens, $user->fcm_token);
-                }
-            }
-            // if (!empty($tokens)) {
 
-            //     Helpers::send_notification($tokens, $notification);
-            // }
-        }
-        if ($request->City) {
-            $Citys = json_decode($request->City);
-            $tokens = [];
-            foreach ($Citys as $key => $City) {
-                $user = User::where('id', $City->admin_id)->first();
-                $notification = Notification::where('id', '2')->first();
-
-                if ($user->fcm_token != null && $user->fcm_token != "") {
-                    array_push($tokens, $user->fcm_token);
-                }
-            }
-            // if (!empty($tokens)) {
-
-            //     Helpers::send_notification($tokens, $notification);
-            // }
-        }
-
-        if ($request->Budjet) {
-
-            DB::table('transactions')
-                ->updateOrInsert(
-                    ['ref_id' => $model->id, 'ref_cite_id' => $citye['id']],
-                    [
-                        'main_type' => '2',
-                        'type' => '2',
-                        'Currency' => '3',
-                        'transact_amount' => $request->Budjet,
-                        'equivelant_amount' => $request->Budjet,
-                        'transaction_date' => $date = date('Y-m-d'),
-
-                    ]
-                );
-        }
-        if ($request->Toole) {
-
-            DB::table('project_toole')
-                ->updateOrInsert(
-                    ['project_id' => $model->id, 'city_id' => $citye['id']],
-                    ['tools' => $request->Toole]
-                );
-        }
         if ($request->bus) {
 
             $buss = json_decode($request->bus);
@@ -555,21 +459,16 @@ class QawafilAlaqsa extends Resource
         }
         if ($request->newbus) {
             $buss = $request->newbus;
-            // $to='{"country":"Israel","countryCode":"il","latlng":{"lat":31.769,"lng":35.2163},"name":"Jerusalem","query":"ontefiore Windmill Sderot Blumfield Jerusalem","type":"city","value":"Jerusalem, Israel"}';
-            // $tojsone =
-            // dd( json_decode($to));
-            // dd($tojsone );
-            // dd($request->newbus);
+
             foreach ($buss as $bus) {
-                // dd($bus['attributes']);
                 DB::table('buses')
                     ->insert(
                         [
                             'name_driver' => $bus['attributes']['name_driver'] ? $bus['attributes']['name_driver'] : "",
-                            'company_id' => $bus['attributes']['BusesCompany'],
+                            'company_id' => $bus['attributes']['BusesCompany'] ? $bus['attributes']['BusesCompany'] : "",
                             'bus_number' => $bus['attributes']['bus_number'],
-                            'number_of_seats' => $bus['attributes']['number_person_on_bus'],
-                            'seat_price' => $bus['attributes']['seat_price'],
+                            'number_of_seats' => $bus['attributes']['number_person_on_bus'] ? $bus['attributes']['number_person_on_bus'] : 50,
+                            'seat_price' => $bus['attributes']['seat_price'] ? $bus['attributes']['seat_price'] : '0',
                             'phone_number_driver' => $bus['attributes']['phone_number'] ? $bus['attributes']['phone_number'] : " ",
                             'status' => '1',
                         ]
@@ -605,6 +504,13 @@ class QawafilAlaqsa extends Resource
                 (new ReportCreated())->withMeta(['width' => 'w-1/3']),
                 (new ReportArea())->withMeta(['width' => 'w-1/3']),
                 (new Reportcity())->withMeta(['width' => 'w-1/3']),
+                (new ReportAdmin())->withMeta(['width' => 'w-1/3']),
+                (new ReportTripFrom())->withMeta(['width' => 'w-1/3']),
+                (new ReportTripFrom())->withMeta(['width' => 'w-1/3']),
+                (new DateRangeFilter(__("start"), "start_date"))->withMeta(['width' => 'w-1/3']),
+
+
+
             ]))->width('full'),
         ];
     }
@@ -621,6 +527,10 @@ class QawafilAlaqsa extends Resource
             new ReportCreated(),
             new ReportArea(),
             new Reportcity(),
+            new ReportAdmin(),
+            new ReportTripFrom(),
+            new DateRangeFilter(__("start"), "start_date"),
+
 
 
         ];

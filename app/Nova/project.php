@@ -54,7 +54,6 @@ use Laravel\Nova\Panel;
 use App\Nova\Actions\ChangeRole;
 use App\Nova\Actions\ProjectStartEnd;
 use App\Nova\Filters\ProjectSectors;
-use App\Nova\Filters\ReportAdmin;
 use App\Nova\Filters\ReportArea;
 use App\Nova\Filters\Reportcity;
 use App\Nova\Filters\ReportCreated;
@@ -165,7 +164,17 @@ class Project extends Resource
 
         ];
     }
-
+    protected static function afterValidation(NovaRequest $request, $validator)
+    {
+        $refObject = json_decode($request->ref_id);
+        if (isset($refObject->key2)) {
+            if (!$refObject->key2) {
+                $validator->errors()->add('ref_id', 'يجب اضافة مشروع');
+            }
+        } else {
+            $validator->errors()->add('ref_id', 'يجب اضافة قطاع');
+        }
+    }
 
     public static function beforeCreate(Request $request, $model)
     {
@@ -181,8 +190,6 @@ class Project extends Resource
         $model->sector = json_decode($request->ref_id)->key2;
         $request->request->remove('ref_id');
         $model->area = Area::find(City::find($request->city)->area_id)->id;
-
-
     }
 
     // public static function beforeSave(Request $request, $model)
@@ -442,14 +449,13 @@ class Project extends Resource
     public function filters(Request $request)
     {
         return [
-            new ReportAdmin(),
             new ProjectSectors(),
             new ReportCreated(),
             new ReportArea(),
             new Reportcity(),
 
 
-            new DateRangeFilter(__("start"),"start_date"),
+            new DateRangeFilter(__("start"), "start_date"),
 
 
         ];

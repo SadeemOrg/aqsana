@@ -29,11 +29,12 @@ class AlhisalatArea extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        // return $query;
 
         return $query->whereHas('address', function ($query) use ($value) {
             $query->whereHas('Area', function ($query) use ($value) {
-                $query->where('id', $value); // Adjust the column name as needed
+                $Area =Area::where('name',$value)->first();
+
+                $query->where('id', $Area->id);
             });
         });
     }
@@ -48,9 +49,9 @@ class AlhisalatArea extends Filter
     {
         $Areas = Area::all();
         $foo = array();
-        $foo['الكل']='non';
+        $foo['الكل']='الكل';
         foreach ($Areas as $Area)
-        $foo[$Area->name]=$Area->id;
+        $foo[$Area->name]=$Area->name;
         return $foo;
     }
 }

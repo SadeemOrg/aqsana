@@ -21,6 +21,7 @@ use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Laravel\Nova\Fields\DateTime;
 use Acme\MultiselectField\Multiselect;
+use Acme\NumberField\NumberField;
 use Acme\ProjectPicker\ProjectPicker;
 use App\Models\Project as ModelsProject;
 use App\Models\Sector;
@@ -32,6 +33,7 @@ use App\Nova\Actions\PrintBill;
 use App\Nova\Actions\ReceiveDonation;
 use App\Nova\Filters\AlhisalatColect;
 use App\Nova\Filters\PaymentType;
+use App\Nova\Filters\ReportCompany;
 use App\Nova\Filters\Transactionproject;
 use App\Nova\Filters\TransactionSectors;
 use App\Nova\Metrics\DonationInBank;
@@ -183,30 +185,30 @@ class Donation extends Resource
 
 
 
-            Flexible::make(__('اضافة شركة جديدة'), 'add_user')
-                ->readonly(true)
+            // Flexible::make(__('اضافة شركة جديدة'), 'add_user')
+            //     ->readonly(true)
 
-                ->hideFromDetail()->hideFromIndex()
-                ->addLayout(__('tooles'), 'Payment_type_details ', [
-                    Text::make(__('name'), "name")->rules('required'),
-                    Text::make(__('phone'), "phone"),
-                ]),
+            //     ->hideFromDetail()->hideFromIndex()
+            //     ->addLayout(__('tooles'), 'Payment_type_details ', [
+            //         Text::make(__('name'), "name")->rules('required'),
+            //         Text::make(__('phone'), "phone"),
+            //     ]),
 
 
-            Text::make(__('payment_reason'), "payment_reason")->hideFromIndex(),
-            Select::make(__("billing language"), "lang")->options([
-                '1' => __('ar'),
-                '2' => __('en'),
-                '3' => __('hr'),
-            ])->displayUsingLabels()->rules('required'),
-            Select::make(__("Payment_type"), "Payment_type")->options(
-                [
-                    '1' => __('cash'),
-                    '2' => __('shek'),
-                    '3' => __('bit'),
-                    '4' => __('hawale'),
-                ]
-            )->displayUsingLabels()->default('1')->hideFromDetail()->hideFromIndex(),
+            // Text::make(__('payment_reason'), "payment_reason")->hideFromIndex(),
+            // Select::make(__("billing language"), "lang")->options([
+            //     '1' => __('ar'),
+            //     '2' => __('en'),
+            //     '3' => __('hr'),
+            // ])->displayUsingLabels()->rules('required'),
+            // Select::make(__("Payment_type"), "Payment_type")->options(
+            //     [
+            //         '1' => __('cash'),
+            //         '2' => __('shek'),
+            //         '3' => __('bit'),
+            //         '4' => __('hawale'),
+            //     ]
+            // )->displayUsingLabels()->default('1')->hideFromDetail()->hideFromIndex(),
             Select::make(__("Payment_type"), "Payment_type")->options(
                 [
                     '1' => __('cash'),
@@ -217,13 +219,13 @@ class Donation extends Resource
                 ]
             )->displayUsingLabels()->default('1')->hideWhenCreating()->hideWhenUpdating(),
             NovaDependencyContainer::make([
-                Text::make(__('transact amount'), 'transact_amount')->rules('required'),
+                NumberField::make(__('transact amount'), 'transact_amount')->rules('required'),
             ])->dependsOn("Payment_type", '1')->hideFromDetail()->hideFromIndex(),
             NovaDependencyContainer::make([
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
                     ->addLayout(__('tooles'), 'Payment_type_details ', [
-                        Text::make(__('Doubt value'), "Doubt_value")->rules('required'),
+                        NumberField::make(__('Doubt value'), "Doubt_value")->rules('required'),
                         Text::make(__('bank number'), "bank_number"),
                         Text::make(__('Branch number'), "Branch_number"),
                         Text::make(__('account number'), "account_number"),
@@ -234,16 +236,14 @@ class Donation extends Resource
                                 return $value;
                             })->rules('required'),
 
-                    ]),
+                    ])->rules('required'),
             ])->dependsOn("Payment_type", '2')->hideFromDetail()->hideFromIndex(),
             NovaDependencyContainer::make([
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
                     ->addLayout(__('tooles'), 'Payment_type_details ', [
-                        Text::make(__('value'), "equivelant_amount")->rules('required'),
+                        NumberField::make(__('value'), "equivelant_amount")->rules('required'),
                         Text::make(__('telephone'), "telephone")->rules('required'),
-                        // Text::make(__('number of installments'), "number_of_installments"),
-
                         DateTime::make(__('History'), 'Date')
                             ->format('DD/MM/YYYY HH:mm')
                             ->resolveUsing(function ($value) {
@@ -256,8 +256,7 @@ class Donation extends Resource
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
                     ->addLayout(__('tooles'), 'Payment_type_details ', [
-                        Text::make(__('value'), "equivelant_amount")->rules('required'),
-
+                        NumberField::make(__('value'), "equivelant_amount")->rules('required'),
                         Text::make(__('bank number'), "bank_number"),
                         Text::make(__('Branch number'), "Branch_number"),
                         Text::make(__('account number'), "account_number"),
@@ -271,27 +270,34 @@ class Donation extends Resource
                     ])->rules('required'),
             ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
             NovaDependencyContainer::make([
-                Text::make(__('transact amount'), 'transact_amount')->rules('required'),
+                NumberField::make(__('transact amount'), 'transact_amount')->rules('required'),
             ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
             ActionButton::make(__('delete'))
                 ->action((new DeleteBill)->confirmText(__('Are you sure you want to delete  this?'))
                     ->confirmButtonText(__('compensation'))
-                    ->cancelButtonText(__('cancellation')), $this->id)
+                    ->cancelButtonText(__('cancellation')), [$this->id])
                 ->text(__('compensation'))->showLoadingAnimation()->readonly(function () {
                     return $this->is_delete > 0;
-                })->buttonColor('#FF0000')->svg('_Delete2')
+                })->buttonColor('#FF0000')
                 ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
+
 
             Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info'),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
 
         ];
     }
-    // public static function redirectAfterUpdate(NovaRequest $request, $resource)
-    // {
-    //     return '/resources/'.static::uriKey().'/'.$resource->getKey();
+    protected static function afterValidation(NovaRequest $request, $validator)
+    {
+        if (!json_decode($request->ref_id)->key2) {
+            $validator->errors()->add('ref_id', 'يجب اضافة مشروع');
+        }
 
-    // }
+        if (!($request->name || $request->add_user)) {
+            $validator->errors()->add('name', 'يجب اضافة شركة');
+        }
+    }
+
     public static function redirectAfterCreate(NovaRequest $request, $resource)
     {
         return '/bill?location=' . $resource->id . '&type=1';
@@ -327,9 +333,6 @@ class Donation extends Resource
         // dd($request->ReceiveDonation );
         if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
         else  $model->transaction_status = '1';
-
-
-
     }
     public static function beforesave(Request $request, $model)
     {
@@ -345,9 +348,9 @@ class Donation extends Resource
         else  $model->transaction_status = '1';
         if ($request->Payment_type == '1') {
             $model->Payment_type_details = null;
-            // dd($request->transact_amount);
             $model->equivelant_amount = $request->transact_amount;
         } elseif ($request->Payment_type == '2') {
+
             $model->transact_amount = 0;
             $amount = 0;
             foreach ($request->Payment_type_details as $key => $value) {
@@ -376,18 +379,14 @@ class Donation extends Resource
             }
 
             $model->equivelant_amount = $amount;
-
         }
-
-
     }
     public static function aftersave(Request $request, $model)
     {
         if (!$request->name && !$request->add_user) {
             DB::table('transactions')
-            ->where('id', $model->id)
-            ->update(['name' => 192 ]);
-
+                ->where('id', $model->id)
+                ->update(['name' => 192]);
         }
         if (!$request->name && $request->add_user) {
             if ($request->add_user[0]['attributes']['name']) {
@@ -436,6 +435,7 @@ class Donation extends Resource
             new Transactionproject(),
             new TransactionSectors(),
             new PaymentType(),
+            new ReportCompany(),
             new DateRangeFilter(__("transaction_date"), "transaction_date"),
 
         ];

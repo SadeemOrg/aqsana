@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Acme\Analytics\Analytics;
 use Acme\MultiselectField\Multiselect as Select;
+use Acme\NumberField\NumberField;
 use Acme\ProjectPicker\ProjectPicker;
 use App\Nova\Actions\ApprovalRejectTransaction;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
@@ -113,38 +114,20 @@ class PaymentVoucher extends Resource
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('المشروع'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            BelongsTo::make(__('الشركة'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
-                return ($this->transaction_type === '1' && $this->type == '0');
-            }),
-            BelongsTo::make(__('الشركة'), 'BusesCompany', \App\Nova\BusesCompany::class)->hideWhenCreating()->hideWhenUpdating()->canSee(function () {
-                return ($this->transaction_type === '2' && $this->type == '0');
-            }),
-            Text::make(__('Sector name'),'Sectors',function(){
-                return $this->project?->Sectors?->text;
-            })->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('company'), 'company', \App\Nova\BusesCompany::class),
 
-            Select::make(__(' اختر  الشركة'), "name")
-                ->options(function () {
-                    $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '8')->get();
-                    $i = 0;
-                    $user_type_admin_array =  array();
-                    foreach ($Users as $User) {
+            BelongsTo::make(__('Sector name'), 'Sectors', \App\Nova\Sector::class)->hideWhenCreating()->hideWhenUpdating(),
 
-
-                        $user_type_admin_array += ['T' . ($User['id']) => ($User['name'])];
-                    }
-                    $Users =  \App\Models\BusesCompany::all();
-                    foreach ($Users as $User) {
-
-
-                        $user_type_admin_array += [('B' . $User['id']) => ($User['name'])];
-                    }
-
-                    return $user_type_admin_array;
-                })
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    return null;
-                })->hideFromDetail()->hideFromIndex()->hideWhenUpdating()->singleSelect(),
+            // Select::make(__(' اختر  الشركة'), "name")
+            // ->options(function () {
+            //         $user_type_admin_array =  array();
+            //         $Users =  \App\Models\BusesCompany::all();
+            //         foreach ($Users as $User) {
+            //             $user_type_admin_array += [( $User['id']) => ($User['name'])];
+            //         }
+            //         return $user_type_admin_array;
+            //     })
+            //     ->hideFromDetail()->hideFromIndex()->singleSelect(),
 
             Flexible::make(__('اضافة شركة جديدة'), 'add_user')
                 ->limit(1)
@@ -171,10 +154,9 @@ class PaymentVoucher extends Resource
                 '2' => __('shek'),
                 '3' => __('bit'),
                 '4' => __('hawale'),
-                // '5' => __('Other'),
             ])->default('1')->displayUsingLabels(),
             NovaDependencyContainer::make([
-                Text::make(__('transact amount pay'), 'transact_amount')->rules('required'),
+                NumberField::make(__('transact amount pay'), 'transact_amount')->rules('required'),
 
             ])->dependsOn("Payment_type", '1')->hideFromIndex(),
 
@@ -182,7 +164,7 @@ class PaymentVoucher extends Resource
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
                     ->addLayout(__('tooles'), 'Payment_type_details ', [
-                        Text::make(__('Doubt value'), "Doubt_value")->rules('required'),
+                        NumberField::make(__('Doubt value'), "Doubt_value")->rules('required'),
                         Text::make(__('bank number'), "bank_number"),
                         Text::make(__('Branch number'), "Branch_number"),
                         Text::make(__('account number'), "account_number"),
@@ -199,7 +181,7 @@ class PaymentVoucher extends Resource
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
                     ->addLayout(__('tooles'), 'Payment_type_details ', [
-                        Text::make(__('value'), "equivelant_amount")->rules('required'),
+                        NumberField::make(__('value'), "equivelant_amount")->rules('required'),
                         Text::make(__('telephone'), "telephone")->rules('required'),
                         // Text::make(__('number of installments'), "number_of_installments"),
 
@@ -216,7 +198,7 @@ class PaymentVoucher extends Resource
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
 
                     ->addLayout(__('tooles'), 'Payment_type_details ', [
-                        Text::make(__('value'), "equivelant_amount")->rules('required'),
+                        NumberField::make(__('value'), "equivelant_amount")->rules('required'),
 
                         Text::make(__('bank number'), "bank_number"),
                         Text::make(__('Branch number'), "Branch_number"),
@@ -238,26 +220,22 @@ class PaymentVoucher extends Resource
 
         ];
     }
+    protected static function afterValidation(NovaRequest $request, $validator)
+    {
+        if (!json_decode($request->ref_id)->key2) {
+            $validator->errors()->add('ref_id', 'يجب اضافة مشروع');
+        }
+    }
     public static function beforeSave(Request $request, $model)
     {
-
         $model->transaction_date = json_decode($request->ref_id)->key1;
         $model->ref_id = json_decode($request->ref_id)->key2;
+
         $model->sector = ModelsProject::where('id', json_decode($request->ref_id)->key2)->first()->sector;
         $request->request->remove('ref_id');
+        $model->transaction_type = '2';
 
-        if (strpos($request->name, 'T') !== false) {
 
-            $model->transaction_type = '1';
-            $str = ltrim($request->name, 'T');
-            $model->name = $str;
-        } elseif (strpos($request->name, 'B') !== false) {
-            $model->transaction_type = '2';
-            $str = ltrim($request->name, 'B');
-            $model->name = $str;
-        } else {
-            $model->transaction_type = '1';
-        }
 
         if ($request->Payment_type == '1') {
             $model->Payment_type_details = null;

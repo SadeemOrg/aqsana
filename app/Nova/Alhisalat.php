@@ -23,6 +23,7 @@ use App\Nova\Actions\AlhisalatDelete;
 use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
 use App\Nova\Actions\AlhisalatSurrender;
+use App\Nova\Filters\AlhisalatAddress;
 use App\Nova\Filters\AlhisalatArea;
 use App\Nova\Filters\AlhisalatCite;
 use App\Nova\Filters\AlhisalatStatusFilters;
@@ -197,9 +198,8 @@ class Alhisalat extends Resource
 
                     foreach ($addresss as $address) {
 
-                        if ($address->Area == null || $this->admin_id == $address['id']) {
                             $address_type_admin_array += [$address['id'] => ($address['name_address'])];
-                        }
+
                     }
 
                     return $address_type_admin_array;
@@ -319,7 +319,8 @@ class Alhisalat extends Resource
         return [
             new AlhisalatStatusFilters(),
             new AlhisalatArea(),
-            new AlhisalatCite()
+            new AlhisalatCite(),
+            new AlhisalatAddress(),
         ];
     }
 
@@ -348,13 +349,7 @@ class Alhisalat extends Resource
 
             (new  AlhisalatSurrender),
 
-            // (new AlhisalatStatuscompleted),
-            //     ->canSee(function () {
-            //         if ($this->status == '2' ) {
-            //             return true;
-            //         }
-            //     }
-            // ),
+
             (new AlhisalatDelete),
 
         ];

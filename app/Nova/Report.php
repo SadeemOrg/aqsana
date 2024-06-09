@@ -9,7 +9,6 @@ use App\Nova\Actions\ExportReports;
 use App\Nova\Filters\CreatedBy;
 use App\Nova\Filters\DateRange;
 use App\Nova\Filters\ProjectSectors;
-use App\Nova\Filters\ReportAdmin;
 use App\Nova\Filters\ReportArea;
 use App\Nova\Filters\Reportcity;
 use App\Nova\Filters\ReportCreated;
@@ -159,7 +158,6 @@ class Report extends Resource
     public function filters(Request $request)
     {
         return [
-            new ReportAdmin(),
             new ProjectSectors(),
             new ReportCreated(),
             new ReportArea(),

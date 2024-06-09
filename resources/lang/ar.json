@@ -466,7 +466,7 @@
     "Are you sure you want to Surrender  this Alhisalat?": "هل أنت متأكد أنك تريد تسليم  هذه الحصالات؟",
     "the receipt Voucher": "سندات قبض",
     "the Payment Voucher": "سندات صرف",
-    "Dont colect": "لا تجمع",
+    "Dont colect": "الغاء",
     "Complet": "الحالة/الاجراء",
     "Finish": "إنهاء",
     "completed": "مكتملة",
@@ -959,5 +959,6 @@
     "user not found!":"لم يتم العثور على المستخدم!",
     "notifications":"إشعارات",
     "Add New File":"أضف ملفًا جديدًا",
-    "Sector name":"اسم القطاع"
+    "Sector name":"اسم القطاع",
+    "Choose date range":"اختر نطاق التاريخ"
 }
