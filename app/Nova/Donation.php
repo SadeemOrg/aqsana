@@ -185,30 +185,30 @@ class Donation extends Resource
 
 
 
-            // Flexible::make(__('اضافة شركة جديدة'), 'add_user')
-            //     ->readonly(true)
+            Flexible::make(__('اضافة شركة جديدة'), 'add_user')
+                ->readonly(true)
 
-            //     ->hideFromDetail()->hideFromIndex()
-            //     ->addLayout(__('tooles'), 'Payment_type_details ', [
-            //         Text::make(__('name'), "name")->rules('required'),
-            //         Text::make(__('phone'), "phone"),
-            //     ]),
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('tooles'), 'Payment_type_details ', [
+                    Text::make(__('name'), "name")->rules('required'),
+                    Text::make(__('phone'), "phone"),
+                ]),
 
 
-            // Text::make(__('payment_reason'), "payment_reason")->hideFromIndex(),
-            // Select::make(__("billing language"), "lang")->options([
-            //     '1' => __('ar'),
-            //     '2' => __('en'),
-            //     '3' => __('hr'),
-            // ])->displayUsingLabels()->rules('required'),
-            // Select::make(__("Payment_type"), "Payment_type")->options(
-            //     [
-            //         '1' => __('cash'),
-            //         '2' => __('shek'),
-            //         '3' => __('bit'),
-            //         '4' => __('hawale'),
-            //     ]
-            // )->displayUsingLabels()->default('1')->hideFromDetail()->hideFromIndex(),
+            Text::make(__('payment_reason'), "payment_reason")->hideFromIndex(),
+            Select::make(__("billing language"), "lang")->options([
+                '1' => __('ar'),
+                '2' => __('en'),
+                '3' => __('hr'),
+            ])->displayUsingLabels()->rules('required'),
+            Select::make(__("Payment_type"), "Payment_type")->options(
+                [
+                    '1' => __('cash'),
+                    '2' => __('shek'),
+                    '3' => __('bit'),
+                    '4' => __('hawale'),
+                ]
+            )->displayUsingLabels()->default('1')->hideFromDetail()->hideFromIndex(),
             Select::make(__("Payment_type"), "Payment_type")->options(
                 [
                     '1' => __('cash'),
