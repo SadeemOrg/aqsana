@@ -222,8 +222,7 @@ class PaymentVoucher extends Resource
     }
     protected static function afterValidation(NovaRequest $request, $validator)
     {
-        dd(isset(json_decode($request->ref_id)->key2));
-        if (isset(json_decode($request->ref_id)->key2)) {
+        if (! isset(json_decode($request->ref_id)->key2)) {
             $validator->errors()->add('ref_id', 'يجب اضافة مشروع');
         }
     }
