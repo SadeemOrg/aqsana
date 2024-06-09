@@ -289,8 +289,7 @@ class Donation extends Resource
     }
     protected static function afterValidation(NovaRequest $request, $validator)
     {
-        dd(!json_decode($request->ref_id)->key2);
-        if (!json_decode($request->ref_id)->key2) {
+        if (!json_decode($request->ref_id)?->key2) {
             $validator->errors()->add('ref_id', 'يجب اضافة مشروع');
         }
 
