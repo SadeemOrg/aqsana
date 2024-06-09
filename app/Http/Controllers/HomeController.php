@@ -38,15 +38,7 @@ class HomeController extends Controller
     public function schedulelast()
     {
 
-        // $test = Transaction::where([
-        //     ['transaction_status', 3],
-        //     ['main_type', 1],
-        //     ['is_delete', 0],
-        // ])->sum('equivelant_amount');
-        // $Transactions = Transaction::where("main_type", '1')->where('is_delete', '0')->sum('equivelant_amount');
 
-
-        // dd($test,$Transactions);
 
 
         $year = Carbon::now()->year;
