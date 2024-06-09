@@ -17,7 +17,7 @@
                 v-else
                 class="mt-2 font-FlatBold text-center text-2xl lg:text-3xl"
             >
-            تم انتاج سند القبض بنجاح، يوفي!
+                تم انتاج سند القبض بنجاح، يوفي!
             </h2>
             <h3 class="mt-4 font-FlatBold text-center text-lg lg:text-xl">
                 تم ارسال الملف للايميل الخاص بك, وبأمكانك ارسال الملف الى الشخص
@@ -47,7 +47,7 @@
                                 name="id"
                                 id="search"
                                 autocomplete="off"
-                                class="hidden search-bar h-16 sm:h-full  pr-12 sm:pr-20 shadow-sm  w-full bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]"
+                                class="hidden search-bar h-16 sm:h-full pr-12 sm:pr-20 shadow-sm w-full bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]"
                             />
                             <input
                                 type="search"
@@ -55,16 +55,15 @@
                                 name="Mail"
                                 id="search"
                                 autocomplete="off"
-                                placeholder="الرجاء ادخال الايميل "
-                                class="inputDev h-16 sm:h-full  sm:pr-4 shadow-sm  block w-[85%] bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]"
+                                placeholder="الرجاء ادخال الايميل"
+                                class="inputDev h-16 sm:h-full sm:pr-4 shadow-sm block w-[85%] bg-white border-2 sm:text-sm rounded-md focus:ring-[#349A37] focus:border-[#349A37]"
                             />
                             <div
                                 class="flex flex-row items-center justify-center w-full"
                             >
                                 <button
                                     type="submit"
-                                    @click="send($event)"
-                                    class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white "
+                                    class="connectUs duration-200 px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white"
                                 >
                                     ارسال
                                 </button>
@@ -119,28 +118,21 @@ import { useRoute } from "vue-router";
 export default {
     data() {
         return {
-            id: "",
+            id: null,
             type: "",
             mail: "",
             userFilter: "",
             typeFilter: "",
-            baseUrl: ""
-        };
-    },
-    setup() {
-        const route = useRoute();
-
-        onMounted(() => {
-            this.id = route;
-        });
-    },
-    data() {
-        return {
+            baseUrl: "",
             info: null
         };
     },
 
     methods: {
+        async onSubmit(event) {
+            event.preventDefault();
+            this.send();
+        },
         getImage() {
             return "/assets/image/pdf.png";
         },
@@ -189,12 +181,9 @@ export default {
         getYears: function() {
             let queryString = window.location.search;
             let urlParams = new URLSearchParams(queryString);
-            console.log("urlParams", urlParams);
             this.id = urlParams.get("location");
             this.type = urlParams.get("type");
             this.baseUrl = window.location.origin;
-            // alert(this.type);
-            console.log("  locationFilter", this.id);
         }
     },
     beforeMount() {
@@ -292,6 +281,7 @@ export default {
         padding-right: 1rem;
     }
 }
+
 .connectUs {
     transition-duration: 200ms;
     padding-left: 1.25rem /* 20px */;
