@@ -28,7 +28,8 @@ export default {
 
             projectshow: false,
             items: [],
-            Sectors: []
+            Sectors: [],
+            value2:null
         };
     },
 
