@@ -1050,10 +1050,6 @@ class HomeController extends Controller
         }
         $original = 0;
 
-
-        // Mail::to('alaqaaquds@gmail.com')->send(new \App\Mail\BillMail($Transaction, $PaymentType));
-
-        // dd("Email is Sent.");
         $type = '1';
         $bill_number = $Transaction->bill_number;
         return view('Pages.Bills.mainBill', compact('id', 'type', 'bill_number'));
@@ -1137,67 +1133,7 @@ class HomeController extends Controller
             Mail::to($request->Mail)->send(new \App\Mail\BillMail($Transaction, $PaymentType));
             return response()->json(['success' => 'Added new records.']);
         }
-
-        return response()->json(['error' => $validator->errors()->all()]);
-        $Transaction =  Transaction::where("id", $request->id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
-
-        if ($Transaction->lang == 1) {
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "نقدي";
-                    break;
-                case 2:
-                    $PaymentType = "شك";
-                    break;
-                case 3:
-                    $PaymentType = "بيت";
-                    break;
-                case 4:
-                    $PaymentType = "حوالة مصرفية";
-                    break;
-                case 5:
-                    $PaymentType = "حصالة";
-                    break;
-            }
-        } else if ($Transaction->lang == 2) {
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "cash";
-                    break;
-                case 2:
-                    $PaymentType = "Bank doubt";
-                    break;
-                case 3:
-                    $PaymentType = "bit";
-                    break;
-                case 4:
-                    $PaymentType = "Bank transfer";
-                    break;
-                case 5:
-                    $PaymentType = "moneybox";
-                    break;
-            }
-        } else if ($Transaction->lang == 3) {
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "כסף מזומן";
-                    break;
-                case 2:
-                    $PaymentType = "ספק בבנק";
-                    break;
-                case 3:
-                    $PaymentType = "קצת";
-                    break;
-                case 4:
-                    $PaymentType = "העברה בנקאית";
-                    break;
-                case 5:
-                    $PaymentType = "קופסת כסף";
-                    break;
-            }
-        }
-
-        Mail::to($request->Mail)->send(new \App\Mail\BillMail($Transaction, $PaymentType));
+        return $this->sendError('Error', ["message" => $validator->errors()->all()], 202);
     }
     public function showToastrMessages()
     {
