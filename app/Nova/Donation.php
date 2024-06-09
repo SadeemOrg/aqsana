@@ -289,6 +289,7 @@ class Donation extends Resource
     }
     protected static function afterValidation(NovaRequest $request, $validator)
     {
+        dd($request->ref_id);
         if (!json_decode($request->ref_id)?->key2) {
             $validator->errors()->add('ref_id', 'يجب اضافة مشروع');
         }
@@ -302,10 +303,7 @@ class Donation extends Resource
     {
         return '/bill?location=' . $resource->id . '&type=1';
     }
-    // public static function afterCreate(Request $request, $model)
-    // {
-    //     return Action::redirect("/mainbill/" . $model->id);
-    // }
+
 
     public static function beforeCreate(Request $request, $model)
     {
