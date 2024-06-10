@@ -437,5 +437,7 @@
     "Rename file": "إعادة تسمية الملف",
     "Rename": "إعادة التسمية ",
     "Add New File":"أضف ملفًا ",
-    "Choose date range":"اختر التاريخ"
+    "Choose date range":"اختر التاريخ",
+    "transact amount": "مبلغ المتبرع به"
+
 }

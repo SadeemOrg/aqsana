@@ -96,7 +96,7 @@ class Project extends Model
 
     public function TripBooking()
     {
-        return $this->belongsTo(TripBooking::class,'id','project_id');
+        return $this->hasMany(TripBooking::class);
     }
     public function admin()
     {
@@ -109,7 +109,6 @@ class Project extends Model
 
         $citye =   City::where('admin_id', $id)
         ->select('id')->first();
-        // if ($user->type() == 'regular_city')     return $this->belongsToMany(Bus::class,'project_bus')->where('project_bus.city_id', '=', $citye['id']);
         return $this->belongsToMany(Bus::class,'project_bus');
     }
 

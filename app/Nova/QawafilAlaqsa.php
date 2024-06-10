@@ -7,6 +7,7 @@ use App\Models\{
     City,
     Address,
     Bus,
+    TripBooking,
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{
@@ -26,7 +27,6 @@ use Laravel\Nova\{
     Fields\HasMany,
     Panel,
     Http\Requests\NovaRequest,
-    Resource
 };
 use Laravel\Nova\Actions\ActionResource;
 use Acme\MultiselectField\Multiselect as Select;
@@ -278,18 +278,26 @@ class QawafilAlaqsa extends Resource
                 DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required'),
                 DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required', new QawafilAlaqsaDate($request->start_date)),
 
-
-
                 Boolean::make(__('is_has_Donations'), 'is_donation')->hideFromIndex(),
-
-
-
-
-
 
                 BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating()->hideFromIndex(),
+                Text::make(__("TripBooking number"),'TripBooking number',function(){
+                    $buss = $this->bus;
+                    $number = 0;
+                    foreach ($buss as $key => $bus) {
+                        $number_of_people = TripBooking::where([
+                            ['bus_id', $bus->id],
+                            ['status', '1'],
+                            ['project_id', $this->id],
+                        ])->sum('number_of_people');
 
+                        $number +=  $number_of_people ;
+
+                    }
+                   return  $number ;
+
+                })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
 
             ]))->withToolbar(),
 
@@ -418,7 +426,6 @@ class QawafilAlaqsa extends Resource
 
         $citye =   City::where('admin_id', $id)
             ->select('id')->first();
-
 
 
 
