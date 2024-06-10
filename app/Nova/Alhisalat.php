@@ -210,16 +210,17 @@ class Alhisalat extends Resource
 
 
             Flexible::make(__('newadres'), 'newadres')
-                ->readonly(true)
-                ->limit(1)
+                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                    $model->$attribute = null;
+                })->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('Add new bus'), 'bus', [
-                    Text::make(__('Name'), "name_address")->rules('required'),
+                    Text::make(__('Name'), "name_address")    ->rules('required', __('Your custom error message for name address')),
                     Text::make(__("description"), "description")->rules('required'),
                     Text::make(__("phone number"), "phone_number_address")->rules('required'),
                     MapsAddress::make(__('Address'), 'current_location')
                         ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036])
-                        ->types(['establishment']),
+                        ->types(['establishment'])->rules('required'),
 
                 ])->hideWhenUpdating(),
 
@@ -228,13 +229,14 @@ class Alhisalat extends Resource
                 '2' => 'تم جمع ',
                 '3' => 'تم التسليم',
                 '4' => 'تم العد',
-            ])->singleSelect()->hideWhenCreating()->hideWhenUpdating(),
+            ])->singleSelect()->hideWhenCreating()->hideWhenUpdating()->rules('required'),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
     }
     protected static function afterValidation(NovaRequest $request, $validator)
     {
+
         if (!($request->newadres  || $request->address_id)) {
             $validator->errors()->add('address_id', 'يجب اضافة عنوان');
         }
@@ -256,7 +258,7 @@ class Alhisalat extends Resource
                     'name_address' => $request->newadres[0]['attributes']['name_address'],
                     'description' => $request->newadres[0]['attributes']['description'],
                     'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
-                    'current_location' => json_decode( $request->newadres[0]['attributes']['current_location']),
+                    'current_location' => json_decode($request->newadres[0]['attributes']['current_location']),
                     "number" => "1",
                     'status' => 1,
                     'type' => 2,
@@ -266,6 +268,7 @@ class Alhisalat extends Resource
                 $model->address_id = $address->id;
             }
         }
+        $request->request->remove('newadres');
     }
 
 
