@@ -46,7 +46,6 @@ class CustomRule implements Rule
             $number_of_people += $this->number;
 
             if (($number_of_people  < $bus->number_of_seats)) {
-                // dd("ss");
                 return true;
             }
 
