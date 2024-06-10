@@ -184,7 +184,8 @@
     /* Add other styles as needed */
 }
 .btn.btn-default.btn-primary.flex.items-center.justify-center {
-        padding: 0;
+        padding: 16;
+
     }
   </style>
 
