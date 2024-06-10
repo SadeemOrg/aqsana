@@ -233,6 +233,12 @@ class Alhisalat extends Resource
 
         ];
     }
+    protected static function afterValidation(NovaRequest $request, $validator)
+    {
+        if (!($request->newadres  || $request->address_id)) {
+            $validator->errors()->add('address_id', 'يجب اضافة عنوان');
+        }
+    }
     public static function beforesave(Request $request, $model)
     {
 
