@@ -154,7 +154,7 @@ class Alhisalat extends Resource
                 ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
 
-                ActionButton::make(__('colect'))
+            ActionButton::make(__('colect'))
                 ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
                     ->confirmButtonText(__('colect '))
                     ->cancelButtonText(__('sent done')), $this->id)
@@ -167,17 +167,17 @@ class Alhisalat extends Resource
 
 
             ActionButton::make(__('حصالة مفقودة'))
-            ->action((new AlhisalatDelete)
-            ->confirmText(__('Are you sure you want to colect  this Alhisalat?'))
-                ->confirmButtonText(__('حصالة مفقودة'))
-                ->cancelButtonText(__('الغاء')), $this->id)
+                ->action((new AlhisalatDelete)
+                    ->confirmText(__('Are you sure you want to colect  this Alhisalat?'))
+                    ->confirmButtonText(__('حصالة مفقودة'))
+                    ->cancelButtonText(__('الغاء')), $this->id)
                 ->canSee(function () {
                     return $this->status != '0';
-                })->readonly(function(){
+                })->readonly(function () {
                     return $this->status  >= '3';
                 })
-           ->text(__('حصالة مفقودة'))->showLoadingAnimation()
-            ->loadingColor('#FF3333')->buttonColor('#FF3333')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                ->text(__('حصالة مفقودة'))->showLoadingAnimation()
+                ->loadingColor('#FF3333')->buttonColor('#FF3333')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
             ActionButton::make(__('colect'))
                 ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
@@ -198,8 +198,7 @@ class Alhisalat extends Resource
 
                     foreach ($addresss as $address) {
 
-                            $address_type_admin_array += [$address['id'] => ($address['name_address'])];
-
+                        $address_type_admin_array += [$address['id'] => ($address['name_address'])];
                     }
 
                     return $address_type_admin_array;
@@ -219,10 +218,10 @@ class Alhisalat extends Resource
                     Text::make(__("description"), "description")->rules('required'),
                     Text::make(__("phone number"), "phone_number_address")->rules('required'),
                     MapsAddress::make(__('Address'), 'current_location')
-                    ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036])
-                    ->types(['establishment']),
+                        ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036])
+                        ->types(['establishment']),
 
-                ]),
+                ])->hideWhenUpdating(),
 
             Multiselect::make(__("Status"), "status")->options([
                 '1' => 'تم  الوضع',
@@ -236,47 +235,30 @@ class Alhisalat extends Resource
     }
     public static function beforesave(Request $request, $model)
     {
-        if ($request->address_id != $model->address_id) {
 
-
-            if ($request->address_id) {
-
-                // $alhisalats = DB::table('alhisalats')->where('address_id', $request->address_id)->get();
-                $addresses = DB::table('addresses')->where('id', $request->address_id)->first();
-                $countt = $addresses->number + 1;
-                // $addresses->number=$countt;
-                DB::table('addresses')->where('id', $request->address_id)->update(['number' => $countt]);
-
-
-
-                // $model->number_alhisala =  $countt . "  " . $addresses->name_address;
-                $model->number_alhisala =   $addresses->name_address . " " . $countt;
-                $model->address_id = $addresses->id;
-            } else {
-
-                $id = Auth::id();
-                if ($request->newadres) {
-                    $address = address::create([
-                        'name_address' => $request->newadres[0]['attributes']['name_address'],
-                        'description' => $request->newadres[0]['attributes']['description'],
-                        'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
-                        // 'current_location' => $request->newadres[0]['attributes']['current_location'],
-                        "number" => "1",
-                        'status' => 1,
-                        'type' => 2,
-                        'created_by' => $id
-                    ]);
-
-
-                    $model->number_alhisala =  $address->name_address . " 1";
-                    $model->address_id = $address->id;
-                } else  dd();
-
-                // dd($model);
-
+        if ($request->address_id) {
+            $addresses = DB::table('addresses')->where('id', $request->address_id)->first();
+            $countt = $addresses->number + 1;
+            DB::table('addresses')->where('id', $request->address_id)->update(['number' => $countt]);
+            $model->number_alhisala =   $addresses->name_address . " " . $countt;
+            $model->address_id = $addresses->id;
+        } else {
+            $id = Auth::id();
+            if ($request->newadres) {
+                $address = address::create([
+                    'name_address' => $request->newadres[0]['attributes']['name_address'],
+                    'description' => $request->newadres[0]['attributes']['description'],
+                    'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
+                    'current_location' => $request->newadres[0]['attributes']['current_location'],
+                    "number" => "1",
+                    'status' => 1,
+                    'type' => 2,
+                    'created_by' => $id
+                ]);
+                $model->number_alhisala =  $address->name_address . " 1";
+                $model->address_id = $address->id;
             }
         }
-        else dd();
     }
 
 
