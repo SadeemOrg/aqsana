@@ -433,21 +433,32 @@ $(document).ready(function() {
     // Handle click event for main items
     $('.main-items').click(function() {
         $('.w-sidebar').removeClass('sidebar-hidden');
+        $('.room-sort').slideUp();
+        // Remove flipped class from all arrow icons
+        $('.arrow-icon').removeClass('flipped');
         $(this).next('.room-sort').slideToggle();
     });
 
+    // Handle click event for dropdown buttons using event delegation
     $(document).on('click', '.dropdown .dropBtn', function(event) {
         event.preventDefault();
         const arrowIcon = $(this).find('.arrow-icon');
+        // Toggle flipped class for the clicked arrow icon
         arrowIcon.toggleClass('flipped');
-
+        // Remove flipped class from all other arrow icons
+        $('.arrow-icon').not(arrowIcon).removeClass('flipped');
         $('.w-sidebar').removeClass('sidebar-hidden');
+        // Close all other dropdown menus
+        $('.dropMenu').not($(this).next('.dropMenu')).slideUp();
+        // Slide toggle for the clicked dropdown menu
         $(this).next('.dropMenu').slideToggle();
     });
 
     // Slide down active router links
     $('.router-link-active').parent().parent('.dropMenu').slideDown();
 });
+
+
 
 
 
