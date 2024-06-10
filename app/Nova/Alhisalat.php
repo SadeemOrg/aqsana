@@ -218,8 +218,9 @@ class Alhisalat extends Resource
                     Text::make(__('Name'), "name_address")->rules('required'),
                     Text::make(__("description"), "description")->rules('required'),
                     Text::make(__("phone number"), "phone_number_address")->rules('required'),
-                    MapsAddress::make(__('Address'), 'current_location')->zoom(10)
-                        ->center(['lat' =>  31.775947, 'lng' => 35.235577]),
+                    MapsAddress::make(__('Address'), 'current_location')
+                    ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036])
+                    ->types(['establishment']),
 
                 ]),
 
