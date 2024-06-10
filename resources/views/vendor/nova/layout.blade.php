@@ -183,6 +183,9 @@
     position: relative; /* or any other positioning you want */
     /* Add other styles as needed */
 }
+.btn.btn-default.btn-primary.flex.items-center.justify-center {
+        padding: 0;
+    }
   </style>
 
     <script>
