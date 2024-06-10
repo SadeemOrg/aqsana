@@ -8,9 +8,6 @@
             </svg>
             <span class="sidebar-label cursor-pointer">{{ __('Resources') }}</span>
         </div>
-        {{-- <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" class="ml-2">
-            <path fill="#fff" d="M8.292893.292893c.390525-.390524 1.023689-.390524 1.414214 0 .390524.390525.390524 1.023689 0 1.414214l-4 4c-.390525.390524-1.023689.390524-1.414214 0l-4-4c-.390524-.390525-.390524-1.023689 0-1.414214.390525-.390524 1.023689-.390524 1.414214 0L5 3.585786 8.292893.292893z"></path>
-        </svg> --}}
     </h3>
 
     @php
@@ -26,7 +23,7 @@
         array_multisort($navigation, SORT_ASC, SORT_NUMERIC, $arrSort);
     @endphp
 
-    <div class="room-sort">
+    <div class="">
         <ul style="list-style-type: none" class="room-sort-menu">
             @foreach ($navigation as $group => $resources)
                 <li class="dropdown">
@@ -34,7 +31,7 @@
                         class="dropBtn mb-4 text-base text-white uppercase tracking-wide cursor-pointer text"
                         href="#">
                         {{ $group }}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"
+                        <svg class="arrow-icon " xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"
                             class="ml-2 arrow-icon">
                             <path fill="#fff"
                                 d="M8.292893.292893c.390525-.390524 1.023689-.390524 1.414214 0 .390524.390525.390524 1.023689 0 1.414214l-4 4c-.390525.390524-1.023689.390524-1.414214 0l-4-4c-.390524-.390525-.390524-1.023689 0-1.414214.390525-.390524 1.023689-.390524 1.414214 0L5 3.585786 8.292893.292893z">
