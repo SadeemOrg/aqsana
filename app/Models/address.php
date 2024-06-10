@@ -38,9 +38,5 @@ class address extends Model
         return $this->belongsTo(City::class,'city_id');
     }
 
-    // public function create()
-    // {
-    //     return $this->belongsTo('App\Models\User','created_by');
-    // }
 
 }

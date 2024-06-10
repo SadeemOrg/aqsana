@@ -233,6 +233,12 @@ class Alhisalat extends Resource
 
         ];
     }
+    protected static function afterValidation(NovaRequest $request, $validator)
+    {
+        if (!($request->newadres  || $request->address_id)) {
+            $validator->errors()->add('address_id', 'يجب اضافة عنوان');
+        }
+    }
     public static function beforesave(Request $request, $model)
     {
 
@@ -245,11 +251,12 @@ class Alhisalat extends Resource
         } else {
             $id = Auth::id();
             if ($request->newadres) {
+                // dd(json_decode( $request->newadres[0]['attributes']['current_location']));
                 $address = address::create([
                     'name_address' => $request->newadres[0]['attributes']['name_address'],
                     'description' => $request->newadres[0]['attributes']['description'],
                     'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
-                    'current_location' => $request->newadres[0]['attributes']['current_location'],
+                    'current_location' => json_decode( $request->newadres[0]['attributes']['current_location']),
                     "number" => "1",
                     'status' => 1,
                     'type' => 2,
