@@ -215,7 +215,7 @@ class Alhisalat extends Resource
                 })->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('Add new bus'), 'bus', [
-                    Text::make(__('Name'), "name_address")    ->rules('required', __('Your custom error message for name address')),
+                    Text::make(__('Name'), "name_address")    ->rules('required'),
                     Text::make(__("description"), "description")->rules('required'),
                     Text::make(__("phone number"), "phone_number_address")->rules('required'),
                     MapsAddress::make(__('Address'), 'current_location')
