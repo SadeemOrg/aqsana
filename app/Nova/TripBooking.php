@@ -73,9 +73,9 @@ class TripBooking extends Resource
             BelongsTo::make(__('user'), 'Users', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('bus'), 'Buses', \App\Nova\Bus::class)
                 ->hideWhenCreating()->hideWhenUpdating(),
-            Text::make(__('number phone'), 'number_phone'),
-            Text::make(__('number_of_people'), 'number_of_people'),
-            Text::make(__('reservation_amount'), 'reservation_amount'),
+            Text::make(__('number phone'), 'number_phone')->rules('required'),
+            Text::make(__('number_of_people'), 'number_of_people')->rules('required'),
+            Text::make(__('reservation_amount'), 'reservation_amount')->rules('required'),
 
 
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
@@ -85,7 +85,6 @@ class TripBooking extends Resource
 
     public static function beforeSave(Request $request, $model)
     {
-        // dd($request->Project);
         $projext = Project::where('id', $request->Project)->with('bus')->first();
         $buss = $projext->bus;
         $IsFull = 1;

@@ -89,7 +89,7 @@ class address extends Resource
                     return $address_type_admin_array;
                 })->singleSelect()->hideFromIndex()->hideFromDetail()->rules('required'),
 
-            Text::make(__('name address'), "name_address")->rules('required'),
+            Text::make(__('name address'), "name_address")->required(),
             Text::make(__("description address"), "description")->rules('required'),
             Text::make(__("phone number"), "phone_number_address"),
 
@@ -122,7 +122,7 @@ class address extends Resource
 
             MapsAddress::make(__('Address'), 'current_location')
                 ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036])
-                ->types(['establishment']),
+                ->types(['establishment'])->rules('required'),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
