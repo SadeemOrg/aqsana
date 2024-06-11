@@ -28,11 +28,7 @@
                                 <Budgets :years="years" :year="year" />
                             </div>
                             <!-- second form -->
-                            <div :class="{
-                                hidden: openTab !== 2,
-                                block: openTab === 2
-                            }">
-                                <!-- ... (your form content) -->
+                            <div :class="{ hidden: openTab !== 2, block: openTab === 2 }">
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
                                     <div>
                                         <label
@@ -52,25 +48,23 @@
                                             class="block text-black text-base py-2 font-medium md:text-right mb-1 md:mb-0">
                                             ميزانية السنة
                                         </label>
-
-                                        <input v-on:keyup="countdown"
+                                        <input v-on:input="onYearBudgetInput"
                                             class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                                             id="inline-full-name" type="text" v-model="budgetsOfyear" />
                                     </div>
                                 </div>
                                 <form @submit.prevent="savenew" class="add-form py-4">
                                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4">
-                                        <div v-for="(Sector,
-                                            index) in newSectors" :key="Sector.Sector" :value="Sector.Sector"
-                                            class=" mb-3">
-                                            <div class="">
+                                        <div v-for="(Sector, index) in newSectors" :key="Sector.Sector"
+                                            :value="Sector.Sector" class="mb-3">
+                                            <div>
                                                 <label
                                                     class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64"
                                                     :for="index">
                                                     {{ Sector.Sector }}
                                                 </label>
-                                                <input v-on:keyup="countdown"
-                                                    class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                                                <input v-on:input="onInput($event, index)"
+                                                    class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
                                                     :id="index" type="text" v-model="Sector.Budget" />
                                             </div>
                                         </div>
@@ -85,7 +79,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <p class="text-right text-small" v-bind:class="{ 'text-danger': hasError }">
+                                <p class="text-right text-small" :class="{ 'text-danger': hasError }">
                                     Sum: {{ remainingCount }}
                                 </p>
                             </div>
@@ -96,7 +90,7 @@
                             block: openTab === 3
                         }">
                             <!-- ... (your form content) -->
-                            <DeleteBudget :years="years" />
+                            <DeleteBudget :years="years" @get-years="getYears" />
                         </div>
                         <!-- fourth form -->
                         <div :class="{
@@ -223,7 +217,8 @@ export default {
             ],
             projectshow: false,
             chartWidth: 400,
-            remainingCount: 0
+            remainingCount: 0,
+            // includedYears: []
         };
     },
     beforeMount() {
@@ -268,6 +263,16 @@ export default {
             try {
                 const response = await axios.post("/year");
                 this.years = response.data;
+                // this.includedYears = Object.values(this.years).map(
+                //     item => parseInt(item.year)
+                // );
+                // const startYear = 2022;
+                // const endYear = 2050;
+                // for (let year = startYear; year <= endYear; year++) {
+                //     if (!this.includedYears.includes(year)) {
+                //         this.addYears.push(year);
+                //     }
+                // }
             } catch (error) {
                 console.error(error);
             }
@@ -308,6 +313,24 @@ export default {
                 sum += parseInt(element["Budget"]);
             });
             return sum;
+        },
+        convertArabicToEnglish(input) {
+            const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            const englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+            return input.split('').map(char => {
+                const index = arabicNumbers.indexOf(char);
+                return index > -1 ? englishNumbers[index] : char;
+            }).join('');
+        },
+        onInput(event, index) {
+            const value = this.convertArabicToEnglish(event.target.value);
+            this.newSectors[index].Budget = value;
+            this.countdown();
+        },
+        onYearBudgetInput(event) {
+            this.budgetsOfyear = this.convertArabicToEnglish(event.target.value);
+            this.countdown();
         },
         async savenew() {
             let sum = 0;

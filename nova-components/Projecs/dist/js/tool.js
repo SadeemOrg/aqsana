@@ -495,12 +495,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
@@ -544,6 +538,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             projectshow: false,
             chartWidth: 400,
             remainingCount: 0
+            // includedYears: []
         };
     },
     beforeMount: function beforeMount() {
@@ -602,6 +597,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 response = _context.sent;
 
                                 this.years = response.data;
+                                // this.includedYears = Object.values(this.years).map(
+                                //     item => parseInt(item.year)
+                                // );
+                                // const startYear = 2022;
+                                // const endYear = 2050;
+                                // for (let year = startYear; year <= endYear; year++) {
+                                //     if (!this.includedYears.includes(year)) {
+                                //         this.addYears.push(year);
+                                //     }
+                                // }
                                 _context.next = 10;
                                 break;
 
@@ -719,6 +724,24 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 sum += parseInt(element["Budget"]);
             });
             return sum;
+        },
+        convertArabicToEnglish: function convertArabicToEnglish(input) {
+            var arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            var englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+            return input.split('').map(function (char) {
+                var index = arabicNumbers.indexOf(char);
+                return index > -1 ? englishNumbers[index] : char;
+            }).join('');
+        },
+        onInput: function onInput(event, index) {
+            var value = this.convertArabicToEnglish(event.target.value);
+            this.newSectors[index].Budget = value;
+            this.countdown();
+        },
+        onYearBudgetInput: function onYearBudgetInput(event) {
+            this.budgetsOfyear = this.convertArabicToEnglish(event.target.value);
+            this.countdown();
         },
         savenew: function () {
             var _ref6 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
@@ -9903,38 +9926,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ["years", "year"],
@@ -9946,7 +9937,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             totalSectorYear: 0,
             sumSectorsPerYear: 0,
             remainingCount: 0,
-            hasError: false
+            hasError: false,
+            internalYear: this.year
         };
     },
 
@@ -10073,6 +10065,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.remainingCount = this.totalSectorYear - this.sumSectorsPerYear;
             this.hasError = this.sumSectorsPerYear > this.totalSectorYear;
         },
+        convertArabicToEnglish: function convertArabicToEnglish(input) {
+            var arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            var englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+            return input.split('').map(function (char) {
+                var index = arabicNumbers.indexOf(char);
+                return index > -1 ? englishNumbers[index] : char;
+            }).join('');
+        },
+        onInput: function onInput(event, index) {
+            var value = this.convertArabicToEnglish(event.target.value);
+            this.Sectors[index].Budget = value;
+            this.countdown();
+        },
         onChange: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(event) {
                 var response;
@@ -10115,6 +10121,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return onChange;
         }()
+    },
+    watch: {
+        year: function year(newYear) {
+            this.internalYear = newYear;
+        }
     }
 });
 
@@ -10127,61 +10138,85 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "py-4 w-[95%] bg-slate-700" }, [
-      _vm._m(0),
-      _vm._v(" "),
+    _c("div", { staticClass: "py-4 bg-slate-700" }, [
       _c(
-        "select",
+        "div",
         {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.year,
-              expression: "year"
-            }
-          ],
-          staticClass:
-            "select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
-          on: {
-            change: [
-              function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.year = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
-              function($event) {
-                return _vm.onChange($event)
-              }
-            ]
-          }
+          staticClass: "flex flex-col items-start justify-start",
+          staticStyle: { width: "80%" }
         },
         [
-          _c("option", { attrs: { selected: "", disabled: "", value: "0" } }, [
-            _vm._v("\n                الرجاء اختيار السنة\n            ")
-          ]),
+          _c(
+            "label",
+            {
+              staticClass:
+                "block text-black text-base ml-4 py-2 font-medium md:text-right mb-1 md:mb-0"
+            },
+            [_vm._v("\n                السنة\n            ")]
+          ),
           _vm._v(" "),
-          _vm._l(_vm.years, function(year) {
-            return _c(
-              "option",
-              { key: year.year, domProps: { value: year.year } },
-              [
-                _vm._v(
-                  "\n                " + _vm._s(year.year) + "\n            "
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.internalYear,
+                  expression: "internalYear"
+                }
+              ],
+              staticClass:
+                "select1 mt-1 w-full block rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.internalYear = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function($event) {
+                    return _vm.onChange($event)
+                  }
+                ]
+              }
+            },
+            [
+              _c(
+                "option",
+                { attrs: { selected: "", disabled: "", value: "0" } },
+                [
+                  _vm._v(
+                    "\n                    الرجاء اختيار السنة\n                "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.years, function(year) {
+                return _c(
+                  "option",
+                  { key: year.year, domProps: { value: year.year } },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(year.year) +
+                        "\n                "
+                    )
+                  ]
                 )
-              ]
-            )
-          })
-        ],
-        2
+              })
+            ],
+            2
+          )
+        ]
       )
     ]),
     _vm._v(" "),
@@ -10240,12 +10275,17 @@ var render = function() {
                     domProps: { value: Sector.Budget },
                     on: {
                       keyup: _vm.countdown,
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                      input: [
+                        function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(Sector, "Budget", $event.target.value)
+                        },
+                        function($event) {
+                          return _vm.onInput($event, index)
                         }
-                        _vm.$set(Sector, "Budget", $event.target.value)
-                      }
+                      ]
                     }
                   })
                 ])
@@ -10284,7 +10324,7 @@ var render = function() {
           ? _c(
               "div",
               { staticClass: "md:flex md:items-center w-full justify-end" },
-              [_vm._m(1)]
+              [_vm._m(0)]
             )
           : _vm._e()
       ]
@@ -10292,21 +10332,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/3" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-black text-base ml-4 py-2 font-medium md:text-right mb-1 md:mb-0"
-        },
-        [_vm._v("\n                السنة\n            ")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -10514,24 +10539,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -10539,14 +10546,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     components: { deleteModalSector: __WEBPACK_IMPORTED_MODULE_1__delete_modal_sector_vue___default.a },
     data: function data() {
         return {
-            selectedItem: "0",
-            selectedyear: "0",
-            year: "0",
+            localYears: this.years,
+            selectedItem: null,
+            selectedYear: null,
+            year: null,
             deletSectors: [],
             showModalSector: false
         };
     },
 
+    watch: {
+        years: function years(newYears) {
+            this.localYears = newYears;
+        }
+    },
     methods: {
         onChangedelet: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(event) {
@@ -10566,7 +10579,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                                 this.deletSectors = response.data;
                                 this.selectedItem = "0";
-                                this.selectedyear = "0";
+                                this.selectedYear = event.target.value;
                                 this.year = event.target.value;
                                 _context.next = 13;
                                 break;
@@ -10613,83 +10626,44 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return deleteSector;
         }(),
-
-        getYears: function () {
+        handeDeleteSector: function () {
             var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
-                var response;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
                             case 0:
                                 _context3.prev = 0;
                                 _context3.next = 3;
-                                return axios.post("/year");
-
-                            case 3:
-                                response = _context3.sent;
-
-                                this.years = response.data;
-                                _context3.next = 10;
-                                break;
-
-                            case 7:
-                                _context3.prev = 7;
-                                _context3.t0 = _context3["catch"](0);
-
-                                console.error(_context3.t0);
-
-                            case 10:
-                            case "end":
-                                return _context3.stop();
-                        }
-                    }
-                }, _callee3, this, [[0, 7]]);
-            }));
-
-            function getYears() {
-                return _ref3.apply(this, arguments);
-            }
-
-            return getYears;
-        }(),
-        handeDeleteSector: function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
-                    while (1) {
-                        switch (_context4.prev = _context4.next) {
-                            case 0:
-                                _context4.prev = 0;
-                                _context4.next = 3;
                                 return axios.post("/delet", {
                                     year: this.year
                                 });
 
                             case 3:
                                 this.deletSectors = [];
-                                _context4.next = 6;
-                                return this.getYears();
+                                _context3.next = 6;
+                                return this.$emit('get-years');
 
                             case 6:
                                 this.showModalSector = false;
-                                _context4.next = 12;
+                                _context3.next = 12;
                                 break;
 
                             case 9:
-                                _context4.prev = 9;
-                                _context4.t0 = _context4["catch"](0);
+                                _context3.prev = 9;
+                                _context3.t0 = _context3["catch"](0);
 
-                                console.error(_context4.t0);
+                                console.error(_context3.t0);
 
                             case 12:
                             case "end":
-                                return _context4.stop();
+                                return _context3.stop();
                         }
                     }
-                }, _callee4, this, [[0, 9]]);
+                }, _callee3, this, [[0, 9]]);
             }));
 
             function handeDeleteSector() {
-                return _ref4.apply(this, arguments);
+                return _ref3.apply(this, arguments);
             }
 
             return handeDeleteSector;
@@ -10981,37 +10955,85 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "py-4 w-[95%] bg-slate-700" }, [
+    _c("div", { staticClass: "py-4 bg-slate-700" }, [
       _c(
-        "select",
+        "div",
         {
-          staticClass:
-            "select1 mt-1 block w-full rounded-md border-2 border-gray-200 px-4 py-2 pl-3 pr-10 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm",
-          attrs: { selectedyear: "" },
-          on: {
-            change: function($event) {
-              return _vm.onChangedelet($event)
-            }
-          }
+          staticClass: "flex flex-col items-start justify-start",
+          staticStyle: { width: "80%" }
         },
         [
-          _c("option", { attrs: { selected: "", disabled: "", value: "0" } }, [
-            _vm._v("\n                الرجاء اختيار عام\n            ")
-          ]),
+          _c(
+            "label",
+            {
+              staticClass:
+                "block text-black text-base ml-4 py-2 font-medium md:text-right mb-1 md:mb-0"
+            },
+            [
+              _vm._v(
+                "\n                اختر السنة التي تريد حذفها\n            "
+              )
+            ]
+          ),
           _vm._v(" "),
-          _vm._l(_vm.years, function(year) {
-            return _c(
-              "option",
-              { key: year.year, domProps: { value: year.year } },
-              [
-                _vm._v(
-                  "\n                " + _vm._s(year.year) + "\n            "
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.selectedYear,
+                  expression: "selectedYear"
+                }
+              ],
+              staticClass:
+                "select1 mt-1 w-full block rounded-md border-2 border-gray-200 px-4 py-2 pl-3 pr-10 text-base focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.selectedYear = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function($event) {
+                    return _vm.onChangedelet($event)
+                  }
+                ]
+              }
+            },
+            [
+              _c(
+                "option",
+                { attrs: { selected: "", disabled: "", value: "0" } },
+                [_vm._v("\n                الرجاء اختيار عام\n            ")]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.localYears, function(year) {
+                return _c(
+                  "option",
+                  { key: year.year, domProps: { value: year.year } },
+                  [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(year.year) +
+                        "\n            "
+                    )
+                  ]
                 )
-              ]
-            )
-          })
-        ],
-        2
+              })
+            ],
+            2
+          )
+        ]
       )
     ]),
     _vm._v(" "),
@@ -11068,8 +11090,12 @@ var render = function() {
                       }
                     ],
                     staticClass:
-                      " appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
-                    attrs: { id: "inline-full-name", type: "text" },
+                      "appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                    attrs: {
+                      id: "inline-full-name",
+                      type: "text",
+                      disabled: ""
+                    },
                     domProps: { value: Sector.Budget },
                     on: {
                       input: function($event) {
@@ -11339,13 +11365,15 @@ var render = function() {
                             attrs: { id: "inline-full-name", type: "text" },
                             domProps: { value: _vm.budgetsOfyear },
                             on: {
-                              keyup: _vm.countdown,
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.budgetsOfyear = $event.target.value
-                              }
+                              input: [
+                                function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.budgetsOfyear = $event.target.value
+                                },
+                                _vm.onYearBudgetInput
+                              ]
                             }
                           })
                         ])
@@ -11375,11 +11403,11 @@ var render = function() {
                               "div",
                               {
                                 key: Sector.Sector,
-                                staticClass: " mb-3",
+                                staticClass: "mb-3",
                                 attrs: { value: Sector.Sector }
                               },
                               [
-                                _c("div", {}, [
+                                _c("div", [
                                   _c(
                                     "label",
                                     {
@@ -11406,21 +11434,25 @@ var render = function() {
                                       }
                                     ],
                                     staticClass:
-                                      " appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
+                                      "appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black",
                                     attrs: { id: index, type: "text" },
                                     domProps: { value: Sector.Budget },
                                     on: {
-                                      keyup: _vm.countdown,
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
+                                      input: [
+                                        function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            Sector,
+                                            "Budget",
+                                            $event.target.value
+                                          )
+                                        },
+                                        function($event) {
+                                          return _vm.onInput($event, index)
                                         }
-                                        _vm.$set(
-                                          Sector,
-                                          "Budget",
-                                          $event.target.value
-                                        )
-                                      }
+                                      ]
                                     }
                                   })
                                 ])
@@ -11469,7 +11501,12 @@ var render = function() {
                     block: _vm.openTab === 3
                   }
                 },
-                [_c("DeleteBudget", { attrs: { years: _vm.years } })],
+                [
+                  _c("DeleteBudget", {
+                    attrs: { years: _vm.years },
+                    on: { "get-years": _vm.getYears }
+                  })
+                ],
                 1
               ),
               _vm._v(" "),

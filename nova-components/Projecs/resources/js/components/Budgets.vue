@@ -1,77 +1,45 @@
 <template>
     <div>
-        <div class="py-4 w-[95%] bg-slate-700">
-            <div class="md:w-1/3">
-                <label
-                    class="block text-black text-base ml-4 py-2 font-medium md:text-right mb-1 md:mb-0"
-                >
+        <div class="py-4 bg-slate-700">
+            <div class="flex flex-col items-start justify-start" style="width: 80%;">
+                <label class="block text-black text-base ml-4 py-2 font-medium md:text-right mb-1 md:mb-0">
                     السنة
                 </label>
+                <select
+                    class="select1 mt-1 w-full block rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+                    @change="onChange($event)" v-model="internalYear">
+                    <option selected disabled value="0">
+                        الرجاء اختيار السنة
+                    </option>
+                    <option v-for="year in years" :key="year.year" :value="year.year">
+                        {{ year.year }}
+                    </option>
+                </select>
             </div>
-            <select
-                class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
-                @change="onChange($event)"
-                v-model="year"
-            >
-                <option selected disabled value="0">
-                    الرجاء اختيار السنة
-                </option>
-                <option
-                    v-for="year in years"
-                    :key="year.year"
-                    :value="year.year"
-                >
-                    {{ year.year }}
-                </option>
-            </select>
         </div>
         <form @submit.prevent="save" class="add-form py-4">
-            <div
-                class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4"
-            >
-                <div
-                    v-for="(Sector, index) in Sectors"
-                    :key="Sector.Sector"
-                    :value="Sector.Sector"
-                    class=""
-                >
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4">
+                <div v-for="(Sector, index) in Sectors" :key="Sector.Sector" :value="Sector.Sector" class="">
                     <div class="mb-3">
-                        <label
-                            class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64"
-                            :for="index"
-                        >
+                        <label class="block text-gray-500 font-medium md:text-right mb-2 md:mb-0 text-sm w-64" :for="index">
                             {{ Sector.Sector }}
                         </label>
-                        <input
-                            v-on:keyup="countdown"
+                        <input v-on:keyup="countdown" v-on:input="onInput($event, index)"
                             class=" appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                            :id="index"
-                            type="text"
-                            v-model="Sector.Budget"
-                        />
+                            :id="index" type="text" v-model="Sector.Budget" />
                     </div>
                 </div>
             </div>
-            <div
-                v-if="Sectors.length"
-                class="md:flex md:items-center w-full justify-start py-4"
-            >
-                <p
-                    class="text-right text-small"
-                    v-bind:class="{ 'text-danger': hasError }"
-                >
+            <div v-if="Sectors.length" class="md:flex md:items-center w-full justify-start py-4">
+                <p class="text-right text-small" v-bind:class="{ 'text-danger': hasError }">
                     Sum: {{ remainingCount }}
                 </p>
             </div>
-            <div
-                v-if="Sectors.length"
-                class="md:flex md:items-center w-full justify-end"
-            >
+            <div v-if="Sectors.length" class="md:flex md:items-center w-full justify-end">
                 <div class="md:w-2/3">
                     <button
                         class="shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold px-16 py-4 rounded"
-                        type="submit"
-                    >
+                        type="submit">
                         حفظ
                     </button>
                 </div>
@@ -91,7 +59,8 @@ export default {
             totalSectorYear: 0,
             sumSectorsPerYear: 0,
             remainingCount: 0,
-            hasError: false
+            hasError: false,
+            internalYear: this.year 
         };
     },
     methods: {
@@ -155,7 +124,7 @@ export default {
                 toastr.error("ميزانية السنة لا تطابق ميزانية القطاعات");
             }
         },
-        countdown: function() {
+        countdown: function () {
             this.sumSectorsPerYear = 0;
             this.totalSectorYear = 0;
             this.Sectors.forEach(sector => {
@@ -173,6 +142,20 @@ export default {
             this.remainingCount = this.totalSectorYear - this.sumSectorsPerYear;
             this.hasError = this.sumSectorsPerYear > this.totalSectorYear;
         },
+         convertArabicToEnglish(input) {
+            const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            const englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+            return input.split('').map(char => {
+                const index = arabicNumbers.indexOf(char);
+                return index > -1 ? englishNumbers[index] : char;
+            }).join('');
+        },
+        onInput(event, index) {
+            const value = this.convertArabicToEnglish(event.target.value);
+            this.Sectors[index].Budget = value;
+            this.countdown();
+        },
         async onChange(event) {
             try {
                 const response = await axios.post("/SectorsBudget", {
@@ -185,6 +168,11 @@ export default {
                 console.error(error);
             }
         }
-    }
+    },
+    watch: {
+        year(newYear) {
+            this.internalYear = newYear;
+        }
+    },
 };
 </script>
