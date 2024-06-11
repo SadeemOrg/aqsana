@@ -118,16 +118,6 @@ class PaymentVoucher extends Resource
 
             BelongsTo::make(__('Sector name'), 'Sectors', \App\Nova\Sector::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            // Select::make(__(' اختر  الشركة'), "name")
-            // ->options(function () {
-            //         $user_type_admin_array =  array();
-            //         $Users =  \App\Models\BusesCompany::all();
-            //         foreach ($Users as $User) {
-            //             $user_type_admin_array += [( $User['id']) => ($User['name'])];
-            //         }
-            //         return $user_type_admin_array;
-            //     })
-            //     ->hideFromDetail()->hideFromIndex()->singleSelect(),
 
             Flexible::make(__('اضافة شركة جديدة'), 'add_user')
                 ->limit(1)
@@ -215,7 +205,7 @@ class PaymentVoucher extends Resource
             Files::make(__('voucher'), 'voucher'),
             Files::make(__('file'), 'file'),
 
-            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
+            // HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
 
         ];
