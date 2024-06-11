@@ -30,7 +30,7 @@
                   .  شكرًا  على معاملتك مع جمعية الاقصي<br>
 
                 <div style="padding: 12px 0;">
-                    <a style=" font-size: 16px; font-weight: 700; color: #ffffff; text-decoration: none; background-color: #16803c; border-radius: 6px; padding: 10px 20px; display: inline-block; min-width:100px"
+                    <a style=" font-size: 16px; font-weight: 700; color: #ffffff; text-decoration: none; background-color: #16803c; border-radius: 6px; padding: 10px 20px; display: inline-block; min-width:100px ;font-size:21px"
                     href="{{ config('app.url') . '/generate-pdf/' . $Transaction['id'] }}">
                     تحميل الفاتورة
                     </a>
