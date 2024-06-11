@@ -82,7 +82,8 @@
         "whitecube/nova-flexible-content": "^0.2.8",
         "yassi/nova-nested-form": "^3.0",
         "zeyad/notification": "*",
-        "acme/number-field": "*"
+        "acme/number-field": "*",
+        "acme/bookings-bus": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
@@ -146,6 +147,10 @@
         {
             "type": "path",
             "url": "./nova-components/NumberField"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/BookingsBus"
         }
     ],
     "autoload": {

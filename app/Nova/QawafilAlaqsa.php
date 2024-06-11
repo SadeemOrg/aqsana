@@ -285,21 +285,26 @@ class QawafilAlaqsa extends Resource
                 Text::make(__("TripBooking number"),'TripBooking number',function(){
                     $buss = $this->bus;
                     $number = 0;
+                    $text='';
                     foreach ($buss as $key => $bus) {
                         $number_of_people = TripBooking::where([
                             ['bus_id', $bus->id],
                             ['status', '1'],
                             ['project_id', $this->id],
                         ])->sum('number_of_people');
+                        $text .=  'اسم الباص:    '  . $bus->bus_number . "   " .'عدد  الاشخاص المتبقي:    ' . ($bus->number_of_seats - $number_of_people)."</br>";
 
                         $number +=  $number_of_people ;
 
                     }
-                   return  $number ;
+                    $number +  $number ."</br>";
+                    return $text;
 
-                })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
+
+                })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating()->asHtml(),
 
             ]))->withToolbar(),
+
 
 
 

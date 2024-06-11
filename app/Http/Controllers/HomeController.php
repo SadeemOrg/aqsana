@@ -22,6 +22,7 @@ use App\Models\Sector;
 use App\Models\SmsType;
 use App\Models\TelephoneDirectory;
 use App\Models\Transaction;
+use App\Models\TripBooking;
 use App\Models\User;
 use App\Models\WorkHours;
 use App\Rules\passwordRule;
@@ -34,7 +35,8 @@ use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
-    private   function getDaysInMonth($year, $month) {
+    private   function getDaysInMonth($year, $month)
+    {
         // Create a Carbon date object for the first day of the given month and year
         $date = Carbon::createFromDate($year, $month, 1);
 
@@ -61,7 +63,7 @@ class HomeController extends Controller
             $year = $date->year;
             $month = $date->month;
             $date_from = $year . '-' . $month . '-1';
-            $date_to = $year . '-' . $month . '-'.$this->getDaysInMonth($year, $month);
+            $date_to = $year . '-' . $month . '-' . $this->getDaysInMonth($year, $month);
             $from = date($date_from);
             $to = date($date_to);
 
@@ -100,7 +102,7 @@ class HomeController extends Controller
             $year = $date->year;
             $month = $date->month;
             $date_from = $year . '-' . $month . '-1';
-            $date_to = $year . '-' . $month . '-'.$this->getDaysInMonth($year, $month);
+            $date_to = $year . '-' . $month . '-' . $this->getDaysInMonth($year, $month);
             $from = date($date_from);
             $to = date($date_to);
             $Transactions = Transaction::where("main_type", '1')->where('is_delete', '0')->get();
@@ -459,8 +461,6 @@ class HomeController extends Controller
 
                 $project->save();
             }
-
-
         }
 
 
@@ -768,6 +768,37 @@ class HomeController extends Controller
         $projects = project::whereIn('sector', $Sectors)->whereYear('start_date', '=', $request->Year)->get();
         // dd($projects);
         return $projects;
+    }
+
+    public function getBus(Request $request)
+    {
+
+        $busarray = array();
+        $projext = Project::where('id', $request->id)->with('bus')->first();
+
+        if (isset($projext)) {
+
+
+            $text = '';
+            $buss = $projext->bus;
+            foreach ($buss as $key => $bus) {
+                $number_of_people = TripBooking::where([
+                    ['bus_id', $bus->id],
+                    ['status', '1'],
+                ])->sum('number_of_people');
+
+                $pus = array(
+                    "bus_number" => $bus->bus_number,
+                    "number_of_seats" => $bus->number_of_seats,
+                    "number_of_people" => ($bus->number_of_seats - $number_of_people),
+                );
+
+                array_push($busarray, $pus);
+            }
+        }
+
+
+        return $busarray;
     }
     public function Sectors(Request $request)
     {

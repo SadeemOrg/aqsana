@@ -55,6 +55,7 @@ class ProjectStartEnd extends Action
                         $newQafel->end_date = Carbon::parse($newQafel->end_date)->addDays(1);
 
 
+
                         break;
                     case "2":
                         $newQafel = $model->replicate();
@@ -84,6 +85,15 @@ class ProjectStartEnd extends Action
                 if (isset($newQafel)) {
                     $newQafel->created_at = Carbon::now();
                     $newQafel->save();
+                    $Buses = $model->Bus;
+                    foreach ($Buses as $key => $Bus) {
+                        DB::table('project_bus')
+                            ->updateOrInsert(
+                                ['project_id' => $newQafel->id, 'bus_id' => $Bus->id],
+
+                            );
+                    }
+
                     DB::table('project_status')->insert([
                         'project_id' => $newQafel->id,
                         'status' => 2,

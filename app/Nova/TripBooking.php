@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use Acme\BookingsBus\BookingsBus;
+use Acme\MultiselectField\Multiselect;
 use Acme\NumberField\NumberField;
 use App\Models\Bus;
 use App\Models\Project;
@@ -77,37 +79,37 @@ class TripBooking extends Resource
         $viaResourceId = $request->input('viaResourceId');
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            BelongsTo::make(__('Qawafil'), 'Project', \App\Nova\QawafilAlaqsa::class),
+            BookingsBus::make("", 'hi', function () use ($viaResourceId) {
+                return $viaResourceId;
+            })->hideFromDetail()->hideFromIndex()->readonly(),
 
-            BelongsTo::make(__('Qawafil'), 'Project', \App\Nova\QawafilAlaqsa::class)->rules(new CustomRule($request->number_of_people)),
+            Multiselect::make(__('bus'), 'bus_id')
+                ->options(function () use ($viaResourceId){
+                    $projext = Project::where('id', $viaResourceId)->with('bus')->first();
+                    if (isset($projext)) {
+                        $Area_type_admin_array =  array();
+                        $buss = $projext->bus;
 
-            Textarea::make(__("TripBooking number"), 'TripBooking_number')->resolveUsing(function ($value, $resource) use ($viaResourceId) {
-
-                $projext = Project::where('id', $viaResourceId)->with('bus')->first();
-                if (isset($projext)) {
+                        foreach ($buss as $key => $bus) {
 
 
-                $text = '';
-                $buss = $projext->bus;
-                foreach ($buss as $key => $bus) {
-                    $number_of_people = ModelsTripBooking::where([
-                        ['bus_id', $bus->id],
-                        ['status', '1'],
-                    ])->sum('number_of_people');
+                            $Area_type_admin_array += [$bus['id'] => ($bus['bus_number'])];
+                        }
 
-                    $text .=  'اسم الباص ' . $bus->bus_number . 'عدد  الاشخاص المتبقي' . ($bus->number_of_seats - $number_of_people) . '********';
-                }
-                return $text;
-            }
-            })->hideFromIndex()->hideWhenUpdating()->hideFromDetail()->hideFromIndex()->readonly()->canSee(function () use ($viaResourceId) {
-                return isset($viaResourceId);
-            }),
+                        return $Area_type_admin_array;
+                    }
+
+
+
+                })->singleSelect()->rules('required',new CustomRule($request->number_of_people))->hideFromIndex()->hideFromDetail(),
+
 
             BelongsTo::make(__('user'), 'Users', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('bus'), 'Buses', \App\Nova\Bus::class)
                 ->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('number phone'), 'number_phone')->rules('required'),
-            NumberField::make(__('number_of_people'), 'number_of_people_bus')->hideFromDetail()->hideFromIndex()->rules('required'),
-            NumberField::make(__('number_of_people'), 'number_of_people')->hideWhenCreating()->hideWhenUpdating()->rules('required'),
+            NumberField::make(__('number_of_people'), 'number_of_people')->rules('required'),
 
             NumberField::make(__('reservation_amount'), 'reservation_amount')->rules('required'),
 
@@ -119,49 +121,45 @@ class TripBooking extends Resource
 
     public static function beforeSave(Request $request, $model)
     {
-        $projext = Project::where('id', $request->Project)->with('bus')->first();
-        $buss = $projext->bus;
-        $IsFull = $request->number_of_people_bus;
-        $request->request->remove('number_of_people_bus');
+        // $projext = Project::where('id', $request->Project)->with('bus')->first();
+        // $buss = $projext->bus;
+        // $IsFull = $request->number_of_people_bus;
+        // $request->request->remove('number_of_people_bus');
 
-        foreach ($buss as $key => $bus) {
+        // foreach ($buss as $key => $bus) {
 
-            if ($IsFull > 0) {
+        //     if ($IsFull > 0) {
 
-                $number_of_people = ModelsTripBooking::where([
-                    ['bus_id', $bus->id],
-                    ['status', '1'],
-                ])->sum('number_of_people');
-                if ((($bus->number_of_seats - $number_of_people) >= $IsFull)&&$key == 0 ) {
+        //         $number_of_people = ModelsTripBooking::where([
+        //             ['bus_id', $bus->id],
+        //             ['status', '1'],
+        //         ])->sum('number_of_people');
+        //         if ((($bus->number_of_seats - $number_of_people) >= $IsFull) && $key == 0) {
 
-                    $model->bus_id = $bus->id;
-                    $model->number_of_people=$IsFull;
-                    $model->project_id = $request->project_id;
-                    $IsFull = 0;
-                } else {
-                    if ($key == 0) {
-                        $model->bus_id = $bus->id;
-                        $model->project_id = $request->project_id;
-                        $IsFull = $IsFull - ($bus->number_of_seats - $number_of_people);
-                        $model->number_of_people =($bus->number_of_seats - $number_of_people);
-                    } else {
-                        $ModelsTripBooking = new ModelsTripBooking();
-                        $ModelsTripBooking->project_id = $request->Project;
-                        $ModelsTripBooking->bus_id = $bus->id;
-                        $ModelsTripBooking->booking_type = 2;
-                        $ModelsTripBooking->number_of_people = $IsFull;
-                        $ModelsTripBooking->reservation_amount = 0;
-                        $ModelsTripBooking->number_phone = $request->number_phone;
-                        $ModelsTripBooking->save();
-                        $IsFull = $IsFull ;
-                    }
-
-
-
-
-                }
-            }
-        }
+        //             $model->bus_id = $bus->id;
+        //             $model->number_of_people = $IsFull;
+        //             $model->project_id = $request->project_id;
+        //             $IsFull = 0;
+        //         } else {
+        //             if ($key == 0) {
+        //                 $model->bus_id = $bus->id;
+        //                 $model->project_id = $request->project_id;
+        //                 $IsFull = $IsFull - ($bus->number_of_seats - $number_of_people);
+        //                 $model->number_of_people = ($bus->number_of_seats - $number_of_people);
+        //             } else {
+        //                 $ModelsTripBooking = new ModelsTripBooking();
+        //                 $ModelsTripBooking->project_id = $request->Project;
+        //                 $ModelsTripBooking->bus_id = $bus->id;
+        //                 $ModelsTripBooking->booking_type = 2;
+        //                 $ModelsTripBooking->number_of_people = $IsFull;
+        //                 $ModelsTripBooking->reservation_amount = 0;
+        //                 $ModelsTripBooking->number_phone = $request->number_phone;
+        //                 $ModelsTripBooking->save();
+        //                 $IsFull = $IsFull;
+        //             }
+        //         }
+        //     }
+        // }
 
 
         $model->booking_type = 2;

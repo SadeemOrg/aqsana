@@ -22,6 +22,7 @@ use Laravel\Nova\Fields\Image;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Alaqsa\Project\Project;
 use App\Models\BusesCompany;
+use App\Models\Currency;
 use App\Models\Project as ModelsProject;
 use App\Models\Sector;
 use App\Models\TelephoneDirectory;
@@ -145,6 +146,7 @@ class PaymentVoucher extends Resource
                 '3' => __('bit'),
                 '4' => __('hawale'),
             ])->default('1')->displayUsingLabels(),
+
             NovaDependencyContainer::make([
                 NumberField::make(__('transact amount pay'), 'transact_amount')->rules('required'),
 
@@ -202,10 +204,11 @@ class PaymentVoucher extends Resource
 
                     ])->rules('required'),
             ])->dependsOn("Payment_type", '4')->hideFromIndex(),
+            NumberField::make(__('equivelant_amount'), 'equivelant_amount')->hideWhenCreating()->hideWhenUpdating(),
+
             Files::make(__('voucher'), 'voucher'),
             Files::make(__('file'), 'file'),
 
-            // HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
 
         ];
@@ -224,6 +227,7 @@ class PaymentVoucher extends Resource
         $model->sector = ModelsProject::where('id', json_decode($request->ref_id)->key2)->first()->sector;
         $request->request->remove('ref_id');
         $model->transaction_type = '2';
+
 
 
 
@@ -248,7 +252,6 @@ class PaymentVoucher extends Resource
 
             $model->equivelant_amount = $amount;
 
-            #  // $model->equivelant_amount
         } elseif ($request->Payment_type == '4') {
             $model->transact_amount = 0;
             $amount = 0;
@@ -259,8 +262,9 @@ class PaymentVoucher extends Resource
 
             $model->equivelant_amount = $amount;
         }
+        $Currency= Currency::find($request->Currenc);
+        $model->equivelant_amount = $model->equivelant_amount * $Currency->rate ;
         if (!$request->name) {
-            // dd($request->add_user);
             if ($request->add_user) {
                 # code...
 
