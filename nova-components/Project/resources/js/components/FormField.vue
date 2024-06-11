@@ -106,7 +106,6 @@ export default {
             // alert("ss");
             axios.post("/SectorsPill").then(response => {
                 this.Sectors = response.data;
-                console.log("ddd",this.Sectors);
             });
         },
 

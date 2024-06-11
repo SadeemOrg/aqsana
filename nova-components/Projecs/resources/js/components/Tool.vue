@@ -238,7 +238,6 @@ export default {
             } else if (window.innerWidth < 499) {
                 this.chartWidth = 250;
             }
-            console.log(this.chartWidth);
         });
     },
     methods: {

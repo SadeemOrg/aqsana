@@ -64,7 +64,6 @@ export default {
     },
     Sumschedulelast: function () {
         let sumsArray = {};
-           console.log("dsddsd");
 
        this.schedules.forEach(item => {
 this.totalinput +=item.Transactions

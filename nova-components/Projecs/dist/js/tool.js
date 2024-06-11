@@ -560,7 +560,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             } else if (window.innerWidth < 499) {
                 _this.chartWidth = 250;
             }
-            console.log(_this.chartWidth);
         });
     },
 

@@ -327,13 +327,8 @@ export default {
         },
         UserAdmin: function () {
             axios.post("/UserAdmin").then(response => {
-                console.log("start");
-                console.log(this.Admin);
                 this.Admin = response.data;
 
-                console.log("user admin");
-                console.log(this.Admin);
-                console.log("finsh");
             });
         },
         async myNotifications() {
@@ -411,7 +406,6 @@ export default {
                 .then(response => {
                     this.allNotifications = response.data;
                 });
-            console.log(this.allNotifications);
         },
         toggleTabs: function (tabNumber) {
             this.openTab = tabNumber;
