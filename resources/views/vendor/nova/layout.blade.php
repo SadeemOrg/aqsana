@@ -252,7 +252,6 @@
 
         .btn.btn-default.btn-primary.flex.items-center.justify-center {
             padding: 0.375rem;
-            /* 6px */
         }
     </style>
 
