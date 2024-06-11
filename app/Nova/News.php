@@ -107,7 +107,7 @@ class News extends Resource
                 ->readonly(function () {
                     return $this->status === '1';
                 })->text(__('post'))->showLoadingAnimation()
-                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                ->loadingColor('#fff') ->hideWhenCreating()->hideWhenUpdating(),
             Boolean::make(__('is posted'), 'status')->rules('required'),
             Text::make(__('TITLE'), 'title')->rules('required'),
             Textarea::make(__('Sub_text'), 'description')->rules('required'),

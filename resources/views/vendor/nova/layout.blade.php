@@ -97,13 +97,14 @@
         .show {
             display: block;
         }
-        .arrow-icon {
-        transition: transform 0.3s ease;
-    }
 
-    .arrow-icon.flipped {
-        transform: rotate(180deg);
-    }
+        .arrow-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .arrow-icon.flipped {
+            transform: rotate(180deg);
+        }
 
         .dropMenu li a {
             display: block;
@@ -250,8 +251,8 @@
         }
 
         .btn.btn-default.btn-primary.flex.items-center.justify-center {
-            padding: 16;
-
+            padding: 0.375rem;
+            /* 6px */
         }
     </style>
 
@@ -429,34 +430,34 @@
         Nova.liftOff()
     </script>
     <script>
-$(document).ready(function() {
-    // Handle click event for main items
-    $('.main-items').click(function() {
-        $('.w-sidebar').removeClass('sidebar-hidden');
-        $('.room-sort').slideUp();
-        // Remove flipped class from all arrow icons
-        $('.arrow-icon').removeClass('flipped');
-        $(this).next('.room-sort').slideToggle();
-    });
+        $(document).ready(function() {
+            // Handle click event for main items
+            $('.main-items').click(function() {
+                $('.w-sidebar').removeClass('sidebar-hidden');
+                $('.room-sort').slideUp();
+                // Remove flipped class from all arrow icons
+                $('.arrow-icon').removeClass('flipped');
+                $(this).next('.room-sort').slideToggle();
+            });
 
-    // Handle click event for dropdown buttons using event delegation
-    $(document).on('click', '.dropdown .dropBtn', function(event) {
-        event.preventDefault();
-        const arrowIcon = $(this).find('.arrow-icon');
-        // Toggle flipped class for the clicked arrow icon
-        arrowIcon.toggleClass('flipped');
-        // Remove flipped class from all other arrow icons
-        $('.arrow-icon').not(arrowIcon).removeClass('flipped');
-        $('.w-sidebar').removeClass('sidebar-hidden');
-        // Close all other dropdown menus
-        $('.dropMenu').not($(this).next('.dropMenu')).slideUp();
-        // Slide toggle for the clicked dropdown menu
-        $(this).next('.dropMenu').slideToggle();
-    });
+            // Handle click event for dropdown buttons using event delegation
+            $(document).on('click', '.dropdown .dropBtn', function(event) {
+                event.preventDefault();
+                const arrowIcon = $(this).find('.arrow-icon');
+                // Toggle flipped class for the clicked arrow icon
+                arrowIcon.toggleClass('flipped');
+                // Remove flipped class from all other arrow icons
+                $('.arrow-icon').not(arrowIcon).removeClass('flipped');
+                $('.w-sidebar').removeClass('sidebar-hidden');
+                // Close all other dropdown menus
+                $('.dropMenu').not($(this).next('.dropMenu')).slideUp();
+                // Slide toggle for the clicked dropdown menu
+                $(this).next('.dropMenu').slideToggle();
+            });
 
-    // Slide down active router links
-    $('.router-link-active').parent().parent('.dropMenu').slideDown();
-});
+            // Slide down active router links
+            $('.router-link-active').parent().parent('.dropMenu').slideDown();
+        });
 
 
 

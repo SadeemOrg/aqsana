@@ -84,13 +84,6 @@ class ProjectNews extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Boolean::make(__('posted For App'), 'report_status')->rules('required'),
 
-            // ActionButton::make(__('POST NEWS'))
-            // ->action((new PostProjectNews) ->confirmText('Are you sure you want to read  this Massage?')
-            // ->confirmButtonText(__('post'))
-            // ->cancelButtonText(__('Dont post')), $this->id) ->readonly(function () {
-            //     return $this->report_status === '1';
-            // })->text(__('post'))->showLoadingAnimation()
-            // ->loadingColor('#fff') ->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
 
 
             Select::make(__("project type"), "project_type")->options([

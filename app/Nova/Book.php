@@ -91,7 +91,7 @@ class Book extends Resource
                 ->readonly(function () {
                     return $this->post === 1;
                 })->text(__('post'))->showLoadingAnimation()
-                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                ->loadingColor('#fff') ->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('Name'), 'name')->rules('required', 'max:255'),
             Text::make(__('author'), 'author'),
             Tiptap::make(__('description'), 'description')

@@ -28,7 +28,7 @@ class PostBook extends Action
         ]);
     }
 
-    return action::message('the done');
+
     }
 
     /**

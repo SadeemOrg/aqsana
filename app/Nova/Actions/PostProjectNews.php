@@ -28,7 +28,7 @@ class PostProjectNews extends Action
         ]);
     }
 
-    return action::message('the done');
+
     }
 
     /**

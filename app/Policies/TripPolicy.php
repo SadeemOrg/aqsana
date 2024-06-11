@@ -53,7 +53,7 @@ class TripPolicy
      */
     public function update(User $user, Trip $trip)
     {
-          return true;
+          return false;
     }
 
     /**

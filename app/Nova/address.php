@@ -6,6 +6,7 @@ use Acme\MultiselectField\Multiselect;
 use App\Models\Area;
 use App\Models\City;
 use App\Nova\Actions\ExportAddress;
+use App\Rules\AlhisalatMap;
 use devops\MapAddress\MapAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -122,7 +123,7 @@ class address extends Resource
 
             MapsAddress::make(__('Address'), 'current_location')
                 ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036])
-                ->types(['establishment'])->rules('required'),
+                ->types(['establishment'])->rules(new AlhisalatMap()),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];

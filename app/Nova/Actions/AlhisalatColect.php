@@ -56,7 +56,7 @@ class AlhisalatColect extends Action
             }
         }
 
-        return action::message('the done');
+
     }
 
     /**

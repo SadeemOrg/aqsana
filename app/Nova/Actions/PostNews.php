@@ -28,7 +28,7 @@ class PostNews extends Action
         ]);
     }
 
-    return action::message('the done');
+
     }
 
     /**

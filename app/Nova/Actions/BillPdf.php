@@ -33,7 +33,7 @@ class BillPdf extends Action
 
     }
 
-    return action::message('the done');
+
     }
 
     /**

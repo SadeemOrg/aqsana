@@ -34,7 +34,7 @@ class ReadMessage extends Action
         ]);
     }
 
-    return action::message('the done');
+
 
     }
 
