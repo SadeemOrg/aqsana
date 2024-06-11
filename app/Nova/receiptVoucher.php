@@ -108,12 +108,12 @@ class receiptVoucher extends Resource
             ActionButton::make(__('colect'))
             ->action((new AlhisalatStatuscompleted)->confirmText(__('Are you sure you want to Surrender  this Alhisalat?'))
                     ->confirmButtonText(__('colect')),
-                $this->id
+                [$this->id]
             )
             ->readonly(function () {
                 return $this->status > '3';
             })->text(__('colect'))->showLoadingAnimation()
-            ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+            ->loadingColor('#fff') ->hideWhenCreating()->hideWhenUpdating(),
 
             BelongsTo::make(__('saved addresss'), 'address', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 

@@ -2,6 +2,7 @@
 
 namespace App\Nova\Actions;
 
+use Acme\NumberField\NumberField;
 use App\Models\Project;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -77,7 +78,7 @@ class AlhisalatStatuscompleted extends Action
                 ]
             );
 
-        return action::message('the done');
+
     }
 
     /**
@@ -89,7 +90,8 @@ class AlhisalatStatuscompleted extends Action
     {
         return [
 
-            Text::make(__("alhisala amount"), "amount"),
+            NumberField::make(__("alhisala amount"), "amount")->rules('required'),
+
             // Boolean::make("Add new  alhisala", "new_alhasele")
         ];
     }

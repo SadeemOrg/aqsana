@@ -59,8 +59,8 @@ class DeleteBill extends Action
     public function fields()
     {
         return [
-            Date::make(__("transaction_date"), "transaction_date"),
-            Text::make(__("return money"), "return_money"),
+            Date::make(__("transaction_date"), "transaction_date")->rules('required'),
+            Text::make(__("return money"), "return_money")->rules('required'),
         ];
     }
 }

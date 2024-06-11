@@ -82,7 +82,7 @@ public static function groupOrder() {
                 return $this->is_read === '0';
             })
             ->text(__('Read'))->showLoadingAnimation()
-            ->loadingColor('#fff') ->svg('VueComponentName'),
+            ->loadingColor('#fff')  ,
 
             ActionButton::make(__('ReadMessage'))
 

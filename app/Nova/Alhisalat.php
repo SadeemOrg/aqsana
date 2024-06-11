@@ -28,6 +28,7 @@ use App\Nova\Filters\AlhisalatArea;
 use App\Nova\Filters\AlhisalatCite;
 use App\Nova\Filters\AlhisalatStatusFilters;
 use App\Nova\Metrics\NewAlhisalat;
+use App\Rules\AlhisalatMap;
 use AwesomeNova\Cards\FilterCard;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
@@ -117,76 +118,79 @@ class Alhisalat extends Resource
 
     public function fields(Request $request)
     {
+
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
             Text::make(__("number alhisala"), "number_alhisala")
                 ->readonly()->hideWhenCreating()->hideWhenUpdating(),
 
+
+
             ActionButton::make(__('colect'))
                 ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to colect  this Alhisalat?'))
                     ->confirmButtonText(__('colect'))
-                    ->cancelButtonText(__('Dont colect')), $this->id)
+                    ->cancelButtonText(__('Dont colect')), [$this->id])
                 ->canSee(function () {
                     return $this->status === '1';
                 })->text(__('colect'))->showLoadingAnimation()
-                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
 
 
             ActionButton::make(__('colect'))
                 ->action((new AlhisalatSurrender)->confirmText(__('Are you sure you want to Surrender  this Alhisalat?'))
                         ->confirmButtonText(__('Surrender')),
-                    $this->id
+                    [$this->id]
                 )
                 ->canSee(function () {
                     return $this->status === '2';
                 })->text(__('AlhisalatSurrender'))->showLoadingAnimation()
-                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
             ActionButton::make(__('colect'))
                 ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
                     ->confirmButtonText(__('colect '))
-                    ->cancelButtonText(__('sent done')), $this->id)
+                    ->cancelButtonText(__('sent done')), [$this->id])
                 ->canSee(function () {
                     return $this->status  >= '3';
                 })->readonly()->text(__('sent done'))->showLoadingAnimation()
-                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
 
             ActionButton::make(__('colect'))
                 ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
                     ->confirmButtonText(__('colect '))
-                    ->cancelButtonText(__('sent done')), $this->id)
+                    ->cancelButtonText(__('sent done')), [$this->id])
                 ->canSee(function () {
                     return $this->status == '0';
                 })->readonly()->text(__('لا يمكن الجمع '))->showLoadingAnimation()->buttonColor('#3374FF')
-                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
-
-
+                ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
 
             ActionButton::make(__('حصالة مفقودة'))
+
                 ->action((new AlhisalatDelete)
                     ->confirmText(__('Are you sure you want to colect  this Alhisalat?'))
                     ->confirmButtonText(__('حصالة مفقودة'))
-                    ->cancelButtonText(__('الغاء')), $this->id)
+                    ->cancelButtonText(__('الغاء')), [$this->id])
                 ->canSee(function () {
                     return $this->status != '0';
                 })->readonly(function () {
                     return $this->status  >= '3';
                 })
                 ->text(__('حصالة مفقودة'))->showLoadingAnimation()
-                ->loadingColor('#FF3333')->buttonColor('#FF3333')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                ->loadingColor('#FF3333')->buttonColor('#FF3333')->hideWhenCreating()->hideWhenUpdating(),
 
             ActionButton::make(__('colect'))
                 ->action((new AlhisalatColect)->confirmText(__('Are you sure you want to read  this Alhisalat?'))
                     ->confirmButtonText(__('colect '))
-                    ->cancelButtonText(__('sent done')), $this->id)
+                    ->cancelButtonText(__('sent done')), [$this->id])
                 ->canSee(function () {
                     return $this->status == '0';
                 })->readonly()->text(__('delete done'))->showLoadingAnimation()->buttonColor('#3374FF')
-                ->loadingColor('#fff')->svg('VueComponentName')->hideWhenCreating()->hideWhenUpdating(),
+                ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
+
 
 
 
@@ -206,22 +210,24 @@ class Alhisalat extends Resource
                 ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
                     return null;
                 }),
+
+
+
             BelongsTo::make(__('saved addresss'), 'address', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
+
+
             Flexible::make(__('newadres'), 'newadres')
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    $model->$attribute = null;
-                })->limit(1)
+                ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('Add new bus'), 'bus', [
-                    Text::make(__('Name'), "name_address")    ->rules('required'),
+                    Text::make(__('Name'), "name_address")->rules('required'),
                     Text::make(__("description"), "description")->rules('required'),
                     Text::make(__("phone number"), "phone_number_address")->rules('required'),
                     MapsAddress::make(__('Address'), 'current_location')
                         ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036])
-                        ->types(['establishment'])->rules('required'),
-
+                        ->types(['establishment'])->rules(new AlhisalatMap(), 'required'),
                 ])->hideWhenUpdating(),
 
             Multiselect::make(__("Status"), "status")->options([

@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Acme\NumberField\NumberField;
 use App\Models\Bus;
 use App\Models\Project;
 use App\Models\TripBooking as ModelsTripBooking;
@@ -15,6 +16,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Validation\ValidationException;
 use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Textarea;
 
 class TripBooking extends Resource
 {
@@ -44,9 +46,10 @@ class TripBooking extends Resource
     public static $title = 'id';
     public static function availableForNavigation(Request $request)
     {
+        return false;
         if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("TripBooking",  $request->user()->userrole()))) {
-            return true;
         } else return false;
+        return true;
     }
     /**
      * The columns that should be searched.
@@ -65,17 +68,48 @@ class TripBooking extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public function authorizedToUpdate(Request $request)
+    {
+        return false;
+    }
     public function fields(Request $request)
     {
+        $viaResourceId = $request->input('viaResourceId');
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
             BelongsTo::make(__('Qawafil'), 'Project', \App\Nova\QawafilAlaqsa::class)->rules(new CustomRule($request->number_of_people)),
+
+            Textarea::make(__("TripBooking number"), 'TripBooking_number')->resolveUsing(function ($value, $resource) use ($viaResourceId) {
+
+                $projext = Project::where('id', $viaResourceId)->with('bus')->first();
+                if (isset($projext)) {
+
+
+                $text = '';
+                $buss = $projext->bus;
+                foreach ($buss as $key => $bus) {
+                    $number_of_people = ModelsTripBooking::where([
+                        ['bus_id', $bus->id],
+                        ['status', '1'],
+                    ])->sum('number_of_people');
+
+                    $text .=  'اسم الباص ' . $bus->bus_number . 'عدد  الاشخاص المتبقي' . ($bus->number_of_seats - $number_of_people) . '********';
+                }
+                return $text;
+            }
+            })->hideFromIndex()->hideWhenUpdating()->hideFromDetail()->hideFromIndex()->readonly()->canSee(function () use ($viaResourceId) {
+                return isset($viaResourceId);
+            }),
+
             BelongsTo::make(__('user'), 'Users', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('bus'), 'Buses', \App\Nova\Bus::class)
                 ->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('number phone'), 'number_phone')->rules('required'),
-            Text::make(__('number_of_people'), 'number_of_people')->rules('required'),
-            Text::make(__('reservation_amount'), 'reservation_amount')->rules('required'),
+            NumberField::make(__('number_of_people'), 'number_of_people_bus')->hideFromDetail()->hideFromIndex()->rules('required'),
+            NumberField::make(__('number_of_people'), 'number_of_people')->hideWhenCreating()->hideWhenUpdating()->rules('required'),
+
+            NumberField::make(__('reservation_amount'), 'reservation_amount')->rules('required'),
 
 
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
@@ -87,25 +121,48 @@ class TripBooking extends Resource
     {
         $projext = Project::where('id', $request->Project)->with('bus')->first();
         $buss = $projext->bus;
-        $IsFull = 1;
-
+        $IsFull = $request->number_of_people_bus;
+        $request->request->remove('number_of_people_bus');
 
         foreach ($buss as $key => $bus) {
-            if ($IsFull == 1) {
 
-                $number_of_people =  ModelsTripBooking::where([
+            if ($IsFull > 0) {
+
+                $number_of_people = ModelsTripBooking::where([
                     ['bus_id', $bus->id],
                     ['status', '1'],
                 ])->sum('number_of_people');
-                $number_of_people += $request->number_of_people;
-
-                if (($number_of_people  < $bus->number_of_seats)) {
+                if ((($bus->number_of_seats - $number_of_people) >= $IsFull)&&$key == 0 ) {
 
                     $model->bus_id = $bus->id;
+                    $model->number_of_people=$IsFull;
+                    $model->project_id = $request->project_id;
                     $IsFull = 0;
+                } else {
+                    if ($key == 0) {
+                        $model->bus_id = $bus->id;
+                        $model->project_id = $request->project_id;
+                        $IsFull = $IsFull - ($bus->number_of_seats - $number_of_people);
+                        $model->number_of_people =($bus->number_of_seats - $number_of_people);
+                    } else {
+                        $ModelsTripBooking = new ModelsTripBooking();
+                        $ModelsTripBooking->project_id = $request->Project;
+                        $ModelsTripBooking->bus_id = $bus->id;
+                        $ModelsTripBooking->booking_type = 2;
+                        $ModelsTripBooking->number_of_people = $IsFull;
+                        $ModelsTripBooking->reservation_amount = 0;
+                        $ModelsTripBooking->number_phone = $request->number_phone;
+                        $ModelsTripBooking->save();
+                        $IsFull = $IsFull ;
+                    }
+
+
+
+
                 }
             }
         }
+
 
         $model->booking_type = 2;
     }
