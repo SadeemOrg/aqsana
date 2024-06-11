@@ -26,11 +26,13 @@
                 </a>
             </div>
             <div style="border: 2px solid #e9ecef; border-radius: 10px; background-color: white; padding: 46px 24px; text-align: center;">
-                <h1 style="font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px; margin: 0;">شكرًا  على معاملتك معنا. لتحميل الفاتورة اضغط هنا</h1>
+                <h1 style="font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px; margin: 0;">
+                    شكرًا  على معاملتك مع جمعية الاقصي<br>.
+                    
                 <div style="padding: 12px 0;">
                     <a style="font-size: 16px; font-weight: 700; color: #ffffff; text-decoration: none; background-color: #1a82e2; border-radius: 6px; padding: 10px 20px; display: inline-block;"
                     href="{{ config('app.url') . '/generate-pdf/' . $Transaction['id'] }}">
-                    تحميل
+                    تحميل الفاتورة
                     </a>
                 </div>
             </div>
