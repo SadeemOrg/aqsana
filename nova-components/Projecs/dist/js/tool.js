@@ -590,7 +590,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 response = _context.sent;
 
                                 this.years = response.data;
-                                console.log("xxx");
                                 this.includedYears = Object.values(this.years).map(function (item) {
                                     return parseInt(item.year);
                                 });
@@ -604,21 +603,21 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                         this.addYears.push(year);
                                     }
                                 }
-                                _context.next = 16;
+                                _context.next = 15;
                                 break;
 
-                            case 13:
-                                _context.prev = 13;
+                            case 12:
+                                _context.prev = 12;
                                 _context.t0 = _context["catch"](0);
 
                                 console.error(_context.t0);
 
-                            case 16:
+                            case 15:
                             case "end":
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[0, 13]]);
+                }, _callee, this, [[0, 12]]);
             }));
 
             function getYears() {

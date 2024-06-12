@@ -256,7 +256,6 @@ export default {
             try {
                 const response = await axios.post("/year");
                 this.years = response.data;
-                console.log("xxx")
                 this.includedYears = Object.values(this.years).map(
                     item => parseInt(item.year)
                 );

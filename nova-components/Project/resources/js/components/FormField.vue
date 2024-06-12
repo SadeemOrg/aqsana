@@ -89,9 +89,6 @@ export default {
                               else{
                                  this.projectshow = false;
                               }
-
-
-
         },
         Sectors: function() {
             // console.log("dddjdskk");

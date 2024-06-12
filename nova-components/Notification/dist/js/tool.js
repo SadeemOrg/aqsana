@@ -278,7 +278,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\ntable {\n    font-family: arial, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\ntd,\nth {\n    border: 1px solid #dddddd;\n\n    padding: 8px;\n}\n.for-mobile-scoll-x {\n    min-width: 800px;\n}\n", ""]);
+exports.push([module.i, "\ntable {\n    font-family: arial, sans-serif;\n    border-collapse: collapse;\n    /* width: 100%; */\n}\ntd,\nth {\n    border: 1px solid #dddddd;\n\n    padding: 8px;\n}\n.for-mobile-scoll-x {\n    min-width: 800px;\n}\n", ""]);
 
 // exports
 
@@ -640,107 +640,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2646,7 +2545,7 @@ var render = function() {
             "div",
             {
               staticClass:
-                "flex flex-row items-center justify-start w-full my-4 gap-x-2"
+                "flex flex-row xl:flex-nowrap flex-wrap gap-y-3 items-center justify-start w-full my-4 gap-x-2"
             },
             [
               _c(
@@ -2775,12 +2674,12 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "overflow-x-auto" }, [
+          _c("div", { staticClass: "overflow-x-auto bg-white shadow-lg" }, [
             _c(
               "div",
               {
                 staticClass:
-                  "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scroll-x",
+                  "relative flex flex-col min-w-0 break-words w-full mb-6 rounded p-4 for-mobile-scroll-x",
                 class: {
                   hidden: _vm.openTab !== 1,
                   block: _vm.openTab === 1
@@ -2795,7 +2694,7 @@ var render = function() {
                     _vm._v(" "),
                     _vm._l(_vm.myNotification, function(Notification) {
                       return _c("tr", { key: Notification.id }, [
-                        _c("td", [
+                        _c("td", { staticClass: "min-w-[150px]" }, [
                           _vm._v(
                             "\n                                " +
                               _vm._s(Notification.Notifications.Notifications) +
@@ -2803,72 +2702,79 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _c("td", { staticClass: "flex w-full h-full" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white",
-                              attrs: { for: "search" }
-                            },
-                            [_vm._v("البحث")]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "relative w-full" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: Notification.note,
-                                  expression: "Notification.note"
-                                }
-                              ],
-                              staticClass:
-                                "block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-                              attrs: {
-                                type: "text",
-                                id: "fname",
-                                required: ""
-                              },
-                              domProps: { value: Notification.note },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    Notification,
-                                    "note",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass: "flex w-full h-full",
+                            staticStyle: { "min-width": "210px" }
+                          },
+                          [
                             _c(
-                              "button",
+                              "label",
                               {
                                 staticClass:
-                                  "text-white absolute left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
-                                attrs: { type: "submit" },
+                                  "mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white",
+                                attrs: { for: "" }
+                              },
+                              [_vm._v("البحث")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "relative w-full" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: Notification.note,
+                                    expression: "Notification.note"
+                                  }
+                                ],
+                                staticClass:
+                                  "block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                                attrs: {
+                                  type: "text",
+                                  id: "fname",
+                                  required: ""
+                                },
+                                domProps: { value: Notification.note },
                                 on: {
-                                  click: function($event) {
-                                    return _vm.AddNote(
-                                      Notification.id,
-                                      Notification.note
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      Notification,
+                                      "note",
+                                      $event.target.value
                                     )
                                   }
                                 }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                        إضافة\n                                    "
-                                )
-                              ]
-                            )
-                          ])
-                        ]),
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "text-white absolute left-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                                  attrs: { type: "submit" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.AddNote(
+                                        Notification.id,
+                                        Notification.note
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        إضافة\n                                    "
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        ),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(Notification.sender.name))]),
                         _vm._v(" "),
@@ -2958,7 +2864,7 @@ var render = function() {
                             "button",
                             {
                               staticClass:
-                                "shadow bg-red-500 hover:bg-red-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded",
+                                "shadow bg-red-500 hover:bg-red-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-4 rounded",
                               attrs: { type: "submit" },
                               on: {
                                 click: function($event) {
@@ -3313,12 +3219,12 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "overflow-x-auto" }, [
+          _c("div", { staticClass: "overflow-x-auto bg-white shadow-lg" }, [
             _c(
               "div",
               {
                 staticClass:
-                  "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scoll-x",
+                  "relative flex flex-col min-w-0 break-words w-full mb-6 rounded p-4 for-mobile-scoll-x",
                 class: {
                   hidden: _vm.openTab !== 4,
                   block: _vm.openTab === 4
