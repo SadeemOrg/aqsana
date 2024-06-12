@@ -537,8 +537,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             tabs: [{ index: 1, name: "الميزانيات" }, { index: 2, name: "اضافة جديد" }, { index: 3, name: "حذف" }, { index: 4, name: "احصائيات" }],
             projectshow: false,
             chartWidth: 400,
-            remainingCount: 0
-            // includedYears: []
+            remainingCount: 0,
+            includedYears: []
         };
     },
     beforeMount: function beforeMount() {
@@ -548,12 +548,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     mounted: function mounted() {
         var _this = this;
 
-        var startYear = 2022;
-        var endYear = 2050;
-
-        for (var year = startYear; year <= endYear; year++) {
-            this.addYears.push(year);
-        }
         window.addEventListener("resize", function () {
             if (window.innerWidth < 1220 && window.innerWidth > 500) {
                 _this.chartWidth = 300;
@@ -583,7 +577,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         },
         getYears: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var response;
+                var response, startYear, endYear, year;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
@@ -596,31 +590,35 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 response = _context.sent;
 
                                 this.years = response.data;
-                                // this.includedYears = Object.values(this.years).map(
-                                //     item => parseInt(item.year)
-                                // );
-                                // const startYear = 2022;
-                                // const endYear = 2050;
-                                // for (let year = startYear; year <= endYear; year++) {
-                                //     if (!this.includedYears.includes(year)) {
-                                //         this.addYears.push(year);
-                                //     }
-                                // }
-                                _context.next = 10;
+                                console.log("xxx");
+                                this.includedYears = Object.values(this.years).map(function (item) {
+                                    return parseInt(item.year);
+                                });
+
+                                startYear = 2022;
+                                endYear = 2050;
+
+                                this.addYears = []; // Reset addYears array
+                                for (year = startYear; year <= endYear; year++) {
+                                    if (!this.includedYears.includes(year) && year !== this.newyear) {
+                                        this.addYears.push(year);
+                                    }
+                                }
+                                _context.next = 16;
                                 break;
 
-                            case 7:
-                                _context.prev = 7;
+                            case 13:
+                                _context.prev = 13;
                                 _context.t0 = _context["catch"](0);
 
                                 console.error(_context.t0);
 
-                            case 10:
+                            case 16:
                             case "end":
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[0, 7]]);
+                }, _callee, this, [[0, 13]]);
             }));
 
             function getYears() {
@@ -629,6 +627,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return getYears;
         }(),
+
         getSector: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
                 var response;
@@ -742,7 +741,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.budgetsOfyear = this.convertArabicToEnglish(event.target.value);
             this.countdown();
         },
-        savenew: function () {
+        saveNew: function () {
             var _ref6 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
                 var sum, response;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
@@ -756,7 +755,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 });
 
                                 if (!(this.budgetsOfyear >= sum)) {
-                                    _context4.next = 19;
+                                    _context4.next = 21;
                                     break;
                                 }
 
@@ -783,11 +782,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 };
                                 toastr.success("تم انشاء ميزانية السنة بنجاح");
                                 this.getYears();
-                                _context4.next = 17;
+                                this.budgetsOfyear = 0;
+                                this.newSectors.forEach(function (element) {
+                                    element.Budget = 0;
+                                });
+                                _context4.next = 19;
                                 break;
 
-                            case 12:
-                                _context4.prev = 12;
+                            case 14:
+                                _context4.prev = 14;
                                 _context4.t0 = _context4["catch"](3);
 
                                 toastr.options = {
@@ -803,11 +806,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 toastr.error("حدث خطأ أثناء الحفظ");
                                 console.error(_context4.t0);
 
-                            case 17:
-                                _context4.next = 21;
+                            case 19:
+                                _context4.next = 23;
                                 break;
 
-                            case 19:
+                            case 21:
                                 toastr.options = {
                                     closeButton: true,
                                     debug: false,
@@ -821,19 +824,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                                 toastr.error("ميزانية السنة لا تطابق ميزانية القطاعات");
 
-                            case 21:
+                            case 23:
                             case "end":
                                 return _context4.stop();
                         }
                     }
-                }, _callee4, this, [[3, 12]]);
+                }, _callee4, this, [[3, 14]]);
             }));
 
-            function savenew() {
+            function saveNew() {
                 return _ref6.apply(this, arguments);
             }
 
-            return savenew;
+            return saveNew;
         }()
     },
     computed: {
@@ -9958,6 +9961,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                         _this.totalSectorYear = parseInt(sector.Budget);
                                     }
                                 });
+
                                 this.Sectors.forEach(function (sector) {
                                     if (sector.sector_id != 0) {
                                         if (sector.Budget) {
@@ -9966,7 +9970,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     }
                                 });
 
-                                if (!(this.sumSectorsPerYear <= this.totalSectorYear)) {
+                                if (!(this.sumSectorsPerYear <= this.totalSectorYear && this.year !== '0')) {
                                     _context.next = 20;
                                     break;
                                 }
@@ -10013,23 +10017,37 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 console.error(_context.t0);
 
                             case 18:
-                                _context.next = 22;
+                                _context.next = 21;
                                 break;
 
                             case 20:
-                                toastr.options = {
-                                    closeButton: true,
-                                    debug: false,
-                                    positionClass: "toast-bottom-right",
-                                    onclick: null,
-                                    showDuration: "300",
-                                    hideDuration: "2000",
-                                    showMethod: "fadeIn",
-                                    hideMethod: "fadeOut"
-                                };
-                                toastr.error("ميزانية السنة لا تطابق ميزانية القطاعات");
+                                if (this.year == '0') {
+                                    toastr.options = {
+                                        closeButton: true,
+                                        debug: false,
+                                        positionClass: "toast-bottom-right",
+                                        onclick: null,
+                                        showDuration: "300",
+                                        hideDuration: "2000",
+                                        showMethod: "fadeIn",
+                                        hideMethod: "fadeOut"
+                                    };
+                                    toastr.error("الرجاء اختيار السنة التي تريد تعديل االميزانية لها!");
+                                } else {
+                                    toastr.options = {
+                                        closeButton: true,
+                                        debug: false,
+                                        positionClass: "toast-bottom-right",
+                                        onclick: null,
+                                        showDuration: "300",
+                                        hideDuration: "2000",
+                                        showMethod: "fadeIn",
+                                        hideMethod: "fadeOut"
+                                    };
+                                    toastr.error("ميزانية السنة لا تطابق ميزانية القطاعات");
+                                }
 
-                            case 22:
+                            case 21:
                             case "end":
                                 return _context.stop();
                         }
@@ -11386,7 +11404,7 @@ var render = function() {
                         on: {
                           submit: function($event) {
                             $event.preventDefault()
-                            return _vm.savenew.apply(null, arguments)
+                            return _vm.saveNew.apply(null, arguments)
                           }
                         }
                       },

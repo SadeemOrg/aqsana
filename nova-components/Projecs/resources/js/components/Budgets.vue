@@ -72,6 +72,7 @@ export default {
                     this.totalSectorYear = parseInt(sector.Budget);
                 }
             });
+           
             this.Sectors.forEach(sector => {
                 if (sector.sector_id != 0) {
                     if (sector.Budget) {
@@ -79,7 +80,7 @@ export default {
                     }
                 }
             });
-            if (this.sumSectorsPerYear <= this.totalSectorYear) {
+            if (this.sumSectorsPerYear <= this.totalSectorYear&&this.year !== '0' ) {
                 try {
                     const response = await axios.post("/save", {
                         year: this.year,
@@ -110,7 +111,20 @@ export default {
                     toastr.error("خطأ في الحفظ");
                     console.error(error);
                 }
-            } else {
+            }else if(this.year=='0'){
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.error("الرجاء اختيار السنة التي تريد تعديل االميزانية لها!");
+            } 
+            else {
                 toastr.options = {
                     closeButton: true,
                     debug: false,

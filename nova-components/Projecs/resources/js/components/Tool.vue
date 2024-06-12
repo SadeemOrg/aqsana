@@ -53,7 +53,7 @@
                                             id="inline-full-name" type="text" v-model="budgetsOfyear" />
                                     </div>
                                 </div>
-                                <form @submit.prevent="savenew" class="add-form py-4">
+                                <form @submit.prevent="saveNew" class="add-form py-4">
                                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4">
                                         <div v-for="(Sector, index) in newSectors" :key="Sector.Sector"
                                             :value="Sector.Sector" class="mb-3">
@@ -218,7 +218,7 @@ export default {
             projectshow: false,
             chartWidth: 400,
             remainingCount: 0,
-            // includedYears: []
+            includedYears: []
         };
     },
     beforeMount() {
@@ -226,12 +226,6 @@ export default {
         this.getSector();
     },
     mounted() {
-        const startYear = 2022;
-        const endYear = 2050;
-
-        for (let year = startYear; year <= endYear; year++) {
-            this.addYears.push(year);
-        }
         window.addEventListener("resize", () => {
             if (window.innerWidth < 1220 && window.innerWidth > 500) {
                 this.chartWidth = 300;
@@ -262,20 +256,24 @@ export default {
             try {
                 const response = await axios.post("/year");
                 this.years = response.data;
-                // this.includedYears = Object.values(this.years).map(
-                //     item => parseInt(item.year)
-                // );
-                // const startYear = 2022;
-                // const endYear = 2050;
-                // for (let year = startYear; year <= endYear; year++) {
-                //     if (!this.includedYears.includes(year)) {
-                //         this.addYears.push(year);
-                //     }
-                // }
+                console.log("xxx")
+                this.includedYears = Object.values(this.years).map(
+                    item => parseInt(item.year)
+                );
+
+                const startYear = 2022;
+                const endYear = 2050;
+                this.addYears = []; // Reset addYears array
+                for (let year = startYear; year <= endYear; year++) {
+                    if (!this.includedYears.includes(year) && year !== this.newyear) {
+                        this.addYears.push(year);
+                    }
+                }
             } catch (error) {
                 console.error(error);
             }
         },
+
         async getSector() {
             try {
                 const response = await axios.post("/Sectors");
@@ -331,7 +329,7 @@ export default {
             this.budgetsOfyear = this.convertArabicToEnglish(event.target.value);
             this.countdown();
         },
-        async savenew() {
+        async saveNew() {
             let sum = 0;
             this.newSectors.forEach(element => {
                 sum += parseInt(element["Budget"]);
@@ -355,6 +353,10 @@ export default {
                     };
                     toastr.success("تم انشاء ميزانية السنة بنجاح");
                     this.getYears();
+                    this.budgetsOfyear = 0;
+                    this.newSectors.forEach(element => {
+                        element.Budget = 0;
+                    });
                 } catch (error) {
                     toastr.options = {
                         closeButton: true,
