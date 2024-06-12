@@ -93,6 +93,7 @@ class QawafilAlaqsa extends Resource
         return $query;
     }
 
+
     public function fields(Request $request)
     {
         return [
@@ -231,16 +232,13 @@ class QawafilAlaqsa extends Resource
                 BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
-                        $id = Auth::id();
-
                         $user = Auth::user();
                         $userRoles = $user->userrole();
                         if (in_array("super-admin", $userRoles)) {
                             $addresss =  \App\Models\address::where('type', '1')->get();
                         } else {
-                            $city =   City::where('admin_id', $id)
-                                ->select('id')->first();
-                            $addresss =  \App\Models\address::where('type', '1')->where('city_id', $city->id)->get();
+                            $addresss =  \App\Models\address::where('type', '1')->where('city_id', $user->city)->get();
+
                         }
 
 
@@ -285,21 +283,26 @@ class QawafilAlaqsa extends Resource
                 Text::make(__("TripBooking number"),'TripBooking number',function(){
                     $buss = $this->bus;
                     $number = 0;
+                    $text='';
                     foreach ($buss as $key => $bus) {
                         $number_of_people = TripBooking::where([
                             ['bus_id', $bus->id],
                             ['status', '1'],
                             ['project_id', $this->id],
                         ])->sum('number_of_people');
+                        $text .=  'اسم الباص:    '  . $bus->bus_number . "   " .'عدد  الاشخاص المتبقي:    ' . ($bus->number_of_seats - $number_of_people)."</br>";
 
                         $number +=  $number_of_people ;
 
                     }
-                   return  $number ;
+                    $number +  $number ."</br>";
+                    return $text;
 
-                })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating(),
+
+                })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating()->asHtml(),
 
             ]))->withToolbar(),
+
 
 
 

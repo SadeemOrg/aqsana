@@ -30,6 +30,18 @@ class CustomRule implements Rule
      */
     public function passes($attribute, $value)
     {
+        $bus=Bus::find($value);
+
+        $number_of_people = TripBooking::where([
+            ['bus_id', $value],
+            ['status', '1'],
+        ])->sum('number_of_people');
+        if($number_of_people + $this->number <= $bus->number_of_seats){
+
+            return true;
+        }
+        return false;
+
 
         $IsFull = 1;
 

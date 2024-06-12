@@ -43,7 +43,9 @@
         "build-project-picker": "cd nova-components/ProjectPicker && npm run dev",
         "build-project-picker-prod": "cd nova-components/ProjectPicker && npm run prod",
         "build-number-field": "cd nova-components/NumberField && npm run dev",
-        "build-number-field-prod": "cd nova-components/NumberField && npm run prod"
+        "build-number-field-prod": "cd nova-components/NumberField && npm run prod",
+        "build-bookings-bus": "cd nova-components/BookingsBus && npm run dev",
+        "build-bookings-bus-prod": "cd nova-components/BookingsBus && npm run prod"
     },
     "devDependencies": {
         "@popperjs/core": "^2.10.2",

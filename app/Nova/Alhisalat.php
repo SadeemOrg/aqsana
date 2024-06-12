@@ -114,7 +114,17 @@ class Alhisalat extends Resource
     //     // }
     // }
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        $userRoles = $request->user()->userrole();
+        if (!in_array("super-admin", $userRoles)) {
+            $query = $query->whereHas('address', function($query) use ($request) {
+                $query->where('city_id', $request->user()->city);
+            });
+        }
 
+        return $query;
+    }
 
     public function fields(Request $request)
     {

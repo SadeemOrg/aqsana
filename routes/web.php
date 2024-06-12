@@ -135,6 +135,7 @@ Route::post("Sectors/", [HomeController::class, "Sectors"])->name('Sectors');
 Route::post("getType", [HomeController::class, "getType"])->name('getType');
 Route::get("getType", [HomeController::class, "getType"])->name('getType');
 
+Route::post("getBus", [HomeController::class, "getBus"])->name('getBus');
 
 
 Route::post("get-sectors/", [HomeController::class, "getSectors"])->name('get-sectors');
