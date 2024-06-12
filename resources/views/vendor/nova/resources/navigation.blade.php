@@ -1,10 +1,9 @@
-
-
 @if (count(\Laravel\Nova\Nova::resourcesForNavigation(request())))
     <h3 class="flex items-center justify-between font-normal text-white mb-6 text-base no-underline main-items">
         <div class="flex items-center">
             <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path fill="#fff" d="M3 1h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2H3c-1.1045695 0-2-.8954305-2-2V3c0-1.1045695.8954305-2 2-2zm0 2v4h4V3H3zm10-2h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2h-4c-1.1045695 0-2-.8954305-2-2V3c0-1.1045695.8954305-2 2-2zm0 2v4h4V3h-4zM3 11h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2H3c-1.1045695 0-2-.8954305-2-2v-4c0-1.1045695.8954305-2 2-2zm0 2v4h4v-4H3zm10-2h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2h-4c-1.1045695 0-2-.8954305-2-2v-4c0-1.1045695.8954305-2 2-2zm0 2v4h4v-4h-4z" />
+                <path fill="#fff"
+                    d="M3 1h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2H3c-1.1045695 0-2-.8954305-2-2V3c0-1.1045695.8954305-2 2-2zm0 2v4h4V3H3zm10-2h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2h-4c-1.1045695 0-2-.8954305-2-2V3c0-1.1045695.8954305-2 2-2zm0 2v4h4V3h-4zM3 11h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2H3c-1.1045695 0-2-.8954305-2-2v-4c0-1.1045695.8954305-2 2-2zm0 2v4h4v-4H3zm10-2h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2h-4c-1.1045695 0-2-.8954305-2-2v-4c0-1.1045695.8954305-2 2-2zm0 2v4h4v-4h-4z" />
             </svg>
             <span class="sidebar-label cursor-pointer">{{ __('Resources') }}</span>
         </div>
@@ -31,8 +30,8 @@
                         class="dropBtn mb-4 text-base text-white uppercase tracking-wide cursor-pointer text"
                         href="#">
                         {{ $group }}
-                        <svg class="arrow-icon " xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"
-                            class="ml-2 arrow-icon">
+                        <svg class="arrow-icon " xmlns="http://www.w3.org/2000/svg" width="10" height="6"
+                            viewBox="0 0 10 6" class="ml-2 arrow-icon">
                             <path fill="#fff"
                                 d="M8.292893.292893c.390525-.390524 1.023689-.390524 1.414214 0 .390524.390525.390524 1.023689 0 1.414214l-4 4c-.390525.390524-1.023689.390524-1.414214 0l-4-4c-.390524-.390525-.390524-1.023689 0-1.414214.390525-.390524 1.023689-.390524 1.414214 0L5 3.585786 8.292893.292893z">
                             </path>
@@ -49,11 +48,17 @@
                                 </router-link>
                             </li>
                         @endforeach
-                        @if ($group == 'الادارة المالية')
+                        @php
+
+                            $user = App\Models\User::find(Auth::user()->id);
+                            $userRoles = $user->userrole();
+                        @endphp
+                        @if ($group == 'الادارة المالية' && (in_array("super-admin", $userRoles)))
                             <li>
                                 <router-link :to="{ name: 'projecs' }"
                                     class="text-white text-justify no-underline dim ml-2" style="font-size: 15px"
                                     dusk="{{ $resource::uriKey() }}-resource-link">
+
                                     {{ __('budget') }}
                                 </router-link>
                             </li>
@@ -89,6 +94,6 @@
             }
         }
 
-   
+
     </script>
 @endif

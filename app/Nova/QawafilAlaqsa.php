@@ -93,6 +93,7 @@ class QawafilAlaqsa extends Resource
         return $query;
     }
 
+
     public function fields(Request $request)
     {
         return [
@@ -231,16 +232,13 @@ class QawafilAlaqsa extends Resource
                 BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
-                        $id = Auth::id();
-
                         $user = Auth::user();
                         $userRoles = $user->userrole();
                         if (in_array("super-admin", $userRoles)) {
                             $addresss =  \App\Models\address::where('type', '1')->get();
                         } else {
-                            $city =   City::where('admin_id', $id)
-                                ->select('id')->first();
-                            $addresss =  \App\Models\address::where('type', '1')->where('city_id', $city->id)->get();
+                            $addresss =  \App\Models\address::where('type', '1')->where('city_id', $user->city)->get();
+
                         }
 
 
