@@ -33,7 +33,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     private   function getDaysInMonth($year, $month)
     {
