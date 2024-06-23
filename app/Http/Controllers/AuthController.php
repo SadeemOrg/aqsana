@@ -46,24 +46,29 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        $fields = $request->validate([
+        // dd("dd");
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'email' => 'required|string|unique:users|email',
             'password' => 'required|string|confirmed',
             'user_role' => 'required|string',
             'phone_number' => 'required|string',
-
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 403);
+        }
+
 
 
 
 
         $user = User::create([
-            'name' => $fields['name'],
-            'email' => $fields['email'],
-            'phone' => $fields['phone_number'],
-            'password' => bcrypt($fields['password']),
-            'user_role' => $fields['user_role'],
+            'name' => $validator['name'],
+            'email' => $validator['email'],
+            'phone' => $validator['phone_number'],
+            'password' => bcrypt($validator['password']),
+            'user_role' => $validator['user_role'],
             'app_user' => 1,
 
         ]);
