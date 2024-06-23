@@ -40,7 +40,7 @@ return [
     'declined_if' => 'The :attribute must be declined when :other is :value.',
     'different' => 'The :attribute and :other must be different.',
     'digits' => 'The :attribute must be :digits digits.',
-    'digits_between' => 'The :attribute must be between :min and :max digits.',
+    'digits_between' => ':attribute  يجب ان يكون بين :min و :max .',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
     'email' => 'The :attribute must be a valid email address.',
@@ -108,6 +108,7 @@ return [
     'prohibits' => 'The :attribute field prohibits :other from being present.',
     'regex' => 'التنسيق غير صالح.',
     'required' => 'هذا الحقل مطلوب',
+
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
