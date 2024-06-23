@@ -100,7 +100,7 @@ class QawafilAlaqsa extends Resource
             (new Panel(__('main'), [
                 ID::make(__('ID'), 'id')->sortable(),
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, [$this->id])
+                    ->action(ProjectStartEnd::class, (string) $this->id)
                     ->text(__('لم يبدا بعد'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -118,7 +118,7 @@ class QawafilAlaqsa extends Resource
                     ->hideWhenCreating()->hideWhenUpdating(),
 
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, [$this->id])
+                    ->action(ProjectStartEnd::class, (string) $this->id)
                     ->text(__('فعالة'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -137,7 +137,7 @@ class QawafilAlaqsa extends Resource
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, [$this->id])
+                    ->action(ProjectStartEnd::class, (string) $this->id)
                     ->text(__('اغلاق'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -162,7 +162,7 @@ class QawafilAlaqsa extends Resource
 
                     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, [$this->id])
+                    ->action(ProjectStartEnd::class, (string) $this->id)
                     ->text(__('مغلق'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -185,7 +185,7 @@ class QawafilAlaqsa extends Resource
 
                     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, [$this->id])
+                    ->action(ProjectStartEnd::class, (string) $this->id)
                     ->text(__('مفتوحة'))
                     ->showLoadingAnimation()
                     ->loadingColor('#fff')->buttonColor('#21b970')
@@ -529,13 +529,10 @@ class QawafilAlaqsa extends Resource
                 (new ReportTripFrom())->withMeta(['width' => 'w-1/3']),
                 (new ReportTripFrom())->withMeta(['width' => 'w-1/3']),
                 (new DateRangeFilter(__("start"), "start_date"))->withMeta(['width' => 'w-1/3']),
-
-
-
             ]))->width('full'),
         ];
     }
-
+    // vendor\pos-lifestyle\laravel-nova-date-range-filter
     /**
      * Get the filters available for the resource.
      *
