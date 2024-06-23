@@ -23,6 +23,8 @@ use Laravel\Nova\Fields\Image;
 use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Acme\MultiselectField\Multiselect;
+use App\Nova\Filters\AlhisalatAddress;
+use App\Nova\Filters\AlhisalatStatusFilters;
 use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
 
@@ -161,8 +163,6 @@ class receiptVoucher extends Resource
     }
     public static function aftersave(Request $request, $model)
     {
-        // return redirect('itsolutionstuff/tags');
-        // dd($request->add_user);
         if (!$request->name) {
             if ($request->add_user[0]['attributes']['name'] &&    $request->add_user[0]['attributes']['email'] && $request->add_user[0]['attributes']['phone']) {
                 DB::table('users')
@@ -200,7 +200,12 @@ class receiptVoucher extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new AlhisalatStatusFilters(),
+
+            new AlhisalatAddress(),
+
+        ];
     }
 
     /**
