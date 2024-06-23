@@ -4,7 +4,7 @@
 
         <div class="flex">
             <div class="w-full h-full">
-                <div class="flex flex-row items-center justify-start w-full my-4 gap-x-2">
+                <div class="flex flex-row xl:flex-nowrap flex-wrap gap-y-3 items-center justify-start w-full my-4 gap-x-2">
                     <div class="flex flex-row items-center justify-center cursor-pointer w-1/2">
                         <a v-on:click="toggleTabs(1)" v-bind:class="{
                             'text-green-600 bg-white w-full py-4 text-center rounded-md':
@@ -46,29 +46,29 @@
                         </a>
                     </div>
                 </div>
-                <div class="overflow-x-auto">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scroll-x"
+                <div class="overflow-x-auto bg-white shadow-lg">
+                    <div class="relative flex flex-col min-w-0 break-words  w-full mb-6  rounded p-4 for-mobile-scroll-x"
                         v-bind:class="{
                             hidden: openTab !== 1,
                             block: openTab === 1
                         }">
                         <table class="text-center w-full">
                             <tr>
-                                <th style="width: 40%;">المهمة</th>
-                                <th style="width: 40%;">الملاحظات</th>
-                                <th style="width: 10%;">المرسل</th>
-                                <th style="width: 10%;">التاريخ</th>
-                                <th>حالة المهمه</th>
-                                <th>حذف</th>
+                                <th  style="width: 40%;">المهمة</th>
+                                <th  style="width: 40%;">الملاحظات</th>
+                                <th  style="width: 10%;">المرسل</th>
+                                <th  style="width: 10%;">التاريخ</th>
+                                <th >حالة المهمه</th>
+                                <th >حذف</th>
                             </tr>
                             <tr v-for="Notification in myNotification" :key="Notification.id">
-                                <td>
+                                <td class="min-w-[150px]">
                                     {{
                                         Notification.Notifications.Notifications
                                     }}
                                 </td>
-                                <td class="flex w-full h-full">
-                                    <label for="search"
+                                <td class="flex w-full h-full " style="min-width: 210px;">
+                                    <label for=""
                                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">البحث</label>
                                     <div class="relative w-full">
                                         <input type="text" id="fname" v-model="Notification.note"
@@ -124,7 +124,7 @@
                                 <td v-else>انتهت المهمة</td>
                                 <th>
                                     <button
-                                        class="shadow bg-red-500 hover:bg-red-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-2 rounded"
+                                        class="shadow bg-red-500 hover:bg-red-600 text-sm focus:shadow-outline focus:outline-none text-white px-10 py-4 rounded"
                                         type="submit" @click="
                                             deleteNotifications(Notification.id)
                                             ">
@@ -253,8 +253,8 @@
                         </tr>
                     </table>
                 </div>
-                <div class="overflow-x-auto ">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-4 for-mobile-scoll-x"
+                <div class="overflow-x-auto bg-white shadow-lg">
+                    <div class="relative flex flex-col min-w-0 break-words w-full mb-6  rounded p-4 for-mobile-scoll-x"
                         v-bind:class="{
                             hidden: openTab !== 4,
                             block: openTab === 4
@@ -605,7 +605,7 @@ export default {
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    /* width: 100%; */
 }
 
 td,

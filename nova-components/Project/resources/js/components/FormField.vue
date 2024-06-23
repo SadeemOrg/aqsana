@@ -89,9 +89,6 @@ export default {
                               else{
                                  this.projectshow = false;
                               }
-
-
-
         },
         Sectors: function() {
             // console.log("dddjdskk");
@@ -106,7 +103,6 @@ export default {
             // alert("ss");
             axios.post("/SectorsPill").then(response => {
                 this.Sectors = response.data;
-                console.log("ddd",this.Sectors);
             });
         },
 
