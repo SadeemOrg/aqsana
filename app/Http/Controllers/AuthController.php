@@ -63,14 +63,17 @@ class AuthController extends Controller
 
 
 
-        $user = User::create([
-            'name' => $validator['name'],
-            'email' => $validator['email'],
-            'phone' => $validator['phone_number'],
-            'password' => bcrypt($validator['password']),
-            'user_role' => $validator['user_role'],
-            'app_user' => 1,
+        // Retrieve validated data
+        $validatedData = $validator->validated();
 
+        // Create a new user
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone_number'],
+            'password' => bcrypt($validatedData['password']),
+            'user_role' => $validatedData['user_role'],
+            'app_user' => 1,
         ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;
