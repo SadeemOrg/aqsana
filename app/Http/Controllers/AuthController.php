@@ -303,8 +303,8 @@ class AuthController extends Controller
         $fields = $request->validate([
             'email' => 'string|email',
             'name' => 'required|string',
-            'phone' => 'numeric|digits_between:9,15',
-            'user_role' => 'required|string',
+            'phone_number' => 'required|digits_between:10,14',
+
 
 
         ]);
@@ -316,8 +316,8 @@ class AuthController extends Controller
             $user->name = $request->get("name");
         }
 
-        if ($request->has("phone")) {
-            $user->phone = $request->get("phone");
+        if ($request->has("phone_number")) {
+            $user->phone = $request->get("phone_number");
         }
         if ($request->has("email")) {
             $user->email = $request->get("email");
