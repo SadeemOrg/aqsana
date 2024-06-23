@@ -79,8 +79,8 @@
                                         </div>
                                     </div>
                                 </form>
-                                <p class="text-right text-small" :class="{ 'text-danger': hasError }">
-                                    Sum: {{ remainingCount }}
+                                <p class="text-right text-small" v-bind:class="{ 'text-danger': hasError }">
+                                    المجموع: {{ remainingCount }}
                                 </p>
                             </div>
                         </div>

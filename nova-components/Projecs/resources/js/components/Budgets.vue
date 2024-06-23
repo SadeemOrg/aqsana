@@ -30,9 +30,15 @@
                     </div>
                 </div>
             </div>
-            <div v-if="Sectors.length" class="md:flex md:items-center w-full justify-start py-4">
-                <p class="text-right text-small" v-bind:class="{ 'text-danger': hasError }">
-                    Sum: {{ remainingCount }}
+            <div
+                v-if="Sectors.length"
+                class="md:flex md:items-center w-full justify-start py-4"
+            >
+                <p
+                    class="text-right text-small"
+                    v-bind:class="{ 'text-danger': hasError }"
+                >
+                    المجموع: {{ remainingCount }}
                 </p>
             </div>
             <div v-if="Sectors.length" class="md:flex md:items-center w-full justify-end">
@@ -60,7 +66,7 @@ export default {
             sumSectorsPerYear: 0,
             remainingCount: 0,
             hasError: false,
-            internalYear: this.year 
+            internalYear: this.year
         };
     },
     methods: {
@@ -72,7 +78,7 @@ export default {
                     this.totalSectorYear = parseInt(sector.Budget);
                 }
             });
-           
+
             this.Sectors.forEach(sector => {
                 if (sector.sector_id != 0) {
                     if (sector.Budget) {
@@ -123,7 +129,7 @@ export default {
                     hideMethod: "fadeOut"
                 };
                 toastr.error("الرجاء اختيار السنة التي تريد تعديل االميزانية لها!");
-            } 
+            }
             else {
                 toastr.options = {
                     closeButton: true,
