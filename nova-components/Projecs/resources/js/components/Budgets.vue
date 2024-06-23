@@ -60,7 +60,7 @@
                     class="text-right text-small"
                     v-bind:class="{ 'text-danger': hasError }"
                 >
-                    Sum: {{ remainingCount }}
+                    المجموع: {{ remainingCount }}
                 </p>
             </div>
             <div
