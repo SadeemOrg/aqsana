@@ -51,6 +51,8 @@ class AuthController extends Controller
             'email' => 'required|string|unique:users|email',
             'password' => 'required|string|confirmed',
             'user_role' => 'required|string',
+            'phone_number' => 'required|string',
+
         ]);
 
 
@@ -59,6 +61,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $fields['name'],
             'email' => $fields['email'],
+            'phone' => $fields['phone_number'],
             'password' => bcrypt($fields['password']),
             'user_role' => $fields['user_role'],
             'app_user' => 1,
