@@ -105,7 +105,7 @@ class TripController extends BaseController
                 ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
         }
 
-
+        dd($trips);
 
         $trips->map(function ($trip) use ($request) {
             $trip->tripToLocation = $trip->tripto->name_address;
