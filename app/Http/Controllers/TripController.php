@@ -97,15 +97,17 @@ class TripController extends BaseController
                 $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
                     ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->where('id', $trip_bokking->project_id)->get();
             } else {
-                $trips = Project::where("project_type", "2")->orWhere("project_type", "3")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
-                    ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
+
+                $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+                    ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())
+                    ->latest('id')->get();
             }
         } else {
-            $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
-                ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
+            $trips =  Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+                ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())
+                ->latest('id')->get();
         }
 
-        dd($trips);
 
         $trips->map(function ($trip) use ($request) {
             $trip->tripToLocation = $trip->tripto->name_address;
@@ -158,7 +160,7 @@ class TripController extends BaseController
         $trip = $trips->sortBy('from_distance')->first();
 
 
-        return $this->sendResponse($trip, 'Success get Trips');
+        return $this->sendResponse($trip, Carbon::now());
     }
 
 
@@ -226,7 +228,6 @@ class TripController extends BaseController
                 $trip_to_value = $trip->tripfrom?->name_address;
                 if (stripos($trip_to_value, $request->get("search")) !== false) {
                     $search_trip->push($trip);
-
                 }
             }
         });
@@ -244,7 +245,7 @@ class TripController extends BaseController
             ->get();
 
         $search_trip = collect();
-        $filteredTrips = $trips->filter(function ($trip) use ($request,$search_trip) {
+        $filteredTrips = $trips->filter(function ($trip) use ($request, $search_trip) {
             if ($trip->tripfrom != null) {
                 $trip_to_value = $trip->tripfrom?->name_address;
                 if (stripos($trip_to_value, $request->get("search")) !== false) {
