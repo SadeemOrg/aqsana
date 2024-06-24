@@ -30,9 +30,9 @@ class TripBookingController extends BaseController
             if ($check_trip_booking->status == "0") {
                 $check_trip_booking->status = '1';
                 $check_trip_booking->save();
-                return $this->sendResponse($check_trip_booking, 'Trib booking has been done');
+                return $this->sendResponse($check_trip_booking, 'لم تم  حجز الرحلة بنجاح');
             } else {
-                return $this->sendError('Error', ["message" => "I have already trib booking for this project"], 202);
+                return $this->sendError('Error', ["message" => "لقد قمت بلحجز مسبقا"], 202);
             }
         }
 
@@ -65,9 +65,9 @@ class TripBookingController extends BaseController
                 'number_of_people' => $request['number_of_people'],
                 'reservation_amount' => '0.0',
             ]);
-            return $this->sendResponse($tripBooking, 'Success create trib booking');
+            return $this->sendResponse($tripBooking, 'تم الحجز بنجاح');
         } else {
-            return $this->sendError('Error', ["message" => "Bus Full"], 202);
+            return $this->sendError('Error', ["message" => "ناسف! الباص ممتلئ"], 202);
         }
     }
 
