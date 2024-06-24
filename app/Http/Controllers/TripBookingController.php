@@ -49,7 +49,7 @@ class TripBookingController extends BaseController
                     ['status', '1'],
                 ])->sum('number_of_people');
                 $number_of_people += $request['number_of_people'];
-                if (($number_of_people  < $bus->number_of_seats)) {
+                if (($number_of_people  <= $bus->number_of_seats)) {
                     $IsFull = 0;
                     $BusId = $bus->id;
                 }
