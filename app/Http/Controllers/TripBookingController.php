@@ -81,9 +81,9 @@ class TripBookingController extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Validate Error', $validator->errors());
         }
-
-        $trip_booking = TripBooking::where("project_id", $request->get("id"))->delete();
-
+         TripBooking::where('project_id', $request->get('id'))
+        ->where('user_id', Auth()->id())
+        ->delete();
         return $this->sendResponse([], 'Trib booking has been cancelled');
     }
 
