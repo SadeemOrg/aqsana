@@ -93,15 +93,15 @@ class TripController extends BaseController
         if (Auth()->id() != null) {
 
             $trip_bokking = TripBooking::where('user_id', Auth()->id())->first();
-            // if ($trip_bokking != null) {
-            //     $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
-            //         ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->where('id', $trip_bokking->project_id)->get();
-            // } else {
-            //     $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
-            //         ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
-            // }
-            $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
-                ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
+            if ($trip_bokking != null) {
+                $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+                    ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->where('id', $trip_bokking->project_id)->get();
+            } else {
+                $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+                    ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
+            }
+            // $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+            // ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
         } else {
             $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
                 ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
