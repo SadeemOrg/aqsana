@@ -97,17 +97,13 @@ class TripController extends BaseController
                 $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
                     ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->where('id', $trip_bokking->project_id)->get();
             } else {
-
-                $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
-                    ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())
-                    ->latest('id')->get();
+                $trips = Project::where("project_type", "2")->orWhere("project_type", "3")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+                    ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
             }
         } else {
-            $trips =  Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
-                ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())
-                ->latest('id')->get();
+            $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+                ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
         }
-
 
         $trips->map(function ($trip) use ($request) {
             $trip->tripToLocation = $trip->tripto->name_address;
