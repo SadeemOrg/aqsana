@@ -76,8 +76,11 @@ class TripController extends BaseController
                 $trip->isBooking = 0;
             }
         });
+        $trips = $trips->filter(function($trip) {
+            return $trip->from_distance < 20;
+        })->sortBy('from_distance');
         $trips = $trips->skip($request->get("skip"));
-        $trips = $trips->sortBy('from_distance');
+
         $trips = $trips->values()->all();
 
 
@@ -155,7 +158,11 @@ class TripController extends BaseController
             }
         });
 
-        $trip = $trips->sortBy('from_distance')->first();
+        $trips = $trips->filter(function($trip) {
+            return $trip->from_distance < 20;
+        })->sortBy('from_distance');
+
+        $trip = $trips->first();
 
 
         return $this->sendResponse($trip, Carbon::now());
