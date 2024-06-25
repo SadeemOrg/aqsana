@@ -19,9 +19,9 @@ class Transaction extends Model implements HasMedia
     use  SoftDeletes;
 
     protected $fillable = [
-        'id','main_type','type','description', 'ref_id','transact_amount',
-         'Currency','equivelant_amount','voucher','transaction_date',
-         'reason_of_reject','approval','sector','transaction_status','is_delete','transaction_type','name'
+        'id', 'main_type', 'type', 'description', 'ref_id', 'transact_amount',
+        'Currency', 'equivelant_amount', 'voucher', 'transaction_date',
+        'reason_of_reject', 'approval', 'sector', 'transaction_status', 'is_delete', 'transaction_type', 'name'
     ];
 
     protected $hidden = [
@@ -58,44 +58,42 @@ class Transaction extends Model implements HasMedia
 
     public function Trip()
     {
-        return $this->belongsTo('App\Models\Project','ref_id');
+        return $this->belongsTo('App\Models\Project', 'ref_id');
     }
 
 
     public function Alhisalat()
     {
-     return $this->belongsTo('App\Models\Alhisalat','ref_id');
-
-
+        return $this->belongsTo('App\Models\Alhisalat', 'ref_id');
     }
 
     public function Donations()
     {
-        return $this->belongsTo('App\Models\Donations','ref_id','id');
+        return $this->belongsTo('App\Models\Donations', 'ref_id', 'id');
     }
 
     public function QawafilAlaqsa()
     {
-        return $this->belongsTo('App\Models\QawafilAlaqsa','ref_id');
+        return $this->belongsTo('App\Models\QawafilAlaqsa', 'ref_id');
     }
 
     public function Project()
     {
 
-        return $this->belongsTo('App\Models\Project','ref_id');
+        return $this->belongsTo('App\Models\Project', 'ref_id');
     }
     public function Sectors()
     {
-        return $this->belongsTo('App\Models\Sector','sector');
+        return $this->belongsTo('App\Models\Sector', 'sector');
     }
     public function Currenc()
     {
-        return $this->belongsTo('App\Models\Currency','Currency');
+        return $this->belongsTo('App\Models\Currency', 'Currency');
     }
 
     public function TelephoneDirectory()
     {
-        return $this->belongsTo('App\Models\TelephoneDirectory','name');
+        return $this->belongsTo('App\Models\TelephoneDirectory', 'name');
     }
 
     public function company()
@@ -107,9 +105,12 @@ class Transaction extends Model implements HasMedia
 
     public function ActionEvents()
     {
-        return $this->hasMany(ActionEvents::class,"actionable_id")->where('action_events.target_type', '=', get_class($this));
+        return $this->hasMany(ActionEvents::class, "actionable_id")->where('action_events.target_type', '=', get_class($this));
     }
-
+    public function create()
+    {
+        return $this->belongsTo('App\Models\User', 'Created_By');
+    }
     // public function getCountryName() {
     //     return Currency::where('id', $this->id)->first()->name;
     // }
@@ -125,5 +126,4 @@ class Transaction extends Model implements HasMedia
     {
         return $this->is_delete;
     }
-
 }

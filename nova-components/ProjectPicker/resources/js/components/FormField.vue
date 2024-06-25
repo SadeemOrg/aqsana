@@ -46,7 +46,11 @@ export default {
          */
         setInitialValue() {
             if (this.field.value['key2'] === null) {
-                this.field.value['key2'] = '2024-01-01';
+                let today = new Date();
+                let year = today.getFullYear();
+                let month = (today.getMonth() + 1).toString().padStart(2, '0'); // Months are zero indexed
+                let day = today.getDate().toString().padStart(2, '0');
+                this.field.value['key2'] = today;
             }
             const dateObject = new Date(this.field.value['key2']);
             // Format the Date object to the desired string

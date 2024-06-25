@@ -118,7 +118,7 @@ class TelephoneDirectory extends Resource
                     Text::make(__('name'), 'name'),
                     Text::make(__('describtion'), 'describtion'),
 
-                ])->confirmRemove(),
+                ]) ,
 
                 InlineIndex::make(__('phone_number'), 'phone_number')
                 ->options([

@@ -146,7 +146,7 @@ class Book extends Resource
                 ->addLayout(__('Add new type'), 'type', [
                     Text::make(__('name'), 'name'),
                     Text::make(__(__('Description')), 'describtion'),
-                ])->confirmRemove(),
+                ]) ,
             Image::make(__('cover_photo'), 'cover_photo')->disk('public')->prunable()->creationRules('required'),
             File::make(__('file'), 'file')->disk('public')->deletable()->creationRules('required'),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)

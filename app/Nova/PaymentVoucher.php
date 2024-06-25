@@ -107,20 +107,21 @@ class PaymentVoucher extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            ProjectPicker::make(__('تاريخ  السند'), 'ref_id', function () {
+            ProjectPicker::make(__('تاريخ اخراج سند الصرف'), 'ref_id', function () {
                 $keyValueArray = ['key1' => $this->ref_id, 'key2' => $this->transaction_date];
 
                 return $keyValueArray;
             })->hideFromDetail()->hideFromIndex(),
+
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('المشروع'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            BelongsTo::make(__('company'), 'company', \App\Nova\BusesCompany::class),
+            BelongsTo::make(__('اسم المتبرع'), 'company', \App\Nova\BusesCompany::class),
 
             BelongsTo::make(__('Sector name'), 'Sectors', \App\Nova\Sector::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
-            Flexible::make(__('اضافة شركة جديدة'), 'add_user')
+            Flexible::make(__('اضافة  متبرع جديدة'), 'add_user')
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('tooles'), 'Payment_type_details ', [
@@ -209,13 +210,16 @@ class PaymentVoucher extends Resource
             Files::make(__('voucher'), 'voucher'),
             Files::make(__('file'), 'file'),
 
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
         ];
     }
     protected static function afterValidation(NovaRequest $request, $validator)
     {
-        if (! isset(json_decode($request->ref_id)->key2)) {
+        $data = json_decode($request->ref_id, true);
+        // dd(isset($data['key2']) , !empty($data['key2']) , $request->newproject);
+        if (!((isset($data['key2']) && !empty($data['key2'])) || $request->newproject)) {
             $validator->errors()->add('ref_id', 'يجب اضافة مشروع');
         }
     }
@@ -251,7 +255,6 @@ class PaymentVoucher extends Resource
             }
 
             $model->equivelant_amount = $amount;
-
         } elseif ($request->Payment_type == '4') {
             $model->transact_amount = 0;
             $amount = 0;
@@ -262,11 +265,10 @@ class PaymentVoucher extends Resource
 
             $model->equivelant_amount = $amount;
         }
-        $Currency= Currency::find($request->Currenc);
-        $model->equivelant_amount = $model->equivelant_amount * $Currency->rate ;
+        $Currency = Currency::find($request->Currenc);
+        $model->equivelant_amount = $model->equivelant_amount * $Currency->rate;
         if (!$request->name) {
             if ($request->add_user) {
-                # code...
 
                 if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
                     $telfone =  new TelephoneDirectory();
@@ -292,14 +294,9 @@ class PaymentVoucher extends Resource
         }
         $request->request->remove('add_user');
         if (!$request->ref_id) {
-            // dd($request->add_user);
             if ($request->newproject) {
-                # code...
-
                 if ($request->newproject[0]['attributes']['project_name'] &&     $request->newproject[0]['attributes']['project_describe'] && $request->newproject[0]['attributes']['start_date'] &&     $request->newproject[0]['attributes']['end_date']) {
                     $Project =  new  ModelsProject();
-
-
                     $Project->project_name = $request->newproject[0]['attributes']['project_name'];
                     $Project->project_describe = $request->newproject[0]['attributes']['project_describe'];
                     $Project->start_date =  $request->newproject[0]['attributes']['start_date'];

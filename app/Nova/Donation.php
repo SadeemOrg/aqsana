@@ -23,6 +23,7 @@ use Laravel\Nova\Fields\DateTime;
 use Acme\MultiselectField\Multiselect;
 use Acme\NumberField\NumberField;
 use Acme\ProjectPicker\ProjectPicker;
+use Acme\SectorPicker\SectorPicker;
 use App\Models\Project as ModelsProject;
 use App\Models\Sector;
 use App\Models\Transaction;
@@ -44,6 +45,7 @@ use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Textarea;
 use NovaButton\Button;
 use function Clue\StreamFilter\fun;
 use Titasgailius\SearchRelations\SearchesRelations;
@@ -132,11 +134,41 @@ class Donation extends Resource
             Text::make(__('bill_number'), 'bill_number')->hideWhenCreating()->hideWhenUpdating(),
 
             Button::make(__('print'))->link('/mainbill/' . $this->id)->style('primary'),
-            ProjectPicker::make(__('تاريخ  السند '), 'ref_id', function () {
+            ProjectPicker::make(__('تاريخ اخراج سند القبض '), 'ref_id', function () {
                 $keyValueArray = ['key1' => $this->ref_id, 'key2' => $this->transaction_date];
 
                 return $keyValueArray;
             })->hideFromDetail()->hideFromIndex()->rules('required')->sortable(),
+
+            Flexible::make(__('new project'), 'newproject')
+                ->limit(1)
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('Add new type'), 'type', [
+
+                    SectorPicker::make(__('تاريخ المشروع'), 'ref_id', function () {
+                        $keyValueArray = ['key1' => $this->sector, 'key2' => $this->start_date];
+
+                        return $keyValueArray;
+                    })->hideFromDetail()->hideFromIndex(),
+                    Text::make(__("project name"), "project_name")->rules('required'),
+                    Textarea::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
+
+                    Multiselect::make(__('city'), 'city')
+                        ->options(function () {
+                            $Areas =  \App\Models\City::all();
+
+                            $Area_type_admin_array =  array();
+
+                            foreach ($Areas as $Area) {
+
+
+                                $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                            }
+
+                            return $Area_type_admin_array;
+                        })->singleSelect()->rules('required')->hideFromIndex()->hideFromDetail(),
+
+                ]),
 
 
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
@@ -184,7 +216,7 @@ class Donation extends Resource
 
             Flexible::make(__('اضافة شركة جديدة'), 'add_user')
                 ->readonly(true)
-
+                ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('tooles'), 'Payment_type_details ', [
                     Text::make(__('name'), "name")->rules('required'),
@@ -241,7 +273,7 @@ class Donation extends Resource
                     ->addLayout(__('tooles'), 'Payment_type_details ', [
                         NumberField::make(__('value'), "equivelant_amount")->rules('required'),
                         Text::make(__('telephone'), "telephone")->rules('required'),
-                        DateTime::make(__('History'), 'Date')
+                        DateTime::make(__('History Of Bit'), 'Date')
                             ->format('DD/MM/YYYY HH:mm')
                             ->resolveUsing(function ($value) {
                                 return $value;
@@ -258,7 +290,7 @@ class Donation extends Resource
                         Text::make(__('Branch number'), "Branch_number"),
                         Text::make(__('account number'), "account_number"),
 
-                        DateTime::make(__('History'), 'Date')
+                        DateTime::make(__('History of hawale'), 'Date')
                             ->format('DD/MM/YYYY HH:mm')
                             ->resolveUsing(function ($value) {
                                 return $value;
@@ -281,14 +313,25 @@ class Donation extends Resource
 
             Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info'),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
+
 
         ];
     }
     protected static function afterValidation(NovaRequest $request, $validator)
     {
-
-        if (!isset(json_decode($request->ref_id)->key2)) {
+        $data = json_decode($request->ref_id, true);
+        if (!((isset($data['key2']) && !empty($data['key2'])) || $request->newproject)) {
             $validator->errors()->add('ref_id', 'يجب اضافة مشروع');
+        }
+        if ($request->newproject  &&  empty(json_decode($request->ref_id)->key2)) {
+            $date1 = json_decode($request->ref_id)->key1;
+            $date2 = json_decode($request->newproject[0]['attributes']['ref_id'])->key1;
+            $year1 = date('Y', strtotime($date1));
+            $year2 = date('Y', strtotime($date2));
+            if (!($year1 == $year2)) {
+                $validator->errors()->add('ref_id', 'تاريخ المشروع غير متطابق مع تاريخ السند');
+            }
         }
 
         if (!($request->name || $request->add_user)) {
@@ -329,16 +372,32 @@ class Donation extends Resource
         if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
         else  $model->transaction_status = '1';
     }
-    public static function beforesave(Request $request, $model)
+    public static function beforeSave(Request $request, $model)
     {
 
-        $model->transaction_date = json_decode($request->ref_id)->key1;
-        $model->ref_id = json_decode($request->ref_id)->key2;
-        $model->sector = ModelsProject::where('id', json_decode($request->ref_id)->key2)->first()->sector;
+
+
+        if ($request->newproject  &&  empty(json_decode($request->ref_id)->key2)) {
+
+            $Project =  new  ModelsProject();
+            $model->transaction_date = json_decode($request->ref_id)->key1;
+            $Project->start_date = json_decode($request->newproject[0]['attributes']['ref_id'])->key1;
+            $Project->sector = json_decode($request->newproject[0]['attributes']['ref_id'])->key2;
+            $Project->project_name = $request->newproject[0]['attributes']['project_name'];
+            $Project->project_describe = $request->newproject[0]['attributes']['project_describe'];
+            $Project->project_type = '1';
+            $Project->save();
+            $model->ref_id = $Project->id;
+
+            $request->request->remove('newproject');
+        } else {
+            $model->transaction_date = json_decode($request->ref_id)->key1;
+            $model->ref_id = json_decode($request->ref_id)->key2;
+            $model->sector = ModelsProject::where('id', json_decode($request->ref_id)->key2)->first()->sector;
+        }
+        $request->request->remove('newproject');
+
         $request->request->remove('ref_id');
-
-
-
         if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
         else  $model->transaction_status = '1';
         if ($request->Payment_type == '1') {
@@ -393,12 +452,12 @@ class Donation extends Resource
                     ],
                 );
             }
-            // dd( $telfone);
             DB::table('transactions')
                 ->where('id', $model->id)
                 ->update(['name' => $telfone->id]);
         }
     }
+
 
     /**
      * Get the cards available for the request.

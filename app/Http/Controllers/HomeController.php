@@ -759,14 +759,12 @@ class HomeController extends BaseController
     }
     public function getProject(Request $request)
     {
-
         $Sectors =  Sector::whereHas('budget', function ($query) use ($request) {
             $query->where('year', '=', $request->Year)
                 ->where('budget', '>', 0);
         })->pluck('id')->toArray();
 
-        $projects = project::whereIn('sector', $Sectors)->whereYear('start_date', '=', $request->Year)->get();
-        // dd($projects);
+        $projects = project::whereIn('sector', $Sectors)->get();
         return $projects;
     }
 
