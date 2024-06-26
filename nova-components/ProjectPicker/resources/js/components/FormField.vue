@@ -4,15 +4,13 @@
 
             <input type="date" v-model="selectedDate" @change="onChange"
                 class="w-full form-control form-input form-input-bordered" />
-            <div class="flex gap-x-11 items-center ">
+            <div class="flex gap-x-6 items-center ">
                 <p class="pt-3"> المشروع</p>
-                <select class="w-full form-control form-input form-input-bordered mt-4" name="LeaveType"
-                    v-model="value2">
-
-                    <option v-for="item in Sectors" :key="item.id" :value="item.id">
-                        {{ item.project_name }}</option>
-
-                </select>
+                <v-select dir="rtl" :options="Sectors" label="project_name" v-model="value2" :reduce="item => item.id"
+                    class="w-full  border-md  mt-4 pt-3" :clearable="false" :searchable="true" >
+                    <template #no-options>
+                        <span>عذرًا، لا توجد خيارات مطابقة</span>
+                    </template></v-select>
             </div>
 
 
@@ -24,8 +22,13 @@
 
 <script>
 import { FormField, HandlesValidationErrors } from "laravel-nova";
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
 
 export default {
+    components: {
+        vSelect
+    },
     data() {
         return {
             projectshow: false,
@@ -33,6 +36,7 @@ export default {
             Sectors: [],
             selectedDate: null,
             value2: null,
+            noOptionsMessage: "sssss"
         };
     },
 
@@ -56,7 +60,6 @@ export default {
             // Format the Date object to the desired string
             this.selectedDate = dateObject.toISOString().split('T')[0] || '2024-01-1';
             this.onChange22(this.selectedDate);
-
         },
 
         onChange(event) {
@@ -67,22 +70,15 @@ export default {
                 })
                 .then(response => {
                     this.Sectors = response.data;
-
-
                 });
 
             if (this.Sectors.value != 0) {
                 this.projectshow = true;
-            }
-            else {
+            } else {
                 this.projectshow = false;
             }
-
-
-
-
-
         },
+
         onChange22(event) {
             const selectedYear = new Date(event).getFullYear();
             axios
@@ -95,16 +91,10 @@ export default {
                 });
             if (this.Sectors.value != 0) {
                 this.projectshow = true;
-            }
-            else {
+            } else {
                 this.projectshow = false;
             }
-
-
         },
-
-
-
 
         /**
          * Fill the given FormData object with the field's internal value.
@@ -119,6 +109,7 @@ export default {
     },
 
     beforeMount() {
+        this.setInitialValue();
     }
 };
 </script>
