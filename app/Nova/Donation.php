@@ -198,7 +198,7 @@ class Donation extends Resource
             Text::make(__('description'), 'description')->hideFromIndex(),
             Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('الشركة'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
-            Multiselect::make(__('اسم الشركة'), "name")
+            Multiselect::make(__(' اسم الشركة او اسم المتبرع'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '2')->get();
                     $i = 0;
@@ -215,7 +215,7 @@ class Donation extends Resource
 
 
 
-            Flexible::make(__('اضافة شركة جديدة'), 'add_user')
+            Flexible::make(__('اضافة شركة جديد او متبرع'), 'add_user')
                 ->readonly(true)
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
