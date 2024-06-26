@@ -436,6 +436,7 @@
         function handelInputEditNotestimeTo() {
             $('.foucsEditTimeEnd').attr('type', 'time');
         }
+
         function handelFocusWorkHourFrom() {
             $('#hidePlaceHolderDateWorkHourFrom').attr('type', 'date');
             $(".svgFoucusWorkHourFrom").css('display', 'block');
@@ -1236,52 +1237,46 @@
             });
         })
         $(".MailBill").submit(function(e) {
-            e.preventDefault();
-            var $Mail = $('input[name="Mail"]').val();
-            var $id = $('input[name="id"]').val();
+    e.preventDefault();
+    var $Mail = $('input[name="Mail"]').val();
+    var $id = $('input[name="id"]').val();
 
-            $.ajax({
-                type: "get",
-                url: "/SendMail",
-                data: {
-                    Mail: $Mail,
-                    id: $id,
-                },
-                success: function(data) {
-                    if (data.success != false) {
-s
-                        toastr.options = {
-                            "closeButton": true,
-                            "debug": false,
-                            "positionClass": "toast-bottom-right",
-                            "onclick": null,
-                            "showDuration": "300",
-                            "hideDuration": "2000",
-                            "showMethod": "fadeIn",
-                            "hideMethod": "fadeOut"
-                        };
-                        toastr.success("تم ارسال الرسالة بنجاح");
-                    } else {
-                        toastr.options = {
-                            "closeButton": true,
-                            "debug": false,
-                            "positionClass": "toast-bottom-right",
-                            "onclick": null,
-                            "showDuration": "300",
-                            "hideDuration": "2000",
-                            "showMethod": "fadeIn",
-                            "hideMethod": "fadeOut"
-                        };
-                        toastr.error(data.data.message);
-                    }
-                },
-                error: function() {
-                    console.log("err");
-                    console.log(data.error);
-                }
-            })
-        })
-    </script>
+    $.ajax({
+        type: "GET", // Use GET method
+        url: "/SendMail",
+        data: {
+            Mail: $Mail,
+            id: $id
+        },
+        success: function(data) {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "2000",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            toastr.success("تم ارسال الرسالة بنجاح");
+        },
+        error: function(xhr, status, error) {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "2000",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            toastr.error('حدث خطأ أثناء إرسال الرسالة');
+        }
+    });
+});
+       </script>
     <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
     <script src="{{ asset('assets/front-end/js/main.js') }}"></script>
     @livewireScripts
