@@ -458,7 +458,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          */
         setInitialValue: function setInitialValue() {
             if (this.field.value['key2'] === null) {
-                this.field.value['key2'] = '2024-01-01';
+                var today = new Date();
+                var year = today.getFullYear();
+                var month = (today.getMonth() + 1).toString().padStart(2, '0'); // Months are zero indexed
+                var day = today.getDate().toString().padStart(2, '0');
+                this.field.value['key2'] = today;
             }
             var dateObject = new Date(this.field.value['key2']);
             // Format the Date object to the desired string
