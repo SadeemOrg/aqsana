@@ -26919,7 +26919,7 @@ var render = function() {
                 reduce: function(item) {
                   return item.id
                 },
-                clearable: false,
+                clearable: true,
                 searchable: true
               },
               scopedSlots: _vm._u([

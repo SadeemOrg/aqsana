@@ -6,8 +6,8 @@
                 class="w-full form-control form-input form-input-bordered" />
             <div class="flex gap-x-6 items-center ">
                 <p class="pt-3"> المشروع</p>
-                <v-select dir="rtl" :options="Sectors" label="project_name" v-model="value2" :reduce="item => item.id"
-                    class="w-full  border-md  mt-4 pt-3" :clearable="false" :searchable="true" >
+                <v-select dir="rtl" :options="Sectors" label="project_name" v-model="value2" :reduce="item => item.id" 
+                    class="w-full  border-md  mt-4 pt-3" :clearable="true" :searchable="true" >
                     <template #no-options>
                         <span>عذرًا، لا توجد خيارات مطابقة</span>
                     </template></v-select>
