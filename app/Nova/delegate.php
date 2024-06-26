@@ -148,7 +148,7 @@ class delegate extends Resource
                         })
                         ->singleSelect()
                         ->rules('required')->hideFromDetail()->hideFromIndex(),
-                ])->confirmRemove(),
+                ]) ,
 
             Select::make(__('jop'), 'jop')->options([
                 1 => __('مندوب رئيسي'),
