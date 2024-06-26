@@ -389,8 +389,8 @@ class Donation extends Resource
             $Project->project_type = '1';
             $Project->save();
             $model->ref_id = $Project->id;
+            $model->sector = json_decode($request->newproject[0]['attributes']['ref_id'])->key2;
 
-            $request->request->remove('newproject');
         } else {
             $model->transaction_date = json_decode($request->ref_id)->key1;
             $model->ref_id = json_decode($request->ref_id)->key2;
