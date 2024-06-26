@@ -76,7 +76,6 @@ class TripController extends BaseController
                 $trip->isBooking = 0;
             }
         });
-        dump($trips);
 
         $trips = $trips->filter(function($trip) {
             return $trip->from_distance < 20;
