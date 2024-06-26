@@ -35,6 +35,7 @@ use App\Nova\Actions\ReceiveDonation;
 use App\Nova\Filters\AlhisalatColect;
 use App\Nova\Filters\PaymentType;
 use App\Nova\Filters\ReportCompany;
+use App\Nova\Filters\ReportCreated;
 use App\Nova\Filters\Transactionproject;
 use App\Nova\Filters\TransactionSectors;
 use App\Nova\Metrics\DonationInBank;
@@ -311,8 +312,8 @@ class Donation extends Resource
                 ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
 
-            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info'),
+                Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info'),
+                BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
 
 
@@ -491,6 +492,8 @@ class Donation extends Resource
             new PaymentType(),
             new ReportCompany(),
             new DateRangeFilter(__("transaction_date"), "transaction_date"),
+            new ReportCreated(),
+
 
         ];
     }
