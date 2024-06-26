@@ -1160,7 +1160,7 @@ class HomeController extends BaseController
             }
 
             Mail::to($request->Mail)->send(new \App\Mail\BillMail($Transaction, $PaymentType));
-            return response()->json(['success' => 'Added new records.']);
+            return response()->json(['success' => 'send maill.']);
         }
         return $this->sendError('Error', ["message" => $validator->errors()->all()], 202);
     }

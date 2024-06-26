@@ -1240,7 +1240,6 @@
             var $Mail = $('input[name="Mail"]').val();
             var $id = $('input[name="id"]').val();
 
-            console.log("hello", $Mail, $id);
             $.ajax({
                 type: "get",
                 url: "/SendMail",
@@ -1249,7 +1248,8 @@
                     id: $id,
                 },
                 success: function(data) {
-                    if ($.isEmptyObject(data.error)) {
+                    if (data.success != false) {
+s
                         toastr.options = {
                             "closeButton": true,
                             "debug": false,
@@ -1272,7 +1272,7 @@
                             "showMethod": "fadeIn",
                             "hideMethod": "fadeOut"
                         };
-                        toastr.error(data.error);
+                        toastr.error(data.data.message);
                     }
                 },
                 error: function() {
