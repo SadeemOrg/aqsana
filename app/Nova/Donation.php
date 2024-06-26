@@ -311,9 +311,9 @@ class Donation extends Resource
                 ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
 
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info'),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
-            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
         ];

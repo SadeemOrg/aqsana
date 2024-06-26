@@ -527,8 +527,7 @@ class QawafilAlaqsa extends Resource
                 (new Reportcity())->withMeta(['width' => 'w-1/3']),
                 (new ReportAdmin())->withMeta(['width' => 'w-1/3']),
                 (new ReportTripFrom())->withMeta(['width' => 'w-1/3']),
-                (new ReportTripFrom())->withMeta(['width' => 'w-1/3']),
-                (new DateRangeFilter(__("start"), "start_date"))->withMeta(['width' => 'w-1/3']),
+                 (new DateRangeFilter(__("start"), "start_date"))->withMeta(['width' => 'w-1/3']),
             ]))->width('full'),
         ];
     }
