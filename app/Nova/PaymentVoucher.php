@@ -4,8 +4,10 @@ namespace App\Nova;
 
 use Acme\Analytics\Analytics;
 use Acme\MultiselectField\Multiselect as Select;
+use Acme\MultiselectField\Multiselect;
 use Acme\NumberField\NumberField;
 use Acme\ProjectPicker\ProjectPicker;
+use Acme\SectorPicker\SectorPicker;
 use App\Nova\Actions\ApprovalRejectTransaction;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
@@ -37,6 +39,7 @@ use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Textarea;
 use MyApp\BillingSchedule\BillingSchedule;
 use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 use Pdmfc\NovaFields\ActionButton;
@@ -112,6 +115,38 @@ class PaymentVoucher extends Resource
 
                 return $keyValueArray;
             })->hideFromDetail()->hideFromIndex(),
+            Flexible::make(__('new project'), 'newproject')
+                ->limit(1)
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('Add new type'), 'type', [
+
+                    SectorPicker::make(__('تاريخ المشروع'), 'ref_id', function () {
+                        $keyValueArray = ['key1' => $this->sector, 'key2' => $this->start_date];
+
+                        return $keyValueArray;
+                    })->hideFromDetail()->hideFromIndex(),
+                    Text::make(__("project name"), "project_name")->rules('required'),
+                    Textarea::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
+
+                    Multiselect::make(__('city'), 'city')
+                        ->options(function () {
+                            $Areas =  \App\Models\City::all();
+
+                            $Area_type_admin_array =  array();
+
+                            foreach ($Areas as $Area) {
+
+
+                                $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                            }
+
+                            return $Area_type_admin_array;
+                        })->singleSelect()->rules('required')->hideFromIndex()->hideFromDetail(),
+
+                ]),
+
+
+
 
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('المشروع'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -121,7 +156,7 @@ class PaymentVoucher extends Resource
             BelongsTo::make(__('Sector name'), 'Sectors', \App\Nova\Sector::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
-            Flexible::make(__('اضافة  متبرع جديدة'), 'add_user')
+            Flexible::make(__('اضافة  شركة  جديدة'), 'add_user')
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('tooles'), 'Payment_type_details ', [
@@ -218,18 +253,44 @@ class PaymentVoucher extends Resource
     protected static function afterValidation(NovaRequest $request, $validator)
     {
         $data = json_decode($request->ref_id, true);
-        // dd(isset($data['key2']) , !empty($data['key2']) , $request->newproject);
         if (!((isset($data['key2']) && !empty($data['key2'])) || $request->newproject)) {
             $validator->errors()->add('ref_id', 'يجب اضافة مشروع');
+        }
+        if ($request->newproject  &&  empty(json_decode($request->ref_id)->key2)) {
+            $date1 = json_decode($request->ref_id)->key1;
+            $date2 = json_decode($request->newproject[0]['attributes']['ref_id'])->key1;
+            $year1 = date('Y', strtotime($date1));
+            $year2 = date('Y', strtotime($date2));
+            if (!($year1 == $year2)) {
+                $validator->errors()->add('ref_id', 'تاريخ المشروع غير متطابق مع تاريخ السند');
+            }
         }
     }
     public static function beforeSave(Request $request, $model)
     {
-        $model->transaction_date = json_decode($request->ref_id)->key1;
-        $model->ref_id = json_decode($request->ref_id)->key2;
 
-        $model->sector = ModelsProject::where('id', json_decode($request->ref_id)->key2)->first()->sector;
+
+        if ($request->newproject  &&  empty(json_decode($request->ref_id)->key2)) {
+
+            $Project =  new  ModelsProject();
+            $model->transaction_date = json_decode($request->ref_id)->key1;
+            $Project->start_date = json_decode($request->newproject[0]['attributes']['ref_id'])->key1;
+            $Project->sector = json_decode($request->newproject[0]['attributes']['ref_id'])->key2;
+            $Project->project_name = $request->newproject[0]['attributes']['project_name'];
+            $Project->project_describe = $request->newproject[0]['attributes']['project_describe'];
+            $Project->project_type = '1';
+            $Project->save();
+            $model->ref_id = $Project->id;
+            $model->sector = json_decode($request->newproject[0]['attributes']['ref_id'])->key2;
+
+        } else {
+            $model->transaction_date = json_decode($request->ref_id)->key1;
+            $model->ref_id = json_decode($request->ref_id)->key2;
+            $model->sector = ModelsProject::where('id', json_decode($request->ref_id)->key2)->first()->sector;
+        }
+        $request->request->remove('newproject');
         $request->request->remove('ref_id');
+
         $model->transaction_type = '2';
 
 
