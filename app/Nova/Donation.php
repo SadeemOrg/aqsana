@@ -302,6 +302,7 @@ class Donation extends Resource
             NovaDependencyContainer::make([
                 NumberField::make(__('transact amount'), 'transact_amount')->rules('required'),
             ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
+            BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             ActionButton::make(__('delete'))
                 ->action((new DeleteBill)->confirmText(__('Are you sure you want to delete  this?'))
                     ->confirmButtonText(__('compensation'))
@@ -313,7 +314,6 @@ class Donation extends Resource
 
 
                 Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info'),
-                BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
 
 
