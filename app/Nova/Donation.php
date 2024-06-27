@@ -230,7 +230,7 @@ class Donation extends Resource
                 '1' => __('ar'),
                 '2' => __('en'),
                 '3' => __('hr'),
-            ])->displayUsingLabels()->rules('required'),
+            ])->displayUsingLabels()->default('1')->rules('required'),
             Select::make(__("Payment_type"), "Payment_type")->options(
                 [
                     '1' => __('cash'),
@@ -238,7 +238,7 @@ class Donation extends Resource
                     '3' => __('bit'),
                     '4' => __('hawale'),
                 ]
-            )->displayUsingLabels()->default('1')->hideFromDetail()->hideFromIndex(),
+            )->displayUsingLabels()->default('4')->hideFromDetail()->hideFromIndex(),
             Select::make(__("Payment_type"), "Payment_type")->options(
                 [
                     '1' => __('cash'),
@@ -247,7 +247,7 @@ class Donation extends Resource
                     '4' => __('hawale'),
                     '5' => __('حصالة'),
                 ]
-            )->displayUsingLabels()->default('1')->hideWhenCreating()->hideWhenUpdating(),
+            )->displayUsingLabels()->default('4')->hideWhenCreating()->hideWhenUpdating(),
             NovaDependencyContainer::make([
                 NumberField::make(__('transact amount'), 'transact_amount')->rules('required'),
             ])->dependsOn("Payment_type", '1')->hideFromDetail()->hideFromIndex(),
@@ -369,7 +369,6 @@ class Donation extends Resource
         }
         $model->bill_number = $largestBillNumber + 1;
 
-        // dd($request->ReceiveDonation );
         if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
         else  $model->transaction_status = '1';
     }

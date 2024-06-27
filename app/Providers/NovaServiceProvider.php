@@ -72,7 +72,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Nova::sortResourcesBy(function ($resource) {
             return $resource::$priority ?? 9999;
         });
-        // Nova::initialPath('/resources/users');
 
         parent::boot();
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields([
