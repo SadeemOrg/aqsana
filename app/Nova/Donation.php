@@ -151,8 +151,8 @@ class Donation extends Resource
 
                         return $keyValueArray;
                     })->hideFromDetail()->hideFromIndex(),
-                    Text::make(__("project name"), "project_name")->rules('required'),
-                    Textarea::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
+                    Text::make(__("project name"), "project_name"),
+                    Textarea::make(__("project describe"), "project_describe")->hideFromIndex(),
 
                     Multiselect::make(__('city'), 'city')
                         ->options(function () {
@@ -167,7 +167,7 @@ class Donation extends Resource
                             }
 
                             return $Area_type_admin_array;
-                        })->singleSelect()->rules('required')->hideFromIndex()->hideFromDetail(),
+                        })->singleSelect()->hideFromIndex()->hideFromDetail(),
 
                 ]),
 
@@ -313,7 +313,7 @@ class Donation extends Resource
                 ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
 
-                Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info'),
+            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info'),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
 
 
@@ -321,11 +321,26 @@ class Donation extends Resource
     }
     protected static function afterValidation(NovaRequest $request, $validator)
     {
+
         $data = json_decode($request->ref_id, true);
         if (!((isset($data['key2']) && !empty($data['key2'])) || $request->newproject)) {
             $validator->errors()->add('ref_id', 'يجب اضافة مشروع');
         }
         if ($request->newproject  &&  empty(json_decode($request->ref_id)->key2)) {
+
+
+
+            //
+            $refId = json_decode($request->newproject[0]['attributes']['ref_id']);
+            if (!isset($refId->key1) || !isset($refId->key2)) {
+                $validator->errors()->add($request->newproject[0]['key'] . '__ref_id', 'هذا الحقل مطلوب');
+            }
+            if (!isset($request->newproject[0]['attributes']['project_describe']) ) {
+                $validator->errors()->add($request->newproject[0]['key'] . '__project_describe', 'هذا الحقل مطلوب');
+            }
+            if (!isset($request->newproject[0]['attributes']['project_name']) ) {
+                $validator->errors()->add($request->newproject[0]['key'] . '__project_name', 'هذا الحقل مطلوب');
+            }
             $date1 = json_decode($request->ref_id)->key1;
             $date2 = json_decode($request->newproject[0]['attributes']['ref_id'])->key1;
             $year1 = date('Y', strtotime($date1));
@@ -389,7 +404,6 @@ class Donation extends Resource
             $Project->save();
             $model->ref_id = $Project->id;
             $model->sector = json_decode($request->newproject[0]['attributes']['ref_id'])->key2;
-
         } else {
             $model->transaction_date = json_decode($request->ref_id)->key1;
             $model->ref_id = json_decode($request->ref_id)->key2;

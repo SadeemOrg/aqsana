@@ -344,6 +344,15 @@
                         <span class="font-FlatBold text-[#101426] mx-1 text-sm"> תפוקה כללית</span>
                     @endif
                 </p>
+                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">פרויקט :
+                    <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->project->project_name }}</span>
+                </p>
+                @if ($Transaction->payment_reason != null)
+
+                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">סיבת תרומה :
+                    <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->payment_reason }}</span>
+                </p>
+                @endif
                 @if ($Transaction->description != null)
                     <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">הערות :
                         <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
