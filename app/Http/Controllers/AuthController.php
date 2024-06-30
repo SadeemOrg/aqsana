@@ -37,7 +37,7 @@ class AuthController extends Controller
      * @bodyParam   city_id    string      The  birth_date of the  user.   Example:1
      * @bodyParam photo file  The image.
      * @bodyParam birth_date date_format  The .
-     * @bodyParam   phone    string      The name of the  user.      Example: 123456789
+     * @bodyParam   phone_number    string      The name of the  user.      Example: 123456789
      *
      * @response {
      *  "user": "{ email:testuser@example.com,name :testuser,passwor:secret }",
@@ -46,14 +46,32 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        // dd("dd");
-        $validator = Validator::make($request->all(), [
+        $requestData = $request->all();
+        $requestData['phone'] = $requestData['phone_number'];
+
+        $validator = Validator::make( $requestData, [
             'name' => 'required|string',
             'email' => 'required|string|unique:users|email',
             'password' => 'required|string|confirmed',
             'user_role' => 'required|string',
-            'phone_number' => 'required|unique:users|digits_between:10,14',
+            'phone'  => 'required|unique:users|digits_between:10,14',
+        ], [
+            'name.required' => 'حقل الاسم مطلوب.',
+            'name.string' => 'يجب أن يكون الاسم نصًا.',
+            'email.required' => 'حقل البريد الإلكتروني مطلوب.',
+            'email.string' => 'يجب أن يكون البريد الإلكتروني نصًا.',
+            'email.unique' => 'البريد الإلكتروني مستخدم بالفعل.',
+            'email.email' => 'يجب أن يكون البريد الإلكتروني عنوان بريد إلكتروني صحيح.',
+            'password.required' => 'حقل كلمة المرور مطلوب.',
+            'password.string' => 'يجب أن تكون كلمة المرور نصًا.',
+            'password.confirmed' => 'تأكيد كلمة المرور غير متطابق.',
+            'user_role.required' => 'حقل دور المستخدم مطلوب.',
+            'user_role.string' => 'يجب أن يكون دور المستخدم نصًا.',
+            'phone.required' => 'حقل رقم الهاتف مطلوب.',
+            'phone.unique' => 'رقم الهاتف مستخدم بالفعل.',
+            'phone.digits_between' => 'يجب أن يكون رقم الهاتف بين 10 و 14 رقمًا.',
         ]);
+
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 403);
