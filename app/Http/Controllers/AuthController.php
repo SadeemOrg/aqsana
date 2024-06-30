@@ -493,7 +493,7 @@ class AuthController extends Controller
      */
     public function getInformationUser(Request $request)
     {
-
+        dd("test");
         $user = User::where("id", Auth()->id())->with("Donations.Project", "Volunteer.Project")
             ->with(["TripBooking.Project" => function ($query) use ($request) {
                 $query->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')->get();
