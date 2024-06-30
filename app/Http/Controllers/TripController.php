@@ -156,7 +156,7 @@ class TripController extends BaseController
                 $trip->isBooking = 0;
             }
         });
-        if ($trip_booking != null) {
+        if (Auth()->id() != null && $trip_booking != null) {
             $trips = $trips->sortBy('from_distance');
         } else {
             $trips = $trips->filter(function ($trip) {
