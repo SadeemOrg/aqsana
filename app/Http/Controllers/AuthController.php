@@ -47,9 +47,13 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $requestData = $request->all();
+        $arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+        $englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+        $requestData['phone_number'] = str_replace($arabicNumbers, $englishNumbers, $requestData['phone_number']);
         $requestData['phone'] = $requestData['phone_number'];
 
-        $validator = Validator::make( $requestData, [
+        $validator = Validator::make($requestData, [
             'name' => 'required|string',
             'email' => 'required|string|unique:users|email',
             'password' => 'required|string',
