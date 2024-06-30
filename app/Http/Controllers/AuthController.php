@@ -509,8 +509,6 @@ class AuthController extends Controller
 
             $from_lat = $trip->project->tripfrom->current_location->latitude;
             $from_lng = $trip->project->tripfrom->current_location->longitude;
-
-            dd($trip->project->tripto->current_location->latitude,$trip->project->tripto->current_location->longitude);
             $to_lat = $trip->project->tripto->current_location->latitude;
             $to_lng = $trip->project->tripto->current_location->longitude;
 
