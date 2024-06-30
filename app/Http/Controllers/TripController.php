@@ -77,7 +77,7 @@ class TripController extends BaseController
             }
         });
 
-        $trips = $trips->filter(function($trip) {
+        $trips = $trips->filter(function ($trip) {
             return $trip->from_distance < 20;
         })->sortBy('from_distance');
         $trips = $trips->skip($request->get("skip"));
@@ -96,16 +96,14 @@ class TripController extends BaseController
 
         if (Auth()->id() != null) {
 
-            $trip_bokking = TripBooking::where('user_id', Auth()->id())->first();
-            if ($trip_bokking != null) {
+            $trip_booking = TripBooking::where('user_id', Auth()->id())->first();
+            if ($trip_booking != null) {
                 $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
-                    ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->where('id', $trip_bokking->project_id)->get();
+                    ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->where('id', $trip_booking->project_id)->get();
             } else {
                 $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
                     ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
             }
-            // $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
-            // ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
         } else {
             $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
                 ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
@@ -158,10 +156,15 @@ class TripController extends BaseController
                 $trip->isBooking = 0;
             }
         });
+        if ($trip_booking != null) {
+            $trips = $trips->sortBy('from_distance');
+        } else {
+            $trips = $trips->filter(function ($trip) {
+                return $trip->from_distance < 20;
+            })->sortBy('from_distance');
+        }
 
-        $trips = $trips->filter(function($trip) {
-            return $trip->from_distance < 20;
-        })->sortBy('from_distance');
+
 
         $trip = $trips->first();
 
