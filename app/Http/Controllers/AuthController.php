@@ -47,27 +47,31 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $requestData = $request->all();
+        $arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+        $englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+        $requestData['phone_number'] = str_replace($arabicNumbers, $englishNumbers, $requestData['phone_number']);
         $requestData['phone'] = $requestData['phone_number'];
 
-        $validator = Validator::make( $requestData, [
+        $validator = Validator::make($requestData, [
             'name' => 'required|string',
             'email' => 'required|string|unique:users|email',
             'password' => 'required|string',
             'user_role' => 'required|string',
             'phone'  => 'required|unique:users|digits_between:10,14',
         ], [
-            'name.required' => 'حقل الاسم مطلوب.',
+            'name.required' => 'الاسم مطلوب.',
             'name.string' => 'يجب أن يكون الاسم نصًا.',
-            'email.required' => 'حقل البريد الإلكتروني مطلوب.',
+            'email.required' => 'البريد الإلكتروني مطلوب.',
             'email.string' => 'يجب أن يكون البريد الإلكتروني نصًا.',
             'email.unique' => 'البريد الإلكتروني مستخدم بالفعل.',
             'email.email' => 'يجب أن يكون البريد الإلكتروني عنوان بريد إلكتروني صحيح.',
-            'password.required' => 'حقل كلمة المرور مطلوب.',
+            'password.required' => 'كلمة المرور مطلوب.',
             'password.string' => 'يجب أن تكون كلمة المرور نصًا.',
             'password.confirmed' => 'تأكيد كلمة المرور غير متطابق.',
-            'user_role.required' => 'حقل دور المستخدم مطلوب.',
+            'user_role.required' => 'دور المستخدم مطلوب.',
             'user_role.string' => 'يجب أن يكون دور المستخدم نصًا.',
-            'phone.required' => 'حقل رقم الهاتف مطلوب.',
+            'phone.required' => 'رقم الهاتف مطلوب.',
             'phone.unique' => 'رقم الهاتف مستخدم بالفعل.',
             'phone.digits_between' => 'يجب أن يكون رقم الهاتف بين 10 و 14 رقمًا.',
         ]);
