@@ -509,11 +509,11 @@ class AuthController extends Controller
 
             $from_lat = $trip->project->tripfrom->current_location->latitude;
             $from_lng = $trip->project->tripfrom->current_location->longitude;
-            dd($trip);
 
             $to_lat = $trip->project->tripto->current_location->latitude;
             $to_lng = $trip->project->tripto->current_location->longitude;
 
+            dd($trip);
 
             $from_distance = Helpers::distance($request->lat, $request->lng, $from_lat, $from_lng, 'K');
             $trip->project->from_distance = round($from_distance, 2);
