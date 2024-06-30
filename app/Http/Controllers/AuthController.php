@@ -506,6 +506,7 @@ class AuthController extends Controller
         $trip_booking = collect($trip_booking);
 
         $trip_booking->map(function ($trip) use ($request) {
+            dd($trip);
 
             $from_lat = $trip->project->tripfrom->current_location->latitude;
             $from_lng = $trip->project->tripfrom->current_location->longitude;
@@ -513,7 +514,6 @@ class AuthController extends Controller
             $to_lat = $trip->project->tripto->current_location->latitude;
             $to_lng = $trip->project->tripto->current_location->longitude;
 
-            dd("test");
 
             $from_distance = Helpers::distance($request->lat, $request->lng, $from_lat, $from_lng, 'K');
             $trip->project->from_distance = round($from_distance, 2);
