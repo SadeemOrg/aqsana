@@ -521,16 +521,15 @@ class AuthController extends Controller
             $trip->project->to_distance = round($to_distance, 2);
 
             $trip_bokking = TripBooking::where('user_id', Auth()->id())->where('project_id', $trip->project->id)->first();
-            dd($trip_bokking);
-            // if ($trip_bokking != null) {
-            //     if ($trip_bokking->status == 1) {
-            //         $trip->project->isBooking = 1;
-            //     } else {
-            //         $trip->project->isBooking = 0;
-            //     }
-            // } else {
-            //     $trip->project->isBooking = 0;
-            // }
+            if ($trip_bokking != null) {
+                if ($trip_bokking->status == 1) {
+                    $trip->project->isBooking = 1;
+                } else {
+                    $trip->project->isBooking = 0;
+                }
+            } else {
+                $trip->project->isBooking = 0;
+            }
         });
 
 
