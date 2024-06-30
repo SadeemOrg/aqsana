@@ -493,7 +493,7 @@ class AuthController extends Controller
      */
     public function getInformationUser(Request $request)
     {
-        dd("test");
+
         $user = User::where("id", Auth()->id())->with("Donations.Project", "Volunteer.Project")
             ->with(["TripBooking.Project" => function ($query) use ($request) {
                 $query->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')->get();
@@ -504,7 +504,7 @@ class AuthController extends Controller
             ->first();
         $trip_booking = json_decode($user)->trip_booking;
         $trip_booking = collect($trip_booking);
-
+        dd($trip_booking);
         $trip_booking->map(function ($trip) use ($request) {
 
             $from_lat = $trip->project->tripfrom->current_location->latitude;
