@@ -52,7 +52,7 @@ class AuthController extends Controller
         $validator = Validator::make( $requestData, [
             'name' => 'required|string',
             'email' => 'required|string|unique:users|email',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|string',
             'user_role' => 'required|string',
             'phone'  => 'required|unique:users|digits_between:10,14',
         ], [
@@ -81,14 +81,12 @@ class AuthController extends Controller
 
 
 
-        // Retrieve validated data
         $validatedData = $validator->validated();
 
-        // Create a new user
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
-            'phone' => $validatedData['phone_number'],
+            'phone' => $validatedData['phone'],
             'password' => bcrypt($validatedData['password']),
             'user_role' => $validatedData['user_role'],
             'app_user' => 1,
