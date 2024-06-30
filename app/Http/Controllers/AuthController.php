@@ -504,7 +504,7 @@ class AuthController extends Controller
             ->first();
         $trip_booking = json_decode($user)->trip_booking;
         $trip_booking = collect($trip_booking);
-        dd($trip_booking);
+
         $trip_booking->map(function ($trip) use ($request) {
 
             $from_lat = $trip->project->tripfrom->current_location->latitude;
@@ -535,6 +535,7 @@ class AuthController extends Controller
             }
         });
 
+        dd($trip_booking);
 
         $user->custom_trip_booking = $trip_booking;
 
