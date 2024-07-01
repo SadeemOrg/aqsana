@@ -1219,7 +1219,7 @@ var render = function() {
         }
       },
       [
-        _c("div", { staticClass: "mb-6 p-12" }, [
+        _c("div", { staticClass: "mb-6" }, [
           _c(
             "label",
             {

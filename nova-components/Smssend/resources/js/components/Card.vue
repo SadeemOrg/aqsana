@@ -1,7 +1,7 @@
 <template>
     <card class="flex flex-col">
         <form @submit.prevent="send" method="get">
-            <div class="mb-6 p-12">
+            <div class="mb-6 ">
                 <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     اختر الفئة
                 </label>
