@@ -41,7 +41,9 @@ class PDFController extends Controller
                 case 5:
                     $PaymentType = "حصالة";
                     break;
-
+                case 6:
+                    $PaymentType = "التطبيق";
+                    break;
             }
         } else if ($Transaction->lang == 2) {
             switch ($Transaction->Payment_type) {
@@ -60,6 +62,9 @@ class PDFController extends Controller
                 case 5:
                     $PaymentType = "moneybox";
                     break;
+                case 6:
+                    $PaymentType = "Application";
+                    break;
             }
         } else if ($Transaction->lang == 3) {
             switch ($Transaction->Payment_type) {
@@ -77,6 +82,9 @@ class PDFController extends Controller
                     break;
                 case 5:
                     $PaymentType = "קופסת כסף";
+                    break;
+                case 6:
+                    $PaymentType = "יישום";
                     break;
             }
         }
