@@ -17749,13 +17749,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _user_profile_vue_vue_type_template_id_6c253c1c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user-profile.vue?vue&type=template&id=6c253c1c */ "./resources/js/components/user-profile.vue?vue&type=template&id=6c253c1c");
 /* harmony import */ var _user_profile_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user-profile.vue?vue&type=script&lang=js */ "./resources/js/components/user-profile.vue?vue&type=script&lang=js");
-/* harmony import */ var _home_forge_aqsana_org_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_asmahameed_Averotech_Al_Aqsa_Association_github_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_home_forge_aqsana_org_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_user_profile_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_user_profile_vue_vue_type_template_id_6c253c1c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/user-profile.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_asmahameed_Averotech_Al_Aqsa_Association_github_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_user_profile_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_user_profile_vue_vue_type_template_id_6c253c1c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/user-profile.vue"]])
 /* hot reload */
 if (false) {}
 

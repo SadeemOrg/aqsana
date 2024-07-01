@@ -1162,7 +1162,7 @@ class HomeController extends BaseController
             Mail::to($request->Mail)->send(new \App\Mail\BillMail($Transaction, $PaymentType));
             return response()->json(['success' => 'send maill.']);
         }
-        return $this->sendError('Error', ["message" => $validator->errors()->all()], 202);
+        return $this->sendError('Error', ["message" => $validator->errors()->all()], 404);
     }
     public function showToastrMessages()
     {

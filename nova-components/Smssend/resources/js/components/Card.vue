@@ -26,11 +26,16 @@
                         </div>
                     </div>
                 </div>
-                <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            </div>
+            <div class="mb-6">
+                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     ادخل نص الرسالة
                 </label>
-                <span>Add a comment</span> <em class="text-light">(up to 140 characters)</em>
-                <textarea v-on:keyup="countdown" v-model="Message" placeholder="" id="default-input" name="" cols="30"
+                <textarea
+                    id="message"
+                    v-on:keyup="countdown"
+                    v-model="Message"
+                    cols="30"
                     rows="10"
                     class="appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-black"></textarea>
                 <p class='text-right text-small' v-bind:class="{ 'text-danger': hasError }">{{ remainingCount }}</p>
@@ -54,24 +59,23 @@ export default {
             Types: [],
             maxCount: 140,
             remainingCount: 140,
-            message: '',
             hasError: false,
             isOpen: false,
-            searchQuery: ''
+            searchQuery: ""
         };
     },
-    props: [
-        "card",
-    ],
+    props: ["card"],
     beforeMount() {
         this.getType();
     },
     computed: {
         selectedText() {
             if (this.selectval.length === 0) {
-                return 'اختر الفئة';
+                return "اختر الفئة";
             }
-            return this.Types.filter(type => this.selectval.includes(type.id)).map(type => type.name).join(', ');
+            return this.Types.filter(type => this.selectval.includes(type.id))
+                .map(type => type.name)
+                .join(", ");
         },
         filteredTypes() {
             return this.Types.filter(type => {
@@ -93,8 +97,8 @@ export default {
                 toastr.error('فشل في إرسال رسالة');
             }
         },
-        getType: function () {
-            axios.post("/getType").then((response) => {
+        getType() {
+            axios.post("/getType").then(response => {
                 this.Types = response.data;
             });
         },
@@ -112,7 +116,19 @@ export default {
             } else {
                 this.selectval.push(type.id);
             }
+        },
+        onSubmit() {
+            this.send();
         }
-    },
+    }
 };
 </script>
+
+<style>
+.card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+}
+</style>
