@@ -246,6 +246,8 @@ class Donation extends Resource
                     '3' => __('bit'),
                     '4' => __('hawale'),
                     '5' => __('حصالة'),
+                    '6' => __('التطبيق'),
+
                 ]
             )->displayUsingLabels()->default('4')->hideWhenCreating()->hideWhenUpdating(),
             NovaDependencyContainer::make([
