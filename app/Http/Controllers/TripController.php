@@ -30,6 +30,22 @@ class TripController extends BaseController
 
         $trips->map(function ($trip) use ($request) {
 
+            $buss = $trip->bus;
+            $number = 0;
+            foreach ($buss as $key => $bus) {
+                $number_of_people = TripBooking::where([
+                    ['bus_id', $bus->id],
+                    ['status', '1'],
+                    ['project_id', $trip->id],
+                ])->sum('number_of_people');
+                $number +=  ($bus->number_of_seats - $number_of_people);
+            }
+             $trip->number=$number;
+             $trip->isFull = $number > 0 ? 0 : 1 ;
+
+
+
+
             $trip->tripToLocation = $trip->tripto->name_address;
             $trip->tripFromLocation = $trip->tripfrom->name_address;
             $trip->start_date = $trip->start_date;
@@ -76,7 +92,6 @@ class TripController extends BaseController
                 $trip->isBooking = 0;
             }
         });
-
         $trips = $trips->filter(function ($trip) {
             return $trip->from_distance < 20;
         })->sortBy('from_distance');
@@ -110,6 +125,21 @@ class TripController extends BaseController
         }
 
         $trips->map(function ($trip) use ($request) {
+
+            $buss = $trip->bus;
+            $number = 0;
+            foreach ($buss as $key => $bus) {
+                $number_of_people = TripBooking::where([
+                    ['bus_id', $bus->id],
+                    ['status', '1'],
+                    ['project_id', $trip->id],
+                ])->sum('number_of_people');
+                $number +=  ($bus->number_of_seats - $number_of_people);
+            }
+             $trip->number=$number;
+             $trip->isFull = $number > 0 ? 0 : 1 ;
+
+
             $trip->tripToLocation = $trip->tripto->name_address;
             $trip->tripFromLocation = $trip->tripfrom->name_address;
             $trip->start_date = $trip->start_date;
@@ -182,6 +212,19 @@ class TripController extends BaseController
 
         $search_trip = collect();
         $trips->map(function ($trip) use ($request, $search_trip) {
+
+            $buss = $trip->bus;
+            $number = 0;
+            foreach ($buss as $key => $bus) {
+                $number_of_people = TripBooking::where([
+                    ['bus_id', $bus->id],
+                    ['status', '1'],
+                    ['project_id', $trip->id],
+                ])->sum('number_of_people');
+                $number +=  ($bus->number_of_seats - $number_of_people);
+            }
+             $trip->number=$number;
+             $trip->isFull = $number > 0 ? 0 : 1 ;
 
             $trip->tripToLocation = $trip->tripto->name_address;
             $trip->tripFromLocation = $trip->tripfrom->name_address;

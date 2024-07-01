@@ -63,6 +63,8 @@ class DonationsController extends BaseController
             'type' => '2',
             'ref_id' => $request->get("project_id"),
             'Currency' => '3',
+            'Payment_type'=>'6',
+            'lang'=>1,
             'transact_amount' => $requestData["donation_amount"], // Use the converted amount
             'equivelant_amount' => $requestData["donation_amount"], // Use the converted amount
             'transaction_date' => date('Y-m-d'),
