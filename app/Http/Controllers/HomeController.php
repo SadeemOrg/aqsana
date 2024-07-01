@@ -491,7 +491,6 @@ class HomeController extends BaseController
         foreach ($results as $key => $value) {
             $phoneNumber = $value->phone_number;
             if (preg_match('/^\d{10}$/', $phoneNumber)) {
-                dump($value->id, $phoneNumber);
                 Http::get('https://la.cellactpro.com/http_req.asp', [
                     'FROM' => 'ppAksa',
                     'USER' => 'ppAksa',
@@ -504,6 +503,9 @@ class HomeController extends BaseController
                 ]);
             }
         }
+
+        return response()->json(['message' => 'Message Sent successfully.'], 200);
+
     }
 
     public function SectorsBudget(Request $request)
