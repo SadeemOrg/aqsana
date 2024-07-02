@@ -88,14 +88,14 @@
 
     <!--First Paragraph-->
     <div dir="rtl" style="align-items: left; padding-top: 70px;">
-        <p style="font-size: 16px;color:#101426">رقم الجمعية : <span
-                style="color: #6B7280;font-size: 16px;">{{ $society_id }}</span></p>
-        <p style="font-size: 16px;color:#101426">العنوان : <span
-                style="color: #6B7280;font-size: 16px;">{{ $address }}</span></p>
-        <p style="font-size: 16px;color:#101426">رقم التلفون: <span
-                style="color: #6B7280;font-size: 16px;">{{ $phone }}</span></p>
-        <p style="font-size: 16px;color:#101426">الايميل : <span
-                style="color: #6B7280;font-size: 16px;">{{ $email }}</span></p>
+        <p style="font-size: 17px;color:#101426; font-weight: 700">رقم الجمعية : <span
+                style="color: #6B7280;font-size: 14px;font-weight: 200">{{ $society_id }}</span></p>
+        <p style="font-size: 17px;color:#101426;font-weight: 700">العنوان : <span
+                style="color: #6B7280;font-size: 16px;font-weight: 200">{{ $address }}</span></p>
+        <p style="font-size: 17px;color:#101426;font-weight: 700">رقم التلفون: <span
+                style="color: #6B7280;font-size: 16px;font-weight: 200">{{ $phone }}</span></p>
+        <p style="font-size: 17px;color:#101426;font-weight: 700">الايميل : <span
+                style="color: #6B7280;font-size: 16px;font-weight: 200">{{ $email }}</span></p>
     </div>
     <!--End First Paragraph-->
 
@@ -314,9 +314,11 @@
         <p dir="rtl" style="font-size: 17px;text-align: right"> مشروع :
             <span style="color: #6B7280;font-size: 16px;">{{  $TransactionArray['project']['project_name'] }}</span>
         </p>
+        @if ($TransactionArray['payment_reason'] != null)
         <p dir="rtl" style="font-size: 17px;text-align: right"> سبب التبرع :
             <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
         </p>
+        @endif
         @if ($TransactionArray['description'] != null)
             <p dir="rtl" style="font-size: 17px;text-align: right"> ملاحظات :
                 <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>

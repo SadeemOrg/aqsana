@@ -316,9 +316,12 @@
         <p dir="rtl" style="font-size: 17px;text-align: right"> פרויקט :
             <span style="color: #6B7280;font-size: 16px;">{{  $TransactionArray['project']['project_name'] }}</span>
         </p>
+        @if ($TransactionArray['payment_reason'] != null)
+
         <p dir="rtl" style="font-size: 17px;text-align: right"> סיבת תרומה  :
             <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
         </p>
+        @endif
         @if ($TransactionArray['description'] != null)
         <p dir="rtl" style="font-size: 17px;text-align: right"> הערות :
             <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
