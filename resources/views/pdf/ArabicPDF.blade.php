@@ -7,7 +7,36 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Document</title>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
+        @layer base {
+            @font-face {
+                font-family: "alfont_com_JF-Flat-Bold";
+                font-weight: 700px;
+                src: url('/public/assets/front-end/fonts/alfont_com_JF-Flat-Bold.ttf')
+            }
+
+            @font-face {
+                font-family: "alfont_com_JF-Flat-regular";
+                font-weight: 400px;
+                src: url('/public/assets/front-end/fonts/alfont_com_JF-Flat-regular.ttf')
+            }
+
+            @font-face {
+                font-family: "Rpt-Bold";
+                font-weight: 700px;
+                src: url({{ asset('assets/front-end/fonts/ArbFONTS-arbfonts-rpt-Bold.ttf') }});
+            }
+
+            .font-FlatBold {
+                font-family: 'alfont_com_JF-Flat-Bold' !important
+            }
+
+            .font-RpT-Bold {
+                font-family: 'Rpt-Bold' !important
+            }
+        }
+
         table.blueTable {
             border: 1px solid white;
             background-color: #f1fff1;
@@ -88,8 +117,8 @@
 
     <!--First Paragraph-->
     <div dir="rtl" style="align-items: left; padding-top: 70px;">
-        <p style="font-size: 17px;color:#101426; font-weight: 700">رقم الجمعية : <span
-                style="color: #6B7280;font-size: 14px;font-weight: 200">{{ $society_id }}</span></p>
+        <p class="font-FlatBold" style="font-size: 17px;color:#101426;">رقم الجمعية : <span
+               class="font-RpT-Bold" style="color: #6B7280;font-size: 14px;font-weight: 200">{{ $society_id }}</span></p>
         <p style="font-size: 17px;color:#101426;font-weight: 700">العنوان : <span
                 style="color: #6B7280;font-size: 16px;font-weight: 200">{{ $address }}</span></p>
         <p style="font-size: 17px;color:#101426;font-weight: 700">رقم التلفون: <span
