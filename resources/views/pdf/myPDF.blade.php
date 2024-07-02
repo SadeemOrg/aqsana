@@ -310,7 +310,7 @@
             <span style="color: #6B7280;font-size: 16px;">{{  $TransactionArray['project']['project_name'] }}</span>
         </p>
         <p dir="ltr" style="font-size: 17px;text-align: left"> payment reason :
-            <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['project']['payment_reason'] }}</span>
+            <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
         </p>
         @if ($TransactionArray['description'] != null)
         <p dir="ltr" style="font-size: 17px;text-align: left"> notes :

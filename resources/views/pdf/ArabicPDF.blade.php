@@ -310,11 +310,12 @@
                 <span style="color: #6B7280;font-size: 16px;">مخرجات عامة</span>
             @endif
         </p>
+        {{-- @dd($TransactionArray['project']); --}}
         <p dir="rtl" style="font-size: 17px;text-align: right"> مشروع :
             <span style="color: #6B7280;font-size: 16px;">{{  $TransactionArray['project']['project_name'] }}</span>
         </p>
         <p dir="rtl" style="font-size: 17px;text-align: right"> سبب التبرع :
-            <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['project']['payment_reason'] }}</span>
+            <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
         </p>
         @if ($TransactionArray['description'] != null)
             <p dir="rtl" style="font-size: 17px;text-align: right"> ملاحظات :
