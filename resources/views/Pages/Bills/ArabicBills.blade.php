@@ -397,19 +397,19 @@
                 </p>
 
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">مشروع :
-                    <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->project->project_name }}</span>
+                    <span
+                        class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->project->project_name }}</span>
                 </p>
                 @if ($Transaction->payment_reason != null)
-
-                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">سبب التبرع :
-                    <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->payment_reason }}</span>
-                </p>
+                    <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">سبب التبرع :
+                        <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->payment_reason }}</span>
+                    </p>
                 @endif
                 @if ($Transaction->description != null)
-                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">ملاحظات :
-                    <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
-                </p>
-            @endif
+                    <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">ملاحظات :
+                        <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
+                    </p>
+                @endif
             </div>
             <button dir="ltr" id="printpagebutton" type="button" onclick="printpage()"
                 class=" rounded-[50px] bg-[#349A37] text-white text-base w-28 py-4 mt-4 font-[700] hover:bg-[#101426] duration-200">
