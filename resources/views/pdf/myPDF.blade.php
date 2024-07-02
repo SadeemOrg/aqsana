@@ -309,9 +309,12 @@
         <p dir="ltr" style="font-size: 17px;text-align: left"> project :
             <span style="color: #6B7280;font-size: 16px;">{{  $TransactionArray['project']['project_name'] }}</span>
         </p>
+        @if ($TransactionArray['payment_reason'] != null)
+
         <p dir="ltr" style="font-size: 17px;text-align: left"> payment reason :
             <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
         </p>
+        @endif
         @if ($TransactionArray['description'] != null)
         <p dir="ltr" style="font-size: 17px;text-align: left"> notes :
             <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
