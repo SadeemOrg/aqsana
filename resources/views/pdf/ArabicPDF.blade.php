@@ -332,8 +332,9 @@
             </p>
         @endif --}}
         <div class="imgstyle">
-            <img style="max-height: 160px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
-            <img style="height: 120px;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
+            <p>xxxx</p>
+            {{-- <img style="max-height: 160px; " src="{{ asset('assets/image/-dc.png') }}" alt="logo"> --}}
+            {{-- <img style="height: 120px;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab"> --}}
         </div>
     </div>
 
