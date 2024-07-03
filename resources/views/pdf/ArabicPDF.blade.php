@@ -80,9 +80,7 @@
     @endphp
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
-        <img style="height: 220px; "
-            src="https://media.discordapp.net/attachments/938405759996276806/1060518737767309342/iuktui.png?width=1440&height=302"
-            alt="alaqsa Logo">
+        <img style="height: 220px; " src="{{ asset('/assets/image/iuktui.png') }}" alt="alaqsa Logo">
     </div>
     <!--End Top Image -->
 
@@ -102,9 +100,10 @@
     <!--Start Second Paragraph-->
     <div style="text-align: center">
         <p style="font-size: 16px;color:#101426">{{ $ChickBillDate }}</p>
-        <p style="font-size:16px; color:#101426 ">سند قبض رقم
+        <p style="font-size:16px; color:#101426 ">
+            F-{{ $TransactionArray['bill_number'] }}
             <span>
-                F-{{ $TransactionArray['bill_number'] }}
+                سند قبض رقم
             </span>
         </p>
         <p style="font-size:16px; color:#101426; ">نسخة عن الفاتورة الأصلية</p>
