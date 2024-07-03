@@ -321,8 +321,8 @@
                 <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
             </p>
         @endif
-        <div style="position: absolute; bottom: 13%; left:250px; width:100%;">
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+        <div style="position:relative">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; bottom: 13%; left:250px;">
                 <img style="max-height: 160px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
                 <img style="height:120px; position:absolute;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
             </div>
