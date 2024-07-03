@@ -336,7 +336,7 @@
         <div class="imgstyle">
             <p style="text-align: center;position:relative">
                 <img style="max-height: 160px; " src="{{ asset('assets/image/-dc.png') }}" alt="logo">
-                <img style="height: 120px; margin-right:20%;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab"> 
+                <img style="height: 120px; padding-right:20%;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab"> 
             </p>
             {{-- <img style="max-height: 160px; " src="{{ asset('assets/image/-dc.png') }}" alt="logo"> --}}
             {{-- <img style="height: 120px;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab"> --}}
