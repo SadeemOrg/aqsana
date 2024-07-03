@@ -300,7 +300,7 @@
     <!--End Table -->
 
     <!--Start Sector Name-->
-    <div style="width:full; ">
+    <div style="width:full; position: relative;">
         <p style="font-size: 17px; text-align: right"> اسم القطاع :
             @if ($TransactionArray['sectors'] != null)
                 <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
@@ -321,15 +321,16 @@
                 <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
             </p>
         @endif
-    </div>
-    <div style="position: relative; ">
-        <div style=" max-height: 160px; margin-left: 20%; ">
-            <img style="height:290px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
+        <div style="position: absolute; bottom: 13%; left: 37%; ">
+            <div style=" max-height: 160px; ">
+                <img src="{{ asset('assets/image/-dc.png') }}" alt="logo">
+            </div>
+            <div>
+                <img style="height:120px;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
+            </div>
         </div>
-        <div style="position: absolute; height: 120px; bottom: 13%; left: 37%;">
-            <img style="height:100px;"  src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
-        </div>
     </div>
+
     <!--End Sector Name-->
 
 </body>
