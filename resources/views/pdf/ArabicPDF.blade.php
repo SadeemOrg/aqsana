@@ -80,9 +80,7 @@
     @endphp
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
-        <img style="height: 220px; "
-            src="{{ asset('/assets/image/iuktui.png') }}"
-            alt="alaqsa Logo">
+        <img style="height: 220px; " src="{{ asset('/assets/image/iuktui.png') }}" alt="alaqsa Logo">
     </div>
     <!--End Top Image -->
 
@@ -280,7 +278,7 @@
                     // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
                 @endphp
                 <tr>
-                    <td> {{ $PaymentType }}   {{ $TransactionArray['description'] }}</td>
+                    <td> {{ $PaymentType }} {{ $TransactionArray['description'] }}</td>
 
                     <td>{{ $ChickBillDate }}</td>
                     <td> {{ $TransactionArray['equivelant_amount'] }}</td>
@@ -310,24 +308,27 @@
                 <span style="color: #6B7280;font-size: 16px;">مخرجات عامة</span>
             @endif
         </p>
-        {{-- @dd($TransactionArray['project']); --}}
         <p dir="rtl" style="font-size: 17px;text-align: right"> مشروع :
-            <span style="color: #6B7280;font-size: 16px;">{{  $TransactionArray['project']['project_name'] }}</span>
+            <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['project']['project_name'] }}</span>
         </p>
-        <p dir="rtl" style="font-size: 17px;text-align: right"> سبب التبرع :
-            <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
-        </p>
+        @if ($TransactionArray['payment_reason'] != null)
+            <p dir="rtl" style="font-size: 17px;text-align: right"> سبب التبرع :
+                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
+            </p>
+        @endif
         @if ($TransactionArray['description'] != null)
             <p dir="rtl" style="font-size: 17px;text-align: right"> ملاحظات :
                 <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
             </p>
         @endif
     </div>
-    <div style="position: relative; max-height: 160px; margin-left: 20%; ">
-        <img style="height:290px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
-    </div>
-    <div style="position: absolute; height: 150px; bottom: 13%; left: 37%;">
-        <img src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
+    <div >
+        <div style="position: relative; max-height: 160px; margin-left: 20%; ">
+            <img style="height:290px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
+        </div>
+        <div style="position: absolute; height: 150px; bottom: 13%; left: 37%;">
+            <img src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
+        </div>
     </div>
     <!--End Sector Name-->
 
