@@ -303,32 +303,31 @@
     <div style="width: 100%; position: relative;">
         <p style="font-size: 17px; text-align: right"> اسم القطاع :
             @if ($TransactionArray['sectors'] != null)
-                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
+                <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
             @else
-                <span style="color: #6B7280;font-size: 16px;">مخرجات عامة</span>
+                <span style="color: #6B7280; font-size: 16px;">مخرجات عامة</span>
             @endif
         </p>
-        <p dir="rtl" style="font-size: 17px;text-align: right"> مشروع :
-            <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['project']['project_name'] }}</span>
+        <p dir="rtl" style="font-size: 17px; text-align: right"> مشروع :
+            <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['project']['project_name'] }}</span>
         </p>
         @if ($TransactionArray['payment_reason'] != null)
-            <p dir="rtl" style="font-size: 17px;text-align: right"> سبب التبرع :
-                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
+            <p dir="rtl" style="font-size: 17px; text-align: right"> سبب التبرع :
+                <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
             </p>
         @endif
         @if ($TransactionArray['description'] != null)
-            <p dir="rtl" style="font-size: 17px;text-align: right"> ملاحظات :
-                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
+            <p dir="rtl" style="font-size: 17px; text-align: right"> ملاحظات :
+                <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['description'] }}</span>
             </p>
         @endif
-        <div style="position:relative">
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; bottom: 13%; left:250px;">
-                <img style="max-height: 160px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
-                <img style="height:120px; position:absolute;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
-            </div>
+        <div
+            style="position: absolute; bottom: 13%; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center;">
+            <img style="max-height: 160px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
+            <img style="height: 120px;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
         </div>
-   
     </div>
+
 
 
     <!--End Sector Name-->
