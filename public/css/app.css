@@ -1241,6 +1241,9 @@ video {
 .w-full{
   width: 100%;
 }
+.w-\[70\%\]{
+  width: 70%;
+}
 .min-w-\[100px\]{
   min-width: 100px;
 }
@@ -2187,6 +2190,9 @@ video {
 .font-semibold{
   font-weight: 600;
 }
+.font-extralight{
+  font-weight: 200;
+}
 .uppercase{
   text-transform: uppercase;
 }
@@ -2633,6 +2639,10 @@ body{
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
+  .sm\:mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+  }
   .sm\:mb-0{
     margin-bottom: 0px;
   }
@@ -2707,6 +2717,9 @@ body{
   }
   .sm\:h-full{
     height: 100%;
+  }
+  .sm\:h-\[200px\]{
+    height: 200px;
   }
   .sm\:max-h-\[360px\]{
     max-height: 360px;
@@ -2885,6 +2898,10 @@ body{
     margin-left: 0px;
     margin-right: 0px;
   }
+  .md\:mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+  }
   .md\:ml-0{
     margin-left: 0px;
   }
@@ -2927,6 +2944,12 @@ body{
   .md\:h-\[75px\]{
     height: 75px;
   }
+  .md\:h-40{
+    height: 10rem;
+  }
+  .md\:h-\[290px\]{
+    height: 290px;
+  }
   .md\:max-h-14{
     max-height: 3.5rem;
   }
@@ -2965,6 +2988,12 @@ body{
   }
   .md\:w-full{
     width: 100%;
+  }
+  .md\:w-44{
+    width: 11rem;
+  }
+  .md\:w-\[320px\]{
+    width: 320px;
   }
   .md\:min-w-0{
     min-width: 0px;

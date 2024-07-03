@@ -10,22 +10,22 @@
     @endphp
     <!--English Bills -->
     <div dir="ltr" class="max-w-7xl  mx-auto sm:px-6 lg:px-8 px-8" id="printJS-table">
-        <img class="sm:h-[250px] w-[90%] mt-1.5"
+        <img class="sm:h-[200px] w-[90%] mt-1.5"
             src="{{ asset('/assets/image/iuktui.png') }}"
             alt="alaqsa Logo">
-        <div class="flex sm:flex-row flex-col-reverse items-center justify-between relative">
+        <div class="flex sm:flex-row w-[90%] mx-auto  flex-col-reverse items-center justify-between relative">
             <div class="basis-1/2 hidden sm:flex flex-col  items-start">
-                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">Association Id :
-                    <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
+                <p class=" mt-3 text-[17px] font-bold text-[#101426]">Association Id :
+                    <span class="font-extralight text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                 </p>
-                <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">title :
-                    <span class="font-FlatBold text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>
+                <p class="mt-1 text-[17px] font-bold text-[#101426]">title :
+                    <span class="font-extralight text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>
                 </p>
-                <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">Telephone :
-                    <span dir="ltr" class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
+                <p class="mt-1 text-[17px] font-bold text-[#101426]">Telephone :
+                    <span dir="ltr" class="font-extralight text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
                 </p>
-                <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">Email :
-                    <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
+                <p class="mt-1 text-[17px] font-bold text-[#101426]">Email :
+                    <span class="font-extralight text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
                 </p>
             </div>
             <div class="sm:hidden flex flex-col items-center justify-center w-full mt-8  my-4 gap-y-2 px-16">
@@ -73,7 +73,7 @@
             </span>
         </div>
         <!-- table -->
-        <div class="px-4 mx-8 md:mx-0">
+        <div class="px-4 mx-8 md:mx-auto w-[90%]">
             <div class="sm:flex sm:items-center">
             </div>
             <div class="mt-8 flex flex-col">
@@ -383,11 +383,11 @@
             </button>
         </div>
         <div class="relative flex flex-row items-center justify-end md:justify-center w-full -mt-14 ">
-            <img class="w-[200px] h-[180px] md:w-[280px] md:h-[240px]"
+            <img class="w-[200px] h-[180px] md:w-[320px] md:h-[290px]"
                         src="{{asset('assets/image/-dc.png')}}"
                 alt="logo">
             <div class="absolute">
-                <img class="w-28 h-28 md:w-36 md:h-36"
+                <img class="w-28 h-28 md:w-44 md:h-40"
                     src="{{ asset('assets/image/-removebg-preview.png') }}"
                     alt="ttab">
             </div>
