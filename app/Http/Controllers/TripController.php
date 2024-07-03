@@ -277,7 +277,7 @@ class TripController extends BaseController
             }
 
             if ($trip->tripfrom != null) {
-                $trip_to_value = $trip->tripfrom?->name_address;
+                $trip_to_value = $trip->tripfrom?->city?->name;
                 if (stripos($trip_to_value, $request->get("search")) !== false) {
                     $search_trip->push($trip);
                 }
