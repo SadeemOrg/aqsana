@@ -322,12 +322,12 @@
             </p>
         @endif
     </div>
-    <div style="position: absolute; bottom:5%; left: 37%;">
-        <div style="position: relative; max-height: 160px; margin-left: 20%; ">
+    <div style="position: relative; ">
+        <div style=" max-height: 160px; margin-left: 20%; ">
             <img style="height:290px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
         </div>
-        <div style="position: absolute; height: 150px; bottom: 13%; left: 37%;">
-            <img src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
+        <div style="position: absolute; height: 120px; bottom: 13%; left: 37%;">
+            <img style="height:100px;"  src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
         </div>
     </div>
     <!--End Sector Name-->
