@@ -81,7 +81,7 @@
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
         <img style="height: 220px; "
-            src="{{ asset('/assets/image/iuktui.png') }}"
+            src="https://media.discordapp.net/attachments/938405759996276806/1060518737767309342/iuktui.png?width=1440&height=302"
             alt="alaqsa Logo">
     </div>
     <!--End Top Image -->
@@ -102,10 +102,9 @@
     <!--Start Second Paragraph-->
     <div style="text-align: center">
         <p style="font-size: 16px;color:#101426">{{ $ChickBillDate }}</p>
-        <p style="font-size:16px; color:#101426 ">
-            F-{{ $TransactionArray['bill_number'] }}
+        <p style="font-size:16px; color:#101426 ">سند قبض رقم
             <span>
-                سند قبض رقم
+                F-{{ $TransactionArray['bill_number'] }}
             </span>
         </p>
         <p style="font-size:16px; color:#101426; ">نسخة عن الفاتورة الأصلية</p>
@@ -280,7 +279,7 @@
                     // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
                 @endphp
                 <tr>
-                    <td> {{ $PaymentType }}   {{ $TransactionArray['description'] }}</td>
+                    <td> {{ $PaymentType }} {{ $TransactionArray['description'] }}</td>
 
                     <td>{{ $ChickBillDate }}</td>
                     <td> {{ $TransactionArray['equivelant_amount'] }}</td>
@@ -311,7 +310,9 @@
             @endif
         </p>
         <p dir="rtl">مشروع : <span>{{ $TransactionArray['project']['project_name'] }}</span></p>
-
+        @if ($TransactionArray['payment_reason'] != null)
+            <p dir="rtl">سبب التبرع : <span>{{ $TransactionArray['payment_reason'] }}</span></p>
+        @endif
         @if ($TransactionArray['description'] != null)
             <p dir="rtl" style="font-size: 17px;text-align: right"> ملاحظات :
                 <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
