@@ -323,7 +323,7 @@
         @endif
     </div>
     <div >
-        <div style="position: relative; max-height: 160px; margin-left: 20%; ">
+        <div style="position: absolute; max-height: 160px; margin-left: 20%; ">
             <img style="height:290px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
         </div>
         <div style="position: absolute; height: 150px; bottom: 13%; left: 37%;">
