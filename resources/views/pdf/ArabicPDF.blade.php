@@ -334,9 +334,9 @@
             </p>
         @endif --}}
         <div class="imgstyle">
-            <p style="text-align: center">
+            <p style="text-align: center;position:relative">
                 <img style="max-height: 160px; " src="{{ asset('assets/image/-dc.png') }}" alt="logo">
-                <img style="height: 120px;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab"> 
+                <img style="height: 120px;position:absolute" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab"> 
             </p>
             {{-- <img style="max-height: 160px; " src="{{ asset('assets/image/-dc.png') }}" alt="logo"> --}}
             {{-- <img style="height: 120px;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab"> --}}
