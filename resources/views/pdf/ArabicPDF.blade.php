@@ -312,7 +312,7 @@
     <!--End Table -->
 
     <!--Start Sector Name-->
-    <div style="width: 100%; position: relative;">
+    <div style="width: 100%; position:relative;">
         {{-- <p style="font-size: 17px; text-align: right"> اسم القطاع :
             @if ($TransactionArray['sectors'] != null)
                 <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
@@ -334,7 +334,7 @@
             </p>
         @endif --}}
         <div class="imgstyle">
-            <p>xxxx</p>
+            <p style="text-align: center">xxxx</p>
             {{-- <img style="max-height: 160px; " src="{{ asset('assets/image/-dc.png') }}" alt="logo"> --}}
             {{-- <img style="height: 120px;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab"> --}}
         </div>
