@@ -322,7 +322,9 @@
             </p>
         @endif
         <div style="position: absolute; bottom: 13%; left: 50%; transform: translateX(-50%);">
-        <img style="max-height: 160px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <img style="max-height: 160px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
+            </div>
         </div>
         {{-- <div style="position: absolute; bottom: 13%; left: 50%; transform: translateX(-50%);">
             <div style="max-height: 160px;">
@@ -333,7 +335,7 @@
             </div>
         </div> --}}
     </div>
-    
+
 
     <!--End Sector Name-->
 
