@@ -65,18 +65,6 @@
             padding: 8px 8px;
             border-radius: 5px;
         }
-
-        .imgstyle {
-            position: absolute;
-            bottom: 13%;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #39A423
-        }
     </style>
 </head>
 
@@ -92,20 +80,22 @@
     @endphp
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
-        <img style="height: 220px; " src="{{ asset('/assets/image/iuktui.png') }}" alt="alaqsa Logo">
+        <img style="height: 220px; "
+            src="{{ asset('/assets/image/iuktui.png') }}"
+            alt="alaqsa Logo">
     </div>
     <!--End Top Image -->
 
     <!--First Paragraph-->
     <div dir="rtl" style="align-items: left; padding-top: 70px;">
-        <p style="font-size: 17px;color:#101426; font-weight: 700">رقم الجمعية : <span
-                style="color: #6B7280;font-size: 14px;font-weight: 200">{{ $society_id }}</span></p>
-        <p style="font-size: 17px;color:#101426;font-weight: 700">العنوان : <span
-                style="color: #6B7280;font-size: 16px;font-weight: 200">{{ $address }}</span></p>
-        <p style="font-size: 17px;color:#101426;font-weight: 700">رقم التلفون: <span
-                style="color: #6B7280;font-size: 16px;font-weight: 200">{{ $phone }}</span></p>
-        <p style="font-size: 17px;color:#101426;font-weight: 700">الايميل : <span
-                style="color: #6B7280;font-size: 16px;font-weight: 200">{{ $email }}</span></p>
+        <p style="font-size: 16px;color:#101426">رقم الجمعية : <span
+                style="color: #6B7280;font-size: 16px;">{{ $society_id }}</span></p>
+        <p style="font-size: 16px;color:#101426">العنوان : <span
+                style="color: #6B7280;font-size: 16px;">{{ $address }}</span></p>
+        <p style="font-size: 16px;color:#101426">رقم التلفون: <span
+                style="color: #6B7280;font-size: 16px;">{{ $phone }}</span></p>
+        <p style="font-size: 16px;color:#101426">الايميل : <span
+                style="color: #6B7280;font-size: 16px;">{{ $email }}</span></p>
     </div>
     <!--End First Paragraph-->
 
@@ -290,7 +280,7 @@
                     // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
                 @endphp
                 <tr>
-                    <td> {{ $PaymentType }} {{ $TransactionArray['description'] }}</td>
+                    <td> {{ $PaymentType }}   {{ $TransactionArray['description'] }}</td>
 
                     <td>{{ $ChickBillDate }}</td>
                     <td> {{ $TransactionArray['equivelant_amount'] }}</td>
@@ -312,39 +302,28 @@
     <!--End Table -->
 
     <!--Start Sector Name-->
-    <div style="width: 100%; position:relative;">
-        {{-- <p style="font-size: 17px; text-align: right"> اسم القطاع :
+    <div style="width:full; ">
+        <p style="font-size: 17px; text-align: right"> اسم القطاع :
             @if ($TransactionArray['sectors'] != null)
-                <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
+                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
             @else
-                <span style="color: #6B7280; font-size: 16px;">مخرجات عامة</span>
+                <span style="color: #6B7280;font-size: 16px;">مخرجات عامة</span>
             @endif
         </p>
-        <p dir="rtl" style="font-size: 17px; text-align: right"> مشروع :
-            <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['project']['project_name'] }}</span>
-        </p>
-        @if ($TransactionArray['payment_reason'] != null)
-            <p dir="rtl" style="font-size: 17px; text-align: right"> سبب التبرع :
-                <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
+        <p dir="rtl">مشروع : <span>{{ $TransactionArray['project']['project_name'] }}</span></p>
+
+        @if ($TransactionArray['description'] != null)
+            <p dir="rtl" style="font-size: 17px;text-align: right"> ملاحظات :
+                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
             </p>
         @endif
-        @if ($TransactionArray['description'] != null)
-            <p dir="rtl" style="font-size: 17px; text-align: right"> ملاحظات :
-                <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['description'] }}</span>
-            </p>
-        @endif --}}
-        <div class="imgstyle">
-            <p style="text-align: center;position:relative">
-                <img style="max-height: 160px; " src="{{ asset('assets/image/-dc.png') }}" alt="logo">
-                <img style="height: 120px; padding-right:20%;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab"> 
-            </p>
-            {{-- <img style="max-height: 160px; " src="{{ asset('assets/image/-dc.png') }}" alt="logo"> --}}
-            {{-- <img style="height: 120px;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab"> --}}
-        </div>
     </div>
-
-
-
+    <div style="position: relative; max-height: 160px; margin-left: 20%; ">
+        <img style="height:290px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
+    </div>
+    <div style="position: absolute; height: 150px; bottom: 13%; left: 37%;">
+        <img src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
+    </div>
     <!--End Sector Name-->
 
 </body>
