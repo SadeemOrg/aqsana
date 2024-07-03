@@ -321,14 +321,14 @@
                 <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
             </p>
         @endif
-        <div style="position: absolute; bottom: 13%; left: 50%; transform: translateX(-50%);">
+        {{-- <div style="position: absolute; bottom: 13%; left: 50%; transform: translateX(-50%);">
             <div style="max-height: 160px;">
                 <img src="{{ asset('assets/image/-dc.png') }}" alt="logo">
             </div>
             <div>
                 <img style="height:120px;" src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
             </div>
-        </div>
+        </div> --}}
     </div>
     
 
