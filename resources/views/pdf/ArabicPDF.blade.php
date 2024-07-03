@@ -74,6 +74,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background: #39A423
         }
     </style>
 </head>
