@@ -80,11 +80,19 @@
             max-height: 100px;
             display: inline-block;
         }
-
     </style>
 </head>
 
 <body>
+    @php
+        $society_id = nova_get_setting('society_id', '580179794');
+        $phone = nova_get_setting('phone', 'default_value');
+        $email = nova_get_setting('email', 'default_value');
+        $address = nova_get_setting('address', 'default_value');
+        // $newaddress = explode(',', $address);
+        $ChickBillDate = date('d/m/Y', strtotime($TransactionArray['transaction_date']));
+        // dd($TelephoneDirectory);
+    @endphp
     <div class="container">
         <!--Top Image -->
         <div class="header">
