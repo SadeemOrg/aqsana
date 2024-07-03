@@ -80,7 +80,7 @@
     @endphp
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
-        <img style="height: 220px; " src="{{ asset('/assets/image/iuktui.png') }}" alt="alaqsa Logo">
+        <img style="height: 220px; " src=" {{  $imagePaths['image1']  }}" alt="alaqsa Logo">
     </div>
     <!--End Top Image -->
 
@@ -319,10 +319,10 @@
         @endif
     </div>
     <div style="position: relative; max-height: 160px; margin-left: 20%; ">
-        <img style="height:290px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
+            <img style="height:290px;" src=" {{  $imagePaths['image2']  }}" alt="logo">
     </div>
     <div style="position: absolute; height: 150px; bottom: 13%; left: 37%;">
-        <img src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
+        <img src=" {{  $imagePaths['image3']  }}" alt="ttab">
     </div>
     <!--End Sector Name-->
 

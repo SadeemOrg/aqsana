@@ -21,6 +21,16 @@ class PDFController extends Controller
      */
     public function generatePDF($id)
     {
+        $imagePaths = [
+            'image1' => public_path('assets/image/iuktui.png'),
+            'image2' => public_path('assets/image/-dc.png'),
+            'image3' => public_path('assets/image/-removebg-preview.png')
+        ];
+        foreach ($imagePaths as $key => $imagePath) {
+            if (!file_exists($imagePath)) {
+                return response()->json(['error' => $key . ' file does not exist.'], 404);
+            }
+        }
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
         $TransactionArray = @json_decode(json_encode($Transaction), true);
         // dd();
@@ -94,9 +104,11 @@ class PDFController extends Controller
             'margin-top' => 0,
             'autoArabic' => true
         ]);
+        // dd($imagePaths['image1']);
         $data = [
             'TransactionArray' => $TransactionArray,
-            'PaymentType' =>  $PaymentType
+            'PaymentType' =>  $PaymentType,
+            'imagePaths'=>$imagePaths,
         ];
         $fileName = 'Invoices details.pdf';
         $mpdf->autoLangToFont = true;
