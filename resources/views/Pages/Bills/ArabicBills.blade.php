@@ -14,19 +14,19 @@
         <div class="flex flex-row items-center justify-center mx-8 mt-12">
             <img class="sm:h-[170px] w-[90%]" src="{{ asset('/assets/image/iuktui.png') }}" alt="alaqsa Logo">
         </div>
-        <div class="flex sm:flex-row flex-col-reverse items-center justify-between ">
-            <div class="basis-1/2 hidden sm:flex flex-col  items-start">
-                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">رقم الجمعية :
-                    <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
+        <div class="flex w-[70%] mx-auto sm:flex-row flex-col-reverse items-center justify-between ">
+            <div class="basis-1/2 hidden sm:flex flex-col gap-y-3 items-start">
+                <p class=" mt-3 text-[17px] font-bold text-[#101426]">رقم الجمعية :
+                    <span class="font-extralight text-[#6B7280] mx-1 text-sm">{{ $society_id }}</span>
                 </p>
-                <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">العنوان :
-                    <span class="font-FlatBold text-[#6B7280] mx-1 ">{{ $newaddress[0] }}</span>
+                <p class="mt-1 text-[17px] font-bold text-[#101426]">العنوان :
+                    <span class="font-extralight text-[#6B7280] mx-1 text-sm ">{{ $newaddress[0] }}</span>
                 </p>
-                <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">رقم الهاتف :
-                    <span dir="ltr" class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
+                <p class="mt-1 text-[17px] font-bold text-[#101426]">رقم الهاتف :
+                    <span dir="ltr" class="font-extralight text-[#6B7280] mx-1 text-sm">{{ $phone }}</span>
                 </p>
-                <p class="mt-1 text-[17px] font-noto_Regular text-[#101426]">البريد الالكتروني :
-                    <span class="font-FlatBold text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
+                <p class="mt-1 text-[17px] font-bold text-[#101426]">البريد الالكتروني :
+                    <span class="font-extralight text-[#6B7280] mx-1 text-sm">{{ $email }}</span>
                 </p>
             </div>
             <div class="sm:hidden flex flex-col items-center justify-center w-full mt-8  my-4 gap-y-2 px-16">
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-col items-start px-16 md:px-0 md:items-center mt-10">
+        <div class="flex w-[70%] mx-auto flex-col items-start px-16 md:px-0 md:items-center mt-10">
             <p dir="ltr" class="">{{ $newDate[0] }}</p>
             <p class="font-FlatBold text-[17px] text-[#101426] ">سند قبض رقم
                 <span class="text-base">
@@ -56,12 +56,12 @@
                 </span>
             </p>
             @if ($original == 1)
-                <p class="font-FlatBold text-[17px] text-[#101426] "> النسخة ألاصلية</p>
+                <p class="font-FlatBold text-[17px] text-[#101426] "> نسخة عن الفاتورة الأصلية</p>
             @else
-                <p class="font-FlatBold text-[17px] text-[#101426] ">نسحة عن النسخة ألاصلية</p>
+                <p class="font-FlatBold text-[17px] text-[#101426] ">نسحة عن النسخة للفاتورة ألاصلية</p>
             @endif
         </div>
-        <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 max-w-xl mt-4">
+        <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 w-[70%] mx-auto mt-4">
             <p class="text-[18px] font-FlatBold text-[#101426] pr-16 md:pr-0">لحساب :</p>
 
             <span class="font-FlatBold text-[#101426] md:text-[#6B7280]  text-[18px] text-right">
@@ -75,7 +75,7 @@
             </span>
         </div>
         <!-- table -->
-        <div class="px-4 mx-8 md:mx-0">
+        <div class=" px-4 mx-8 md:mx-auto w-[70%]">
             <div class="sm:flex sm:items-center">
             </div>
             <div class="mt-8 flex  flex-col">
@@ -384,8 +384,7 @@
                 </div>
             </div>
         </div>
-        <div
-            class="flex flex-row flex-wrap items-center md:justify-between justify-between px-16 md:px-4 mt-4 sm:mx-0 mb-6 ">
+        <div class="flex flex-row flex-wrap items-center md:justify-between justify-between px-16 md:px-4 mt-4 sm:mx-auto w-[70%] mb-6 ">
             <div>
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">اسم القطاع:
 
@@ -416,12 +415,13 @@
                 طباعة
             </button>
         </div>
-        <div
-            class="relative flex flex-row items-center justify-end md:justify-center ml-8 md:ml-0 w-full px-8 md:px-0 -mt-12">
-            <img class="w-[200px] h-[180px] md:w-[280px] md:h-[240px]" src="{{ asset('assets/image/-dc.png') }}"
+        <div class="relative flex flex-row items-center justify-end md:justify-center ml-8 md:ml-0 w-full px-8 md:px-0 -mt-12">
+            <img class="w-[200px] h-[180px] md:w-[320px] md:h-[290px]"
+            src="{{ asset('assets/image/-dc.png') }}"
                 alt="logo">
             <div class="absolute">
-                <img class="w-28 h-28 md:w-36 md:h-36" src="{{ asset('assets/image/-removebg-preview.png') }}"
+                <img class="w-28 h-28 md:w-44 md:h-40"
+                    src="{{ asset('assets/image/-removebg-preview.png') }}"
                     alt="ttab">
             </div>
         </div>
