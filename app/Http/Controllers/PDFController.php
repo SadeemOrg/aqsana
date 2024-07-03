@@ -104,7 +104,6 @@ class PDFController extends Controller
         // for Arabic Bills PDF
         if ($data['TransactionArray']['lang'] == 1) {
             $html = \view('pdf.ArabicPDF', $data);
-            // for English Bills PDF
         } else if ($data['TransactionArray']['lang'] == 2) {
             $html = \view('pdf.myPDF', $data);
         } else if ($data['TransactionArray']['lang'] == 3) {
