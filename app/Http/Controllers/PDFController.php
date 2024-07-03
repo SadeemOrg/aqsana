@@ -103,9 +103,7 @@ class PDFController extends Controller
         $mpdf->autoScriptToLang = true;
         // for Arabic Bills PDF
         if ($data['TransactionArray']['lang'] == 1) {
-            return view('pdf.ArabicPDF', $data);
             $html = \view('pdf.ArabicPDF', $data);
-            // for English Bills PDF
         } else if ($data['TransactionArray']['lang'] == 2) {
             $html = \view('pdf.myPDF', $data);
         } else if ($data['TransactionArray']['lang'] == 3) {
