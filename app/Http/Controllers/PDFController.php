@@ -24,7 +24,9 @@ class PDFController extends Controller
         $imagePaths = [
             'image1' => public_path('assets/image/iuktui.png'),
             'image2' => public_path('assets/image/-dc.png'),
-            'image3' => public_path('assets/image/-removebg-preview.png')
+            'image3' => public_path('assets/image/-removebg-preview.png'),
+            'image4' => public_path('assets/image/signiture.jpg')
+
         ];
         foreach ($imagePaths as $key => $imagePath) {
             if (!file_exists($imagePath)) {

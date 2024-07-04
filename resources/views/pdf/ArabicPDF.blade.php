@@ -80,7 +80,7 @@
     @endphp
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
-        <img style="height: 220px; " src=" {{  $imagePaths['image1']  }}" alt="alaqsa Logo">
+        <img style="height: 220px; " src="{{ asset('assets/image/iuktui.png') }}" alt="alaqsa Logo">
     </div>
     <!--End Top Image -->
 
@@ -300,30 +300,36 @@
     <!--End Table -->
 
     <!--Start Sector Name-->
-    <div style="width:full; ">
+    <div style="width: 100%; ">
+
         <p style="font-size: 17px; text-align: right"> اسم القطاع :
             @if ($TransactionArray['sectors'] != null)
-                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
+                <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
             @else
-                <span style="color: #6B7280;font-size: 16px;">مخرجات عامة</span>
+                <span style="color: #6B7280; font-size: 16px;">مخرجات عامة</span>
             @endif
         </p>
-        <p dir="rtl">مشروع : <span>{{ $TransactionArray['project']['project_name'] }}</span></p>
+
+        <p dir="rtl" style="font-size: 17px; text-align: right">مشروع :
+            <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['project']['project_name'] }}</span>
+        </p>
         @if ($TransactionArray['payment_reason'] != null)
-            <p dir="rtl">سبب التبرع : <span>{{ $TransactionArray['payment_reason'] }}</span></p>
-        @endif
-        @if ($TransactionArray['description'] != null)
-            <p dir="rtl" style="font-size: 17px;text-align: right"> ملاحظات :
-                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
+            <p dir="rtl" style="font-size: 17px; text-align: right">سبب التبرع :
+                <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
             </p>
         @endif
+        @if ($TransactionArray['description'] != null)
+            <p dir="rtl" style="font-size: 17px; text-align: right"> ملاحظات :
+                <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['description'] }}</span>
+            </p>
+        @endif
+        <div style="position: absolute; bottom: 0; width: 100%; text-align: center;">
+            <img style="height: 200px;" src="{{ asset('assets/image/signiture.jpg') }}" alt="logo">
+        </div>
     </div>
-    <div style="position: relative; max-height: 160px; margin-left: 20%; ">
-            <img style="height:290px;" src=" {{  $imagePaths['image2']  }}" alt="logo">
-    </div>
-    <div style="position: absolute; height: 150px; bottom: 13%; left: 37%;">
-        <img src=" {{  $imagePaths['image3']  }}" alt="ttab">
-    </div>
+
+
+
     <!--End Sector Name-->
 
 </body>
