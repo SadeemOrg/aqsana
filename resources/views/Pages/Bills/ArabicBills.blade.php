@@ -56,7 +56,7 @@
                 </span>
             </p>
             @if ($original == 1)
-                <p class="font-FlatBold text-[17px] text-[#101426] "> نسخة عن الفاتورة الأصلية</p>
+                <p class="font-FlatBold text-[17px] text-[#101426] ">  الفاتورة الأصلية</p>
             @else
                 <p class="font-FlatBold text-[17px] text-[#101426] ">نسحة عن النسخة للفاتورة ألاصلية</p>
             @endif

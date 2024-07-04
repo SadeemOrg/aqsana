@@ -1211,6 +1211,9 @@ video {
 .w-\[4oopx\]{
   width: 4oopx;
 }
+.w-\[70\%\]{
+  width: 70%;
+}
 .w-\[75\%\]{
   width: 75%;
 }
@@ -1240,9 +1243,6 @@ video {
 }
 .w-full{
   width: 100%;
-}
-.w-\[70\%\]{
-  width: 70%;
 }
 .min-w-\[100px\]{
   min-width: 100px;
@@ -2181,6 +2181,9 @@ video {
 .font-extrabold{
   font-weight: 800;
 }
+.font-extralight{
+  font-weight: 200;
+}
 .font-medium{
   font-weight: 500;
 }
@@ -2189,9 +2192,6 @@ video {
 }
 .font-semibold{
   font-weight: 600;
-}
-.font-extralight{
-  font-weight: 200;
 }
 .uppercase{
   text-transform: uppercase;
@@ -2627,21 +2627,17 @@ body{
     margin-left: -1.5rem;
     margin-right: -1.5rem;
   }
-  .sm\:mx-0{
-    margin-left: 0px;
-    margin-right: 0px;
-  }
   .sm\:mx-7{
     margin-left: 1.75rem;
     margin-right: 1.75rem;
   }
-  .sm\:my-8{
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
   .sm\:mx-auto{
     margin-left: auto;
     margin-right: auto;
+  }
+  .sm\:my-8{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
   .sm\:mb-0{
     margin-bottom: 0px;
@@ -2697,8 +2693,8 @@ body{
   .sm\:h-\[170px\]{
     height: 170px;
   }
-  .sm\:h-\[250px\]{
-    height: 250px;
+  .sm\:h-\[200px\]{
+    height: 200px;
   }
   .sm\:h-\[300px\]{
     height: 300px;
@@ -2717,9 +2713,6 @@ body{
   }
   .sm\:h-full{
     height: 100%;
-  }
-  .sm\:h-\[200px\]{
-    height: 200px;
   }
   .sm\:max-h-\[360px\]{
     max-height: 360px;
@@ -2923,11 +2916,11 @@ body{
   .md\:h-16{
     height: 4rem;
   }
-  .md\:h-36{
-    height: 9rem;
+  .md\:h-40{
+    height: 10rem;
   }
-  .md\:h-\[240px\]{
-    height: 240px;
+  .md\:h-\[290px\]{
+    height: 290px;
   }
   .md\:h-\[300px\]{
     height: 300px;
@@ -2944,12 +2937,6 @@ body{
   .md\:h-\[75px\]{
     height: 75px;
   }
-  .md\:h-40{
-    height: 10rem;
-  }
-  .md\:h-\[290px\]{
-    height: 290px;
-  }
   .md\:max-h-14{
     max-height: 3.5rem;
   }
@@ -2959,8 +2946,8 @@ body{
   .md\:max-h-\[320px\]{
     max-height: 320px;
   }
-  .md\:w-36{
-    width: 9rem;
+  .md\:w-44{
+    width: 11rem;
   }
   .md\:w-\[184px\]{
     width: 184px;
@@ -2971,8 +2958,8 @@ body{
   .md\:w-\[210px\]{
     width: 210px;
   }
-  .md\:w-\[280px\]{
-    width: 280px;
+  .md\:w-\[320px\]{
+    width: 320px;
   }
   .md\:w-\[44\%\]{
     width: 44%;
@@ -2988,12 +2975,6 @@ body{
   }
   .md\:w-full{
     width: 100%;
-  }
-  .md\:w-44{
-    width: 11rem;
-  }
-  .md\:w-\[320px\]{
-    width: 320px;
   }
   .md\:min-w-0{
     min-width: 0px;
