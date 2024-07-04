@@ -80,7 +80,7 @@
     @endphp
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
-        <img style="height: 220px; " src=" {{  $imagePaths['image1']  }}" alt="alaqsa Logo">
+        <img style="height: 220px; " src="{{ asset('assets/image/iuktui.png') }}" alt="alaqsa Logo">
     </div>
     <!--End Top Image -->
 
@@ -300,35 +300,36 @@
     <!--End Table -->
 
     <!--Start Sector Name-->
-    <div style="width: 100%; position: relative;">
-        <p style="font-size: 17px; text-align: right">اسم القطاع:
+    <div style="width: 100%; ">
+
+        <p style="font-size: 17px; text-align: right"> اسم القطاع :
             @if ($TransactionArray['sectors'] != null)
                 <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
             @else
                 <span style="color: #6B7280; font-size: 16px;">مخرجات عامة</span>
             @endif
         </p>
-        <p dir="rtl">مشروع: <span>{{ $TransactionArray['project']['project_name'] }}</span></p>
+
+        <p dir="rtl" style="font-size: 17px; text-align: right">مشروع :
+            <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['project']['project_name'] }}</span>
+        </p>
         @if ($TransactionArray['payment_reason'] != null)
-            <p dir="rtl">سبب التبرع: <span>{{ $TransactionArray['payment_reason'] }}</span></p>
+            <p dir="rtl" style="font-size: 17px; text-align: right">سبب التبرع :
+                <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
+            </p>
         @endif
         @if ($TransactionArray['description'] != null)
-            <p dir="rtl" style="font-size: 17px; text-align: right">ملاحظات:
+            <p dir="rtl" style="font-size: 17px; text-align: right"> ملاحظات :
                 <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['description'] }}</span>
             </p>
         @endif
-    
-        <!-- First Image -->
-        <div style="position: relative; margin-top: 20px; max-height: 160px; text-align: center;">
-            <img style="height: 290px;" src="{{ $imagePaths['image2'] }}" alt="logo">
-        </div>
-    
-        <!-- Second Image Positioned Absolutely -->
-        <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">
-            <img style="height: 150px;" src="{{ $imagePaths['image3'] }}" alt="ttab">
+        <div style="position: absolute; bottom: 0; width: 100%; text-align: center;">
+            <img style="height: 200px;" src="{{ asset('assets/image/signiture.jpg') }}" alt="logo">
         </div>
     </div>
-    
+
+
+
     <!--End Sector Name-->
 
 </body>
