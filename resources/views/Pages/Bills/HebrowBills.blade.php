@@ -64,7 +64,7 @@
             @endif
         </div>
         <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 w-[70%] mx-auto mt-4">
-            <p class="text-[18px] font-FlatBold text-[#101426] pr-16 md:pr-0">لحساب :</p>
+            <p class="text-[18px] font-FlatBold text-[#101426] pr-16 md:pr-0">לחשב :</p>
             <span class="font-FlatBold text-[#101426] md:text-[#6B7280]  text-[18px] text-right">
                 @if ($Transaction->Payment_type == 5)
                 קופסת כסף  :

@@ -111,7 +111,7 @@
     <!--End Second Paragraph-->
 
     <!--Start for Account Paragraph-->
-    <p style="text-align: right;font-size: 16px;color:#101426">لحساب :
+    <p style="text-align: right;font-size: 16px;color:#101426">לחשב :
         <span style="color: #6B7280;font-size: 16px;">
             @if ($TransactionArray['Payment_type'] == 5)
                 ספק בבנק:
