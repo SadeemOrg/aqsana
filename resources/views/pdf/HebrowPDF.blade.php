@@ -80,21 +80,19 @@
     @endphp
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
-        <img style="height: 220px; "
-            src="{{ asset('/assets/image/iuktui.png') }}"
-            alt="alaqsa Logo">
+        <img style="height: 220px; " src="{{ asset('/assets/image/iuktui.png') }}" alt="alaqsa Logo">
     </div>
     <!--End Top Image -->
 
     <!--First Paragraph-->
     <div dir="rtl" style="align-items: left; padding-top: 70px;">
-        <p style="font-size: 16px;color:#101426">אִרגוּן  : <span
+        <p style="font-size: 16px;color:#101426">אִרגוּן : <span
                 style="color: #6B7280;font-size: 16px;">{{ $society_id }}</span></p>
-        <p style="font-size: 16px;color:#101426">כותרת  : <span
+        <p style="font-size: 16px;color:#101426">כותרת : <span
                 style="color: #6B7280;font-size: 16px;">{{ $address }}</span></p>
         <p style="font-size: 16px;color:#101426">טלפון : <span
                 style="color: #6B7280;font-size: 16px;">{{ $phone }}</span></p>
-        <p style="font-size: 16px;color:#101426">אימייל  : <span
+        <p style="font-size: 16px;color:#101426">אימייל : <span
                 style="color: #6B7280;font-size: 16px;">{{ $email }}</span></p>
     </div>
     <!--End First Paragraph-->
@@ -113,14 +111,14 @@
     <!--End Second Paragraph-->
 
     <!--Start for Account Paragraph-->
-    <p  style="text-align: right;font-size: 16px;color:#101426">لحساب :
+    <p style="text-align: right;font-size: 16px;color:#101426">لحساب :
         <span style="color: #6B7280;font-size: 16px;">
             @if ($TransactionArray['Payment_type'] == 5)
-            ספק בבנק:
-                            {{ $TransactionArray['description'] }}
-        @else
-            {{ $TransactionArray['telephone_directory']['name'] }}
-        @endif
+                ספק בבנק:
+                {{ $TransactionArray['description'] }}
+            @else
+                {{ $TransactionArray['telephone_directory']['name'] }}
+            @endif
         </span>
     </p>
     <!--End for Account Paragraph-->
@@ -135,8 +133,8 @@
                     <th> תאריך</th>
                     <th>בַּנק</th>
                     <th>ענף</th>
-                    <th>מספר חשבון	 </th>
-                    <th>סך הכל  </th>
+                    <th>מספר חשבון </th>
+                    <th>סך הכל </th>
                 </tr>
             </thead>
             <tbody>
@@ -158,7 +156,7 @@
                     <td class=""></td>
                     <td class=""></td>
                     <td class="">
-                        סך הכל סופי  :</td>
+                        סך הכל סופי :</td>
                     <td class=""></td>
                     <td class="">
                         {{ $TransactionArray['equivelant_amount'] }} </td>
@@ -170,7 +168,7 @@
         <table dir="rtl" class="blueTable">
             <thead>
                 <tr>
-                    <th>שיטות תשלום	</th>
+                    <th>שיטות תשלום </th>
                     <th>תאריך</th>
                     <th>סך הכל </th>
                 </tr>
@@ -195,10 +193,10 @@
         <table dir="rtl" class="blueTable">
             <thead>
                 <tr>
-                    <th>שיטות תשלום	</th>
+                    <th>שיטות תשלום </th>
                     <th>תאריך</th>
                     <th>מספר הטלפון </th>
-                    <th>סך הכל  </th>
+                    <th>סך הכל </th>
                 </tr>
             </thead>
             <tbody>
@@ -230,11 +228,11 @@
             <thead>
                 <tr>
                     <th> שיטות תשלום</th>
-                    <th> תאריך ספק	</th>
-                    <th> בַּנק	</th>
-                    <th> מספר סניף	</th>
-                    <th> מספר החשבון	</th>
-                    <th>ערך ספק  </th>
+                    <th> תאריך ספק </th>
+                    <th> בַּנק </th>
+                    <th> מספר סניף </th>
+                    <th> מספר החשבון </th>
+                    <th>ערך ספק </th>
                 </tr>
             </thead>
             <tbody>
@@ -264,32 +262,32 @@
             </tbody>
             </tr>
         </table>
-        @elseif($PaymentType == 'קופסת כסף')
+    @elseif($PaymentType == 'קופסת כסף')
         <table dir="rtl" class="blueTable">
             <thead>
                 <tr>
                     <th> התשלום נעשה דרך:</th>
-                    <th>ערך ספק   </th>
-                    <th>  סך הכל סופי </th>
+                    <th>ערך ספק </th>
+                    <th> סך הכל סופי </th>
 
                 </tr>
             </thead>
             <tbody>
 
-                    @php
-                        // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
-                    @endphp
-                    <tr>
-                        <td> {{ $PaymentType }} {{ $TransactionArray['alhisalat']['number_alhisala'] }}  </td>
-                        <td>{{ $ChickBillDate }}</td>
-                        <td> {{ $TransactionArray['equivelant_amount']}}</td>
+                @php
+                    // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                @endphp
+                <tr>
+                    <td> {{ $PaymentType }} {{ $TransactionArray['alhisalat']['number_alhisala'] }} </td>
+                    <td>{{ $ChickBillDate }}</td>
+                    <td> {{ $TransactionArray['equivelant_amount'] }}</td>
 
-                    </tr>
+                </tr>
 
                 <tr>
 
                     <td class="">
-                        סך הכל סופי  :</td>
+                        סך הכל סופי :</td>
                     <td class=""></td>
                     <td class="">
                         {{ $TransactionArray['equivelant_amount'] }} </td>
@@ -301,12 +299,12 @@
     <!--End Table -->
 
     <!--Start Sector Name-->
-    <div style="width:full;">
+    <div style="width: 100%;">
         <p style="font-size: 17px; text-align: right"> שם המגזר :
             @if ($TransactionArray['sectors'] != null)
                 <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
             @else
-                <span style="color: #6B7280;font-size: 16px;">مخرجات عامة</span>
+                <span style="color: #6B7280;font-size: 16px;">פלטים כלליים</span>
             @endif
         </p>
 
@@ -314,25 +312,21 @@
             <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
         </p>
         <p dir="rtl" style="font-size: 17px;text-align: right"> פרויקט :
-            <span style="color: #6B7280;font-size: 16px;">{{  $TransactionArray['project']['project_name'] }}</span>
+            <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['project']['project_name'] }}</span>
         </p>
         @if ($TransactionArray['payment_reason'] != null)
-
-        <p dir="rtl" style="font-size: 17px;text-align: right"> סיבת תרומה  :
-            <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
-        </p>
+            <p dir="rtl" style="font-size: 17px;text-align: right"> סיבת תרומה :
+                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
+            </p>
         @endif
         @if ($TransactionArray['description'] != null)
-        <p dir="rtl" style="font-size: 17px;text-align: right"> הערות :
-            <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
-        </p>
-    @endif
-    </div>
-    <div style="position: relative; max-height: 160px; margin-left: 20%; ">
-        <img style="height:290px;" src="{{ asset('assets/image/-dc.png') }}" alt="logo">
-    </div>
-    <div style="position: absolute; height: 150px; bottom: 13%; left: 37%;">
-        <img src="{{ asset('assets/image/-removebg-preview.png') }}" alt="ttab">
+            <p dir="rtl" style="font-size: 17px;text-align: right"> הערות :
+                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
+            </p>
+        @endif
+        <div style="position: absolute; bottom: 0; width: 100%; text-align: center;">
+            <img style="height: 200px;" src="{{ $imagePaths['image4'] }}" alt="logo">
+        </div>
     </div>
     <!--End Sector Name-->
 
