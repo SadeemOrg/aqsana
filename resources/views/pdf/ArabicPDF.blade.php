@@ -80,7 +80,7 @@
     @endphp
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
-        <img style="height: 220px; " src=" {{ $imagePaths['image1'] }}" alt="alaqsa Logo">
+        <img style="height: 220px; " src="{{ asset('assets/image/iuktui.png') }}" alt="alaqsa Logo">
     </div>
     <!--End Top Image -->
 
