@@ -80,7 +80,7 @@
     @endphp
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
-        <img style="height: 220px; " src="{{ asset('assets/image/iuktui.png') }}" alt="alaqsa Logo">
+        <img style="height: 220px; " src=" {{ $imagePaths['image1'] }}" alt="alaqsa Logo">
     </div>
     <!--End Top Image -->
 
@@ -324,7 +324,7 @@
             </p>
         @endif
         <div style="position: absolute; bottom: 0; width: 100%; text-align: center;">
-            <img style="height: 200px;" src="{{ asset('assets/image/signiture.jpg') }}" alt="logo">
+            <img style="height: 200px;" src="{{ $imagePaths['image4'] }}"  1alt="logo">
         </div>
     </div>
 
