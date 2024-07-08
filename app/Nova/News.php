@@ -237,11 +237,11 @@ class News extends Resource
                 ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
 
             Image::make(__('master image'), 'image')->disk('public'),
-            Images::make('Image 1', 'img1')
-                ->withResponsiveImages()
-                ->withResponsiveImages()
-                ->singleImageRules('dimensions:max_width=100')
-                ->showStatistics()->mustCrop(),
+            // Images::make('Image 1', 'img1')
+            //     ->withResponsiveImages()
+            //     ->withResponsiveImages()
+            //     ->singleImageRules('dimensions:max_width=100')
+            //     ->showStatistics()->mustCrop(),
 
             ArrayImages::make(__('PICTURES'), 'pictures')
                 ->disk('public'),
@@ -250,7 +250,7 @@ class News extends Resource
             Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
             // Date::make('date', 'new_date'),
 
-            Flexible::make(__('add user'), 'videos')
+            Flexible::make(__('add videos'), 'videos')
                 ->addLayout(__('video'), 'video', [
                     Text::make(__('VIDEO LINK'), 'video_link'),
                     Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
