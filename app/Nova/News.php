@@ -237,11 +237,11 @@ class News extends Resource
                 ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
 
             Image::make(__('master image'), 'image')->disk('public'),
-            Images::make('Image 1', 'img1')
-                ->withResponsiveImages()
-                ->withResponsiveImages()
-                ->singleImageRules('dimensions:max_width=100')
-                ->showStatistics()->mustCrop(),
+            // Images::make('Image 1', 'img1')
+            //     ->withResponsiveImages()
+            //     ->withResponsiveImages()
+            //     ->singleImageRules('dimensions:max_width=100')
+            //     ->showStatistics()->mustCrop(),
 
             ArrayImages::make(__('PICTURES'), 'pictures')
                 ->disk('public'),
