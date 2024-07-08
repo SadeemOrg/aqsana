@@ -94,11 +94,6 @@ class News extends Resource
     public function fields(Request $request)
     {
         return [
-
-
-
-
-
             ID::make(__('ID'), 'id'),
             ActionButton::make(__('POST NEWS'))
                 ->action((new PostNews)->confirmText(__('Are you sure you want to post  this NEWS?'))
@@ -107,7 +102,7 @@ class News extends Resource
                 ->readonly(function () {
                     return $this->status === '1';
                 })->text(__('post'))->showLoadingAnimation()
-                ->loadingColor('#fff') ->hideWhenCreating()->hideWhenUpdating(),
+                ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
             Boolean::make(__('is posted'), 'status')->rules('required'),
             Text::make(__('TITLE'), 'title')->rules('required'),
             Textarea::make(__('Sub_text'), 'description')->rules('required'),
@@ -132,13 +127,9 @@ class News extends Resource
 
                 ])->displayUsingLabels()->hideFromDetail()->hideFromIndex()
                 ->rules('required')
-                // ->withMeta(['ignoreOnSaving'])
                 ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    // dd($attribute);
                     return null;
                 }),
-
-
 
             NovaDependencyContainer::make([
                 Select::make(__('main Type'), "main_type", function () {
@@ -151,10 +142,7 @@ class News extends Resource
                     if (gettype($total) == "string") return "2";
                     else return "1";
                     $coutotal =  count($total);
-                    // if( $coutotal >1) return "1";
-                    // else return "2";
-                    // // dd($coutotal);
-                    // return ($this->main_type );
+
                 })
                     ->options([
 
@@ -192,47 +180,32 @@ class News extends Resource
 
                     ])->rules('required'),
             ])->dependsOn('mult', "1"),
-            // Multiselect::make("main Type", "main_type")
-            // ->options([
-            //     '1' => 'News',
-            //     '2' => 'alqudus walmasjid alaqsaa',
-            //     '3' => 'alqudus walmasjid alaqsaa',
 
 
-            // ]),
 
-            // CKEditor::make('Contents', 'contents')->hidefromindex(),
+
             Tiptap::make(__('Contents'), 'contents')
                 ->buttons([
                     'heading',
-                    '|',
                     'italic',
                     'bold',
-                    '|',
                     'link',
                     'code',
                     'strike',
                     'underline',
                     'highlight',
-                    '|',
                     'bulletList',
                     'orderedList',
                     'br',
                     'codeBlock',
                     'blockquote',
-                    '|',
                     'horizontalRule',
                     'hardBreak',
-                    '|',
                     'table',
-                    '|',
                     'image',
-                    '|',
                     'textAlign',
-                    '|',
                     'rtl',
-                    '|',
-                    'history',
+                                        'history',
                 ])
                 ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
 
@@ -241,22 +214,72 @@ class News extends Resource
             ArrayImages::make(__('PICTURES'), 'pictures')
                 ->disk('public'),
 
-            Text::make(__('VIDEO LINK'), 'video_link'),
-            Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
-            Flexible::make(__('add videos'), 'videos')
-                ->addLayout(__('video'), 'video', [
-                    Text::make(__('VIDEO LINK'), 'video_link'),
-                    Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
-                ]),
-            Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y')->sortable()->rules('required'),
-
-
-            HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
-
-
-
-
         ];
+        // return [
+
+
+
+
+
+        //     ID::make(__('ID'), 'id'),
+        //     ActionButton::make(__('POST NEWS'))
+        //         ->action((new PostNews)->confirmText(__('Are you sure you want to post  this NEWS?'))
+        //             ->confirmButtonText(__('post'))
+        //             ->cancelButtonText(__('Dont post')), $this->id)
+        //         ->readonly(function () {
+        //             return $this->status === '1';
+        //         })->text(__('post'))->showLoadingAnimation()
+        //         ->loadingColor('#fff') ->hideWhenCreating()->hideWhenUpdating(),
+        //     Boolean::make(__('is posted'), 'status')->rules('required'),
+        //     Text::make(__('TITLE'), 'title')->rules('required'),
+        //     Textarea::make(__('Sub_text'), 'description')->rules('required'),
+        //     Select::make(__('SECTOR'), 'sector')
+        //         ->options(function () {
+        //             $sectors = Sector::all();
+        //             $user_type_admin_array =  array();
+        //             foreach ($sectors as $sector) {
+        //                 $user_type_admin_array += [$sector['id'] => ($sector['text'])];
+        //             }
+        //             return  $user_type_admin_array;
+        //         })->displayUsingLabels(),
+
+        //     Select::make(__('have multi category'), "mult", function () {
+        //         $total =  json_decode($this->main_type);
+        //         if (gettype($total) == "string") return "2";
+        //         else return "1";
+        //     })
+        //         ->options([
+        //             '1' => __('yes'),
+        //             '2' => __('no'),
+
+        //         ])->displayUsingLabels()->hideFromDetail()->hideFromIndex()
+        //         ->rules('required')
+        //         // ->withMeta(['ignoreOnSaving'])
+        //         ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+        //             // dd($attribute);
+        //             return null;
+        //         }),
+
+
+
+
+
+        //     Text::make(__('VIDEO LINK'), 'video_link'),
+        //     Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
+        //     Flexible::make(__('add videos'), 'videos')
+        //         ->addLayout(__('video'), 'video', [
+        //             Text::make(__('VIDEO LINK'), 'video_link'),
+        //             Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
+        //         ]),
+        //     Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y')->sortable()->rules('required'),
+
+
+        //     HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
+
+
+
+
+        // ];
     }
     public static function beforeSave(Request $request, $model)
     {
