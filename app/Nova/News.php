@@ -94,94 +94,84 @@ class News extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id'),
-            ActionButton::make(__('POST NEWS'))
-                ->action((new PostNews)->confirmText(__('Are you sure you want to post  this NEWS?'))
-                    ->confirmButtonText(__('post'))
-                    ->cancelButtonText(__('Dont post')), $this->id)
-                ->readonly(function () {
-                    return $this->status === '1';
-                })->text(__('post'))->showLoadingAnimation()
-                ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
-            Boolean::make(__('is posted'), 'status')->rules('required'),
-            Text::make(__('TITLE'), 'title')->rules('required'),
-            Textarea::make(__('Sub_text'), 'description')->rules('required'),
-            Select::make(__('SECTOR'), 'sector')
+            ID::make(__('ID'), 'id')->sortable(),
+            Text::make("Title", 'title'),
+            //   BelongsTo::make("newsType",'newsTypes'),
+            Textarea::make('description', 'description'),
+            // Select::make("main sector", "sector")
+            // ->options([
+            //     '1' => 'قطاع الاغاثة',
+            //     '2' => 'قطاع التنمية والدعم الاقتصادي',
+            //     '3' => 'قوافل الأقصى',
+            //     '4' => 'قطاع الأوقاف والمقدسات',
+            //     '5' => 'قطاع الصحة ',
+            // ])->displayUsingLabels(),
+
+            Select::make('sector', 'sector')
                 ->options(function () {
-                    $sectors = Sector::all();
+                    // // $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
+                    //     $user = DB::table('nova_settings')
+                    //     ->where('key', 'address')
+                    //     ->first();
+                    $sectors = nova_get_setting('workplace', 'default_value');
                     $user_type_admin_array =  array();
                     foreach ($sectors as $sector) {
-                        $user_type_admin_array += [$sector['id'] => ($sector['text'])];
+                        $user_type_admin_array += [$sector['data']['searsh_text_workplace'] => ($sector['data']['searsh_text_workplace']. " (". $sector['data']['text_main_workplace'] .")")];
+                        // $user_type_admin_array += $sector['data']['text_main_workplace'];
                     }
+
+
+                    // foreach($users as $user) {
+                    //     if ($user->Area == null  ) {
+
+
+                    //     $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
+                    // }
+                    // }
                     return  $user_type_admin_array;
-                })->displayUsingLabels(),
-
-            Select::make(__('have multi category'), "mult", function () {
-                $total =  json_decode($this->main_type);
-                if (gettype($total) == "string") return "2";
-                else return "1";
-            })
+                    // return $user->value;
+                })->hideFromIndex()->hideFromDetail(),
+            Select::make("main Type", "main_type")
                 ->options([
-                    '1' => __('yes'),
-                    '2' => __('no'),
+                    '1' => 'News',
+                    '2' => 'alqudus walmasjid alaqsaa',
+                    '3' => 'alqudus walmasjid alaqsaa',
 
-                ])->displayUsingLabels()->hideFromDetail()->hideFromIndex()
-                ->rules('required')
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    return null;
-                }),
+
+                ])->displayUsingLabels(),
+
 
             NovaDependencyContainer::make([
-                Select::make(__('main Type'), "main_type", function () {
-
-                    $tt =  str_replace('"', "", $this->main_type);
-                    return $tt;
-                    // dd($tt);
-                    $total =  json_decode($this->main_type);
-                    // dd(gettype( $total));
-                    if (gettype($total) == "string") return "2";
-                    else return "1";
-                    $coutotal =  count($total);
-
-                })
+                Select::make(" type", "type")
                     ->options([
+                        '1' => 'News',
+                        '2' => 'Blogs',
+                        '3' => 'Report',
+                    ])->displayUsingLabels(),
+            ])->dependsOn('main_type', '1'),
 
-                        '1' => __('News'),
-                        '2' => __('alqudus walmasjid alaqsaa'),
-
-                    ])->displayUsingLabels()->rules('required'),
-
-                NovaDependencyContainer::make([
-                    Select::make(__('type'), "type")
-                        ->options([
-                            '1' => __('News'),
-                            '2' => __('Blogs'),
-                            '3' => __('Report'),
-                        ])->displayUsingLabels(),
-                ])->dependsOn('main_type', '1')->rules('required'),
-
-                NovaDependencyContainer::make([
-                    Select::make(__('type'), "type")
-                        ->options([
-                            '1' => __('News'),
-                            '2' => __('almas alsamel'),
-                            '3' => __('Report'),
-                        ])->displayUsingLabels(),
-                ])->dependsOn('main_type', '2'),
-            ])->dependsOn('mult', "2")->rules('required'),
 
             NovaDependencyContainer::make([
-                Multiselect::make(__('main Type'), "main_type")
+                Select::make(" type", "type")
                     ->options([
-                        '1' => __('News'),
-                        '2' => __('alqudus walmasjid alaqsaa'),
+                        '1' => 'News',
+                        '2' => 'Blogs',
+                        '3' => 'Report',
+                    ])->displayUsingLabels(),
+            ])->dependsOn('main_type', '2'),
+
+
+            NovaDependencyContainer::make([
+                Select::make(" type", "type")
+                    ->options([
+                        '1' => 'News',
+                        '2' => 'almas alsamel',
+                    ])->displayUsingLabels(),
+            ])->dependsOn('main_type', '3'),
 
 
 
-                    ])->rules('required'),
-            ])->dependsOn('mult', "1"),
-
-
+            // CKEditor::make('Contents', 'contents')->hidefromindex(),
 
 
             Tiptap::make(__('Contents'), 'contents')
@@ -208,79 +198,22 @@ class News extends Resource
                                         'history',
                 ])
                 ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
-
-            Image::make(__('master image'), 'image')->disk('public'),
-
-            ArrayImages::make(__('PICTURES'), 'pictures')
+            Image::make('Image', 'image')->disk('public')->prunable(),
+            ArrayImages::make('Pictures', 'pictures')
                 ->disk('public'),
 
+            Text::make("video link", 'video_link'),
+
+            // Date::make('date', 'new_date'),
+            Date::make('date', 'new_date')->pickerDisplayFormat('d.m.Y'),
+
+
+
+
+
         ];
-        // return [
-
-
-
-
-
-        //     ID::make(__('ID'), 'id'),
-        //     ActionButton::make(__('POST NEWS'))
-        //         ->action((new PostNews)->confirmText(__('Are you sure you want to post  this NEWS?'))
-        //             ->confirmButtonText(__('post'))
-        //             ->cancelButtonText(__('Dont post')), $this->id)
-        //         ->readonly(function () {
-        //             return $this->status === '1';
-        //         })->text(__('post'))->showLoadingAnimation()
-        //         ->loadingColor('#fff') ->hideWhenCreating()->hideWhenUpdating(),
-        //     Boolean::make(__('is posted'), 'status')->rules('required'),
-        //     Text::make(__('TITLE'), 'title')->rules('required'),
-        //     Textarea::make(__('Sub_text'), 'description')->rules('required'),
-        //     Select::make(__('SECTOR'), 'sector')
-        //         ->options(function () {
-        //             $sectors = Sector::all();
-        //             $user_type_admin_array =  array();
-        //             foreach ($sectors as $sector) {
-        //                 $user_type_admin_array += [$sector['id'] => ($sector['text'])];
-        //             }
-        //             return  $user_type_admin_array;
-        //         })->displayUsingLabels(),
-
-        //     Select::make(__('have multi category'), "mult", function () {
-        //         $total =  json_decode($this->main_type);
-        //         if (gettype($total) == "string") return "2";
-        //         else return "1";
-        //     })
-        //         ->options([
-        //             '1' => __('yes'),
-        //             '2' => __('no'),
-
-        //         ])->displayUsingLabels()->hideFromDetail()->hideFromIndex()
-        //         ->rules('required')
-        //         // ->withMeta(['ignoreOnSaving'])
-        //         ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-        //             // dd($attribute);
-        //             return null;
-        //         }),
-
-
-
-
-
-        //     Text::make(__('VIDEO LINK'), 'video_link'),
-        //     Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
-        //     Flexible::make(__('add videos'), 'videos')
-        //         ->addLayout(__('video'), 'video', [
-        //             Text::make(__('VIDEO LINK'), 'video_link'),
-        //             Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
-        //         ]),
-        //     Date::make(__('DATE'), 'new_date')->pickerDisplayFormat('d.m.Y')->sortable()->rules('required'),
-
-
-        //     HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
-
-
-
-
-        // ];
     }
+
     public static function beforeSave(Request $request, $model)
     {
         $id = Auth::id();
