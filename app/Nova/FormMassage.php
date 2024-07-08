@@ -78,7 +78,7 @@ public static function groupOrder() {
             ActionButton::make(__('ReadMessage'))
             ->action((new ReadMessage) ->confirmText(__('Are you sure you want to read this Message?'))
             ->confirmButtonText('Read')
-           , $this->id) ->canSee(function () {
+           ,(string) $this->id) ->canSee(function () {
                 return $this->is_read === '0';
             })
             ->text(__('Read'))->showLoadingAnimation()
