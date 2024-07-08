@@ -260,14 +260,20 @@
                     </div>
 
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
+
                         @if (!empty(json_decode($news_detail->videos)))
                             @foreach (json_decode($news_detail->videos) as $video)
                                 <div class="col-span-1 scalabel-img-box">
                                     <a href={{ $video->attributes->video_link }}
                                         class="mediabox rounded-[5px] overflow-hidden relative">
-                                        <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full"
-                                            src="/storage/{{ $video->attributes->video_img_cover }}"
-                                            alt="people_on_Mousq" />
+                                        @if (isset($video->attributes->video_img_cover))
+                                            <img class=" mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full"
+                                                src="/storage/{{ $video->attributes->video_img_cover }}"
+                                                alt="people_on_Mousq" />
+                                        @else
+                                            <img class="  mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full"
+                                                src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
+                                        @endif
                                         <img src="{{ asset('assets/image/play_Svg.svg') }}"
                                             class="absolute max-w-[46px] top-[44%] right-[45%] " />
                                     </a>
@@ -295,7 +301,8 @@
                             @endforeach
                         @elseif (empty($pictures) && !empty($news_detail->video_link))
                             <div class="col-span-1 scalabel-img-box">
-                                <a href={{ $news_detail->video_link }} class="mediabox rounded-[5px] overflow-hidden relative">
+                                <a href={{ $news_detail->video_link }}
+                                    class="mediabox rounded-[5px] overflow-hidden relative">
                                     <img class="  mx-auto w-full object-cover lg:h-[265px] rounded-[5px] h-full"
                                         src="{{ asset($imageVideoCover) }}" alt="people_on_Mousq" />
                                     <img src="{{ asset('assets/image/play_Svg.svg') }}"
