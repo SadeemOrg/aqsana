@@ -232,12 +232,12 @@ class Alhisalat extends Resource
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('Add new bus'), 'bus', [
-                    Text::make(__('Name'), "name_address")->rules('required'),
-                    Text::make(__("description"), "description")->rules('required'),
-                    Text::make(__("phone number"), "phone_number_address")->rules('required'),
+                    Text::make(__('Name'), "name_address"),
+                    Text::make(__("description"), "description"),
+                    Text::make(__("phone number"), "phone_number_address"),
                     MapsAddress::make(__('Address'), 'current_location')
                         ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036])
-                        ->types(['establishment'])->rules(new AlhisalatMap(), 'required'),
+                        ->types(['establishment']),
                 ])->hideWhenUpdating(),
 
             Multiselect::make(__("Status"), "status")->options([
@@ -256,6 +256,27 @@ class Alhisalat extends Resource
         if (!($request->newadres  || $request->address_id)) {
             $validator->errors()->add('address_id', 'يجب اضافة عنوان');
         }
+
+        if ($request->newadres  &&  empty(($request->address_id))) {
+
+
+        // dd();
+
+            if (!isset($request->newadres[0]['attributes']['name_address']) ) {
+                $validator->errors()->add($request->newadres[0]['key'] . '__name_address', 'هذا الحقل مطلوب');
+            }
+            if (!isset($request->newadres[0]['attributes']['description']) ) {
+                $validator->errors()->add($request->newadres[0]['key'] . '__description', 'هذا الحقل مطلوب');
+            }
+            if (!isset($request->newadres[0]['attributes']['phone_number_address']) ) {
+                $validator->errors()->add($request->newadres[0]['key'] . '__phone_number_address', 'هذا الحقل مطلوب');
+            }
+            if (($request->newadres[0]['attributes']['current_location'])== 'null' ) {
+                $validator->errors()->add($request->newadres[0]['key'] . '__current_location', 'هذا الحقل مطلوب');
+            }
+
+        }
+
     }
     public static function beforesave(Request $request, $model)
     {
