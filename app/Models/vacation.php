@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class vacation extends Model
 {
     use HasFactory;
-
+    protected $casts = [
+        'date'=>'date',
+    ];
     public function user()
     {
         return $this->belongsTo('App\Models\User','user_id');
