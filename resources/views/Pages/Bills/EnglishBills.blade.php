@@ -60,7 +60,7 @@
                 <p class="font-FlatBold text-[17px] text-[#101426] ">Copy from orginal Bill</p>
             @endif
         </div>
-        <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 max-w-xl mt-4 px-16 md:px-0">
+        <div class="flex flex-col-reverse items-center mx-auto relative sm:flex-row w-[90%]">
             <p class="text-[18px] font-FlatBold text-[#101426]">account owner :</p>
             <span class="font-FlatBold text-[#6B7280]  text-[18px] text-right">
                 @if ($Transaction->Payment_type == 5)
