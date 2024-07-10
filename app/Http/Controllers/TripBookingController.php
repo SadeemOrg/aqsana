@@ -22,7 +22,7 @@ class TripBookingController extends BaseController
 
 
         ], [
-            'project_id.required' => 'الاسم مطلوب.',
+            'project_id.required' => 'القافلة مطلوب.',
             'project_id.string' => 'يجب أن يكون الاسم نصًا.',
             'number_of_people.required' => 'عدد الاشخاص  مطلوب.',
             'number_phone.required' => 'رقم الهاتف مطلوب.',
