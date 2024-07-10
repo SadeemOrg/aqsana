@@ -353,7 +353,7 @@
             </div>
         </div>
         <div dir="rtl"
-            class="flex flex-row-reverse flex-wrap items-center justify-around sm:justify-between mt-4 sm:mx-7 mb-6 ">
+            class="flex flex-row-reverse flex-wrap items-center justify-around sm:justify-between mt-4 sm:mx-7 mb-6 w-[90%] px-4">
             <div dir="ltr">
                 <p class=" mt-3 text-[18px] font-FlatBold text-[#101426]">sector name:
                     @if ($Transaction->Sectors != null)
