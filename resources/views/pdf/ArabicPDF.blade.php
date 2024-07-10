@@ -114,7 +114,6 @@
     <p style="text-align: right;font-size: 16px;color:#101426">لحساب :
         <span style="color: #6B7280;font-size: 16px;">
             @if ($TransactionArray['Payment_type'] == 5)
-                حصالة رقم:
                 {{ $TransactionArray['description'] }}
             @else
                 {{ $TransactionArray['telephone_directory']['name'] }}
