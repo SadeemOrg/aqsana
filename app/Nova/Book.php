@@ -87,7 +87,7 @@ class Book extends Resource
             ActionButton::make(__('POST NEWS'))
                 ->action((new PostBook)->confirmText(__('Are you sure you want to post  this NEWS?'))
                     ->confirmButtonText(__('post'))
-                    ->cancelButtonText(__('Dont post')), $this->id)
+                    ->cancelButtonText(__('Dont post')), (string)$this->id)
                 ->readonly(function () {
                     return $this->post === 1;
                 })->text(__('post'))->showLoadingAnimation()
