@@ -47,8 +47,8 @@ class DeleteBill extends Action
             ]);
 
             $new_data = $model->replicate();
-            $new_data-> transact_amount =  -$model->transact_amount;
-            $new_data->equivelant_amount = -$model->transact_amount;
+            $new_data-> transact_amount =  -$model->equivelant_amount;
+            $new_data->equivelant_amount = -$model->equivelant_amount;
             $new_data->transaction_date = $fields->transaction_date;
             $new_data->payment_reason = $fields->return_money;
 
