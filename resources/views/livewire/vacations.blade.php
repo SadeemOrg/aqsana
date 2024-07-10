@@ -168,7 +168,7 @@
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <svg class="cursor-pointer" wire:click="Delete({{ $vacation->id }})"
+                                                <svg class="cursor-pointer" wire:click="DeleteModel({{ $vacation->id }})"
                                                     width="35" height="35" viewBox="0 0 56 55" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <rect width="56" height="55" rx="2"
@@ -381,6 +381,35 @@
         </div>
 
 
+
+    @endif
+    @if ($this->showDeleteModel == true)
+    <div class="popUpTimerReason relative z-10 contactusModel" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        <div class="fixed inset-0 top-[3%] z-10 flex items-center justify-center">
+            <div class="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:max-w-sm">
+                <button class="absolute top-4 left-4 text-gray-600 hover:text-gray-800" wire:click="closeDeleteModel">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div class="px-6 py-4 text-right">
+                    <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">تأكيد الحذف</h3>
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-500">هل أنت متأكد أنك تريد حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء.</p>
+                    </div>
+                    <div class="mt-4 flex justify-end space-x-4">
+                        <button class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:click="closeDeleteModel">
+                            إلغاء
+                        </button>
+                        <button class="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" wire:click="Delete">
+                            حذف
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     @endif
     <!--end reason popup Timer -->

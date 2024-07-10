@@ -21,6 +21,7 @@ class AdminWorkHours extends Component
     public $showEditModel = false;
     public $showAddModel = false;
     public $showNoteModels = false;
+    public $showDeleteModel = false;
     public $ModelId = 0;
     public $EditWorkHours;
     public $date;
@@ -46,6 +47,8 @@ class AdminWorkHours extends Component
     public $ModelIdErorrUser = '';
     public $notedate = [];
     public $stop = 0;
+    public $DeleteWorkHours = null;
+
     protected $rules = [
         'FromDate' => 'required',
     ];
@@ -239,7 +242,7 @@ class AdminWorkHours extends Component
     }
     public function showEditModels($id)
     {
-           $this->dateErorrUser = "";
+        $this->dateErorrUser = "";
         $this->startTimeErorr = "";
         $this->endTimeWorkHoursErorr = "";
         $this->EditWorkHours =    WorkHours::find($id);
@@ -362,6 +365,9 @@ class AdminWorkHours extends Component
                 $this->dateErorrUser = "هذا اليوم موجود مسبقا";
             }
         }
+        if (!($this->Name == null || $this->Name == "null" && $this->FromDate == null && $this->ToDate == null)) {
+            $this->searchWorkHours();
+        }
     }
     public function showNoteModels($id)
     {
@@ -393,7 +399,6 @@ class AdminWorkHours extends Component
     }
     public function DeleteNote($id)
     {
-        // dd($id);
         $EditWorkHours =    WorkHours::find($this->ModelId);
         unset($this->notedate[$id]);
         $EditWorkHours->departure = $this->notedate;
@@ -401,9 +406,21 @@ class AdminWorkHours extends Component
         $EditWorkHours->update();
         $this->showNoteModels = false;
     }
-    public function Delete($id)
+    public function DeleteModel($id)
     {
-        WorkHours::destroy($id);
+        $this->DeleteWorkHours =  $id;
+        $this->showDeleteModel = true;
+    }
+    public function closeDeleteModel()
+    {
+
+        $this->showDeleteModel = false;
+    }
+    public function Delete()
+    {
+        WorkHours::destroy($this->DeleteWorkHours);
+        $this->showDeleteModel = false;
+
         $this->searchWorkHours();
     }
 

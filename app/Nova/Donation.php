@@ -42,6 +42,7 @@ use App\Nova\Metrics\DonationInBank;
 use App\Nova\Metrics\DonationInBox;
 use App\Nova\Metrics\DonationNotReceive;
 use AwesomeNova\Cards\FilterCard;
+use Carbon\Carbon;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\Boolean;
@@ -264,9 +265,9 @@ class Donation extends Resource
                         Text::make(__('Doubt number'), "Doubt_number"),
 
                         DateTime::make(__('History of doubt'), 'Date')
-                            ->resolveUsing(function ($value) {
-                                return $value;
-                            })->rules('required'),
+                        ->resolveUsing(function ($value) {
+                            return $value ?? Carbon::now()->format('d/m/Y');
+                        })->rules('required'),
 
                     ])->rules('required'),
             ])->dependsOn("Payment_type", '2')->hideFromDetail()->hideFromIndex(),
@@ -279,7 +280,7 @@ class Donation extends Resource
                         DateTime::make(__('History Of Bit'), 'Date')
                             ->format('DD/MM/YYYY HH:mm')
                             ->resolveUsing(function ($value) {
-                                return $value;
+                                return $value ?? Carbon::now()->format('d/m/Y');
                             })->rules('required'),
 
                     ]),
@@ -294,10 +295,11 @@ class Donation extends Resource
                         Text::make(__('account number'), "account_number"),
 
                         DateTime::make(__('History of hawale'), 'Date')
-                            ->format('DD/MM/YYYY HH:mm')
-                            ->resolveUsing(function ($value) {
-                                return $value;
-                            })->rules('required'),
+                        ->format('DD/MM/YYYY')
+                        ->resolveUsing(function ($value) {
+                            return $value ?? Carbon::now()->format('d/m/Y');
+                        })
+                        ->rules('required'),
 
                     ])->rules('required'),
             ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),

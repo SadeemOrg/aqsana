@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use App\Models\vacation;
+use App\Models\WorkHours;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -21,6 +22,8 @@ class Vacations extends Component
     public $showEditModel = false;
     public $showAddModel = false;
     public $showNoteModels = false;
+    public $showDeleteModel = false;
+    public $DeleteVacation = null;
     public $vacations;
     public $EditVacation;
     public $editDate;
@@ -51,7 +54,7 @@ class Vacations extends Component
                 $this->exportWorkHoursErorrDate = '';
                 // dd("dffd");
                 if ($this->FromDate == null || $this->FromDate == "null") {
-                    $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء " ;
+                    $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء ";
                 }
                 break;
 
@@ -68,29 +71,42 @@ class Vacations extends Component
     public function searchVacation()
     {
 
-        $this->exportWorkHoursErorrUser= "";
+        $this->exportWorkHoursErorrUser = "";
         $this->exportWorkHoursErorrDate = "";
         $this->exportWorkHoursErorrType = "";
 
         // dd($this->userId);
-        if ($this->Name == null ||$this->Name =="null")  {
-            $this->exportWorkHoursErorrUser = "يجب اختيار الاسم " ;
+        if ($this->Name == null || $this->Name == "null") {
+            $this->exportWorkHoursErorrUser = "يجب اختيار الاسم ";
         }
 
         if ($this->FromDate == null) {
-            $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء " ;
+            $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء ";
         }
         if ($this->ToDate == null) {
-            $this->exportWorkHoursErorrType =  "يجب اختيار تاريخ النهاية " ;
+            $this->exportWorkHoursErorrType =  "يجب اختيار تاريخ النهاية ";
         }
 
         $from = date($this->FromDate);
         $to = date($this->ToDate);
         $this->vacations = vacation::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->orderBy('date', 'ASC')->get();
     }
-    public function Delete($id)
+
+    public function DeleteModel($id)
     {
-        vacation::destroy($id);
+                $this->DeleteVacation =  $id;
+        $this->showDeleteModel = true;
+    }
+    public function closeDeleteModel()
+    {
+
+        $this->showDeleteModel = false;
+    }
+    public function Delete()
+    {
+
+        vacation::destroy($this->DeleteVacation);
+        $this->showDeleteModel = false;
         $this->searchVacation();
     }
 
@@ -139,43 +155,46 @@ class Vacations extends Component
     {
 
         $this->exportWorkHoursErorr = "";
-        $this->exportWorkHoursErorrUserModel= "";
+        $this->exportWorkHoursErorrUserModel = "";
         $this->exportWorkHoursErorrDateModel = "";
         $this->exportWorkHoursErorrTypeModel     = "";
 
         // dd($this->userId);
-        if ($this->userId == null ||$this->userId =="null")  {
-            $this->exportWorkHoursErorrUserModel = "يجب اختيار الاسم " ;
+        if ($this->userId == null || $this->userId == "null") {
+            $this->exportWorkHoursErorrUserModel = "يجب اختيار الاسم ";
         }
 
         if ($this->date == null) {
-            $this->exportWorkHoursErorrDateModel =  "يجب اختيار تاريخ " ;
+            $this->exportWorkHoursErorrDateModel =  "يجب اختيار تاريخ ";
         }
         if ($this->type == null) {
-            $this->exportWorkHoursErorrTypeModel     =  "يجب اختيار السبب " ;
+            $this->exportWorkHoursErorrTypeModel     =  "يجب اختيار السبب ";
         }
 
 
         if ($this->type != null && $this->date != null && $this->userId != null) {
-            $oldData =  vacation::where('date', $this->date)->where('id', $this->ModelId)->first();
-
-
+            $oldData =  vacation::where('date', $this->date)->where('user_id', $this->userId)->first();
+            $oldDataWorkHours =  WorkHours::whereDate('date', $this->date)->where('user_id', $this->userId)->first();
             if ($oldData == null) {
+                if ($oldDataWorkHours == null) {
 
+                    $vacation = new vacation();
+                    $vacation->user_id = $this->userId;
+                    $vacation->date = $this->date;
+                    $vacation->day = Carbon::parse($this->date)->locale('ar')->dayName;
+                    $vacation->type =  str_replace('_', ' ', $this->type);
+                    $vacation->note = $this->note;
+                    $vacation->created_by = Auth::id();
+                    $vacation->save();
+                    $this->showAddModel = false;
 
-                $vacation = new vacation();
-                $vacation->user_id = $this->userId;
-                $vacation->date = $this->date;
-                $vacation->day = Carbon::parse($this->date)->locale('ar')->dayName;
-                $vacation->type =  str_replace('_', ' ', $this->type);
-                $vacation->note = $this->note;
-                $vacation->created_by = Auth::id();
-                $vacation->save();
-                $this->showAddModel = false;
+                    $this->searchVacation();
+                } else {
 
-                $this->searchVacation();
+                    $this->exportWorkHoursErorrDateModel = "هذا اليوم يوجد دوام";
+                }
             } else {
-                // $this->error = "هذا اليوم موجود مسبقا";
+                $this->exportWorkHoursErorrDateModel = "هذا اليوم موجود مسبقا";
             }
         }
     }

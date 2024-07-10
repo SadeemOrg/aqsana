@@ -34,6 +34,7 @@ use App\Nova\Filters\PaymentVoucherCompany;
 use App\Nova\Filters\Transactionproject;
 use App\Nova\Filters\TransactionSectors;
 use App\Nova\Metrics\InComeTransaction;
+use Carbon\Carbon;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\DateTime;
@@ -198,9 +199,9 @@ class PaymentVoucher extends Resource
                         Text::make(__('Doubt number'), "Doubt_number"),
 
                         DateTime::make(__('History of doubt'), 'Date')
-                            ->resolveUsing(function ($value) {
-                                return $value;
-                            })->rules('required'),
+                        ->resolveUsing(function ($value) {
+                            return $value ?? Carbon::now()->format('d/m/Y');
+                        })->rules('required'),
 
                     ]),
             ])->dependsOn("Payment_type", '2')->hideFromIndex(),
@@ -215,7 +216,7 @@ class PaymentVoucher extends Resource
                         DateTime::make(__('History'), 'Date')
                             ->format('DD/MM/YYYY HH:mm')
                             ->resolveUsing(function ($value) {
-                                return $value;
+                                return $value ?? Carbon::now()->format('d/m/Y');
                             })->rules('required'),
 
                     ]),
@@ -234,7 +235,7 @@ class PaymentVoucher extends Resource
                         DateTime::make(__('History'), 'Date')
                             ->format('DD/MM/YYYY HH:mm')
                             ->resolveUsing(function ($value) {
-                                return $value;
+                                return $value ?? Carbon::now()->format('d/m/Y');
                             })->rules('required'),
 
                     ])->rules('required'),
