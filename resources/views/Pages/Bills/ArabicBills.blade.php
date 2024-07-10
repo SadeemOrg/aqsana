@@ -67,7 +67,7 @@
             <span class="font-FlatBold text-[#101426] md:text-[#6B7280]  text-[18px] text-right">
 
                 @if ($Transaction->Payment_type == 5)
-                    حصالة رقم:
+
                     {{ $Transaction->description }}
                 @else
                     {{ $Transaction->TelephoneDirectory->name }}
