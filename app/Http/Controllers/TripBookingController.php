@@ -72,16 +72,16 @@ class TripBookingController extends BaseController
                 'number_phone' => $request['number_phone'],
             ]);
             //sms
-            Http::get('https://la.cellactpro.com/http_req.asp', [
-                'FROM' => 'ppAksa',
-                'USER' => 'ppAksa',
-                'PASSWORD' => 'UKFV6Sx7',
-                'APP' => 'LA',
-                'CMD' => 'sendtextmt',
-                'CONTENT' => 'تم الحجز بنجاح',
-                'SENDER' => '0506940095',
-                'TO' => $request['number_phone'],
-            ]);
+            // Http::get('https://la.cellactpro.com/http_req.asp', [
+            //     'FROM' => 'ppAksa',
+            //     'USER' => 'ppAksa',
+            //     'PASSWORD' => 'UKFV6Sx7',
+            //     'APP' => 'LA',
+            //     'CMD' => 'sendtextmt',
+            //     'CONTENT' => 'تم الحجز بنجاح',
+            //     'SENDER' => '0506940095',
+            //     'TO' => $request['number_phone'],
+            // ]);
             return $this->sendResponse($tripBooking, 'تم الحجز بنجاح');
         } else {
             return $this->sendError('Error', ["message" => "ناسف! الباص ممتلئ"], 202);
