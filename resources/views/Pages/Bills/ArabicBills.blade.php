@@ -384,7 +384,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row flex-wrap items-center md:justify-between justify-between px-16 md:px-4 mt-4 sm:mx-auto w-[70%] mb-6 ">
+        <div class="flex flex-row flex-wrap items-center md:justify-between justify-between px-16 md:px-4 mt-4 sm:mx-auto w-[75%] mb-6">
             <div>
                 <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">اسم القطاع:
 
