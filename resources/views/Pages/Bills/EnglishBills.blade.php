@@ -377,10 +377,10 @@
                     </p>
                 @endif
             </div>
-            <button dir="ltr" id="printpagebutton" type="button" onclick="printpage()"
+            {{-- <button dir="ltr" id="printpagebutton" type="button" onclick="printpage()"
                 class=" rounded-[50px] bg-[#349A37] text-white text-base w-28 py-4 mt-4 font-[700] hover:bg-[#101426] duration-200">
-                طباعة
-            </button>
+                print
+            </button> --}}
         </div>
         <div class="relative flex flex-row items-center justify-end md:justify-center w-full -mt-14 ">
             <img class="w-[200px] h-[180px] md:w-[320px] md:h-[290px]"
