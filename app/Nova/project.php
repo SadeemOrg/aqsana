@@ -152,7 +152,7 @@ class Project extends Resource
                     }
 
                     return $Area_type_admin_array;
-                })->singleSelect()->rules('required')->hideFromIndex()->hideFromDetail(),
+                })->singleSelect()->hideFromIndex()->hideFromDetail(),
 
 
             HasMany::make(__('Volunteer'), 'Volunteer', \App\Nova\Volunteer::class),
