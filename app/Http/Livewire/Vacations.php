@@ -191,7 +191,7 @@ class Vacations extends Component
                     $this->searchVacation();
                 } else {
 
-                    $this->exportWorkHoursErorrDateModel = "هذا اليوم يوجد دوام";
+                    $this->exportWorkHoursErorrDateModel = "يوجد دوام في هذا اليوم";
                 }
             } else {
                 $this->exportWorkHoursErorrDateModel = "هذا اليوم موجود مسبقا";
