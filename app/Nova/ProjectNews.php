@@ -83,6 +83,7 @@ class ProjectNews extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Boolean::make(__('posted For App'), 'report_status')->rules('required'),
+            Boolean::make(__('is_has_Donations'), 'is_donation'),
 
 
 
@@ -130,7 +131,6 @@ class ProjectNews extends Resource
                         'history',
                     ])
                     ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
-                    Boolean::make(__('is_has_Donations'), 'is_donation'),
 
 
                 Image::make(__('IMAGE'), 'report_image')->disk('public')->prunable(),
