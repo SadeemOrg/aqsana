@@ -557,7 +557,7 @@
                             <p class="text-sm text-gray-500">هل أنت متأكد أنك تريد حذف هذا العنصر؟ لا يمكن التراجع عن
                                 هذا الإجراء.</p>
                         </div>
-                        <div class="mt-4 flex justify-end space-x-4">
+                        <div class="mt-4 flex justify-end gap-x-1">
                             <button
                                 class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 wire:click="closeDeleteModel">
