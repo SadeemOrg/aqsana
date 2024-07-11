@@ -26,7 +26,7 @@
 
 
                 <span class="block no-underline text-90 hover:bg-30 p-3"
-                    onclick="location.href='/Admin/userprofile'">{{ __('حساب') }}</span>
+                    onclick="location.href='/Admin/userprofile'">{{ __('حسابي') }}</span>
             </h3>
 
         </li>
