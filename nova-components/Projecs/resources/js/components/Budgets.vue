@@ -86,10 +86,10 @@ export default {
                     }
                 }
             });
-            if (this.sumSectorsPerYear <= this.totalSectorYear&&this.year !== '0' ) {
+            if (this.sumSectorsPerYear <= this.totalSectorYear&&this.internalYear !== '0' ) {
                 try {
                     const response = await axios.post("/save", {
-                        year: this.year,
+                        year: this.internalYear,
                         Sectors: this.Sectors
                     });
                     toastr.options = {
@@ -117,7 +117,7 @@ export default {
                     toastr.error("خطأ في الحفظ");
                     console.error(error);
                 }
-            }else if(this.year=='0'){
+            }else if(this.internalYear=='0'){
                 toastr.options = {
                     closeButton: true,
                     debug: false,

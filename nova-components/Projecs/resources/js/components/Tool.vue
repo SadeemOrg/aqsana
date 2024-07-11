@@ -356,6 +356,7 @@ export default {
                     this.newSectors.forEach(element => {
                         element.Budget = 0;
                     });
+                    this.remainingCount = 0;
                 } catch (error) {
                     toastr.options = {
                         closeButton: true,
