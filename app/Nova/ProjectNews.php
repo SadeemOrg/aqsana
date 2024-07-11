@@ -84,6 +84,8 @@ class ProjectNews extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Boolean::make(__('posted For App'), 'report_status')->rules('required'),
             Boolean::make(__('is_has_Donations'), 'is_donation'),
+            Boolean::make(__('is_has_volunteer'), 'is_volunteer'),
+
 
 
 
