@@ -276,8 +276,9 @@ class QawafilAlaqsa extends Resource
                 DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required'),
                 DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required', new QawafilAlaqsaDate($request->start_date)),
 
-                Boolean::make(__('is_has_Donations'), 'is_donation')->hideFromIndex(),
-
+                Boolean::make(__('is_has_Donations'), 'is_donation')
+                ->hideFromIndex()
+                ->default(true),
                 BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating()->hideFromIndex(),
                 Text::make(__("TripBooking number"),'TripBooking number',function(){

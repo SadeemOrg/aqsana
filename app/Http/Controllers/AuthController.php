@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\CPU\Helpers;
+use App\Models\TelephoneDirectory;
 use App\Models\TripBooking;
 use Illuminate\Support\Facades\Redirect;
 
@@ -95,7 +96,11 @@ class AuthController extends Controller
             'user_role' => $validatedData['user_role'],
             'app_user' => 1,
         ]);
-
+        TelephoneDirectory::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'phone_number' => $validatedData['phone']
+        ]);
         $token = $user->createToken('myapptoken')->plainTextToken;
 
         $response = [
