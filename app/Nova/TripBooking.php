@@ -111,8 +111,7 @@ class TripBooking extends Resource
             Text::make(__('number phone'), 'number_phone')->rules('required'),
             NumberField::make(__('number_of_people'), 'number_of_people')->rules('required'),
 
-            NumberField::make(__('reservation_amount'), 'reservation_amount')->rules('required'),
-
+            NumberField::make(__('reservation_amount'), 'reservation_amount')->rules('required') ,
 
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 

@@ -13,7 +13,6 @@
             window.open(url, '_blank');
         });
 
-        // Close this tab after opening all URLs
         window.close();
     </script>
 </body>
