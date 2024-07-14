@@ -206,7 +206,7 @@ class QawafilAlaqsa extends Resource
 
 
                 Text::make(__("QawafilAlaqsa name"), "project_name")->rules('required'),
-                Text::make(__("QawafilAlaqsa describe"), "project_describe")->rules('required'),
+                Text::make(__("QawafilAlaqsa describe"), "project_describe"),
 
                 Select::make(__("Repetition"), "repetition")->options([
                     '6' => __('Once'),
@@ -389,6 +389,10 @@ class QawafilAlaqsa extends Resource
     public static function beforeCreate(Request $request, $model)
     {
         $id = Auth::id();
+        if($request->project_describe == null ){
+            $request->merge(['project_describe' => '']);
+
+        }
         $model->created_by = $id;
         $model->project_type = '2';
         $model->sector = '5';
