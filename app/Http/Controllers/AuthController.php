@@ -99,7 +99,8 @@ class AuthController extends Controller
         TelephoneDirectory::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
-            'phone_number' => $validatedData['phone']
+            'phone_number' => $validatedData['phone'],
+            'type'=>'"[111]"'
         ]);
         $token = $user->createToken('myapptoken')->plainTextToken;
 
