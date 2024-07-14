@@ -100,7 +100,7 @@ class AuthController extends Controller
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'phone_number' => $validatedData['phone'],
-            'type'=>[112]
+            'type'=>["112"]
         ]);
         $token = $user->createToken('myapptoken')->plainTextToken;
 
