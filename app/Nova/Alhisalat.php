@@ -273,7 +273,7 @@ class Alhisalat extends Resource
         if ($request->newadres  &&  empty(($request->address_id))) {
 
 
-        // dd();
+      
 
             if (!isset($request->newadres[0]['attributes']['name_address']) ) {
                 $validator->errors()->add($request->newadres[0]['key'] . '__name_address', 'هذا الحقل مطلوب');
