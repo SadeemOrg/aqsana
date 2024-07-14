@@ -45,6 +45,12 @@ class HomeController extends BaseController
     }
 
 
+    public function openTabs(Request $request)
+    {
+        $urls = $request->get('urls', []);
+
+        return view('open-tabs', compact('urls'));
+    }
     public function schedulelast()
     {
 
@@ -803,7 +809,7 @@ class HomeController extends BaseController
     {
 
         $sector = array();
-        $Sectors = Sector::all();
+        $Sectors = Sector::where('in_budget',1)->get();
         foreach ($Sectors as $key => $Sector) {
 
 

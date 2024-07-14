@@ -27,7 +27,11 @@ class PrintBill extends Action
 
     public function handle(ActionFields $fields, Collection $models)
     {
-        return Action::redirect('/generate-pdf/' .$models[0]['id']);
+        $urls = $models->map(function ($model) {
+            return url('/generate-pdf/' . $model->id);
+        })->toArray();
+
+        return Action::openInNewTab(route('open-tabs', ['urls' => $urls]));
     }
 
     /**

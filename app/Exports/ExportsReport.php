@@ -31,6 +31,11 @@ class ExportsReport implements FromCollection, WithHeadings
     public function collection()
     {
         $Projects = Project::wherein('id',json_decode($this->name))->get();
+        $this->from = (($this->from != 'null') ?  $this->from : '2001-01-01 00:00:00.0');
+        $this->to = ($this->to != 'null') ?  $this->to :  Carbon::now();
+        $startdate = date($this->from);
+        $finishdate = date($this->to);
+
         $mergedQuery = collect(); // Initialize as an empty collection
 
        foreach ($Projects as $key => $Project) {
@@ -42,12 +47,12 @@ class ExportsReport implements FromCollection, WithHeadings
                 ['main_type', '=', 1],
                 ['type', '=', 2],
                 ['is_delete', '<>', '2'],
-            ])->get();
+                ])->whereBetween('transaction_date', [$startdate, $finishdate])->get();
             $totalAmountMainType1 = $filteredTransactionsSet1->sum('equivelant_amount');
 
             $filteredTransactionsSet2 = $Project->Transaction()->where([
                 ['main_type', '=', 2],
-            ])->get();
+                ])->whereBetween('transaction_date', [$startdate, $finishdate])->get();
             $totalAmountMainType2 = $filteredTransactionsSet2->sum('equivelant_amount');
 
             $mergedTransactions = $filteredTransactionsSet1->merge($filteredTransactionsSet2);

@@ -233,7 +233,20 @@ class Alhisalat extends Resource
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('Add new bus'), 'bus', [
                     Text::make(__('Name'), "name_address"),
-                    Text::make(__("description"), "description"),
+                    Multiselect::make(__('city'), 'city_id')
+                    ->options(function () {
+                        $Areas =  \App\Models\City::all();
+
+                        $Area_type_admin_array =  array();
+
+                        foreach ($Areas as $Area) {
+
+
+                            $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                        }
+
+                        return $Area_type_admin_array;
+                    })->singleSelect()->hideFromIndex()->hideFromDetail(),
                     Text::make(__("phone number"), "phone_number_address"),
                     MapsAddress::make(__('Address'), 'current_location')
                         ->zoom(15)->center(['lat' =>  31.77624246761854, 'lng' => 35.236198620223036])
@@ -265,12 +278,10 @@ class Alhisalat extends Resource
             if (!isset($request->newadres[0]['attributes']['name_address']) ) {
                 $validator->errors()->add($request->newadres[0]['key'] . '__name_address', 'هذا الحقل مطلوب');
             }
-            if (!isset($request->newadres[0]['attributes']['description']) ) {
-                $validator->errors()->add($request->newadres[0]['key'] . '__description', 'هذا الحقل مطلوب');
+            if (!isset($request->newadres[0]['attributes']['city_id']) ) {
+                $validator->errors()->add($request->newadres[0]['key'] . '__city_id', 'هذا الحقل مطلوب');
             }
-            if (!isset($request->newadres[0]['attributes']['phone_number_address']) ) {
-                $validator->errors()->add($request->newadres[0]['key'] . '__phone_number_address', 'هذا الحقل مطلوب');
-            }
+
             if (($request->newadres[0]['attributes']['current_location'])== 'null' ) {
                 $validator->errors()->add($request->newadres[0]['key'] . '__current_location', 'هذا الحقل مطلوب');
             }
@@ -293,7 +304,8 @@ class Alhisalat extends Resource
                 // dd(json_decode( $request->newadres[0]['attributes']['current_location']));
                 $address = address::create([
                     'name_address' => $request->newadres[0]['attributes']['name_address'],
-                    'description' => $request->newadres[0]['attributes']['description'],
+                    'description' => " ",
+                    'city_id' => $request->newadres[0]['attributes']['city_id'],
                     'phone_number_address' => $request->newadres[0]['attributes']['phone_number_address'],
                     'current_location' => json_decode($request->newadres[0]['attributes']['current_location']),
                     "number" => "1",

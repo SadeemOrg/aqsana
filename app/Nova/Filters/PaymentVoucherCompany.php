@@ -27,7 +27,9 @@ class PaymentVoucherCompany extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('name',$value);
+        $BusesCompany =\App\Models\BusesCompany::where('name',$value)->first();
+
+        return $query->where('name', $BusesCompany->id);
     }
 
     /**
@@ -41,18 +43,17 @@ class PaymentVoucherCompany extends Filter
 
 
 
-        $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '8')->get();
-        $foo = array();
-        $user_type_admin_array =  array();
-        foreach ($Users as $User) {
-            $foo[$User['name']]=$User['id'];
+        // $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '8')->get();
+        // $foo = array();
+        // $user_type_admin_array =  array();
+        // foreach ($Users as $User) {
+        //     $foo[$User['name']]=$User['id'];
 
-        }
+        // }
+        $foo = array();
         $Users =  \App\Models\BusesCompany::all();
         foreach ($Users as $User) {
-
-
-            $foo[$User['name']]=$User['id'];
+            $foo[$User['name']] = $User['name'];
         }
         return $foo;
     }

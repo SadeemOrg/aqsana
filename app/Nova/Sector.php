@@ -72,7 +72,9 @@ class Sector extends Resource
             Boolean::make(__("is published"),'is_published'),
             Text::make(__('main text'),'text'),
             Text::make(__('sup text'),'sup_text'),
+            Boolean::make(__("in_budget"),'in_budget'),
             Image::make(__('Image'),'img')->disk('public')->deletable(),
+
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
