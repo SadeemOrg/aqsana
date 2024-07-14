@@ -14,7 +14,7 @@
         });
 
         // Close this tab after opening all URLs
-        window.close();
+        // window.close();
     </script>
 </body>
 </html>
