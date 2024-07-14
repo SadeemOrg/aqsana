@@ -27,7 +27,9 @@ class ExportReport extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        $string = '?reselt=' .$models->pluck('id');
+        // $string = '?reselt=' .$models->pluck('id');
+        $string = '?reselt=' . $models->pluck('id').'&from='.$fields-> from.'&to='.$fields->to;
+
         return Action::openInNewTab('/export/ExportReport'. $string);
 
     }
@@ -40,8 +42,8 @@ class ExportReport extends Action
     public function fields()
     {
         return [
-        //     Date::make(__('from'), 'from')->required(),
-        //     Date::make(__('to'), 'to')->required(),
+            Date::make(__('from'), 'from')->required(),
+            Date::make(__('to'), 'to')->required(),
 
         ];
     }

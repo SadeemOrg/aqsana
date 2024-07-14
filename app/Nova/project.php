@@ -188,7 +188,15 @@ class Project extends Resource
         $model->start_date = json_decode($request->ref_id)->key1;
         $model->sector = json_decode($request->ref_id)->key2;
         $request->request->remove('ref_id');
-        $model->area = Area::find(City::find($request->city)->area_id)->id;
+        if ($request->city !== null) {
+            $city = City::find($request->city);
+            if ($city) {
+                $area = Area::find($city->area_id);
+                if ($area) {
+                    $model->area = $area->id;
+                }
+            }
+        }
     }
 
 

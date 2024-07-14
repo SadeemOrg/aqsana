@@ -28,6 +28,9 @@ use Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/open-tabs', 'OpenTabsController@openTabs');
+Route::get("/open-tabs", [HomeController::class, "openTabs"])->name('open-tabs');
+
 Route::get('/app/password/reset/{token}', [ForgotPasswordController::class, 'showForm']);
 Route::post('/app/password/reset', [ForgotPasswordController::class, 'update'])->name('password.update.new');
 

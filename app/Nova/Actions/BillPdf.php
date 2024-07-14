@@ -22,18 +22,17 @@ class BillPdf extends Action
      */
     public  function name()
     {
-        return __('طباعة');
+        return __('معاينة');
     }
     public function handle(ActionFields $fields, Collection $models)
     {
+        $urls = [];
+
         foreach ($models as $model) {
+            $urls[] = "/mainbill/" . $model->id;
+        }
 
-            return Action::openInNewTab("/mainbill/". $model->id);
-
-
-    }
-
-
+        return Action::openInNewTab('/open-tabs?' . http_build_query(['urls' => $urls]));
     }
 
     /**

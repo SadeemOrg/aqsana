@@ -231,7 +231,7 @@ class Donation extends Resource
                 '1' => __('ar'),
                 '2' => __('en'),
                 '3' => __('hr'),
-            ])->displayUsingLabels()->default('1')->rules('required'),
+            ])->displayUsingLabels()->hideFromIndex()->default('1')->rules('required'),
             Select::make(__("Payment_type"), "Payment_type")->options(
                 [
                     '1' => __('cash'),

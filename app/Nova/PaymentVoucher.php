@@ -172,9 +172,11 @@ class PaymentVoucher extends Resource
             Text::make(__('bill_number'), 'bill_number'),
             Text::make(__('description'), 'description')->hideFromIndex(),
 
-            BelongsTo::make(__('Currenc'), 'Currenc', \App\Nova\Currency::class),
+            BelongsTo::make(__('Currenc'), 'Currenc', \App\Nova\Currency::class)->hideWhenCreating(),
 
 
+            BelongsTo::make(__('Currency'), 'Currenc', \App\Nova\Currency::class)
+            ->withMeta(['value' => \App\Models\Currency::find(3)->id])->hideFromIndex()->hideFromDetail()->hideWhenUpdating(),
 
             singleSelect::make(__("Payment_type"), "Payment_type")->options([
                 '1' => __('cash'),
