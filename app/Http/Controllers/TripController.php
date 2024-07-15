@@ -208,7 +208,7 @@ class TripController extends BaseController
 
 
         $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
-                ->where('start_date', '>', Carbon::now())
+            ->where('start_date', '>', Carbon::now())
             ->whereDate('end_date', '>=', date('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->get();
 
         $search_trip = collect();
@@ -292,8 +292,8 @@ class TripController extends BaseController
     {
         $trips = Project::where("project_type", "2")
             ->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
-            ->orderBy('created_at', 'desc')
-            ->where('start_date', '>', Carbon::now())
+            ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())
+            ->whereDate('end_date', '>=', date('Y-m-d H:i:s'))
             ->get();
 
         $search_trip = collect();
