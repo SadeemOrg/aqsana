@@ -416,7 +416,7 @@ class QawafilAlaqsa extends Resource
         if ($request->newadresFrom  &&  empty(($request->trip_from))) {
 
 
-      
+
 
             if (!isset($request->newadresFrom[0]['attributes']['name_address']) ) {
                 $validator->errors()->add($request->newadresFrom[0]['key'] . '__name_address', 'هذا الحقل مطلوب');
@@ -482,19 +482,16 @@ class QawafilAlaqsa extends Resource
                     'current_location' => json_decode($request->newadresFrom[0]['attributes']['current_location']),
                     "number" => "1",
                     'status' => 1,
-                    'type' => 2,
+                    'type' => 1,
                     'created_by' => $id
                 ]);
                 $request->merge(['trip_from' => $address->id]);
-
 
                 $model->city = address::find($address->id)->city_id;
                 $model->area = address::find($address->id)->area_id;
             }
 
         }
-
-       
         $request->request->remove('newadresFrom');
     }
     public static function aftersave(Request $request, $model)
@@ -575,7 +572,7 @@ class QawafilAlaqsa extends Resource
                 }
             }
         }
-        
+
     }
     /**
      * Get the cards available for the request.

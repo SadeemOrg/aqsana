@@ -40,8 +40,8 @@ class TripController extends BaseController
                 ])->sum('number_of_people');
                 $number +=  ($bus->number_of_seats - $number_of_people);
             }
-             $trip->number=$number;
-             $trip->isFull = $number > 0 ? 0 : 1 ;
+            $trip->number = $number;
+            $trip->isFull = $number > 0 ? 0 : 1;
 
 
 
@@ -136,8 +136,8 @@ class TripController extends BaseController
                 ])->sum('number_of_people');
                 $number +=  ($bus->number_of_seats - $number_of_people);
             }
-             $trip->number=$number;
-             $trip->isFull = $number > 0 ? 0 : 1 ;
+            $trip->number = $number;
+            $trip->isFull = $number > 0 ? 0 : 1;
 
 
             $trip->tripToLocation = $trip->tripto->name_address;
@@ -223,9 +223,8 @@ class TripController extends BaseController
                 ])->sum('number_of_people');
                 $number +=  ($bus->number_of_seats - $number_of_people);
             }
-             $trip->number=$number;
-             $trip->isFull = $number > 0 ? 0 : 1 ;
-
+            $trip->number = $number;
+            $trip->isFull = $number > 0 ? 0 : 1;
             $trip->tripToLocation = $trip->tripto->name_address;
             $trip->tripFromLocation = $trip->tripfrom->name_address;
             $trip->start_date = $trip->start_date;
@@ -290,10 +289,10 @@ class TripController extends BaseController
 
     public function auto_compleate_search_trip(Request $request)
     {
-
-
-        $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
-            ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())
+        $trips = Project::where("project_type", "2")
+            ->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
+            ->orderBy('created_at', 'desc')
+            ->where('start_date', '>', Carbon::now())
             ->get();
 
         $search_trip = collect();
@@ -302,17 +301,16 @@ class TripController extends BaseController
                 $trip_to_value = $trip->tripfrom?->city?->name;
                 if (stripos($trip_to_value, $request->get("search")) !== false) {
                     $search_trip->push($trip_to_value);
-
                     return true;
                 }
             }
             return false;
         });
 
+        $uniqueTrips = $search_trip->unique()->values(); // Remove duplicates and reset the keys
 
-        return $this->sendResponse($search_trip, 'Success get Trips');
+        return $this->sendResponse($uniqueTrips, 'Success get Trips');
     }
-
 
     /**
      * Show the form for creating a new resource.
