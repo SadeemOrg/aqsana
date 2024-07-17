@@ -13,6 +13,8 @@
             <h2 class="mt-2 font-FlatBold text-center text-2xl lg:text-3xl">يوفي!
                 @if ($type == 1)
                     سند القبض
+                @elseif($type == 2)
+                    سند تعويض
                 @else
                     فاتورة
                 @endif
@@ -70,6 +72,3 @@
         </div>
     </div>
 @endsection
-
-
-

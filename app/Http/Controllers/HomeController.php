@@ -1033,82 +1033,33 @@ class HomeController extends BaseController
 
         return view('Pages.Bills.Bills', compact('Transaction', 'original',  'PaymentType'));
     }
-    public function mainbill($id,Request $request)
+    public function mainbill($id, Request $request)
     {
-       $type= $request->type;
-
-        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
-
-        if ($Transaction->lang == 1) {
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "نقدي";
-                    break;
-                case 2:
-                    $PaymentType = "شك";
-                    break;
-                case 3:
-                    $PaymentType = "بيت";
-                    break;
-                case 4:
-                    $PaymentType = "حوالة مصرفية";
-                    break;
-                case 5:
-                    $PaymentType = "حصالة";
-                    break;
-                case 6:
-                    $PaymentType = "حصالة";
-                    break;
-            }
-        } else if ($Transaction->lang == 2) {
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "cash";
-                    break;
-                case 2:
-                    $PaymentType = "Bank doubt";
-                    break;
-                case 3:
-                    $PaymentType = "bit";
-                    break;
-                case 4:
-                    $PaymentType = "Bank transfer";
-                    break;
-                case 5:
-                    $PaymentType = "moneybox";
-                    break;
-                case 6:
-                    $PaymentType = "moneybox";
-                    break;
-            }
-        } else if ($Transaction->lang == 3) {
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "כסף מזומן";
-                    break;
-                case 2:
-                    $PaymentType = "ספק בבנק";
-                    break;
-                case 3:
-                    $PaymentType = "קצת";
-                    break;
-                case 4:
-                    $PaymentType = "העברה בנקאית";
-                    break;
-                case 5:
-                    $PaymentType = "קופסת כסף";
-                    break;
-                case 6:
-                    $PaymentType = "קופסת כסף";
-                    break;
-            }
-        }
+        $typeBill = $request->type;
+        $transaction = Transaction::where("id", $id)
+            ->with('Sectors')
+            ->with('Project')
+            ->with('TelephoneDirectory')
+            ->first();
+    
+        $paymentTypes = [
+            1 => ["نقدي", "cash", "כסף מזומן"],
+            2 => ["شك", "Bank doubt", "ספק בבנק"],
+            3 => ["بيت", "bit", "קצת"],
+            4 => ["حوالة مصرفية", "Bank transfer", "העברה בנקאית"],
+            5 => ["حصالة", "moneybox", "קופסת כסף"],
+            6 => ["حصالة", "moneybox", "קופסת כסף"],
+        ];
+    
+        $langIndex = $transaction->lang - 1; // Assuming lang is 1, 2, or 3
+        $paymentType = $paymentTypes[$transaction->Payment_type][$langIndex] ?? 'Unknown';
+    
         $original = 0;
-
-        $type = '1';
-        $bill_number = $Transaction->bill_number;
+        $type = ($request->type == 'repayment') ? '2' : '1';
+        $bill_number = $transaction->bill_number;
         return view('Pages.Bills.mainBill', compact('id', 'type', 'bill_number'));
     }
+    
     public function SendMail(Request $request)
     {
 
