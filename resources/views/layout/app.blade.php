@@ -415,7 +415,7 @@
         }
         function handelFocusEndDateVacationPopup() {
             $('#hidePlaceHolderEndDatePopUp').attr('type', 'date');
-            $(".svgFoucusWorkHourVacations").css('display', 'block');
+            $(".svgFoucusWorkHourVacations_end").css('display', 'block');
         }
 
         function handelFocusDatePopup() {

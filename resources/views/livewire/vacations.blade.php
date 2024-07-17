@@ -363,7 +363,7 @@
                             </div>
                             <div class="mt-2 selectdiv relative">
                                 <div
-                                    class="svgFoucusWorkHourVacations absolute hidden inset-y-0 left-4 top-3  mb-1 items-center pl-3 pointer-events-none">
+                                    class="svgFoucusWorkHourVacations absolute hidden inset-y-0 -ml-2 left-4 top-3  mb-1 items-center pl-3 pointer-events-none">
                                     <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor"
                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
@@ -373,7 +373,7 @@
                                 </div>
                                 <input type="text" wire:model.defer ="date" id="hidePlaceHolderDatePopUp"
                                     class=" border-[#349A37] text-[#349A37] text-sm text-right
-                                    rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[97%] pl-10 p-2.5
+                                    rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5
                                     placeholder-[#349A37]"
                                     placeholder="تاريخ بداية الاجازة" onfocus="handelFocusDateVacationPopup()">
                                 <div class="text-red-600 text-sm px-2 text-right">
@@ -382,7 +382,7 @@
                             </div>
                             <div class="mt-2 selectdiv relative">
                                 <div
-                                    class="svgFoucusWorkHourVacations absolute hidden inset-y-0 left-4 top-3  mb-1 items-center pl-3 pointer-events-none">
+                                    class="svgFoucusWorkHourVacations_end absolute hidden inset-y-0 -ml-2 left-4 top-3  mb-1 items-center pl-3 pointer-events-none">
                                     <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor"
                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
@@ -392,7 +392,7 @@
                                 </div>
                                 <input type="text" wire:model.defer ="endDate" id="hidePlaceHolderEndDatePopUp"
                                     class=" border-[#349A37] text-[#349A37] text-sm text-right
-                                    rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[97%] pl-10 p-2.5
+                                    rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5
                                     placeholder-[#349A37]"
                                     placeholder="تاريخ نهاية الاجازة" onfocus="handelFocusEndDateVacationPopup()">
                             </div>
