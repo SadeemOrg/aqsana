@@ -95,7 +95,7 @@
                         // $totalTime = new DateTime($totalTime, new DateTimeZone('UTC'));
 
                     @endphp
-                    <p style="font-size: 16px; font-weight: bold;color:#101426">عدد الساعات :
+                    <p style="font-size: 16px; font-weight: bold;color:#101426">عدد الساعات الدوام :
                         <span style="font-size: 16px;">
                             {{ ($totalTime->day-1) * 24 + $totalTime->hour }}:{{ $totalTime->minute }}:{{ $totalTime->second }}
                         </span>

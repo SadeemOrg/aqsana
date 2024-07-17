@@ -27,6 +27,7 @@ class Vacations extends Component
     public $vacations;
     public $EditVacation;
     public $editDate;
+    public $editEndDate;
     public $editType;
     public $editNote;
     public $note;
@@ -122,6 +123,8 @@ class Vacations extends Component
     {
         $this->EditVacation =    vacation::find($id);
         $this->editDate = Carbon::parse($this->EditVacation->date)->format('Y-m-d');
+        $this->editEndDate = Carbon::parse($this->EditVacation->end_date)->format('Y-m-d');
+
         $this->editType = $this->EditVacation->type;
         $this->editNote = $this->EditVacation->note;
         $this->ModelId = $id;
@@ -138,9 +141,9 @@ class Vacations extends Component
     public function EditVacation()
     {
 
-
         $EditVacation =   vacation::find($this->ModelId);
         $EditVacation->date = $this->editDate;
+        $EditVacation->end_date = $this->editEndDate;
         $EditVacation->day = Carbon::parse($this->editDate)->locale('ar')->dayName;
         $EditVacation->type = str_replace('_', ' ', $this->editType);
         $EditVacation->note = $this->editNote;

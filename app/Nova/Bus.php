@@ -69,9 +69,9 @@ class Bus extends Resource
 
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make(__('company'), 'company', \App\Nova\BusesCompany::class),
-            Text::make(__("Bus Name"), "bus_number"),
-            Number::make(__("Number person on bus"), "number_of_seats")->step(1.0),
+            BelongsTo::make(__('company'), 'company', \App\Nova\BusesCompany::class)->rules('required'),
+            Text::make(__("Bus Name"), "bus_number")->rules('required'),
+            Number::make(__("Number person on bus"), "number_of_seats")->step(1.0)->rules('required'),
             Number::make(__("seat price"), "seat_price")->step(1.0),
 
             Text::make(__("Name Driver"), "name_driver"),
@@ -80,7 +80,7 @@ class Bus extends Resource
                 ->options([
                     '1' => __('available'),
                     '2' => __('un available'),
-                ])->displayUsingLabels(),
+                ])->displayUsingLabels()->default(1),
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Update by'), 'Updateby', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
 
@@ -95,8 +95,6 @@ HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
     {
         $id = Auth::id();
         $model->created_by = $id;
-        $model->phone_number_driver = " ";
-        $model->name_driver = " ";
 
     }
 

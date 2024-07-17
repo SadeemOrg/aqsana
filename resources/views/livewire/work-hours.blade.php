@@ -139,7 +139,7 @@
                                 <div class="mt-2 selectdiv">
                                     <select wire:model.defer="Timeleave"
                                         class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
-                                        <option selected value="">الوقت</option>
+                                        <option selected value="">الوقت المتوقع للمغادرة</option>
                                         @foreach ($TimeDpartures as $TimeDparture)
                                             <option value={{ $TimeDparture->attributes->time_departure }}>
                                                 {{ $TimeDparture->attributes->title_departure }}
