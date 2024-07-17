@@ -56,6 +56,8 @@ class DeleteBill extends Action
             $new_data->description = "حذف سند رقم " . $model->id;
             $new_data->save();
         }
+        return Action::openInNewTab('/mainbill/'.$models[0]->id.'?type=repayment' );
+
     }
 
     public function icon()

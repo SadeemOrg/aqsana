@@ -413,6 +413,10 @@
             $('#hidePlaceHolderDatePopUp').attr('type', 'date');
             $(".svgFoucusWorkHourVacations").css('display', 'block');
         }
+        function handelFocusEndDateVacationPopup() {
+            $('#hidePlaceHolderEndDatePopUp').attr('type', 'date');
+            $(".svgFoucusWorkHourVacations").css('display', 'block');
+        }
 
         function handelFocusDatePopup() {
             $('#hidePlaceHolderDatePopUp').attr('type', 'date');

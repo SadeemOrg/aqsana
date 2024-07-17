@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use NovaButton\Button;
 
 class IndemnityBond extends Resource
 {
@@ -81,6 +82,7 @@ return false;
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Button::make(__('print'))->link('/mainbill/' . $this->id.'?type=repayment')->style('primary'),
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),

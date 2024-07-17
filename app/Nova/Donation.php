@@ -135,7 +135,7 @@ class Donation extends Resource
 
             Text::make(__('bill_number'), 'bill_number')->hideWhenCreating()->hideWhenUpdating(),
 
-            Button::make(__('print'))->link('/mainbill/' . $this->id)->style('primary'),
+            Button::make(__('print'))->link('/mainbill/' . $this->id.'?type=bill')->style('primary'),
             ProjectPicker::make(__('تاريخ اخراج سند القبض '), 'ref_id', function () {
                 $keyValueArray = ['key1' => $this->ref_id, 'key2' => $this->transaction_date];
 
