@@ -1033,8 +1033,9 @@ class HomeController extends BaseController
 
         return view('Pages.Bills.Bills', compact('Transaction', 'original',  'PaymentType'));
     }
-    public function mainbill($id)
+    public function mainbill($id,Request $request)
     {
+       $type= $request->type;
 
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
 
