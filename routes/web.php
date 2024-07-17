@@ -28,7 +28,6 @@ use Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/open-tabs', 'OpenTabsController@openTabs');
 Route::get("/open-tabs", [HomeController::class, "openTabs"])->name('open-tabs');
 
 Route::get('/app/password/reset/{token}', [ForgotPasswordController::class, 'showForm']);
@@ -225,8 +224,8 @@ Route::get('/librarysearch/{search}', [HomeController::class, 'librarySearch'])-
 Route::get('/librarySearchType/{id}', [HomeController::class, 'librarySearchType'])->name('librarySearchType');
 
 
-Route::get('originalbill/{id}', [HomeController::class, 'originalbillbills'])->name('originalbill');
-Route::get('bill/{id}', [HomeController::class, 'bills'])->name('bill');
+Route::get('originalbill/{id}/{type?}', [HomeController::class, 'originalbillbills'])->name('originalbill');
+Route::get('bill/{id}/{type?}', [HomeController::class, 'bills'])->name('bill');
 Route::get('/mainbill/{id}', [HomeController::class, 'mainbill'])->name('mainbill');
 Route::get('/SendMail', [HomeController::class, 'SendMail'])->name('SendMail');
 Route::post('/SendMail', [HomeController::class, 'SendMail'])->name('SendMail');
@@ -286,7 +285,7 @@ Route::get("/WorkHoursUser", [HomeController::class, "WorkHoursUser"])->name('Wo
 Route::get("/StartTimerWorkHours", [HomeController::class, "StartTimerWorkHours"])->name('StartTimerWorkHours');
 
 
-Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF'])->name('generate-pdf');
+Route::get('generate-pdf/{id}/{type?}', [PDFController::class, 'generatePDF'])->name('generate-pdf');
 
 Route::get('generate-pdf-hours', [PDFController::class, 'generatePDFHours'])->name('generate-pdf-hours');
 

@@ -48,20 +48,20 @@
                     </div>
                 </div>
 
-                <div onclick="location.href='{{ route('originalbill', ['id' => $id]) }}'"
+                <div onclick="location.href='{{ route('originalbill', ['id' => $id,'type'=>$type]) }}'"
                     class="flex flex-col justify-center cursor-pointer items-center border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3">
                     <img src="{{ asset('assets/image/pdf.png') }}" class="w-8 h-8 " alt="">
                     <h3 class="font-FlatBold text-center text-lg lg:text-xl">نسخة أصلية</h3>
                 </div>
 
 
-                <div onclick="location.href='{{ route('bill', ['id' => $id]) }}'"
+                <div onclick="location.href='{{ route('bill', ['id' => $id,'type'=>$type]) }}'"
                     class="flex flex-col justify-center items-center border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2  pl-2 basis-1/5 min-h-[145px] cursor-pointer border-gray-500 gap-y-3">
                     <img src="{{ asset('assets/image/pdf.png') }}" class="w-8 h-8 " alt="">
                     <h3 class="font-FlatBold text-center text-lg lg:text-xl">نسخة عن الأصلية</h3>
                 </div>
 
-                <a href="https://api.whatsapp.com/send?text=  {{ route('generate-pdf', ['id' => $id]) }}"
+                <a href="https://api.whatsapp.com/send?text=  {{ route('generate-pdf', ['id' => $id,'type'=>$type]) }}"
                     class="flex flex-col justify-center items-center  pl-2 basis-1/5 min-h-[145px] cursor-pointer  gap-y-3">
                     <img src="{{ asset('assets/image/whatsappbill.png') }}" class="w-8 h-8 " alt="">
                     <h3 class="font-FlatBold text-center text-lg lg:text-xl">ارسال عن طريق الواتس اب</h3>
