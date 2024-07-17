@@ -36,12 +36,10 @@ class DeleteBill extends Action
         foreach ($models as $model) {
 
             $largestBillNumber = Transaction::where([
-                ['main_type', 1],
-                ['type', 2],
-                ['is_delete', '<>', '2'],
+                ['is_delete',  '1'],
             ])
-                ->orderBy('re_payment_number', 'desc')
-                ->value('re_payment_number');
+                ->orderBy('bill_number', 'desc')
+                ->value('bill_number');
             if (is_null($largestBillNumber)) {
                 $largestBillNumber = 999;
             }
