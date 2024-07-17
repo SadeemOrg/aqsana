@@ -2,6 +2,7 @@
 
 namespace App\Nova\Actions;
 
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -33,7 +34,19 @@ class DeleteBill extends Action
     {
 
         foreach ($models as $model) {
-            // dd($fields->transaction_date, $model->transaction_date);
+
+            $largestBillNumber = Transaction::where([
+                ['main_type', 1],
+                ['type', 2],
+                ['is_delete', '<>', '2'],
+            ])
+                ->orderBy('re_payment_number', 'desc')
+                ->value('re_payment_number');
+            if (is_null($largestBillNumber)) {
+                $largestBillNumber = 999;
+            }
+
+
             $fieldsTransactionDate = Carbon::parse($fields->transaction_date);
             $modelTransactionDate = $model->transaction_date;
 
@@ -51,6 +64,7 @@ class DeleteBill extends Action
             $new_data->equivelant_amount = -$model->equivelant_amount;
             $new_data->transaction_date = $fields->transaction_date;
             $new_data->payment_reason = $fields->return_money;
+            $new_data->bill_number = $largestBillNumber + 1;
 
             $new_data->is_delete = 2;
             $new_data->description = "حذف سند رقم " . $model->id;

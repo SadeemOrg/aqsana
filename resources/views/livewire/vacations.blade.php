@@ -28,14 +28,15 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.defer="FromDate" id="hidePlaceHolderDateAdminVicationFrom" wire:change='onChange("FromDate")'
-                        type="text" data-val-required="Mandatory field" data-val="true"
+                    <input wire:model.defer="FromDate" id="hidePlaceHolderDateAdminVicationFrom"
+                        wire:change='onChange("FromDate")' type="text" data-val-required="Mandatory field"
+                        data-val="true"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
                         onfocus="handelFocusVicationDateFrom()">
-                        <div class="text-red-600 text-sm px-2 text-right">
-                            {{ $this->exportWorkHoursErorrDate }}
-                        </div>
+                    <div class="text-red-600 text-sm px-2 text-right">
+                        {{ $this->exportWorkHoursErorrDate }}
+                    </div>
                 </div>
                 <!--to Date  -->
                 <div dir="ltr" class="relative h-12">
@@ -48,12 +49,13 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.defer="ToDate" id="hidePlaceHolderDateVicationAdminTo" type="text" wire:change='onChange("ToDate")'
+                    <input wire:model.defer="ToDate" id="hidePlaceHolderDateVicationAdminTo" type="text"
+                        wire:change='onChange("ToDate")'
                         class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusVicationDateTo()">
-                        <div class="text-red-600 text-sm px-2 text-right">
-                            {{ $this->exportWorkHoursErorrType }}
-                        </div>
+                    <div class="text-red-600 text-sm px-2 text-right">
+                        {{ $this->exportWorkHoursErorrType }}
+                    </div>
                 </div>
                 <!--end Picker -->
                 <div class="flex w-full h-12">
@@ -105,9 +107,9 @@
                                         التاريخ
                                     </th>
                                     <th scope="col"
-                                    class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">
-                                    التاريخ نهاية الاجازة
-                                </th>
+                                        class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">
+                                        التاريخ نهاية الاجازة
+                                    </th>
                                     <th scope="col"
                                         class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37] min-w-[150px]">
                                         السبب
@@ -137,9 +139,14 @@
                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
                                             {{ $vacation->day }}</td>
                                         <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                            {{ $vacation->date }}</td>
-                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                                {{ $vacation->end_date }}</td>
+                                            {{ date_format($vacation->date, 'd/m/Y') }}</td>
+                                        <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                            @if ($vacation->end_date)
+                                                {{ date_format($vacation->end_date, 'd/m/Y') }}
+                                            @else
+                                                --
+                                            @endif
+                                        </td>
 
                                         <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
                                             {{ $vacation->type }}</td>
@@ -158,7 +165,8 @@
                                                     wire:click="showEditModels({{ $vacation->id }})" width="35"
                                                     height="35" viewBox="0 0 56 55" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <rect width="56" height="55" rx="2" fill="#F7F7F7" />
+                                                    <rect width="56" height="55" rx="2"
+                                                        fill="#F7F7F7" />
                                                     <g clip-path="url(#clip0_54_1525)">
                                                         <path
                                                             d="M31.5266 18.0388L15.0202 34.5464C14.9372 34.6297 14.8772 34.7349 14.8486 34.8479L13.0191 42.1915C12.9643 42.4125 13.0293 42.6476 13.1906 42.8089C13.3127 42.931 13.479 42.9986 13.6491 42.9986C13.7013 42.9986 13.7546 42.9921 13.8064 42.9791L21.15 41.1492C21.2644 41.1207 21.3684 41.061 21.4514 40.9779L37.9593 24.4715L31.5266 18.0388Z"
@@ -174,8 +182,9 @@
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <svg class="cursor-pointer" wire:click="DeleteModel({{ $vacation->id }})"
-                                                    width="35" height="35" viewBox="0 0 56 55" fill="none"
+                                                <svg class="cursor-pointer"
+                                                    wire:click="DeleteModel({{ $vacation->id }})" width="35"
+                                                    height="35" viewBox="0 0 56 55" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <rect width="56" height="55" rx="2"
                                                         fill="#F7F7F7" />
@@ -206,7 +215,7 @@
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
                                         مجموع الايام </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                        {{  $this->vacations->sum('days') }}
+                                        {{ $this->vacations->sum('days') }}
 
                                     </td>
 
@@ -249,6 +258,12 @@
                                     class="hidePlaceHolderEditDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusEditDatePopup()">
                             </div>
+                            <div class="mt-2 selectdiv">
+                                <input type="text" wire:model.defer="editEndDate"
+                                    class="hidePlaceHolderEditDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
+                                    placeholder="تاريخ نهاية الاجازة"  onfocus="handelFocusEditDatePopup()">
+                            </div>
+
 
                             <div class="mt-2 selectdiv">
                                 <select wire:model.defer="editType"
@@ -272,6 +287,8 @@
                                 <input type="text" wire:model.defer="editNote"
                                     class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]">
                             </div>
+
+
                             <div class="mt-2">
                                 <button type="submit"
                                     class="connectUs duration-200  px-5 lg:px-10 py-3 mt-2 text-[13px] text-left font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#101426] hover:text-white ">
@@ -354,15 +371,14 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input type="text" wire:model.defer ="date"
-                                    id="hidePlaceHolderDatePopUp"
+                                <input type="text" wire:model.defer ="date" id="hidePlaceHolderDatePopUp"
                                     class=" border-[#349A37] text-[#349A37] text-sm text-right
                                     rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[97%] pl-10 p-2.5
                                     placeholder-[#349A37]"
-                                    placeholder="تاريخ" onfocus="handelFocusDateVacationPopup()">
-                                    <div class="text-red-600 text-sm px-2 text-right">
-                                        {{ $this->exportWorkHoursErorrDateModel }}
-                                    </div>
+                                    placeholder="تاريخ بداية الاجازة" onfocus="handelFocusDateVacationPopup()">
+                                <div class="text-red-600 text-sm px-2 text-right">
+                                    {{ $this->exportWorkHoursErorrDateModel }}
+                                </div>
                             </div>
                             <div class="mt-2 selectdiv relative">
                                 <div
@@ -374,12 +390,11 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input type="text" wire:model.defer ="endDate"
-                                    id="hidePlaceHolderEndDatePopUp"
+                                <input type="text" wire:model.defer ="endDate" id="hidePlaceHolderEndDatePopUp"
                                     class=" border-[#349A37] text-[#349A37] text-sm text-right
                                     rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[97%] pl-10 p-2.5
                                     placeholder-[#349A37]"
-                                    placeholder="تاريخ" onfocus="handelFocusEndDateVacationPopup()">
+                                    placeholder="تاريخ نهاية الاجازة" onfocus="handelFocusEndDateVacationPopup()">
                             </div>
 
 
@@ -407,33 +422,41 @@
 
     @endif
     @if ($this->showDeleteModel == true)
-    <div class="popUpTimerReason relative z-10 contactusModel" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-        <div class="fixed inset-0 top-[3%] z-10 flex items-center justify-center">
-            <div class="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:max-w-sm">
-                <button class="absolute top-4 left-4 text-gray-600 hover:text-gray-800" wire:click="closeDeleteModel">
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-                <div class="px-6 py-4 text-right">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">تأكيد الحذف</h3>
-                    <div class="mt-2">
-                        <p class="text-sm text-gray-500">هل أنت متأكد أنك تريد حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء.</p>
-                    </div>
-                    <div class="mt-4 flex justify-end gap-x-1">
-                        <button class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:click="closeDeleteModel">
-                            إلغاء
-                        </button>
-                        <button class="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" wire:click="Delete">
-                            حذف
-                        </button>
+        <div class="popUpTimerReason relative z-10 contactusModel" aria-labelledby="modal-title" role="dialog"
+            aria-modal="true">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+            <div class="fixed inset-0 top-[3%] z-10 flex items-center justify-center">
+                <div
+                    class="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:max-w-sm">
+                    <button class="absolute top-4 left-4 text-gray-600 hover:text-gray-800"
+                        wire:click="closeDeleteModel">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    <div class="px-6 py-4 text-right">
+                        <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">تأكيد الحذف</h3>
+                        <div class="mt-2">
+                            <p class="text-sm text-gray-500">هل أنت متأكد أنك تريد حذف هذا العنصر؟ لا يمكن التراجع عن
+                                هذا الإجراء.</p>
+                        </div>
+                        <div class="mt-4 flex justify-end gap-x-1">
+                            <button
+                                class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                wire:click="closeDeleteModel">
+                                إلغاء
+                            </button>
+                            <button
+                                class="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                wire:click="Delete">
+                                حذف
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
     @endif
     <!--end reason popup Timer -->
 
