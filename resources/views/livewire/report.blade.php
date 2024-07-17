@@ -167,7 +167,7 @@
                                     @elseif ($WorkHoursearch['table'] == 'vacations')
                                         <tr class="bg-red-500">
                                             <td
-                                                class=" whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426]">
+                                                class=" whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-white">
                                                 {{ $WorkHoursearch['day'] }} </td>
 
                                             @php
@@ -180,25 +180,25 @@
                                                 // Format the DateTime object as 'd/m/Y'
                                                 $formattedDate = $dateTime->format('d/m/Y');
                                             @endphp
-                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-white">
                                                 {{ $formattedDate }}</td>
-                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-white">
                                                 {{ $WorkHoursearch['type'] }}</td>
 
 
                                             <td
-                                                class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
+                                                class="whitespace-nowrap py-4 px-3 text-sm text-white min-w-[150px]">
 
                                                 {{ $WorkHoursearch['note'] }}
 
 
                                             </td>
                                             <td
-                                                class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
+                                                class="whitespace-nowrap py-4 px-3 text-sm text-white min-w-[150px]">
 
                                             </td>
                                             <td
-                                                class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
+                                                class="whitespace-nowrap py-4 px-3 text-sm text-white min-w-[150px]">
 
 
 
