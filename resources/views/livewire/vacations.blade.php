@@ -105,6 +105,10 @@
                                         التاريخ
                                     </th>
                                     <th scope="col"
+                                    class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">
+                                    التاريخ نهاية الاجازة
+                                </th>
+                                    <th scope="col"
                                         class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37] min-w-[150px]">
                                         السبب
                                     </th>
@@ -134,6 +138,8 @@
                                             {{ $vacation->day }}</td>
                                         <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
                                             {{ $vacation->date }}</td>
+                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                                {{ $vacation->end_date }}</td>
 
                                         <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
                                             {{ $vacation->type }}</td>
@@ -200,7 +206,7 @@
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
                                         مجموع الايام </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                        {{ $this->vacations->count() }}
+                                        {{  $this->vacations->sum('days') }}
 
                                     </td>
 
@@ -357,6 +363,23 @@
                                     <div class="text-red-600 text-sm px-2 text-right">
                                         {{ $this->exportWorkHoursErorrDateModel }}
                                     </div>
+                            </div>
+                            <div class="mt-2 selectdiv relative">
+                                <div
+                                    class="svgFoucusWorkHourVacations absolute hidden inset-y-0 left-4 top-3  mb-1 items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <input type="text" wire:model.defer ="endDate"
+                                    id="hidePlaceHolderEndDatePopUp"
+                                    class=" border-[#349A37] text-[#349A37] text-sm text-right
+                                    rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-[97%] pl-10 p-2.5
+                                    placeholder-[#349A37]"
+                                    placeholder="تاريخ" onfocus="handelFocusEndDateVacationPopup()">
                             </div>
 
 

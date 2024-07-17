@@ -10,6 +10,7 @@ class vacation extends Model
     use HasFactory;
     protected $casts = [
         'date'=>'date',
+        'end_date'=>'date'
     ];
     public function user()
     {

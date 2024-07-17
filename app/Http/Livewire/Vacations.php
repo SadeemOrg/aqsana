@@ -32,6 +32,7 @@ class Vacations extends Component
     public $note;
     public $type;
     public $date;
+    public $endDate;
     public $ModelId;
     public $userId;
     public $Reasons_to_vacations;
@@ -89,12 +90,19 @@ class Vacations extends Component
 
         $from = date($this->FromDate);
         $to = date($this->ToDate);
-        $this->vacations = vacation::whereBetween('date', [$from, $to])->where("user_id", $this->Name)->orderBy('date', 'ASC')->get();
+        $vacations = Vacation::whereBetween('date', [$from, $to])
+            ->where('user_id', $this->Name)
+            ->orderBy('date', 'ASC')
+            ->get();
+            $this->vacations = $vacations->map(function ($vacation) {
+                $vacation->days = $vacation->end_date ? $vacation->date->diffInDays($vacation->end_date) : 1;
+                return $vacation;
+            });
     }
 
     public function DeleteModel($id)
     {
-                $this->DeleteVacation =  $id;
+        $this->DeleteVacation =  $id;
         $this->showDeleteModel = true;
     }
     public function closeDeleteModel()
@@ -154,6 +162,8 @@ class Vacations extends Component
     public function AddDay()
     {
 
+
+
         $this->exportWorkHoursErorr = "";
         $this->exportWorkHoursErorrUserModel = "";
         $this->exportWorkHoursErorrDateModel = "";
@@ -171,8 +181,18 @@ class Vacations extends Component
             $this->exportWorkHoursErorrTypeModel     =  "يجب اختيار السبب ";
         }
 
+        $starttime = Carbon::parse($this->date);
+        $finishTime = Carbon::parse($this->endDate);
+        $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
+        $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
+        if (isset($endDate)) {
+            if ($endDate->lt($startDate)) {
+                $this->exportWorkHoursErorrDateModel =  "تاربج نهاية الاجازة اقل من تاربج بداية الاجازة ";
+            }
+        }
 
-        if ($this->type != null && $this->date != null && $this->userId != null) {
+
+        if ($this->type != null && $this->date != null && $this->userId != null && !($endDate->lt($startDate))) {
             $oldData =  vacation::where('date', $this->date)->where('user_id', $this->userId)->first();
             $oldDataWorkHours =  WorkHours::whereDate('date', $this->date)->where('user_id', $this->userId)->first();
             if ($oldData == null) {
@@ -181,10 +201,12 @@ class Vacations extends Component
                     $vacation = new vacation();
                     $vacation->user_id = $this->userId;
                     $vacation->date = $this->date;
+                    $vacation->end_date = $this->endDate;
                     $vacation->day = Carbon::parse($this->date)->locale('ar')->dayName;
                     $vacation->type =  str_replace('_', ' ', $this->type);
                     $vacation->note = $this->note;
                     $vacation->created_by = Auth::id();
+
                     $vacation->save();
                     $this->showAddModel = false;
 
