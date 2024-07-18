@@ -890,13 +890,16 @@ class HomeController extends BaseController
         $Transaction = Transaction::where('id', $id)
             ->with(['Sectors', 'Project', 'Alhisalat', 'TelephoneDirectory'])
             ->first();
-    
+
         $PaymentType = $this->getPaymentType($Transaction->Payment_type, $Transaction->lang);
         $original = 1;
-    
+        $type = ($Transaction->is_delete == 2) ? '2' : '1';
+
+
+
         return view('Pages.Bills.Bills', compact('Transaction', 'original', 'PaymentType', 'type'));
     }
-    
+
     private function getPaymentType($paymentType, $lang)
     {
         $paymentTypes = [
@@ -907,10 +910,10 @@ class HomeController extends BaseController
             5 => ['حصالة', 'moneybox', 'קופסת כסף'],
             6 => ['التطبيق', 'Application', 'יישום'],
         ];
-    
+
         return $paymentTypes[$paymentType][$lang - 1] ?? null;
     }
-    
+
 
     public function bills($id)
     {
