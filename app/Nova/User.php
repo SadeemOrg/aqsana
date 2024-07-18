@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Illuminate\Support\Facades\DB;
 use App\Models\Area;
+use App\Models\TelephoneDirectory;
 use App\Nova\Actions\ExportUsers;
 use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\Date;
@@ -82,21 +83,26 @@ class User extends Resource
     }
     public function fields(Request $request)
     {
+        $TelephoneDirectory= TelephoneDirectory::find($request->viaResourceId);
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
             Gravatar::make()->maxWidth(50),
             Text::make(__('id_number'), 'id_number')
                 ->sortable()->rules('required', 'max:255'),
-            Text::make(__('Name'), 'name')
+                Text::make(__('Name'), 'name')
                 ->sortable()
-                ->rules('required', 'max:255'),
+                ->rules('required', 'max:255')
+                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->name : '']),
 
             Text::make(__('email'), 'email')
                 ->sortable()
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
+                ->updateRules('unique:users,email,{{resourceId}}')
+                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->email : '']),
+
+
 
             Password::make(__('Password'), 'password')
                 ->onlyOnForms()
@@ -106,7 +112,8 @@ class User extends Resource
 
 
             Number::make(__('Phone'), 'phone')
-                ->textAlign('left'),
+                ->textAlign('left')
+                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->phone_number : '']),
             Date::make(__('Birth Date'), 'birth_date'),
             Image::make(__('photo'), 'photo')->disk('public'),
             Multiselect::make(__('city'), 'city')
@@ -122,7 +129,9 @@ class User extends Resource
                 }
 
                 return $Area_type_admin_array;
-            })->singleSelect()->hideFromIndex()->hideFromDetail(),
+            })->singleSelect()->hideFromIndex()->hideFromDetail()
+
+            ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->city : '']),
         BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating()->nullable(),
              BelongsTo::make(__('Role_user'), 'Role', \App\Nova\Role::class),
 
