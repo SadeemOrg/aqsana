@@ -50,15 +50,23 @@
         </div>
         <div class="flex w-[70%] mx-auto flex-col items-start px-16 md:px-0 md:items-center mt-10">
             <p dir="ltr" class="">{{ $newDate[0] }}</p>
-            <p class="font-FlatBold text-[17px] text-[#101426] ">سند قبض رقم
-                <span class="text-base">
-                    F-{{ $Transaction->bill_number }}
-                </span>
-            </p>
-            @if ($original == 1)
-                <p class="font-FlatBold text-[17px] text-[#101426] ">  الفاتورة الأصلية</p>
+            @if ($type == 1)
+                <p class="font-FlatBold text-[17px] text-[#101426] ">سند قبض رقم
+                    <span class="text-base">
+                        F-{{ $Transaction->bill_number }}
+                    </span>
+                </p>
             @else
-                <p class="font-FlatBold text-[17px] text-[#101426] ">نسحة عن النسخة للفاتورة ألاصلية</p>
+                <p class="font-FlatBold text-[17px] text-[#101426] ">سند تعويض-זיכוי رقم
+                    <span class="text-base">
+                        R-{{ $Transaction->bill_number }}
+                    </span>
+                </p>
+            @endif
+            @if ($original == 1)
+                <p class="font-FlatBold text-[17px] text-[#101426] "> النسخة الأصلية</p>
+            @else
+                <p class="font-FlatBold text-[17px] text-[#101426] ">نسحة عن النسخة ألاصلية</p>
             @endif
         </div>
         <div class="flex flex-row items-center xl:justify-start justify-start gap-x-4 w-[70%] mx-auto mt-4">
@@ -67,7 +75,6 @@
             <span class="font-FlatBold text-[#101426] md:text-[#6B7280]  text-[18px] text-right">
 
                 @if ($Transaction->Payment_type == 5)
-
                     {{ $Transaction->description }}
                 @else
                     {{ $Transaction->TelephoneDirectory->name }}
@@ -81,350 +88,435 @@
             <div class="mt-8 flex  flex-col">
                 <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8  ">
                     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-0">
-                        <div
-                            class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg md:border-0 border-2 border-black">
-                            @if ($PaymentType == 'حوالة مصرفية')
+                        @if ($type == 1)
+                            <div
+                                class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg md:border-0 border-2 border-black">
+                                @if ($PaymentType == 'حوالة مصرفية')
+                                    <table class="min-w-full divide-y divide-black md:divide-gray-300">
+                                        <thead class="bg-[#349A37]">
+                                            <tr class="">
+                                                <th scope="col"
+                                                    class=" py-3.5 pl-4 pr-3  text-sm font-semibold text-white text-right sm:pl-6">
+                                                    طريقة الدفع</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    التاريخ</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    البنك</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    الفرع</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    رقم الحساب</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    المجموع</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-black md:divide-gray-200 bg-[#E4FFE585]">
+                                            @foreach ($Transaction->Payment_type_details as $ChikPayment)
+                                                @php
+                                                    $ChickBillDate = date(
+                                                        'd/m/Y',
+                                                        strtotime($ChikPayment['attributes']['Date']),
+                                                    );
+                                                @endphp
+                                                <tr>
+                                                    <td
+                                                        class="whitespace-nowrap py-4 pl-4 pr-3  font-FlatBold text-black md:text-gray-900 sm:pl-6">
+                                                        {{ $PaymentType }} </td>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                                        {{ $ChickBillDate }}
+                                                    </td>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                                        {{ $ChikPayment['attributes']['bank_number'] }}
+                                                    </td>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                                        {{ $ChikPayment['attributes']['Branch_number'] }}
+                                                    </td>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                                        {{ $ChikPayment['attributes']['account_number'] }}
+                                                    </td>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                                        {{ $ChikPayment['attributes']['equivelant_amount'] }}
+                                                        ₪</td>
+                                                </tr>
+                                            @endforeach
+                                            <tr>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
+                                                    المجموع الكلي :</td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
+                                                    {{ $Transaction->equivelant_amount }} ₪</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                @elseif($PaymentType == 'نقدي')
+                                    <table class="min-w-full divide-y md:divide-gray-200 divide-black">
+                                        <thead class="bg-[#349A37]">
+                                            <tr class="">
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right w-48">
+                                                    تم الدفع من خلال :</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    التاريخ :</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-center">
+                                                    المجموع</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-black md:divide-gray-200 bg-[#E4FFE585]">
+                                            <tr>
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-4  font-FlatBold text-base text-black md:text-gray-500">
+                                                    {{ $PaymentType }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
+                                                    {{ $newDate[0] }}
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-4 text-sm text-center text-black md:text-gray-500">
+                                                    {{ $Transaction->transact_amount }} ₪</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base">
+                                                    المجموع الكلي :</td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-center text-lg">
+                                                    {{ $Transaction->transact_amount }} ₪</td>
+                                            </tr>
+                                            <!-- More people... -->
+                                        </tbody>
+                                    </table>
+                                @elseif($PaymentType == 'شك')
+                                    <table class="min-w-full divide-y divide-black md:divide-gray-300">
+                                        <thead class="bg-[#349A37]">
+                                            <tr class="">
+                                                <th scope="col"
+                                                    class=" py-3.5 pl-4 pr-3  text-sm font-semibold text-white text-right sm:pl-6">
+                                                    طريقة الدفع</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    تاريخ الشك</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    رقم البنك</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    رقم الفرع</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    رقم الحساب</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    قيمة الشك</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
+                                            @foreach ($Transaction->Payment_type_details as $ChikPayment)
+                                                @php
+                                                    $ChickBillDate = date(
+                                                        'd/m/Y',
+                                                        strtotime($ChikPayment['attributes']['Date']),
+                                                    );
+                                                @endphp
+                                                <tr>
+                                                    <td
+                                                        class="whitespace-nowrap py-4 pl-4 pr-3  font-FlatBold text-black md:text-gray-900 sm:pl-6">
+                                                        {{ $PaymentType }} </td>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                                        {{ $ChickBillDate }}
+                                                    </td>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                                        {{ $ChikPayment['attributes']['bank_number'] }}
+                                                    </td>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                                        {{ $ChikPayment['attributes']['Branch_number'] }}
+                                                    </td>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                                        {{ $ChikPayment['attributes']['account_number'] }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
+                                                        {{ $ChikPayment['attributes']['Doubt_value'] }}₪
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            <tr>
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
+                                                    المجموع الكلي :</td>
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
+                                                    {{ $Transaction->equivelant_amount }} ₪</td>
+                                            </tr>
+                                            <!-- More people... -->
+                                        </tbody>
+                                    </table>
+                                @elseif($PaymentType == 'بيت')
+                                    <table class="min-w-full divide-y divide-black md:divide-gray-300">
+                                        <thead class="bg-[#349A37]">
+                                            <tr class="">
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right w-48">
+                                                    تم الدفع من خلال :</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    التاريخ :</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    رقم الهاتف :</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-center">
+                                                    المجموع</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
+                                            @foreach ($Transaction->Payment_type_details as $ChikPayment)
+                                                @php
+                                                    $ChickBillDate = date(
+                                                        'd/m/Y',
+                                                        strtotime($ChikPayment['attributes']['Date']),
+                                                    );
+                                                @endphp
+                                                <tr>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4  font-FlatBold text-base text-black-900">
+                                                        {{ $PaymentType }}
+                                                    </td>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 font-FlatBold text-base text-black-900">
+                                                        {{ $ChickBillDate }}
+                                                    </td>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 font-FlatBold text-base text-black-900">
+                                                        {{ $ChikPayment['attributes']['telephone'] }}
+                                                    </td>
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base text-black-900">
+                                                        {{ $ChikPayment['attributes']['equivelant_amount'] }} ₪
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            <tr>
+                                                <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base">
+                                                    المجموع الكلي :</td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-center text-lg">
+                                                    {{ $Transaction->equivelant_amount }} ₪</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                @elseif($PaymentType == 'حصالة')
+                                    <table class="min-w-full divide-y divide-black md:divide-gray-300">
+                                        <thead class="bg-[#349A37]">
+                                            <tr class="">
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right w-48">
+                                                    تم الدفع من خلال :</th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                                    التاريخ :</th>
+
+                                                <th scope="col"
+                                                    class="px-3 py-3.5  text-sm font-semibold text-white text-center">
+                                                    المجموع</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
+
+                                            <tr>
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-4  font-FlatBold text-base text-black md:text-black-900">
+                                                    {{ $Transaction->description }}
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-4 font-FlatBold text-base text-black md:text-black-900">
+                                                    @php
+                                                        $ChickBillDate = date(
+                                                            'd/m/Y',
+                                                            strtotime($Transaction->transaction_date),
+                                                        );
+                                                    @endphp
+                                                    {{ $ChickBillDate }}
+                                                </td>
+
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base text-black md:text-black-900">
+                                                    {{ $Transaction->transact_amount }} ₪
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
+                                                </td>
+
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base">
+                                                    المجموع الكلي :</td>
+                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-center text-lg">
+                                                    {{ $Transaction->transact_amount }} ₪</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                @endif
+                            </div>
+                        @else
+                            <div
+                                class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg md:border-0 border-2 border-black">
                                 <table class="min-w-full divide-y divide-black md:divide-gray-300">
                                     <thead class="bg-[#349A37]">
                                         <tr class="">
                                             <th scope="col"
                                                 class=" py-3.5 pl-4 pr-3  text-sm font-semibold text-white text-right sm:pl-6">
-                                                طريقة الدفع</th>
+                                                طريقة ارجاع المال</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
+                                            </th>
                                             <th scope="col"
                                                 class="px-3 py-3.5  text-sm font-semibold text-white text-right">
                                                 التاريخ</th>
                                             <th scope="col"
                                                 class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                البنك</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                الفرع</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                رقم الحساب</th>
+                                            </th>
                                             <th scope="col"
                                                 class="px-3 py-3.5  text-sm font-semibold text-white text-right">
                                                 المجموع</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-black md:divide-gray-200 bg-[#E4FFE585]">
-                                        @foreach ($Transaction->Payment_type_details as $ChikPayment)
-                                            @php
-                                                $ChickBillDate = date(
-                                                    'd/m/Y',
-                                                    strtotime($ChikPayment['attributes']['Date']),
-                                                );
-                                            @endphp
-                                            <tr>
-                                                <td
-                                                    class="whitespace-nowrap py-4 pl-4 pr-3  font-FlatBold text-black md:text-gray-900 sm:pl-6">
-                                                    {{ $PaymentType }} </td>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
-                                                    {{ $ChickBillDate }}
-                                                </td>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
-                                                    {{ $ChikPayment['attributes']['bank_number'] }}
-                                                </td>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
-                                                    {{ $ChikPayment['attributes']['Branch_number'] }}
-                                                </td>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
-                                                    {{ $ChikPayment['attributes']['account_number'] }}
-                                                </td>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
-                                                    {{ $ChikPayment['attributes']['equivelant_amount'] }}
-                                                    ₪</td>
-                                            </tr>
-                                        @endforeach
-                                        <tr>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
-                                                المجموع الكلي :</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
-                                                {{ $Transaction->equivelant_amount }} ₪</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            @elseif($PaymentType == 'نقدي')
-                                <table class="min-w-full divide-y md:divide-gray-200 divide-black">
-                                    <thead class="bg-[#349A37]">
-                                        <tr class="">
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right w-48">
-                                                تم الدفع من خلال :</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                التاريخ :</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-center">
-                                                المجموع</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-black md:divide-gray-200 bg-[#E4FFE585]">
                                         <tr>
                                             <td
-                                                class="whitespace-nowrap px-3 py-4  font-FlatBold text-base text-black md:text-gray-500">
-                                                {{ $PaymentType }}
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
-                                                {{ $newDate[0] }}
+                                                class="whitespace-nowrap py-4 pl-4 pr-3  font-FlatBold text-black md:text-gray-900 sm:pl-6">
+                                                {{ $Transaction->payment_reason }}
                                             </td>
                                             <td
-                                                class="whitespace-nowrap px-3 py-4 text-sm text-center text-black md:text-gray-500">
-                                                {{ $Transaction->transact_amount }} ₪</td>
+                                                class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                            </td>
+                                            <td
+                                                class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                                {{ explode(' ', $Transaction->transaction_date)[0] }}
+                                            </td>
+                                            <td
+                                                class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                            </td>
+                                            <td
+                                                class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                                {{ $Transaction->equivelant_amount * -1 }}
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
+                                            <td
+                                                class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                            </td>
+                                            <td
+                                                class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
+                                            </td>
+                                            <td
+                                                class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base">
                                                 المجموع الكلي :</td>
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-center text-lg">
-                                                {{ $Transaction->transact_amount }} ₪</td>
-                                        </tr>
-                                        <!-- More people... -->
-                                    </tbody>
-                                </table>
-                            @elseif($PaymentType == 'شك')
-                                <table class="min-w-full divide-y divide-black md:divide-gray-300">
-                                    <thead class="bg-[#349A37]">
-                                        <tr class="">
-                                            <th scope="col"
-                                                class=" py-3.5 pl-4 pr-3  text-sm font-semibold text-white text-right sm:pl-6">
-                                                طريقة الدفع</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                تاريخ الشك</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                رقم البنك</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                رقم الفرع</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                رقم الحساب</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                قيمة الشك</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
-                                        @foreach ($Transaction->Payment_type_details as $ChikPayment)
-                                            @php
-                                                $ChickBillDate = date(
-                                                    'd/m/Y',
-                                                    strtotime($ChikPayment['attributes']['Date']),
-                                                );
-                                            @endphp
-                                            <tr>
-                                                <td
-                                                    class="whitespace-nowrap py-4 pl-4 pr-3  font-FlatBold text-black md:text-gray-900 sm:pl-6">
-                                                    {{ $PaymentType }} </td>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
-                                                    {{ $ChickBillDate }}
-                                                </td>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
-                                                    {{ $ChikPayment['attributes']['bank_number'] }}
-                                                </td>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
-                                                    {{ $ChikPayment['attributes']['Branch_number'] }}
-                                                </td>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
-                                                    {{ $ChikPayment['attributes']['account_number'] }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-gray-900 ">
-                                                    {{ $ChikPayment['attributes']['Doubt_value'] }}₪
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        <tr>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
-                                                المجموع الكلي :</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-black md:text-gray-500">
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-lg">
-                                                {{ $Transaction->equivelant_amount }} ₪</td>
-                                        </tr>
-                                        <!-- More people... -->
-                                    </tbody>
-                                </table>
-                            @elseif($PaymentType == 'بيت')
-                                <table class="min-w-full divide-y divide-black md:divide-gray-300">
-                                    <thead class="bg-[#349A37]">
-                                        <tr class="">
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right w-48">
-                                                تم الدفع من خلال :</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                التاريخ :</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                رقم الهاتف :</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-center">
-                                                المجموع</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
-                                        @foreach ($Transaction->Payment_type_details as $ChikPayment)
-                                            @php
-                                                $ChickBillDate = date(
-                                                    'd/m/Y',
-                                                    strtotime($ChikPayment['attributes']['Date']),
-                                                );
-                                            @endphp
-                                            <tr>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4  font-FlatBold text-base text-black-900">
-                                                    {{ $PaymentType }}
-                                                </td>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4 font-FlatBold text-base text-black-900">
-                                                    {{ $ChickBillDate }}
-                                                </td>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4 font-FlatBold text-base text-black-900">
-                                                    {{ $ChikPayment['attributes']['telephone'] }}
-                                                </td>
-                                                <td
-                                                    class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base text-black-900">
-                                                    {{ $ChikPayment['attributes']['equivelant_amount'] }} ₪
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        <tr>
-                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base">
-                                                المجموع الكلي :</td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-center text-lg">
-                                                {{ $Transaction->equivelant_amount }} ₪</td>
+                                                {{ $Transaction->equivelant_amount * -1 }} ₪</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            @elseif($PaymentType == 'حصالة')
-                                <table class="min-w-full divide-y divide-black md:divide-gray-300">
-                                    <thead class="bg-[#349A37]">
-                                        <tr class="">
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right w-48">
-                                                تم الدفع من خلال :</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-right">
-                                                التاريخ :</th>
-
-                                            <th scope="col"
-                                                class="px-3 py-3.5  text-sm font-semibold text-white text-center">
-                                                المجموع</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-200 bg-[#E4FFE585]">
-
-                                        <tr>
-                                            <td
-                                                class="whitespace-nowrap px-3 py-4  font-FlatBold text-base text-black md:text-black-900">
-                                                {{ $Transaction->description }}
-                                            </td>
-                                            <td
-                                                class="whitespace-nowrap px-3 py-4 font-FlatBold text-base text-black md:text-black-900">
-                                                @php
-                                                    $ChickBillDate = date(
-                                                        'd/m/Y',
-                                                        strtotime($Transaction->transaction_date),
-                                                    );
-                                                @endphp
-                                                {{ $ChickBillDate }}
-                                            </td>
-
-                                            <td
-                                                class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base text-black md:text-black-900">
-                                                {{ $Transaction->transact_amount }} ₪
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="whitespace-nowrap px-3 py-4  font-FlatBold text-base">
-                                            </td>
-
-                                            <td class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base">
-                                                المجموع الكلي :</td>
-                                            <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-center text-lg">
-                                                {{ $Transaction->transact_amount }} ₪</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            @endif
-                        </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
-        <div class="flex flex-row flex-wrap items-center md:justify-between justify-between px-16 md:px-4 mt-4 sm:mx-auto w-[75%] mb-6">
-            <div>
-                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">اسم القطاع:
+        @if ($type == 1)
+            <div
+                class="flex flex-row flex-wrap items-center md:justify-between justify-between px-16 md:px-4 mt-4 sm:mx-auto w-[75%] mb-6">
+                <div>
+                    <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">اسم القطاع:
 
-                    @if ($Transaction->Sectors != null)
-                        <span class="font-FlatBold text-[#101426] mx-1 text-sm"> {{ $Transaction->Sectors->text }}</span>
-                    @else
-                        <span class="font-FlatBold text-[#101426] mx-1 text-sm"> مخرجات عامة</span>
+                        @if ($Transaction->Sectors != null)
+                            <span class="font-FlatBold text-[#101426] mx-1 text-sm">
+                                {{ $Transaction->Sectors->text }}</span>
+                        @else
+                            <span class="font-FlatBold text-[#101426] mx-1 text-sm"> مخرجات عامة</span>
+                        @endif
+                    </p>
+
+                    <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">مشروع :
+                        <span
+                            class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->project->project_name }}</span>
+                    </p>
+                    @if ($Transaction->payment_reason != null)
+                        <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">سبب التبرع :
+                            <span
+                                class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->payment_reason }}</span>
+                        </p>
                     @endif
-                </p>
-
-                <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">مشروع :
-                    <span
-                        class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->project->project_name }}</span>
-                </p>
-                @if ($Transaction->payment_reason != null)
-                    <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">سبب التبرع :
-                        <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->payment_reason }}</span>
-                    </p>
-                @endif
-                @if ($Transaction->description != null)
-                    <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">ملاحظات :
-                        <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
-                    </p>
-                @endif
+                    @if ($Transaction->description != null)
+                        <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">ملاحظات :
+                            <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
+                        </p>
+                    @endif
+                </div>
             </div>
-            {{-- <button dir="ltr" id="printpagebutton" type="button" onclick="printpage()"
-                class=" rounded-[50px] bg-[#349A37] text-white text-base w-28 py-4 mt-4 font-[700] hover:bg-[#101426] duration-200">
-                طباعة
-            </button> --}}
-        </div>
-        <div class="relative flex flex-row items-center justify-end md:justify-center ml-8 md:ml-0 w-full px-8 md:px-0 -mt-12">
-            <img class="w-[200px] h-[180px] md:w-[320px] md:h-[290px]"
-            src="{{ asset('assets/image/-dc.png') }}"
+        @endif
+
+        @if ($type == 1)
+            <div
+                class="relative flex flex-row items-center justify-end md:justify-center ml-8 md:ml-0 w-full px-8 md:px-0 -mt-12">
+                <img class="w-[200px] h-[180px] md:w-[320px] md:h-[290px]" src="{{ asset('assets/image/-dc.png') }}"
+                    alt="logo">
+                <div class="absolute">
+                    <img class="w-28 h-28 md:w-44 md:h-40" src="{{ asset('assets/image/-removebg-preview.png') }}"
+                        alt="ttab">
+                </div>
+            </div>
+        @endif
+
+        @if ($type == 2)
+        <div
+            class="relative flex flex-row items-center justify-end md:justify-center ml-8 md:ml-0 w-full px-8 md:px-0 ">
+            <img class="w-[200px] h-[180px] md:w-[320px] md:h-[290px]" src="{{ asset('assets/image/-dc.png') }}"
                 alt="logo">
             <div class="absolute">
-                <img class="w-28 h-28 md:w-44 md:h-40"
-                    src="{{ asset('assets/image/-removebg-preview.png') }}"
+                <img class="w-28 h-28 md:w-44 md:h-40" src="{{ asset('assets/image/-removebg-preview.png') }}"
                     alt="ttab">
             </div>
         </div>
+    @endif
 
     </div>
 @endsection
