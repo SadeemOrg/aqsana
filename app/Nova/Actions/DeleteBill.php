@@ -28,7 +28,7 @@ class DeleteBill extends Action
      */
     public function name()
     {
-        return __('حذف');
+        return __('تعويض');
     }
     public function handle(ActionFields $fields, Collection $models)
     {
