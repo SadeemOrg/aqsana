@@ -13,7 +13,7 @@ class AddIsUserToTelephoneDirectoryTable extends Migration
      */
     public function up()
     {
-        Schema::table('telephone_directory', function (Blueprint $table) {
+        Schema::table('telephone_directories', function (Blueprint $table) {
             $table->boolean('is_user')->default(0);
 
         });
