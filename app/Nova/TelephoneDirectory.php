@@ -18,6 +18,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Ncus\InlineIndex\InlineIndex;
+use OptimistDigital\NovaDetachedFilters\NovaDetachedFilters;
 
 class TelephoneDirectory extends Resource
 {
@@ -195,7 +196,9 @@ class TelephoneDirectory extends Resource
     {
         return [
             new Smssend(),
-            new FilterCard(new UserType)
+            (new NovaDetachedFilters([
+                (new UserType())->withMeta(['width' => 'w-full']),
+            ]))->width('full'),
         ];
     }
 

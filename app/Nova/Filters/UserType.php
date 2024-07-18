@@ -2,12 +2,18 @@
 
 namespace App\Nova\Filters;
 
+use App\Models\Area;
 use App\Models\SmsType;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
 
 class UserType extends Filter
 {
+
+    public function name()
+    {
+        return __('انواع المستخدمين');
+    }
     /**
      * The filter's component.
      *
@@ -28,8 +34,8 @@ class UserType extends Filter
         if ($value == "non") {
             return $query;
         }
-        $retVal = (gettype($value) == 'integer') ?  (string)$value : $value;
-
+        $SmsType=SmsType::where('name',$value)->first();
+        $retVal = (gettype($SmsType->id) == 'integer') ?  (string)$SmsType->id : $SmsType->id;
         return $query->whereJsonContains('type', $retVal);
     }
 
@@ -45,7 +51,7 @@ class UserType extends Filter
         $foo = array();
         $foo['الكل'] = 'non';
         foreach ($Areas as $Area)
-            $foo[$Area->name] = $Area->id;
+            $foo[$Area->name] = $Area->name;
         return $foo;
     }
 }
