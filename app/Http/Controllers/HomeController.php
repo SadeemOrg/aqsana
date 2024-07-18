@@ -915,7 +915,7 @@ class HomeController extends BaseController
     }
 
 
-    public function bills($id)
+    public function bills($id,$type=1)
     {
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
         // dd($Transaction );
@@ -986,8 +986,10 @@ class HomeController extends BaseController
 
         // dd($sector_Text);
         $original = 0;
+        $type = ($Transaction->is_delete == 2) ? '2' : '1';
 
-        return view('Pages.Bills.Bills', compact('Transaction', 'original',  'PaymentType'));
+
+        return view('Pages.Bills.Bills', compact('Transaction', 'original',  'PaymentType','type'));
     }
     public function mainbill($id, Request $request)
     {
