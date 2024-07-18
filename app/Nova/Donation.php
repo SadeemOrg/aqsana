@@ -119,6 +119,7 @@ class Donation extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
     public static function indexQuery(NovaRequest $request, $query)
     {
 
@@ -318,7 +319,9 @@ class Donation extends Resource
                 ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
 
-            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info'),
+            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info')->readonly(function () {
+                return $this->is_delete == 1    ;
+            }),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
 
 
