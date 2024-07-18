@@ -78,19 +78,19 @@ class User extends Resource
 
         $query->where(function ($query) {
             $query->whereNull('app_user')
-                  ->orWhere('app_user', '<>', '1');
+                ->orWhere('app_user', '<>', '1');
         });
     }
     public function fields(Request $request)
     {
-        $TelephoneDirectory= TelephoneDirectory::find($request->viaResourceId);
+        $TelephoneDirectory = TelephoneDirectory::find($request->viaResourceId);
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
             Gravatar::make()->maxWidth(50),
             Text::make(__('id_number'), 'id_number')
                 ->sortable()->rules('required', 'max:255'),
-                Text::make(__('Name'), 'name')
+            Text::make(__('Name'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255')
                 ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->name : '']),
@@ -117,26 +117,26 @@ class User extends Resource
             Date::make(__('Birth Date'), 'birth_date'),
             Image::make(__('photo'), 'photo')->disk('public'),
             Multiselect::make(__('city'), 'city')
-            ->options(function () {
-                $Areas =  \App\Models\City::all();
+                ->options(function () {
+                    $Areas =  \App\Models\City::all();
 
-                $Area_type_admin_array =  array();
+                    $Area_type_admin_array =  array();
 
-                foreach ($Areas as $Area) {
+                    foreach ($Areas as $Area) {
 
 
-                    $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
-                }
+                        $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                    }
 
-                return $Area_type_admin_array;
-            })->singleSelect()->hideFromIndex()->hideFromDetail()
+                    return $Area_type_admin_array;
+                })->singleSelect()->hideFromIndex()->hideFromDetail()
 
-            ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->city : '']),
-        BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating()->nullable(),
-             BelongsTo::make(__('Role_user'), 'Role', \App\Nova\Role::class),
+                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->city : '']),
+            BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating()->nullable(),
+            BelongsTo::make(__('Role_user'), 'Role', \App\Nova\Role::class),
 
             Text::make(__('jop'), 'job')
-            ->sortable(),
+                ->sortable(),
             Multiselect::make(__('Permations'), 'role')
                 ->options(
                     [
@@ -214,7 +214,12 @@ class User extends Resource
     }
     public static function beforeSave(Request $request, $model)
     {
-        $model->user_role=1;
+        $telephoneDirectory = TelephoneDirectory::find($request->viaResourceId);
+        if ($telephoneDirectory) {
+            $telephoneDirectory->is_user = 1;
+            $telephoneDirectory->save();
+        }
+        $model->user_role = 1;
         $model->app_user = 0;
     }
 

@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Nova\Filters\AreaDelegate;
 use Acme\MultiselectField\Multiselect;
 use App\Models\City;
+use App\Nova\Actions\AddAsUser;
 use App\Nova\Actions\ExportDelegates;
 use App\Nova\Filters\JobDelegateFilter;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ use AwesomeNova\Cards\FilterCard;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
+use Pdmfc\NovaFields\ActionButton;
 use Titasgailius\SearchRelations\SearchesRelations;
 use Whitecube\NovaFlexibleContent\Flexible;
 
@@ -87,6 +89,18 @@ class delegate extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
+            ActionButton::make(__('Action'))
+            ->action(AddAsUser::class, (string) $this->id)
+            ->text(__('اضافة كمستخدم'))
+            ->showLoadingAnimation()
+            ->loadingColor('#fff')->buttonColor('#21b970')
+            ->readonly(function () {
+                if ($this->is_user==1) {
+                    return true;
+                }
+            })
+            ->hideWhenCreating()->hideWhenUpdating(),
 
             Text::make(__('Name'), 'name')
                 ->sortable()
@@ -257,6 +271,8 @@ class delegate extends Resource
     {
         return [
             (new ExportDelegates)->standalone(),
+            (new AddAsUser)->onlyOnDetail()->withoutConfirmation(),
+
             // (new ExportJobDelegate)->standalone()->withoutConfirmation(),
 
 

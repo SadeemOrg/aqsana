@@ -27,6 +27,12 @@ class PrintBill extends Action
 
     public function handle(ActionFields $fields, Collection $models)
     {
+
+        foreach ($models as $model) {
+            if ($model->is_delete == 1) {
+                return Action::danger('لا يمكن تنفيذ الإجراء لأن السند يحتوي على حالة is_delete == 1');
+            }
+        }
         $ids = [];
         foreach ($models as $model) {
             $ids[] = $model['id'];
