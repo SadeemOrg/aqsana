@@ -600,7 +600,6 @@ class AuthController extends Controller
     }
     public function getCities(Request $request)
     {
-        dd("dd");
         $cities=City::all();
         return $this->sendResponse($cities, 'Success get cities');
 
