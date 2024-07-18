@@ -955,6 +955,8 @@ class HomeController extends BaseController
             }
         }
         $original = 1;
+        $type = ($Transaction->is_delete == 2) ? '2' : '1';
+
 
         return view('Pages.Bills.Bills', compact('Transaction', 'original', 'PaymentType','type'));
     }
