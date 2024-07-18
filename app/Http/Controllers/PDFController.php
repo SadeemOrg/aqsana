@@ -19,7 +19,85 @@ class PDFController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function generatePDF($id,$type = 1)
+    public function generatePDFs($ids)
+    {
+        $idsArray = explode(',', $ids); // Split IDs by comma
+
+        $mpdf = new \Mpdf\Mpdf([
+            'margin_left' => 10,
+            'margin_right' => 10,
+            'margin-top' => 0,
+            'autoArabic' => true
+        ]);
+
+        foreach ($idsArray as $id) {
+            $imagePaths = [
+                'image1' => public_path('assets/image/iuktui.png'),
+                'image2' => public_path('assets/image/-dc.png'),
+                'image3' => public_path('assets/image/-removebg-preview.png'),
+                'image4' => public_path('assets/image/signiture.jpg')
+            ];
+
+            foreach ($imagePaths as $key => $imagePath) {
+                if (!file_exists($imagePath)) {
+                    return response()->json(['error' => $key . ' file does not exist.'], 404);
+                }
+            }
+
+            $Transaction = Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
+            $TransactionArray = @json_decode(json_encode($Transaction), true);
+
+            // Determine Payment Type based on language
+            switch ($Transaction->Payment_type) {
+                case 1:
+                    $PaymentType = "نقدي";
+                    break;
+                case 2:
+                    $PaymentType = "شك";
+                    break;
+                case 3:
+                    $PaymentType = "بيت";
+                    break;
+                case 4:
+                    $PaymentType = "حوالة مصرفية";
+                    break;
+                case 5:
+                    $PaymentType = "حصالة";
+                    break;
+                case 6:
+                    $PaymentType = "التطبيق";
+                    break;
+                default:
+                    $PaymentType = "";
+                    break;
+            }
+
+            $data = [
+                'TransactionArray' => $TransactionArray,
+                'PaymentType' => $PaymentType,
+                'imagePaths' => $imagePaths,
+            ];
+
+            // Render HTML for the page
+            if ($TransactionArray['lang'] == 1) {
+                $html = view('pdf.ArabicPDF', $data)->render();
+            } else if ($TransactionArray['lang'] == 2) {
+                $html = view('pdf.myPDF', $data)->render();
+            } else if ($TransactionArray['lang'] == 3) {
+                $html = view('pdf.HebrowPDF', $data)->render();
+            }
+
+            $mpdf->AddPage(); // Add a new page for each ID
+            $mpdf->WriteHTML($html);
+        }
+
+        $fileName = 'Multiple_PDFs.pdf';
+        $mpdf->Output($fileName, 'I'); // Output the combined PDF for inline viewing
+
+        exit; // Terminate script after generating PDF
+    }
+
+    public function generatePDF($id, $type = 1)
     {
         $imagePaths = [
             'image1' => public_path('assets/image/iuktui.png'),
@@ -111,8 +189,8 @@ class PDFController extends Controller
         $data = [
             'TransactionArray' => $TransactionArray,
             'PaymentType' =>  $PaymentType,
-            'imagePaths'=>$imagePaths,
-            'type'=>$type,
+            'imagePaths' => $imagePaths,
+            'type' => $type,
         ];
         $fileName = 'Invoices details.pdf';
         $mpdf->autoLangToFont = true;
