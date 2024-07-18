@@ -32,7 +32,7 @@ class BillPdf extends Action
         }
 
         $idsString = implode(',', $ids);
-        return Action::redirect('/generate-pdf/' . $idsString);
+        return Action::redirect('/generate-pdfs/' . $idsString);
 
     }
 
