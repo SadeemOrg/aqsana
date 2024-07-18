@@ -61,7 +61,7 @@ class AuthController extends Controller
             'email' => 'required|string|unique:users|email',
             'password' => 'required|string',
             'user_role' => 'required|string',
-            'user_role' => 'required',
+            'city' => 'required',
             'phone'  => 'required|unique:users|digits_between:10,14',
         ], [
             'name.required' => 'الاسم مطلوب.',
