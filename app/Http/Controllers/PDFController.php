@@ -19,7 +19,7 @@ class PDFController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function generatePDFs($ids)
+    public function generatePDFs($ids,$type=1)
     {
         $idsArray = explode(',', $ids); // Split IDs by comma
 
@@ -76,6 +76,8 @@ class PDFController extends Controller
                 'TransactionArray' => $TransactionArray,
                 'PaymentType' => $PaymentType,
                 'imagePaths' => $imagePaths,
+                'type' => $type,
+
             ];
 
             // Render HTML for the page
