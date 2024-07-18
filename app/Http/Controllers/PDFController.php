@@ -79,6 +79,8 @@ class PDFController extends Controller
             ];
 
             // Render HTML for the page
+            $mpdf->autoLangToFont = true;
+            $mpdf->autoScriptToLang = true;
             if ($TransactionArray['lang'] == 1) {
                 $html = view('pdf.ArabicPDF', $data)->render();
             } else if ($TransactionArray['lang'] == 2) {
@@ -92,6 +94,8 @@ class PDFController extends Controller
         }
 
         $fileName = 'Multiple_PDFs.pdf';
+        $html = $html->render();
+        $mpdf->WriteHTML($html);
         $mpdf->Output($fileName, 'I'); // Output the combined PDF for inline viewing
 
         exit; // Terminate script after generating PDF
