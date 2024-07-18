@@ -885,81 +885,32 @@ class HomeController extends BaseController
 
         Budget::where('year', $request->year)->restore();
     }
-    public function originalbillbills($id,$type=1)
+    public function originalbillbills($id, $type = 1)
     {
-        $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
-        // dd(  $Transaction ->Alhisalat);
-
-        if ($Transaction->lang == 1) {
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "نقدي";
-                    break;
-                case 2:
-                    $PaymentType = "شك";
-                    break;
-                case 3:
-                    $PaymentType = "بيت";
-                    break;
-                case 4:
-                    $PaymentType = "حوالة مصرفية";
-                    break;
-                case 5:
-                    $PaymentType = "حصالة";
-                    break;
-                case 6:
-                    $PaymentType = "التطبيق";
-                    break;
-            }
-        } else if ($Transaction->lang == 2) {
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "cash";
-                    break;
-                case 2:
-                    $PaymentType = "Bank doubt";
-                    break;
-                case 3:
-                    $PaymentType = "bit";
-                    break;
-                case 4:
-                    $PaymentType = "Bank transfer";
-                    break;
-                case 5:
-                    $PaymentType = "moneybox";
-                    break;
-                case 6:
-                    $PaymentType = "Application";
-                    break;
-            }
-        } else if ($Transaction->lang == 3) {
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "כסף מזומן";
-                    break;
-                case 2:
-                    $PaymentType = "ספק בבנק";
-                    break;
-                case 3:
-                    $PaymentType = "קצת";
-                    break;
-                case 4:
-                    $PaymentType = "העברה בנקאית";
-                    break;
-                case 5:
-                    $PaymentType = "קופסת כסף";
-                    break;
-                case 6:
-                    $PaymentType = "יישום";
-                    break;
-            }
-        }
+        $Transaction = Transaction::where('id', $id)
+            ->with(['Sectors', 'Project', 'Alhisalat', 'TelephoneDirectory'])
+            ->first();
+    
+        $PaymentType = $this->getPaymentType($Transaction->Payment_type, $Transaction->lang);
         $original = 1;
-        $type = ($Transaction->is_delete == 2) ? '2' : '1';
-
-
-        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'PaymentType','type'));
+    
+        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'PaymentType', 'type'));
     }
+    
+    private function getPaymentType($paymentType, $lang)
+    {
+        $paymentTypes = [
+            1 => ['نقدي', 'cash', 'כסף מזומן'],
+            2 => ['شك', 'Bank doubt', 'ספק בבנק'],
+            3 => ['بيت', 'bit', 'קצת'],
+            4 => ['حوالة مصرفية', 'Bank transfer', 'העברה בנקאית'],
+            5 => ['حصالة', 'moneybox', 'קופסת כסף'],
+            6 => ['التطبيق', 'Application', 'יישום'],
+        ];
+    
+        return $paymentTypes[$paymentType][$lang - 1] ?? null;
+    }
+    
 
     public function bills($id)
     {
