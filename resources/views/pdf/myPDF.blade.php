@@ -74,9 +74,7 @@
         $phone = nova_get_setting('phone', 'default_value');
         $email = nova_get_setting('email', 'default_value');
         $address = nova_get_setting('address', 'default_value');
-        // $newaddress = explode(',', $address);
         $ChickBillDate = date('d/m/Y', strtotime($TransactionArray['transaction_date']));
-        // dd($TelephoneDirectory);
     @endphp
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
@@ -100,11 +98,19 @@
     <!--Start Second Paragraph-->
     <div style="text-align: center">
         <p style="font-size: 16px;color:#101426">{{ $ChickBillDate }}</p>
+        @if($type==1)
         <p style="font-size:16px; color:#101426 ">receipt voucher number
             <span>
                 F-{{ $TransactionArray['bill_number'] }}
             </span>
         </p>
+        @else
+        <p style="font-size:16px; color:#101426 ">Compensation Voucher number
+            <span>
+                R-{{ $TransactionArray['bill_number'] }}
+            </span>
+        </p>
+        @endif
         <p style="font-size:16px; color:#101426; ">copy of orginal Bill</p>
     </div>
     <!--End Second Paragraph-->
@@ -124,7 +130,8 @@
     <!--End for Account Paragraph-->
 
     <!--Start Table -->
-
+@if($type==1)
+    <div>
     @if ($PaymentType == 'Bank transfer')
         <table class="blueTable">
             <thead>
@@ -293,6 +300,43 @@
 
         </table>
     @endif
+</div>
+@else
+<div>
+    <div
+        class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg md:border-0 border-2 border-black">
+        <table dir="rtl" class="blueTable">
+            <thead>
+                <tr>
+                    <th>refunding money method.</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {{ $TransactionArray['payment_reason'] }}</td>
+                    <td>
+                        {{ explode('T', $TransactionArray['transaction_date'])[0] }}
+                    </td>
+                    <td>
+                        {{ $TransactionArray['equivelant_amount'] * -1 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class=""></td>
+                    <td class="">
+                        Total :</td>
+                    <td class="">
+                        {{ $TransactionArray['equivelant_amount'] * -1 }}
+                    </td>
+                </tr>
+            </tbody>
+            </tr>
+        </table>
+    </div>
+</div>
+@endif
     <!--End Table -->
 
     <!--Start Sector Name-->

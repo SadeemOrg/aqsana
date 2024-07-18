@@ -74,9 +74,7 @@
         $phone = nova_get_setting('phone', 'default_value');
         $email = nova_get_setting('email', 'default_value');
         $address = nova_get_setting('address', 'default_value');
-        // $newaddress = explode(',', $address);
         $ChickBillDate = date('d/m/Y', strtotime($TransactionArray['transaction_date']));
-        // dd($TelephoneDirectory);
     @endphp
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
@@ -100,12 +98,21 @@
     <!--Start Second Paragraph-->
     <div style="text-align: center">
         <p style="font-size: 16px;color:#101426">{{ $ChickBillDate }}</p>
-        <p style="font-size:16px; color:#101426 ">
-            F-{{ $TransactionArray['bill_number'] }}
-            <span>
-                קבלה מספר
-            </span>
-        </p>
+        @if ($type == 1)
+            <p style="font-size:16px; color:#101426 ">
+                F-{{ $TransactionArray['bill_number'] }}
+                <span>
+                    קבלה מספר
+                </span>
+            </p>
+        @else
+            <p style="font-size:16px; color:#101426 ">
+                R-{{ $TransactionArray['bill_number'] }}
+                <span>
+                    אג"ח שיפוי
+                </span>
+            </p>
+        @endif
         <p style="font-size:16px; color:#101426; ">קבלה מקורית </p>
     </div>
     <!--End Second Paragraph-->
@@ -124,201 +131,241 @@
     <!--End for Account Paragraph-->
 
     <!--Start Table -->
-
-    @if ($PaymentType == 'העברה בנקאית')
-        <table dir="rtl" class="blueTable">
-            <thead>
-                <tr>
-                    <th> שיטות תשלום</th>
-                    <th> תאריך</th>
-                    <th>בַּנק</th>
-                    <th>ענף</th>
-                    <th>מספר חשבון </th>
-                    <th>סך הכל </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($TransactionArray['Payment_type_details'] as $ChikPayment)
-                    @php
-                        $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
-                    @endphp
-                    <tr>
-                        <td> {{ $PaymentType }} </td>
-                        <td>{{ $ChickBillDate }}</td>
-                        <td> {{ $ChikPayment['attributes']['bank_number'] }}</td>
-                        <td>{{ $ChikPayment['attributes']['Branch_number'] }}</td>
-                        <td>{{ $ChikPayment['attributes']['account_number'] }}</td>
-                        <td> {{ $ChikPayment['attributes']['equivelant_amount'] }} </td>
+    @if ($type == 1)
+        <div>
+            @if ($PaymentType == 'העברה בנקאית')
+                <table dir="rtl" class="blueTable">
+                    <thead>
+                        <tr>
+                            <th> שיטות תשלום</th>
+                            <th> תאריך</th>
+                            <th>בַּנק</th>
+                            <th>ענף</th>
+                            <th>מספר חשבון </th>
+                            <th>סך הכל </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($TransactionArray['Payment_type_details'] as $ChikPayment)
+                            @php
+                                $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                            @endphp
+                            <tr>
+                                <td> {{ $PaymentType }} </td>
+                                <td>{{ $ChickBillDate }}</td>
+                                <td> {{ $ChikPayment['attributes']['bank_number'] }}</td>
+                                <td>{{ $ChikPayment['attributes']['Branch_number'] }}</td>
+                                <td>{{ $ChikPayment['attributes']['account_number'] }}</td>
+                                <td> {{ $ChikPayment['attributes']['equivelant_amount'] }} </td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td class=""></td>
+                            <td class=""></td>
+                            <td class=""></td>
+                            <td class="">
+                                סך הכל סופי :</td>
+                            <td class=""></td>
+                            <td class="">
+                                {{ $TransactionArray['equivelant_amount'] }} </td>
+                        </tr>
+                    </tbody>
                     </tr>
-                @endforeach
-                <tr>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class="">
-                        סך הכל סופי :</td>
-                    <td class=""></td>
-                    <td class="">
-                        {{ $TransactionArray['equivelant_amount'] }} </td>
-                </tr>
-            </tbody>
-            </tr>
-        </table>
-    @elseif($PaymentType == 'כסף מזומן')
-        <table dir="rtl" class="blueTable">
-            <thead>
-                <tr>
-                    <th>שיטות תשלום </th>
-                    <th>תאריך</th>
-                    <th>סך הכל </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td> {{ $PaymentType }} </td>
-                    <td>{{ $ChickBillDate }}</td>
-                    <td>{{ $TransactionArray['transact_amount'] }}</td>
-                </tr>
-                <tr>
-                    <td class=""></td>
-                    <td class="">
-                        סך הכל סופי :</td>
-                    <td class="">
-                        {{ $TransactionArray['transact_amount'] }} </td>
-                </tr>
-            </tbody>
-            </tr>
-        </table>
-    @elseif($PaymentType == 'קצת')
-        <table dir="rtl" class="blueTable">
-            <thead>
-                <tr>
-                    <th>שיטות תשלום </th>
-                    <th>תאריך</th>
-                    <th>מספר הטלפון </th>
-                    <th>סך הכל </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($TransactionArray['Payment_type_details'] as $ChikPayment)
-                    @php
-                        $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
-
-                    @endphp
-                    <tr>
-                        <td> {{ $PaymentType }} </td>
-                        <td>{{ $ChickBillDate }}</td>
-                        <td>{{ $ChikPayment['attributes']['telephone'] }}</td>
-                        <td>{{ $ChikPayment['attributes']['equivelant_amount'] }}</td>
+                </table>
+            @elseif($PaymentType == 'כסף מזומן')
+                <table dir="rtl" class="blueTable">
+                    <thead>
+                        <tr>
+                            <th>שיטות תשלום </th>
+                            <th>תאריך</th>
+                            <th>סך הכל </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{ $PaymentType }} </td>
+                            <td>{{ $ChickBillDate }}</td>
+                            <td>{{ $TransactionArray['transact_amount'] }}</td>
+                        </tr>
+                        <tr>
+                            <td class=""></td>
+                            <td class="">
+                                סך הכל סופי :</td>
+                            <td class="">
+                                {{ $TransactionArray['transact_amount'] }} </td>
+                        </tr>
+                    </tbody>
                     </tr>
-                @endforeach
-                <tr>
-                    <td class=""></td>
-                    <td class="">
-                        סך הכל סופי :</td>
-                    <td class=""></td>
-                    <td class="">
-                        {{ $TransactionArray['equivelant_amount'] }} </td>
-                </tr>
-            </tbody>
-            </tr>
-        </table>
-    @elseif($PaymentType == 'ספק בבנק')
-        <table dir="rtl" class="blueTable">
-            <thead>
-                <tr>
-                    <th> שיטות תשלום</th>
-                    <th> תאריך ספק </th>
-                    <th> בַּנק </th>
-                    <th> מספר סניף </th>
-                    <th> מספר החשבון </th>
-                    <th>ערך ספק </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($TransactionArray['Payment_type_details'] as $ChikPayment)
-                    @php
-                        $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
-                    @endphp
-                    <tr>
-                        <td> {{ $PaymentType }} </td>
-                        <td>{{ $ChickBillDate }}</td>
-                        <td> {{ $ChikPayment['attributes']['bank_number'] }}</td>
-                        <td>{{ $ChikPayment['attributes']['Branch_number'] }}</td>
-                        <td>{{ $ChikPayment['attributes']['account_number'] }}</td>
-                        <td> {{ $ChikPayment['attributes']['Doubt_value'] }} </td>
+                </table>
+            @elseif($PaymentType == 'קצת')
+                <table dir="rtl" class="blueTable">
+                    <thead>
+                        <tr>
+                            <th>שיטות תשלום </th>
+                            <th>תאריך</th>
+                            <th>מספר הטלפון </th>
+                            <th>סך הכל </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($TransactionArray['Payment_type_details'] as $ChikPayment)
+                            @php
+                                $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+
+                            @endphp
+                            <tr>
+                                <td> {{ $PaymentType }} </td>
+                                <td>{{ $ChickBillDate }}</td>
+                                <td>{{ $ChikPayment['attributes']['telephone'] }}</td>
+                                <td>{{ $ChikPayment['attributes']['equivelant_amount'] }}</td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td class=""></td>
+                            <td class="">
+                                סך הכל סופי :</td>
+                            <td class=""></td>
+                            <td class="">
+                                {{ $TransactionArray['equivelant_amount'] }} </td>
+                        </tr>
+                    </tbody>
                     </tr>
-                @endforeach
-                <tr>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class="">
-                        סך הכל סופי :</td>
-                    <td class=""></td>
-                    <td class="">
-                        {{ $TransactionArray['equivelant_amount'] }} </td>
-                </tr>
-            </tbody>
-            </tr>
-        </table>
-    @elseif($PaymentType == 'קופסת כסף')
-        <table dir="rtl" class="blueTable">
-            <thead>
-                <tr>
-                    <th> התשלום נעשה דרך:</th>
-                    <th>ערך ספק </th>
-                    <th> סך הכל סופי </th>
+                </table>
+            @elseif($PaymentType == 'ספק בבנק')
+                <table dir="rtl" class="blueTable">
+                    <thead>
+                        <tr>
+                            <th> שיטות תשלום</th>
+                            <th> תאריך ספק </th>
+                            <th> בַּנק </th>
+                            <th> מספר סניף </th>
+                            <th> מספר החשבון </th>
+                            <th>ערך ספק </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($TransactionArray['Payment_type_details'] as $ChikPayment)
+                            @php
+                                $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                            @endphp
+                            <tr>
+                                <td> {{ $PaymentType }} </td>
+                                <td>{{ $ChickBillDate }}</td>
+                                <td> {{ $ChikPayment['attributes']['bank_number'] }}</td>
+                                <td>{{ $ChikPayment['attributes']['Branch_number'] }}</td>
+                                <td>{{ $ChikPayment['attributes']['account_number'] }}</td>
+                                <td> {{ $ChikPayment['attributes']['Doubt_value'] }} </td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td class=""></td>
+                            <td class=""></td>
+                            <td class=""></td>
+                            <td class="">
+                                סך הכל סופי :</td>
+                            <td class=""></td>
+                            <td class="">
+                                {{ $TransactionArray['equivelant_amount'] }} </td>
+                        </tr>
+                    </tbody>
+                    </tr>
+                </table>
+            @elseif($PaymentType == 'קופסת כסף')
+                <table dir="rtl" class="blueTable">
+                    <thead>
+                        <tr>
+                            <th> התשלום נעשה דרך:</th>
+                            <th>ערך ספק </th>
+                            <th> סך הכל סופי </th>
 
-                </tr>
-            </thead>
-            <tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                @php
-                    // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
-                @endphp
-                <tr>
-                    <td> {{ $PaymentType }} {{ $TransactionArray['alhisalat']['number_alhisala'] }} </td>
-                    <td>{{ $ChickBillDate }}</td>
-                    <td> {{ $TransactionArray['equivelant_amount'] }}</td>
+                        @php
+                            // $ChickBillDate = date('d/m/Y', strtotime($ChikPayment['attributes']['Date']));
+                        @endphp
+                        <tr>
+                            <td> {{ $PaymentType }} {{ $TransactionArray['alhisalat']['number_alhisala'] }} </td>
+                            <td>{{ $ChickBillDate }}</td>
+                            <td> {{ $TransactionArray['equivelant_amount'] }}</td>
 
-                </tr>
+                        </tr>
 
-                <tr>
+                        <tr>
 
-                    <td class="">
-                        סך הכל סופי :</td>
-                    <td class=""></td>
-                    <td class="">
-                        {{ $TransactionArray['equivelant_amount'] }} </td>
-                </tr>
-            </tbody>
+                            <td class="">
+                                סך הכל סופי :</td>
+                            <td class=""></td>
+                            <td class="">
+                                {{ $TransactionArray['equivelant_amount'] }} </td>
+                        </tr>
+                    </tbody>
 
-        </table>
+                </table>
+            @endif
+        </div>
+    @else
+        <div>
+            <div
+                class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg md:border-0 border-2 border-black">
+                <table dir="rtl" class="blueTable">
+                    <thead>
+                        <tr>
+                            <th>איך להחזיר כסף</th>
+                            <th>היסטוריה</th>
+                            <th>סך הכל</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{ $TransactionArray['payment_reason'] }}</td>
+                            <td>
+                                {{ explode('T', $TransactionArray['transaction_date'])[0] }}
+                            </td>
+                            <td>
+                                {{ $TransactionArray['equivelant_amount'] * -1 }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class=""></td>
+                            <td class="">
+                                סך הכל :</td>
+                            <td class="">
+                                {{ $TransactionArray['equivelant_amount'] * -1 }}
+                            </td>
+                        </tr>
+                    </tbody>
+                    </tr>
+                </table>
+            </div>
+        </div>
     @endif
     <!--End Table -->
 
     <!--Start Sector Name-->
     <div style="width: 100%;">
-        <p style="font-size: 17px; text-align: right"> שם המגזר :
-            @if ($TransactionArray['sectors'] != null)
-                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
-            @else
-                <span style="color: #6B7280;font-size: 16px;">פלטים כלליים</span>
+        @if ($type == 1)
+            <p style="font-size: 17px; text-align: right"> שם המגזר :
+                @if ($TransactionArray['sectors'] != null)
+                    <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['sectors']['text'] }}</span>
+                @else
+                    <span style="color: #6B7280;font-size: 16px;">פלטים כלליים</span>
+                @endif
+            </p>
+            <p dir="rtl" style="font-size: 17px;text-align: right"> פרויקט :
+                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['project']['project_name'] }}</span>
+            </p>
+            @if ($TransactionArray['payment_reason'] != null)
+                <p dir="rtl" style="font-size: 17px;text-align: right"> סיבת תרומה :
+                    <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
+                </p>
             @endif
-        </p>
-        <p dir="rtl" style="font-size: 17px;text-align: right"> פרויקט :
-            <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['project']['project_name'] }}</span>
-        </p>
-        @if ($TransactionArray['payment_reason'] != null)
-            <p dir="rtl" style="font-size: 17px;text-align: right"> סיבת תרומה :
-                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
-            </p>
-        @endif
-        @if ($TransactionArray['description'] != null)
-            <p dir="rtl" style="font-size: 17px;text-align: right"> הערות :
-                <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
-            </p>
+            @if ($TransactionArray['description'] != null)
+                <p dir="rtl" style="font-size: 17px;text-align: right"> הערות :
+                    <span style="color: #6B7280;font-size: 16px;">{{ $TransactionArray['description'] }}</span>
+                </p>
+            @endif
         @endif
         <div style="position: absolute; bottom: 0; width: 100%; text-align: center;">
             <img style="height: 200px;" src="{{ $imagePaths['image4'] }}" alt="logo">

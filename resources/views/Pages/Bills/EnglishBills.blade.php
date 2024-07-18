@@ -56,7 +56,7 @@
                     </span>
                 </p>
             @else
-                <p class="font-FlatBold text-[17px] text-[#101426] ">receipt voucher number
+                <p class="font-FlatBold text-[17px] text-[#101426] ">Compensation Voucher number
                     <span class="text-base">
                         R-{{ $Transaction->bill_number }}
                     </span>
