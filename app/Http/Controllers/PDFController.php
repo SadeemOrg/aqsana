@@ -19,7 +19,7 @@ class PDFController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function generatePDF($id)
+    public function generatePDF($id,$type = 1)
     {
         $imagePaths = [
             'image1' => public_path('assets/image/iuktui.png'),
@@ -35,7 +35,7 @@ class PDFController extends Controller
         }
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
         $TransactionArray = @json_decode(json_encode($Transaction), true);
-        // dd();
+
         if ($Transaction->lang == 1) {
             switch ($Transaction->Payment_type) {
                 case 1:
@@ -106,11 +106,13 @@ class PDFController extends Controller
             'margin-top' => 0,
             'autoArabic' => true
         ]);
-        // dd($imagePaths['image1']);
+        $type = ($Transaction->is_delete == 2) ? '2' : '1';
+
         $data = [
             'TransactionArray' => $TransactionArray,
             'PaymentType' =>  $PaymentType,
             'imagePaths'=>$imagePaths,
+            'type'=>$type,
         ];
         $fileName = 'Invoices details.pdf';
         $mpdf->autoLangToFont = true;
