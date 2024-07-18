@@ -286,6 +286,7 @@ Route::get("/StartTimerWorkHours", [HomeController::class, "StartTimerWorkHours"
 
 
 Route::get('generate-pdf/{id}/{type?}', [PDFController::class, 'generatePDF'])->name('generate-pdf');
+Route::get('generate-pdfs/{ids}/{type?}', [PDFController::class, 'generatePDFs'])->name('generate-pdfs');
 
 Route::get('generate-pdf-hours', [PDFController::class, 'generatePDFHours'])->name('generate-pdf-hours');
 
