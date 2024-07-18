@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\CPU\Helpers;
+use App\Models\City;
 use App\Models\TelephoneDirectory;
 use App\Models\TripBooking;
 use Illuminate\Support\Facades\Redirect;
@@ -596,5 +597,13 @@ class AuthController extends Controller
             ];
             return response($response, 401);
         }
+    }
+    public function getCities(Request $request)
+    {
+        dd("dd");
+        $cities=City::all();
+        return $this->sendResponse($cities, 'Success get cities');
+
+
     }
 }

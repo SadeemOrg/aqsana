@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/get-cities', [AuthController::class, 'getCities']);
 
 //paymnet Api
 Route::post('/payment', [PaymentController::class, 'sendMoney']);
