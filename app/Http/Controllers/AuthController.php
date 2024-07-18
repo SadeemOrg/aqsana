@@ -601,7 +601,12 @@ class AuthController extends Controller
     public function getCities(Request $request)
     {
         $cities=City::all();
-        return $this->response($cities, 'Success get cities');
+
+        $response = [
+            'success' => "true",
+            'cities' => $cities
+        ];
+        return response($response, 200);
 
     }
 }
