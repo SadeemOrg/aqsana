@@ -26,13 +26,14 @@ class BillPdf extends Action
     }
     public function handle(ActionFields $fields, Collection $models)
     {
-        $urls = [];
-
+        $ids = [];
         foreach ($models as $model) {
-            $urls[] = "/mainbill/" . $model->id;
+            $ids[] = $model['id'];
         }
 
-        return Action::openInNewTab('/open-tabs?' . http_build_query(['urls' => $urls]));
+        $idsString = implode(',', $ids);
+        return Action::redirect('/generate-pdf/' . $idsString);
+
     }
 
     /**
