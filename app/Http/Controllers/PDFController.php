@@ -94,6 +94,8 @@ class PDFController extends Controller
         }
 
         $fileName = 'Multiple_PDFs.pdf';
+        $html = $html->render();
+        $mpdf->WriteHTML($html);
         $mpdf->Output($fileName, 'I'); // Output the combined PDF for inline viewing
 
         exit; // Terminate script after generating PDF
