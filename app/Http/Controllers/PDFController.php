@@ -79,6 +79,8 @@ class PDFController extends Controller
             ];
 
             // Render HTML for the page
+            $mpdf->autoLangToFont = true;
+            $mpdf->autoScriptToLang = true;
             if ($TransactionArray['lang'] == 1) {
                 $html = view('pdf.ArabicPDF', $data)->render();
             } else if ($TransactionArray['lang'] == 2) {
