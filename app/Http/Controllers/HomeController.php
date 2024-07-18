@@ -885,7 +885,7 @@ class HomeController extends BaseController
 
         Budget::where('year', $request->year)->restore();
     }
-    public function originalbillbills($id)
+    public function originalbillbills($id,$type=1)
     {
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('Alhisalat')->with('TelephoneDirectory')->first();
         // dd(  $Transaction ->Alhisalat);
@@ -956,7 +956,7 @@ class HomeController extends BaseController
         }
         $original = 1;
 
-        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'PaymentType'));
+        return view('Pages.Bills.Bills', compact('Transaction', 'original', 'PaymentType','type'));
     }
 
     public function bills($id)
@@ -1041,7 +1041,6 @@ class HomeController extends BaseController
             ->with('Project')
             ->with('TelephoneDirectory')
             ->first();
-    
         $paymentTypes = [
             1 => ["نقدي", "cash", "כסף מזומן"],
             2 => ["شك", "Bank doubt", "ספק בבנק"],
@@ -1050,16 +1049,16 @@ class HomeController extends BaseController
             5 => ["حصالة", "moneybox", "קופסת כסף"],
             6 => ["حصالة", "moneybox", "קופסת כסף"],
         ];
-    
+
         $langIndex = $transaction->lang - 1; // Assuming lang is 1, 2, or 3
         $paymentType = $paymentTypes[$transaction->Payment_type][$langIndex] ?? 'Unknown';
-    
+
         $original = 0;
         $type = ($request->type == 'repayment') ? '2' : '1';
         $bill_number = $transaction->bill_number;
         return view('Pages.Bills.mainBill', compact('id', 'type', 'bill_number'));
     }
-    
+
     public function SendMail(Request $request)
     {
 
