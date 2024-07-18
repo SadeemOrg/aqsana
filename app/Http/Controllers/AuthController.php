@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\CPU\Helpers;
+use App\Models\Area;
 use App\Models\City;
 use App\Models\TelephoneDirectory;
 use App\Models\TripBooking;
@@ -60,6 +61,7 @@ class AuthController extends Controller
             'email' => 'required|string|unique:users|email',
             'password' => 'required|string',
             'user_role' => 'required|string',
+            'user_role' => 'required',
             'phone'  => 'required|unique:users|digits_between:10,14',
         ], [
             'name.required' => 'الاسم مطلوب.',
@@ -73,6 +75,7 @@ class AuthController extends Controller
             'password.confirmed' => 'تأكيد كلمة المرور غير متطابق.',
             'user_role.required' => 'دور المستخدم مطلوب.',
             'user_role.string' => 'يجب أن يكون دور المستخدم نصًا.',
+            'city.required' => ' المدينة  مطلوب.',
             'phone.required' => 'رقم الهاتف مطلوب.',
             'phone.unique' => 'رقم الهاتف مستخدم بالفعل.',
             'phone.digits_between' => 'يجب أن يكون رقم الهاتف بين 10 و 14 رقمًا.',
@@ -96,12 +99,17 @@ class AuthController extends Controller
             'password' => bcrypt($validatedData['password']),
             'user_role' => $validatedData['user_role'],
             'app_user' => 1,
+            'city' => $validatedData['city'],
+
         ]);
         TelephoneDirectory::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'phone_number' => $validatedData['phone'],
-            'type'=>["112"]
+            'type'=>["112"],
+            'city' => $validatedData['city'],
+            'Area' =>Area::find(City::find($validatedData['city'])->area_id)->id ,
+
         ]);
         $token = $user->createToken('myapptoken')->plainTextToken;
 
