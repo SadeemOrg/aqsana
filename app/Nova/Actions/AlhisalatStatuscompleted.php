@@ -32,6 +32,15 @@ class AlhisalatStatuscompleted extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
+        $cityId = null;
+
+        foreach ($models as $model) {
+            if (is_null($cityId)) {
+                $cityId = $model->address->city_id;
+            } elseif ($cityId !== $model->address->city_id) {
+                return Action::danger('لا يمكن جمع سندات من مدن مختلفة');
+            }
+        }
 
         $currentYear = Carbon::now()->year;
         $Project = Project::where('project_name', 'حصلات ' . $currentYear)->first();
@@ -69,11 +78,12 @@ class AlhisalatStatuscompleted extends Action
                     'transaction_type' => "3",
                     'transaction_status' => "2",
                     "Payment_type" => '5',
+                    'payment_reason'=> "حصلات " . " : " .$models[0]->address->City->name,
                     'description' => "حصلات رقم" . " : " . $stringResult,
                     "lang" => 1,
                     'transaction_date' => $date = date('Y-m-d'),
                     'sector' => 11,
-                    'ref_id' => $Project->id,
+                    'ref_id' => $Project?$Project->id:"",
                     'bill_number'=>$largestBillNumber + 1,
                 ]
             );
