@@ -12,7 +12,10 @@ use Laravel\Nova\Fields\ActionFields;
 class AddAsUser extends Action
 {
     use InteractsWithQueue, Queueable;
-
+    public  function name()
+    {
+        return __('اضافة كمستخدم اداري');
+    }
     /**
      * Perform the action on the given models.
      *
