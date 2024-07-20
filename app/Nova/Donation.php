@@ -319,9 +319,7 @@ class Donation extends Resource
                 ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
 
-            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info')->readonly(function () {
-                return $this->is_delete == 1    ;
-            }),
+            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info')->visible( $this->is_delete == 0 ),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
 
 

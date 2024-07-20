@@ -33,8 +33,6 @@ class ExportDonations extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        // dd($fields->ref_id);
-
 
         return Action::openInNewTab('/export/ExportDonations?ref=' . $fields->ref_id . '&&name=' . $fields->name . '&&from=' . $fields->from . '&&to=' . $fields->to);
     }
