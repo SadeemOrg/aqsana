@@ -119,34 +119,34 @@ class TelephoneDirectory extends Resource
                     Text::make(__('name'), 'name'),
                     Text::make(__('describtion'), 'describtion'),
 
-                ]) ,
+                ]),
 
-                InlineIndex::make(__('phone_number'), 'phone_number')
+            InlineIndex::make(__('phone_number'), 'phone_number')
                 ->options([
                     'event' => 'blur',
                     'type' => 'text',
                 ])->sortable(),
-                // InlineIndex::make(__('city'), 'city')
-                // ->options([
-                //     'event' => 'blur',
-                //     'type' => 'text',
-                // ])->sortable(),
+            // InlineIndex::make(__('city'), 'city')
+            // ->options([
+            //     'event' => 'blur',
+            //     'type' => 'text',
+            // ])->sortable(),
 
-                Multiselect::make(__('city'), 'city')
-                    ->options(function () {
-                        $Areas =  \App\Models\City::all();
+            Multiselect::make(__('city'), 'city')
+                ->options(function () {
+                    $Areas =  \App\Models\City::all();
 
-                        $Area_type_admin_array =  array();
+                    $Area_type_admin_array =  array();
 
-                        foreach ($Areas as $Area) {
+                    foreach ($Areas as $Area) {
 
 
-                            $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
-                        }
+                        $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                    }
 
-                        return $Area_type_admin_array;
-                    })->singleSelect()->hideFromIndex()->hideFromDetail(),
-                BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating()->nullable(),
+                    return $Area_type_admin_array;
+                })->singleSelect()->hideFromIndex()->hideFromDetail(),
+            BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating()->nullable(),
 
             // Text::make(__('phone_number'), 'phone_number')->rules('unique:telephone_directories'),
 
@@ -165,6 +165,7 @@ class TelephoneDirectory extends Resource
     }
     public static function beforeSave(Request $request, $model)
     {
+
         if (!$request->type) {
 
 
@@ -183,7 +184,18 @@ class TelephoneDirectory extends Resource
         }
 
         $request->request->remove('newType');
-        // dd($request->all());
+
+        $phoneNumber = $request->input('phone_number');
+
+        if ($phoneNumber) {
+            $phoneNumber = str_replace('-', '', $phoneNumber);
+            $phoneNumber = preg_replace('/^\+072/', '0', $phoneNumber);
+            $phoneNumber = preg_replace('/^\+070/', '0', $phoneNumber);
+            $phoneNumber = preg_replace('/^\0070/', '0', $phoneNumber);
+            $phoneNumber = preg_replace('/^\0072/', '0', $phoneNumber);
+
+            $request->merge(['phone_number' => $phoneNumber]);
+        }
     }
 
     /**
@@ -236,7 +248,7 @@ class TelephoneDirectory extends Resource
     {
 
         return [
-           ( new Actions\ImportTelephoneDirectory)->standalone(),
-    ];
+            (new Actions\ImportTelephoneDirectory)->standalone(),
+        ];
     }
 }
