@@ -463,12 +463,12 @@
                     <span
                         class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->project->project_name }}</span>
                 </p>
-                @if ($Transaction->payment_reason != null)
+                @if ($Transaction->payment_reason != null && $PaymentType != 'حصالة')
                     <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">סיבת תרומה :
                         <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->payment_reason }}</span>
                     </p>
                 @endif
-                @if ($Transaction->description != null)
+                @if ($Transaction->description != null && $PaymentType != 'حصالة')
                     <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">הערות :
                         <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
                     </p>
@@ -476,7 +476,7 @@
             </div>
         </div>
         @endif
-        
+
         @if ($type == 1)
         <div
             class="relative flex flex-row items-center justify-end md:justify-center ml-8 md:ml-0 w-full px-8 md:px-0 -mt-12">
