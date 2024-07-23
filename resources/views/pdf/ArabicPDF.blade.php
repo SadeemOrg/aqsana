@@ -80,7 +80,7 @@
     @endphp
     <!--Top Image -->
     <div style="position: absolute; top: -15px;">
-        <img style="height: 220px; " src="{{ asset('/assets/image/iuktui.png') }}" alt="alaqsa Logo">
+        <img style="height: 220px; " src="{{asset('/assets/image/iuktui.png')  }}" alt="alaqsa Logo">
     </div>
     <!--End Top Image -->
 
@@ -360,12 +360,12 @@
                 <span
                     style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['project']['project_name'] }}</span>
             </p>
-            @if ($TransactionArray['payment_reason'] != null)
+            @if ($TransactionArray['payment_reason'] != null && $PaymentType != 'حصالة' )
                 <p dir="rtl" style="font-size: 17px; text-align: right">سبب التبرع :
                     <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['payment_reason'] }}</span>
                 </p>
             @endif
-            @if ($TransactionArray['description'] != null)
+            @if ($TransactionArray['description'] != null && $PaymentType != 'حصالة')
                 <p dir="rtl" style="font-size: 17px; text-align: right"> ملاحظات :
                     <span style="color: #6B7280; font-size: 16px;">{{ $TransactionArray['description'] }}</span>
                 </p>

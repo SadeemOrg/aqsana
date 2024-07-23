@@ -479,13 +479,13 @@
                         <span
                             class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->project->project_name }}</span>
                     </p>
-                    @if ($Transaction->payment_reason != null)
+                    @if ($Transaction->payment_reason != null && $PaymentType != 'حصالة' )
                         <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">سبب التبرع :
                             <span
                                 class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->payment_reason }}</span>
                         </p>
                     @endif
-                    @if ($Transaction->description != null)
+                    @if ($Transaction->description != null && $PaymentType != 'حصالة')
                         <p class=" mt-3 text-[17px] font-noto_Regular text-[#101426]">ملاحظات :
                             <span class="font-FlatBold text-[#101426] mx-1 text-sm">{{ $Transaction->description }}</span>
                         </p>
