@@ -41,7 +41,7 @@ class AlhisalatStatuscompleted extends Action
             if (is_null($cityId)) {
                 $cityId = $model->address->city_id;
             } elseif ($cityId !== $model->address->city_id) {
-                return Action::danger('لا يمكن جمع حصلات من مدن مختلفة');
+                return Action::danger('لا يمكن جمع حصلات من بلدات مختلفة');
             }
         }
 
