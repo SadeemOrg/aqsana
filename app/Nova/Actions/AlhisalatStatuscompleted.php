@@ -47,7 +47,11 @@ class AlhisalatStatuscompleted extends Action
 
         $currentYear = Carbon::now()->year;
         $Project = Project::where('project_name', 'حصلات ' . $currentYear)->first();
+        if($Project)
+        {
+            return Action::danger( '   لا يوجد مشروع حصلات  '.$currentYear);
 
+        }
 
         $array = $models->pluck('number_alhisala')->toArray();
         $stringResult = implode(', ', $array);
