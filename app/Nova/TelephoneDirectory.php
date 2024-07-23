@@ -95,7 +95,7 @@ class TelephoneDirectory extends Resource
                     }
 
                     return $Area_type_admin_array;
-                })->saveAsJSON(),
+                })->saveAsJSON()->hideFromIndex(),
             // Text::make(__('type'),'type'),
             //     ->options([
             //     1 => __('متبرعين سجب ثابت'),
@@ -126,11 +126,6 @@ class TelephoneDirectory extends Resource
                     'event' => 'blur',
                     'type' => 'text',
                 ])->sortable(),
-            // InlineIndex::make(__('city'), 'city')
-            // ->options([
-            //     'event' => 'blur',
-            //     'type' => 'text',
-            // ])->sortable(),
 
             Multiselect::make(__('city'), 'city')
                 ->options(function () {
@@ -150,14 +145,14 @@ class TelephoneDirectory extends Resource
 
             // Text::make(__('phone_number'), 'phone_number')->rules('unique:telephone_directories'),
 
-            Text::make(__('note'), 'note'),
-            Text::make(__('jop'), 'jop'),
-            Text::make(__('id_number'), 'id_number'),
+            Text::make(__('note'), 'note')->hideFromIndex(),
+            Text::make(__('jop'), 'jop')->hideFromIndex(),
+            Text::make(__('id_number'), 'id_number')->hideFromIndex(),
 
 
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
 
-            Date::make(__('birth_date'), 'birth_date')->pickerDisplayFormat('d.m.Y')->sortable(),
+            Date::make(__('birth_date'), 'birth_date')->pickerDisplayFormat('d.m.Y')->sortable()->hideFromIndex(),
 
 
 
