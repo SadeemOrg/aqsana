@@ -24,6 +24,8 @@ use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Acme\MultiselectField\Multiselect;
 use App\Nova\Filters\AlhisalatAddress;
+use App\Nova\Filters\AlhisalatArea;
+use App\Nova\Filters\AlhisalatCite;
 use App\Nova\Filters\AlhisalatStatusFilters;
 use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\HasMany;
@@ -118,7 +120,9 @@ class receiptVoucher extends Resource
             ->loadingColor('#fff') ->hideWhenCreating()->hideWhenUpdating(),
 
             BelongsTo::make(__('saved addresss'), 'address', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
-
+            Text::make(__('city'), 'city_id',function(){
+                    return $this->address?->City?->name;
+            }),
 
             Multiselect::make(__("Status"), "status")->options([
                 '1' => 'تم  الوضع',
@@ -201,8 +205,11 @@ class receiptVoucher extends Resource
     public function filters(Request $request)
     {
         return [
-            new AlhisalatStatusFilters(),
 
+
+            new AlhisalatStatusFilters(),
+            new AlhisalatArea(),
+            new AlhisalatCite(),
             new AlhisalatAddress(),
 
         ];

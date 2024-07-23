@@ -15,6 +15,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Whitecube\NovaFlexibleContent\Flexible;
+use Acme\MultiselectField\Multiselect;
 
 class Tours extends Resource
 {
@@ -74,7 +75,7 @@ class Tours extends Resource
 
             BelongsTo::make(__('Contacts'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            Select::make(__('Contacts'), "Contacts")
+            Multiselect::make(__('Contacts'), "Contacts")
                 ->options(function () {
                     $types =  TelephoneDirectory::whereJsonContains('type',  '6')->get();
                     $type_array =  array();
@@ -83,7 +84,7 @@ class Tours extends Resource
                     }
 
                     return $type_array;
-                })->displayUsingLabels()->hideFromDetail()->hideFromIndex(),
+                })->singleSelect()->hideFromDetail()->hideFromIndex(),
 
 
 
@@ -94,8 +95,27 @@ class Tours extends Resource
                     Text::make(__('name'), 'name'),
                     Text::make(__('phone_number'), 'phone_number'),
                 ]),
-            Text::make(__('guide_name'), 'guide_name')->rules('required'),
-            Text::make(__('guide_number'), 'guide_number'),
+
+
+            BelongsTo::make(__('guide_name'), 'guide', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
+
+            Multiselect::make(__('tour_guide_name'), "guide_name")
+                ->options(function () {
+                    $types =  TelephoneDirectory::whereJsonContains('type',  '113')->get();
+                    $type_array =  array();
+                    foreach ($types as $type) {
+                        $type_array += [$type['id'] => ($type['name'])];
+                    }
+
+                    return $type_array;
+                })->singleSelect()->hideFromDetail()->hideFromIndex(),
+            Flexible::make(__(''), 'NewGuide')
+                ->limit(1)
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('Add new type'), 'type', [
+                    Text::make(__('name'), 'name'),
+                    Text::make(__('phone_number'), 'phone_number'),
+                ]),
             Text::make(__('start Time'), 'start_tour')
                 ->placeholder('##:##')
                 ->creationRules('date_format:"H:i"')
@@ -109,7 +129,19 @@ class Tours extends Resource
 
         ];
     }
+    protected static function afterValidation(NovaRequest $request, $validator)
+    {
 
+        if (!($request->NewGuide  || $request->guide_name)) {
+            $validator->errors()->add('guide_name', ' يجب اضافة ');
+        }
+
+        if ($request->NewGuide  &&  empty(($request->guide_name))) {
+            if (!isset($request->NewGuide[0]['attributes']['name'])) {
+                $validator->errors()->add($request->NewGuide[0]['key'] . '__name', 'هذا الحقل مطلوب');
+            }
+        }
+    }
     public static function beforeSave(Request $request, $model)
     {
 
@@ -129,6 +161,20 @@ class Tours extends Resource
             }
         }
         $request->request->remove('NewContacts');
+        if (!$request->guide_name) {
+
+
+            if ($request->NewGuide   && ($request->NewGuide[0]['attributes']['name'] || $request->NewGuide[0]['attributes']['phone_number'])) {
+
+                $bookt = TelephoneDirectory::create([
+                    'name' => $request->NewGuide[0]['attributes']['name'],
+                    'phone_number' => $request->NewGuide[0]['attributes']['phone_number'],
+                    'type' => ["113"],
+                ]);
+                $request->merge(['guide_name' => $bookt->id]);
+            }
+        }
+        $request->request->remove('NewGuide');
     }
     /**
      * Get the cards available for the request.

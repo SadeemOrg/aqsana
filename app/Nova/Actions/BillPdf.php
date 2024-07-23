@@ -26,6 +26,11 @@ class BillPdf extends Action
     }
     public function handle(ActionFields $fields, Collection $models)
     {
+        // foreach ($models as $model) {
+        //     if ($model->is_delete == 1) {
+        //         return Action::danger('لا يمكن تنفيذ الإجراء لأن السندات يحتوي على سند محذوف');
+        //     }
+        // }
         $ids = [];
         foreach ($models as $model) {
             $ids[] = $model['id'];

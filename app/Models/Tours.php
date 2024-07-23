@@ -35,4 +35,8 @@ class Tours extends Model
     {
         return $this->belongsTo('App\Models\TelephoneDirectory','Contacts');
     }
+    public function guide()
+    {
+        return $this->belongsTo('App\Models\TelephoneDirectory','guide_name');
+    }
 }
