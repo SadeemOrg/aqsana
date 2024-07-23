@@ -47,7 +47,7 @@ class AlhisalatStatuscompleted extends Action
 
         $currentYear = Carbon::now()->year;
         $Project = Project::where('project_name', 'حصلات ' . $currentYear)->first();
-        if($Project)
+        if(!$Project)
         {
             return Action::danger( '   لا يوجد مشروع حصلات  '.$currentYear);
 
