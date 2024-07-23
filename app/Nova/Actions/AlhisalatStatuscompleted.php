@@ -35,10 +35,13 @@ class AlhisalatStatuscompleted extends Action
         $cityId = null;
 
         foreach ($models as $model) {
+            if (is_null($model->address->city_id)) {
+                return Action::danger('لا يمكن جمع حصالة او  حصالات لا تنتمي الى بلد ');
+            }
             if (is_null($cityId)) {
                 $cityId = $model->address->city_id;
             } elseif ($cityId !== $model->address->city_id) {
-                return Action::danger('لا يمكن جمع سندات من مدن مختلفة');
+                return Action::danger('لا يمكن جمع حصلات من مدن مختلفة');
             }
         }
 
