@@ -85,6 +85,7 @@ export default {
     },
     methods: {
         async send() {
+
             try {
                 const response = await axios.get('/SendMessageSms', {
                     params: {
@@ -92,6 +93,8 @@ export default {
                         Message: this.Message
                     }
                 });
+                this.selectval=[];
+                this.Message = "";  
                 toastr.success('تم ارسال الرسالة');
             } catch (error) {
                 toastr.error('فشل في إرسال رسالة');
