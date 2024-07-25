@@ -315,7 +315,7 @@ class Donation extends Resource
                 ->action((new DeleteBill)->confirmText(__('Are you sure you want to delete  this?'))
                     ->confirmButtonText(__('compensation'))
                     ->cancelButtonText(__('cancellation')), [$this->id])
-                ->text(__('compensation'))->showLoadingAnimation()->readonly(function () {
+                ->text('compensation')->showLoadingAnimation()->readonly(function () {
                     return $this->is_delete > 0;
                 })->buttonColor('#FFFFFF')
 
