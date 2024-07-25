@@ -309,7 +309,7 @@ class Donation extends Resource
                 NumberField::make(__('transact amount'), 'transact_amount')->rules('required'),
             ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
-            ActionButton::make(__('delete'))
+            ActionButton::make('')
             ->svg('delete') // Use the Vue component name here
 
                 ->action((new DeleteBill)->confirmText(__('Are you sure you want to delete  this?'))
