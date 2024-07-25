@@ -25,6 +25,7 @@ class Vacations extends Component
     public $showDeleteModel = false;
     public $DeleteVacation = null;
     public $vacations;
+    public $WorkHourssearchCount;
     public $EditVacation;
     public $editDate;
     public $editEndDate;
@@ -39,6 +40,7 @@ class Vacations extends Component
     public $Reasons_to_vacations;
     public $exportWorkHoursErorrUserModel = '';
     public $exportWorkHoursErorrDateModel = '';
+    public $exportWorkHoursErorrEndDateModel = '';
     public $exportWorkHoursErorrTypeModel = '';
 
     public function onChange($type)
@@ -77,7 +79,6 @@ class Vacations extends Component
         $this->exportWorkHoursErorrDate = "";
         $this->exportWorkHoursErorrType = "";
 
-        // dd($this->userId);
         if ($this->Name == null || $this->Name == "null") {
             $this->exportWorkHoursErorrUser = "يجب اختيار الاسم ";
         }
@@ -95,10 +96,36 @@ class Vacations extends Component
             ->where('user_id', $this->Name)
             ->orderBy('date', 'ASC')
             ->get();
-            $this->vacations = $vacations->map(function ($vacation) {
-                $vacation->days = $vacation->end_date ? $vacation->date->diffInDays($vacation->end_date) : 1;
-                return $vacation;
-            });
+
+        // Calculate the number of days for each vacation
+        $this->vacations = $vacations->map(function ($vacation) {
+            $vacation->days = $vacation->end_date ? $vacation->date->diffInDays($vacation->end_date) + 1 : 1;
+            return $vacation;
+        });
+
+        // Retrieve work hours within the given date range
+        $workHours = WorkHours::whereBetween('date', [$from, $to])
+            ->where('user_id', $this->Name)
+            ->orderBy('date', 'ASC')
+            ->get();
+
+        // Initialize the work hours count during vacations
+        $workHoursDuringVacationCount = 0;
+
+        // Count work hours that fall within each vacation period
+        foreach ($vacations as $vacation) {
+            $vacationStart = Carbon::parse($vacation->date);
+            $vacationEnd = Carbon::parse($vacation->end_date);
+
+            foreach ($workHours as $workHour) {
+                $workHourDate = Carbon::parse($workHour->date);
+
+                if ($workHourDate->between($vacationStart, $vacationEnd)) {
+                    $workHoursDuringVacationCount++;
+                }
+            }
+        }
+        $this->WorkHourssearchCount = $workHoursDuringVacationCount;
     }
 
     public function DeleteModel($id)
@@ -140,17 +167,46 @@ class Vacations extends Component
 
     public function EditVacation()
     {
+        $this->exportWorkHoursErorrDateModel = "";
 
-        $EditVacation =   vacation::find($this->ModelId);
-        $EditVacation->date = $this->editDate;
-        $EditVacation->end_date = $this->editEndDate;
-        $EditVacation->day = Carbon::parse($this->editDate)->locale('ar')->dayName;
-        $EditVacation->type = str_replace('_', ' ', $this->editType);
-        $EditVacation->note = $this->editNote;
-        $EditVacation->update();
+        $starttime = Carbon::parse($this->editDate);
+        $finishTime = Carbon::parse($this->editEndDate);
+        $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
+        $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
+        if (isset($endDate)) {
+            if ($endDate->lt($startDate)) {
+                $this->exportWorkHoursErorrDateModel =  "تاربج نهاية الاجازة اقل من تاربج بداية الاجازة ";
+            }
+        }
+        if ($this->editType != null && $this->editDate != null && $this->editEndDate != null &&  !($endDate->lt($startDate))) {
 
-        $this->showEditModel = false;
-        $this->searchVacation();
+            $EditVacation =   vacation::find($this->ModelId);
+            $oldData =   Vacation::where('user_id', $EditVacation->user_id)
+            ->where('id', '!=', $this->ModelId)
+                ->where(function ($query) use ($startDate, $endDate) {
+                    $query->whereBetween('date', [$startDate, $endDate])
+                        ->orWhereBetween('end_date', [$startDate, $endDate])
+                        ->orWhere(function ($query) use ($startDate, $endDate) {
+                            $query->where('date', '<=', $startDate)
+                                ->where('end_date', '>=', $endDate);
+                        });
+                })->first();
+            if ($oldData == null) {
+                $EditVacation->date = $this->editDate;
+                $EditVacation->end_date = $this->editEndDate;
+                $EditVacation->day = Carbon::parse($this->editDate)->locale('ar')->dayName;
+                $EditVacation->type = str_replace('_', ' ', $this->editType);
+                $EditVacation->note = $this->editNote;
+                $EditVacation->update();
+
+                $this->showEditModel = false;
+                $this->searchVacation();
+            }
+            else{
+                $this->exportWorkHoursErorrDateModel = "هذا اليوم موجود مسبقا";
+
+            }
+        }
     }
 
     public function showAddModels()
@@ -164,21 +220,20 @@ class Vacations extends Component
     }
     public function AddDay()
     {
-
-
-
         $this->exportWorkHoursErorr = "";
         $this->exportWorkHoursErorrUserModel = "";
         $this->exportWorkHoursErorrDateModel = "";
+        $this->exportWorkHoursErorrEndDateModel = "";
         $this->exportWorkHoursErorrTypeModel     = "";
-
-        // dd($this->userId);
         if ($this->userId == null || $this->userId == "null") {
             $this->exportWorkHoursErorrUserModel = "يجب اختيار الاسم ";
         }
 
         if ($this->date == null) {
             $this->exportWorkHoursErorrDateModel =  "يجب اختيار تاريخ ";
+        }
+        if ($this->endDate == null) {
+            $this->exportWorkHoursErorrEndDateModel =  " يجب اختيار تاريخ نهاية ";
         }
         if ($this->type == null) {
             $this->exportWorkHoursErorrTypeModel     =  "يجب اختيار السبب ";
@@ -193,31 +248,30 @@ class Vacations extends Component
                 $this->exportWorkHoursErorrDateModel =  "تاربج نهاية الاجازة اقل من تاربج بداية الاجازة ";
             }
         }
+        if ($this->type != null && $this->date != null && $this->endDate != null && $this->userId != null && !($endDate->lt($startDate))) {
+            $oldData =   Vacation::where('user_id', $this->userId)->where(function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('date', [$startDate, $endDate])
+                    ->orWhereBetween('end_date', [$startDate, $endDate])
+                    ->orWhere(function ($query) use ($startDate, $endDate) {
+                        $query->where('date', '<=', $startDate)
+                            ->where('end_date', '>=', $endDate);
+                    });
+            })->first();
 
-
-        if ($this->type != null && $this->date != null && $this->userId != null && !($endDate->lt($startDate))) {
-            $oldData =  vacation::where('date', $this->date)->where('user_id', $this->userId)->first();
-            $oldDataWorkHours =  WorkHours::whereDate('date', $this->date)->where('user_id', $this->userId)->first();
             if ($oldData == null) {
-                if ($oldDataWorkHours == null) {
+                $vacation = new vacation();
+                $vacation->user_id = $this->userId;
+                $vacation->date = $this->date;
+                $vacation->end_date = $this->endDate;
+                $vacation->day = Carbon::parse($this->date)->locale('ar')->dayName;
+                $vacation->type =  str_replace('_', ' ', $this->type);
+                $vacation->note = $this->note;
+                $vacation->created_by = Auth::id();
 
-                    $vacation = new vacation();
-                    $vacation->user_id = $this->userId;
-                    $vacation->date = $this->date;
-                    $vacation->end_date = $this->endDate;
-                    $vacation->day = Carbon::parse($this->date)->locale('ar')->dayName;
-                    $vacation->type =  str_replace('_', ' ', $this->type);
-                    $vacation->note = $this->note;
-                    $vacation->created_by = Auth::id();
+                $vacation->save();
+                $this->showAddModel = false;
 
-                    $vacation->save();
-                    $this->showAddModel = false;
-
-                    $this->searchVacation();
-                } else {
-
-                    $this->exportWorkHoursErorrDateModel = "يوجد دوام في هذا اليوم";
-                }
+                $this->searchVacation();
             } else {
                 $this->exportWorkHoursErorrDateModel = "هذا اليوم موجود مسبقا";
             }

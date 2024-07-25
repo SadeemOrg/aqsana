@@ -208,18 +208,26 @@
 
 
                                     </td>
-
                                     <td
-                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
-                                    </td>
-                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                        مجموع الايام </td>
+                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-right font-medium text-[#101426] ">
+
+
+                                </td>
+
+                                    {{-- <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                        مجموع ايام الاجازات </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
                                         {{ $this->vacations->sum('days') }}
-
                                     </td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                        مجموع  ايام العمل </td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                    {{ $WorkHourssearchCount }}          </td> --}}
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                      عدد ايام الاجازات  </td>
+                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
+                                    {{  $this->vacations->sum('days')-$WorkHourssearchCount }}          </td>
 
-                                    <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]"></td>
 
                                 </tr>
 
@@ -257,6 +265,9 @@
                                 <input type="text" wire:model.defer="editDate"
                                     class="hidePlaceHolderEditDatePopUp border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                                     placeholder="تاريخ" onfocus="handelFocusEditDatePopup()">
+                                    <div class="text-red-600 text-sm px-2 text-right">
+                                        {{ $this->exportWorkHoursErorrDateModel }}
+                                    </div>
                             </div>
                             <div class="mt-2 selectdiv">
                                 <input type="text" wire:model.defer="editEndDate"
@@ -395,6 +406,9 @@
                                     rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5
                                     placeholder-[#349A37]"
                                     placeholder="تاريخ نهاية الاجازة" onfocus="handelFocusEndDateVacationPopup()">
+                                    <div class="text-red-600 text-sm px-2 text-right">
+                                        {{ $this->exportWorkHoursErorrEndDateModel }}
+                                    </div>
                             </div>
 
 

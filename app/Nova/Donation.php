@@ -136,7 +136,7 @@ class Donation extends Resource
 
             Text::make(__('bill_number'), 'bill_number')->hideWhenCreating()->hideWhenUpdating(),
 
-            Button::make(__('print'))->link('/mainbill/' . $this->id.'?type=bill')->style('primary'),
+            Button::make(__('print'))->link('/mainbill/' . $this->id.'?type=bill')->style('custom'),
 
             ProjectPicker::make(__('تاريخ اخراج سند القبض '), 'ref_id', function () {
                 $keyValueArray = ['key1' => $this->ref_id, 'key2' => $this->transaction_date];
@@ -310,16 +310,19 @@ class Donation extends Resource
             ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             ActionButton::make(__('delete'))
+            ->svg('delete') // Use the Vue component name here
+
                 ->action((new DeleteBill)->confirmText(__('Are you sure you want to delete  this?'))
                     ->confirmButtonText(__('compensation'))
                     ->cancelButtonText(__('cancellation')), [$this->id])
                 ->text(__('compensation'))->showLoadingAnimation()->readonly(function () {
                     return $this->is_delete > 0;
-                })->buttonColor('#FF0000')
+                })->buttonColor('#FFFFFF')
+
                 ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
 
-            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('info')->visible( $this->is_delete == 0 ),
+            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('custom')->visible( $this->is_delete == 0 ),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
 
 
