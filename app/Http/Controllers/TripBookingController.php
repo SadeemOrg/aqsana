@@ -18,16 +18,11 @@ class TripBookingController extends BaseController
             'project_id' => 'required|string',
             'number_of_people' => 'required',
             'number_phone' => 'required',
-
-
-
         ], [
             'project_id.required' => 'القافلة مطلوب.',
             'project_id.string' => 'يجب أن يكون الاسم نصًا.',
             'number_of_people.required' => 'عدد الاشخاص  مطلوب.',
             'number_phone.required' => 'رقم الهاتف مطلوب.',
-
-
         ]);
 
         if ($validator->fails()) {
@@ -53,18 +48,24 @@ class TripBookingController extends BaseController
         $buss = $projext->bus;
         $IsFull = 1;
         $BusId = null;
+        $numberOfSeats=0;
 
         foreach ($buss as $key => $bus) {
             if ($IsFull == 1) {
-                $number_of_people =  TripBooking::where([
+                $number_of_peopleTripBooking = TripBooking::where([
                     ['bus_id', $bus->id],
                     ['status', '1'],
                 ])->sum('number_of_people');
-                $number_of_people += $request['number_of_people'];
+                $number_of_people =$number_of_peopleTripBooking+ $request['number_of_people'];
+
                 if (($number_of_people  <= $bus->number_of_seats)) {
                     $IsFull = 0;
                     $BusId = $bus->id;
                 }
+                if (($numberOfSeats  <  $bus->number_of_seats)) {
+                 $numberOfSeats=  $bus->number_of_seats - $number_of_peopleTripBooking;
+                }
+
             }
         }
         if ($IsFull == 0) {
@@ -98,7 +99,7 @@ class TripBookingController extends BaseController
             // }
             return $this->sendResponse($tripBooking, 'تم الحجز بنجاح');
         } else {
-            return $this->sendError('Error', ["message" => "ناسف! الباص ممتلئ"], 202);
+            return $this->sendError('Error', ["message" => " ناسف! الباص ممتلئ عدد المقاعد المتبقية  ".$numberOfSeats ], 202);
         }
     }
 
