@@ -29,8 +29,9 @@
                         </svg>
                     </div>
 
-                    <input wire:model.defer="FromDate"   wire:change='onChange("FromDate")' id="hidePlaceHolderDateReportAdminFrom" type="text"
-                        data-val-required="Mandatory field" data-val="true"
+                    <input wire:model.defer="FromDate" wire:change='onChange("FromDate")'
+                        id="hidePlaceHolderDateReportAdminFrom" type="text" data-val-required="Mandatory field"
+                        data-val="true"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onblur="if(this.value==''){this.type='text'}"
                         onfocus="handelFocusAdminReportDateFrom()">
@@ -49,7 +50,8 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input wire:model.defer="ToDate"    wire:change='onChange("ToDate")' id="hidePlaceHolderDateReportAdminTo" type="text"
+                    <input wire:model.defer="ToDate" wire:change='onChange("ToDate")'
+                        id="hidePlaceHolderDateReportAdminTo" type="text"
                         class="border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusAdminReportDateTo()">
                     <div class="text-red-600 text-sm px-2 text-right">
@@ -117,6 +119,10 @@
                                         التاريخ
                                     </th>
                                     <th scope="col"
+                                        class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">
+                                        التاريخ النهاية
+                                    </th>
+                                    <th scope="col"
                                         class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">ساعة
                                         البدء
                                     </th>
@@ -127,6 +133,7 @@
                                         class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37] min-w-[150px]">
                                         عدد
                                         ساعات عملي</th>
+
                                     <th scope="col"
                                         class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37] min-w-[150px]">
                                         ملاحضات
@@ -154,7 +161,7 @@
                                             @endphp
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
                                                 {{ $formattedDate }}</td>
-
+                                            <td></td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
                                                 {{ $WorkHoursearch['start_time'] }}</td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
@@ -182,23 +189,37 @@
                                             @endphp
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-white">
                                                 {{ $formattedDate }}</td>
+                                            @php
+                                                // Assuming $WorkHoursearch['date'] is the date string
+                                                $dateString = $WorkHoursearch['end_date'];
+
+                                                // Convert the date string to a DateTime object
+                                                $dateTime = new DateTime($dateString);
+
+                                                // Format the DateTime object as 'd/m/Y'
+                                                $formattedDate = $dateTime->format('d/m/Y');
+                                            @endphp
+
+                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-white">
+                                                {{ $formattedDate }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-white">
                                                 {{ $WorkHoursearch['type'] }}</td>
 
 
-                                            <td
-                                                class="whitespace-nowrap py-4 px-3 text-sm text-white min-w-[150px]">
+                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-white min-w-[150px]">
 
                                                 {{ $WorkHoursearch['note'] }}
 
 
                                             </td>
-                                            <td
-                                                class="whitespace-nowrap py-4 px-3 text-sm text-white min-w-[150px]">
+                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-white min-w-[150px]">
 
                                             </td>
-                                            <td
-                                                class="whitespace-nowrap py-4 px-3 text-sm text-white min-w-[150px]">
+                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-white min-w-[150px]">
 
 
 
@@ -229,7 +250,7 @@
                                     </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
 
-
+                                        {{-- {{ $this->vacations->sum('days') }} --}}
 
                                         {{ $sumVacation }}
                                     </td>

@@ -90,14 +90,9 @@
                 <td style="font-size: 16px; font-weight: bold; color:#101426;">عدد ايام الاجازات: {{ $sumVacation }}
                 </td>
                 <td style="font-size: 16px;">
-                    @php
-                        // dd($totalTime);
-                        // $totalTime = new DateTime($totalTime, new DateTimeZone('UTC'));
-
-                    @endphp
                     <p style="font-size: 16px; font-weight: bold;color:#101426">عدد الساعات الدوام :
                         <span style="font-size: 16px;">
-                            {{ ($totalTime->day-1) * 24 + $totalTime->hour }}:{{ $totalTime->minute }}:{{ $totalTime->second }}
+                            {{ ($totalTime->day - 1) * 24 + $totalTime->hour }}:{{ $totalTime->minute }}:{{ $totalTime->second }}
                         </span>
                     </p>
                 </td>
@@ -112,8 +107,9 @@
         <table dir="rtl" class="blueTable">
             <thead>
                 <tr>
-                    <th> التاريخ</th>
                     <th> اليوم</th>
+                    <th> التاريخ</th>
+                    <th> التاريخ النهاية</th>
                     <th> ساعة البداية</th>
                     <th> ساعة النهاية </th>
                     <th>عدد الساعات</th>
@@ -124,16 +120,22 @@
                 @foreach ($data as $day)
                     @php
                         $carbonDate = \Carbon\Carbon::parse($day['date']);
+
                     @endphp
                     <tr style="{{ $day['table'] === 'vacations' ? 'background-color: #ff3333;' : '' }}">
                         @unless ($day['table'] === 'vacations')
-                            <td style="width: 150px; ">{{ $carbonDate->toDateString() }}</td>
                             <td>{{ $day['day'] }}</td>
+                            <td style="width: 150px; ">{{ $carbonDate->toDateString() }}</td>
+                            <td></td>
                         @else
-                            <td style="color:white;width: 150px; ">{{ $carbonDate->toDateString() }}</td>
-                            <td style="color:white;">{{ $day['day'] }}</td>
-                        @endunless
+                        @php
+                                                    $carbonEndDate = \Carbon\Carbon::parse($day['end_date']);
 
+                        @endphp
+                            <td style="color:white;">{{ $day['day'] }}</td>
+                            <td style="color:white;width: 150px; ">{{ $carbonDate->toDateString() }}</td>
+                            <td style="color:white;width: 150px; ">{{ $carbonEndDate->toDateString() }}</td>
+                        @endunless
                         @unless ($day['table'] === 'vacations')
                             <td>{{ $day['start_time'] }}</td>
                             <td>{{ $day['end_time'] }}</td>

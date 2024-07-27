@@ -129,7 +129,13 @@ class Report extends Component
                 ->orderBy('date', 'ASC')
                 ->get();
 
-            $this->sumVacation = $vacations->count();
+                $vacations = $vacations->map(function ($vacation) {
+                    $vacation->days = $vacation->end_date ? $vacation->date->diffInDays($vacation->end_date) + 1 : 1;
+                    return $vacation;
+                });
+
+
+            $this->sumVacation = $vacations->sum('days');//$vacations->count();
             $vacations = $vacations->toArray();
 
 

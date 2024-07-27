@@ -263,8 +263,11 @@ class PDFController extends Controller
             ->orderBy('date', 'ASC')
             ->get();
 
-
-        $sumVacation = $vacations->count();
+            $vacations = $vacations->map(function ($vacation) {
+                $vacation->days = $vacation->end_date ? $vacation->date->diffInDays($vacation->end_date) + 1 : 1;
+                return $vacation;
+            });
+        $sumVacation = $vacations->sum('days');
         $vacations = $vacations->toArray();
 
         // Add the table name to each column in the vacations array
@@ -294,7 +297,6 @@ class PDFController extends Controller
             'margin-top' => 0,
             'autoArabic' => true
         ]);
-
         $data = [
             'data' => $sortedArray,
             'user' => User::find($request->id)->name,
@@ -307,6 +309,7 @@ class PDFController extends Controller
         $mpdf->autoLangToFont = true;
         $mpdf->autoScriptToLang = true;
         // for Arabic Bills PDF
+
         $html = \view('pdf.WorkHours', $data);
 
 

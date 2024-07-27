@@ -316,7 +316,6 @@ class QawafilAlaqsa extends Resource
                         $number_of_people = TripBooking::where([
                             ['bus_id', $bus->id],
                             ['status', '1'],
-                            ['project_id', $this->id],
                         ])->sum('number_of_people');
                         $text .=  'اسم الباص:    '  . $bus->bus_number . "   " . 'عدد  الاشخاص المتبقي:    ' . ($bus->number_of_seats - $number_of_people) . "</br>";
 
@@ -434,9 +433,7 @@ class QawafilAlaqsa extends Resource
     public static function beforeCreate(Request $request, $model)
     {
         $id = Auth::id();
-        if ($request->project_describe == null) {
-            $request->merge(['project_describe' => '']);
-        }
+
         $model->created_by = $id;
         $model->project_type = '2';
         $model->sector = '5';
@@ -466,6 +463,9 @@ class QawafilAlaqsa extends Resource
     }
     public static function beforesave(Request $request, $model)
     {
+        if ($request->project_describe == null) {
+            $request->merge(['project_describe' => '']);
+        }
         if ($request->trip_from) {
             address::find($request->trip_from);
             $model->city = address::find($request->trip_from)->city_id;
