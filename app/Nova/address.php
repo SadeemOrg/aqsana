@@ -75,7 +75,7 @@ class address extends Resource
     public function fields(Request $request)
     {
         return [
-            
+
             ID::make(__('ID'), 'id')->sortable(),
 
             Multiselect::make(__('type'), 'type')
@@ -137,13 +137,16 @@ class address extends Resource
         $model->created_by = $id;
         $model->status = 1;
         $model->area_id = Area::find(City::find($request->city_id)->area_id)->id;
+
+        // $request->request->remove('city');
+    }
+    public static function beforesave(Request $request, $model)
+    {
         if($request->description == null ){
             $request->merge(['description' => '']);
 
         }
-        // $request->request->remove('city');
     }
-
     /**
      * Get the cards available for the request.
      *

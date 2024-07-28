@@ -21,7 +21,8 @@ class Transaction extends Model implements HasMedia
     protected $fillable = [
         'id', 'main_type', 'type', 'description', 'ref_id', 'transact_amount',
         'Currency', 'equivelant_amount', 'voucher', 'transaction_date',
-        'reason_of_reject', 'approval', 'sector', 'transaction_status', 'is_delete', 'transaction_type', 'name'
+        'reason_of_reject', 'approval', 'sector', 'transaction_status', 'is_delete', 'transaction_type', 'name',
+        'deleted_ref'
     ];
 
     protected $hidden = [

@@ -409,7 +409,7 @@
                                             </td>
                                             <td
                                                 class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
-                                                {{ $Transaction->equivelant_amount * -1 }}
+                                                {{ $Transaction->equivelant_amount  }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -425,7 +425,7 @@
                                             <td class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base">
                                                 Total :</td>
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-center text-lg">
-                                                {{ $Transaction->equivelant_amount * -1 }} ₪</td>
+                                                {{ $Transaction->equivelant_amount  }} ₪</td>
                                         </tr>
                                     </tbody>
                                 </table>

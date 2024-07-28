@@ -320,7 +320,7 @@
                         {{ explode('T', $TransactionArray['transaction_date'])[0] }}
                     </td>
                     <td>
-                        {{ $TransactionArray['equivelant_amount'] * -1 }}
+                        {{ $TransactionArray['equivelant_amount']  }}
                     </td>
                 </tr>
                 <tr>
@@ -328,7 +328,7 @@
                     <td class="">
                         Total :</td>
                     <td class="">
-                        {{ $TransactionArray['equivelant_amount'] * -1 }}
+                        {{ $TransactionArray['equivelant_amount']  }}
                     </td>
                 </tr>
             </tbody>
