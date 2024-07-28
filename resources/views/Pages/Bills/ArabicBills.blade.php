@@ -421,7 +421,7 @@
                                         <tr>
                                             <td
                                                 class="whitespace-nowrap py-4 pl-4 pr-3  font-FlatBold text-black md:text-gray-900 sm:pl-6">
-                                                {{ $Transaction->payment_reason }}
+                                               {{ $Transaction->payment_reason }}
                                             </td>
                                             <td
                                                 class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
@@ -435,7 +435,7 @@
                                             </td>
                                             <td
                                                 class="whitespace-nowrap px-3 py-4 font-FlatBold text-black md:text-gray-900 ">
-                                                {{ $Transaction->equivelant_amount * -1 }}
+                                                {{ $Transaction->equivelant_amount  }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -451,7 +451,7 @@
                                             <td class="whitespace-nowrap px-3 py-4 text-center font-FlatBold text-base">
                                                 المجموع الكلي :</td>
                                             <td class="whitespace-nowrap px-3 py-4 font-FlatBold text-center text-lg">
-                                                {{ $Transaction->equivelant_amount * -1 }} ₪</td>
+                                                {{ $Transaction->equivelant_amount  }} ₪</td>
                                         </tr>
                                     </tbody>
                                 </table>

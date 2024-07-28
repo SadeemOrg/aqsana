@@ -82,13 +82,14 @@ return false;
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Button::make(__('print'))->link('/mainbill/' . $this->id.'?type=repayment')->style('custom'),
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('project'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
 
             Text::make(__('description'), 'description'),
             Text::make(__('return money'), 'payment_reason'),
+            Button::make(__('print'))->link('/mainbill/' . $this->id.'?type=repayment')->style('custom'),
+
 
 
         ];

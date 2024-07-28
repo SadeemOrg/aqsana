@@ -54,6 +54,8 @@ use Titasgailius\SearchRelations\SearchesRelations;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 use PosLifestyle\DateRangeFilter\DateRangeFilter;
+use Upline\RowBackground\RowBackground;
+use Upline\RowBackground\RowBackgroundData;
 
 class Donation extends Resource
 {
@@ -136,7 +138,6 @@ class Donation extends Resource
 
             Text::make(__('bill_number'), 'bill_number')->hideWhenCreating()->hideWhenUpdating(),
 
-            Button::make(__('print'))->link('/mainbill/' . $this->id.'?type=bill')->style('custom'),
 
             ProjectPicker::make(__('تاريخ اخراج سند القبض '), 'ref_id', function () {
                 $keyValueArray = ['key1' => $this->ref_id, 'key2' => $this->transaction_date];
@@ -321,10 +322,18 @@ class Donation extends Resource
 
                 ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
+                Button::make(__('print'))->link('/mainbill/' . $this->id.'?type=bill')->style('custom'),
 
-            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('custom')->visible( $this->is_delete == 0 ),
+            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('custom'),
+            //->visible( $this->is_delete == 0 ),
+            // Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('custom')->visible( $this->is_delete != 0 ),
+
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
-
+            RowBackground::make(__("Net In Come"), "is_delete", function ($model) {
+                if ($this->is_delete != 0) {
+                    return new RowBackgroundData("#D2042D", "#FFFFFF");
+                }
+            })->onlyOnIndex(),
 
         ];
     }
