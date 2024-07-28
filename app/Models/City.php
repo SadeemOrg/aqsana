@@ -65,7 +65,10 @@ class City extends Model
     }
 
 
-
+    public function tours()
+    {
+        return $this->belongsToMany(Tours::class, 'city_tours', 'city_id', 'tour_id');
+    }
 }
 
 

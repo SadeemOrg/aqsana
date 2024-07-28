@@ -39,4 +39,9 @@ class Tours extends Model
     {
         return $this->belongsTo('App\Models\TelephoneDirectory','guide_name');
     }
+    public function cities()
+    {
+        return $this->belongsToMany(City::class, 'city_tours', 'tour_id', 'city_id');
+
+    }
 }

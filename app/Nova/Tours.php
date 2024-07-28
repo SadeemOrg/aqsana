@@ -16,6 +16,9 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Acme\MultiselectField\Multiselect;
+use App\Models\City;
+use Benjacho\BelongsToManyField\BelongsToManyField;
+use Laravel\Nova\Fields\BelongsToMany;
 
 class Tours extends Resource
 {
@@ -72,6 +75,13 @@ class Tours extends Resource
             Text::make(__('name'), 'name')->rules('required'),
             Date::make(__('DATE'), 'date')->pickerDisplayFormat('d.m.Y')->rules('required'),
             Text::make(__('number_of_people'), 'number_of_people')->rules('required'),
+
+            BelongsToManyField::make(__('Cities'), 'Cities', 'App\Nova\City')
+            ->options(City::all())
+            ->optionsLabel('name')
+            ->hideFromIndex(),
+
+            BelongsToMany::make('Cities'),
 
             BelongsTo::make(__('Contacts'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 

@@ -99,7 +99,7 @@ class TripBookingController extends BaseController
             // }
             return $this->sendResponse($tripBooking, 'تم الحجز بنجاح');
         } else {
-            return $this->sendError('Error', ["message" => " ناسف! الباص ممتلئ عدد المقاعد المتبقية  ".$numberOfSeats ], 202);
+             return $this->sendError('Error', ["message" => "ناسف! الباص ممتلئ"], 202);
         }
     }
 
