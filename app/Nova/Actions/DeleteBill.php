@@ -53,9 +53,7 @@ class DeleteBill extends Action
 
             }
 
-            $model->update([
-                'is_delete' => '1',
-            ]);
+
 
             $new_data = $model->replicate();
             $new_data-> transact_amount =  -$model->equivelant_amount;
@@ -67,7 +65,10 @@ class DeleteBill extends Action
             $new_data->is_delete = 2;
             $new_data->description = "حذف سند رقم " . $model->id;
             $new_data->save();
-
+            $model->update([
+                'is_delete' => '1',
+                'deleted_ref'=>$new_data->id,
+            ]);
             return Action::openInNewTab('/mainbill/'.$new_data->id.'?type=repayment' );
         }
 

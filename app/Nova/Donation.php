@@ -268,9 +268,9 @@ class Donation extends Resource
                         Text::make(__('Doubt number'), "Doubt_number"),
 
                         DateTime::make(__('History of doubt'), 'Date')
-                        ->resolveUsing(function ($value) {
-                            return $value ?? Carbon::now()->format('d/m/Y');
-                        })->rules('required'),
+                            ->resolveUsing(function ($value) {
+                                return $value ?? Carbon::now()->format('d/m/Y');
+                            })->rules('required'),
 
                     ])->rules('required'),
             ])->dependsOn("Payment_type", '2')->hideFromDetail()->hideFromIndex(),
@@ -298,11 +298,11 @@ class Donation extends Resource
                         Text::make(__('account number'), "account_number"),
 
                         DateTime::make(__('History of hawale'), 'Date')
-                        ->format('DD/MM/YYYY')
-                        ->resolveUsing(function ($value) {
-                            return $value ?? Carbon::now()->format('d/m/Y');
-                        })
-                        ->rules('required'),
+                            ->format('DD/MM/YYYY')
+                            ->resolveUsing(function ($value) {
+                                return $value ?? Carbon::now()->format('d/m/Y');
+                            })
+                            ->rules('required'),
 
                     ])->rules('required'),
             ])->dependsOn("Payment_type", '4')->hideFromDetail()->hideFromIndex(),
@@ -311,7 +311,7 @@ class Donation extends Resource
             ])->dependsOn("Payment_type", '5')->hideFromDetail()->hideFromIndex(),
             BelongsTo::make(__('created by'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
             ActionButton::make('')
-            ->svg('delete') // Use the Vue component name here
+                ->svg('delete') // Use the Vue component name here
 
                 ->action((new DeleteBill)->confirmText(__('Are you sure you want to delete  this?'))
                     ->confirmButtonText(__('compensation'))
@@ -322,11 +322,19 @@ class Donation extends Resource
 
                 ->loadingColor('#fff')->hideWhenCreating()->hideWhenUpdating(),
 
-                Button::make(__('print'))->link('/mainbill/' . $this->id.'?type=bill')->style('custom'),
+            Button::make(__('print'))->link('/mainbill/' . $this->id . '?type=bill')->style('custom')->canSee(function () {
+                return $this->is_delete == 0;
+            }),
+            Button::make(__('print'))->link('/mainbill/' . $this->deleted_ref   .'?type=repayment')->style('custom')->canSee(function () {
+                return $this->is_delete != 0;
+            }),
 
-            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('custom'),
-            //->visible( $this->is_delete == 0 ),
-            // Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('custom')->visible( $this->is_delete != 0 ),
+            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->id)->style('custom')->canSee(function () {
+                return $this->is_delete == 0;
+            }),
+            Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->deleted_ref . '/2')->style('custom')->canSee(function () {
+                return $this->is_delete != 0;
+            }),
 
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
             RowBackground::make(__("Net In Come"), "is_delete", function ($model) {
@@ -353,10 +361,10 @@ class Donation extends Resource
             if (!isset($refId->key1) || !isset($refId->key2)) {
                 $validator->errors()->add($request->newproject[0]['key'] . '__ref_id', 'هذا الحقل مطلوب');
             }
-            if (!isset($request->newproject[0]['attributes']['project_describe']) ) {
+            if (!isset($request->newproject[0]['attributes']['project_describe'])) {
                 $validator->errors()->add($request->newproject[0]['key'] . '__project_describe', 'هذا الحقل مطلوب');
             }
-            if (!isset($request->newproject[0]['attributes']['project_name']) ) {
+            if (!isset($request->newproject[0]['attributes']['project_name'])) {
                 $validator->errors()->add($request->newproject[0]['key'] . '__project_name', 'هذا الحقل مطلوب');
             }
             $date1 = json_decode($request->ref_id)->key1;
