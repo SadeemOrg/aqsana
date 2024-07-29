@@ -264,7 +264,16 @@ class PDFController extends Controller
             ->get();
 
             $vacations = $vacations->map(function ($vacation) {
-                $vacation->days = $vacation->end_date ? $vacation->date->diffInDays($vacation->end_date) + 1 : 1;
+                // Calculate vacation days
+                $vacation->days = $vacation->end_date
+                    ? $vacation->date->diffInDays($vacation->end_date) + 1
+                    : 1;
+
+                // Calculate total work hours for the vacation period
+                $workHours = WorkHours::whereBetween('date', [$vacation->date, $vacation->end_date])
+                                       ->get()->count(); // Assuming there's a 'hours' field in WorkHours
+
+                $vacation->days -=$workHours;
                 return $vacation;
             });
         $sumVacation = $vacations->sum('days');
