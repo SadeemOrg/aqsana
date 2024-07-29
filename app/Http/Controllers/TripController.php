@@ -36,7 +36,6 @@ class TripController extends BaseController
                 $number_of_people = TripBooking::where([
                     ['bus_id', $bus->id],
                     ['status', '1'],
-                    ['project_id', $trip->id],
                 ])->sum('number_of_people');
                 $number +=  ($bus->number_of_seats - $number_of_people);
             }
@@ -132,7 +131,6 @@ class TripController extends BaseController
                 $number_of_people = TripBooking::where([
                     ['bus_id', $bus->id],
                     ['status', '1'],
-                    ['project_id', $trip->id],
                 ])->sum('number_of_people');
                 $number +=  ($bus->number_of_seats - $number_of_people);
             }
@@ -220,7 +218,6 @@ class TripController extends BaseController
                 $number_of_people = TripBooking::where([
                     ['bus_id', $bus->id],
                     ['status', '1'],
-                    ['project_id', $trip->id],
                 ])->sum('number_of_people');
                 $number +=  ($bus->number_of_seats - $number_of_people);
             }
