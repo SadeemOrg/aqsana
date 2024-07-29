@@ -63,7 +63,7 @@ class DeleteBill extends Action
             $new_data->bill_number = $largestBillNumber + 1;
 
             $new_data->is_delete = 2;
-            $new_data->description = "حذف سند رقم " . $model->id;
+            $new_data->description = "تعويض سند رقم " . $model->id;
             $new_data->save();
             $model->update([
                 'is_delete' => '1',
