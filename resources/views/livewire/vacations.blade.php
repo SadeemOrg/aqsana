@@ -226,7 +226,7 @@
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
                                       عدد ايام الاجازات  </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426]">
-                                    {{  $this->vacations->sum('days')-$WorkHourssearchCount }}          </td>
+                                    {{  $this->vacations->sum('days')}}          </td>
 
 
                                 </tr>

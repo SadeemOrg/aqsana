@@ -252,7 +252,7 @@
 
                                         {{-- {{ $this->vacations->sum('days') }} --}}
 
-                                        {{ $sumVacation  -  $sumWorkHours }}
+                                        {{ $sumVacation  }}
                                     </td>
                                     <td class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] min-w-[150px]">
 
