@@ -82,7 +82,7 @@ class guide extends Resource
     }
     public static function beforeCreate(Request $request, $model)
     {
-        $model->type = 6;
+        $model->type = ["6"];
     }
     /**
      * Get the cards available for the request.

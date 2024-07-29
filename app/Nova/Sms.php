@@ -83,7 +83,7 @@ class Sms extends Resource
     }
     public static function beforeCreate(Request $request, $model)
     {
-        $model->type = 9;
+        $model->type = ["9"];
     }
     /**
      * Get the cards available for the request.
