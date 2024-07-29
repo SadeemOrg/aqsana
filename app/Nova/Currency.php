@@ -63,9 +63,9 @@ class Currency extends Resource
 
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('Name'),'name'),
-            Text::make(__('code'),'code'),
-            Number::make(__('rate'),'rate')->step(0.01),
+            Text::make(__('Name'),'name')->rules('required'),
+            Text::make(__('code'),'code')->rules('required'),
+            Number::make(__('rate'),'rate')->step(0.01)->rules('required'),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
