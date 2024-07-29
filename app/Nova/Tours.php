@@ -143,7 +143,7 @@ class Tours extends Resource
     {
 
         if (!($request->NewGuide  || $request->guide_name)) {
-            $validator->errors()->add('guide_name', ' يجب اضافة ');
+            $validator->errors()->add('guide_name', ' هذا الحقل مطلوب  ');
         }
 
         if ($request->NewGuide  &&  empty(($request->guide_name))) {
