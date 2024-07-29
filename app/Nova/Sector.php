@@ -70,9 +70,9 @@ class Sector extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Boolean::make(__("is published"),'is_published'),
-            Text::make(__('main text'),'text'),
-            Text::make(__('sup text'),'sup_text'),
-            Boolean::make(__("in_budget"),'in_budget'),
+            Text::make(__('main text'),'text')->rules('required'),
+            Text::make(__('sup text'),'sup_text')->rules('required'),
+            Boolean::make(__("in_budget"),'in_budget')->rules('required'),
             Image::make(__('Image'),'img')->disk('public')->deletable(),
 
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
