@@ -87,7 +87,7 @@
 
         <table dir="rtl" style="width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 20px;">
             <tr>
-                <td style="font-size: 16px; font-weight: bold; color:#101426;">عدد ايام الاجازات: {{ $sumVacation-$sumWorkHours }}
+                <td style="font-size: 16px; font-weight: bold; color:#101426;">عدد ايام الاجازات: {{ $sumVacation }}
                 </td>
                 <td style="font-size: 16px;">
                     <p style="font-size: 16px; font-weight: bold;color:#101426">عدد الساعات الدوام :
