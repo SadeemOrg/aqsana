@@ -199,7 +199,7 @@ class delegate extends Resource
     }
     public static function beforeCreate(Request $request, $model)
     {
-        $model->type = "3";
+        $model->type = ["3"];
     }
     public static function afterSave(Request $request, $model)
     {
