@@ -60,7 +60,7 @@ class AddressType extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('name'),'name'),
+            Text::make(__('name'),'name')->rules('required'),
             Text::make(__('description'),'description'),
             Boolean::make(__('active'),'active'),
         ];
