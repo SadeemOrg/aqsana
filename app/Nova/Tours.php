@@ -77,10 +77,50 @@ class Tours extends Resource
             Text::make(__('number_of_people'), 'number_of_people')->rules('required'),
 
             BelongsToManyField::make(__('Cities'), 'Cities', 'App\Nova\City')
-            ->options(City::all())
-            ->optionsLabel('name')
-            ->hideFromIndex(),
+                ->options(City::all())
+                ->optionsLabel('name')
+                ->hideFromIndex(),
 
+            Flexible::make(__(''), 'NewCity')
+                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                    return null;
+                })
+                ->limit(1)
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('Add new type'), 'type', [
+                    Text::make(__('name'), 'name'),
+                    Multiselect::make(__('Area'), 'Area')
+                        ->options(function () {
+                            $Areas =  \App\Models\Area::all();
+
+                            $Area_type_admin_array =  array();
+
+                            foreach ($Areas as $Area) {
+
+
+                                $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                            }
+
+                            return $Area_type_admin_array;
+                        })->singleSelect()->hideFromIndex()->hideFromDetail(),
+
+                    Multiselect::make(__('admin city'), 'admin_id')
+                        ->options(function () {
+                            $users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '3')->get();
+
+                            $user_type_admin_array =  array();
+
+                            foreach ($users as $user) {
+
+
+
+                                $user_type_admin_array += [$user['id'] => ($user['name'])];
+                            }
+                            return $user_type_admin_array;
+                        })
+                        ->singleSelect()->hideFromDetail()->hideFromIndex(),
+
+                ]),
             BelongsToMany::make('Cities'),
 
             BelongsTo::make(__('Contacts'), 'admin', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
@@ -141,7 +181,22 @@ class Tours extends Resource
     }
     protected static function afterValidation(NovaRequest $request, $validator)
     {
-
+        if (($request->Cities == '[]' &&  $request->NewCity)) {
+            if (!isset($request->NewCity[0]['attributes']['name'])) {
+                $validator->errors()->add($request->NewCity[0]['key'] . '__name', 'هذا الحقل مطلوب');
+            }
+            if (!isset($request->NewCity[0]['attributes']['Area'])) {
+                $validator->errors()->add($request->NewCity[0]['key'] . '__Area', 'هذا الحقل مطلوب');
+            }
+            if (!isset($request->NewCity[0]['attributes']['admin_id'])) {
+                $validator->errors()->add($request->NewCity[0]['key'] . '__admin_id', 'هذا الحقل مطلوب');
+            }
+        }
+        if (!($request->Cities != '[]' || $request->NewCity)) {
+            $validator->errors()->add('Cities', ' هذا الحقل مطلوب  ');
+        }
+        if (($request->Cities != '[]'  && $request->NewCity)) {
+        }
         if (!($request->NewGuide  || $request->guide_name)) {
             $validator->errors()->add('guide_name', ' هذا الحقل مطلوب  ');
         }
@@ -155,6 +210,8 @@ class Tours extends Resource
     public static function beforeSave(Request $request, $model)
     {
 
+        // dd();
+        // dd($newCities);
         if (!$request->Contacts) {
 
 
@@ -185,7 +242,23 @@ class Tours extends Resource
             }
         }
         $request->request->remove('NewGuide');
+        if ($request->NewCity   && ($request->NewCity[0]['attributes']['name'] || $request->NewCity[0]['attributes']['admin_id'] || $request->NewCity[0]['attributes']['Area'])) {
+            $citye =  new City();
+            $citye->name = $request->NewCity[0]['attributes']['name'];
+            $citye->area_id = $request->NewCity[0]['attributes']['Area'];
+            $citye->admin_id = $request->NewCity[0]['attributes']['admin_id'];
+            $citye->Qawafil_admin = $request->NewCity[0]['attributes']['admin_id'];
+            $citye->Alhisalat_admin = $request->NewCity[0]['attributes']['admin_id'];
+            $citiesArray = json_decode($request->Cities, true); // true to decode as associative array
+            $citye->save();
+            $newCityArray = $citye->toArray();
+            $citiesArray[] = $newCityArray;
+            $newCitiesJson = json_encode($citiesArray);
+            $request->merge(['Cities' => $newCitiesJson]);
+        }
+        $request->request->remove('NewCity');
     }
+
     /**
      * Get the cards available for the request.
      *
