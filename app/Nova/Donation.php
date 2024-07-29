@@ -339,7 +339,7 @@ class Donation extends Resource
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
             RowBackground::make(__("Net In Come"), "is_delete", function ($model) {
                 if ($this->is_delete != 0) {
-                    return new RowBackgroundData("#D2042D", "#FFFFFF");
+                    return new RowBackgroundData("#A9A9A9", "#000000");
                 }
             })->onlyOnIndex(),
 
