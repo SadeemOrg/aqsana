@@ -46,7 +46,7 @@ class Grant extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'phone_number'
+        'id', 'name',
     ];
 
     /**
@@ -55,11 +55,7 @@ class Grant extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public static function indexQuery(NovaRequest $request, $query)
-    {
-        return $query->whereJsonContains('type', '7');
 
-    }
     public function fields(Request $request)
     {
         return [
