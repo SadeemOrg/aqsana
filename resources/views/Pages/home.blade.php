@@ -1,7 +1,7 @@
 @extends('layout.app')
 @section('content')
     @include('layout.front-end.partial._popModal')
-    <div class="hidden_popUp">
+    <div class="">
         @include('layout.front-end.partial._top_banner')
         {{-- @include('layout.front-end.partial._left-sidebar') --}}
         @include('Components.Home.Association_news')

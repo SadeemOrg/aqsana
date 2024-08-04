@@ -7,6 +7,7 @@
     $isactive = nova_get_setting('active', 0);
 
 @endphp
+@if ($isactive)
 
 <!-- Start Pop up Modal-->
 <div dir="rtl" class="CloseHomePopUp relative hiddenModal  z-10" aria-labelledby="modal-title" role="dialog"
@@ -48,3 +49,4 @@
 </div>
 <!-- endPop up Modal-->
 
+@endif
