@@ -4,8 +4,7 @@
     $Imageweb = 'storage/' . nova_get_setting('image_web_pop_up', 'default_value');
     $link = nova_get_setting('link_pop_up', 'default_value');
 
-    $isactive = nova_get_setting('active', 0);
-
+    $isactive = nova_get_setting('active_pop_up', 0);
 @endphp
 @if ($isactive)
     <!-- Start Pop up Modal-->
