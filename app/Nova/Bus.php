@@ -28,17 +28,22 @@ class Bus extends Resource
 
     public static function label()
     {
-        return __('Bus');
+        return __('QawafilAlaqsaBus');
     }
     public static function group()
     {
-        return __('the Busss');
+        return __('QawafilAlaqsa');
     }
     // public static $displayInNavigation = false;
 
     public static $priority = 2;
     public static $model = \App\Models\Bus::class;
-    public static $displayInNavigation = false;
+    // public static $displayInNavigation = false;
+    public static function availableForNavigation(Request $request)
+    {
+        $userRoles = $request->user()->userrole();
+        return in_array("super-admin", $userRoles) || in_array("QawafilAlaqsaparmation", $userRoles);
+    }
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
