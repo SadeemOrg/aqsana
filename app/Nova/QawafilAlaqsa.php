@@ -54,7 +54,7 @@ use Mauricewijnia\NovaMapsAddress\MapsAddress;
 class QawafilAlaqsa extends Resource
 {
     public static $model = \App\Models\Project::class;
-    public static $priority = 2;
+    public static $priority = 1;
     public static $title = 'project_name';
     public static $search = ['id', 'project_name', 'project_describe'];
 
