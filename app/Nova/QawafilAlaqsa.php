@@ -589,7 +589,7 @@ class QawafilAlaqsa extends Resource
                 (new Reportcity())->withMeta(['width' => 'w-1/3']),
                 (new ReportAdmin())->withMeta(['width' => 'w-1/3']),
                 (new ReportTripFrom())->withMeta(['width' => 'w-1/3']),
-                (new DateRangeFilter(__("start"), "start_date"))->withMeta(['width' => 'w-1/3']),
+                (new DateRangeFilter(__("From_to"), "start_date"))->withMeta(['width' => 'w-1/3']),
             ]))->width('full'),
         ];
     }
@@ -608,7 +608,7 @@ class QawafilAlaqsa extends Resource
             new Reportcity(),
             new ReportAdmin(),
             new ReportTripFrom(),
-            new DateRangeFilter(__("start"), "start_date"),
+            new DateRangeFilter(__("From_to"), "start_date"),
 
 
 
