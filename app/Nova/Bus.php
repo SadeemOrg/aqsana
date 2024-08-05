@@ -77,10 +77,10 @@ class Bus extends Resource
             BelongsTo::make(__('company'), 'company', \App\Nova\BusesCompany::class)->rules('required'),
             Text::make(__("Bus Name"), "bus_number")->rules('required'),
             Number::make(__("Number person on bus"), "number_of_seats")->step(1.0)->rules('required'),
-            Number::make(__("seat price"), "seat_price")->step(1.0),
+            Number::make(__("seat price"), "seat_price")->step(1.0)->rules('required'),
 
-            Text::make(__("Name Driver"), "name_driver"),
-            Text::make(__("phone_number"), "phone_number_driver"),
+            Text::make(__("Name Driver"), "name_driver")->rules('required'),
+            Text::make(__("phone_number"), "phone_number_driver")->rules('required'),
             Select::make(__("status"), "status")
                 ->options([
                     '1' => __('available'),
