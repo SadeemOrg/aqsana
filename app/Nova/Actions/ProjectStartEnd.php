@@ -17,7 +17,7 @@ class ProjectStartEnd extends Action
     use InteractsWithQueue, Queueable;
     public  function name()
     {
-        return __('المشروع');
+        return __('اغلاق');
     }
     /**
      * Perform the action on the given models.
