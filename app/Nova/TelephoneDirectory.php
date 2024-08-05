@@ -5,6 +5,7 @@ namespace App\Nova;
 use Acme\MultiselectField\Multiselect;
 use Acme\Smssend\Smssend;
 use App\Models\SmsType;
+use App\Nova\Filters\Reportcity;
 use App\Nova\Filters\UserType;
 use AwesomeNova\Cards\FilterCard;
 use Illuminate\Http\Request;
@@ -218,7 +219,9 @@ class TelephoneDirectory extends Resource
     public function filters(Request $request)
     {
         return [
-            new UserType
+            new UserType,
+            new Reportcity(),
+
         ];
     }
 
