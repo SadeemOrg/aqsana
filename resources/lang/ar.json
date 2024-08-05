@@ -91,7 +91,7 @@
     "budjet": "الميزانية",
     "Net": "صافي",
     "Out Come": "مخرجات",
-    "In Come": "مصاريف",
+    "In Come": "مدخلات",
     "Report Created": "انشاء بواسطة",
     "Total Count": "المجموع",
     "FilemanagerTool": "مدير الملفات",
@@ -315,7 +315,6 @@
     "read": "مقروء",
     "QawafilAlaqsa": "قوافل الاقصى",
     "QawafilAlaqsaBus": "باصات محفوظة",
-
     "AppUser":"مستخدمين التطبيق",
     "Upload Image": "رفع صورة",
     "add videos":"اضافة فيديوهات",
@@ -976,5 +975,7 @@
     "TripBooking number":"عدد الاشخاص في القافلة",
     "phone_number_address":"رقم الهاتف ",
     "equivelant_amount":"القيمة بشيكل",
-    "Cities":"البلدات"
+    "Cities":"البلدات",
+    "From_to":"من تاريخ - الى تاريخ"
+
 }

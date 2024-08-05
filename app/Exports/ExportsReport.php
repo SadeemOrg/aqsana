@@ -81,7 +81,7 @@ class ExportsReport implements FromCollection, WithHeadings
 
             $additionalRows = [
 
-                ['', 'المجموع ',  $totalAmountMainType1 - $totalAmountMainType2],
+                ['المدخلات',$totalAmountMainType1,'المخرجات',$totalAmountMainType2,'صافي الانفاق ',  $totalAmountMainType1 - $totalAmountMainType2],
                 ['', '** ',  '**','**'],
                 ['', '** ',  '**','**'],
             ];
