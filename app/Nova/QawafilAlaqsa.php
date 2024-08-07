@@ -87,6 +87,80 @@ class QawafilAlaqsa extends Resource
 
     public static function indexQuery(NovaRequest $request, $query)
     {
+        $CloseProjects = $query->where('project_type', '2')->get();
+        foreach ($CloseProjects as $key => $CloseProject) {
+            $starttime = Carbon::parse($CloseProject->start_date);
+            $finishTime = Carbon::parse($CloseProject->end_date);
+            $now = Carbon::now();
+            $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
+            $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
+            $nowtime = Carbon::createFromFormat('Y-m-d H:i:s', $now);
+            $projects = DB::table('project_status')->where('project_id', $CloseProject->id)->first();
+            if (($endDate->lt($nowtime)) && $projects->status != 3) {
+                DB::table('project_status')
+                    ->where('project_id', $CloseProject->id)
+                    ->update(['status' => DB::raw('status+1'),]);
+                TripBooking::where('project_id', $CloseProject->id)
+                    ->update([
+                        'status' => '0'
+                    ]);
+                DB::table('project_status')
+                    ->where('project_id', $CloseProject->id)
+                    ->first();
+                switch ($CloseProject->repetition) {
+                    case "1":
+
+                        $newQafel = $CloseProject->replicate();
+                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addDays(1);
+                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addDays(1);
+
+
+
+                        break;
+                    case "2":
+                        $newQafel = $CloseProject->replicate();
+                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addDays(7);
+                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addDays(7);
+                        break;
+                    case "3":
+                        $newQafel = $CloseProject->replicate();
+                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addDays(14);
+                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addDays(14);
+                        break;
+                    case "4":
+                        $newQafel = $CloseProject->replicate();
+                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addMonth();
+                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addMonth();
+
+                        break;
+                    case "5":
+                        $newQafel = $CloseProject->replicate();
+                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addYear();
+                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addYear();
+                        break;
+                    default:
+                        break;
+                }
+
+                if (isset($newQafel)) {
+                    $newQafel->created_at = Carbon::now();
+                    $newQafel->save();
+                    $Buses = $CloseProject->Bus;
+                    foreach ($Buses as $key => $Bus) {
+                        DB::table('project_bus')
+                            ->updateOrInsert(
+                                ['project_id' => $newQafel->id, 'bus_id' => $Bus->id],
+
+                            );
+                    }
+
+                    DB::table('project_status')->insert([
+                        'project_id' => $newQafel->id,
+                        'status' => 2,
+                    ]);
+                }
+            }
+        }
         $userRoles = $request->user()->userrole();
         $query = $query->where('project_type', '2');
 
@@ -140,31 +214,31 @@ class QawafilAlaqsa extends Resource
                         return true;
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
-                ActionButton::make(__('Action'))
-                    ->action(ProjectStartEnd::class, (string) $this->id)
-                    ->text(__('اغلاق'))
-                    ->showLoadingAnimation()
-                    ->loadingColor('#fff')->buttonColor('#21b970')
-                    ->canSee(function () {
-                        $starttime = Carbon::parse($this->start_date);
-                        $finishTime = Carbon::parse($this->end_date);
-                        $now = Carbon::now();
-                        $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
-                        $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
-                        $nowtime = Carbon::createFromFormat('Y-m-d H:i:s', $now);
-                        $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-                        if ($projects) {
-                            if ($projects->status == 3) {
+                // ActionButton::make(__('Action'))
+                //     ->action(ProjectStartEnd::class, (string) $this->id)
+                //     ->text(__('اغلاق'))
+                //     ->showLoadingAnimation()
+                //     ->loadingColor('#fff')->buttonColor('#21b970')
+                //     ->canSee(function () {
+                //         $starttime = Carbon::parse($this->start_date);
+                //         $finishTime = Carbon::parse($this->end_date);
+                //         $now = Carbon::now();
+                //         $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
+                //         $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
+                //         $nowtime = Carbon::createFromFormat('Y-m-d H:i:s', $now);
+                //         $projects = DB::table('project_status')->where('project_id', $this->id)->first();
+                //         if ($projects) {
+                //             if ($projects->status == 3) {
 
-                                return false;
-                            }
-                        }
+                //                 return false;
+                //             }
+                //         }
 
 
-                        return ($endDate->lt($nowtime));
-                    })
+                //         return ($endDate->lt($nowtime));
+                //     })
 
-                    ->hideWhenCreating()->hideWhenUpdating(),
+                //     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
                     ->action(ProjectStartEnd::class, (string) $this->id)
                     ->text(__('مغلق'))
@@ -180,7 +254,7 @@ class QawafilAlaqsa extends Resource
                         $nowtime = Carbon::createFromFormat('Y-m-d H:i:s', $now);
                         $projects = DB::table('project_status')->where('project_id', $this->id)->first();
                         if ($projects) {
-                            if ($projects->status == 3 && ($endDate->lt($nowtime))) {
+                            if (($endDate->lt($nowtime))) {
 
                                 return true;
                             }
@@ -463,47 +537,48 @@ class QawafilAlaqsa extends Resource
             ]);
         }
 
-        // $model->newbus = null;
+        $model->newbus = null;
 
-        // $replicationIntervals = [
-        //     "1" => 1,          // 1 day
-        //     "2" => 7,          // 7 days
-        //     "3" => 14,         // 14 days
-        //     "4" => 1,          // 1 month
-        //     "5" => 12,         // 1 year (12 months)
-        // ];
-        // $interval = isset($replicationIntervals[$model->repetition]) ? $replicationIntervals[$model->repetition] : 0;
-        // if ($interval > 0) {
-        //     for ($i = 1; $i <= 7; $i++) {
-        //         $newProjectId = DB::table('projects')->insertGetId([
-        //             'project_type' => 2,
-        //             'project_name' => $model->project_name,
-        //             'project_describe' => "  ",
-        //             'city' => $model->city,
-        //             'repetition' => $model->repetition,
-        //             'admin_id' => $model->admin_id,
-        //             'trip_from' => $model->trip_from,
-        //             'trip_to' => $model->trip_to,
-        //             'start_date' => $model->start_date,
-        //             'end_date' => $model->end_date,
-        //             'note' => $model->note,
-        //             'created_by' => Auth::id(),
-        //         ]);
-        //         $newProject = DB::table('projects')->where('id', $newProjectId)->first();
-        //         if ($interval < 12) {
-        //             $newStartDate = Carbon::parse($newProject->start_date)->addDays($interval * $i);
-        //             $newEndDate = Carbon::parse($newProject->end_date)->addDays($interval * $i);
-        //         } else {
-        //             $newStartDate = Carbon::parse($newProject->start_date)->addMonths($interval * $i);
-        //             $newEndDate = Carbon::parse($newProject->end_date)->addMonths($interval * $i);
-        //         }
+        $replicationIntervals = [
+            "1" => 1,          // 1 day
+            "2" => 7,          // 7 days
+            "3" => 14,         // 14 days
+            "4" => 1,          // 1 month
+            "5" => 12,         // 1 year (12 months)
+        ];
+        $interval = isset($replicationIntervals[$model->repetition]) ? $replicationIntervals[$model->repetition] : 0;
+        if ($interval > 0) {
+            for ($i = 1; $i <= 7; $i++) {
+                $newProjectId = DB::table('projects')->insertGetId([
+                    'project_type' => 2,
+                    'project_name' => $model->project_name,
+                    'project_describe' => $model->project_describe,
+                    'city' => $model->city,
+                    'repetition' => $model->repetition,
+                    'admin_id' => $model->admin_id,
+                    'trip_from' => $model->trip_from,
+                    'trip_to' => $model->trip_to,
+                    'start_date' => $model->start_date,
+                    'end_date' => $model->end_date,
+                    'note' => $model->note,
+                    'created_by' => $model->created_by,
 
-        //         DB::table('projects')->where('id', $newProjectId)->update([
-        //             'start_date' => $newStartDate,
-        //             'end_date' => $newEndDate,
-        //         ]);
-        //     }
-        // }
+                ]);
+                $newProject = DB::table('projects')->where('id', $newProjectId)->first();
+                if ($interval < 12) {
+                    $newStartDate = Carbon::parse($newProject->start_date)->addDays($interval * $i);
+                    $newEndDate = Carbon::parse($newProject->end_date)->addDays($interval * $i);
+                } else {
+                    $newStartDate = Carbon::parse($newProject->start_date)->addMonths($interval * $i);
+                    $newEndDate = Carbon::parse($newProject->end_date)->addMonths($interval * $i);
+                }
+
+                DB::table('projects')->where('id', $newProjectId)->update([
+                    'start_date' => $newStartDate,
+                    'end_date' => $newEndDate,
+                ]);
+            }
+        }
     }
     public static function beforesave(Request $request, $model)
     {
@@ -612,46 +687,6 @@ class QawafilAlaqsa extends Resource
 
                         );
                 }
-            }
-        }
-
-        $replicationIntervals = [
-            "1" => 1,          // 1 day
-            "2" => 7,          // 7 days
-            "3" => 14,         // 14 days
-            "4" => 1,          // 1 month
-            "5" => 12,         // 1 year (12 months)
-        ];
-        $interval = isset($replicationIntervals[$model->repetition]) ? $replicationIntervals[$model->repetition] : 0;
-        if ($interval > 0) {
-            for ($i = 1; $i <= 7; $i++) {
-                $newProjectId = DB::table('projects')->insertGetId([
-                    'project_type' => 2,
-                    'project_name' => $model->project_name,
-                    'project_describe' => $model->project_describe,
-                    'city' => $model->city,
-                    'repetition' => $model->repetition,
-                    'admin_id' => $model->admin_id,
-                    'trip_from' => $model->trip_from,
-                    'trip_to' => $model->trip_to,
-                    'start_date' => $model->start_date,
-                    'end_date' => $model->end_date,
-                    'note' => $model->note,
-                    'created_by' =>$model->created_by,
-                ]);
-                $newProject = DB::table('projects')->where('id', $newProjectId)->first();
-                if ($interval < 12) {
-                    $newStartDate = Carbon::parse($newProject->start_date)->addDays($interval * $i);
-                    $newEndDate = Carbon::parse($newProject->end_date)->addDays($interval * $i);
-                } else {
-                    $newStartDate = Carbon::parse($newProject->start_date)->addMonths($interval * $i);
-                    $newEndDate = Carbon::parse($newProject->end_date)->addMonths($interval * $i);
-                }
-
-                DB::table('projects')->where('id', $newProjectId)->update([
-                    'start_date' => $newStartDate,
-                    'end_date' => $newEndDate,
-                ]);
             }
         }
         $buses = $model->Bus;
