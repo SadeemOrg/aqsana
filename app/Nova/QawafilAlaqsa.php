@@ -463,47 +463,48 @@ class QawafilAlaqsa extends Resource
             ]);
         }
 
-        // $model->newbus = null;
+        $model->newbus = null;
 
-        // $replicationIntervals = [
-        //     "1" => 1,          // 1 day
-        //     "2" => 7,          // 7 days
-        //     "3" => 14,         // 14 days
-        //     "4" => 1,          // 1 month
-        //     "5" => 12,         // 1 year (12 months)
-        // ];
-        // $interval = isset($replicationIntervals[$model->repetition]) ? $replicationIntervals[$model->repetition] : 0;
-        // if ($interval > 0) {
-        //     for ($i = 1; $i <= 7; $i++) {
-        //         $newProjectId = DB::table('projects')->insertGetId([
-        //             'project_type' => 2,
-        //             'project_name' => $model->project_name,
-        //             'project_describe' => "  ",
-        //             'city' => $model->city,
-        //             'repetition' => $model->repetition,
-        //             'admin_id' => $model->admin_id,
-        //             'trip_from' => $model->trip_from,
-        //             'trip_to' => $model->trip_to,
-        //             'start_date' => $model->start_date,
-        //             'end_date' => $model->end_date,
-        //             'note' => $model->note,
-        //             'created_by' => Auth::id(),
-        //         ]);
-        //         $newProject = DB::table('projects')->where('id', $newProjectId)->first();
-        //         if ($interval < 12) {
-        //             $newStartDate = Carbon::parse($newProject->start_date)->addDays($interval * $i);
-        //             $newEndDate = Carbon::parse($newProject->end_date)->addDays($interval * $i);
-        //         } else {
-        //             $newStartDate = Carbon::parse($newProject->start_date)->addMonths($interval * $i);
-        //             $newEndDate = Carbon::parse($newProject->end_date)->addMonths($interval * $i);
-        //         }
+        $replicationIntervals = [
+            "1" => 1,          // 1 day
+            "2" => 7,          // 7 days
+            "3" => 14,         // 14 days
+            "4" => 1,          // 1 month
+            "5" => 12,         // 1 year (12 months)
+        ];
+        $interval = isset($replicationIntervals[$model->repetition]) ? $replicationIntervals[$model->repetition] : 0;
+        if ($interval > 0) {
+            for ($i = 1; $i <= 7; $i++) {
+                $newProjectId = DB::table('projects')->insertGetId([
+                    'project_type' => 2,
+                    'project_name' => $model->project_name,
+                    'project_describe' => $model->project_describe,
+                    'city' => $model->city,
+                    'repetition' => $model->repetition,
+                    'admin_id' => $model->admin_id,
+                    'trip_from' => $model->trip_from,
+                    'trip_to' => $model->trip_to,
+                    'start_date' => $model->start_date,
+                    'end_date' => $model->end_date,
+                    'note' => $model->note,
+                    'created_by' => $model->created_by,
 
-        //         DB::table('projects')->where('id', $newProjectId)->update([
-        //             'start_date' => $newStartDate,
-        //             'end_date' => $newEndDate,
-        //         ]);
-        //     }
-        // }
+                ]);
+                $newProject = DB::table('projects')->where('id', $newProjectId)->first();
+                if ($interval < 12) {
+                    $newStartDate = Carbon::parse($newProject->start_date)->addDays($interval * $i);
+                    $newEndDate = Carbon::parse($newProject->end_date)->addDays($interval * $i);
+                } else {
+                    $newStartDate = Carbon::parse($newProject->start_date)->addMonths($interval * $i);
+                    $newEndDate = Carbon::parse($newProject->end_date)->addMonths($interval * $i);
+                }
+
+                DB::table('projects')->where('id', $newProjectId)->update([
+                    'start_date' => $newStartDate,
+                    'end_date' => $newEndDate,
+                ]);
+            }
+        }
     }
     public static function beforesave(Request $request, $model)
     {
@@ -612,46 +613,6 @@ class QawafilAlaqsa extends Resource
 
                         );
                 }
-            }
-        }
-
-        $replicationIntervals = [
-            "1" => 1,          // 1 day
-            "2" => 7,          // 7 days
-            "3" => 14,         // 14 days
-            "4" => 1,          // 1 month
-            "5" => 12,         // 1 year (12 months)
-        ];
-        $interval = isset($replicationIntervals[$model->repetition]) ? $replicationIntervals[$model->repetition] : 0;
-        if ($interval > 0) {
-            for ($i = 1; $i <= 7; $i++) {
-                $newProjectId = DB::table('projects')->insertGetId([
-                    'project_type' => 2,
-                    'project_name' => $model->project_name,
-                    'project_describe' => $model->project_describe,
-                    'city' => $model->city,
-                    'repetition' => $model->repetition,
-                    'admin_id' => $model->admin_id,
-                    'trip_from' => $model->trip_from,
-                    'trip_to' => $model->trip_to,
-                    'start_date' => $model->start_date,
-                    'end_date' => $model->end_date,
-                    'note' => $model->note,
-                    'created_by' =>$model->created_by,
-                ]);
-                $newProject = DB::table('projects')->where('id', $newProjectId)->first();
-                if ($interval < 12) {
-                    $newStartDate = Carbon::parse($newProject->start_date)->addDays($interval * $i);
-                    $newEndDate = Carbon::parse($newProject->end_date)->addDays($interval * $i);
-                } else {
-                    $newStartDate = Carbon::parse($newProject->start_date)->addMonths($interval * $i);
-                    $newEndDate = Carbon::parse($newProject->end_date)->addMonths($interval * $i);
-                }
-
-                DB::table('projects')->where('id', $newProjectId)->update([
-                    'start_date' => $newStartDate,
-                    'end_date' => $newEndDate,
-                ]);
             }
         }
         $buses = $model->Bus;
