@@ -109,34 +109,29 @@ class QawafilAlaqsa extends Resource
                     ->first();
                 switch ($CloseProject->repetition) {
                     case "1":
-
                         $newQafel = $CloseProject->replicate();
-                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addDays(1);
-                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addDays(1);
-
-
-
+                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addDays(8);
+                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addDays(8);
                         break;
                     case "2":
                         $newQafel = $CloseProject->replicate();
-                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addDays(7);
-                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addDays(7);
+                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addWeeks(8);
+                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addWeeks(8);
                         break;
                     case "3":
                         $newQafel = $CloseProject->replicate();
-                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addDays(14);
-                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addDays(14);
+                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addWeeks(8);
+                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addWeeks(8);
                         break;
                     case "4":
                         $newQafel = $CloseProject->replicate();
-                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addMonth();
-                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addMonth();
-
+                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addMonths(8);
+                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addMonths(8);
                         break;
                     case "5":
                         $newQafel = $CloseProject->replicate();
-                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addYear();
-                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addYear();
+                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addYears(8);
+                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addYears(8);
                         break;
                     default:
                         break;
