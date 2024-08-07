@@ -628,7 +628,7 @@ class QawafilAlaqsa extends Resource
                 $newProjectId = DB::table('projects')->insertGetId([
                     'project_type' => 2,
                     'project_name' => $model->project_name,
-                    'project_describe' => "  ",
+                    'project_describe' => $model->project_describe,
                     'city' => $model->city,
                     'repetition' => $model->repetition,
                     'admin_id' => $model->admin_id,
