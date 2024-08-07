@@ -637,7 +637,7 @@ class QawafilAlaqsa extends Resource
                     'start_date' => $model->start_date,
                     'end_date' => $model->end_date,
                     'note' => $model->note,
-                    'created_by' => Auth::id(),
+                    'created_by' =>$model->created_by,
                 ]);
                 $newProject = DB::table('projects')->where('id', $newProjectId)->first();
                 if ($interval < 12) {
