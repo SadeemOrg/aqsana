@@ -150,10 +150,10 @@ $tiktok_Link = nova_get_setting('tiktok', 'https://www.tiktok.com/@alaqsa.quds')
 
             <p class="text-16px">
                 Copyright
-                <?php echo date("Y"); ?> Name By                
-                <a target="_blank" href="https://averotech.com/" class="avero-name mt-3 pb-0 text-[#CC9933] hover:text-[#CC9933]">                          
-                    Averotech
-                </a>                
+                <?php echo date("Y"); ?> Name By
+                <a target="_blank" href="https://sadeembd.com/" class="avero-name mt-3 pb-0 text-[#CC9933] hover:text-[#CC9933]">
+                    Sadeem
+                </a>
             </p>
         </div>
     </div>
