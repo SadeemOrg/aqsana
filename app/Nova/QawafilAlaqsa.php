@@ -7,6 +7,7 @@ use App\Models\{
     City,
     Address,
     Bus,
+    Project,
     TripBooking,
 };
 use Illuminate\Http\Request;
@@ -417,21 +418,21 @@ class QawafilAlaqsa extends Resource
 
 
 
-            if (!isset($request->newadresFrom[0]['attributes']['name_address']) ) {
+            if (!isset($request->newadresFrom[0]['attributes']['name_address'])) {
                 $validator->errors()->add($request->newadresFrom[0]['key'] . '__name_address', 'هذا الحقل مطلوب');
             }
-            if (!isset($request->newadresFrom[0]['attributes']['city_id']) ) {
+            if (!isset($request->newadresFrom[0]['attributes']['city_id'])) {
                 $validator->errors()->add($request->newadresFrom[0]['key'] . '__city_id', 'هذا الحقل مطلوب');
             }
 
-            if (($request->newadresFrom[0]['attributes']['current_location'])== 'null' ) {
+            if (($request->newadresFrom[0]['attributes']['current_location']) == 'null') {
                 $validator->errors()->add($request->newadresFrom[0]['key'] . '__current_location', 'هذا الحقل مطلوب');
             }
-
         }
     }
     public static function beforeCreate(Request $request, $model)
     {
+
         $id = Auth::id();
 
         $model->created_by = $id;
@@ -444,6 +445,9 @@ class QawafilAlaqsa extends Resource
     }
     public static function afterCreate(Request $request, $model)
     {
+
+
+
         DB::table('project_status')->insert([
             'project_id' => $model->id,
             'status' => 2,
@@ -459,7 +463,47 @@ class QawafilAlaqsa extends Resource
             ]);
         }
 
-        $model->newbus = null;
+        // $model->newbus = null;
+
+        // $replicationIntervals = [
+        //     "1" => 1,          // 1 day
+        //     "2" => 7,          // 7 days
+        //     "3" => 14,         // 14 days
+        //     "4" => 1,          // 1 month
+        //     "5" => 12,         // 1 year (12 months)
+        // ];
+        // $interval = isset($replicationIntervals[$model->repetition]) ? $replicationIntervals[$model->repetition] : 0;
+        // if ($interval > 0) {
+        //     for ($i = 1; $i <= 7; $i++) {
+        //         $newProjectId = DB::table('projects')->insertGetId([
+        //             'project_type' => 2,
+        //             'project_name' => $model->project_name,
+        //             'project_describe' => "  ",
+        //             'city' => $model->city,
+        //             'repetition' => $model->repetition,
+        //             'admin_id' => $model->admin_id,
+        //             'trip_from' => $model->trip_from,
+        //             'trip_to' => $model->trip_to,
+        //             'start_date' => $model->start_date,
+        //             'end_date' => $model->end_date,
+        //             'note' => $model->note,
+        //             'created_by' => Auth::id(),
+        //         ]);
+        //         $newProject = DB::table('projects')->where('id', $newProjectId)->first();
+        //         if ($interval < 12) {
+        //             $newStartDate = Carbon::parse($newProject->start_date)->addDays($interval * $i);
+        //             $newEndDate = Carbon::parse($newProject->end_date)->addDays($interval * $i);
+        //         } else {
+        //             $newStartDate = Carbon::parse($newProject->start_date)->addMonths($interval * $i);
+        //             $newEndDate = Carbon::parse($newProject->end_date)->addMonths($interval * $i);
+        //         }
+
+        //         DB::table('projects')->where('id', $newProjectId)->update([
+        //             'start_date' => $newStartDate,
+        //             'end_date' => $newEndDate,
+        //         ]);
+        //     }
+        // }
     }
     public static function beforesave(Request $request, $model)
     {
@@ -470,8 +514,7 @@ class QawafilAlaqsa extends Resource
             address::find($request->trip_from);
             $model->city = address::find($request->trip_from)->city_id;
             $model->area = address::find($request->trip_from)->area_id;
-        }
-        else{
+        } else {
             $id = Auth::id();
             if ($request->newadresFrom) {
                 $address = address::create([
@@ -490,7 +533,6 @@ class QawafilAlaqsa extends Resource
                 $model->city = address::find($address->id)->city_id;
                 $model->area = address::find($address->id)->area_id;
             }
-
         }
         $request->request->remove('newadresFrom');
     }
@@ -573,6 +615,57 @@ class QawafilAlaqsa extends Resource
             }
         }
 
+        $replicationIntervals = [
+            "1" => 1,          // 1 day
+            "2" => 7,          // 7 days
+            "3" => 14,         // 14 days
+            "4" => 1,          // 1 month
+            "5" => 12,         // 1 year (12 months)
+        ];
+        $interval = isset($replicationIntervals[$model->repetition]) ? $replicationIntervals[$model->repetition] : 0;
+        if ($interval > 0) {
+            for ($i = 1; $i <= 7; $i++) {
+                $newProjectId = DB::table('projects')->insertGetId([
+                    'project_type' => 2,
+                    'project_name' => $model->project_name,
+                    'project_describe' => "  ",
+                    'city' => $model->city,
+                    'repetition' => $model->repetition,
+                    'admin_id' => $model->admin_id,
+                    'trip_from' => $model->trip_from,
+                    'trip_to' => $model->trip_to,
+                    'start_date' => $model->start_date,
+                    'end_date' => $model->end_date,
+                    'note' => $model->note,
+                    'created_by' => Auth::id(),
+                ]);
+                $newProject = DB::table('projects')->where('id', $newProjectId)->first();
+                if ($interval < 12) {
+                    $newStartDate = Carbon::parse($newProject->start_date)->addDays($interval * $i);
+                    $newEndDate = Carbon::parse($newProject->end_date)->addDays($interval * $i);
+                } else {
+                    $newStartDate = Carbon::parse($newProject->start_date)->addMonths($interval * $i);
+                    $newEndDate = Carbon::parse($newProject->end_date)->addMonths($interval * $i);
+                }
+
+                DB::table('projects')->where('id', $newProjectId)->update([
+                    'start_date' => $newStartDate,
+                    'end_date' => $newEndDate,
+                ]);
+            }
+        }
+        $buses = $model->Bus;
+        $newProjects = Project::where('project_name', $model->project_name)
+            ->where('trip_from', $model->trip_from)
+            ->get();
+        $newProjects->map(function ($project) use ($buses) {
+            // Loop through each bus and attach it to the project if not already attached
+            $buses->each(function ($bus) use ($project) {
+                if (!$project->Bus->contains($bus->id)) {
+                    $project->Bus()->attach($bus->id);
+                }
+            });
+        });
     }
     /**
      * Get the cards available for the request.
