@@ -303,7 +303,7 @@
                             </div>
                             <div class="flex flex-row items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-1/2">
-                                    <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
+                                    <input type="time" 
                                         wire:model.defer="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
 
@@ -312,7 +312,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-2 selectdiv w-1/2">
-                                    <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
+                                    <input type="time"
                                         wire:model.defer="end_time"
                                         class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
                                     <div class="text-red-600 text-sm px-2 text-right">
@@ -374,7 +374,7 @@
                                     <label for="appt" class="text-[#349A37] text-sm mt-3 w-[84px] sm:w-auto">ساعة البدء:</label>
                                     <input type="time" id="appt" wire:model.defer="start_time"
                                         wire:change='addModeOnChange("start_time")' 
-                                        class="border border-[#349A37] text-center lg:w-[110px] text-[#349A37]  text-base rounded-[60px] focus:ring-2 focus:ring-offset-0 focus:ring-[#349A37]"
+                                        class="border border-[#349A37] text-center lg:w-[110px] text-[#349A37] text-base rounded-[60px] focus:ring-2 focus:ring-offset-0 focus:ring-[#349A37]"
                                          />
                                 </div>
                                 <div class="flex flex-row items-start justify-start gap-x-1">
