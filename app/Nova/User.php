@@ -93,14 +93,14 @@ class User extends Resource
             Text::make(__('Name'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255')
-                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->name : '']),
+                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->name : $this->name]),
 
             Text::make(__('email'), 'email')
                 ->sortable()
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}')
-                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->email : '']),
+                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->email : $this->email]),
 
 
 
@@ -113,7 +113,7 @@ class User extends Resource
 
             Number::make(__('Phone'), 'phone')
                 ->textAlign('left')
-                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->phone_number : '']),
+                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->phone_number : $this->phone]),
             Date::make(__('Birth Date'), 'birth_date'),
             Image::make(__('photo'), 'photo')->disk('public'),
             Multiselect::make(__('city'), 'city')
@@ -131,7 +131,7 @@ class User extends Resource
                     return $Area_type_admin_array;
                 })->singleSelect()->hideFromIndex()->hideFromDetail()
 
-                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->city : '']),
+                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->city : $this->city]),
             BelongsTo::make(__('city'), 'citeDelegate', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating()->nullable(),
             BelongsTo::make(__('Role_user'), 'Role', \App\Nova\Role::class),
 
