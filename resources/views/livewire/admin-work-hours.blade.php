@@ -352,12 +352,13 @@
                             </svg>
                         </button>
                         <form class="Wraper2" wire:submit.prevent="AddDay">
-                            <p class="w-full text-center mt-2 text-[20px] text-[#151630]">اضافة ساعات العمل </p>
+                            <p class="w-full text-center mt-2 text-[#349A37] text-[20px]">اضافة ساعات
+                                العمل </p>
                             <!--First One -->
                             <div class="mt-2 selectdiv ">
                                 <select wire:model.defer="ModelId" name="ModelId"
                                     wire:change='addModeOnChange("ModelId")'
-                                    class="h-12 text-[#349A37] w-full text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37] ">
+                                    class="h-12 text-[#349A37] w-full text-right border-[#349A37] border rounded-[60px] sm:text-base px-4 placeholder-[#349A37] focus:ring-2 focus:ring-offset-0 focus:ring-[#349A37]">
                                     <option class="text-black" value="0" disabled> اسم الموظف </option>
                                     @foreach ($users as $user)
                                         <option class="text-[#349A37] " value="{{ $user['id'] }}">
@@ -368,26 +369,31 @@
                                     {!! $this->ModelIdErorrUser !!}
                                 </div>
                             </div>
-                            <div class="flex flex-row gap-2 items-center flex-wrap sm:flex-nowrap justify-between">
-                                <div class="mt-2 selectdiv w-full sm:w-1/2">
-                                    <input type="text" placeholder="ساعة البدء" onfocus="handelInputtimeFrom()"
-                                        wire:model.defer="start_time" wire:change='addModeOnChange("start_time")'
-                                        class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
-                                    <div class="text-red-600 text-sm px-2 text-right">
-                                        {!! $this->startTimeErorr !!}
-                                    </div>
+                            <div class="flex flex-row flex-wrap gap-y-2 items-center my-3 justify-start gap-x-2">
+                                <div class="flex flex-row items-start justify-start gap-x-1">
+                                    <label for="appt" class="text-[#349A37] text-sm mt-3 w-[84px] sm:w-auto">ساعة البدء:</label>
+                                    <input type="time" id="appt" wire:model.defer="start_time"
+                                        wire:change='addModeOnChange("start_time")' 
+                                        class="border border-[#349A37] text-center lg:w-[110px] text-[#349A37]  text-base rounded-[60px] focus:ring-2 focus:ring-offset-0 focus:ring-[#349A37]"
+                                         />
                                 </div>
-                                <div class="sm:mt-2 selectdiv w-full sm:w-1/2">
-                                    <input type="text" onfocus="handelInputtimeTo()" placeholder="ساعة الانتهاء"
-                                        wire:model.defer="end_time" wire:change='addModeOnChange("end_time")'
-                                        class="foucsTimeEnd h-12 bg-transparent border border-[#349A37] w-full text-[#349A37] text-sm text-right rounded-[60px] block  p-2.5 placeholder-[#349A37] ">
-
-                                    <div class="text-red-600 text-sm px-2 text-right">
-                                        {!! $this->endTimeWorkHoursErorr !!}
-                                        {{ $this->error }}
-                                    </div>
+                                <div class="flex flex-row items-start justify-start gap-x-1">
+                                    <label for="appt_end" class="text-[#349A37] text-sm mt-3">ساعة الانتهاء:</label>
+                                    <input type="time" id="appt_end" wire:model.defer="end_time"
+                                        wire:change='addModeOnChange("end_time")'
+                                        class="border border-[#349A37] px-4 text-[#349A37] text-base text-center lg:w-[114px] rounded-[60px] focus:ring-2 focus:ring-offset-0 focus:ring-[#349A37]"
+                                         /> 
                                 </div>
                             </div>
+                            <div class="flex flex-row items-center mx-4 justify-between ">
+                            <div class="text-red-600 text-sm  text-right">
+                                {!! $this->startTimeErorr !!}
+                            </div>
+                            <div class="text-red-600 text-sm  text-right">
+                                {!! $this->endTimeWorkHoursErorr !!}
+                                {{ $this->error }}
+                            </div>
+                        </div>
                             <div class="mt-2 selectdiv relative">
                                 <input type="text" id="hidePlaceHolderDatePopUp" wire:model.defer="date"
                                     wire:change='addModeOnChange("date")'
@@ -414,11 +420,7 @@
                                 </button>
                             </div>
                     </div>
-
                     </form>
-
-
-
                     <!--Endsecond Page -->
                 </div>
             </div>
