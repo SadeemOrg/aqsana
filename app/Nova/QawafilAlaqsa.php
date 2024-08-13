@@ -572,6 +572,12 @@ class QawafilAlaqsa extends Resource
                     'start_date' => $newStartDate,
                     'end_date' => $newEndDate,
                 ]);
+
+                DB::table('project_status')->insert([
+                    'project_id' => $newProjectId,
+                    'status' => 2,
+                ]);
+
             }
         }
     }
