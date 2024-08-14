@@ -185,10 +185,10 @@ class TelephoneDirectory extends Resource
 
         if ($phoneNumber) {
             $phoneNumber = str_replace('-', '', $phoneNumber);
-            $phoneNumber = preg_replace('/^\+072/', '0', $phoneNumber);
-            $phoneNumber = preg_replace('/^\+070/', '0', $phoneNumber);
-            $phoneNumber = preg_replace('/^\0070/', '0', $phoneNumber);
-            $phoneNumber = preg_replace('/^\0072/', '0', $phoneNumber);
+            $phoneNumber = preg_replace('/^\+972/', '0', $phoneNumber);
+            $phoneNumber = preg_replace('/^\+970/', '0', $phoneNumber);
+            $phoneNumber = preg_replace('/^\0970/', '0', $phoneNumber);
+            $phoneNumber = preg_replace('/^\0972/', '0', $phoneNumber);
 
             $request->merge(['phone_number' => $phoneNumber]);
         }
