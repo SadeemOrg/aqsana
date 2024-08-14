@@ -93,7 +93,7 @@ class TripController extends BaseController
         });
         $trips = $trips->filter(function ($trip) {
             return $trip->from_distance < 20;
-        })->sortBy('from_distance');
+        })->sortBy('from_distance')->sortBy('start_date');
         $trips = $trips->skip($request->get("skip"));
 
         $trips = $trips->values()->all();
@@ -160,10 +160,8 @@ class TripController extends BaseController
                 $to_lat = 180;
                 $to_lng = -180;
             }
-
             $from_distance = Helpers::distance($request->lat, $request->lng, $from_lat, $from_lng, 'K');
             $trip->from_distance = round($from_distance, 2);
-
 
             $to_distance = Helpers::distance($request->lat, $request->lng, $to_lat, $to_lng, 'K');
             $trip->to_distance = round($to_distance, 2);
@@ -185,14 +183,15 @@ class TripController extends BaseController
             }
         });
         if (Auth()->id() != null && $trip_booking != null) {
-            $trips = $trips->sortBy('from_distance');
+            $trips = $trips->sortBy('from_distance')->sortBy('start_date');
         } else {
             $trips = $trips->filter(function ($trip) {
                 return $trip->from_distance < 20;
-            })->sortBy('from_distance');
+            })->sortBy('from_distance')->sortBy('start_date');
         }
-
-
+        $trips = $trips->filter(function ($trip) {
+            return $trip->from_distance < 20;
+        })->sortBy('from_distance')->sortBy('start_date');
 
         $trip = $trips->first();
 
