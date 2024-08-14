@@ -53,19 +53,19 @@ class TripController extends BaseController
 
             if (($trip->tripfrom) != null && isset($trip->tripfrom->current_location)) {
                 $from_latlng = $trip->tripfrom;
-                $from_lat = isset($from_latlng->current_location['latitude']) ? $from_latlng->current_location['latitude'] : 180;
-                $from_lng = isset($from_latlng->current_location['longitude']) ? $from_latlng->current_location['longitude'] : -180;
+                $from_lat = isset($from_latlng->current_location['latitude']) ? $from_latlng->current_location['latitude'] : 32.130492742251334;
+                $from_lng = isset($from_latlng->current_location['longitude']) ? $from_latlng->current_location['longitude'] : 34.97348856681219;
             } else {
-                $from_lat = 180;
-                $from_lng = -180;
+                $from_lat = 32.130492742251334;
+                $from_lng = 34.97348856681219;
             }
             if (($trip->tripto) != null && isset($trip->tripto->current_location)) {
                 $to_latlng = $trip->tripto;
-                $to_lat = isset($to_latlng->current_location['latitude']) ? $to_latlng->current_location['latitude'] : 180;
-                $to_lng = isset($to_latlng->current_location['longitude']) ? $to_latlng->current_location['longitude'] : -180;
+                $to_lat = isset($to_latlng->current_location['latitude']) ? $to_latlng->current_location['latitude'] : 32.130492742251334;
+                $to_lng = isset($to_latlng->current_location['longitude']) ? $to_latlng->current_location['longitude'] : 34.97348856681219;
             } else {
-                $to_lat = 180;
-                $to_lng = -180;
+                $to_lat = 32.130492742251334;
+                $to_lng = 34.97348856681219;
             }
 
             $from_distance = Helpers::distance($request->lat, $request->lng, $from_lat, $from_lng, 'K');
@@ -146,19 +146,19 @@ class TripController extends BaseController
 
             if (($trip->tripfrom) != null && isset($trip->tripfrom->current_location)) {
                 $from_latlng = $trip->tripfrom;
-                $from_lat = isset($from_latlng->current_location['latitude']) ? $from_latlng->current_location['latitude'] : 180;
-                $from_lng = isset($from_latlng->current_location['longitude']) ? $from_latlng->current_location['longitude'] : -180;
+                $from_lat = isset($from_latlng->current_location['latitude']) ? $from_latlng->current_location['latitude'] : 32.130492742251334;
+                $from_lng = isset($from_latlng->current_location['longitude']) ? $from_latlng->current_location['longitude'] : 34.97348856681219;
             } else {
-                $from_lat = 180;
-                $from_lng = -180;
+                $from_lat = 32.130492742251334;
+                $from_lng = 34.97348856681219;
             }
             if (($trip->tripto) != null && isset($trip->tripto->current_location)) {
                 $to_latlng = $trip->tripto;
-                $to_lat = isset($to_latlng->current_location['latitude']) ? $to_latlng->current_location['latitude'] : 180;
-                $to_lng = isset($to_latlng->current_location['longitude']) ? $to_latlng->current_location['longitude'] : -180;
+                $to_lat = isset($to_latlng->current_location['latitude']) ? $to_latlng->current_location['latitude'] : 32.130492742251334;
+                $to_lng = isset($to_latlng->current_location['longitude']) ? $to_latlng->current_location['longitude'] : 34.97348856681219;
             } else {
-                $to_lat = 180;
-                $to_lng = -180;
+                $to_lat = 32.130492742251334;
+                $to_lng = 34.97348856681219;
             }
             $from_distance = Helpers::distance($request->lat, $request->lng, $from_lat, $from_lng, 'K');
             $trip->from_distance = round($from_distance, 2);
@@ -233,8 +233,8 @@ class TripController extends BaseController
                 $from_lat = $from_latlng->latitude;
                 $from_lng = $from_latlng->longitude;
             } else {
-                $from_lat = 180;
-                $from_lng = -180;
+                $from_lat = 32.130492742251334;
+                $from_lng = 34.97348856681219;
             }
 
 
@@ -243,8 +243,8 @@ class TripController extends BaseController
                 $to_lat = $to_latlng->latitude;
                 $to_lng = $to_latlng->longitude;
             } else {
-                $to_lat = 180;
-                $to_lng = -180;
+                $to_lat = 32.130492742251334;
+                $to_lng = 34.97348856681219;
             }
 
 
