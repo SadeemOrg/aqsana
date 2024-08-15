@@ -95,9 +95,9 @@ class News extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make("Title", 'title'),
+            Text::make("العنوان", 'title')->rules('required'),
             //   BelongsTo::make("newsType",'newsTypes'),
-            Textarea::make('description', 'description'),
+            Textarea::make('وصف', 'description')->rules('required'),
             // Select::make("main sector", "sector")
             // ->options([
             //     '1' => 'قطاع الاغاثة',
@@ -107,7 +107,7 @@ class News extends Resource
             //     '5' => 'قطاع الصحة ',
             // ])->displayUsingLabels(),
 
-            Select::make('sector', 'sector')
+            Select::make('قطاع', 'sector')
                 ->options(function () {
                     // // $users =  \App\Models\User::where('user_role', '=', 'regular_area')->get();
                     //     $user = DB::table('nova_settings')
@@ -121,52 +121,45 @@ class News extends Resource
                     }
 
 
-                    // foreach($users as $user) {
-                    //     if ($user->Area == null  ) {
 
-
-                    //     $user_type_admin_array += [$user['id'] => ($user['name'] . " (". $user['user_role'] .")")];
-                    // }
-                    // }
                     return  $user_type_admin_array;
                     // return $user->value;
                 })->hideFromIndex()->hideFromDetail(),
-            Select::make("main Type", "main_type")
+            Select::make("النوع الرئيسي", "main_type")
                 ->options([
-                    '1' => 'News',
-                    '2' => 'alqudus walmasjid alaqsaa',
-                    '3' => 'alqudus walmasjid alaqsaa',
+                    '1' => 'اخبار',
+                    '2' => 'القدس والمسحد الاقصي',
 
 
-                ])->displayUsingLabels(),
+                ])->displayUsingLabels()->rules('required'),
 
 
             NovaDependencyContainer::make([
-                Select::make(" type", "type")
+                Select::make(" نوع", "type")
                     ->options([
-                        '1' => 'News',
-                        '2' => 'Blogs',
-                        '3' => 'Report',
-                    ])->displayUsingLabels(),
+                        '1' => 'اخبار',
+                        '2' => 'المدونات',
+                        '3' => 'تقارير',
+                    ])->displayUsingLabels()->rules('required'),
             ])->dependsOn('main_type', '1'),
 
 
             NovaDependencyContainer::make([
-                Select::make(" type", "type")
+                Select::make(" نوع", "type")
                     ->options([
-                        '1' => 'News',
-                        '2' => 'Blogs',
-                        '3' => 'Report',
-                    ])->displayUsingLabels(),
+                        '1' => 'اخبار',
+                        '2' => 'المدونات',
+                        '3' => 'تقارير',
+                    ])->displayUsingLabels()->rules('required'),
             ])->dependsOn('main_type', '2'),
 
 
             NovaDependencyContainer::make([
-                Select::make(" type", "type")
+                Select::make(" نوع", "type")
                     ->options([
-                        '1' => 'News',
-                        '2' => 'almas alsamel',
-                    ])->displayUsingLabels(),
+                        '1' => 'اخبار',
+                      '2' => 'المسح الشامل',
+                    ])->displayUsingLabels()->rules('required'),
             ])->dependsOn('main_type', '3'),
 
 
@@ -174,7 +167,7 @@ class News extends Resource
             // CKEditor::make('Contents', 'contents')->hidefromindex(),
 
 
-            Tiptap::make(__('Contents'), 'contents')
+            Tiptap::make(__('محتوى'), 'contents')
                 ->buttons([
                     'heading',
                     'italic',
@@ -198,14 +191,14 @@ class News extends Resource
                                         'history',
                 ])
                 ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
-            Image::make('Image', 'image')->disk('public')->prunable(),
-            ArrayImages::make('Pictures', 'pictures')
+            Image::make('صورة', 'image')->disk('public')->prunable()->rules('required'),
+            ArrayImages::make('صور', 'pictures')
                 ->disk('public'),
 
-            Text::make("video link", 'video_link'),
+            Text::make("رابط الفيديو", 'video_link'),
 
             // Date::make('date', 'new_date'),
-            Date::make('date', 'new_date')->pickerDisplayFormat('d.m.Y'),
+            Date::make('تاريخ', 'new_date')->pickerDisplayFormat('d.m.Y')->rules('required'),
 
 
 
