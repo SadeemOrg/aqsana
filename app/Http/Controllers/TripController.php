@@ -26,7 +26,7 @@ class TripController extends BaseController
 
         $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
             ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())
-            ->latest('id')->take(5)->get();
+            ->latest('id')->get();
 
         $trips->map(function ($trip) use ($request) {
 
@@ -96,7 +96,7 @@ class TripController extends BaseController
         })->sortBy('from_distance')->sortBy('start_date');
         $trips = $trips->skip($request->get("skip"));
 
-        $trips = $trips->values()->all();
+        $trips = $trips->values()->take(5)->all();
 
 
         return $this->sendResponse($trips, 'Success get Trips');
