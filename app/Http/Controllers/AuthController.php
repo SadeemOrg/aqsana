@@ -53,7 +53,7 @@ class AuthController extends Controller
         // $arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
         // $englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
         // $requestData['phone_number'] = str_replace($arabicNumbers, $englishNumbers, $requestData['phone']);
-        // $requestData['phone'] = $requestData['phone_number'];
+        // $requestData['phone'] = $requestData['phone'];
 
         $validator = Validator::make($requestData, [
             'name' => 'required|string',
@@ -61,7 +61,7 @@ class AuthController extends Controller
             'password' => 'required|string',
             'user_role' => 'required|string',
             // 'city' => 'required',
-            'phone'  => 'required|unique:users|digits_between:10,14',
+            // 'phone'  => 'required|unique:users|digits_between:10,14',
         ], [
             'name.required' => 'الاسم مطلوب.',
             'name.string' => 'يجب أن يكون الاسم نصًا.',
