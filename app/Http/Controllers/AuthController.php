@@ -60,7 +60,7 @@ class AuthController extends Controller
             'email' => 'required|string|unique:users|email',
             'password' => 'required|string',
             'user_role' => 'required|string',
-            'city' => 'required',
+            // 'city' => 'required',
             'phone'  => 'required|unique:users|digits_between:10,14',
         ], [
             'name.required' => 'الاسم مطلوب.',
@@ -98,7 +98,7 @@ class AuthController extends Controller
             'password' => bcrypt($validatedData['password']),
             'user_role' => $validatedData['user_role'],
             'app_user' => 1,
-            'city' => $validatedData['city'],
+            // 'city' => $validatedData['city'],
 
         ]);
         TelephoneDirectory::create([
@@ -106,8 +106,8 @@ class AuthController extends Controller
             'email' => $validatedData['email'],
             'phone_number' => $validatedData['phone'],
             'type'=>["112"],
-            'city' => $validatedData['city'],
-            'Area' =>Area::find(City::find($validatedData['city'])->area_id)->id ,
+            // 'city' => $validatedData['city'],
+            // 'Area' =>Area::find(City::find($validatedData['city'])->area_id)->id ,
 
         ]);
         $token = $user->createToken('myapptoken')->plainTextToken;
