@@ -52,8 +52,7 @@ class AuthController extends Controller
         $requestData = $request->all();
         $arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
         $englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
-        $requestData['phone_number'] = str_replace($arabicNumbers, $englishNumbers, $requestData['phone_number']);
+        $requestData['phone_number'] = str_replace($arabicNumbers, $englishNumbers, $requestData['phone']);
         $requestData['phone'] = $requestData['phone_number'];
 
         $validator = Validator::make($requestData, [
@@ -61,7 +60,7 @@ class AuthController extends Controller
             'email' => 'required|string|unique:users|email',
             'password' => 'required|string',
             'user_role' => 'required|string',
-            // 'city' => 'required',
+            'city' => 'required',
             'phone'  => 'required|unique:users|digits_between:10,14',
         ], [
             'name.required' => 'الاسم مطلوب.',
@@ -99,7 +98,7 @@ class AuthController extends Controller
             'password' => bcrypt($validatedData['password']),
             'user_role' => $validatedData['user_role'],
             'app_user' => 1,
-            // 'city' => $validatedData['city'],
+            'city' => $validatedData['city'],
 
         ]);
         TelephoneDirectory::create([
