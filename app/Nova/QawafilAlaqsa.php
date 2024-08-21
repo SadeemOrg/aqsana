@@ -382,16 +382,22 @@ class QawafilAlaqsa extends Resource
                     $buss = $this->bus;
                     $number = 0;
                     $text = '';
-                    foreach ($buss as $key => $bus) {
-                        $number_of_people = TripBooking::where([
-                            ['bus_id', $bus->id],
-                            ['status', '1'],
-                        ])->sum('number_of_people');
-                        $text .=  'اسم الباص:    '  . $bus->bus_number . "   " . 'عدد  الاشخاص المتبقي:    ' . ($bus->number_of_seats - $number_of_people) . "</br>";
 
-                        $number +=  $number_of_people;
+                    foreach ($buss as $key => $bus) {
+                        $number_of_people = TripBooking::where('bus_id', $bus->id)
+                            ->where('status', '1')
+                            ->whereHas('Project', function ($query) {
+                                $query->whereBetween('start_date', [$this->start_date, $this->end_date]);
+                            })
+                            ->sum('number_of_people');
+
+                        $text .=  'اسم الباص: '  . $bus->bus_number . " عدد الاشخاص المتبقي: " . ($bus->number_of_seats - $number_of_people) . "</br>";
+
+                        $number += $number_of_people;
                     }
-                    $number +  $number . "</br>";
+
+                    // Output the total number of people
+                    $text .= "إجمالي عدد الأشخاص: " . $number . "</br>";
                     return $text;
                 })->hideFromIndex()->hideWhenCreating()->hideWhenUpdating()->asHtml(),
 
@@ -577,7 +583,6 @@ class QawafilAlaqsa extends Resource
                     'project_id' => $newProjectId,
                     'status' => 2,
                 ]);
-
             }
         }
     }

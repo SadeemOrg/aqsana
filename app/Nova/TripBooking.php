@@ -102,7 +102,7 @@ class TripBooking extends Resource
 
 
 
-                })->singleSelect()->rules('required',new CustomRule($request->number_of_people))->hideFromIndex()->hideFromDetail(),
+                })->singleSelect()->rules('required',new CustomRule($request->number_of_people,$viaResourceId))->hideFromIndex()->hideFromDetail(),
 
 
             BelongsTo::make(__('user'), 'Users', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),

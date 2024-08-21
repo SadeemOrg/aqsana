@@ -16,10 +16,14 @@ class CustomRule implements Rule
      * @return void
      */
     public $number;
-    public function __construct($number)
+    public $project_id;
+
+    public function __construct($number, $project_id)
     {
         $this->number = $number;
+        $this->project_id = $project_id;
     }
+
 
     /**
      * Determine if the validation rule passes.
@@ -30,47 +34,46 @@ class CustomRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $bus=Bus::find($value);
+        // Fetch the project and its related buses
+        $project = Project::where('id', $this->project_id)->with('Bus')->first();
+        
+        if (!$project) {
+            return false;
+        }
 
-        $number_of_people = TripBooking::where([
-            ['bus_id', $value],
-            ['status', '1'],
-        ])->sum('number_of_people');
-        if($number_of_people + $this->number <= $bus->number_of_seats){
+        $start_date = $project->start_date;
+        $end_date = $project->end_date;
 
+        $buses = $project->Bus;
+
+        $number_of_people = 0;
+        $text = '';
+
+        foreach ($buses as $bus) {
+            $number_of_people_in_bus = TripBooking::where('bus_id', $bus->id)
+                ->where('status', '1')
+                ->whereHas('Project', function ($query) use ($start_date, $end_date) {
+                    $query->whereBetween('start_date', [$start_date, $end_date]);
+                })
+                ->sum('number_of_people');
+
+            $remaining_seats = $bus->number_of_seats - $number_of_people_in_bus;
+            $text .= 'اسم الباص: ' . $bus->bus_number . " عدد الاشخاص المتبقي: " . $remaining_seats . "</br>";
+
+            $number_of_people += $number_of_people_in_bus;
+        }
+
+        // Output the total number of people
+        $text .= "إجمالي عدد الأشخاص: " . $number_of_people . "</br>";
+
+        // Check if there are enough seats in the buses
+        $total_seats = $buses->sum('number_of_seats');
+        if ($total_seats >= $this->number) {
             return true;
         }
+
+        $this->message = $text; // Set the custom message
         return false;
-
-
-        $IsFull = 1;
-
-        $projext = Project::where('id', $value)->with('bus')->first();
-
-        $buss = $projext->bus;
-        $number_of_people_in_all=0;
-        $number_of_seats_in_all=0;
-
-        foreach ($buss as $key => $bus) {
-
-            $number_of_people = TripBooking::where([
-                ['bus_id', $bus->id],
-                ['status', '1'],
-            ])->sum('number_of_people');
-
-            $number_of_seats_in_all +=$bus->number_of_seats;
-            $number_of_people_in_all +=$number_of_people;
-
-
-
-
-        }
-           if (($number_of_seats_in_all >= $this->number)) {
-                return true;
-            }
-            return false;
-
-
     }
 
     /**

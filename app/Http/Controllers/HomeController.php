@@ -779,23 +779,27 @@ class HomeController extends BaseController
     {
 
         $busarray = array();
-        $projext = Project::where('id', $request->id)->with('bus')->first();
+        $project = Project::where('id', $request->id)->with('bus')->first();
 
-        if (isset($projext)) {
-
+        if (isset($project)) {
+            $startDate = $project->start_date;
+            $endDate = $project->end_date;
+            $buses = $project->Bus;
 
             $text = '';
-            $buss = $projext->bus;
+            $buss = $project->bus;
             foreach ($buss as $key => $bus) {
-                $number_of_people = TripBooking::where([
-                    ['bus_id', $bus->id],
-                    ['status', '1'],
-                ])->sum('number_of_people');
+                $numberOfPeople = TripBooking::where('bus_id', $bus->id)
+                ->where('status', '1')
+                ->whereHas('Project', function ($query) use ($startDate, $endDate) {
+                    $query->whereBetween('start_date', [$startDate, $endDate]);
+                })
+                ->sum('number_of_people'); 
 
                 $pus = array(
                     "bus_number" => $bus->bus_number,
                     "number_of_seats" => $bus->number_of_seats,
-                    "number_of_people" => ($bus->number_of_seats - $number_of_people),
+                    "number_of_people" => ($bus->number_of_seats - $numberOfPeople),
                 );
 
                 array_push($busarray, $pus);

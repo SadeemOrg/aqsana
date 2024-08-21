@@ -33,10 +33,12 @@ class TripController extends BaseController
             $buss = $trip->bus;
             $number = 0;
             foreach ($buss as $key => $bus) {
-                $number_of_people = TripBooking::where([
-                    ['bus_id', $bus->id],
-                    ['status', '1'],
-                ])->sum('number_of_people');
+                $number_of_people = TripBooking::where('bus_id', $bus->id)
+                ->where('status', '1')
+                ->whereHas('Project', function ($query) use($trip){
+                    $query->whereBetween('start_date', [$trip->start_date, $trip->end_date]);
+                })
+                ->sum('number_of_people');
                 $number +=  ($bus->number_of_seats - $number_of_people);
             }
             $trip->number = $number;
@@ -50,7 +52,7 @@ class TripController extends BaseController
             $trip->start_date = $trip->start_date;
             $trip->start_date = $trip->start_date;
             $trip->end_date = $trip->end_date;
-
+            dd($trip);
             if (($trip->tripfrom) != null && isset($trip->tripfrom->current_location)) {
                 $from_latlng = $trip->tripfrom;
                 $from_lat = isset($from_latlng->current_location['latitude']) ? $from_latlng->current_location['latitude'] : 32.130492742251334;
