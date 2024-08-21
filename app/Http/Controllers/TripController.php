@@ -279,7 +279,9 @@ class TripController extends BaseController
                 }
             }
         });
-        $search_trip = $search_trip->sortBy('start_date');
+        $search_trip = $search_trip;
+        $search_trip = collect($search_trip)->sortBy('start_date');
+        $search_trip = $search_trip->values()->all();
 
 
         return $this->sendResponse($search_trip, 'Success get Trips');
