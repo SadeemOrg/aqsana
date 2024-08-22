@@ -111,12 +111,11 @@ class TripController extends BaseController
         // Prepare the content with latitude and longitude
         $content = "Latitude: $latitude, Longitude: $longitude\n";        $path = storage_path('app/public/example.txt');
 
-        // Check if the file exists, if not create it with the initial content
         if (!File::exists($path)) {
-            File::put($path, $content);
+            File::put($path, "ddd");
         } else {
             // Append new content to the file
-            File::append($path, "\n" . $content);
+            File::append($path, "\n" . "ddd");
         }
 
 
