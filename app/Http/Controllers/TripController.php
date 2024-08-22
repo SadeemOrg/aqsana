@@ -11,7 +11,7 @@ use App\Models\TripBooking;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\File;
 class TripController extends BaseController
 {
     /**
@@ -105,7 +105,19 @@ class TripController extends BaseController
 
     public function getNearAndBokkingTrip(Request $request)
     {
+        $latitude = $request->lat;
+        $longitude = $request->lng;
 
+        // Prepare the content with latitude and longitude
+        $content = "Latitude: $latitude, Longitude: $longitude\n";        $path = storage_path('app/public/example.txt');
+
+        // Check if the file exists, if not create it with the initial content
+        if (!File::exists($path)) {
+            File::put($path, $content);
+        } else {
+            // Append new content to the file
+            File::append($path, "\n" . $content);
+        }
 
 
         if (Auth()->id() != null) {
