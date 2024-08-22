@@ -11,6 +11,8 @@ use App\Models\TripBooking;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+
 
 class TripController extends BaseController
 {
@@ -34,11 +36,11 @@ class TripController extends BaseController
             $number = 0;
             foreach ($buss as $key => $bus) {
                 $number_of_people = TripBooking::where('bus_id', $bus->id)
-                ->where('status', '1')
-                ->whereHas('Project', function ($query) use($trip){
-                    $query->whereBetween('start_date', [$trip->start_date, $trip->end_date]);
-                })
-                ->sum('number_of_people');
+                    ->where('status', '1')
+                    ->whereHas('Project', function ($query) use ($trip) {
+                        $query->whereBetween('start_date', [$trip->start_date, $trip->end_date]);
+                    })
+                    ->sum('number_of_people');
                 $number +=  ($bus->number_of_seats - $number_of_people);
             }
             $trip->number = $number;
@@ -109,7 +111,19 @@ class TripController extends BaseController
     {
 
 
+        $latitude = $request->lat;
+        $longitude = $request->lng;
+        
+        // Prepare the content with latitude and longitude
+        $content = "Latitude: $latitude, Longitude: $longitude\n";        $path = storage_path('app/public/example.txt');
 
+        // Check if the file exists, if not create it with the initial content
+        if (!File::exists($path)) {
+            File::put($path, $content);
+        } else {
+            // Append new content to the file
+            File::append($path, "\n" . $content);
+        }
         if (Auth()->id() != null) {
 
             $trip_booking = TripBooking::where('user_id', Auth()->id())->first();

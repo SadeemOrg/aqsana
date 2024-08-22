@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Artisan;
 
+use Illuminate\Support\Facades\File;
 
 // use App\Http\Livewire\Notification;
 
@@ -28,6 +29,38 @@ use Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/write-to-file', function () {
+    $content = "This is the content you want to write to the file.";
+    $path = storage_path('app/public/example.txt');
+    
+    // Check if the file exists, if not create it with the initial content
+    if (!File::exists($path)) {
+        File::put($path, $content);
+    } else {
+        // Append new content to the file
+        File::append($path, "\n" . $content);
+    }
+
+
+});
+Route::get('/show-file', function () {
+
+    $path = storage_path('app/public/example.txt');
+
+    // Check if the file exists
+    if (File::exists($path)) {
+        // Get the file contents
+        $content = File::get($path);
+        
+        // Return the content as a response
+        return response($content)
+                ->header('Content-Type', 'text/plain');
+    } else {
+        return "File does not exist.";
+    }
+});
 Route::get("/open-tabs", [HomeController::class, "openTabs"])->name('open-tabs');
 
 Route::get('/app/password/reset/{token}', [ForgotPasswordController::class, 'showForm']);
