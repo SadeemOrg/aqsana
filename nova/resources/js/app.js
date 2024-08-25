@@ -9,7 +9,7 @@ import './plugins'
 import Localization from '@/mixins/Localization'
 import ThemingClasses from '@/mixins/ThemingClasses'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 Vue.mixin(Localization)
 
