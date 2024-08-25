@@ -399,7 +399,16 @@
             $('#hidePlaceHolderDateReportAdminTo').attr('type', 'date');
             $(".svgFoucusReportAdminTo").css('display', 'block');
         }
-        
+
+        function handelInputtimeFrom() {
+            $('.foucsTimeStart').attr('type', 'time');
+        }
+
+        function handelInputtimeTo() {
+            $('.foucsTimeEnd').attr('type', 'time');
+        }
+
+
         function handelFocusDateVacationPopup() {
             $('#hidePlaceHolderDatePopUp').attr('type', 'date');
             $(".svgFoucusWorkHourVacations").css('display', 'block');

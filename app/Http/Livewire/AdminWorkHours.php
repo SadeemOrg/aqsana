@@ -83,6 +83,7 @@ class AdminWorkHours extends Component
     }
     public function addModeOnChange($type)
     {
+
         switch ($type) {
             case "ModelId":
                 $this->ModelIdErorrUser = "";
