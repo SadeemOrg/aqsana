@@ -6,6 +6,7 @@ namespace App\Nova;
 use App\Models\{
     City,
     Address,
+    address as ModelsAddress,
     Area,
     Bus,
     Project,
@@ -164,9 +165,9 @@ class QawafilAlaqsa extends Resource
         if (!in_array("super-admin", $userRoles)) {
             $query = $query->where('city', $request->user()->city);
         }
-        foreach ($query->where('project_type', '2')->get() as $value) {
+        foreach ($query->get() as $value) {
             // Find the address based on trip_from
-            $address = address::find($value->trip_from);
+            $address = ModelsAddress::find($value->trip_from);
 
             if ($address) {
                 // Update area if address is found
