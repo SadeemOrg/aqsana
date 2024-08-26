@@ -6,6 +6,7 @@ namespace App\Nova;
 use App\Models\{
     City,
     Address,
+    Area,
     Bus,
     Project,
     TripBooking,
@@ -87,6 +88,7 @@ class QawafilAlaqsa extends Resource
 
     public static function indexQuery(NovaRequest $request, $query)
     {
+
         $CloseProjects = $query->where('project_type', '2')->get();
         foreach ($CloseProjects as $key => $CloseProject) {
             $starttime = Carbon::parse($CloseProject->start_date);
@@ -161,6 +163,37 @@ class QawafilAlaqsa extends Resource
 
         if (!in_array("super-admin", $userRoles)) {
             $query = $query->where('city', $request->user()->city);
+        }
+        foreach ($query->where('project_type', '2')->get() as $value) {
+            // Find the address based on trip_from
+            $address = address::find($value->trip_from);
+
+            if ($address) {
+                // Update area if address is found
+                $value->area = $address->area_id;
+
+                // Optionally, you might want to handle cases where area_id is null
+                if (is_null($value->area)) {
+                    // Fetch the city and its associated area if address area_id is null
+                    $city = City::find($address->city_id);
+                    if ($city) {
+                        $area = Area::find($city->area_id);
+                        if ($area) {
+                            $value->area = $area->id;
+                        } else {
+                            $value->area = null; // or some default value
+                        }
+                    } else {
+                        $value->area = null; // or some default value
+                    }
+                }
+            } else {
+                // Handle case where the address is not found
+                $value->area = null; // or some default value
+            }
+
+            // Save the updated value
+            $value->save();
         }
 
         return $query;
@@ -279,7 +312,7 @@ class QawafilAlaqsa extends Resource
 
 
                 Text::make(__("QawafilAlaqsa name"), "project_name")->rules('required'),
-                Text::make(__("QawafilAlaqsa describe"), "project_describe"),
+                Text::make(__("QawafilAlaqsa describe"), "project_describe")->hideFromIndex(),
 
                 Select::make(__("Repetition"), "repetition")->options([
                     '6' => __('Once'),
@@ -288,7 +321,7 @@ class QawafilAlaqsa extends Resource
                     '3' => __('fortnightly'),
                     '4' => __('Monthly'),
                     '5' => __('annual'),
-                ])->rules('required')->singleSelect(),
+                ])->rules('required')->singleSelect()->hideFromIndex(),
 
 
                 Select::make(__('delegatee'), 'admin_id')
@@ -302,6 +335,7 @@ class QawafilAlaqsa extends Resource
                         return $user_type_admin_array;
                     })->singleSelect(),
                 BelongsTo::make(__('city'), 'CityProject', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating(),
+                BelongsTo::make(__('Area'), 'AreaProject', \App\Nova\Area::class)->hideWhenCreating()->hideWhenUpdating(),
                 BelongsTo::make(__('trip from'), 'tripfrom', \App\Nova\address::class)->hideWhenCreating()->hideWhenUpdating(),
                 Select::make(__('trip from'), 'trip_from')
                     ->options(function () {
@@ -577,7 +611,6 @@ class QawafilAlaqsa extends Resource
                     'project_id' => $newProjectId,
                     'status' => 2,
                 ]);
-
             }
         }
     }
