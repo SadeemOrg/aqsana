@@ -136,7 +136,7 @@
 
                                     <th scope="col"
                                         class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37] min-w-[150px]">
-                                        ملاحضات
+                                        ملاحظات
                                     </th>
 
                                 </tr>

@@ -181,7 +181,7 @@
                             <button
                                 class="shadow bg-green-600 hover:bg-green-500 mt-4 focus:shadow-outline focus:outline-none text-white font-medium px-16 py-4 rounded"
                                 type="submit">
-                                حفظ
+                                إرسال
                             </button>
                         </div>
                     </form>
@@ -200,7 +200,7 @@
                         <select @change="AdminNotifications($event)"
                             class="select1 mt-1 block w-full rounded-md border border-gray-200 px-4 py-2 pl-3 pr-10 text-base max-w-4xl mx-auto focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                             v-model="selectedAdmin">
-                            <!-- <option selected disabled 
+                            <!-- <option selected disabled
                                 >الرجاء اختيار المستخدم</option
                             > -->
 
@@ -213,7 +213,7 @@
                     <table class="text-center">
                         <tr>
                             <th style="width: 40%;">المهمة</th>
-                            <th style="width: 40%;">الملاحضات</th>
+                            <th style="width: 40%;">الملاحظات</th>
                             <th style="width: 10%;">التاريخ</th>
 
                             <th style="width: 10%;">الحالة</th>
@@ -262,7 +262,7 @@
                         <table class="text-center">
                             <tr>
                                 <th style="width: 40%;">المهمة</th>
-                                <th style="width: 40%;">الملاحضات</th>
+                                <th style="width: 40%;">الملاحظات</th>
                                 <th style="width: 10%;">المرسل</th>
 
                                 <th style="width: 10%;">التاريخ</th>
