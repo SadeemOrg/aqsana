@@ -138,6 +138,7 @@ class Project extends Resource
             Text::make(__("project name"), "project_name")->rules('required'),
             Textarea::make(__("project describe"), "project_describe")->rules('required')->hideFromIndex(),
             BelongsTo::make(__('city'), 'CityProject', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Area'), 'AreaProject', \App\Nova\Area::class)->hideWhenCreating()->hideWhenUpdating(),
 
             Multiselect::make(__('city'), 'city')
                 ->options(function () {
