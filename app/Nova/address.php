@@ -94,6 +94,7 @@ class address extends Resource
             Text::make(__('name address'), "name_address")->required(),
             Text::make(__("description address"), "description"),
             BelongsTo::make(__('city'), 'City', \App\Nova\City::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Area'), 'Area', \App\Nova\Area::class)->hideWhenCreating()->hideWhenUpdating(),
 
             Text::make(__("phone number"), "phone_number_address"),
 
