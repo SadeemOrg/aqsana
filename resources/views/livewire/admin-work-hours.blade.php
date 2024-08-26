@@ -133,7 +133,7 @@
                                         ساعات عملي</th>
                                     <th scope="col"
                                         class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37] min-w-[150px]">
-                                        ملاحضات
+                                        ملاحظات
                                     </th>
                                     <th scope="col"
                                         class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">
@@ -303,7 +303,7 @@
                             </div>
                             <div class="flex flex-row items-center flex-wrap sm:flex-nowrap justify-between">
                                 <div class="mt-2 selectdiv w-1/2">
-                                    <input type="time" 
+                                    <input type="time"
                                         wire:model.defer="start_time"
                                         class="foucsTimeStart h-12 bg-transparent border border-[#349A37] w-[180px] sm:w-[150px] text-[#349A37] text-sm text-right rounded-[15px] block  p-2.5 placeholder-[#349A37] ">
 
@@ -373,7 +373,7 @@
                                 <div class="flex flex-row items-start justify-start gap-x-1">
                                     <label for="appt" class="text-[#349A37] text-sm mt-3 w-[84px] sm:w-auto">ساعة البدء:</label>
                                     <input type="time" id="appt" wire:model.defer="start_time"
-                                        wire:change='addModeOnChange("start_time")' 
+                                        wire:change='addModeOnChange("start_time")'
                                         class="border border-[#349A37] text-center lg:w-[110px] text-[#349A37] text-base rounded-[60px] focus:ring-2 focus:ring-offset-0 focus:ring-[#349A37]"
                                          />
                                 </div>
@@ -382,7 +382,7 @@
                                     <input type="time" id="appt_end" wire:model.defer="end_time"
                                         wire:change='addModeOnChange("end_time")'
                                         class="border border-[#349A37] px-4 text-[#349A37] text-base text-center lg:w-[114px] rounded-[60px] focus:ring-2 focus:ring-offset-0 focus:ring-[#349A37]"
-                                         /> 
+                                         />
                                 </div>
                             </div>
                             <div class="flex flex-row items-center mx-4 justify-between ">

@@ -254,7 +254,7 @@ var content = __webpack_require__(5);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(7)("6e5db1d0", content, false, {});
+var update = __webpack_require__(7)("290c3e45", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -3391,7 +3391,11 @@ var staticRenderFns = [
             "shadow bg-green-600 hover:bg-green-500 mt-4 focus:shadow-outline focus:outline-none text-white font-medium px-16 py-4 rounded",
           attrs: { type: "submit" }
         },
-        [_vm._v("\n                            حفظ\n                        ")]
+        [
+          _vm._v(
+            "\n                            إرسال\n                        "
+          )
+        ]
       )
     ])
   },
@@ -3417,7 +3421,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", { staticStyle: { width: "40%" } }, [_vm._v("المهمة")]),
       _vm._v(" "),
-      _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحضات")]),
+      _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحظات")]),
       _vm._v(" "),
       _c("th", { staticStyle: { width: "10%" } }, [_vm._v("التاريخ")]),
       _vm._v(" "),
@@ -3433,7 +3437,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", { staticStyle: { width: "40%" } }, [_vm._v("المهمة")]),
       _vm._v(" "),
-      _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحضات")]),
+      _c("th", { staticStyle: { width: "40%" } }, [_vm._v("الملاحظات")]),
       _vm._v(" "),
       _c("th", { staticStyle: { width: "10%" } }, [_vm._v("المرسل")]),
       _vm._v(" "),
