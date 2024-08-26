@@ -164,37 +164,7 @@ class QawafilAlaqsa extends Resource
         if (!in_array("super-admin", $userRoles)) {
             $query = $query->where('city', $request->user()->city);
         }
-        foreach ($query->where('project_type', '2')->get() as $value) {
-            // Find the address based on trip_from
-            $address = address::find($value->trip_from);
 
-            if ($address) {
-                // Update area if address is found
-                $value->area = $address->area_id;
-
-                // Optionally, you might want to handle cases where area_id is null
-                if (is_null($value->area)) {
-                    // Fetch the city and its associated area if address area_id is null
-                    $city = City::find($address->city_id);
-                    if ($city) {
-                        $area = Area::find($city->area_id);
-                        if ($area) {
-                            $value->area = $area->id;
-                        } else {
-                            $value->area = null; // or some default value
-                        }
-                    } else {
-                        $value->area = null; // or some default value
-                    }
-                }
-            } else {
-                // Handle case where the address is not found
-                $value->area = null; // or some default value
-            }
-
-            // Save the updated value
-            $value->save();
-        }
 
         return $query;
     }
