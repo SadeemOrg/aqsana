@@ -554,6 +554,8 @@ class QawafilAlaqsa extends Resource
                     'project_name' => $model->project_name,
                     'project_describe' => $model->project_describe,
                     'city' => $model->city,
+                    'area' => $model->area,
+                    'sector'=> '5',
                     'repetition' => $model->repetition,
                     'admin_id' => $model->admin_id,
                     'trip_from' => $model->trip_from,
