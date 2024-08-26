@@ -52,7 +52,8 @@ class address extends Resource
      */
     public static $priority = 3;
     public static $search = [
-        'id', "name_address"
+        'id',
+        "name_address"
     ];
 
     /**
@@ -139,15 +140,21 @@ class address extends Resource
         $id = Auth::id();
         $model->created_by = $id;
         $model->status = 1;
-        $model->area_id = Area::find(City::find($request->city_id)->area_id)->id;
 
         // $request->request->remove('city');
     }
     public static function beforesave(Request $request, $model)
     {
-        if($request->description == null ){
+        if ($request->description == null) {
             $request->merge(['description' => '']);
+        }
+        $city = City::find($request->city_id);
 
+        if ($city && $city->area_id) {
+            $area = Area::find($city->area_id);
+            if ($area) {
+                $model->area_id = $area->id;
+            }
         }
     }
     /**
