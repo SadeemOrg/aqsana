@@ -60,7 +60,9 @@ class User extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'email',
+        'id',
+        'name',
+        'email',
     ];
     public static function createButtonLabel()
     {
@@ -85,15 +87,20 @@ class User extends Resource
     {
         $TelephoneDirectory = TelephoneDirectory::find($request->viaResourceId);
         return [
-            ID::make(__('ID'), 'id')->sortable(),
 
-            // Gravatar::make()->maxWidth(50),
-            Text::make(__('id_number'), 'id_number')
-                ->sortable()->rules('required', 'max:255'),
             Text::make(__('Name'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255')
-                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->name : $this->name]),
+                ->withMeta(['value' => $TelephoneDirectory ? $TelephoneDirectory->name : $this->name])->hideFromIndex(),
+                Text::make(__('Name'), 'name')
+                ->sortable()
+                ->rules('required', 'max:255')
+                ->displayUsing(function ($name) {
+                    return "<a class='no-underline dim text-primary font-bold' href='/Admin/resources/users/{$this->id}'>{$name}</a>";
+                })->asHtml()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),
+
+            Text::make(__('id_number'), 'id_number')
+                ->sortable()->rules('required', 'max:255'),
 
             Text::make(__('email'), 'email')
                 ->sortable()

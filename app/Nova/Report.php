@@ -46,12 +46,12 @@ class Report extends Resource
      * @var string
      */
 
-     public static function availableForNavigation(Request $request)
-     {
-         if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Reportparmation",  $request->user()->userrole()))) {
-             return true;
-         } else return false;
-     }
+    public static function availableForNavigation(Request $request)
+    {
+        if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("Reportparmation",  $request->user()->userrole()))) {
+            return true;
+        } else return false;
+    }
     public static $title = 'id';
     public static function label()
     {
@@ -71,7 +71,8 @@ class Report extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'project_name'
+        'id',
+        'project_name'
     ];
 
 
@@ -109,7 +110,11 @@ class Report extends Resource
         return [
 
 
-            Text::make(__("project name"), "project_name")->rules('required'),
+            Text::make(__("project name"), "project_name")
+                ->rules('required')
+                ->displayUsing(function ($name) {
+                    return "<a class='no-underline dim text-primary font-bold' href='/Admin/resources/reports/{$this->id}'>{$name}</a>";
+                })->asHtml(),
             BelongsTo::make(__('Sector'), 'Sectors', \App\Nova\Sector::class)->nullable()->hideWhenCreating()->hideWhenUpdating(),
             DateTime::make(__('projec start'), 'start_date')->rules('required'),
             // BelongsTo::make(__('Project Officer'), 'create', \App\Nova\User::class)->hideWhenCreating()->hideWhenUpdating(),
