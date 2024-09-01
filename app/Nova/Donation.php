@@ -509,11 +509,7 @@ class Donation extends Resource
     public function cards(Request $request)
     {
         return [
-            // new OutComeTransaction()
-            new DonationNotReceive(),
-            new DonationInBox(),
-            new DonationInBank(),
-            new FilterCard(new AlhisalatColect()),
+
         ];
     }
 
@@ -526,13 +522,6 @@ class Donation extends Resource
     public function filters(Request $request)
     {
         return [
-            new AlhisalatColect(),
-            new Transactionproject(),
-            new TransactionSectors(),
-            new PaymentType(),
-            new ReportCompany(),
-            new DateRangeFilter(__("transaction_date"), "transaction_date"),
-            new ReportCreated(),
 
 
         ];
