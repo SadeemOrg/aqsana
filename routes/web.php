@@ -80,7 +80,7 @@ Route::post('/send-text', [MessagingController::class, 'sendText'])->name('send.
 
 
 Route::get('/reports/show-orders', function () {
-    return Excel::download(new ExportDonations, 'test.csv');
+    return Excel::download(new ExportDonations, 'test.xlsx');
 });
 Route::controller(ExportExcelController::class)->group(function () {
     Route::post('submit-form', 'submit')->name('submit-form');

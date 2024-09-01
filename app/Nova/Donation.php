@@ -410,12 +410,12 @@ class Donation extends Resource
         }
         $model->bill_number = $largestBillNumber + 1;
 
-        if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
+        if ($request->Payment_type==4) $model->transaction_status = '3';
+        elseif ($request->ReceiveDonation == 1 && $request->Payment_type!=4) $model->transaction_status = '2';
         else  $model->transaction_status = '1';
     }
     public static function beforeSave(Request $request, $model)
     {
-
 
 
         if ($request->newproject  &&  empty(json_decode($request->ref_id)->key2)) {
@@ -438,7 +438,8 @@ class Donation extends Resource
         $request->request->remove('newproject');
 
         $request->request->remove('ref_id');
-        if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
+        if ($request->Payment_type==4) $model->transaction_status = '3';
+        elseif ($request->ReceiveDonation == 1 && $request->Payment_type!=4) $model->transaction_status = '2';
         else  $model->transaction_status = '1';
         if ($request->Payment_type == '1') {
             $model->Payment_type_details = null;

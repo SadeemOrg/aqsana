@@ -27,17 +27,19 @@ class Role extends Resource
 
     public static function label()
     {
-        return __('Role');
+        return __('المسمي الوظيفي');
     }
     public static function group()
     {
-        return __('address');
+        return __('Public Administration');
     }
      public static $title = 'role';
     public static $priority = 2;
     public static function availableForNavigation(Request $request)
     {
-        return false;
+        if ((in_array("super-admin",  $request->user()->userrole())) ) {
+            return true;
+        } else return false;
     }
     /**
      * The columns that should be searched.
@@ -58,10 +60,7 @@ class Role extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('code_role'),'code_role'),
             Text::make(__('role'),'role'),
-            Boolean::make(__("status"),"status"),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];

@@ -21,7 +21,7 @@ class   ExportDonations implements FromCollection, WithHeadings
     }
     public function headings(): array
     {
-        return ['id', 'قطاع',  'قيمة التبرغ', 'اسم', 'رقم الشركة', 'رقم الفاتوره', 'سبب التبرع', ' ', 'مشروع','تاريخ الصفقة'];
+        return ['id', 'قطاع',  'قيمة التبرغ', 'اسم', 'رقم الشركة', 'رقم الفاتوره', 'سبب التبرع', ' ', 'مشروع', 'تاريخ الصفقة'];
     }
     /**
      * @return \Illuminate\Support\Collection
@@ -29,8 +29,8 @@ class   ExportDonations implements FromCollection, WithHeadings
     public function collection()
     {
         // dd($this->from !='null');
-        $from = (( $this->from !='null') ?  $this->from : '2001-01-01 00:00:00.0' );
-        $this->to=( $this->to !='null') ?  $this->to :  Carbon::now();
+        $from = (($this->from != 'null') ?  $this->from : '2001-01-01 00:00:00.0');
+        $this->to = ($this->to != 'null') ?  $this->to :  Carbon::now();
         $startdate = date($this->from);
         $finishdate = date($this->to);
         if ($this->id != 'null' && $this->name == 'null') {
@@ -68,15 +68,18 @@ class   ExportDonations implements FromCollection, WithHeadings
             // dd(Sector::find($Transaction-> ref_id)->select('text')->first()->text);
             // $id=$Transaction-> ref_id;
             if ($Transaction->sector != null) {
-                $sector = Sector::find($Transaction->sector)->first()->text;
-                $Transaction->sector = $sector;
+                $sector = Sector::find($Transaction->sector);
+                if ($sector) {
+                    $Transaction->sector = $sector->text;
+                } else  $Transaction->sector = "";
             }
+
 
             if ($Transaction->name != null) {
 
                 $name = TelephoneDirectory::find($Transaction->name);
                 // dd($Transaction->name,$name,TelephoneDirectory::find($Transaction->name)->name);
-                $name = (isset($name)) ? $name->name : "" ;
+                $name = (isset($name)) ? $name->name : "";
                 $Transaction->name = $name;
             }
             if ($Transaction->ref_id != null) {
@@ -85,11 +88,11 @@ class   ExportDonations implements FromCollection, WithHeadings
                 // dd($Transaction->name,$name,TelephoneDirectory::find($Transaction->name)->name);
                 $Transaction->ref_id = $ref;
             }
-          $day=  (Carbon::parse($Transaction->transaction_date)->day);
-          $month = (Carbon::parse($Transaction->transaction_date)->month);
-          $year =   (Carbon::parse($Transaction->transaction_date)->year);
-          $Transaction->transaction_date= null;
-          $Transaction->day= $year.'/'.$month.'/'.$day;
+            $day =  (Carbon::parse($Transaction->transaction_date)->day);
+            $month = (Carbon::parse($Transaction->transaction_date)->month);
+            $year =   (Carbon::parse($Transaction->transaction_date)->year);
+            $Transaction->transaction_date = null;
+            $Transaction->day = $year . '/' . $month . '/' . $day;
         }
 
         return $Transactions;

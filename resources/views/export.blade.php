@@ -13,7 +13,7 @@
 
 {{-- /    <livewire:export-donations :key="$key"/> --}}
 
-    @livewire('export-donations', ['key' => $key,'ref' => $ref,'name'=>$name,'from'=>$from,'to'=>$to])
+    @livewire('export-donations', ['key' => $key,'ref' => $ref,'name'=>$name,'from'=>$from,'to'=>$to,'dateType'=>$dateType,'PaymentType'=>$PaymentType])
 
     @livewireScripts
 
