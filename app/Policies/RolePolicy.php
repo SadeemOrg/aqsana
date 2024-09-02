@@ -41,7 +41,9 @@ class RolePolicy
      */
     public function create(User $user)
     {
-        return false;
+        return ((in_array("super-admin",  $user->userrole())) );
+        // return ($user->type() == 'admin' ) ;
+
     }
 
     /**

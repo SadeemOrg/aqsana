@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\Select;
 
 class ExportReport extends Action
 {
@@ -28,7 +29,7 @@ class ExportReport extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         // $string = '?reselt=' .$models->pluck('id');
-        $string = '?reselt=' . $models->pluck('id').'&from='.$fields-> from.'&to='.$fields->to;
+        $string = '?reselt=' . $models->pluck('id').'&from='.$fields-> from.'&to='.$fields->to.'&dateType='.$fields->type.'&PaymentType='.$fields->Payment_type;
 
         return Action::openInNewTab('/export/ExportReport'. $string);
 
@@ -42,6 +43,24 @@ class ExportReport extends Action
     public function fields()
     {
         return [
+            Select::make('نوع التاريخ','type')
+            ->options([
+                '1' => 'تاريخ السند',
+                '2' => 'تاريخ الدفعة',
+            ])
+            ->displayUsingLabels(),
+            Select::make(__("Payment_type"), "Payment_type")->options(
+                [
+                    '0' => __('all'),
+                    '1' => __('cash'),
+                    '2' => __('shek'),
+                    '3' => __('bit'),
+                    '4' => __('hawale'),
+                    '5' => __('حصالة'),
+                    // '6' => __('التطبيق'),
+
+                ]
+            )->displayUsingLabels(),
             Date::make(__('from'), 'from')->required(),
             Date::make(__('to'), 'to')->required(),
 

@@ -1,0 +1,216 @@
+.tryThis {
+    justify-content: space-between;
+}
+
+.searchItem {
+    margin-right: 5%;
+}
+
+.imgSideBar {
+    margin-left: 4%;
+}
+
+.room-sort-menu ul {
+    margin: 0;
+    padding: 0;
+}
+
+.room-sort-menu li>a.active {
+    text-decoration: underline
+}
+
+span.sort {
+    /* margin-right: 30px; */
+    color: #fff;
+    font-weight: 800;
+}
+
+.sort-mobile {
+    display: none;
+}
+
+.room-sort-menu>li>a {
+    display: inline-block;
+    margin: 0;
+    font-size: 0.8em;
+    color: #fff;
+    text-decoration: none;
+}
+
+.room-sort-menu>li>a:hover,
+.room-sort-menu>li>a:focus {}
+
+.dropdown {
+    position: relative;
+}
+
+.dropMenu {
+    position: ;
+    display: none;
+    top: 46px;
+    left: 0px;
+    border: 1px solid color;
+    width: auto;
+    background: rgb(21 128 61 / var(--tw-bg-opacity));
+    font-size: 0.8em;
+    z-index: 1;
+}
+
+.show {
+    display: block;
+}
+
+.arrow-icon {
+    transition: transform 0.3s ease;
+}
+
+.arrow-icon.flipped {
+    transform: rotate(180deg);
+}
+
+.dropMenu li a {
+    display: block;
+    padding: 7px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.dropMenu li a:hover,
+.dropMenu li a.router-link-active {
+    /* --tw-bg-opacity: 1; */
+    background-color: #fff;
+    color: #000
+}
+
+.hide-angle svg.ml-2 {
+    display: none
+}
+
+.list-reset {
+    max-height: 400px
+}
+
+.h-header .dropdown-trigger svg {
+    min-width: 10px
+}
+
+@media (max-width: 991px) {
+    div[x-placement="bottom-start"] {
+        transform: none !important
+    }
+
+    html:not([dir="rtl"]) div[dusk$='index-component'] .btn[dusk='create-button']::before,
+    html:not([dir="rtl"]) div[dusk$='index-component'] .btn[dusk='attach-button']::before {
+        position: relative;
+        left: 19px;
+        top: 3px
+    }
+}
+
+table tbody td button {
+    min-width: 125px;
+    font-size: 15px
+}
+
+/* Start custom style in tailwind components */
+.custom-class-tabs .card {
+    flex-wrap: wrap
+}
+
+.custom-class-tabs .card button {
+    min-width: 200px
+}
+
+.table th {
+    font-size: 15px
+}
+
+.custom_defaultField>div>div {
+    direction: ltr !important
+}
+
+.custom_defaultField {
+    width: 100%
+}
+
+.pl-6 {
+    padding-left: 1.5rem !important
+}
+
+.pr-6 {
+    padding-right: 1.5rem !important
+}
+
+@media (max-width: 767px) {
+    .custom-field-style {
+        width: 100% !important
+    }
+
+    .custom-field-style label {
+        padding-top: 1.5rem
+    }
+}
+
+.multiselect {
+    text-align: right !important
+}
+
+.multiselect .multiselect__tags {
+    padding: 8px 8px 0 40px
+}
+
+.w-sidebar {
+    height: 100vh;
+}
+
+.w-sidebar .custom-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 13.75rem;
+    overflow: auto;
+    z-index: 99;
+}
+
+ul.list-reset li>div {
+    border-color: #bacad6
+}
+
+.icons[data-v-b3635f2e] {
+    right: auto !important;
+    left: 0;
+}
+
+#filemanager-manager .btn-primary:not([disabled]):not(.btn-disabled),
+.btn-primary:not([disabled]):not(.btn-disabled) {
+    background-color: #16a34a;
+    font-weight: 500
+}
+
+#filemanager-manager .btn-primary:not([disabled]):not(.btn-disabled):hover,
+.btn-primary:not([disabled]):not(.btn-disabled):hover {
+    background-color: #22c55e
+}
+
+#filemanager-manager .btn-default:not([disabled]):not(.btn-disabled):focus,
+#filemanager-manager .btn-default:not([disabled]):not(.btn-disabled):active {
+    -webkit-box-shadow: 0 0 0 3px #22c55e
+}
+
+.reset-button {
+    margin-top: 1px;
+    margin-right: 3px;
+    padding: 2px display: flex;
+    justify-content: flex-start;
+}
+
+.search-input-trigger {
+    position: relative;
+    /* or any other positioning you want */
+    /* Add other styles as needed */
+}
+
+.btn.btn-default.btn-primary.flex.items-center.justify-center {
+    padding: 0.375rem;
+}
