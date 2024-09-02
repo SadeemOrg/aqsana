@@ -106,7 +106,10 @@ class Donation extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'transaction_date', 'equivelant_amount'
+        'id',
+        'name',
+        'transaction_date',
+        'equivelant_amount'
 
     ];
 
@@ -320,7 +323,7 @@ class Donation extends Resource
             Button::make(__('print'))->link('/mainbill/' . $this->id . '?type=bill')->style('custom')->canSee(function () {
                 return $this->is_delete == 0;
             }),
-            Button::make(__('print'))->link('/mainbill/' . $this->deleted_ref   .'?type=repayment')->style('custom')->canSee(function () {
+            Button::make(__('print'))->link('/mainbill/' . $this->deleted_ref   . '?type=repayment')->style('custom')->canSee(function () {
                 return $this->is_delete != 0;
             }),
 
@@ -350,10 +353,12 @@ class Donation extends Resource
     public function cards(Request $request)
     {
         return [
-            new DonationNotReceive(),
-            new DonationInBox(),
-            new DonationInBank(),
-            new FilterCard(new AlhisalatColect()),
+            new ReceiveDonation,
+            new DepositedInBank,
+            new BillPdf,
+            (new DeleteBill)->onlyOnDetail(),
+            (new PrintBill)->withoutConfirmation(),
+            (new ExportDonations)->standalone(),
         ];
     }
 
@@ -365,10 +370,7 @@ class Donation extends Resource
      */
     public function filters(Request $request)
     {
-        return [
-
-
-        ];
+        return [];
     }
 
     /**
@@ -391,6 +393,12 @@ class Donation extends Resource
     public function actions(Request $request)
     {
         return [
+            new ReceiveDonation,
+            new DepositedInBank,
+            new BillPdf,
+            (new DeleteBill)->onlyOnDetail(),
+            (new PrintBill)->withoutConfirmation(),
+            (new ExportDonations)->standalone(),
 
         ];
     }
