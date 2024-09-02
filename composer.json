@@ -27,9 +27,7 @@
         "badinansoft/table-footer": "^1.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "benjacho/belongs-to-many-field": "^2.0",
-        "chaseconey/nova-external-image": "^0.3.1",
         "coderello/laravel-nova-lang": "^1.8",
-        "comodolab/nova-help": "^0.5.0",
         "ctessier/nova-advanced-image-field": "^1.3",
         "digital-creative/collapsible-resource-manager": "v1.4.2",
         "digital-creative/resource-navigation-tab": "^1.1",
@@ -39,10 +37,8 @@
         "epartment/nova-dependency-container": "^1.3",
         "ericlagarda/nova-settings-card": "^1.2",
         "fontech/nova-searchable-select-filter": "^0.1.0",
-        "fourstacks/nova-repeatable-fields": "^1.3",
         "fruitcake/laravel-cors": "^2.0",
         "ganyicz/nova-callbacks": "^1.1",
-        "gregoriohc/laravel-nova-theme-responsive": "^0.8.1",
         "guzzlehttp/guzzle": "^7.0.1",
         "gwd/laravel-nova-flexible-content": "^0.0.1",
         "halimtuhu/array-images": "^1.1",
@@ -67,6 +63,7 @@
         "nunomaduro/laravel-desktop-notifier": "^2.6",
         "optimistdigital/nova-settings": "^3.5",
         "optimistdigital/nova-tailwind": "^1.1",
+
         "orlyapps/nova-belongsto-depend": "^3.0",
         "outl1ne/nova-detached-filters": "^1.1.0",
         "pdmfc/nova-action-button": "^0.7.4",
@@ -199,3 +196,4 @@
     "minimum-stability": "dev",
     "prefer-stable": true
 }
+
