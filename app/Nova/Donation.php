@@ -344,52 +344,40 @@ class Donation extends Resource
         ];
     }
 
-    /**
-     * Get the cards available for the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
+
     public function cards(Request $request)
     {
         return [
-            new ReceiveDonation,
-            new DepositedInBank,
-            new BillPdf,
-            (new DeleteBill)->onlyOnDetail(),
-            (new PrintBill)->withoutConfirmation(),
-            (new ExportDonations)->standalone(),
+            // new OutComeTransaction()
+            new DonationNotReceive(),
+            new DonationInBox(),
+            new DonationInBank(),
+            new FilterCard(new AlhisalatColect()),
         ];
     }
 
-    /**
-     * Get the filters available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
+
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new AlhisalatColect(),
+            new Transactionproject(),
+            new TransactionSectors(),
+            new PaymentType(),
+            new ReportCompany(),
+            new DateRangeFilter(__("transaction_date"), "transaction_date"),
+            new ReportCreated(),
+
+
+        ];
     }
 
-    /**
-     * Get the lenses available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function lenses(Request $request)
     {
         return [];
     }
 
-    /**
-     * Get the actions available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
+
     public function actions(Request $request)
     {
         return [
@@ -399,7 +387,6 @@ class Donation extends Resource
             (new DeleteBill)->onlyOnDetail(),
             (new PrintBill)->withoutConfirmation(),
             (new ExportDonations)->standalone(),
-
         ];
     }
 }
