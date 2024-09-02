@@ -25,6 +25,7 @@
         @else
             <link rel="stylesheet" href="/nova-api/styles/{{ $name }}">
         @endif
+
     @endforeach
 
     <!-- Custom Meta Data -->
