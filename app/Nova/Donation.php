@@ -372,12 +372,6 @@ class Donation extends Resource
     public function actions(Request $request)
     {
         return [
-            new ReceiveDonation,
-            new DepositedInBank,
-            new BillPdf,
-            (new DeleteBill)->onlyOnDetail(),
-            (new PrintBill)->withoutConfirmation(),
-            (new ExportDonations)->standalone(),
         ];
     }
 }
