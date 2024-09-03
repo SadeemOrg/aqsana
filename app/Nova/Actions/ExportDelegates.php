@@ -17,7 +17,7 @@ class ExportDelegates extends Action
 
     public  function name()
     {
-        return __('تصدير');
+        return __('Export To Exsel');
     }
     /**
      * Perform the action on the given models.

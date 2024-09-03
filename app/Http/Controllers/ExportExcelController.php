@@ -164,7 +164,7 @@ class ExportExcelController extends Controller
 
 
         $key = 'Cites';
-        return view('export', compact('key', 'ref', 'name', 'from', 'to'));
+        return view('export', compact('key', 'ref', 'name', 'from', 'to', 'dateType', 'PaymentType'));
     }
     public function  ExportAddress(Request $request)
     {

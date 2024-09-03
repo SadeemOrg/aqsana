@@ -111,7 +111,7 @@ class Donation extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'transaction_date', 'equivelant_amount'
+         'name', 'transaction_date', 'equivelant_amount','bill_number'
 
     ];
 
@@ -201,7 +201,7 @@ class Donation extends Resource
             }),
             Text::make(__('description'), 'description')->hideFromIndex(),
             Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('الشركة'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('متبرع'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
             Multiselect::make(__(' اسم الشركة او اسم المتبرع'), "name")
                 ->options(function () {
                     $Users =  \App\Models\TelephoneDirectory::whereJsonContains('type',  '2')->get();

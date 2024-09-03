@@ -15,7 +15,7 @@ class ExportReport extends Action
 {
     public  function name()
     {
-        return __('ExportReport');
+        return __('Export To Exsel');
     }
     use InteractsWithQueue, Queueable;
 

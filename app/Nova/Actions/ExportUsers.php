@@ -12,7 +12,10 @@ use Laravel\Nova\Fields\ActionFields;
 class ExportUsers extends Action
 {
     use InteractsWithQueue, Queueable;
-
+    public  function name()
+    {
+        return __('Export To Exsel');
+    }
     /**
      * Perform the action on the given models.
      *

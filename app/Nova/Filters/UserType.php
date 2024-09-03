@@ -12,7 +12,7 @@ class UserType extends Filter
 
     public function name()
     {
-        return __('انواع المستخدمين');
+        return __('انواع الموظفين');
     }
     /**
      * The filter's component.
