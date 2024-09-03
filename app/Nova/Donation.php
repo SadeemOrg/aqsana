@@ -60,6 +60,11 @@ use Upline\RowBackground\RowBackgroundData;
 class Donation extends Resource
 {
 
+    use SearchesRelations;
+
+    public static $searchRelations = [
+        'TelephoneDirectory' => ['id', 'name'],
+    ];
     /**
      * The model the resource corresponds to.
      *
@@ -120,12 +125,13 @@ class Donation extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
 
-        return $query->where([
+        return $query->withoutGlobalScopes()->where([
             ['main_type', 1],
             ['type', 2],
             ['is_delete', '<>', '2'],
 
         ]);
+
     }
     public function fields(Request $request)
     {
@@ -503,6 +509,7 @@ class Donation extends Resource
     public function cards(Request $request)
     {
         return [
+            // new OutComeTransaction()
             new DonationNotReceive(),
             new DonationInBox(),
             new DonationInBank(),
@@ -519,6 +526,14 @@ class Donation extends Resource
     public function filters(Request $request)
     {
         return [
+            new AlhisalatColect(),
+            new Transactionproject(),
+            new TransactionSectors(),
+            new PaymentType(),
+            new ReportCompany(),
+            new DateRangeFilter(__("transaction_date"), "transaction_date"),
+            new ReportCreated(),
+
 
         ];
     }
