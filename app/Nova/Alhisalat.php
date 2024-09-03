@@ -23,6 +23,7 @@ use App\Nova\Actions\AlhisalatDelete;
 use App\Nova\Actions\AlhisalatStatus;
 use App\Nova\Actions\AlhisalatStatuscompleted;
 use App\Nova\Actions\AlhisalatSurrender;
+use App\Nova\Actions\ExportAlhisalat;
 use App\Nova\Filters\AlhisalatAddress;
 use App\Nova\Filters\AlhisalatArea;
 use App\Nova\Filters\AlhisalatCite;
@@ -273,7 +274,7 @@ class Alhisalat extends Resource
         if ($request->newadres  &&  empty(($request->address_id))) {
 
 
-      
+
 
             if (!isset($request->newadres[0]['attributes']['name_address']) ) {
                 $validator->errors()->add($request->newadres[0]['key'] . '__name_address', 'هذا الحقل مطلوب');
@@ -393,6 +394,7 @@ class Alhisalat extends Resource
 
 
             (new AlhisalatDelete),
+            (new ExportAlhisalat  )->standalone()->withoutConfirmation(),
 
         ];
     }

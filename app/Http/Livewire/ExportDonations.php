@@ -59,7 +59,7 @@ class ExportDonations extends Component
     }
     public function PaymentVoucher()
     {
-        return Excel::download(new ExportPaymentVoucher, 'PaymentVoucher.xlsx');
+        return Excel::download(new ExportPaymentVoucher($this->ref, $this->name, $this->from, $this->to), 'PaymentVoucher.xlsx');
     }
     public function Address()
     {

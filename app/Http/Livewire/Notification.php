@@ -29,6 +29,8 @@ class Notification extends Component
         $wordlist = ModelsNotification::where([
             ['notifiable_id', $id],
             ['read_at', null],
+            ['notification_type', '!=', '2'],
+
 
         ])->get();
         $this->count = $wordlist->count();
@@ -36,26 +38,27 @@ class Notification extends Component
 
 
 
-
-        $this->notificationsArray = ModelsNotification::where('notifiable_id', $id)->latest()->take(10)
+        $this->notificationsArray = ModelsNotification::where([
+            ['notifiable_id', $id],
+            ['notification_type', '!=', '2']
+        ])->latest()->take(10)
             ->orderBy('created_at', 'ASC')
             ->with('user')->get();
 
 
-            $this->receiveNotification =  ModelsNotification::where([
-                ['notifiable_id', $id],
-                ['receive', null],
+        $this->receiveNotification =  ModelsNotification::where([
+            ['notifiable_id', $id],
+            ['receive', null],
 
 
-            ])->get();
-            $this->receiveNotificationcount = $this->receiveNotification->count();
+        ])->get();
+        $this->receiveNotificationcount = $this->receiveNotification->count();
 
 
-            ModelsNotification::where([
-                ['notifiable_id', $id],
-                ['receive', null],
-            ])->update(['receive' => 1]);
-            // $this->alertSuccess();
+        ModelsNotification::where([
+            ['notifiable_id', $id],
+            ['receive', null],
+        ])->update(['receive' => 1]);
 
         return view('livewire.notification');
     }
@@ -67,7 +70,6 @@ class Notification extends Component
      */
     public function alertSuccess()
     {
-        // $this->dd++;
         $this->count++;
 
         $id = Auth::id();
