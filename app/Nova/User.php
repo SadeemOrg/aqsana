@@ -66,7 +66,7 @@ class User extends Resource
     ];
     public static function createButtonLabel()
     {
-        return 'انشاء مستخدم';
+        return 'انشاء موظف ';
     }
     /**
      * Get the fields displayed by the resource.

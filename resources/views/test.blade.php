@@ -33,7 +33,7 @@
 
                     var disposition = xhr.getResponseHeader('content-disposition');
                     var matches = /"([^"]*)"/.exec(disposition);
-                    var filename = (matches != null && matches[1] ? matches[1] : 'salary.csv');
+                    var filename = (matches != null && matches[1] ? matches[1] : 'salary.xlsx');
 
                     // The actual download
                     var blob = new Blob([result], {
