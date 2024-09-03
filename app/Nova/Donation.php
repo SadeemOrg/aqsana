@@ -106,10 +106,7 @@ class Donation extends Resource
      * @var array
      */
     public static $search = [
-        'id',
-        'name',
-        'transaction_date',
-        'equivelant_amount'
+        'id', 'name', 'transaction_date', 'equivelant_amount'
 
     ];
 
@@ -323,7 +320,7 @@ class Donation extends Resource
             Button::make(__('print'))->link('/mainbill/' . $this->id . '?type=bill')->style('custom')->canSee(function () {
                 return $this->is_delete == 0;
             }),
-            Button::make(__('print'))->link('/mainbill/' . $this->deleted_ref   . '?type=repayment')->style('custom')->canSee(function () {
+            Button::make(__('print'))->link('/mainbill/' . $this->deleted_ref   .'?type=repayment')->style('custom')->canSee(function () {
                 return $this->is_delete != 0;
             }),
 
@@ -343,8 +340,166 @@ class Donation extends Resource
 
         ];
     }
+    protected static function afterValidation(NovaRequest $request, $validator)
+    {
+
+        $data = json_decode($request->ref_id, true);
+        if (!((isset($data['key2']) && !empty($data['key2'])) || $request->newproject)) {
+            $validator->errors()->add('ref_id', 'يجب اضافة مشروع');
+        }
+        if ($request->newproject  &&  empty(json_decode($request->ref_id)->key2)) {
 
 
+
+            //
+            $refId = json_decode($request->newproject[0]['attributes']['ref_id']);
+            if (!isset($refId->key1) || !isset($refId->key2)) {
+                $validator->errors()->add($request->newproject[0]['key'] . '__ref_id', 'هذا الحقل مطلوب');
+            }
+            if (!isset($request->newproject[0]['attributes']['project_describe'])) {
+                $validator->errors()->add($request->newproject[0]['key'] . '__project_describe', 'هذا الحقل مطلوب');
+            }
+            if (!isset($request->newproject[0]['attributes']['project_name'])) {
+                $validator->errors()->add($request->newproject[0]['key'] . '__project_name', 'هذا الحقل مطلوب');
+            }
+            $date1 = json_decode($request->ref_id)->key1;
+            $date2 = json_decode($request->newproject[0]['attributes']['ref_id'])->key1;
+            $year1 = date('Y', strtotime($date1));
+            $year2 = date('Y', strtotime($date2));
+            if (!($year1 == $year2)) {
+                $validator->errors()->add('ref_id', 'تاريخ المشروع غير متطابق مع تاريخ السند');
+            }
+        }
+
+        if (!($request->name || $request->add_user)) {
+            $validator->errors()->add('name', 'يجب اضافة شركة');
+        }
+    }
+
+    public static function redirectAfterCreate(NovaRequest $request, $resource)
+    {
+        return '/bill?location=' . $resource->id . '&type=1';
+    }
+
+
+    public static function beforeCreate(Request $request, $model)
+    {
+
+
+
+        $id = Auth::id();
+        $model->created_by = $id;
+        $model->transaction_type = '1';
+        $model->main_type = '1';
+        $model->type = '2';
+
+        $largestBillNumber = Transaction::where([
+            ['main_type', 1],
+            ['type', 2],
+            ['is_delete', '<>', '2'],
+        ])
+            ->orderBy('bill_number', 'desc')
+            ->value('bill_number');
+        if (is_null($largestBillNumber)) {
+            $largestBillNumber = 999;
+        }
+        $model->bill_number = $largestBillNumber + 1;
+
+        if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
+        else  $model->transaction_status = '1';
+    }
+    public static function beforeSave(Request $request, $model)
+    {
+
+
+
+        if ($request->newproject  &&  empty(json_decode($request->ref_id)->key2)) {
+
+            $Project =  new  ModelsProject();
+            $model->transaction_date = json_decode($request->ref_id)->key1;
+            $Project->start_date = json_decode($request->newproject[0]['attributes']['ref_id'])->key1;
+            $Project->sector = json_decode($request->newproject[0]['attributes']['ref_id'])->key2;
+            $Project->project_name = $request->newproject[0]['attributes']['project_name'];
+            $Project->project_describe = $request->newproject[0]['attributes']['project_describe'];
+            $Project->project_type = '1';
+            $Project->save();
+            $model->ref_id = $Project->id;
+            $model->sector = json_decode($request->newproject[0]['attributes']['ref_id'])->key2;
+        } else {
+            $model->transaction_date = json_decode($request->ref_id)->key1;
+            $model->ref_id = json_decode($request->ref_id)->key2;
+            $model->sector = ModelsProject::where('id', json_decode($request->ref_id)->key2)->first()->sector;
+        }
+        $request->request->remove('newproject');
+
+        $request->request->remove('ref_id');
+        if ($request->ReceiveDonation == 1) $model->transaction_status = '2';
+        else  $model->transaction_status = '1';
+        if ($request->Payment_type == '1') {
+            $model->Payment_type_details = null;
+            $model->equivelant_amount = $request->transact_amount;
+        } elseif ($request->Payment_type == '2') {
+
+            $model->transact_amount = 0;
+            $amount = 0;
+            foreach ($request->Payment_type_details as $key => $value) {
+
+                $amount += $value['attributes']['Doubt_value'];
+            }
+
+            $model->equivelant_amount = $amount;
+        } elseif ($request->Payment_type == '3') {
+            $model->transact_amount = 0;
+            $amount = 0;
+            foreach ($request->Payment_type_details as $key => $value) {
+
+                $amount += $value['attributes']['equivelant_amount'];
+            }
+
+            $model->equivelant_amount = $amount;
+
+            #  // $model->equivelant_amount
+        } elseif ($request->Payment_type == '4') {
+            $model->transact_amount = 0;
+            $amount = 0;
+            foreach ($request->Payment_type_details as $key => $value) {
+
+                $amount += $value['attributes']['equivelant_amount'];
+            }
+
+            $model->equivelant_amount = $amount;
+        }
+    }
+    public static function aftersave(Request $request, $model)
+    {
+        if (!$request->name && !$request->add_user) {
+            DB::table('transactions')
+                ->where('id', $model->id)
+                ->update(['name' => 192]);
+        }
+        if (!$request->name && $request->add_user) {
+            if ($request->add_user[0]['attributes']['name']) {
+                $telfone =  TelephoneDirectory::create(
+                    [
+                        'name' => $request->add_user[0]['attributes']['name'],
+                        'type' => '2',
+                        'phone_number' =>  $request->add_user[0]['attributes']['phone']
+                    ],
+                );
+            }
+            DB::table('transactions')
+                ->where('id', $model->id)
+                ->update(['name' => $telfone->id]);
+        }
+    }
+
+
+    /**
+     * Get the cards available for the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
     public function cards(Request $request)
     {
         return [
@@ -352,27 +507,48 @@ class Donation extends Resource
             new DonationInBox(),
             new DonationInBank(),
             new FilterCard(new AlhisalatColect()),
+        ];
+    }
+
+    /**
+     * Get the filters available for the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function filters(Request $request)
+    {
+        return [
 
         ];
     }
 
-
-    public function filters(Request $request)
-    {
-        return [
-         ];
-    }
-
+    /**
+     * Get the lenses available for the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
     public function lenses(Request $request)
     {
         return [];
     }
 
-
+    /**
+     * Get the actions available for the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
     public function actions(Request $request)
     {
         return [
-
+            new ReceiveDonation,
+            new DepositedInBank,
+            new BillPdf,
+            (new DeleteBill)->onlyOnDetail(),
+            (new PrintBill)->withoutConfirmation(),
+            (new ExportDonations)->standalone(),
         ];
     }
 }
