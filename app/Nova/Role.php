@@ -60,6 +60,7 @@ class Role extends Resource
     public function fields(Request $request)
     {
         return [
+
             Text::make(__('role'),'role'),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
