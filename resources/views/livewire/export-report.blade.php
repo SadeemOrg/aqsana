@@ -66,10 +66,7 @@
             <!--end Picker -->
             <div class="flex w-full h-12">
 
-                <button type="submit"
-                    class="mx-2 connectUs w-full duration-200 text-center px-5 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
-                    بحث
-                </button>
+
 
                 <button wire:click="Report"
                     class="connectUs flex items-center justify-center w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
