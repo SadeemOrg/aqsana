@@ -23,8 +23,8 @@
    @elseif ($this->key=='Report')
    <button id='clickButton' wire:click="Report" hidden>Click Me</button>
     @endif
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script>
-            <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
         var button = document.getElementById('clickButton');
 
