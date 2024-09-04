@@ -191,11 +191,8 @@ class ExportReport extends Component
                 });
 
                 $additionalRows = [
-                    ['  ', '  ', '   ', ' '],
-                    ['  ', '  ', '   ', ' '],
                     ['المدخلات', $totalAmountMainType1, 'المخرجات', $totalAmountMainType2, 'صافي الانفاق', $totalAmountMainType1 - $totalAmountMainType2],
-                    ['  ', '  ', '   ', ' '],
-                    ['  ', '  ', '   ', ' '],
+
                 ];
                 $mergedQuery = $mergedQuery->concat($selectedTransactions)->concat($additionalRows);
             }
