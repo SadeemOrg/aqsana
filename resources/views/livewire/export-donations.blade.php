@@ -37,7 +37,7 @@
         }
 
         function funtion2() {
-            // setTimeout(function(){  window.close(); }, 4000);
+            setTimeout(function(){  window.close(); }, 4000);
 
 
         }
