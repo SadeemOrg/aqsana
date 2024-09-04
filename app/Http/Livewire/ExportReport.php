@@ -29,8 +29,7 @@ class ExportReport extends Component
 
 
     // }
-    public function onChange($type)
-    {}
+    public function onChange($type) {}
     public function Report()
     {
         $projectNames = Project::whereIn('id', json_decode($this->name))
@@ -43,7 +42,7 @@ class ExportReport extends Component
         // Construct the filename directly without encoding
         $filename = "{$truncatedProjectNames}_{$dateToday}.xlsx";
 
-        return Excel::download(new ExportsReport($this->name, $this->from, $this->to,$this->dateType,$this->PaymentType), $filename);
+        return Excel::download(new ExportsReport($this->name, $this->from, $this->to, $this->dateType, $this->PaymentType), $filename);
     }
     public function render()
     {
@@ -69,7 +68,10 @@ class ExportReport extends Component
 
                 $filteredTransactionsSet2 = $Project->Transaction()->where([
                     ['main_type', '=', 2],
-                ])->whereBetween('transaction_date', [$startdate, $finishdate])->get();
+                ])->whereBetween('transaction_date', [$startdate, $finishdate])
+                    ->when($this->PaymentType != 0, function ($query) {
+                        return $query->where('payment_type', $this->PaymentType);
+                    })->get();
                 $totalAmountMainType2 = $filteredTransactionsSet2->sum('equivelant_amount');
 
                 $mergedTransactions = $filteredTransactionsSet1->merge($filteredTransactionsSet2);
@@ -83,7 +85,7 @@ class ExportReport extends Component
                     return $transaction;
                 });
                 $additionalRows = [
-                    [' اسم المشروع ', '  ',  '  ',$Project?->project_name , ''],
+                    [' اسم المشروع ', '  ',  '  ', $Project?->project_name, ''],
                 ];
                 $mergedQuery = $mergedQuery->concat([])->concat($additionalRows);
 
@@ -98,19 +100,18 @@ class ExportReport extends Component
                     ];
 
 
-                        return [
-                            'bill' => $transaction->bill_number,
-                            'id' => $transaction->id,
-                            'date' => $transaction->transaction_date,
-                            'dateDetails' => isset($transaction->Payment_type_details['0']['attributes']['Date'])
-                                ? $transaction->Payment_type_details['0']['attributes']['Date']
-                                : null,
-                            'type' => $transaction->type,
-                            'name' => $transaction->TelephoneDirectory?->name,
-                            'transact_amount' => $transaction->equivelant_amount,
-                            'paymentTypeValue' => $paymentTypeLabels[$transaction->Payment_type] ?? __('Unknown'),
-                        ];
-
+                    return [
+                        'bill' => $transaction->bill_number,
+                        'id' => $transaction->id,
+                        'date' => $transaction->transaction_date,
+                        'dateDetails' => isset($transaction->Payment_type_details['0']['attributes']['Date'])
+                            ? $transaction->Payment_type_details['0']['attributes']['Date']
+                            : null,
+                        'type' => $transaction->type,
+                        'name' => $transaction->TelephoneDirectory?->name,
+                        'transact_amount' => $transaction->equivelant_amount,
+                        'paymentTypeValue' => $paymentTypeLabels[$transaction->Payment_type] ?? __('Unknown'),
+                    ];
                 });
 
                 $additionalRows = [
@@ -118,11 +119,8 @@ class ExportReport extends Component
 
                 ];
                 $mergedQuery = $mergedQuery->concat($selectedTransactions)->concat($additionalRows);
-
-
             }
-        }
-        else {
+        } else {
             foreach ($Projects as $key => $Project) {
                 $filteredTransactionsSet1 = $Project->Transaction()
                     ->where([
@@ -148,7 +146,10 @@ class ExportReport extends Component
 
                 $filteredTransactionsSet2 = $Project->Transaction()->where([
                     ['main_type', '=', 2],
-                ])->whereBetween('transaction_date', [$startdate, $finishdate])->get();
+                ])->whereBetween('transaction_date', [$startdate, $finishdate])
+                ->when($this->PaymentType != 0, function ($query) {
+                    return $query->where('payment_type', $this->PaymentType);
+                })->get();
                 $totalAmountMainType2 = $filteredTransactionsSet2->sum('equivelant_amount');
 
                 $mergedTransactions = $filteredTransactionsSet1->merge($filteredTransactionsSet2);
@@ -162,7 +163,7 @@ class ExportReport extends Component
                     return $transaction;
                 });
                 $additionalRows = [
-                    [' اسم المشروع ', '  ',  '  ',$Project?->project_name , ' '],
+                    [' اسم المشروع ', '  ',  '  ', $Project?->project_name, ' '],
                 ];
                 $mergedQuery = $mergedQuery->concat([])->concat($additionalRows);
 
@@ -199,7 +200,7 @@ class ExportReport extends Component
             // return $mergedQuery;
         }
 
-        $this->exportData=$mergedQuery;
+        $this->exportData = $mergedQuery;
         // dd($this->name, $this->from, $this->to,$this->dateType,$this->PaymentType);
         return view('livewire.export-report');
     }
