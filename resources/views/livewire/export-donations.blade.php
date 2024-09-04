@@ -24,6 +24,8 @@
    <button id='clickButton' wire:click="Report" hidden>Click Me</button>
     @endif
     <script>
+            <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
         var button = document.getElementById('clickButton');
 
         window.onload = function() {
