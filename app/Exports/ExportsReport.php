@@ -51,7 +51,9 @@ class ExportsReport implements FromCollection, WithHeadings, WithStyles, ShouldA
 
                 $filteredTransactionsSet2 = $Project->Transaction()->where([
                     ['main_type', '=', 2],
-                ])->whereBetween('transaction_date', [$startdate, $finishdate])->get();
+                ])->whereBetween('transaction_date', [$startdate, $finishdate]) ->when($this->PaymentType != 0, function ($query) {
+                    return $query->where('payment_type', $this->PaymentType);
+                })->get();
                 $totalAmountMainType2 = $filteredTransactionsSet2->sum('equivelant_amount');
 
                 $mergedTransactions = $filteredTransactionsSet1->merge($filteredTransactionsSet2);
@@ -134,7 +136,10 @@ class ExportsReport implements FromCollection, WithHeadings, WithStyles, ShouldA
 
                 $filteredTransactionsSet2 = $Project->Transaction()->where([
                     ['main_type', '=', 2],
-                ])->whereBetween('transaction_date', [$startdate, $finishdate])->get();
+                ])->whereBetween('transaction_date', [$startdate, $finishdate])
+                ->when($this->PaymentType != 0, function ($query) {
+                    return $query->where('payment_type', $this->PaymentType);
+                })->get();
                 $totalAmountMainType2 = $filteredTransactionsSet2->sum('equivelant_amount');
 
                 $mergedTransactions = $filteredTransactionsSet1->merge($filteredTransactionsSet2);
