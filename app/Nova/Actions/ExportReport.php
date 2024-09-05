@@ -46,7 +46,7 @@ class ExportReport extends Action
                     '1' => 'تاريخ السند',
                     '2' => 'تاريخ الدفعة',
                 ])
-                ->displayUsingLabels(),
+                ->displayUsingLabels()->default(1),
             Select::make(__("Payment_type"), "Payment_type")->options(
                 [
                     '0' => __('all'),
@@ -58,7 +58,7 @@ class ExportReport extends Action
                     // '6' => __('التطبيق'),
 
                 ]
-            )->displayUsingLabels(),
+            )->displayUsingLabels()->default(0),
             Date::make(__('from'), 'from')->required(),
             Date::make(__('to'), 'to')->required(),
             Select::make('معاينة ', 'print')
