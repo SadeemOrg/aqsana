@@ -11,6 +11,7 @@ use App\Models\FormMassage;
 
 use App\Mail\TestMail;
 use App\Models\Almuahada;
+use App\Models\ArchiveSms;
 use App\Models\Book;
 use App\Models\BookType;
 use App\Models\Budget;
@@ -509,6 +510,13 @@ class HomeController extends BaseController
                 ]);
             }
         }
+        ArchiveSms::create([
+            'send_type' => json_encode($request->type),
+            'content' => $request->Message,
+            'date' => Carbon::now(),
+            'number_of_people' => $results->count(),
+            'sender_id' => Auth::id(),
+        ]);
 
         return response()->json(['message' => 'Message Sent successfully.'], 200);
     }
