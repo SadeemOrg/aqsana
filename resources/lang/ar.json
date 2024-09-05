@@ -246,6 +246,7 @@
     "Sub_text": "العنوان الفرعي",
     "Bus Number": "اسم الباص",
     "Number person on bus": "عدد الأشخاص في الحافلة",
+    "Number person": "عدد الأشخاص  ",
     "seat price": "سعر المقعد",
     "travel from": "السفر من",
     "travel to": "يسافر إلى",
@@ -980,7 +981,9 @@
     "Hassale":"حصالة",
     "Payment Type":"طريقة الدفع",
     "Transaction Amount":"قيمة الشك",
-    "Date Details":"تاريخ الدفع"
+    "Date Details":"تاريخ الدفع",
+    "ArchiveSms":"ارشيف  الرسائل",
+    "Sender":"مرسل"
 
 
 }
