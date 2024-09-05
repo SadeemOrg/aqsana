@@ -976,6 +976,11 @@
     "phone_number_address":"رقم الهاتف ",
     "equivelant_amount":"القيمة بشيكل",
     "Cities":"البلدات",
-    "From_to":"من تاريخ - الى تاريخ"
+    "From_to":"من تاريخ - الى تاريخ",
+    "Hassale":"حصالة",
+    "Payment Type":"طريقة الدفع",
+    "Transaction Amount":"قيمة الشك",
+    "Date Details":"تاريخ الدفع"
+
 
 }
