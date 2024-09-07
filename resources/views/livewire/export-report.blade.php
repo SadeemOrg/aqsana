@@ -1,6 +1,6 @@
 <div class="container mx-auto sm:px-6 lg:px-8">
     <div class="flex flex-row items-center justify-center mx-8 mt-12">
-        <img class="sm:h-[170px] w-[90%]" src="{{ asset('/assets/image/iuktui.png') }}" alt="alaqsa Logo">
+        <img class="h-[170px] md:w-[90%]" src="{{ asset('/assets/image/iuktui.png') }}" alt="alaqsa Logo">
     </div>
     <div class="flex-col justify-start p-5">
 
@@ -68,7 +68,7 @@
         </div>
         <div  style="width: 100%;" dir="ltr">
 
-            <table dir="rtl"
+            <table dir="rtl" class="overflow-x-auto"
                 style="border-collapse: collapse; width: 100%; margin-bottom: 20px; font-family: Arial, sans-serif; text-align: left;">
                 <thead class="bg-[#349A37] text-center">
                     <tr >
@@ -100,16 +100,16 @@
                                 </td>
                             </tr>
                         @else
-                            <tr class="bg-[#E4FFE585] " >
-                                <td style="border-top: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 8px;">
+                            <tr class="bg-[#E4FFE585] text-center " >
+                                <td style="border-top: 1px solid #ddd;  border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 8px;">
                                     {{ $item['0'] }}</td>
-                                <td style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['1'] ?? '' }}</td>
-                                <td style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['2'] ?? '' }}</td>
-                                <td style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['3'] ?? '' }}</td>
-                                <td style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['4'] ?? '' }}</td>
-                                <td style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['5'] ?? '' }}</td>
-                                <td style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;  padding: 8px;"></td>
-                                <td style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; border-left: 1px solid #ddd;  padding: 8px;"></td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['1'] ?? '' }}</td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['2'] ?? '' }}</td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['3'] ?? '' }}</td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['4'] ?? '' }}</td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['5'] ?? '' }}</td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;"></td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd; border-left: 1px solid #ddd;  padding: 8px;"></td>
                             </tr>
                         @endisset
                     @endforeach
