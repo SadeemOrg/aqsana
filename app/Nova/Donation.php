@@ -60,11 +60,7 @@ use Upline\RowBackground\RowBackgroundData;
 class Donation extends Resource
 {
 
-    use SearchesRelations;
 
-    public static $searchRelations = [
-        'TelephoneDirectory' => ['id', 'name'],
-    ];
     /**
      * The model the resource corresponds to.
      *
@@ -110,10 +106,6 @@ class Donation extends Resource
      *
      * @var array
      */
-    public static $search = [
-         'name', 'transaction_date', 'equivelant_amount','bill_number'
-
-    ];
 
     /**
      * Get the fields displayed by the resource.
