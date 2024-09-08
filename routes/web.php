@@ -30,36 +30,7 @@ use Illuminate\Support\Facades\File;
 */
 
 
-Route::get('/write-to-file', function () {
-    $content = "This is the content you want to write to the file.";
-    $path = storage_path('app/public/example.txt');
 
-    // Check if the file exists, if not create it with the initial content
-    if (!File::exists($path)) {
-        File::put($path, $content);
-    } else {
-        // Append new content to the file
-        File::append($path, "\n" . $content);
-    }
-
-
-});
-Route::get('/show-file', function () {
-
-    $path = storage_path('app/public/example.txt');
-
-    // Check if the file exists
-    if (File::exists($path)) {
-        // Get the file contents
-        $content = File::get($path);
-
-        // Return the content as a response
-        return response($content)
-                ->header('Content-Type', 'text/plain');
-    } else {
-        return "File does not exist.";
-    }
-});
 
 Route::get("/open-tabs", [HomeController::class, "openTabs"])->name('open-tabs');
 
@@ -161,8 +132,6 @@ Route::post("UserAdmin", [HomeController::class, "Admin"])->name('Admin');
 Route::post("schedulelast", [HomeController::class, "schedulelast"])->name('schedulelast');
 Route::get("schedulelast", [HomeController::class, "schedulelastTest"])->name('schedulelast');
 
-Route::get('/export', 'ExportController@export')->name('export');
-Route::get('/delete-all-data', 'ExportController@deleteAllData')->name('delete.all.data');
 
 
 Route::post("first/", [HomeController::class, "first"])->name('first');
@@ -234,9 +203,8 @@ Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch')
 
 
 Route::get('/search/{val}/', [HomeController::class, 'search'])->name('search');
-
-// Route::get('/searchpage', [HomeController::class, 'searchpage'])->name('searchpage');
-
+Route::get('/export', 'ExportController@export')->name('export');
+Route::get('/delete-all-data', 'ExportController@deleteAllData')->name('delete.all.data');
 Route::get('/project', [HomeController::class, 'project'])->name('project');
 Route::get('/project/{id}', [HomeController::class, 'getprojectDetail'])->name('getprojectDetail');
 Route::get('/projectapi/{id}', [HomeController::class, 'getprojectDetailapi'])->name('getprojectDetailapi');
@@ -250,7 +218,6 @@ Route::get('/privacy-policy', function () {
     return View('Pages.privacy-policy');
 });
 
-// Library
 Route::get('/library', [HomeController::class, 'library'])->name('library');
 Route::get('/librarydetail/{id}', [HomeController::class, 'libraryDetail'])->name('libraryDetail');
 Route::get('/librarysearch/{search}', [HomeController::class, 'librarySearch'])->name('librarySearch');
@@ -263,7 +230,6 @@ Route::get('/mainbill/{id}', [HomeController::class, 'mainbill'])->name('mainbil
 Route::get('/SendMail', [HomeController::class, 'SendMail'])->name('SendMail');
 Route::post('/SendMail', [HomeController::class, 'SendMail'])->name('SendMail');
 
-// Route::get('bill', [HomeController::class, 'billsPdf']);
 
 
 Route::get('/landingPage', function () {
@@ -272,10 +238,6 @@ Route::get('/landingPage', function () {
 });
 
 
-// Route::get('/try', function (){
-
-//     return view('Pages.Try');
-// });
 
 
 

@@ -151,7 +151,7 @@ class PaymentVoucher extends Resource
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('المشروع'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            BelongsTo::make(__('company'), 'company', \App\Nova\BusesCompany::class),
+            BelongsTo::make(__('متبرع'), 'company', \App\Nova\BusesCompany::class),
 
             BelongsTo::make(__('Sector name'), 'Sectors', \App\Nova\Sector::class)->hideWhenCreating()->hideWhenUpdating(),
 

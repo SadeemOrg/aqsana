@@ -20,6 +20,10 @@ class ExportCites extends Action
      * @param  \Illuminate\Support\Collection  $models
      * @return mixed
      */
+    public  function name()
+    {
+        return __('Export To Exsel');
+    }
     public function handle(ActionFields $fields, Collection $models)
     {
         return Action::openInNewTab('/export/ExportCites');

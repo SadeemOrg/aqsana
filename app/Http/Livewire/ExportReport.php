@@ -1,33 +1,50 @@
 <?php
 
-namespace App\Exports;
+namespace App\Http\Livewire;
 
-use App\Models\address;
+use App\Exports\ExportsReport;
 use App\Models\Project;
 use Carbon\Carbon;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Livewire\Component;
+use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
-class ExportsReport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize
+class ExportReport extends Component
 {
-    public function __construct(string $name, string $from, string $to, string $dateType, string $PaymentType)
-    {
-        $this->name = $name;
-        $this->from = $from;
-        $this->to = $to;
-        $this->dateType = $dateType;
-        $this->PaymentType = $PaymentType;
-    }
+    public $key;
+    public $ref;
+    public $name;
+    public $from;
+    public $to;
+    public $type;
+    public $dateType;
+    public $PaymentType;
+    public $exportData;
 
-    public function headings(): array
-    {
-        return ['رقم', 'المعرف', ' تاريخ السند', ' تاريخ الدفعة', 'نوع السند', 'الاسم', 'القيمة', 'طريقة الدفع'];
-    }
 
-    public function collection()
+    // public function mount($key, $ref)
+    // {
+    //     $this->key = $key;
+    //     $this->ref = $ref;
+
+
+    // }
+    public function onChange($type) {}
+    public function Report()
+    {
+        $projectNames = Project::whereIn('id', json_decode($this->name))
+            ->pluck('project_name')
+            ->implode(', ');
+
+        $truncatedProjectNames = Str::limit($projectNames, 30, '');
+        $dateToday = Carbon::now()->format('Y-m-d');
+
+        // Construct the filename directly without encoding
+        $filename = "{$truncatedProjectNames}_{$dateToday}.xlsx";
+
+        return Excel::download(new ExportsReport($this->name, $this->from, $this->to, $this->dateType, $this->PaymentType), $filename);
+    }
+    public function render()
     {
         $Projects = Project::wherein('id', json_decode($this->name))->get();
         $this->from = (($this->from != 'null') ?  $this->from : '2001-01-01 00:00:00.0');
@@ -51,9 +68,10 @@ class ExportsReport implements FromCollection, WithHeadings, WithStyles, ShouldA
 
                 $filteredTransactionsSet2 = $Project->Transaction()->where([
                     ['main_type', '=', 2],
-                ])->whereBetween('transaction_date', [$startdate, $finishdate]) ->when($this->PaymentType != 0, function ($query) {
-                    return $query->where('payment_type', $this->PaymentType);
-                })->get();
+                ])->whereBetween('transaction_date', [$startdate, $finishdate])
+                    ->when($this->PaymentType != 0, function ($query) {
+                        return $query->where('payment_type', $this->PaymentType);
+                    })->get();
                 $totalAmountMainType2 = $filteredTransactionsSet2->sum('equivelant_amount');
 
                 $mergedTransactions = $filteredTransactionsSet1->merge($filteredTransactionsSet2);
@@ -67,9 +85,7 @@ class ExportsReport implements FromCollection, WithHeadings, WithStyles, ShouldA
                     return $transaction;
                 });
                 $additionalRows = [
-
-                    [' اسم المشروع ', '  ',  '  ',$Project?->project_name , ' '],
-                    ['  ', '  ', '   ', ' '],
+                    [' اسم المشروع ', '  ',  '  ', $Project?->project_name, ''],
                 ];
                 $mergedQuery = $mergedQuery->concat([])->concat($additionalRows);
 
@@ -84,32 +100,26 @@ class ExportsReport implements FromCollection, WithHeadings, WithStyles, ShouldA
                     ];
 
 
-                        return [
-                            'bill' => $transaction->bill_number,
-                            'id' => $transaction->id,
-                            'date' => $transaction->transaction_date,
-                            'dateDetails' => isset($transaction->Payment_type_details['0']['attributes']['Date'])
-                                ? $transaction->Payment_type_details['0']['attributes']['Date']
-                                : null,
-                            'type' => $transaction->type,
-                            'name' => $transaction->TelephoneDirectory?->name,
-                            'transact_amount' => $transaction->equivelant_amount,
-                            'paymentTypeValue' => $paymentTypeLabels[$transaction->Payment_type] ?? __('Unknown'),
-                        ];
-
+                    return [
+                        'bill' => $transaction->bill_number,
+                        'id' => $transaction->id,
+                        'date' => $transaction->transaction_date,
+                        'dateDetails' => isset($transaction->Payment_type_details['0']['attributes']['Date'])
+                            ? $transaction->Payment_type_details['0']['attributes']['Date']
+                            : null,
+                        'type' => $transaction->type,
+                        'name' => $transaction->TelephoneDirectory?->name,
+                        'transact_amount' => $transaction->equivelant_amount,
+                        'paymentTypeValue' => $paymentTypeLabels[$transaction->Payment_type] ?? __('Unknown'),
+                    ];
                 });
 
                 $additionalRows = [
-                    ['  ', '  ', '   ', ' '],
-                    ['  ', '  ', '   ', ' '],
                     ['المدخلات', $totalAmountMainType1, 'المخرجات', $totalAmountMainType2, 'صافي الانفاق', $totalAmountMainType1 - $totalAmountMainType2],
-                    ['  ', '  ', '   ', ' '],
-                    ['  ', '  ', '   ', ' '],
+
                 ];
                 $mergedQuery = $mergedQuery->concat($selectedTransactions)->concat($additionalRows);
             }
-
-            return $mergedQuery;
         } else {
             foreach ($Projects as $key => $Project) {
                 $filteredTransactionsSet1 = $Project->Transaction()
@@ -153,9 +163,7 @@ class ExportsReport implements FromCollection, WithHeadings, WithStyles, ShouldA
                     return $transaction;
                 });
                 $additionalRows = [
-
-                    [' اسم المشروع ', '  ',  '  ',$Project?->project_name , ' '],
-                    ['  ', '  ', '   ', ' '],
+                    [' اسم المشروع ', '  ',  '  ', $Project?->project_name, ' '],
                 ];
                 $mergedQuery = $mergedQuery->concat([])->concat($additionalRows);
 
@@ -184,49 +192,16 @@ class ExportsReport implements FromCollection, WithHeadings, WithStyles, ShouldA
                 });
 
                 $additionalRows = [
-                    ['  ', '  ', '   ', ' '],
-                    ['  ', '  ', '   ', ' '],
                     ['المدخلات', $totalAmountMainType1, 'المخرجات', $totalAmountMainType2, 'صافي الانفاق', $totalAmountMainType1 - $totalAmountMainType2],
-                    ['  ', '  ', '   ', ' '],
-                    ['  ', '  ', '   ', ' '],
+
                 ];
                 $mergedQuery = $mergedQuery->concat($selectedTransactions)->concat($additionalRows);
             }
-            return $mergedQuery;
+            // return $mergedQuery;
         }
-    }
 
-    public function styles(Worksheet $sheet)
-    {
-        // Determine the total number of rows in the sheet
-        $highestRow = $sheet->getHighestRow();
-
-
-        // Apply red background to rows containing the string 'المدخلات'
-        for ($row = 1; $row <= $highestRow; $row++) {
-            $cellValue = $sheet->getCell("A$row")->getValue(); // Adjust column if necessary
-            if ($cellValue === 'المدخلات') {
-                $sheet->getStyle("A$row:I$row")->applyFromArray([
-                    'fill' => [
-                        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                        'color' => ['argb' => 'FF00FF00'], // Green color
-                    ],
-                    'font' => [
-                        'bold' => true,
-                    ],
-                ]);
-            }elseif($cellValue === ' اسم المشروع ')
-            {
-                $sheet->getStyle("A$row:I$row")->applyFromArray([
-                    'fill' => [
-                        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                        'color' => ['argb' => '87CEEB'], // Sky blue color
-                    ],
-                    'font' => [
-                        'bold' => true,
-                    ],
-                ]);
-            }
-        }
+        $this->exportData = $mergedQuery;
+        // dd($this->name, $this->from, $this->to,$this->dateType,$this->PaymentType);
+        return view('livewire.export-report');
     }
 }

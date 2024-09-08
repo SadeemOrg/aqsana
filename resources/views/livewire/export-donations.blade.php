@@ -23,7 +23,9 @@
    @elseif ($this->key=='Report')
    <button id='clickButton' wire:click="Report" hidden>Click Me</button>
     @endif
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script>
+
         var button = document.getElementById('clickButton');
 
         window.onload = function() {
@@ -37,7 +39,7 @@
         }
 
         function funtion2() {
-            // setTimeout(function(){  window.close(); }, 4000);
+            setTimeout(function(){  window.close(); }, 4000);
 
 
         }

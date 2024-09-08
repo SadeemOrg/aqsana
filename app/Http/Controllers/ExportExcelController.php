@@ -62,6 +62,8 @@ class ExportExcelController extends Controller
         $to = ($request->to != null) ? $request->to : 'null';
         $dateType = ($request->dateType != null) ? $request->dateType : 'null';
         $PaymentType = ($request->PaymentType != null) ? $request->PaymentType : 'null';
+        $PaymentType = ($request->PaymentType != null) ? $request->PaymentType : 'null';
+
 
         $key = 'Donations';
         return view('export', compact('key', 'ref', 'name', 'from', 'to', 'dateType', 'PaymentType'));
@@ -79,12 +81,13 @@ class ExportExcelController extends Controller
         $to = ($request->to != null) ? $request->to : 'null';
         $dateType = ($request->dateType != null) ? $request->dateType : 'null';
         $PaymentType = ($request->PaymentType != null) ? $request->PaymentType : 'null';
+        $print = ($request->print != null) ? $request->print : 'null';
 
 
 
         $key = 'Report';
 
-        return view('export', compact('key', 'ref', 'name', 'from', 'to', 'dateType', 'PaymentType'));
+        return view('export', compact('key', 'ref', 'name', 'from', 'to', 'dateType', 'PaymentType','print'));
     }
     public function ExportPaymentVoucher(Request $request)
     {
@@ -164,7 +167,7 @@ class ExportExcelController extends Controller
 
 
         $key = 'Cites';
-        return view('export', compact('key', 'ref', 'name', 'from', 'to'));
+        return view('export', compact('key', 'ref', 'name', 'from', 'to', 'dateType', 'PaymentType'));
     }
     public function  ExportAddress(Request $request)
     {
