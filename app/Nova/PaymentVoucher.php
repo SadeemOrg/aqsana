@@ -117,47 +117,48 @@ class PaymentVoucher extends Resource
                 return $keyValueArray;
             })->hideFromDetail()->hideFromIndex(),
             Flexible::make(__('new project'), 'newproject')
-            ->limit(1)
-            ->hideFromDetail()->hideFromIndex()
-            ->addLayout(__('Add new type'), 'type', [
+                ->limit(1)
+                ->hideFromDetail()->hideFromIndex()
+                ->addLayout(__('Add new type'), 'type', [
 
-                SectorPicker::make(__('تاريخ المشروع'), 'ref_id', function () {
-                    $keyValueArray = ['key1' => $this->sector, 'key2' => $this->start_date];
+                    SectorPicker::make(__('تاريخ المشروع'), 'ref_id', function () {
+                        $keyValueArray = ['key1' => $this->sector, 'key2' => $this->start_date];
 
-                    return $keyValueArray;
-                })->hideFromDetail()->hideFromIndex(),
-                Text::make(__("project name"), "project_name"),
-                Textarea::make(__("project describe"), "project_describe")->hideFromIndex(),
+                        return $keyValueArray;
+                    })->hideFromDetail()->hideFromIndex(),
+                    Text::make(__("project name"), "project_name"),
+                    Textarea::make(__("project describe"), "project_describe")->hideFromIndex(),
 
-                Multiselect::make(__('city'), 'city')
-                    ->options(function () {
-                        $Areas =  \App\Models\City::all();
+                    Multiselect::make(__('city'), 'city')
+                        ->options(function () {
+                            $Areas =  \App\Models\City::all();
 
-                        $Area_type_admin_array =  array();
+                            $Area_type_admin_array =  array();
 
-                        foreach ($Areas as $Area) {
+                            foreach ($Areas as $Area) {
 
 
-                            $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
-                        }
+                                $Area_type_admin_array += [$Area['id'] => ($Area['name'])];
+                            }
 
-                        return $Area_type_admin_array;
-                    })->singleSelect()->hideFromIndex()->hideFromDetail(),
+                            return $Area_type_admin_array;
+                        })->singleSelect()->hideFromIndex()->hideFromDetail(),
 
-            ]),
+                ]),
 
 
 
             Date::make(__('date'), 'transaction_date')->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('المشروع'), 'project', \App\Nova\project::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            BelongsTo::make(__('متبرع'), 'company', \App\Nova\BusesCompany::class),
+            BelongsTo::make(__('شركة'), 'company', \App\Nova\BusesCompany::class)->nullable(),
 
             BelongsTo::make(__('Sector name'), 'Sectors', \App\Nova\Sector::class)->hideWhenCreating()->hideWhenUpdating(),
 
 
             Flexible::make(__('اضافة  شركة  جديدة'), 'add_user')
                 ->limit(1)
+                ->readonly(true)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('tooles'), 'Payment_type_details ', [
                     Text::make(__('name'), "name")->rules('required'),
@@ -176,7 +177,7 @@ class PaymentVoucher extends Resource
 
 
             BelongsTo::make(__('Currency'), 'Currenc', \App\Nova\Currency::class)
-            ->withMeta(['value' => \App\Models\Currency::find(3)->id])->hideFromIndex()->hideFromDetail()->hideWhenUpdating(),
+                ->withMeta(['value' => \App\Models\Currency::find(3)->id])->hideFromIndex()->hideFromDetail()->hideWhenUpdating(),
 
             singleSelect::make(__("Payment_type"), "Payment_type")->options([
                 '1' => __('cash'),
@@ -201,9 +202,9 @@ class PaymentVoucher extends Resource
                         Text::make(__('Doubt number'), "Doubt_number"),
 
                         DateTime::make(__('History of doubt'), 'Date')
-                        ->resolveUsing(function ($value) {
-                            return $value ?? Carbon::now()->format('d/m/Y');
-                        })->rules('required'),
+                            ->resolveUsing(function ($value) {
+                                return $value ?? Carbon::now()->format('d/m/Y');
+                            })->rules('required'),
 
                     ]),
             ])->dependsOn("Payment_type", '2')->hideFromIndex(),
@@ -267,10 +268,10 @@ class PaymentVoucher extends Resource
             if (!isset($refId->key1) || !isset($refId->key2)) {
                 $validator->errors()->add($request->newproject[0]['key'] . '__ref_id', 'هذا الحقل مطلوب');
             }
-            if (!isset($request->newproject[0]['attributes']['project_describe']) ) {
+            if (!isset($request->newproject[0]['attributes']['project_describe'])) {
                 $validator->errors()->add($request->newproject[0]['key'] . '__project_describe', 'هذا الحقل مطلوب');
             }
-            if (!isset($request->newproject[0]['attributes']['project_name']) ) {
+            if (!isset($request->newproject[0]['attributes']['project_name'])) {
                 $validator->errors()->add($request->newproject[0]['key'] . '__project_name', 'هذا الحقل مطلوب');
             }
             $date1 = json_decode($request->ref_id)->key1;
@@ -291,6 +292,11 @@ class PaymentVoucher extends Resource
                 $validator->errors()->add('ref_id', 'تاريخ المشروع غير متطابق مع تاريخ السند');
             }
         }
+
+        if (!($request->company || $request->add_user)) {
+
+            $validator->errors()->add('company', 'يجب اضافة شركة');
+        }
     }
     public static function beforeSave(Request $request, $model)
     {
@@ -308,7 +314,6 @@ class PaymentVoucher extends Resource
             $Project->save();
             $model->ref_id = $Project->id;
             $model->sector = json_decode($request->newproject[0]['attributes']['ref_id'])->key2;
-
         } else {
             $model->transaction_date = json_decode($request->ref_id)->key1;
             $model->ref_id = json_decode($request->ref_id)->key2;
@@ -354,32 +359,33 @@ class PaymentVoucher extends Resource
         }
         $Currency = Currency::find($request->Currenc);
         $model->equivelant_amount = $model->equivelant_amount * $Currency->rate;
-        if (!$request->name) {
-            if ($request->add_user) {
+        // if (!$request->name) {
+        //     if ($request->add_user) {
 
-                if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
-                    $telfone =  new TelephoneDirectory();
-
-
-                    $telfone->name = $request->add_user[0]['attributes']['name'];
-                    $telfone->type = '8';
-                    $telfone->phone_number =  $request->add_user[0]['attributes']['phone'];
-                    $telfone->save();
+        //         if ($request->add_user[0]['attributes']['name'] &&     $request->add_user[0]['attributes']['phone']) {
+        //             $telfone =  new TelephoneDirectory();
 
 
-                    $busescompanies = new  BusesCompany();
-                    $busescompanies->name = $request->add_user[0]['attributes']['name'];
-                    $busescompanies->phone_number =  $request->add_user[0]['attributes']['phone'];
-                    $busescompanies->save();
-                }
-                $model->name = $busescompanies->id;
-                // $request->merge(['name' => ]);
+        //             $telfone->name = $request->add_user[0]['attributes']['name'];
+        //             $telfone->type = '8';
+        //             $telfone->phone_number =  $request->add_user[0]['attributes']['phone'];
+        //             $telfone->save();
 
 
-                $request->merge(['transaction_type' => '1']);
-            }
-        }
-        $request->request->remove('add_user');
+        //             $busescompanies = new  BusesCompany();
+        //             $busescompanies->name = $request->add_user[0]['attributes']['name'];
+        //             $busescompanies->phone_number =  $request->add_user[0]['attributes']['phone'];
+        //             $busescompanies->save();
+        //         }
+        //         $model->name = $busescompanies->id;
+        //         // dd($busescompanies->id,$model->name);
+
+        //         // $request->merge(['name' => $busescompanies->id]);
+
+        //         $request->merge(['transaction_type' => '1']);
+        //     }
+        // }
+        // $request->request->remove('add_user');
         if (!$request->ref_id) {
             if ($request->newproject) {
                 if ($request->newproject[0]['attributes']['project_name'] &&     $request->newproject[0]['attributes']['project_describe'] && $request->newproject[0]['attributes']['start_date'] &&     $request->newproject[0]['attributes']['end_date']) {
@@ -406,6 +412,25 @@ class PaymentVoucher extends Resource
         $model->main_type = '2';
         $model->type = '0';
         // $model->equivelant_amount = $new->rate * $request->transact_amount;
+    }
+    public static function aftersave(Request $request, $model)
+    {
+
+
+        if (!$request->company && $request->add_user) {
+            if ($request->add_user[0]['attributes']['name']) {
+                $busescompanies = new  BusesCompany();
+                $busescompanies->name = $request->add_user[0]['attributes']['name'];
+                $busescompanies->phone_number =  $request->add_user[0]['attributes']['phone'];
+                $busescompanies->save();
+
+                DB::table('transactions')
+                ->where('id', $model->id)
+                ->update(['name' => $busescompanies->id]);
+
+            }
+
+        }
     }
 
 
