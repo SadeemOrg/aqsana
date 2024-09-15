@@ -13,20 +13,23 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,800,800i,900,900i"
         rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('app.css', 'vendor/nova') }}">
 
     <!-- Tool Styles -->
     @foreach (\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
+    @if (\Illuminate\Support\Str::contains($path, 'nova-components'))
+        @continue
+    @endif
         @if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://']))
             <link rel="stylesheet" href="{!! $path !!}">
         @else
             <link rel="stylesheet" href="/nova-api/styles/{{ $name }}">
         @endif
     @endforeach
-
     <!-- Custom Meta Data -->
     @include('nova::partials.meta')
 
