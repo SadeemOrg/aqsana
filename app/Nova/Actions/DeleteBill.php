@@ -69,9 +69,9 @@ class DeleteBill extends Action
                 'is_delete' => '1',
                 'deleted_ref'=>$new_data->id,
             ]);
-            return Action::openInNewTab('/mainbill/'.$new_data->id.'?type=repayment' );
         }
 
+        return Action::openInNewTab('/mainbill/'.$new_data->id.'?type=repayment' );
     }
 
     public function icon()
