@@ -12,7 +12,7 @@ class UserType extends Filter
 
     public function name()
     {
-        return __('انواع الموظفين');
+        return __(' بحث في مجموعات جهات الاتصال ');
     }
     /**
      * The filter's component.
