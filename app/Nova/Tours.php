@@ -138,7 +138,7 @@ class Tours extends Resource
 
 
 
-            Flexible::make(__('Contacts'), 'NewContacts')
+            Flexible::make(__(''), 'NewContacts')
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('Add new type'), 'type', [
@@ -166,14 +166,11 @@ class Tours extends Resource
                     Text::make(__('name'), 'name'),
                     Text::make(__('phone_number'), 'phone_number'),
                 ]),
-            Text::make(__('start Time'), 'start_tour')
-                ->placeholder('##:##')
-                ->creationRules('date_format:"H:i"')
-                ->help('hh:mm'),
-            Text::make(__('end Time'), 'end_tour')
-                ->placeholder('##:##')
-                ->creationRules('date_format:"H:i"')
-                ->help('hh:mm'),
+
+            Text::make(__('start Time'), 'start_tour')->withMeta(['extraAttributes' => ['type' => 'time']]),
+            Text::make(__('end Time'), 'end_tour')->withMeta(['extraAttributes' => ['type' => 'time']]),
+
+
             Textarea::make(__('note'), 'note'),
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
@@ -220,7 +217,7 @@ class Tours extends Resource
                 $bookt = TelephoneDirectory::create([
                     'name' => $request->NewContacts[0]['attributes']['name'],
                     'phone_number' => $request->NewContacts[0]['attributes']['phone_number'],
-                    'type' => 6
+                    'type' => ["6"]
                 ]);
                 // $model->Contacts=$bookt->id;
                 // $BookType =  \App\Models\BookType::orderBy('created_at', 'desc')->first();

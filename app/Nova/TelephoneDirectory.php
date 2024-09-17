@@ -46,6 +46,7 @@ class TelephoneDirectory extends Resource
     {
         return __('SMS');
     }
+
     public static function group()
     {
         return __('address');

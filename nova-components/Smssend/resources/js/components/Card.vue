@@ -3,7 +3,7 @@
         <form @submit.prevent="send" method="get">
             <div class="mb-6 ">
                 <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    اختر الفئة
+                    إختر جهات الاتصال المستهدفة
                 </label>
                 <div class="relative">
                     <div @click="toggleDropdown"
@@ -71,7 +71,7 @@ export default {
     computed: {
         selectedText() {
             if (this.selectval.length === 0) {
-                return "اختر الفئة";
+                return "إختر جهات الاتصال المستهدفة";
             }
             return this.Types.filter(type => this.selectval.includes(type.id))
                 .map(type => type.name)
@@ -94,7 +94,7 @@ export default {
                     }
                 });
                 this.selectval=[];
-                this.Message = "";  
+                this.Message = "";
                 toastr.success('تم ارسال الرسالة');
             } catch (error) {
                 toastr.error('فشل في إرسال رسالة');
