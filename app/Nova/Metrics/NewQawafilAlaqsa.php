@@ -4,6 +4,7 @@ namespace App\Nova\Metrics;
 
 use App\Models\City;
 use App\Models\Project;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -17,35 +18,29 @@ class NewQawafilAlaqsa extends Value
      * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return mixed
      */
-    public  function name ()
+    public  function name()
     {
         return __('NewQawafilAlaqsa');
     }
     public function calculate(NovaRequest $request)
     {
-        $user = Auth::user();
-            $id = Auth::id();
-            if ($user->type() == 'admin') {
+        $nowTime = Carbon::now();
 
-                return $this->count($request, Project::where('project_type', 2));
+        // Fetch projects and apply the filter
+        $projects = Project::where('project_type', 2)
+            ->get()  // First, fetch the projects
+            ->filter(function ($project) use ($nowTime) {
+                $startTime = Carbon::parse($project->start_date);
+                $endTime = Carbon::parse($project->end_date);
 
-            } elseif ($user->type() == 'regular_area') {
+                // Return true if current time is between start and end dates
+                return ($startTime->lt($nowTime) && $nowTime->lt($endTime)) || ($startTime->gt($nowTime));
+            }) ->unique('project_name');
 
-                $Area = \App\Models\Area::where('admin_id', $id)->first();
-                $projects = DB::table('project_area')->where('area_id', $Area->id)->get();
-            } else {
-                $citye =   City::where('admin_id', $id)
-                    ->select('id')->first();
-                $projects = DB::table('project_city')->where('city_id', $citye->id)->get();
-            }
-
-
-            $stack = array();
-            foreach ($projects as $key => $value) {
-                array_push($stack, $value->project_id);
-            }
-            return $this->count($request, Project::where('project_type', 2)->whereIn('id', $stack));
+        // Return the count of filtered projects
+        return $this->result($projects->count());
     }
+
 
     /**
      * Get the ranges available for the metric.

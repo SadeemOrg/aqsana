@@ -2,11 +2,11 @@
 
 namespace App\Nova\Metrics;
 
-use App\Models\Alhisalat;
+use App\Models\City;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Value;
 
-class NewAlhisalat extends Value
+class CitySum extends Value
 {
     /**
      * Calculate the value of the metric.
@@ -16,11 +16,14 @@ class NewAlhisalat extends Value
      */
     public  function name ()
     {
-        return __('NewAlhisalat');
+        return __('CitySum');
     }
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Alhisalat::where('status', '=', 1));
+        $count = City::whereJsonContains('type', '3')->count();
+
+        // Return the result wrapped in the Nova metric format
+        return $this->result($count);
     }
 
     /**
@@ -30,15 +33,7 @@ class NewAlhisalat extends Value
      */
     public function ranges()
     {
-        return [
-            30 => __('30 Days'),
-            60 => __('60 Days'),
-            365 => __('365 Days'),
-            'TODAY' => __('Today'),
-            'MTD' => __('Month To Date'),
-            'QTD' => __('Quarter To Date'),
-            'YTD' => __('Year To Date'),
-        ];
+
     }
 
     /**
@@ -58,6 +53,6 @@ class NewAlhisalat extends Value
      */
     public function uriKey()
     {
-        return 'new-alhisalat';
+        return 'city-sum';
     }
 }

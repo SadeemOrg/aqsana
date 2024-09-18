@@ -984,7 +984,9 @@
     "Transaction Amount":"قيمة الشك",
     "Date Details":"تاريخ الدفع",
     "ArchiveSms":"ارشيف  الرسائل",
-    "Sender":"مرسل"
+    "Sender":"مرسل",
+    "DelegateSum":"عدد المندوبين",
+    "CitySum":"عدد البلاد"
 
 
 }

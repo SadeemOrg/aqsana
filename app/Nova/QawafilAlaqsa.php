@@ -213,31 +213,7 @@ class QawafilAlaqsa extends Resource
                         return true;
                     })
                     ->hideWhenCreating()->hideWhenUpdating(),
-                // ActionButton::make(__('Action'))
-                //     ->action(ProjectStartEnd::class, (string) $this->id)
-                //     ->text(__('اغلاق'))
-                //     ->showLoadingAnimation()
-                //     ->loadingColor('#fff')->buttonColor('#21b970')
-                //     ->canSee(function () {
-                //         $starttime = Carbon::parse($this->start_date);
-                //         $finishTime = Carbon::parse($this->end_date);
-                //         $now = Carbon::now();
-                //         $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
-                //         $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
-                //         $nowtime = Carbon::createFromFormat('Y-m-d H:i:s', $now);
-                //         $projects = DB::table('project_status')->where('project_id', $this->id)->first();
-                //         if ($projects) {
-                //             if ($projects->status == 3) {
 
-                //                 return false;
-                //             }
-                //         }
-
-
-                //         return ($endDate->lt($nowtime));
-                //     })
-
-                //     ->hideWhenCreating()->hideWhenUpdating(),
                 ActionButton::make(__('Action'))
                     ->action(ProjectStartEnd::class, (string) $this->id)
                     ->text(__('مغلق'))
