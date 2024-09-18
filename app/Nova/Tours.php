@@ -149,7 +149,7 @@ class Tours extends Resource
 
             BelongsTo::make(__('guide_name'), 'guide', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            Multiselect::make(__('tour_guide_name'), "guide_name")
+            Multiselect::make(__('guide_name'), "guide_name")
                 ->options(function () {
                     $types =  TelephoneDirectory::whereJsonContains('type',  '113')->get();
                     $type_array =  array();
