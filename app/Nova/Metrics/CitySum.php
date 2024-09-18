@@ -20,9 +20,9 @@ class CitySum extends Value
     }
     public function calculate(NovaRequest $request)
     {
-        $count = City::whereJsonContains('type', '3')->count();
+        $count = City::count();
 
-        // Return the result wrapped in the Nova metric format
+        // Return the count result wrapped in Nova's result method
         return $this->result($count);
     }
 
