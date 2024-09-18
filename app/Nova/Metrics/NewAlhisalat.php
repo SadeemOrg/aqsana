@@ -20,7 +20,10 @@ class NewAlhisalat extends Value
     }
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Alhisalat::where('status', '=', 1));
+        $count = Alhisalat::where('status', '=', 1)->count();
+
+        // Return the count result wrapped in Nova's result method
+        return $this->result($count);
     }
 
     /**
@@ -30,15 +33,7 @@ class NewAlhisalat extends Value
      */
     public function ranges()
     {
-        return [
-            30 => __('30 Days'),
-            60 => __('60 Days'),
-            365 => __('365 Days'),
-            'TODAY' => __('Today'),
-            'MTD' => __('Month To Date'),
-            'QTD' => __('Quarter To Date'),
-            'YTD' => __('Year To Date'),
-        ];
+
     }
 
     /**
