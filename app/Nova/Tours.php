@@ -18,6 +18,7 @@ use Whitecube\NovaFlexibleContent\Flexible;
 use Acme\MultiselectField\Multiselect;
 use App\Models\City;
 use Benjacho\BelongsToManyField\BelongsToManyField;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 use Laravel\Nova\Fields\BelongsToMany;
 
 class Tours extends Resource
@@ -172,6 +173,8 @@ class Tours extends Resource
 
 
             Textarea::make(__('note'), 'note'),
+            Files::make(__('Multiple files'), 'file'),
+
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
