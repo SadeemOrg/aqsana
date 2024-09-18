@@ -53,6 +53,9 @@ use DigitalCreative\CollapsibleResourceManager\Resources\Group;
 use Zeyad\Notification\Notification;
 use Zeyad\Profile\Profile;
 use Anaseqal\NovaImport\NovaImport;
+use App\Nova\Metrics\CitySum;
+use App\Nova\Metrics\DelegateSum;
+
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
 
@@ -499,31 +502,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
 
-
-
-            (new NewProject())
-                ->canSee(function () {
-                    $user = Auth::user();
-                    if ($user->type() == 'admin') return true;
-                    return false;
-                }),
-            (new NewQawafilAlaqsa())
-                ->canSee(function () {
-                    $user = Auth::user();
-                    if ($user->type() == 'admin') return true;
-                    return false;
-                }),
-            (new NewTrip())
-                ->canSee(function () {
-                    $user = Auth::user();
-                    if ($user->type() == 'admin') return true;
-                    return false;
-                }),
-            (new   NewAlhisalat())->canSee(function () {
-                $user = Auth::user();
-                if ($user->type() == 'admin') return true;
-                return false;
-            }),
             (new InComeTransaction())->canSee(function () {
                 $user = Auth::user();
                 if ($user->type() == 'admin') return true;
@@ -534,16 +512,69 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 if ($user->type() == 'admin') return true;
                 return false;
             }),
-            (new DonationsSum())->canSee(function () {
+
+            (new   NewAlhisalat())->canSee(function () {
                 $user = Auth::user();
                 if ($user->type() == 'admin') return true;
                 return false;
             }),
-            (new AlmuahadaSum())->canSee(function () {
+            (new NewQawafilAlaqsa())
+            ->canSee(function () {
                 $user = Auth::user();
-                if ($user->type() == 'Almuahada_admin') return true;
+                if ($user->type() == 'admin') return true;
                 return false;
             }),
+            (new DelegateSum())
+            ->canSee(function () {
+                $user = Auth::user();
+                if ($user->type() == 'admin') return true;
+                return false;
+            }),
+            (new CitySum())
+            ->canSee(function () {
+                $user = Auth::user();
+                if ($user->type() == 'admin') return true;
+                return false;
+            }),
+
+            //'''''''''''''''
+
+
+            // (new NewProject())
+            //     ->canSee(function () {
+            //         $user = Auth::user();
+            //         if ($user->type() == 'admin') return true;
+            //         return false;
+            //     }),
+
+            // (new   NewAlhisalat())->canSee(function () {
+            //     $user = Auth::user();
+            //     if ($user->type() == 'admin') return true;
+            //     return false;
+            // }),
+
+
+
+        //
+
+
+            // (new NewTrip())
+            // ->canSee(function () {
+            //     $user = Auth::user();
+            //     if ($user->type() == 'admin') return true;
+            //     return false;
+            // }),
+
+            // (new DonationsSum())->canSee(function () {
+            //     $user = Auth::user();
+            //     if ($user->type() == 'admin') return true;
+            //     return false;
+            // }),
+            // (new AlmuahadaSum())->canSee(function () {
+            //     $user = Auth::user();
+            //     if ($user->type() == 'Almuahada_admin') return true;
+            //     return false;
+            // }),
         ];
     }
     /**
