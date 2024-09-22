@@ -12,9 +12,11 @@ use App\Models\FormMassage;
 use App\Mail\TestMail;
 use App\Models\Almuahada;
 use App\Models\ArchiveSms;
+use App\Models\Area;
 use App\Models\Book;
 use App\Models\BookType;
 use App\Models\Budget;
+use App\Models\City;
 use App\Models\Donations;
 use App\Models\News;
 use App\Models\newsType;
@@ -2117,9 +2119,83 @@ class HomeController extends BaseController
     }
     public function reportsApi(Request $request)
     {
-        // Use pagination instead of all()
-        $reports = Project::paginate(10); // Adjust the number per page as needed
 
+
+        $decodedString = base64_decode($request->input('filters'));
+        $array = json_decode($decodedString, true);
+        // dd($array);
+        $reports = Project::query(); // Start a query builder instance
+
+        // Apply sorting only if orderBy and orderByDirection are provided
+        if ($request->filled('orderBy') && $request->filled('orderByDirection')) {
+            $reports->orderBy($request->get('orderBy'), $request->get('orderByDirection'));
+        }
+
+        if (is_array($array)) {
+            foreach ($array as $item) {
+                if (!empty($item['value'])) {
+                    switch ($item['class']) {
+                        case 'App\Nova\Filters\ReportCreated':
+                            $user = User::where('name',  $item['value'])->first();
+                            if ($user) {
+                                $reports->where('Created_By', $user->id);
+                            }
+
+                            break;
+                        case 'App\Nova\Filters\ProjectSectors':
+                            $Sector = Sector::where('text', $item['value'])->first();
+                            if ($Sector) {
+                                $reports->where('sector', $Sector->id);
+                            }
+                            break;
+                        case 'PosLifestyle\DateRangeFilter\DateRangeFilter_start_date':
+                            if (isset($item['value'][0], $item['value'][1])) {
+
+
+                                $reports->whereBetween(
+                                    'start_date',
+                                    [
+                                        Carbon::createFromFormat('Y-m-d', $item['value'][0])->startOfDay(),
+                                        Carbon::createFromFormat('Y-m-d', $item['value'][1])->endOfDay(),
+                                    ]
+                                );
+                            }
+                            break;
+
+
+                        case 'App\Nova\Filters\ReportArea':
+                            $Area = Area::where('name', $item['value'])->first();
+                            if ($Area) {
+                                $reports->where('area', $Area->id);
+                            }
+
+                            break;
+                        case 'App\Nova\Filters\Reportcity':
+                            $City = City::where('name', $item['value'])->first();
+                            if ($City) {
+                                $reports->where('city', $City->id);
+                            }
+
+                            break;
+
+
+                        case 'App\Nova\Filters\ReportName':
+                            $reports->where('project_name', $item['value']);
+
+
+
+
+
+
+
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        $reports = $reports->paginate(10);
         foreach ($reports as $q) {
             // Calculate income
             $in_come = Transaction::where([
@@ -2325,10 +2401,10 @@ class HomeController extends BaseController
                         'stacked' => false,
                         'textAlign' => 'left',
                         'validationKey' => 'Net_in_come',
-                        "value"=>$report->Net_in_come < 0 ?[
-                            "backgroundColor"=> "#ff9999",
-                            "textColor"=>"#000000"
-                        ]:null
+                        "value" => $report->Net_in_come < 0 ? [
+                            "backgroundColor" => "#ff9999",
+                            "textColor" => "#000000"
+                        ] : null
                     ]
                 ],
                 "authorizedToView" => true,
