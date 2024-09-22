@@ -1472,6 +1472,7 @@ class HomeController extends BaseController
     public function donationsApi(Request $request)
     {
 
+        $page_size = isset($request->perPage) ? $request->perPage : 10;
 
         $decodedString = base64_decode($request->input('filters'));
         $array = json_decode($decodedString, true);
@@ -1575,7 +1576,7 @@ class HomeController extends BaseController
                 }
             }
         }
-        $transactions = $transactions->paginate(10);
+        $transactions = $transactions->paginate($page_size);
         $statuses = [
             '1' => __('Not Receive yet'),
             '2' => __('in a box'),
@@ -2119,11 +2120,11 @@ class HomeController extends BaseController
     }
     public function reportsApi(Request $request)
     {
+        $page_size = isset($request->perPage) ? $request->perPage : 10;
 
 
         $decodedString = base64_decode($request->input('filters'));
         $array = json_decode($decodedString, true);
-        // dd($array);
         $reports = Project::query(); // Start a query builder instance
 
         // Apply sorting only if orderBy and orderByDirection are provided
@@ -2195,7 +2196,7 @@ class HomeController extends BaseController
             }
         }
 
-        $reports = $reports->paginate(10);
+        $reports = $reports->paginate($page_size);
         foreach ($reports as $q) {
             // Calculate income
             $in_come = Transaction::where([
