@@ -64,7 +64,7 @@ class ExportReport extends Action
             Select::make('معاينة ', 'print')
                 ->options([
                     '1' => 'معاينة قبل الطباعة',
-                    '2' => 'طباعة مباشرة',
+                    '2' => 'تنزيل Excel',
                 ])
                 ->displayUsingLabels()->default(1),
 
