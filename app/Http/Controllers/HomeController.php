@@ -2117,9 +2117,19 @@ class HomeController extends BaseController
     }
     public function reportsApi(Request $request)
     {
-        // Use pagination instead of all()
-        $reports = Project::paginate(10); // Adjust the number per page as needed
 
+
+        $decodedString = base64_decode($request->input('filters'));
+        $array = json_decode($decodedString, true);
+
+        $reports = Project::query(); // Start a query builder instance
+
+        // Apply sorting only if orderBy and orderByDirection are provided
+        if ($request->filled('orderBy') && $request->filled('orderByDirection')) {
+            $reports->orderBy($request->get('orderBy'), $request->get('orderByDirection'));
+        }
+
+        $reports = $reports->paginate(10);
         foreach ($reports as $q) {
             // Calculate income
             $in_come = Transaction::where([
