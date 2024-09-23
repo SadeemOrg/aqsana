@@ -77,7 +77,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span class="mr-2">تصدير xl</span>
+                        <span class="mr-2">تصدير Excel</span>
                     </button>
                 </div>
             </div>

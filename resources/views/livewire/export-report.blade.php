@@ -1,6 +1,6 @@
 <div class="container mx-auto sm:px-6 lg:px-8">
     <div class="flex flex-row items-center justify-center mx-8 mt-12">
-        <img class="h-[170px] md:w-[90%]" src="{{ asset('/assets/image/iuktui.png') }}" alt="alaqsa Logo">
+        <img class="h-[200px] lg:h-auto lg:w-auto" src="{{ asset('/assets/image/iuktui.png') }}" alt="alaqsa Logo">
     </div>
     <div class="flex-col justify-start p-5">
 
@@ -60,7 +60,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span class="mr-2">تصدير xl</span>
+                        <span class="mr-2">تصدير Excel</span>
                     </button>
                 </div>
             </div>
