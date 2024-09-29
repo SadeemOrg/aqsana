@@ -40,34 +40,34 @@ class ExportReport extends Action
      */
     public function fields()
     {
-        return [
-            Select::make('نوع التاريخ', 'type')
-                ->options([
-                    '1' => 'تاريخ السند',
-                    '2' => 'تاريخ الدفعة',
-                ])
-                ->displayUsingLabels()->default(1),
-            Select::make(__("Payment_type"), "Payment_type")->options(
-                [
-                    '0' => __('all'),
-                    '1' => __('cash'),
-                    '2' => __('shek'),
-                    '3' => __('bit'),
-                    '4' => __('hawale'),
-                    '5' => __('حصالة'),
-                    // '6' => __('التطبيق'),
+        // return [
+        //     Select::make('نوع التاريخ', 'type')
+        //         ->options([
+        //             '1' => 'تاريخ السند',
+        //             '2' => 'تاريخ الدفعة',
+        //         ])
+        //         ->displayUsingLabels()->default(1),
+        //     Select::make(__("Payment_type"), "Payment_type")->options(
+        //         [
+        //             '0' => __('all'),
+        //             '1' => __('cash'),
+        //             '2' => __('shek'),
+        //             '3' => __('bit'),
+        //             '4' => __('hawale'),
+        //             '5' => __('حصالة'),
+        //             // '6' => __('التطبيق'),
 
-                ]
-            )->displayUsingLabels()->default(0),
-            Date::make(__('from'), 'from')->required(),
-            Date::make(__('to'), 'to')->required(),
-            Select::make('معاينة ', 'print')
-                ->options([
-                    '1' => 'معاينة قبل الطباعة',
-                    '2' => 'تنزيل Excel',
-                ])
-                ->displayUsingLabels()->default(1),
+        //         ]
+        //     )->displayUsingLabels()->default(0),
+        //     Date::make(__('from'), 'from')->required(),
+        //     Date::make(__('to'), 'to')->required(),
+        //     Select::make('معاينة ', 'print')
+        //         ->options([
+        //             '1' => 'معاينة قبل الطباعة',
+        //             '2' => 'تنزيل Excel',
+        //         ])
+        //         ->displayUsingLabels()->default(1),
 
-        ];
+        // ];
     }
 }

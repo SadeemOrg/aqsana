@@ -1471,6 +1471,7 @@ class HomeController extends BaseController
     }
     public function donationsApi(Request $request)
     {
+        // dd($request->viaResource,$request->viaResourceId);
 
         $page_size = isset($request->perPage) ? $request->perPage : 10;
 
@@ -1483,7 +1484,13 @@ class HomeController extends BaseController
             ['main_type', 1],
             ['type', 2],
             ['is_delete', '<>', 2],
-        ])->orderBy('created_at', 'desc');
+        ]);
+
+        if ($request->viaResourceId) {
+            $transactions->where('ref_id', $request->viaResourceId);
+        }
+
+        $transactions = $transactions->orderBy('created_at', 'desc');
         if (is_array($array)) {
             foreach ($array as $item) {
                 if (!empty($item['value'])) {
@@ -2223,6 +2230,51 @@ class HomeController extends BaseController
         $resources = $reports->map(function ($report) {
             return [
                 'fields' => [
+                    [
+                        "attribute" => "معاينة",
+                        "component" => "nova-button",
+                        "helpText" => null,
+                        "indexName" => null,
+                        "name" => "معاينة",
+                        "nullable" => false,
+                        "panel" => null,
+                        "prefixComponent" => true,
+                        "readonly" => false,
+                        "required" => false,
+                        "sortable" => false,
+                        "sortableUriKey" => "معاينة",
+                        "stacked" => false,
+                        "textAlign" => "left",
+                        "validationKey" => "معاينة",
+                        "value" => null,
+                        "key" => "معاينة",
+                        "type" => "link",
+                        "link" => [
+                            "href" => "/export/ExportReport?reselt=[{$report->id}]&from=&to=&dateType=1&PaymentType=0&print=1&generate-pdf",
+                            "target" => "_blank"
+                        ],
+
+                        "text" => "معاينة",
+                        "event" => "NovaButton\\Events\\ButtonClick",
+                        "label" => null,
+                        "route" => null,
+                        "reload" => false,
+                        "confirm" => null,
+                        "visible" => true,
+                        "classes" => [
+                            "nova-button-transaction",
+                            "bg-orange"
+                        ],
+                        "title" => null,
+                        "indexAlign" => "right",
+                        "errorText" => "Failed",
+                        "errorClasses" => "cursor-pointer dim inline-block text-danger font-bold no-underline",
+                        "successText" => "Success",
+                        "successClasses" => "cursor-pointer dim inline-block text-success font-bold no-underline",
+                        "loadingText" => "Loading",
+                        "loadingClasses" => "cursor-pointer dim inline-block text-grey font-bold no-underline"
+
+                    ],
                     [
                         'attribute' => 'project_name',
                         'component' => 'text-field',

@@ -24,6 +24,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use Nemrutco\NovaGlobalFilter\NovaGlobalFilter;
 use OptimistDigital\NovaDetachedFilters\NovaDetachedFilters;
+use Pdmfc\NovaFields\ActionButton;
 use PosLifestyle\DateRangeFilter\DateRangeFilter;
 use Upline\RowBackground\RowBackground;
 use Upline\RowBackground\RowBackgroundData;
@@ -108,7 +109,6 @@ class Report extends Resource
     public function fields(Request $request)
     {
         return [
-
 
             Text::make(__("project name"), "project_name")
                 ->rules('required')
