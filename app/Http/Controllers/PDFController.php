@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\vacation;
@@ -325,5 +326,180 @@ class PDFController extends Controller
         $html = $html->render();
         $mpdf->WriteHTML($html);
         $mpdf->Output($fileName, 'I');
+    }
+    public function generatePDFReport(Request $request)
+    {
+        $Projects = Project::wherein('id', json_decode($request->name))->get();
+        $request->from = (($request->from != 'null') ?  $request->from : '2001-01-01 00:00:00.0');
+        $request->to = ($request->to != 'null') ?  $request->to :  Carbon::now();
+        $startdate = date($request->from);
+        $finishdate = date($request->to);
+
+
+        $mergedQuery = collect();
+
+        if ($request->dateType == 1) {
+
+            foreach ($Projects as $key => $Project) {
+                $filteredTransactionsSet1 = $Project->Transaction()->where([
+                    ['main_type', '=', 1],
+                    ['type', '=', 2],
+                    ['is_delete', '<>', '2'],
+                ])->whereBetween('transaction_date', [$startdate, $finishdate])
+                    ->when($request->PaymentType != 0, function ($query) use($request) {
+                        return $query->where('payment_type', $request->PaymentType);
+                    })->get();
+                $totalAmountMainType1 = $filteredTransactionsSet1->sum('equivelant_amount');
+                $filteredTransactionsSet2 = $Project->Transaction()->where([
+                    ['main_type', '=', 2],
+                ])->whereBetween('transaction_date', [$startdate, $finishdate]) ->when($request->PaymentType != 0, function ($query) use($request) {
+                    return $query->where('payment_type', $request->PaymentType);
+                })->get();
+                $totalAmountMainType2 = $filteredTransactionsSet2->sum('equivelant_amount');
+
+                $mergedTransactions = $filteredTransactionsSet1->merge($filteredTransactionsSet2);
+                $mergedTransactions->transform(function ($transaction) {
+                    if ($transaction->main_type == 1) {
+                        $transaction->type = 'سندات قبض';
+                    } else {
+                        $transaction->type = 'سندات صرف';
+                    }
+
+                    return $transaction;
+                });
+
+                $additionalRows = [
+
+                    [' اسم المشروع ', '  ',  '  ',$Project?->project_name , ' '],
+                    ['  ', '  ', '   ', ' '],
+                ];
+                $mergedQuery = $mergedQuery->concat([])->concat($additionalRows);
+
+                $selectedTransactions = $mergedTransactions->map(function ($transaction, $index) use ($Project) {
+                    $paymentTypeLabels = [
+                        '1' => __('cash'),
+                        '2' => __('shek'),
+                        '3' => __('bit'),
+                        '4' => __('hawale'),
+                        '5' => __('حصالة'),
+                        '6' => __('التطبيق'),
+                    ];
+
+
+                        return [
+                            'bill' => $transaction->bill_number,
+                            'id' => $transaction->id,
+                            'date' => $transaction->transaction_date,
+                            'dateDetails' => isset($transaction->Payment_type_details['0']['attributes']['Date'])
+                                ? $transaction->Payment_type_details['0']['attributes']['Date']
+                                : null,
+                            'type' => $transaction->type,
+                            'name' => $transaction->TelephoneDirectory?->name,
+                            'transact_amount' => $transaction->equivelant_amount,
+                            'paymentTypeValue' => $paymentTypeLabels[$transaction->Payment_type] ?? __('Unknown'),
+                        ];
+
+                });
+
+            }
+
+        } else {
+            foreach ($Projects as $key => $Project) {
+                $filteredTransactionsSet1 = $Project->Transaction()
+                    ->where([
+                        ['main_type', '=', 1],
+                        ['type', '=', 2],
+                        ['is_delete', '<>', '2'],
+                    ])
+                    ->where(function ($query) use ($startdate, $finishdate) {
+                        $query->where(function ($query) {
+                            $query->where('Payment_type', '=', 1)
+                                ->orWhere('Payment_type', '=', 5);
+                        })->whereBetween('transaction_date', [$startdate, $finishdate])
+                            ->orWhere(function ($query) use ($startdate, $finishdate) {
+                                $query->whereNotIn('Payment_type', [1, 5])
+                                    ->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(Payment_type_details, '$[0].attributes.Date')) BETWEEN ? AND ?", [$startdate, $finishdate]);
+                            });
+                    })
+                    ->when($request->PaymentType != 0, function ($query)use($request) {
+                        return $query->where('payment_type', $request->PaymentType);
+                    })
+                    ->get();
+                $totalAmountMainType1 = $filteredTransactionsSet1->sum('equivelant_amount');
+
+                $filteredTransactionsSet2 = $Project->Transaction()->where([
+                    ['main_type', '=', 2],
+                ])->whereBetween('transaction_date', [$startdate, $finishdate])
+                ->when($request->PaymentType != 0, function ($query)use($request) {
+                    return $query->where('payment_type', $request->PaymentType);
+                })->get();
+                $totalAmountMainType2 = $filteredTransactionsSet2->sum('equivelant_amount');
+
+                $mergedTransactions = $filteredTransactionsSet1->merge($filteredTransactionsSet2);
+                $mergedTransactions->transform(function ($transaction) {
+                    if ($transaction->main_type == 1) {
+                        $transaction->type = 'سندات قبض';
+                    } else {
+                        $transaction->type = 'سندات صرف';
+                    }
+
+                    return $transaction;
+                });
+
+                $selectedTransactions = $mergedTransactions->map(function ($transaction, $Project) {
+                    $paymentTypeLabels = [
+                        '1' => __('cash'),
+                        '2' => __('shek'),
+                        '3' => __('bit'),
+                        '4' => __('hawale'),
+                        '5' => __('حصالة'),
+                        '6' => __('التطبيق'),
+                    ];
+                    return [
+                        'bill' =>  $transaction->bill_number,
+                        'id' =>  $transaction->id,
+                        'date' =>  $transaction->transaction_date,
+                        'dateDetails' => isset($transaction->Payment_type_details['0']['attributes']['Date'])
+                            ? $transaction->Payment_type_details['0']['attributes']['Date']
+                            : null,
+                        'bill' =>  $transaction->bill_number,
+                        'type' =>  $transaction->type,
+                        'name' => $transaction->TelephoneDirectory?->name,
+                        'transact_amount' => $transaction->equivelant_amount,
+                        'paymentTypeValue' => $paymentTypeLabels[$transaction->Payment_type] ?? __('Unknown'),
+                    ];
+                });
+
+         }
+
+        }
+        $data = [
+            'data' => $selectedTransactions,
+            '$dateType' => $request->dateType,
+            // 'sumVacation' => $sumVacation,
+            // 'sumWorkHours' => $sumWorkHours,
+            // 'totalTime' => $date,
+
+        ];
+    //    dd( $selectedTransactions);
+        $mpdf = new \Mpdf\Mpdf([
+            'margin_left' => 10,
+            'margin_right' => 10,
+            'margin-top' => 0,
+            'autoArabic' => true
+        ]);
+
+        $fileName = 'Invoices details.pdf';
+        $mpdf->autoLangToFont = true;
+        $mpdf->autoScriptToLang = true;
+        // for Arabic Bills PDF
+
+        $html = \view('pdf.exportReport',$data);
+
+
+        $html = $html->render();
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($fileName, 'I');
+
     }
 }

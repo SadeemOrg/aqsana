@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Exports\ExportsReport;
 use App\Models\Project;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -44,6 +45,14 @@ class ExportReport extends Component
 
         return Excel::download(new ExportsReport($this->name, $this->from, $this->to, $this->dateType, $this->PaymentType), $filename);
     }
+    public function exportReport()
+    {
+        $pdfUrl = '/generate-pdf-report?name=' . $this->name . '&from=' . $this->from . '&to=' . $this->to   . '&dateType=' . $this->dateType. '&PaymentType=' . $this->PaymentType;
+
+
+        return Redirect::away($pdfUrl)->with(['pdfUrl' => $pdfUrl]);
+    }
+
     public function render()
     {
         $Projects = Project::wherein('id', json_decode($this->name))->get();
@@ -147,9 +156,9 @@ class ExportReport extends Component
                 $filteredTransactionsSet2 = $Project->Transaction()->where([
                     ['main_type', '=', 2],
                 ])->whereBetween('transaction_date', [$startdate, $finishdate])
-                ->when($this->PaymentType != 0, function ($query) {
-                    return $query->where('payment_type', $this->PaymentType);
-                })->get();
+                    ->when($this->PaymentType != 0, function ($query) {
+                        return $query->where('payment_type', $this->PaymentType);
+                    })->get();
                 $totalAmountMainType2 = $filteredTransactionsSet2->sum('equivelant_amount');
 
                 $mergedTransactions = $filteredTransactionsSet1->merge($filteredTransactionsSet2);

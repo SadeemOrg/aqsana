@@ -708,6 +708,8 @@ Route::get('generate-pdf/{id}/{type?}', [PDFController::class, 'generatePDF'])->
 Route::get('generate-pdfs/{ids}/{type?}', [PDFController::class, 'generatePDFs'])->name('generate-pdfs');
 
 Route::get('generate-pdf-hours', [PDFController::class, 'generatePDFHours'])->name('generate-pdf-hours');
+Route::get('generate-pdf-report', [PDFController::class, 'generatePDFReport'])->name('generate-pdf-report');
+
 
 Route::get('send-sms-notification', [NotificationController::class, 'sendSmsNotificaition']);
 
