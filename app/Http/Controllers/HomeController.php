@@ -2250,7 +2250,7 @@ class HomeController extends BaseController
                         "key" => "معاينة",
                         "type" => "link",
                         "link" => [
-                            "href" => "/export/ExportReport?reselt=[{$report->id}]&from=&to=&dateType=1&PaymentType=0&print=1&generate-pdf",
+                            "href" => "/export/ExportReport?reselt=[{$report->id}]&from=&to=&dateType=1&PaymentType=0&print=1&mainbill",
                             "target" => "_blank"
                         ],
 
