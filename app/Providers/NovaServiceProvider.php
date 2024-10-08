@@ -16,6 +16,7 @@ use Acme\Projecs\Projecs;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use App\Models\Bus;
 use Acme\MultiselectField\Multiselect;
+use Acme\ReportRegulation\ReportRegulation;
 use Averotech\Link\Link;
 use Averotech\Tree\Tree;
 use Laravel\Nova\Fields\Textarea;
@@ -600,6 +601,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     return true;
                 } else return false;
             }),
+            new ReportRegulation,
+
             (new \Infinety\Filemanager\FilemanagerTool())->canSee(function ($request) {
                 if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("FilemanagerTool",  $request->user()->userrole()))) {
                     return true;
