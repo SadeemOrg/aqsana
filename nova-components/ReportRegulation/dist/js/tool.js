@@ -1140,7 +1140,7 @@ var content = __webpack_require__(14);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(16)("290c3e45", content, false, {});
+var update = __webpack_require__(16)("6e5db1d0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -1164,7 +1164,7 @@ exports = module.exports = __webpack_require__(15)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* TailwindCSS is used for styling, no additional CSS needed here */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* TailwindCSS is used for styling, no additional CSS needed here */\n", ""]);
 
 // exports
 
@@ -1693,6 +1693,59 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1700,14 +1753,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     data: function data() {
         return {
             companyName: "regulation",
-            businessAccountNumber: "2312312312",
+            businessAccountNumber: "231231231231",
             fileLocation: "C://Downloads",
-            startDate: "",
-            endDate: "",
             customStartDate: "",
             customEndDate: "",
             displayDateRange: "",
             showDatePicker: false,
+            activeTab: 'days',
             errorMessage: "",
             successMessage: ""
         };
@@ -1720,35 +1772,35 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         closeDatePicker: function closeDatePicker() {
             this.showDatePicker = false;
         },
+        setActiveTab: function setActiveTab(tab) {
+            this.activeTab = tab;
+        },
         selectLastDays: function selectLastDays(days) {
             var today = new Date();
             var pastDate = new Date(today);
             pastDate.setDate(today.getDate() - days);
-
-            this.startDate = pastDate.toISOString().split('T')[0];
-            this.endDate = today.toISOString().split('T')[0];
-            this.displayDateRange = this.startDate + " to " + this.endDate;
+            this.displayDateRange = pastDate.toISOString().split("T")[0] + " ---- " + today.toISOString().split("T")[0];
             this.showDatePicker = false;
         },
-        selectLastYear: function selectLastYear() {
+        selectLastWeeks: function selectLastWeeks(weeks) {
+            this.selectLastDays(weeks * 7);
+        },
+        selectLastMonths: function selectLastMonths(months) {
             var today = new Date();
-            var lastYear = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
-
-            this.startDate = lastYear.toISOString().split('T')[0];
-            this.endDate = today.toISOString().split('T')[0];
-            this.displayDateRange = this.startDate + " to " + this.endDate;
+            var pastDate = new Date(today);
+            pastDate.setMonth(today.getMonth() - months);
+            this.displayDateRange = pastDate.toISOString().split("T")[0] + " ----  " + today.toISOString().split("T")[0];
             this.showDatePicker = false;
         },
-        selectAllTime: function selectAllTime() {
-            this.startDate = "2000-01-01";
-            this.endDate = new Date().toISOString().split('T')[0];
-            this.displayDateRange = this.startDate + " to " + this.endDate;
+        selectLastYears: function selectLastYears(years) {
+            var today = new Date();
+            var pastDate = new Date(today);
+            pastDate.setFullYear(today.getFullYear() - years);
+            this.displayDateRange = pastDate.toISOString().split("T")[0] + " ---- " + today.toISOString().split("T")[0];
             this.showDatePicker = false;
         },
         applyCustomRange: function applyCustomRange() {
-            this.startDate = this.customStartDate;
-            this.endDate = this.customEndDate;
-            this.displayDateRange = this.startDate + " to " + this.endDate;
+            this.displayDateRange = this.customStartDate + " ---- " + this.customEndDate;
             this.showDatePicker = false;
         },
         submitForm: function () {
@@ -1764,8 +1816,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     companyName: this.companyName,
                                     businessAccountNumber: this.businessAccountNumber,
                                     fileLocation: this.fileLocation,
-                                    startDate: this.startDate,
-                                    endDate: this.endDate
+                                    dateRange: this.displayDateRange
                                 });
 
                             case 3:
@@ -3606,7 +3657,7 @@ module.exports = {
 /* 39 */
 /***/ (function(module, exports) {
 
-module.exports = {"_args":[["axios@0.21.4","C:\\Users\\USER2022\\Documents\\GitHub\\Al-Aqsa-Association"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"C:\\Users\\USER2022\\Documents\\GitHub\\Al-Aqsa-Association","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}
+module.exports = {"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}
 
 /***/ }),
 /* 40 */
@@ -3734,9 +3785,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "p-10 max-w-md mx-auto bg-white shadow-lg rounded-lg" },
+    { staticClass: "p-10 max-w-2xl mx-auto bg-white shadow-lg rounded-lg" },
     [
-      _c("h2", { staticClass: "text-2xl font-bold mb-5" }, [
+      _c("h2", { staticClass: "text-2xl text-center font-bold mb-5" }, [
         _vm._v("Regulation Report")
       ]),
       _vm._v(" "),
@@ -3744,6 +3795,7 @@ var render = function() {
         "form",
         {
           staticClass: "space-y-4",
+          attrs: { dir: "ltr" },
           on: {
             submit: function($event) {
               $event.preventDefault()
@@ -3752,260 +3804,668 @@ var render = function() {
           }
         },
         [
-          _c("div", { staticClass: "flex flex-col" }, [
-            _c("label", { staticClass: "text-gray-600" }, [
-              _vm._v("Company Name:")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
+          _c(
+            "div",
+            {
+              staticClass:
+                "flex flex-row-reverse items-center justify-start gap-6 w-full"
+            },
+            [
+              _c(
+                "div",
                 {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.companyName,
-                  expression: "companyName"
-                }
-              ],
-              staticClass: "border rounded-md p-2 mt-1 bg-gray-100",
-              attrs: { type: "text", disabled: "", value: "regulation" },
-              domProps: { value: _vm.companyName },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.companyName = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col" }, [
-            _c("label", { staticClass: "text-gray-600" }, [
-              _vm._v("Business Account Number:")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.businessAccountNumber,
-                  expression: "businessAccountNumber"
-                }
-              ],
-              staticClass: "border rounded-md p-2 mt-1 bg-gray-100",
-              attrs: { type: "text", disabled: "", value: "2312312312" },
-              domProps: { value: _vm.businessAccountNumber },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.businessAccountNumber = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col" }, [
-            _c("label", { staticClass: "text-gray-600" }, [
-              _vm._v("File Location:")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.fileLocation,
-                  expression: "fileLocation"
-                }
-              ],
-              staticClass: "border rounded-md p-2 mt-1 bg-gray-100",
-              attrs: { type: "text", disabled: "", value: "C://Downloads" },
-              domProps: { value: _vm.fileLocation },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.fileLocation = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col" }, [
-            _c("label", { staticClass: "text-gray-600" }, [
-              _vm._v("Choose Your Date:")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "relative" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.displayDateRange,
-                    expression: "displayDateRange"
-                  }
-                ],
-                staticClass: "border rounded-md p-2 w-full cursor-pointer",
-                attrs: {
-                  type: "text",
-                  placeholder: "Select Date Range",
-                  readonly: ""
+                  staticClass: "flex flex-col items-end",
+                  staticStyle: { width: "33%" }
                 },
-                domProps: { value: _vm.displayDateRange },
-                on: {
-                  click: _vm.toggleDatePicker,
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                [
+                  _c("label", { staticClass: "text-gray-600 font-bold" }, [
+                    _vm._v("Company Name")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.companyName,
+                        expression: "companyName"
+                      }
+                    ],
+                    staticClass:
+                      "border text-left rounded-md p-2 mt-1 bg-gray-100 w-full",
+                    staticStyle: { "text-align": "end" },
+                    attrs: { type: "text", disabled: "", value: "regulation" },
+                    domProps: { value: _vm.companyName },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.companyName = $event.target.value
+                      }
                     }
-                    _vm.displayDateRange = $event.target.value
-                  }
-                }
-              }),
+                  })
+                ]
+              ),
               _vm._v(" "),
-              _vm.showDatePicker
-                ? _c(
-                    "div",
-                    {
-                      staticClass:
-                        "absolute z-10 bg-white shadow-md p-4 rounded-md mt-1 w-full"
+              _c(
+                "div",
+                {
+                  staticClass: "flex flex-col items-end",
+                  staticStyle: { width: "33%" }
+                },
+                [
+                  _c("label", { staticClass: "text-gray-600 font-bold" }, [
+                    _vm._v("File Location")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.fileLocation,
+                        expression: "fileLocation"
+                      }
+                    ],
+                    staticClass:
+                      "border text-left rounded-md p-2 mt-1 bg-gray-100 w-full",
+                    staticStyle: { "text-align": "end" },
+                    attrs: {
+                      type: "text",
+                      disabled: "",
+                      value: "C://Downloads"
                     },
-                    [
-                      _c("div", { staticClass: "flex flex-col space-y-2" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "bg-gray-200 p-2 rounded-md",
-                            on: {
-                              click: function($event) {
-                                return _vm.selectLastDays(30)
-                              }
-                            }
-                          },
-                          [_vm._v("Last 30 Days")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "bg-gray-200 p-2 rounded-md",
-                            on: {
-                              click: function($event) {
-                                return _vm.selectLastDays(90)
-                              }
-                            }
-                          },
-                          [_vm._v("Last 90 Days")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "bg-gray-200 p-2 rounded-md",
-                            on: { click: _vm.selectLastYear }
-                          },
-                          [_vm._v("Last Year")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "bg-gray-200 p-2 rounded-md",
-                            on: { click: _vm.selectAllTime }
-                          },
-                          [_vm._v("All Time")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mt-4" }, [
-                        _c("label", { staticClass: "text-gray-600" }, [
-                          _vm._v("Custom Range:")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "flex space-x-2 mt-2" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.customStartDate,
-                                expression: "customStartDate"
-                              }
-                            ],
-                            staticClass: "border rounded-md p-2",
-                            attrs: { type: "date" },
-                            domProps: { value: _vm.customStartDate },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.customStartDate = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.customEndDate,
-                                expression: "customEndDate"
-                              }
-                            ],
-                            staticClass: "border rounded-md p-2",
-                            attrs: { type: "date" },
-                            domProps: { value: _vm.customEndDate },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.customEndDate = $event.target.value
-                              }
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mt-4 flex space-x-2" }, [
-                        _c(
-                          "button",
+                    domProps: { value: _vm.fileLocation },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.fileLocation = $event.target.value
+                      }
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "flex flex-col items-end",
+                  staticStyle: { width: "33%" }
+                },
+                [
+                  _c("label", { staticClass: "text-gray-600 font-bold" }, [
+                    _vm._v("Choose Your Date")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "relative w-full" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.displayDateRange,
+                          expression: "displayDateRange"
+                        }
+                      ],
+                      staticClass:
+                        "border rounded-md p-2 w-full cursor-pointer",
+                      staticStyle: { "text-align": "end" },
+                      attrs: {
+                        type: "text",
+                        placeholder: "Select Date Range",
+                        readonly: ""
+                      },
+                      domProps: { value: _vm.displayDateRange },
+                      on: {
+                        click: _vm.toggleDatePicker,
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.displayDateRange = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.showDatePicker
+                      ? _c(
+                          "div",
                           {
                             staticClass:
-                              "bg-green-500 text-white p-2 rounded-md",
-                            on: { click: _vm.applyCustomRange }
+                              "absolute z-10 bg-white shadow-md p-4 rounded-md mt-1 w-full"
                           },
-                          [_vm._v("Apply")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "bg-red-500 text-white p-2 rounded-md",
-                            on: { click: _vm.closeDatePicker }
-                          },
-                          [_vm._v("Cancel")]
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex flex-row-reverse space-x-4 mb-4"
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "p-2 rounded-md",
+                                    class: {
+                                      "bg-gray-200": _vm.activeTab === "days"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.setActiveTab("days")
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Days")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "p-2 rounded-md",
+                                    class: {
+                                      "bg-gray-200": _vm.activeTab === "weeks"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.setActiveTab("weeks")
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Weeks")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "p-2 rounded-md",
+                                    class: {
+                                      "bg-gray-200": _vm.activeTab === "months"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.setActiveTab("months")
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Months")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "p-2 rounded-md",
+                                    class: {
+                                      "bg-gray-200": _vm.activeTab === "years"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.setActiveTab("years")
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Years")]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm.activeTab === "days"
+                              ? _c(
+                                  "div",
+                                  { staticClass: "flex flex-col space-y-2" },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "bg-gray-200 p-2 rounded-md",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.selectLastDays(7)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Last 7 Days")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "bg-gray-200 p-2 rounded-md",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.selectLastDays(14)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Last 14 Days")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "bg-gray-200 p-2 rounded-md",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.selectLastDays(30)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Last 30 Days")]
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.activeTab === "weeks"
+                              ? _c(
+                                  "div",
+                                  { staticClass: "flex flex-col space-y-2" },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "bg-gray-200 p-2 rounded-md",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.selectLastWeeks(1)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Last 1 Week")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "bg-gray-200 p-2 rounded-md",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.selectLastWeeks(2)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Last 2 Weeks")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "bg-gray-200 p-2 rounded-md",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.selectLastWeeks(4)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Last 4 Weeks")]
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.activeTab === "months"
+                              ? _c(
+                                  "div",
+                                  { staticClass: "flex flex-col space-y-2" },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "bg-gray-200 p-2 rounded-md",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.selectLastMonths(1)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Last 1 Month")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "bg-gray-200 p-2 rounded-md",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.selectLastMonths(3)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Last 3 Months")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "bg-gray-200 p-2 rounded-md",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.selectLastMonths(6)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Last 6 Months")]
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.activeTab === "years"
+                              ? _c(
+                                  "div",
+                                  { staticClass: "flex flex-col space-y-2" },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "bg-gray-200 p-2 rounded-md",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.selectLastYears(1)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Last 1 Year")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "bg-gray-200 p-2 rounded-md",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.selectLastYears(2)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Last 2 Years")]
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "mt-4 flex flex-col items-end" },
+                              [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "text-gray-600 pr-2 font-bold"
+                                  },
+                                  [_vm._v("Custom Range")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "flex flex-col gap-4 mx-2 mt-2 w-full"
+                                  },
+                                  [
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "font-bold",
+                                        staticStyle: { "text-align": "left" },
+                                        attrs: { for: "date_from" }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "Date From\n                                    "
+                                        ),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.customStartDate,
+                                              expression: "customStartDate"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "border rounded-md p-2 w-full",
+                                          attrs: {
+                                            type: "date",
+                                            name: "date_from"
+                                          },
+                                          domProps: {
+                                            value: _vm.customStartDate
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.customStartDate =
+                                                $event.target.value
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "font-bold",
+                                        staticStyle: { "text-align": "left" },
+                                        attrs: { for: "date_to" }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "Date To\n                                    "
+                                        ),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.customEndDate,
+                                              expression: "customEndDate"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "border rounded-md p-2 w-full",
+                                          attrs: {
+                                            type: "date",
+                                            name: "date_to"
+                                          },
+                                          domProps: {
+                                            value: _vm.customEndDate
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.customEndDate =
+                                                $event.target.value
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mt-4 flex gap-x-4" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "text-white p-2 rounded-md",
+                                  staticStyle: {
+                                    "background-color": "#16803C"
+                                  },
+                                  on: { click: _vm.applyCustomRange }
+                                },
+                                [_vm._v("Apply")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "bg-red-500 text-white p-2 rounded-md",
+                                  on: { click: _vm.closeDatePicker }
+                                },
+                                [_vm._v("Cancel")]
+                              )
+                            ])
+                          ]
                         )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            ])
-          ]),
+                      : _vm._e()
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "flex flex-row-reverse items-center justify-start gap-6 w-full"
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "flex flex-col items-end my-4",
+                  staticStyle: { width: "33%" }
+                },
+                [
+                  _c("label", { staticClass: "text-gray-600 font-medium" }, [
+                    _vm._v("Company Name")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.companyName,
+                        expression: "companyName"
+                      }
+                    ],
+                    staticClass:
+                      "text-left font-medium bg-white py-2 mt-1 w-full",
+                    staticStyle: { "text-align": "end" },
+                    attrs: { type: "text", disabled: "", value: "regulation" },
+                    domProps: { value: _vm.companyName },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.companyName = $event.target.value
+                      }
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "flex flex-col items-end my-4",
+                  staticStyle: { width: "33%" }
+                },
+                [
+                  _c("label", { staticClass: "text-gray-600 font-medium" }, [
+                    _vm._v("Business Account Number")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.companyName,
+                        expression: "companyName"
+                      }
+                    ],
+                    staticClass:
+                      "text-left font-medium bg-white py-2 mt-1 w-full",
+                    staticStyle: { "text-align": "end" },
+                    attrs: {
+                      type: "text",
+                      disabled: "",
+                      value: "231231231231"
+                    },
+                    domProps: { value: _vm.companyName },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.companyName = $event.target.value
+                      }
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "flex flex-col items-end my-4",
+                  staticStyle: { width: "33%" }
+                },
+                [
+                  _c("label", { staticClass: "text-gray-600 font-medium" }, [
+                    _vm._v("Company Name")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.companyName,
+                        expression: "companyName"
+                      }
+                    ],
+                    staticClass:
+                      "text-left font-medium bg-white py-2 mt-1 w-full",
+                    staticStyle: { "text-align": "end" },
+                    attrs: { type: "text", disabled: "", value: "xxxss11" },
+                    domProps: { value: _vm.companyName },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.companyName = $event.target.value
+                      }
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
           _vm._v(" "),
           _c(
             "button",
             {
               staticClass:
-                "bg-green-500 text-white font-semibold p-2 rounded-md w-full hover:bg-green-600 transition-colors",
+                "text-white font-semibold p-2 rounded-md w-full hover:bg-green-600 transition-colors",
+              staticStyle: { "background-color": "#16803C" },
               attrs: { type: "submit" }
             },
             [_vm._v("\n            Submit\n        ")]
@@ -4021,7 +4481,7 @@ var render = function() {
       _vm._v(" "),
       _vm.successMessage
         ? _c("div", { staticClass: "mt-4 text-green-500" }, [
-            _vm._v(_vm._s(_vm.successMessage))
+            _vm._v("\n        " + _vm._s(_vm.successMessage) + "\n    ")
           ])
         : _vm._e()
     ]
