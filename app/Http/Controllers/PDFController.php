@@ -20,7 +20,7 @@ class PDFController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function generatePDFs($ids,$type=1)
+    public function generatePDFs($ids, $type = 1)
     {
         $idsArray = explode(',', $ids); // Split IDs by comma
 
@@ -264,19 +264,19 @@ class PDFController extends Controller
             ->orderBy('date', 'ASC')
             ->get();
 
-            $vacations = $vacations->map(function ($vacation) {
-                // Calculate vacation days
-                $vacation->days = $vacation->end_date
-                    ? $vacation->date->diffInDays($vacation->end_date) + 1
-                    : 1;
+        $vacations = $vacations->map(function ($vacation) use ($request) {
+            // Calculate vacation days
+            $vacation->days = $vacation->end_date
+                ? $vacation->date->diffInDays($vacation->end_date) + 1
+                : 1;
 
-                // Calculate total work hours for the vacation period
-                $workHours = WorkHours::whereBetween('date', [$vacation->date, $vacation->end_date])
-                                       ->get()->count(); // Assuming there's a 'hours' field in WorkHours
+            // Calculate total work hours for the vacation period
+            $workHours = WorkHours::whereBetween('date', [$vacation->date, $vacation->end_date])
+                ->where('user_id', $request->id)->get()->count(); // Assuming there's a 'hours' field in WorkHours
 
-                $vacation->days -=$workHours;
-                return $vacation;
-            });
+            $vacation->days -= $workHours;
+            return $vacation;
+        });
         $sumVacation = $vacations->sum('days');
         $vacations = $vacations->toArray();
 
@@ -346,13 +346,13 @@ class PDFController extends Controller
                     ['type', '=', 2],
                     ['is_delete', '<>', '2'],
                 ])->whereBetween('transaction_date', [$startdate, $finishdate])
-                    ->when($request->PaymentType != 0, function ($query) use($request) {
+                    ->when($request->PaymentType != 0, function ($query) use ($request) {
                         return $query->where('payment_type', $request->PaymentType);
                     })->get();
                 $totalAmountMainType1 = $filteredTransactionsSet1->sum('equivelant_amount');
                 $filteredTransactionsSet2 = $Project->Transaction()->where([
                     ['main_type', '=', 2],
-                ])->whereBetween('transaction_date', [$startdate, $finishdate]) ->when($request->PaymentType != 0, function ($query) use($request) {
+                ])->whereBetween('transaction_date', [$startdate, $finishdate])->when($request->PaymentType != 0, function ($query) use ($request) {
                     return $query->where('payment_type', $request->PaymentType);
                 })->get();
                 $totalAmountMainType2 = $filteredTransactionsSet2->sum('equivelant_amount');
@@ -370,7 +370,7 @@ class PDFController extends Controller
 
                 $additionalRows = [
 
-                    [' اسم المشروع ', '  ',  '  ',$Project?->project_name , ' '],
+                    [' اسم المشروع ', '  ',  '  ', $Project?->project_name, ' '],
                     ['  ', '  ', '   ', ' '],
                 ];
                 $mergedQuery = $mergedQuery->concat([])->concat($additionalRows);
@@ -386,23 +386,20 @@ class PDFController extends Controller
                     ];
 
 
-                        return [
-                            'bill' => $transaction->bill_number,
-                            'id' => $transaction->id,
-                            'date' => $transaction->transaction_date,
-                            'dateDetails' => isset($transaction->Payment_type_details['0']['attributes']['Date'])
-                                ? $transaction->Payment_type_details['0']['attributes']['Date']
-                                : null,
-                            'type' => $transaction->type,
-                            'name' => $transaction->TelephoneDirectory?->name,
-                            'transact_amount' => $transaction->equivelant_amount,
-                            'paymentTypeValue' => $paymentTypeLabels[$transaction->Payment_type] ?? __('Unknown'),
-                        ];
-
+                    return [
+                        'bill' => $transaction->bill_number,
+                        'id' => $transaction->id,
+                        'date' => $transaction->transaction_date,
+                        'dateDetails' => isset($transaction->Payment_type_details['0']['attributes']['Date'])
+                            ? $transaction->Payment_type_details['0']['attributes']['Date']
+                            : null,
+                        'type' => $transaction->type,
+                        'name' => $transaction->TelephoneDirectory?->name,
+                        'transact_amount' => $transaction->equivelant_amount,
+                        'paymentTypeValue' => $paymentTypeLabels[$transaction->Payment_type] ?? __('Unknown'),
+                    ];
                 });
-
             }
-
         } else {
             foreach ($Projects as $key => $Project) {
                 $filteredTransactionsSet1 = $Project->Transaction()
@@ -421,7 +418,7 @@ class PDFController extends Controller
                                     ->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(Payment_type_details, '$[0].attributes.Date')) BETWEEN ? AND ?", [$startdate, $finishdate]);
                             });
                     })
-                    ->when($request->PaymentType != 0, function ($query)use($request) {
+                    ->when($request->PaymentType != 0, function ($query) use ($request) {
                         return $query->where('payment_type', $request->PaymentType);
                     })
                     ->get();
@@ -430,9 +427,9 @@ class PDFController extends Controller
                 $filteredTransactionsSet2 = $Project->Transaction()->where([
                     ['main_type', '=', 2],
                 ])->whereBetween('transaction_date', [$startdate, $finishdate])
-                ->when($request->PaymentType != 0, function ($query)use($request) {
-                    return $query->where('payment_type', $request->PaymentType);
-                })->get();
+                    ->when($request->PaymentType != 0, function ($query) use ($request) {
+                        return $query->where('payment_type', $request->PaymentType);
+                    })->get();
                 $totalAmountMainType2 = $filteredTransactionsSet2->sum('equivelant_amount');
 
                 $mergedTransactions = $filteredTransactionsSet1->merge($filteredTransactionsSet2);
@@ -469,9 +466,7 @@ class PDFController extends Controller
                         'paymentTypeValue' => $paymentTypeLabels[$transaction->Payment_type] ?? __('Unknown'),
                     ];
                 });
-
-         }
-
+            }
         }
         $data = [
             'data' => $selectedTransactions,
@@ -481,7 +476,7 @@ class PDFController extends Controller
             // 'totalTime' => $date,
 
         ];
-    //    dd( $selectedTransactions);
+        //    dd( $selectedTransactions);
         $mpdf = new \Mpdf\Mpdf([
             'margin_left' => 10,
             'margin_right' => 10,
@@ -494,12 +489,11 @@ class PDFController extends Controller
         $mpdf->autoScriptToLang = true;
         // for Arabic Bills PDF
 
-        $html = \view('pdf.exportReport',$data);
+        $html = \view('pdf.exportReport', $data);
 
 
         $html = $html->render();
         $mpdf->WriteHTML($html);
         $mpdf->Output($fileName, 'I');
-
     }
 }
