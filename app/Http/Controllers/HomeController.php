@@ -47,7 +47,52 @@ class HomeController extends BaseController
         return $date->daysInMonth;
     }
 
+    public function ReportRegulation(Request $request)
+    {
+        $staticData = [
+            //        DETAILS
+            'authorizedDealerNumber' => '308150820', //9(9)
+            'identifier' => '151515151515151', //9(15)
+            'companyNumber' => '308150820', //9(9)
 
+            'softwareRegistrationNumber' => '12345678', //9(8)
+            'softwareName' => 'auratech', //X(20)
+            'softwareVersion' => 'v0.0.1', //X(20)
+            'softwareManufacturerNumber' => '308150820', //9(9)
+            'softwareManufacturerName' => 'auratech', //X(20)
+
+            'businessName' => 'auratech', //X(50)
+            'businessStreet' => 'kfar meilia', //X(50)
+            'businessAddressNumber' => '1', //X(10)
+            'businessCity' => 'kfar meilia', //X(30)
+            'businessPostalCode' => '25140', //X(8)
+
+            //        SETTINGS
+            'softwareType' => '2', //9(1) - 1/2 - single / multi (years)
+            'filesLocationPath' => 'abc', //X(50)
+            'softwareAccountingType' => '0', //9(1) - 0/1/2 not relevant - one side - double
+            'requiredAccountingBalance' => '1', //9(1) - 1/2 ramat hatnua, ramat hamana
+            'deductionFileID' => '', //9(9)
+            'langCode' => '0', //9(1) - 0/1/2
+            'charactersSet' => '1', //9(1) - 2=CP-862 ;1=ISO-8859-8-i
+            'zipSoftwareName' => 'zip', //X(20)
+            'coin' => 'ILS',
+            'branchesInformation' => '0', //9(1) - 0/1
+            'endOfFutureField' => "",
+        ];
+        $startDate = ($request->startDate != null) ? $request->startDate : 'null';
+        $endDate = ($request->endDate != null) ? $request->endDate : 'null';
+        $TransactionsSet1 = Transaction::where([
+            ['main_type', '=', 1],
+            ['type', '=', 2],
+            ['is_delete', '<>', '2'],
+        ])->whereBetween('transaction_date', [$startDate, $endDate])->get();
+        $TransactionsSet2 = Transaction::where([
+            ['main_type', '=', 2],
+        ])->whereBetween('transaction_date', [$startDate, $endDate])
+            ->get();
+        dd($TransactionsSet1, $TransactionsSet2);
+    }
     public function openTabs(Request $request)
     {
         $urls = $request->get('urls', []);
@@ -2250,7 +2295,7 @@ class HomeController extends BaseController
                         "key" => "معاينة",
                         "type" => "link",
                         "link" => [
-                            "href" => "/export/ExportReport?reselt=[{$report->id}]&from=&to=&dateType=1&PaymentType=0&print=1&generate-pdf",
+                            "href" => "/export/ExportReport?reselt=[{$report->id}]&from=&to=&dateType=1&PaymentType=0&print=1&mainbill",
                             "target" => "_blank"
                         ],
 

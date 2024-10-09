@@ -64,7 +64,7 @@ class Report extends Component
                 $this->exportWorkHoursErorrDate = '';
                 // dd("dffd");
                 if ($this->FromDate == null || $this->FromDate == "null") {
-                    $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء " ;
+                    $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء ";
                 }
                 break;
 
@@ -80,19 +80,19 @@ class Report extends Component
     }
     public function searchWorkHours()
     {
-        $this->exportWorkHoursErorrUser= "";
+        $this->exportWorkHoursErorrUser = "";
         $this->exportWorkHoursErorrDate = "";
         $this->exportWorkHoursErorrType = "";
 
-        if ($this->Name == null ||$this->Name =="null")  {
-            $this->exportWorkHoursErorrUser = "يجب اختيار الاسم " ;
+        if ($this->Name == null || $this->Name == "null") {
+            $this->exportWorkHoursErorrUser = "يجب اختيار الاسم ";
         }
 
         if ($this->FromDate == null) {
-            $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء " ;
+            $this->exportWorkHoursErorrDate =  "يجب اختيار تاريخ البدء ";
         }
         if ($this->ToDate == null) {
-            $this->exportWorkHoursErorrType =  "يجب اختيار تاريخ النهاية " ;
+            $this->exportWorkHoursErorrType =  "يجب اختيار تاريخ النهاية ";
         }
 
         if ($this->FromDate != null && $this->ToDate != null && $this->Name != null) {
@@ -129,32 +129,32 @@ class Report extends Component
                 ->orderBy('date', 'ASC')
                 ->get();
 
-                $vacations = $vacations->map(function ($vacation) {
-                    $vacation->days = $vacation->end_date ? $vacation->date->diffInDays($vacation->end_date) + 1 : 1;
-                    return $vacation;
-                });
+            $vacations = $vacations->map(function ($vacation) {
+                $vacation->days = $vacation->end_date ? $vacation->date->diffInDays($vacation->end_date) + 1 : 1;
+                return $vacation;
+            });
 
-                $vacations = $vacations->map(function ($vacation) {
-                    $vacation->days = $vacation->end_date
-                        ? $vacation->date->diffInDays($vacation->end_date) + 1
-                        : 1;
-                    return $vacation;
-                });
-                $vacations = $vacations->map(function ($vacation) {
-                    // Calculate vacation days
-                    $vacation->days = $vacation->end_date
-                        ? $vacation->date->diffInDays($vacation->end_date) + 1
-                        : 1;
+            $vacations = $vacations->map(function ($vacation) {
+                $vacation->days = $vacation->end_date
+                    ? $vacation->date->diffInDays($vacation->end_date) + 1
+                    : 1;
+                return $vacation;
+            });
+            $vacations = $vacations->map(function ($vacation) {
+                // Calculate vacation days
+                $vacation->days = $vacation->end_date
+                    ? $vacation->date->diffInDays($vacation->end_date) + 1
+                    : 1;
 
-                    // Calculate total work hours for the vacation period
-                    $workHours = WorkHours::whereBetween('date', [$vacation->date, $vacation->end_date])
-                                           ->get()->count(); // Assuming there's a 'hours' field in WorkHours
+                // Calculate total work hours for the vacation period
+                $workHours = WorkHours::whereBetween('date', [$vacation->date, $vacation->end_date])
+                    ->where('user_id', $this->Name)->get()->count(); // Assuming there's a 'hours' field in WorkHours
 
-                    $vacation->days -=$workHours;
-                    return $vacation;
-                });
+                $vacation->days -= $workHours;
+                return $vacation;
+            });
 
-            $this->sumVacation = $vacations->sum('days');//$vacations->count();
+            $this->sumVacation = $vacations->sum('days'); //$vacations->count();
             $vacations = $vacations->toArray();
 
 
@@ -322,7 +322,6 @@ class Report extends Component
             $redirectUrl = '/placeholder-page';
             return Redirect::away($pdfUrl)->with(['pdfUrl' => $pdfUrl]);
         }
-
     }
 
     public function render()

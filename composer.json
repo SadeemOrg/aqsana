@@ -79,7 +79,8 @@
         "yassi/nova-nested-form": "^3.0",
         "zeyad/notification": "*",
         "acme/number-field": "*",
-        "acme/bookings-bus": "*"
+        "acme/bookings-bus": "*",
+        "acme/report-regulation": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
@@ -147,6 +148,10 @@
         {
             "type": "path",
             "url": "./nova-components/BookingsBus"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/ReportRegulation"
         }
     ],
     "autoload": {

@@ -5,8 +5,8 @@
     <div class="flex-col justify-start p-5">
 
         <div class="mb-8">
-            <div class="grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mb-4">
-                <div class=" h-12 my-2 mb-4">
+            <div class="grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-4">
+                <div class=" h-12 my-2 mb-4 ">
                     <label for="dateType" class="block text-sm pr-2 pb-1 text-[#349A37]">نوع التاريخ الذي تريد
                         عرضه</label>
                     <select pla wire:model.defer="dateType" id="dateType" name="dateType"
@@ -16,7 +16,7 @@
                         <option {{ $dateType == 2 ? 'selected' : '' }} value="2">تاريخ الدفعة</option>
                     </select>
                 </div>
-                <div class="h-12 my-1 mb-4">
+                <div class="h-12 my-1 mb-4 ">
                     <label for="dateType" class="block text-sm pr-2 pb-1 text-[#349A37]">طريقة الدفع</label>
                     <select pla wire:model.defer="PaymentType" name="PaymentType" wire:change='onChange("PaymentType")'
                         class="selectwhorkHour block w-full text-[#349A37] border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] focus:ring-[#349A37] focus:border-[#349A37]">
@@ -27,24 +27,22 @@
                         <option {{ $PaymentType == 4 ? 'selected' : '' }} value="4">{{ __('hawale') }}</option>
                         <option {{ $PaymentType == 5 ? 'selected' : '' }} value="5">{{ __('Hassale') }}</option>
                     </select>
-
                 </div>
-
                 <div class=" h-12 my-1 mb-4">
-                    <label for="" class="block text-sm pr-2 pb-1 text-[#349A37]">تاريخ البداية</label>
+                    <label for="" class="block text-sm pr-3 pb-1 text-[#349A37]">تاريخ البداية</label>
                     <input type="date" name="" id="" wire:model.defer="from"
                         wire:change='onChange("from")'
                         class="block w-full text-[#349A37] border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] focus:ring-[#349A37] focus:border-[#349A37]">
                 </div>
 
                 <div class=" h-12 my-1 mb-4">
-                    <label for="" class="block text-sm pr-2 pb-1 text-[#349A37]">تاريخ النهاية</label>
+                    <label for="" class="block text-sm pr-3 pb-1 text-[#349A37]">تاريخ النهاية</label>
                     <input wire:model.defer="to" wire:change='onChange("to")' type="date"
                         class="block w-full text-[#349A37] border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] focus:ring-[#349A37] focus:border-[#349A37]">
                 </div>
 
                 <!--end Picker -->
-                <div class="h-12 my-1 mb-4 ">
+                <div style="display: flex; gap: 10px;">
                     <button wire:click="Report"
                         class="flex items-center justify-center mt-5 w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                         <svg class="min-w-[20px] min-h-[20px]" xmlns="http://www.w3.org/2000/svg"
@@ -63,15 +61,35 @@
                         <span class="mr-2">تصدير Excel</span>
                     </button>
                 </div>
+                <div style="display: flex; gap: 10px;">
+                    <button wire:click="exportReport"
+                        class="flex items-center justify-center mt-5 w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
+                        <svg class="min-w-[20px] min-h-[20px]" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256 256" width="20px"
+                            height="20px">
+                            <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                                style="mix-blend-mode: normal">
+                                <g transform="scale(5.12,5.12)">
+                                    <path
+                                        d="M37,0h-22c-1.09375,0 -2,0.90625 -2,2v44c0,1.09375 0.90625,2 2,2h32c1.09375,0 2,-0.90625 2,-2v-34zm2,43v3h-28v-2h25.5625l-8.1875-8.8125l2.15625,-2.125zm-4,-2h-10v-10h10zm-14,-10v12h-10v-38h20v6h-9c-1.09375,0 -2,0.90625 -2,2v14zm0,-8v-10h8v8h-6v6h-2z" />
+                                </g>
+                            </g>
+                        </svg>
+
+                        <span class="mr-2"> تصدير pdf</span>
+                    </button>
+                </div>
             </div>
 
         </div>
-        <div  style="width: 100%;" dir="ltr">
+        <div style="width: 100%;" dir="ltr">
 
             <table dir="rtl" class="overflow-x-auto"
                 style="border-collapse: collapse; width: 100%; margin-bottom: 20px; font-family: Arial, sans-serif; text-align: left;">
                 <thead class="bg-[#349A37] text-center">
-                    <tr >
+                    <tr>
                         <th style="border: 1px solid #ddd; padding: 8px;">{{ __('ID') }}</th>
                         <th style="border: 1px solid #ddd; padding: 8px;">{{ __('bill_number') }}</th>
                         <th style="border: 1px solid #ddd; padding: 8px;">{{ __('DATE') }} </th>
@@ -82,7 +100,7 @@
                         <th style="border: 1px solid #ddd; padding: 8px;">{{ __('Payment Type') }} </th>
                     </tr>
                 </thead>
-                <tbody >
+                <tbody>
                     @foreach ($exportData as $item)
                         @isset($item['id'])
                             <tr class="text-center bg-white">
@@ -100,16 +118,25 @@
                                 </td>
                             </tr>
                         @else
-                            <tr class="bg-[#E4FFE585] text-center " >
-                                <td style="border-top: 1px solid #ddd;  border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 8px;">
+                            <tr class="bg-[#E4FFE585] text-center ">
+                                <td
+                                    style="border-top: 1px solid #ddd;  border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 8px;">
                                     {{ $item['0'] }}</td>
-                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['1'] ?? '' }}</td>
-                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['2'] ?? '' }}</td>
-                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['3'] ?? '' }}</td>
-                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['4'] ?? '' }}</td>
-                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">{{ $item['5'] ?? '' }}</td>
-                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;"></td>
-                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd; border-left: 1px solid #ddd;  padding: 8px;"></td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">
+                                    {{ $item['1'] ?? '' }}</td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">
+                                    {{ $item['2'] ?? '' }}</td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">
+                                    {{ $item['3'] ?? '' }}</td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">
+                                    {{ $item['4'] ?? '' }}</td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">
+                                    {{ $item['5'] ?? '' }}</td>
+                                <td style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd;  padding: 8px;">
+                                </td>
+                                <td
+                                    style="border-top: 1px solid #ddd;  border-bottom: 1px solid #ddd; border-left: 1px solid #ddd;  padding: 8px;">
+                                </td>
                             </tr>
                         @endisset
                     @endforeach
