@@ -41,6 +41,8 @@ class WorkHours extends Component
     public $Timetimetime;
     public $exportWorkHoursErorr = '';
     public $addTime;
+    public $TimeleaveTextarea;
+
     public $exportWorkHoursErorrFromDate='';
     public $exportWorkHoursErorrToDate='';
 
@@ -103,7 +105,6 @@ class WorkHours extends Component
     }
     public function ModelForm()
     {
-        // dd("dd");
         $this->hide = 1;
         $this->render();
 
@@ -115,6 +116,7 @@ class WorkHours extends Component
             $schedule = array();
             $pus = array(
                 "Type" => ($this->leaveGoal == "اخرى") ? $this->leaveGoalTextarea : $this->leaveGoal,
+                "required_time" => ($this->Timeleave == "اخرى") ? $this->TimeleaveTextarea : $this->Timeleave,
                 "required_time" => $this->Timeleave,
                 "time_out" => Carbon::now()->addHour($this->addTime)->toDateTimeString(),
                 "return_time" =>  null,

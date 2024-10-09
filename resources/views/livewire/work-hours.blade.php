@@ -1,11 +1,9 @@
 <div>
     <!--Perosonal Information -->
     <form class="Wraper" wire:submit.prevent="searchWorkHours">
-        <div
-            class="">
+        <div class="">
             <p class="font-FlatBold w-full text-xl sm:text-[22px] text-center  lg:mt-0 xl:text-right">ساعات عملي</p>
-            <div
-                class=" grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-4">
+            <div class=" grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-4">
                 <!--Date Picker -->
                 <div dir="ltr" class=" relative h-12">
                     <div
@@ -20,7 +18,7 @@
                     <input wire:model.defer="FromDate" id="hidePlaceHolderDateWorkHourFrom" type="text"
                         class="border-[#349A37] hidePlaceHolderDate  text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" من تاريخ" type="text" onfocus="handelFocusWorkHourFrom()">
-                        <span class="text-red-700">{{ $this->exportWorkHoursErorrFromDate }}</span>
+                    <span class="text-red-700">{{ $this->exportWorkHoursErorrFromDate }}</span>
 
                 </div>
                 <!--to Date  -->
@@ -37,7 +35,7 @@
                     <input wire:model.defer="ToDate" id="hidePlaceHolderDateWorkHourTo" type="text"
                         class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusWorkerHourTo()">
-                        <span class="text-red-700">{{ $this->exportWorkHoursErorrToDate }}</span>
+                    <span class="text-red-700">{{ $this->exportWorkHoursErorrToDate }}</span>
 
                 </div>
 
@@ -47,8 +45,21 @@
                         class="connectUs w-full duration-200 text-center px-1div0 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                         بحث
                     </button>
-                    <button wire:click="exportWorkHours" class="connectUs flex items-center justify-center w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
-                        <svg class="min-w-[20px] min-h-[20px]" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="20px" height="20px"><g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M28.875,0c-0.01953,0.00781 -0.04297,0.01953 -0.0625,0.03125l-28,5.3125c-0.47656,0.08984 -0.82031,0.51172 -0.8125,1v37.3125c-0.00781,0.48828 0.33594,0.91016 0.8125,1l28,5.3125c0.28906,0.05469 0.58984,-0.01953 0.82031,-0.20703c0.22656,-0.1875 0.36328,-0.46484 0.36719,-0.76172v-5h17c1.09375,0 2,-0.90625 2,-2v-34c0,-1.09375 -0.90625,-2 -2,-2h-17v-5c0.00391,-0.28906 -0.12109,-0.5625 -0.33594,-0.75391c-0.21484,-0.19141 -0.50391,-0.28125 -0.78906,-0.24609zM28,2.1875v4.34375c-0.13281,0.27734 -0.13281,0.59766 0,0.875v35.40625c-0.02734,0.13281 -0.02734,0.27344 0,0.40625v4.59375l-26,-4.96875v-35.6875zM30,8h17v34h-17v-5h4v-2h-4v-6h4v-2h-4v-5h4v-2h-4v-5h4v-2h-4zM36,13v2h8v-2zM6.6875,15.6875l5.46875,9.34375l-5.96875,9.34375h5l3.25,-6.03125c0.22656,-0.58203 0.375,-1.02734 0.4375,-1.3125h0.03125c0.12891,0.60938 0.25391,1.02344 0.375,1.25l3.25,6.09375h4.96875l-5.75,-9.4375l5.59375,-9.25h-4.6875l-2.96875,5.53125c-0.28516,0.72266 -0.48828,1.29297 -0.59375,1.65625h-0.03125c-0.16406,-0.60937 -0.35156,-1.15234 -0.5625,-1.59375l-2.6875,-5.59375zM36,20v2h8v-2zM36,27v2h8v-2zM36,35v2h8v-2z"/></g></g></svg>
+                    <button wire:click="exportWorkHours"
+                        class="connectUs flex items-center justify-center w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
+                        <svg class="min-w-[20px] min-h-[20px]" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="20px"
+                            height="20px">
+                            <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                                style="mix-blend-mode: normal">
+                                <g transform="scale(5.12,5.12)">
+                                    <path
+                                        d="M28.875,0c-0.01953,0.00781 -0.04297,0.01953 -0.0625,0.03125l-28,5.3125c-0.47656,0.08984 -0.82031,0.51172 -0.8125,1v37.3125c-0.00781,0.48828 0.33594,0.91016 0.8125,1l28,5.3125c0.28906,0.05469 0.58984,-0.01953 0.82031,-0.20703c0.22656,-0.1875 0.36328,-0.46484 0.36719,-0.76172v-5h17c1.09375,0 2,-0.90625 2,-2v-34c0,-1.09375 -0.90625,-2 -2,-2h-17v-5c0.00391,-0.28906 -0.12109,-0.5625 -0.33594,-0.75391c-0.21484,-0.19141 -0.50391,-0.28125 -0.78906,-0.24609zM28,2.1875v4.34375c-0.13281,0.27734 -0.13281,0.59766 0,0.875v35.40625c-0.02734,0.13281 -0.02734,0.27344 0,0.40625v4.59375l-26,-4.96875v-35.6875zM30,8h17v34h-17v-5h4v-2h-4v-6h4v-2h-4v-5h4v-2h-4v-5h4v-2h-4zM36,13v2h8v-2zM6.6875,15.6875l5.46875,9.34375l-5.96875,9.34375h5l3.25,-6.03125c0.22656,-0.58203 0.375,-1.02734 0.4375,-1.3125h0.03125c0.12891,0.60938 0.25391,1.02344 0.375,1.25l3.25,6.09375h4.96875l-5.75,-9.4375l5.59375,-9.25h-4.6875l-2.96875,5.53125c-0.28516,0.72266 -0.48828,1.29297 -0.59375,1.65625h-0.03125c-0.16406,-0.60937 -0.35156,-1.15234 -0.5625,-1.59375l-2.6875,-5.59375zM36,20v2h8v-2zM36,27v2h8v-2zM36,35v2h8v-2z" />
+                                </g>
+                            </g>
+                        </svg>
                         <span class="mr-2">تصدير Excel</span>
                     </button>
                 </div>
@@ -65,8 +76,8 @@
             <p id="timer" class="text-white text-2xl"></p>
         </div>
         <div class="cursor-pointer min-w-[100px]  mb-4">
-            <svg wire:click="EndWork" class="h-16 md:h-16 " width="100"  viewBox="0 0 163 114"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg wire:click="EndWork" class="h-16 md:h-16 " width="100" viewBox="0 0 163 114" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
                 <rect width="163" height="114" rx="6" fill="#349A37" />
                 <g clip-path="url(#clip0_59_1521)">
                     <path
@@ -146,10 +157,23 @@
                                             </option>
                                         @endforeach
 
+                                        <option value="اخرى">
+                                            اخرى
+                                        </option>
+
+
+
                                     </select>
                                 </div>
+                                @if ($Timeleave == 'اخرى' && $this->showModel == true)
+                                <div class="ml-1  pt-6 lg:px-0 ">
+                                    <textarea wire:model.defer="TimeleaveTextarea" rows="4" name="message" placeholder="سبب المغادرة"
+                                        class="w-full  inline-flex items-center text-right  justify-center border-[#349A37] border  rounded-[10px] focus:ring-[#349A37] focus:border-[#349A37] sm:text-sm p-4"></textarea>
+                                </div>
+                            @endif
                                 <div class="mt-2 selectdiv">
-                                    <select wire:model.defer="leaveGoal" wire:click="changeEvent2($event.target.value)"
+                                    <select wire:model.defer="leaveGoal"
+                                        wire:click="changeEvent2($event.target.value)"
                                         class="block  w-full  mt-4 border-[#349A37] border pr-4 rounded-[60px] sm:text-sm p-4 focus:ring-[#349A37] focus:border-[#349A37]">
                                         <option selected value="">الرجاء
                                             ادخال سبب المغادرة</option>
@@ -251,19 +275,20 @@
                                 </tr>
                             @endforeach
                             <tr>
-                                <td colspan="2" class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] border-2 border-[#349A37] bg-white">
+                                <td colspan="2"
+                                    class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] border-2 border-[#349A37] bg-white">
                                     <span>مجموع الايام: </span>
                                     <span>{{ $WorkHourssearch->count() }}</span>
                                 </td>
-                                <td colspan="3" class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] border-2 border-[#349A37] bg-white">
+                                <td colspan="3"
+                                    class="whitespace-nowrap py-4 px-3 text-sm text-[#101426] border-2 border-[#349A37] bg-white">
                                     <span> مجموع الساعات: </span>
                                     @if ($WorkHourssearch->count() == 0)
                                         <span>00:00:00</span>
                                     @else
                                         <span>
-                                            {{ ($sumWorkHourssearch->day-1) * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
+                                            {{ ($sumWorkHourssearch->day - 1) * 24 + $sumWorkHourssearch->hour }}:{{ $sumWorkHourssearch->minute }}:{{ $sumWorkHourssearch->second }}
                                         </span>
-
                                     @endif
                                 </td>
                             </tr>
