@@ -5,8 +5,8 @@
     <div class="flex-col justify-start p-5">
 
         <div class="mb-8">
-            <div class="grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mb-4">
-                <div class=" h-12 my-2 mb-4">
+            <div class="grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-4">
+                <div class=" h-12 my-2 mb-4 ">
                     <label for="dateType" class="block text-sm pr-2 pb-1 text-[#349A37]">نوع التاريخ الذي تريد
                         عرضه</label>
                     <select pla wire:model.defer="dateType" id="dateType" name="dateType"
@@ -16,7 +16,7 @@
                         <option {{ $dateType == 2 ? 'selected' : '' }} value="2">تاريخ الدفعة</option>
                     </select>
                 </div>
-                <div class="h-12 my-1 mb-4">
+                <div class="h-12 my-1 mb-4 ">
                     <label for="dateType" class="block text-sm pr-2 pb-1 text-[#349A37]">طريقة الدفع</label>
                     <select pla wire:model.defer="PaymentType" name="PaymentType" wire:change='onChange("PaymentType")'
                         class="selectwhorkHour block w-full text-[#349A37] border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] focus:ring-[#349A37] focus:border-[#349A37]">
@@ -27,18 +27,16 @@
                         <option {{ $PaymentType == 4 ? 'selected' : '' }} value="4">{{ __('hawale') }}</option>
                         <option {{ $PaymentType == 5 ? 'selected' : '' }} value="5">{{ __('Hassale') }}</option>
                     </select>
-
                 </div>
-
                 <div class=" h-12 my-1 mb-4">
-                    <label for="" class="block text-sm pr-2 pb-1 text-[#349A37]">تاريخ البداية</label>
+                    <label for="" class="block text-sm pr-3 pb-1 text-[#349A37]">تاريخ البداية</label>
                     <input type="date" name="" id="" wire:model.defer="from"
                         wire:change='onChange("from")'
                         class="block w-full text-[#349A37] border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] focus:ring-[#349A37] focus:border-[#349A37]">
                 </div>
 
                 <div class=" h-12 my-1 mb-4">
-                    <label for="" class="block text-sm pr-2 pb-1 text-[#349A37]">تاريخ النهاية</label>
+                    <label for="" class="block text-sm pr-3 pb-1 text-[#349A37]">تاريخ النهاية</label>
                     <input wire:model.defer="to" wire:change='onChange("to")' type="date"
                         class="block w-full text-[#349A37] border-[#349A37] border rounded-[60px] sm:text-sm px-4 h-10 placeholder-[#349A37] focus:ring-[#349A37] focus:border-[#349A37]">
                 </div>
@@ -62,6 +60,8 @@
                         </svg>
                         <span class="mr-2">تصدير Excel</span>
                     </button>
+                </div>
+                <div style="display: flex; gap: 10px;">
                     <button wire:click="exportReport"
                         class="flex items-center justify-center mt-5 w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                         <svg class="min-w-[20px] min-h-[20px]" xmlns="http://www.w3.org/2000/svg"

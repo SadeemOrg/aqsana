@@ -3057,6 +3057,12 @@ body{
   .md\:gap-6{
     gap: 1.5rem;
   }
+  .md\:gap-64{
+    gap: 16rem;
+  }
+  .md\:gap-4{
+    gap: 1rem;
+  }
   .md\:gap-y-0{
     row-gap: 0px;
   }
@@ -3335,6 +3341,9 @@ body{
   }
   .lg\:grid-cols-5{
     grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .lg\:grid-cols-6{
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
   .lg\:flex-row{
     flex-direction: row;
