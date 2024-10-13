@@ -3,6 +3,8 @@
     $Imagemobile = 'storage/' . nova_get_setting('image_mobile_pop_up', 'default_value');
     $Imageweb = 'storage/' . nova_get_setting('image_web_pop_up', 'default_value');
     $link = nova_get_setting('link_pop_up', 'default_value');
+    $text = nova_get_setting('text_pop_up', 'تبرع الان');
+
 
 
 @endphp
@@ -30,7 +32,7 @@
                     <div class="flex text-center justify-end gap-y-6">
                         <a target="_self"
                             class="bg-[#349A37] hover:bg-[#101426] duration-200 py-4 ml-2 text-white text-2xl rounded-[50px] w-[160px] lg:w-[180px] xl:w-[220px] "
-                            href="{{ $link }}">تبرع الان</a>
+                            href="{{ $link }}">{{ $text }}</a>
                     </div>
                     <img class="h-[1000px] hidden sm:flex "
                         src="/{{  $Imageweb }}" />

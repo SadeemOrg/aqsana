@@ -105,6 +105,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         Image::make(__('Image mobile'), 'image_mobile_pop_up')->disk('public'),
                         Image::make(__('Image web'), 'image_web_pop_up')->disk('public'),
                         Text::make(__('link'), 'link_pop_up'),
+                        Text::make(__('button  text'), 'text_pop_up'),
+
                         Boolean::make(__('active'), 'active_pop_up')
 
 
