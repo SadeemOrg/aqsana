@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\CPU\Helpers;
 use App\Models\QawafilAlaqsa;
 use App\Models\TripBooking;
+use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
@@ -112,8 +113,9 @@ class TripController extends BaseController
 
             $trip_booking = TripBooking::where('user_id', Auth()->id())->whereHas('Project', function ($query) {
                 $query->where('start_date', '>', Carbon::now());
-            })->get();
+            })->first();
             if ($trip_booking != null) {
+
                 $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
                     ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->where('id', $trip_booking->project_id)->get();
             } else {
@@ -124,7 +126,6 @@ class TripController extends BaseController
             $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
                 ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->get();
         }
-
         $trips->map(function ($trip) use ($request) {
 
             $buss = $trip->bus;
@@ -191,9 +192,20 @@ class TripController extends BaseController
                 return $trip->from_distance < 20;
             })->sortBy('from_distance')->sortBy('start_date');
         }
-        $trips = $trips->filter(function ($trip) {
+        $trip_booking = TripBooking::where('user_id', Auth()->id())->whereHas('Project', function ($query) {
+            $query->where('start_date', '>', Carbon::now());
+        })->first();
+        $trips = $trips->filter(function ($trip) use ($trip_booking) {
+            // If the trip booking exists and the trip ID matches the booking ID, include it
+            if ($trip_booking && $trip->id == $trip_booking->project_id) {
+                return true;
+            }
+
+            // Otherwise, only include trips where from_distance is less than 20
             return $trip->from_distance < 20;
-        })->sortBy('from_distance')->sortBy('start_date');
+        })
+            ->sortBy('from_distance')   // Sort by distance
+            ->sortBy('start_date');
 
         $trip = $trips->first();
 
