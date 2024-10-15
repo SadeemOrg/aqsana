@@ -110,7 +110,9 @@ class TripController extends BaseController
 
         if (Auth()->id() != null) {
 
-            $trip_booking = TripBooking::where('user_id', Auth()->id())->first();
+            $trip_booking = TripBooking::where('user_id', Auth()->id())->whereHas('Project', function ($query) {
+                $query->where('start_date', '>', Carbon::now());
+            })->get();
             if ($trip_booking != null) {
                 $trips = Project::where("project_type", "2")->with('TripCity.City', 'BusTrip.travelto', 'BusTrip.travelfrom', 'tripfrom', 'tripto')
                     ->orderBy('created_at', 'desc')->where('start_date', '>', Carbon::now())->where('id', $trip_booking->project_id)->get();
