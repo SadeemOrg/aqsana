@@ -23,10 +23,10 @@
                 <div class="flex flex-col items-center justify-center my-3 gap-y-3">
                     <div class="flex text-center justify-end gap-y-6">
                         <a target="_self"
-                            class="bg-[#349A37] hover:bg-[#101426] duration-200 py-4 ml-2 text-white text-2xl rounded-[50px] w-[160px] lg:w-[180px] xl:w-[220px] "
+                            class="bg-[#349A37] hover:bg-[#101426] duration-200 py-4 ml-2 text-white text-lg xl:text-2xl rounded-md  w-[160px] lg:w-[180px] xl:w-[220px] "
                             href="{{ $link }}">{{ $text }}</a>
                             <button type="button"
-                            class=" PopUp_Modal_Home_Close  bg-[#349A37] hover:bg-[#101426] duration-200 py-4 ml-2 text-white text-2xl rounded-[50px] w-[160px] lg:w-[180px] xl:w-[220px] ">
+                            class=" PopUp_Modal_Home_Close  bg-[#349A37] hover:bg-[#101426] duration-200 py-4 ml-2 text-white text-lg xl:text-2xl rounded-md  w-[160px] lg:w-[180px] xl:w-[220px] ">
                             <span class="sr-only">Close</span>
                             <!-- Heroicon name: outline/x -->
                             اكمل تصفح الموقع
