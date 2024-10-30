@@ -78,7 +78,7 @@ class AppUser extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             Text::make(__('id_number'), 'id_number')
-                ->sortable()->rules('required', 'max:255'),
+                ->sortable(),
             Text::make(__('Name'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
