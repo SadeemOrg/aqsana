@@ -2,6 +2,7 @@
 
 use App\Exports\ExportDonations;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\CardcomController;
 use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\File;
 // use App\Http\Livewire\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,31 @@ use Illuminate\Pagination\LengthAwarePaginator;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
+Route::get('/download-android-apk', function () {
+    $filePath = public_path('android-apk/app-release-v1.apk'); // Path to your APK file
+    return Response::download($filePath, 'app-release-v1.apk', [
+        'Content-Type' => 'application/vnd.android.package-archive',
+    ]);
+});
+
+// routes/web.php
+Route::get('/payment-form', function () {
+    return view('payment.payment');
+})->name('payment.form');
+// Route for initiating the payment process
+Route::post('/initiate-payment', [CardcomController::class, 'initiatePayment'])->name('payment.initiate');
+
+// Route for handling successful payment response
+Route::get('/payment-success', [CardcomController::class, 'success'])->name('payment.success');
+
+// Route for handling failed payment response
+Route::get('/payment-failure', [CardcomController::class, 'failure'])->name('payment.failure');
+
+
+
 
 Route::get('/nova-api/donations', [HomeController::class, 'donationsApi'])->name('donations');
 Route::get('/nova-api/reports', [HomeController::class, 'reportsApi'])->name('reports');
