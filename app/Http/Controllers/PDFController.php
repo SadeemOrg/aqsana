@@ -266,11 +266,21 @@ class PDFController extends Controller
         }, $workHours);
 
         // Fetch vacations within the date range
+        // $vacations = Vacation::where("user_id", $request->id)
+        //     ->whereBetween('date', [$from, $to])
+        //     ->orderBy('date', 'ASC')
+        //     ->get();
         $vacations = Vacation::where("user_id", $request->id)
-            ->whereBetween('date', [$from, $to])
-            ->orderBy('date', 'ASC')
-            ->get();
-
+        ->where(function($query) use ($from, $to) {
+            $query->whereBetween('date', [$from, $to])
+                  ->orWhereBetween('end_date', [$from, $to])
+                  ->orWhere(function($subQuery) use ($from, $to) {
+                      $subQuery->where('date', '<', $from)
+                               ->where('end_date', '>', $to);
+                  });
+        })
+        ->orderBy('date', 'ASC')
+        ->get();
         // Process vacation days, excluding weekends
         $vacations = $vacations->map(function ($vacation) use ($from, $to) {
             $vacationStart = Carbon::parse($vacation->date);
@@ -279,10 +289,13 @@ class PDFController extends Controller
             if ($vacationEnd->gt($to)) {
                 $vacationEnd = $to;
             }
-            $days = $vacationStart->diffInDays($vacationEnd) + 1;
+            if ($vacationStart->lt($from)) {
+                $vacation->date = $from;
+            }
 
-            // Exclude Fridays and Saturdays
             $currentDate = $vacationStart->copy();
+            $currentDate = Carbon::parse($vacation->date);
+
             $actualDays = 0;
             while ($currentDate->lte($vacationEnd)) {
                 if (!$currentDate->isFriday() && !$currentDate->isSaturday()) {
@@ -290,11 +303,9 @@ class PDFController extends Controller
                 }
                 $currentDate->addDay();
             }
-
             $vacation->days = $actualDays;
             return $vacation;
         });
-
         $sumVacation = $vacations->sum('days');
         $vacations = $vacations->toArray();
 
