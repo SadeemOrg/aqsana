@@ -122,9 +122,17 @@ class Report extends Component
 
             // Fetch vacation records within the date range
             $vacations = Vacation::where("user_id", $this->Name)
-                ->whereBetween('date', [$from, $to])
-                ->orderBy('date', 'ASC')
-                ->get();
+            ->where(function($query) use ($from, $to) {
+                $query->whereBetween('date', [$from, $to])
+                      ->orWhereBetween('end_date', [$from, $to])
+                      ->orWhere(function($subQuery) use ($from, $to) {
+                          $subQuery->where('date', '<', $from)
+                                   ->where('end_date', '>', $to);
+                      });
+            })
+            ->orderBy('date', 'ASC')
+            ->get();
+
             $vacations = $vacations->map(function ($vacation) use ($to) {
                 $vacationStart = Carbon::parse($vacation->date); // Vacation start date
                 $vacationEnd = Carbon::parse($vacation->end_date); // Vacation end date
@@ -145,6 +153,10 @@ class Report extends Component
                 if ($vacationEnd->gt($to)) {
                     $vacation->end_date = $to;
                 }
+                if ($vacationStart->lt($from)) {
+                    $vacation->date = $from;
+                }
+
 
                 // Calculate the number of days between the start and end dates
                 if ($vacationEnd->lt($from) || $vacationStart->gt($to)) {
