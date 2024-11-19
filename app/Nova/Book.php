@@ -84,13 +84,13 @@ class Book extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Boolean::make(__('is posted'), 'post'),
-            ActionButton::make(__('POST NEWS'))
+            ActionButton::make(__('POST Book'))
                 ->action((new PostBook)->confirmText(__('Are you sure you want to post  this NEWS?'))
                     ->confirmButtonText(__('post'))
                     ->cancelButtonText(__('Dont post')), (string)$this->id)
                 ->readonly(function () {
                     return $this->post === 1;
-                })->text(__('post'))->showLoadingAnimation()
+                })->text(__('POST Book'))->showLoadingAnimation()
                 ->loadingColor('#fff') ->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('Name'), 'name')->rules('required', 'max:255'),
             Text::make(__('author'), 'author'),

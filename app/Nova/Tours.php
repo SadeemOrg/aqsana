@@ -18,6 +18,7 @@ use Whitecube\NovaFlexibleContent\Flexible;
 use Acme\MultiselectField\Multiselect;
 use App\Models\City;
 use Benjacho\BelongsToManyField\BelongsToManyField;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 use Laravel\Nova\Fields\BelongsToMany;
 
 class Tours extends Resource
@@ -138,7 +139,7 @@ class Tours extends Resource
 
 
 
-            Flexible::make(__('Contacts'), 'NewContacts')
+            Flexible::make(__(''), 'NewContacts')
                 ->limit(1)
                 ->hideFromDetail()->hideFromIndex()
                 ->addLayout(__('Add new type'), 'type', [
@@ -149,7 +150,7 @@ class Tours extends Resource
 
             BelongsTo::make(__('guide_name'), 'guide', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
 
-            Multiselect::make(__('tour_guide_name'), "guide_name")
+            Multiselect::make(__('guide_name'), "guide_name")
                 ->options(function () {
                     $types =  TelephoneDirectory::whereJsonContains('type',  '113')->get();
                     $type_array =  array();
@@ -166,15 +167,14 @@ class Tours extends Resource
                     Text::make(__('name'), 'name'),
                     Text::make(__('phone_number'), 'phone_number'),
                 ]),
-            Text::make(__('start Time'), 'start_tour')
-                ->placeholder('##:##')
-                ->creationRules('date_format:"H:i"')
-                ->help('hh:mm'),
-            Text::make(__('end Time'), 'end_tour')
-                ->placeholder('##:##')
-                ->creationRules('date_format:"H:i"')
-                ->help('hh:mm'),
+
+            Text::make(__('start Time'), 'start_tour')->withMeta(['extraAttributes' => ['type' => 'time']]),
+            Text::make(__('end Time'), 'end_tour')->withMeta(['extraAttributes' => ['type' => 'time']]),
+
+
             Textarea::make(__('note'), 'note'),
+            Files::make(__('Multiple files'), 'file'),
+
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class)
 
         ];
@@ -220,7 +220,7 @@ class Tours extends Resource
                 $bookt = TelephoneDirectory::create([
                     'name' => $request->NewContacts[0]['attributes']['name'],
                     'phone_number' => $request->NewContacts[0]['attributes']['phone_number'],
-                    'type' => 6
+                    'type' => ["6"]
                 ]);
                 // $model->Contacts=$bookt->id;
                 // $BookType =  \App\Models\BookType::orderBy('created_at', 'desc')->first();

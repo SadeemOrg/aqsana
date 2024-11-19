@@ -21,7 +21,8 @@ class   ExportDonations implements FromCollection, WithHeadings
     }
     public function headings(): array
     {
-        return ['id', 'قطاع',  'قيمة التبرغ', 'اسم', 'رقم الشركة', 'رقم الفاتوره', 'سبب التبرع', ' ', 'مشروع', 'تاريخ الصفقة'];
+
+        return ['id', 'قطاع',  'قيمة التبرغ', 'اسم', 'رقم الشركة', 'رقم الفاتوره', 'سبب التبرع',  'مشروع', 'تاريخ الصفقة'];
     }
     /**
      * @return \Illuminate\Support\Collection

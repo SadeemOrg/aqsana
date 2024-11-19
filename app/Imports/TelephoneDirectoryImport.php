@@ -25,8 +25,6 @@ class TelephoneDirectoryImport implements ToModel
             return new TelephoneDirectory([
                 'name'     => $row[0],
                 'phone_number'    => $row[1],
-                'city'    => $row[2],
-                'birth_date'    => $row[3],
                 'type'    => $this->type,
             ]);
         }

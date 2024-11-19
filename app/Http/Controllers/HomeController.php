@@ -11,9 +11,12 @@ use App\Models\FormMassage;
 
 use App\Mail\TestMail;
 use App\Models\Almuahada;
+use App\Models\ArchiveSms;
+use App\Models\Area;
 use App\Models\Book;
 use App\Models\BookType;
 use App\Models\Budget;
+use App\Models\City;
 use App\Models\Donations;
 use App\Models\News;
 use App\Models\newsType;
@@ -44,7 +47,52 @@ class HomeController extends BaseController
         return $date->daysInMonth;
     }
 
+    public function ReportRegulation(Request $request)
+    {
+        $staticData = [
+            //        DETAILS
+            'authorizedDealerNumber' => '308150820', //9(9)
+            'identifier' => '151515151515151', //9(15)
+            'companyNumber' => '308150820', //9(9)
 
+            'softwareRegistrationNumber' => '12345678', //9(8)
+            'softwareName' => 'auratech', //X(20)
+            'softwareVersion' => 'v0.0.1', //X(20)
+            'softwareManufacturerNumber' => '308150820', //9(9)
+            'softwareManufacturerName' => 'auratech', //X(20)
+
+            'businessName' => 'auratech', //X(50)
+            'businessStreet' => 'kfar meilia', //X(50)
+            'businessAddressNumber' => '1', //X(10)
+            'businessCity' => 'kfar meilia', //X(30)
+            'businessPostalCode' => '25140', //X(8)
+
+            //        SETTINGS
+            'softwareType' => '2', //9(1) - 1/2 - single / multi (years)
+            'filesLocationPath' => 'abc', //X(50)
+            'softwareAccountingType' => '0', //9(1) - 0/1/2 not relevant - one side - double
+            'requiredAccountingBalance' => '1', //9(1) - 1/2 ramat hatnua, ramat hamana
+            'deductionFileID' => '', //9(9)
+            'langCode' => '0', //9(1) - 0/1/2
+            'charactersSet' => '1', //9(1) - 2=CP-862 ;1=ISO-8859-8-i
+            'zipSoftwareName' => 'zip', //X(20)
+            'coin' => 'ILS',
+            'branchesInformation' => '0', //9(1) - 0/1
+            'endOfFutureField' => "",
+        ];
+        $startDate = ($request->startDate != null) ? $request->startDate : 'null';
+        $endDate = ($request->endDate != null) ? $request->endDate : 'null';
+        $TransactionsSet1 = Transaction::where([
+            ['main_type', '=', 1],
+            ['type', '=', 2],
+            ['is_delete', '<>', '2'],
+        ])->whereBetween('transaction_date', [$startDate, $endDate])->get();
+        $TransactionsSet2 = Transaction::where([
+            ['main_type', '=', 2],
+        ])->whereBetween('transaction_date', [$startDate, $endDate])
+            ->get();
+        dd($TransactionsSet1, $TransactionsSet2);
+    }
     public function openTabs(Request $request)
     {
         $urls = $request->get('urls', []);
@@ -509,6 +557,13 @@ class HomeController extends BaseController
                 ]);
             }
         }
+        ArchiveSms::create([
+            'send_type' => json_encode($request->type),
+            'content' => $request->Message,
+            'date' => Carbon::now(),
+            'number_of_people' => $results->count(),
+            'sender_id' => Auth::id(),
+        ]);
 
         return response()->json(['message' => 'Message Sent successfully.'], 200);
     }
@@ -809,7 +864,7 @@ class HomeController extends BaseController
     {
 
         $sector = array();
-        $Sectors = Sector::where('in_budget',1)->get();
+        $Sectors = Sector::where('in_budget', 1)->get();
         foreach ($Sectors as $key => $Sector) {
 
 
@@ -915,7 +970,7 @@ class HomeController extends BaseController
     }
 
 
-    public function bills($id,$type=1)
+    public function bills($id, $type = 1)
     {
         $Transaction =  Transaction::where("id", $id)->with('Sectors')->with('Project')->with('TelephoneDirectory')->first();
         // dd($Transaction );
@@ -989,7 +1044,7 @@ class HomeController extends BaseController
         $type = ($Transaction->is_delete == 2) ? '2' : '1';
 
 
-        return view('Pages.Bills.Bills', compact('Transaction', 'original',  'PaymentType','type'));
+        return view('Pages.Bills.Bills', compact('Transaction', 'original',  'PaymentType', 'type'));
     }
     public function mainbill($id, Request $request)
     {
@@ -1458,5 +1513,1046 @@ class HomeController extends BaseController
     {
         $project = null;
         return view('Pages.donationsPage.donations-page', compact('project'));
+    }
+    public function donationsApi(Request $request)
+    {
+        // dd($request->viaResource,$request->viaResourceId);
+
+        $page_size = isset($request->perPage) ? $request->perPage : 10;
+
+        $decodedString = base64_decode($request->input('filters'));
+        $array = json_decode($decodedString, true);
+
+
+
+        $transactions = Transaction::where([
+            ['main_type', 1],
+            ['type', 2],
+            ['is_delete', '<>', 2],
+        ]);
+
+        if ($request->viaResourceId) {
+            $transactions->where('ref_id', $request->viaResourceId);
+        }
+
+        $transactions = $transactions->orderBy('created_at', 'desc');
+        if (is_array($array)) {
+            foreach ($array as $item) {
+                if (!empty($item['value'])) {
+                    switch ($item['class']) {
+                        case 'App\Nova\Filters\AlhisalatColect':
+                            switch ($item['value']) {
+                                case __('الكل'):
+                                    $transactions = $transactions;
+                                    break;
+                                case __('Not Receive yet'):
+                                    $transactions = $transactions->where('transaction_status', '=', 1);
+                                    break;
+                                case __('in a box'):
+                                    $transactions = $transactions->where('transaction_status', '=', 2);
+                                    break;
+
+                                case __('in the bank'):
+                                    $transactions = $transactions->where('transaction_status', '=', 3);
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                            break;
+                        case 'App\Nova\Filters\Transactionproject':
+                            $Project = Project::where('project_name', $item['value'])->first();
+                            if ($Project) {
+                                $transactions->where('ref_id', $Project->id);
+                            }
+                            break;
+                        case 'App\Nova\Filters\TransactionSectors':
+                            $Sector = Sector::where('text', $item['value'])->first();
+                            if ($Sector) {
+                                $transactions->where('sector', $Sector->id);
+                            }
+                            break;
+                        case 'App\Nova\Filters\PaymentType':
+                            switch ($item['value']) {
+                                case __('الكل'):
+                                    $transactions = $transactions;
+                                    break;
+                                case __('cash'):
+                                    $transactions = $transactions->where('Payment_type', '=', 1);
+                                    break;
+                                case __('shek'):
+                                    $transactions = $transactions->where('Payment_type', '=', 2);
+                                    break;
+                                case __('bit'):
+                                    $transactions = $transactions->where('Payment_type', '=', 3);
+                                    break;
+                                case __('hawale'):
+                                    $transactions = $transactions->where('Payment_type', '=', 4);
+                                    break;
+                                case __('حصالة'):
+                                    $transactions = $transactions->where('Payment_type', '=', 5);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case 'App\Nova\Filters\ReportCreated':
+                            $user = User::where('name',  $item['value'])->first();
+                            if ($user) {
+                                $transactions->where('Created_By', $user->id);
+                            }
+
+                            break;
+                        case 'App\Nova\Filters\ReportCompany':
+                            $Company = TelephoneDirectory::where('name', $item['value'])->first();
+                            if ($Company) {
+                                $transactions->where('name', $Company->id);;
+                            }
+
+                            break;
+                        case 'PosLifestyle\DateRangeFilter\DateRangeFilter_transaction_date':
+                            if (isset($item['value'][0], $item['value'][1])) {
+
+                                $transactions->whereBetween(
+                                    'transaction_date',
+                                    [
+                                        Carbon::createFromFormat('Y-m-d', $item['value'][0])->startOfDay(),
+                                        Carbon::createFromFormat('Y-m-d', $item['value'][1])->endOfDay(),
+                                    ]
+                                );
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        $transactions = $transactions->paginate($page_size);
+        $statuses = [
+            '1' => __('Not Receive yet'),
+            '2' => __('in a box'),
+            '3' => __('in the bank'),
+        ];
+        $PaymentType = [
+            '1' => __('cash'),
+            '2' => __('shek'),
+            '3' => __('bit'),
+            '4' => __('hawale'),
+            '5' => __('حصالة'),
+            '6' => __('التطبيق'),
+
+        ];
+        $resources = $transactions->map(function ($transaction) use ($statuses, $PaymentType) {
+            return [
+                'actions' => [
+                    [
+                        "cancelButtonText" => "إلغاء",
+                        "component" => "confirm-action-modal",
+                        "confirmButtonText" => "تنفيذ الاجراء",
+                        "class" => "btn-primary",
+                        "confirmText" => "هل أنت متأكد من تنفيذ هذا الاجراء؟",
+                        "destructive" => false,
+                        "name" => "تعويض",
+                        "uriKey" => "تعويض",
+                        "fields" => [
+                            [
+                                "attribute" => "transaction_date",
+                                "component" => "date",
+                                "helpText" => null,
+                                "indexName" => "تاريخ ",
+                                "name" => "تاريخ ",
+                                "nullable" => false,
+                                "panel" => null,
+                                "prefixComponent" => true,
+                                "readonly" => false,
+                                "required" => true,
+                                "sortable" => false,
+                                "sortableUriKey" => "transaction_date",
+                                "stacked" => false,
+                                "textAlign" => "left",
+                                "validationKey" => "transaction_date",
+                                "value" => null
+                            ],
+                            [
+                                "attribute" => "return_money",
+                                "component" => "text-field",
+                                "helpText" => null,
+                                "indexName" => "طريقة ارجاع المال",
+                                "name" => "طريقة ارجاع المال",
+                                "nullable" => false,
+                                "panel" => null,
+                                "prefixComponent" => true,
+                                "readonly" => false,
+                                "required" => true,
+                                "sortable" => false,
+                                "sortableUriKey" => "return_money",
+                                "stacked" => false,
+                                "textAlign" => "left",
+                                "validationKey" => "return_money",
+                                "value" => null
+                            ]
+                        ],
+                        "availableForEntireResource" => false,
+                        "showOnDetail" => true,
+                        "showOnIndex" => true,
+                        "showOnTableRow" => false,
+                        "standalone" => false,
+                        "withoutConfirmation" => false
+                    ]
+                ],
+                'fields' => [
+
+                    [
+                        'attribute' => 'bill_number',
+                        'component' => 'text-field',
+                        'help_text' => null,
+                        "indexName" => __("bill_number"),
+                        "name" => __("bill_number"),
+                        'nullable' => false,
+                        'panel' => null,
+                        'prefix_component' => true,
+                        'readonly' => false,
+                        'required' => false,
+                        'sortable' => false,
+                        'sortable_uri_key' => 'bill_number',
+                        'stacked' => false,
+                        'text_align' => 'left',
+                        'validation_key' => 'bill_number',
+                        'value' => $transaction->bill_number
+                    ],
+                    [
+                        "attribute" => "transaction_date",
+                        "component" => "date",
+                        "helpText" => null,
+                        "indexName" => "تاريخ",
+                        "name" => "تاريخ",
+                        "nullable" => false,
+                        "panel" => null,
+                        "prefixComponent" => true,
+                        "readonly" => false,
+                        "required" => false,
+                        "sortable" => false,
+                        "sortableUriKey" => "transaction_date",
+                        "stacked" => false,
+                        "textAlign" => "left",
+                        "validationKey" => "transaction_date",
+                        "value" => Carbon::parse($transaction->transaction_date)->format('d-m-Y'),
+                    ],
+                    [
+                        "belongsToId" => $transaction->ref_id,
+                        "belongsToRelationship" => "project",
+                        "debounce" => 500,
+                        "displaysWithTrashed" => true,
+                        "label" => "مشروع",
+                        "resourceName" => "projects",
+                        "reverse" => false,
+                        "searchable" => false,
+                        "withSubtitles" => false,
+                        "showCreateRelationButton" => false,
+                        "singularLabel" => "المشروع",
+                        "viewable" => true,
+                        "attribute" => "project",
+                        "component" => "belongs-to-field",
+                        "helpText" => null,
+                        "indexName" => "المشروع",
+                        "name" => "المشروع",
+                        "nullable" => false,
+                        "panel" => null,
+                        "prefixComponent" => true,
+                        "readonly" => false,
+                        "required" => true,
+                        "sortable" => false,
+                        "sortableUriKey" => "ref_id",
+                        "stacked" => false,
+                        "textAlign" => "left",
+                        "validationKey" => "project",
+                        "value" => Project::find($transaction->ref_id)?->project_name,
+                    ],
+                    [
+
+
+                        "attribute" => "transaction_status",
+                        "component" => "select-field",
+                        "helpText" => null,
+                        "indexName" => __("transaction_status"),
+                        "name" => __("transaction_status"),
+                        "nullable" => false,
+                        "panel" => null,
+                        "prefixComponent" => true,
+                        "readonly" => false,
+                        "required" => false,
+                        "sortable" => false,
+                        "sortableUriKey" => "transaction_status",
+                        "stacked" => false,
+                        "textAlign" => "left",
+                        "validationKey" => "transaction_status",
+                        "value" =>   $statuses[$transaction->transaction_status] ?? __('Unknown status'),
+                        "options" => [
+                            [
+                                "label" => "لم يتم التسليم بعد",
+                                "value" => 1
+                            ],
+                            [
+                                "label" => "في صندوق",
+                                "value" => 2
+                            ],
+                            [
+                                "label" => "في البنك",
+                                "value" => 3
+                            ]
+                        ],
+                        "searchable" => false,
+
+                    ],
+                    [
+                        "indexName" => __("ReceiveDonation"),
+                        "name" => __("ReceiveDonation"),
+                        'attribute' => 'ReceiveDonation',
+                        'component' => 'boolean-field',
+                        'help_text' => null,
+
+                        'nullable' => false,
+                        'panel' => null,
+                        'prefix_component' => true,
+                        'readonly' => false,
+                        'required' => false,
+                        'sortable' => false,
+                        'sortable_uri_key' => 'ReceiveDonation',
+                        'stacked' => false,
+                        'text_align' => 'center',
+                        'validation_key' => 'ReceiveDonation',
+                        'value' => true
+                    ],
+                    [
+                        "indexName" => __("equivalent value"),
+                        "name" => __("equivalent value"),
+                        'component' => 'text-field',
+                        'help_text' => null,
+                        'index_name' => 'قيمة السند',
+                        'nullable' => false,
+                        'panel' => null,
+                        'prefix_component' => true,
+                        'readonly' => false,
+                        'required' => false,
+                        'sortable' => false,
+                        'sortable_uri_key' => 'equivelant_amount',
+                        'stacked' => false,
+                        'text_align' => 'left',
+                        'validation_key' => 'equivelant_amount',
+                        'value' => $transaction->equivelant_amount,
+                    ],
+                    [
+                        "indexName" => __("Donor"),
+                        "name" => __("Donor"),
+                        'attribute' => 'TelephoneDirectory',
+                        'component' => 'belongs-to-field',
+                        'debounce' => 500,
+                        'displays_with_trashed' => true,
+                        'help_text' => null,
+                        'index_name' => 'متبرع',
+                        'label' => 'SMS',
+                        'nullable' => false,
+                        'panel' => null,
+                        'prefix_component' => true,
+                        'readonly' => false,
+                        'required' => true,
+                        'resource_name' => 'telephone-directories',
+                        'reverse' => false,
+                        'searchable' => false,
+                        'show_create_relation_button' => false,
+                        'singular_label' => 'متبرع',
+                        'sortable' => false,
+                        'sortable_uri_key' => 'name',
+                        'stacked' => false,
+                        'text_align' => 'left',
+                        'validation_key' => 'TelephoneDirectory',
+                        'value' =>  TelephoneDirectory::find($transaction->name)?->name, //'קעדאן כאלד יחיא',
+                        'viewable' => true,
+                        'with_subtitles' => false
+                    ],
+                    [
+                        "indexName" => __("Payment Type"),
+                        "name" => __("Payment Type"),
+                        'attribute' => 'Payment_type',
+                        'component' => 'select-field',
+                        'help_text' => null,
+                        'index_name' => 'طريقة الدفع',
+                        'nullable' => false,
+                        'options' => [
+                            ['label' => 'نقد', 'value' => 1],
+                            ['label' => 'شيك', 'value' => 2],
+                            ['label' => 'بيت', 'value' => 3],
+                        ],
+                        'panel' => null,
+                        'prefix_component' => true,
+                        'readonly' => false,
+                        'required' => false,
+                        'searchable' => false,
+                        'sortable' => false,
+                        'sortable_uri_key' => 'Payment_type',
+                        'stacked' => false,
+                        'text_align' => 'left',
+                        'validation_key' => 'Payment_type',
+                        "value" =>   $PaymentType[$transaction->Payment_type] ?? __('Unknown status'),
+                    ],
+                    [
+                        "belongsToId" => $transaction->Created_By,
+                        "belongsToRelationship" => "create",
+                        "debounce" => 500,
+                        "displaysWithTrashed" => true,
+                        "label" => "موظفين اداريين",
+                        "resourceName" => "users",
+                        "reverse" => false,
+                        "searchable" => false,
+                        "withSubtitles" => false,
+                        "showCreateRelationButton" => false,
+                        "singularLabel" => "انشأ بواسطة",
+                        "viewable" => true,
+                        "attribute" => "create",
+                        "component" => "belongs-to-field",
+                        "helpText" => null,
+                        "indexName" => "انشأ بواسطة",
+                        "name" => "انشأ بواسطة",
+                        "nullable" => false,
+                        "panel" => null,
+                        "prefixComponent" => true,
+                        "readonly" => false,
+                        "required" => true,
+                        "sortable" => false,
+                        "sortableUriKey" => "Created_By",
+                        "stacked" => false,
+                        "textAlign" => "left",
+                        "validationKey" => "create",
+                        "value" => User::find($transaction->Created_By)?->name
+
+                    ],
+                    [
+                        "attribute" => "",
+                        "component" => "nova-action-button",
+                        "helpText" => null,
+                        "indexName" => "",
+                        "name" => "",
+                        "nullable" => false,
+                        "panel" => null,
+                        "prefixComponent" => true,
+                        "readonly" => $transaction->is_delete != 0 ? true : false,
+                        "required" => false,
+                        "sortable" => false,
+                        "sortableUriKey" => "",
+                        "stacked" => false,
+                        "textAlign" => "left",
+                        "validationKey" => "",
+                        "value" => null,
+                        "svg" => "delete",
+
+                        "resourceId" => [2],
+                        "text" => "compensation",
+                        "showLoadingAnimation" => true,
+                        "buttonColor" => "#FFFFFF",
+                        "loadingColor" => "#fff",
+                        "extraAttributes" => [
+                            "readonly" => false,
+                        ],
+                        'action' => [
+                            "cancelButtonText" => "إلغاء",
+                            "component" => "confirm-action-modal",
+                            "confirmButtonText" => "تعويض",
+                            "class" => "btn-primary",
+                            "confirmText" => "Are you sure you want to delete this?",
+                            "destructive" => false,
+                            "name" => "تعويض",
+                            "uriKey" => "تعويض",
+                            "fields" => [
+                                [
+                                    "attribute" => "transaction_date",
+                                    "component" => "date",
+                                    "helpText" => null,
+                                    "indexName" => "تاريخ ",
+                                    "name" => "تاريخ ",
+                                    "nullable" => false,
+                                    "panel" => null,
+                                    "prefixComponent" => true,
+                                    "readonly" => false,
+                                    "required" => true,
+                                    "sortable" => false,
+                                    "sortableUriKey" => "transaction_date",
+                                    "stacked" => false,
+                                    "textAlign" => "left",
+                                    "validationKey" => "transaction_date",
+                                    "value" => null
+                                ],
+                                [
+                                    "attribute" => "return_money",
+                                    "component" => "text-field",
+                                    "helpText" => null,
+                                    "indexName" => "طريقة ارجاع المال",
+                                    "name" => "طريقة ارجاع المال",
+                                    "nullable" => false,
+                                    "panel" => null,
+                                    "prefixComponent" => true,
+                                    "readonly" => false,
+                                    "required" => true,
+                                    "sortable" => false,
+                                    "sortableUriKey" => "return_money",
+                                    "stacked" => false,
+                                    "textAlign" => "left",
+                                    "validationKey" => "return_money",
+                                    "value" => null
+                                ]
+                            ],
+                            "availableForEntireResource" => false,
+                            "showOnDetail" => true,
+                            "showOnIndex" => true,
+                            "showOnTableRow" => false,
+                            "standalone" => false,
+                            "withoutConfirmation" => false,
+                            "resourceId" => [2]
+                        ]
+
+                    ],
+                    [
+                        "attribute" => "معاينة",
+                        "component" => "nova-button",
+                        "helpText" => null,
+                        "indexName" => null,
+                        "name" => "معاينة",
+                        "nullable" => false,
+                        "panel" => null,
+                        "prefixComponent" => true,
+                        "readonly" => false,
+                        "required" => false,
+                        "sortable" => false,
+                        "sortableUriKey" => "معاينة",
+                        "stacked" => false,
+                        "textAlign" => "left",
+                        "validationKey" => "معاينة",
+                        "value" => null,
+                        "key" => "معاينة",
+                        "type" => "link",
+                        "link" => [
+                            "href" => "/mainbill/{$transaction->id}?type=bill",
+                            "target" => "_blank"
+                        ],
+                        "text" => "معاينة",
+                        "event" => "NovaButton\\Events\\ButtonClick",
+                        "label" => null,
+                        "route" => null,
+                        "reload" => false,
+                        "confirm" => null,
+                        "visible" => true,
+                        "classes" => [
+                            "nova-button-transaction",
+                            "bg-orange"
+                        ],
+                        "title" => null,
+                        "indexAlign" => "right",
+                        "errorText" => "Failed",
+                        "errorClasses" => "cursor-pointer dim inline-block text-danger font-bold no-underline",
+                        "successText" => "Success",
+                        "successClasses" => "cursor-pointer dim inline-block text-success font-bold no-underline",
+                        "loadingText" => "Loading",
+                        "loadingClasses" => "cursor-pointer dim inline-block text-grey font-bold no-underline"
+
+                    ],
+                    [
+                        "attribute" => "طباعة",
+                        "component" => "nova-button",
+                        "helpText" => null,
+                        "indexName" => null,
+                        "name" => "طباعة",
+                        "nullable" => false,
+                        "panel" => null,
+                        "prefixComponent" => true,
+                        "readonly" => false,
+                        "required" => false,
+                        "sortable" => false,
+                        "sortableUriKey" => "طباعة",
+                        "stacked" => false,
+                        "textAlign" => "left",
+                        "validationKey" => "طباعة",
+                        "value" => null,
+                        "key" => "طباعة",
+                        "type" => "link",
+                        "link" => [
+                            "href" => "/generate-pdf/{$transaction->id}",
+                            "target" => "_blank"
+                        ],
+                        "text" => "طباعة",
+                        "event" => "NovaButton\\Events\\ButtonClick",
+                        "label" => null,
+                        "route" => null,
+                        "reload" => false,
+                        "confirm" => null,
+                        "visible" => true,
+                        "classes" => [
+                            "nova-button-transaction",
+                            "bg-orange"
+                        ],
+                        "title" => null,
+                        "indexAlign" => "right",
+                        "errorText" => "Failed",
+                        "errorClasses" => "cursor-pointer dim inline-block text-danger font-bold no-underline",
+                        "successText" => "Success",
+                        "successClasses" => "cursor-pointer dim inline-block text-success font-bold no-underline",
+                        "loadingText" => "Loading",
+                        "loadingClasses" => "cursor-pointer dim inline-block text-grey font-bold no-underline"
+
+                    ],
+                    [
+                        'attribute' => 'is_delete',
+                        'component' => 'row-background',
+                        'help_text' => null,
+                        'index_name' => 'Net In Come',
+                        'name' => 'Net In Come',
+                        'nullable' => true,
+                        'panel' => null,
+                        'prefix_component' => true,
+                        'readonly' => true,
+                        'required' => false,
+                        'sortable' => false,
+                        'sortable_uri_key' => 'Net In Come',
+                        'stacked' => false,
+                        'text_align' => 'center',
+                        'validation_key' => 'Net In Come',
+                        'value' => $transaction->is_delete != 0 ? [
+                            'backgroundColor' => '#A9A9A9',
+                            'textColor' => '#000000'
+                        ] : null,
+                    ]
+                ],
+                "authorizedToView" => true,
+                "authorizedToCreate" => true,
+                "authorizedToUpdate" => true,
+                "authorizedToDelete" => false,
+                "authorizedToRestore" => true,
+                "authorizedToForceDelete" => true,
+                "softDeletes" => true,
+                "softDeleted" => false,
+                'title' => '1402',
+                'id' => [
+                    'attribute' => 'id',
+                    'component' => 'id-field',
+                    'helpText' => null,
+                    'indexName' => 'ID',
+                    'name' => 'ID',
+                    'nullable' => false,
+                    'panel' => null,
+                    'prefixComponent' => true,
+                    'readonly' => false,
+                    'required' => false,
+                    'sortable' => false,
+                    'sortableUriKey' => 'id',
+                    'stacked' => false,
+                    'textAlign' => 'left',
+                    'validationKey' => 'id',
+                    'value' => $transaction->id, // Use the actual id value from the transaction
+                    'softDeleted' => false,
+                    'softDeletes' => true,
+                    'title' => (string) $transaction->id, // Convert to string if needed
+                ],
+            ];
+        });
+
+        $response = [
+            'label' => 'سندات قبض',
+            'resources' => $resources,
+            'total' => $transactions->total(),
+            'per_page' => $transactions->perPage(),
+            'current_page' => $transactions->currentPage(),
+            'last_page' => $transactions->lastPage(),
+            'prev_page_url' => $transactions->previousPageUrl(),
+            'next_page_url' => $transactions->nextPageUrl(),
+            'sortable' => true,
+            'softDeletes' => true,
+            'per_page_options' => [10, 25, 50, 100],
+        ];
+
+        return response()->json($response);
+    }
+    public function reportsApi(Request $request)
+    {
+        $page_size = isset($request->perPage) ? $request->perPage : 10;
+
+
+        $decodedString = base64_decode($request->input('filters'));
+        $array = json_decode($decodedString, true);
+        $reports = Project::query(); // Start a query builder instance
+
+        // Apply sorting only if orderBy and orderByDirection are provided
+        if ($request->filled('orderBy') && $request->filled('orderByDirection')) {
+            $reports->orderBy($request->get('orderBy'), $request->get('orderByDirection'));
+        }
+
+        if (is_array($array)) {
+            foreach ($array as $item) {
+                if (!empty($item['value'])) {
+                    switch ($item['class']) {
+                        case 'App\Nova\Filters\ReportCreated':
+                            $user = User::where('name',  $item['value'])->first();
+                            if ($user) {
+                                $reports->where('Created_By', $user->id);
+                            }
+
+                            break;
+                        case 'App\Nova\Filters\ProjectSectors':
+                            $Sector = Sector::where('text', $item['value'])->first();
+                            if ($Sector) {
+                                $reports->where('sector', $Sector->id);
+                            }
+                            break;
+                        case 'PosLifestyle\DateRangeFilter\DateRangeFilter_start_date':
+                            if (isset($item['value'][0], $item['value'][1])) {
+
+
+                                $reports->whereBetween(
+                                    'start_date',
+                                    [
+                                        Carbon::createFromFormat('Y-m-d', $item['value'][0])->startOfDay(),
+                                        Carbon::createFromFormat('Y-m-d', $item['value'][1])->endOfDay(),
+                                    ]
+                                );
+                            }
+                            break;
+
+
+                        case 'App\Nova\Filters\ReportArea':
+                            $Area = Area::where('name', $item['value'])->first();
+                            if ($Area) {
+                                $reports->where('area', $Area->id);
+                            }
+
+                            break;
+                        case 'App\Nova\Filters\Reportcity':
+                            $City = City::where('name', $item['value'])->first();
+                            if ($City) {
+                                $reports->where('city', $City->id);
+                            }
+
+                            break;
+
+
+                        case 'App\Nova\Filters\ReportName':
+                            $reports->where('project_name', $item['value']);
+
+
+
+
+
+
+
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        $reports = $reports->paginate($page_size);
+        foreach ($reports as $q) {
+            // Calculate income
+            $in_come = Transaction::where([
+                ['main_type', '=', 1],
+                ['type', '=', 2],
+                ['is_delete', '<>', '2'],
+            ])->where('ref_id', $q->id)->sum('equivelant_amount');
+
+            // Calculate outcome
+            $out_come = Transaction::where('main_type', '2')->where('ref_id', $q->id)->sum('equivelant_amount');
+
+            // Calculate net income
+            $Net_in_come = $in_come - $out_come;
+
+            // Update the project
+            Project::where('id', $q->id)->update([
+                'out_come' => $out_come,
+                'in_come' => $in_come,
+                'Net_in_come' => $Net_in_come
+            ]);
+        }
+
+        // Map the reports into the desired structure
+        $resources = $reports->map(function ($report) {
+            return [
+                'fields' => [
+                    [
+                        "attribute" => "معاينة",
+                        "component" => "nova-button",
+                        "helpText" => null,
+                        "indexName" => null,
+                        "name" => "معاينة",
+                        "nullable" => false,
+                        "panel" => null,
+                        "prefixComponent" => true,
+                        "readonly" => false,
+                        "required" => false,
+                        "sortable" => false,
+                        "sortableUriKey" => "معاينة",
+                        "stacked" => false,
+                        "textAlign" => "left",
+                        "validationKey" => "معاينة",
+                        "value" => null,
+                        "key" => "معاينة",
+                        "type" => "link",
+                        "link" => [
+                            "href" => "/export/ExportReport?reselt=[{$report->id}]&from=&to=&dateType=1&PaymentType=0&print=1&mainbill",
+                            "target" => "_blank"
+                        ],
+
+                        "text" => "معاينة",
+                        "event" => "NovaButton\\Events\\ButtonClick",
+                        "label" => null,
+                        "route" => null,
+                        "reload" => false,
+                        "confirm" => null,
+                        "visible" => true,
+                        "classes" => [
+                            "nova-button-transaction",
+                            "bg-orange"
+                        ],
+                        "title" => null,
+                        "indexAlign" => "right",
+                        "errorText" => "Failed",
+                        "errorClasses" => "cursor-pointer dim inline-block text-danger font-bold no-underline",
+                        "successText" => "Success",
+                        "successClasses" => "cursor-pointer dim inline-block text-success font-bold no-underline",
+                        "loadingText" => "Loading",
+                        "loadingClasses" => "cursor-pointer dim inline-block text-grey font-bold no-underline"
+
+                    ],
+                    [
+                        'attribute' => 'project_name',
+                        'component' => 'text-field',
+                        'helpText' => null,
+                        'indexName' => 'اسم المشروع',
+                        'name' => 'اسم المشروع',
+                        'nullable' => false,
+                        'panel' => null,
+                        'prefixComponent' => true,
+                        'readonly' => false,
+                        'required' => true,
+                        'sortable' => false,
+                        'sortableUriKey' => 'project_name',
+                        'stacked' => false,
+                        'textAlign' => 'left',
+                        'validationKey' => 'project_name',
+                        'value' => "<a class='no-underline dim text-primary font-bold' href='/Admin/resources/reports/{$report->id}'>{$report->project_name}</a>",
+                        'asHtml' => true,
+                    ],
+                    [
+                        'belongsToId' => $report?->Sectors?->id,
+                        'belongsToRelationship' => 'Sectors',
+                        'debounce' => 500,
+                        'displaysWithTrashed' => true,
+                        'label' => 'قطاعات',
+                        'resourceName' => 'sectors',
+                        'reverse' => false,
+                        'searchable' => false,
+                        'withSubtitles' => false,
+                        'showCreateRelationButton' => false,
+                        'singularLabel' => 'قطاع',
+                        'viewable' => true,
+                        'attribute' => 'Sectors',
+                        'component' => 'belongs-to-field',
+                        'helpText' => null,
+                        'indexName' => 'قطاع',
+                        'name' => 'قطاع',
+                        'nullable' => true,
+                        'panel' => null,
+                        'prefixComponent' => true,
+                        'readonly' => false,
+                        'required' => false,
+                        'sortable' => false,
+                        'sortableUriKey' => 'sector',
+                        'stacked' => false,
+                        'textAlign' => 'left',
+                        'validationKey' => 'Sectors',
+                        'value' => $report?->Sectors?->text,
+                    ],
+                    [
+                        'attribute' => 'start_date',
+                        'component' => 'date-time',
+                        'helpText' => null,
+                        'indexName' => 'تاربج بدء المشروع',
+                        'name' => 'تاربج بدء المشروع',
+                        'nullable' => false,
+                        'panel' => null,
+                        'prefixComponent' => true,
+                        'readonly' => false,
+                        'required' => true,
+                        'sortable' => false,
+                        'sortableUriKey' => 'start_date',
+                        'stacked' => false,
+                        'textAlign' => 'left',
+                        'validationKey' => 'start_date',
+                        'value' => $report->start_date
+                    ],
+                    [
+                        'belongsToId' => $report?->create?->id,
+                        'belongsToRelationship' => 'create',
+                        'debounce' => 500,
+                        'displaysWithTrashed' => true,
+                        'label' => 'موظفين اداريين',
+                        'resourceName' => 'users',
+                        'reverse' => false,
+                        'searchable' => false,
+                        'withSubtitles' => false,
+                        'showCreateRelationButton' => false,
+                        'singularLabel' => 'انشأ بواسطة',
+                        'viewable' => true,
+                        'attribute' => 'create',
+                        'component' => 'belongs-to-field',
+                        'helpText' => null,
+                        'indexName' => 'انشأ بواسطة',
+                        'name' => 'انشأ بواسطة',
+                        'nullable' => false,
+                        'panel' => null,
+                        'prefixComponent' => true,
+                        'readonly' => false,
+                        'required' => true,
+                        'sortable' => false,
+                        'sortableUriKey' => 'created_by',
+                        'stacked' => false,
+                        'textAlign' => 'left',
+                        'validationKey' => 'create',
+                        'value' => $report?->create?->name
+                    ],
+                    [
+                        'attribute' => 'in_come',
+                        'component' => 'text-field',
+                        'helpText' => null,
+                        'indexName' => 'مدخلات',
+                        'name' => 'مدخلات',
+                        'nullable' => false,
+                        'panel' => null,
+                        'prefixComponent' => true,
+                        'readonly' => false,
+                        'required' => false,
+                        'sortable' => true,
+                        'sortableUriKey' => 'in_come',
+                        'stacked' => false,
+                        'textAlign' => 'left',
+                        'validationKey' => 'in_come',
+                        'value' => $report->in_come,
+                        'calculate' => 'sum',
+                        'title' => 'المجموع',
+                        'postfix' => '',
+                        'prefix' => ''
+                    ],
+                    [
+                        'attribute' => 'out_come',
+                        'component' => 'text-field',
+                        'helpText' => null,
+                        'indexName' => 'مخرجات',
+                        'name' => 'مخرجات',
+                        'nullable' => false,
+                        'panel' => null,
+                        'prefixComponent' => true,
+                        'readonly' => false,
+                        'required' => false,
+                        'sortable' => true,
+                        'sortableUriKey' => 'out_come',
+                        'stacked' => false,
+                        'textAlign' => 'left',
+                        'validationKey' => 'out_come',
+                        'value' => $report->out_come,
+                        'calculate' => 'sum',
+                        'title' => 'المجموع',
+                        'postfix' => '',
+                        'prefix' => ''
+                    ],
+                    [
+                        'attribute' => 'Net_in_come',
+                        'component' => 'text-field',
+                        'helpText' => null,
+                        'indexName' => 'صافي',
+                        'name' => 'صافي',
+                        'nullable' => false,
+                        'panel' => null,
+                        'prefixComponent' => true,
+                        'readonly' => false,
+                        'required' => false,
+                        'sortable' => true,
+                        'sortableUriKey' => 'Net_in_come',
+                        'stacked' => false,
+                        'textAlign' => 'left',
+                        'validationKey' => 'Net_in_come',
+                        'value' => $report->Net_in_come,
+                        'calculate' => 'sum',
+                        'title' => 'المجموع',
+                        'postfix' => '',
+                        'prefix' => ''
+                    ],
+                    [
+                        'attribute' => 'Net_in_come',
+                        'component' => 'row-background',
+                        'helpText' => null,
+                        'indexName' => 'Net In Come',
+                        'name' => 'Net In Come',
+                        'nullable' => false,
+                        'panel' => null,
+                        'prefixComponent' => true,
+                        'readonly' => false,
+                        'required' => false,
+                        'sortable' => false,
+                        'sortableUriKey' => 'Net_in_come',
+                        'stacked' => false,
+                        'textAlign' => 'left',
+                        'validationKey' => 'Net_in_come',
+                        "value" => $report->Net_in_come < 0 ? [
+                            "backgroundColor" => "#ff9999",
+                            "textColor" => "#000000"
+                        ] : null
+                    ]
+                ],
+                "authorizedToView" => true,
+                "authorizedToCreate" => false,
+                "authorizedToUpdate" => false,
+                "authorizedToDelete" => false,
+                "authorizedToRestore" => false,
+                "authorizedToForceDelete" => false,
+                "softDeletes" => false,
+                "softDeleted" => false,
+                'title' => '1402',
+                'id' => [
+                    'attribute' => 'id',
+                    'component' => 'id-field',
+                    'helpText' => null,
+                    'indexName' => 'ID',
+                    'name' => 'ID',
+                    'nullable' => false,
+                    'panel' => null,
+                    'prefixComponent' => true,
+                    'readonly' => false,
+                    'required' => false,
+                    'sortable' => false,
+                    'sortableUriKey' => 'id',
+                    'stacked' => false,
+                    'textAlign' => 'left',
+                    'validationKey' => 'id',
+                    'value' => $report->id,
+                    'softDeleted' => false,
+                    'softDeletes' => true,
+                    'title' => (string) $report->id,
+                ],
+            ];
+        });
+
+        // Prepare the response with pagination data
+        $response = [
+            'label' => 'سندات قبض',
+            'resources' => $resources,
+            'total' => $reports->total(),
+            'per_page' => $reports->perPage(),
+            'current_page' => $reports->currentPage(),
+            'last_page' => $reports->lastPage(),
+            'prev_page_url' => $reports->previousPageUrl(),
+            'next_page_url' => $reports->nextPageUrl(),
+            'sortable' => true,
+            'softDeletes' => true,
+            'per_page_options' => [10, 25, 50, 100],
+        ];
+
+        return response()->json($response);
     }
 }

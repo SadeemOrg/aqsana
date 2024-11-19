@@ -105,14 +105,12 @@ class Vacations extends Component
             return $vacation;
         });
         $this->vacations = $vacations->map(function ($vacation) {
-            // Calculate vacation days
             $vacation->days = $vacation->end_date
                 ? $vacation->date->diffInDays($vacation->end_date) + 1
                 : 1;
 
-            // Calculate total work hours for the vacation period
-            $workHours = WorkHours::whereBetween('date', [$vacation->date, $vacation->end_date])
-                                   ->get()->count(); // Assuming there's a 'hours' field in WorkHours
+                $workHours = WorkHours::whereBetween('date', [$vacation->date, $vacation->end_date])
+                ->where('user_id', $this->Name)->get()->count(); // Assuming there's a 'hours' field in WorkHours
 
             $vacation->days -=$workHours;
             return $vacation;

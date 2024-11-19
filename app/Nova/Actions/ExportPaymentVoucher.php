@@ -22,7 +22,7 @@ class ExportPaymentVoucher extends Action
      */
     public  function name()
     {
-        return __('ExportReport');
+        return __('Export To Exsel');
     }
 
     public function handle(ActionFields $fields, Collection $models)

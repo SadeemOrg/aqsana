@@ -20,13 +20,15 @@
     <link href="{{ asset('css/appNova.css') }}" rel="stylesheet">
 
     @foreach (\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
+    @if (\Illuminate\Support\Str::contains($path, 'nova-components'))
+        @continue
+    @endif
         @if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://']))
             <link rel="stylesheet" href="{!! $path !!}">
         @else
             <link rel="stylesheet" href="/nova-api/styles/{{ $name }}">
         @endif
     @endforeach
-
 
     @foreach (\Laravel\Nova\Nova::themeStyles() as $publicPath)
         <link rel="stylesheet" href="{{ $publicPath }}">

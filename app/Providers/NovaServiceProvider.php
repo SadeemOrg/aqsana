@@ -16,6 +16,7 @@ use Acme\Projecs\Projecs;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 use App\Models\Bus;
 use Acme\MultiselectField\Multiselect;
+use Acme\ReportRegulation\ReportRegulation;
 use Averotech\Link\Link;
 use Averotech\Tree\Tree;
 use Laravel\Nova\Fields\Textarea;
@@ -53,6 +54,9 @@ use DigitalCreative\CollapsibleResourceManager\Resources\Group;
 use Zeyad\Notification\Notification;
 use Zeyad\Profile\Profile;
 use Anaseqal\NovaImport\NovaImport;
+use App\Nova\Metrics\CitySum;
+use App\Nova\Metrics\DelegateSum;
+
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
 
@@ -101,6 +105,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         Image::make(__('Image mobile'), 'image_mobile_pop_up')->disk('public'),
                         Image::make(__('Image web'), 'image_web_pop_up')->disk('public'),
                         Text::make(__('link'), 'link_pop_up'),
+                        Text::make(__('button  text'), 'text_pop_up'),
+
                         Boolean::make(__('active'), 'active_pop_up')
 
 
@@ -499,31 +505,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
 
-
-
-            (new NewProject())
-                ->canSee(function () {
-                    $user = Auth::user();
-                    if ($user->type() == 'admin') return true;
-                    return false;
-                }),
-            (new NewQawafilAlaqsa())
-                ->canSee(function () {
-                    $user = Auth::user();
-                    if ($user->type() == 'admin') return true;
-                    return false;
-                }),
-            (new NewTrip())
-                ->canSee(function () {
-                    $user = Auth::user();
-                    if ($user->type() == 'admin') return true;
-                    return false;
-                }),
-            (new   NewAlhisalat())->canSee(function () {
-                $user = Auth::user();
-                if ($user->type() == 'admin') return true;
-                return false;
-            }),
             (new InComeTransaction())->canSee(function () {
                 $user = Auth::user();
                 if ($user->type() == 'admin') return true;
@@ -534,16 +515,69 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 if ($user->type() == 'admin') return true;
                 return false;
             }),
-            (new DonationsSum())->canSee(function () {
+
+            (new   NewAlhisalat())->canSee(function () {
                 $user = Auth::user();
                 if ($user->type() == 'admin') return true;
                 return false;
             }),
-            (new AlmuahadaSum())->canSee(function () {
+            (new NewQawafilAlaqsa())
+            ->canSee(function () {
                 $user = Auth::user();
-                if ($user->type() == 'Almuahada_admin') return true;
+                if ($user->type() == 'admin') return true;
                 return false;
             }),
+            (new DelegateSum())
+            ->canSee(function () {
+                $user = Auth::user();
+                if ($user->type() == 'admin') return true;
+                return false;
+            }),
+            (new CitySum())
+            ->canSee(function () {
+                $user = Auth::user();
+                if ($user->type() == 'admin') return true;
+                return false;
+            }),
+
+            //'''''''''''''''
+
+
+            // (new NewProject())
+            //     ->canSee(function () {
+            //         $user = Auth::user();
+            //         if ($user->type() == 'admin') return true;
+            //         return false;
+            //     }),
+
+            // (new   NewAlhisalat())->canSee(function () {
+            //     $user = Auth::user();
+            //     if ($user->type() == 'admin') return true;
+            //     return false;
+            // }),
+
+
+
+        //
+
+
+            // (new NewTrip())
+            // ->canSee(function () {
+            //     $user = Auth::user();
+            //     if ($user->type() == 'admin') return true;
+            //     return false;
+            // }),
+
+            // (new DonationsSum())->canSee(function () {
+            //     $user = Auth::user();
+            //     if ($user->type() == 'admin') return true;
+            //     return false;
+            // }),
+            // (new AlmuahadaSum())->canSee(function () {
+            //     $user = Auth::user();
+            //     if ($user->type() == 'Almuahada_admin') return true;
+            //     return false;
+            // }),
         ];
     }
     /**
@@ -569,6 +603,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     return true;
                 } else return false;
             }),
+            new ReportRegulation,
+
             (new \Infinety\Filemanager\FilemanagerTool())->canSee(function ($request) {
                 if ((in_array("super-admin",  $request->user()->userrole())) || (in_array("FilemanagerTool",  $request->user()->userrole()))) {
                     return true;

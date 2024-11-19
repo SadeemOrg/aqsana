@@ -711,7 +711,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var _this = this;
 
             if (this.selectval.length === 0) {
-                return "اختر الفئة";
+                return "إختر جهات الاتصال المستهدفة";
             }
             return this.Types.filter(function (type) {
                 return _this.selectval.includes(type.id);
@@ -1612,7 +1612,11 @@ var render = function() {
                 "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
               attrs: { for: "default-input" }
             },
-            [_vm._v("\n                اختر الفئة\n            ")]
+            [
+              _vm._v(
+                "\n                إختر جهات الاتصال المستهدفة\n            "
+              )
+            ]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "relative" }, [

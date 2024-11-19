@@ -18,7 +18,7 @@ class RolePolicy
      */
     public function viewAny(User $user)
     {
-              return ($user->type() == 'admin' ) ;
+        return ((in_array("super-admin",  $user->userrole())));
     }
 
     /**
@@ -30,7 +30,7 @@ class RolePolicy
      */
     public function view(User $user, Role $role)
     {
-              return ($user->type() == 'admin' ) ;
+        return ((in_array("super-admin",  $user->userrole())));
     }
 
     /**
@@ -41,9 +41,7 @@ class RolePolicy
      */
     public function create(User $user)
     {
-        return ((in_array("super-admin",  $user->userrole())) );
-        // return ($user->type() == 'admin' ) ;
-
+        return ((in_array("super-admin",  $user->userrole())));
     }
 
     /**
@@ -55,7 +53,7 @@ class RolePolicy
      */
     public function update(User $user, Role $role)
     {
-              return ($user->type() == 'admin' ) ;
+        return ((in_array("super-admin",  $user->userrole())));
     }
 
     /**

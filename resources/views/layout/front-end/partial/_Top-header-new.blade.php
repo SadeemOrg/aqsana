@@ -181,7 +181,7 @@
                     <div class="rt-links">
                         <nav>
                             <ul
-                                class="navbar-nav h-[50px] xl:flex xl:flex-row justify-between items-center gap-x-4 2xl:gap-x-8">
+                                class="navbar-nav h-[50px] xl:flex xl:flex-row justify-between items-center gap-x-1 2xl:gap-x-6">
                                 @if (isset($nav))
                                     @foreach ($nav as $key => $item)
                                         @if (empty($item->children))

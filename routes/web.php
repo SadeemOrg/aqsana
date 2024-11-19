@@ -2,6 +2,7 @@
 
 use App\Exports\ExportDonations;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\CardcomController;
 use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -10,6 +11,10 @@ use App\Http\Controllers\NotificationTest;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\WebNotificationController;
+use App\Models\Project;
+use App\Models\TelephoneDirectory;
+use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -17,6 +22,9 @@ use Illuminate\Support\Facades\Artisan;
 
 use Illuminate\Support\Facades\File;
 // use App\Http\Livewire\Notification;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,36 +38,35 @@ use Illuminate\Support\Facades\File;
 */
 
 
-Route::get('/write-to-file', function () {
-    $content = "This is the content you want to write to the file.";
-    $path = storage_path('app/public/example.txt');
 
-    // Check if the file exists, if not create it with the initial content
-    if (!File::exists($path)) {
-        File::put($path, $content);
-    } else {
-        // Append new content to the file
-        File::append($path, "\n" . $content);
-    }
-
-
+Route::get('/download-android-apk', function () {
+    $filePath = public_path('android-apk/app-release-v1.apk'); // Path to your APK file
+    return Response::download($filePath, 'app-release-v1.apk', [
+        'Content-Type' => 'application/vnd.android.package-archive',
+    ]);
 });
-Route::get('/show-file', function () {
 
-    $path = storage_path('app/public/example.txt');
+// routes/web.php
+Route::get('/payment-form', function () {
+    return view('payment.payment');
+})->name('payment.form');
+// Route for initiating the payment process
+Route::post('/initiate-payment', [CardcomController::class, 'initiatePayment'])->name('payment.initiate');
 
-    // Check if the file exists
-    if (File::exists($path)) {
-        // Get the file contents
-        $content = File::get($path);
+// Route for handling successful payment response
+Route::get('/payment-success', [CardcomController::class, 'success'])->name('payment.success');
 
-        // Return the content as a response
-        return response($content)
-                ->header('Content-Type', 'text/plain');
-    } else {
-        return "File does not exist.";
-    }
-});
+// Route for handling failed payment response
+Route::get('/payment-failure', [CardcomController::class, 'failure'])->name('payment.failure');
+
+
+
+
+Route::get('/nova-api/donations', [HomeController::class, 'donationsApi'])->name('donations');
+Route::get('/nova-api/reports', [HomeController::class, 'reportsApi'])->name('reports');
+Route::post('/report-regulation', [HomeController::class, 'ReportRegulation'])->name('report-regulation');
+
+
 
 Route::get("/open-tabs", [HomeController::class, "openTabs"])->name('open-tabs');
 
@@ -68,10 +75,10 @@ Route::post('/app/password/reset', [ForgotPasswordController::class, 'update'])-
 
 
 Route::get('/Carbon', function () {
-    dd( Carbon::now());
+    dd(Carbon::now());
 });
 Route::get('/sms', function () {
-   return view('sms');
+    return view('sms');
 });
 Route::post('/send-message', [MessagingController::class, 'sendMessage']);
 Route::post('/send-text', [MessagingController::class, 'sendText'])->name('send.text');
@@ -97,7 +104,6 @@ Route::controller(ExportExcelController::class)->group(function () {
     Route::get('export/ExportAddress', 'ExportAddress')->name('export.ExportAddress');
     Route::get('export/ExportBusesCompany', 'ExportBusesCompany')->name('export.ExportBusesCompany');
     Route::get('export/ExportReport', 'ExportReport')->name('export.ExportReport');
-
 });
 
 
@@ -161,8 +167,6 @@ Route::post("UserAdmin", [HomeController::class, "Admin"])->name('Admin');
 Route::post("schedulelast", [HomeController::class, "schedulelast"])->name('schedulelast');
 Route::get("schedulelast", [HomeController::class, "schedulelastTest"])->name('schedulelast');
 
-Route::get('/export', 'ExportController@export')->name('export');
-Route::get('/delete-all-data', 'ExportController@deleteAllData')->name('delete.all.data');
 
 
 Route::post("first/", [HomeController::class, "first"])->name('first');
@@ -234,9 +238,8 @@ Route::get('/search', [HomeController::class, 'pagesearch'])->name('pagesearch')
 
 
 Route::get('/search/{val}/', [HomeController::class, 'search'])->name('search');
-
-// Route::get('/searchpage', [HomeController::class, 'searchpage'])->name('searchpage');
-
+Route::get('/export', 'ExportController@export')->name('export');
+Route::get('/delete-all-data', 'ExportController@deleteAllData')->name('delete.all.data');
 Route::get('/project', [HomeController::class, 'project'])->name('project');
 Route::get('/project/{id}', [HomeController::class, 'getprojectDetail'])->name('getprojectDetail');
 Route::get('/projectapi/{id}', [HomeController::class, 'getprojectDetailapi'])->name('getprojectDetailapi');
@@ -250,7 +253,6 @@ Route::get('/privacy-policy', function () {
     return View('Pages.privacy-policy');
 });
 
-// Library
 Route::get('/library', [HomeController::class, 'library'])->name('library');
 Route::get('/librarydetail/{id}', [HomeController::class, 'libraryDetail'])->name('libraryDetail');
 Route::get('/librarysearch/{search}', [HomeController::class, 'librarySearch'])->name('librarySearch');
@@ -263,7 +265,6 @@ Route::get('/mainbill/{id}', [HomeController::class, 'mainbill'])->name('mainbil
 Route::get('/SendMail', [HomeController::class, 'SendMail'])->name('SendMail');
 Route::post('/SendMail', [HomeController::class, 'SendMail'])->name('SendMail');
 
-// Route::get('bill', [HomeController::class, 'billsPdf']);
 
 
 Route::get('/landingPage', function () {
@@ -272,10 +273,6 @@ Route::get('/landingPage', function () {
 });
 
 
-// Route::get('/try', function (){
-
-//     return view('Pages.Try');
-// });
 
 
 
@@ -289,6 +286,7 @@ Route::get('sendattachmentemail', 'HomeController@attachment_email');
 
 
 Route::get('Admin/userprofile', [HomeController::class, 'userprofile'])->name('userprofile');
+
 
 
 Route::get('/send-notification', [NotificationController::class, 'sendOfferNotification']);
@@ -322,6 +320,8 @@ Route::get('generate-pdf/{id}/{type?}', [PDFController::class, 'generatePDF'])->
 Route::get('generate-pdfs/{ids}/{type?}', [PDFController::class, 'generatePDFs'])->name('generate-pdfs');
 
 Route::get('generate-pdf-hours', [PDFController::class, 'generatePDFHours'])->name('generate-pdf-hours');
+Route::get('generate-pdf-report', [PDFController::class, 'generatePDFReport'])->name('generate-pdf-report');
+
 
 Route::get('send-sms-notification', [NotificationController::class, 'sendSmsNotificaition']);
 
