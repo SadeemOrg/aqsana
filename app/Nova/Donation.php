@@ -43,6 +43,7 @@ use App\Nova\Metrics\DonationInBox;
 use App\Nova\Metrics\DonationNotReceive;
 use AwesomeNova\Cards\FilterCard;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\Boolean;
@@ -111,7 +112,7 @@ class Donation extends Resource
      * @var array
      */
     public static $search = [
-         'name', 'transaction_date', 'equivelant_amount','bill_number'
+        'name', 'transaction_date', 'equivelant_amount', 'bill_number'
 
     ];
 
@@ -137,6 +138,7 @@ class Donation extends Resource
         return [
 
             Text::make(__('bill_number'), 'bill_number')->hideWhenCreating()->hideWhenUpdating(),
+            Text::make(__('cardcom_Invoice_number'), 'cardcom_Invoice_number')->hideWhenCreating()->hideWhenUpdating(),
 
 
             ProjectPicker::make(__('تاريخ اخراج سند القبض '), 'ref_id', function () {
@@ -325,7 +327,7 @@ class Donation extends Resource
             Button::make(__('print'))->link('/mainbill/' . $this->id . '?type=bill')->style('custom')->canSee(function () {
                 return $this->is_delete == 0;
             }),
-            Button::make(__('print'))->link('/mainbill/' . $this->deleted_ref   .'?type=repayment')->style('custom')->canSee(function () {
+            Button::make(__('print'))->link('/mainbill/' . $this->deleted_ref   . '?type=repayment')->style('custom')->canSee(function () {
                 return $this->is_delete != 0;
             }),
 
@@ -390,7 +392,49 @@ class Donation extends Resource
     public static function beforeCreate(Request $request, $model)
     {
 
+        $baseUrl = 'https://secure.cardcom.solutions/Interface/CreateInvoice.aspx';
+        if ($request->Payment_type == '1') {
 
+            $params = [
+                'terminalnumber'          => '1001',
+                'username'                => 'test2025',
+                'InvoiceType'             => 3,
+                'InvoiceHead.CustName'    => 'YuvalTest',
+                'cash'                    => $request->transact_amount,
+                'InvoiceLines.Quantity'   => 1,
+                'InvoiceLines.Price'      => $request->transact_amount,
+                'InvoiceLines.Description' => 'test',
+                'InvoiceHead.Email'       => 'ameed.asmah1@gmail.com',
+                'InvoiceHead.Language'    => 'he',
+                'InvoiceHead.SendByEmail' => 'true',
+            ];
+        } elseif ($request->Payment_type == '4') {
+
+            $params = [
+                'terminalnumber'          => '1001',
+                'username'                => 'test2025',
+                'InvoiceType'             => 3,
+                'InvoiceHead.CustName'    => 'YuvalTest',
+                'InvoiceLines.Quantity'   => 1,
+                'InvoiceLines.Price'      => $request->transact_amount,
+                'InvoiceLines.Description' => 'test',
+                'InvoiceHead.Email'       => 'ameed.asmah1@gmail.com',
+                'InvoiceHead.Language'    => 'he',
+                'InvoiceHead.SendByEmail' => 'true',
+                'CustomPay.TransactionID' => 30,
+                'CustomPay.TransDate'     => 17/11/2024,
+                'CustomPay.Description'   => 'Bank Deposit', 
+                'CustomPay.Sum'           => $request->transact_amount,
+                'CustomPay.Asmacta'       => '123456-ZZC',
+            ];
+        }
+        $response = Http::get($baseUrl, $params);
+        if ($response->successful()) {
+            parse_str($response->body(), $parsedResponse);
+            $model->cardcom_Invoice_number = $parsedResponse['InvoiceNumber'];
+        } else {
+            dd('erreo', $response->body());
+        }
 
         $id = Auth::id();
         $model->created_by = $id;
@@ -410,12 +454,13 @@ class Donation extends Resource
         }
         $model->bill_number = $largestBillNumber + 1;
 
-        if ($request->Payment_type==4) $model->transaction_status = '3';
-        elseif ($request->ReceiveDonation == 1 && $request->Payment_type!=4) $model->transaction_status = '2';
+        if ($request->Payment_type == 4) $model->transaction_status = '3';
+        elseif ($request->ReceiveDonation == 1 && $request->Payment_type != 4) $model->transaction_status = '2';
         else  $model->transaction_status = '1';
     }
     public static function beforeSave(Request $request, $model)
     {
+
 
 
         if ($request->newproject  &&  empty(json_decode($request->ref_id)->key2)) {
@@ -438,8 +483,8 @@ class Donation extends Resource
         $request->request->remove('newproject');
 
         $request->request->remove('ref_id');
-        if ($request->Payment_type==4) $model->transaction_status = '3';
-        elseif ($request->ReceiveDonation == 1 && $request->Payment_type!=4) $model->transaction_status = '2';
+        if ($request->Payment_type == 4) $model->transaction_status = '3';
+        elseif ($request->ReceiveDonation == 1 && $request->Payment_type != 4) $model->transaction_status = '2';
         else  $model->transaction_status = '1';
         if ($request->Payment_type == '1') {
             $model->Payment_type_details = null;
