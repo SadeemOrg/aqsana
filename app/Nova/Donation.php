@@ -526,7 +526,7 @@ class Donation extends Resource
                 'InvoiceLines.Price'      => $request->Payment_type_details[0]['attributes']['equivelant_amount'],
                 'InvoiceLines.Description' => $request->description,
                 'InvoiceHead.Email'       => $request->email,
-                'InvoiceHead.Language'    => 'ar',
+                'InvoiceHead.Language'    => $selectedLanguage,
                 'InvoiceHead.SendByEmail' => $request->send_to_email,
                 'CustomPay.TransactionID' => 101011,
                 'CustomPay.TransDate'     => Carbon::parse($request->Payment_type_details[0]['attributes']['Date'])->format('d/m/Y'),
