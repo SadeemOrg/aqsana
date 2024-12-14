@@ -98,6 +98,12 @@ class Donation extends Resource
     {
         return false;
     }
+    public  function authorizedToUpdate(Request $request)
+    {
+        return false;
+    }
+
+
 
     public static function availableForNavigation(Request $request)
     {
@@ -112,7 +118,10 @@ class Donation extends Resource
      * @var array
      */
     public static $search = [
-        'name', 'transaction_date', 'equivelant_amount', 'bill_number'
+        'name',
+        'transaction_date',
+        'equivelant_amount',
+        'bill_number'
 
     ];
 
@@ -203,6 +212,7 @@ class Donation extends Resource
             }),
             Text::make(__('description'), 'description')->hideFromIndex(),
             Text::make(__('equivalent value'), "equivelant_amount")->hideWhenCreating()->hideWhenUpdating(),
+
             BelongsTo::make(__('متبرع'), 'TelephoneDirectory', \App\Nova\TelephoneDirectory::class)->hideWhenCreating()->hideWhenUpdating(),
             Multiselect::make(__(' اسم الشركة او اسم المتبرع'), "name")
                 ->options(function () {
@@ -229,6 +239,11 @@ class Donation extends Resource
                     Text::make(__('name'), "name")->rules('required'),
                     Text::make(__('phone'), "phone"),
                 ]),
+
+
+            Boolean::make(__('Send to Email'), 'send_to_email'),
+            Text::make(__('Email Address'), 'email'),
+
 
 
             Text::make(__('payment_reason'), "payment_reason")->hideFromIndex(),
@@ -273,12 +288,11 @@ class Donation extends Resource
                             ->resolveUsing(function ($value) {
                                 return $value ?? Carbon::now()->format('d/m/Y');
                             })->rules('required'),
-
                     ])->rules('required'),
             ])->dependsOn("Payment_type", '2')->hideFromDetail()->hideFromIndex(),
             NovaDependencyContainer::make([
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
-
+                    ->limit(1)
                     ->addLayout(__('tooles'), 'Payment_type_details ', [
                         NumberField::make(__('value'), "equivelant_amount")->rules('required'),
                         Text::make(__('telephone'), "telephone")->rules('required'),
@@ -287,12 +301,11 @@ class Donation extends Resource
                             ->resolveUsing(function ($value) {
                                 return $value ?? Carbon::now()->format('d/m/Y');
                             })->rules('required'),
-
                     ]),
             ])->dependsOn("Payment_type", '3')->hideFromDetail()->hideFromIndex(),
             NovaDependencyContainer::make([
                 Flexible::make(__('Payment_type_details'), 'Payment_type_details')
-
+                    ->limit(1)
                     ->addLayout(__('tooles'), 'Payment_type_details ', [
                         NumberField::make(__('value'), "equivelant_amount")->rules('required'),
                         Text::make(__('bank number'), "bank_number"),
@@ -337,6 +350,10 @@ class Donation extends Resource
             Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->deleted_ref . '/2')->style('custom')->canSee(function () {
                 return $this->is_delete != 0;
             }),
+//
+            Button::make(__('print'))->link('secure.cardcom.solutions/Note')->style('custom')->canSee(function () {
+                return true;
+            }),
 
             HasMany::make(__("ActionEvents"), "ActionEvents", ActionResource::class),
             RowBackground::make(__("Net In Come"), "is_delete", function ($model) {
@@ -349,7 +366,6 @@ class Donation extends Resource
     }
     protected static function afterValidation(NovaRequest $request, $validator)
     {
-
         $data = json_decode($request->ref_id, true);
         if (!((isset($data['key2']) && !empty($data['key2'])) || $request->newproject)) {
             $validator->errors()->add('ref_id', 'يجب اضافة مشروع');
@@ -381,53 +397,145 @@ class Donation extends Resource
         if (!($request->name || $request->add_user)) {
             $validator->errors()->add('name', 'يجب اضافة شركة');
         }
+        if (($request->send_to_email == 1)) {
+            if (empty($request->email)) {
+                $validator->errors()->add('email', 'يجب اضافة بريد الاكتروني');
+            }
+            if (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+                $validator->errors()->add('email', 'الايميل غير صالح');
+            }
+        }
     }
 
     public static function redirectAfterCreate(NovaRequest $request, $resource)
     {
-        return '/bill?location=' . $resource->id . '&type=1';
+        // dd();
+        return '/bill?location=' . $resource->id . '&type=1'.'&cardcom_Invoice_number='.$resource->cardcom_Invoice_number;
     }
 
 
     public static function beforeCreate(Request $request, $model)
     {
+        if (!$request->name && $request->add_user) {
+            if ($request->add_user[0]['attributes']['name']) {
+                $telfone =  TelephoneDirectory::create(
+                    [
+                        'name' => $request->add_user[0]['attributes']['name'],
+                        'type' => '2',
+                        'phone_number' =>  $request->add_user[0]['attributes']['phone']
+                    ],
+                );
+            }
+
+            $model->name = $telfone->id;
+            // $request->request->remove('name');
+
+        }
+
+
+        $largestBillNumber = Transaction::where([
+            ['main_type', 1],
+            ['type', 2],
+            ['is_delete', '<>', '2'],
+        ])
+            ->orderBy('bill_number', 'desc')
+            ->value('bill_number');
+        if (is_null($largestBillNumber)) {
+            $largestBillNumber = 999;
+        }
+        $model->bill_number = $largestBillNumber = $largestBillNumber + 1;
+
+
+
+        $languageMapping = [
+            '1' => 'ar',
+            '2' => 'en',
+            '3' => 'he',
+        ];
+        $selectedLanguage = $languageMapping[$request->lang] ?? 'he';
+        // dd($selectedLanguage);
+        $CustomerName = TelephoneDirectory::find($model->name ? $model->name : $request->name)->name ?? 'فاعل خير';
 
         $baseUrl = 'https://secure.cardcom.solutions/Interface/CreateInvoice.aspx';
+        // cash
         if ($request->Payment_type == '1') {
-
+            $formattedDate = Carbon::parse($model->transaction_date)->format('d/m/Y');
             $params = [
                 'terminalnumber'          => '1001',
                 'username'                => 'test2025',
                 'InvoiceType'             => 3,
-                'InvoiceHead.CustName'    => 'YuvalTest',
+                'InvoiceHead.CustName' => $CustomerName,
                 'cash'                    => $request->transact_amount,
                 'InvoiceLines.Quantity'   => 1,
                 'InvoiceLines.Price'      => $request->transact_amount,
-                'InvoiceLines.Description' => 'test',
-                'InvoiceHead.Email'       => 'ameed.asmah1@gmail.com',
-                'InvoiceHead.Language'    => 'he',
-                'InvoiceHead.SendByEmail' => 'true',
+                'InvoiceLines.Description' => $request->payment_reason,
+                'InvoiceHead.Email'       => $request->email,
+                'InvoiceHead.Language'    => $selectedLanguage,
+                'InvoiceHead.SendByEmail' => $request->send_to_email,
+                'InvoiceHead.InvDate' => $formattedDate,
+                'InvoiceHead.ValueDate' => $formattedDate,
             ];
-        } elseif ($request->Payment_type == '4') {
+        }
+        // shek
+        elseif ($request->Payment_type == '2') {
+
+
+            $totalDoubtValue = array_sum(array_map(function ($item) {
+                return $item['attributes']['Doubt_value'];
+            }, $request->Payment_type_details));
+
 
             $params = [
                 'terminalnumber'          => '1001',
                 'username'                => 'test2025',
                 'InvoiceType'             => 3,
-                'InvoiceHead.CustName'    => 'YuvalTest',
+                'InvoiceHead.CustName'    => $CustomerName,
                 'InvoiceLines.Quantity'   => 1,
-                'InvoiceLines.Price'      => $request->transact_amount,
-                'InvoiceLines.Description' => 'test',
-                'InvoiceHead.Email'       => 'ameed.asmah1@gmail.com',
-                'InvoiceHead.Language'    => 'he',
-                'InvoiceHead.SendByEmail' => 'true',
-                'CustomPay.TransactionID' => 30,
-                'CustomPay.TransDate'     => 17/11/2024,
-                'CustomPay.Description'   => 'Bank Deposit', 
-                'CustomPay.Sum'           => $request->transact_amount,
-                'CustomPay.Asmacta'       => '123456-ZZC',
+                'InvoiceLines.Price'      => $totalDoubtValue,
+                'InvoiceLines.Description' => $request->description,
+                'InvoiceHead.Email'       => $request->email,
+                'InvoiceHead.Language'    => $selectedLanguage,
+                'InvoiceHead.SendByEmail' => $request->send_to_email,
+            ];
+            foreach ($request->Payment_type_details as $index => $detail) {
+                if ($index === 0) {
+                    $params["Cheque.ChequeNumber"] = $detail['attributes']['Doubt_number'];
+                    $params["Cheque.BankNumber"] = $detail['attributes']['bank_number'];
+                    $params["Cheque.SniffNumber"] = $detail['attributes']['Branch_number'];
+                    $params["Cheque.AccountNumber"] = $detail['attributes']['account_number'];
+                    $params["Cheque.DateCheque"] = Carbon::parse($detail['attributes']['Date'])->format('d/m/Y');
+                    $params["Cheque.Sum"] = $detail['attributes']['Doubt_value'];
+                } else {
+                    $params["Cheque{$index}.ChequeNumber"] = $detail['attributes']['Doubt_number'];
+                    $params["Cheque{$index}.BankNumber"] = $detail['attributes']['bank_number'];
+                    $params["Cheque{$index}.SniffNumber"] = $detail['attributes']['Branch_number'];
+                    $params["Cheque{$index}.AccountNumber"] = $detail['attributes']['account_number'];
+                    $params["Cheque{$index}.DateCheque"] = Carbon::parse($detail['attributes']['Date'])->format('d/m/Y');
+                    $params["Cheque{$index}.Sum"] = $detail['attributes']['Doubt_value'];
+                }
+            }
+        }
+        // hawale
+        elseif ($request->Payment_type == '4') {
+            $params = [
+                'terminalnumber'          => '1001',
+                'username'                => 'test2025',
+                'InvoiceType'             => 3,
+                'InvoiceHead.CustName'    => $CustomerName,
+                'InvoiceLines.Quantity'   => 1,
+                'InvoiceLines.Price'      => $request->Payment_type_details[0]['attributes']['equivelant_amount'],
+                'InvoiceLines.Description' => $request->description,
+                'InvoiceHead.Email'       => $request->email,
+                'InvoiceHead.Language'    => 'ar',
+                'InvoiceHead.SendByEmail' => $request->send_to_email,
+                'CustomPay.TransactionID' => 101011,
+                'CustomPay.TransDate'     => Carbon::parse($request->Payment_type_details[0]['attributes']['Date'])->format('d/m/Y'),
+                'CustomPay.Description'   => 'Bank Deposit',
+                'CustomPay.Sum'           => $request->Payment_type_details[0]['attributes']['equivelant_amount'],
+                'CustomPay.Asmacta'       => $largestBillNumber,
             ];
         }
+        // dd($params);
         $response = Http::get($baseUrl, $params);
         if ($response->successful()) {
             parse_str($response->body(), $parsedResponse);
@@ -442,17 +550,8 @@ class Donation extends Resource
         $model->main_type = '1';
         $model->type = '2';
 
-        $largestBillNumber = Transaction::where([
-            ['main_type', 1],
-            ['type', 2],
-            ['is_delete', '<>', '2'],
-        ])
-            ->orderBy('bill_number', 'desc')
-            ->value('bill_number');
-        if (is_null($largestBillNumber)) {
-            $largestBillNumber = 999;
-        }
-        $model->bill_number = $largestBillNumber + 1;
+        $request->merge(['name' => $model->name ? $model->name : $request->name]);
+
 
         if ($request->Payment_type == 4) $model->transaction_status = '3';
         elseif ($request->ReceiveDonation == 1 && $request->Payment_type != 4) $model->transaction_status = '2';
@@ -460,8 +559,6 @@ class Donation extends Resource
     }
     public static function beforeSave(Request $request, $model)
     {
-
-
 
         if ($request->newproject  &&  empty(json_decode($request->ref_id)->key2)) {
 
@@ -523,25 +620,11 @@ class Donation extends Resource
     }
     public static function aftersave(Request $request, $model)
     {
-        if (!$request->name && !$request->add_user) {
-            DB::table('transactions')
-                ->where('id', $model->id)
-                ->update(['name' => 192]);
-        }
-        if (!$request->name && $request->add_user) {
-            if ($request->add_user[0]['attributes']['name']) {
-                $telfone =  TelephoneDirectory::create(
-                    [
-                        'name' => $request->add_user[0]['attributes']['name'],
-                        'type' => '2',
-                        'phone_number' =>  $request->add_user[0]['attributes']['phone']
-                    ],
-                );
-            }
-            DB::table('transactions')
-                ->where('id', $model->id)
-                ->update(['name' => $telfone->id]);
-        }
+        // if (!$request->name && !$request->add_user) {
+        //     DB::table('transactions')
+        //         ->where('id', $model->id)
+        //         ->update(['name' => 192]);
+        // }
     }
 
 

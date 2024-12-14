@@ -97,6 +97,10 @@ class Transaction extends Model implements HasMedia
     {
         return $this->belongsTo('App\Models\TelephoneDirectory', 'name');
     }
+     public function AlhisalatAdmin()
+    {
+        return $this->belongsTo('App\Models\TelephoneDirectory','name');
+    }
 
     public function company()
     {

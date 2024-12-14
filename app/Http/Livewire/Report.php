@@ -345,8 +345,6 @@ class Report extends Component
             // generate-pdf-hours?id=1&FromDate=1/1/2024&ToDate=12/2/2024
             $pdfUrl = '/generate-pdf-hours?id=' . $this->Name . '&FromDate=' . $this->FromDate . '&ToDate=' . $this->ToDate;
 
-            // Redirect to a placeholder page
-            $redirectUrl = '/placeholder-page';
             return Redirect::away($pdfUrl)->with(['pdfUrl' => $pdfUrl]);
         }
     }

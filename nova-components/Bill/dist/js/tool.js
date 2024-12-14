@@ -300,7 +300,7 @@ var content = __webpack_require__(8);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(9)("8f2c45c2", content, false, {});
+var update = __webpack_require__(9)("18a4f44c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -837,6 +837,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     data: function data() {
         return {
             id: null,
+            cardcomInvoiceNumber: null,
             type: "",
             mail: "",
             userFilter: "",
@@ -950,6 +951,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var urlParams = new URLSearchParams(queryString);
             this.id = urlParams.get("location");
             this.type = urlParams.get("type");
+            this.cardcomInvoiceNumber = urlParams.get("cardcom_Invoice_number");
+
             this.baseUrl = window.location.origin;
         }
     },
@@ -29793,7 +29796,12 @@ var render = function() {
                 {
                   staticClass:
                     "secContainer flex flex-col justify-center cursor-pointer items-center md:border-b-0 py-4 min-w-[260px] md:min-w-0 md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3",
-                  attrs: { href: "/originalbill/" + _vm.id }
+                  attrs: {
+                    href:
+                      "https://secure.cardcom.solutions/Note/Invoice.aspx?InvoiceNumber=" +
+                      _vm.cardcomInvoiceNumber +
+                      "&InvType=3&Print=1"
+                  }
                 },
                 [
                   _c("img", {
@@ -29821,7 +29829,12 @@ var render = function() {
                 {
                   staticClass:
                     "secContainer flex flex-col justify-center cursor-pointer items-center md:border-b-0 py-4 min-w-[260px] md:min-w-0 md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3",
-                  attrs: { href: "/bill/" + _vm.id }
+                  attrs: {
+                    href:
+                      "https://secure.cardcom.solutions/api/Document/GetDocumentPDF?DocumentNumber=" +
+                      _vm.cardcomInvoiceNumber +
+                      "&DocumentType=3&IsOriginal=false"
+                  }
                 },
                 [
                   _c("img", {
@@ -29835,11 +29848,7 @@ var render = function() {
                       staticClass:
                         "font-FlatBold text-center text-lg lg:text-xl"
                     },
-                    [
-                      _vm._v(
-                        "\n                    نسخة عن الأصلية\n                "
-                      )
-                    ]
+                    [_vm._v("\n                    طباعة\n                ")]
                   )
                 ]
               ),

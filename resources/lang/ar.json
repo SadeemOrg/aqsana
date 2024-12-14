@@ -988,7 +988,8 @@
     "DelegateSum":"عدد المندوبين",
     "CitySum":"عدد البلاد",
     "POST Book":"النشر علي الموقع",
-    "cardcom_Invoice_number":"رقم الفاتورة (كارد كوم)"
+    "cardcom_Invoice_number":"رقم الفاتورة (كارد كوم)",
+"Send to Email":"هل تريد الارسال لايميل"
 
 
 }
