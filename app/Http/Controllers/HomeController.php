@@ -2078,9 +2078,9 @@ class HomeController extends BaseController
                         "key" => "طباعة",
                         "type" => "link",
                         "link" => [
-                            "href" => "",
+                            // "href" => "",
 
-                            // "href" => "/generate-pdf/{$transaction->id}",
+                            "href" => "/generate-pdf/{$transaction->id}",
                             "target" => "_blank"
                         ],
                         //
