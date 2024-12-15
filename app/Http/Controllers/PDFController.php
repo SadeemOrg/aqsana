@@ -271,16 +271,16 @@ class PDFController extends Controller
         //     ->orderBy('date', 'ASC')
         //     ->get();
         $vacations = Vacation::where("user_id", $request->id)
-        ->where(function($query) use ($from, $to) {
-            $query->whereBetween('date', [$from, $to])
-                  ->orWhereBetween('end_date', [$from, $to])
-                  ->orWhere(function($subQuery) use ($from, $to) {
-                      $subQuery->where('date', '<', $from)
-                               ->where('end_date', '>', $to);
-                  });
-        })
-        ->orderBy('date', 'ASC')
-        ->get();
+            ->where(function ($query) use ($from, $to) {
+                $query->whereBetween('date', [$from, $to])
+                    ->orWhereBetween('end_date', [$from, $to])
+                    ->orWhere(function ($subQuery) use ($from, $to) {
+                        $subQuery->where('date', '<', $from)
+                            ->where('end_date', '>', $to);
+                    });
+            })
+            ->orderBy('date', 'ASC')
+            ->get();
         // Process vacation days, excluding weekends
         $vacations = $vacations->map(function ($vacation) use ($from, $to) {
             $vacationStart = Carbon::parse($vacation->date);
@@ -290,7 +290,13 @@ class PDFController extends Controller
                 $vacationEnd = $to;
             }
             if ($vacationStart->lt($from)) {
+                if ($from->isFriday() || $from->isSaturday()) {
+                    $from->addDays(7 - $from->dayOfWeek);
+                }
                 $vacation->date = $from;
+                $from->locale('ar');
+                $dayName = $from->isoFormat('dddd');
+                $vacation->day = $dayName;
             }
 
             $currentDate = $vacationStart->copy();

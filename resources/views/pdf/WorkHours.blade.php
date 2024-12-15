@@ -109,7 +109,7 @@
                 <tr>
                     <th> اليوم</th>
                     <th> التاريخ</th>
-                    <th> التاريخ النهاية</th>
+                    <th> تاريخ النهاية</th>
                     <th> ساعة البداية</th>
                     <th> ساعة النهاية </th>
                     <th>عدد الساعات</th>
@@ -118,6 +118,7 @@
             </thead>
             <tbody>
                 @foreach ($data as $day)
+
                     @php
                         $carbonDate = \Carbon\Carbon::parse($day['date']);
 
@@ -129,9 +130,9 @@
                             <td></td>
                         @else
                         @php
-                                                    $carbonEndDate = \Carbon\Carbon::parse($day['end_date']);
+                                $carbonEndDate = \Carbon\Carbon::parse($day['end_date']);
 
-                        @endphp
+                            @endphp
                             <td style="color:white;">{{ $day['day'] }}</td>
                             <td style="color:white;width: 150px; ">{{ $carbonDate->toDateString() }}</td>
                             <td style="color:white;width: 150px; ">{{ $carbonEndDate->toDateString() }}</td>
@@ -170,7 +171,8 @@
                                 <td> -</td>
                             @endif
                         @else
-                            <td style="color:white;">{{ $day['type'] }}</td>
+                            <td style="color:white;">{{ $day['type'] }}- <br>
+                                عدد ايام الاجازة  {{ $day['days'] }}</td>
                         @endunless
                     </tr>
                 @endforeach

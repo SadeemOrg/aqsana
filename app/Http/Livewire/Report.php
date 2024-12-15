@@ -154,7 +154,13 @@ class Report extends Component
                     $vacation->end_date = $to;
                 }
                 if ($vacationStart->lt($from)) {
+                    if ($from->isFriday() || $from->isSaturday()) {
+                        $from->addDays(7 - $from->dayOfWeek);
+                    }
                     $vacation->date = $from;
+                    $from->locale('ar');
+                    $dayName = $from->isoFormat('dddd');
+                    $vacation->day = $dayName;
                 }
 
 
@@ -342,12 +348,10 @@ class Report extends Component
         }
 
         if ($this->FromDate != null && $this->ToDate != null && $this->Name != null) {
-            // generate-pdf-hours?id=1&FromDate=1/1/2024&ToDate=12/2/2024
             $pdfUrl = '/generate-pdf-hours?id=' . $this->Name . '&FromDate=' . $this->FromDate . '&ToDate=' . $this->ToDate;
+            $this->dispatchBrowserEvent('open-pdf', ['url' => $pdfUrl]);
 
-            // Redirect to a placeholder page
-            $redirectUrl = '/placeholder-page';
-            return Redirect::away($pdfUrl)->with(['pdfUrl' => $pdfUrl]);
+            // return Redirect::away($pdfUrl)->with(['pdfUrl' => $pdfUrl]);
         }
     }
 
