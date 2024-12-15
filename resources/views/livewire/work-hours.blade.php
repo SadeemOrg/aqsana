@@ -1,8 +1,5 @@
-<style>
-    .datepicker-controls {
-        background: ;
-    }
-</style>
+
+
 <div>
     <!--Perosonal Information -->
     <form class="Wraper" wire:submit.prevent="searchWorkHours">
@@ -10,7 +7,7 @@
             <p class="font-FlatBold w-full text-xl sm:text-[22px] text-center  lg:mt-0 xl:text-right">ساعات عملي</p>
             <div class=" grid grid-cols-1 gap-3 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-4">
                 <!--Date Picker -->
-                <div dir="ltr" class="hidden md:block relative h-12">
+                {{-- <div dir="ltr" class="hidden md:block relative h-12">
                     <div
                         class="svgFoucusWorkHourFrom absolute hidden inset-y-0 left-0 top-3 mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
@@ -25,9 +22,9 @@
                         placeholder=" من تاريخ" type="text" onfocus="handelFocusWorkHourFrom()">
                     <span class="text-red-700">{{ $this->exportWorkHoursErorrFromDate }}</span>
 
-                </div>
+                </div> --}}
                 <!--to Date  -->
-                <div dir="ltr" class="hidden md:block relative">
+                {{-- <div dir="ltr" class="hidden md:block relative">
                     <div
                         class="svgFoucusWorkHourTo absolute hidden inset-y-0 left-0 top-3     mb-1 items-center pl-3 pointer-events-none">
                         <svg aria-hidden=" true" class="w-5 h-5 text-[#349A37] " fill="currentColor" viewBox="0 0 20 20"
@@ -37,13 +34,14 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
+
                     <input wire:model.defer="ToDate" id="hidePlaceHolderDateWorkHourTo" type="text"
                         class=" border-[#349A37] text-[#349A37] text-sm text-right rounded-[60px] focus:ring-[#349A37] focus:border-[#349A37] block w-full pl-10 p-2.5 placeholder-[#349A37]"
                         placeholder=" الى تاريخ" onfocus="handelFocusWorkerHourTo()">
                     <span class="text-red-700">{{ $this->exportWorkHoursErorrToDate }}</span>
 
-                </div>
-                <div dir="ltr" class="block md:hidden relative max-w-sm">
+                </div> --}}
+                <div dir="ltr" class="block  relative max-w-sm">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-4 h-4 text-[#349a37] dark:text-[#349a37]" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -51,13 +49,16 @@
                                 d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
                     </div>
-                    <input datepicker id="default-datepicker" type="text"
-                        class="bg-gray-50 border text-right border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-white dark:border-[#349a37] dark:placeholder-[#349a37] dark:text-[#349a37] dark:focus:ring-[#349a37] dark:focus:border-[#349a37]"
-                        placeholder="من تاريخ">
+                    <input wire:model.defer="FromDate" id="hidePlaceHolderDateWorkHourFrom" type="text"
+                    class="bg-gray-50 border text-right hidePlaceHolderDate border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-white dark:border-[#349a37] dark:placeholder-[#349a37] dark:text-[#349a37] dark:focus:ring-[#349a37] dark:focus:border-[#349a37]"
+                                        placeholder=" من تاريخ" type="text" onfocus="handelFocusWorkHourFrom()">
+
+
+
                 </div>
 
 
-                <div dir="ltr" class="block md:hidden relative max-w-sm">
+                <div dir="ltr" class="block  relative max-w-sm">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-4 h-4 text-[#349a37] dark:text-[#349a37]" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -65,9 +66,11 @@
                                 d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
                     </div>
-                    <input datepicker id="default-datepicker" type="text"
-                        class="bg-gray-50 border text-right border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-white dark:border-[#349a37] dark:placeholder-[#349a37] dark:text-[#349a37] dark:focus:ring-[#349a37] dark:focus:border-[#349a37]"
-                        placeholder="الى تاريخ">
+                    <input wire:model.defer="ToDate" id="hidePlaceHolderDateWorkHourTo" type="text"
+                    class="bg-gray-50 border text-right hidePlaceHolderDate border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-white dark:border-[#349a37] dark:placeholder-[#349a37] dark:text-[#349a37] dark:focus:ring-[#349a37] dark:focus:border-[#349a37]"
+                    placeholder=" الى تاريخ" onfocus="handelFocusWorkerHourTo()">
+
+
                 </div>
 
 
@@ -349,6 +352,10 @@
 
 </div>
 <script>
+
+$( "#default-datepicker" ).datepicker({
+  dateFormat: "dd/mm/yy"  // This will format the date as DD/MM/YYYY
+});
     var sites = {!! json_encode($this->realTime) !!};
     var hide = {!! json_encode($this->hide) !!};
     // alert(sites)
