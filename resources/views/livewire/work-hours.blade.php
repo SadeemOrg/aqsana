@@ -1,4 +1,3 @@
-
 <style>
     .datepicker-controls {
         background: ;
@@ -44,13 +43,7 @@
                     <span class="text-red-700">{{ $this->exportWorkHoursErorrToDate }}</span>
 
                 </div>
-
-                {{-- <div dir="rtl" class="relative md:hidden block ">
-                    <input dir="rtl" datepicker id="default-datepicker" type="text"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full ps-10 p-2.5  dark:border-[#349a37] dark:placeholder-gray-400 dark:text-[#349a37] dark:focus:ring-[#349a37] dark:focus:border[#349a37]"
-                        placeholder="من تاريخ"  wire:model="FromDate">
-                </div> --}}
-                <div dir="ltr" class="relative max-w-sm">
+                <div dir="ltr" class="block md:hidden relative max-w-sm">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-4 h-4 text-[#349a37] dark:text-[#349a37]" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -63,8 +56,8 @@
                         placeholder="من تاريخ">
                 </div>
 
-                
-                <div dir="ltr" class="relative max-w-sm">
+
+                <div dir="ltr" class="block md:hidden relative max-w-sm">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-4 h-4 text-[#349a37] dark:text-[#349a37]" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -77,7 +70,7 @@
                         placeholder="الى تاريخ">
                 </div>
 
-        
+
 
 
                 <!--end Picker -->
