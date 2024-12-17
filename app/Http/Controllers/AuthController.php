@@ -99,7 +99,7 @@ class AuthController extends Controller
             'password' => bcrypt($validatedData['password']),
             'user_role' => $validatedData['user_role'],
             'app_user' => 1,
-            // 'city' => $validatedData['city'],
+            'city' => $validatedData['city'],
 
         ]);
         TelephoneDirectory::create([
