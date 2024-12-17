@@ -342,12 +342,15 @@ class Report extends Component
         }
 
         if ($this->FromDate != null && $this->ToDate != null && $this->Name != null) {
-            // generate-pdf-hours?id=1&FromDate=1/1/2024&ToDate=12/2/2024
+
             $pdfUrl = '/generate-pdf-hours?id=' . $this->Name . '&FromDate=' . $this->FromDate . '&ToDate=' . $this->ToDate;
 
-            // Redirect to a placeholder page
-            $redirectUrl = '/placeholder-page';
-            return Redirect::away($pdfUrl)->with(['pdfUrl' => $pdfUrl]);
+            // Emit JavaScript to open the URL in a new tab
+            $this->dispatchBrowserEvent('open-pdf', ['url' => $pdfUrl]);
+            // generate-pdf-hours?id=1&FromDate=1/1/2024&ToDate=12/2/2024
+            // $pdfUrl = '/generate-pdf-hours?id=' . $this->Name . '&FromDate=' . $this->FromDate . '&ToDate=' . $this->ToDate;
+
+            // return Redirect::away($pdfUrl)->with(['pdfUrl' => $pdfUrl]);
         }
     }
 
