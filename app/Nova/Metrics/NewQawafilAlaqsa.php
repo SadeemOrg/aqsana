@@ -24,6 +24,8 @@ class NewQawafilAlaqsa extends Value
     }
     public function calculate(NovaRequest $request)
     {
+        return $this->count($request, Project::where('project_type', 2));
+
         $nowTime = Carbon::now();
 
         // Fetch projects and apply the filter
@@ -49,7 +51,15 @@ class NewQawafilAlaqsa extends Value
      */
     public function ranges()
     {
-
+        return [
+            30 => __('30 Days'),
+            60 => __('60 Days'),
+            365 => __('365 Days'),
+            'TODAY' => __('Today'),
+            'MTD' => __('Month To Date'),
+            'QTD' => __('Quarter To Date'),
+            'YTD' => __('Year To Date'),
+        ];
     }
 
     /**
