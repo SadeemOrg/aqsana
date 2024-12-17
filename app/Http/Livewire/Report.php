@@ -122,16 +122,16 @@ class Report extends Component
 
             // Fetch vacation records within the date range
             $vacations = Vacation::where("user_id", $this->Name)
-            ->where(function($query) use ($from, $to) {
-                $query->whereBetween('date', [$from, $to])
-                      ->orWhereBetween('end_date', [$from, $to])
-                      ->orWhere(function($subQuery) use ($from, $to) {
-                          $subQuery->where('date', '<', $from)
-                                   ->where('end_date', '>', $to);
-                      });
-            })
-            ->orderBy('date', 'ASC')
-            ->get();
+                ->where(function ($query) use ($from, $to) {
+                    $query->whereBetween('date', [$from, $to])
+                        ->orWhereBetween('end_date', [$from, $to])
+                        ->orWhere(function ($subQuery) use ($from, $to) {
+                            $subQuery->where('date', '<', $from)
+                                ->where('end_date', '>', $to);
+                        });
+                })
+                ->orderBy('date', 'ASC')
+                ->get();
 
             $vacations = $vacations->map(function ($vacation) use ($to) {
                 $vacationStart = Carbon::parse($vacation->date); // Vacation start date
@@ -139,6 +139,7 @@ class Report extends Component
 
                 // If vacation's end_date is greater than $to, update it to $to
                 if ($vacationEnd->gt($to)) {
+
                     $vacation->end_date = $to; // Set end_date to $to
                 }
 
@@ -155,6 +156,15 @@ class Report extends Component
                 }
                 if ($vacationStart->lt($from)) {
                     $vacation->date = $from;
+
+                    if ($from->isFriday() || $from->isSaturday()) {
+                        $from->addDays(7 - $from->dayOfWeek);
+                    }
+
+                    $vacation->date = $from;
+                    $vacation->day = $from->locale('ar')->isoFormat('dddd');
+
+
                 }
 
 
