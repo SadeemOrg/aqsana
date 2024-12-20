@@ -49,6 +49,7 @@ class TripController extends BaseController
                 ->max('remaining_seats');
             $trip->largest_remaining_seats = $largest_remaining_seats;
             $trip->number = $number;
+            //
             $trip->buses_data = $buses_data;
             $trip->isFull = $number > 0 ? 0 : 1;
 
@@ -139,15 +140,27 @@ class TripController extends BaseController
 
             $buss = $trip->bus;
             $number = 0;
+            $buses_data = [];
             foreach ($buss as $key => $bus) {
                 $number_of_people = TripBooking::where([
                     ['bus_id', $bus->id],
                     ['status', '1'],
                 ])->sum('number_of_people');
-                $number +=  ($bus->number_of_seats - $number_of_people);
+                $buses_data[] = [
+                    'bus_id' => $bus->id,
+                    'remaining_seats' => ($bus->number_of_seats - $number_of_people),
+                ];
+                $number =  ($bus->number_of_seats - $number_of_people);
             }
+            $largest_remaining_seats = collect($buses_data)
+                ->max('remaining_seats');
+            $trip->largest_remaining_seats = $largest_remaining_seats;
             $trip->number = $number;
+            //
+            $trip->buses_data = $buses_data;
             $trip->isFull = $number > 0 ? 0 : 1;
+
+
 
 
             $trip->tripToLocation = $trip->tripto->name_address;
@@ -172,8 +185,10 @@ class TripController extends BaseController
                 $to_lat = 32.130492742251334;
                 $to_lng = 34.97348856681219;
             }
+
             $from_distance = Helpers::distance($request->lat, $request->lng, $from_lat, $from_lng, 'K');
             $trip->from_distance = round($from_distance, 2);
+
 
             $to_distance = Helpers::distance($request->lat, $request->lng, $to_lat, $to_lng, 'K');
             $trip->to_distance = round($to_distance, 2);
