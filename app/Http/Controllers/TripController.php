@@ -33,14 +33,23 @@ class TripController extends BaseController
 
             $buss = $trip->bus;
             $number = 0;
+            $buses_data = [];
             foreach ($buss as $key => $bus) {
                 $number_of_people = TripBooking::where([
                     ['bus_id', $bus->id],
                     ['status', '1'],
                 ])->sum('number_of_people');
-                $number +=  ($bus->number_of_seats - $number_of_people);
+                $buses_data[] = [
+                    'bus_id' => $bus->id,
+                    'remaining_seats' => ($bus->number_of_seats - $number_of_people),
+                ];
+                $number =  ($bus->number_of_seats - $number_of_people);
             }
+            $largest_remaining_seats = collect($buses_data)
+                ->max('remaining_seats');
+            $trip->largest_remaining_seats = $largest_remaining_seats;
             $trip->number = $number;
+            $trip->buses_data = $buses_data;
             $trip->isFull = $number > 0 ? 0 : 1;
 
 

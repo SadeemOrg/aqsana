@@ -109,7 +109,7 @@
                 <tr>
                     <th> اليوم</th>
                     <th> التاريخ</th>
-                    <th> التاريخ النهاية</th>
+                    <th> تاريخ النهاية</th>
                     <th> ساعة البداية</th>
                     <th> ساعة النهاية </th>
                     <th>عدد الساعات</th>
@@ -170,7 +170,10 @@
                                 <td> -</td>
                             @endif
                         @else
-                            <td style="color:white;">{{ $day['type'] }}</td>
+                            <td style="color:white;">{{ $day['type'] }} -<br>
+                                عدد ايام الاجازة
+                                {{$day['days']  }}
+                            </td>
                         @endunless
                     </tr>
                 @endforeach
