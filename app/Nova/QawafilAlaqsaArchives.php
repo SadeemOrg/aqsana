@@ -54,7 +54,7 @@ use App\Rules\AlhisalatMap;
 use App\Rules\QawafilAlaqsaDate;
 use Mauricewijnia\NovaMapsAddress\MapsAddress;
 
-class QawafilAlaqsa extends Resource
+class QawafilAlaqsaArchives extends Resource
 {
     public static $model = \App\Models\Project::class;
     public static $priority = 1;
@@ -68,7 +68,7 @@ class QawafilAlaqsa extends Resource
 
     public static function label()
     {
-        return __('Qawafil');
+        return __('QawafilAlaqsaArchives');
     }
 
     public static function group()
@@ -147,7 +147,7 @@ class QawafilAlaqsa extends Resource
         }
 
 
-        return $query->reorder()    ->where('end_date', '>=', Carbon::now())
+        return $query->reorder()    ->where('end_date', '<=', Carbon::now())
         ->orderBy('start_date', 'asc');
 
 
@@ -716,7 +716,6 @@ class QawafilAlaqsa extends Resource
             new ReportAdmin(),
             new ReportTripFrom(),
             new DateRangeFilter(__("From_to"), "start_date"),
-
 
 
 

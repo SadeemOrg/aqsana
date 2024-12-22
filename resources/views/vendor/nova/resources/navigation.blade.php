@@ -62,13 +62,13 @@
                                     {{ __('budget') }}
                                 </router-link>
                             </li>
-                            <li>
+                            {{-- <li>
                             <router-link :to="{ name: 'report-regulation' }"
                                 class="text-white text-justify no-underline dim ml-2" style="font-size: 15px"
                                 dusk="{{ $resource::uriKey() }}-resource-link">
                                 {{ __('report Regulation') }}
                             </router-link>
-                            </li>
+                            </li> --}}
                         @elseif ($group == 'موقع الجمعية')
                         <li>
                             <router-link :to="{ name: 'nova-settings' }"
