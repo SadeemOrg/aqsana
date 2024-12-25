@@ -92,6 +92,8 @@ class TripController extends BaseController
                 if ($trip_bokking != null) {
                     if ($trip_bokking->status == 1) {
                         $trip->isBooking = 1;
+                        $trip->BookingNumber = $trip_bokking->number_of_people;
+
                     } else {
                         $trip->isBooking = 0;
                     }
@@ -199,6 +201,8 @@ class TripController extends BaseController
                 if ($trip_bokking != null) {
                     if ($trip_bokking->status == 1) {
                         $trip->isBooking = 1;
+                        $trip->BookingNumber = $trip_bokking->number_of_people;
+
                     } else {
                         $trip->isBooking = 0;
                     }
@@ -313,6 +317,8 @@ class TripController extends BaseController
                 if ($trip_bokking != null) {
                     if ($trip_bokking->status == 1) {
                         $trip->isBooking = 1;
+                        $trip->BookingNumber = $trip_bokking->number_of_people;
+
                     } else {
                         $trip->isBooking = 0;
                     }
