@@ -88,11 +88,13 @@ class TripController extends BaseController
 
             if (Auth()->id() != null) {
                 $trip_bokking = TripBooking::where('user_id', Auth()->id())->where('project_id', $trip->id)->first();
-
                 if ($trip_bokking != null) {
                     if ($trip_bokking->status == 1) {
+
                         $trip->isBooking = 1;
                         $trip->BookingNumber = $trip_bokking->number_of_people;
+                        $trip->BusNumber = $trip_bokking->bus_number;
+
 
                     } else {
                         $trip->isBooking = 0;
@@ -202,6 +204,8 @@ class TripController extends BaseController
                     if ($trip_bokking->status == 1) {
                         $trip->isBooking = 1;
                         $trip->BookingNumber = $trip_bokking->number_of_people;
+                        $trip->BusNumber = $trip_bokking->bus_number;
+
 
                     } else {
                         $trip->isBooking = 0;
@@ -318,6 +322,8 @@ class TripController extends BaseController
                     if ($trip_bokking->status == 1) {
                         $trip->isBooking = 1;
                         $trip->BookingNumber = $trip_bokking->number_of_people;
+                        $trip->BusNumber = $trip_bokking->bus_number;
+
 
                     } else {
                         $trip->isBooking = 0;
