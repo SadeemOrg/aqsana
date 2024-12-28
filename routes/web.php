@@ -37,6 +37,8 @@ use Illuminate\Support\Facades\Response;
 |
 */
 
+Route::post('/settings', [HomeController::class, 'appSetting'])->name('settings.save');
+Route::get('/settings', [HomeController::class, 'getAppSettings'])->name('settings.get');
 
 
 Route::get('/download-android-apk', function () {
