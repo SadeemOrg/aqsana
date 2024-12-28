@@ -18,6 +18,7 @@ class AppUser extends Resource
 {
 
 
+    public static $priority = 5;
 
     public static function label()
     {

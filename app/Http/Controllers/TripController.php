@@ -49,7 +49,7 @@ class TripController extends BaseController
                 ->max('remaining_seats');
             $trip->largest_remaining_seats = $largest_remaining_seats;
             $trip->number = $number;
-            //
+
             $trip->buses_data = $buses_data;
             $trip->isFull = $number > 0 ? 0 : 1;
 
@@ -85,17 +85,17 @@ class TripController extends BaseController
 
             $to_distance = Helpers::distance($request->lat, $request->lng, $to_lat, $to_lng, 'K');
             $trip->to_distance = round($to_distance, 2);
+            // Auth::login(User::first());
 
             if (Auth()->id() != null) {
                 $trip_bokking = TripBooking::where('user_id', Auth()->id())->where('project_id', $trip->id)->first();
+
                 if ($trip_bokking != null) {
                     if ($trip_bokking->status == 1) {
 
                         $trip->isBooking = 1;
-                        $trip->BookingNumber = $trip_bokking->number_of_people;
-                        $trip->BusNumber = $trip_bokking->bus_number;
-
-
+                        $trip->seatsBookedByUser = $trip_bokking->number_of_people;
+                        $trip->BusName  = $trip_booking->bus_number ?? 'A1';
                     } else {
                         $trip->isBooking = 0;
                     }
@@ -203,10 +203,8 @@ class TripController extends BaseController
                 if ($trip_bokking != null) {
                     if ($trip_bokking->status == 1) {
                         $trip->isBooking = 1;
-                        $trip->BookingNumber = $trip_bokking->number_of_people;
-                        $trip->BusNumber = $trip_bokking->bus_number;
-
-
+                        $trip->seatsBookedByUser = $trip_bokking->number_of_people;
+                        $trip->BusName  = $trip_booking->bus_number ?? 'A1';
                     } else {
                         $trip->isBooking = 0;
                     }
@@ -321,10 +319,8 @@ class TripController extends BaseController
                 if ($trip_bokking != null) {
                     if ($trip_bokking->status == 1) {
                         $trip->isBooking = 1;
-                        $trip->BookingNumber = $trip_bokking->number_of_people;
-                        $trip->BusNumber = $trip_bokking->bus_number;
-
-
+                        $trip->seatsBookedByUser = $trip_bokking->number_of_people;
+                        $trip->BusName  = $trip_booking->bus_number ?? 'A1';
                     } else {
                         $trip->isBooking = 0;
                     }
