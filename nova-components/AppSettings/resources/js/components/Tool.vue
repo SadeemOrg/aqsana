@@ -4,7 +4,7 @@
         <form @submit.prevent="saveSettings">
             <div class="mb-4">
                 <label for="donation" class="block text-sm font-medium text-gray-700">الحد الادنى للتبرع  </label>
-                <input v-model="settings.donation" type="text" id="donation" placeholder=" الرجاء ادخال النص    المراد اظهارة في التطبيق"
+                <input v-model="settings.donation" type="text" id="donation" placeholder=" الرجاء ادخال النص المراد اظهارة في التطبيق"
                     class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
             </div>
 

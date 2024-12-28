@@ -1592,7 +1592,7 @@ var render = function() {
               attrs: {
                 type: "text",
                 id: "donation",
-                placeholder: " الرجاء ادخال النص    المراد اظهارة في التطبيق"
+                placeholder: " الرجاء ادخال النص المراد اظهارة في التطبيق"
               },
               domProps: { value: _vm.settings.donation },
               on: {
