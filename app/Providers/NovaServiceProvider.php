@@ -54,6 +54,7 @@ use DigitalCreative\CollapsibleResourceManager\Resources\Group;
 use Zeyad\Notification\Notification;
 use Zeyad\Profile\Profile;
 use Anaseqal\NovaImport\NovaImport;
+use App\AppSettings\AppSettings;
 use App\Nova\Metrics\CitySum;
 use App\Nova\Metrics\DelegateSum;
 
@@ -623,6 +624,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new Notification,
             new Bill,
             new NovaImport,
+            new AppSettings,
+
         ];
     }
     /**

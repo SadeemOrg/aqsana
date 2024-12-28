@@ -80,7 +80,8 @@
         "zeyad/notification": "*",
         "acme/number-field": "*",
         "acme/bookings-bus": "*",
-        "acme/report-regulation": "*"
+        "acme/report-regulation": "*",
+        "app/app-settings": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
@@ -152,6 +153,10 @@
         {
             "type": "path",
             "url": "./nova-components/ReportRegulation"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/AppSettings"
         }
     ],
     "autoload": {

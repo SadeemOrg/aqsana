@@ -55,9 +55,8 @@
                         @endphp
                         @if ($group == 'الادارة المالية' && in_array('super-admin', $userRoles))
                             <li>
-                                <router-link :to="{ name: 'projecs' }"
-                                    class="text-white  no-underline dim ml-2" style="font-size: 15px"
-                                    dusk="{{ $resource::uriKey() }}-resource-link">
+                                <router-link :to="{ name: 'projecs' }" class="text-white  no-underline dim ml-2"
+                                    style="font-size: 15px" dusk="{{ $resource::uriKey() }}-resource-link">
 
                                     {{ __('budget') }}
                                 </router-link>
@@ -69,14 +68,24 @@
                                 {{ __('report Regulation') }}
                             </router-link>
                             </li> --}}
-                        @elseif ($group == 'موقع الجمعية')
+                        @elseif ($group == 'قوافل الاقصى')
                         <li>
-                            <router-link :to="{ name: 'nova-settings' }"
-                                class="text-white  no-underline dim ml-2" style="font-size: 15px"
-                                dusk="{{ $resource::uriKey() }}-resource-link">
-                                {{ __('إعدادات الموقع') }}
+
+                            <router-link :to="{ name: 'app-settings' }" class="text-white no-underline dim ml-2"
+                                style="font-size: 15px" :dusk="'{{ $resource::uriKey() }}-resource-link'">
+                                {{ __('إعدادات التطبيق') }}
                             </router-link>
+
                         </li>
+                        @elseif ($group == 'موقع الجمعية')
+                            <li>
+                                <router-link :to="{ name: 'nova-settings', query: { type: 'web' } }"
+                                    class="text-white no-underline dim ml-2" style="font-size: 15px"
+                                    :dusk="'{{ $resource::uriKey() }}-resource-link'">
+                                    {{ __('إعدادات الموقع') }}
+                                </router-link>
+
+                            </li>
                         @endif
                     </ul>
                 </li>

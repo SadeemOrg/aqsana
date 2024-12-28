@@ -12,6 +12,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TripController extends BaseController
 {
@@ -371,6 +372,14 @@ class TripController extends BaseController
         return $this->sendResponse($uniqueTrips, 'Success get Trips');
     }
 
+    public function getDonation(Request $request)
+    {
+        $settings = DB::table('nova_settings')->where('key', 'donation')->first();
+
+        return $settings ? $settings->value : '';
+
+
+    }
     /**
      * Show the form for creating a new resource.
      *
