@@ -758,7 +758,7 @@
             if (this.value == 'payPalv1') {
                 $(".btn-btn-payPal").css("display", "block");
                 paypal.Buttons({
-                    env: 'sandbox', // sandbox | production
+                    env: 'production', // sandbox | production
                     // Specify the style of the button
                     style: {
                         height: 55,
