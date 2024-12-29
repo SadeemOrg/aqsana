@@ -7,6 +7,7 @@ use App\Models\TripBooking;
 use App\Models\Bus;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,7 +31,7 @@ class TripBookingController extends BaseController
         }
 
 
-        $check_trip_booking = TripBooking::where("user_id", Auth()->id())->where("project_id", $request['project_id'])->first();
+        $check_trip_booking = TripBooking::where("user_id", 1)->where("project_id", $request['project_id'])->first();
 
         if ($check_trip_booking != null) {
             if ($check_trip_booking->status == "0") {
@@ -61,6 +62,11 @@ class TripBookingController extends BaseController
                 if (($number_of_people  <= $bus->number_of_seats)) {
                     $IsFull = 0;
                     $BusId = $bus->id;
+                    $number_of_bus = DB::table('project_bus')->where([
+                        ['bus_id', $bus->id],
+                        ['project_id', $projext->id],
+                    ])->first()->bus_number;
+
                 }
                 if (($numberOfSeats  <  $bus->number_of_seats)) {
                  $numberOfSeats=  $bus->number_of_seats - $number_of_peopleTripBooking;
@@ -78,6 +84,8 @@ class TripBookingController extends BaseController
                 'number_of_people' => $request['number_of_people'],
                 'reservation_amount' => '0.0',
                 'number_phone' => $request['number_phone'],
+                'bus_number' =>$number_of_bus  ,
+
             ]);
             //sms
             // $phoneNumber = isset($request['number_phone']) ? $request['number_phone'] : '';
