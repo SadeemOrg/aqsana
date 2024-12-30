@@ -22,7 +22,8 @@ class Transaction extends Model implements HasMedia
         'id', 'main_type', 'type', 'description', 'ref_id', 'transact_amount',
         'Currency', 'equivelant_amount', 'voucher', 'transaction_date',
         'reason_of_reject', 'approval', 'sector', 'transaction_status', 'is_delete', 'transaction_type', 'name',
-        'deleted_ref'
+        'deleted_ref', 'cardcom_Invoice_number',
+
     ];
 
     protected $hidden = [
@@ -95,6 +96,10 @@ class Transaction extends Model implements HasMedia
     public function TelephoneDirectory()
     {
         return $this->belongsTo('App\Models\TelephoneDirectory', 'name');
+    }
+     public function AlhisalatAdmin()
+    {
+        return $this->belongsTo('App\Models\TelephoneDirectory','name');
     }
 
     public function company()

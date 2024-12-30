@@ -191,7 +191,7 @@ class News extends Resource
                                         'history',
                 ])
                 ->headingLevels([1, 2, 3, 4, 5, 6])->rules('required'),
-            Image::make('صورة', 'image')->disk('public')->prunable()->rules('required'),
+            Image::make('صورة', 'image')->disk('public')->prunable()->creationRules('required'),
             ArrayImages::make('صور', 'pictures')
                 ->disk('public'),
 

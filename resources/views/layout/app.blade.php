@@ -34,6 +34,8 @@
     <meta property="fb:admins" content="{{ nova_get_setting('phone', '') }}" />
     <meta name="theme-color" content="#349A37" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -283,6 +285,7 @@
 
     <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 
 
     <script>

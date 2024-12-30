@@ -1069,7 +1069,9 @@ class HomeController extends BaseController
         $original = 0;
         $type = ($request->type == 'repayment') ? '2' : '1';
         $bill_number = $transaction->bill_number;
-        return view('Pages.Bills.mainBill', compact('id', 'type', 'bill_number'));
+        $cardcom_Invoice_number = $transaction->cardcom_Invoice_number;
+
+        return view('Pages.Bills.mainBill', compact('id', 'type', 'bill_number','cardcom_Invoice_number'));
     }
 
     public function SendMail(Request $request)
@@ -1843,33 +1845,34 @@ class HomeController extends BaseController
                         'value' => $transaction->equivelant_amount,
                     ],
                     [
-                        "indexName" => __("Donor"),
-                        "name" => __("Donor"),
-                        'attribute' => 'TelephoneDirectory',
-                        'component' => 'belongs-to-field',
-                        'debounce' => 500,
-                        'displays_with_trashed' => true,
-                        'help_text' => null,
-                        'index_name' => 'متبرع',
-                        'label' => 'SMS',
-                        'nullable' => false,
-                        'panel' => null,
-                        'prefix_component' => true,
-                        'readonly' => false,
-                        'required' => true,
-                        'resource_name' => 'telephone-directories',
-                        'reverse' => false,
-                        'searchable' => false,
-                        'show_create_relation_button' => false,
-                        'singular_label' => 'متبرع',
-                        'sortable' => false,
-                        'sortable_uri_key' => 'name',
-                        'stacked' => false,
-                        'text_align' => 'left',
-                        'validation_key' => 'TelephoneDirectory',
-                        'value' =>  TelephoneDirectory::find($transaction->name)?->name, //'קעדאן כאלד יחיא',
-                        'viewable' => true,
-                        'with_subtitles' => false
+                        "belongsToId"=> $transaction->name,
+                        "belongsToRelationship"=> "TelephoneDirectory",
+                        "debounce"=> 500,
+                        "displaysWithTrashed"=> true,
+                        "label"=> "SMS",
+                        "resourceName"=> "telephone-directories",
+                        "reverse"=> false,
+                        "searchable"=> false,
+                        "withSubtitles"=> false,
+                        "showCreateRelationButton"=> false,
+                        "singularLabel"=> __("Donor"),
+                        "viewable"=> true,
+                        "attribute"=> "TelephoneDirectory",
+                        "component"=> "belongs-to-field",
+                        "helpText"=> null,
+                        "indexName"=> __("Donor"),
+                        "name"=> __("Donor"),
+                        "nullable"=> false,
+                        "panel"=> null,
+                        "prefixComponent"=> true,
+                        "readonly"=> false,
+                        "required"=> true,
+                        "sortable"=> false,
+                        "sortableUriKey"=> "name",
+                        "stacked"=> false,
+                        "textAlign"=> "left",
+                        "validationKey"=> "TelephoneDirectory",
+                        'value' =>  TelephoneDirectory::find($transaction->name)?->name,
                     ],
                     [
                         "indexName" => __("Payment Type"),
@@ -2075,9 +2078,12 @@ class HomeController extends BaseController
                         "key" => "طباعة",
                         "type" => "link",
                         "link" => [
+                            // "href" => "",
+
                             "href" => "/generate-pdf/{$transaction->id}",
                             "target" => "_blank"
                         ],
+                        //
                         "text" => "طباعة",
                         "event" => "NovaButton\\Events\\ButtonClick",
                         "label" => null,
@@ -2123,7 +2129,7 @@ class HomeController extends BaseController
                 ],
                 "authorizedToView" => true,
                 "authorizedToCreate" => true,
-                "authorizedToUpdate" => true,
+                "authorizedToUpdate" => false,
                 "authorizedToDelete" => false,
                 "authorizedToRestore" => true,
                 "authorizedToForceDelete" => true,
