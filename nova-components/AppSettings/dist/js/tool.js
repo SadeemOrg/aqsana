@@ -68,7 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-module.exports = __webpack_require__(11);
+module.exports = __webpack_require__(14);
 
 
 /***/ }),
@@ -90,13 +90,13 @@ Nova.booting(function (Vue, router, store) {
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(15)
+  __webpack_require__(3)
 }
 var normalizeComponent = __webpack_require__(8)
 /* script */
 var __vue_script__ = __webpack_require__(9)
 /* template */
-var __vue_template__ = __webpack_require__(20)
+var __vue_template__ = __webpack_require__(13)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -135,8 +135,46 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 3 */,
-/* 4 */,
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(4);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(6)("18a4f44c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tool.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tool.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Tailwind styles will be applied directly, so no need for custom CSS here */\n", ""]);
+
+// exports
+
+
+/***/ }),
 /* 5 */
 /***/ (function(module, exports) {
 
@@ -594,7 +632,7 @@ module.exports = function normalizeComponent (
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
@@ -616,12 +654,29 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             settings: {
-                donation: ''
+                donation: '',
+                latestVersion: '',
+                updateLink: ''
+
             },
             message: ''
         };
@@ -646,22 +701,26 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 response = _context.sent;
 
                                 // Assuming the response returns the setting as an object with keys like {donation: 'value'}
-                                this.settings.donation = response.data.donation || ''; // Set the value if it exists
-                                _context.next = 10;
+                                this.settings.donation = response.data.donation || '';
+                                this.settings.latestVersion = response.data.latestVersion || '';
+                                this.settings.updateLink = response.data.updateLink || ''; // Set the value if it exists
+                                // Set the value if it exists
+                                // Set the value if it exists
+                                _context.next = 12;
                                 break;
 
-                            case 7:
-                                _context.prev = 7;
+                            case 9:
+                                _context.prev = 9;
                                 _context.t0 = _context['catch'](0);
 
                                 console.error('Error fetching settings:', _context.t0);
 
-                            case 10:
+                            case 12:
                             case 'end':
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[0, 7]]);
+                }, _callee, this, [[0, 9]]);
             }));
 
             function getSettings() {
@@ -712,64 +771,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 10 */,
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(11);
+
+
+/***/ }),
 /* 11 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(16);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(6)("18a4f44c", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tool.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68ff5483\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tool.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(5)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Tailwind styles will be applied directly, so no need for custom CSS here */\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(18);
-
-
-/***/ }),
-/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -794,7 +803,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(19);
+module.exports = __webpack_require__(12);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -810,7 +819,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 19 */
+/* 12 */
 /***/ (function(module, exports) {
 
 /**
@@ -1543,7 +1552,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 20 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1576,7 +1585,7 @@ var render = function() {
                 staticClass: "block text-sm font-medium text-gray-700",
                 attrs: { for: "donation" }
               },
-              [_vm._v("الحد الادنى للتبرع  ")]
+              [_vm._v("الحد الادنى للتبرع ")]
             ),
             _vm._v(" "),
             _c("input", {
@@ -1601,6 +1610,80 @@ var render = function() {
                     return
                   }
                   _vm.$set(_vm.settings, "donation", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-4" }, [
+            _c(
+              "label",
+              {
+                staticClass: "block text-sm font-medium text-gray-700",
+                attrs: { for: "latestVersion" }
+              },
+              [_vm._v(" نسخة التطبيق ")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.settings.latestVersion,
+                  expression: "settings.latestVersion"
+                }
+              ],
+              staticClass: "mt-1 p-2 border border-gray-300 rounded-md w-full",
+              attrs: {
+                type: "text",
+                id: "latestVersion",
+                placeholder: " الرجاء ادخال نسخة التطبيق "
+              },
+              domProps: { value: _vm.settings.latestVersion },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.settings, "latestVersion", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-4" }, [
+            _c(
+              "label",
+              {
+                staticClass: "block text-sm font-medium text-gray-700",
+                attrs: { for: "updateLink" }
+              },
+              [_vm._v(" الرابط ")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.settings.updateLink,
+                  expression: "settings.updateLink"
+                }
+              ],
+              staticClass: "mt-1 p-2 border border-gray-300 rounded-md w-full",
+              attrs: {
+                type: "text",
+                id: "updateLink",
+                placeholder: " الرجاء ادخال الرابط"
+              },
+              domProps: { value: _vm.settings.updateLink },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.settings, "updateLink", $event.target.value)
                 }
               }
             })
@@ -1635,6 +1718,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-68ff5483", module.exports)
   }
 }
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
