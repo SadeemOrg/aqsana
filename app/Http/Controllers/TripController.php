@@ -374,11 +374,11 @@ class TripController extends BaseController
 
     public function getDonation(Request $request)
     {
-        $settings = DB::table('nova_settings')->where('key', 'donation')->first();
+        $settings = DB::table('nova_settings')
+            ->whereIn('key', ['donation', 'latestVersion', 'updateLink'])
+            ->pluck('value', 'key');
 
-        return $settings ? $settings->value : '';
-
-
+        return $settings->toArray();
     }
     /**
      * Show the form for creating a new resource.

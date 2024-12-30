@@ -147,10 +147,8 @@ class QawafilAlaqsa extends Resource
         }
 
 
-        return $query->reorder()    ->where('end_date', '>=', Carbon::now())
-        ->orderBy('start_date', 'asc');
-
-
+        return $query->reorder()->where('end_date', '>=', Carbon::now())
+            ->orderBy('start_date', 'asc');
     }
 
 
@@ -347,7 +345,7 @@ class QawafilAlaqsa extends Resource
                     ])
                     ->hideFromIndex()->hideFromDetail()->singleSelect(),
                 text::make(__('note'), "note"),
-                DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required') ->sortable(),
+                DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required')->sortable(),
                 DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required', new QawafilAlaqsaDate($request->start_date)),
 
                 Boolean::make(__('is_has_Donations'), 'is_donation')
@@ -617,24 +615,62 @@ class QawafilAlaqsa extends Resource
             }
             $result = array_intersect($stack, $busstack);
 
-            $deleted = DB::table('project_bus')->where(['project_id' => $model->id])
+            DB::table('project_bus')->where(['project_id' => $model->id])
                 ->whereNotIn('bus_id', $result)
                 ->delete();
 
-            // dd(gettype($buss));
-            // $bus_id=$buss[0]->id;
 
+            $largebus_number = DB::table('project_bus')
+                ->where('project_id', $model->id)
+                ->max('bus_number');
+
+            if (is_null($largebus_number)) {
+                // الحصول على الحروف المستخدمة بالفعل للمشاريع
+                $usedChars = DB::table('project_bus')
+                    ->selectRaw("DISTINCT SUBSTRING(bus_number, 1, 1) as first_char")
+                    ->pluck('first_char')
+                    ->map(fn($char) => strtoupper($char)) // التأكد من الحروف الكبيرة
+                    ->toArray();
+
+                // إنشاء قائمة بجميع الحروف الكبيرة
+                $allChars = range('A', 'Z');
+
+                // البحث عن أول حرف غير مستخدم
+                $availableChar = collect($allChars)
+                    ->first(fn($char) => !in_array($char, $usedChars));
+
+                // إذا لم يكن هناك أي حرف مستخدم بعد
+                if (!$availableChar) {
+                    $availableChar = 'A'; // تبدأ من A إذا كان لا يوجد حروف مستخدمة
+                }
+                $largebus_number = $availableChar . '0';
+
+            }
 
             foreach ($buss as $key => $user) {
+                $existingRecord = DB::table('project_bus')
+                    ->where('project_id', $model->id)
+                    ->where('bus_id', $user->id)
+                    ->first();
 
 
-                DB::table('project_bus')
-                    ->updateOrInsert(
-                        ['project_id' => $model->id, 'bus_id' => $user->id],
 
-                    );
+                $data = ['project_id' => $model->id, 'bus_id' => $user->id];
+                if (!$existingRecord) {
+                    if (preg_match('/([A-Z])(\d+)/', $largebus_number, $matches)) {
+                        $currentChar = $matches[1];
+                        $currentNumber = (int)$matches[2];
+                        $newNumber = $currentNumber + 1;
+                        $largebus_number = $currentChar . $newNumber;
+                    }
+
+                    $data['bus_number'] = $largebus_number;
+                }
+
+                DB::table('project_bus')->updateOrInsert($data);
             }
         }
+
         if ($request->newbus) {
             $buss = $request->newbus;
 
@@ -656,30 +692,40 @@ class QawafilAlaqsa extends Resource
                 if ($user->type() == 'regular_city') {
                     DB::table('project_bus')
                         ->updateOrInsert(
-                            ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
+                            ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id'], 'bus_number' => $largebus_number + 1],
 
                         );
+
+                    $largebus_number = $largebus_number + 1;
                 } else {
                     DB::table('project_bus')
                         ->updateOrInsert(
-                            ['project_id' => $model->id, 'bus_id' => $bus['id']],
+                            [
+                                'project_id' => $model->id,
+                                'bus_id' => $bus['id'],
+                                'bus_number' => $largebus_number + 1
+                            ],
 
                         );
+
+                    $largebus_number = $largebus_number + 1;
                 }
             }
         }
-        $buses = $model->Bus;
-        $newProjects = Project::where('project_name', $model->project_name)
-            ->where('trip_from', $model->trip_from)
-            ->get();
-        $newProjects->map(function ($project) use ($buses) {
-            // Loop through each bus and attach it to the project if not already attached
-            $buses->each(function ($bus) use ($project) {
-                if (!$project->Bus->contains($bus->id)) {
-                    $project->Bus()->attach($bus->id);
-                }
-            });
-        });
+
+
+        // $buses = $model->Bus;
+        // $newProjects = Project::where('project_name', $model->project_name)
+        //     ->where('trip_from', $model->trip_from)
+        //     ->get();
+        // $newProjects->map(function ($project) use ($buses) {
+        //     // Loop through each bus and attach it to the project if not already attached
+        //     $buses->each(function ($bus) use ($project) {
+        //         if (!$project->Bus->contains($bus->id)) {
+        //             $project->Bus()->attach($bus->id);
+        //         }
+        //     });
+        // });
     }
     /**
      * Get the cards available for the request.
