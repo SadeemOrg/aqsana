@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/get-donation-information', [TripController::class, 'getDonation']);
+Route::get('/appSettings', [TripController::class, 'getDonation']);
 
 
 
