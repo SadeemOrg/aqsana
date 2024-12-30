@@ -31,7 +31,7 @@ class TripBookingController extends BaseController
         }
 
 
-        $check_trip_booking = TripBooking::where("user_id", 1)->where("project_id", $request['project_id'])->first();
+        $check_trip_booking = TripBooking::where("user_id",Auth()->id())->where("project_id", $request['project_id'])->first();
 
         if ($check_trip_booking != null) {
             if ($check_trip_booking->status == "0") {
@@ -49,7 +49,7 @@ class TripBookingController extends BaseController
         $buss = $projext->bus;
         $IsFull = 1;
         $BusId = null;
-        $numberOfSeats=0;
+        $numberOfSeats = 0;
 
         foreach ($buss as $key => $bus) {
             if ($IsFull == 1) {
@@ -57,7 +57,7 @@ class TripBookingController extends BaseController
                     ['bus_id', $bus->id],
                     ['status', '1'],
                 ])->sum('number_of_people');
-                $number_of_people =$number_of_peopleTripBooking+ $request['number_of_people'];
+                $number_of_people = $number_of_peopleTripBooking + $request['number_of_people'];
 
                 if (($number_of_people  <= $bus->number_of_seats)) {
                     $IsFull = 0;
@@ -66,12 +66,10 @@ class TripBookingController extends BaseController
                         ['bus_id', $bus->id],
                         ['project_id', $projext->id],
                     ])->first()->bus_number;
-
                 }
                 if (($numberOfSeats  <  $bus->number_of_seats)) {
-                 $numberOfSeats=  $bus->number_of_seats - $number_of_peopleTripBooking;
+                    $numberOfSeats =  $bus->number_of_seats - $number_of_peopleTripBooking;
                 }
-
             }
         }
         if ($IsFull == 0) {
@@ -84,7 +82,7 @@ class TripBookingController extends BaseController
                 'number_of_people' => $request['number_of_people'],
                 'reservation_amount' => '0.0',
                 'number_phone' => $request['number_phone'],
-                'bus_number' =>$number_of_bus  ,
+                'bus_number' => $number_of_bus,
 
             ]);
             //sms
@@ -107,7 +105,7 @@ class TripBookingController extends BaseController
             // }
             return $this->sendResponse($tripBooking, 'تم الحجز بنجاح');
         } else {
-             return $this->sendError('Error', ["message" => "ناسف! الباص ممتلئ"], 202);
+            return $this->sendError('Error', ["message" => "ناسف! الباص ممتلئ"], 202);
         }
     }
 
@@ -121,9 +119,40 @@ class TripBookingController extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Validate Error', $validator->errors());
         }
-        TripBooking::where('project_id', $request->get('id'))
-            ->where('user_id', Auth()->id())
-            ->delete();
+        $bus = DB::table('project_bus')->where(
+            ['project_id' => $request->get('id')]
+        )->get();
+        $busCount = $bus->count();
+
+        if ($busCount == 1) {
+            TripBooking::where('project_id', $request->get('id'))
+                ->where('user_id', 1)
+                ->delete();
+        } else {
+            $busCountBooking = 0;
+            foreach ($bus as $key => $value) {
+
+                $exist =  TripBooking::where('project_id', $request->get('id'))
+                    ->where('bus_id', $value->bus_id)
+                    ->where('status', 1)
+                    ->first();
+                if ($exist) {
+                    $busCountBooking += 1;
+                }
+            }
+            if ($busCountBooking == 1) {
+                TripBooking::where('project_id', $request->get('id'))
+                    ->where('user_id', 1)
+                    ->delete();
+            } else {
+                TripBooking::where('project_id', $request->get('id'))
+                ->where('user_id', 1)
+                ->delete();
+
+            }
+        }
+
+
         return $this->sendResponse([], 'Trib booking has been cancelled');
     }
 
