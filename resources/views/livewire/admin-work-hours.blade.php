@@ -63,7 +63,7 @@
                         بحث
                     </button>
                     <button wire:click="exportWorkHours"
-                        class="connectUs flex items-center justify-center w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
+                        class="connectUs flex items-center justify-center w-full duration-200 text-center px-10 lg:px-0 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
                         <svg class="min-w-[20px] min-h-[20px]" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="20px"
                             height="20px">

@@ -64,19 +64,15 @@
                 <div style="display: flex; gap: 10px;">
                     <button wire:click="exportReport"
                         class="flex items-center justify-center mt-5 w-full duration-200 text-center px-10 lg:px-10 py-3 text-[13px]  font-FlatBold rounded-[30px] text-white bg-[#349A37] hover:bg-[#40b744] hover:text-white ">
-                        <svg class="min-w-[20px] min-h-[20px]" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256 256" width="20px"
-                            height="20px">
-                            <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
-                                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
-                                font-family="none" font-weight="none" font-size="none" text-anchor="none"
-                                style="mix-blend-mode: normal">
-                                <g transform="scale(5.12,5.12)">
-                                    <path
-                                        d="M37,0h-22c-1.09375,0 -2,0.90625 -2,2v44c0,1.09375 0.90625,2 2,2h32c1.09375,0 2,-0.90625 2,-2v-34zm2,43v3h-28v-2h25.5625l-8.1875-8.8125l2.15625,-2.125zm-4,-2h-10v-10h10zm-14,-10v12h-10v-38h20v6h-9c-1.09375,0 -2,0.90625 -2,2v14zm0,-8v-10h8v8h-6v6h-2z" />
-                                </g>
-                            </g>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-file-text">
+                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                        <path d="M10 9H8" />
+                        <path d="M16 13H8" />
+                        <path d="M16 17H8" />
+                    </svg>
 
                         <span class="mr-2"> تصدير pdf</span>
                     </button>

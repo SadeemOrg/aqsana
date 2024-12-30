@@ -73,7 +73,7 @@
                 </div>
 
                 <a
-                    :href="`/originalbill/${id}`"
+                    :href="`https://secure.cardcom.solutions/Note/Invoice.aspx?InvoiceNumber=${cardcomInvoiceNumber }&InvType=3&Print=1`"
                     class="secContainer flex flex-col justify-center cursor-pointer items-center  md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3"
                 >
                     <img src="/assets/image/pdf.png" class="w-8 h-8 " alt="" />
@@ -82,12 +82,12 @@
                     </h3>
                 </a>
                 <a
-                    :href="`/bill/${id}`"
+                    :href="`https://secure.cardcom.solutions/api/Document/GetDocumentPDF?DocumentNumber=${cardcomInvoiceNumber}&amp;DocumentType=3&amp;IsOriginal=false`"
                     class="secContainer flex flex-col justify-center cursor-pointer items-center  md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3"
                 >
                     <img src="/assets/image/pdf.png" class="w-8 h-8 " alt="" />
                     <h3 class="font-FlatBold text-center text-lg lg:text-xl">
-                        نسخة عن الأصلية
+                        طباعة
                     </h3>
                 </a>
                 <a
@@ -119,6 +119,7 @@ export default {
     data() {
         return {
             id: null,
+            cardcomInvoiceNumber: null,
             type: "",
             mail: "",
             userFilter: "",
@@ -183,6 +184,8 @@ export default {
             let urlParams = new URLSearchParams(queryString);
             this.id = urlParams.get("location");
             this.type = urlParams.get("type");
+            this.cardcomInvoiceNumber = urlParams.get("cardcom_Invoice_number");
+
             this.baseUrl = window.location.origin;
         }
     },

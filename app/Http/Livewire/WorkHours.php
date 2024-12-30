@@ -154,7 +154,6 @@ class WorkHours extends Component
     }
     public function searchWorkHours()
     {
-
         $user = Auth::user();
         $this->sersh = 1;
         $from = date($this->FromDate);
@@ -328,6 +327,8 @@ class WorkHours extends Component
         $this->TimeDpartures = nova_get_setting('time_departure', 'Timdepartures');
         $this->TimeDpartures = json_decode($this->TimeDpartures);
 
+        $this->FromDate = \Carbon\Carbon::parse($this->FromDate)->format('m/d/Y');
+        $this->ToDate = \Carbon\Carbon::parse($this->ToDate)->format('m/d/Y');
 
         return view('livewire.work-hours');
     }

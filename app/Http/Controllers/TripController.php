@@ -88,15 +88,20 @@ class TripController extends BaseController
             $trip->to_distance = round($to_distance, 2);
             // Auth::login(User::first());
 
+            $user = User::find(1); // Replace with the user ID you want to authenticate
+            Auth::login($user);
             if (Auth()->id() != null) {
                 $trip_bokking = TripBooking::where('user_id', Auth()->id())->where('project_id', $trip->id)->first();
-
+                // dd($trip->id);
                 if ($trip_bokking != null) {
                     if ($trip_bokking->status == 1) {
 
                         $trip->isBooking = 1;
                         $trip->seatsBookedByUser = $trip_bokking->number_of_people;
                         $trip->BusName  = $trip_booking->bus_number ?? 'A1';
+                        $trip_bokking = TripBooking::where('user_id', Auth()->id())->where('project_id', $trip->id)->first();
+                        $trip->isBooking = 1;
+                        $trip->BookingNumber = $trip_bokking->number_of_people;
                     } else {
                         $trip->isBooking = 0;
                     }
@@ -206,6 +211,7 @@ class TripController extends BaseController
                         $trip->isBooking = 1;
                         $trip->seatsBookedByUser = $trip_bokking->number_of_people;
                         $trip->BusName  = $trip_booking->bus_number ?? 'A1';
+                        $trip->BookingNumber = $trip_bokking->number_of_people;
                     } else {
                         $trip->isBooking = 0;
                     }
@@ -322,6 +328,7 @@ class TripController extends BaseController
                         $trip->isBooking = 1;
                         $trip->seatsBookedByUser = $trip_bokking->number_of_people;
                         $trip->BusName  = $trip_booking->bus_number ?? 'A1';
+                        $trip->BookingNumber = $trip_bokking->number_of_people;
                     } else {
                         $trip->isBooking = 0;
                     }
