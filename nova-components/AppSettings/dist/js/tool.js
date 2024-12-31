@@ -169,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Tailwind styles will be applied directly, so no need for custom CSS here */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Tailwind styles will be applied directly, so no need for custom CSS here */\n", ""]);
 
 // exports
 
@@ -668,6 +668,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -676,9 +677,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 donation: '',
                 latestVersion: '',
                 updateLink: ''
-
             },
-            message: ''
+            message: '',
+            loading: false // Add loading state
         };
     },
     mounted: function mounted() {
@@ -700,12 +701,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             case 3:
                                 response = _context.sent;
 
-                                // Assuming the response returns the setting as an object with keys like {donation: 'value'}
                                 this.settings.donation = response.data.donation || '';
                                 this.settings.latestVersion = response.data.latestVersion || '';
-                                this.settings.updateLink = response.data.updateLink || ''; // Set the value if it exists
-                                // Set the value if it exists
-                                // Set the value if it exists
+                                this.settings.updateLink = response.data.updateLink || '';
                                 _context.next = 12;
                                 break;
 
@@ -731,34 +729,58 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }(),
         saveSettings: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-                var response;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
-                                _context2.prev = 0;
-                                _context2.next = 3;
+                                this.loading = true; // Set loading to true
+                                _context2.prev = 1;
+                                _context2.next = 4;
                                 return axios.post('/settings', this.settings);
 
-                            case 3:
-                                response = _context2.sent;
-
-                                this.message = response.data.message;
-                                _context2.next = 10;
+                            case 4:
+                                toastr.options = {
+                                    closeButton: true,
+                                    debug: false,
+                                    positionClass: "toast-bottom-right",
+                                    onclick: null,
+                                    showDuration: "300",
+                                    hideDuration: "2000",
+                                    showMethod: "fadeIn",
+                                    hideMethod: "fadeOut"
+                                };
+                                toastr.success("تم الحفظ  بنجاح");
+                                _context2.next = 12;
                                 break;
 
-                            case 7:
-                                _context2.prev = 7;
-                                _context2.t0 = _context2['catch'](0);
+                            case 8:
+                                _context2.prev = 8;
+                                _context2.t0 = _context2['catch'](1);
 
-                                this.message = 'Error saving settings.';
+                                toastr.options = {
+                                    closeButton: true,
+                                    debug: false,
+                                    positionClass: "toast-bottom-right",
+                                    onclick: null,
+                                    showDuration: "300",
+                                    hideDuration: "2000",
+                                    showMethod: "fadeIn",
+                                    hideMethod: "fadeOut"
+                                };
+                                toastr.error("خطأ في الحفظ");
 
-                            case 10:
+                            case 12:
+                                _context2.prev = 12;
+
+                                this.loading = false; // Set loading back to false
+                                return _context2.finish(12);
+
+                            case 15:
                             case 'end':
                                 return _context2.stop();
                         }
                     }
-                }, _callee2, this, [[0, 7]]);
+                }, _callee2, this, [[1, 8, 12, 15]]);
             }));
 
             function saveSettings() {
@@ -1567,139 +1589,135 @@ var render = function() {
         _vm._v("اعدادات التطبيق")
       ]),
       _vm._v(" "),
-      _c(
-        "form",
-        {
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.saveSettings.apply(null, arguments)
-            }
-          }
-        },
-        [
-          _c("div", { staticClass: "mb-4" }, [
-            _c(
-              "label",
-              {
-                staticClass: "block text-sm font-medium text-gray-700",
-                attrs: { for: "donation" }
-              },
-              [_vm._v("الحد الادنى للتبرع ")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.settings.donation,
-                  expression: "settings.donation"
-                }
-              ],
-              staticClass: "mt-1 p-2 border border-gray-300 rounded-md w-full",
-              attrs: {
-                type: "text",
-                id: "donation",
-                placeholder: " الرجاء ادخال النص المراد اظهارة في التطبيق"
-              },
-              domProps: { value: _vm.settings.donation },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.settings, "donation", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-4" }, [
-            _c(
-              "label",
-              {
-                staticClass: "block text-sm font-medium text-gray-700",
-                attrs: { for: "latestVersion" }
-              },
-              [_vm._v(" نسخة التطبيق ")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.settings.latestVersion,
-                  expression: "settings.latestVersion"
-                }
-              ],
-              staticClass: "mt-1 p-2 border border-gray-300 rounded-md w-full",
-              attrs: {
-                type: "text",
-                id: "latestVersion",
-                placeholder: " الرجاء ادخال نسخة التطبيق "
-              },
-              domProps: { value: _vm.settings.latestVersion },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.settings, "latestVersion", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-4" }, [
-            _c(
-              "label",
-              {
-                staticClass: "block text-sm font-medium text-gray-700",
-                attrs: { for: "updateLink" }
-              },
-              [_vm._v(" الرابط ")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.settings.updateLink,
-                  expression: "settings.updateLink"
-                }
-              ],
-              staticClass: "mt-1 p-2 border border-gray-300 rounded-md w-full",
-              attrs: {
-                type: "text",
-                id: "updateLink",
-                placeholder: " الرجاء ادخال الرابط"
-              },
-              domProps: { value: _vm.settings.updateLink },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.settings, "updateLink", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
+      _c("div", [
+        _c("div", { staticClass: "mb-4" }, [
           _c(
-            "button",
+            "label",
             {
-              staticClass:
-                "w-full bg-green-700 text-white py-2 rounded-md hover:bg-green-800",
-              attrs: { type: "submit" }
+              staticClass: "block text-sm font-medium text-gray-700",
+              attrs: { for: "donation" }
             },
-            [_vm._v("حفظ")]
-          )
-        ]
-      ),
+            [_vm._v("الحد الادنى للتبرع ")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.settings.donation,
+                expression: "settings.donation"
+              }
+            ],
+            staticClass: "mt-1 p-2 border border-gray-300 rounded-md w-full",
+            attrs: {
+              type: "text",
+              id: "donation",
+              placeholder: " الرجاء ادخال النص المراد اظهارة في التطبيق"
+            },
+            domProps: { value: _vm.settings.donation },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.settings, "donation", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-4" }, [
+          _c(
+            "label",
+            {
+              staticClass: "block text-sm font-medium text-gray-700",
+              attrs: { for: "latestVersion" }
+            },
+            [_vm._v(" نسخة التطبيق ")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.settings.latestVersion,
+                expression: "settings.latestVersion"
+              }
+            ],
+            staticClass: "mt-1 p-2 border border-gray-300 rounded-md w-full",
+            attrs: {
+              type: "text",
+              id: "latestVersion",
+              placeholder: " الرجاء ادخال نسخة التطبيق "
+            },
+            domProps: { value: _vm.settings.latestVersion },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.settings, "latestVersion", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-4" }, [
+          _c(
+            "label",
+            {
+              staticClass: "block text-sm font-medium text-gray-700",
+              attrs: { for: "updateLink" }
+            },
+            [_vm._v(" الرابط ")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.settings.updateLink,
+                expression: "settings.updateLink"
+              }
+            ],
+            staticClass: "mt-1 p-2 border border-gray-300 rounded-md w-full",
+            attrs: {
+              type: "text",
+              id: "updateLink",
+              placeholder: " الرجاء ادخال الرابط"
+            },
+            domProps: { value: _vm.settings.updateLink },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.settings, "updateLink", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "w-full bg-green-700 text-white py-2 rounded-md hover:bg-green-800",
+            attrs: { disabled: _vm.loading },
+            on: { click: _vm.saveSettings }
+          },
+          [
+            _vm._v(
+              "\n            " +
+                _vm._s(_vm.loading ? "جاري الحفظ..." : "حفظ") +
+                "\n        "
+            )
+          ]
+        )
+      ]),
       _vm._v(" "),
       _vm.message
         ? _c("p", { staticClass: "mt-4 text-green-500" }, [

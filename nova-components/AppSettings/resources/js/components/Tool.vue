@@ -1,7 +1,7 @@
 <template>
     <div class="p-6 max-w-lg mx-auto bg-white shadow-md rounded-md">
         <h2 class="text-2xl font-semibold text-gray-800 mb-6">اعدادات التطبيق</h2>
-        <form @submit.prevent="saveSettings">
+        <div>
             <div class="mb-4">
                 <label for="donation" class="block text-sm font-medium text-gray-700">الحد الادنى للتبرع </label>
                 <input v-model="settings.donation" type="text" id="donation"
@@ -21,9 +21,10 @@
                     class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
             </div>
 
-
-            <button type="submit" class="w-full bg-green-700 text-white py-2 rounded-md hover:bg-green-800">حفظ</button>
-        </form>
+            <button @click="saveSettings" :disabled="loading" class="w-full bg-green-700 text-white py-2 rounded-md hover:bg-green-800">
+                {{ loading ? 'جاري الحفظ...' : 'حفظ' }}
+            </button>
+        </div>
         <p v-if="message" class="mt-4 text-green-500">{{ message }}</p>
     </div>
 </template>
@@ -34,11 +35,11 @@ export default {
         return {
             settings: {
                 donation: '',
-                latestVersion:'',
-                updateLink:''
-
+                latestVersion: '',
+                updateLink: ''
             },
-            message: ''
+            message: '',
+            loading: false // Add loading state
         };
     },
     mounted() {
@@ -48,22 +49,42 @@ export default {
         async getSettings() {
             try {
                 const response = await axios.get('/settings');
-                // Assuming the response returns the setting as an object with keys like {donation: 'value'}
                 this.settings.donation = response.data.donation || '';
                 this.settings.latestVersion = response.data.latestVersion || '';
-                this.settings.updateLink = response.data.updateLink || ''; // Set the value if it exists
-                 // Set the value if it exists
-                // Set the value if it exists
+                this.settings.updateLink = response.data.updateLink || '';
             } catch (error) {
                 console.error('Error fetching settings:', error);
             }
         },
         async saveSettings() {
+            this.loading = true; // Set loading to true
             try {
-                const response = await axios.post('/settings', this.settings);
-                this.message = response.data.message;
+                await axios.post('/settings', this.settings);
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.success("تم الحفظ  بنجاح");
             } catch (error) {
-                this.message = 'Error saving settings.';
+                toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    positionClass: "toast-bottom-right",
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "2000",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+                toastr.error("خطأ في الحفظ");
+            } finally {
+                this.loading = false; // Set loading back to false
             }
         }
     }
