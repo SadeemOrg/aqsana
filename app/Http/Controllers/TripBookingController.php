@@ -134,7 +134,8 @@ class TripBookingController extends BaseController
 
                 $exist =  TripBooking::where('project_id', $request->get('id'))
                     ->where('bus_id', $value->bus_id)
-                    ->where('status', Auth()->id())
+                    ->where('status', 1)
+                    ->where('user_id', Auth()->id())
                     ->first();
                 if ($exist) {
                     $busCountBooking += 1;
@@ -142,10 +143,12 @@ class TripBookingController extends BaseController
             }
             if ($busCountBooking == 1) {
                 TripBooking::where('project_id', $request->get('id'))
+                ->where('status', 1)
                     ->where('user_id', Auth()->id())
                     ->delete();
             } else {
                 TripBooking::where('project_id', $request->get('id'))
+                ->where('status', 1)
                 ->where('user_id', Auth()->id())
                 ->delete();
 
