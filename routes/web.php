@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessagingController;
 use App\Http\Controllers\NotificationTest;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PapPalController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\WebNotificationController;
 use App\Models\Project;
@@ -36,6 +37,13 @@ use Illuminate\Support\Facades\Response;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('go-payment', [PapPalController::class, 'goPayment'])->name('payment.go');
+
+Route::get('payment',[PapPalController::class, 'payment'])->name('payment');
+Route::get('cancel',[PapPalController::class, 'cancel'])->name('payment.cancel');
+Route::get('payment/success', [PapPalController::class, 'success'])->name('payment.success');
+
 
 Route::post('/settings', [HomeController::class, 'appSetting'])->name('settings.save');
 Route::get('/settings', [HomeController::class, 'getAppSettings'])->name('settings.get');
