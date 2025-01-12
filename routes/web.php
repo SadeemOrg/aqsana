@@ -42,8 +42,8 @@ Route::get('/settings', [HomeController::class, 'getAppSettings'])->name('settin
 
 
 Route::get('/download-android-apk', function () {
-    $filePath = public_path('android-apk/app-release-v1.apk'); // Path to your APK file
-    return Response::download($filePath, 'app-release-v1.apk', [
+    $filePath = public_path('android-apk/app-release-v2.apk'); // Path to your APK file
+    return Response::download($filePath, 'app-release-v2.apk', [
         'Content-Type' => 'application/vnd.android.package-archive',
     ]);
 });
