@@ -1,7 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use Illuminate\Support\Facades\Validator;
+
 class PayPalController extends Controller
 {
     /**
@@ -12,7 +16,6 @@ class PayPalController extends Controller
     public function createTransaction()
     {
         return view('products.welcome');
-
     }
     /**
      * process transaction.
@@ -21,40 +24,59 @@ class PayPalController extends Controller
      */
     public function processTransaction(Request $request)
     {
-        $provider = new PayPalClient;
-        $provider->setApiCredentials(config('paypal'));
-        $paypalToken = $provider->getAccessToken();
-        $response = $provider->createOrder([
-            "intent" => "CAPTURE",
-            "application_context" => [
-                "return_url" => route('successTransaction'),
-                "cancel_url" => route('cancelTransaction'),
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'donation_amount' => 'required',
+
             ],
-            "purchase_units" => [
-                0 => [
-                    "amount" => [
-                        "currency_code" => "USD",
-                        "value" => "100.00"
+            [
+
+                'donation_amount.required' => ' الرجاء ادخال المبلغ المراد التبرع به . ',
+
+            ]
+        );
+        if ($validator->passes()) {
+
+            $provider = new PayPalClient;
+            $provider->setApiCredentials(config('paypal'));
+            $paypalToken = $provider->getAccessToken();
+
+            $response = $provider->createOrder([
+                "intent" => "CAPTURE",
+                "application_context" => [
+                    "return_url" => route('successTransaction'),
+                    "cancel_url" => route('cancelTransaction'),
+                ],
+                "purchase_units" => [
+                    0 => [
+                        "amount" => [
+                            "currency_code" => "ILs",
+                            "value" => $request->donation_amount
+                        ]
                     ]
                 ]
-            ]
-        ]);
-        if (isset($response['id']) && $response['id'] != null) {
+            ]);
+            if (isset($response['id']) && $response['id'] != null) {
 
-            foreach ($response['links'] as $links) {
-                if ($links['rel'] == 'approve') {
+                foreach ($response['links'] as $links) {
+                    if ($links['rel'] == 'approve') {
 
-                    return redirect()->away($links['href']);
+                        return $links['href'];
+                        return redirect()->away($links['href']);
+                    }
                 }
+                return redirect()
+                    ->route('createTransaction')
+                    ->with('error', 'Something went wrong.');
+            } else {
+                return redirect()
+                    ->route('createTransaction')
+                    ->with('error', $response['message'] ?? 'Something went wrong.');
             }
-            return redirect()
-                ->route('createTransaction')
-                ->with('error', 'Something went wrong.');
-        } else {
-            return redirect()
-                ->route('createTransaction')
-                ->with('error', $response['message'] ?? 'Something went wrong.');
         }
+
+        return response()->json(['error' => $validator->errors()->all()]);
     }
     /**
      * success transaction.
