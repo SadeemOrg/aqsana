@@ -17,7 +17,7 @@
         </ul>
     </div>
 
-    @include('Components.ProjectDonations.DonationSteps')
+    {{-- @include('Components.ProjectDonations.DonationSteps') --}}
     @include('Components.ProjectDonations.ProjectDonationsDetalis')
 </div>
 @endsection

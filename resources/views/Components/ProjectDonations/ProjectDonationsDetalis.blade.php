@@ -3,167 +3,67 @@
         -webkit-appearance: none;
     }
 </style>
-@if ($project == null)
-    @php
-        $project_Id = null;
-    @endphp
-@else
-    @php
-        $project_Id = $project->id;
-    @endphp
-@endif
 
-<div>
-    <form class="flex flex-col w-full items-center md:items-start justify-center" action="{{ route('donations') }}"
-        method="post">
-        @csrf
-        <div class="flex flex-row items-center ">
+<!-- resources/views/donation.blade.php -->
+
+<form action="{{ route('processTransaction') }}" method="POST" class="space-y-6">
+    @csrf
+
+    <!-- Donation Amount Input -->
+    <div class="flex flex-col items-start gap-y-6">
+        <div class="flex flex-row items-center">
             <div class="mt-10 firstPage">
                 <label for="price" class="block text-sm font-medium text-gray-700 pr-1">المبلغ المراد التبرع به</label>
                 <div class="mt-2 relative rounded-md shadow-sm">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span class="text-gray-500 sm:text-sm"> ₪ </span>
+                        <span class="text-gray-500 sm:text-sm">₪</span>
                     </div>
                     <input type="number" name="donation_amount" id="price"
-                        class="focus:ring-green-500 focus:border-green-500 block  sm:text-sm border-gray-300 rounded-md w-[220px] md:w-[210px]"
-                        placeholder="0.00" aria-describedby="price-currency">
+                           class="focus:ring-green-500 focus:border-green-500 block sm:text-sm border-gray-300 rounded-md w-[220px] md:w-[210px]"
+                           placeholder="0.00" aria-describedby="price-currency" required>
                 </div>
             </div>
         </div>
-        <!-- Sector -->
-        @if ($project_Id !== null)
-            <div class="mt-4 firstPage">
-                <label for="sector" class=" pr-1 block text-sm font-medium text-gray-700">القطاعات</label>
-                <div class="mt-2">
-                    <input type="text" name="sector" id="sector" value="{{ $project->sector }}" disabled
-                        class="shadow-sm block sm:text-sm border-gray-300 rounded-md w-[220px] md:w-[210px]">
-                </div>
-            </div>
-            <!-- title -->
-            <div class="mt-4 firstPage ">
-                <label for="title" class="block  text-sm font-medium text-gray-700">عنوان المشروع</label>
-                <p
-                    class="shadow-sm hidden md:block sm:text-sm border px-4 md:px-2 p-2 mt-2 min-w-[210px] border-gray-300 rounded-md   ">
 
-                    {{ Illuminate\Support\Str::limit($project->project_name, 113) }}
-                </p>
-                <p
-                    class="shadow-sm block md:hidden  text-sm border px-4 md:px-2 p-2 mt-2 border-gray-300 rounded-md w-[220px]">
-                    {{ Illuminate\Support\Str::limit($project->project_name, 70) }}
-
-                </p>
-            </div>
-        @else
-            <div class="firstPage pt-6  lg:px-0 w-[220px] lg:w-[80%]">
-                <label for="donationAim" class=" pr-1 block text-sm font-medium text-gray-700">سبب التبرع</label>
-                <textarea rows="4" name="donationAim" id="order_note" placeholder="سبب التبرع" required=""
-                    class="w-full mt-2 inline-flex items-center text-right  justify-center  border rounded-md focus:ring-green-500 focus:border-green-500  border-gray-300 sm:text-sm p-4 ml-6 md:ml-0"></textarea>
-            </div>
-        @endif
-        <!-- Second Page Input -->
-        <!-- To Do Until Transila Work -->
-        <div class="secondPage mt-10 sm:mt-20 flex flex-col gap-y-6 hidden w-full">
-            <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
-                <input type="text" id="firstName" name="firstName" placeholder=" الاسم الاول" value=""
-                    class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
-                <input type="text" id="firstName" name="lastName" placeholder=" الاسم الاخير" value=""
-                    class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
-            </div>
-            <input type="hidden" id="donorName" name="donor_name" value="" placeholder=" الاسم كامل"
-                class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
-            <!--Hide this Item until Transila work-->
-            {{-- <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
-                <input type="number" name="telephone" placeholder="رقم الهاتف"
-                    class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
-                <input type="number" name="visaid" placeholder="رقم البطاقة"
-                    class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
-            </div>
-            <div class="flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start w-full gap-x-5">
-                <input type="number" name="CVV" placeholder="CVV"
-                    class="rtl block w-[80%] md:w-[50%] border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4">
-                <div dir="ltr" class="w-[80%] md:w-[50%]">
-                    <input datepicker type="text" name="VisaDate"
-                        class="block w-full border-[#A2A6B0] border rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-4 text-right"
-                        placeholder="MM/YY">
-                </div>
-            </div> --}}
-            <!--end Hide this Item until Transila work-->
-            <!-- Second Page Radio Input -->
-            <div class="flex flex-col gap-y-2 items-start justify-start mt-4 mr-[9%] md:mr-0">
-                <div class="flex flex-row items-center mb-5 sm:mb-0">
-                    <!--PayPal -->
-                    <input id="payPal" name="notification-method" type="radio" value="payPal"
-                        class="paymentMethod focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
-
-                    <label for="payPal"
-                        class="ml-3 text-md font-medium text-[#201A3C] pr-2 flex flex-row-reverse items-center">
-                        <span>Paypal</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48"
-                            height="48" viewBox="0 0 48 48" style=" fill:#000000;">
-                            <path fill="#1565C0"
-                                d="M18.7,13.767l0.005,0.002C18.809,13.326,19.187,13,19.66,13h13.472c0.017,0,0.034-0.007,0.051-0.006C32.896,8.215,28.887,6,25.35,6H11.878c-0.474,0-0.852,0.335-0.955,0.777l-0.005-0.002L5.029,33.813l0.013,0.001c-0.014,0.064-0.039,0.125-0.039,0.194c0,0.553,0.447,0.991,1,0.991h8.071L18.7,13.767z">
-                            </path>
-                            <path fill="#039BE5"
-                                d="M33.183,12.994c0.053,0.876-0.005,1.829-0.229,2.882c-1.281,5.995-5.912,9.115-11.635,9.115c0,0-3.47,0-4.313,0c-0.521,0-0.767,0.306-0.88,0.54l-1.74,8.049l-0.305,1.429h-0.006l-1.263,5.796l0.013,0.001c-0.014,0.064-0.039,0.125-0.039,0.194c0,0.553,0.447,1,1,1h7.333l0.013-0.01c0.472-0.007,0.847-0.344,0.945-0.788l0.018-0.015l1.812-8.416c0,0,0.126-0.803,0.97-0.803s4.178,0,4.178,0c5.723,0,10.401-3.106,11.683-9.102C42.18,16.106,37.358,13.019,33.183,12.994z">
-                            </path>
-                            <path fill="#283593"
-                                d="M19.66,13c-0.474,0-0.852,0.326-0.955,0.769L18.7,13.767l-2.575,11.765c0.113-0.234,0.359-0.54,0.88-0.54c0.844,0,4.235,0,4.235,0c5.723,0,10.432-3.12,11.713-9.115c0.225-1.053,0.282-2.006,0.229-2.882C33.166,12.993,33.148,13,33.132,13H19.66z">
-                            </path>
-                        </svg>
-                    </label>
-                </div>
-
-                {{-- אני מאשר/ת את מדיניות ביטולים וגם מדיניות פרטיות --}}
-                <div class="flex flex-row items-start sm:items-center mb-5 sm:mb-0">
-                    <input id="privecy" name="privecy" type="checkbox" value="privecy"
-                        class="focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" />
-                    <label for="privecy"
-                        class="tabs ml-3 text-base sm:text-lg font-medium text-[#201A3C] pr-2 flex flex-row flex-wrap gap-x-1 sm:items-center justify-start">
-                        <p> אני מאשר/ת </p>
-                        <p data-tab="1"
-                            class=" text-green-900 px-1  underline text-xl font-extrabold cursor-pointer showModal ">
-                            מדיניות ביטולים</p>
-                        <p>בנוסף</p>
-                        </p>
-                        <p data-tab="2"
-                            class=" text-green-900 px-1  underline text-xl font-extrabold cursor-pointer showModal ">
-                            מדיניות פרטיות</p>
-                </div>
-            </div>
+        <!-- Donation Aim Textarea -->
+        <div class="firstPage pt-6 lg:px-0 w-[220px] lg:w-[80%]">
+            <label for="donationAim" class="pr-1 block text-sm font-medium text-gray-700">سبب التبرع</label>
+            <textarea rows="4" name="donationAim" id="order_note" placeholder="سبب التبرع" required
+                      class="w-full mt-2 inline-flex items-center text-right justify-center border rounded-md focus:ring-green-500 focus:border-green-500 border-gray-300 sm:text-sm p-4 ml-6 md:ml-0"></textarea>
         </div>
-        <div class="">
-            @include('Components.ProjectDonations.PrivecySetting')
+
+        <!-- Privacy Policy Checkbox -->
+        <div class="flex flex-row items-start sm:items-center mb-5 sm:mb-0">
+            <input id="privecy" name="privecy" type="checkbox" value="privecy"
+                   class="focus:ring-[#349A37] bg-gray h-4 w-4 text-[#349A37] border-gray-300 relative" required>
+            <label for="privecy"
+                   class="tabs ml-3 text-base sm:text-lg font-medium text-[#201A3C] pr-2 flex flex-row flex-wrap gap-x-1 sm:items-center justify-start">
+                <p>אני מאשר/ת</p>
+                <p data-tab="1" class="text-green-900 px-1 underline text-xl font-extrabold cursor-pointer showModal">
+                    מדיניות ביטולים</p>
+                <p>בנוסף</p>
+                <p data-tab="2" class="text-green-900 px-1 underline text-xl font-extrabold cursor-pointer showModal">
+                    מדיניות פרטיות</p>
+                <div>
+                    @include('Components.ProjectDonations.PrivecySetting')
+                </div>
+            </label>
         </div>
-</div>
+        
+        <!-- PayPal Button -->
+        <button type="submit" class="w-sm flex bg-[#349a37] justify-center items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  hover:text-base focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.97733 35.5457C1.907 35.5458 1.83903 35.5729 1.78559 35.622C1.73215 35.671 1.69675 35.7389 1.6857 35.8135L0.00406346 47.2622C-0.00207564 47.304 0.000291042 47.3467 0.0109977 47.3874C0.0217043 47.4282 0.0404991 47.4659 0.0660895 47.4981C0.09168 47.5303 0.123452 47.5562 0.159237 47.5739C0.195022 47.5917 0.233968 47.6009 0.27339 47.601H2.26812C2.33839 47.6008 2.40632 47.5738 2.45975 47.5248C2.51318 47.4758 2.54863 47.408 2.55977 47.3336L3.05339 43.9714C3.06453 43.897 3.09998 43.8292 3.15341 43.7802C3.20684 43.7312 3.27476 43.7042 3.34502 43.704H5.15799C7.27697 43.704 9.07534 42.0448 9.40387 39.7959C9.73532 37.5285 8.08537 35.5504 5.74605 35.5457H1.97733ZM3.9162 38.1015H5.36707C6.56154 38.1015 6.95011 38.8579 6.82712 39.6945C6.70413 40.533 6.10063 41.1506 4.94494 41.1506H3.46822L3.9162 38.1015ZM13.4609 38.8803C12.9573 38.8823 12.3775 38.9928 11.7269 39.2837C10.2348 39.9512 9.5179 41.3314 9.21376 42.3375C9.21376 42.3375 8.24505 45.4069 10.4337 47.0935C10.4337 47.0935 12.4632 48.7165 14.7483 46.993L14.7091 47.2622C14.703 47.304 14.7054 47.3467 14.7161 47.3874C14.7268 47.4282 14.7456 47.4659 14.7712 47.4981C14.7968 47.5303 14.8285 47.5562 14.8643 47.5739C14.9001 47.5917 14.939 47.6009 14.9785 47.601H16.8719C17.017 47.601 17.1404 47.4873 17.1631 47.3331L18.315 39.4929C18.3212 39.4511 18.3188 39.4084 18.3081 39.3677C18.2974 39.3269 18.2786 39.2892 18.253 39.257C18.2274 39.2248 18.1957 39.1989 18.1599 39.1812C18.1241 39.1634 18.0851 39.1542 18.0457 39.1541H16.1523C16.0068 39.1541 15.8834 39.2678 15.8607 39.4216L15.799 39.8434H15.7985C15.7985 39.8434 14.9718 38.8742 13.4607 38.8803H13.4609ZM13.5228 41.3567C13.7402 41.3567 13.9391 41.3885 14.1173 41.4502C14.9341 41.732 15.3977 42.5738 15.2634 43.4872C15.0981 44.6119 14.2391 45.4403 13.1376 45.4403C12.9201 45.4403 12.7209 45.4083 12.5426 45.3467C11.7259 45.065 11.2596 44.2227 11.394 43.3093C11.5593 42.1851 12.4213 41.3567 13.5228 41.3567Z" fill="#003087"/>
+                <path d="M29.2432 35.5457C29.0981 35.5457 28.9747 35.6593 28.952 35.8135L27.2699 47.2622C27.2638 47.304 27.2662 47.3468 27.2769 47.3876C27.2876 47.4283 27.3065 47.4661 27.3321 47.4983C27.3577 47.5305 27.3896 47.5563 27.4254 47.5741C27.4612 47.5918 27.5002 47.601 27.5397 47.601H29.5344C29.6795 47.601 29.8029 47.4875 29.8256 47.3336L30.3197 43.9714C30.3308 43.897 30.3663 43.8292 30.4197 43.7802C30.4731 43.7312 30.541 43.7042 30.6113 43.704H32.4243C34.5433 43.704 36.3416 42.0448 36.6702 39.7959C37.0016 37.5285 35.3513 35.5504 33.0119 35.5457H29.2432ZM31.1821 38.1015H32.6329C33.8274 38.1015 34.2164 38.8579 34.0934 39.6945C33.9704 40.533 33.3667 41.1506 32.2108 41.1506H30.7341L31.1821 38.1015ZM40.7272 38.8803C40.2235 38.8823 39.6438 38.9928 38.9932 39.2837C37.5011 39.9512 36.7838 41.3314 36.4796 42.3375C36.4796 42.3375 35.5111 45.4069 37.6999 47.0935C37.6999 47.0935 39.7295 48.7165 42.0146 46.993L41.975 47.2622C41.9689 47.304 41.9712 47.3468 41.982 47.3876C41.9927 47.4283 42.0115 47.4661 42.0372 47.4983C42.0628 47.5305 42.0946 47.5563 42.1305 47.5741C42.1663 47.5918 42.2053 47.601 42.2448 47.601H44.1378C44.2081 47.6008 44.2761 47.5737 44.3295 47.5247C44.3829 47.4756 44.4184 47.4077 44.4294 47.3331L45.5814 39.4929C45.5875 39.4511 45.5851 39.4083 45.5744 39.3676C45.5636 39.3268 45.5448 39.289 45.5192 39.2568C45.4935 39.2246 45.4617 39.1988 45.4259 39.1811C45.3901 39.1633 45.3511 39.1541 45.3116 39.1541H43.4186C43.2731 39.1541 43.1497 39.2678 43.127 39.4216L43.065 39.8434C43.065 39.8434 42.2383 38.8742 40.7272 38.8803ZM40.7887 41.3567C41.0061 41.3567 41.2054 41.3885 41.3836 41.4502C42.2004 41.732 42.6636 42.5738 42.5295 43.4872C42.3642 44.6119 41.5052 45.4403 40.4037 45.4403C40.1862 45.4403 39.9874 45.4083 39.8091 45.3467C38.9924 45.065 38.5261 44.2227 38.6605 43.3093C38.8256 42.1851 39.6872 41.3567 40.7887 41.3567Z" fill="#0070E0"/>
+                <path d="M19.2134 39.154C19.1785 39.154 19.1441 39.1628 19.113 39.1797C19.0819 39.1967 19.0549 39.2213 19.0344 39.2516C19.0139 39.2819 19.0003 39.3169 18.9948 39.3539C18.9893 39.3909 18.9921 39.4288 19.0028 39.4644L21.0783 46.3788L19.2013 49.6378C19.1104 49.796 19.2161 49.9999 19.3895 49.9999H21.6073C21.6708 49.9999 21.7332 49.9824 21.7886 49.9489C21.8439 49.9155 21.8903 49.8673 21.9231 49.809L27.7198 39.5141C27.809 39.3559 27.7029 39.1536 27.5307 39.1536H25.3129C25.2488 39.1535 25.1859 39.1714 25.1302 39.2054C25.0745 39.2394 25.0281 39.2884 24.9954 39.3476L22.7136 43.4835L21.5552 39.3785C21.5173 39.2449 21.4028 39.1538 21.2725 39.1538L19.2134 39.154Z" fill="#003087"/>
+                <path d="M47.7329 35.5457C47.5879 35.5457 47.4644 35.6593 47.4417 35.8135L45.7597 47.2622C45.7535 47.304 45.7559 47.3468 45.7666 47.3876C45.7774 47.4283 45.7962 47.4661 45.8218 47.4983C45.8475 47.5305 45.8793 47.5563 45.9151 47.5741C45.951 47.5918 45.99 47.601 46.0294 47.601H48.0238C48.1688 47.601 48.2922 47.4875 48.315 47.3336L49.9974 35.8844C50.0036 35.8426 50.0012 35.7998 49.9904 35.759C49.9797 35.7182 49.9608 35.6804 49.9351 35.6482C49.9095 35.616 49.8776 35.5901 49.8417 35.5724C49.8058 35.5547 49.7668 35.5456 49.7273 35.5457H47.7329Z" fill="#0070E0"/>
+                <path d="M23.0958 6.02122C22.6983 6.02122 22.3595 6.33159 22.2976 6.75339L20.9708 15.7842L19.7517 24.0827L19.7509 24.0896L19.7523 24.0827L20.9714 15.7842C21.0333 15.3624 21.3716 15.0521 21.7694 15.0521H25.6563C29.568 15.0521 32.8883 11.9885 33.4945 7.8371C33.5398 7.52733 33.5654 7.21459 33.571 6.90108V6.90063H33.5706C32.5765 6.34076 31.4091 6.021 30.13 6.021L23.0958 6.02122Z" fill="#001C64"/>
+                <path d="M33.5708 6.90039C33.5654 7.20874 33.5404 7.52135 33.4943 7.83686C32.8879 11.9882 29.5678 15.0518 25.6561 15.0518H21.7692C21.3716 15.0518 21.0333 15.3622 20.9712 15.784L19.7521 24.0825L18.9871 29.2889C18.9724 29.3895 18.9781 29.4923 19.0039 29.5902C19.0298 29.6882 19.075 29.779 19.1367 29.8564C19.1983 29.9337 19.2748 29.9959 19.3609 30.0385C19.4471 30.0811 19.5408 30.1032 19.6356 30.1032H23.8546C24.2525 30.1032 24.5909 29.7928 24.653 29.371L25.7643 21.8047C25.7944 21.6006 25.8912 21.4147 26.0375 21.2804C26.1839 21.1462 26.37 21.0723 26.5625 21.0721H29.0469C32.9586 21.0721 36.2785 18.0087 36.8847 13.8576C37.3152 10.9106 35.9337 8.2298 33.5708 6.90039Z" fill="#0070E0"/>
+                <path d="M18.3025 0C18.11 0.00018021 17.9239 0.0740525 17.7776 0.208339C17.6313 0.342625 17.5344 0.528521 17.5043 0.732619L14.1936 23.2679C14.1788 23.3685 14.1845 23.4714 14.2103 23.5694C14.2361 23.6674 14.2813 23.7582 14.343 23.8357C14.4046 23.9131 14.4811 23.9753 14.5673 24.0179C14.6535 24.0606 14.7472 24.0826 14.8421 24.0827H19.7517L20.9708 15.7842L22.2976 6.75334C22.3595 6.33154 22.6983 6.02117 23.0958 6.02117H30.1298C31.4091 6.02117 32.5765 6.34116 33.5708 6.90036C33.6386 3.1209 30.7333 0.000225353 26.7386 0.000225353L18.3025 0Z" fill="#003087"/>
+                </svg>
+                
+                
+        </button>
+    </div>
 </form>
 
-<!-- third Page Input -->
-<div class="thirdPage mt-24 flex flex-col items-center justify-center hidden">
-    @php
-        $img = 'storage/' . nova_get_setting('logo', 'default_value');
-    @endphp
-    <img class="w-[370px] h-24" src="/{{ $img }}" alt="logo">
-    <p class="text-[30px] max-w-md mt-8 text-center">
-        تم التبرع بنجاح لصالح مشروع اسم المشروع بمبلغ قدره
-        <span class="text-[#349A37] InputValue">500 شيكل </span>
-    </p>
-    <a target="_self"
-        class="bg-[#349A37] mt-5 hover:bg-[#101426] duration-200 py-3 px-4 ml-2 text-white  rounded-[50px] text-lg  "
-        href="/">الصفحة الرئيسية</a>
-
-</div>
-
-<div class="flex flex-row items-center justify-center md:justify-start gap-x-2">
-    {{-- <div class="btn-btn-payPal hidden mt-10" id="btn-paypal-checkout"></div> --}}
-    <div class="mt-10 flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5">
-        <div
-            class="secondPage  flex flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-start  gap-x-5 hidden">
-            <button id="PreviousPageDonations"
-                class=" rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">الخلف</button>
-        </div>
-        <button id="firstPageDonations" type="submit"
-            class="Ctnbtn  rounded-[50px] bg-[#349A37] text-white w-[150px] py-4 font-[700] hover:bg-[#101426] duration-200">متابعة</button>
-        <div id="paypal-button-container" class="mt-2 btn-btn-payPal"></div>
-
-    </div>
-</div>
