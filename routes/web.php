@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessagingController;
 use App\Http\Controllers\NotificationTest;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PapPalController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\WebNotificationController;
 use App\Models\Project;
@@ -37,6 +38,20 @@ use Illuminate\Support\Facades\Response;
 |
 */
 
+use App\Http\Controllers\PayPalController;
+Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
+Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
+
+// Route::get('go-payment', [PapPalController::class, 'goPayment'])->name('payment.go');
+
+// Route::get('payment',[PapPalController::class, 'payment'])->name('payment');
+// Route::get('cancel',[PapPalController::class, 'cancel'])->name('payment.cancel');
+// Route::get('payment-success', [PapPalController::class, 'success'])->name('payment.success');
+
+
 Route::post('/settings', [HomeController::class, 'appSetting'])->name('settings.save');
 Route::get('/settings', [HomeController::class, 'getAppSettings'])->name('settings.get');
 
@@ -48,18 +63,18 @@ Route::get('/download-android-apk', function () {
     ]);
 });
 
-// routes/web.php
-Route::get('/payment-form', function () {
-    return view('payment.payment');
-})->name('payment.form');
-// Route for initiating the payment process
-Route::post('/initiate-payment', [CardcomController::class, 'initiatePayment'])->name('payment.initiate');
+// // routes/web.php
+// Route::get('/payment-form', function () {
+//     return view('payment.payment');
+// })->name('payment.form');
+// // Route for initiating the payment process
+// Route::post('/initiate-payment', [CardcomController::class, 'initiatePayment'])->name('payment.initiate');
 
-// Route for handling successful payment response
-Route::get('/payment-success', [CardcomController::class, 'success'])->name('payment.success');
+// // Route for handling successful payment response
+// Route::get('/payment-success', [CardcomController::class, 'success'])->name('payment.success');
 
-// Route for handling failed payment response
-Route::get('/payment-failure', [CardcomController::class, 'failure'])->name('payment.failure');
+// // Route for handling failed payment response
+// Route::get('/payment-failure', [CardcomController::class, 'failure'])->name('payment.failure');
 
 
 

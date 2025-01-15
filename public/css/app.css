@@ -1260,9 +1260,6 @@ video {
 .w-full{
   width: 100%;
 }
-.w-\[40\%\]{
-  width: 40%;
-}
 .min-w-\[100px\]{
   min-width: 100px;
 }
@@ -1361,14 +1358,14 @@ video {
 .max-w-none{
   max-width: none;
 }
+.max-w-sm{
+  max-width: 24rem;
+}
 .max-w-xl{
   max-width: 36rem;
 }
 .max-w-xs{
   max-width: 20rem;
-}
-.max-w-\[220px\]{
-  max-width: 220px;
 }
 .flex-1{
   flex: 1 1 0%;
@@ -1573,6 +1570,11 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+.space-y-6 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 .divide-y > :not([hidden]) ~ :not([hidden]){
   --tw-divide-y-reverse: 0;
@@ -1853,6 +1855,10 @@ video {
 .bg-white\/30{
   background-color: rgb(255 255 255 / 0.3);
 }
+.bg-blue-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+}
 .bg-opacity-75{
   --tw-bg-opacity: 0.75;
 }
@@ -1887,6 +1893,9 @@ video {
 }
 .p-6{
   padding: 1.5rem;
+}
+.p-8{
+  padding: 2rem;
 }
 .px-0{
   padding-left: 0px;
@@ -2260,6 +2269,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(52 154 55 / var(--tw-text-opacity));
 }
+.text-\[\#349a37\]{
+  --tw-text-opacity: 1;
+  color: rgb(52 154 55 / var(--tw-text-opacity));
+}
 .text-\[\#6B7280\]{
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -2493,6 +2506,14 @@ body{
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
+.hover\:text-lg:hover{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.hover\:text-base:hover{
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
 .hover\:text-\[\#349A37\]:hover{
   --tw-text-opacity: 1;
   color: rgb(52 154 55 / var(--tw-text-opacity));
@@ -2544,6 +2565,10 @@ body{
   --tw-border-opacity: 1;
   border-color: rgb(147 197 253 / var(--tw-border-opacity));
 }
+.focus\:border-blue-500:focus{
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
 .focus\:border-green-500:focus{
   --tw-border-opacity: 1;
   border-color: rgb(34 197 94 / var(--tw-border-opacity));
@@ -2579,6 +2604,10 @@ body{
 .focus\:ring-\[\#349A37\]:focus{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(52 154 55 / var(--tw-ring-opacity));
+}
+.focus\:ring-blue-500:focus{
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
 }
 .focus\:ring-green-500:focus{
   --tw-ring-opacity: 1;
@@ -2636,12 +2665,40 @@ body{
   margin-left: 0.5rem;
 }
 @media (prefers-color-scheme: dark){
+  .dark\:border-\[\#349a37\]{
+    --tw-border-opacity: 1;
+    border-color: rgb(52 154 55 / var(--tw-border-opacity));
+  }
   .dark\:bg-gray-800\/30{
     background-color: rgb(31 41 55 / 0.3);
+  }
+  .dark\:bg-white{
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
+  .dark\:text-\[\#349a37\]{
+    --tw-text-opacity: 1;
+    color: rgb(52 154 55 / var(--tw-text-opacity));
   }
   .dark\:text-gray-800{
     --tw-text-opacity: 1;
     color: rgb(31 41 55 / var(--tw-text-opacity));
+  }
+  .dark\:placeholder-\[\#349a37\]::-moz-placeholder{
+    --tw-placeholder-opacity: 1;
+    color: rgb(52 154 55 / var(--tw-placeholder-opacity));
+  }
+  .dark\:placeholder-\[\#349a37\]::placeholder{
+    --tw-placeholder-opacity: 1;
+    color: rgb(52 154 55 / var(--tw-placeholder-opacity));
+  }
+  .dark\:focus\:border-\[\#349a37\]:focus{
+    --tw-border-opacity: 1;
+    border-color: rgb(52 154 55 / var(--tw-border-opacity));
+  }
+  .dark\:focus\:ring-\[\#349a37\]:focus{
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(52 154 55 / var(--tw-ring-opacity));
   }
   .group:hover .dark\:group-hover\:bg-gray-800\/60{
     background-color: rgb(31 41 55 / 0.6);
@@ -2788,9 +2845,6 @@ body{
   }
   .sm\:w-full{
     width: 100%;
-  }
-  .sm\:w-\[35\%\]{
-    width: 35%;
   }
   .sm\:max-w-\[620px\]{
     max-width: 620px;
@@ -3021,9 +3075,6 @@ body{
   .md\:w-full{
     width: 100%;
   }
-  .md\:w-\[30\%\]{
-    width: 30%;
-  }
   .md\:min-w-0{
     min-width: 0px;
   }
@@ -3118,10 +3169,6 @@ body{
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
-  .md\:px-8{
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
   .md\:pr-0{
     padding-right: 0px;
   }
@@ -3177,10 +3224,6 @@ body{
   .md\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
-  }
-  .md\:text-2xl{
-    font-size: 1.5rem;
-    line-height: 2rem;
   }
   .md\:leading-7{
     line-height: 1.75rem;
@@ -3332,12 +3375,6 @@ body{
   .lg\:w-auto{
     width: auto;
   }
-  .lg\:w-\[25\%\]{
-    width: 25%;
-  }
-  .lg\:w-\[160px\]{
-    width: 160px;
-  }
   .lg\:max-w-\[160px\]{
     max-width: 160px;
   }
@@ -3383,9 +3420,6 @@ body{
   }
   .lg\:gap-y-28{
     row-gap: 7rem;
-  }
-  .lg\:rounded-\[50px\]{
-    border-radius: 50px;
   }
   .lg\:px-0{
     padding-left: 0px;
@@ -3437,10 +3471,6 @@ body{
   .lg\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
-  }
-  .lg\:text-2xl{
-    font-size: 1.5rem;
-    line-height: 2rem;
   }
 }
 @media (min-width: 1280px){
@@ -3507,9 +3537,6 @@ body{
   .xl\:w-auto{
     width: auto;
   }
-  .xl\:w-\[20\%\]{
-    width: 20%;
-  }
   .xl\:max-w-\[184px\]{
     max-width: 184px;
   }
@@ -3544,9 +3571,6 @@ body{
   .xl\:gap-y-0{
     row-gap: 0px;
   }
-  .xl\:rounded-\[50px\]{
-    border-radius: 50px;
-  }
   .xl\:bg-transparent{
     background-color: transparent;
   }
@@ -3564,15 +3588,15 @@ body{
   .xl\:text-right{
     text-align: right;
   }
+  .xl\:text-2xl{
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
   .xl\:text-\[16px\]{
     font-size: 16px;
   }
   .xl\:text-\[30px\]{
     font-size: 30px;
-  }
-  .xl\:text-2xl{
-    font-size: 1.5rem;
-    line-height: 2rem;
   }
   .xl\:text-\[\#000\]{
     --tw-text-opacity: 1;
@@ -3590,10 +3614,6 @@ body{
 @media (min-width: 1536px){
   .\32xl\:h-96{
     height: 24rem;
-  }
-  .\32xl\:gap-x-8{
-    -moz-column-gap: 2rem;
-         column-gap: 2rem;
   }
   .\32xl\:gap-x-6{
     -moz-column-gap: 1.5rem;
