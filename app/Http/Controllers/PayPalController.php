@@ -28,11 +28,17 @@ class PayPalController extends Controller
             $request->all(),
             [
                 'donation_amount' => 'required',
+                'privecy' => 'accepted',
+
 
             ],
             [
 
                 'donation_amount.required' => ' الرجاء ادخال المبلغ المراد التبرع به . ',
+                'privecy.accepted' => ' الرجاء وضع اشارة صح على شروط الخصوصية ',
+                'privecy.accepted' => 'يجب قبول شروط الخصوصية.',  // Custom message for the accepted rule
+
+
 
             ]
         );
