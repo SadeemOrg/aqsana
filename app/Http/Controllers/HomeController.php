@@ -2579,7 +2579,6 @@ class HomeController extends BaseController
     public function getAppSettings()
     {
         $settings = DB::table('nova_settings')->pluck('value', 'key')->toArray();
-        dd($settings);
         return response()->json($settings);
     }
 }
