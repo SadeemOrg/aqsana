@@ -350,7 +350,7 @@ class Donation extends Resource
             Button::make(__('print Pdf'))->link('/generate-pdf/' . $this->deleted_ref . '/2')->style('custom')->canSee(function () {
                 return $this->is_delete != 0;
             }),
-//
+            //
             Button::make(__('print'))->link('secure.cardcom.solutions/Note')->style('custom')->canSee(function () {
                 return true;
             }),
@@ -410,7 +410,7 @@ class Donation extends Resource
     public static function redirectAfterCreate(NovaRequest $request, $resource)
     {
         // dd();
-        return '/bill?location=' . $resource->id . '&type=1'.'&cardcom_Invoice_number='.$resource->cardcom_Invoice_number;
+        return '/bill?location=' . $resource->id . '&type=1' . '&cardcom_Invoice_number=' . $resource->cardcom_Invoice_number;
     }
 
 
@@ -478,6 +478,7 @@ class Donation extends Resource
         }
         // shek
         elseif ($request->Payment_type == '2') {
+            $formattedDate = Carbon::parse($model->transaction_date)->format('d/m/Y');
 
 
             $totalDoubtValue = array_sum(array_map(function ($item) {
@@ -496,6 +497,8 @@ class Donation extends Resource
                 'InvoiceHead.Email'       => $request->email,
                 'InvoiceHead.Language'    => $selectedLanguage,
                 'InvoiceHead.SendByEmail' => $request->send_to_email,
+                'InvoiceHead.InvDate' => $formattedDate,
+
             ];
             foreach ($request->Payment_type_details as $index => $detail) {
                 if ($index === 0) {
@@ -517,6 +520,8 @@ class Donation extends Resource
         }
         // hawale
         elseif ($request->Payment_type == '4') {
+            $formattedDate = Carbon::parse($model->transaction_date)->format('d/m/Y');
+            $formattedDatedetails = Carbon::parse($request->Payment_type_details[0]['attributes']['Date'])->format('d/m/Y');
             $params = [
                 'terminalnumber'          => '154954',
                 'username'                => 'alaqsa2024',
@@ -529,7 +534,8 @@ class Donation extends Resource
                 'InvoiceHead.Language'    => $selectedLanguage,
                 'InvoiceHead.SendByEmail' => $request->send_to_email,
                 'CustomPay.TransactionID' => 101011,
-                'CustomPay.TransDate'     => Carbon::parse($request->Payment_type_details[0]['attributes']['Date'])->format('d/m/Y'),
+                'CustomPay.TransDate'     => $formattedDatedetails,
+                'InvoiceHead.InvDate' => $formattedDate,
                 'CustomPay.Description'   => 'Bank Deposit',
                 'CustomPay.Sum'           => $request->Payment_type_details[0]['attributes']['equivelant_amount'],
                 'CustomPay.Asmacta'       => $largestBillNumber,
