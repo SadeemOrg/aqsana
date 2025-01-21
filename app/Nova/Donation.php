@@ -461,8 +461,8 @@ class Donation extends Resource
         if ($request->Payment_type == '1') {
             $formattedDate = Carbon::parse($model->transaction_date)->format('d/m/Y');
             $params = [
-                'terminalnumber'          => '1001',
-                'username'                => 'test2025',
+                'terminalnumber'          => '154954',
+                'username'                => 'alaqsa2024',
                 'InvoiceType'             => 3,
                 'InvoiceHead.CustName' => $CustomerName,
                 'cash'                    => $request->transact_amount,
@@ -486,8 +486,8 @@ class Donation extends Resource
 
 
             $params = [
-                'terminalnumber'          => '1001',
-                'username'                => 'test2025',
+                'terminalnumber'          => '154954',
+                'username'                => 'alaqsa2024',
                 'InvoiceType'             => 3,
                 'InvoiceHead.CustName'    => $CustomerName,
                 'InvoiceLines.Quantity'   => 1,
@@ -518,8 +518,8 @@ class Donation extends Resource
         // hawale
         elseif ($request->Payment_type == '4') {
             $params = [
-                'terminalnumber'          => '1001',
-                'username'                => 'test2025',
+                'terminalnumber'          => '154954',
+                'username'                => 'alaqsa2024',
                 'InvoiceType'             => 3,
                 'InvoiceHead.CustName'    => $CustomerName,
                 'InvoiceLines.Quantity'   => 1,
