@@ -43,6 +43,7 @@
         "fontech/nova-searchable-select-filter": "^0.1.0",
         "fruitcake/laravel-cors": "^2.0",
         "ganyicz/nova-callbacks": "^1.1",
+        "google/apiclient": "^2.18",
         "guzzlehttp/guzzle": "^7.0.1",
         "gwd/laravel-nova-flexible-content": "^0.0.1",
         "halimtuhu/array-images": "^1.1",
