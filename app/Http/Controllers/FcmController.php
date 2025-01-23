@@ -51,7 +51,7 @@ class FcmController extends Controller
         $description = $request->body;
         $projectId = 'alaqsa-association';//config('services.fcm.project_id'); # INSERT COPIED PROJECT ID
 
-        $credentialsFilePath = storage_path('/app/json/file.json'); //public_path('json/file.json');
+        $credentialsFilePath = storage_path('app/json/file.json'); //public_path('json/file.json');
         //C:\Users\USER2022\Documents\GitHub\Al-Aqsa-Association\public\json\file.js
         $client = new GoogleClient();
         $client->setAuthConfig($credentialsFilePath);
