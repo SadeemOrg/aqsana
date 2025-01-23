@@ -51,8 +51,8 @@ class FcmController extends Controller
         $description = $request->body;
         $projectId = 'alaqsa-association';//config('services.fcm.project_id'); # INSERT COPIED PROJECT ID
 
-        $credentialsFilePath = public_path('json/file.json');
-        //Storage::path('/app/json/file.json');C:\Users\USER2022\Documents\GitHub\Al-Aqsa-Association\public\json\file.js
+        $credentialsFilePath = storage_path('/app/json/file.json'); //public_path('json/file.json');
+        //C:\Users\USER2022\Documents\GitHub\Al-Aqsa-Association\public\json\file.js
         $client = new GoogleClient();
         $client->setAuthConfig($credentialsFilePath);
         $client->addScope('https://www.googleapis.com/auth/firebase.messaging');
