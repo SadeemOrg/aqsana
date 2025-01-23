@@ -12,6 +12,9 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PapPalController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\WebNotificationController;
+use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\FcmController;
+
 use App\Models\Project;
 use App\Models\TelephoneDirectory;
 use App\Models\Transaction;
@@ -38,7 +41,10 @@ use Illuminate\Support\Facades\Response;
 |
 */
 
-use App\Http\Controllers\PayPalController;
+
+// Route::PUT('update-device-token', [FcmController::class, 'updateDeviceToken']);
+// Route::post('send-fcm-notification', [FcmController::class, 'sendFcmNotification']);
+
 Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
 Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
 Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
