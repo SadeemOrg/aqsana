@@ -26,6 +26,7 @@ use App\Http\Controllers\VolunteerController;
 
 
 
+
 Route::PUT('update-device-token', [FcmController::class, 'updateDeviceToken']);
 Route::post('send-fcm-notification', [FcmController::class, 'sendFcmNotification']);
 
