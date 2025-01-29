@@ -9,6 +9,8 @@ class Kernel extends ConsoleKernel
 {
     protected $commands = [
         Commands\ProjectStartEnd::class,
+        \App\Console\Commands\DailyJob::class,
+
     ];
     /**
      * Define the application's command schedule.
@@ -20,6 +22,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('Project:StartEnd')
         ->everyMinute();
+        $schedule->command('daily:job') ->everyMinute();
+
     }
 
     /**
