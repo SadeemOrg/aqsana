@@ -2561,4 +2561,24 @@ class HomeController extends BaseController
 
         return response()->json($response);
     }
+    public function appSetting(Request $request)
+    {
+
+
+        foreach ($request->all() as $key => $value) {
+            DB::table('nova_settings')
+                ->updateOrInsert(
+                    ['key' => $key], // Check for the specific setting key
+                    ['value' => $value] // Insert or update the value
+                );
+        }
+
+
+        return response()->json(['message' => 'تم الحفظ بنجاح!']);
+    }
+    public function getAppSettings()
+    {
+        $settings = DB::table('nova_settings')->pluck('value', 'key')->toArray();
+        return response()->json($settings);
+    }
 }

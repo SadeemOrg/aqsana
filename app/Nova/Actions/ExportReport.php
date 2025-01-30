@@ -40,7 +40,7 @@ class ExportReport extends Action
      */
     public function fields()
     {
-        // return [
+        return [
         //     Select::make('نوع التاريخ', 'type')
         //         ->options([
         //             '1' => 'تاريخ السند',
@@ -68,6 +68,6 @@ class ExportReport extends Action
         //         ])
         //         ->displayUsingLabels()->default(1),
 
-        // ];
+        ];
     }
 }

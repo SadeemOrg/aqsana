@@ -45,7 +45,9 @@
         "build-number-field": "cd nova-components/NumberField && npm run dev",
         "build-number-field-prod": "cd nova-components/NumberField && npm run prod",
         "build-bookings-bus": "cd nova-components/BookingsBus && npm run dev",
-        "build-bookings-bus-prod": "cd nova-components/BookingsBus && npm run prod"
+        "build-bookings-bus-prod": "cd nova-components/BookingsBus && npm run prod",
+        "build-app-settings": "cd nova-components/AppSettings && npm run dev",
+        "build-app-settings-prod": "cd nova-components/AppSettings && npm run prod"
     },
     "devDependencies": {
         "@popperjs/core": "^2.10.2",

@@ -89,76 +89,56 @@ class QawafilAlaqsa extends Resource
 
     public static function indexQuery(NovaRequest $request, $query)
     {
-
+        // Fetch Close Projects
         $CloseProjects = $query->where('project_type', '2')->get();
-        foreach ($CloseProjects as $key => $CloseProject) {
-            $starttime = Carbon::parse($CloseProject->start_date);
-            $finishTime = Carbon::parse($CloseProject->end_date);
-            $now = Carbon::now();
-            $startDate = Carbon::createFromFormat('Y-m-d H:i:s',   $starttime);
-            $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $finishTime);
-            $nowtime = Carbon::createFromFormat('Y-m-d H:i:s', $now);
-            $projects = DB::table('project_status')->where('project_id', $CloseProject->id)->first();
-            if (($endDate->lt($nowtime)) && $projects->status != 3) {
-                DB::table('project_status')
-                    ->where('project_id', $CloseProject->id)
-                    ->update(['status' => DB::raw('status+1'),]);
-                TripBooking::where('project_id', $CloseProject->id)
-                    ->update([
-                        'status' => '0'
-                    ]);
-                DB::table('project_status')
-                    ->where('project_id', $CloseProject->id)
-                    ->first();
-                switch ($CloseProject->repetition) {
-                    case "1":
-                        $newQafel = $CloseProject->replicate();
-                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addDays(8);
-                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addDays(8);
-                        break;
-                    case "2":
-                        $newQafel = $CloseProject->replicate();
-                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addWeeks(8);
-                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addWeeks(8);
-                        break;
-                    case "3":
-                        $newQafel = $CloseProject->replicate();
-                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addWeeks(8);
-                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addWeeks(8);
-                        break;
-                    case "4":
-                        $newQafel = $CloseProject->replicate();
-                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addMonths(8);
-                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addMonths(8);
-                        break;
-                    case "5":
-                        $newQafel = $CloseProject->replicate();
-                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->addYears(8);
-                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->addYears(8);
-                        break;
-                    default:
-                        break;
-                }
 
-                if (isset($newQafel)) {
-                    $newQafel->created_at = Carbon::now();
-                    $newQafel->save();
-                    $Buses = $CloseProject->Bus;
-                    foreach ($Buses as $key => $Bus) {
-                        DB::table('project_bus')
-                            ->updateOrInsert(
-                                ['project_id' => $newQafel->id, 'bus_id' => $Bus->id],
+        // Use a transaction for safety
+        DB::transaction(function () use ($CloseProjects) {
+            foreach ($CloseProjects as $CloseProject) {
+                $now = Carbon::now();
+                $endDate = Carbon::parse($CloseProject->end_date);
 
+                $projectStatus = DB::table('project_status')->where('project_id', $CloseProject->id)->first();
+
+                // Check if the project has expired and update status
+                if ($endDate->lt($now) && $projectStatus->status != 3) {
+                    DB::table('project_status')->where('project_id', $CloseProject->id)->increment('status');
+                    TripBooking::where('project_id', $CloseProject->id)->update(['status' => '0']);
+
+                    // Handle project repetition
+                    $repetitionIntervals = [
+                        "1" => "addDays",
+                        "2" => "addWeeks",
+                        "3" => "addWeeks",
+                        "4" => "addMonths",
+                        "5" => "addYears",
+                    ];
+
+                    if (isset($repetitionIntervals[$CloseProject->repetition])) {
+                        $newQafel = $CloseProject->replicate();
+                        $newQafel->start_date = Carbon::parse($newQafel->start_date)->{$repetitionIntervals[$CloseProject->repetition]}(8);
+                        $newQafel->end_date = Carbon::parse($newQafel->end_date)->{$repetitionIntervals[$CloseProject->repetition]}(8);
+                        $newQafel->created_at = Carbon::now();
+                        $newQafel->save();
+
+                        // Replicate related buses
+                        foreach ($CloseProject->Bus as $Bus) {
+                            DB::table('project_bus')->updateOrInsert(
+                                ['project_id' => $newQafel->id, 'bus_id' => $Bus->id]
                             );
-                    }
+                        }
 
-                    DB::table('project_status')->insert([
-                        'project_id' => $newQafel->id,
-                        'status' => 2,
-                    ]);
+                        // Insert default status for the new project
+                        DB::table('project_status')->insert([
+                            'project_id' => $newQafel->id,
+                            'status' => 2,
+                        ]);
+                    }
                 }
             }
-        }
+        });
+
+        // Restrict query based on user role
         $userRoles = $request->user()->userrole();
         $query = $query->where('project_type', '2');
 
@@ -167,7 +147,8 @@ class QawafilAlaqsa extends Resource
         }
 
 
-        return $query;
+        return $query->reorder()->where('end_date', '>=', Carbon::now())
+            ->orderBy('start_date', 'asc');
     }
 
 
@@ -175,7 +156,7 @@ class QawafilAlaqsa extends Resource
     {
         return [
             (new Panel(__('main'), [
-                ID::make(__('ID'), 'id')->sortable(),
+                ID::make(__('ID'), 'id'),
                 ActionButton::make(__('Action'))
                     ->action(ProjectStartEnd::class, (string) $this->id)
                     ->text(__('لم يبدا بعد'))
@@ -260,6 +241,19 @@ class QawafilAlaqsa extends Resource
 
                 Text::make(__("QawafilAlaqsa name"), "project_name")->rules('required'),
                 Text::make(__("QawafilAlaqsa describe"), "project_describe")->hideFromIndex(),
+                Text::make(__("TripBooking number"), 'TripBooking number', function () {
+                    $buss = $this->bus;
+                    $number = 0;
+                    foreach ($buss as $key => $bus) {
+                        $number_of_people = TripBooking::where([
+                            ['bus_id', $bus->id],
+                            ['status', '1'],
+                        ])->sum('number_of_people');
+
+                        $number +=  $number_of_people;
+                    }
+                    return $number;
+                })->hideWhenCreating()->hideWhenUpdating()->asHtml(),
 
                 Select::make(__("Repetition"), "repetition")->options([
                     '6' => __('Once'),
@@ -351,7 +345,7 @@ class QawafilAlaqsa extends Resource
                     ])
                     ->hideFromIndex()->hideFromDetail()->singleSelect(),
                 text::make(__('note'), "note"),
-                DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required'),
+                DateTime::make(__('QawafilAlaqsa start'), 'start_date')->rules('required')->sortable(),
                 DateTime::make(__('QawafilAlaqsa end'), 'end_date')->rules('required', new QawafilAlaqsaDate($request->start_date)),
 
                 Boolean::make(__('is_has_Donations'), 'is_donation')
@@ -531,7 +525,7 @@ class QawafilAlaqsa extends Resource
                     'project_describe' => $model->project_describe,
                     'city' => $model->city,
                     'area' => $model->area,
-                    'sector'=> '5',
+                    'sector' => '5',
                     'repetition' => $model->repetition,
                     'admin_id' => $model->admin_id,
                     'trip_from' => $model->trip_from,
@@ -621,24 +615,62 @@ class QawafilAlaqsa extends Resource
             }
             $result = array_intersect($stack, $busstack);
 
-            $deleted = DB::table('project_bus')->where(['project_id' => $model->id])
+            DB::table('project_bus')->where(['project_id' => $model->id])
                 ->whereNotIn('bus_id', $result)
                 ->delete();
 
-            // dd(gettype($buss));
-            // $bus_id=$buss[0]->id;
 
+            $largebus_number = DB::table('project_bus')
+                ->where('project_id', $model->id)
+                ->max('bus_number');
+
+            if (is_null($largebus_number)) {
+                // الحصول على الحروف المستخدمة بالفعل للمشاريع
+                $usedChars = DB::table('project_bus')
+                    ->selectRaw("DISTINCT SUBSTRING(bus_number, 1, 1) as first_char")
+                    ->pluck('first_char')
+                    ->map(fn($char) => strtoupper($char)) // التأكد من الحروف الكبيرة
+                    ->toArray();
+
+                // إنشاء قائمة بجميع الحروف الكبيرة
+                $allChars = range('A', 'Z');
+
+                // البحث عن أول حرف غير مستخدم
+                $availableChar = collect($allChars)
+                    ->first(fn($char) => !in_array($char, $usedChars));
+
+                // إذا لم يكن هناك أي حرف مستخدم بعد
+                if (!$availableChar) {
+                    $availableChar = 'A'; // تبدأ من A إذا كان لا يوجد حروف مستخدمة
+                }
+                $largebus_number = $availableChar . '0';
+
+            }
 
             foreach ($buss as $key => $user) {
+                $existingRecord = DB::table('project_bus')
+                    ->where('project_id', $model->id)
+                    ->where('bus_id', $user->id)
+                    ->first();
 
 
-                DB::table('project_bus')
-                    ->updateOrInsert(
-                        ['project_id' => $model->id, 'bus_id' => $user->id],
 
-                    );
+                $data = ['project_id' => $model->id, 'bus_id' => $user->id];
+                if (!$existingRecord) {
+                    if (preg_match('/([A-Z])(\d+)/', $largebus_number, $matches)) {
+                        $currentChar = $matches[1];
+                        $currentNumber = (int)$matches[2];
+                        $newNumber = $currentNumber + 1;
+                        $largebus_number = $currentChar . $newNumber;
+                    }
+
+                    $data['bus_number'] = $largebus_number;
+                }
+
+                DB::table('project_bus')->updateOrInsert($data);
             }
         }
+
         if ($request->newbus) {
             $buss = $request->newbus;
 
@@ -660,30 +692,40 @@ class QawafilAlaqsa extends Resource
                 if ($user->type() == 'regular_city') {
                     DB::table('project_bus')
                         ->updateOrInsert(
-                            ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id']],
+                            ['project_id' => $model->id, 'city_id' => $citye['id'], 'bus_id' => $bus['id'], 'bus_number' => $largebus_number + 1],
 
                         );
+
+                    $largebus_number = $largebus_number + 1;
                 } else {
                     DB::table('project_bus')
                         ->updateOrInsert(
-                            ['project_id' => $model->id, 'bus_id' => $bus['id']],
+                            [
+                                'project_id' => $model->id,
+                                'bus_id' => $bus['id'],
+                                'bus_number' => $largebus_number + 1
+                            ],
 
                         );
+
+                    $largebus_number = $largebus_number + 1;
                 }
             }
         }
-        $buses = $model->Bus;
-        $newProjects = Project::where('project_name', $model->project_name)
-            ->where('trip_from', $model->trip_from)
-            ->get();
-        $newProjects->map(function ($project) use ($buses) {
-            // Loop through each bus and attach it to the project if not already attached
-            $buses->each(function ($bus) use ($project) {
-                if (!$project->Bus->contains($bus->id)) {
-                    $project->Bus()->attach($bus->id);
-                }
-            });
-        });
+
+
+        // $buses = $model->Bus;
+        // $newProjects = Project::where('project_name', $model->project_name)
+        //     ->where('trip_from', $model->trip_from)
+        //     ->get();
+        // $newProjects->map(function ($project) use ($buses) {
+        //     // Loop through each bus and attach it to the project if not already attached
+        //     $buses->each(function ($bus) use ($project) {
+        //         if (!$project->Bus->contains($bus->id)) {
+        //             $project->Bus()->attach($bus->id);
+        //         }
+        //     });
+        // });
     }
     /**
      * Get the cards available for the request.
@@ -720,6 +762,7 @@ class QawafilAlaqsa extends Resource
             new ReportAdmin(),
             new ReportTripFrom(),
             new DateRangeFilter(__("From_to"), "start_date"),
+
 
 
 

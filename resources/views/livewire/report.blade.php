@@ -116,7 +116,7 @@
                                     </th>
                                     <th scope="col"
                                         class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">
-                                        التاريخ النهاية
+                                        تاريخ النهاية
                                     </th>
                                     <th scope="col"
                                         class="py-3.5 px-3 text-right text-sm font-semibold text-[#349A37]">ساعة
@@ -203,7 +203,9 @@
                                             <td></td>
 
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-white">
-                                                {{ $WorkHoursearch['type'] }}</td>
+                                                {{ $WorkHoursearch['type'] }}-<br>
+                                                عدد ايام الاجازة
+                                                {{$WorkHoursearch['days']  }}</td>
 
 
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-white min-w-[150px]">
@@ -268,5 +270,11 @@
         </div>
     </div>
 
+    <script>
+        window.addEventListener('open-pdf', event => {
+            // Open the PDF URL in a new tab
+            window.open(event.detail.url, '_blank');
+        });
+    </script>
 
 </div>

@@ -353,9 +353,7 @@
 </div>
 <script>
 
-$( "#default-datepicker" ).datepicker({
-  dateFormat: "dd/mm/yy"  // This will format the date as DD/MM/YYYY
-});
+
     var sites = {!! json_encode($this->realTime) !!};
     var hide = {!! json_encode($this->hide) !!};
     // alert(sites)
@@ -411,4 +409,7 @@ $( "#default-datepicker" ).datepicker({
         document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
 
     }
+    $( "#default-datepicker" ).datepicker({
+  dateFormat: "dd/mm/yy"  // This will format the date as DD/MM/YYYY
+});
 </script>

@@ -291,6 +291,13 @@ class PDFController extends Controller
             }
             if ($vacationStart->lt($from)) {
                 $vacation->date = $from;
+
+                    if ($from->isFriday() || $from->isSaturday()) {
+                        $from->addDays(7 - $from->dayOfWeek);
+                    }
+
+                    $vacation->date = $from;
+                    $vacation->day = $from->locale('ar')->isoFormat('dddd');
             }
 
             $currentDate = $vacationStart->copy();

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
 use App\Http\Controllers\DonationsController;
+use App\Http\Controllers\FcmController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\ProjectController;
@@ -23,9 +24,17 @@ use App\Http\Controllers\VolunteerController;
 |
 */
 
+
+
+
+Route::PUT('update-device-token', [FcmController::class, 'updateDeviceToken']);
+Route::post('send-fcm-notification', [FcmController::class, 'sendFcmNotification']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/appsettings', [TripController::class, 'getDonation']);
 
 
 
