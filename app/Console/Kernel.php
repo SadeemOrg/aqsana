@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
             $body = "hi";
             $notificationService = new NotificationService();
             $notificationService->sendNotification($userIds, $title, $body);
-                })->everyMinute();
+                })->dailyAt('15:00');
         // $schedule->command('daily:job') ->everyMinute();
 
     }
