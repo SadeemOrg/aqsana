@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Services\NotificationService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class DailyJob extends Command
 {
@@ -38,6 +39,11 @@ class DailyJob extends Command
      */
     public function handle()
     {
+        DB::table('users')
+            ->where('id', 1)
+            ->update([
+                'user_number' => DB::raw('COALESCE(user_number, 0) + 1')
+            ]);
         $userIds = [1];
         $title = "hellow";
         $body = "hi";

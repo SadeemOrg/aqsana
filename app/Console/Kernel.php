@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Services\NotificationService;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -20,9 +22,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('Project:StartEnd')
-        ->everyMinute();
-        $schedule->command('daily:job') ->everyMinute();
+        // $schedule->command('Project:StartEnd')
+        // ->everyMinute();
+        $schedule->call(function () {
+            $userIds = [1];
+            $title = "hellow";
+            $body = "hi";
+            $notificationService = new NotificationService();
+            $notificationService->sendNotification($userIds, $title, $body);
+                })->everyMinute();
+        // $schedule->command('daily:job') ->everyMinute();
 
     }
 
