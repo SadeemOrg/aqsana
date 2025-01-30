@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\TripBooking;
 use App\Models\Bus;
 use App\Models\Project;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -39,6 +40,11 @@ class TripBookingController extends BaseController
                 $check_trip_booking->save();
 
                 return $this->sendResponse($check_trip_booking, 'لم تم  حجز الرحلة بنجاح');
+                $userIds = [Auth()->id()];
+                $title = "aqsana";
+                $body = "لم تم  حجز الرحلة بنجاح";
+                $notificationService = new NotificationService();
+                $notificationService->sendNotification($userIds, $title, $body);
             } else {
                 return $this->sendError('Error', ["message" => "لقد قمت بلحجز مسبقا"], 202);
             }
@@ -103,6 +109,11 @@ class TripBookingController extends BaseController
             //     ]);
             //     return $this->sendResponse($tripBooking, 'تم الحجز بنجاح');
             // }
+            $userIds = [Auth()->id()];
+            $title = "aqsana";
+            $body = "لم تم  حجز  بنجاح";
+            $notificationService = new NotificationService();
+            $notificationService->sendNotification($userIds, $title, $body);
             return $this->sendResponse($tripBooking, 'تم الحجز بنجاح');
         } else {
             return $this->sendError('Error', ["message" => "ناسف! الباص ممتلئ"], 202);
@@ -155,7 +166,11 @@ class TripBookingController extends BaseController
             }
         }
 
-
+        $userIds = [Auth()->id()];
+        $title = "aqsana";
+        $body = " تم الغاء حجز الرحلة بنجاح";
+        $notificationService = new NotificationService();
+        $notificationService->sendNotification($userIds, $title, $body);
         return $this->sendResponse([], 'Trib booking has been cancelled');
     }
 
