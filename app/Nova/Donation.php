@@ -520,6 +520,20 @@ class Donation extends Resource
         }
         // hawale
         elseif ($request->Payment_type == '4') {
+            switch ($selectedLanguage) {
+                case 'ar':
+                    $description = 'إيداع البنك'; // Arabic translation
+                    break;
+                case 'en':
+                    $description = 'Bank Deposit'; // English translation
+                    break;
+                case 'he':
+                    $description = 'הפקדת בנק'; // Hebrew translation
+                    break;
+                default:
+                    $description = 'Bank Deposit'; // Default to English if no match
+            }
+
             $formattedDate = Carbon::parse($model->transaction_date)->format('d/m/Y');
             $formattedDatedetails = Carbon::parse($request->Payment_type_details[0]['attributes']['Date'])->format('d/m/Y');
             $params = [
@@ -533,10 +547,11 @@ class Donation extends Resource
                 'InvoiceHead.Email'       => $request->email,
                 'InvoiceHead.Language'    => $selectedLanguage,
                 'InvoiceHead.SendByEmail' => $request->send_to_email,
-                'CustomPay.TransactionID' => 101011,
-                'CustomPay.TransDate'     => $formattedDatedetails,
                 'InvoiceHead.InvDate' => $formattedDate,
-                'CustomPay.Description'   => 'Bank Deposit',
+                'InvoiceLines.TransferDate'     => $formattedDatedetails,
+                'CustomPay.TransactionID' => 101011,
+                'CustomPay.TransferDate' => $formattedDatedetails,
+                'CustomPay.Description'   => $description,
                 'CustomPay.Sum'           => $request->Payment_type_details[0]['attributes']['equivelant_amount'],
                 'CustomPay.Asmacta'       => $largestBillNumber,
             ];
