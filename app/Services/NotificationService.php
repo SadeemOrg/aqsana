@@ -24,7 +24,7 @@ class NotificationService
             // Step 1: Validate and find the user
 
             $user = \App\Models\User::find($userId);
-            // dd($userId);
+            dump($user ,$user->fcm_token,$userId);
             if (!$user || !$user->fcm_token) {
                 $responses[] = [
                     'user_id' => $userId,
