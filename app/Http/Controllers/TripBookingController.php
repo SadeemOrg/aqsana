@@ -168,7 +168,7 @@ class TripBookingController extends BaseController
 
         $userIds = [Auth()->id()];
         $title = "aqsana";
-        $project = Project::where('id', $request['project_id'])->with('bus')->first();
+        $project = Project::where('id', $request->get('id'))->with('bus')->first();
 
         $body = "تم إلغاء حجز $project->project_name بنجاح.";
         $notificationService = new NotificationService();
