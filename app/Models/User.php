@@ -41,7 +41,8 @@ class User extends Authenticatable
         'account_number',
         'bank_number',
         'device_key',
-        'app_user'
+        'app_user',
+        'fcm_token'
 
 
     ];
