@@ -111,7 +111,8 @@ class TripBookingController extends BaseController
             // }
             $userIds = [Auth()->id()];
             $title = "aqsana";
-            $body = "لقد تم  حجز قافلة . $projext->project_name. بنجاح";
+            $body = " لقد تم  حجز قافلة . $projext->project_name. بنجاح
+            .$projext->start_date. يوم";
             $notificationService = new NotificationService();
             $notificationService->sendNotification($userIds, $title, $body);
             return $this->sendResponse($tripBooking, 'تم الحجز بنجاح');
