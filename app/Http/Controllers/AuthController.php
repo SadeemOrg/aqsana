@@ -266,7 +266,6 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-
         $fields = $request->validate([
             'email' => 'string',
             'phone' => 'string',
