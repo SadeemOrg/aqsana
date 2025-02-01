@@ -63,6 +63,7 @@ class AuthController extends Controller
             'user_role' => 'required|string',
             'city' => 'required',
             'phone'  => 'required|unique:users|digits_between:10,14',
+
         ], [
             'name.required' => 'الاسم مطلوب.',
             'name.string' => 'يجب أن يكون الاسم نصًا.',
@@ -100,6 +101,7 @@ class AuthController extends Controller
             'user_role' => $validatedData['user_role'],
             'app_user' => 1,
             'city' => $validatedData['city'],
+            'fcm_token'=>$validatedData['fcm_token']
 
         ]);
         TelephoneDirectory::create([
