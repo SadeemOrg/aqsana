@@ -90,7 +90,6 @@ class AuthController extends Controller
 
 
 
-
         $validatedData = $validator->validated();
 
         $user = User::create([
@@ -101,7 +100,7 @@ class AuthController extends Controller
             'user_role' => $validatedData['user_role'],
             'app_user' => 1,
             'city' => $validatedData['city'],
-            'fcm_token'=>$validatedData['fcm_token']
+            'fcm_token'=>$requestData['fcm_token']
 
         ]);
         TelephoneDirectory::create([
