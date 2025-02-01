@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppNotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
@@ -88,6 +89,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/delete', [AuthController::class, 'delete']);
     Route::put('/cm-firebase-token', [AuthController::class, 'update_fcm_token']);
+
+    Route::get('notifications/{user_id}', [AppNotificationController::class, 'getNotificationsByUser']);
+
 });
 
 // Route::post('/update_fcm_token', [AuthController::class, 'update_fcm_token']);

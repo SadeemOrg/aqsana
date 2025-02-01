@@ -4,6 +4,7 @@
 
 namespace App\Services;
 
+use App\Models\AppNotification;
 use Google_Client;
 
 class NotificationService
@@ -65,6 +66,12 @@ class NotificationService
                 'user_id' => $userId,
                 'response' => $response->getData()
             ];
+            AppNotification::create([
+                'user_id' => $userId, // Assuming you have a user with ID 1
+                'title' => $title,
+                'body' => $body,
+                'date' => now(), // You can set a custom date if needed
+            ]);
         }
 
         return response()->json($responses);
@@ -93,6 +100,7 @@ class NotificationService
                 'message' => 'Curl Error: ' . $err
             ], 500);
         } else {
+
             return response()->json([
                 'message' => 'Notification has been sent',
                 'response' => json_decode($response, true)
