@@ -168,7 +168,9 @@ class TripBookingController extends BaseController
 
         $userIds = [Auth()->id()];
         $title = "aqsana";
-        $body = " تم الغاء حجز الرحلة بنجاح";
+        $projext = Project::where('id', $request['project_id'])->with('bus')->first();
+
+        $body = " تم الغاء حجز $projext->project_name بنجاح";
         $notificationService = new NotificationService();
         $notificationService->sendNotification($userIds, $title, $body);
         return $this->sendResponse([], 'Trib booking has been cancelled');
