@@ -266,7 +266,6 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-
         $fields = $request->validate([
             'email' => 'string',
             'phone' => 'string',
@@ -279,14 +278,18 @@ class AuthController extends Controller
         }
         if (!empty($fields['email'])) {
             $user = User::where('email', $fields['email'])->first();
+
         } else {
             $user = User::where('phone', $fields['phone'])->first();
         }
+
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
                 'message' => 'Bad creds'
             ], 401);
         }
+        $user->fcm_token = $request->get("fcm_token");
+        $user->save();
         $token = $user->createToken('myapptoken')->plainTextToken;
 
         $response = [
