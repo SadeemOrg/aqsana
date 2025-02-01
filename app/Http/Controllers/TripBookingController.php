@@ -111,7 +111,7 @@ class TripBookingController extends BaseController
             // }
             $userIds = [Auth()->id()];
             $title = "aqsana";
-            $body = "لقد تم  حجز $projext->project_name بنجاح";
+            $body = "تم حجز $projext->project_name .بنجاح";
             $notificationService = new NotificationService();
             $notificationService->sendNotification($userIds, $title, $body);
             return $this->sendResponse($tripBooking, 'تم الحجز بنجاح');
@@ -170,7 +170,7 @@ class TripBookingController extends BaseController
         $title = "aqsana";
         $projext = Project::where('id', $request['project_id'])->with('bus')->first();
 
-        $body = " تم الغاء حجز $projext->project_name بنجاح";
+        $body = "تم الغاء حجز $projext->project_name .بنجاح";
         $notificationService = new NotificationService();
         $notificationService->sendNotification($userIds, $title, $body);
         return $this->sendResponse([], 'Trib booking has been cancelled');
