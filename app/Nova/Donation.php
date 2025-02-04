@@ -548,17 +548,20 @@ class Donation extends Resource
                 'InvoiceHead.Language'    => $selectedLanguage,
                 'InvoiceHead.SendByEmail' => $request->send_to_email,
                 'InvoiceHead.InvDate' => $formattedDate,
-                'InvoiceLines.TransferDate'     => $formattedDatedetails,
                 'CustomPay.TransactionID' => 101011,
-                'CustomPay.TransferDate' => $formattedDatedetails,
+                'CustomPay.TranDate'=>$formattedDatedetails,
                 'CustomPay.Description'   => $description,
                 'CustomPay.Sum'           => $request->Payment_type_details[0]['attributes']['equivelant_amount'],
                 'CustomPay.Asmacta'       => $largestBillNumber,
+
             ];
+
+
         }
-        // dd($params);
         $response = Http::get($baseUrl, $params);
+
         if ($response->successful()) {
+
             parse_str($response->body(), $parsedResponse);
             $model->cardcom_Invoice_number = $parsedResponse['InvoiceNumber'];
         } else {

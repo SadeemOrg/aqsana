@@ -828,6 +828,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 
 
@@ -29666,7 +29667,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n            تم انتاج سند القبض بنجاح، يوفي!\n        "
+                    "\n                تم انتاج سند القبض بنجاح، يوفي!\n            "
                   )
                 ]
               )
@@ -29678,7 +29679,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n            تم انتاج سند القبض بنجاح، يوفي!\n        "
+                    "\n                تم انتاج سند القبض بنجاح، يوفي!\n            "
                   )
                 ]
               ),
@@ -29690,7 +29691,7 @@ var render = function() {
             },
             [
               _vm._v(
-                "\n            تم ارسال الملف للايميل الخاص بك, وبأمكانك ارسال الملف الى الشخص\n            المتبرع ايضا\n        "
+                "\n                تم ارسال الملف للايميل الخاص بك, وبأمكانك ارسال الملف الى الشخص\n                المتبرع ايضا\n            "
               )
             ]
           ),
@@ -29717,7 +29718,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    الرجاء ادخال الايميل المراد ارسال الملف له\n                "
+                        "\n                        الرجاء ادخال الايميل المراد ارسال الملف له\n                    "
                       )
                     ]
                   ),
@@ -29800,7 +29801,8 @@ var render = function() {
                     href:
                       "https://secure.cardcom.solutions/Note/Invoice.aspx?InvoiceNumber=" +
                       _vm.cardcomInvoiceNumber +
-                      "&InvType=3&Print=1"
+                      "&InvType=3&Print=1",
+                    target: "_blank"
                   }
                 },
                 [
@@ -29815,11 +29817,7 @@ var render = function() {
                       staticClass:
                         "font-FlatBold text-center text-lg lg:text-xl"
                     },
-                    [
-                      _vm._v(
-                        "\n                    نسخة أصلية\n                "
-                      )
-                    ]
+                    [_vm._v("\n        نسخة أصلية\n    ")]
                   )
                 ]
               ),
@@ -29848,7 +29846,11 @@ var render = function() {
                       staticClass:
                         "font-FlatBold text-center text-lg lg:text-xl"
                     },
-                    [_vm._v("\n                    طباعة\n                ")]
+                    [
+                      _vm._v(
+                        "\n                        طباعة\n                    "
+                      )
+                    ]
                   )
                 ]
               ),
@@ -29880,7 +29882,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    ارسال عن طريق الواتس اب\n                "
+                        "\n                        ارسال عن طريق الواتس اب\n                    "
                       )
                     ]
                   )
@@ -29911,7 +29913,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                                ارسال\n                            "
+              "\n                                    ارسال\n                                "
             )
           ]
         )
