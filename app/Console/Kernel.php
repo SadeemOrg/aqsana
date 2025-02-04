@@ -2,7 +2,9 @@
 
 namespace App\Console;
 
+use App\Models\TripBooking;
 use App\Services\NotificationService;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\DB;
@@ -24,14 +26,26 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('Project:StartEnd')
         // ->everyMinute();
+
         $schedule->call(function () {
-            $userIds = [1];
-            $title = "تذكير قافلة قادمة";
-            $body = "";
-            $notificationService = new NotificationService();
-            $notificationService->sendNotification($userIds, $title, $body);
-                })->dailyAt('15:00');
-        // $schedule->command('daily:job') ->everyMinute();
+            // Get the date for tomorrow
+            $tomorrow = Carbon::tomorrow()->toDateString();
+
+            // Get users who have booked a trip where the related project start_date is tomorrow
+            $userIds = TripBooking::whereHas('Project', function ($query) use ($tomorrow) {
+                $query->whereDate('start_date', '=', $tomorrow);
+            })
+            ->pluck('user_id'); // Extract the user IDs
+
+            $title = "تذكير قافلة قادمة";
+            $body = "هذه تذكرة تذكير للقافلة القادمة التي تبدأ غداً.";
+
+            // Check if there are any users to notify
+            if ($userIds->isNotEmpty()) {
+                $notificationService = new NotificationService();
+                $notificationService->sendNotification($userIds->toArray(), $title, $body);
+            }
+        })->dailyAt('15:00');
 
     }
 
