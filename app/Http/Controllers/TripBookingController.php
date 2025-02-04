@@ -41,7 +41,7 @@ class TripBookingController extends BaseController
 
                 return $this->sendResponse($check_trip_booking, 'لم تم  حجز الرحلة بنجاح');
                 $userIds = [Auth()->id()];
-                $title = "aqsana";
+                $title = "حجز قافلة";
                 $body = "لم تم  حجز الرحلة بنجاح";
                 $notificationService = new NotificationService();
                 $notificationService->sendNotification($userIds, $title, $body);
@@ -110,7 +110,7 @@ class TripBookingController extends BaseController
             //     return $this->sendResponse($tripBooking, 'تم الحجز بنجاح');
             // }
             $userIds = [Auth()->id()];
-            $title = "aqsana";
+            $title = "حجز قافلة";
             $body = "تم حجز $projext->project_name بنجاح.";
             $notificationService = new NotificationService();
             $notificationService->sendNotification($userIds, $title, $body);
@@ -167,7 +167,7 @@ class TripBookingController extends BaseController
         }
 
         $userIds = [Auth()->id()];
-        $title = "aqsana";
+        $title = "الغاء حجز قافلة";
         $project = Project::where('id', $request->get('id'))->with('bus')->first();
 
         $body = "تم إلغاء حجز $project->project_name بنجاح.";
