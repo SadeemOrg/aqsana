@@ -26,8 +26,8 @@ class Kernel extends ConsoleKernel
         // ->everyMinute();
         $schedule->call(function () {
             $userIds = [1];
-            $title = "hellow";
-            $body = "hi";
+            $title = "تذكير قافلة قادمة";
+            $body = "";
             $notificationService = new NotificationService();
             $notificationService->sendNotification($userIds, $title, $body);
                 })->dailyAt('15:00');
