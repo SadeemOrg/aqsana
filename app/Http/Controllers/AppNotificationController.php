@@ -21,7 +21,8 @@ class AppNotificationController extends Controller
 
         // Fetch notifications by user_id with pagination
         $notifications = AppNotification::where('user_id', Auth::id())
-                                        ->paginate($pageSize, ['*'], 'page', $page);
+        ->orderBy('created_at', 'desc')
+        ->paginate($pageSize, ['*'], 'page', $page);
 
         // Return the response
         return response()->json([
