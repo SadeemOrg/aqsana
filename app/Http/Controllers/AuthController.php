@@ -266,46 +266,44 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+        // Validate input fields
         $fields = $request->validate([
-            'email' => 'string',
-            'phone' => 'string',
-            'password' => 'required|string'
+            'email' => 'nullable|string|email',
+            'phone_number' => 'nullable|string',
+            'password' => 'required|string',
+            'fcm_token' => 'nullable|string'
         ]);
-        if (empty($fields['email']) && empty($fields['phone'])) {
-            return response([
-                'message' => 'Bad creds'
-            ], 401);
-        }
-        if (!empty($fields['email'])) {
-            $user = User::where('email', $fields['email'])->first();
-        } else {
-            $user = User::where('phone', $fields['phone'])->first();
+
+        // Ensure either email or phone is provided
+        if (empty($fields['email']) && empty($fields['phone_number'])) {
+            return response(['message' => 'Bad creds'], 401);
         }
 
+        // Retrieve user based on email or phone, prioritize email
+        $user = User::where('email', $fields['email'])
+            ->orWhere('phone', $fields['phone_number'])
+            ->first();
+
+        // Check if user exists and password is correct
         if (!$user || !Hash::check($fields['password'], $user->password)) {
-            return response([
-                'message' => 'Bad creds'
-            ], 401);
+            return response(['message' => 'Bad creds'], 401);
         }
-        // Get the current fcm_token from the request
-        $newFcmToken = $request->get('fcm_token');
 
-        // Check if the new fcm_token is different from the current one stored in the database
-        if ($user->fcm_token !== $newFcmToken) {
-            // If different, update the fcm_token and save it to the database
-            $user->fcm_token = $newFcmToken;
+        // Update fcm_token if necessary
+        if ($fields['fcm_token'] && $user->fcm_token !== $fields['fcm_token']) {
+            $user->fcm_token = $fields['fcm_token'];
             $user->save();
         }
 
+        // Create and return authentication token
         $token = $user->createToken('myapptoken')->plainTextToken;
 
-        $response = [
+        return response([
             'user' => $user,
             'token' => $token
-        ];
-
-        return response($response, 201);
+        ], 201);
     }
+
     /**
      * logout a user
      *
