@@ -100,14 +100,14 @@ class AuthController extends Controller
             'user_role' => $validatedData['user_role'],
             'app_user' => 1,
             'city' => $validatedData['city'],
-            'fcm_token'=>$requestData['fcm_token']
+            'fcm_token' => $requestData['fcm_token']
 
         ]);
         TelephoneDirectory::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'phone_number' => $validatedData['phone'],
-            'type'=>["112"],
+            'type' => ["112"],
             // 'city' => $validatedData['city'],
             // 'Area' =>Area::find(City::find($validatedData['city'])->area_id)->id ,
 
@@ -278,7 +278,6 @@ class AuthController extends Controller
         }
         if (!empty($fields['email'])) {
             $user = User::where('email', $fields['email'])->first();
-
         } else {
             $user = User::where('phone', $fields['phone'])->first();
         }
@@ -288,8 +287,16 @@ class AuthController extends Controller
                 'message' => 'Bad creds'
             ], 401);
         }
-        $user->fcm_token = $request->get("fcm_token");
-        $user->save();
+        // Get the current fcm_token from the request
+        $newFcmToken = $request->get('fcm_token');
+
+        // Check if the new fcm_token is different from the current one stored in the database
+        if ($user->fcm_token !== $newFcmToken) {
+            // If different, update the fcm_token and save it to the database
+            $user->fcm_token = $newFcmToken;
+            $user->save();
+        }
+
         $token = $user->createToken('myapptoken')->plainTextToken;
 
         $response = [
@@ -612,13 +619,12 @@ class AuthController extends Controller
     }
     public function getCities(Request $request)
     {
-        $cities=City::all();
+        $cities = City::all();
 
         $response = [
             'success' => "true",
             'cities' => $cities
         ];
         return response($response, 200);
-
     }
 }
