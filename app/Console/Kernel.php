@@ -48,7 +48,7 @@ class Kernel extends ConsoleKernel
             //     $notificationService = new NotificationService();
             //     $notificationService->sendNotification($userIds->toArray(), $title, $body);
             // }
-        })->dailyAt('15:00');
+        })->dailyAt('10:00');
     }
 
     /**
