@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Alaqsa\Project\Project;
 use App\Models\TripBooking;
 use App\Services\NotificationService;
 use Carbon\Carbon;
@@ -28,25 +29,26 @@ class Kernel extends ConsoleKernel
         // ->everyMinute();
 
         $schedule->call(function () {
-            // Get the date for tomorrow
             $tomorrow = Carbon::tomorrow()->toDateString();
-
-            // Get users who have booked a trip where the related project start_date is tomorrow
-            $userIds = TripBooking::whereHas('Project', function ($query) use ($tomorrow) {
+            $users = TripBooking::whereHas('Project', function ($query) use ($tomorrow) {
                 $query->whereDate('start_date', '=', $tomorrow);
-            })
-            ->pluck('user_id'); // Extract the user IDs
+            })->get();
 
-            $title = "تذكير قافلة قادمة";
-            $body = "هذه تذكرة تذكير للقافلة القادمة التي تبدأ غداً.";
+            foreach ($users as $key => $user) {
+                $Project=Project::find($user->project_id);
+                $title = "تذكير لقافلة الغد";
+                $body = "تذكير للقافلة $Project->project_name التي تبدأ غداً.";
+                $notificationService = new NotificationService();
+                $notificationService->sendNotification([$user->id], $title, $body);
+            }
+
 
             // Check if there are any users to notify
-            if ($userIds->isNotEmpty()) {
-                $notificationService = new NotificationService();
-                $notificationService->sendNotification($userIds->toArray(), $title, $body);
-            }
+            // if ($userIds->isNotEmpty()) {
+            //     $notificationService = new NotificationService();
+            //     $notificationService->sendNotification($userIds->toArray(), $title, $body);
+            // }
         })->dailyAt('15:00');
-
     }
 
     /**
@@ -56,7 +58,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
