@@ -251,7 +251,7 @@ class Donation extends Resource
                 '1' => __('ar'),
                 '2' => __('en'),
                 '3' => __('hr'),
-            ])->displayUsingLabels()->hideFromIndex()->default('1')->rules('required'),
+            ])->displayUsingLabels()->hideFromIndex()->default('3')->rules('required'),
             Select::make(__("Payment_type"), "Payment_type")->options(
                 [
                     '1' => __('cash'),
@@ -308,9 +308,9 @@ class Donation extends Resource
                     ->limit(1)
                     ->addLayout(__('tooles'), 'Payment_type_details ', [
                         NumberField::make(__('value'), "equivelant_amount")->rules('required'),
-                        Text::make(__('bank number'), "bank_number"),
-                        Text::make(__('Branch number'), "Branch_number"),
-                        Text::make(__('account number'), "account_number"),
+                        Text::make(__('bank number'), "bank_number")->rules('required'),
+                        Text::make(__('Branch number'), "Branch_number")->rules('required'),
+                        Text::make(__('account number'), "account_number")->rules('required'),
 
                         DateTime::make(__('History of hawale'), 'Date')
                             ->format('DD/MM/YYYY')

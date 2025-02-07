@@ -18,6 +18,7 @@ use App\Http\Controllers\FcmController;
 use App\Models\Project;
 use App\Models\TelephoneDirectory;
 use App\Models\Transaction;
+use App\Models\TripBooking;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -98,6 +99,15 @@ Route::post('/app/password/reset', [ForgotPasswordController::class, 'update'])-
 
 
 Route::get('/Carbon', function () {
+    $tomorrow = Carbon::tomorrow()->toDateString();
+
+    $user = TripBooking::whereHas('Project', function ($query) use ($tomorrow) {
+        $query->whereDate('start_date', '=', $tomorrow);
+    })->get();
+    $Project=Project::find($user[0]->project_id);
+    dd($Project->project_name);
+    // ->pluck('user_id'); // Extract the user IDs
+dd($userIds);
     dd(Carbon::now());
 });
 Route::get('/sms', function () {
