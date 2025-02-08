@@ -829,6 +829,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 
 
@@ -29831,7 +29832,8 @@ var render = function() {
                     href:
                       "https://secure.cardcom.solutions/api/Document/GetDocumentPDF?DocumentNumber=" +
                       _vm.cardcomInvoiceNumber +
-                      "&DocumentType=3&IsOriginal=false"
+                      "&DocumentType=3&IsOriginal=false",
+                    target: "_blank"
                   }
                 },
                 [
