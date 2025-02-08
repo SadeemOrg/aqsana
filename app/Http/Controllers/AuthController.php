@@ -280,9 +280,9 @@ class AuthController extends Controller
         }
 
         // Retrieve user based on email or phone, prioritize email
-        $user = User::where('email', $fields['email'])
-            ->orWhere('phone', $fields['phone_number'])
-            ->first();
+        $user = User::where('email', $fields['email'] ?? '') // Use fallback if email is null
+        ->orWhere('phone', $fields['phone_number'] ?? '') // Use fallback if phone_number is null
+        ->first();
 
         // Check if user exists and password is correct
         if (!$user || !Hash::check($fields['password'], $user->password)) {

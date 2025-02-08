@@ -48,18 +48,17 @@
                     </div>
                 </div>
 
-                <div onclick="location.href='https://secure.cardcom.solutions/Note/Invoice.aspx?InvoiceNumber={{ $cardcom_Invoice_number }}&InvType=3&Print=1'"
-                    class="flex flex-col justify-center cursor-pointer items-center border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3">
-                    <img src="{{ asset('assets/image/pdf.png') }}" class="w-8 h-8 " alt="">
-                    <h3 class="font-FlatBold text-center text-lg lg:text-xl">نسخة أصلية</h3>
-                </div>
+                <div onclick="window.open('https://secure.cardcom.solutions/Note/Invoice.aspx?InvoiceNumber={{ $cardcom_Invoice_number }}&InvType=3&Print=1', '_blank')"
+                class="flex flex-col justify-center cursor-pointer items-center border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0 md:border-l-2 pl-2 basis-1/5 min-h-[145px] border-gray-500 gap-y-3">
+                <img src="{{ asset('assets/image/pdf.png') }}" class="w-8 h-8" alt="">
+                <h3 class="font-FlatBold text-center text-lg lg:text-xl">نسخة أصلية</h3>
+            </div>
 
-
-                <div onclick="location.href='https://secure.cardcom.solutions/api/Document/GetDocumentPDF?DocumentNumber={{ $cardcom_Invoice_number }}&amp;DocumentType=3&amp;IsOriginal=false'"
-                    class="flex flex-col justify-center items-center border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0  md:border-l-2  pl-2 basis-1/5 min-h-[145px] cursor-pointer border-gray-500 gap-y-3">
-                    <img src="{{ asset('assets/image/pdf.png') }}" class="w-8 h-8 " alt="">
-                    <h3 class="font-FlatBold text-center text-lg lg:text-xl">طباعة  </h3>
-                </div>
+            <div onclick="window.open('https://secure.cardcom.solutions/api/Document/GetDocumentPDF?DocumentNumber={{ $cardcom_Invoice_number }}&amp;DocumentType=3&amp;IsOriginal=false', '_blank')"
+                class="flex flex-col justify-center items-center border-b-2 md:border-b-0 py-4 min-w-[260px] md:min-w-0 md:border-l-2 pl-2 basis-1/5 min-h-[145px] cursor-pointer border-gray-500 gap-y-3">
+                <img src="{{ asset('assets/image/pdf.png') }}" class="w-8 h-8" alt="">
+                <h3 class="font-FlatBold text-center text-lg lg:text-xl">طباعة</h3>
+            </div>
 
                 <a href="https://api.whatsapp.com/send?text=  {{ route('generate-pdf', ['id' => $id,'type'=>$type]) }}"
                     class="flex flex-col justify-center items-center  pl-2 basis-1/5 min-h-[145px] cursor-pointer  gap-y-3">
