@@ -100,7 +100,7 @@ class Donation extends Resource
     }
     public  function authorizedToUpdate(Request $request)
     {
-        return false;
+        return true;
     }
 
 
