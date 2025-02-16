@@ -132,6 +132,8 @@
 
     <!--Start Table -->
     @if ($type == 1)
+   ddd {{ $PaymentType  }}
+
         <div>
             @if ($PaymentType == 'העברה בנקאית')
                 <table dir="rtl" class="blueTable">
