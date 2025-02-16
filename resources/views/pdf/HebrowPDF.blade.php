@@ -131,8 +131,9 @@
     <!--End for Account Paragraph-->
 
     <!--Start Table -->
+    ddd {{ $PaymentType  }}
+    {{ $type }}
     @if ($type == 1)
-   ddd {{ $PaymentType  }}
 
         <div>
             @if ($PaymentType == 'העברה בנקאית')
