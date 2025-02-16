@@ -49,28 +49,69 @@ class PDFController extends Controller
             $TransactionArray = @json_decode(json_encode($Transaction), true);
 
             // Determine Payment Type based on language
-            switch ($Transaction->Payment_type) {
-                case 1:
-                    $PaymentType = "نقدي";
-                    break;
-                case 2:
-                    $PaymentType = "شك";
-                    break;
-                case 3:
-                    $PaymentType = "بيت";
-                    break;
-                case 4:
-                    $PaymentType = "حوالة مصرفية";
-                    break;
-                case 5:
-                    $PaymentType = "حصالة";
-                    break;
-                case 6:
-                    $PaymentType = "التطبيق";
-                    break;
-                default:
-                    $PaymentType = "";
-                    break;
+            if ($Transaction->lang == 1) {
+                switch ($Transaction->Payment_type) {
+                    case 1:
+                        $PaymentType = "نقدي";
+                        break;
+                    case 2:
+                        $PaymentType = "شك";
+                        break;
+                    case 3:
+                        $PaymentType = "بيت";
+                        break;
+                    case 4:
+                        $PaymentType = "حوالة مصرفية";
+                        break;
+                    case 5:
+                        $PaymentType = "حصالة";
+                        break;
+                    case 6:
+                        $PaymentType = "التطبيق";
+                        break;
+                }
+            } else if ($Transaction->lang == 2) {
+                switch ($Transaction->Payment_type) {
+                    case 1:
+                        $PaymentType = "cash";
+                        break;
+                    case 2:
+                        $PaymentType = "Bank doubt";
+                        break;
+                    case 3:
+                        $PaymentType = "bit";
+                        break;
+                    case 4:
+                        $PaymentType = "Bank transfer";
+                        break;
+                    case 5:
+                        $PaymentType = "moneybox";
+                        break;
+                    case 6:
+                        $PaymentType = "Application";
+                        break;
+                }
+            } else if ($Transaction->lang == 3) {
+                switch ($Transaction->Payment_type) {
+                    case 1:
+                        $PaymentType = "כסף מזומן";
+                        break;
+                    case 2:
+                        $PaymentType = "ספק בבנק";
+                        break;
+                    case 3:
+                        $PaymentType = "קצת";
+                        break;
+                    case 4:
+                        $PaymentType = "העברה בנקאית";
+                        break;
+                    case 5:
+                        $PaymentType = "קופסת כסף";
+                        break;
+                    case 6:
+                        $PaymentType = "יישום";
+                        break;
+                }
             }
 
             $data = [
