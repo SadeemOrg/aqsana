@@ -196,6 +196,7 @@ class News extends Resource
                 ->disk('public'),
 
             Text::make("رابط الفيديو", 'video_link'),
+            Image::make(__('video_img_cover'), 'video_img_cover')->disk('public')->prunable(),
 
             // Date::make('date', 'new_date'),
             Date::make('تاريخ', 'new_date')->pickerDisplayFormat('d.m.Y')->rules('required'),
