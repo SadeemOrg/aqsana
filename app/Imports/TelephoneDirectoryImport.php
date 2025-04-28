@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\TelephoneDirectory;
 use Maatwebsite\Excel\Concerns\ToModel;
+use  App\Models\City;
 
 class TelephoneDirectoryImport implements ToModel
 {
@@ -22,10 +23,31 @@ class TelephoneDirectoryImport implements ToModel
         
         $isExist = TelephoneDirectory::where('name', $row[0])->first();
         if (!$isExist) {
+           
+            $phone = $row[1];
+
+                $prefixes = ['+972', '+970', '0972', '0970'];
+                foreach ($prefixes as $prefix) {
+                    if (strpos($phone, $prefix) === 0) {
+                        $phone = substr($phone, strlen($prefix));
+                        break; // stop after first match
+                    }
+                }
+
+                // Remove dashes
+                $phone = str_replace('-', '', $phone);
+
+                // Ensure it starts with 0
+                if (substr($phone, 0, 1) !== '0') {
+                    $phone = '0' . $phone;
+                }
+                $city = City::where('name', $row[2])->first()->id;
+
 
             return new TelephoneDirectory([
                 'name'     => !empty($row[0]) ? $row[0] : 'لا يوجد اسم',
-                'phone_number'    => $row[1],
+                'phone_number' => $phone,
+                'city' => $city ? $city : '',
                 'type'    => $this->type,
             ]);
         }
