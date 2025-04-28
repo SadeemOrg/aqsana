@@ -19,11 +19,12 @@ class TelephoneDirectoryImport implements ToModel
      */
     public function model(array $row)
     {
+        
         $isExist = TelephoneDirectory::where('name', $row[0])->first();
         if (!$isExist) {
 
             return new TelephoneDirectory([
-                'name'     => $row[0],
+                'name'     => !empty($row[0]) ? $row[0] : 'لا يوجد اسم',
                 'phone_number'    => $row[1],
                 'type'    => $this->type,
             ]);
