@@ -1518,7 +1518,7 @@ class HomeController extends BaseController
     }
     public function donationsApi(Request $request)
     {
-        // dd($request->viaResource,$request->viaResourceId);
+        
 
         $page_size = isset($request->perPage) ? $request->perPage : 10;
 
@@ -1531,7 +1531,15 @@ class HomeController extends BaseController
             ['main_type', 1],
             ['type', 2],
             ['is_delete', '<>', 2],
-        ]);
+        ])
+        ->when($request->search, function ($query, $search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('cardcom_Invoice_number', 'like', '%' . $search . '%')
+                  ->orWhere('equivelant_amount', 'like', '%' . $search . '%')
+                  ->orWhere('name', 'like', '%' . $search . '%')
+                  ->orWhere('bill_number', 'like', '%' . $search . '%');
+            });
+        });
 
         if ($request->viaResourceId) {
             $transactions->where('ref_id', $request->viaResourceId);
@@ -1722,7 +1730,25 @@ class HomeController extends BaseController
                         'text_align' => 'left',
                         'validation_key' => 'bill_number',
                         'value' => $transaction->bill_number
+                    ],    [
+                        'attribute' => 'bill_number',
+                        'component' => 'text-field',
+                        'help_text' => null,
+                        "indexName" => __("cardcom_Invoice_number"),
+                        "name" => __("cardcom_Invoice_number"),
+                        'nullable' => false,
+                        'panel' => null,
+                        'prefix_component' => true,
+                        'readonly' => false,
+                        'required' => false,
+                        'sortable' => false,
+                        'sortable_uri_key' => 'bill_number',
+                        'stacked' => false,
+                        'text_align' => 'left',
+                        'validation_key' => 'bill_number',
+                        'value' => $transaction->cardcom_Invoice_number
                     ],
+
                     [
                         "attribute" => "transaction_date",
                         "component" => "date",
