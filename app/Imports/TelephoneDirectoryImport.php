@@ -41,8 +41,13 @@ class TelephoneDirectoryImport implements ToModel
                 if (substr($phone, 0, 1) !== '0') {
                     $phone = '0' . $phone;
                 }
-                $city = City::where('name', $row[2])->first()->id;
+                $cityRecord = City::where('name', trim($row[2]))->first();
 
+                if ($cityRecord) {
+                    $city = $cityRecord->id;
+                } else {
+                    $city = null; 
+                }
 
             return new TelephoneDirectory([
                 'name'     => !empty($row[0]) ? $row[0] : 'لا يوجد اسم',
