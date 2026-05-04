@@ -534,6 +534,10 @@ class HomeController extends BaseController
     }
     public function SendMessage(Request $request)
     {
+            $request->validate([
+        'Message' => 'required|string'
+    ]);
+
         $TelephoneDirectory = TelephoneDirectory::query();
 
         $TelephoneDirectory->where(function ($query) use ($request) {
@@ -542,9 +546,18 @@ class HomeController extends BaseController
             }
         });
         $results = $TelephoneDirectory->get();
+        $seen = [];
+        $number_of_people=0;
+
         foreach ($results as $key => $value) {
             $phoneNumber = $value->phone_number;
+
+        if (in_array($phoneNumber, $seen)) {
+            $value->delete();
+        } else {
+            $seen[] = $phoneNumber;
             if (preg_match('/^\d{10}$/', $phoneNumber)) {
+                $number_of_people++;
                 Http::get('https://la.cellactpro.com/http_req.asp', [
                     'FROM' => 'ppAksa',
                     'USER' => 'ppAksa',
@@ -557,11 +570,13 @@ class HomeController extends BaseController
                 ]);
             }
         }
+
+        }
         ArchiveSms::create([
             'send_type' => json_encode($request->type),
             'content' => $request->Message,
             'date' => Carbon::now(),
-            'number_of_people' => $results->count(),
+            'number_of_people' => $number_of_people,//$results->count(),
             'sender_id' => Auth::id(),
         ]);
 
@@ -1518,7 +1533,7 @@ class HomeController extends BaseController
     }
     public function donationsApi(Request $request)
     {
-        
+
 
         $page_size = isset($request->perPage) ? $request->perPage : 10;
 
@@ -1730,7 +1745,7 @@ class HomeController extends BaseController
                         'text_align' => 'left',
                         'validation_key' => 'bill_number',
                         'value' => $transaction->cardcom_Invoice_number
-                    ],  
+                    ],
                     //   [
                     //     'attribute' => 'bill_number',
                     //     'component' => 'text-field',
