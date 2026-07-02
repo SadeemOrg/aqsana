@@ -125,7 +125,8 @@
             @if ($TransactionArray['Payment_type'] == 5)
                 {{ $TransactionArray['description'] }}
             @else
-                {{ $TransactionArray['telephone_directory']['name'] }}
+            {{ $TransactionArray['telephone_directory']['name'] ?? '' }}
+                {{-- {{ $TransactionArray['telephone_directory']['name'] }} --}}
             @endif
         </span>
     </p>
